@@ -192,13 +192,17 @@ class XmlParser
   # @param [Hash] opts
   # @option opts [Array<String>] :required The names of required attributes.
   # @option opts [Array<String>] :optional The names of optional attributes.
-  # @option opts [Array<String>] :one The names of disjoint required attributes.
+  # @option opts [Array<String>] :disjoint The names of disjoint required attributes.
   def allowed_attributes(n, opts={})
     required = opts.fetch(:required, [])
     required.each do |attribute|
       assert_in attribute, n.attributes.keys, 'required attribute name', n
     end
-    unexpected = n.attributes.keys - required - opts.fetch(:optional, [])
+
+    disjoint = opts.fetch(:disjoint, [])
+    assert disjoint.empty? || disjoint.one?{ |attribute| n.attributes.keys.include?(attribute) }, "expected one of #{disjoint.join(', ')}", n
+
+    unexpected = n.attributes.keys - required - disjoint - opts.fetch(:optional, [])
     assert unexpected.empty?, "unexpected attributes #{unexpected}", n
   end
 
@@ -268,9 +272,8 @@ class XmlParser
 
   # Follows a `ref` or `type` attribute.
   def follow(n, depth, opts, optional=false)
-    if !optional
-      assert [n.key?('type'), n.key?('ref'), n.element_children.any?].one?, 'expected one of "type", "ref" or children', n
-    end
+    matches = [n.key?('type'), n.key?('ref'), n.element_children.any?].select(&:itself)
+    assert matches.one? || optional && matches.none?, 'expected one of "type", "ref" or children', n
 
     if n.key?('type')
       set = xpath(%w(complex simple).map{ |prefix| "./xs:#{prefix}Type[@name='#{n['type']}']" }.join('|'))
@@ -322,7 +325,7 @@ class XmlParser
     when 'element'
       tree << TreeNode.new(n, opts)
 
-      allowed_attributes(n, optional: %w(name type minOccurs maxOccurs ref))
+      allowed_attributes(n, disjoint: %w(name ref), optional: %w(type minOccurs maxOccurs))
       annotate(n, %w(annotation unique))
       ns = node_set(n.element_children, size: 0..1, names: %w(complexType simpleType), name_only: true)
       ns.each do |c|
@@ -334,7 +337,7 @@ class XmlParser
     when 'group'
       tree << TreeNode.new(n, opts)
 
-      allowed_attributes(n, optional: %w(name minOccurs maxOccurs ref))
+      allowed_attributes(n, disjoint: %w(name ref), optional: %w(minOccurs maxOccurs))
       annotate(n, ['annotation'])
       ns = node_set(n.element_children, size: 0..1, names: %w(choice sequence), children: true)
       ns.each do |c|
