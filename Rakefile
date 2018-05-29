@@ -9,16 +9,16 @@ require 'nokogiri'
 # These known attributes will automatically be added to the built tree.
 ATTRIBUTES = %i(name type minOccurs maxOccurs use fixed ref)
 # These attributes are used internally to build a locator for a node in the tree.
-LOCATORS   = %i(index0 index1 index2 index3 index4 index5 index6 index7 index8)
+LOCATORS   = %i(index0 index1 index2 index3 index4 index5 index6 index7 index8 index9 index10)
 # These are calculated or other non-XML attributes of the node.
-OTHERS     = %i(tag annotation base value)
+OTHERS     = %i(tag annotation unique base value)
 # All known, locator and other attributes that can be assigned.
 ASSIGNABLE = ATTRIBUTES + LOCATORS + OTHERS
 # All known and other attributes, excluding internal locators.
 PROPERTIES = ATTRIBUTES + OTHERS
 
 # All `ASSIGNABLE`, but with `LOCATORS` replaced with `index`.
-HEADERS = %i(index name type minOccurs maxOccurs use fixed ref tag annotation base value)
+HEADERS = %i(index name type minOccurs maxOccurs use fixed ref tag annotation unique base value)
 
 class TreeNode
   # @return [Hash] the node's attributes
@@ -59,14 +59,12 @@ class XmlParser
   attr_reader :tree
 
   # @param [String] form the form's identifier
-  # @param [Nokogiri::XML::NodeSet] the form's schema
-  # @param [Nokogiri::XML::NodeSet] the TED common schema
-  # @param [Nokogiri::XML::NodeSet] the TED countries schema
-  def initialize(form, schema, common, countries)
+  # @param [Nokogiri::XML::NodeSet] schema the form's schema
+  # @param [Array<Nokogiri::XML::NodeSet>] args the shared TED schema
+  def initialize(form, schema, *args)
     @form = form
     @schema = schema
-    @common = common
-    @countries = countries
+    @schemas = [schema, *args]
 
     @tree = []
   end
@@ -145,6 +143,9 @@ class XmlParser
     if opts.key?(:attributes) && (opts.key?(:required_attributes) || opts.key?(:optional_attributes))
       raise 'must not set both :attributes and any of :required_attribute, :optional_attributes'
     end
+    if opts.key?(:size) && opts[:size] > 1 && opts.key?(:index) && !opts.key?(:xml)
+      raise 'must set :xml if :size is greater than 1 and :index is set'
+    end
 
     if opts.key?(:size)
       assert_equal ns.size, opts[:size], "elements: #{ns}"
@@ -179,13 +180,9 @@ class XmlParser
 
     if !opts[:name_only]
       if opts.key?(:required_attributes) || opts.key?(:optional_attributes)
-        required_attributes = opts.fetch(:required_attributes, [])
-        required_attributes.each do |attribute|
-          assert_in attribute, n.attributes.keys, 'attribute name', n
-        end
-        allowed_attributes(n, required_attributes + opts.fetch(:optional_attributes))
+        allowed_attributes(n, opts.fetch(:required_attributes, []), opts.fetch(:optional_attributes, []))
       else
-        assert_equal n.attributes.keys, opts.fetch(:attributes, []), 'attribute names', n
+        allowed_attributes(n, opts.fetch(:attributes, []))
       end
     end
 
@@ -197,12 +194,15 @@ class XmlParser
     end
   end
 
-  # Checks whether a node's attribute names are within an expected list.
+  # Checks whether required attributes are present on a node and whether any attributes are unexpected.
   #
   # @param [Nokogiri::XML::Node] n
   # @param [Array] attributes
-  def allowed_attributes(n, attributes=[])
-    unexpected = n.attributes.keys - attributes
+  def allowed_attributes(n, required=[], optional=[])
+    required.each do |attribute|
+      assert_in attribute, n.attributes.keys, 'required attribute name', n
+    end
+    unexpected = n.attributes.keys - required - optional
     assert unexpected.empty?, "unexpected attributes #{unexpected}", n
   end
 
@@ -211,14 +211,13 @@ class XmlParser
   # @param [String] path an XPath
   # @return [Nokogiri::XML::NodeSet] a nodeset
   def xpath(path)
-    node_set = @schema.xpath(path)
-    if node_set.empty?
-      node_set = @common.xpath(path)
-      if node_set.empty?
-        node_set = @countries.xpath(path)
+    @schemas.each do |s|
+      node_set = s.xpath(path)
+      if !node_set.empty?
+        return node_set
       end
     end
-    node_set
+    nil
   end
 
   # @return [Symbol] the symbol for the locator at this depth
@@ -229,6 +228,11 @@ class XmlParser
       raise "missing property #{key}"
     end
     key
+  end
+
+  def set_last(n, key, value)
+    assert !tree.last.attributes.key?(key), "unexpected #{key}", n
+    tree.last.attributes[key] = value
   end
 
   # Builds the tree by traversing the XML from the given node.
@@ -258,7 +262,7 @@ class XmlParser
       end
 
     when 'choice'
-      allowed_attributes(n)
+      allowed_attributes(n, [], ['maxOccurs'])
       ns = node_set(n.element_children, names: %w(element group sequence), name_only: true)
       ns.to_enum.with_index(97) do |n, i|
         elements(n, depth + 1, opts.merge(key_for_depth(depth) => i.chr))
@@ -267,8 +271,8 @@ class XmlParser
     when 'element'
       tree << TreeNode.new(n, opts)
 
-      allowed_attributes(n, %w(name type minOccurs maxOccurs ref))
-      ns = node_set(n.element_children, allow_empty: true, names: %w(annotation complexType simpleType), name_only: true)
+      allowed_attributes(n, [], %w(name type minOccurs maxOccurs ref))
+      ns = node_set(n.element_children, allow_empty: true, names: %w(annotation complexType simpleType unique), name_only: true)
       ns.each do |n|
         elements(n, depth, opts)
       end
@@ -288,9 +292,7 @@ class XmlParser
         ns = node_set(type, size: 1, names: %w(complexType simpleType), name_only: true)
         elements(ns[0], depth, opts)
       elsif n.key?('ref')
-        if n['ref'] == 'n2016:NUTS'
-          # TODO
-        else
+        if n['ref'] != 'n2016:NUTS' # TODO
           ref = xpath("./xs:#{n.name}[@name='#{n['ref']}']")
           ns = node_set(ref, size: 1, names: [n.name], name_only: true)
           elements(ns[0], depth, opts)
@@ -300,7 +302,7 @@ class XmlParser
     when 'group'
       tree << TreeNode.new(n, opts)
 
-      allowed_attributes(n, %w(minOccurs maxOccurs ref))
+      allowed_attributes(n, %w(ref), %w(minOccurs maxOccurs))
       ns = node_set(n.element_children, allow_empty: true, names: ['annotation'], name_only: true)
       ns.each do |n|
         elements(n, depth, opts.merge(tag: 'group'))
@@ -311,26 +313,29 @@ class XmlParser
     when 'annotation'
       allowed_attributes(n)
       ns = node_set(n.element_children, size: 1, names: ['documentation'], children: 'text')
+      set_last(n, :annotation, ns[0].text)
 
-      assert !tree.last.attributes.key?(:annotation), 'unexpected annotation', n
-      tree.last.attributes[:annotation] = ns[0].text
+    when 'unique'
+      allowed_attributes(n, ['name'])
+      ns = node_set(n.element_children, size: 2, index: 1, names: ['field'], attributes: ['xpath'], xml: {0 => '<xs:selector xpath="*"/>'})
+      set_last(n, :unique, ns[1]['xpath'])
 
     when 'complexType'
-      allowed_attributes(n, %w(name mixed))
+      allowed_attributes(n, [], %w(name mixed))
       ns = node_set(n.element_children, names: %w(annotation attribute choice group sequence complexContent simpleContent), name_only: true)
       ns.each do |n|
         elements(n, depth, opts)
       end
 
     when 'simpleType'
-      allowed_attributes(n, %w(name))
+      allowed_attributes(n, [], ['name'])
       # ns = node_set(n.element_children, names: %w(), name_only: true)
       # TODO
 
     when 'attribute'
       tree << TreeNode.new(n, opts.merge(key_for_depth(depth) => '+'))
 
-      allowed_attributes(n, %w(name type use fixed))
+      allowed_attributes(n, %w(name), %w(type use fixed))
       # TODO follow `type` reference
 
       if n.element_children.any?
@@ -355,7 +360,7 @@ class XmlParser
       base = ns[0]['base']
       # TODO follow `base` reference
 
-      ns = node_set(ns[0].element_children, size: 1, names: ['attribute'], required_attributes: ['name'], optional_attributes: %w(type use fixed))
+      ns = node_set(ns[0].element_children, size: 1, names: ['attribute'], name_only: true)
       elements(ns[0], depth, opts)
       # TODO follow `type` reference
 
@@ -370,12 +375,12 @@ class XmlParser
       when 'extension'
         names = %w(attribute choice group sequence)
       when 'restriction'
-        names = %w(sequence)
+        names = ['sequence']
       else
         assert false, "unexpected #{n.name}", n
       end
 
-      allowed_attributes(ns[0], %w(base))
+      allowed_attributes(ns[0], ['base'])
       ns = node_set(ns[0].element_children, allow_empty: true, names: names, name_only: true)
       ns.each do |n|
         elements(n, depth, opts)
@@ -389,13 +394,22 @@ end
 
 task :download do
   # TODO download the necessary files
+  # http://publications.europa.eu/mdr/eprocurement/ted/specific_versions_new.html#div2
 end
 
 task :process do
-  # http://publications.europa.eu/mdr/eprocurement/ted/specific_versions_new.html#div2
-  Dir['TED_*_R2'].sort.each do |directory|
-    common = Nokogiri::XML(File.read(File.join(directory, 'common_2014.xsd'))).xpath('/xs:schema')
-    countries = Nokogiri::XML(File.read(File.join(directory, 'countries.xsd'))).xpath('/xs:schema')
+  def parse(directory, basename)
+    Nokogiri::XML(File.read(File.join(directory, "#{basename}.xsd"))).xpath('/xs:schema')
+  end
+
+  if ENV['DIRECTORY']
+    directories = [ENV['DIRECTORY']]
+  else
+    directories = Dir['TED_*_R2'].sort
+  end
+
+  directories.each do |directory|
+    schemas = ['common_2014', 'countries', 'cpv_codes', 'cpv_supplementary_codes'].map{ |basename| parse(directory, basename) }
 
     # Other files described at https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.1.Overview
     Dir[File.join(directory, 'F*_2014.xsd')].sort.each do |filename|
@@ -404,7 +418,7 @@ task :process do
 
       # Assume XML declaration, xs:schema attributes, and comments are irrelevant.
       schema = Nokogiri::XML(File.read(filename)).xpath('/xs:schema')
-      parser = XmlParser.new(form, schema, common, countries)
+      parser = XmlParser.new(form, schema, *schemas)
 
       ns = parser.node_set(schema.xpath("./xs:element[@name='#{basename}']"), size: 1, names: ['element'], attributes: ['name'], children: true)
       ns = parser.node_set(ns[0].element_children, size: 2, index: 1, names: ['complexType'], children: true, xml: {0 => "<xs:annotation>\n\t\t\t<xs:documentation>ROOT element #{form}</xs:documentation>\n\t\t</xs:annotation>"})
@@ -424,7 +438,7 @@ task :process do
           # TODO children
 
         when 'element' # TODO deduplicate with `elements` ?
-          parser.allowed_attributes(n, %w(name type minOccurs maxOccurs))
+          parser.allowed_attributes(n, %w(name type), %w(minOccurs maxOccurs))
 
           ns = parser.node_set(schema.xpath("./xs:complexType[@name='#{n['type']}']"), size: 1, names: ['complexType'], attributes: ['name'], children: true)
 
