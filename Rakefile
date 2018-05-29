@@ -74,7 +74,7 @@ class XmlParser
   # Prints the built tree as a CSV to standard output.
   def to_csv
     CSV do |csv|
-      csv << %w(form) + HEADERS
+      csv << ['form'] + HEADERS
       tree.each do |node|
         if node.attributes.key?(:value)
           node.attributes[:value] = node.attributes[:value].join('|')
@@ -117,63 +117,51 @@ class XmlParser
 
   # Checks whether a node set meets expectations.
   #
-  # `:size` and `:allow_empty` are always tested, and one of the following:
-  #
-  # * If `:names` is set, nodes will be tested with `:names` only.
-  # * If `:size` is set, the indexed node will be tested with remaining options.
-  # * If `:names` and `:size` aren't set, all the nodes will be tested with remaining options.
+  # `:size`, `:allow_empty` and `:xml` are always tested. If `:name_only` is set, attributes and children are not tested.
+  # If `:index` is set, only the node at that index is tested. Otherwise, all options and all nodes are tested.
   #
   # @param [Nokogiri::XML::NodeSet] ns a node set
   # @param [Hash] opts
   # @option opts [Integer] :size The expected number of nodes in the node set.
   # @option opts [Integer] :allow_empty The number of nodes in the node set can be zero.
-  # @option opts [Integer] :index The index of the node to test. `0` by default.
+  # @option opts [Hash] :xml A hash of array indices/slices to XML strings.
+  # @option opts [Boolean] :name_only Only test `:size`, `:allow_empty`, `:xml` and `:names`.
+  # @option opts [Integer] :index The index of the single node to test.
   # @option opts [String] :names The allowed tag names.
-  # @option opts [String] :name The tag name of the node(s) to test.
-  # @option opts [Array<String>] :attributes The attribute names of the node(s) to test. `[]` by default.
+  # @option opts [Array<String>] :attributes The expected attribute names. `[]` by default.
   # @option opts [Array<String>] :required_attributes The names of required attributes if `:attributes` not used.
   # @option opts [Array<String>] :optional_attributes The names of optional attributes if `:attributes` not used.
   # @option opts [String, true] :children If omitted, the node(s) to test are expected to have no children. If `"text"`,
   #                                       they are expected to have no element children. If `true`, they are expected to
   #                                       have children. If `"any"`, there are no expectations.
-  # @option opts :xml A hash of array indices/slices to XML strings.
   # @return the node set
   def node_set(ns, opts)
     # Check options.
     if opts.key?(:size) && opts.key?(:allow_empty)
       raise 'must not set both :size and :allow_empty'
     end
-    if opts.key?(:index) && (opts.key?(:names) || !opts.key?(:size))
-      raise 'must not set :index and :names, or :index without :size'
-    end
-    if opts.key?(:names) && (opts.key?(:name) || opts.key?(:attributes) || opts.key?(:required_attributes) || opts.key?(:optional_attributes) || opts.key?(:children) || opts.key?(:xml))
-      raise 'must not set both :names and any of :name, :attributes, :required_attributes, :optional_attributes, :children, :xml'
+    if opts.key?(:attributes) && (opts.key?(:required_attributes) || opts.key?(:optional_attributes))
+      raise 'must not set both :attributes and any of :required_attribute, :optional_attributes'
     end
 
-    # Common checks.
     if opts.key?(:size)
       assert_equal ns.size, opts[:size], "elements: #{ns}"
     else
       assert opts[:allow_empty] || !ns.empty?, 'expected to be non-empty'
     end
 
-    # Specific checks.
-    if !opts.key?(:size) && !opts.key?(:names)
+    if opts[:xml]
+      opts[:xml].each do |k, v|
+        assert_equal ns[k].to_xml, v
+      end
+    end
+
+    if opts.key?(:index)
+      node(ns[opts[:index]], opts)
+    else
       ns.each do |n|
         node(n, opts)
       end
-    elsif opts.key?(:names) # need to check attributes and children separately
-      ns.each do |n|
-        assert_in n.name, opts[:names], 'tag name', n
-      end
-    elsif opts.key?(:size)
-      i = opts[:index] || 0
-      if opts[:xml]
-        opts[:xml].each do |k, v|
-          assert_equal ns[k].to_xml, v
-        end
-      end
-      node(ns[i], opts)
     end
 
     ns
@@ -185,13 +173,9 @@ class XmlParser
   # @param [Hash] opts
   # @see node_set
   def node(n, opts)
-    if opts.key?(:names)
-      assert_in n.name, opts[:names], 'tag name', n
-    else
-      assert_equal n.name, opts.fetch(:name), 'tag name', n
-    end
+    assert_in n.name, opts.fetch(:names), 'tag name', n
 
-    if !opts.key?(:names)
+    if !opts[:name_only]
       if opts.key?(:required_attributes) && opts.key?(:optional_attributes)
         opts[:required_attributes].each do |attribute|
           assert_in attribute, n.attributes.keys, 'attribute name', n
@@ -202,7 +186,7 @@ class XmlParser
       end
     end
 
-    if !opts.key?(:names)
+    if !opts[:name_only]
       assert !opts.key?(:children) && n.children.none? ||
         opts[:children] == 'text' && n.element_children.none? ||
         opts[:children] == true && n.children.any? ||
@@ -260,14 +244,14 @@ class XmlParser
     case n.name
     when 'sequence'
       allowed_attributes(n)
-      ns = node_set(n.element_children, names: %w(element group sequence choice))
+      ns = node_set(n.element_children, names: %w(element group sequence choice), name_only: true)
       ns.to_enum.with_index(1) do |n, i|
         elements(n, depth + 1, opts.merge(key_for_depth(depth) => i))
       end
 
     when 'choice'
       allowed_attributes(n)
-      ns = node_set(n.element_children, names: %w(element group sequence))
+      ns = node_set(n.element_children, names: %w(element group sequence), name_only: true)
       ns.to_enum.with_index(97) do |n, i|
         elements(n, depth + 1, opts.merge(key_for_depth(depth) => i.chr))
       end
@@ -276,7 +260,7 @@ class XmlParser
       tree << TreeNode.new(n, opts)
 
       allowed_attributes(n, %w(name type minOccurs maxOccurs ref))
-      ns = node_set(n.element_children, names: %w(annotation complexType), allow_empty: true)
+      ns = node_set(n.element_children, allow_empty: true, names: %w(annotation complexType), name_only: true)
       ns.each do |n|
         elements(n, depth, opts)
       end
@@ -292,7 +276,6 @@ class XmlParser
 
       # Follow references.
       if n.key?('type')
-        $stderr.puts %w(complex simple).map{ |prefix| "./xs:#{prefix}Type[@name='#{n['type']}']" }.join('|')
         type = xpath(%w(complex simple).map{ |prefix| "./xs:#{prefix}Type[@name='#{n['type']}']" }.join('|'))
         ns = node_set(type, size: 1, names: %w(complexType simpleType), attributes: ['name'], children: true)
         # TODO
@@ -301,7 +284,7 @@ class XmlParser
           # TODO
         else
           ref = xpath("./xs:#{n.name}[@name='#{n['ref']}']")
-          ns = node_set(ref, size: 1, name: n.name, required_attributes: ['name'], optional_attributes: %w(type), children: 'any')
+          ns = node_set(ref, size: 1, names: [n.name], required_attributes: ['name'], optional_attributes: ['type'], children: 'any')
           # TODO
         end
       end
@@ -310,7 +293,7 @@ class XmlParser
       tree << TreeNode.new(n, opts)
 
       allowed_attributes(n, %w(minOccurs maxOccurs ref))
-      ns = node_set(n.element_children, names: %w(annotation), allow_empty: true)
+      ns = node_set(n.element_children, allow_empty: true, names: ['annotation'], name_only: true)
       ns.each do |n|
         elements(n, depth, opts.merge(tag: 'group'))
       end
@@ -319,14 +302,14 @@ class XmlParser
 
     when 'annotation'
       allowed_attributes(n)
-      ns = node_set(n.element_children, size: 1, name: 'documentation', children: 'text')
+      ns = node_set(n.element_children, size: 1, names: ['documentation'], children: 'text')
 
       assert !tree.last.attributes.key?(:annotation), 'unexpected annotation', n
       tree.last.attributes[:annotation] = ns[0].text
 
     when 'complexType'
       allowed_attributes(n)
-      ns = node_set(n.element_children, names: %w(attribute choice group sequence complexContent simpleContent)) # TODO add annotation
+      ns = node_set(n.element_children, names: %w(attribute choice group sequence complexContent simpleContent), name_only: true) # TODO add annotation
       ns.each do |n|
         elements(n, depth, opts)
       end
@@ -338,13 +321,13 @@ class XmlParser
       # TODO follow `type` reference
 
       if n.element_children.any?
-        ns = node_set(n.element_children, size: 1, name: 'simpleType', children: true)
-        ns = node_set(ns[0].element_children, size: 1, name: 'restriction', attributes: ['base'], children: 'any')
+        ns = node_set(n.element_children, size: 1, names: ['simpleType'], children: true)
+        ns = node_set(ns[0].element_children, size: 1, names: ['restriction'], attributes: ['base'], children: 'any')
 
         base = ns[0]['base']
         # TODO follow `base` reference
 
-        ns = node_set(ns[0].element_children, name: 'enumeration', attributes: ['value'], allow_empty: true)
+        ns = node_set(ns[0].element_children, allow_empty: true, names: ['enumeration'], attributes: ['value'])
 
         tree.last.update_attributes({
           base: base,
@@ -354,18 +337,18 @@ class XmlParser
 
     when 'simpleContent'
       allowed_attributes(n)
-      ns = node_set(n.element_children, size: 1, name: 'extension', attributes: ['base'], children: true)
+      ns = node_set(n.element_children, size: 1, names: ['extension'], attributes: ['base'], children: true)
 
       base = ns[0]['base']
       # TODO follow `base` reference
 
-      ns = node_set(ns[0].element_children, size: 1, name: 'attribute', required_attributes: ['name'], optional_attributes: %w(type use fixed))
+      ns = node_set(ns[0].element_children, size: 1, names: ['attribute'], required_attributes: ['name'], optional_attributes: %w(type use fixed))
       elements(ns[0], depth, opts)
       # TODO follow `type` reference
 
     when 'complexContent'
       allowed_attributes(n)
-      ns = node_set(n.element_children, size: 1, names: %w(extension restriction))
+      ns = node_set(n.element_children, size: 1, names: %w(extension restriction), name_only: true)
 
       base = ns[0]['base']
       # TODO follow `base` reference
@@ -380,7 +363,7 @@ class XmlParser
       end
 
       allowed_attributes(ns[0], %w(base))
-      ns = node_set(ns[0].element_children, names: names, allow_empty: true)
+      ns = node_set(ns[0].element_children, allow_empty: true, names: names, name_only: true)
       ns.each do |n|
         elements(n, depth, opts)
       end
@@ -410,10 +393,10 @@ task :process do
       schema = Nokogiri::XML(File.read(filename)).xpath('/xs:schema')
       parser = XmlParser.new(form, schema, common, countries)
 
-      ns = parser.node_set(schema.xpath("./xs:element[@name='#{basename}']"), size: 1, name: 'element', attributes: ['name'], children: true)
-      ns = parser.node_set(ns[0].element_children, size: 2, index: 1, name: 'complexType', children: true, xml: {0 => "<xs:annotation>\n\t\t\t<xs:documentation>ROOT element #{form}</xs:documentation>\n\t\t</xs:annotation>"})
-      ns = parser.node_set(ns[1].element_children, size: 4, name: 'sequence', children: true, xml: {1..3 => %(<xs:attribute name="LG" type="t_ce_language_list" use="required"/><xs:attribute name="CATEGORY" type="original_translation" use="required"/><xs:attribute name="FORM" use="required" fixed="#{form}"/>)})
-      ns = parser.node_set(ns[0].element_children, names: %w(choice element))
+      ns = parser.node_set(schema.xpath("./xs:element[@name='#{basename}']"), size: 1, names: ['element'], attributes: ['name'], children: true)
+      ns = parser.node_set(ns[0].element_children, size: 2, index: 1, names: ['complexType'], children: true, xml: {0 => "<xs:annotation>\n\t\t\t<xs:documentation>ROOT element #{form}</xs:documentation>\n\t\t</xs:annotation>"})
+      ns = parser.node_set(ns[1].element_children, size: 4, index: 0, names: ['sequence'], children: true, xml: {1..3 => %(<xs:attribute name="LG" type="t_ce_language_list" use="required"/><xs:attribute name="CATEGORY" type="original_translation" use="required"/><xs:attribute name="FORM" use="required" fixed="#{form}"/>)})
+      ns = parser.node_set(ns[0].element_children, names: %w(choice element), name_only: true)
 
       # For each element in the form's main `sequence`:
       ns.to_enum.with_index(1) do |n, i|
@@ -424,15 +407,15 @@ task :process do
         case n.name
         when 'choice'
           parser.allowed_attributes(n)
-          ns = parser.node_set(ns[0].element_children, names: %w(element sequence))
+          ns = parser.node_set(ns[0].element_children, names: %w(element sequence), name_only: true)
           # TODO children
 
         when 'element' # TODO deduplicate with `elements` ?
           parser.allowed_attributes(n, %w(name type minOccurs maxOccurs))
 
-          ns = parser.node_set(schema.xpath("./xs:complexType[@name='#{n['type']}']"), size: 1, name: 'complexType', attributes: ['name'], children: true)
+          ns = parser.node_set(schema.xpath("./xs:complexType[@name='#{n['type']}']"), size: 1, names: ['complexType'], attributes: ['name'], children: true)
 
-          ns = parser.node_set(ns[0].element_children, names: %w(annotation attribute complexContent choice sequence))
+          ns = parser.node_set(ns[0].element_children, names: %w(annotation attribute complexContent choice sequence), name_only: true)
           ns.each do |ctn|
             parser.elements(ctn, 0, opts)
           end
