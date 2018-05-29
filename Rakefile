@@ -9,34 +9,34 @@ require 'nokogiri'
 # These known attributes will automatically be added to the built tree.
 ATTRIBUTES = %i(name type minOccurs maxOccurs use fixed ref)
 # These attributes are used internally to build a locator for a node in the tree.
-LOCATORS   = %i(index0 index1 index2 index3 index4 index5)
+LOCATORS   = %i(index0 index1 index2 index3 index4 index5 index6 index7 index8)
 # These are calculated or other non-XML attributes of the node.
-OTHERS     = %i(path tag annotation base value)
+OTHERS     = %i(tag annotation base value)
 # All known, locator and other attributes that can be assigned.
 ASSIGNABLE = ATTRIBUTES + LOCATORS + OTHERS
 # All known and other attributes, excluding internal locators.
 PROPERTIES = ATTRIBUTES + OTHERS
 
 # All `ASSIGNABLE`, but with `LOCATORS` replaced with `index`.
-HEADERS = %i(index name type minOccurs maxOccurs use fixed ref path tag annotation base value)
+HEADERS = %i(index name type minOccurs maxOccurs use fixed ref tag annotation base value)
 
 class TreeNode
   # @return [Hash] the node's attributes
   attr_accessor :attributes
 
-  # Sets the node's path, known attributes and given attributes.
+  # Sets the node's known attributes and given attributes.
   #
   # @param [Nokogiri::XML::Node] node a node
   # @param [Hash] attrs attributes
   def initialize(node, attrs={})
-    self.attributes = {path: node.path}
+    @node = node
 
+    self.attributes = {}
     ATTRIBUTES.each do |k|
       if node.key?(k.to_s)
         attributes[k] = node[k]
       end
     end
-
     update_attributes(attrs)
   end
 
@@ -49,7 +49,7 @@ class TreeNode
     if difference.empty?
       attributes.merge!(attrs)
     else
-      raise "unexpected attributes #{difference} for #{path}"
+      raise "unexpected attributes #{difference} for #{@node.path}"
     end
   end
 end
@@ -101,12 +101,12 @@ class XmlParser
 
   # @raise if the actual value isn't the expected value
   def assert_equal(actual, expected, message='', node=nil)
-    assert actual == expected, "expected #{expected}, got #{actual} #{message}"
+    assert actual == expected, "expected #{expected}, got #{actual} #{message}", node
   end
 
   # @raise if the first value is not included in the second value
   def assert_in(first, second, message='', node=nil)
-    assert Array === second && second.include?(first), "expected #{second} to include '#{first}' #{message}"
+    assert Array === second && second.include?(first), "expected #{second} to include '#{first}' #{message}", node
   end
 
   # @param [Nokogiri::XML::Node] node a node
@@ -129,11 +129,13 @@ class XmlParser
   # @option opts [Integer] :index The index of the single node to test.
   # @option opts [String] :names The allowed tag names.
   # @option opts [Array<String>] :attributes The expected attribute names. `[]` by default.
-  # @option opts [Array<String>] :required_attributes The names of required attributes if `:attributes` not used.
-  # @option opts [Array<String>] :optional_attributes The names of optional attributes if `:attributes` not used.
-  # @option opts [String, true] :children If omitted, the node(s) to test are expected to have no children. If `"text"`,
-  #                                       they are expected to have no element children. If `true`, they are expected to
-  #                                       have children. If `"any"`, there are no expectations.
+  # @option opts [Array<String>] :required_attributes The names of required attributes.
+  # @option opts [Array<String>] :optional_attributes The names of optional attributes.
+  # @option opts [String, true] :children The nodes are expected to have:
+  #   * If `"any"`, anything
+  #   * If `true`: children
+  #   * If `"text"`: no element children
+  #   * If omitted: no children
   # @return the node set
   def node_set(ns, opts)
     # Check options.
@@ -176,11 +178,12 @@ class XmlParser
     assert_in n.name, opts.fetch(:names), 'tag name', n
 
     if !opts[:name_only]
-      if opts.key?(:required_attributes) && opts.key?(:optional_attributes)
-        opts[:required_attributes].each do |attribute|
+      if opts.key?(:required_attributes) || opts.key?(:optional_attributes)
+        required_attributes = opts.fetch(:required_attributes, [])
+        required_attributes.each do |attribute|
           assert_in attribute, n.attributes.keys, 'attribute name', n
         end
-        allowed_attributes(n, opts[:required_attributes] + opts[:optional_attributes])
+        allowed_attributes(n, required_attributes + opts.fetch(:optional_attributes))
       else
         assert_equal n.attributes.keys, opts.fetch(:attributes, []), 'attribute names', n
       end
@@ -241,10 +244,15 @@ class XmlParser
   # @option opts :index5
   # @option opts :tag
   def elements(n, depth, opts={})
+    if ENV['DEBUG']
+      $stderr.puts n
+      $stderr.puts '-' * 80
+    end
+
     case n.name
     when 'sequence'
       allowed_attributes(n)
-      ns = node_set(n.element_children, names: %w(element group sequence choice), name_only: true)
+      ns = node_set(n.element_children, names: %w(annotation choice element group sequence), name_only: true)
       ns.to_enum.with_index(1) do |n, i|
         elements(n, depth + 1, opts.merge(key_for_depth(depth) => i))
       end
@@ -260,7 +268,7 @@ class XmlParser
       tree << TreeNode.new(n, opts)
 
       allowed_attributes(n, %w(name type minOccurs maxOccurs ref))
-      ns = node_set(n.element_children, allow_empty: true, names: %w(annotation complexType), name_only: true)
+      ns = node_set(n.element_children, allow_empty: true, names: %w(annotation complexType simpleType), name_only: true)
       ns.each do |n|
         elements(n, depth, opts)
       end
@@ -277,15 +285,15 @@ class XmlParser
       # Follow references.
       if n.key?('type')
         type = xpath(%w(complex simple).map{ |prefix| "./xs:#{prefix}Type[@name='#{n['type']}']" }.join('|'))
-        ns = node_set(type, size: 1, names: %w(complexType simpleType), attributes: ['name'], children: true)
-        # TODO
+        ns = node_set(type, size: 1, names: %w(complexType simpleType), name_only: true)
+        elements(ns[0], depth, opts)
       elsif n.key?('ref')
         if n['ref'] == 'n2016:NUTS'
           # TODO
         else
           ref = xpath("./xs:#{n.name}[@name='#{n['ref']}']")
-          ns = node_set(ref, size: 1, names: [n.name], required_attributes: ['name'], optional_attributes: ['type'], children: 'any')
-          # TODO
+          ns = node_set(ref, size: 1, names: [n.name], name_only: true)
+          elements(ns[0], depth, opts)
         end
       end
 
@@ -308,11 +316,16 @@ class XmlParser
       tree.last.attributes[:annotation] = ns[0].text
 
     when 'complexType'
-      allowed_attributes(n)
-      ns = node_set(n.element_children, names: %w(attribute choice group sequence complexContent simpleContent), name_only: true) # TODO add annotation
+      allowed_attributes(n, %w(name mixed))
+      ns = node_set(n.element_children, names: %w(annotation attribute choice group sequence complexContent simpleContent), name_only: true)
       ns.each do |n|
         elements(n, depth, opts)
       end
+
+    when 'simpleType'
+      allowed_attributes(n, %w(name))
+      # ns = node_set(n.element_children, names: %w(), name_only: true)
+      # TODO
 
     when 'attribute'
       tree << TreeNode.new(n, opts.merge(key_for_depth(depth) => '+'))
