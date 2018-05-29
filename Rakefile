@@ -22,7 +22,7 @@ PROPERTIES = ATTRIBUTES + OTHERS + RESTRICTIONS
 
 class TreeNode
   # @return [Hash] the node's attributes
-  attr_accessor :attributes
+  attr_reader :attributes
 
   # Sets the node's known attributes and given attributes.
   #
@@ -31,7 +31,7 @@ class TreeNode
   def initialize(node, attrs={})
     @node = node
 
-    self.attributes = {}
+    @attributes = {}
     ATTRIBUTES.each do |k|
       if node.key?(k.to_s)
         attributes[k] = node[k]
@@ -51,6 +51,21 @@ class TreeNode
     else
       raise "unexpected attributes #{difference} for #{@node.path}"
     end
+  end
+
+  def merge(n, attrs)
+    other = self.class.new(n, attrs)
+    # The given `:ref` attributes will equal the other node's `"name"` attribute.
+    other.attributes.delete(:ref)
+
+    other.attributes.each do |k, v|
+      value = attributes[k]
+      if value && value != v
+        raise "unexpected overwite of #{k} from #{value} to #{v}"
+      end
+    end
+
+    update_attributes(other.attributes)
   end
 end
 
@@ -128,6 +143,7 @@ class XmlParser
   # @option opts [Array<String>] :attributes The expected attribute names. `[]` by default.
   # @option opts [Array<String>] :required The names of required attributes.
   # @option opts [Array<String>] :optional The names of optional attributes.
+  # @option opts [Array<String>] :disjoint The names of disjoint required attributes.
   # @option opts [String, true] :children The nodes are expected to have:
   #   * If `"any"`, anything
   #   * If `true`: children
@@ -190,9 +206,6 @@ class XmlParser
   #
   # @param [Nokogiri::XML::Node] n
   # @param [Hash] opts
-  # @option opts [Array<String>] :required The names of required attributes.
-  # @option opts [Array<String>] :optional The names of optional attributes.
-  # @option opts [Array<String>] :disjoint The names of disjoint required attributes.
   def allowed_attributes(n, opts={})
     required = opts.fetch(:required, [])
     required.each do |attribute|
@@ -265,8 +278,17 @@ class XmlParser
         else
           assert false, "unexpected #{n.name}", n
         end
-        n.unlink
+        n.unlink # TODO removes from document, so not picked up in later passes
       end
+    end
+  end
+
+  # Adds or merges entries to the tree.
+  def enter(n, opts)
+    if opts[:ref] && opts[:ref] == n['name']
+      tree.last.merge(n, opts)
+    else
+      tree << TreeNode.new(n, opts)
     end
   end
 
@@ -323,7 +345,7 @@ class XmlParser
       end
 
     when 'element'
-      tree << TreeNode.new(n, opts)
+      enter(n, opts)
 
       allowed_attributes(n, disjoint: %w(name ref), optional: %w(type minOccurs maxOccurs))
       annotate(n, %w(annotation unique))
@@ -335,7 +357,7 @@ class XmlParser
       follow(n, depth, opts.merge(ref: n['ref'] || n['type']))
 
     when 'group'
-      tree << TreeNode.new(n, opts)
+      enter(n, opts)
 
       allowed_attributes(n, disjoint: %w(name ref), optional: %w(minOccurs maxOccurs))
       annotate(n, ['annotation'])
@@ -380,7 +402,7 @@ class XmlParser
       end
 
     when 'attribute'
-      tree << TreeNode.new(n, opts.merge(key_for_depth(depth) => '+'))
+      enter(n, opts.merge(key_for_depth(depth) => '+'))
 
       allowed_attributes(n, required: ['name'], optional: %w(type use fixed))
       ns = node_set(n.element_children, size: 0..1, names: ['simpleType'], children: true)
