@@ -237,7 +237,7 @@ class XmlParser
         case n.name
         when 'annotation'
           allowed_attributes(n)
-          ns = node_set(n.element_children, size: 1, names: ['documentation'], optional: ['lang'], children: 'any') # discard `lang`
+          ns = node_set(n.element_children, size: 1, names: ['documentation'], optional: ['lang'], children: 'any') # discard lang ("en")
           set_last(node, annotation: ns[0].text.split("\n").map(&:strip).join("\n").strip)
           # TODO after other `base` followed
           # if ns[0].text != ns[0].text.split("\n").map(&:strip).join("\n").strip
@@ -305,7 +305,7 @@ class XmlParser
       end
 
     when 'choice'
-      allowed_attributes(n, optional: ['maxOccurs']) # TODO preserve maxOccurs
+      allowed_attributes(n, optional: ['maxOccurs']) # discard maxOccurs (on p and text_ft_multi_lines_or_string only)
       n = annotate(n, ['annotation'])
       ns = node_set(n.element_children, size: 1..6, names: %w(choice element group sequence), name_only: true)
       ns.to_enum.with_index(97) do |c, i|
@@ -341,7 +341,7 @@ class XmlParser
         enter(n, depth, opts)
       end
 
-      allowed_attributes(n, optional: %w(name mixed)) # discard mixed TODO preserve name
+      allowed_attributes(n, optional: %w(name mixed)) # discard name (referenced) and mixed (on p and text_ft_multi_lines_or_string only)
       n = annotate(n, ['annotation'])
       ns = node_set(n.element_children, size: 0..2, names: %w(attribute choice group sequence complexContent simpleContent), name_only: true)
       ns.each do |c|
@@ -353,12 +353,12 @@ class XmlParser
         enter(n, depth, opts)
       end
 
-      allowed_attributes(n, optional: ['name']) # TODO preserve name
+      allowed_attributes(n, optional: ['name']) # discard name (referenced)
       n = annotate(n, ['annotation'])
       ns = node_set(n.element_children, size: 1, names: ['restriction'], attributes: ['base'], children: 'any')
 
       base = ns[0]['base']
-      # TODO follow/set `base` reference
+      # TODO follow `base` reference
 
       ns = node_set(ns[0].element_children, size: 0..9999, names: RESTRICTIONS.map(&:to_s), attributes: ['value'])
 
@@ -400,7 +400,7 @@ class XmlParser
 
     when 'complexContent'
       allowed_attributes(n)
-      ns = node_set(n.element_children, size: 1, names: %w(extension restriction), name_only: true)
+      ns = node_set(n.element_children, size: 1, names: %w(extension restriction), attributes: ['base'], children: 'any')
 
       base = ns[0]['base']
       # TODO follow/set `base` reference
@@ -414,7 +414,6 @@ class XmlParser
         assert false, "unexpected #{n.name}", n
       end
 
-      allowed_attributes(ns[0], required: ['base'])
       ns = node_set(ns[0].element_children, size: 0..1, names: names, name_only: true)
       ns.each do |c|
         elements(c, depth, opts)
