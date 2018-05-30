@@ -210,7 +210,7 @@ class XmlParser
     attributes.each do |key, value|
       # Don't overwrite if the new tag is a basic type.
       unless tree.last.attributes.key?(key) && (
-        key == :restriction && %w(xs:nonNegativeInteger _4car xs:string string_with_letter string_not_empty string_200).include?(value) ||
+        key == :restriction && %w(xs:integer xs:nonNegativeInteger _4car xs:string string_with_letter string_not_empty string_200).include?(value) ||
         key == :annotation && %w(xs:nonNegativeInteger _3car _4car string_not_empty).include?(node['name']) ||
         key == :pattern && %w(string_not_empty).include?(node['name'])
       )
@@ -246,11 +246,6 @@ class XmlParser
           allowed_attributes(n)
           ns = node_set(n.element_children, size: 1, names: ['documentation'], optional: ['lang'], children: 'any') # discard lang ("en")
           set_last(node, annotation: ns[0].text.split("\n").map(&:strip).join("\n").strip)
-          # TODO after other `base` followed
-          # if ns[0].text != ns[0].text.split("\n").map(&:strip).join("\n").strip
-          #   $stderr.puts ns[0]
-          #   $stderr.puts ns[0].text.split("\n").map(&:strip).join("\n").strip
-          # end
         when 'unique'
           allowed_attributes(n, required: ['name'])
           ns = node_set(n.element_children, size: 2, index: 1, names: ['field'], attributes: ['xpath'], xml: {0 => '<xs:selector xpath="*"/>'})
@@ -294,14 +289,18 @@ class XmlParser
   #
   # @param [Nokogiri::XML::Node] n a node
   # @param [Integer] depth the depth of the node
-  # @param [Hash] opts
+  # @param [Hash] opts locators and references
   # @option opts :index0
   # @option opts :index1
   # @option opts :index2
   # @option opts :index3
   # @option opts :index4
   # @option opts :index5
-  # @option opts :ref
+  # @option opts :index6
+  # @option opts :index7
+  # @option opts :extension
+  # @option opts :restriction
+  # @option opts :reference
   def elements(n, depth, opts)
     case n.name
     when 'sequence'

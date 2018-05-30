@@ -10,16 +10,15 @@ require 'nokogiri'
 # `:use` and `:fixed` are unique to `attribute` tags.
 ATTRIBUTES   = %i(name type minOccurs maxOccurs use fixed ref)
 # These attributes are used internally to build a locator for a node in the tree.
-LOCATORS     = %i(index0 index1 index2 index3 index4 index5 index6 index7 index8 index9 index10)
-# These are the supported restrictions on the tag's value.
+LOCATORS     = %i(index0 index1 index2 index3 index4 index5 index6 index7)
 RESTRICTIONS = %i(enumeration maxLength maxInclusive minInclusive minExclusive pattern totalDigits)
-# These are calculated or other non-XML attributes of the node.
-OTHERS       = %i(unique extension restriction reference annotation)
+REFERENCES   = %i(extension restriction reference)
+ANNOTATIONS  = %i(unique annotation)
 
 # All attributes that can be assigned.
-ASSIGNABLE = ATTRIBUTES + LOCATORS + OTHERS + RESTRICTIONS
+ASSIGNABLE = ATTRIBUTES + LOCATORS + REFERENCES + ANNOTATIONS + RESTRICTIONS
 # All attributes, excluding internal locators.
-PROPERTIES = ATTRIBUTES + OTHERS + RESTRICTIONS
+PROPERTIES = ATTRIBUTES + REFERENCES + ANNOTATIONS + RESTRICTIONS
 
 NO_FOLLOW = [
   # base
@@ -123,7 +122,7 @@ end
 
 task review: :common do
   directories.each do |directory|
-    text = File.read('common.csv') # must redirect this command's output to common.csv
+    text = File.read(File.join('out', 'common_2014.csv'))
 
     parser = XmlParser.new(File.join(directory, 'common_2014.xsd'))
 
