@@ -48,11 +48,25 @@ class XmlParser
     FileUtils.mkdir_p('output')
     CSV.open(File.join('output', "#{@basename}.csv"), 'w') do |csv|
       csv << %w(file index) + PROPERTIES
+
+      mappings = {}
+
       tree.each do |node|
-        if node.attributes.key?(:enumeration)
-          node.attributes[:enumeration] = node.attributes[:enumeration].join('|')
+        attributes = node.attributes
+
+        if attributes.key?(:enumeration)
+          attributes[:enumeration] = attributes[:enumeration].join('|')
         end
-        csv << [@basename, node.attributes.values_at(*LOCATORS).compact.join('.')] + node.attributes.values_at(*PROPERTIES)
+
+        index0 = attributes[:index0]
+        if !attributes.key?(:index1) && attributes[:annotation] && attributes[:annotation][/\ASection ([IV]+)/] && Integer === attributes[:index0]
+          mappings[index0] = $1
+        end
+        if mappings.key?(index0)
+          attributes[:index0] = mappings[index0]
+        end
+
+        csv << [@basename, attributes.values_at(*LOCATORS).compact.join('.')] + attributes.values_at(*PROPERTIES)
       end
     end
   end
