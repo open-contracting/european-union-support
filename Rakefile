@@ -22,6 +22,14 @@ ASSIGNABLE = ATTRIBUTES + LOCATORS + OTHERS + RESTRICTIONS
 PROPERTIES = ATTRIBUTES + OTHERS + RESTRICTIONS
 
 NO_FOLLOW = [
+  # base
+  'contact',
+  'string_with_letter',
+
+  # ref
+  'annex_d1_part1',
+  'annex_d2_part1',
+
   # type
   'ac_definition',
   'contact_contracting_body',
@@ -31,10 +39,6 @@ NO_FOLLOW = [
   'no_award',
   'phone',
   'text_ft_multi_lines', # see readme
-
-  # ref
-  'annex_d1_part1',
-  'annex_d2_part1',
 ]
 
 require_relative 'lib/tree_node'
@@ -63,30 +67,31 @@ end
 
 task :common do
   directories.each do |directory|
-    refs = Set.new
-    types = Set.new
+    references = Set.new
 
-    # Get the `ref`'s and `type`'s re-used across forms.
+    # Get the `base`, `ref` and `type` re-used across forms.
     forms(directory).each do |filename|
       parser = XmlParser.new(filename)
 
-      refs += parser.schema.xpath('.//*[@ref]').reject{ |n|
+      references += parser.schema.xpath('.//*[@ref]').reject{ |n|
         parser.schema.xpath("./xs:#{n.name}[@name='#{n['ref'].split(':', 2).last}']").any?
       }.map{ |n| n['ref'] }
 
-      types += parser.schema.xpath('.//*[@type]').reject{ |n|
-        parser.schema.xpath(%w(complex simple).map{ |prefix| "./xs:#{prefix}Type[@name='#{n['type']}']" }.join('|')).any?
-      }.map{ |n| n['type'] }
+      %w(base type).each do |name|
+        references += parser.schema.xpath(".//*[@#{name}]").reject{ |n|
+          parser.schema.xpath(%w(complex simple).map{ |prefix| "./xs:#{prefix}Type[@name='#{n[name]}']" }.join('|')).any?
+        }.map{ |n| n[name] }
+      end
     end
 
     # Correction if types referenced in common schema only.
-    types += NO_FOLLOW
+    references += NO_FOLLOW
 
     parser = XmlParser.new(File.join(directory, 'common_2014.xsd'))
 
     ns = parser.node_set(parser.schema.element_children, size: 0..999, names: %w(import include element group complexType simpleType), name_only: true)
     ns.each do |c|
-      if refs.include?(c['name']) || types.include?(c['name'])
+      if references.include?(c['name'])
         parser.elements(c, 0, index0: c['name'], enter: true)
       end
     end
@@ -123,7 +128,7 @@ task review: :common do
     parser = XmlParser.new(File.join(directory, 'common_2014.xsd'))
 
     counts = Hash.new(0)
-    %w(ref type).each do |name|
+    %w(base ref type).each do |name|
       parser.schema.xpath(".//@#{name}").each do |attribute|
         counts[attribute.value] += 1
       end

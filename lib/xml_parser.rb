@@ -46,7 +46,7 @@ class XmlParser
   def to_csv
     FileUtils.mkdir_p('out')
     CSV.open(File.join('out', "#{@basename}.csv"), 'w') do |csv|
-      csv << %w(form index) + PROPERTIES
+      csv << %w(file index) + PROPERTIES
       tree.each do |node|
         if node.attributes.key?(:enumeration)
           node.attributes[:enumeration] = node.attributes[:enumeration].join('|')
@@ -208,8 +208,12 @@ class XmlParser
   # @param [Hash] attributes
   def set_last(node, attributes)
     attributes.each do |key, value|
-      # Don't override the old base if the new base is a basic type.
-      unless key == :restriction && %w(string_200 string_not_empty string_with_letter xs:string).include?(value) && tree.last.attributes.key?(key)
+      # Don't overwrite if the new tag is a basic type.
+      unless tree.last.attributes.key?(key) && (
+        key == :restriction && %w(xs:nonNegativeInteger _4car xs:string string_with_letter string_not_empty string_200).include?(value) ||
+        key == :annotation && %w(xs:nonNegativeInteger _3car _4car string_not_empty).include?(node['name']) ||
+        key == :pattern && %w(string_not_empty).include?(node['name'])
+      )
         assert !tree.last.attributes.key?(key), "unexpected #{key} (was #{tree.last.attributes[key]})", node
         tree.last.attributes[key] = value
       end
@@ -260,16 +264,17 @@ class XmlParser
     node
   end
 
-  # Follows a `ref` or `type` attribute.
+  # Follows a `base`, `ref` or `type` attribute.
   def follow(n, depth, opts, optional=false)
-    matches = [n.key?('type'), n.key?('ref'), n.element_children.any?].select(&:itself)
-    assert matches.one? || optional && matches.none?, 'expected one of "type", "ref" or children', n
+    matches = [n.key?('base'), n.key?('ref'), n.key?('type'), !n.key?('base') && n.element_children.any?].select(&:itself)
+    assert matches.one? || optional && matches.none?, 'expected one of "base", "ref", "type" or children without "base"', n
 
     set = nil
 
-    if n.key?('type')
-      if !NO_FOLLOW.include?(n['type'])
-        set = xpath(%w(complex simple).map{ |prefix| "./xs:#{prefix}Type[@name='#{n['type']}']" }.join('|'))
+    if n.key?('base') || n.key?('type')
+      reference = n['base'] || n['type']
+      if !NO_FOLLOW.include?(reference)
+        set = xpath(%w(complex simple).map{ |prefix| "./xs:#{prefix}Type[@name='#{reference}']" }.join('|'))
         names = %w(complexType simpleType)
       end
     elsif n.key?('ref')
@@ -360,8 +365,8 @@ class XmlParser
       n = annotate(n, ['annotation'])
       ns = node_set(n.element_children, size: 1, names: ['restriction'], attributes: ['base'], children: 'any')
 
+      node = ns[0]
       restriction = ns[0]['base']
-      # TODO follow `base` reference
 
       ns = node_set(ns[0].element_children, size: 0..9999, names: RESTRICTIONS.map(&:to_s), attributes: ['value'])
 
@@ -380,6 +385,8 @@ class XmlParser
         set_last(n, restrictions.merge(restriction: restriction))
       end
 
+      follow(node, depth, opts.merge(reference: restriction))
+
     when 'attribute'
       enter(n, depth, opts.merge(key_for_depth(depth) => '+'))
 
@@ -395,18 +402,20 @@ class XmlParser
       allowed_attributes(n)
       ns = node_set(n.element_children, size: 1, names: ['extension'], attributes: ['base'], children: true)
 
+      node = ns[0]
       extension = ns[0]['base']
-      # TODO follow `base` reference
 
       ns = node_set(ns[0].element_children, size: 1, names: ['attribute'], name_only: true)
       elements(ns[0], depth, opts.merge(extension: extension))
+
+      follow(node, depth, opts.merge(reference: extension))
 
     when 'complexContent'
       allowed_attributes(n)
       ns = node_set(n.element_children, size: 1, names: %w(extension restriction), attributes: ['base'], children: 'any')
 
+      node = ns[0]
       base = ns[0]['base']
-      # TODO follow `base` reference
 
       case ns[0].name
       when 'extension'
@@ -423,6 +432,8 @@ class XmlParser
       ns.each do |c|
         elements(c, depth, opts.merge(additional))
       end
+
+      follow(node, depth, opts.merge(reference: base))
 
     else
       assert false, "unexpected #{n.name}", n
