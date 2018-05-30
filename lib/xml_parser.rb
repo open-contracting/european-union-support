@@ -28,11 +28,12 @@ class XmlParser
   # @return [Hash] the key is a file path and the value is the `schema` tag of an XML document
   def import(path)
     schemas = {}
-    directory = File.dirname(path)
+
     schemas[path] = parse(path)
     schemas[path].xpath('./xs:include|./xs:import').each do |n| # discard import's namespace
-      schemas.merge!(import(File.join(directory, n['schemaLocation'])))
+      schemas.merge!(import(File.join(File.dirname(path), n['schemaLocation'])))
     end
+
     schemas
   end
 
@@ -51,7 +52,6 @@ class XmlParser
         if node.attributes.key?(:enumeration)
           node.attributes[:enumeration] = node.attributes[:enumeration].join('|')
         end
-
         csv << [@basename, node.attributes.values_at(*LOCATORS).compact.join('.')] + node.attributes.values_at(*PROPERTIES)
       end
     end
@@ -110,7 +110,6 @@ class XmlParser
   #   * If omitted: no children
   # @return the node set
   def node_set(ns, opts)
-    # Check options.
     if opts.key?(:attributes) && (opts.key?(:required) || opts.key?(:optional))
       raise 'must not set both :attributes and any of :required, :optional'
     end
@@ -155,9 +154,9 @@ class XmlParser
 
     if !opts[:name_only]
       assert !opts.key?(:children) && n.children.none? ||
-        opts[:children] == 'text' && n.element_children.none? ||
-        opts[:children] == true && n.children.any? ||
-        opts[:children] == 'any', "expected #{opts[:children].inspect} children", n
+             opts[:children] == 'text' && n.element_children.none? ||
+             opts[:children] == true && n.children.any? ||
+             opts[:children] == 'any', "expected #{opts[:children].inspect} children", n
     end
   end
 
@@ -198,9 +197,11 @@ class XmlParser
   # @raise if the depth of the locator is unexpected
   def key_for_depth(depth)
     key = "index#{depth + 1}".to_sym
+
     if !LOCATORS.include?(key)
       raise "missing property #{key}"
     end
+
     key
   end
 
@@ -209,11 +210,10 @@ class XmlParser
   def set_last(node, attributes)
     attributes.each do |key, value|
       # Don't overwrite if the new tag is a basic type.
-      unless tree.last.attributes.key?(key) && (
-        key == :restriction && %w(xs:integer xs:nonNegativeInteger _4car xs:string string_with_letter string_not_empty string_200).include?(value) ||
-        key == :annotation && %w(xs:nonNegativeInteger _3car _4car string_not_empty).include?(node['name']) ||
-        key == :pattern && %w(string_not_empty).include?(node['name'])
-      )
+      unless tree.last.attributes.key?(key) &&
+             key == :restriction && %w(xs:integer xs:nonNegativeInteger _4car xs:string string_with_letter string_not_empty string_200).include?(value) ||
+             key == :annotation && %w(xs:nonNegativeInteger _3car _4car string_not_empty).include?(node['name']) ||
+             key == :pattern && %w(string_not_empty).include?(node['name'])
         assert !tree.last.attributes.key?(key), "unexpected #{key} (was #{tree.last.attributes[key]})", node
         tree.last.attributes[key] = value
       end
@@ -238,24 +238,29 @@ class XmlParser
   # @param [Array<String>] annotations the node's allowed annotation elements
   def annotate(node, annotations)
     node = node.dup
+
     annotations.each do |name|
       n = node.element_children.find{ |child| child.name == name }
+
       if n
         case n.name
         when 'annotation'
           allowed_attributes(n)
           ns = node_set(n.element_children, size: 1, names: ['documentation'], optional: ['lang'], children: 'any') # discard lang ("en")
           set_last(node, annotation: ns[0].text.split("\n").map(&:strip).join("\n").strip)
+
         when 'unique'
           allowed_attributes(n, required: ['name'])
           ns = node_set(n.element_children, size: 2, index: 1, names: ['field'], attributes: ['xpath'], xml: {0 => '<xs:selector xpath="*"/>'})
           set_last(node, unique: ns[1]['xpath'])
+
         else
           assert false, "unexpected #{n.name}", n
         end
         n.unlink
       end
     end
+
     node
   end
 
@@ -386,17 +391,6 @@ class XmlParser
 
       follow(node, depth, opts.merge(reference: restriction))
 
-    when 'attribute'
-      enter(n, depth, opts.merge(key_for_depth(depth) => '+'))
-
-      allowed_attributes(n, required: ['name'], optional: %w(type use fixed))
-      ns = node_set(n.element_children, size: 0..1, names: ['simpleType'], children: true)
-      if ns.any?
-        elements(ns[0], depth, opts)
-      end
-
-      follow(n, depth, opts.merge(reference: n['type']), true)
-
     when 'simpleContent'
       allowed_attributes(n)
       ns = node_set(n.element_children, size: 1, names: ['extension'], attributes: ['base'], children: true)
@@ -433,6 +427,17 @@ class XmlParser
       end
 
       follow(node, depth, opts.merge(reference: base))
+
+    when 'attribute'
+      enter(n, depth, opts.merge(key_for_depth(depth) => '+'))
+
+      allowed_attributes(n, required: ['name'], optional: %w(type use fixed))
+      ns = node_set(n.element_children, size: 0..1, names: ['simpleType'], children: true)
+      if ns.any?
+        elements(ns[0], depth, opts)
+      end
+
+      follow(n, depth, opts.merge(reference: n['type']), true)
 
     else
       assert false, "unexpected #{n.name}", n
