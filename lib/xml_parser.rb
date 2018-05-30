@@ -226,7 +226,7 @@ class XmlParser
     if opts[:reference] && opts[:reference] == n['name']
       tree.last.merge(n, opts, %i(reference))
     elsif n.name == 'attribute' && n['name'] == 'CTYPE'
-      tree.last.merge(n, opts, %i(reference name) + [key_for_depth(depth)])
+      tree.last.merge(n, opts, %i(reference tag name) + [key_for_depth(depth)])
     else
       tree << TreeNode.new(n, opts)
     end
@@ -309,7 +309,7 @@ class XmlParser
   def elements(n, depth, opts)
     case n.name
     when 'sequence'
-      allowed_attributes(n)
+      allowed_attributes(n, optional: %w(minOccurs)) # discard minOccurs ("0")
       n = annotate(n, ['annotation'])
       ns = node_set(n.element_children, size: 1..16, names: %w(choice element group sequence), name_only: true)
       ns.to_enum.with_index(1) do |c, i|
@@ -317,7 +317,7 @@ class XmlParser
       end
 
     when 'choice'
-      allowed_attributes(n, optional: ['maxOccurs']) # discard maxOccurs (on p and text_ft_multi_lines_or_string only)
+      allowed_attributes(n, optional: %w(minOccurs maxOccurs)) # discard minOccurs ("0"), maxOccurs (on p and text_ft_multi_lines_or_string only)
       n = annotate(n, ['annotation'])
       ns = node_set(n.element_children, size: 1..6, names: %w(choice element group sequence), name_only: true)
       ns.to_enum.with_index(97) do |c, i|

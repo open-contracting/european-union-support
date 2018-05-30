@@ -8,7 +8,7 @@ require 'nokogiri'
 
 # These known attributes will automatically be added to the built tree.
 # `:use` and `:fixed` are unique to `attribute` tags.
-ATTRIBUTES   = %i(name type minOccurs maxOccurs use fixed ref)
+ATTRIBUTES   = %i(tag name type minOccurs maxOccurs use fixed ref)
 # These attributes are used internally to build a locator for a node in the tree.
 LOCATORS     = %i(index0 index1 index2 index3 index4 index5 index6 index7)
 RESTRICTIONS = %i(enumeration maxLength maxInclusive minInclusive minExclusive pattern totalDigits)
@@ -47,7 +47,7 @@ def directories
   if ENV['DIRECTORY']
     directories = [ENV['DIRECTORY']]
   else
-    directories = Dir['TED_*_R2'].sort
+    directories = Dir[File.join('source', 'TED_*_R2')].sort
   end
 end
 
@@ -57,11 +57,6 @@ def forms(directory)
   else
     Dir[File.join(directory, 'F*_2014.xsd')].sort
   end
-end
-
-task :download do
-  # TODO download the necessary files
-  # http://publications.europa.eu/mdr/eprocurement/ted/specific_versions_new.html#div2
 end
 
 task :common do
@@ -122,7 +117,7 @@ end
 
 task review: :common do
   directories.each do |directory|
-    text = File.read(File.join('out', 'common_2014.csv'))
+    text = File.read(File.join('output', 'common_2014.csv'))
 
     parser = XmlParser.new(File.join(directory, 'common_2014.xsd'))
 

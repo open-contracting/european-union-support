@@ -9,7 +9,7 @@ class TreeNode
   def initialize(node, attrs={})
     @node = node
 
-    @attributes = {}
+    @attributes = {tag: node.name}
     ATTRIBUTES.each do |k|
       if node.key?(k.to_s)
         attributes[k] = node[k]

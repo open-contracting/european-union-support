@@ -1,16 +1,36 @@
 # TED XSD parser
 
+Download prerequisites:
+
+    mkdir -p source
+
+    cd source
+
+    # http://publications.europa.eu/mdr/eprocurement/ted/index.html
+    curl -O http://publications.europa.eu/mdr/resource/eprocurement/ted/R2.0.9/publication/XML_Labels_Mapping_R209.zip
+    unzip XML_Labels_Mapping_R209.zip
+    rm -f XML_Labels_Mapping_R209.zip
+
+    # http://publications.europa.eu/mdr/eprocurement/ted/specific_versions_new.html#div2
+    curl -O http://publications.europa.eu/mdr/resource/eprocurement/ted/R2.0.9/publication/beta/TED_publication_R2.0.9.S03.E01_004-20180322.zip
+    unzip TED_publication_R2.0.9.S03.E01_004-20180322.zip -d TED_publication_R2
+    rm -f TED_publication_R2.0.9.S03.E01_004-20180322.zip
+
+    cd ..
+
+Prepare prerequisites:
+
+    in2csv --write-sheets - "source/XML Labels mapping R2.09.xlsx" > /dev/null
+
 Process all directories and all forms:
 
-```shell
-rake common forms
-```
+    rake common forms
 
 Process one directory and given forms:
 
-```
-rake common forms DIRECTORY=TED_publication_R2 FORMS=01,02,03,14,20
-```
+    rake common forms DIRECTORY=source/TED_publication_R2 FORMS=01,02,03,14,20
+
+## Reference
 
 * [Overview of XSD files](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.1.Overview)
 * [Form structure](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.2.Formstructure)
