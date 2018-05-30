@@ -1,7 +1,7 @@
 require 'csv'
 require 'delegate'
 
-# The script doesn't check whether all elements of the forms are visited during parsing, instead assuming the TED
+# The script doesn't check whether all tags of the forms are visited during parsing, instead assuming the TED
 # documentation is correct. See https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.2.Formstructure
 
 require 'nokogiri'
@@ -10,7 +10,7 @@ require 'nokogiri'
 ATTRIBUTES   = %i(name type minOccurs maxOccurs use fixed mixed)
 # These attributes are used internally to build a locator for a node in the tree.
 LOCATORS     = %i(index0 index1 index2 index3 index4 index5 index6 index7 index8 index9 index10)
-# These are the supported restrictions on the element's value.
+# These are the supported restrictions on the tag's value.
 RESTRICTIONS = %i(enumeration maxLength maxInclusive minInclusive minExclusive pattern totalDigits)
 # These are calculated or other non-XML attributes of the node.
 OTHERS       = %i(annotation unique base ref)
@@ -70,18 +70,46 @@ class TreeNode
 end
 
 class XmlParser
-  # @return the built tree
+  # @return [String] the file's basename without extension
+  attr_reader :basename
+  # @return [Nokogiri::XML::Node] the XML schema
+  attr_reader :schema
+  # @return [Array<TreeNode>] the built tree
   attr_reader :tree
 
-  # @param [String] form the form's identifier
-  # @param [Nokogiri::XML::NodeSet] schema the form's schema
-  # @param [Array<Nokogiri::XML::NodeSet>] args the shared TED schema
-  def initialize(form, schema, *args)
-    @form = form
-    @schema = schema
-    @schemas = [schema, *args]
+  class << self
+    attr_reader :xml
+  end
+
+  @xml = {}
+
+  # @param [String] path the path to the XSD file
+  def initialize(path)
+    @basename = File.basename(path, '.xsd')
+    @schemas = import(path).values
+    @schema = @schemas[0]
 
     @tree = []
+  end
+
+  # Finds the `schema` tag of the XML document at the given path, and then recursively finds the `schema` tags of the
+  # XML documents referenced by `include` or `import` tags.
+  #
+  # @return [Hash] the key is a file path and the value is the `schema` tag of an XML document
+  def import(path)
+    schemas = {}
+    directory = File.dirname(path)
+    schemas[path] = parse(path)
+    schemas[path].xpath('./xs:include|./xs:import').each do |n| # discard import's namespace
+      schemas.merge!(import(File.join(directory, n['schemaLocation'])))
+    end
+    schemas
+  end
+
+  # @return [Nokogiri::XML::Node] the `schema` tag of the XML document at the given path
+  def parse(path)
+    # Assume the XML declaration, xs:schema attributes, and comments are irrelevant.
+    self.class.xml[path] ||= node_set(Nokogiri::XML(File.read(path)).xpath('/xs:schema'), size: 1, names: ['schema'], required: ['elementFormDefault', 'attributeFormDefault', 'version'], optional: ['targetNamespace'], children: true)[0]
   end
 
   # Prints the built tree as a CSV to standard output.
@@ -93,7 +121,7 @@ class XmlParser
           node.attributes[:enumeration] = node.attributes[:enumeration].join('|')
         end
 
-        csv << [@form, node.attributes.values_at(*LOCATORS).compact.join('.')] + node.attributes.values_at(*PROPERTIES)
+        csv << [@basename, node.attributes.values_at(*LOCATORS).compact.join('.')] + node.attributes.values_at(*PROPERTIES)
       end
     end
   end
@@ -104,9 +132,9 @@ class XmlParser
   # @raise if the condition isn't met
   def assert(condition, message='', node=nil)
     unless condition
-      message = "#{@form}: #{message}"
+      message = "#{@basename}: #{message}"
       if node
-        message += " at #{node.path}: #{node}"
+        message += " at #{node.path}: #{node.to_s[0..2000]}"
       end
       raise message
     end
@@ -147,7 +175,7 @@ class XmlParser
   # @option opts [String, true] :children The nodes are expected to have:
   #   * If `"any"`, anything
   #   * If `true`: children
-  #   * If `"text"`: no element children
+  #   * If `"text"`: no tag children
   #   * If omitted: no children
   # @return the node set
   def node_set(ns, opts)
@@ -301,9 +329,8 @@ class XmlParser
       set = xpath(%w(complex simple).map{ |prefix| "./xs:#{prefix}Type[@name='#{n['type']}']" }.join('|'))
       ns = node_set(set, size: 1, names: %w(complexType simpleType), name_only: true)
       elements(ns[0], depth, opts)
-    # 404 http://publications.europa.eu/resource/schema/ted/2016/nuts
-    elsif n.key?('ref') && n['ref'] != 'n2016:NUTS'
-      set = xpath("./xs:#{n.name}[@name='#{n['ref']}']")
+    elsif n.key?('ref')
+      set = xpath("./xs:#{n.name}[@name='#{n['ref'].split(':', 2).last}']") # remove namespace
       ns = node_set(set, size: 1, names: [n.name], name_only: true)
       elements(ns[0], depth, opts)
     end
@@ -455,35 +482,44 @@ task :download do
   # http://publications.europa.eu/mdr/eprocurement/ted/specific_versions_new.html#div2
 end
 
-task :process do
-  def parse(directory, basename)
-    Nokogiri::XML(File.read(File.join(directory, "#{basename}.xsd"))).xpath('/xs:schema')
-  end
-
+task :preprocess do
   if ENV['DIRECTORY']
     directories = [ENV['DIRECTORY']]
   else
     directories = Dir['TED_*_R2'].sort
   end
 
-  schema_basenames = ['common_2014', 'countries', 'cpv_codes', 'cpv_supplementary_codes', 'languages']
+  directories.each do |directory|
+    parser = XmlParser.new(File.join(directory, 'common_2014.xsd'))
+
+    ns = parser.node_set(parser.schema.element_children, size: 0..999, names: %w(include import element group complexType simpleType), name_only: true)
+    ns.each do |c|
+      if !%w(include import)
+        # TODO parse the reusable elements
+        # later: remove any unused reusable elements
+      end
+    end
+  end
+end
+
+task :process do
+  if ENV['DIRECTORY']
+    directories = [ENV['DIRECTORY']]
+  else
+    directories = Dir['TED_*_R2'].sort
+  end
 
   directories.each do |directory|
-    schemas = schema_basenames.map{ |basename| parse(directory, basename) }
-
     # Other files described at https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.1.Overview
     Dir[File.join(directory, 'F*_2014.xsd')].sort.each do |filename|
-      basename = File.basename(filename, '.xsd')
-      form = basename.sub('_2014', '')
+      parser = XmlParser.new(filename)
 
-      # Assume XML declaration, xs:schema attributes, and comments are irrelevant.
-      schema = Nokogiri::XML(File.read(filename)).xpath('/xs:schema')
-      parser = XmlParser.new(form, schema, *schemas)
+      abbreviation = parser.basename.sub('_2014', '')
 
       # Navigate to the form's main sequence.
-      ns = parser.node_set(schema.xpath("./xs:element[@name='#{basename}']"), size: 1, names: ['element'], attributes: ['name'], children: true)
-      ns = parser.node_set(ns[0].element_children, size: 2, index: 1, names: ['complexType'], children: true, xml: {0 => "<xs:annotation>\n\t\t\t<xs:documentation>ROOT element #{form}</xs:documentation>\n\t\t</xs:annotation>"})
-      ns = parser.node_set(ns[1].element_children, size: 4, index: 0, names: ['sequence'], children: true, xml: {1..3 => %(<xs:attribute name="LG" type="t_ce_language_list" use="required"/><xs:attribute name="CATEGORY" type="original_translation" use="required"/><xs:attribute name="FORM" use="required" fixed="#{form}"/>)})
+      ns = parser.node_set(parser.schema.xpath("./xs:element[@name='#{parser.basename}']"), size: 1, names: ['element'], attributes: ['name'], children: true)
+      ns = parser.node_set(ns[0].element_children, size: 2, index: 1, names: ['complexType'], children: true, xml: {0 => "<xs:annotation>\n\t\t\t<xs:documentation>ROOT element #{abbreviation}</xs:documentation>\n\t\t</xs:annotation>"})
+      ns = parser.node_set(ns[1].element_children, size: 4, index: 0, names: ['sequence'], children: true, xml: {1..3 => %(<xs:attribute name="LG" type="t_ce_language_list" use="required"/><xs:attribute name="CATEGORY" type="original_translation" use="required"/><xs:attribute name="FORM" use="required" fixed="#{abbreviation}"/>)})
       ns = parser.node_set(ns[0].element_children, size: 4..8, names: %w(choice element), name_only: true)
       ns.to_enum.with_index(1) do |c, i|
         parser.elements(c, 0, index0: i)
