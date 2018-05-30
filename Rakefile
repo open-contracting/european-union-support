@@ -2,7 +2,7 @@ require 'csv'
 require 'delegate'
 
 # The script doesn't check whether all tags of the forms are visited during parsing, instead assuming the TED
-# documentation is correct. See https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.2.Formstructure
+# documentation about form structure is correct.
 
 require 'nokogiri'
 
@@ -48,18 +48,26 @@ def directories
   end
 end
 
+def forms(directory)
+  if ENV['FORMS']
+    ENV['FORMS'].split(',').map{ |number| File.join(directory, "F#{number}_2014.xsd") }
+  else
+    Dir[File.join(directory, 'F*_2014.xsd')].sort
+  end
+end
+
 task :download do
   # TODO download the necessary files
   # http://publications.europa.eu/mdr/eprocurement/ted/specific_versions_new.html#div2
 end
 
-task :preprocess do
+task :common do
   directories.each do |directory|
     refs = Set.new
     types = Set.new
 
     # Get the `ref`'s and `type`'s re-used across forms.
-    Dir[File.join(directory, 'F*_2014.xsd')].sort.each do |filename|
+    forms(directory).each do |filename|
       parser = XmlParser.new(filename)
 
       refs += parser.schema.xpath('.//*[@ref]').reject{ |n|
@@ -71,9 +79,10 @@ task :preprocess do
       }.map{ |n| n['type'] }
     end
 
-    parser = XmlParser.new(File.join(directory, 'common_2014.xsd'))
-
+    # Manual correction if types referenced in common schema only.
     types += %w(contact_contractor contact_review phone)
+
+    parser = XmlParser.new(File.join(directory, 'common_2014.xsd'))
 
     ns = parser.node_set(parser.schema.element_children, size: 0..999, names: %w(import include element group complexType simpleType), name_only: true)
     ns.each do |c|
@@ -88,7 +97,6 @@ end
 
 task :process do
   directories.each do |directory|
-    # Other files described at https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.1.Overview
     Dir[File.join(directory, 'F*_2014.xsd')].sort.each do |filename|
       parser = XmlParser.new(filename)
 
@@ -108,19 +116,18 @@ task :process do
   end
 end
 
-task tmp: :preprocess do
+task review: :common do
   directories.each do |directory|
+    text = File.read('common.csv') # must redirect this command's output to common.csv
+
     parser = XmlParser.new(File.join(directory, 'common_2014.xsd'))
 
     counts = Hash.new(0)
-    parser.schema.xpath('.//@ref').each do |attribute|
-      counts[attribute.value] += 1
+    %w(ref type).each do |name|
+      parser.schema.xpath(".//@#{name}").each do |attribute|
+        counts[attribute.value] += 1
+      end
     end
-    parser.schema.xpath('.//@type').each do |attribute|
-      counts[attribute.value] += 1
-    end
-
-    text = File.read('common.csv') # must redirect output to common.csv
 
     $stderr.puts "\nFrequently occurring references:"
     counts.map{ |k, v|
@@ -129,9 +136,12 @@ task tmp: :preprocess do
       $stderr.puts "#{v}: #{k}"
     }
 
-    $stderr.puts "\nFrequently occurring attributes:"
     counts = Hash.new(0)
-    text.scan(/\+,([^,\n]+)/).each{ |s| counts[s[0]] += 1 }
+    text.scan(/\+,([^,\n]+)/).each do |s|
+      counts[s[0]] += 1
+    end
+
+    $stderr.puts "\nFrequently occurring attributes:"
     counts.sort_by(&:last).each do |k, v|
       $stderr.puts "#{v}: #{k}"
     end
