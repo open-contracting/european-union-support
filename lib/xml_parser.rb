@@ -208,8 +208,11 @@ class XmlParser
   # @param [Hash] attributes
   def set_last(node, attributes)
     attributes.each do |key, value|
-      assert !tree.last.attributes.key?(key), "unexpected #{key} (was #{tree.last.attributes[key]})", node
-      tree.last.attributes[key] = value
+      # Don't override the old base if the new base is a basic type.
+      unless key == :base && %w(xs:string string_200 string_not_empty string_with_letter).include?(value) && tree.last.attributes.key?(key)
+        assert !tree.last.attributes.key?(key), "unexpected #{key} (was #{tree.last.attributes[key]})", node
+        tree.last.attributes[key] = value
+      end
     end
   end
 
@@ -393,17 +396,17 @@ class XmlParser
       ns = node_set(n.element_children, size: 1, names: ['extension'], attributes: ['base'], children: true)
 
       base = ns[0]['base']
-      # TODO follow/set `base` reference
+      # TODO follow `base` reference
 
       ns = node_set(ns[0].element_children, size: 1, names: ['attribute'], name_only: true)
-      elements(ns[0], depth, opts)
+      elements(ns[0], depth, opts.merge(base: base))
 
     when 'complexContent'
       allowed_attributes(n)
       ns = node_set(n.element_children, size: 1, names: %w(extension restriction), attributes: ['base'], children: 'any')
 
       base = ns[0]['base']
-      # TODO follow/set `base` reference
+      # TODO follow `base` reference
 
       case ns[0].name
       when 'extension'
@@ -416,7 +419,7 @@ class XmlParser
 
       ns = node_set(ns[0].element_children, size: 0..1, names: names, name_only: true)
       ns.each do |c|
-        elements(c, depth, opts)
+        elements(c, depth, opts.merge(base: base))
       end
 
     else
