@@ -45,8 +45,8 @@ class XmlParser
 
   # Prints the built tree as a CSV to standard output.
   def to_csv
-    FileUtils.mkdir_p('out')
-    CSV.open(File.join('out', "#{@basename}.csv"), 'w') do |csv|
+    FileUtils.mkdir_p('output')
+    CSV.open(File.join('output', "#{@basename}.csv"), 'w') do |csv|
       csv << %w(file index) + PROPERTIES
       tree.each do |node|
         if node.attributes.key?(:enumeration)
