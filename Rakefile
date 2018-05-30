@@ -16,6 +16,11 @@ RESTRICTIONS = %i(enumeration maxLength maxInclusive minInclusive minExclusive p
 # These are calculated or other non-XML attributes of the node.
 OTHERS       = %i(annotation unique base reference)
 
+# All attributes that can be assigned.
+ASSIGNABLE = ATTRIBUTES + LOCATORS + OTHERS + RESTRICTIONS
+# All attributes, excluding internal locators.
+PROPERTIES = ATTRIBUTES + OTHERS + RESTRICTIONS
+
 NO_FOLLOW = [
   # type
   'ac_definition',
@@ -32,18 +37,8 @@ NO_FOLLOW = [
   'annex_d2_part1',
 ]
 
-# All attributes that can be assigned.
-ASSIGNABLE = ATTRIBUTES + LOCATORS + OTHERS + RESTRICTIONS
-# All attributes, excluding internal locators.
-PROPERTIES = ATTRIBUTES + OTHERS + RESTRICTIONS
-
 require_relative 'lib/tree_node'
 require_relative 'lib/xml_parser'
-
-task :download do
-  # TODO download the necessary files
-  # http://publications.europa.eu/mdr/eprocurement/ted/specific_versions_new.html#div2
-end
 
 def directories
   if ENV['DIRECTORY']
@@ -51,6 +46,11 @@ def directories
   else
     directories = Dir['TED_*_R2'].sort
   end
+end
+
+task :download do
+  # TODO download the necessary files
+  # http://publications.europa.eu/mdr/eprocurement/ted/specific_versions_new.html#div2
 end
 
 task :preprocess do
