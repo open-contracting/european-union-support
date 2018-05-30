@@ -209,7 +209,7 @@ class XmlParser
   def set_last(node, attributes)
     attributes.each do |key, value|
       # Don't override the old base if the new base is a basic type.
-      unless key == :base && %w(xs:string string_200 string_not_empty string_with_letter).include?(value) && tree.last.attributes.key?(key)
+      unless key == :restriction && %w(string_200 string_not_empty string_with_letter xs:string).include?(value) && tree.last.attributes.key?(key)
         assert !tree.last.attributes.key?(key), "unexpected #{key} (was #{tree.last.attributes[key]})", node
         tree.last.attributes[key] = value
       end
@@ -360,7 +360,7 @@ class XmlParser
       n = annotate(n, ['annotation'])
       ns = node_set(n.element_children, size: 1, names: ['restriction'], attributes: ['base'], children: 'any')
 
-      base = ns[0]['base']
+      restriction = ns[0]['base']
       # TODO follow `base` reference
 
       ns = node_set(ns[0].element_children, size: 0..9999, names: RESTRICTIONS.map(&:to_s), attributes: ['value'])
@@ -377,7 +377,7 @@ class XmlParser
         if restrictions[:enumeration].none?
           restrictions.delete(:enumeration)
         end
-        set_last(n, restrictions.merge(base: base))
+        set_last(n, restrictions.merge(restriction: restriction))
       end
 
     when 'attribute'
@@ -395,11 +395,11 @@ class XmlParser
       allowed_attributes(n)
       ns = node_set(n.element_children, size: 1, names: ['extension'], attributes: ['base'], children: true)
 
-      base = ns[0]['base']
+      extension = ns[0]['base']
       # TODO follow `base` reference
 
       ns = node_set(ns[0].element_children, size: 1, names: ['attribute'], name_only: true)
-      elements(ns[0], depth, opts.merge(base: base))
+      elements(ns[0], depth, opts.merge(extension: extension))
 
     when 'complexContent'
       allowed_attributes(n)
@@ -410,8 +410,10 @@ class XmlParser
 
       case ns[0].name
       when 'extension'
+        additional = {extension: base}
         names = %w(attribute choice group sequence)
       when 'restriction'
+        additional = {restriction: base}
         names = ['sequence']
       else
         assert false, "unexpected #{n.name}", n
@@ -419,7 +421,7 @@ class XmlParser
 
       ns = node_set(ns[0].element_children, size: 0..1, names: names, name_only: true)
       ns.each do |c|
-        elements(c, depth, opts.merge(base: base))
+        elements(c, depth, opts.merge(additional))
       end
 
     else

@@ -14,7 +14,7 @@ LOCATORS     = %i(index0 index1 index2 index3 index4 index5 index6 index7 index8
 # These are the supported restrictions on the tag's value.
 RESTRICTIONS = %i(enumeration maxLength maxInclusive minInclusive minExclusive pattern totalDigits)
 # These are calculated or other non-XML attributes of the node.
-OTHERS       = %i(annotation unique base reference)
+OTHERS       = %i(unique extension restriction reference annotation)
 
 # All attributes that can be assigned.
 ASSIGNABLE = ATTRIBUTES + LOCATORS + OTHERS + RESTRICTIONS
