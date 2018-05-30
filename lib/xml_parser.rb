@@ -13,10 +13,11 @@ class XmlParser
   @xml = {}
 
   # @param [String] path the path to the XSD file
-  def initialize(path)
+  def initialize(path, follow=true)
     @basename = File.basename(path, '.xsd')
     @schemas = import(path).values
     @schema = @schemas[0]
+    @follow = follow
 
     @tree = []
   end
@@ -43,7 +44,8 @@ class XmlParser
 
   # Prints the built tree as a CSV to standard output.
   def to_csv
-    CSV do |csv|
+    FileUtils.mkdir_p('out')
+    CSV.open(File.join('out', "#{@basename}.csv"), 'w') do |csv|
       csv << %w(form index) + PROPERTIES
       tree.each do |node|
         if node.attributes.key?(:enumeration)
@@ -181,11 +183,12 @@ class XmlParser
   # @param [String] path an XPath
   # @return [Nokogiri::XML::NodeSet] a nodeset
   def xpath(path)
-    # TODO stop if reference goes outside the file
     @schemas.each do |s|
       node_set = s.xpath(path)
       if !node_set.empty?
         return node_set
+      elsif !@follow
+        return
       end
     end
     nil
@@ -216,7 +219,7 @@ class XmlParser
     if opts[:reference] && opts[:reference] == n['name']
       tree.last.merge(n, opts, %i(reference))
     elsif n.name == 'attribute' && n['name'] == 'CTYPE'
-      tree.last.merge(n, opts, %i(name) + [key_for_depth(depth)])
+      tree.last.merge(n, opts, %i(reference name) + [key_for_depth(depth)])
     else
       tree << TreeNode.new(n, opts)
     end
@@ -248,7 +251,7 @@ class XmlParser
         else
           assert false, "unexpected #{n.name}", n
         end
-        n.unlink # TODO removes from document, so not picked up in later passes
+        n.unlink
       end
     end
     node
@@ -259,18 +262,23 @@ class XmlParser
     matches = [n.key?('type'), n.key?('ref'), n.element_children.any?].select(&:itself)
     assert matches.one? || optional && matches.none?, 'expected one of "type", "ref" or children', n
 
+    set = nil
+
     if n.key?('type')
       if !NO_FOLLOW.include?(n['type'])
         set = xpath(%w(complex simple).map{ |prefix| "./xs:#{prefix}Type[@name='#{n['type']}']" }.join('|'))
-        ns = node_set(set, size: 1, names: %w(complexType simpleType), name_only: true)
-        elements(ns[0], depth, opts)
+        names = %w(complexType simpleType)
       end
     elsif n.key?('ref')
       if !NO_FOLLOW.include?(n['ref'])
         set = xpath("./xs:#{n.name}[@name='#{n['ref'].split(':', 2).last}']") # remove namespace
-        ns = node_set(set, size: 1, names: [n.name], name_only: true)
-        elements(ns[0], depth, opts)
+        names = [n.name]
       end
+    end
+
+    if set
+      ns = node_set(set, size: 1, names: names, name_only: true)
+      elements(ns[0], depth, opts)
     end
   end
 
@@ -297,7 +305,7 @@ class XmlParser
       end
 
     when 'choice'
-      allowed_attributes(n, optional: ['maxOccurs']) # TODO preserve attr
+      allowed_attributes(n, optional: ['maxOccurs']) # TODO preserve maxOccurs
       n = annotate(n, ['annotation'])
       ns = node_set(n.element_children, size: 1..6, names: %w(choice element group sequence), name_only: true)
       ns.to_enum.with_index(97) do |c, i|
@@ -333,7 +341,7 @@ class XmlParser
         enter(n, depth, opts)
       end
 
-      allowed_attributes(n, optional: %w(name mixed)) # discard mixed TODO preserve attr
+      allowed_attributes(n, optional: %w(name mixed)) # discard mixed TODO preserve name
       n = annotate(n, ['annotation'])
       ns = node_set(n.element_children, size: 0..2, names: %w(attribute choice group sequence complexContent simpleContent), name_only: true)
       ns.each do |c|
@@ -345,7 +353,7 @@ class XmlParser
         enter(n, depth, opts)
       end
 
-      allowed_attributes(n, optional: ['name']) # TODO preserve attr
+      allowed_attributes(n, optional: ['name']) # TODO preserve name
       n = annotate(n, ['annotation'])
       ns = node_set(n.element_children, size: 1, names: ['restriction'], attributes: ['base'], children: 'any')
 

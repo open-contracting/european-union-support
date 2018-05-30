@@ -1,5 +1,19 @@
 # TED XSD parser
 
+Process all directories and all forms:
+
+```shell
+rake common
+rake forms
+```
+
+Process one directory and given forms:
+
+```
+rake common DIRECTORY=TED_publication_R2 FORMS=01,02,03,14,20
+rake forms DIRECTORY=TED_publication_R2 FORMS=01,02,03,14,20
+```
+
 * [Overview of XSD files](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.1.Overview)
 * [Form structure](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.2.Formstructure)
 

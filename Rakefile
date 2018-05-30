@@ -79,8 +79,8 @@ task :common do
       }.map{ |n| n['type'] }
     end
 
-    # Manual correction if types referenced in common schema only.
-    types += %w(contact_contractor contact_review phone)
+    # Correction if types referenced in common schema only.
+    types += NO_FOLLOW
 
     parser = XmlParser.new(File.join(directory, 'common_2014.xsd'))
 
@@ -95,10 +95,10 @@ task :common do
   end
 end
 
-task :process do
+task :forms do
   directories.each do |directory|
-    Dir[File.join(directory, 'F*_2014.xsd')].sort.each do |filename|
-      parser = XmlParser.new(filename)
+    forms(directory).each do |filename|
+      parser = XmlParser.new(filename, false)
 
       abbreviation = parser.basename.sub('_2014', '')
 
@@ -144,12 +144,6 @@ task review: :common do
     $stderr.puts "\nFrequently occurring attributes:"
     counts.sort_by(&:last).each do |k, v|
       $stderr.puts "#{v}: #{k}"
-    end
-
-    NO_FOLLOW.each do |index|
-      if !text[/^common_2014,#{index}/]
-        $stderr.puts "#{index} is undefined in common.csv - change `types` in :preprocess task?"
-      end
     end
   end
 end
