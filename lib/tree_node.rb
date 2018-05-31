@@ -39,7 +39,7 @@ class TreeNode
   def merge(node, attrs, except: [])
     other = self.class.new(node, attrs)
 
-    other.attributes = other.attributes.slice(*ASSIGNABLE - except)
+    other.attributes = other.attributes.except(*except)
 
     other.attributes.each do |k, v|
       value = attributes[k]

@@ -123,7 +123,7 @@ class XmlParser
   # @param [String] message
   # @param [Nokogiri::XML::Node] node a node
   def assert(condition, message='', node=nil)
-    unless condition
+    if !condition
       message = "#{@basename}: #{message}"
       if node
         message += " at #{node.path}: #{node.to_s[0..2000]}"
@@ -513,9 +513,15 @@ class XmlParser
         assert false, "unexpected #{n.name}", n
       end
 
-      children = node_set(node.element_children, size: 0..1, names: names, name_only: true)
-      children.each do |c|
-        elements(c, depth, opts.merge(additional))
+      if node.name == 'restriction' && !NO_CHILDREN.include?(node['base'])
+        compare(node, depth, opts)
+      end
+
+      if node.name != 'restriction' || !NO_CHILDREN.include?(node['base'])
+        children = node_set(node.element_children, size: 0..1, names: names, name_only: true)
+        children.each do |c|
+          elements(c, depth, opts.merge(additional))
+        end
       end
 
       follow(node, depth, opts.merge(reference: base))
@@ -534,5 +540,44 @@ class XmlParser
     else
       assert false, "unexpected #{n.name}", n
     end
+  end
+
+  def compare(node, depth, opts)
+    def comparator(active)
+      # :index0 may be natural numbers instead of roman numerals.
+      # :index1 may be larger numbers due to additional tags.
+      # :restriction and :reference will be swapped or nil.
+      @trees[active][:tree].map{ |n| n.attributes.except(:index0, :index1, :restriction, :reference) }
+    end
+
+    activate(:restriction, reset: true)
+
+    children = node_set(node.element_children, size: 0..1, names: ['sequence'], name_only: true)
+    children.each do |c|
+      elements(c, depth, opts.merge(restriction: node['base']))
+    end
+
+    activate(:follow, reset: true)
+
+    tree << @trees[:main][:tree].last # initialize with the last node of the main tree, for annotations
+    follow(node, depth, opts.merge(reference: node['base']))
+    tree.shift
+
+    a = comparator(:restriction)
+    b = comparator(:follow)
+
+    changed = a - b
+    while changed.any? && b.any? # b will be empty if the type is included in NO_FOLLOW
+      c = a.delete(changed.shift)
+      d = b.delete_at(b.index{ |n| n[:name] == c[:name] })
+      $stderr.puts "#{@basename}: #{node['base']}: changes #{c[:name]}: #{HashDiff.diff(d, c)}"
+    end
+
+    removed = b - a
+    if removed.any?
+      $stderr.puts "#{@basename} #{node['base']}: removes #{removed.map{ |n| n[:name] }}"
+    end
+
+    activate(:main)
   end
 end

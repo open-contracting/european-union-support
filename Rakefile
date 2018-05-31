@@ -38,6 +38,7 @@ HEADERS    = ATTRIBUTES + %i(cardinality) + REFERENCES + ANNOTATIONS + RESTRICTI
   :unique, # once
 ]
 
+# Avoid expanding common types to keep the CSVs small.
 NO_FOLLOW = [
   # base
   'contact',
@@ -56,6 +57,12 @@ NO_FOLLOW = [
   'no_award',
   'phone',
   'text_ft_multi_lines', # see readme
+]
+
+# Avoid expanding common bases to keep the CSVs small. Note differences in readme.
+NO_CHILDREN = [
+  'lefti',
+  'complement_info',
 ]
 
 require_relative 'lib/tree_node'
@@ -97,7 +104,7 @@ task :common do
       end
     end
 
-    # Correction if types referenced in common schema only.
+    # The above will not collect the references in NO_FOLLOW.
     references += NO_FOLLOW
 
     parser = XmlParser.new(File.join(directory, 'common_2014.xsd'))
