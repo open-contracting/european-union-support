@@ -31,8 +31,13 @@ class TreeNode
     end
   end
 
-  def merge(n, attrs, except=[])
-    other = self.class.new(n, attrs)
+  # Merges other attributes into this object.
+  #
+  # @param [Nokogiri::XML::Node] node an other node
+  # @param [Hash] attrs other attributes
+  # @raise if the other attribute values conflict with this object's attribute values
+  def merge(node, attrs, except: [])
+    other = self.class.new(node, attrs)
 
     other.attributes = other.attributes.slice(*ASSIGNABLE - except)
 

@@ -1,10 +1,12 @@
 require 'csv'
 require 'delegate'
 
+require 'active_support/core_ext/hash/except'
+require 'hashdiff'
+require 'nokogiri'
+
 # The script doesn't check whether all tags of the forms are visited during parsing, instead assuming the TED
 # documentation about form structure is correct.
-
-require 'nokogiri'
 
 # These known attributes will automatically be added to the built tree.
 # `:use` and `:fixed` are unique to `attribute` tags.
@@ -114,7 +116,7 @@ end
 task :forms do
   directories.each do |directory|
     forms(directory, 'xsd').each do |filename|
-      parser = XmlParser.new(filename, false)
+      parser = XmlParser.new(filename, follow: false)
 
       abbreviation = parser.basename.sub('_2014', '')
 
@@ -133,15 +135,44 @@ task :forms do
 end
 
 task :label do
-  forms('output', 'csv').each do |filename|
-    number = Integer(File.basename(filename, '.csv').gsub(/\AF0|_2014\z/)) - 1
-    reference = CSV.read(File.join('..', 'source', "XML Labels mapping R2.09_#{number}.csv"), headers: true)
+  forms('output', 'csv').each do |output|
+    number = Integer(File.basename(output, '.csv').gsub(/\AF0?|_2014\z/, '')) - 1
+    source = File.join('source', "XML Labels mapping R2.09_#{number}.csv")
+    if File.exist?(source)
+      labels = CSV.read(source, headers: true)
 
-    form = CSV.read(filename, headers: true)
-    # read the XLSX-CSV for the given XML-CSV
-    # do naive matching of 'XML element name' to name in form or common
-    # see how many don't match from XLSX
-    # see how many are unmatched from XML/CSV
+      form = CSV.read(output, headers: true)
+
+      labels_map = {}
+      labels.each do |row|
+        name = row['XML element name']
+        if name
+          other = labels_map[name]
+          if other
+            difference = HashDiff.diff(row.to_h.except('Field ID'), other.to_h.except('Field ID'))
+            if difference.any?
+              puts "#{name}: #{difference}"
+            end
+          else
+            labels_map[name] = row
+          end
+        end
+      end
+
+      # form_map = {}
+      # form.each do |row|
+      #   form_map[row['name']] = row
+      #   form_map[row['ref']] = row
+      # end
+      # labels.each do |row|
+      #   row['XML element name']
+      #   form.
+      # do naive matching of 'XML element name' to name in form or common
+
+      # see how many don't match from XLSX
+
+      # see how many are unmatched from XML/CSV
+    end
   end
 end
 

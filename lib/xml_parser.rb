@@ -3,8 +3,6 @@ class XmlParser
   attr_reader :basename
   # @return [Nokogiri::XML::Node] the XML schema
   attr_reader :schema
-  # @return [Array<TreeNode>] the built tree
-  attr_reader :tree
 
   class << self
     attr_reader :xml
@@ -13,13 +11,26 @@ class XmlParser
   @xml = {}
 
   # @param [String] path the path to the XSD file
-  def initialize(path, follow=true)
+  # @param [Boolean] follow whether to lookup references in imports or includes
+  def initialize(path, follow: true)
     @basename = File.basename(path, '.xsd')
     @schemas = import(path).values
     @schema = @schemas[0]
     @follow = follow
+    @trees = {}
 
-    @tree = []
+    activate(:main)
+  end
+
+  # Sets and initializes the active tree.
+  def activate(active)
+    @active = active
+    @trees[active] ||= []
+  end
+
+  # @return [Array<TreeNode>] the active tree
+  def tree
+    @trees[@active]
   end
 
   # Finds the `schema` tag of the XML document at the given path, and then recursively finds the `schema` tags of the
@@ -37,14 +48,16 @@ class XmlParser
     schemas
   end
 
+  # @param [String] path a filename
   # @return [Nokogiri::XML::Node] the `schema` tag of the XML document at the given path
   def parse(path)
     # Assume the XML declaration, xs:schema attributes, and comments are irrelevant.
     self.class.xml[path] ||= node_set(Nokogiri::XML(File.read(path)).xpath('/xs:schema'), size: 1, names: ['schema'], required: ['elementFormDefault', 'attributeFormDefault', 'version'], optional: ['targetNamespace'], children: true)[0]
   end
 
-  # Prints the built tree as a CSV to standard output.
-  def to_csv
+  # Prints the built tree to CSV.
+  # @param [IO] stream an IO stream like standard output
+  def to_csv(stream: nil)
     FileUtils.mkdir_p('output')
 
     mappings = {}
@@ -52,7 +65,7 @@ class XmlParser
     rows = [%w(index) + HEADERS]
 
     rows += tree.map do |node|
-      attributes = node.attributes
+      attributes = node.attributes.dup
 
       index0 = attributes[:index0]
       if !attributes.key?(:index1) && attributes[:annotation] && attributes[:annotation][/\ASection ([IV]+)/] && Integer === attributes[:index0]
@@ -77,9 +90,17 @@ class XmlParser
 
     rows = rows.transpose.reject{ |row| row.drop(1).all?(&:nil?) }.transpose
 
-    CSV.open(File.join('output', "#{@basename}.csv"), 'w') do |csv|
+    csv = CSV.generate do |csv|
       rows.each do |row|
         csv << row
+      end
+    end
+
+    if stream
+      stream.puts csv
+    else
+      File.open(File.join('output', "#{@basename}.csv"), 'w') do |f|
+        f.write(csv)
       end
     end
   end
@@ -128,8 +149,8 @@ class XmlParser
   # @option opts [String] :names The allowed tag names.
   # @option opts [Array<String>] :attributes The expected attribute names. `[]` by default.
   # @option opts [Array<String>] :required The names of required attributes.
-  # @option opts [Array<String>] :optional The names of optional attributes.
   # @option opts [Array<String>] :disjoint The names of disjoint required attributes.
+  # @option opts [Array<String>] :optional The names of optional attributes.
   # @option opts [String, true] :children The nodes are expected to have:
   #   * If `"any"`, anything
   #   * If `true`: children
@@ -190,17 +211,17 @@ class XmlParser
   # Checks whether required attributes are present on a node and whether any attributes are unexpected.
   #
   # @param [Nokogiri::XML::Node] n
-  # @param [Hash] opts
-  def allowed_attributes(n, opts={})
-    required = opts.fetch(:required, [])
+  # @param [Array<String>] :required The names of required attributes.
+  # @param [Array<String>] :disjoint The names of disjoint required attributes.
+  # @param [Array<String>] :optional The names of optional attributes.
+  def allowed_attributes(n, required: [], disjoint: [], optional: [])
     required.each do |attribute|
       assert_in attribute, n.attributes.keys, 'required attribute name', n
     end
 
-    disjoint = opts.fetch(:disjoint, [])
     assert disjoint.empty? || disjoint.one?{ |attribute| n.attributes.keys.include?(attribute) }, "expected one of #{disjoint.join(', ')}", n
 
-    unexpected = n.attributes.keys - required - disjoint - opts.fetch(:optional, [])
+    unexpected = n.attributes.keys - required - disjoint - optional
     assert unexpected.empty?, "unexpected attributes #{unexpected}", n
   end
 
@@ -255,13 +276,15 @@ class XmlParser
   end
 
   # Adds or merges entries to the tree.
+  #
+  # @see elements
   def enter(n, depth, opts)
     opts.delete(:enter)
     reference = opts.key?(:reference) && opts[:reference].split(':', 2).last # remove namespace
     if reference && reference == n['name']
-      tree.last.merge(n, opts, %i(reference))
+      tree.last.merge(n, opts, except: %i(reference))
     elsif n.name == 'attribute' && n['name'] == 'CTYPE'
-      tree.last.merge(n, opts, %i(reference tag name) + [key_for_depth(depth)])
+      tree.last.merge(n, opts, except: %i(reference tag name) + [key_for_depth(depth)])
     else
       tree << TreeNode.new(n, opts)
     end
@@ -300,7 +323,10 @@ class XmlParser
   end
 
   # Follows a `base`, `ref` or `type` attribute.
-  def follow(n, depth, opts, optional=false)
+  #
+  # @param [Boolean] optional whether the element may have neither references nor children
+  # @see elements
+  def follow(n, depth, opts, optional: false)
     matches = [n.key?('base'), n.key?('ref'), n.key?('type'), !n.key?('base') && n.element_children.any?].select(&:itself)
     assert matches.one? || optional && matches.none?, 'expected one of "base", "ref", "type" or children without "base"', n
 
@@ -472,7 +498,7 @@ class XmlParser
         elements(ns[0], depth, opts)
       end
 
-      follow(n, depth, opts.merge(reference: n['type']), true)
+      follow(n, depth, opts.merge(reference: n['type']), optional: true)
 
     else
       assert false, "unexpected #{n.name}", n
