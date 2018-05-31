@@ -16,21 +16,33 @@ class XmlParser
     @basename = File.basename(path, '.xsd')
     @schemas = import(path).values
     @schema = @schemas[0]
-    @follow = follow
     @trees = {}
 
-    activate(:main)
+    activate(:main, follow: follow)
   end
 
   # Sets and initializes the active tree.
-  def activate(active)
+  #
+  # @param [Symbol] active the tree to activate
+  # @param [Boolean] follow whether to lookup references in imports or includes
+  # @param [Boolean] reset whether to reset the tree
+  def activate(active, follow: true, reset: false)
     @active = active
-    @trees[active] ||= []
+    if !@trees.key?(active)
+      @trees[active] = {tree: [], follow: follow}
+    elsif reset
+      @trees[active][:tree] = []
+    end
   end
 
   # @return [Array<TreeNode>] the active tree
   def tree
-    @trees[@active]
+    @trees[@active][:tree]
+  end
+
+  # @return [Boolean] whether to lookup references in imports or includes
+  def follow?
+    @trees[@active][:follow]
   end
 
   # Finds the `schema` tag of the XML document at the given path, and then recursively finds the `schema` tags of the
@@ -56,8 +68,8 @@ class XmlParser
   end
 
   # Prints the built tree to CSV.
-  # @param [IO] stream an IO stream like standard output
-  def to_csv(stream: nil)
+  # @param [IO, String] io a string or an IO stream like standard output
+  def to_csv(io: nil)
     FileUtils.mkdir_p('output')
 
     mappings = {}
@@ -96,8 +108,8 @@ class XmlParser
       end
     end
 
-    if stream
-      stream.puts csv
+    if io
+      io << csv
     else
       File.open(File.join('output', "#{@basename}.csv"), 'w') do |f|
         f.write(csv)
@@ -234,7 +246,7 @@ class XmlParser
       node_set = s.xpath(path)
       if !node_set.empty?
         return node_set
-      elsif !@follow
+      elsif !follow?
         return
       end
     end
