@@ -117,32 +117,34 @@ class XmlParser
     end
   end
 
+  # Prints to standard error if the condition isn't met.
+  #
   # @param condition
   # @param [String] message
   # @param [Nokogiri::XML::Node] node a node
-  # @raise if the condition isn't met
   def assert(condition, message='', node=nil)
     unless condition
       message = "#{@basename}: #{message}"
       if node
         message += " at #{node.path}: #{node.to_s[0..2000]}"
       end
-      raise message
+      $stderr.puts message
     end
   end
 
-  # @raise if the actual value isn't the expected value
+  # Prints to standard error if the actual value isn't the expected value.
   def assert_equal(actual, expected, message='', node=nil)
     assert actual == expected, "expected #{expected}, got #{actual} #{message}", node
   end
 
-  # @raise if the first value is not included in the second value
+  # Prints to standard error if the first value is not included in the second value.
   def assert_in(first, second, message='', node=nil)
     assert Array === second && second.include?(first), "expected #{second} to include '#{first}' #{message}", node
   end
 
+  # Prints to standard error if the node has children.
+  #
   # @param [Nokogiri::XML::Node] node a node
-  # @raise if the node has children
   def assert_leaf(node)
     assert node.element_children.empty?, 'expected no children', node
   end
@@ -169,6 +171,7 @@ class XmlParser
   #   * If `"text"`: no tag children
   #   * If omitted: no children
   # @return the node set
+  # @raise if the arguments are not properly set
   def node_set(ns, opts)
     if opts.key?(:attributes) && (opts.key?(:required) || opts.key?(:optional))
       raise 'must not set both :attributes and any of :required, :optional'
@@ -269,19 +272,22 @@ class XmlParser
   # @param [Hash] attributes
   def set_last(node, attributes)
     attributes.each do |key, value|
-      was = tree.last.attributes[key]
-
       # Exception to preserve length information.
-      if key == :restriction && was == 'contact' && value == 'string_200'
+      if key == :restriction && tree.last.attributes[key] == 'contact' && value == 'string_200'
         tree.last.attributes.delete(key)
       end
 
-      # Don't overwrite if the new tag is a basic type.
-      unless tree.last.attributes.key?(key) &&
-             key == :restriction && %w(xs:integer xs:nonNegativeInteger _4car xs:string string_with_letter string_not_empty).include?(value) ||
-             key == :annotation && %w(xs:nonNegativeInteger _3car _4car string_not_empty).include?(node['name']) ||
+      was = tree.last.attributes[key]
+
+      unless was &&
+             # Don't overwrite if the restriction is a simpler type.
+             key == :restriction && %w(xs:date xs:integer xs:nonNegativeInteger _4car _5car xs:string string_with_letter string_not_empty).include?(value) ||
+             # Don't overwrite with the annotation of a simpler type.
+             # common_2014.xsd expands "LEFTI" to "LEGAL, ECONOMIC, FINANCIAL AND TECHNICAL INFORMATION".
+             key == :annotation && %w(_3car _4car string_not_empty lefti).include?(node['name']) ||
+             # Don't overwrite with the pattern of a simpler type.
              key == :pattern && %w(string_not_empty).include?(node['name'])
-        assert !tree.last.attributes.key?(key), "unexpected #{key} (was #{was})", node
+        assert was.nil? || was == value, "unexpected #{key} = '#{value}' (was #{was})", node
         tree.last.attributes[key] = value
       end
     end
