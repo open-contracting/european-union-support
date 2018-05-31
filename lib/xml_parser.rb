@@ -459,9 +459,9 @@ class XmlParser
 
       ns = node_set(n.element_children, size: 1, names: ['restriction'], attributes: ['base'], children: 'any')
       node = ns[0]
-      base = ns[0]['base']
+      base = node['base']
 
-      children = node_set(ns[0].element_children, size: 0..9999, names: RESTRICTIONS.map(&:to_s), attributes: ['value'])
+      children = node_set(node.element_children, size: 0..9999, names: RESTRICTIONS.map(&:to_s), attributes: ['value'])
       if children.any?
         restrictions = {enumeration: []}
         children.each do |c|
@@ -486,9 +486,9 @@ class XmlParser
 
       ns = node_set(n.element_children, size: 1, names: ['extension'], attributes: ['base'], children: true)
       node = ns[0]
-      base = ns[0]['base']
+      base = node['base']
 
-      children = node_set(ns[0].element_children, size: 1, names: ['attribute'], name_only: true)
+      children = node_set(node.element_children, size: 1, names: ['attribute'], name_only: true)
       children.each do |c|
         elements(c, depth, opts.merge(extension: base))
       end
@@ -500,9 +500,9 @@ class XmlParser
 
       ns = node_set(n.element_children, size: 1, names: %w(extension restriction), attributes: ['base'], children: 'any')
       node = ns[0]
-      base = ns[0]['base']
+      base = node['base']
 
-      case ns[0].name
+      case node.name
       when 'extension'
         additional = {extension: base}
         names = %w(attribute choice group sequence)
@@ -513,7 +513,7 @@ class XmlParser
         assert false, "unexpected #{n.name}", n
       end
 
-      children = node_set(ns[0].element_children, size: 0..1, names: names, name_only: true)
+      children = node_set(node.element_children, size: 0..1, names: names, name_only: true)
       children.each do |c|
         elements(c, depth, opts.merge(additional))
       end
