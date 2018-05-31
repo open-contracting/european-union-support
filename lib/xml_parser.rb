@@ -387,19 +387,29 @@ class XmlParser
   # @option opts :reference
   def elements(n, depth, opts)
     case n.name
+      # Each case follows a rhythm of:
+      #
+      # * enter(n, depth, opts…   only element, group, attribute plus complexType, simpleType for common_2014.xsd
+      # * allowed_attributes(n…
+      # * n = annotate(n, …       except simpleContent, complexContent, attribute
+      # * [base]                  only simpleType, simpleContent, complexContent
+      # * [logic]
+      # * children = node_set(n…  except simpleType
+      # * children.…              except simpleType
+      # * follow(n…               except sequence, choice, complexType
     when 'sequence'
       allowed_attributes(n, optional: %w(minOccurs)) # discard minOccurs ("0")
       n = annotate(n, ['annotation'])
-      ns = node_set(n.element_children, size: 1..16, names: %w(choice element group sequence), name_only: true)
-      ns.to_enum.with_index(1) do |c, i|
+      children = node_set(n.element_children, size: 1..16, names: %w(choice element group sequence), name_only: true)
+      children.to_enum.with_index(1) do |c, i|
         elements(c, depth + 1, opts.merge(key_for_depth(depth) => i))
       end
 
     when 'choice'
       allowed_attributes(n, optional: %w(minOccurs maxOccurs)) # discard minOccurs ("0"), maxOccurs (on p and text_ft_multi_lines_or_string only)
       n = annotate(n, ['annotation'])
-      ns = node_set(n.element_children, size: 1..6, names: %w(choice element group sequence), name_only: true)
-      ns.to_enum.with_index(97) do |c, i|
+      children = node_set(n.element_children, size: 1..6, names: %w(choice element group sequence), name_only: true)
+      children.to_enum.with_index(97) do |c, i|
         elements(c, depth + 1, opts.merge(key_for_depth(depth) => i.chr))
       end
 
@@ -408,8 +418,8 @@ class XmlParser
 
       allowed_attributes(n, disjoint: %w(name ref), optional: %w(type minOccurs maxOccurs))
       n = annotate(n, %w(annotation unique))
-      ns = node_set(n.element_children, size: 0..1, names: %w(complexType simpleType), name_only: true)
-      ns.each do |c|
+      children = node_set(n.element_children, size: 0..1, names: %w(complexType simpleType), name_only: true)
+      children.each do |c|
         elements(c, depth, opts)
       end
 
@@ -420,8 +430,8 @@ class XmlParser
 
       allowed_attributes(n, disjoint: %w(name ref), optional: %w(minOccurs maxOccurs))
       n = annotate(n, ['annotation'])
-      ns = node_set(n.element_children, size: 0..1, names: %w(choice sequence), children: true)
-      ns.each do |c|
+      children = node_set(n.element_children, size: 0..1, names: %w(choice sequence), children: true)
+      children.each do |c|
         elements(c, depth, opts)
       end
 
@@ -434,8 +444,8 @@ class XmlParser
 
       allowed_attributes(n, optional: %w(name mixed)) # discard name (referenced) and mixed (on p and text_ft_multi_lines_or_string only)
       n = annotate(n, ['annotation'])
-      ns = node_set(n.element_children, size: 0..2, names: %w(attribute choice group sequence complexContent simpleContent), name_only: true)
-      ns.each do |c|
+      children = node_set(n.element_children, size: 0..2, names: %w(attribute choice group sequence complexContent simpleContent), name_only: true)
+      children.each do |c|
         elements(c, depth, opts)
       end
 
@@ -446,46 +456,49 @@ class XmlParser
 
       allowed_attributes(n, optional: ['name']) # discard name (referenced)
       n = annotate(n, ['annotation'])
+
       ns = node_set(n.element_children, size: 1, names: ['restriction'], attributes: ['base'], children: 'any')
-
       node = ns[0]
-      restriction = ns[0]['base']
+      base = ns[0]['base']
 
-      ns = node_set(ns[0].element_children, size: 0..9999, names: RESTRICTIONS.map(&:to_s), attributes: ['value'])
-
-      if ns.any?
+      children = node_set(ns[0].element_children, size: 0..9999, names: RESTRICTIONS.map(&:to_s), attributes: ['value'])
+      if children.any?
         restrictions = {enumeration: []}
-        ns.each do |c|
-          if c.name == 'enumeration'
-            restrictions[c.name.to_sym] << c['value']
+        children.each do |c|
+          key = c.name.to_sym
+          value = c['value']
+          if key == :enumeration
+            restrictions[key] << value
           else
-            restrictions[c.name.to_sym] = c['value']
+            restrictions[key] = value
           end
         end
         if restrictions[:enumeration].none?
           restrictions.delete(:enumeration)
         end
-        set_last(n, restrictions.merge(restriction: restriction))
+        set_last(n, restrictions.merge(restriction: base))
       end
 
-      follow(node, depth, opts.merge(reference: restriction))
+      follow(node, depth, opts.merge(reference: base))
 
     when 'simpleContent'
       allowed_attributes(n)
+
       ns = node_set(n.element_children, size: 1, names: ['extension'], attributes: ['base'], children: true)
-
       node = ns[0]
-      extension = ns[0]['base']
+      base = ns[0]['base']
 
-      ns = node_set(ns[0].element_children, size: 1, names: ['attribute'], name_only: true)
-      elements(ns[0], depth, opts.merge(extension: extension))
+      children = node_set(ns[0].element_children, size: 1, names: ['attribute'], name_only: true)
+      children.each do |c|
+        elements(c, depth, opts.merge(extension: base))
+      end
 
-      follow(node, depth, opts.merge(reference: extension))
+      follow(node, depth, opts.merge(reference: base))
 
     when 'complexContent'
       allowed_attributes(n)
-      ns = node_set(n.element_children, size: 1, names: %w(extension restriction), attributes: ['base'], children: 'any')
 
+      ns = node_set(n.element_children, size: 1, names: %w(extension restriction), attributes: ['base'], children: 'any')
       node = ns[0]
       base = ns[0]['base']
 
@@ -500,8 +513,8 @@ class XmlParser
         assert false, "unexpected #{n.name}", n
       end
 
-      ns = node_set(ns[0].element_children, size: 0..1, names: names, name_only: true)
-      ns.each do |c|
+      children = node_set(ns[0].element_children, size: 0..1, names: names, name_only: true)
+      children.each do |c|
         elements(c, depth, opts.merge(additional))
       end
 
@@ -511,9 +524,9 @@ class XmlParser
       enter(n, depth, opts.merge(key_for_depth(depth) => '+'))
 
       allowed_attributes(n, required: ['name'], optional: %w(type use fixed))
-      ns = node_set(n.element_children, size: 0..1, names: ['simpleType'], children: true)
-      if ns.any?
-        elements(ns[0], depth, opts)
+      children = node_set(n.element_children, size: 0..1, names: ['simpleType'], children: true)
+      children.each do |c|
+        elements(c, depth, opts)
       end
 
       follow(n, depth, opts.merge(reference: n['type']), optional: true)
