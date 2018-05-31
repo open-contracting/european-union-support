@@ -16,6 +16,8 @@ Download prerequisites:
     unzip TED_publication_R2.0.9.S03.E01_004-20180322.zip -d TED_publication_R2
     rm -f TED_publication_R2.0.9.S03.E01_004-20180322.zip
 
+    rm -f TED_publication_R2/{common_prod.xsd,DEVCO.xsd,MOVE.xsd,TED_EXPORT.xsd,xlink.xsd}
+
     cd ..
 
 Prepare prerequisites:

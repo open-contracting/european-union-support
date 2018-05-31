@@ -46,27 +46,40 @@ class XmlParser
   # Prints the built tree as a CSV to standard output.
   def to_csv
     FileUtils.mkdir_p('output')
+
+    mappings = {}
+
+    rows = [%w(index) + HEADERS]
+
+    rows += tree.map do |node|
+      attributes = node.attributes
+
+      index0 = attributes[:index0]
+      if !attributes.key?(:index1) && attributes[:annotation] && attributes[:annotation][/\ASection ([IV]+)/] && Integer === attributes[:index0]
+        mappings[index0] = $1
+      end
+      if mappings.key?(index0)
+        attributes[:index0] = mappings[index0]
+      end
+
+      minOccurs = attributes[:minOccurs] || 1
+      maxOccurs = attributes[:maxOccurs] || 1
+      if minOccurs != 1 || maxOccurs != 1
+        attributes[:cardinality] = "[#{minOccurs}, #{maxOccurs}]"
+      end
+
+      if attributes.key?(:enumeration)
+        attributes[:enumeration] = attributes[:enumeration].join('|')
+      end
+
+      [attributes.values_at(*LOCATORS).compact.join('.')] + attributes.values_at(*HEADERS)
+    end
+
+    rows = rows.transpose.reject{ |row| row.drop(1).all?(&:nil?) }.transpose
+
     CSV.open(File.join('output', "#{@basename}.csv"), 'w') do |csv|
-      csv << %w(file index) + PROPERTIES
-
-      mappings = {}
-
-      tree.each do |node|
-        attributes = node.attributes
-
-        if attributes.key?(:enumeration)
-          attributes[:enumeration] = attributes[:enumeration].join('|')
-        end
-
-        index0 = attributes[:index0]
-        if !attributes.key?(:index1) && attributes[:annotation] && attributes[:annotation][/\ASection ([IV]+)/] && Integer === attributes[:index0]
-          mappings[index0] = $1
-        end
-        if mappings.key?(index0)
-          attributes[:index0] = mappings[index0]
-        end
-
-        csv << [@basename, attributes.values_at(*LOCATORS).compact.join('.')] + attributes.values_at(*PROPERTIES)
+      rows.each do |row|
+        csv << row
       end
     end
   end
@@ -223,12 +236,19 @@ class XmlParser
   # @param [Hash] attributes
   def set_last(node, attributes)
     attributes.each do |key, value|
+      was = tree.last.attributes[key]
+
+      # Exception to preserve length information.
+      if key == :restriction && was == 'contact' && value == 'string_200'
+        tree.last.attributes.delete(key)
+      end
+
       # Don't overwrite if the new tag is a basic type.
       unless tree.last.attributes.key?(key) &&
-             key == :restriction && %w(xs:integer xs:nonNegativeInteger _4car xs:string string_with_letter string_not_empty string_200).include?(value) ||
+             key == :restriction && %w(xs:integer xs:nonNegativeInteger _4car xs:string string_with_letter string_not_empty).include?(value) ||
              key == :annotation && %w(xs:nonNegativeInteger _3car _4car string_not_empty).include?(node['name']) ||
              key == :pattern && %w(string_not_empty).include?(node['name'])
-        assert !tree.last.attributes.key?(key), "unexpected #{key} (was #{tree.last.attributes[key]})", node
+        assert !tree.last.attributes.key?(key), "unexpected #{key} (was #{was})", node
         tree.last.attributes[key] = value
       end
     end
@@ -237,7 +257,8 @@ class XmlParser
   # Adds or merges entries to the tree.
   def enter(n, depth, opts)
     opts.delete(:enter)
-    if opts[:reference] && opts[:reference] == n['name']
+    reference = opts.key?(:reference) && opts[:reference].split(':', 2).last # remove namespace
+    if reference && reference == n['name']
       tree.last.merge(n, opts, %i(reference))
     elsif n.name == 'attribute' && n['name'] == 'CTYPE'
       tree.last.merge(n, opts, %i(reference tag name) + [key_for_depth(depth)])
@@ -264,7 +285,7 @@ class XmlParser
           set_last(node, annotation: ns[0].text.split("\n").map(&:strip).join("\n").strip)
 
         when 'unique'
-          allowed_attributes(n, required: ['name'])
+          allowed_attributes(n, required: ['name']) # discard name ("lg")
           ns = node_set(n.element_children, size: 2, index: 1, names: ['field'], attributes: ['xpath'], xml: {0 => '<xs:selector xpath="*"/>'})
           set_last(node, unique: ns[1]['xpath'])
 

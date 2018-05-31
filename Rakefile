@@ -8,7 +8,7 @@ require 'nokogiri'
 
 # These known attributes will automatically be added to the built tree.
 # `:use` and `:fixed` are unique to `attribute` tags.
-ATTRIBUTES   = %i(tag name type minOccurs maxOccurs use fixed ref)
+ATTRIBUTES   = %i(tag name type ref fixed maxOccurs minOccurs use)
 # These attributes are used internally to build a locator for a node in the tree.
 LOCATORS     = %i(index0 index1 index2 index3 index4 index5 index6 index7)
 RESTRICTIONS = %i(enumeration maxLength maxInclusive minInclusive minExclusive pattern totalDigits)
@@ -17,8 +17,24 @@ ANNOTATIONS  = %i(unique annotation)
 
 # All attributes that can be assigned.
 ASSIGNABLE = ATTRIBUTES + LOCATORS + REFERENCES + ANNOTATIONS + RESTRICTIONS
-# All attributes, excluding internal locators.
-PROPERTIES = ATTRIBUTES + REFERENCES + ANNOTATIONS + RESTRICTIONS
+
+# All attributes, excluding compressed and predictable attributes.
+HEADERS    = ATTRIBUTES + %i(cardinality) + REFERENCES + ANNOTATIONS + RESTRICTIONS - [
+  # Attributes
+  :fixed, # 31 times: "F##" (FORM), "NO" (PUBLICATION), "MONTH" (TYPE), "QSU_CALL_COMPETITION" (TYPE)
+  :maxOccurs, # cardinality
+  :minOccurs, # cardinality
+  :use, # 140 times: "required" / all but 7 attributes are required (PUBLICATION)
+
+  # Restrictions
+  :maxLength, # 11 times: "100" (TOWN) / others implied by :name, :type, :restriction, :extension
+  :maxInclusive, # 4 times: "100", "10000"
+  :minInclusive, # once: "1"
+  :minExclusive, # 8 times: "0"
+
+  # Annotations
+  :unique, # once
+]
 
 NO_FOLLOW = [
   # base
@@ -51,11 +67,12 @@ def directories
   end
 end
 
-def forms(directory)
+def forms(directory, extension)
+  suffix = "_2014.#{extension}"
   if ENV['FORMS']
-    ENV['FORMS'].split(',').map{ |number| File.join(directory, "F#{number}_2014.xsd") }
+    ENV['FORMS'].split(',').map{ |number| File.join(directory, "F#{number}#{suffix}") }
   else
-    Dir[File.join(directory, 'F*_2014.xsd')].sort
+    Dir[File.join(directory, "F*#{suffix}")].sort
   end
 end
 
@@ -64,7 +81,7 @@ task :common do
     references = Set.new
 
     # Get the `base`, `ref` and `type` re-used across forms.
-    forms(directory).each do |filename|
+    forms(directory, 'xsd').each do |filename|
       parser = XmlParser.new(filename)
 
       references += parser.schema.xpath('.//*[@ref]').reject{ |n|
@@ -96,7 +113,7 @@ end
 
 task :forms do
   directories.each do |directory|
-    forms(directory).each do |filename|
+    forms(directory, 'xsd').each do |filename|
       parser = XmlParser.new(filename, false)
 
       abbreviation = parser.basename.sub('_2014', '')
@@ -112,6 +129,19 @@ task :forms do
 
       parser.to_csv
     end
+  end
+end
+
+task :label do
+  forms('output', 'csv').each do |filename|
+    number = Integer(File.basename(filename, '.csv').gsub(/\AF0|_2014\z/)) - 1
+    reference = CSV.read(File.join('..', 'source', "XML Labels mapping R2.09_#{number}.csv"), headers: true)
+
+    form = CSV.read(filename, headers: true)
+    # read the XLSX-CSV for the given XML-CSV
+    # do naive matching of 'XML element name' to name in form or common
+    # see how many don't match from XLSX
+    # see how many are unmatched from XML/CSV
   end
 end
 
