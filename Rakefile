@@ -41,6 +41,7 @@ HEADERS    = ATTRIBUTES + %i(cardinality) + REFERENCES + ANNOTATIONS + RESTRICTI
 # Avoid expanding common types to keep the CSVs small.
 NO_FOLLOW = [
   # base
+  'cost',
   'contact',
   'string_with_letter',
 
@@ -53,7 +54,7 @@ NO_FOLLOW = [
   'contact_contracting_body',
   'contact_contractor',
   'contact_review',
-  'empty', # has annotation "only-element"
+  'empty',
   'no_award',
   'phone',
   'text_ft_multi_lines', # see readme
@@ -63,6 +64,12 @@ NO_FOLLOW = [
 NO_CHILDREN = [
   'lefti',
   'complement_info',
+]
+
+# Skip enumeration annotations. Note annotations in readme.
+NO_ANNOTATIONS = [
+  't_currency_tedschema',
+  't_legal-basis_tedschema',
 ]
 
 require_relative 'lib/tree_node'
@@ -165,6 +172,8 @@ task :label do
           end
         end
       end
+
+      # CONTINUE HERE
 
       # form_map = {}
       # form.each do |row|

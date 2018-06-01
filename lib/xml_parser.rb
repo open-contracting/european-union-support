@@ -250,10 +250,10 @@ class XmlParser
       if !node_set.empty?
         return node_set
       elsif !follow?
-        return
+        return false
       end
     end
-    nil
+    []
   end
 
   # @return [Symbol] the symbol for the locator at this depth
@@ -312,7 +312,8 @@ class XmlParser
   #
   # @param [Nokogiri::XML::Node] node a node
   # @param [Array<String>] annotations the node's allowed annotation elements
-  def annotate(node, annotations)
+  # @param [Boolean] discard whether to discard the annotation
+  def annotate(node, annotations, discard: false)
     node = node.dup
 
     annotations.each do |name|
@@ -323,16 +324,21 @@ class XmlParser
         when 'annotation'
           allowed_attributes(n)
           ns = node_set(n.element_children, size: 1, names: ['documentation'], optional: ['lang'], children: 'any') # discard lang ("en")
-          set_last(node, annotation: ns[0].text.split("\n").map(&:strip).join("\n").strip)
+          attributes = {annotation: ns[0].text.split("\n").map(&:strip).join("\n").strip}
 
         when 'unique'
           allowed_attributes(n, required: ['name']) # discard name ("lg")
           ns = node_set(n.element_children, size: 2, index: 1, names: ['field'], attributes: ['xpath'], xml: {0 => '<xs:selector xpath="*"/>'})
-          set_last(node, unique: ns[1]['xpath'])
+          attributes = {unique: ns[1]['xpath']}
 
         else
           assert false, "unexpected #{n.name}", n
         end
+
+        if !discard
+          set_last(node, attributes)
+        end
+
         n.unlink
       end
     end
@@ -348,24 +354,27 @@ class XmlParser
     matches = [n.key?('base'), n.key?('ref'), n.key?('type'), !n.key?('base') && n.element_children.any?].select(&:itself)
     assert matches.one? || optional && matches.none?, 'expected one of "base", "ref", "type" or children without "base"', n
 
-    set = nil
+    if opts[:reference]
+      reference = opts[:reference]
 
-    if n.key?('base') || n.key?('type')
-      reference = n['base'] || n['type']
-      if !NO_FOLLOW.include?(reference)
-        set = xpath(%w(complex simple).map{ |prefix| "./xs:#{prefix}Type[@name='#{reference}']" }.join('|'))
-        names = %w(complexType simpleType)
+      if reference[':']
+        namespace, reference = reference.split(':', 2)
       end
-    elsif n.key?('ref')
-      if !NO_FOLLOW.include?(n['ref'])
-        set = xpath("./xs:#{n.name}[@name='#{n['ref'].split(':', 2).last}']") # remove namespace
-        names = [n.name]
-      end
-    end
 
-    if set
-      ns = node_set(set, size: 1, names: names, name_only: true)
-      elements(ns[0], depth, opts)
+      if !NO_FOLLOW.include?(reference) && namespace != 'xs'
+        if n.key?('base') || n.key?('type')
+          names = %w(complexType simpleType)
+        elsif n.key?('ref')
+          names = [n.name]
+        end
+
+        set = xpath(names.map{ |name| "./xs:#{name}[@name='#{reference}']" }.join('|'))
+
+        if set
+          ns = node_set(set, size: 1, names: names, name_only: true)
+          elements(ns[0], depth, opts)
+        end
+      end
     end
   end
 
@@ -461,12 +470,16 @@ class XmlParser
       node = ns[0]
       base = node['base']
 
-      children = node_set(node.element_children, size: 0..9999, names: RESTRICTIONS.map(&:to_s), attributes: ['value'])
+      children = node_set(node.element_children, size: 0..9999, names: RESTRICTIONS.map(&:to_s), attributes: ['value'], children: 'any')
       if children.any?
         restrictions = {enumeration: []}
         children.each do |c|
+          c = annotate(c, ['annotation'], discard: NO_ANNOTATIONS.include?(n['name']))
+          assert_leaf c
+
           key = c.name.to_sym
           value = c['value']
+
           if key == :enumeration
             restrictions[key] << value
           else
