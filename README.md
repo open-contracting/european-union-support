@@ -3,34 +3,33 @@
 Download prerequisites:
 
     mkdir -p source
-
     cd source
 
-    # http://publications.europa.eu/mdr/eprocurement/ted/index.html
-    curl -O http://publications.europa.eu/mdr/resource/eprocurement/ted/R2.0.9/publication/XML_Labels_Mapping_R209.zip
-    unzip XML_Labels_Mapping_R209.zip
-    rm -f XML_Labels_Mapping_R209.zip
+    curl -O 'ftp://eu-tenders:eu-tenders-123@ted.europa.eu/Resources/XML schema 2.0.9/Forms_Templates_R209S01.zip'
+    unzip Forms_Templates_R209S01.zip
+    rm -f Forms_Templates_R209S01.zip
+    rm -rf __MACOSX
 
-    # http://publications.europa.eu/mdr/eprocurement/ted/specific_versions_new.html#div2
-    curl -O http://publications.europa.eu/mdr/resource/eprocurement/ted/R2.0.9/publication/beta/TED_publication_R2.0.9.S03.E01_004-20180322.zip
-    unzip TED_publication_R2.0.9.S03.E01_004-20180322.zip -d TED_publication_R2
-    rm -f TED_publication_R2.0.9.S03.E01_004-20180322.zip
-
-    rm -f TED_publication_R2/{common_prod.xsd,DEVCO.xsd,MOVE.xsd,TED_EXPORT.xsd,xlink.xsd}
+    curl -O 'ftp://eu-tenders:eu-tenders-123@ted.europa.eu/Resources/TEDFTP_Schema_20180704_TED_publication.zip'
+    unzip TEDFTP_Schema_20180704_TED_publication.zip TED_publication_R2.0.9.S03.E01_006-20180608.zip
+    rm -f TEDFTP_Schema_20180704_TED_publication.zip
+    unzip TED_publication_R2.0.9.S03.E01_006-20180608.zip -d TED_publication_R2.0.9.S03.E01_006
+    rm -f TED_publication_R2.0.9.S03.E01_006-20180608.zip
+    rm -f TED_publication_R2.0.9.S03.E01_006/{common_prod.xsd,DEVCO.xsd,MOVE.xsd,TED_EXPORT.xsd,xlink.xsd}
 
     cd ..
 
-Prepare prerequisites:
-
-    in2csv --write-sheets - "source/XML Labels mapping R2.09.xlsx" > /dev/null
-
-Process all directories and all forms:
+Transform all forms into CSV files:
 
     rake common forms
 
-Process one directory and given forms:
+Transform a specific directory and specific forms into CSV files:
 
     rake common forms DIRECTORY=source/TED_publication_R2 FORMS=01,02,03,14,20
+
+Annotate the CSV files:
+
+    rake label
 
 ## Reference
 
