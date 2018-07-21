@@ -41,11 +41,10 @@ class XmlParser < XmlBase
     @trees[@active][:follow]
   end
 
-  # Prints the built tree to CSV.
-  # @param [IO, String] io a string or an IO stream like standard output
-  def to_csv(io: nil)
-    FileUtils.mkdir_p('output')
-
+  # Returns the built tree as a CSV.
+  #
+  # @return [String] the CSV
+  def to_csv
     mappings = {}
 
     rows = [%w(index) + HEADERS]
@@ -76,17 +75,9 @@ class XmlParser < XmlBase
 
     rows = rows.transpose.reject{ |row| row.drop(1).all?(&:nil?) }.transpose
 
-    csv = CSV.generate do |csv|
+    CSV.generate do |csv|
       rows.each do |row|
         csv << row
-      end
-    end
-
-    if io
-      io << csv
-    else
-      File.open(File.join('output', "#{@basename}.csv"), 'w') do |f|
-        f.write(csv)
       end
     end
   end

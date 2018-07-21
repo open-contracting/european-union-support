@@ -67,6 +67,8 @@ NO_ANNOTATIONS = [
 
 desc 'Process common_2014.xsd'
 task :common do
+  FileUtils.mkdir_p('output')
+
   directories.each do |directory|
     references = Set.new
 
@@ -97,12 +99,16 @@ task :common do
       end
     end
 
-    parser.to_csv
+    File.open(File.join('output', "#{parser.basename}.csv"), 'w') do |f|
+      f.write(parser.to_csv)
+    end
   end
 end
 
 desc 'Process F##_2014.xsd'
 task :forms do
+  FileUtils.mkdir_p('output')
+
   directories.each do |directory|
     forms(directory, 'xsd').each do |filename|
       parser = XmlParser.new(filename, follow: false)
@@ -118,7 +124,9 @@ task :forms do
         parser.elements(c, 0, index0: i)
       end
 
-      parser.to_csv
+      File.open(File.join('output', "#{parser.basename}.csv"), 'w') do |f|
+        f.write(parser.to_csv)
+      end
     end
   end
 end
