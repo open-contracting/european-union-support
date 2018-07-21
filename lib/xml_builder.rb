@@ -1,14 +1,6 @@
 class XMLBuilder < XmlBase
   @xml = {}
 
-  ALWAYS_VISIT = %w(
-    empty
-    ft
-    p
-    text_ft_multi_lines
-    text_ft_single_line
-  )
-
   # @param [String] path the path to the XSD file
   def initialize(path)
     @basename = File.basename(path, '.xsd')
@@ -87,22 +79,13 @@ class XMLBuilder < XmlBase
     end
   end
 
-  # Returns a comment node.
-  #
-  # @return [BuildNode] the comment node
-  def comment_node(comment)
-    node = BuildNode.new('comment')
-    node.contents << comment
-    node
-  end
-
   # Adds a comment for the parsed node's attributes.
   #
   # Call `comment` before `add_node` to add the comment before its corresponding node.
   #
   # @param [Nokogiri::XML::Node] n a node from the parser
   # @param [Nokogiri::XML::Node] pointer the current node in the tree
-  def comment(n, pointer)
+  def attribute_comment(n, pointer)
     comments = []
 
     # mixed is "true" on p and text_ft_multi_lines_or_string only
@@ -115,18 +98,41 @@ class XMLBuilder < XmlBase
     end
 
     if comments.any?
-      pointer.children << comment_node(comments.join(' '))
+      suffix = ''
+      if n.name != 'element'
+        name = n['name'] || n['ref'] || n.xpath('./ancestor::*[@name]')[0].attributes.fetch('name')
+        if n.key?('name')
+          infix = 'name='
+        elsif n.key?('ref')
+          infix = 'ref='
+        else
+          infix = 'in '
+        end
+        suffix = " for #{n.name} #{infix}#{name}"
+      end
+      add_node('comment', pointer, content: comments.join(' ') + suffix)
     end
   end
 
   # Adds a parsed node to the tree.
   #
-  # @param [Nokogiri::XML::Node] n a node from the parser
+  # @param [Nokogiri::XML::Node, String] name a tag name, or a node from the parser
   # @param [Nokogiri::XML::Node] pointer the current node in the tree
+  # @param [String] content the content for the current node
   # @param [Boolean] attribute whether the node is an attribute
-  def add_node(n, pointer, attribute = false)
-    node = BuildNode.new(n.attributes.fetch('name'), attribute)
-    pointer.children.append(node)
+  def add_node(name, pointer, content: nil, attribute: false)
+    unless String === name
+      name = name.attributes.fetch('name')
+    end
+
+    node = BuildNode.new(name, attribute)
+
+    if content
+      node.contents << content
+    end
+
+    pointer.children << node
+
     node
   end
 
@@ -155,12 +161,24 @@ class XMLBuilder < XmlBase
 
       node = lookup(reference, 'complexType', 'simpleType')
 
-      if node.name == 'complexType' && !ALWAYS_VISIT.include?(reference)
-        if @types.key?(reference)
-          pointer.children << comment_node("see #{@types[reference]}")
+      if node.name == 'complexType'
+        case reference
+        when 'empty'
+          # Do nothing.
+        when 'text_ft_single_line', 'text_ft_multi_lines'
+          # Hardcode common types to make sample smaller.
+          paragraph = BuildNode.new('P')
+          paragraph.contents << SecureRandom.hex(8)
+          pointer.children << paragraph
           return
+        else
+          # Reference repeated types to make sample smaller. (Sample will not validate.)
+          if @types.key?(reference)
+            add_node('comment', pointer, content: "see #{@types[reference]}")
+            return
+          end
+          @types[reference] = n.attributes.fetch('name')
         end
-        @types[reference] = n.attributes.fetch('name')
       end
       visit(node, pointer)
 
@@ -197,27 +215,25 @@ class XMLBuilder < XmlBase
   # @param [Nokogiri::XML::Node] n a node from the parser
   # @param [Nokogiri::XML::Node] pointer the current node in the tree
   def visit(n, pointer)
-    # TODO if there's a comment (e.g. cardinality) on choice, sequence, group, need to show that it applies to the set, not the element
     case n.name
     when 'choice'
       # TODO add comment (or something) about choices
-      comment(n, pointer)
+      attribute_comment(n, pointer)
 
     when 'sequence'
-      # TODO nesting like procurement_address
-      comment(n, pointer)
+      attribute_comment(n, pointer)
 
     when 'group'
-      comment(n, pointer)
+      attribute_comment(n, pointer)
 
     when 'element'
-      comment(n, pointer)
+      attribute_comment(n, pointer)
       if n.key?('name')
         pointer = add_node(n, pointer)
       end
 
     when 'attribute'
-      pointer = add_node(n, pointer, true)
+      pointer = add_node(n, pointer, attribute: true)
 
       # use is "required" on all xs:attribute except <xs:attribute name="PUBLICATION" type="publication"/>
       if n.key?('fixed')
@@ -249,8 +265,6 @@ class XMLBuilder < XmlBase
       pointer.comments['totalDigits'] = Integer(n.attributes.fetch('value').value)
 
     when 'extension'
-      # TODO logic
-
       # Every `complexType` node with a `complexContent` child with an `extension` child uses a base of:
       #
       # * contact_contractor        restricts contact

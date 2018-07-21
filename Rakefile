@@ -1,5 +1,6 @@
 require 'csv'
 require 'delegate'
+require 'securerandom'
 
 require 'active_support/core_ext/hash/except'
 require 'hashdiff'
