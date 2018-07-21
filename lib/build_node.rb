@@ -103,7 +103,7 @@ class BuildNode
     if attribute?
       parts << name
     end
-    parts << comments.sort_by{ |k, v| ATTRIBUTE_PRIORITY.index(k) || -1 }.map{ |k, v| %(#{k}="#{v}") }.join(', ')
+    parts << comments.sort_by{ |k, v| ATTRIBUTE_PRIORITY.index(k) || -1 }.map{ |k, v| %(#{k}="#{v}") }.join(' ')
     " #{parts.join(' ')} "
   end
 end

@@ -81,7 +81,7 @@ class XMLBuilder < XmlBase
 
   # Adds a comment for the parsed node's attributes.
   #
-  # Call `comment` before `add_node` to add the comment before its corresponding node.
+  # Call `attribute_comment` before `add_node` to add the comment before its corresponding node.
   #
   # @param [Nokogiri::XML::Node] n a node from the parser
   # @param [Nokogiri::XML::Node] pointer the current node in the tree
@@ -90,11 +90,12 @@ class XMLBuilder < XmlBase
 
     # mixed is "true" on p and text_ft_multi_lines_or_string only
 
-    minOccurs = n['minOccurs'] || 1
-    maxOccurs = n['maxOccurs'] || 1
-    if minOccurs != 1 || maxOccurs != 1
-      # XXX if 0-1, do something simpler to indicate "optional"
-      comments << %(cardinality="[#{minOccurs}, #{maxOccurs}]")
+    minOccurs = Integer(n['minOccurs'] || 1)
+    maxOccurs = Integer(n['maxOccurs'] || 1)
+    if minOccurs == 0 && maxOccurs == 1
+      comments << 'optional'
+    elsif minOccurs != 1 || maxOccurs != 1
+      comments << "[#{minOccurs}, #{maxOccurs}]"
     end
 
     if comments.any?
@@ -108,7 +109,7 @@ class XMLBuilder < XmlBase
         else
           infix = 'in '
         end
-        suffix = " for #{n.name} #{infix}#{name}"
+        suffix = " #{n.name} #{infix}#{name}"
       end
       add_node('comment', pointer, content: comments.join(' ') + suffix)
     end
@@ -122,7 +123,7 @@ class XMLBuilder < XmlBase
   # @param [Boolean] attribute whether the node is an attribute
   def add_node(name, pointer, content: nil, attribute: false)
     unless String === name
-      name = name.attributes.fetch('name')
+      name = name.attributes['name'].value
     end
 
     node = BuildNode.new(name, attribute)
@@ -244,25 +245,25 @@ class XMLBuilder < XmlBase
 
     when 'enumeration'
       pointer.comments['enumeration'] ||= []
-      pointer.comments['enumeration'] << n.attributes.fetch('value').value
+      pointer.comments['enumeration'] << n.attributes['value'].value
 
     when 'maxLength'
-      pointer.comments['maxLength'] = Integer(n.attributes.fetch('value').value)
+      pointer.comments['maxLength'] = Integer(n.attributes['value'].value)
 
     when 'maxInclusive'
-      pointer.comments['maxInclusive'] = Integer(n.attributes.fetch('value').value)
+      pointer.comments['maxInclusive'] = Integer(n.attributes['value'].value)
 
     when 'minInclusive'
-      pointer.comments['minInclusive'] = Integer(n.attributes.fetch('value').value)
+      pointer.comments['minInclusive'] = Integer(n.attributes['value'].value)
 
     when 'minExclusive'
-      pointer.comments['minExclusive'] = Integer(n.attributes.fetch('value').value)
+      pointer.comments['minExclusive'] = Integer(n.attributes['value'].value)
 
     when 'pattern'
-      pointer.comments['pattern'] = n.attributes.fetch('value').value
+      pointer.comments['pattern'] = n.attributes['value'].value
 
     when 'totalDigits'
-      pointer.comments['totalDigits'] = Integer(n.attributes.fetch('value').value)
+      pointer.comments['totalDigits'] = Integer(n.attributes['value'].value)
 
     when 'extension'
       # Every `complexType` node with a `complexContent` child with an `extension` child uses a base of:
