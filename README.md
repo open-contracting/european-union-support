@@ -1,14 +1,21 @@
 # TED XSD parser
 
-Download prerequisites:
+Download prerequisites (fish shell):
 
     mkdir -p source
     cd source
+
+    # http://publications.europa.eu/mdr/eprocurement/ted/index.html
+    curl -O http://publications.europa.eu/mdr/resource/eprocurement/ted/R2.0.9/publication/XML_Labels_Mapping_R209.zip
+    unzip XML_Labels_Mapping_R209.zip
+    rm -f XML_Labels_Mapping_R209.zip
+    in2csv --sheet Labels_EN_FR_DE 'XML Labels mapping R2.09.xlsx' > 'XML Labels mapping R2.09.csv'
 
     curl -O 'ftp://eu-tenders:eu-tenders-123@ted.europa.eu/Resources/XML schema 2.0.9/Forms_Templates_R209S01.zip'
     unzip Forms_Templates_R209S01.zip
     rm -f Forms_Templates_R209S01.zip
     rm -rf __MACOSX
+    for i in source/2015-11-03a_TED_forms_templates/*.pdf; pdftotext -layout $i; end
 
     curl -O 'ftp://eu-tenders:eu-tenders-123@ted.europa.eu/Resources/TEDFTP_Schema_20180704_TED_publication.zip'
     unzip TEDFTP_Schema_20180704_TED_publication.zip TED_publication_R2.0.9.S03.E01_006-20180608.zip
@@ -25,11 +32,7 @@ Transform all forms into CSV files:
 
 Transform a specific directory and specific forms into CSV files:
 
-    rake common forms DIRECTORY=source/TED_publication_R2 FORMS=01,02,03,14,20
-
-Annotate the CSV files:
-
-    rake label
+    rake common forms DIRECTORY=source/TED_publication_R2.0.9.S03.E01_006 FORMS=01,02,03,14,20
 
 ## Reference
 
