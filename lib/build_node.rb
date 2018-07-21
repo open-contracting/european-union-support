@@ -1,4 +1,5 @@
 class BuildNode
+  # Low to high.
   ATTRIBUTE_PRIORITY = %w(
     use
     totalDigits
@@ -62,7 +63,7 @@ class BuildNode
         if value == '(19|20).{8}' # base="xs:date"
           value = /(19|20)\d\d-\d\d-\d\d/
         end
-        Regexp.new(value).random_example
+        Regexp.new(value).random_example # (max_repeater_variance: 10)
       when 'maxExclusive', 'maxInclusive', 'minExclusive', 'minInclusive', 'totalDigits'
         rand(minimum..maximum)
       else
@@ -98,6 +99,11 @@ class BuildNode
 
   # @return [String] the node's comment
   def comment
-    " #{name} #{comments.sort_by{ |k, v| ATTRIBUTE_PRIORITY.index(k) || -1 }.map{ |k, v| %(#{k}="#{v}") }.join(', ')} "
+    parts = []
+    if attribute?
+      parts << name
+    end
+    parts << comments.sort_by{ |k, v| ATTRIBUTE_PRIORITY.index(k) || -1 }.map{ |k, v| %(#{k}="#{v}") }.join(', ')
+    " #{parts.join(' ')} "
   end
 end
