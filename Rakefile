@@ -4,12 +4,29 @@ require 'delegate'
 require 'active_support/core_ext/hash/except'
 require 'hashdiff'
 require 'nokogiri'
+require 'regexp-examples'
 
 require_relative 'lib/build_node'
 require_relative 'lib/tree_node'
 require_relative 'lib/xml_base'
 require_relative 'lib/xml_builder'
 require_relative 'lib/xml_parser'
+
+# Modify RegexpExamples to exclude control characters.
+# https://github.com/tom-lord/regexp-examples/blob/master/lib/regexp-examples/char_sets.rb
+module RegexpExamples
+  module CharSets
+    def self.redefine(const, value)
+      self.send(:remove_const, const)
+      self.const_set(const, value)
+    end
+
+    redefine(:Any, Any - Control) # libxml2 errors on control characters
+    redefine(:AnyNoNewLine, AnyNoNewLine - Control) # libxml2 errors on control characters
+    redefine(:Whitespace, Whitespace - ["\f", "\v", "\r", "\n"]) # libxml2 errors on \f and \v, some types restrict \r and \n
+    redefine(:BackslashCharMap, BackslashCharMap.merge('s' => Whitespace))
+  end
+end
 
 def directories
   if ENV['DIRECTORY']

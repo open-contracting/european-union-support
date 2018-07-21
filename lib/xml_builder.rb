@@ -52,10 +52,37 @@ class XMLBuilder < XmlBase
   end
 
   # Recursively adds nodes to the XML document.
-  def to_xml_recursive(children, xml)
-    children.each do |child|
-      xml.send(child.name, *child.arguments) do
-        to_xml_recursive(child.children, xml)
+  def to_xml_recursive(nodes, xml)
+    nodes.each do |node|
+      if node.name == 'comment'
+        xml.comment " #{node.content} "
+      else
+        attribute_nodes, element_nodes = node.children.partition do |child|
+          child.attribute?
+        end
+
+        attributes, comments = {}, []
+        attribute_nodes.each do |attribute_node|
+          attributes[attribute_node.name] = attribute_node.content
+          if attribute_node.comments.any?
+            comments << attribute_node.comment
+          end
+        end
+
+        if comments.any?
+          xml.comment comments.join('|')
+        end
+
+        xml.send(node.name, attributes) do
+          content = node.content
+          if node.comments.any?
+            xml.comment node.comment
+          end
+          if content
+            xml.text content
+          end
+          to_xml_recursive(element_nodes, xml)
+        end
       end
     end
   end
@@ -64,9 +91,10 @@ class XMLBuilder < XmlBase
   #
   # @return [BuildNode] the comment node
   def comment_node(comment)
-    BuildNode.new('comment', " #{comment} ")
+    node = BuildNode.new('comment')
+    node.contents << comment
+    node
   end
-
 
   # Adds a comment for the parsed node's attributes.
   #
@@ -95,36 +123,11 @@ class XMLBuilder < XmlBase
   #
   # @param [Nokogiri::XML::Node] n a node from the parser
   # @param [Nokogiri::XML::Node] pointer the current node in the tree
-  def add_node(n, pointer)
-    node = BuildNode.new(n.attributes.fetch('name'))
+  # @param [Boolean] attribute whether the node is an attribute
+  def add_node(n, pointer, attribute = false)
+    node = BuildNode.new(n.attributes.fetch('name'), attribute)
     pointer.children.append(node)
     node
-  end
-
-  # Adds parsed attributes to the current node.
-  #
-  # Call `attribute` after `add_node` to add the attributes to the corresponding node.
-  #
-  # @param [Nokogiri::XML::Node] n a node from the parser
-  # @param [Nokogiri::XML::Node] pointer the current node in the tree
-  def attribute(n, pointer)
-    attributes = {}
-    nodes = n.xpath('./xs:attribute')
-
-    nodes.each do |node|
-      name = node.attributes.fetch('name')
-      if node.key?('fixed')
-        attributes[name] = node['fixed']
-      else
-        # XXX set value more intelligently
-        # use is "required" on all xs:attribute except <xs:attribute name="PUBLICATION" type="publication"/>
-        attributes[name] = n['use'] || 'foo'
-      end
-      follow(node, pointer)
-    end
-
-    nodes.remove
-    pointer.arguments[0].merge!(attributes)
   end
 
   def lookup(name, *tags)
@@ -141,7 +144,7 @@ class XMLBuilder < XmlBase
       reference = n['ref']
 
       if reference[':']
-        reference = reference.split(':', 2)[1]
+        namespace, reference = reference.split(':', 2)
       end
 
       node = lookup(reference, n.name)
@@ -160,9 +163,23 @@ class XMLBuilder < XmlBase
         end
         @types[reference] = n.attributes.fetch('name')
       end
+
       visit(node, pointer)
 
-    else
+    elsif n.key?('base')
+      if n.parent.name == 'simpleType'
+        reference = n['base']
+
+        if reference[':']
+          namespace, reference = reference.split(':', 2)
+        end
+
+        unless namespace == 'xs'
+          node = lookup(reference, 'simpleType')
+
+          visit(node, pointer)
+        end
+      end
       # Based on the following analysis, we can visit a restricted node's children as if it were unrestricted.
       #
       # Every `complexType` node with a `restriction` grandchild uses a `base` of:
@@ -205,10 +222,10 @@ class XMLBuilder < XmlBase
       # See: <xs:restriction base="(?!(_2car|_3car|_4car|_5car|alphanum|cur:t_currency_tedschema|lb:t_legal-basis_tedschema|legal_basis|prct|string_100|string_200|string_not_empty|string_with_letter|xs:decimal|xs:date|xs:integer|xs:nonNegativeInteger|xs:string|complement_info|contact|contact_contracting_body|lefti|lot_numbers)")
       #
       # Note: The two enumerations have annotations with English labels in separate files.
+    end
 
-      n.element_children.each do |c|
-        visit(c, pointer)
-      end
+    n.element_children.each do |c|
+      visit(c, pointer)
     end
   end
 
@@ -236,24 +253,49 @@ class XMLBuilder < XmlBase
         pointer = add_node(n, pointer)
       end
 
-    when 'complexType'
-      attribute(n, pointer)
-
     when 'simpleContent'
-      # TODO extension attribute()
+      # TODO extension
 
     when 'extension'
       # TODO logic
-      attribute(n, pointer)
 
     when 'complexContent'
-      # TODO extension attribute()
+      # TODO extension
 
-    when 'enumeration', 'maxLength', 'maxInclusive', 'minInclusive', 'minExclusive', 'pattern'
-      # XXX use to generate a value, see comment in `follow`
+    when 'attribute'
+      pointer = add_node(n, pointer, true)
+
+      # use is "required" on all xs:attribute except <xs:attribute name="PUBLICATION" type="publication"/>
+      if n.key?('fixed')
+        pointer.contents << n['fixed']
+      else
+        pointer.comments['use'] = n['use']
+      end
+
+    when 'enumeration'
+      pointer.comments['enumeration'] ||= []
+      pointer.comments['enumeration'] << n.attributes.fetch('value').value
+
+    when 'maxLength'
+      pointer.comments['maxLength'] = Integer(n.attributes.fetch('value').value)
+
+    when 'maxInclusive'
+      pointer.comments['maxInclusive'] = Integer(n.attributes.fetch('value').value)
+
+    when 'minInclusive'
+      pointer.comments['minInclusive'] = Integer(n.attributes.fetch('value').value)
+
+    when 'minExclusive'
+      pointer.comments['minExclusive'] = Integer(n.attributes.fetch('value').value)
+
+    when 'pattern'
+      pointer.comments['pattern'] = n.attributes.fetch('value').value
+
+    when 'totalDigits'
+      pointer.comments['totalDigits'] = Integer(n.attributes.fetch('value').value)
 
     # Visit the children.
-    when 'restriction', 'simpleType'
+    when 'complexType', 'simpleType', 'restriction'
 
     else
       raise "unexpected #{n.name}: #{n}"
