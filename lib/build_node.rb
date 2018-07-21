@@ -14,6 +14,8 @@ class BuildNode
 
   # @return [String] the node's tag name
   attr_reader :name
+  # @return [String] the node's parent
+  attr_reader :parent
   # @return [Array<BuildNode>] the node's children
   attr_reader :children
   # @return [Array<BuildNode>] the node's contents
@@ -22,9 +24,11 @@ class BuildNode
   attr_accessor :comments
 
   # @param [String] name the node's tag name
+  # @param [BuildNode] parent the node's parent
   # @param [Boolean] attribute whether the node is an attribute
-  def initialize(name, attribute = false)
+  def initialize(name, parent: nil, attribute: false)
     @name = name
+    @parent = parent
     @attribute = attribute
     @children = []
     @contents = []

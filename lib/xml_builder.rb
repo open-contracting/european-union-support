@@ -49,11 +49,13 @@ class XMLBuilder < XmlBase
       if node.name == 'comment'
         xml.comment " #{node.content} "
       else
+        attributes = {}
+        comments = []
+
         attribute_nodes, element_nodes = node.children.partition do |child|
           child.attribute?
         end
 
-        attributes, comments = {}, []
         attribute_nodes.each do |attribute_node|
           attributes[attribute_node.name] = attribute_node.content
           if attribute_node.comments.any?
@@ -79,12 +81,44 @@ class XMLBuilder < XmlBase
     end
   end
 
+  # Builds a node for the tree.
+  #
+  # @param [Nokogiri::XML::Node, String] name a tag name, or a node from the parser
+  # @param [BuildNode] parent the built node's parent
+  # @param [String] content the content for the built node
+  # @param [Boolean] attribute whether the built node is an attribute
+  # @return [BuildNode] a built node for the tree
+  def add_node(name, parent, content: nil, attribute: false)
+    unless String === name
+      name = name.attributes['name'].value
+    end
+
+    node = BuildNode.new(name, parent: parent, attribute: attribute)
+
+    if content
+      node.contents << content
+    end
+
+    parent.children << node
+
+    node
+  end
+
+  # Finds a node matching the tag names and name attribute.
+  #
+  # @param [String] name a name attribute value
+  # @param [Array<String>] tags tag names
+  # @return [Nokogiri::XML::Node] the matching node
+  def lookup(name, *tags)
+    xpath(tags.map{ |tag| "./xs:#{tag}[@name='#{name}']" }.join('|'))[0]
+  end
+
   # Adds a comment for the parsed node's attributes.
   #
   # Call `attribute_comment` before `add_node` to add the comment before its corresponding node.
   #
   # @param [Nokogiri::XML::Node] n a node from the parser
-  # @param [Nokogiri::XML::Node] pointer the current node in the tree
+  # @param [BuildNode] pointer the current node in the tree
   def attribute_comment(n, pointer)
     comments = []
 
@@ -99,52 +133,14 @@ class XMLBuilder < XmlBase
     end
 
     if comments.any?
-      suffix = ''
-      if n.name != 'element'
-        name = n['name'] || n['ref'] || n.xpath('./ancestor::*[@name]')[0].attributes.fetch('name')
-        if n.key?('name')
-          infix = 'name='
-        elsif n.key?('ref')
-          infix = 'ref='
-        else
-          infix = 'in '
-        end
-        suffix = " #{n.name} #{infix}#{name}"
-      end
-      add_node('comment', pointer, content: comments.join(' ') + suffix)
+      add_node('comment', pointer, content: comments.join(' '))
     end
-  end
-
-  # Adds a parsed node to the tree.
-  #
-  # @param [Nokogiri::XML::Node, String] name a tag name, or a node from the parser
-  # @param [Nokogiri::XML::Node] pointer the current node in the tree
-  # @param [String] content the content for the current node
-  # @param [Boolean] attribute whether the node is an attribute
-  def add_node(name, pointer, content: nil, attribute: false)
-    unless String === name
-      name = name.attributes['name'].value
-    end
-
-    node = BuildNode.new(name, attribute)
-
-    if content
-      node.contents << content
-    end
-
-    pointer.children << node
-
-    node
-  end
-
-  def lookup(name, *tags)
-    xpath(tags.map{ |tag| "./xs:#{tag}[@name='#{name}']" }.join('|'))[0]
   end
 
   # Follows the references or visits the children of a parsed node.
   #
   # @param [Nokogiri::XML::Node] n a node from the parser
-  # @param [Nokogiri::XML::Node] pointer the current node in the tree
+  # @param [BuildNode] pointer the current node in the tree
   def follow(n, pointer)
     # We already checked that nodes have at most one of these in the XmlParser.
     if n.key?('ref')
@@ -214,21 +210,31 @@ class XMLBuilder < XmlBase
   # Visits a parsed node.
   #
   # @param [Nokogiri::XML::Node] n a node from the parser
-  # @param [Nokogiri::XML::Node] pointer the current node in the tree
+  # @param [BuildNode] pointer the current node in the tree
   def visit(n, pointer)
     case n.name
     when 'choice'
-      # TODO add comment (or something) about choices
       attribute_comment(n, pointer)
+
+      pointer = add_node('choice', pointer)
 
     when 'sequence'
       attribute_comment(n, pointer)
 
+      if pointer.name == 'choice' || n.attributes.any? # choice or optional
+        pointer = add_node('sequence', pointer)
+      end
+
     when 'group'
       attribute_comment(n, pointer)
 
+      if pointer.name == 'choice' || n.attributes.except('name', 'ref').any? # choice or optional
+        pointer = add_node('group', pointer)
+      end
+
     when 'element'
       attribute_comment(n, pointer)
+
       if n.key?('name')
         pointer = add_node(n, pointer)
       end
