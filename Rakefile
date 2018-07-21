@@ -5,14 +5,17 @@ require 'active_support/core_ext/hash/except'
 require 'hashdiff'
 require 'nokogiri'
 
+require_relative 'lib/build_node'
 require_relative 'lib/tree_node'
+require_relative 'lib/xml_base'
+require_relative 'lib/xml_builder'
 require_relative 'lib/xml_parser'
 
 def directories
   if ENV['DIRECTORY']
     directories = [ENV['DIRECTORY']]
   else
-    directories = Dir[File.join('source', 'TED_*_R2')].sort
+    directories = Dir[File.join('source', 'TED_*')].sort
   end
 end
 
