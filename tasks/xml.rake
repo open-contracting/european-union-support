@@ -19,7 +19,7 @@ HEADERS = ATTRIBUTES + %i(cardinality) + REFERENCES + ANNOTATIONS + RESTRICTIONS
   :fixed, # 31 times: "F##" (FORM), "NO" (PUBLICATION), "MONTH" (TYPE), "QSU_CALL_COMPETITION" (TYPE)
   :maxOccurs, # cardinality
   :minOccurs, # cardinality
-  :use, # 140 times: "required" / all but 7 attributes are required (PUBLICATION)
+  :use, # 140 times: "required" on all xs:attribute except <xs:attribute name="PUBLICATION" type="publication"/>
 
   # Restrictions
   :maxLength, # 11 times: "100" (TOWN) / others implied by :name, :type, :restriction, :extension
@@ -28,14 +28,14 @@ HEADERS = ATTRIBUTES + %i(cardinality) + REFERENCES + ANNOTATIONS + RESTRICTIONS
   :minExclusive, # 8 times: "0"
 
   # Annotations
-  :unique, # once
+  :unique, # once (LANGUAGES/LANGUAGE/@VALUE)
 ]
 
 # Avoid expanding common types to keep the CSVs small.
 NO_FOLLOW = [
   # base
-  'cost',
-  'contact',
+  'cost', # `compare` would report its base="xs:decimal" being different from val's currencies' base="xs:string".
+  'contact', # `compare` would report relevant differences.
   'string_with_letter',
 
   # ref
@@ -47,9 +47,9 @@ NO_FOLLOW = [
   'contact_contracting_body',
   'contact_contractor',
   'contact_review',
-  'empty',
+  'empty', # `compare` would report its annotation of "only-element" being different from D_SERVICES_LISTED's and D_OUTSIDE_SCOPE's annotation of "Other justification for the award of the award of the contract without prior publication".
   'no_award',
-  'phone',
+  'phone', # `compare` would report its base="string_100" being different from a parents' base="contact".
   'text_ft_multi_lines', # see readme
 ]
 
