@@ -1,6 +1,9 @@
 class XMLBuilder < XmlBase
   @xml = {}
 
+  # @return [String] the file's basename without extension
+  attr_reader :basename
+
   # @param [String] path the path to the XSD file
   def initialize(path)
     @basename = File.basename(path, '.xsd')
