@@ -1,14 +1,10 @@
-class XmlParser
+class XmlParser < XmlBase
+  @xml = {}
+
   # @return [String] the file's basename without extension
   attr_reader :basename
   # @return [Nokogiri::XML::Node] the XML schema
   attr_reader :schema
-
-  class << self
-    attr_reader :xml
-  end
-
-  @xml = {}
 
   # @param [String] path the path to the XSD file
   # @param [Boolean] follow whether to lookup references in imports or includes
@@ -43,28 +39,6 @@ class XmlParser
   # @return [Boolean] whether to lookup references in imports or includes
   def follow?
     @trees[@active][:follow]
-  end
-
-  # Finds the `schema` tag of the XML document at the given path, and then recursively finds the `schema` tags of the
-  # XML documents referenced by `include` or `import` tags.
-  #
-  # @return [Hash] the key is a file path and the value is the `schema` tag of an XML document
-  def import(path)
-    schemas = {}
-
-    schemas[path] = parse(path)
-    schemas[path].xpath('./xs:include|./xs:import').each do |n| # discard import's namespace
-      schemas.merge!(import(File.join(File.dirname(path), n['schemaLocation'])))
-    end
-
-    schemas
-  end
-
-  # @param [String] path a filename
-  # @return [Nokogiri::XML::Node] the `schema` tag of the XML document at the given path
-  def parse(path)
-    # Assume the XML declaration, xs:schema attributes, and comments are irrelevant.
-    self.class.xml[path] ||= node_set(Nokogiri::XML(File.read(path)).xpath('/xs:schema'), size: 1, names: ['schema'], required: ['elementFormDefault', 'attributeFormDefault', 'version'], optional: ['targetNamespace'], children: true)[0]
   end
 
   # Prints the built tree to CSV.
@@ -240,22 +214,6 @@ class XmlParser
     assert unexpected.empty?, "unexpected attributes #{unexpected}", n
   end
 
-  # Checks the form's schema and then the TED schemas for the given path.
-  #
-  # @param [String] path an XPath
-  # @return [Nokogiri::XML::NodeSet] a nodeset
-  def xpath(path)
-    @schemas.each do |s|
-      node_set = s.xpath(path)
-      if !node_set.empty?
-        return node_set
-      elsif !follow?
-        return false
-      end
-    end
-    []
-  end
-
   # @return [Symbol] the symbol for the locator at this depth
   # @raise if the depth of the locator is unexpected
   def key_for_depth(depth)
@@ -352,7 +310,7 @@ class XmlParser
   # @see elements
   def follow(n, depth, opts, optional: false)
     matches = [n.key?('base'), n.key?('ref'), n.key?('type'), !n.key?('base') && n.element_children.any?].select(&:itself)
-    assert matches.one? || optional && matches.none?, 'expected one of "base", "ref", "type" or children without "base"', n
+    assert matches.one? || optional && matches.none?, 'expected one of "base", "ref", "type", or children without "base"', n
 
     if opts[:reference]
       reference = opts[:reference]
@@ -406,14 +364,6 @@ class XmlParser
       # * children = node_set(n…  except simpleType
       # * children.…              except simpleType
       # * follow(n…               except sequence, choice, complexType
-    when 'sequence'
-      allowed_attributes(n, optional: %w(minOccurs)) # discard minOccurs ("0")
-      n = annotate(n, ['annotation'])
-      children = node_set(n.element_children, size: 1..16, names: %w(choice element group sequence), name_only: true)
-      children.to_enum.with_index(1) do |c, i|
-        elements(c, depth + 1, opts.merge(key_for_depth(depth) => i))
-      end
-
     when 'choice'
       allowed_attributes(n, optional: %w(minOccurs maxOccurs)) # discard minOccurs ("0"), maxOccurs (on p and text_ft_multi_lines_or_string only)
       n = annotate(n, ['annotation'])
@@ -422,17 +372,13 @@ class XmlParser
         elements(c, depth + 1, opts.merge(key_for_depth(depth) => i.chr))
       end
 
-    when 'element'
-      enter(n, depth, opts)
-
-      allowed_attributes(n, disjoint: %w(name ref), optional: %w(type minOccurs maxOccurs))
-      n = annotate(n, %w(annotation unique))
-      children = node_set(n.element_children, size: 0..1, names: %w(complexType simpleType), name_only: true)
-      children.each do |c|
-        elements(c, depth, opts)
+    when 'sequence'
+      allowed_attributes(n, optional: %w(minOccurs)) # discard minOccurs ("0")
+      n = annotate(n, ['annotation'])
+      children = node_set(n.element_children, size: 1..16, names: %w(choice element group sequence), name_only: true)
+      children.to_enum.with_index(1) do |c, i|
+        elements(c, depth + 1, opts.merge(key_for_depth(depth) => i))
       end
-
-      follow(n, depth, opts.merge(reference: n['ref'] || n['type']))
 
     when 'group'
       enter(n, depth, opts)
@@ -445,6 +391,18 @@ class XmlParser
       end
 
       follow(n, depth, opts.merge(reference: n['ref']))
+
+    when 'element'
+      enter(n, depth, opts)
+
+      allowed_attributes(n, disjoint: %w(name ref), optional: %w(type minOccurs maxOccurs))
+      n = annotate(n, %w(annotation unique))
+      children = node_set(n.element_children, size: 0..1, names: %w(complexType simpleType), name_only: true)
+      children.each do |c|
+        elements(c, depth, opts)
+      end
+
+      follow(n, depth, opts.merge(reference: n['ref'] || n['type']))
 
     when 'complexType'
       if opts[:enter]
