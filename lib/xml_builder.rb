@@ -116,6 +116,17 @@ class XMLBuilder < XmlBase
     xpath(tags.map{ |tag| "./xs:#{tag}[@name='#{name}']" }.join('|'))[0]
   end
 
+  # Parses a minOccurs or maxOccurs value.
+  #
+  # @param [String, Integer] the parsed value
+  def parse_occurs(value)
+    if value == 'unbounded'
+      value
+    else
+      Integer(value || 1)
+    end
+  end
+
   # Adds a comment for the parsed node's attributes.
   #
   # Call `attribute_comment` before `add_node` to add the comment before its corresponding node.
@@ -127,8 +138,8 @@ class XMLBuilder < XmlBase
 
     # mixed is "true" on p and text_ft_multi_lines_or_string only
 
-    minOccurs = Integer(n['minOccurs'] || 1)
-    maxOccurs = Integer(n['maxOccurs'] || 1)
+    minOccurs = parse_occurs(n['minOccurs'])
+    maxOccurs = parse_occurs(n['maxOccurs'])
     if minOccurs == 0 && maxOccurs == 1
       comments << 'optional'
     elsif minOccurs != 1 || maxOccurs != 1
