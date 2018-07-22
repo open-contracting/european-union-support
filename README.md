@@ -26,13 +26,32 @@ Download prerequisites (fish shell):
 
     cd ..
 
-Transform all forms into CSV files:
+Transform all form schema into CSV files:
 
     rake common forms
 
-Transform a specific directory and specific forms into CSV files:
+Or transform a specific directory and specific form schema:
 
     rake common forms DIRECTORY=source/TED_publication_R2.0.9.S03.E01_006 FORMS=01,02,03,14,20
+
+Create sample XML files for each form schema:
+
+    rake sample
+
+Or for specific form schema:
+
+    rake sample FORMS=01,02,03,14,20
+
+Generate files for mapping forms' XPath's to label keys:
+
+    rake label:xpath label:ignore
+
+1. In a multi-monitor setup, open a form's template PDF, English PDF, and XPath CSV.
+1. Fill in the `key` column with keys from the template PDF, cross-referencing with the English PDF to determine the correspondence.
+1. If a key has no corresponding editable field in the PDF, it may not have a corresponding XML element. If so, add it to `ignore.csv`.
+1. Once completed, run `rake missing` to see which XML elements have no key, and which keys have no XML element and aren' in `ignore.csv`.
+
+You can now generate a table for each form, displaying, for each element, the index within the PDF ("I.1"), the label (in any language) and the XPath, to which you can then add guidance for OCDS.
 
 ## Reference
 
