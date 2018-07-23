@@ -37,10 +37,10 @@ def directories
   end
 end
 
-def forms(directory, extension)
+def files(directory, extension)
   suffix = "_2014.#{extension}"
-  if ENV['FORMS']
-    ENV['FORMS'].split(',').map{ |number| File.join(directory, "F#{number}#{suffix}") }
+  if ENV['FILES']
+    ENV['FILES'].split(',').map{ |number| File.join(directory, "F#{number}#{suffix}") }
   else
     Dir[File.join(directory, "F*#{suffix}")].sort
   end

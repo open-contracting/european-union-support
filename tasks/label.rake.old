@@ -101,7 +101,7 @@ task :label do
     },
   }
 
-  forms('output', 'csv').each do |output|
+  files('output', 'csv').each do |output|
     label_key_to_label = {}
     CSV.read(File.join('source', 'XML Labels mapping R2.09_7.csv'), headers: true).each do |row|
       label_key_to_label[row['Label']] = row['EN']

@@ -73,7 +73,7 @@ task :common do
     references = Set.new
 
     # Get the `base`, `ref` and `type` re-used across forms.
-    forms(directory, 'xsd').each do |filename|
+    files(directory, 'xsd').each do |filename|
       parser = XmlParser.new(filename)
 
       references += parser.schema.xpath('.//*[@ref]').reject{ |n|
@@ -110,7 +110,7 @@ task :forms do
   FileUtils.mkdir_p('output')
 
   directories.each do |directory|
-    forms(directory, 'xsd').each do |filename|
+    files(directory, 'xsd').each do |filename|
       parser = XmlParser.new(filename, follow: false)
 
       abbreviation = parser.basename.sub('_2014', '')
