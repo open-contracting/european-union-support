@@ -65,11 +65,11 @@ Early on, I transformed the XML schema to CSV summaries, both to understand the 
 
 Transform all form schema into CSV files:
 
-    rake common forms
+    rake legacy:common legacy:forms
 
 Or transform a specific directory and specific form schema:
 
-    rake common forms DIRECTORY=source/TED_publication_R2.0.9.S03.E01_006 FILES=01,02,03,14,20
+    rake legacy:common legacy:forms DIRECTORY=source/TED_publication_R2.0.9.S03.E01_006 FILES=01,02,03,14,20
 
 ## Reference
 

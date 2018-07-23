@@ -8,10 +8,8 @@ require 'nokogiri'
 require 'regexp-examples'
 
 require_relative 'lib/build_node'
-require_relative 'lib/tree_node'
 require_relative 'lib/xml_base'
 require_relative 'lib/xml_builder'
-require_relative 'lib/xml_parser'
 
 # Modify RegexpExamples to exclude control characters.
 # https://github.com/tom-lord/regexp-examples/blob/master/lib/regexp-examples/char_sets.rb
@@ -47,3 +45,4 @@ def files(directory, extension)
 end
 
 Dir['tasks/*.rake'].each { |r| import r }
+Dir['legacy/*.rake'].each { |r| import r }
