@@ -7,24 +7,27 @@ Download prerequisites (fish shell):
 
     # Get the mapping from label keys to text labels.
     # http://publications.europa.eu/mdr/eprocurement/ted/index.html
-    curl -O http://publications.europa.eu/mdr/resource/eprocurement/ted/R2.0.9/publication/XML_Labels_Mapping_R209.zip
-    unzip XML_Labels_Mapping_R209.zip
-    rm -f XML_Labels_Mapping_R209.zip
-    in2csv --sheet Labels_EN_FR_DE 'XML Labels mapping R2.09.xlsx' > 'XML Labels mapping R2.09.csv'
+    curl -O 'ftp://eu-tenders:eu-tenders-123@ted.europa.eu/Resources/XML schema 2.0.9/Forms_Labels_R209S01.zip'
+    unzip Forms_Labels_R209S01.zip
+    in2csv 'Forms labels R2.09.xlsx' > 'Forms labels R2.09.csv'
+    rm -f Forms_Labels_R209S01.zip 'Forms labels R2.09.xlsx'
 
     # Get the template PDFs containing label keys.
     curl -O 'ftp://eu-tenders:eu-tenders-123@ted.europa.eu/Resources/XML schema 2.0.9/Forms_Templates_R209S01.zip'
     unzip Forms_Templates_R209S01.zip
-    rm -f Forms_Templates_R209S01.zip
-    rm -rf __MACOSX
     for i in source/2015-11-03a_TED_forms_templates/*.pdf; pdftotext -layout $i; end
+    rm -rf Forms_Templates_R209S01.zip __MACOSX
+
+    # Get the English PDFs.
+    # http://simap.ted.europa.eu/standard-forms-for-public-procurement
+    mkdir -p English
+    for i in 01 02 03 14 20; curl -o English/EN_F$i.pdf http://simap.ted.europa.eu/documents/10184/99173/EN_F$i.pdf; end
 
     # Get the XML schema.
     curl -O 'ftp://eu-tenders:eu-tenders-123@ted.europa.eu/Resources/TEDFTP_Schema_20180704_TED_publication.zip'
     unzip TEDFTP_Schema_20180704_TED_publication.zip TED_publication_R2.0.9.S03.E01_006-20180608.zip
-    rm -f TEDFTP_Schema_20180704_TED_publication.zip
     unzip TED_publication_R2.0.9.S03.E01_006-20180608.zip -d TED_publication_R2.0.9.S03.E01_006
-    rm -f TED_publication_R2.0.9.S03.E01_006-20180608.zip
+    rm -f TEDFTP_Schema_20180704_TED_publication.zip TED_publication_R2.0.9.S03.E01_006-20180608.zip
     rm -f TED_publication_R2.0.9.S03.E01_006/{common_prod.xsd,DEVCO.xsd,MOVE.xsd,TED_EXPORT.xsd,xlink.xsd}
 
     cd ..
@@ -35,7 +38,7 @@ Create sample XML files for each form schema:
 
 Or for specific form schema:
 
-    rake sample FORMS=01,02,03,14,20
+    rake sample FILES=01,02,03,14,20
 
 Generate files for mapping forms' XPath's to label keys:
 
@@ -48,6 +51,14 @@ Generate files for mapping forms' XPath's to label keys:
 
 You can now generate a table for each form, displaying, for each element, the index within the PDF ("I.1"), the label (in any language) and the XPath, to which you can then add guidance for OCDS.
 
+## Design
+
+The code focuses on XML schema and label keys.
+
+* Label keys are expected to change less frequently than labels.
+* No XML samples describe the same range of possibilities described by XML schema.
+* XML schema are expected to change more frequently than the XML they describe (e.g. reordering and refactoring).
+
 ## Exploration
 
 Early on, I transformed the XML schema to CSV summaries, both to understand the structure of the schema through implementation, and to get an easy overview of the XML schema, which were otherwise quite referential.
@@ -58,7 +69,7 @@ Transform all form schema into CSV files:
 
 Or transform a specific directory and specific form schema:
 
-    rake common forms DIRECTORY=source/TED_publication_R2.0.9.S03.E01_006 FORMS=01,02,03,14,20
+    rake common forms DIRECTORY=source/TED_publication_R2.0.9.S03.E01_006 FILES=01,02,03,14,20
 
 ## Reference
 
@@ -72,7 +83,7 @@ The following types have annotations for each enumeration:
 * `t_currency_tedschema`
 * `t_legal-basis_tedschema`
 
-The following forms restrict the following types:
+The following forms restrict the following types (non-exhaustive):
 
     F01_2014: lefti: removes ["RULES_CRITERIA", "RESERVED_ORGANISATIONS_SERVICE_MISSION", "DEPOSIT_GUARANTEE_REQUIRED", "MAIN_FINANCING_CONDITION", "LEGAL_FORM", "QUALIFICATION", "CONDITIONS", "METHODS", "CRITERIA_SELECTION"]
     F02_2014: lefti: removes ["RULES_CRITERIA", "RESERVED_ORGANISATIONS_SERVICE_MISSION", "DEPOSIT_GUARANTEE_REQUIRED", "MAIN_FINANCING_CONDITION", "LEGAL_FORM", "QUALIFICATION", "CONDITIONS", "METHODS", "CRITERIA_SELECTION"]
