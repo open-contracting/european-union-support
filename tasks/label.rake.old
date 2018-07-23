@@ -1,4 +1,4 @@
-# This file is abandoned, because the labels spreadsheet doesn't match labels to all relevant XML elements.
+# This file is abandoned, because the labels spreadsheet doesn't have labels for all relevant XML elements.
 
 =begin
 # http://publications.europa.eu/mdr/eprocurement/ted/index.html
@@ -157,7 +157,7 @@ task :label do
 
       # To do:
       # - Handle NAME/NAME, NAME/@ATTR, NAME[@ATTR="VAL"], NAME[@ATTR="VALUE",@ATTR="VALUE"]/@ATTR in 'XML element name'
-      # - Instead of printing, merge into CSV
+      # - Instead of printing, merge into summary CSV
       # - 'Forms validation rules' doesn't have 'Label-key', but has 'Description' and 'Range of values'
       CSV.read(output, headers: true).each do |row|
         xml_name = row['name'] || row['ref']

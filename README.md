@@ -5,18 +5,21 @@ Download prerequisites (fish shell):
     mkdir -p source
     cd source
 
+    # Get the mapping from label keys to text labels.
     # http://publications.europa.eu/mdr/eprocurement/ted/index.html
     curl -O http://publications.europa.eu/mdr/resource/eprocurement/ted/R2.0.9/publication/XML_Labels_Mapping_R209.zip
     unzip XML_Labels_Mapping_R209.zip
     rm -f XML_Labels_Mapping_R209.zip
     in2csv --sheet Labels_EN_FR_DE 'XML Labels mapping R2.09.xlsx' > 'XML Labels mapping R2.09.csv'
 
+    # Get the template PDFs containing label keys.
     curl -O 'ftp://eu-tenders:eu-tenders-123@ted.europa.eu/Resources/XML schema 2.0.9/Forms_Templates_R209S01.zip'
     unzip Forms_Templates_R209S01.zip
     rm -f Forms_Templates_R209S01.zip
     rm -rf __MACOSX
     for i in source/2015-11-03a_TED_forms_templates/*.pdf; pdftotext -layout $i; end
 
+    # Get the XML schema.
     curl -O 'ftp://eu-tenders:eu-tenders-123@ted.europa.eu/Resources/TEDFTP_Schema_20180704_TED_publication.zip'
     unzip TEDFTP_Schema_20180704_TED_publication.zip TED_publication_R2.0.9.S03.E01_006-20180608.zip
     rm -f TEDFTP_Schema_20180704_TED_publication.zip
@@ -25,14 +28,6 @@ Download prerequisites (fish shell):
     rm -f TED_publication_R2.0.9.S03.E01_006/{common_prod.xsd,DEVCO.xsd,MOVE.xsd,TED_EXPORT.xsd,xlink.xsd}
 
     cd ..
-
-Transform all form schema into CSV files:
-
-    rake common forms
-
-Or transform a specific directory and specific form schema:
-
-    rake common forms DIRECTORY=source/TED_publication_R2.0.9.S03.E01_006 FORMS=01,02,03,14,20
 
 Create sample XML files for each form schema:
 
@@ -52,6 +47,18 @@ Generate files for mapping forms' XPath's to label keys:
 1. Once completed, run `rake missing` to see which XML elements have no key, and which keys have no XML element and aren' in `ignore.csv`.
 
 You can now generate a table for each form, displaying, for each element, the index within the PDF ("I.1"), the label (in any language) and the XPath, to which you can then add guidance for OCDS.
+
+## Exploration
+
+Early on, I transformed the XML schema to CSV summaries, both to understand the structure of the schema through implementation, and to get an easy overview of the XML schema, which were otherwise quite referential.
+
+Transform all form schema into CSV files:
+
+    rake common forms
+
+Or transform a specific directory and specific form schema:
+
+    rake common forms DIRECTORY=source/TED_publication_R2.0.9.S03.E01_006 FORMS=01,02,03,14,20
 
 ## Reference
 

@@ -183,7 +183,7 @@ class XMLBuilder < XmlBase
           pointer.children << paragraph
           return
         else
-          # Reference repeated types to make sample smaller. (Sample will not validate.)
+          # Reference repeated types to make sample smaller. (Sample will be invalid.)
           if @types.key?(reference)
             add_node('comment', pointer, content: "see #{@types[reference]}")
             return
@@ -226,6 +226,8 @@ class XMLBuilder < XmlBase
   # @param [Nokogiri::XML::Node] n a node from the parser
   # @param [BuildNode] pointer the current node in the tree
   def visit(n, pointer)
+    # `choice`, `sequence` and `group` nodes are added for the sample to reflect all possibilities in the schema.
+    # However, this means the sample will be invalid.
     case n.name
     when 'choice'
       attribute_comment(n, pointer)
