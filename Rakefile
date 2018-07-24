@@ -27,21 +27,13 @@ module RegexpExamples
   end
 end
 
-def directories
-  if ENV['DIRECTORY']
-    directories = [ENV['DIRECTORY']]
-  else
-    directories = Dir[File.join('source', 'TED_*')].sort
-  end
-end
-
-def files(directory, extension)
-  suffix = "_2014.#{extension}"
+def files(glob)
   if ENV['FILES']
-    ENV['FILES'].split(',').map{ |number| File.join(directory, "F#{number}#{suffix}") }
+    glob = glob.sub('{}', "{#{ENV['FILES']}}")
   else
-    Dir[File.join(directory, "F*#{suffix}")].sort
+    glob = glob.sub('{}', '*')
   end
+  Dir[glob].sort
 end
 
 Dir['tasks/*.rake'].each { |r| import r }

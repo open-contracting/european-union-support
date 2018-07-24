@@ -15,7 +15,6 @@ Download prerequisites (fish shell):
     # Get the template PDFs containing label keys.
     curl -O 'ftp://eu-tenders:eu-tenders-123@ted.europa.eu/Resources/XML schema 2.0.9/Forms_Templates_R209S01.zip'
     unzip Forms_Templates_R209S01.zip
-    for i in source/2015-11-03a_TED_forms_templates/*.pdf; pdftotext -layout $i; end
     rm -rf Forms_Templates_R209S01.zip __MACOSX
 
     # Get the English PDFs.
@@ -45,7 +44,7 @@ Generate files for mapping forms' XPath's to label keys:
     rake label:xpath label:ignore
 
 1. In a multi-monitor setup, open a form's template PDF, English PDF, and XPath CSV.
-1. Fill in the `key` column with keys from the template PDF, cross-referencing with the English PDF to determine the correspondence.
+1. Fill in the `label-key` column with keys from the template PDF, cross-referencing with the English PDF to determine the correspondence.
 1. If a key has no corresponding editable field in the PDF, it may not have a corresponding XML element. If so, add it to `ignore.csv`.
 1. Once completed, run `rake missing` to see which XML elements have no key, and which keys have no XML element and aren' in `ignore.csv`.
 

@@ -71,100 +71,94 @@ NO_ANNOTATIONS = [
 namespace :legacy do
   desc 'Process common_2014.xsd'
   task :common do
-    FileUtils.mkdir_p('output')
+    FileUtils.mkdir_p('output/summaries')
 
-    directories.each do |directory|
-      references = Set.new
+    references = Set.new
 
-      # Get the `base`, `ref` and `type` re-used across forms.
-      files(directory, 'xsd').each do |filename|
-        parser = XmlParser.new(filename)
+    # Get the `base`, `ref` and `type` re-used across forms.
+    files('source/TED_publication_*/F{}_*.xsd').each do |filename|
+      parser = XmlParser.new(filename)
 
-        references += parser.schema.xpath('.//*[@ref]').reject{ |n|
-          parser.schema.xpath("./xs:#{n.name}[@name='#{n['ref'].split(':', 2).last}']").any?
-        }.map{ |n| n['ref'] }
+      references += parser.schema.xpath('.//*[@ref]').reject{ |n|
+        parser.schema.xpath("./xs:#{n.name}[@name='#{n['ref'].split(':', 2).last}']").any?
+      }.map{ |n| n['ref'] }
 
-        %w(base type).each do |name|
-          references += parser.schema.xpath(".//*[@#{name}]").reject{ |n|
-            parser.schema.xpath(%w(complex simple).map{ |prefix| "./xs:#{prefix}Type[@name='#{n[name]}']" }.join('|')).any?
-          }.map{ |n| n[name] }
-        end
+      %w(base type).each do |name|
+        references += parser.schema.xpath(".//*[@#{name}]").reject{ |n|
+          parser.schema.xpath(%w(complex simple).map{ |prefix| "./xs:#{prefix}Type[@name='#{n[name]}']" }.join('|')).any?
+        }.map{ |n| n[name] }
       end
+    end
 
-      # The above will not collect the references in NO_FOLLOW.
-      references += NO_FOLLOW
+    # The above will not collect the references in NO_FOLLOW.
+    references += NO_FOLLOW
 
-      parser = XmlParser.new(File.join(directory, 'common_2014.xsd'))
+    parser = XmlParser.new(Dir['source/TED_publication_*/common_2014.xsd'][0])
 
-      ns = parser.node_set(parser.schema.element_children, size: 0..999, names: %w(import include element group complexType simpleType), name_only: true)
-      ns.each do |c|
-        if references.include?(c['name'])
-          parser.elements(c, 0, index0: c['name'], enter: true)
-        end
+    ns = parser.node_set(parser.schema.element_children, size: 0..999, names: %w(import include element group complexType simpleType), name_only: true)
+    ns.each do |c|
+      if references.include?(c['name'])
+        parser.elements(c, 0, index0: c['name'], enter: true)
       end
+    end
 
-      File.open(File.join('output', "#{parser.basename}.csv"), 'w') do |f|
-        f.write(parser.to_csv)
-      end
+    File.open("output/summaries/#{parser.basename}.csv", 'w') do |f|
+      f.write(parser.to_csv)
     end
   end
 
   desc 'Process F##_2014.xsd'
   task :forms do
-    FileUtils.mkdir_p('output')
+    FileUtils.mkdir_p('output/summaries')
 
-    directories.each do |directory|
-      files(directory, 'xsd').each do |filename|
-        parser = XmlParser.new(filename, follow: false)
+    files('source/TED_publication_*/F{}_*.xsd').each do |filename|
+      parser = XmlParser.new(filename, follow: false)
 
-        abbreviation = parser.basename.sub('_2014', '')
+      abbreviation = parser.basename.sub('_2014', '')
 
-        # Navigate to the form's main sequence.
-        ns = parser.node_set(parser.schema.xpath("./xs:element[@name='#{parser.basename}']"), size: 1, names: ['element'], attributes: ['name'], children: true)
-        ns = parser.node_set(ns[0].element_children, size: 2, index: 1, names: ['complexType'], children: true, xml: {0 => "<xs:annotation>\n\t\t\t<xs:documentation>ROOT element #{abbreviation}</xs:documentation>\n\t\t</xs:annotation>"})
-        ns = parser.node_set(ns[1].element_children, size: 4, index: 0, names: ['sequence'], children: true, xml: {1..3 => %(<xs:attribute name="LG" type="t_ce_language_list" use="required"/><xs:attribute name="CATEGORY" type="original_translation" use="required"/><xs:attribute name="FORM" use="required" fixed="#{abbreviation}"/>)})
-        ns = parser.node_set(ns[0].element_children, size: 4..8, names: %w(choice element), name_only: true)
-        ns.to_enum.with_index(1) do |c, i|
-          parser.elements(c, 0, index0: i)
-        end
+      # Navigate to the form's main sequence.
+      ns = parser.node_set(parser.schema.xpath("./xs:element[@name='#{parser.basename}']"), size: 1, names: ['element'], attributes: ['name'], children: true)
+      ns = parser.node_set(ns[0].element_children, size: 2, index: 1, names: ['complexType'], children: true, xml: {0 => "<xs:annotation>\n\t\t\t<xs:documentation>ROOT element #{abbreviation}</xs:documentation>\n\t\t</xs:annotation>"})
+      ns = parser.node_set(ns[1].element_children, size: 4, index: 0, names: ['sequence'], children: true, xml: {1..3 => %(<xs:attribute name="LG" type="t_ce_language_list" use="required"/><xs:attribute name="CATEGORY" type="original_translation" use="required"/><xs:attribute name="FORM" use="required" fixed="#{abbreviation}"/>)})
+      ns = parser.node_set(ns[0].element_children, size: 4..8, names: %w(choice element), name_only: true)
+      ns.to_enum.with_index(1) do |c, i|
+        parser.elements(c, 0, index0: i)
+      end
 
-        File.open(File.join('output', "#{parser.basename}.csv"), 'w') do |f|
-          f.write(parser.to_csv)
-        end
+      File.open("output/summaries/#{parser.basename}.csv", 'w') do |f|
+        f.write(parser.to_csv)
       end
     end
   end
 
   desc 'Reports frequently occuring references and attributes'
   task review: :common do
-    directories.each do |directory|
-      text = File.read(File.join('output', 'common_2014.csv'))
+    text = File.read('output/summaries/common_2014.csv')
 
-      parser = XmlParser.new(File.join(directory, 'common_2014.xsd'))
+    parser = XmlParser.new(Dir['source/TED_publication_*/common_2014.xsd'][0])
 
-      counts = Hash.new(0)
-      %w(base ref type).each do |name|
-        parser.schema.xpath(".//@#{name}").each do |attribute|
-          counts[attribute.value] += 1
-        end
+    counts = Hash.new(0)
+    %w(base ref type).each do |name|
+      parser.schema.xpath(".//@#{name}").each do |attribute|
+        counts[attribute.value] += 1
       end
+    end
 
-      $stderr.puts "\nFrequently occurring references:"
-      counts.map{ |k, v|
-        [text.scan(/,#{Regexp.escape(k)}\b/).count - v, k]
-      }.sort.select{ |v, k| v > 1 }.each{ |v, k|
-        $stderr.puts "#{v}: #{k}"
-      }
+    $stderr.puts "\nFrequently occurring references:"
+    counts.map{ |k, v|
+      [text.scan(/,#{Regexp.escape(k)}\b/).count - v, k]
+    }.sort.select{ |v, k| v > 1 }.each{ |v, k|
+      $stderr.puts "#{v}: #{k}"
+    }
 
-      counts = Hash.new(0)
-      text.scan(/\+,[^,\n]+,([^,\n]+)/).each do |s|
-        counts[s[0]] += 1
-      end
+    counts = Hash.new(0)
+    text.scan(/\+,[^,\n]+,([^,\n]+)/).each do |s|
+      counts[s[0]] += 1
+    end
 
-      $stderr.puts "\nFrequently occurring attributes:"
-      counts.sort_by(&:last).each do |k, v|
-        $stderr.puts "#{v}: #{k}"
-      end
+    $stderr.puts "\nFrequently occurring attributes:"
+    counts.sort_by(&:last).each do |k, v|
+      $stderr.puts "#{v}: #{k}"
     end
   end
 end

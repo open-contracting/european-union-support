@@ -102,14 +102,14 @@ namespace :legacy do
       },
     }
 
-    files('output', 'csv').each do |output|
+    files('output/summaries/F{}_*.csv').each do |output|
       label_key_to_label = {}
-      CSV.read(File.join('source', 'XML Labels mapping R2.09_7.csv'), headers: true).each do |row|
+      CSV.read('source/XML Labels mapping R2.09_7.csv', headers: true).each do |row|
         label_key_to_label[row['Label']] = row['EN']
       end
 
       number = Integer(File.basename(output, '.csv').gsub(/\AF0?|_2014\z/, '')) - 1
-      source = File.join('source', "XML Labels mapping R2.09_#{number}.csv")
+      source = "source/XML Labels mapping R2.09_#{number}.csv"
 
       if File.exist?(source)
         # Map values from 'XML element name' and 'Type / Value range' to rows.
