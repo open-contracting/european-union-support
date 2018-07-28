@@ -41,9 +41,26 @@ class XMLBuilder < XmlBase
   #
   # @return [String] the built XML
   def to_xml
+    prune!(@root)
+
     Nokogiri::XML::Builder.new do |xml|
       to_xml_recursive(@root.children, xml)
     end.to_xml
+  end
+
+  def prune!(node)
+    node.children.reject! do |n|
+      prune!(n)
+      # If the element is not published, remove it.
+      n.children.any?{ |c| c.attribute? && c.name == 'PUBLICATION' && c.content == 'NO' } ||
+      # If the element is XML Schema and has no children, remove it.
+      %w(choice group sequence).include?(n.name) && n.children.empty?
+    end
+
+    # If the children are all "optional" comments (due to above changes), remove the children.
+    if node.children.all?{ |c| c.name == 'comment' && c.content == 'optional' }
+      node.children.replace([])
+    end
   end
 
   # Recursively adds nodes to the XML document.
@@ -175,7 +192,9 @@ class XMLBuilder < XmlBase
       if node.name == 'complexType'
         case reference
         when 'empty'
-          # Do nothing.
+          # Do nothing with empty elements.
+        when 'val', 'val_range', 'country', 'nuts', 'no_works', 'supplies', 'non_published'
+          # Do nothing with simple elements.
         when 'text_ft_single_line', 'text_ft_multi_lines'
           # Hardcode common types to make sample smaller.
           paragraph = BuildNode.new('P')
