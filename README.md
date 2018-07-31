@@ -1,5 +1,9 @@
 # TED XSD parser
 
+## Usage
+
+### Download prerequisites
+
 Download prerequisites (fish shell):
 
     mkdir -p source
@@ -31,6 +35,8 @@ Download prerequisites (fish shell):
 
     cd ..
 
+### Create sample XML files
+
 Create sample XML files for each form schema:
 
     rake sample
@@ -39,16 +45,32 @@ Or for specific form schema:
 
     rake sample FILES=01,02,03,14,20
 
-Generate files for mapping forms' XPath's to label keys:
+### Map XML elements and attributes to text labels
+
+Generate files for mapping forms' XPath values to label keys:
 
     rake label:xpath label:ignore
 
-1. In a multi-monitor setup, open a form's template PDF, English PDF, and XPath CSV.
-1. Fill in the `label-key` column with keys from the template PDF, cross-referencing with the English PDF to determine the correspondence.
-1. If a key has no corresponding editable field in the PDF, it may not have a corresponding XML element. If so, add it to `ignore.csv`.
-1. Once completed, run `rake missing` to see which XML elements have no key, and which keys have no XML element and aren' in `ignore.csv`.
+You're now ready to map label keys to XPath values. As setup, if you have two monitors, open a form's template PDF and English PDF side-by-side in one monitor, to make it easy to see the text label of each label key in context. In a text editor, open `ignore.csv`, `enumerations.csv`, `attributes.csv` and a form's sample XML and XPath CSV.
 
-You can now generate a table for each form, displaying, for each element, the index within the PDF ("I.1"), the label (in any language) and the XPath, to which you can then add guidance for OCDS.
+Fill in each form's XPath CSV:
+
+1. Fill in the `label-key` column with label keys from the template PDF, referring to the English PDF and sample XML to verify the correspondence. Each instance of a label key should occur at most once in the CSV.
+1. If the label key is immediately preceded by an index (like `II.1.1`), fill in the `index` column with the index.
+1. If an XPath value has no corresponding label key in the PDF, fill in the `comment` column with a rationale.
+
+Add rows to `ignore.csv` as needed:
+
+1. If a label key has no corresponding editable field in the PDF, it may not have a corresponding XPath value. If so, add it to `ignore.csv`.
+1. If the label key is immediately preceded by an index (like `II.1.1`), fill in the `index` column with the index.
+
+Fill in `enumerations.csv`:
+
+* In some cases, a form has label keys for each enumeration value. If so, fill in `xpath` with the XPath to the attribute, `value` with the enumeration value, and `label-key` with the label key.
+
+Once completed, run `rake missing` to see which XML elements and attributes have no key, and which keys have no XML element or attribute and aren't in `ignore.csv`.
+
+You can now generate a table for each form, displaying, for each element and attribute, the index within the PDF ("I.1"), the label (in any language) and the XPath, to which you can then add guidance for OCDS.
 
 ## Design
 
