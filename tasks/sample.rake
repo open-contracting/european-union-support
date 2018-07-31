@@ -4,6 +4,7 @@
 # * Visual Studio Community 2017 for Mac: Lacks XML Schema Explorer. Note: schemaLocation must be an absolute path to validate XSD.
 # * OxygenXML: Can generate multiple samples, but no easy way to see choices, cardinality, restrictions, optional sequences, etc.
 
+desc 'Create sample XML files from XSD files'
 task :sample do
   FileUtils.mkdir_p('output/samples')
 
