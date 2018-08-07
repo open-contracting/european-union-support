@@ -59,9 +59,9 @@ namespace :label do
     end
 
     CSV.open(path, 'w') do |csv|
-      csv << ['label-key', 'index']
+      csv << ['label-key', 'index', 'comment']
       keys.each do |key|
-        csv << [key, nil]
+        csv << [key, nil, nil]
       end
       non_default_keys.each do |row|
         csv << row
