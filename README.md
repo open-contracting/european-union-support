@@ -4,7 +4,7 @@
 
 ### Download prerequisites
 
-Download prerequisites (fish shell):
+Using the fish shell:
 
     mkdir -p source
     cd source
@@ -45,7 +45,7 @@ Or for specific form schema:
 
     rake sample FILES=01,02,03,14,20
 
-See the comments in `sample.rake` to understand why tools like OxygenXML are insufficient.
+See the comments in `sample.rake` to understand why tools like Oxygen are insufficient.
 
 ### Map XML elements and attributes to text labels
 
@@ -63,7 +63,7 @@ Fill in each form's XPath CSV:
 
 Add rows to `ignore.csv` as needed:
 
-1. If a label key has no corresponding editable field in the PDF, it may not have a corresponding XPath value. If so, add it to `ignore.csv`.
+1. If a label key has no corresponding editable field in the PDF, it may not have a corresponding XPath value. If so, add it.
 1. If the label key is immediately preceded by an index (like `II.1.1`), fill in the `index` column with the index.
 
 Fill in `enumerations.csv`:
@@ -81,7 +81,7 @@ You can now generate a table for each form, displaying, for each element and att
 ## Design
 
 * Label keys are expected to change less frequently than labels. The code therefore focuses on label keys.
-* XML schema are expected to change more frequently than the XML they describe (e.g. reordering and refactoring). However, no XML samples provided by the Publication Office or generated from XSD by tools like Oxygen XML Editor describe the same range of possibilities as described by XML schema. The code therefore generates its own eccentric samples.
+* XML schema are expected to change more frequently than the XML they describe (e.g. reordering and refactoring). However, no XML samples provided by the Publication Office or generated from XSD by tools like Oxygen describe the same range of possibilities as described by XML schema. The code therefore generates its own eccentric samples.
 
 ## Exploration
 
@@ -101,8 +101,8 @@ I also attempted to map elements and attributes in the XML to labels on the form
 
 ### Laws
 
-* [Commission Implementing Regulation 2015/1986](https://eur-lex.europa.eu/eli/reg_impl/2015/1986/oj) establishing standard forms for the publication of notices in the field of public procurement
 * [Directive 2014/24](https://eur-lex.europa.eu/eli/dir/2014/24/oj) on public procurement
+* [Commission Implementing Regulation 2015/1986](https://eur-lex.europa.eu/eli/reg_impl/2015/1986/oj) establishing standard forms for the publication of notices in the field of public procurement
 * [Council Directive 89/665](https://eur-lex.europa.eu/eli/dir/1989/665/oj) on the coordination of the laws, regulations and administrative provisions relating to the application of review procedures to the award of public supply and public works contracts
 
 ### TED schema
@@ -110,18 +110,18 @@ I also attempted to map elements and attributes in the XML to labels on the form
 In addition to the resources linked under prerequisites above, there is a [TED eSenders wiki](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender), which contains:
 
 * [XML Schema 2.0.9](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9), in particular:
-  * [Overview of XSD files](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.1.Overview)
+  * [Overview](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.1.Overview)
   * [Form structure](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.2.Formstructure)
 * [Standard forms guidance](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/Standard+forms+guidance)
-* [Instructions for the use of the standard form 14 "Corrigendum"](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/Instructions+for+the+use+of+F14)
-* [Frequently asked questions](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/FAQ) (click "Expand all")
+* [Instructions for the use of 14](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/Instructions+for+the+use+of+F14)
+* [FAQ](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/FAQ) (click "Expand all")
 * [Contacts](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/Contacts)
 
 The "Tree browser" on the ["Pages" page](https://webgate.ec.europa.eu/fpfis/wikis/collector/pages.action?key=TEDeSender) serves as a table of contents.
 
-In the [Metadata Registry](http://publications.europa.eu/mdr/eprocurement/ted/), the [reception schema](http://publications.europa.eu/mdr/resource/eprocurement/ted/R2.0.9/reception/latest/) contains [an Excel file for validation rules](http://publications.europa.eu/mdr/resource/eprocurement/ted/R2.0.9/reception/latest/Forms_validation_rules_R2.0.9.S03_006-20180608.xlsx), which also makes XML elements to human-readable text. **This is the most useful summary of the TED schema.** It is described in the [wiki](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/XML+Schema+2.0.9#XMLSchema2.0.9-5.Descriptionofvalidationrules).
+In the [Metadata Registry](http://publications.europa.eu/mdr/eprocurement/ted/), the [reception schema](http://publications.europa.eu/mdr/resource/eprocurement/ted/R2.0.9/reception/latest/) contains [an Excel file for validation rules](http://publications.europa.eu/mdr/resource/eprocurement/ted/R2.0.9/reception/latest/Forms_validation_rules_R2.0.9.S03_006-20180608.xlsx), which also maps XML elements to human-readable text. **This is the most useful summary of the TED schema.** It is described in the [wiki](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/XML+Schema+2.0.9#XMLSchema2.0.9-5.Descriptionofvalidationrules).
 
-The [FTP server](ftp://eu-tenders:eu-tenders-123@ted.europa.eu) has a [general description](ftp://eu-tenders:eu-tenders-123@ted.europa.eu/Resources/TED-XML_general_description_v2%200_20160219.pdf) of TED schema.
+The FTP server (ftp://eu-tenders:eu-tenders-123@ted.europa.eu) has a general description (ftp://eu-tenders:eu-tenders-123@ted.europa.eu/Resources/TED-XML_general_description_v2%200_20160219.pdf) of TED schema.
 
 #### Schema notes
 
@@ -130,7 +130,7 @@ The following types have annotations for each enumeration:
 * `t_currency_tedschema`
 * `t_legal-basis_tedschema`
 
-`text_ft_multi_lines` is an element that ["can contain several <P> tags"](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.5.Textfieldsizelimitation). In `common_2014.xsd`, it's defined as a sequence of `P` elements (unbounded), and `P` is defined as [mixed content](https://www.w3.org/TR/xmlschema-0/#mixedContent), with optional `FT` elements (unbounded), which are either [superscripts or subscripts](http://simap.ted.europa.eu/documents/10184/45895/esenders_faq_en.pdf/14f88d13-7d5d-4f8f-b6a0-9bcbe7aa9351#page=16). The schema uses `P` elements instead of `CRLF` text.
+`text_ft_multi_lines` is an element that ["can contain several `<P>` tags"](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.5.Textfieldsizelimitation). In `common_2014.xsd`, it's defined as a sequence of `P` elements (unbounded), and `P` is defined as [mixed content](https://www.w3.org/TR/xmlschema-0/#mixedContent), with optional `FT` elements (unbounded), which are either [superscripts or subscripts](http://simap.ted.europa.eu/documents/10184/45895/esenders_faq_en.pdf/14f88d13-7d5d-4f8f-b6a0-9bcbe7aa9351#page=16). The schema uses `P` elements instead of `CRLF` text.
 
 #### Reception, internal and publication schema
 
@@ -140,13 +140,13 @@ TED has reception, internal and publication schema. We use the publication schem
 * Replace `Last update ?:[\d/ ]+` with `Last update :` (no semantic change)
 * Run `diff -ruw <folderA> <folderB>`
 
-The publication schema sometimes has `minOccurs="0"` where the reception and internal schema don't. To ignore such differences:
+The publication schema sometimes has `minOccurs="0"` where the reception and internal schema don't. To ignore that:
 
 * Replace ` minOccurs="0"` with nothing
 
 ##### Internal schema
 
-The remaining differences are in `F08_2014.xsd` (comment), `F14_2014.xsd` (choice), `F20_2014.xsd` (`PUBLICATION` attribute), `common_2014.xsd` (import `xlink.xsd`), `nuts_codes.xsd` (irrelevant) and `common_prod.xsd` (stricter, re-ordered, etc.).
+The remaining differences are in `F08_2014.xsd` (comment), `F14_2014.xsd` (choice), `F20_2014.xsd` (`PUBLICATION` attribute), `common_2014.xsd` (import `xlink.xsd`), `nuts_codes.xsd` (irrelevant) and `common_prod.xsd`.
 
 `INTERNAL_OJS.xsd` is only in the internal schema. `TED_EXPORT.xsd` and `xlink.xsd` are only in the publication schema.
 
