@@ -1,4 +1,4 @@
-# TED XSD parser
+# Support scripts for TED mapping
 
 ## Usage
 
@@ -45,17 +45,19 @@ Or for specific form schema:
 
     rake sample FILES=01,02,03,14,20
 
+See the comments in `sample.rake` to understand why tools like OxygenXML are insufficient.
+
 ### Map XML elements and attributes to text labels
 
-Generate files for mapping forms' XPath values to label keys:
+Create or update files for mapping forms' XPath values to label keys:
 
     rake label:xpath label:ignore
 
-You're now ready to map label keys to XPath values. As setup, if you have two monitors, open a form's template PDF and English PDF side-by-side in one monitor, to make it easy to see the text label of each label key in context. In a text editor, open `ignore.csv`, `enumerations.csv`, `attributes.csv` and a form's sample XML and XPath CSV.
+You're now ready to map label keys to XPath values. As setup, if you have two monitors, open a form's template PDF and English PDF side-by-side in one monitor, to make it easy to see the text label of each label key in context. In a text editor, open `ignore.csv`, `enumerations.csv` and a form's sample XML and XPath CSV.
 
 Fill in each form's XPath CSV:
 
-1. Fill in the `label-key` column with label keys from the template PDF, referring to the English PDF and sample XML to verify the correspondence. Each instance of a label key should occur at most once in the CSV.
+1. Fill in the `label-key` column with label keys from the template PDF, referring to the English PDF and sample XML to verify the correspondence. Each *instance* of a label key should occur at most once in the CSV.
 1. If the label key is immediately preceded by an index (like `II.1.1`), fill in the `index` column with the index.
 1. If an XPath value has no corresponding label key in the PDF, fill in the `comment` column with a rationale.
 
@@ -66,19 +68,20 @@ Add rows to `ignore.csv` as needed:
 
 Fill in `enumerations.csv`:
 
-* In some cases, a form has label keys for each enumeration value. If so, fill in `xpath` with the XPath to the attribute, `value` with the enumeration value, and `label-key` with the label key.
+1. In some cases, a form has label keys for each enumeration value. If so, fill in `xpath` with the XPath to the attribute, `value` with the enumeration value, and `label-key` with the label key.
 
 Once completed, run `rake missing` to see which XML elements and attributes have no key, and which keys have no XML element or attribute and aren't in `ignore.csv`.
 
+### Build tables for OCDS guidance
+
 You can now generate a table for each form, displaying, for each element and attribute, the index within the PDF ("I.1"), the label (in any language) and the XPath, to which you can then add guidance for OCDS.
+
+    rake table LANGUAGE=EN
 
 ## Design
 
-The code focuses on XML schema and label keys.
-
-* Label keys are expected to change less frequently than labels.
-* No XML samples describe the same range of possibilities described by XML schema.
-* XML schema are expected to change more frequently than the XML they describe (e.g. reordering and refactoring).
+* Label keys are expected to change less frequently than labels. The code therefore focuses on label keys.
+* XML schema are expected to change more frequently than the XML they describe (e.g. reordering and refactoring). However, no XML samples provided by the Publication Office or generated from XSD by tools like Oxygen XML Editor describe the same range of possibilities as described by XML schema. The code therefore generates its own eccentric samples.
 
 ## Exploration
 
@@ -92,27 +95,81 @@ Or transform a specific directory and specific form schema:
 
     rake legacy:common legacy:forms DIRECTORY=source/TED_publication_R2.0.9.S03.E01_006 FILES=01,02,03,14,20
 
+I also attempted to map elements and attributes in the XML to labels on the forms using the Publication Office's [form label mappings](http://publications.europa.eu/mdr/eprocurement/ted/index.html), but the file was far from complete. The [forms validation rules](http://publications.europa.eu/mdr/resource/eprocurement/ted/R2.0.9/reception/latest/Forms_validation_rules_R2.0.9.S03_006-20180608.xlsx) map elements and attributes to descriptions, but these are not the same as the labels on the forms.
+
 ## Reference
 
-* [Overview of XSD files](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.1.Overview)
-* [Form structure](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.2.Formstructure)
+### Laws
 
-`text_ft_multi_lines` is an element that ["can contain several <P> tags"](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.5.Textfieldsizelimitation). In `common_2014.xsd`, it's defined as a sequence of `P` elements (unbounded), and `P` is defined as [mixed content](https://www.w3.org/TR/xmlschema-0/#mixedContent), with optional `FT` elements (unbounded), which are either [superscripts or subscripts](http://simap.ted.europa.eu/documents/10184/45895/esenders_faq_en.pdf/14f88d13-7d5d-4f8f-b6a0-9bcbe7aa9351#page=16). The schema uses `P` elements instead of `CRLF` text.
+* [Commission Implementing Regulation 2015/1986](https://eur-lex.europa.eu/eli/reg_impl/2015/1986/oj) establishing standard forms for the publication of notices in the field of public procurement
+* [Directive 2014/24](https://eur-lex.europa.eu/eli/dir/2014/24/oj) on public procurement
+* [Council Directive 89/665](https://eur-lex.europa.eu/eli/dir/1989/665/oj) on the coordination of the laws, regulations and administrative provisions relating to the application of review procedures to the award of public supply and public works contracts
+
+### TED schema
+
+In addition to the resources linked under prerequisites above, there is a [TED eSenders wiki](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender), which contains:
+
+* [XML Schema 2.0.9](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9), in particular:
+  * [Overview of XSD files](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.1.Overview)
+  * [Form structure](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.2.Formstructure)
+* [Standard forms guidance](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/Standard+forms+guidance)
+* [Instructions for the use of the standard form 14 "Corrigendum"](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/Instructions+for+the+use+of+F14)
+* [Frequently asked questions](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/FAQ) (click "Expand all")
+* [Contacts](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/Contacts)
+
+The "Tree browser" on the ["Pages" page](https://webgate.ec.europa.eu/fpfis/wikis/collector/pages.action?key=TEDeSender) serves as a table of contents.
+
+In the [Metadata Registry](http://publications.europa.eu/mdr/eprocurement/ted/), the [reception schema](http://publications.europa.eu/mdr/resource/eprocurement/ted/R2.0.9/reception/latest/) contains [an Excel file for validation rules](http://publications.europa.eu/mdr/resource/eprocurement/ted/R2.0.9/reception/latest/Forms_validation_rules_R2.0.9.S03_006-20180608.xlsx), which also makes XML elements to human-readable text. **This is the most useful summary of the TED schema.** It is described in the [wiki](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/XML+Schema+2.0.9#XMLSchema2.0.9-5.Descriptionofvalidationrules).
+
+The [FTP server](ftp://eu-tenders:eu-tenders-123@ted.europa.eu) has a [general description](ftp://eu-tenders:eu-tenders-123@ted.europa.eu/Resources/TED-XML_general_description_v2%200_20160219.pdf) of TED schema.
+
+#### Schema notes
 
 The following types have annotations for each enumeration:
 
 * `t_currency_tedschema`
 * `t_legal-basis_tedschema`
 
-The following forms restrict the following types (non-exhaustive):
+`text_ft_multi_lines` is an element that ["can contain several <P> tags"](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.5.Textfieldsizelimitation). In `common_2014.xsd`, it's defined as a sequence of `P` elements (unbounded), and `P` is defined as [mixed content](https://www.w3.org/TR/xmlschema-0/#mixedContent), with optional `FT` elements (unbounded), which are either [superscripts or subscripts](http://simap.ted.europa.eu/documents/10184/45895/esenders_faq_en.pdf/14f88d13-7d5d-4f8f-b6a0-9bcbe7aa9351#page=16). The schema uses `P` elements instead of `CRLF` text.
 
-    F01_2014: lefti: removes ["RULES_CRITERIA", "RESERVED_ORGANISATIONS_SERVICE_MISSION", "DEPOSIT_GUARANTEE_REQUIRED", "MAIN_FINANCING_CONDITION", "LEGAL_FORM", "QUALIFICATION", "CONDITIONS", "METHODS", "CRITERIA_SELECTION"]
-    F02_2014: lefti: removes ["RULES_CRITERIA", "RESERVED_ORGANISATIONS_SERVICE_MISSION", "DEPOSIT_GUARANTEE_REQUIRED", "MAIN_FINANCING_CONDITION", "LEGAL_FORM", "QUALIFICATION", "CONDITIONS", "METHODS", "CRITERIA_SELECTION"]
+#### Reception, internal and publication schema
 
-    F01_2014: complement_info: removes ["RECURRENT_PROCUREMENT", "ESTIMATED_TIMING", "NO_RECURRENT_PROCUREMENT"]
-    F03_2014: complement_info: removes ["RECURRENT_PROCUREMENT", "ESTIMATED_TIMING", "NO_RECURRENT_PROCUREMENT", "EORDERING", "EINVOICING", "EPAYMENT"]
-    F20_2014: complement_info: removes ["RECURRENT_PROCUREMENT", "ESTIMATED_TIMING", "NO_RECURRENT_PROCUREMENT", "EORDERING", "EINVOICING", "EPAYMENT"]
+TED has reception, internal and publication schema. We use the publication schema. To find major differences:
 
-    F02_2014: complement_info: changes ADDRESS_REVIEW_BODY: [["-", "minOccurs", "0"]]
-    F03_2014: complement_info: changes ADDRESS_REVIEW_BODY: [["-", "minOccurs", "0"]]
-    F20_2014: complement_info: changes ADDRESS_REVIEW_BODY: [["-", "minOccurs", "0"]]
+* Replace `R2\.0\.9\.S0[A-Z\d.]+` with `R2.0.9.S0X` (no semantic change)
+* Replace `Last update ?:[\d/ ]+` with `Last update :` (no semantic change)
+* Run `diff -ruw <folderA> <folderB>`
+
+The publication schema sometimes has `minOccurs="0"` where the reception and internal schema don't. To ignore such differences:
+
+* Replace ` minOccurs="0"` with nothing
+
+##### Internal schema
+
+The remaining differences are in `F08_2014.xsd` (comment), `F14_2014.xsd` (choice), `F20_2014.xsd` (`PUBLICATION` attribute), `common_2014.xsd` (import `xlink.xsd`), `nuts_codes.xsd` (irrelevant) and `common_prod.xsd` (stricter, re-ordered, etc.).
+
+`INTERNAL_OJS.xsd` is only in the internal schema. `TED_EXPORT.xsd` and `xlink.xsd` are only in the publication schema.
+
+##### Reception schema
+
+The remaining differences are in `F14_2014.xsd` (choice), `F20_2014.xsd` (`PUBLICATION` attribute), `common_2014.xsd` (`maxLength` values, `TRANSLATION` enumeration) and `nuts_codes.xsd` (irrelevant).
+
+`TED_ESENDERS.xsd` is only in the reception schema. `common_prod.xsd`, `TED_EXPORT.xsd` and `xlink.xsd` are only in the publication schema.
+
+### Prior work
+
+#### By others
+
+* In DIGIWHIST, TED data is imported, processed, cleaned, and exported as OCDS. There is no usable mapping from import format to export format, due to the many processing and cleaning steps in between.
+* In OpenOpps, a subset of TED data is imported, processed, cleaned, and exported as OCDS. There is no complete mapping from TED to OCDS.
+* The [OpenTED spreadsheet](https://docs.google.com/spreadsheets/d/1ps3Mgi-rJTaEbpTpm_2oMr8yAinmya74S_QeV4J2y_o/edit#gid=1455892276) is incomplete and may be out-of-date.
+
+#### By OCP
+
+By March 2017, Data Unlocked (Simon Whitehouse) authored a [draft mapping](https://drive.google.com/drive/folders/0B5qzJROt-jZ0Vm9UNHNMVE5JOHM) to OCDS from a spreadsheet that was among the materials in a [consultation on eForms](http://ec.europa.eu/growth/content/targeted-consultation-eforms-next-generation-public-procurement-standard-forms-0_en) ending January 30, 2017. An [updated version](https://docs.google.com/spreadsheets/d/1W6eJiYEHkuQVSNzHtUdFbsYse0aTfZXtU-XjLRVVSyg/edit) of the [original spreadsheet](https://docs.google.com/spreadsheets/d/11uDaomY1mK-_h9FPW9D1o7D8_z_vR6Z4nxWgqbHc39g/edit?usp=sharing) accompanying the consultation was shared with OCP. This mapping was [reviewed](https://drive.google.com/drive/folders/0B7agx7YesblKS2NxQTdJMEw5Q2s). Some next steps and use cases were discussed at a [workshop in Kiev](https://docs.google.com/document/d/1gBOVMsiSVholLfS4s41bX4FOjLqIustdtKGYtqoAndU/edit#heading=h.v6nxv59w4s43). However, both spreadsheets were abandoned in the latest consultation.
+
+Other work from 2015 includes [ocds-ted](https://github.com/timgdavies/ocds-ted) by Tim Davies, which has draft extensions and links to a [very early draft mapping](https://docs.google.com/spreadsheets/d/13AMbfIhjg9j-7IsKWJ3-tdnVXWzHdqnARtHpzMownoU/edit#gid=1338855215) based on Publication Office's: XML labels mapping spreadsheet, forms labels spreadsheet, and a subset of possible XPaths in XML data. There is earlier, similar work in a [gist](https://gist.github.com/timgdavies/cc0e571aef7224d5e546), in particular this [documentation](https://gist.github.com/timgdavies/cc0e571aef7224d5e546#file-1-ocds-to-ted-mapping-documentation-md) and [script](https://gist.github.com/timgdavies/cc0e571aef7224d5e546#file-tedxml-py). These efforts are largely superseded by the later work by Data Unlocked. A copy of the TED schema can be browsed in this repository:
+
+    git clone git@github.com:timgdavies/ocds-ted.git
+    jekyll serve
+    open http://127.0.0.1:4000/ocds-ted/docs/
