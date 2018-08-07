@@ -70,7 +70,13 @@ Fill in `enumerations.csv`:
 
 1. In some cases, a form has label keys for each enumeration value. If so, fill in `xpath` with the XPath to the attribute, `value` with the enumeration value, and `label-key` with the label key.
 
-Once completed, run `rake missing` to see which XML elements and attributes have no key, and which keys have no XML element or attribute and aren't in `ignore.csv`.
+Once completed, run `rake missing` to see which XML elements and attributes have no key, and which keys have no XML element or attribute and aren't in `ignore.csv`:
+
+    rake missing FILES=01,02,03
+
+Report any incoherences in mappings across forms. Note that some forms use check boxes instead of radio buttons, and some change tense from present to past.
+
+    rake label:coherence
 
 ### Build tables for OCDS guidance
 
@@ -95,7 +101,7 @@ Or transform a specific directory and specific form schema:
 
     rake legacy:common legacy:forms DIRECTORY=source/TED_publication_R2.0.9.S03.E01_006 FILES=01,02,03,14,20
 
-I also attempted to map elements and attributes in the XML to labels on the forms using the Publication Office's [form label mappings](http://publications.europa.eu/mdr/eprocurement/ted/index.html), but the file was far from complete. The [forms validation rules](http://publications.europa.eu/mdr/resource/eprocurement/ted/R2.0.9/reception/latest/Forms_validation_rules_R2.0.9.S03_006-20180608.xlsx) map elements and attributes to descriptions, but these are not the same as the labels on the forms.
+I also attempted to map elements and attributes in the XML to labels on the forms using the Publication Office's [form label mappings](http://publications.europa.eu/mdr/eprocurement/ted/index.html), but the file covers only forms 1-6, doesn't cover all XML elements, doesn't use full XPaths, isn't machine-interpretable, etc.; manual interpretation would require at least the same effort as the above process. The [forms validation rules](http://publications.europa.eu/mdr/resource/eprocurement/ted/R2.0.9/reception/latest/Forms_validation_rules_R2.0.9.S03_006-20180608.xlsx) map elements and attributes to descriptions, but these are not the same as the labels on the forms.
 
 ## Reference
 
@@ -112,16 +118,16 @@ In addition to the resources linked under prerequisites above, there is a [TED e
 * [XML Schema 2.0.9](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9), in particular:
   * [Overview](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.1.Overview)
   * [Form structure](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.2.Formstructure)
-* [Standard forms guidance](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/Standard+forms+guidance)
-* [Instructions for the use of 14](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/Instructions+for+the+use+of+F14)
+* [Standard forms guidance](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/Standard+forms+guidance), which includes **"Field explanations"** that can inform field definitions in OCDS extensions (PDF)
+* [Instructions for the use of 14](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/Instructions+for+the+use+of+F14) (PDF)
 * [FAQ](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/FAQ) (click "Expand all")
 * [Contacts](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/Contacts)
 
 The "Tree browser" on the ["Pages" page](https://webgate.ec.europa.eu/fpfis/wikis/collector/pages.action?key=TEDeSender) serves as a table of contents.
 
-In the [Metadata Registry](http://publications.europa.eu/mdr/eprocurement/ted/), the [reception schema](http://publications.europa.eu/mdr/resource/eprocurement/ted/R2.0.9/reception/latest/) contains [an Excel file for validation rules](http://publications.europa.eu/mdr/resource/eprocurement/ted/R2.0.9/reception/latest/Forms_validation_rules_R2.0.9.S03_006-20180608.xlsx), which also maps XML elements to human-readable text. **This is the most useful summary of the TED schema.** It is described in the [wiki](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/XML+Schema+2.0.9#XMLSchema2.0.9-5.Descriptionofvalidationrules).
+In the [Metadata Registry](http://publications.europa.eu/mdr/eprocurement/ted/), the [reception schema](http://publications.europa.eu/mdr/resource/eprocurement/ted/R2.0.9/reception/latest/) contains [validation rules](http://publications.europa.eu/mdr/resource/eprocurement/ted/R2.0.9/reception/latest/Forms_validation_rules_R2.0.9.S03_006-20180608.xlsx) (Excel), which also maps XML elements to human-readable text. **This is the most useful summary of the TED schema.** It is described in the [wiki](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/XML+Schema+2.0.9#XMLSchema2.0.9-5.Descriptionofvalidationrules). It also contains a [validation tool](http://publications.europa.eu/mdr/resource/eprocurement/ted/R2.0.9/reception/latest/XSLT_validation_tool_R2.0.9.S03_022-20180608.zip) with XSLT rules.
 
-The FTP server (ftp://eu-tenders:eu-tenders-123@ted.europa.eu) has a general description (ftp://eu-tenders:eu-tenders-123@ted.europa.eu/Resources/TED-XML_general_description_v2%200_20160219.pdf) of TED schema.
+The FTP server (ftp://eu-tenders:eu-tenders-123@ted.europa.eu) has a document (ftp://eu-tenders:eu-tenders-123@ted.europa.eu/Resources/TED-XML_general_description_v2%200_20160219.pdf) (PDF) describing the structure of the FTP server, of individual resources and of notices (without much detail on the FORM section), and information on mapping forms labels and XML elements in R2.0.9 (essentially asking the user do the work of this repository 🤯). I haven't figured out how to use the "HTML/PDF rendering web service" it describes.
 
 #### Schema notes
 
