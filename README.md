@@ -63,12 +63,12 @@ Fill in each form's XPath CSV:
 
 Add rows to `ignore.csv` as needed:
 
-1. If a label key has no corresponding editable field in the PDF, it may not have a corresponding XPath value. If so, add it.
+1. If a label key has no corresponding editable field in the PDF, it may not have a corresponding XPath value. If so, unless it appears in the footer or endnotes or is a section number (`section_1`, etc.), form name (`notice_pin`, etc.) or legal basis (`directive_201424`), fill in `index` with the index as above, `label-key` with the label key, and `numbers` with a pipe-separated list (`|`) of form numbers. Follow the order in the PDF templates.
 1. If the label key is immediately preceded by an index (like `II.1.1`), fill in the `index` column with the index.
 
 Fill in `enumerations.csv`:
 
-1. In some cases, a form has label keys for each enumeration value. If so, fill in `xpath` with the XPath to the attribute, `value` with the enumeration value, and `label-key` with the label key.
+1. In some cases, a form has label keys for each enumeration value. If so, fill in `xpath` with the XPath to the attribute, `value` with the enumeration value, `label-key` with the label key, and `numbers` with a pipe-separated list (`|`) of form numbers. Follow the order in the PDF templates.
 
 Once completed, run `rake missing` to see which XML elements and attributes have no key, and which keys have no XML element or attribute and aren't in `ignore.csv`:
 
@@ -82,7 +82,7 @@ Report any incoherences in mappings across forms. Note that some forms use check
 
 You can now generate a table for each form, displaying, for each element and attribute, the index within the PDF ("I.1"), the label (in any language) and the XPath, to which you can then add guidance for OCDS.
 
-    rake table LANGUAGE=EN
+    rake table LANGUAGE=FR
 
 ## Design
 
