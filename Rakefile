@@ -8,6 +8,7 @@ require 'nokogiri'
 require 'regexp-examples'
 
 require_relative 'lib/build_node'
+require_relative 'lib/table_builder'
 require_relative 'lib/xml_base'
 require_relative 'lib/xml_builder'
 
@@ -40,9 +41,9 @@ def pdftotext(path)
   lines = `pdftotext -layout #{path} -`.split("\n")
 
   # Remove footers.
-  lines.reject!{ |line| line[/\A<<HD_ln>> <<standardform>> \d+ – <<\S+>> +\d+\z/] }
-  # Remove footnotes.
-  lines.take_while{ |line| !line['<<HD_reminder>>'] }
+  lines = lines.reject{ |line| line[/\A<<HD_ln>> <<standardform>> \d+ – <<\S+>> +\d+\z/] }
+  # Remove endnotes.
+  lines = lines.take_while{ |line| !line['<<HD_reminder>>'] }
 
   lines.join("\n")
 end
