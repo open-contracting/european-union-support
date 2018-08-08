@@ -36,5 +36,24 @@ def files(glob)
   Dir[glob].sort
 end
 
+def pdftotext(path)
+  lines = `pdftotext -layout #{path} -`.split("\n")
+
+  # Remove footers.
+  lines.reject!{ |line| line[/\A<<HD_ln>> <<standardform>> \d+ – <<\S+>> +\d+\z/] }
+  # Remove footnotes.
+  lines.take_while{ |line| !line['<<HD_reminder>>'] }
+
+  lines.join("\n")
+end
+
+def label_keys(text)
+  text.scan(/<<([^>]+)>>/).flatten
+end
+
+def help_text?(key)
+  key[/\AHD?_/]
+end
+
 Dir['tasks/*.rake'].each { |r| import r }
 Dir['legacy/*.rake'].each { |r| import r }

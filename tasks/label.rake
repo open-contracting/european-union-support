@@ -1,11 +1,3 @@
-def pdftotext(path)
-  `pdftotext -layout #{path} -`
-end
-
-def label_keys(text)
-  text.scan(/<<([^>]+)>>/).flatten
-end
-
 namespace :label do
   desc 'Create or update files for mapping XPath values to corresponding label keys'
   task :xpath do
@@ -41,34 +33,6 @@ namespace :label do
     end
   end
 
-  desc 'Create or update a file for listing label keys without corresponding XPath values'
-  task :ignore do
-    path = 'output/mapping/ignore.csv'
-    non_default_keys = []
-    if File.exist?(path)
-      CSV.read(path, headers: true).each do |row|
-        if !row['label-key'][/\AHD?_/]
-          non_default_keys << row
-        end
-      end
-    end
-
-    keys = Set.new
-    files('source/*_TED_forms_templates/F{}_*.pdf').each do |filename|
-      keys += label_keys(pdftotext(filename)).select{ |key| key[/\AHD?_/] }
-    end
-
-    CSV.open(path, 'w') do |csv|
-      csv << ['label-key', 'index', 'comment']
-      keys.each do |key|
-        csv << [key, nil, nil]
-      end
-      non_default_keys.each do |row|
-        csv << row
-      end
-    end
-  end
-
   desc 'Report any XPath values without corresponding label keys, and vice versa'
   task :missing do
     label_keys_seen = Set.new
@@ -96,7 +60,7 @@ namespace :label do
     files('source/*_TED_forms_templates/F{}_*.pdf').each do |filename|
       text = pdftotext(filename)
 
-      difference = Set.new(label_keys(text)) - label_keys_seen
+      difference = Set.new(label_keys(text).reject{ |key| help_text?(key) }) - label_keys_seen
       if difference.any?
         puts "#{File.basename(filename)}: #{difference.to_a.join(', ')}"
       end

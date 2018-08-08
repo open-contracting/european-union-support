@@ -51,7 +51,7 @@ See the comments in `sample.rake` to understand why tools like Oxygen are insuff
 
 Create or update files for mapping forms' XPath values to label keys:
 
-    rake label:xpath label:ignore
+    rake label:xpath
 
 You're now ready to map label keys to XPath values. As setup, if you have two monitors, open a form's template PDF and English PDF side-by-side in one monitor, to make it easy to see the text label of each label key in context. In a text editor, open `ignore.csv`, `enumerations.csv` and a form's sample XML and XPath CSV.
 
