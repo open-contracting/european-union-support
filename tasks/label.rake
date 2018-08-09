@@ -37,6 +37,7 @@ namespace :label do
   task :missing do
     label_keys_seen = Set.new
     indices_seen = Set.new
+
     %w(enumerations.csv ignore.csv).each do |basename|
       CSV.read(File.join('output', 'mapping', basename), headers: true).each do |row|
         label_keys_seen << row['label-key']
@@ -57,10 +58,12 @@ namespace :label do
       end
     end
 
+    regex = /\A(section_\d|notice_contract_award|notice_contract_award_sub|directive_201424)\z/
+
     files('source/*_TED_forms_templates/F{}_*.pdf').each do |filename|
       text = pdftotext(filename)
 
-      difference = Set.new(label_keys(text).reject{ |key| help_text?(key) }) - label_keys_seen
+      difference = Set.new(label_keys(text).reject{ |key| help_text?(key) || key[regex] }) - label_keys_seen
       if difference.any?
         puts "#{File.basename(filename)}: #{difference.to_a.join(', ')}"
       end

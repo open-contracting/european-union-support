@@ -40,10 +40,10 @@ end
 def pdftotext(path)
   lines = `pdftotext -layout #{path} -`.split("\n")
 
+  # Remove endnotes.
+  lines = lines[0...lines.index{ |line| line['<<HD_reminder>>'] } || -1] + lines[lines.index{ |line| line['<<annex_d1>>'] } || -1...-1]
   # Remove footers.
   lines = lines.reject{ |line| line[/\A<<HD_ln>> <<standardform>> \d+ – <<\S+>> +\d+\z/] }
-  # Remove endnotes.
-  lines = lines.take_while{ |line| !line['<<HD_reminder>>'] }
 
   lines.join("\n")
 end
@@ -53,7 +53,7 @@ def label_keys(text)
 end
 
 def help_text?(key)
-  key[/\AHD?_/]
+  key[/\AHD?_/] || key == 'excl_vat'
 end
 
 Dir['tasks/*.rake'].each { |r| import r }
