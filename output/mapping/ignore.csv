@@ -8,10 +8,8 @@ II.1,quantity_scope_contract,01|02|03
 II.1.5,value_magnitude_estimated_total,01|02
 II.1.6,lots_info,01|02|03
 ,division_lots,01|02|03
-,_no,01|02|03
 ,lots_submitted_for,01|02
 II.1.7,value_total,03
-,excl_vat,03
 ,_or,03
 ,taken_consideration,03
 II.2.3,place_performance,01|02|03
@@ -19,8 +17,10 @@ II.2.3,place_performance,01|02|03
 II.2.6,value_magnitude_estimated,01|02
 II.2.7,duration_contract_framework_dps,01|02
 ,_or,01|02
+,_or,01|02
 ,renewals_subject,02
 II.2.9,limit_operators,02
+,_or,02
 II.2.10,variants_info,01|02
 ,variants_accepted,02
 II.2.11,options_info,01|02|03
@@ -28,6 +28,7 @@ II.2.11,options_info,01|02|03
 II.2.12,electronic_catalogue,02
 II.2.13,eu_progr_info,01|02|03
 ,eu_progr_related,01|02|03
+,eu_progr_ref,01
 III.1,conditions_particip,01|02
 III.1.1,situation_personal_incl,01|02
 III.1.2,economic_financial_standing,01|02
@@ -38,6 +39,8 @@ III.2.1,particular_profession_info,01|02
 III.2.3,staff_responsible,01|02
 IV.1,description,01|02|03
 IV.1.1,type_procedure,01|02|03
+,proctype_accelerated,02|03
+,proctype_accelerated,02|03
 ,proctype_accelerated,02|03
 IV.1.3,framework_contract_dps_info,01|02|03
 IV.1.4,reduction_during_dialogue,02
@@ -55,6 +58,7 @@ IV.2.2,limit_express_interest,01
 IV.2.2,limit_receipt_tenders_req_part,02
 IV.2.3,date_dispatch_tender_participate,02
 IV.2.6,min_time_maintain,02
+,_or,02
 ,from_stated_date,02
 IV.2.8,info_termination_dps,03
 IV.2.9,info_termination_pin,03
@@ -65,8 +69,9 @@ V.1,award_noaward_info,03
 ,icar_H_year_number,03
 V.2,award_of_contract,03
 ,awarded_group,03
-V.2.3,awarded_to_name,03
 ,awarded_sme,03
+,_or,03
+,taken_consideration,03
 V.2.5,subcontr_info,03
 ,subcontr_proportion_likely,03
 VI.1,recurrence_info,02
@@ -76,6 +81,7 @@ VI.4,appeals_procedure,01|02|03
 VI.4.3,appeals_lodging,01|02|03
 D1,annex_d1,03
 ,just_wo_pub,03
+,directive_201424,03
 ,d_no_tenders_in_response,03
 ,d_can_provided_only,03
 ,d_advantageous_terms,03
