@@ -17,6 +17,7 @@ class TableBuilder
   def initialize(language)
     @language = language
     @targets = {}
+    @guidances = {}
     @output = ''
   end
 
@@ -35,7 +36,11 @@ class TableBuilder
   # Helpers
 
   def heading(number, label)
-    h2 "F#{number}: #{t(label)}"
+    header 1, "F#{number}: #{t(label)}"
+  end
+
+  def subheading(label)
+    header 2, t(label)
   end
 
   def table(label=nil)
@@ -48,42 +53,61 @@ class TableBuilder
     start_tbody
   end
 
-  def row(label, help_labels: [], index: nil, xpath: false, value: false, guidance: false, reference: false)
+  def row(label, help_labels: [], index: nil, xpath: nil, value: nil, reference: nil, guidance: false)
+    if xpath
+      @targets[label] = xpath
+    end
+    if guidance
+      @guidances[xpath] = guidance
+    end
+
+    no_guidance = reference.nil? && (guidance == false || guidance == '')
+
+    # Prepare "Label and XPath" content.
+    content = t(label)
+    help_labels.each do |help_label|
+      content += " <i>(#{t(help_label)})</i>"
+    end
+    if xpath
+      content += "<br> #{code(xpath)}"
+    end
+    if value
+      content += "is #{code(value)}"
+    end
+
+    # Prepare "Label and XPath" attributes.
+    options = {}
+    if no_guidance
+      options[:colspan] = 2
+    end
+    if xpath
+      options[:id] = xpath
+    end
+
     start_row
-'See above'
+
+    # "Index" cell.
     cell(index)
 
-    if reference == false && guidance == false
-      start_cell(colspan: 2)
-      paragraph(t(label))
-      end_cell
-    else
-      if xpath
-        @targets[label] = xpath
-      end
+    # "Label and XPath" cell.
+    start_cell(options)
+    paragraph(content)
+    end_cell
 
-      content = t(label)
-      help_labels.each do |help_label|
-        content += " (#{t(help_label)})"
-      end
-      if xpath
-        content += "<br> #{code(xpath)}"
-      end
-      if value
-        content += "set to #{code(value)}"
-      end
-
-      if xpath
-        start_cell(id: xpath)
+    # "OCDS guidance" cell.
+    if reference
+      cell(link_to('See above', "##{@targets[label]}"))
+    elsif !no_guidance
+      if @guidances.include?(guidance)
+        cell(link_to('See above', "##{guidance}"))
+      elsif guidance
+        start_cell
+        markdown(guidance)
+        end_cell
       else
         start_cell
-      end
-      paragraph(content)
-      end_cell
-      if reference
-        cell(link_to('See above', "##{@targets[label]}"))
-      else
-        cell(guidance) # TODO
+        paragraph('<i>Need to integrate prior work</i>')
+        end_cell
       end
     end
 
@@ -92,12 +116,14 @@ class TableBuilder
 
   # HTML: Block
 
-  def h2(text)
+  def header(level, text)
     add <<-END
-<h2>#{text}</h2>
+#{'#' * level} #{text}
 
 END
   end
+
+  # HTML: Table
 
   def start_table
     add <<-END
@@ -196,6 +222,10 @@ END
     add <<-END
           <p>#{text}</p>
 END
+  end
+
+  def markdown(text)
+    add Kramdown::Document.new(text.gsub('\n', "\n"), auto_ids: false).to_html
   end
 
   # HTML: Inline

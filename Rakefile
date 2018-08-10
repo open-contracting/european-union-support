@@ -4,6 +4,7 @@ require 'securerandom'
 
 require 'active_support/core_ext/hash/except'
 require 'hashdiff'
+require 'kramdown'
 require 'nokogiri'
 require 'regexp-examples'
 

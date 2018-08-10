@@ -63,14 +63,19 @@ task :table do
     # Skip "Directive 2014/24/EU" (directive_201424).
     labels.shift
 
-    builder.table
+    if number == '01'
+      builder.table
+    end
 
     while labels.any?
       key = labels.shift
 
       if key[/\Asection_\d\z/]
-        builder.end_table
-        builder.table(key)
+        if number != '01' || $0 != 'section_1'
+          builder.end_table
+        end
+        builder.subheading(key)
+        builder.table
 
       elsif ignore.any? && ignore[0]['label-key'] == key
         ignore_seen << key
@@ -82,7 +87,7 @@ task :table do
         enumerations_seen << key
         row = enumerations.shift
 
-        builder.row(key, help_labels: help_labels(labels), xpath: row['xpath'], value: row['value'], guidance: '')
+        builder.row(key, help_labels: help_labels(labels), xpath: row['xpath'], value: row['value'], guidance: row['guidance'])
 
       # Fields appear in a different order in the form and XSD.
       elsif i = data[0..3].index{ |row| row['label-key'] == key }
@@ -92,7 +97,7 @@ task :table do
         data_skipped += data.take_while(&skipper)
         data = data.drop_while(&skipper)
 
-        builder.row(key, help_labels: help_labels(labels), xpath: row['xpath'], index: row['index'], guidance: '')
+        builder.row(key, help_labels: help_labels(labels), xpath: row['xpath'], index: row['index'], guidance: row['guidance'])
 
       elsif enumerations_seen.include?(key)
         builder.row(key, help_labels: help_labels(labels), reference: true)
@@ -110,7 +115,6 @@ task :table do
 
     builder.end_table
 
-    puts "# Standard forms for public procurement\n\n"
     puts builder
 
     report(ignore, 'ignore.csv')
