@@ -25,9 +25,9 @@ namespace :label do
 
       # Preserve the label-key and index columns, if a file existed.
       CSV.open(path, 'w') do |csv|
-        csv << ['xpath', 'label-key', 'index', 'comment']
+        csv << ['xpath', 'label-key', 'index', 'comment', 'guidance']
         xpaths.each do |xpath|
-          csv << (rows_by_xpath[xpath] || [xpath, nil, nil, nil])
+          csv << (rows_by_xpath[xpath] || [xpath, nil, nil, nil, nil])
         end
       end
     end
