@@ -75,6 +75,17 @@ namespace :label do
     end
   end
 
+  desc 'Report any notes about mappings'
+  task :comments do
+    files('output/mapping/F{}_*.csv').each do |filename|
+      CSV.foreach(filename, headers: true) do |row|
+        if row['comment']
+          puts '%-115s %s' % [row['xpath'], row['comment']]
+        end
+      end
+    end
+  end
+
   desc 'Report any incoherences in mappings across forms'
   task :coherence do
     mappings = {}
