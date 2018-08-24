@@ -59,7 +59,7 @@ Fill in each form's XPath CSV:
 
 1. Fill in the `label-key` column with label keys from the template PDF, referring to the English PDF and sample XML to verify the correspondence. Each *instance* of a label key should occur at most once in the CSV.
 1. If the label key is immediately preceded by an index (like `II.1.1`), fill in the `index` column with the index.
-1. If an XPath value has no corresponding label key in the PDF, fill in the `comment` column with a rationale.
+1. If an XPath value has no corresponding label key in the PDF, fill in the `comment` column with a rationale, unless it has no label because it's new (`LEGAL_BASIS`) implied (`ADDRESS_CONTRACTING_BODY_ADDITIONAL`) or an index (`@ITEM`), or because its values are labelled instead (`NOTICE`).
 
 Add rows to `ignore.csv` as needed:
 

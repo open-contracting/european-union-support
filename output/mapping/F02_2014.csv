@@ -1,7 +1,7 @@
 xpath,label-key,index,comment,guidance
-/F02_2014/@LG,,,Unlabeled,Lowercase, and map to `language`.
-/F02_2014/@CATEGORY,,,Unlabeled,Discard. TED translates at form-level. OCDS translates at field-level.
-/F02_2014/LEGAL_BASIS,,,New,""
+/F02_2014/@LG,,,,Lowercase, and map to `language`.
+/F02_2014/@CATEGORY,,,,Discard. TED translates at form-level. OCDS translates at field-level.
+/F02_2014/LEGAL_BASIS,,,,""
 /F02_2014/CONTRACTING_BODY,ca,I,,""
 /F02_2014/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,name_address_contact,I.1,,"Add an `Organization` object to the `parties` array, set its `.id`, and add 'buyer' to its `.roles`.\n\nSet `buyer.id` to its `.id` and `buyer.name` to its `.name` (see below)."
 /F02_2014/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,name_official,,,Map to `.name` and `.identifier.legalName`
@@ -17,7 +17,7 @@ xpath,label-key,index,comment,guidance
 /F02_2014/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,address_fax,,,Map to `.contactPoint.faxNumber`
 /F02_2014/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,url_general,,,Map to `.contactPoint.url`
 /F02_2014/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,url_buyerprofile,,,Map to `.details.buyerProfile` (EXTENSION NEEDED)
-/F02_2014/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL,,,Implied,[See above](#/F01_2014/CONTRACTING_BODY), but ignore the instructions for `buyer.id` and `buyer.name`.
+/F02_2014/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL,,,,[See above](#/F01_2014/CONTRACTING_BODY), but ignore the instructions for `buyer.id` and `buyer.name`.
 /F02_2014/CONTRACTING_BODY/JOINT_PROCUREMENT_INVOLVED,joint_procurement_involves,,,"Discard. If there are multiple parties with the role `buyer`, it is a joint procurement. TED uses the check box as a control element for adding additional contracting authorities."
 /F02_2014/CONTRACTING_BODY/PROCUREMENT_LAW,joint_national_law,,,
 /F02_2014/CONTRACTING_BODY/CENTRAL_PURCHASING,joint_procurement_central,,,
@@ -37,11 +37,11 @@ xpath,label-key,index,comment,guidance
 /F02_2014/OBJECT_CONTRACT,object,II,,
 /F02_2014/OBJECT_CONTRACT/TITLE,title_contract,II.1.1,,
 /F02_2014/OBJECT_CONTRACT/REFERENCE_NUMBER,fileref,,,
-/F02_2014/OBJECT_CONTRACT/CPV_MAIN,,II.1.2,Unlabeled,
+/F02_2014/OBJECT_CONTRACT/CPV_MAIN,,II.1.2,,
 /F02_2014/OBJECT_CONTRACT/CPV_MAIN/CPV_CODE,cpv_main,II.1.2,,
 /F02_2014/OBJECT_CONTRACT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,
 /F02_2014/OBJECT_CONTRACT/TYPE_CONTRACT,type_contract,II.1.3,,
-/F02_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,,,Labeled values,
+/F02_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,,,,
 /F02_2014/OBJECT_CONTRACT/SHORT_DESCR,descr_short,II.1.4,,
 /F02_2014/OBJECT_CONTRACT/VAL_ESTIMATED_TOTAL,value_excl_vat,,,
 /F02_2014/OBJECT_CONTRACT/VAL_ESTIMATED_TOTAL/@CURRENCY,currency,,,
@@ -53,7 +53,7 @@ xpath,label-key,index,comment,guidance
 /F02_2014/OBJECT_CONTRACT/LOT_DIVISION/LOT_MAX_ONE_TENDERER,lots_max_awarded,,,
 /F02_2014/OBJECT_CONTRACT/LOT_DIVISION/LOT_COMBINING_CONTRACT_RIGHT,lots_combination_possible,,,
 /F02_2014/OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,
-/F02_2014/OBJECT_CONTRACT/OBJECT_DESCR/@ITEM,,,Index,
+/F02_2014/OBJECT_CONTRACT/OBJECT_DESCR/@ITEM,,,,
 /F02_2014/OBJECT_CONTRACT/OBJECT_DESCR/TITLE,title_contract,II.2.1,,
 /F02_2014/OBJECT_CONTRACT/OBJECT_DESCR/LOT_NO,lot_number,,,
 /F02_2014/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL,cpv_additional,II.2.2,,
@@ -100,7 +100,7 @@ xpath,label-key,index,comment,guidance
 /F02_2014/LEFTI/RESTRICTED_SHELTERED_WORKSHOP,restricted_sheltered_workshop,,,
 /F02_2014/LEFTI/RESTRICTED_SHELTERED_PROGRAM,restricted_sheltered_program,,,
 /F02_2014/LEFTI/PARTICULAR_PROFESSION,particular_profession_reserved,,,
-/F02_2014/LEFTI/PARTICULAR_PROFESSION/@CTYPE,,,Unlabeled,
+/F02_2014/LEFTI/PARTICULAR_PROFESSION/@CTYPE,,,,
 /F02_2014/LEFTI/REFERENCE_TO_LAW,ref_law_reg_prov,,,
 /F02_2014/LEFTI/PERFORMANCE_CONDITIONS,other_conditions,III.2.2,,
 /F02_2014/LEFTI/PERFORMANCE_STAFF_QUALIFICATION,staff_responsible_indicate,,,
