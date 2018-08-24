@@ -107,10 +107,20 @@ task :table do
         data_seen << key
         row = data.delete_at(i)
 
-        data_skipped += data.take_while(&skipper)
-        data = data.drop_while(&skipper)
-
         builder.row(key, help_labels: help_labels(labels), xpath: row['xpath'], index: row['index'], guidance: row['guidance'])
+
+        data.each do |row|
+          if skipper.call(row)
+            if row['label-key']
+              data_skipped << row
+            else
+              builder.row(nil, xpath: row['xpath'], index: row['index'], guidance: row['guidance'])
+            end
+          else
+            break
+          end
+        end
+        data = data.drop_while(&skipper)
 
       elsif enumerations_seen.include?(key)
         builder.row(key, help_labels: help_labels(labels), reference: true)

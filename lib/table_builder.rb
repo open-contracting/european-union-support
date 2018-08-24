@@ -64,7 +64,11 @@ class TableBuilder
     no_guidance = reference.nil? && (guidance == false || guidance == '')
 
     # Prepare "Label and XPath" content.
-    content = t(label)
+    if label
+      content = t(label)
+    else
+      content = '<i>Unlabeled</i>'
+    end
     help_labels.each do |help_label|
       content += " <i>(#{t(help_label)})</i>"
     end
@@ -146,15 +150,13 @@ END
 END
   end
 
-  def colgroup # TODO
+  def colgroup
     add <<-END
-    <!--
     <colgroup>
-      <col width="5%">
-      <col width="45%">
+      <col width="7%">
       <col width="50%">
+      <col width="43%">
     </colgroup>
-    -->
 END
   end
 
