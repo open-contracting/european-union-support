@@ -191,6 +191,8 @@ class XMLBuilder < XmlBase
 
       if node.name == 'complexType'
         case reference
+        when 'cpv_set'
+          # Always expand, as mapping differs.
         when 'empty'
           # Do nothing with empty elements.
         when 'val', 'val_range', 'country', 'nuts', 'no_works', 'supplies', 'non_published'
