@@ -229,7 +229,7 @@ END
   def markdown(text)
     text = text.gsub('\n', "\n").
       gsub('(ISSUE)', '<span class="badge badge-issue">Issue</span>').
-      gsub('(PROPOSAL)', '<span class="badge badge-proposal">Proposal</span>')
+      gsub(/\(PROPOSAL([^)]+)?\)/){ %(<span class="badge badge-proposal">Proposal#{($1 || '').downcase}</span>) }
     add Kramdown::Document.new(text, auto_ids: false).to_html
   end
 
