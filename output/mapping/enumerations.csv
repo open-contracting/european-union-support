@@ -1,7 +1,7 @@
 xpath,value,label-key,numbers,guidance
-/NOTICE/@TYPE,PRI_ONLY,notice_is_prior_info_only,01,
+/NOTICE/@TYPE,PRI_ONLY,notice_is_prior_info_only,01,Add 'planning' to `tag`
 /NOTICE/@TYPE,PRI_REDUCING_TIME_LIMITS,notice_reduces_timelimits,01,
-/NOTICE/@TYPE,PRI_CALL_COMPETITION,notice_is_call,01,
+/NOTICE/@TYPE,PRI_CALL_COMPETITION,notice_is_call,01,Add 'tender' to `tag`
 /CONTRACTING_BODY/CA_TYPE/@VALUE,MINISTRY,maintype_ministry,01|02|03,Map to 'nationalAuthority'
 /CONTRACTING_BODY/CA_TYPE/@VALUE,NATIONAL_AGENCY,maintype_natagency,01|02|03,Map to 'nationalAgency'
 /CONTRACTING_BODY/CA_TYPE/@VALUE,REGIONAL_AUTHORITY,maintype_localauth,01|02|03,Map to 'localAuthority'
@@ -21,5 +21,5 @@ xpath,value,label-key,numbers,guidance
 /OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,WORKS,works,01|02|03,Map to 'works'
 /OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,SUPPLIES,supplies,01|02|03,Map to 'goods'
 /OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,SERVICES,services,01|02|03,Map to 'services'
-/OBJECT_CONTRACT/OBJECT_DESCR/DURATION/@TYPE,MONTH,duration_months,01|02,
-/OBJECT_CONTRACT/OBJECT_DESCR/DURATION/@TYPE,DAY,indays,01|02,
+/OBJECT_CONTRACT/OBJECT_DESCR/DURATION/@TYPE,MONTH,duration_months,01|02,"Multiply by 30, and map to `.contractPeriod.durationInDays` (PROPOSAL FOR LOTS)\n\nThere's an open issue ([#723](https://github.com/open-contracting/standard/issues/723)) about durations in months. (ISSUE)"
+/OBJECT_CONTRACT/OBJECT_DESCR/DURATION/@TYPE,DAY,indays,01|02,Map to `.contractPeriod.durationInDays` (PROPOSAL FOR LOTS)
