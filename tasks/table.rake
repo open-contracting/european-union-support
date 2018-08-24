@@ -1,5 +1,12 @@
 desc 'Build a table with guidance'
 task :table do
+  def swap(labels, label_1, label_2)
+    index_1 = labels.index(label_1)
+    index_2 = labels.index(label_2)
+    labels[index_1] = label_2
+    labels[index_2] = label_1
+  end
+
   def help_labels(labels)
     index = labels.index{ |key| !help_text?(key) } || 1
     help_labels = labels[0...index]
@@ -48,6 +55,12 @@ task :table do
 
     # Skip "Supplement to the Official Journal of the European Union" (HD_ojs_) and "Info and online forms" (HD_info_forms).
     labels = label_keys(pdftotext(Dir["source/*_TED_forms_templates/F#{number}_*.pdf"][0]))[2..-1]
+
+    # Swap the order of labels.
+    swap(labels, 'maintype_natagency', 'maintype_localagency')
+    swap(labels, 'maintype_localauth', 'maintype_publicbody')
+    swap(labels, 'maintype_localauth', 'maintype_localagency')
+    swap(labels, 'mainactiv_health', 'other_activity')
 
     ### Build
 
