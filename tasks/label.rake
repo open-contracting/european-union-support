@@ -79,6 +79,9 @@ namespace :label do
   task :comments do
     files('output/mapping/F{}_*.csv').each do |filename|
       CSV.foreach(filename, headers: true) do |row|
+        if row.size != 5
+          raise "#{filename}: #{row['xpath']} unquoted comma!"
+        end
         if row['comment']
           puts '%-115s %s' % [row['xpath'], row['comment']]
         end

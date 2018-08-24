@@ -1,11 +1,11 @@
 xpath,label-key,index,comment,guidance
-/@LG,,,,Lowercase, and map to `language`.
+/@LG,,,,"Lowercase, and map to `language`"
 /@CATEGORY,,,,Discard. TED translates at form-level. OCDS translates at field-level.
 /LEGAL_BASIS,,,,""
 /CONTRACTING_BODY,ca,I,,""
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,name_address_contact,I.1,,"Add an `Organization` object to the `parties` array, set its `.id`, and add 'buyer' to its `.roles`.\n\nSet `buyer.id` to its `.id` and `buyer.name` to its `.name` (see below)."
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,name_official,,,Map to `.name` and `.identifier.legalName`
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,national_id,,,Map to `.identifier.id`, and set `.identifier.scheme`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,national_id,,,"Map to `.identifier.id`, and set `.identifier.scheme`"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS,address_postal,,,Map to `.address.streetAddress`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN,address_town,,,Map to `.address.locality`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,nutscode,,,"Take the NUTS code in the `CODE` attribute, and map to `.address.region`\n\nThere is an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) to add better support for region codes."
@@ -17,7 +17,7 @@ xpath,label-key,index,comment,guidance
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,address_fax,,,Map to `.contactPoint.faxNumber`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,url_general,,,Map to `.contactPoint.url`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,url_buyerprofile,,,Map to `.details.buyerProfile` (EXTENSION NEEDED)
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL,,,,[See above](#/F01_2014/CONTRACTING_BODY), but ignore the instructions for `buyer.id` and `buyer.name`.
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL,,,,"[See above](#/F01_2014/CONTRACTING_BODY), but ignore the instructions for `buyer.id` and `buyer.name`."
 /CONTRACTING_BODY/JOINT_PROCUREMENT_INVOLVED,joint_procurement_involves,,,"Discard. If there are multiple parties with the role `buyer`, it is a joint procurement. TED uses the check box as a control element for adding additional contracting authorities."
 /CONTRACTING_BODY/PROCUREMENT_LAW,joint_national_law,,,
 /CONTRACTING_BODY/CENTRAL_PURCHASING,joint_procurement_central,,,
