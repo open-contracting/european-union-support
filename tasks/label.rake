@@ -48,8 +48,8 @@ namespace :label do
     files('output/mapping/F{}_*.csv').each do |filename|
       CSV.foreach(filename, headers: true) do |row|
         if row['label-key'].nil?
-          if row['comment'].nil?
-            puts "#{row['xpath']} has no label-key or comment"
+          if row['comment'].nil? && row['guidance'].nil?
+            puts "#{filename}: #{row['xpath']} has no label-key, comment or guidance"
           end
         else
           label_keys_seen << row['label-key']
@@ -83,7 +83,7 @@ namespace :label do
           raise "#{filename}: #{row['xpath']} unquoted comma!"
         end
         if row['comment']
-          puts '%-115s %s' % [row['xpath'], row['comment']]
+          puts "#{filename}: %-60s %s" % [row['xpath'], row['comment']]
         end
       end
     end
@@ -96,12 +96,12 @@ namespace :label do
     files('output/mapping/F{}_*.csv').each do |filename|
       CSV.foreach(filename, headers: true) do |row|
         if row['label-key']
-          key = row['xpath'].split('/', 3)[2]
+          key = row['xpath']
           value = row.fields[1..-1].join(',')
           if mappings.key?(key)
             expected = mappings[key]
             if expected[:value] != value
-              puts "#{expected[:filename]} #{expected[:value].ljust(21)} != #{filename} #{value}"
+              puts "#{expected[:filename]} #{expected[:value]} !=\n#{filename} #{value}"
             end
           else
             mappings[key] = {filename: filename, value: value}
