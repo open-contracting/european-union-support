@@ -64,7 +64,6 @@ Fill in each form's XPath CSV:
 Add rows to `ignore.csv` as needed:
 
 1. If a label key has no corresponding editable field in the PDF, it may not have a corresponding XPath value. If so, unless it appears in the footer or endnotes or is a section number (`section_1`, etc.), form name (`notice_pin`, etc.) or legal basis (`directive_201424`), fill in `index` with the index as above, `label-key` with the label key, and `numbers` with a pipe-separated list (`|`) of form numbers. Follow the order in the PDF templates.
-1. If the label key is immediately preceded by an index (like `II.1.1`), fill in the `index` column with the index.
 
 Fill in `enumerations.csv`:
 
@@ -120,10 +119,8 @@ I also attempted to map elements and attributes in the XML to labels on the form
 
 In addition to the resources linked under prerequisites above, there is a [TED eSenders wiki](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender), which contains:
 
-* [XML Schema 2.0.9](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9), in particular:
-  * [Overview](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.1.Overview)
-  * [Form structure](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.2.Formstructure)
-* [Standard forms guidance](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/Standard+forms+guidance), which includes **"Field explanations"** that can inform field definitions in OCDS extensions (PDF)
+* [XML Schema 2.0.9](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9), in particular: [Overview](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.1.Overview) and [Form structure](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.2.Formstructure)
+* [Standard forms guidance](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/Standard+forms+guidance), with **"Field explanations"** that can inform field definitions in OCDS extensions (PDF)
 * [Instructions for the use of 14](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/Instructions+for+the+use+of+F14) (PDF)
 * [FAQ](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/FAQ) (click "Expand all")
 * [Contacts](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/Contacts)
