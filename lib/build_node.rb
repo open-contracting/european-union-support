@@ -59,7 +59,7 @@ class BuildNode
       value = comments[attribute]
       case attribute
       when 'enumeration'
-        value.sample
+        (value - ['NO']).sample # special case for `prune!`
       when 'maxLength'
         "maxLength #{comments.delete(attribute)}"
       when 'pattern'
