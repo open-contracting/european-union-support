@@ -33,10 +33,10 @@ task :table do
       row['label-key'].nil? ||
       # A single `currency` label stands for 2-3 elements.
       # `/F03_2014/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY`
-      row['xpath'] == '/F03_2014/OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY' ||
+      row['xpath'] == '/OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY' ||
       # `/F03_2014/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY`
-      row['xpath'] == '/F03_2014/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY' ||
-      row['xpath'] == '/F03_2014/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/@CURRENCY'
+      row['xpath'] == '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY' ||
+      row['xpath'] == '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/@CURRENCY'
     end
 
     ### Setup
@@ -83,7 +83,7 @@ task :table do
     while labels.any?
       key = labels.shift
 
-      if key[/\Asection_\d\z/]
+      if key[/\A(?:annex_d\d|section_\d)\z/]
         if number != '01' || $0 != 'section_1'
           builder.end_table
         end
