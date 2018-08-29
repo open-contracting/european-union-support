@@ -89,6 +89,34 @@ namespace :label do
     end
   end
 
+  desc 'Copy mappings across forms'
+  task :copy do
+    xpaths = {}
+    CSV.foreach(ENV['FROM'], headers: true) do |row|
+      xpaths[row['xpath']] = row
+    end
+
+    headers = nil
+    rows = []
+    CSV.foreach(ENV['TO'], headers: true) do |row|
+      headers = row.headers
+
+      key = row['xpath']
+      if xpaths.key?(key)
+        row['comment'] = xpaths[key]['comment']
+        row['guidance'] = xpaths[key]['guidance']
+      end
+      rows << row
+    end
+
+    CSV.open(ENV['TO'], 'w') do |csv|
+      csv << headers
+      rows.each do |row|
+        csv << row
+      end
+    end
+  end
+
   desc 'Report any incoherences in mappings across forms'
   task :coherence do
     mappings = {}
@@ -97,14 +125,24 @@ namespace :label do
       CSV.foreach(filename, headers: true) do |row|
         if row['label-key']
           key = row['xpath']
-          value = row.fields[1..-1].join(',')
+          actual = row.fields[1..-1]
           if mappings.key?(key)
-            expected = mappings[key]
-            if expected[:value] != value
-              puts "#{expected[:filename]} #{expected[:value]} !=\n#{filename} #{value}"
+            mapping = mappings[key]
+            expected = mapping[:value]
+            if expected != actual
+              message = "#{filename} (#{mapping[:filename]})"
+              added = actual - expected
+              if added.any?
+                message << " added; #{added}"
+              end
+              removed = expected - actual
+              if removed.any?
+                message << " removed: #{removed}"
+              end
+              puts message
             end
           else
-            mappings[key] = {filename: filename, value: value}
+            mappings[key] = {filename: filename, value: actual}
           end
         end
       end
