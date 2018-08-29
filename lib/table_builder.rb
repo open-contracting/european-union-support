@@ -1,10 +1,26 @@
 class TableBuilder
+  # See README instructions to download this file.
+  FORM_LABELS_CSV_PATH = File.join('source', 'Forms labels R2.09.csv')
+
+  # Convert markers to badges.
+  BADGES = {
+    'issue' => 'Issue',
+    'warning' => 'Attention',
+    'proposal' => 'Proposal',
+  }
+
+  # Some XPath's are wider than the "Label and XPath" cell, so we break them across lines.
+  LONG_XPATH_PREFIXES = [
+    '/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/',
+    '/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/',
+  ]
+
   def self.labels
     @labels ||= begin
       labels = {}
 
       # Ignore extra rows and columns.
-      CSV.read(File.join('source', 'Forms labels R2.09.csv'), headers: true).each do |row|
+      CSV.read(FORM_LABELS_CSV_PATH, headers: true).each do |row|
         if row.fields.any?
           labels[row.delete('Label')[1]] = row.delete_if{ |_, v| v.nil? }.to_h
         end
@@ -73,7 +89,7 @@ class TableBuilder
       content += " <i>(#{t(help_label)})</i>"
     end
     if xpath
-      content += "<br> #{code(xpath)}"
+      content += "<br>#{code(xpath)}"
     end
     if value
       content += "is #{code(value)}"
@@ -153,9 +169,9 @@ END
   def colgroup
     add <<-END
     <colgroup>
-      <col width="7%">
+      <col width="8%">
       <col width="50%">
-      <col width="43%">
+      <col width="42%">
     </colgroup>
 END
   end
@@ -227,10 +243,10 @@ END
   end
 
   def markdown(text)
-    text = text.gsub('\n', "\n").
-      gsub('(ISSUE)', '<span class="badge badge-issue">Issue</span>').
-      gsub('(WARNING)', '<span class="badge badge-warning">Attention</span>').
-      gsub(/\(PROPOSAL([^)]+)?\)/){ %(<span class="badge badge-proposal">Proposal#{($1 || '').downcase}</span>) }
+    text = text.gsub('\n', "\n")
+    BADGES.each do |key, label|
+      text = text.gsub(/\(#{key.upcase}([^)]+)?\)/){ %(<span class="badge badge-#{key}">#{label}#{($1 || '').downcase}</span>) }
+    end
     add Kramdown::Document.new(text, auto_ids: false).to_html
   end
 
@@ -241,6 +257,6 @@ END
   end
 
   def code(text)
-    %(<code>#{text}</code>)
+    %(<code>#{text.sub(%r{\A(#{LONG_XPATH_PREFIXES.join('|')})}, '\1<wbr>')}</code>)
   end
 end
