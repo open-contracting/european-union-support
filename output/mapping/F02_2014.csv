@@ -1,68 +1,68 @@
 xpath,label-key,index,comment,guidance
 /@LG,,,,"Lowercase, and map to `language`"
 /@CATEGORY,,,,Discard. TED translates at form-level. OCDS translates at field-level.
-/LEGAL_BASIS,,,,""
+/LEGAL_BASIS,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_LegalBasis,Map to `tender.legalBasis` (PROPOSAL)
 /CONTRACTING_BODY,ca,I,,""
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,name_address_contact,I.1,,"Add an `Organization` object to the `parties` array, set its `.id`, and add 'buyer' to its `.roles`.\n\nSet `buyer.id` to its `.id` and `buyer.name` to its `.name` (see below)."
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,name_address_contact,I.1,,"[Add a party](..#add-a-party), and add 'buyer' to its `.roles`\n\nSet `buyer.id` to its `.id` and `buyer.name` to its [`.name`](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,name_official,,,Map to `.name` and `.identifier.legalName`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,national_id,,,"Map to `.identifier.id`, and set `.identifier.scheme`"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS,address_postal,,,Map to `.address.streetAddress`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN,address_town,,,Map to `.address.locality`
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,nutscode,,,"Take the NUTS code in the `CODE` attribute, and map to `.address.region`\n\nThere is an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) to add better support for region codes."
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,nutscode,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,"Take the NUTS code in the `CODE` attribute, and map to `.address.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE,address_postcode,,,Map to `.address.postalCode`
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY,address_country,,,"Take the country code in the `VALUE` attribute, translate to a country name, and map to `.address.countryName`\n\nThere is an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation."
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY,address_country,,,"Take the country code in the `VALUE` attribute, translate to a country name, and map to `.address.countryName`\n\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation. (ISSUE)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT,contactpoint,,,Map to `.contactPoint.name`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE,address_phone,,,Map to `.contactPoint.telephone`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL,address_email,,,Map to `.contactPoint.email`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,address_fax,,,Map to `.contactPoint.faxNumber`
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,url_general,,,Map to `.contactPoint.url`
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,url_buyerprofile,,,Map to `.details.buyerProfile` (EXTENSION NEEDED)
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL,,,,"[See above](#/CONTRACTING_BODY), but ignore the instructions for `buyer.id` and `buyer.name`."
-/CONTRACTING_BODY/JOINT_PROCUREMENT_INVOLVED,joint_procurement_involves,,,"Discard. If there are multiple parties with the role `buyer`, it is a joint procurement. TED uses the check box as a control element for adding additional contracting authorities."
-/CONTRACTING_BODY/PROCUREMENT_LAW,joint_national_law,,,
-/CONTRACTING_BODY/CENTRAL_PURCHASING,joint_procurement_central,,,
-/CONTRACTING_BODY/DOCUMENT_FULL,address_obtain_docs,,,
-/CONTRACTING_BODY/DOCUMENT_RESTRICTED,docs_restricted,,,
-/CONTRACTING_BODY/URL_DOCUMENT,,,The two pairs of radio buttons and text boxes are implemented as three elements.,
-/CONTRACTING_BODY/ADDRESS_FURTHER_INFO_IDEM,as_contacts_above,,,
-/CONTRACTING_BODY/ADDRESS_FURTHER_INFO,address_another,,,
-/CONTRACTING_BODY/URL_PARTICIPATION,address_send_tenders,,,
-/CONTRACTING_BODY/ADDRESS_PARTICIPATION_IDEM,address_to_above,,,
-/CONTRACTING_BODY/ADDRESS_PARTICIPATION,address_following,,,
-/CONTRACTING_BODY/URL_TOOL,url_communication_tools,,,
-/CONTRACTING_BODY/CA_TYPE,ca_type,I.4,,
-/CONTRACTING_BODY/CA_TYPE_OTHER,other_type,,,
-/CONTRACTING_BODY/CA_ACTIVITY,mainactivity,I.5,,
-/CONTRACTING_BODY/CA_ACTIVITY_OTHER,other_activity,,,
-/OBJECT_CONTRACT,object,II,,
-/OBJECT_CONTRACT/TITLE,title_contract,II.1.1,,
-/OBJECT_CONTRACT/REFERENCE_NUMBER,fileref,,,
-/OBJECT_CONTRACT/CPV_MAIN,,II.1.2,,
-/OBJECT_CONTRACT/CPV_MAIN/CPV_CODE,cpv_main,II.1.2,,
-/OBJECT_CONTRACT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,
-/OBJECT_CONTRACT/TYPE_CONTRACT,type_contract,II.1.3,,
-/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,,,,
-/OBJECT_CONTRACT/SHORT_DESCR,descr_short,II.1.4,,
-/OBJECT_CONTRACT/VAL_ESTIMATED_TOTAL,value_excl_vat,,,
-/OBJECT_CONTRACT/VAL_ESTIMATED_TOTAL/@CURRENCY,currency,,,
-/OBJECT_CONTRACT/LOT_DIVISION,_yes,,,
-/OBJECT_CONTRACT/NO_LOT_DIVISION,_no,,,
-/OBJECT_CONTRACT/LOT_DIVISION/LOT_ALL,lots_all,,,
-/OBJECT_CONTRACT/LOT_DIVISION/LOT_MAX_NUMBER,lots_max,,,
-/OBJECT_CONTRACT/LOT_DIVISION/LOT_ONE_ONLY,lot_one_only,,,
-/OBJECT_CONTRACT/LOT_DIVISION/LOT_MAX_ONE_TENDERER,lots_max_awarded,,,
-/OBJECT_CONTRACT/LOT_DIVISION/LOT_COMBINING_CONTRACT_RIGHT,lots_combination_possible,,,
-/OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,
-/OBJECT_CONTRACT/OBJECT_DESCR/@ITEM,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/TITLE,title_contract,II.2.1,,
-/OBJECT_CONTRACT/OBJECT_DESCR/LOT_NO,lot_number,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL,cpv_additional,II.2.2,,
-/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_CODE,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,,,,
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,url_general,,,Map to `.details.url` (PROPOSAL)
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,url_buyerprofile,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/organization_BuyerProfile,Map to `.details.buyerProfile` (PROPOSAL)
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL,,,,"[Add a party](..#add-a-party), add 'buyer' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
+/CONTRACTING_BODY/JOINT_PROCUREMENT_INVOLVED,joint_procurement_involves,,,"Discard. If there are multiple parties with the role 'buyer', then the contract involves joint procurement. (When *The contract involves joint procurement* is checked, at least one additional contracting authority is provided.)"
+/CONTRACTING_BODY/PROCUREMENT_LAW,joint_national_law,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_JointProcurement,Map to `tender.crossBorderLaw` (PROPOSAL)
+/CONTRACTING_BODY/CENTRAL_PURCHASING,joint_procurement_central,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,Add 'centralPurchasingBody' to the `.roles` of the party (PROPOSAL)
+/CONTRACTING_BODY/DOCUMENT_FULL,address_obtain_docs,,,"Discard. If no `tender.participationFees` have a `.type` of 'document', then access is assumed to be unrestricted.\n\nTo provide direct access to procurement documents, add `Document` objects to the `tender.documents` array, and set their `.id` and other fields."
+/CONTRACTING_BODY/DOCUMENT_RESTRICTED,docs_restricted,,,"Discard. If any `tender.participationFees` have a `.type` of 'document', then access is restricted.\n\nTo provide the cost and terms of payment for procurement documents, use the [Participation Fees](https://github.com/open-contracting/ocds_participationFee_extension) extension, add `ParticipationFee` objects to the `tender.participationFees` array, set their `.type` to 'document', and set their `.id` and other fields."
+/CONTRACTING_BODY/URL_DOCUMENT,,,,Map to `.contactPoint.url`
+/CONTRACTING_BODY/ADDRESS_FURTHER_INFO_IDEM,as_contacts_above,,,"Discard. Additional information can be obtained from the abovementioned address, unless otherwised specified."
+/CONTRACTING_BODY/ADDRESS_FURTHER_INFO,address_another,,,"If only the contact person is different, you can use the [Additional Contact Points](https://github.com/open-contracting/ocds_additionalContactPoints_extension) extension, get the `Organization` object for the buyer, add a `ContactPoint` object to its `.additionalContactPoints` array, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT).\n\nOtherwise, [add a party](..#add-a-party), add 'contactPoint' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME). (PROPOSAL)"
+/CONTRACTING_BODY/URL_PARTICIPATION,address_send_tenders,,,"Add 'electronicSubmission' to `tender.submissionMethod`, and map to `tender.submissionMethodDetails`\n\n*This results in a loss of structure if 'to the following address' is selected.* (WARNING)"
+/CONTRACTING_BODY/ADDRESS_PARTICIPATION_IDEM,address_to_above,,,"Add 'written' to `tender.submissionMethod`, and discard. Tenders or requests to participate must be submitted to the abovementioned address, unless otherwised specified."
+/CONTRACTING_BODY/ADDRESS_PARTICIPATION,address_following,,,"Add 'written' to `tender.submissionMethod`, and map to `tender.submissionMethodDetails`\n\n*This results in a loss of structure if 'electronically via' is checked.* (WARNING)"
+/CONTRACTING_BODY/URL_TOOL,url_communication_tools,,,Map to `tender.communicationDetails.accessToolUrl` (PROPOSAL)
+/CONTRACTING_BODY/CA_TYPE,ca_type,I.4,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, add a `Classification` object to its `.details.classifications` array, and set the latter's `.scheme` to 'TED' and `.id` as follows: (PROPOSAL)"
+/CONTRACTING_BODY/CA_TYPE_OTHER,other_type,,,Map to any other code
+/CONTRACTING_BODY/CA_ACTIVITY,mainactivity,I.5,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, add a `Classification` object to its `.details.classifications` array, and set the latter's `.scheme` to ['COFOG'](https://unstats.un.org/unsd/publications/catalogue?selectID=145) and `.id` as follows: (PROPOSAL)"
+/CONTRACTING_BODY/CA_ACTIVITY_OTHER,other_activity,,,Map to any other code
+/OBJECT_CONTRACT,object,II,,""
+/OBJECT_CONTRACT/TITLE,title_contract,II.1.1,,Map to `tender.title`
+/OBJECT_CONTRACT/REFERENCE_NUMBER,fileref,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_BuyerInternalReferenceID,Map to `tender.id`
+/OBJECT_CONTRACT/CPV_MAIN,,II.1.2,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_Classification,""
+/OBJECT_CONTRACT/CPV_MAIN/CPV_CODE,cpv_main,,,"Set `tender.classification.scheme` to 'CPV', take the CPV code in the `CODE` attribute, and map to `tender.classification.id` (PROPOSAL)"
+/OBJECT_CONTRACT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,"For each `CODE` attribute, add a `Classification` object to the `tender.additionalClassifications` array, set `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to `.id` (PROPOSAL)"
+/OBJECT_CONTRACT/TYPE_CONTRACT,type_contract,II.1.3,,""
+/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,,,,Set `tender.mainProcurementCategory` as follows:
+/OBJECT_CONTRACT/SHORT_DESCR,descr_short,II.1.4,,Map to `tender.description`
+/OBJECT_CONTRACT/VAL_ESTIMATED_TOTAL,value_excl_vat,,,Map to `tender.value.amount`
+/OBJECT_CONTRACT/VAL_ESTIMATED_TOTAL/@CURRENCY,currency,,,Map to `tender.value.currency`
+/OBJECT_CONTRACT/LOT_DIVISION,_yes,,,"Discard. If `tender.lots` is set, then the contract is divided into lots."
+/OBJECT_CONTRACT/NO_LOT_DIVISION,_no,,,"Discard. If `tender.lots` isn't set, then the contract isn't divided into lots."
+/OBJECT_CONTRACT/LOT_DIVISION/LOT_ALL,lots_all,,,"Set `tender.lotDetails.maximumLotsBidPerSupplier` to 1e9999 (which parses to infinity i.e. ""all"")"
+/OBJECT_CONTRACT/LOT_DIVISION/LOT_MAX_NUMBER,lots_max,,,Map to `tender.lotDetails.maximumLotsBidPerSupplier`
+/OBJECT_CONTRACT/LOT_DIVISION/LOT_ONE_ONLY,lot_one_only,,,Set `tender.lotDetails.maximumLotsBidPerSupplier` to 1
+/OBJECT_CONTRACT/LOT_DIVISION/LOT_MAX_ONE_TENDERER,lots_max_awarded,,,Map to `tender.lotDetails.maximumLotsAwardedPerSupplier`
+/OBJECT_CONTRACT/LOT_DIVISION/LOT_COMBINING_CONTRACT_RIGHT,lots_combination_possible,,,"Map to `tender.lotDetails.awardCriteriaDetails`\n\nTo provide groups of lots, use `tender.lotGroups`"
+/OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,"If the contract is divided into lots, add a `Lot` object to the `tender.lots` array"
+/OBJECT_CONTRACT/OBJECT_DESCR/@ITEM,,,,Discard
+/OBJECT_CONTRACT/OBJECT_DESCR/TITLE,title_contract,II.2.1,,"If the contract is divided into lots, map to the lot's `.title`"
+/OBJECT_CONTRACT/OBJECT_DESCR/LOT_NO,lot_number,,,"If the contract is divided into lots, map to the lot's `.id`"
+/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL,cpv_additional,II.2.2,,""
+/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_CODE,,,,"For each `CODE` attribute, if not already added, add a `Classification` object to the `tender.additionalClassifications` array, set `.scheme` to 'CPV', and map to `.id`. If the contract is divided into lots, add the lot's `.id` to the classification's `.relatedLots`. (PROPOSAL)"
+/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,,,,"For each `CODE` attribute, if not already added, add a `Classification` object to the `tender.additionalClassifications` array, set `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to `.id`. If the contract is divided into lots, add the lot's `.id` to the classification's `.relatedLots`. (PROPOSAL)"
 /OBJECT_CONTRACT/OBJECT_DESCR/NUTS,nutscode,,,
 /OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE,mainsiteplace_works_delivery,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,descr_procurement,II.2.4,,
-/OBJECT_CONTRACT/OBJECT_DESCR/AC,award_criteria,II.2.5,,
+/OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,descr_procurement,II.2.4,,"If the contract is divided into lots, map to the lot's `.description`. Otherwise, append to `tender.description`.\n\n*This results in a loss of structure if the contract isn't divided into lots.* (WARNING)"
+/OBJECT_CONTRACT/OBJECT_DESCR/AC,award_criteria,II.2.5,,""
 /OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY,award_criterion_quality,,,
 /OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY/AC_CRITERION,award_criterion_name,,,
 /OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY/AC_WEIGHTING,weighting,,,
@@ -70,28 +70,28 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE,price,,,
 /OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE/AC_WEIGHTING,weighting,,,
 /OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PROCUREMENT_DOC,award_criteria_descriptive,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/VAL_OBJECT,value_excl_vat,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/VAL_OBJECT/@CURRENCY,currency,,,
+/OBJECT_CONTRACT/OBJECT_DESCR/VAL_OBJECT,value_excl_vat,,,"If the contract is divided into lots, map to the lot's `.value.amount`"
+/OBJECT_CONTRACT/OBJECT_DESCR/VAL_OBJECT/@CURRENCY,currency,,,"If the contract is divided into lots, map to the lot's `.value.currency`"
 /OBJECT_CONTRACT/OBJECT_DESCR/DURATION,duration_contract_framework_dps,II.2.7,,""
-/OBJECT_CONTRACT/OBJECT_DESCR/DATE_START,starting,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/DATE_END,end,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/RENEWAL,_yes,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/RENEWAL_DESCR,renewals_descr,,,
+/OBJECT_CONTRACT/OBJECT_DESCR/DATE_START,starting,,,Map to `.contractPeriod.startDate` (PROPOSAL FOR LOTS)
+/OBJECT_CONTRACT/OBJECT_DESCR/DATE_END,end,,,Map to `.contractPeriod.endDate` (PROPOSAL FOR LOTS)
+/OBJECT_CONTRACT/OBJECT_DESCR/RENEWAL,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Renewals,"If checked, add a `Renewals` object to the `tender.renewals` array, and set its `.id`. If the contract is divided into lots, set its `.relatedLot` to the lot's `.id`. (PROPOSAL)"
+/OBJECT_CONTRACT/OBJECT_DESCR/RENEWAL_DESCR,renewals_descr,,,Set the renewals' `.description` (PROPOSAL)
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_RENEWAL,_no,,,
 /OBJECT_CONTRACT/OBJECT_DESCR/NB_ENVISAGED_CANDIDATE,envisaged_number,,,
 /OBJECT_CONTRACT/OBJECT_DESCR/NB_MIN_LIMIT_CANDIDATE,envisaged_min,,,
 /OBJECT_CONTRACT/OBJECT_DESCR/NB_MAX_LIMIT_CANDIDATE,max_number,,,
 /OBJECT_CONTRACT/OBJECT_DESCR/CRITERIA_CANDIDATE,criteria_choosing_limited,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/ACCEPTED_VARIANTS,_yes,,,
+/OBJECT_CONTRACT/OBJECT_DESCR/ACCEPTED_VARIANTS,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Variants,"If checked, add a `Variants` object to the `tender.variants` array, and set its `.id`. If the contract is divided into lots, set its `.relatedLot` to the lot's `.id`. (PROPOSAL)\n\nTo provide conditions for variants, use `.description`"
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_ACCEPTED_VARIANTS,_no,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS,_yes,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS_DESCR,options_descr,,,
+/OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Options,"If checked, add an `Options` object to the `tender.options` array, and set its `.id`. If the contract is divided into lots, set its `.relatedLot` to the lot's `.id`. (PROPOSAL)"
+/OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS_DESCR,options_descr,,,Set the options' `.description` (PROPOSAL)
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_OPTIONS,_no,,,
 /OBJECT_CONTRACT/OBJECT_DESCR/ECATALOGUE_REQUIRED,electronic_catalogue_required,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,eu_progr_ref,,,
+/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,_yes,,,
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,info_additional,II.2.14,,
-/LEFTI,info_legal,III,,
+/OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,info_additional,II.2.14,,Append to `tender.description`\n\n*This results in a loss of structure.* (WARNING)
+/LEFTI,info_legal,III,,""
 /LEFTI/SUITABILITY,info_evaluating_requir,,,
 /LEFTI/ECONOMIC_CRITERIA_DOC,criteria_selection_docs,,,
 /LEFTI/ECONOMIC_FINANCIAL_INFO,info_evaluating_weth_requir,,,
@@ -106,11 +106,11 @@ xpath,label-key,index,comment,guidance
 /LEFTI/REFERENCE_TO_LAW,ref_law_reg_prov,,,
 /LEFTI/PERFORMANCE_CONDITIONS,other_conditions,III.2.2,,
 /LEFTI/PERFORMANCE_STAFF_QUALIFICATION,staff_responsible_indicate,,,
-/PROCEDURE,procedure,IV,,
+/PROCEDURE,procedure,IV,,""
 /PROCEDURE/PT_OPEN,proctype_open,,,
 /PROCEDURE/ACCELERATED_PROC,justification,,,
-/PROCEDURE/PT_RESTRICTED,proctype_restricted,,,
-/PROCEDURE/PT_COMPETITIVE_NEGOTIATION,proctype_comp_negotiation,,,
+/PROCEDURE/PT_RESTRICTED,proctype_restricted,,,Set `tender.procurementMethod` to 'selective'
+/PROCEDURE/PT_COMPETITIVE_NEGOTIATION,proctype_comp_negotiation,,,Set `tender.procurementMethod` to 'open'
 /PROCEDURE/PT_COMPETITIVE_DIALOGUE,proctype_comp_dialogue,,,
 /PROCEDURE/PT_INNOVATION_PARTNERSHIP,proctype_innovation,,,
 /PROCEDURE/FRAMEWORK,notice_involves_framework,,,
@@ -124,14 +124,14 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/RIGHT_CONTRACT_INITIAL_TENDERS,negotiation_without,,,
 /PROCEDURE/EAUCTION_USED,eauction_will_used,,,
 /PROCEDURE/INFO_ADD_EAUCTION,eauction_info_addit,,,
-/PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,
-/PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,
+/PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to `tender.coveredBy`
+/PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in `tender.coveredBy`, then the procurement isn't covered by the GPA."
 /PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,,
 /PROCEDURE/DATE_RECEIPT_TENDERS,date,,,
 /PROCEDURE/TIME_RECEIPT_TENDERS,time,,,
 /PROCEDURE/DATE_DISPATCH_INVITATIONS,date,,,
-/PROCEDURE/LANGUAGES,languages_allowed,IV.2.4,,
-/PROCEDURE/LANGUAGES/LANGUAGE,,,Footnote 1: Please repeat as many times as needed.,
+/PROCEDURE/LANGUAGES,languages_allowed,IV.2.4,,""
+/PROCEDURE/LANGUAGES/LANGUAGE,,,,
 /PROCEDURE/DATE_TENDER_VALID,date_tender_valid,,,
 /PROCEDURE/DURATION_TENDER_VALID,duration_months,,,
 /PROCEDURE/OPENING_CONDITION,opening_conditions,IV.2.7,,
@@ -139,7 +139,7 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/OPENING_CONDITION/TIME_OPENING_TENDERS,time,,,
 /PROCEDURE/OPENING_CONDITION/PLACE,opening_place,,,
 /PROCEDURE/OPENING_CONDITION/INFO_ADD,opening_addit_info,,,
-/COMPLEMENTARY_INFO,info_complement,VI,,
+/COMPLEMENTARY_INFO,info_complement,VI,,""
 /COMPLEMENTARY_INFO/RECURRENT_PROCUREMENT,_yes,,,
 /COMPLEMENTARY_INFO/ESTIMATED_TIMING,further_notices_timing,,,
 /COMPLEMENTARY_INFO/NO_RECURRENT_PROCUREMENT,_no,,,
@@ -160,4 +160,4 @@ xpath,label-key,index,comment,guidance
 /COMPLEMENTARY_INFO/ADDRESS_MEDIATION_BODY,mediation_body,VI.4.2,,
 /COMPLEMENTARY_INFO/REVIEW_PROCEDURE,appeals_deadline,,,
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_INFO,appeals_info,VI.4.4,,
-/COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,date_dispatch,VI.5,,
+/COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,date_dispatch,VI.5,,Map to `date`
