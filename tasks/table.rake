@@ -24,6 +24,7 @@ task :table do
 
   ignore_csv = CSV.read('output/mapping/ignore.csv', headers: true)
   enumerations_csv = CSV.read('output/mapping/enumerations.csv', headers: true)
+  additional_csv = CSV.read('output/mapping/additional.csv', headers: true)
 
   files('output/mapping/F{}_*.csv').each do |filename|
     basename = File.basename(filename)
@@ -41,14 +42,17 @@ task :table do
 
     ### Setup
 
+    seen = {
+      ignore: Set.new,
+      enumerations: Set.new,
+      additional: Set.new,
+      filename => Set.new,
+    }
+
     ignore = ignore_csv.select{ |row| row['numbers'][number] }
     enumerations = enumerations_csv.select{ |row| row['numbers'][number] }
-
-    ignore_seen = Set.new
-    enumerations_seen = Set.new
-
+    additional = additional_csv.select{ |row| row['numbers'][number] }
     data = CSV.read(filename, headers: true)
-    data_seen = Set.new
 
     data_skipped = data.take_while(&skipper)
     data = data.drop_while(&skipper)
@@ -91,20 +95,20 @@ task :table do
         builder.table
 
       elsif ignore.any? && ignore[0]['label-key'] == key
-        ignore_seen << key
+        seen[:ignore] << key
         row = ignore.shift
 
         builder.row(key, help_labels: help_labels(labels), index: row['index'])
 
       elsif enumerations.any? && enumerations[0]['label-key'] == key
-        enumerations_seen << key
+        seen[:enumerations] << key
         row = enumerations.shift
 
         builder.row(key, help_labels: help_labels(labels), xpath: row['xpath'], value: row['value'], guidance: row['guidance'])
 
       # Fields appear in a different order in the form and XSD.
       elsif i = data[0..3].index{ |row| row['label-key'] == key }
-        data_seen << key
+        seen[filename] << key
         row = data.delete_at(i)
 
         builder.row(key, help_labels: help_labels(labels), xpath: row['xpath'], index: row['index'], guidance: row['guidance'])
@@ -122,10 +126,13 @@ task :table do
         end
         data = data.drop_while(&skipper)
 
-      elsif enumerations_seen.include?(key)
-        builder.row(key, help_labels: help_labels(labels), reference: true)
+      elsif additional.any? && additional[0]['label-key'] == key
+        seen[:additional] << key
+        row = additional.shift
 
-      elsif data_seen.include?(key)
+        builder.row(key, help_labels: help_labels(labels), xpath: row['xpath'], value: row['value'], guidance: row['guidance'])
+
+      elsif seen[:enumerations].include?(key) || seen[filename].include?(key)
         builder.row(key, help_labels: help_labels(labels), reference: true)
 
       else
@@ -142,6 +149,7 @@ task :table do
 
     report(ignore, 'ignore.csv')
     report(enumerations, 'enumerations.csv')
+    report(additional, 'additional.csv')
     report(data, basename)
     report(data_skipped, 'skipped')
   end
