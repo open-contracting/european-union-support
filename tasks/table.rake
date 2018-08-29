@@ -43,9 +43,7 @@ task :table do
     ### Setup
 
     seen = {
-      ignore: Set.new,
       enumerations: Set.new,
-      additional: Set.new,
       filename => Set.new,
     }
 
@@ -95,23 +93,21 @@ task :table do
         builder.table
 
       elsif ignore.any? && ignore[0]['label-key'] == key
-        seen[:ignore] << key
         row = ignore.shift
-
         builder.row(key, help_labels: help_labels(labels), index: row['index'])
 
       elsif enumerations.any? && enumerations[0]['label-key'] == key
-        seen[:enumerations] << key
         row = enumerations.shift
-
         builder.row(key, help_labels: help_labels(labels), xpath: row['xpath'], value: row['value'], guidance: row['guidance'])
+
+        seen[:enumerations] << key
 
       # Fields appear in a different order in the form and XSD.
       elsif i = data[0..3].index{ |row| row['label-key'] == key }
-        seen[filename] << key
         row = data.delete_at(i)
-
         builder.row(key, help_labels: help_labels(labels), xpath: row['xpath'], index: row['index'], guidance: row['guidance'])
+
+        seen[filename] << key
 
         data.each do |row|
           if skipper.call(row)
@@ -127,10 +123,8 @@ task :table do
         data = data.drop_while(&skipper)
 
       elsif additional.any? && additional[0]['label-key'] == key
-        seen[:additional] << key
         row = additional.shift
-
-        builder.row(key, help_labels: help_labels(labels), xpath: row['xpath'], value: row['value'], guidance: row['guidance'])
+        builder.row(key, help_labels: help_labels(labels), guidance: row['guidance'])
 
       elsif seen[:enumerations].include?(key) || seen[filename].include?(key)
         builder.row(key, help_labels: help_labels(labels), reference: true)

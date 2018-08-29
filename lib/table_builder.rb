@@ -73,7 +73,7 @@ class TableBuilder
     if xpath
       @targets[label] = xpath
     end
-    if guidance
+    if xpath && guidance
       @guidances[xpath] = guidance
     end
 
