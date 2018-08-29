@@ -51,7 +51,7 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,,,,"For each `CODE` attribute, if not already added, add a `Classification` object to the `tender.additionalClassifications` array, set `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to `.id`. If the contract is divided into lots, add the lot's `.id` to the classification's `.relatedLots`. (PROPOSAL)"
 /OBJECT_CONTRACT/OBJECT_DESCR/NUTS,nutscode,,,
 /OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE,mainsiteplace_works_delivery,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,descr_procurement,II.2.4,,"If the contract is divided into lots, map to the lot's `.description`. Otherwise, append to `tender.description`.\n\n*This results in a loss of structure if the contract isn't divided into lots.* (WARNING)"
+/OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,descr_procurement,II.2.4,,"If the contract is divided into lots, map to the lot's `.description`. Otherwise, append to `tender.description`.\n\n*If the contract isn't divided into lots, this results in a loss of structure.* (WARNING)"
 /OBJECT_CONTRACT/OBJECT_DESCR/AC,award_criteria,II.2.5,,""
 /OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY,award_criterion_quality,,,
 /OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY/AC_CRITERION,award_criterion_name,,,
@@ -59,11 +59,11 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_COST,award_lowest_cost,,,
 /OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE,price,,,
 /OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE/AC_WEIGHTING,weighting,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Options,"If checked, add an `Options` object to the `tender.options` array, and set its `.id`. If the contract is divided into lots, set its `.relatedLot` to the lot's `.id`. (PROPOSAL)"
+/OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Options,"Add an `Options` object to the `tender.options` array, and set its `.id`. If the contract is divided into lots, set its `.relatedLot` to the lot's `.id`. (PROPOSAL)"
 /OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS_DESCR,options_descr,,,Set the options' `.description` (PROPOSAL)
-/OBJECT_CONTRACT/OBJECT_DESCR/NO_OPTIONS,_no,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,_yes,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,
+/OBJECT_CONTRACT/OBJECT_DESCR/NO_OPTIONS,_no,,,"Discard. If there is no corresponding `Options` object in the `tender.options` array, then there are no options."
+/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,eu_progr_ref,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_isEUFunded https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_EUFunded,"Add a `Finance` object to the `planning.budget.finance` array, set its `.id`, and map to `.title`. If the contract is divided into lots, set its `.relatedLot` to the lot's `.id`. (PROPOSAL)"
+/OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,"Discard. If there's no party with the name 'European Union' and the role 'funder', then the procurement isn't related to a project and/or programme financed by European Union funds. (PROPOSAL)"
 /OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,info_additional,II.2.14,,Append to `tender.description`\n\n*This results in a loss of structure.* (WARNING)
 /PROCEDURE,procedure,IV,,""
 /PROCEDURE/PT_OPEN,proctype_open,,,
