@@ -1,24 +1,24 @@
 xpath,label-key,index,comment,guidance
-/@LG,,,,
-/@CATEGORY,,,,
-/LEGAL_BASIS,,,,
+/@LG,,,,"Lowercase, and map to `language`"
+/@CATEGORY,,,,Discard. TED translates at form-level. OCDS translates at field-level.
+/LEGAL_BASIS,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_LegalBasis,Map to `tender.legalBasis` (PROPOSAL)
 /LEGAL_BASIS_OTHER,,,,
-/CONTRACTING_BODY,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL,,,,
+/CONTRACTING_BODY,,,,""
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,,,,"[Add a party](..#add-a-party), and add 'buyer' to its `.roles`\n\nSet `buyer.id` to its `.id` and `buyer.name` to its [`.name`](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,,,,Map to `.name` and `.identifier.legalName`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,,,,"Map to `.identifier.id`, and set `.identifier.scheme`"
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS,,,,Map to `.address.streetAddress`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN,,,,Map to `.address.locality`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE,,,,Map to `.address.postalCode`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY,,,,"Take the country code in the `VALUE` attribute, translate to a country name, and map to `.address.countryName`\n\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation. (ISSUE)"
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT,,,,Map to `.contactPoint.name`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE,,,,Map to `.contactPoint.telephone`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL,,,,Map to `.contactPoint.email`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,,,,Map to `.contactPoint.faxNumber`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,"Take the NUTS code in the `CODE` attribute, and map to `.address.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,,,,Map to `.details.url` (PROPOSAL)
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/organization_BuyerProfile,Map to `.details.buyerProfile` (PROPOSAL)
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL,,,,"[Add a party](..#add-a-party), add 'buyer' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/OFFICIALNAME,,,,
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/NATIONALID,,,,
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/ADDRESS,,,,
@@ -32,17 +32,17 @@ xpath,label-key,index,comment,guidance
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/NUTS,,,,
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/URL_GENERAL,,,,
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/URL_BUYER,,,,
-/OBJECT_CONTRACT,,,,
-/OBJECT_CONTRACT/TITLE,,,,
-/OBJECT_CONTRACT/REFERENCE_NUMBER,,,,
-/OBJECT_CONTRACT/CPV_MAIN,,,,
-/OBJECT_CONTRACT/CPV_MAIN/CPV_CODE,,,,
-/OBJECT_CONTRACT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,,,,
-/OBJECT_CONTRACT/TYPE_CONTRACT,,,,
-/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,,,,
-/OBJECT_CONTRACT/SHORT_DESCR,,,,
-/COMPLEMENTARY_INFO,,,,
-/COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,,,,
+/OBJECT_CONTRACT,,,,""
+/OBJECT_CONTRACT/TITLE,,,,Map to `tender.title`
+/OBJECT_CONTRACT/REFERENCE_NUMBER,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_BuyerInternalReferenceID,Map to `tender.id`
+/OBJECT_CONTRACT/CPV_MAIN,,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_Classification,""
+/OBJECT_CONTRACT/CPV_MAIN/CPV_CODE,,,,"Set `tender.classification.scheme` to 'CPV', take the CPV code in the `CODE` attribute, and map to `tender.classification.id` (PROPOSAL)"
+/OBJECT_CONTRACT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,,,,"For each `CODE` attribute, add a `Classification` object to the `tender.additionalClassifications` array, set `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to `.id` (PROPOSAL)"
+/OBJECT_CONTRACT/TYPE_CONTRACT,,,,""
+/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,,,,Set `tender.mainProcurementCategory` as follows:
+/OBJECT_CONTRACT/SHORT_DESCR,,,,Map to `tender.description`
+/COMPLEMENTARY_INFO,,,,""
+/COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,,,,Map to `date`
 /COMPLEMENTARY_INFO/NOTICE_NUMBER_OJ,,,,
 /CHANGES,,,,
 /CHANGES/CHANGE,,,,
