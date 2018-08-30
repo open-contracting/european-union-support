@@ -83,6 +83,10 @@ Many XPath's are common across forms. To copy guidance across forms, run:
     rake label:copy SOURCE=07 FILES=22
     rake label:copy SOURCE=21 FILES=22
 
+Report any CSV quoting errors:
+
+    rake label:validate
+
 Report any incoherences in mappings across forms. Note that some forms use check boxes instead of radio buttons, and some change tense from present to past.
 
     rake label:coherence

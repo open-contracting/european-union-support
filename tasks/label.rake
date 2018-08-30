@@ -33,12 +33,23 @@ namespace :label do
     end
   end
 
+  desc 'Report any CSV quoting errors'
+  task :validate do
+    files('output/mapping/F{}_*.csv').each do |filename|
+      CSV.foreach(filename, headers: true) do |row|
+        if row.size != 5
+          raise "#{filename}: #{row['xpath']} unquoted comma!"
+        end
+      end
+    end
+  end
+
   desc 'Report any XPath values without corresponding label keys, and vice versa'
   task :missing do
     label_keys_seen = Set.new
     indices_seen = Set.new
 
-    %w(enumerations.csv ignore.csv).each do |basename|
+    %w(ignore.csv enumerations.csv additional.csv).each do |basename|
       CSV.read(File.join('output', 'mapping', basename), headers: true).each do |row|
         label_keys_seen << row['label-key']
         indices_seen << row['index']
@@ -53,12 +64,37 @@ namespace :label do
           end
         else
           label_keys_seen << row['label-key']
+        end
+        if row['index']
           indices_seen << row['index']
         end
       end
     end
 
-    regex = /\A(section_\d|notice_contract_award|notice_contract_award_sub|directive_201424)\z/
+    # Some form titles are used on later forms and therefore ignored with ignore.csv.
+    form_title_labels = [
+      # notice_pin on F02
+      # notice_contract on F03
+      'notice_contract_award', # F03
+      'notice_contract_award_sub', # F03
+      # notice_periodic_utilities on F05
+      # notice_contract_utilities on F06
+      'notice_award_utilities', # F06
+      'notice_contract_award_sub', # F06
+      # notice_qualification_utilities on F22
+      'notice_relates_to', # F08
+      # notice_design_cont on F13
+      'notice_result_design_cont', # F13
+      'notice_corrigendum', # F14
+      'notice_mod', # F20
+      'notice_social_public', # F21
+      'notice_social_util', # F22
+      'notice_social_concess', # F23
+      # notice_concession on F24
+      # notice_concession_award on F23
+    ]
+
+    regex = /\A(annex_d\d|section_\d|directive_201424|#{form_title_labels.join('|')})\z/
 
     files('source/*_TED_forms_templates/F{}_*.pdf').each do |filename|
       text = pdftotext(filename)
@@ -79,9 +115,6 @@ namespace :label do
   task :comments do
     files('output/mapping/F{}_*.csv').each do |filename|
       CSV.foreach(filename, headers: true) do |row|
-        if row.size != 5
-          raise "#{filename}: #{row['xpath']} unquoted comma!"
-        end
         if row['comment']
           puts "#{filename}: %-60s %s" % [row['xpath'], row['comment']]
         end
@@ -89,7 +122,7 @@ namespace :label do
     end
   end
 
-  desc 'Copy mappings across forms'
+  desc 'Copy OCDS guidance across forms'
   task :copy do
     number = ENV['SOURCE']
     source = Dir["output/mapping/F#{number}_*.csv"][0]
@@ -110,6 +143,7 @@ namespace :label do
         other = xpaths[key]
         if other
           row['comment'] = other['comment']
+
           guidance = other['guidance']
           if guidance
             row['guidance'] = guidance
