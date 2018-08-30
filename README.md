@@ -24,7 +24,7 @@ Using the fish shell:
     # Get the English PDFs.
     # http://simap.ted.europa.eu/standard-forms-for-public-procurement
     mkdir -p English
-    for i in 01 02 03 14 20; curl -o English/EN_F$i.pdf http://simap.ted.europa.eu/documents/10184/99173/EN_F$i.pdf; end
+    for i in 01 02 03 04 05 06 07 08 12 13 14 15 20 21 22 23 24 25; curl -o English/EN_F$i.pdf http://simap.ted.europa.eu/documents/10184/99173/EN_F$i.pdf; end
 
     # Get the XML schema.
     curl -O 'ftp://eu-tenders:eu-tenders-123@ted.europa.eu/Resources/TEDFTP_Schema_20180704_TED_publication.zip'
