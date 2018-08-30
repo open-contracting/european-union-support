@@ -75,11 +75,11 @@ Once completed, run `rake missing` to see which XML elements and attributes have
 
 Many XPath's are common across forms. To copy guidance across forms, run:
 
-    rake label:copy SOURCE=01 FILES=02,03,04,05,06,07,21,22,23
+    rake label:copy SOURCE=01
     rake label:copy SOURCE=02 FILES=03,05
-    rake label:copy SOURCE=03 FILES=06,13,25
+    rake label:copy SOURCE=03 FILES=06,13,20,25
     rake label:copy SOURCE=04 FILES=05,06,07,21,22,23
-    rake label:copy SOURCE=06 FILES=22
+    rake label:copy SOURCE=06 FILES=20,22
     rake label:copy SOURCE=07 FILES=22
     rake label:copy SOURCE=21 FILES=22
 
