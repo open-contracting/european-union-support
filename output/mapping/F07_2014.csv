@@ -4,98 +4,98 @@ xpath,label-key,index,comment,guidance
 /LEGAL_BASIS,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_LegalBasis,Map to `tender.legalBasis` (PROPOSAL)
 /NOTICE,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_PurposeOfNotice,""
 /CONTRACTING_BODY,,,,""
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,,,,"[Add a party](..#add-a-party), and add 'buyer' to its `.roles`\n\nSet `buyer.id` to its `.id` and `buyer.name` to its [`.name`](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,,,,Map to `.name` and `.identifier.legalName`
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,,,,"Map to `.identifier.id`, and set `.identifier.scheme`"
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS,,,,Map to `.address.streetAddress`
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN,,,,Map to `.address.locality`
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE,,,,Map to `.address.postalCode`
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY,,,,"Take the country code in the `VALUE` attribute, translate to a country name, and map to `.address.countryName`\n\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation. (ISSUE)"
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT,,,,Map to `.contactPoint.name`
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE,,,,Map to `.contactPoint.telephone`
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL,,,,Map to `.contactPoint.email`
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,,,,Map to `.contactPoint.faxNumber`
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,"Take the NUTS code in the `CODE` attribute, and map to `.address.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,,,,Map to `.details.url` (PROPOSAL)
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/organization_BuyerProfile,Map to `.details.buyerProfile` (PROPOSAL)
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,name_address_contact,I.1,,"[Add a party](..#add-a-party), and add 'buyer' to its `.roles`\n\nSet `buyer.id` to its `.id` and `buyer.name` to its [`.name`](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,name_official,,,Map to `.name` and `.identifier.legalName`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,national_id,,,"Map to `.identifier.id`, and set `.identifier.scheme`"
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS,address_postal,,,Map to `.address.streetAddress`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN,address_town,,,Map to `.address.locality`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE,address_postcode,,,Map to `.address.postalCode`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY,address_country,,,"Take the country code in the `VALUE` attribute, translate to a country name, and map to `.address.countryName`\n\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation. (ISSUE)"
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT,contactpoint,,,Map to `.contactPoint.name`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE,address_phone,,,Map to `.contactPoint.telephone`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL,address_email,,,Map to `.contactPoint.email`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,address_fax,,,Map to `.contactPoint.faxNumber`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,nutscode,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,"Take the NUTS code in the `CODE` attribute, and map to `.address.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,url_general,,,Map to `.details.url` (PROPOSAL)
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,url_buyerprofile,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/organization_BuyerProfile,Map to `.details.buyerProfile` (PROPOSAL)
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL,,,,"[Add a party](..#add-a-party), add 'buyer' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
-/CONTRACTING_BODY/JOINT_PROCUREMENT_INVOLVED,,,,"Discard. If there are multiple parties with the role 'buyer', then the contract involves joint procurement. (When *The contract involves joint procurement* is checked, at least one additional contracting authority is provided.)"
-/CONTRACTING_BODY/PROCUREMENT_LAW,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_JointProcurement,Map to `tender.crossBorderLaw` (PROPOSAL)
-/CONTRACTING_BODY/CENTRAL_PURCHASING,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,Add 'centralPurchasingBody' to the `.roles` of the party (PROPOSAL)
-/CONTRACTING_BODY/DOCUMENT_FULL,,,,"Discard. If no `tender.participationFees` have a `.type` of 'document', then access is **assumed to be** unrestricted. (WARNING)\n\nTo provide direct access to procurement documents, add `Document` objects to the `tender.documents` array, and set their `.id` and other fields."
-/CONTRACTING_BODY/DOCUMENT_RESTRICTED,,,,"Discard. If any `tender.participationFees` have a `.type` of 'document', then access is restricted.\n\nTo provide the cost and terms of payment for procurement documents, use the [Participation Fees](https://github.com/open-contracting/ocds_participationFee_extension) extension, add `ParticipationFee` objects to the `tender.participationFees` array, set their `.type` to 'document', and set their `.id` and other fields."
+/CONTRACTING_BODY/JOINT_PROCUREMENT_INVOLVED,joint_procurement_involves,,,"Discard. If there are multiple parties with the role 'buyer', then the contract involves joint procurement. (When *The contract involves joint procurement* is checked, at least one additional contracting authority is provided.)"
+/CONTRACTING_BODY/PROCUREMENT_LAW,joint_national_law,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_JointProcurement,Map to `tender.crossBorderLaw` (PROPOSAL)
+/CONTRACTING_BODY/CENTRAL_PURCHASING,joint_procurement_central,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,Add 'centralPurchasingBody' to the `.roles` of the party (PROPOSAL)
+/CONTRACTING_BODY/DOCUMENT_FULL,address_obtain_docs,,,"Discard. If no `tender.participationFees` have a `.type` of 'document', then access is **assumed to be** unrestricted. (WARNING)\n\nTo provide direct access to procurement documents, add `Document` objects to the `tender.documents` array, and set their `.id` and other fields."
+/CONTRACTING_BODY/DOCUMENT_RESTRICTED,docs_restricted,,,"Discard. If any `tender.participationFees` have a `.type` of 'document', then access is restricted.\n\nTo provide the cost and terms of payment for procurement documents, use the [Participation Fees](https://github.com/open-contracting/ocds_participationFee_extension) extension, add `ParticipationFee` objects to the `tender.participationFees` array, set their `.type` to 'document', and set their `.id` and other fields."
 /CONTRACTING_BODY/URL_DOCUMENT,,,,Map to `.contactPoint.url`
-/CONTRACTING_BODY/ADDRESS_FURTHER_INFO_IDEM,,,,"Discard. Additional information can be obtained from the abovementioned address, unless otherwised specified."
-/CONTRACTING_BODY/ADDRESS_FURTHER_INFO,,,,"If only the contact person is different, you can use the [Additional Contact Points](https://github.com/open-contracting/ocds_additionalContactPoints_extension) extension, get the `Organization` object for the buyer, add a `ContactPoint` object to its `.additionalContactPoints` array, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT).\n\nOtherwise, [add a party](..#add-a-party), add 'processContactPoint' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME). (PROPOSAL)"
-/CONTRACTING_BODY/URL_PARTICIPATION,,,,"Add 'electronicSubmission' to `tender.submissionMethod`, and map to `tender.submissionMethodDetails`\n\n*If 'to the following address' is selected, this results in a loss of structure.* (WARNING)"
-/CONTRACTING_BODY/ADDRESS_PARTICIPATION_IDEM,,,,"Add 'written' to `tender.submissionMethod`, and discard. Tenders or requests to participate must be submitted to the abovementioned address, unless otherwised specified."
-/CONTRACTING_BODY/ADDRESS_PARTICIPATION,,,,"Add 'written' to `tender.submissionMethod`, and map to `tender.submissionMethodDetails`\n\n*If 'electronically via' is checked, this results in a loss of structure.* (WARNING)"
-/CONTRACTING_BODY/URL_TOOL,,,,Map to `tender.communicationDetails.accessToolUrl` (PROPOSAL)
+/CONTRACTING_BODY/ADDRESS_FURTHER_INFO_IDEM,as_contacts_above,,,"Discard. Additional information can be obtained from the abovementioned address, unless otherwised specified."
+/CONTRACTING_BODY/ADDRESS_FURTHER_INFO,address_another,,,"If only the contact person is different, you can use the [Additional Contact Points](https://github.com/open-contracting/ocds_additionalContactPoints_extension) extension, get the `Organization` object for the buyer, add a `ContactPoint` object to its `.additionalContactPoints` array, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT).\n\nOtherwise, [add a party](..#add-a-party), add 'processContactPoint' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME). (PROPOSAL)"
+/CONTRACTING_BODY/URL_PARTICIPATION,address_send_tenders,,,"Add 'electronicSubmission' to `tender.submissionMethod`, and map to `tender.submissionMethodDetails`\n\n*If 'to the following address' is selected, this results in a loss of structure.* (WARNING)"
+/CONTRACTING_BODY/ADDRESS_PARTICIPATION_IDEM,address_to_above,,,"Add 'written' to `tender.submissionMethod`, and discard. Tenders or requests to participate must be submitted to the abovementioned address, unless otherwised specified."
+/CONTRACTING_BODY/ADDRESS_PARTICIPATION,address_following,,,"Add 'written' to `tender.submissionMethod`, and map to `tender.submissionMethodDetails`\n\n*If 'electronically via' is checked, this results in a loss of structure.* (WARNING)"
+/CONTRACTING_BODY/URL_TOOL,url_communication_tools,,,Map to `tender.communicationDetails.accessToolUrl` (PROPOSAL)
 /CONTRACTING_BODY/CE_ACTIVITY,,,,*Pending guidance from F04*
 /CONTRACTING_BODY/CE_ACTIVITY_OTHER,,,,*Pending guidance from F04*
-/OBJECT_CONTRACT,,,,""
-/OBJECT_CONTRACT/TITLE,,,,Map to `tender.title`
-/OBJECT_CONTRACT/REFERENCE_NUMBER,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_BuyerInternalReferenceID,Map to `tender.id`
-/OBJECT_CONTRACT/CPV_MAIN,,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_Classification,""
-/OBJECT_CONTRACT/CPV_MAIN/CPV_CODE,,,,"Set `tender.classification.scheme` to 'CPV', take the CPV code in the `CODE` attribute, and map to `tender.classification.id` (PROPOSAL)"
-/OBJECT_CONTRACT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,,,,"For each `CODE` attribute, add a `Classification` object to the `tender.additionalClassifications` array, set `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to `.id` (PROPOSAL)"
-/OBJECT_CONTRACT/TYPE_CONTRACT,,,,""
+/OBJECT_CONTRACT,object,,,""
+/OBJECT_CONTRACT/TITLE,title_contract,II.1.1,,Map to `tender.title`
+/OBJECT_CONTRACT/REFERENCE_NUMBER,fileref,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_BuyerInternalReferenceID,Map to `tender.id`
+/OBJECT_CONTRACT/CPV_MAIN,,II.1.2,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_Classification,""
+/OBJECT_CONTRACT/CPV_MAIN/CPV_CODE,cpv_main,,,"Set `tender.classification.scheme` to 'CPV', take the CPV code in the `CODE` attribute, and map to `tender.classification.id` (PROPOSAL)"
+/OBJECT_CONTRACT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,"For each `CODE` attribute, add a `Classification` object to the `tender.additionalClassifications` array, set `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to `.id` (PROPOSAL)"
+/OBJECT_CONTRACT/TYPE_CONTRACT,type_contract,II.1.3,,""
 /OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,,,,Set `tender.mainProcurementCategory` as follows:
-/OBJECT_CONTRACT/OBJECT_DESCR,,,,"If the contract is divided into lots, add a `Lot` object to the `tender.lots` array"
-/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL,,,,""
-/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_CODE,,,,"For each `CODE` attribute, if not already added, add a `Classification` object to the `tender.additionalClassifications` array, set `.scheme` to 'CPV', and map to `.id`. If the contract is divided into lots, add the lot's `.id` to the classification's `.relatedLots`. (PROPOSAL)"
-/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,,,,"For each `CODE` attribute, if not already added, add a `Classification` object to the `tender.additionalClassifications` array, set `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to `.id`. If the contract is divided into lots, add the lot's `.id` to the classification's `.relatedLots`. (PROPOSAL)"
-/OBJECT_CONTRACT/OBJECT_DESCR/NUTS,,,,*Pending guidance from F01*
-/OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE,,,,*Pending guidance from F01*
-/OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,,,,"If the contract is divided into lots, map to the lot's `.description`. Otherwise, append to `tender.description`.\n\n*If the contract isn't divided into lots, this results in a loss of structure.* (WARNING)"
-/OBJECT_CONTRACT/OBJECT_DESCR/AC,,,,""
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY,,,,*Pending guidance from F01*
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY/AC_CRITERION,,,,*Pending guidance from F01*
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY/AC_WEIGHTING,,,,*Pending guidance from F01*
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_COST,,,,*Pending guidance from F01*
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE,,,,*Pending guidance from F01*
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE/AC_WEIGHTING,,,,*Pending guidance from F01*
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PROCUREMENT_DOC,,,,*Pending guidance from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,"If the contract is divided into lots, add a `Lot` object to the `tender.lots` array"
+/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL,cpv_additional,II.2.2,,""
+/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_CODE,cpv_main,,,"For each `CODE` attribute, if not already added, add a `Classification` object to the `tender.additionalClassifications` array, set `.scheme` to 'CPV', and map to `.id`. If the contract is divided into lots, add the lot's `.id` to the classification's `.relatedLots`. (PROPOSAL)"
+/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,"For each `CODE` attribute, if not already added, add a `Classification` object to the `tender.additionalClassifications` array, set `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to `.id`. If the contract is divided into lots, add the lot's `.id` to the classification's `.relatedLots`. (PROPOSAL)"
+/OBJECT_CONTRACT/OBJECT_DESCR/NUTS,nutscode,,,*Pending guidance from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE,mainsiteplace_works_delivery,,,*Pending guidance from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,descr_procurement,II.2.4,,"If the contract is divided into lots, map to the lot's `.description`. Otherwise, append to `tender.description`.\n\n*If the contract isn't divided into lots, this results in a loss of structure.* (WARNING)"
+/OBJECT_CONTRACT/OBJECT_DESCR/AC,award_criteria,II.2.5,,""
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY,award_criterion_quality,,,*Pending guidance from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY/AC_CRITERION,award_criterion_name,,,*Pending guidance from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY/AC_WEIGHTING,weighting,,,*Pending guidance from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_COST,award_lowest_cost,,,*Pending guidance from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE,price,,,*Pending guidance from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE/AC_WEIGHTING,weighting,,,*Pending guidance from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PROCUREMENT_DOC,award_criteria_descriptive,,,*Pending guidance from F01*
 /OBJECT_CONTRACT/OBJECT_DESCR/INDEFINITE_DURATION,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/DATE_START,,,,Map to `.contractPeriod.startDate` (PROPOSAL FOR LOTS)
-/OBJECT_CONTRACT/OBJECT_DESCR/DATE_END,,,,Map to `.contractPeriod.endDate` (PROPOSAL FOR LOTS)
+/OBJECT_CONTRACT/OBJECT_DESCR/DATE_START,starting,,,Map to `.contractPeriod.startDate` (PROPOSAL FOR LOTS)
+/OBJECT_CONTRACT/OBJECT_DESCR/DATE_END,end,,,Map to `.contractPeriod.endDate` (PROPOSAL FOR LOTS)
 /OBJECT_CONTRACT/OBJECT_DESCR/RENEWAL,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Renewals,"Add a `Renewals` object to the `tender.renewals` array, and set its `.id`. If the contract is divided into lots, set its `.relatedLot` to the lot's `.id`. (PROPOSAL)"
 /OBJECT_CONTRACT/OBJECT_DESCR/RENEWAL_DESCR,,,,Set the renewals' `.description` (PROPOSAL)
-/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_isEUFunded https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_EUFunded,"If not already added, [add a party](..#add-a-party), add 'funder' to its `.roles`, and set its `.name` to 'European Union'. (PROPOSAL)\n\nAdd a `Finance` object to the `planning.budget.finance` array, and set its `.financingParty.name` to 'European Union' and `.financingParty.id` to the party's `.id`. If a structured identifier is used to identify the project, map to `.id`; otherwise, set its `.id`, and map to `.title`. If the contract is divided into lots, set its `.relatedLot` to the lot's `.id`. (PROPOSAL)"
-/OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds. (PROPOSAL)"
-/LEFTI,,,,""
-/LEFTI/RESTRICTED_SHELTERED_WORKSHOP,,,,*Pending guidance from F01*
-/LEFTI/RESTRICTED_SHELTERED_PROGRAM,,,,*Pending guidance from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_isEUFunded https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_EUFunded,"If not already added, [add a party](..#add-a-party), add 'funder' to its `.roles`, and set its `.name` to 'European Union'. (PROPOSAL)\n\nAdd a `Finance` object to the `planning.budget.finance` array, and set its `.financingParty.name` to 'European Union' and `.financingParty.id` to the party's `.id`. If a structured identifier is used to identify the project, map to `.id`; otherwise, set its `.id`, and map to `.title`. If the contract is divided into lots, set its `.relatedLot` to the lot's `.id`. (PROPOSAL)"
+/OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds. (PROPOSAL)"
+/LEFTI,info_legal,,,""
+/LEFTI/RESTRICTED_SHELTERED_WORKSHOP,restricted_sheltered_workshop,,,*Pending guidance from F01*
+/LEFTI/RESTRICTED_SHELTERED_PROGRAM,restricted_sheltered_program,,,*Pending guidance from F01*
 /LEFTI/QUALIFICATION,,,,
 /LEFTI/QUALIFICATION/CONDITIONS,,,,
 /LEFTI/QUALIFICATION/METHODS,,,,
-/LEFTI/PARTICULAR_PROFESSION,,,,*Pending guidance from F01*
+/LEFTI/PARTICULAR_PROFESSION,particular_profession_reserved,,,*Pending guidance from F01*
 /LEFTI/PARTICULAR_PROFESSION/@CTYPE,,,,*Pending guidance from F01*
-/LEFTI/REFERENCE_TO_LAW,,,,*Pending guidance from F01*
-/LEFTI/PERFORMANCE_CONDITIONS,,,,*Pending guidance from F01*
-/LEFTI/PERFORMANCE_STAFF_QUALIFICATION,,,,*Pending guidance from F01*
-/PROCEDURE,,,,""
-/PROCEDURE/EAUCTION_USED,,,,*Pending guidance from F01*
-/PROCEDURE/INFO_ADD_EAUCTION,,,,*Pending guidance from F01*
+/LEFTI/REFERENCE_TO_LAW,ref_law_reg_prov,,,*Pending guidance from F01*
+/LEFTI/PERFORMANCE_CONDITIONS,other_conditions,III.2.2,,*Pending guidance from F01*
+/LEFTI/PERFORMANCE_STAFF_QUALIFICATION,staff_responsible_indicate,,,*Pending guidance from F01*
+/PROCEDURE,procedure,,,""
+/PROCEDURE/EAUCTION_USED,eauction_will_used,,,*Pending guidance from F01*
+/PROCEDURE/INFO_ADD_EAUCTION,eauction_info_addit,,,*Pending guidance from F01*
 /PROCEDURE/NOTICE_NUMBER_OJ,,,,
-/PROCEDURE/LANGUAGES,,,,""
+/PROCEDURE/LANGUAGES,languages_allowed,IV.2.4,,""
 /PROCEDURE/LANGUAGES/LANGUAGE,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_SubmissionLanguages,Map to `tender.submissionLanguages` (PROPOSAL)
-/COMPLEMENTARY_INFO,,,,""
-/COMPLEMENTARY_INFO/EORDERING,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows,Add 'electronicOrdering' to `tender.TODO` (PROPOSAL)
-/COMPLEMENTARY_INFO/EINVOICING,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows,Add 'electronicInvoicing' to `tender.TODO` (PROPOSAL)
-/COMPLEMENTARY_INFO/EPAYMENT,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows,Add 'electronicPayment' to `tender.TODO` (PROPOSAL)
-/COMPLEMENTARY_INFO/INFO_ADD,,,,*Pending guidance from F01*
-/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](..#add-a-party), and add 'reviewBody' to its `.roles`"
-/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/OFFICIALNAME,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME
-/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/ADDRESS,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS
-/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/TOWN,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN
-/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/POSTAL_CODE,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE
-/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/COUNTRY,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY
-/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/PHONE,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE
-/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/E_MAIL,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL
-/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/FAX,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX
-/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/URL,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL
-/COMPLEMENTARY_INFO/ADDRESS_MEDIATION_BODY,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](..#add-a-party), and add 'mediationBody' to its `.roles` (PROPOSAL)"
-/COMPLEMENTARY_INFO/REVIEW_PROCEDURE,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,Map to `tender.reviewDetails` (PROPOSAL)
-/COMPLEMENTARY_INFO/ADDRESS_REVIEW_INFO,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](..#add-a-party), and add 'reviewContactPoint' to its `.roles` (PROPOSAL)"
-/COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,,,,Map to `date`
+/COMPLEMENTARY_INFO,info_complement,,,""
+/COMPLEMENTARY_INFO/EORDERING,eordering_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows,Add 'electronicOrdering' to `tender.TODO` (PROPOSAL)
+/COMPLEMENTARY_INFO/EINVOICING,einvoicing_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows,Add 'electronicInvoicing' to `tender.TODO` (PROPOSAL)
+/COMPLEMENTARY_INFO/EPAYMENT,epayment_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows,Add 'electronicPayment' to `tender.TODO` (PROPOSAL)
+/COMPLEMENTARY_INFO/INFO_ADD,info_additional,VI.3,,*Pending guidance from F01*
+/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY,appeals_body,VI.4.1,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](..#add-a-party), and add 'reviewBody' to its `.roles`"
+/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/OFFICIALNAME,name_official,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME
+/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/ADDRESS,address_postal,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS
+/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/TOWN,address_town,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN
+/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/POSTAL_CODE,address_postcode,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE
+/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/COUNTRY,address_country,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY
+/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/PHONE,address_phone,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE
+/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/E_MAIL,address_email,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL
+/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/FAX,address_fax,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX
+/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/URL,internet,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL
+/COMPLEMENTARY_INFO/ADDRESS_MEDIATION_BODY,mediation_body,VI.4.2,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](..#add-a-party), and add 'mediationBody' to its `.roles` (PROPOSAL)"
+/COMPLEMENTARY_INFO/REVIEW_PROCEDURE,appeals_deadline,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,Map to `tender.reviewDetails` (PROPOSAL)
+/COMPLEMENTARY_INFO/ADDRESS_REVIEW_INFO,appeals_info,VI.4.4,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](..#add-a-party), and add 'reviewContactPoint' to its `.roles` (PROPOSAL)"
+/COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,date_dispatch,VI.5,,Map to `date`
