@@ -39,7 +39,12 @@ def files(glob)
 end
 
 def pdftotext(path)
-  lines = `pdftotext -layout #{path} -`.split("\n")
+  text_path = path.sub(/\.pdf/, '.txt')
+  if File.exist?(text_path)
+    lines = File.readlines(text_path, chomp: true)
+  else
+    lines = `pdftotext -layout #{path} -`.split("\n")
+  end
 
   # Remove endnotes.
   lines = lines[0...lines.index{ |line| line['<<HD_reminder>>'] } || -1] + lines[lines.index{ |line| line['<<annex_d1>>'] } || -1...-1]
@@ -51,6 +56,10 @@ end
 
 def label_keys(text)
   text.scan(/<<([^>]+)>>/).flatten
+end
+
+def indices(text)
+  text.scan(/\b[IV]+(?:\.\d+)*/).flatten
 end
 
 def help_text?(key)
