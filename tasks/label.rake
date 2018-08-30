@@ -91,28 +91,40 @@ namespace :label do
 
   desc 'Copy mappings across forms'
   task :copy do
+    number = ENV['SOURCE']
+    source = Dir["output/mapping/F#{number}_*.csv"][0]
+
     xpaths = {}
-    CSV.foreach(ENV['FROM'], headers: true) do |row|
+    CSV.foreach(source, headers: true) do |row|
       xpaths[row['xpath']] = row
     end
 
-    headers = nil
-    rows = []
-    CSV.foreach(ENV['TO'], headers: true) do |row|
-      headers = row.headers
+    files('output/mapping/F{}_*.csv').each do |filename|
+      headers = nil
+      rows = []
 
-      key = row['xpath']
-      if xpaths.key?(key)
-        row['comment'] = xpaths[key]['comment']
-        row['guidance'] = xpaths[key]['guidance']
+      CSV.foreach(filename, headers: true) do |row|
+        headers = row.headers
+
+        key = row['xpath']
+        other = xpaths[key]
+        if other
+          row['comment'] = other['comment']
+          guidance = other['guidance']
+          if guidance
+            row['guidance'] = guidance
+          else
+            row['guidance'] = "*Pending guidance from F#{number}*"
+          end
+        end
+        rows << row
       end
-      rows << row
-    end
 
-    CSV.open(ENV['TO'], 'w') do |csv|
-      csv << headers
-      rows.each do |row|
-        csv << row
+      CSV.open(filename, 'w') do |csv|
+        csv << headers
+        rows.each do |row|
+          csv << row
+        end
       end
     end
   end
@@ -124,6 +136,11 @@ namespace :label do
     files('output/mapping/F{}_*.csv').each do |filename|
       CSV.foreach(filename, headers: true) do |row|
         if row['label-key']
+          # Exception for label:copy command.
+          if row['guidance'] && row['guidance'][/\A\*Pending guidance from F\d\d\*\z/]
+            row['guidance'] = nil
+          end
+
           key = row['xpath']
           actual = row.fields[1..-1]
           if mappings.key?(key)
