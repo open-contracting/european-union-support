@@ -23,3 +23,16 @@ xpath,value,label-key,numbers,guidance
 /OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,SERVICES,services,01|02|03,Map to 'services'
 /OBJECT_CONTRACT/OBJECT_DESCR/DURATION/@TYPE,MONTH,duration_months,01|02,"Multiply by 30, and map to `.contractPeriod.durationInDays` (PROPOSAL FOR LOTS)\n\nThere's an open issue ([#723](https://github.com/open-contracting/standard/issues/723)) about durations in months. (ISSUE)"
 /OBJECT_CONTRACT/OBJECT_DESCR/DURATION/@TYPE,DAY,indays,01|02,Map to `.contractPeriod.durationInDays` (PROPOSAL FOR LOTS)
+/NOTICE/@TYPE,PER_ONLY,notice_is_periodic_only,04,Add 'planning' to `tag`\n\nThis is equivalent to a [notice of planned procurement](https://www.wto.org/english/docs_e/legal_e/rev-gpr-94_01_e.htm#_Toc320546103) in the GPA.
+/NOTICE/@TYPE,PER_REDUCING_TIME_LIMITS,notice_reduces_timelimits,04,"Add 'planning' to `tag`\n\nAccording to [Article XI:4](https://www.wto.org/english/docs_e/legal_e/rev-gpr-94_01_e.htm#articleXI) of the GPA, which is reflected in [2014/24/EU](https://eur-lex.europa.eu/eli/dir/2014/24/oj), a contracting authority may reduce time limits by publishing a prior information notice that is not a call for competition."
+/NOTICE/@TYPE,PER_CALL_COMPETITION,notice_is_call,04,Add 'planning' and 'tender' to `tag`\n\nThis is equivalent to a [noticed of intended procurement](https://www.wto.org/english/docs_e/legal_e/rev-gpr-94_01_e.htm#articleVII) in the GPA.
+/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,PRODUCTION_TRANSPORT_DISTRIBUTION_GAS_HEAT,mainactiv_gas_product,04,
+/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,RAILWAY_SERVICES,mainactiv_railway,04,
+/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,ELECTRICITY,mainactiv_electricity,04,
+/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,URBAN_RAILWAY_TRAMWAY_TROLLEYBUS_BUS_SERVICES,mainactiv_bus,04,
+/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,EXPLORATION_EXTRACTION_GAS_OIL,mainactiv_gas_explor,04,
+/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,PORT_RELATED_ACTIVITIES,mainactiv_port,04,
+/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,EXPLORATION_EXTRACTION_COAL_OTHER_SOLID_FUEL,mainactiv_coal,04,
+/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,AIRPORT_RELATED_ACTIVITIES,mainactiv_airportrelated,04,
+/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,WATER,mainactiv_water,04,
+/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,POSTAL_SERVICES,mainactiv_postal,04,
