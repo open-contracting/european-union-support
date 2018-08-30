@@ -1,89 +1,89 @@
 xpath,label-key,index,comment,guidance
-/@LG,,,,
-/@CATEGORY,,,,
-/LEGAL_BASIS,,,,
-/NOTICE,,,,
-/CONTRACTING_BODY,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,,,,
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,,,,
-/CONTRACTING_BODY/DOCUMENT_FULL,,,,
-/CONTRACTING_BODY/DOCUMENT_RESTRICTED,,,,
-/CONTRACTING_BODY/URL_DOCUMENT,,,,
-/CONTRACTING_BODY/ADDRESS_FURTHER_INFO_IDEM,,,,
-/CONTRACTING_BODY/ADDRESS_FURTHER_INFO,,,,
-/CONTRACTING_BODY/URL_PARTICIPATION,,,,
-/CONTRACTING_BODY/ADDRESS_PARTICIPATION_IDEM,,,,
-/CONTRACTING_BODY/ADDRESS_PARTICIPATION,,,,
-/CONTRACTING_BODY/URL_TOOL,,,,
-/CONTRACTING_BODY/CA_TYPE,,,,
-/CONTRACTING_BODY/CA_TYPE_OTHER,,,,
-/CONTRACTING_BODY/CA_ACTIVITY,,,,
-/CONTRACTING_BODY/CA_ACTIVITY_OTHER,,,,
-/CONTRACTING_BODY/CE_ACTIVITY,,,,
-/CONTRACTING_BODY/CE_ACTIVITY_OTHER,,,,
-/OBJECT_CONTRACT,,,,
-/OBJECT_CONTRACT/TITLE,,,,
-/OBJECT_CONTRACT/REFERENCE_NUMBER,,,,
-/OBJECT_CONTRACT/CPV_MAIN,,,,
-/OBJECT_CONTRACT/CPV_MAIN/CPV_CODE,,,,
-/OBJECT_CONTRACT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,,,,
-/OBJECT_CONTRACT/TYPE_CONTRACT,,,,
-/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,,,,
-/OBJECT_CONTRACT/SHORT_DESCR,,,,
-/OBJECT_CONTRACT/VAL_ESTIMATED_TOTAL,,,,
-/OBJECT_CONTRACT/VAL_ESTIMATED_TOTAL/@CURRENCY,,,,
-/OBJECT_CONTRACT/VAL_TOTAL,,,,
-/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY,,,,
-/OBJECT_CONTRACT/VAL_RANGE_TOTAL,,,,
-/OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY,,,,
-/OBJECT_CONTRACT/VAL_RANGE_TOTAL/LOW,,,,
-/OBJECT_CONTRACT/VAL_RANGE_TOTAL/HIGH,,,,
-/OBJECT_CONTRACT/LOT_DIVISION,,,,
-/OBJECT_CONTRACT/LOT_DIVISION/LOT_ALL,,,,
-/OBJECT_CONTRACT/LOT_DIVISION/LOT_MAX_NUMBER,,,,
-/OBJECT_CONTRACT/LOT_DIVISION/LOT_ONE_ONLY,,,,
-/OBJECT_CONTRACT/LOT_DIVISION/LOT_MAX_ONE_TENDERER,,,,
-/OBJECT_CONTRACT/LOT_DIVISION/LOT_COMBINING_CONTRACT_RIGHT,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/@ITEM,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/TITLE,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/LOT_NO,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_CODE,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/NUTS,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/VAL_OBJECT,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/VAL_OBJECT/@CURRENCY,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/DURATION,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/DATE_START,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/DATE_END,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,,,,
-/OBJECT_CONTRACT/NO_LOT_DIVISION,,,,
-/LEFTI,,,,
-/LEFTI/RULES_CRITERIA,,,,
-/LEFTI/RESTRICTED_SHELTERED_WORKSHOP,,,,
-/LEFTI/RESTRICTED_SHELTERED_PROGRAM,,,,
-/LEFTI/PARTICULAR_PROFESSION,,,,
-/LEFTI/REFERENCE_TO_LAW,,,,
-/LEFTI/PERFORMANCE_CONDITIONS,,,,
-/LEFTI/PERFORMANCE_STAFF_QUALIFICATION,,,,
-/PROCEDURE,,,,
+/@LG,,,,"Lowercase, and map to `language`"
+/@CATEGORY,,,,Discard. TED translates at form-level. OCDS translates at field-level.
+/LEGAL_BASIS,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_LegalBasis,Map to `tender.legalBasis` (PROPOSAL)
+/NOTICE,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_PurposeOfNotice,""
+/CONTRACTING_BODY,,,,""
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,,,,"[Add a party](..#add-a-party), and add 'buyer' to its `.roles`\n\nSet `buyer.id` to its `.id` and `buyer.name` to its [`.name`](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,,,,Map to `.name` and `.identifier.legalName`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,,,,"Map to `.identifier.id`, and set `.identifier.scheme`"
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS,,,,Map to `.address.streetAddress`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN,,,,Map to `.address.locality`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE,,,,Map to `.address.postalCode`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY,,,,"Take the country code in the `VALUE` attribute, translate to a country name, and map to `.address.countryName`\n\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation. (ISSUE)"
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT,,,,Map to `.contactPoint.name`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE,,,,Map to `.contactPoint.telephone`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL,,,,Map to `.contactPoint.email`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,,,,Map to `.contactPoint.faxNumber`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,"Take the NUTS code in the `CODE` attribute, and map to `.address.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,,,,Map to `.details.url` (PROPOSAL)
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/organization_BuyerProfile,Map to `.details.buyerProfile` (PROPOSAL)
+/CONTRACTING_BODY/DOCUMENT_FULL,,,,"Discard. If no `tender.participationFees` have a `.type` of 'document', then access is **assumed to be** unrestricted. (WARNING)\n\nTo provide direct access to procurement documents, add `Document` objects to the `tender.documents` array, and set their `.id` and other fields."
+/CONTRACTING_BODY/DOCUMENT_RESTRICTED,,,,"Discard. If any `tender.participationFees` have a `.type` of 'document', then access is restricted.\n\nTo provide the cost and terms of payment for procurement documents, use the [Participation Fees](https://github.com/open-contracting/ocds_participationFee_extension) extension, add `ParticipationFee` objects to the `tender.participationFees` array, set their `.type` to 'document', and set their `.id` and other fields."
+/CONTRACTING_BODY/URL_DOCUMENT,,,,Map to `.contactPoint.url`
+/CONTRACTING_BODY/ADDRESS_FURTHER_INFO_IDEM,,,,"Discard. Additional information can be obtained from the abovementioned address, unless otherwised specified."
+/CONTRACTING_BODY/ADDRESS_FURTHER_INFO,,,,"If only the contact person is different, you can use the [Additional Contact Points](https://github.com/open-contracting/ocds_additionalContactPoints_extension) extension, get the `Organization` object for the buyer, add a `ContactPoint` object to its `.additionalContactPoints` array, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT).\n\nOtherwise, [add a party](..#add-a-party), add 'processContactPoint' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME). (PROPOSAL)"
+/CONTRACTING_BODY/URL_PARTICIPATION,,,,"Add 'electronicSubmission' to `tender.submissionMethod`, and map to `tender.submissionMethodDetails`\n\n*If 'to the following address' is selected, this results in a loss of structure.* (WARNING)"
+/CONTRACTING_BODY/ADDRESS_PARTICIPATION_IDEM,,,,"Add 'written' to `tender.submissionMethod`, and discard. Tenders or requests to participate must be submitted to the abovementioned address, unless otherwised specified."
+/CONTRACTING_BODY/ADDRESS_PARTICIPATION,,,,"Add 'written' to `tender.submissionMethod`, and map to `tender.submissionMethodDetails`\n\n*If 'electronically via' is checked, this results in a loss of structure.* (WARNING)"
+/CONTRACTING_BODY/URL_TOOL,,,,Map to `tender.communicationDetails.accessToolUrl` (PROPOSAL)
+/CONTRACTING_BODY/CA_TYPE,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, add a `Classification` object to its `.details.classifications` array, and set the latter's `.scheme` to 'TED' and `.id` as follows: (PROPOSAL)"
+/CONTRACTING_BODY/CA_TYPE_OTHER,,,,Map to any other code
+/CONTRACTING_BODY/CA_ACTIVITY,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, add a `Classification` object to its `.details.classifications` array, and set the latter's `.scheme` to ['COFOG'](https://unstats.un.org/unsd/publications/catalogue?selectID=145) and `.id` as follows: (PROPOSAL)"
+/CONTRACTING_BODY/CA_ACTIVITY_OTHER,,,,Map to any other code
+/CONTRACTING_BODY/CE_ACTIVITY,,,,*Pending guidance from F04*
+/CONTRACTING_BODY/CE_ACTIVITY_OTHER,,,,*Pending guidance from F04*
+/OBJECT_CONTRACT,,,,""
+/OBJECT_CONTRACT/TITLE,,,,Map to `tender.title`
+/OBJECT_CONTRACT/REFERENCE_NUMBER,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_BuyerInternalReferenceID,Map to `tender.id`
+/OBJECT_CONTRACT/CPV_MAIN,,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_Classification,""
+/OBJECT_CONTRACT/CPV_MAIN/CPV_CODE,,,,"Set `tender.classification.scheme` to 'CPV', take the CPV code in the `CODE` attribute, and map to `tender.classification.id` (PROPOSAL)"
+/OBJECT_CONTRACT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,,,,"For each `CODE` attribute, add a `Classification` object to the `tender.additionalClassifications` array, set `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to `.id` (PROPOSAL)"
+/OBJECT_CONTRACT/TYPE_CONTRACT,,,,""
+/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,,,,Set `tender.mainProcurementCategory` as follows:
+/OBJECT_CONTRACT/SHORT_DESCR,,,,Map to `tender.description`
+/OBJECT_CONTRACT/VAL_ESTIMATED_TOTAL,,,,Map to `tender.value.amount`
+/OBJECT_CONTRACT/VAL_ESTIMATED_TOTAL/@CURRENCY,,,,Map to `tender.value.currency`
+/OBJECT_CONTRACT/VAL_TOTAL,,,,*Pending guidance from F03*
+/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY,,,,*Pending guidance from F03*
+/OBJECT_CONTRACT/VAL_RANGE_TOTAL,,,This element sets the currency for its children.,*Pending guidance from F03*
+/OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY,,,,*Pending guidance from F03*
+/OBJECT_CONTRACT/VAL_RANGE_TOTAL/LOW,,,,*Pending guidance from F03*
+/OBJECT_CONTRACT/VAL_RANGE_TOTAL/HIGH,,,,*Pending guidance from F03*
+/OBJECT_CONTRACT/LOT_DIVISION,,,,"Discard. If `tender.lots` is set, then the contract is divided into lots."
+/OBJECT_CONTRACT/LOT_DIVISION/LOT_ALL,,,,"Set `tender.lotDetails.maximumLotsBidPerSupplier` to 1e9999 (which parses to infinity i.e. ""all"")"
+/OBJECT_CONTRACT/LOT_DIVISION/LOT_MAX_NUMBER,,,,Map to `tender.lotDetails.maximumLotsBidPerSupplier`
+/OBJECT_CONTRACT/LOT_DIVISION/LOT_ONE_ONLY,,,,Set `tender.lotDetails.maximumLotsBidPerSupplier` to 1
+/OBJECT_CONTRACT/LOT_DIVISION/LOT_MAX_ONE_TENDERER,,,,Map to `tender.lotDetails.maximumLotsAwardedPerSupplier`
+/OBJECT_CONTRACT/LOT_DIVISION/LOT_COMBINING_CONTRACT_RIGHT,,,,"Map to `tender.lotDetails.awardCriteriaDetails`\n\nTo provide groups of lots, use `tender.lotGroups`"
+/OBJECT_CONTRACT/OBJECT_DESCR,,,,"If the contract is divided into lots, add a `Lot` object to the `tender.lots` array"
+/OBJECT_CONTRACT/OBJECT_DESCR/@ITEM,,,,Discard
+/OBJECT_CONTRACT/OBJECT_DESCR/TITLE,,,,"If the contract is divided into lots, map to the lot's `.title`"
+/OBJECT_CONTRACT/OBJECT_DESCR/LOT_NO,,,,"If the contract is divided into lots, map to the lot's `.id`"
+/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL,,,,""
+/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_CODE,,,,"For each `CODE` attribute, if not already added, add a `Classification` object to the `tender.additionalClassifications` array, set `.scheme` to 'CPV', and map to `.id`. If the contract is divided into lots, add the lot's `.id` to the classification's `.relatedLots`. (PROPOSAL)"
+/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,,,,"For each `CODE` attribute, if not already added, add a `Classification` object to the `tender.additionalClassifications` array, set `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to `.id`. If the contract is divided into lots, add the lot's `.id` to the classification's `.relatedLots`. (PROPOSAL)"
+/OBJECT_CONTRACT/OBJECT_DESCR/NUTS,,,,*Pending guidance from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE,,,,*Pending guidance from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,,,,"If the contract is divided into lots, map to the lot's `.description`. Otherwise, append to `tender.description`.\n\n*If the contract isn't divided into lots, this results in a loss of structure.* (WARNING)"
+/OBJECT_CONTRACT/OBJECT_DESCR/VAL_OBJECT,,,,"If the contract is divided into lots, map to the lot's `.value.amount`"
+/OBJECT_CONTRACT/OBJECT_DESCR/VAL_OBJECT/@CURRENCY,,,,"If the contract is divided into lots, map to the lot's `.value.currency`"
+/OBJECT_CONTRACT/OBJECT_DESCR/DURATION,,,,""
+/OBJECT_CONTRACT/OBJECT_DESCR/DATE_START,,,,Map to `.contractPeriod.startDate` (PROPOSAL FOR LOTS)
+/OBJECT_CONTRACT/OBJECT_DESCR/DATE_END,,,,Map to `.contractPeriod.endDate` (PROPOSAL FOR LOTS)
+/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_isEUFunded https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_EUFunded,"If not already added, [add a party](..#add-a-party), add 'funder' to its `.roles`, and set its `.name` to 'European Union'. (PROPOSAL)\n\nAdd a `Finance` object to the `planning.budget.finance` array, and set its `.financingParty.name` to 'European Union' and `.financingParty.id` to the party's `.id`. If a structured identifier is used to identify the project, map to `.id`; otherwise, set its `.id`, and map to `.title`. If the contract is divided into lots, set its `.relatedLot` to the lot's `.id`. (PROPOSAL)"
+/OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds. (PROPOSAL)"
+/OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,,,,Append to `tender.description`\n\n*This results in a loss of structure.* (WARNING)
+/OBJECT_CONTRACT/NO_LOT_DIVISION,,,,"Discard. If `tender.lots` isn't set, then the contract isn't divided into lots."
+/LEFTI,,,,""
+/LEFTI/RULES_CRITERIA,,,,*Pending guidance from F04*
+/LEFTI/RESTRICTED_SHELTERED_WORKSHOP,,,,*Pending guidance from F01*
+/LEFTI/RESTRICTED_SHELTERED_PROGRAM,,,,*Pending guidance from F01*
+/LEFTI/PARTICULAR_PROFESSION,,,,*Pending guidance from F01*
+/LEFTI/REFERENCE_TO_LAW,,,,*Pending guidance from F01*
+/LEFTI/PERFORMANCE_CONDITIONS,,,,*Pending guidance from F01*
+/LEFTI/PERFORMANCE_STAFF_QUALIFICATION,,,,*Pending guidance from F01*
+/PROCEDURE,,,,""
 /PROCEDURE/PT_AWARD_CONTRACT_WITH_PRIOR_PUBLICATION,,,,
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION,,,,
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE,,,,
@@ -94,69 +94,69 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_PROTECT_RIGHTS,,,,
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_OUTSIDE_SCOPE,,,,
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_JUSTIFICATION,,,,
-/PROCEDURE/MAIN_FEATURES_AWARD,,,,
-/PROCEDURE/NOTICE_NUMBER_OJ,,,,
-/PROCEDURE/DATE_RECEIPT_TENDERS,,,,
-/PROCEDURE/TIME_RECEIPT_TENDERS,,,,
-/PROCEDURE/LANGUAGES,,,,
-/PROCEDURE/LANGUAGES/LANGUAGE,,,,
-/AWARD_CONTRACT,,,,
-/AWARD_CONTRACT/@ITEM,,,,
-/AWARD_CONTRACT/LOT_NO,,,,
-/AWARD_CONTRACT/TITLE,,,,
-/AWARD_CONTRACT/NO_AWARDED_CONTRACT,,,,
-/AWARD_CONTRACT/NO_AWARDED_CONTRACT/PROCUREMENT_DISCONTINUED,,,,
-/AWARD_CONTRACT/NO_AWARDED_CONTRACT/PROCUREMENT_UNSUCCESSFUL,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/DATE_CONCLUSION_CONTRACT,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_SME,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_OTHER_EU,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_NON_EU,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_EMEANS,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/AWARDED_TO_GROUP,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/NATIONALID,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/ADDRESS,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/TOWN,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/POSTAL_CODE,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/COUNTRY,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/PHONE,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/E_MAIL,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/FAX,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/NUTS,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/URL,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/SME,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY,,,,
+/PROCEDURE/MAIN_FEATURES_AWARD,,,,*Pending guidance from F21*
+/PROCEDURE/NOTICE_NUMBER_OJ,,,,*Pending guidance from F03*
+/PROCEDURE/DATE_RECEIPT_TENDERS,,,,Map to the date component of `tender.tenderPeriod.endDate`
+/PROCEDURE/TIME_RECEIPT_TENDERS,,,,Map to the time component of `tender.tenderPeriod.endDate`
+/PROCEDURE/LANGUAGES,,,,""
+/PROCEDURE/LANGUAGES/LANGUAGE,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_SubmissionLanguages,Map to `tender.submissionLanguages` (PROPOSAL)
+/AWARD_CONTRACT,,,,*Pending guidance from F03*
+/AWARD_CONTRACT/@ITEM,,,,*Pending guidance from F03*
+/AWARD_CONTRACT/LOT_NO,,,,*Pending guidance from F03*
+/AWARD_CONTRACT/TITLE,,,,*Pending guidance from F03*
+/AWARD_CONTRACT/NO_AWARDED_CONTRACT,,,,*Pending guidance from F03*
+/AWARD_CONTRACT/NO_AWARDED_CONTRACT/PROCUREMENT_DISCONTINUED,,,,*Pending guidance from F03*
+/AWARD_CONTRACT/NO_AWARDED_CONTRACT/PROCUREMENT_UNSUCCESSFUL,,,,*Pending guidance from F03*
+/AWARD_CONTRACT/AWARDED_CONTRACT,,,,*Pending guidance from F03*
+/AWARD_CONTRACT/AWARDED_CONTRACT/DATE_CONCLUSION_CONTRACT,,,,*Pending guidance from F03*
+/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS,,,,*Pending guidance from F03*
+/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED,,,,*Pending guidance from F03*
+/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_SME,,,,*Pending guidance from F03*
+/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_OTHER_EU,,,,*Pending guidance from F03*
+/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_NON_EU,,,,*Pending guidance from F03*
+/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_EMEANS,,,,*Pending guidance from F03*
+/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS,,,This element contains elements from V.2.2 and V.2.3.,*Pending guidance from F03*
+/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/AWARDED_TO_GROUP,,,,*Pending guidance from F03*
+/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR,,,"Contains ADDRESS_CONTRACTOR, SME, NO_SME.",*Pending guidance from F03*
+/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR,,,,*Pending guidance from F03*
+/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME
+/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/NATIONALID,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID
+/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/ADDRESS,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS
+/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/TOWN,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN
+/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/POSTAL_CODE,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE
+/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/COUNTRY,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY
+/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/PHONE,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE
+/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/E_MAIL,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL
+/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/FAX,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX
+/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/NUTS,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS
+/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/URL,,,,*Pending guidance from F03*
+/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/SME,,,,*Pending guidance from F03*
+/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES,,,,*Pending guidance from F03*
+/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL,,,,*Pending guidance from F03*
+/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY,,,,*Pending guidance from F03*
+/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL,,,,*Pending guidance from F03*
+/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY,,,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/VAL_REVENUE,,,,
 /AWARD_CONTRACT/AWARDED_CONTRACT/VAL_REVENUE/@CURRENCY,,,,
 /AWARD_CONTRACT/AWARDED_CONTRACT/VAL_PRICE_PAYMENT,,,,
 /AWARD_CONTRACT/AWARDED_CONTRACT/VAL_PRICE_PAYMENT/@CURRENCY,,,,
 /AWARD_CONTRACT/AWARDED_CONTRACT/INFO_ADD_VALUE,,,,
-/COMPLEMENTARY_INFO,,,,
-/COMPLEMENTARY_INFO/EORDERING,,,,
-/COMPLEMENTARY_INFO/EINVOICING,,,,
-/COMPLEMENTARY_INFO/EPAYMENT,,,,
-/COMPLEMENTARY_INFO/INFO_ADD,,,,
-/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY,,,,
-/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/OFFICIALNAME,,,,
-/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/ADDRESS,,,,
-/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/TOWN,,,,
-/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/POSTAL_CODE,,,,
-/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/COUNTRY,,,,
-/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/PHONE,,,,
-/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/E_MAIL,,,,
-/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/FAX,,,,
-/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/URL,,,,
-/COMPLEMENTARY_INFO/ADDRESS_MEDIATION_BODY,,,,
-/COMPLEMENTARY_INFO/REVIEW_PROCEDURE,,,,
-/COMPLEMENTARY_INFO/ADDRESS_REVIEW_INFO,,,,
-/COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,,,,
+/COMPLEMENTARY_INFO,,,,""
+/COMPLEMENTARY_INFO/EORDERING,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows,Add 'electronicOrdering' to `tender.TODO` (PROPOSAL)
+/COMPLEMENTARY_INFO/EINVOICING,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows,Add 'electronicInvoicing' to `tender.TODO` (PROPOSAL)
+/COMPLEMENTARY_INFO/EPAYMENT,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows,Add 'electronicPayment' to `tender.TODO` (PROPOSAL)
+/COMPLEMENTARY_INFO/INFO_ADD,,,,*Pending guidance from F01*
+/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](..#add-a-party), and add 'reviewBody' to its `.roles`"
+/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/OFFICIALNAME,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME
+/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/ADDRESS,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS
+/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/TOWN,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN
+/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/POSTAL_CODE,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE
+/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/COUNTRY,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY
+/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/PHONE,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE
+/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/E_MAIL,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL
+/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/FAX,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX
+/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/URL,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL
+/COMPLEMENTARY_INFO/ADDRESS_MEDIATION_BODY,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](..#add-a-party), and add 'mediationBody' to its `.roles` (PROPOSAL)"
+/COMPLEMENTARY_INFO/REVIEW_PROCEDURE,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,Map to `tender.reviewDetails` (PROPOSAL)
+/COMPLEMENTARY_INFO/ADDRESS_REVIEW_INFO,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](..#add-a-party), and add 'reviewContactPoint' to its `.roles` (PROPOSAL)"
+/COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,,,,Map to `date`
