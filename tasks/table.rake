@@ -28,6 +28,9 @@ task :table do
   enumerations_csv = CSV.read('output/mapping/enumerations.csv', headers: true)
   additional_csv = CSV.read('output/mapping/additional.csv', headers: true)
 
+  # Some forms have elements before Section 1.
+  has_header = %w(01 04 07 21 22 23)
+
   files('output/mapping/F{}_*.csv').each do |filename|
     basename = File.basename(filename)
     number = basename.match(/\AF(\d+)/)[1]
@@ -81,15 +84,15 @@ task :table do
     # Skip "Directive 2014/24/EU" (directive_201424).
     labels.shift
 
-    if number == '01'
+    if has_header.include?(number)
       builder.table
     end
 
     while labels.any?
       key = labels.shift
 
-      if key[/\A(?:annex_d\d|section_\d)\z/]
-        if number != '01' || $0 != 'section_1'
+      if key[/\A(annex_d\d|section_\d)\z/]
+        if has_header.include?(number) || $1 != 'section_1'
           builder.end_table
         end
         builder.subheading(key)
