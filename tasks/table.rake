@@ -33,13 +33,14 @@ task :table do
     number = basename.match(/\AF(\d+)/)[1]
 
     skipper = ->(row) do
-      row['label-key'].nil? ||
-      # A single `currency` label stands for 2-3 elements.
-      # `/F03_2014/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY`
-      row['xpath'] == '/OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY' ||
-      # `/F03_2014/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY`
-      row['xpath'] == '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY' ||
-      row['xpath'] == '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/@CURRENCY'
+      row['label-key'].nil? || [
+        # A single `currency` label stands for 2-3 elements.
+        # `/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY`
+        '/OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY',
+        # `/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY`
+        '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY',
+        '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/@CURRENCY',
+      ].include?(row['xpath'])
     end
 
     ### Setup
@@ -73,7 +74,7 @@ task :table do
     # Shift `notice_pin`, `notice_contract`, `notice_contract_award`, etc.
     builder.heading(number, labels.shift)
 
-    if number == '03'
+    if %w(03 06).include?(number)
       # Skip "Results of the procurement procedure" (notice_contract_award_sub).
       labels.shift
     end
@@ -108,7 +109,7 @@ task :table do
         seen[:enumerations] << key
 
       # Fields appear in a different order in the form and XSD.
-      elsif i = data[0..3].index{ |row| row['label-key'] == key }
+      elsif i = data[0..5].index{ |row| row['label-key'] == key }
         row = data.delete_at(i)
         builder.row(key, help_labels: help_labels(labels), xpath: row['xpath'], index: row['index'], guidance: row['guidance'])
 

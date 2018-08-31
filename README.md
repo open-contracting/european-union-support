@@ -76,8 +76,8 @@ Once completed, run `rake missing` to see which XML elements and attributes have
 Many XPath's are common across forms. To copy guidance across forms, run:
 
     rake label:copy SOURCE=01
-    rake label:copy SOURCE=02 FILES=03,05
-    rake label:copy SOURCE=03 FILES=06,13,20,25
+    rake label:copy SOURCE=02 FILES=03,05,21,22,23
+    rake label:copy SOURCE=03 FILES=06,13,20,21,22,23,25
     rake label:copy SOURCE=04 FILES=05,06,07,21,22,23
     rake label:copy SOURCE=06 FILES=20,22
     rake label:copy SOURCE=07 FILES=22
@@ -95,7 +95,9 @@ Report any incoherences in mappings across forms. Note that some forms use check
 
 Before running this task, move the following in XPath CSVs to more closely match the order in the PDF templates:
 
-* F03 only: `LOT_DIVISION` after `SHORT_DESCR`, `NO_AWARDED_TO_GROUP` after `AWARDED_TO_GROUP`, `PT_AWARD_CONTRACT_WITHOUT_CALL` children after all
+* F03 and F06 only: `LOT_DIVISION` after `SHORT_DESCR`, `NO_AWARDED_TO_GROUP` after `AWARDED_TO_GROUP`, `PT_AWARD_CONTRACT_WITHOUT_CALL` children after all
+* F21 and F22 only: `LOT_DIVISION` and children after `@CURRENCY`, `PT_AWARD_CONTRACT_WITHOUT_CALL` children after all
+* F23 only: `LOT_DIVISION` and children after `@CURRENCY`, `PT_AWARD_CONTRACT_WITHOUT_PUBLICATION` children after all
 * `NUTS` after `TOWN`, `NO_LOT_DIVISION` after `LOT_DIVISION`
 
 You can now generate a table for each form, displaying, for each element and attribute, the index within the PDF ("I.1"), the label (in any language) and the XPath, to which you can then add guidance for OCDS.

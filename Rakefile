@@ -13,6 +13,16 @@ require_relative 'lib/table_builder'
 require_relative 'lib/xml_base'
 require_relative 'lib/xml_builder'
 
+ROMAN_NUMERALS = {
+  '1' => 'I',
+  '2' => 'II',
+  '3' => 'III',
+  '4' => 'IV',
+  '5' => 'V',
+  '6' => 'VI',
+  '7' => 'VII',
+}
+
 # Modify RegexpExamples to exclude control characters.
 # https://github.com/tom-lord/regexp-examples/blob/master/lib/regexp-examples/char_sets.rb
 module RegexpExamples
@@ -59,11 +69,11 @@ def label_keys(text)
 end
 
 def indices(text)
-  text.scan(/\b[IV]+(?:\.\d+)*/).flatten
+  text.scan(/\bsection_(\d)\b/).flatten.map{ |number| ROMAN_NUMERALS.fetch(number) } + text.scan(/\b[IV]+(?:\.\d+)*/).flatten
 end
 
 def help_text?(key)
-  key[/\AHD?_/] || key == 'excl_vat'
+  key[/\AHD?_/] || %w(excl_vat request_qualification).include?(key)
 end
 
 Dir['tasks/*.rake'].each { |r| import r }

@@ -46,7 +46,7 @@ namespace :label do
 
   desc 'Report any XPath values without corresponding label keys, and vice versa'
   task :missing do
-    label_keys_seen = Set.new
+    label_keys_seen = Set.new(['_or'])
     indices_seen = Set.new
 
     %w(ignore.csv enumerations.csv additional.csv).each do |basename|
@@ -132,13 +132,14 @@ namespace :label do
     headers = rows[0].headers
     enum = rows.to_enum.with_index
 
+    enumerations = CSV.read(File.join('output', 'mapping', 'enumerations.csv'), headers: true)
+
     files('output/mapping/F{}_*.csv').each do |filename|
       number = File.basename(filename).match(/\AF(\d\d)/)[1]
 
       mapped = CSV.read(filename, headers: true).map{ |row| row['label-key'] }
-      if ignore.key?(number)
-        mapped += ignore[number]
-      end
+      mapped += enumerations.select{ |row| row['numbers'][number] }.map{ |row| row['label-key'] }
+      mapped += ignore.fetch(number, [])
       mapped << '_or'
 
       text = pdftotext(files("source/*_TED_forms_templates/F#{number}_*.pdf")[0])
