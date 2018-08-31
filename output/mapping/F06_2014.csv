@@ -2,7 +2,7 @@ xpath,label-key,index,comment,guidance
 /@LG,,,,"Lowercase, and map to `language`"
 /@CATEGORY,,,,Discard. TED translates at form-level. OCDS translates at field-level.
 /LEGAL_BASIS,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_LegalBasis,Map to `tender.legalBasis` (PROPOSAL)
-/CONTRACTING_BODY,ce,,,""
+/CONTRACTING_BODY,ce,I,,""
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,name_address_contact,I.1,,"[Add a party](..#add-a-party), and add 'buyer' to its `.roles`\n\nSet `buyer.id` to its `.id` and `buyer.name` to its [`.name`](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,name_official,,,Map to `.name` and `.identifier.legalName`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,national_id,,,"Map to `.identifier.id`, and set `.identifier.scheme`"
@@ -23,7 +23,7 @@ xpath,label-key,index,comment,guidance
 /CONTRACTING_BODY/CENTRAL_PURCHASING,joint_procurement_central,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,Add 'centralPurchasingBody' to the `.roles` of the party (PROPOSAL)
 /CONTRACTING_BODY/CE_ACTIVITY,mainactivity,I.6,,*Pending guidance from F04*
 /CONTRACTING_BODY/CE_ACTIVITY_OTHER,other_activity,,,*Pending guidance from F04*
-/OBJECT_CONTRACT,object,,,""
+/OBJECT_CONTRACT,object,II,,""
 /OBJECT_CONTRACT/TITLE,title_contract,II.1.1,,Map to `tender.title`
 /OBJECT_CONTRACT/REFERENCE_NUMBER,fileref,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_BuyerInternalReferenceID,Map to `tender.id`
 /OBJECT_CONTRACT/CPV_MAIN,,II.1.2,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_Classification,""
@@ -66,7 +66,7 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_isEUFunded https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_EUFunded,"If not already added, [add a party](..#add-a-party), add 'funder' to its `.roles`, and set its `.name` to 'European Union'. (PROPOSAL)\n\nAdd a `Finance` object to the `planning.budget.finance` array, and set its `.financingParty.name` to 'European Union' and `.financingParty.id` to the party's `.id`. If a structured identifier is used to identify the project, map to `.id`; otherwise, set its `.id`, and map to `.title`. If the contract is divided into lots, set its `.relatedLot` to the lot's `.id`. (PROPOSAL)"
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds. (PROPOSAL)"
 /OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,info_additional,II.2.14,,Append to `tender.description`\n\n*This results in a loss of structure.* (WARNING)
-/PROCEDURE,procedure,,,""
+/PROCEDURE,procedure,IV,,""
 /PROCEDURE/PT_OPEN,proctype_open,,,*Pending guidance from F02*
 /PROCEDURE/PT_RESTRICTED,proctype_restricted,,,Set `tender.procurementMethod` to 'selective'
 /PROCEDURE/PT_NEGOTIATED_WITH_PRIOR_CALL,proctype_negot_w_call,,,*Pending guidance from F04*
@@ -81,7 +81,7 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,,*Pending guidance from F02*
 /PROCEDURE/TERMINATION_DPS,termination_dps,,,*Pending guidance from F03*
 /PROCEDURE/TERMINATION_PIN,pin_as_call_no_contracts_ce,,,*Pending guidance from F03*
-/AWARD_CONTRACT,award_of_contract,,,*Pending guidance from F03*
+/AWARD_CONTRACT,award_of_contract,V,,*Pending guidance from F03*
 /AWARD_CONTRACT/@ITEM,,,,*Pending guidance from F03*
 /AWARD_CONTRACT/CONTRACT_NO,contract_number,,,*Pending guidance from F03*
 /AWARD_CONTRACT/LOT_NO,lot_number,,,*Pending guidance from F03*
@@ -134,7 +134,7 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/INFO_ADD_SUBCONTRACTING,subcontr_descr_short,,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/VAL_BARGAIN_PURCHASE,value_excl_vat,,,
 /AWARD_CONTRACT/AWARDED_CONTRACT/VAL_BARGAIN_PURCHASE/@CURRENCY,currency,,,
-/COMPLEMENTARY_INFO,info_complement,,,""
+/COMPLEMENTARY_INFO,info_complement,VI,,""
 /COMPLEMENTARY_INFO/INFO_ADD,info_additional,VI.3,,*Pending guidance from F01*
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY,appeals_body,VI.4.1,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](..#add-a-party), and add 'reviewBody' to its `.roles`"
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/OFFICIALNAME,name_official,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME

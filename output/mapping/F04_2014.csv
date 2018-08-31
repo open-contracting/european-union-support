@@ -33,7 +33,7 @@ xpath,label-key,index,comment,guidance
 /CONTRACTING_BODY/URL_TOOL,url_communication_tools,,,Map to `tender.communicationDetails.accessToolUrl` (PROPOSAL)
 /CONTRACTING_BODY/CE_ACTIVITY,mainactivity,I.6,,
 /CONTRACTING_BODY/CE_ACTIVITY_OTHER,other_activity,,,
-/OBJECT_CONTRACT,object,,,""
+/OBJECT_CONTRACT,object,II,,""
 /OBJECT_CONTRACT/@ITEM,,,,"Discard.\n\nIf the notice is for prior information only, then this element is repeatable in [present forms](http://simap.ted.europa.eu/documents/10184/99173/EN_F01.pdf), but may not be in [future forms](https://github.com/eForms/eForms/issues/55)."
 /OBJECT_CONTRACT/TITLE,title_contract,II.1.1,,Map to `tender.title`
 /OBJECT_CONTRACT/REFERENCE_NUMBER,fileref,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_BuyerInternalReferenceID,Map to `tender.id`
@@ -84,7 +84,7 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds. (PROPOSAL)"
 /OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,info_additional,II.2.14,,Append to `tender.description`\n\n*This results in a loss of structure.* (WARNING)
 /OBJECT_CONTRACT/DATE_PUBLICATION_NOTICE,date_of_contract_notice,II.3,,Map to `tender.tenderPeriod.startDate`
-/LEFTI,info_legal,,,""
+/LEFTI,info_legal,III,,""
 /LEFTI/SUITABILITY,info_evaluating_requir,,,*Pending guidance from F01*
 /LEFTI/ECONOMIC_CRITERIA_DOC,criteria_selection_docs,,,*Pending guidance from F01*
 /LEFTI/ECONOMIC_FINANCIAL_INFO,info_evaluating_weth_requir,,,*Pending guidance from F01*
@@ -100,7 +100,7 @@ xpath,label-key,index,comment,guidance
 /LEFTI/REFERENCE_TO_LAW,ref_law_reg_prov,,,*Pending guidance from F01*
 /LEFTI/PERFORMANCE_CONDITIONS,other_conditions,III.2.2,,*Pending guidance from F01*
 /LEFTI/PERFORMANCE_STAFF_QUALIFICATION,staff_responsible_indicate,,,*Pending guidance from F01*
-/PROCEDURE,procedure,,,""
+/PROCEDURE,procedure,IV,,""
 /PROCEDURE/PT_RESTRICTED,proctype_restricted,,,Set `tender.procurementMethod` to 'selective'
 /PROCEDURE/PT_NEGOTIATED_WITH_PRIOR_CALL,proctype_negot_w_call,,,
 /PROCEDURE/FRAMEWORK,notice_involves_framework,,,*Pending guidance from F01*
@@ -119,7 +119,7 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/LANGUAGES,languages_allowed,IV.2.4,,""
 /PROCEDURE/LANGUAGES/LANGUAGE,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_SubmissionLanguages,Map to `tender.submissionLanguages` (PROPOSAL)
 /PROCEDURE/DATE_AWARD_SCHEDULED,award_scheduled,IV.2.5,,Map to `tender.awardPeriod.startDate`
-/COMPLEMENTARY_INFO,info_complement,,,""
+/COMPLEMENTARY_INFO,info_complement,VI,,""
 /COMPLEMENTARY_INFO/EORDERING,eordering_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows,Add 'electronicOrdering' to `tender.TODO` (PROPOSAL)
 /COMPLEMENTARY_INFO/EINVOICING,einvoicing_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows,Add 'electronicInvoicing' to `tender.TODO` (PROPOSAL)
 /COMPLEMENTARY_INFO/EPAYMENT,epayment_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows,Add 'electronicPayment' to `tender.TODO` (PROPOSAL)

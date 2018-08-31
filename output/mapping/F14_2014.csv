@@ -3,7 +3,7 @@ xpath,label-key,index,comment,guidance
 /@CATEGORY,,,,Discard. TED translates at form-level. OCDS translates at field-level.
 /LEGAL_BASIS,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_LegalBasis,Map to `tender.legalBasis` (PROPOSAL)
 /LEGAL_BASIS_OTHER,,,,
-/CONTRACTING_BODY,,,,""
+/CONTRACTING_BODY,,I,,""
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,name_address_contact,I.1,,"[Add a party](..#add-a-party), and add 'buyer' to its `.roles`\n\nSet `buyer.id` to its `.id` and `buyer.name` to its [`.name`](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,name_official,,,Map to `.name` and `.identifier.legalName`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,national_id,,,"Map to `.identifier.id`, and set `.identifier.scheme`"
@@ -32,7 +32,7 @@ xpath,label-key,index,comment,guidance
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/NUTS,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/URL_GENERAL,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/URL_BUYER,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER
-/OBJECT_CONTRACT,object,,,""
+/OBJECT_CONTRACT,object,II,,""
 /OBJECT_CONTRACT/TITLE,title_contract,II.1.1,,Map to `tender.title`
 /OBJECT_CONTRACT/REFERENCE_NUMBER,fileref,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_BuyerInternalReferenceID,Map to `tender.id`
 /OBJECT_CONTRACT/CPV_MAIN,,II.1.2,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_Classification,""
@@ -41,7 +41,7 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/TYPE_CONTRACT,type_contract,II.1.3,,""
 /OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,,,,Set `tender.mainProcurementCategory` as follows:
 /OBJECT_CONTRACT/SHORT_DESCR,descr_short,II.1.4,,Map to `tender.description`
-/COMPLEMENTARY_INFO,info_complement,,,""
+/COMPLEMENTARY_INFO,info_complement,VI,,""
 /COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,date_dispatch,VI.5,,Map to `date`
 /COMPLEMENTARY_INFO/NOTICE_NUMBER_OJ,,,,
 /CHANGES,,,,
