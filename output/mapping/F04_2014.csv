@@ -46,6 +46,7 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/VAL_ESTIMATED_TOTAL,value_excl_vat,,,Map to `tender.value.amount`
 /OBJECT_CONTRACT/VAL_ESTIMATED_TOTAL/@CURRENCY,currency,,,Map to `tender.value.currency`
 /OBJECT_CONTRACT/LOT_DIVISION,_yes,,,"Discard. If `tender.lots` is set, then the contract is divided into lots."
+/OBJECT_CONTRACT/NO_LOT_DIVISION,_no,,,"Discard. If `tender.lots` isn't set, then the contract isn't divided into lots."
 /OBJECT_CONTRACT/LOT_DIVISION/LOT_ALL,lots_all,,,"Set `tender.lotDetails.maximumLotsBidPerSupplier` to 1e9999 (which parses to infinity i.e. ""all"")"
 /OBJECT_CONTRACT/LOT_DIVISION/LOT_MAX_NUMBER,lots_max,,,Map to `tender.lotDetails.maximumLotsBidPerSupplier`
 /OBJECT_CONTRACT/LOT_DIVISION/LOT_ONE_ONLY,lot_one_only,,,Set `tender.lotDetails.maximumLotsBidPerSupplier` to 1
@@ -82,7 +83,6 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_isEUFunded https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_EUFunded,"If not already added, [add a party](..#add-a-party), add 'funder' to its `.roles`, and set its `.name` to 'European Union'. (PROPOSAL)\n\nAdd a `Finance` object to the `planning.budget.finance` array, and set its `.financingParty.name` to 'European Union' and `.financingParty.id` to the party's `.id`. If a structured identifier is used to identify the project, map to `.id`; otherwise, set its `.id`, and map to `.title`. If the contract is divided into lots, set its `.relatedLot` to the lot's `.id`. (PROPOSAL)"
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds. (PROPOSAL)"
 /OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,info_additional,II.2.14,,Append to `tender.description`\n\n*This results in a loss of structure.* (WARNING)
-/OBJECT_CONTRACT/NO_LOT_DIVISION,_no,,,"Discard. If `tender.lots` isn't set, then the contract isn't divided into lots."
 /OBJECT_CONTRACT/DATE_PUBLICATION_NOTICE,date_of_contract_notice,II.3,,Map to `tender.tenderPeriod.startDate`
 /LEFTI,info_legal,,,""
 /LEFTI/SUITABILITY,info_evaluating_requir,,,*Pending guidance from F01*

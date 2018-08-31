@@ -31,8 +31,8 @@ xpath,label-key,index,comment,guidance
 /CONTRACTING_BODY/CA_TYPE_OTHER,other_type,,,Map to any other code
 /CONTRACTING_BODY/CA_ACTIVITY,mainactivity,I.5,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, add a `Classification` object to its `.details.classifications` array, and set the latter's `.scheme` to ['COFOG'](https://unstats.un.org/unsd/publications/catalogue?selectID=145) and `.id` as follows: (PROPOSAL)"
 /CONTRACTING_BODY/CA_ACTIVITY_OTHER,other_activity,,,Map to any other code
-/CONTRACTING_BODY/CE_ACTIVITY,,,,*Pending guidance from F04*
-/CONTRACTING_BODY/CE_ACTIVITY_OTHER,,,,*Pending guidance from F04*
+/CONTRACTING_BODY/CE_ACTIVITY,mainactivity,I.6,,*Pending guidance from F04*
+/CONTRACTING_BODY/CE_ACTIVITY_OTHER,other_activity,,,*Pending guidance from F04*
 /OBJECT_CONTRACT,object,,,""
 /OBJECT_CONTRACT/TITLE,title_contract,II.1.1,,Map to `tender.title`
 /OBJECT_CONTRACT/REFERENCE_NUMBER,fileref,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_BuyerInternalReferenceID,Map to `tender.id`
@@ -76,7 +76,7 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,info_additional,II.2.14,,Append to `tender.description`\n\n*This results in a loss of structure.* (WARNING)
 /OBJECT_CONTRACT/NO_LOT_DIVISION,_no,,,"Discard. If `tender.lots` isn't set, then the contract isn't divided into lots."
 /LEFTI,info_legal,,,""
-/LEFTI/RULES_CRITERIA,,,,*Pending guidance from F04*
+/LEFTI/RULES_CRITERIA,descr_brief_rules,,,*Pending guidance from F04*
 /LEFTI/RESTRICTED_SHELTERED_WORKSHOP,,,,*Pending guidance from F01*
 /LEFTI/RESTRICTED_SHELTERED_PROGRAM,,,,*Pending guidance from F01*
 /LEFTI/PARTICULAR_PROFESSION,particular_profession_reserved,,,*Pending guidance from F01*

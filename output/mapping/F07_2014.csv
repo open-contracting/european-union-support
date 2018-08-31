@@ -3,19 +3,19 @@ xpath,label-key,index,comment,guidance
 /@CATEGORY,,,,Discard. TED translates at form-level. OCDS translates at field-level.
 /LEGAL_BASIS,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_LegalBasis,Map to `tender.legalBasis` (PROPOSAL)
 /NOTICE,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_PurposeOfNotice,""
-/CONTRACTING_BODY,,,,""
+/CONTRACTING_BODY,ce,,,""
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,name_address_contact,I.1,,"[Add a party](..#add-a-party), and add 'buyer' to its `.roles`\n\nSet `buyer.id` to its `.id` and `buyer.name` to its [`.name`](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,name_official,,,Map to `.name` and `.identifier.legalName`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,national_id,,,"Map to `.identifier.id`, and set `.identifier.scheme`"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS,address_postal,,,Map to `.address.streetAddress`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN,address_town,,,Map to `.address.locality`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,nutscode,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,"Take the NUTS code in the `CODE` attribute, and map to `.address.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE,address_postcode,,,Map to `.address.postalCode`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY,address_country,,,"Take the country code in the `VALUE` attribute, translate to a country name, and map to `.address.countryName`\n\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation. (ISSUE)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT,contactpoint,,,Map to `.contactPoint.name`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE,address_phone,,,Map to `.contactPoint.telephone`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL,address_email,,,Map to `.contactPoint.email`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,address_fax,,,Map to `.contactPoint.faxNumber`
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,nutscode,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,"Take the NUTS code in the `CODE` attribute, and map to `.address.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,url_general,,,Map to `.details.url` (PROPOSAL)
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,url_buyerprofile,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/organization_BuyerProfile,Map to `.details.buyerProfile` (PROPOSAL)
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL,,,,"[Add a party](..#add-a-party), add 'buyer' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
@@ -31,8 +31,8 @@ xpath,label-key,index,comment,guidance
 /CONTRACTING_BODY/ADDRESS_PARTICIPATION_IDEM,address_to_above,,,"Add 'written' to `tender.submissionMethod`, and discard. Tenders or requests to participate must be submitted to the abovementioned address, unless otherwised specified."
 /CONTRACTING_BODY/ADDRESS_PARTICIPATION,address_following,,,"Add 'written' to `tender.submissionMethod`, and map to `tender.submissionMethodDetails`\n\n*If 'electronically via' is checked, this results in a loss of structure.* (WARNING)"
 /CONTRACTING_BODY/URL_TOOL,url_communication_tools,,,Map to `tender.communicationDetails.accessToolUrl` (PROPOSAL)
-/CONTRACTING_BODY/CE_ACTIVITY,,,,*Pending guidance from F04*
-/CONTRACTING_BODY/CE_ACTIVITY_OTHER,,,,*Pending guidance from F04*
+/CONTRACTING_BODY/CE_ACTIVITY,mainactivity,I.6,,*Pending guidance from F04*
+/CONTRACTING_BODY/CE_ACTIVITY_OTHER,other_activity,,,*Pending guidance from F04*
 /OBJECT_CONTRACT,object,,,""
 /OBJECT_CONTRACT/TITLE,title_contract,II.1.1,,Map to `tender.title`
 /OBJECT_CONTRACT/REFERENCE_NUMBER,fileref,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_BuyerInternalReferenceID,Map to `tender.id`
@@ -56,19 +56,19 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE,price,,,*Pending guidance from F01*
 /OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE/AC_WEIGHTING,weighting,,,*Pending guidance from F01*
 /OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PROCUREMENT_DOC,award_criteria_descriptive,,,*Pending guidance from F01*
-/OBJECT_CONTRACT/OBJECT_DESCR/INDEFINITE_DURATION,,,,
+/OBJECT_CONTRACT/OBJECT_DESCR/INDEFINITE_DURATION,qs_duration_indefinite,,,
 /OBJECT_CONTRACT/OBJECT_DESCR/DATE_START,starting,,,Map to `.contractPeriod.startDate` (PROPOSAL FOR LOTS)
 /OBJECT_CONTRACT/OBJECT_DESCR/DATE_END,end,,,Map to `.contractPeriod.endDate` (PROPOSAL FOR LOTS)
-/OBJECT_CONTRACT/OBJECT_DESCR/RENEWAL,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Renewals,"Add a `Renewals` object to the `tender.renewals` array, and set its `.id`. If the contract is divided into lots, set its `.relatedLot` to the lot's `.id`. (PROPOSAL)"
-/OBJECT_CONTRACT/OBJECT_DESCR/RENEWAL_DESCR,,,,Set the renewals' `.description` (PROPOSAL)
+/OBJECT_CONTRACT/OBJECT_DESCR/RENEWAL,qs_renewal,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Renewals,"Add a `Renewals` object to the `tender.renewals` array, and set its `.id`. If the contract is divided into lots, set its `.relatedLot` to the lot's `.id`. (PROPOSAL)"
+/OBJECT_CONTRACT/OBJECT_DESCR/RENEWAL_DESCR,qs_formalities_renewal,,,Set the renewals' `.description` (PROPOSAL)
 /OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_isEUFunded https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_EUFunded,"If not already added, [add a party](..#add-a-party), add 'funder' to its `.roles`, and set its `.name` to 'European Union'. (PROPOSAL)\n\nAdd a `Finance` object to the `planning.budget.finance` array, and set its `.financingParty.name` to 'European Union' and `.financingParty.id` to the party's `.id`. If a structured identifier is used to identify the project, map to `.id`; otherwise, set its `.id`, and map to `.title`. If the contract is divided into lots, set its `.relatedLot` to the lot's `.id`. (PROPOSAL)"
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds. (PROPOSAL)"
 /LEFTI,info_legal,,,""
 /LEFTI/RESTRICTED_SHELTERED_WORKSHOP,restricted_sheltered_workshop,,,*Pending guidance from F01*
 /LEFTI/RESTRICTED_SHELTERED_PROGRAM,restricted_sheltered_program,,,*Pending guidance from F01*
-/LEFTI/QUALIFICATION,,,,
-/LEFTI/QUALIFICATION/CONDITIONS,,,,
-/LEFTI/QUALIFICATION/METHODS,,,,
+/LEFTI/QUALIFICATION,qs_qualification,III.1.9,,
+/LEFTI/QUALIFICATION/CONDITIONS,qs_conditions_qualify,,,
+/LEFTI/QUALIFICATION/METHODS,qs_methods_verified,,,
 /LEFTI/PARTICULAR_PROFESSION,particular_profession_reserved,,,*Pending guidance from F01*
 /LEFTI/PARTICULAR_PROFESSION/@CTYPE,,,,*Pending guidance from F01*
 /LEFTI/REFERENCE_TO_LAW,ref_law_reg_prov,,,*Pending guidance from F01*
@@ -77,7 +77,7 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE,procedure,,,""
 /PROCEDURE/EAUCTION_USED,eauction_will_used,,,*Pending guidance from F01*
 /PROCEDURE/INFO_ADD_EAUCTION,eauction_info_addit,,,*Pending guidance from F01*
-/PROCEDURE/NOTICE_NUMBER_OJ,,,,
+/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,,
 /PROCEDURE/LANGUAGES,languages_allowed,IV.2.4,,""
 /PROCEDURE/LANGUAGES/LANGUAGE,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_SubmissionLanguages,Map to `tender.submissionLanguages` (PROPOSAL)
 /COMPLEMENTARY_INFO,info_complement,,,""
