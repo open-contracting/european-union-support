@@ -69,9 +69,9 @@ Fill in `enumerations.csv`:
 
 1. In some cases, a form has label keys for each enumeration value. If so, fill in `xpath` with the XPath to the attribute, `value` with the enumeration value, `label-key` with the label key, and `numbers` with a pipe-separated list (`|`) of form numbers. Follow the order in the PDF templates.
 
-Once completed, run `rake missing` to see which XML elements and attributes have no key, and which keys have no XML element or attribute and aren't in `ignore.csv`:
+Once completed, run `rake label:missing` to see which XML elements and attributes have no key, and which keys have no XML element or attribute and aren't in `ignore.csv`:
 
-    rake missing FILES=01,02,03
+    rake label:missing FILES=01,02,03
 
 Many XPath's are common across forms. To copy guidance across forms, run:
 
@@ -82,6 +82,10 @@ Many XPath's are common across forms. To copy guidance across forms, run:
     rake label:copy SOURCE=06 FILES=20,22
     rake label:copy SOURCE=07 FILES=22
     rake label:copy SOURCE=21 FILES=22
+
+Many label keys are ignored across forms. To pre-populate across forms, run:
+
+    rake label:ignore
 
 Report any CSV quoting errors:
 
