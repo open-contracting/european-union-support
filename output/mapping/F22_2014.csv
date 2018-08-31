@@ -3,7 +3,7 @@ xpath,label-key,index,comment,guidance
 /@CATEGORY,,,,Discard. TED translates at form-level. OCDS translates at field-level.
 /LEGAL_BASIS,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_LegalBasis,Map to `tender.legalBasis` (PROPOSAL)
 /NOTICE,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_PurposeOfNotice,""
-/CONTRACTING_BODY,ce,,,""
+/CONTRACTING_BODY,ce,I,,""
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,name_address_contact,I.1,,"[Add a party](..#add-a-party), and add 'buyer' to its `.roles`\n\nSet `buyer.id` to its `.id` and `buyer.name` to its [`.name`](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,name_official,,,Map to `.name` and `.identifier.legalName`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,national_id,,,"Map to `.identifier.id`, and set `.identifier.scheme`"
@@ -33,7 +33,7 @@ xpath,label-key,index,comment,guidance
 /CONTRACTING_BODY/URL_TOOL,url_communication_tools,,,Map to `tender.communicationDetails.accessToolUrl` (PROPOSAL)
 /CONTRACTING_BODY/CE_ACTIVITY,mainactivity,I.6,,*Pending guidance from F04*
 /CONTRACTING_BODY/CE_ACTIVITY_OTHER,other_activity,,,*Pending guidance from F04*
-/OBJECT_CONTRACT,object,,,""
+/OBJECT_CONTRACT,object,II,,""
 /OBJECT_CONTRACT/@ITEM,,,,"Discard.\n\nIf the notice is for prior information only, then this element is repeatable in [present forms](http://simap.ted.europa.eu/documents/10184/99173/EN_F01.pdf), but may not be in [future forms](https://github.com/eForms/eForms/issues/55)."
 /OBJECT_CONTRACT/TITLE,title_contract,II.1.1,,Map to `tender.title`
 /OBJECT_CONTRACT/REFERENCE_NUMBER,fileref,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_BuyerInternalReferenceID,Map to `tender.id`
@@ -84,7 +84,7 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds. (PROPOSAL)"
 /OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,info_additional,II.2.14,,Append to `tender.description`\n\n*This results in a loss of structure.* (WARNING)
 /OBJECT_CONTRACT/DATE_PUBLICATION_NOTICE,date_of_contract_notice,II.3,,Map to `tender.tenderPeriod.startDate`
-/LEFTI,info_legal,,,""
+/LEFTI,info_legal,III,,""
 /LEFTI/RULES_CRITERIA,descr_brief_rules,,,*Pending guidance from F04*
 /LEFTI/RESTRICTED_SHELTERED_WORKSHOP,restricted_sheltered_workshop,,,*Pending guidance from F01*
 /LEFTI/RESTRICTED_SHELTERED_PROGRAM,restricted_sheltered_program,,,*Pending guidance from F01*
@@ -96,36 +96,23 @@ xpath,label-key,index,comment,guidance
 /LEFTI/REFERENCE_TO_LAW,ref_law_reg_prov,,,*Pending guidance from F01*
 /LEFTI/PERFORMANCE_CONDITIONS,other_conditions,III.2.2,,*Pending guidance from F01*
 /LEFTI/PERFORMANCE_STAFF_QUALIFICATION,staff_responsible_indicate,,,*Pending guidance from F01*
-/PROCEDURE,procedure,,,""
+/PROCEDURE,procedure,IV,,""
 /PROCEDURE/PT_OPEN,proctype_open,,,*Pending guidance from F02*
 /PROCEDURE/PT_RESTRICTED,proctype_restricted,,,Set `tender.procurementMethod` to 'selective'
 /PROCEDURE/PT_INVOLVING_NEGOTIATION,proctype_negotiations_involved,,,*Pending guidance from F21*
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL,award_wo_prior_pub_d1,,,*Pending guidance from F03*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE,,,,*Pending guidance from F03*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_NO_TENDERS_REQUESTS,,,,*Pending guidance from F06*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_PURE_RESEARCH,,,,*Pending guidance from F06*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_TECHNICAL,,,,*Pending guidance from F03*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_ARTISTIC,,,,*Pending guidance from F03*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_PROTECT_RIGHTS,,,,*Pending guidance from F03*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_EXTREME_URGENCY,,,,*Pending guidance from F03*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_REPETITION_EXISTING,,,,*Pending guidance from F03*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_FROM_WINDING_PROVIDER,,,,*Pending guidance from F03*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_FROM_LIQUIDATOR_CREDITOR,,,,*Pending guidance from F03*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_BARGAIN_PURCHASE,,,,*Pending guidance from F06*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_OUTSIDE_SCOPE,,,,*Pending guidance from F03*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_JUSTIFICATION,,,,*Pending guidance from F03*
 /PROCEDURE/FRAMEWORK,notice_involves_framework,,,*Pending guidance from F01*
 /PROCEDURE/FRAMEWORK/JUSTIFICATION,framework_just_eight,,,*Pending guidance from F01*
 /PROCEDURE/URL_NATIONAL_PROCEDURE,url_national_rules,,,*Pending guidance from F21*
 /PROCEDURE/MAIN_FEATURES_AWARD,award_main_features,IV.1.11,,*Pending guidance from F21*
-/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,,*Pending guidance from F07*
+/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,,*Pending guidance from F02*
 /PROCEDURE/DATE_RECEIPT_TENDERS,date,,,Map to the date component of `tender.tenderPeriod.endDate`
 /PROCEDURE/TIME_RECEIPT_TENDERS,time,,,Map to the time component of `tender.tenderPeriod.endDate`
 /PROCEDURE/LANGUAGES,languages_allowed,IV.2.4,,""
 /PROCEDURE/LANGUAGES/LANGUAGE,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_SubmissionLanguages,Map to `tender.submissionLanguages` (PROPOSAL)
 /PROCEDURE/DATE_AWARD_SCHEDULED,award_scheduled,IV.2.5,,Map to `tender.awardPeriod.startDate`
-/PROCEDURE/TERMINATION_PIN,,,,*Pending guidance from F03*
-/AWARD_CONTRACT,award_of_contract,,,*Pending guidance from F03*
+/PROCEDURE/TERMINATION_PIN,pin_as_call_no_contracts_ce,,,*Pending guidance from F03*
+/AWARD_CONTRACT,award_of_contract,V,,*Pending guidance from F03*
 /AWARD_CONTRACT/@ITEM,,,,*Pending guidance from F03*
 /AWARD_CONTRACT/CONTRACT_NO,contract_number,,,*Pending guidance from F03*
 /AWARD_CONTRACT/LOT_NO,lot_number,,,*Pending guidance from F03*
@@ -144,7 +131,7 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_EMEANS,offers_received_electronic,,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS,,,This element contains elements from V.2.2 and V.2.3.,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/@PUBLICATION,,,,*Pending guidance from F06*
-/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/AWARDED_TO_GROUP,_yes,,,*Pending guidance from F03*
+/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/AWARDED_TO_GROUP,awarded_group,,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR,,,"Contains ADDRESS_CONTRACTOR, SME, NO_SME.",*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR,awarded_to_name,V.2.3,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME,name_official,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME
@@ -158,7 +145,7 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/E_MAIL,address_email,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/FAX,address_fax,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/URL,internet,,,*Pending guidance from F03*
-/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/SME,_yes,,,*Pending guidance from F03*
+/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/SME,awarded_sme,,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES,value_contract_info,V.2.4,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/@PUBLICATION,,,,*Pending guidance from F06*
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL,value_estim_total_contract,,,*Pending guidance from F03*
@@ -174,7 +161,7 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/VAL_SUBCONTRACTING/@CURRENCY,currency,,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/PCT_SUBCONTRACTING,proportion,,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/INFO_ADD_SUBCONTRACTING,subcontr_descr_short,,,*Pending guidance from F03*
-/COMPLEMENTARY_INFO,info_complement,,,""
+/COMPLEMENTARY_INFO,info_complement,VI,,""
 /COMPLEMENTARY_INFO/EORDERING,eordering_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows,Add 'electronicOrdering' to `tender.TODO` (PROPOSAL)
 /COMPLEMENTARY_INFO/EINVOICING,einvoicing_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows,Add 'electronicInvoicing' to `tender.TODO` (PROPOSAL)
 /COMPLEMENTARY_INFO/EPAYMENT,epayment_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows,Add 'electronicPayment' to `tender.TODO` (PROPOSAL)
@@ -193,3 +180,16 @@ xpath,label-key,index,comment,guidance
 /COMPLEMENTARY_INFO/REVIEW_PROCEDURE,appeals_deadline,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,Map to `tender.reviewDetails` (PROPOSAL)
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_INFO,appeals_info,VI.4.4,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](..#add-a-party), and add 'reviewContactPoint' to its `.roles` (PROPOSAL)"
 /COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,date_dispatch,VI.5,,Map to `date`
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE,,,,*Pending guidance from F03*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_NO_TENDERS_REQUESTS,,,,*Pending guidance from F06*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_PURE_RESEARCH,,,,*Pending guidance from F06*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_TECHNICAL,,,,*Pending guidance from F03*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_ARTISTIC,,,,*Pending guidance from F03*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_PROTECT_RIGHTS,,,,*Pending guidance from F03*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_EXTREME_URGENCY,,,,*Pending guidance from F03*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_REPETITION_EXISTING,,,,*Pending guidance from F03*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_FROM_WINDING_PROVIDER,,,,*Pending guidance from F03*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_FROM_LIQUIDATOR_CREDITOR,,,,*Pending guidance from F03*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_BARGAIN_PURCHASE,,,,*Pending guidance from F06*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_OUTSIDE_SCOPE,,,,*Pending guidance from F03*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_JUSTIFICATION,,,,*Pending guidance from F03*
