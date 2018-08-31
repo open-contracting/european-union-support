@@ -3,8 +3,10 @@ task :table do
   def swap(labels, label_1, label_2)
     index_1 = labels.index(label_1)
     index_2 = labels.index(label_2)
-    labels[index_1] = label_2
-    labels[index_2] = label_1
+    if index_1 && index_2
+      labels[index_1] = label_2
+      labels[index_2] = label_1
+    end
   end
 
   def help_labels(labels)
@@ -92,6 +94,9 @@ task :table do
         builder.subheading(key)
         builder.table
 
+      elsif key == '_or'
+        builder.row(key)
+
       elsif ignore.any? && ignore[0]['label-key'] == key
         row = ignore.shift
         builder.row(key, help_labels: help_labels(labels), index: row['index'])
@@ -133,6 +138,9 @@ task :table do
         $stderr.puts builder
         $stderr.puts data.map(&:to_h)
         $stderr.puts data.index{ |row| row['label-key'] == key }
+        $stderr.puts "ignore: #{ignore.any? && ignore[0]['label-key']}"
+        $stderr.puts "enumerations: #{enumerations.any? && enumerations[0]['label-key']}"
+        $stderr.puts "additional: #{additional.any? && additional[0]['label-key']}"
         raise "unexpected key '#{key}'"
       end
     end

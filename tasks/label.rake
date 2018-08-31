@@ -71,30 +71,21 @@ namespace :label do
       end
     end
 
-    # Some form titles are used on later forms and therefore ignored with ignore.csv.
     form_title_labels = [
-      # notice_pin on F02
-      # notice_contract on F03
       'notice_contract_award', # F03
       'notice_contract_award_sub', # F03
-      # notice_periodic_utilities on F05
-      # notice_contract_utilities on F06
       'notice_award_utilities', # F06
       'notice_contract_award_sub', # F06
-      # notice_qualification_utilities on F22
       'notice_relates_to', # F08
-      # notice_design_cont on F13
       'notice_result_design_cont', # F13
       'notice_corrigendum', # F14
       'notice_mod', # F20
       'notice_social_public', # F21
       'notice_social_util', # F22
       'notice_social_concess', # F23
-      # notice_concession on F24
-      # notice_concession_award on F23
     ]
 
-    regex = /\A(annex_d\d|section_\d|directive_201424|#{form_title_labels.join('|')})\z/
+    regex = /\A(annex_d\d|section_\d|directive_201424|directive_201425|#{form_title_labels.join('|')})\z/
 
     files('source/*_TED_forms_templates/F{}_*.pdf').each do |filename|
       text = pdftotext(filename)
@@ -104,7 +95,7 @@ namespace :label do
         puts "#{File.basename(filename)}: #{difference.to_a.join(', ')}"
       end
 
-      difference = Set.new(text.scan(/\b[IV]+(?:\.\d+)*/).flatten) - indices_seen
+      difference = Set.new(indices(text)) - indices_seen
       if difference.any?
         puts "#{File.basename(filename)}: #{difference.to_a.join(', ')}"
       end
@@ -122,33 +113,99 @@ namespace :label do
     end
   end
 
-  desc 'Copy OCDS guidance across forms'
+  desc 'Add form numbers to ignore.csv'
+  task :ignore do
+    # Some form titles are used on later forms and therefore ignored with ignore.csv.
+    ignore = {
+      '01' => ['notice_pin', 'directive_201424'], # F02
+      '02' => ['notice_contract', 'directive_201424'], # F03
+      '04' => ['notice_periodic_utilities'], # F05
+      '05' => ['notice_contract_utilities'], # F06
+      '07' => ['notice_qualification_utilities'], # F22
+      '12' => ['notice_design_cont'], # F13
+      '24' => ['notice_concession'], # F25
+      '25' => ['notice_concession_award'], # F23
+    }
+
+    path = File.join('output', 'mapping', 'ignore.csv')
+    rows = CSV.read(path, headers: true)
+    headers = rows[0].headers
+    enum = rows.to_enum.with_index
+
+    files('output/mapping/F{}_*.csv').each do |filename|
+      number = File.basename(filename).match(/\AF(\d\d)/)[1]
+
+      mapped = CSV.read(filename, headers: true).map{ |row| row['label-key'] }
+      if ignore.key?(number)
+        mapped += ignore[number]
+      end
+      mapped << '_or'
+
+      text = pdftotext(files("source/*_TED_forms_templates/F#{number}_*.pdf")[0])
+      minimum_indices = Hash.new(-1)
+      label_keys(text).each do |label_key|
+        if !mapped.include?(label_key)
+          index = enum.find_index do |row, i|
+            row['label-key'] == label_key && i > minimum_indices[label_key]
+          end
+          if index
+            if rows[index]['numbers'] && !rows[index]['numbers'][number]
+              rows[index]['numbers'] << "|#{number}"
+            end
+          end
+        end
+      end
+    end
+
+    CSV.open(path, 'w') do |csv|
+      csv << headers
+      rows.each do |row|
+        csv << row
+      end
+    end
+  end
+
+  desc 'Copy label keys, indices and OCDS guidance across forms'
   task :copy do
-    number = ENV['SOURCE']
-    source = Dir["output/mapping/F#{number}_*.csv"][0]
+    source_number = ENV['SOURCE']
+    source = files("output/mapping/F#{source_number}_*.csv")[0]
 
     xpaths = {}
     CSV.foreach(source, headers: true) do |row|
       xpaths[row['xpath']] = row
     end
 
-    files('output/mapping/F{}_*.csv').each do |filename|
+    filenames = files('output/mapping/F{}_*.csv') - [source]
+    filenames.each do |filename|
       headers = nil
       rows = []
 
       CSV.foreach(filename, headers: true) do |row|
         headers = row.headers
+        target_number = File.basename(filename).match(/\AF(\d\d)/)[1]
+
+        template = files("source/*_TED_forms_templates/F#{target_number}_*.pdf")[0]
+        text = pdftotext(template)
+        label_keys = label_keys(text)
+        indices = indices(text)
 
         key = row['xpath']
         other = xpaths[key]
         if other
+          if row['label-key'].nil? && label_keys.include?(other['label-key'])
+            row['label-key'] = other['label-key']
+          end
+          if row['index'].nil? && indices.include?(other['index'])
+            row['index'] = other['index']
+          end
+
           row['comment'] = other['comment']
 
           guidance = other['guidance']
           if guidance
             row['guidance'] = guidance
           else
-            row['guidance'] = "*Pending guidance from F#{number}*"
+            row['guidance'] = "*Pending guidance from F#{source_number}*"
           end
         end
         rows << row
