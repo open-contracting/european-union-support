@@ -19,10 +19,10 @@ xpath,label-key,index,comment,guidance
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,url_buyerprofile,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/organization_BuyerProfile,Map to `.details.buyerProfile` (PROPOSAL)
 /CONTRACTING_BODY/CA_TYPE,ca_type,I.4,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, add a `Classification` object to its `.details.classifications` array, and set the latter's `.scheme` to 'TED' and `.id` as follows: (PROPOSAL)"
 /CONTRACTING_BODY/CA_TYPE_OTHER,other_type,,,Map to any other code
-/CONTRACTING_BODY/CA_ACTIVITY,mainactivity,I.5,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, add a `Classification` object to its `.details.classifications` array, and set the latter's `.scheme` to ['COFOG'](https://unstats.un.org/unsd/publications/catalogue?selectID=145) and `.id` as follows: (PROPOSAL)"
-/CONTRACTING_BODY/CA_ACTIVITY_OTHER,other_activity,,,Map to any other code
-/CONTRACTING_BODY/CE_ACTIVITY,mainactivity,I.6,,*Pending guidance from F04*
-/CONTRACTING_BODY/CE_ACTIVITY_OTHER,other_activity,,,*Pending guidance from F04*
+/CONTRACTING_BODY/CA_ACTIVITY,mainactivity,I.5,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, add a `Classification` object to its `.details.classifications` array, and set the latter's `.scheme` to ['COFOG'](https://unstats.un.org/unsd/publications/catalogue?selectID=145) and `.id` and `.name` as follows: (PROPOSAL)"
+/CONTRACTING_BODY/CA_ACTIVITY_OTHER,other_activity,,,Map to `.name`
+/CONTRACTING_BODY/CE_ACTIVITY,mainactivity,I.6,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification's `.scheme` to 'TED_CE_ACTIVITY', and set its `.id` as follows: (PROPOSAL)\n\n*The codes are drawn from [Directive 2014/25/EU](https://eur-lex.europa.eu/legal-content/en/TXT/?uri=CELEX%3A32014L0025#L_2014094EN.01033901)*"
+/CONTRACTING_BODY/CE_ACTIVITY_OTHER,other_activity,,,Map to `.name`
 /OBJECT_CONTRACT,object,II,,""
 /OBJECT_CONTRACT/TITLE,title_contract,II.1.1,,Map to `tender.title`
 /OBJECT_CONTRACT/REFERENCE_NUMBER,fileref,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_BuyerInternalReferenceID,Map to `tender.id`

@@ -69,6 +69,7 @@ task :table do
     swap(labels, 'maintype_localauth', 'maintype_publicbody')
     swap(labels, 'maintype_localauth', 'maintype_localagency')
     swap(labels, 'mainactiv_health', 'other_activity')
+    swap(labels, 'mainactiv_postal', 'other_activity')
 
     ### Build
 

@@ -33,8 +33,8 @@ xpath,label-key,index,comment,guidance
 /CONTRACTING_BODY/URL_TOOL,url_communication_tools,,,Map to `tender.communicationDetails.accessToolUrl` (PROPOSAL)
 /CONTRACTING_BODY/CA_TYPE,ca_type,I.4,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, add a `Classification` object to its `.details.classifications` array, and set the latter's `.scheme` to 'TED' and `.id` as follows: (PROPOSAL)"
 /CONTRACTING_BODY/CA_TYPE_OTHER,other_type,,,Map to any other code
-/CONTRACTING_BODY/CA_ACTIVITY,mainactivity,I.5,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, add a `Classification` object to its `.details.classifications` array, and set the latter's `.scheme` to ['COFOG'](https://unstats.un.org/unsd/publications/catalogue?selectID=145) and `.id` as follows: (PROPOSAL)"
-/CONTRACTING_BODY/CA_ACTIVITY_OTHER,other_activity,,,Map to any other code
+/CONTRACTING_BODY/CA_ACTIVITY,mainactivity,I.5,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, add a `Classification` object to its `.details.classifications` array, and set the latter's `.scheme` to ['COFOG'](https://unstats.un.org/unsd/publications/catalogue?selectID=145) and `.id` and `.name` as follows: (PROPOSAL)"
+/CONTRACTING_BODY/CA_ACTIVITY_OTHER,other_activity,,,Map to `.name`
 /OBJECT_CONTRACT,object,II,,""
 /OBJECT_CONTRACT/@ITEM,,,,"Discard.\n\nIf the notice is for prior information only, then this element is repeatable in [present forms](http://simap.ted.europa.eu/documents/10184/99173/EN_F01.pdf), but may not be in [future forms](https://github.com/eForms/eForms/issues/55)."
 /OBJECT_CONTRACT/TITLE,title_contract,II.1.1,,Map to `tender.title`
@@ -80,7 +80,7 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,info_additional,II.2.14,,Append to `tender.description`\n\n*This results in a loss of structure.* (WARNING)
 /OBJECT_CONTRACT/DATE_PUBLICATION_NOTICE,date_of_contract_notice,II.3,,Map to `tender.tenderPeriod.startDate`
 /LEFTI,info_legal,III,,"The standard forms express exclusion grounds and selection criteria in this section as unstructured text. In the [introductory note](https://github.com/eForms/eForms/raw/master/20180604_eForms_consultation_introduction.docx) to its [eForms consultation](https://github.com/eForms/eForms), the European Commission proposes to create an extension to eForms to implement the [European Single Procurement Document (ESPD)](http://ec.europa.eu/growth/single-market/public-procurement/e-procurement/espd/), which expresses this information as structured data, following the model of the [Core Criterion and Core Evidence Vocabulary](https://joinup.ec.europa.eu/solution/core-criterion-and-core-evidence-vocabulary). With respect to OCDS, work on this section is postponed until the extension to eForms is available."
-/LEFTI/RULES_CRITERIA,descr_brief_rules,,,*Pending guidance from F04*
+/LEFTI/RULES_CRITERIA,descr_brief_rules,,,""
 /LEFTI/RESTRICTED_SHELTERED_WORKSHOP,restricted_sheltered_workshop,,,""
 /LEFTI/RESTRICTED_SHELTERED_PROGRAM,restricted_sheltered_program,,,""
 /LEFTI/RESERVED_ORGANISATIONS_SERVICE_MISSION,reserved_public_mission,,,""
