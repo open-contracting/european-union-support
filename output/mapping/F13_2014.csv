@@ -2,25 +2,25 @@ xpath,label-key,index,comment,guidance
 /@LG,,,,"Lowercase, and map to `language`"
 /@CATEGORY,,,,Discard. TED translates at form-level. OCDS translates at field-level.
 /LEGAL_BASIS,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_LegalBasis,Map to `tender.legalBasis` (PROPOSAL)
-/CONTRACTING_BODY,,I,,""
+/CONTRACTING_BODY,ca_ce,I,,""
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,name_address_contact,I.1,,"[Add a party](../operations#add-a-party), and add 'buyer' to its `.roles`\n\nSet `buyer.id` to its `.id` and `buyer.name` to its [`.name`](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,name_official,,,Map to `.name` and `.identifier.legalName`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,national_id,,,"Map to `.identifier.id`, and set `.identifier.scheme`"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS,address_postal,,,Map to `.address.streetAddress`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN,address_town,,,Map to `.address.locality`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,nutscode,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,"Take the NUTS code in the `CODE` attribute, and map to `.address.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE,address_postcode,,,Map to `.address.postalCode`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY,address_country,,,"Take the country code in the `VALUE` attribute, translate to a country name, and map to `.address.countryName`\n\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation. (ISSUE)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT,contactpoint,,,Map to `.contactPoint.name`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE,address_phone,,,Map to `.contactPoint.telephone`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL,address_email,,,Map to `.contactPoint.email`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,address_fax,,,Map to `.contactPoint.faxNumber`
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,nutscode,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,"Take the NUTS code in the `CODE` attribute, and map to `.address.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,url_general,,,Map to `.details.url` (PROPOSAL)
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,url_buyerprofile,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/organization_BuyerProfile,Map to `.details.buyerProfile` (PROPOSAL)
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL,,,,"[Add a party](../operations#add-a-party), add 'buyer' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
-/CONTRACTING_BODY/JOINT_PROCUREMENT_INVOLVED,,,,"Discard. If there are multiple parties with the role 'buyer', then the contract involves joint procurement. (When *The contract involves joint procurement* is checked, at least one additional contracting authority is provided.)"
+/CONTRACTING_BODY/JOINT_PROCUREMENT_INVOLVED,joint_procurement_contest_involves,,,"Discard. If there are multiple parties with the role 'buyer', then the contract involves joint procurement. (When *The contract involves joint procurement* is checked, at least one additional contracting authority is provided.)"
 /CONTRACTING_BODY/PROCUREMENT_LAW,joint_national_law,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_JointProcurement,Map to `tender.crossBorderLaw` (PROPOSAL)
-/CONTRACTING_BODY/CENTRAL_PURCHASING,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,Add 'centralPurchasingBody' to the `.roles` of the party (PROPOSAL)
+/CONTRACTING_BODY/CENTRAL_PURCHASING,joint_procurement_central_contest,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,Add 'centralPurchasingBody' to the `.roles` of the party (PROPOSAL)
 /CONTRACTING_BODY/CA_TYPE,ca_type,I.4,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, add a `Classification` object to its `.details.classifications` array, and set the latter's `.scheme` to 'TED' and `.id` as follows: (PROPOSAL)"
 /CONTRACTING_BODY/CA_TYPE_OTHER,other_type,,,Map to any other code
 /CONTRACTING_BODY/CA_ACTIVITY,mainactivity,I.5,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, add a `Classification` object to its `.details.classifications` array, and set the latter's `.scheme` to ['COFOG'](https://unstats.un.org/unsd/publications/catalogue?selectID=145) and `.id` as follows: (PROPOSAL)"
@@ -41,40 +41,40 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_isEUFunded https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_EUFunded,"If not already added, [add a party](../operations#add-a-party), add 'funder' to its `.roles`, and set its `.name` to 'European Union'. (PROPOSAL)\n\nAdd a `Finance` object to the `planning.budget.finance` array, and set its `.financingParty.name` to 'European Union' and `.financingParty.id` to the party's `.id`. If a structured identifier is used to identify the project, map to `.id`; otherwise, set its `.id`, and map to `.title`. If the contract is divided into lots, set its `.relatedLot` to the lot's `.id`. (PROPOSAL)"
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds. (PROPOSAL)"
 /PROCEDURE,procedure,IV,,""
-/PROCEDURE/PT_OPEN,,,,*Pending guidance from F02*
-/PROCEDURE/PT_RESTRICTED,,,,Set `tender.procurementMethod` to 'selective'
-/PROCEDURE/CRITERIA_EVALUATION,,,,*Pending guidance from F12*
+/PROCEDURE/PT_OPEN,open,,,*Pending guidance from F02*
+/PROCEDURE/PT_RESTRICTED,type_restricted,,,Set `tender.procurementMethod` to 'selective'
+/PROCEDURE/CRITERIA_EVALUATION,dc_criteria_evaluation,IV.1.9,,*Pending guidance from F12*
 /PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,,*Pending guidance from F02*
-/RESULTS,,,,
-/RESULTS/NO_AWARDED_PRIZE,,,,
-/RESULTS/NO_AWARDED_PRIZE/PROCUREMENT_DISCONTINUED,,,,
-/RESULTS/NO_AWARDED_PRIZE/PROCUREMENT_UNSUCCESSFUL,,,,
-/RESULTS/AWARDED_PRIZE,,,,
-/RESULTS/AWARDED_PRIZE/DATE_DECISION_JURY,,,,
-/RESULTS/AWARDED_PRIZE/PARTICIPANTS,,,,
+/RESULTS,dc_results_contest,V,,""
+/RESULTS/NO_AWARDED_PRIZE,_yes,,,
+/RESULTS/NO_AWARDED_PRIZE/PROCUREMENT_DISCONTINUED,award_discontinued,,,
+/RESULTS/NO_AWARDED_PRIZE/PROCUREMENT_UNSUCCESSFUL,award_no_projects,,,
+/RESULTS/AWARDED_PRIZE,_no,,,
+/RESULTS/AWARDED_PRIZE/DATE_DECISION_JURY,dc_date_decision,V.3.1,,
+/RESULTS/AWARDED_PRIZE/PARTICIPANTS,info_paricipants,V.3.2,,,
 /RESULTS/AWARDED_PRIZE/PARTICIPANTS/@PUBLICATION,,,,
-/RESULTS/AWARDED_PRIZE/PARTICIPANTS/NB_PARTICIPANTS,,,,
-/RESULTS/AWARDED_PRIZE/PARTICIPANTS/NB_PARTICIPANTS_SME,,,,
-/RESULTS/AWARDED_PRIZE/PARTICIPANTS/NB_PARTICIPANTS_OTHER_EU,,,,
+/RESULTS/AWARDED_PRIZE/PARTICIPANTS/NB_PARTICIPANTS,number_participants,,,
+/RESULTS/AWARDED_PRIZE/PARTICIPANTS/NB_PARTICIPANTS_SME,number_participants_sme,,,
+/RESULTS/AWARDED_PRIZE/PARTICIPANTS/NB_PARTICIPANTS_OTHER_EU,number_participants_foreign,,,
 /RESULTS/AWARDED_PRIZE/WINNERS,,,,
 /RESULTS/AWARDED_PRIZE/WINNERS/@PUBLICATION,,,,
-/RESULTS/AWARDED_PRIZE/WINNERS/WINNER,,,,
+/RESULTS/AWARDED_PRIZE/WINNERS/WINNER,dc_name_winner,V.3.3,,
 /RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER,,,,
-/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/OFFICIALNAME,,,,
-/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/NATIONALID,,,,
-/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/ADDRESS,,,,
-/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/TOWN,,,,
-/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/POSTAL_CODE,,,,
-/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/COUNTRY,,,,
-/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/PHONE,,,,
-/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/E_MAIL,,,,
-/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/FAX,,,,
-/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/NUTS,,,,
-/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/URL,,,,
-/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/SME,,,,
-/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/NO_SME,,,,
-/RESULTS/AWARDED_PRIZE/VAL_PRIZE,,,,
-/RESULTS/AWARDED_PRIZE/VAL_PRIZE/@CURRENCY,,,,
+/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/OFFICIALNAME,name_official,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME
+/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/NATIONALID,national_id,,,"Map to `.identifier.id`, and set `.identifier.scheme`"
+/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/ADDRESS,address_postal,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS
+/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/TOWN,address_town,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN
+/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/NUTS,nutscode,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,"Take the NUTS code in the `CODE` attribute, and map to `.address.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
+/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/POSTAL_CODE,address_postcode,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE
+/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/COUNTRY,address_country,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY
+/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/PHONE,address_phone,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE
+/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/E_MAIL,address_email,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL
+/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/FAX,address_fax,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX
+/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/URL,internet,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL
+/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/SME,_yes,,,
+/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/NO_SME,_no,,,
+/RESULTS/AWARDED_PRIZE/VAL_PRIZE,dc_value_prizes_excl_vat,,,
+/RESULTS/AWARDED_PRIZE/VAL_PRIZE/@CURRENCY,currency,,,
 /RESULTS/AWARDED_PRIZE/VAL_PRIZE/@PUBLICATION,,,,
 /COMPLEMENTARY_INFO,info_complement,VI,,""
 /COMPLEMENTARY_INFO/INFO_ADD,info_additional,VI.3,,*Pending guidance from F01*

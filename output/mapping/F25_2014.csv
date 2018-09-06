@@ -8,13 +8,13 @@ xpath,label-key,index,comment,guidance
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,national_id,,,"Map to `.identifier.id`, and set `.identifier.scheme`"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS,address_postal,,,Map to `.address.streetAddress`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN,address_town,,,Map to `.address.locality`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,nutscode,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,"Take the NUTS code in the `CODE` attribute, and map to `.address.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE,address_postcode,,,Map to `.address.postalCode`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY,address_country,,,"Take the country code in the `VALUE` attribute, translate to a country name, and map to `.address.countryName`\n\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation. (ISSUE)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT,contactpoint,,,Map to `.contactPoint.name`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE,address_phone,,,Map to `.contactPoint.telephone`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL,address_email,,,Map to `.contactPoint.email`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,address_fax,,,Map to `.contactPoint.faxNumber`
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,nutscode,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,"Take the NUTS code in the `CODE` attribute, and map to `.address.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,url_general,,,Map to `.details.url` (PROPOSAL)
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,url_buyerprofile,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/organization_BuyerProfile,Map to `.details.buyerProfile` (PROPOSAL)
 /CONTRACTING_BODY/CA_TYPE,ca_type,I.4,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, add a `Classification` object to its `.details.classifications` array, and set the latter's `.scheme` to 'TED' and `.id` as follows: (PROPOSAL)"
@@ -34,14 +34,15 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/SHORT_DESCR,descr_short,II.1.4,,Map to `tender.description`
 /OBJECT_CONTRACT/VAL_ESTIMATED_TOTAL,value_excl_vat,,,Map to `tender.value.amount`
 /OBJECT_CONTRACT/VAL_ESTIMATED_TOTAL/@CURRENCY,currency,,,Map to `tender.value.currency`
-/OBJECT_CONTRACT/CALCULATION_METHOD,,,,
+/OBJECT_CONTRACT/CALCULATION_METHOD,concession_method_calculate,,,
+/OBJECT_CONTRACT/LOT_DIVISION,_yes,,,"Discard. If `tender.lots` is set, then the contract is divided into lots."
+/OBJECT_CONTRACT/NO_LOT_DIVISION,_no,,,"Discard. If `tender.lots` isn't set, then the contract isn't divided into lots."
 /OBJECT_CONTRACT/VAL_TOTAL,value,,,*Pending guidance from F03*
 /OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY,currency,,,*Pending guidance from F03*
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL,,,This element sets the currency for its children.,*Pending guidance from F03*
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY,currency,,,*Pending guidance from F03*
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/LOW,lowest_offer,,,*Pending guidance from F03*
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/HIGH,highest_offer,,,*Pending guidance from F03*
-/OBJECT_CONTRACT/LOT_DIVISION,_yes,,,"Discard. If `tender.lots` is set, then the contract is divided into lots."
 /OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,"If the contract is divided into lots, add a `Lot` object to the `tender.lots` array"
 /OBJECT_CONTRACT/OBJECT_DESCR/@ITEM,,,,Discard
 /OBJECT_CONTRACT/OBJECT_DESCR/TITLE,title_contract,II.2.1,,"If the contract is divided into lots, map to the lot's `.title`"
@@ -53,25 +54,16 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE,mainsiteplace_works_delivery,,,*Pending guidance from F01*
 /OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,descr_procurement,II.2.4,,"If the contract is divided into lots, map to the lot's `.description`. Otherwise, append to `tender.description`.\n\n*If the contract isn't divided into lots, this results in a loss of structure.* (WARNING)"
 /OBJECT_CONTRACT/OBJECT_DESCR/AC,award_criteria,II.2.5,,""
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_CRITERION,,,,*Pending guidance from F24*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_CRITERION,criteria,,,*Pending guidance from F24*
 /OBJECT_CONTRACT/OBJECT_DESCR/DURATION,duration_concession,II.2.7,,""
 /OBJECT_CONTRACT/OBJECT_DESCR/DATE_START,starting,,,Map to `.contractPeriod.startDate` (PROPOSAL FOR LOTS)
 /OBJECT_CONTRACT/OBJECT_DESCR/DATE_END,end,,,Map to `.contractPeriod.endDate` (PROPOSAL FOR LOTS)
 /OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_isEUFunded https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_EUFunded,"If not already added, [add a party](../operations#add-a-party), add 'funder' to its `.roles`, and set its `.name` to 'European Union'. (PROPOSAL)\n\nAdd a `Finance` object to the `planning.budget.finance` array, and set its `.financingParty.name` to 'European Union' and `.financingParty.id` to the party's `.id`. If a structured identifier is used to identify the project, map to `.id`; otherwise, set its `.id`, and map to `.title`. If the contract is divided into lots, set its `.relatedLot` to the lot's `.id`. (PROPOSAL)"
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds. (PROPOSAL)"
 /OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,info_additional,II.2.14,,Append to `tender.description`\n\n*This results in a loss of structure.* (WARNING)
-/OBJECT_CONTRACT/NO_LOT_DIVISION,_no,,,"Discard. If `tender.lots` isn't set, then the contract isn't divided into lots."
 /PROCEDURE,procedure,IV,,""
 /PROCEDURE/PT_AWARD_CONTRACT_WITH_PRIOR_PUBLICATION,proctype_with_concess_notice,,,*Pending guidance from F23*
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION,award_wo_prior_pub_d4,,,*Pending guidance from F23*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE,,,,*Pending guidance from F23*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_NO_TENDERS_REQUESTS,,,,*Pending guidance from F23*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_ARTISTIC,,,,*Pending guidance from F23*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_TECHNICAL,,,,*Pending guidance from F23*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_EXCLUSIVE_RIGHT,,,,*Pending guidance from F23*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_PROTECT_RIGHTS,,,,*Pending guidance from F23*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_OUTSIDE_SCOPE,,,,*Pending guidance from F23*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_JUSTIFICATION,,,,*Pending guidance from F23*
 /PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to `tender.coveredBy`
 /PROCEDURE/CONTRACT_COVERED_GPA/@CTYPE,,,,*Pending guidance from F24*
 /PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in `tender.coveredBy`, then the procurement isn't covered by the GPA."
@@ -94,6 +86,7 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_EMEANS,offers_received_electronic,,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS,,,This element contains elements from V.2.2 and V.2.3.,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/AWARDED_TO_GROUP,_yes,,,*Pending guidance from F03*
+/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/NO_AWARDED_TO_GROUP,_no,,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR,,,"Contains ADDRESS_CONTRACTOR, SME, NO_SME.",*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR,awarded_to_concess,V.2.3,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME,name_official,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME
@@ -109,7 +102,6 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/URL,internet,,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/SME,_yes,,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/NO_SME,_no,,,*Pending guidance from F03*
-/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/NO_AWARDED_TO_GROUP,_no,,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES,value_concession_info,V.2.4,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL,value_estim_total_contract_concess,,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY,currency,,,*Pending guidance from F03*
@@ -136,3 +128,11 @@ xpath,label-key,index,comment,guidance
 /COMPLEMENTARY_INFO/REVIEW_PROCEDURE,appeals_deadline,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,Map to `tender.reviewDetails` (PROPOSAL)
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_INFO,appeals_info,VI.4.4,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations#add-a-party), and add 'reviewContactPoint' to its `.roles` (PROPOSAL)"
 /COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,date_dispatch,VI.5,,Map to `date`
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE,,,,*Pending guidance from F23*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_NO_TENDERS_REQUESTS,d_no_applications,,,*Pending guidance from F23*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_ARTISTIC,d_artistic_concess,,,*Pending guidance from F23*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_TECHNICAL,d_technical,,,*Pending guidance from F23*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_EXCLUSIVE_RIGHT,d_existence_exclusive,,,*Pending guidance from F23*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_PROTECT_RIGHTS,d_intellectual_concess,,,*Pending guidance from F23*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_OUTSIDE_SCOPE,d_outside_scope,,,*Pending guidance from F23*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_JUSTIFICATION,d_explain,,,*Pending guidance from F23*

@@ -2,25 +2,25 @@ xpath,label-key,index,comment,guidance
 /@LG,,,,"Lowercase, and map to `language`"
 /@CATEGORY,,,,Discard. TED translates at form-level. OCDS translates at field-level.
 /LEGAL_BASIS,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_LegalBasis,Map to `tender.legalBasis` (PROPOSAL)
-/CONTRACTING_BODY,,I,,""
+/CONTRACTING_BODY,ca_ce,I,,""
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,name_address_contact,I.1,,"[Add a party](../operations#add-a-party), and add 'buyer' to its `.roles`\n\nSet `buyer.id` to its `.id` and `buyer.name` to its [`.name`](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,name_official,,,Map to `.name` and `.identifier.legalName`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,national_id,,,"Map to `.identifier.id`, and set `.identifier.scheme`"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS,address_postal,,,Map to `.address.streetAddress`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN,address_town,,,Map to `.address.locality`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,nutscode,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,"Take the NUTS code in the `CODE` attribute, and map to `.address.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE,address_postcode,,,Map to `.address.postalCode`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY,address_country,,,"Take the country code in the `VALUE` attribute, translate to a country name, and map to `.address.countryName`\n\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation. (ISSUE)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT,contactpoint,,,Map to `.contactPoint.name`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE,address_phone,,,Map to `.contactPoint.telephone`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL,address_email,,,Map to `.contactPoint.email`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,address_fax,,,Map to `.contactPoint.faxNumber`
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,nutscode,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,"Take the NUTS code in the `CODE` attribute, and map to `.address.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,url_general,,,Map to `.details.url` (PROPOSAL)
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,url_buyerprofile,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/organization_BuyerProfile,Map to `.details.buyerProfile` (PROPOSAL)
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL,,,,"[Add a party](../operations#add-a-party), add 'buyer' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
-/CONTRACTING_BODY/JOINT_PROCUREMENT_INVOLVED,,,,"Discard. If there are multiple parties with the role 'buyer', then the contract involves joint procurement. (When *The contract involves joint procurement* is checked, at least one additional contracting authority is provided.)"
+/CONTRACTING_BODY/JOINT_PROCUREMENT_INVOLVED,joint_procurement_contest_involves,,,"Discard. If there are multiple parties with the role 'buyer', then the contract involves joint procurement. (When *The contract involves joint procurement* is checked, at least one additional contracting authority is provided.)"
 /CONTRACTING_BODY/PROCUREMENT_LAW,joint_national_law,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_JointProcurement,Map to `tender.crossBorderLaw` (PROPOSAL)
-/CONTRACTING_BODY/CENTRAL_PURCHASING,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,Add 'centralPurchasingBody' to the `.roles` of the party (PROPOSAL)
+/CONTRACTING_BODY/CENTRAL_PURCHASING,joint_procurement_central_contest,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,Add 'centralPurchasingBody' to the `.roles` of the party (PROPOSAL)
 /CONTRACTING_BODY/DOCUMENT_FULL,address_obtain_docs,,,"Discard. If no `tender.participationFees` have a `.type` of 'document', then access is **assumed to be** unrestricted. (WARNING)\n\nTo provide direct access to procurement documents, add `Document` objects to the `tender.documents` array, and set their `.id` and other fields."
 /CONTRACTING_BODY/DOCUMENT_RESTRICTED,docs_restricted,,,"Discard. If any `tender.participationFees` have a `.type` of 'document', then access is restricted.\n\nTo provide the cost and terms of payment for procurement documents, use the [Participation Fees](https://github.com/open-contracting/ocds_participationFee_extension) extension, add `ParticipationFee` objects to the `tender.participationFees` array, set their `.type` to 'document', and set their `.id` and other fields."
 /CONTRACTING_BODY/URL_DOCUMENT,,,,Map to `.contactPoint.url`
@@ -50,31 +50,31 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_isEUFunded https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_EUFunded,"If not already added, [add a party](../operations#add-a-party), add 'funder' to its `.roles`, and set its `.name` to 'European Union'. (PROPOSAL)\n\nAdd a `Finance` object to the `planning.budget.finance` array, and set its `.financingParty.name` to 'European Union' and `.financingParty.id` to the party's `.id`. If a structured identifier is used to identify the project, map to `.id`; otherwise, set its `.id`, and map to `.title`. If the contract is divided into lots, set its `.relatedLot` to the lot's `.id`. (PROPOSAL)"
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds. (PROPOSAL)"
 /LEFTI,info_legal,III,,""
-/LEFTI/CRITERIA_SELECTION,,,,
-/LEFTI/PARTICULAR_PROFESSION,,,,*Pending guidance from F01*
-/LEFTI/NO_PARTICULAR_PROFESSION,,,,
+/LEFTI/CRITERIA_SELECTION,criteria_selection,III.1.10,,
+/LEFTI/PARTICULAR_PROFESSION,dc_indicate_profession,,,*Pending guidance from F01*
+/LEFTI/NO_PARTICULAR_PROFESSION,_no,,,
 /PROCEDURE,procedure,IV,,""
-/PROCEDURE/PT_OPEN,,,,*Pending guidance from F02*
-/PROCEDURE/PT_RESTRICTED,,,,Set `tender.procurementMethod` to 'selective'
-/PROCEDURE/NB_PARTICIPANTS,,,,
-/PROCEDURE/NB_MIN_PARTICIPANTS,,,,
-/PROCEDURE/NB_MAX_PARTICIPANTS,,,,
-/PROCEDURE/PARTICIPANT_NAME,,,,
-/PROCEDURE/CRITERIA_EVALUATION,,,,
+/PROCEDURE/PT_OPEN,open,,,*Pending guidance from F02*
+/PROCEDURE/PT_RESTRICTED,type_restricted,,,Set `tender.procurementMethod` to 'selective'
+/PROCEDURE/NB_PARTICIPANTS,number_participants,,,
+/PROCEDURE/NB_MIN_PARTICIPANTS,min_number,,,
+/PROCEDURE/NB_MAX_PARTICIPANTS,max_number,,,
+/PROCEDURE/PARTICIPANT_NAME,dc_names_selected,IV.1.7,,
+/PROCEDURE/CRITERIA_EVALUATION,dc_criteria_evaluation,IV.1.9,,
 /PROCEDURE/DATE_RECEIPT_TENDERS,date,,,Map to the date component of `tender.tenderPeriod.endDate`
 /PROCEDURE/TIME_RECEIPT_TENDERS,time,,,Map to the time component of `tender.tenderPeriod.endDate`
-/PROCEDURE/DATE_DISPATCH_INVITATIONS,date,,,*Pending guidance from F02*
-/PROCEDURE/LANGUAGES,,IV.2.4,,""
+/PROCEDURE/DATE_DISPATCH_INVITATIONS,date_dispatch_participate_selected,IV.2.3,,*Pending guidance from F02*
+/PROCEDURE/LANGUAGES,languages_allowed_project,IV.2.4,,""
 /PROCEDURE/LANGUAGES/LANGUAGE,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_SubmissionLanguages,Map to `tender.submissionLanguages` (PROPOSAL)
-/PROCEDURE/PRIZE_AWARDED,,,,
-/PROCEDURE/NUMBER_VALUE_PRIZE,,,,
-/PROCEDURE/NO_PRIZE_AWARDED,,,,
-/PROCEDURE/DETAILS_PAYMENT,,,,
-/PROCEDURE/FOLLOW_UP_CONTRACTS,,,,
-/PROCEDURE/NO_FOLLOW_UP_CONTRACTS,,,,
-/PROCEDURE/DECISION_BINDING_CONTRACTING,,,,
-/PROCEDURE/NO_DECISION_BINDING_CONTRACTING,,,,
-/PROCEDURE/MEMBER_NAME,,,,
+/PROCEDURE/PRIZE_AWARDED,_yes,,,
+/PROCEDURE/NUMBER_VALUE_PRIZE,dc_number_value_prizes,,,
+/PROCEDURE/NO_PRIZE_AWARDED,_no,,,
+/PROCEDURE/DETAILS_PAYMENT,dc_details_payment,IV.3.2,,
+/PROCEDURE/FOLLOW_UP_CONTRACTS,_yes,,,
+/PROCEDURE/NO_FOLLOW_UP_CONTRACTS,_no,,,
+/PROCEDURE/DECISION_BINDING_CONTRACTING,_yes,,,
+/PROCEDURE/NO_DECISION_BINDING_CONTRACTING,_no,,,
+/PROCEDURE/MEMBER_NAME,dc_names_jury,IV.3.5,,
 /COMPLEMENTARY_INFO,info_complement,VI,,""
 /COMPLEMENTARY_INFO/INFO_ADD,info_additional,VI.3,,*Pending guidance from F01*
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY,appeals_body,VI.4.1,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations#add-a-party), and add 'reviewBody' to its `.roles`"

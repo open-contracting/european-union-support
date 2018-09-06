@@ -1,20 +1,20 @@
 xpath,label-key,index,comment,guidance
 /@LG,,,,"Lowercase, and map to `language`"
 /@CATEGORY,,,,Discard. TED translates at form-level. OCDS translates at field-level.
-/LEGAL_BASIS,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_LegalBasis,Map to `tender.legalBasis` (PROPOSAL)
-/CONTRACTING_BODY,,I,,""
+/LEGAL_BASIS,notice_relates_to,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_LegalBasis,Set `tender.legalBasis` as follows: (PROPOSAL)
+/CONTRACTING_BODY,ca_ce,I,,""
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,name_address_contact,I.1,,"[Add a party](../operations#add-a-party), and add 'buyer' to its `.roles`\n\nSet `buyer.id` to its `.id` and `buyer.name` to its [`.name`](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,name_official,,,Map to `.name` and `.identifier.legalName`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,national_id,,,"Map to `.identifier.id`, and set `.identifier.scheme`"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS,address_postal,,,Map to `.address.streetAddress`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN,address_town,,,Map to `.address.locality`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,nutscode,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,"Take the NUTS code in the `CODE` attribute, and map to `.address.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE,address_postcode,,,Map to `.address.postalCode`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY,address_country,,,"Take the country code in the `VALUE` attribute, translate to a country name, and map to `.address.countryName`\n\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation. (ISSUE)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT,contactpoint,,,Map to `.contactPoint.name`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE,address_phone,,,Map to `.contactPoint.telephone`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL,address_email,,,Map to `.contactPoint.email`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,address_fax,,,Map to `.contactPoint.faxNumber`
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,nutscode,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,"Take the NUTS code in the `CODE` attribute, and map to `.address.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,url_general,,,Map to `.details.url` (PROPOSAL)
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,url_buyerprofile,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/organization_BuyerProfile,Map to `.details.buyerProfile` (PROPOSAL)
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL,,,,"[Add a party](../operations#add-a-party), add 'buyer' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
@@ -26,19 +26,6 @@ xpath,label-key,index,comment,guidance
 /CONTRACTING_BODY/URL_DOCUMENT,,,,Map to `.contactPoint.url`
 /CONTRACTING_BODY/ADDRESS_FURTHER_INFO_IDEM,as_contacts_above,,,"Discard. Additional information can be obtained from the abovementioned address, unless otherwised specified."
 /CONTRACTING_BODY/ADDRESS_FURTHER_INFO,address_another,,,"If only the contact person is different, you can use the [Additional Contact Points](https://github.com/open-contracting/ocds_additionalContactPoints_extension) extension, get the `Organization` object for the buyer, add a `ContactPoint` object to its `.additionalContactPoints` array, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT).\n\nOtherwise, [add a party](../operations#add-a-party), add 'processContactPoint' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME). (PROPOSAL)"
-/CONTRACTING_BODY/ADDRESS_FURTHER_INFO/OFFICIALNAME,name_official,,,Map to `.name` and `.identifier.legalName`
-/CONTRACTING_BODY/ADDRESS_FURTHER_INFO/NATIONALID,national_id,,,"Map to `.identifier.id`, and set `.identifier.scheme`"
-/CONTRACTING_BODY/ADDRESS_FURTHER_INFO/ADDRESS,address_postal,,,Map to `.address.streetAddress`
-/CONTRACTING_BODY/ADDRESS_FURTHER_INFO/TOWN,address_town,,,Map to `.address.locality`
-/CONTRACTING_BODY/ADDRESS_FURTHER_INFO/POSTAL_CODE,address_postcode,,,Map to `.address.postalCode`
-/CONTRACTING_BODY/ADDRESS_FURTHER_INFO/COUNTRY,address_country,,,"Take the country code in the `VALUE` attribute, translate to a country name, and map to `.address.countryName`\n\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation. (ISSUE)"
-/CONTRACTING_BODY/ADDRESS_FURTHER_INFO/CONTACT_POINT,contactpoint,,,Map to `.contactPoint.name`
-/CONTRACTING_BODY/ADDRESS_FURTHER_INFO/PHONE,address_phone,,,Map to `.contactPoint.telephone`
-/CONTRACTING_BODY/ADDRESS_FURTHER_INFO/E_MAIL,address_email,,,Map to `.contactPoint.email`
-/CONTRACTING_BODY/ADDRESS_FURTHER_INFO/FAX,address_fax,,,Map to `.contactPoint.faxNumber`
-/CONTRACTING_BODY/ADDRESS_FURTHER_INFO/NUTS,nutscode,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,"Take the NUTS code in the `CODE` attribute, and map to `.address.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
-/CONTRACTING_BODY/ADDRESS_FURTHER_INFO/URL_GENERAL,url_general,,,Map to `.details.url` (PROPOSAL)
-/CONTRACTING_BODY/ADDRESS_FURTHER_INFO/URL_BUYER,url_buyerprofile,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/organization_BuyerProfile,Map to `.details.buyerProfile` (PROPOSAL)
 /CONTRACTING_BODY/URL_TOOL,url_communication_tools,,,Map to `tender.communicationDetails.accessToolUrl` (PROPOSAL)
 /CONTRACTING_BODY/CA_TYPE,ca_type,I.4,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, add a `Classification` object to its `.details.classifications` array, and set the latter's `.scheme` to 'TED' and `.id` as follows: (PROPOSAL)"
 /CONTRACTING_BODY/CA_TYPE_OTHER,other_type,,,Map to any other code
