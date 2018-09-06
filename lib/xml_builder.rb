@@ -204,6 +204,10 @@ class XMLBuilder < XmlBase
           pointer.children << paragraph
           return
         else
+          # This edge case avoids extra XPaths in F08.
+          if basename == 'F08_2014' && reference == 'contact_contracting_body'
+            reference = 'contact_buyer'
+          end
           # Reference repeated types to make sample smaller. (Sample will be invalid.)
           if @types.key?(reference)
             add_node('comment', pointer, content: "see #{@types[reference]}")

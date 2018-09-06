@@ -29,7 +29,7 @@ task :table do
   additional_csv = CSV.read('output/mapping/additional.csv', headers: true)
 
   # Some forms have elements before Section 1.
-  has_header = %w(01 04 07 21 22 23)
+  has_header = %w(01 04 07 08 12 13 15 21 22 23)
 
   files('output/mapping/F{}_*.csv').each do |filename|
     basename = File.basename(filename)
@@ -77,12 +77,14 @@ task :table do
     # Shift `notice_pin`, `notice_contract`, `notice_contract_award`, etc.
     builder.heading(number, labels.shift)
 
-    if %w(03 06).include?(number)
+    if %w(03 06 25).include?(number)
       # Skip "Results of the procurement procedure" (notice_contract_award_sub).
       labels.shift
     end
-    # Skip "Directive 2014/24/EU" (directive_201424).
-    labels.shift
+    if !%w(08 12 13 15).include?(number)
+      # Skip "Directive 2014/24/EU" (directive_201424).
+      labels.shift
+    end
 
     if has_header.include?(number)
       builder.table

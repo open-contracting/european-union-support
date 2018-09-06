@@ -85,7 +85,7 @@ namespace :label do
       'notice_social_concess', # F23
     ]
 
-    regex = /\A(annex_d\d|section_\d|directive_201423|directive_201424|directive_201425|#{form_title_labels.join('|')})\z/
+    regex = /\A(annex_d\d|section_\d|directive_(?:200981|201423|201424|201425)|#{form_title_labels.join('|')})\z/
 
     files('source/*_TED_forms_templates/F{}_*.pdf').each do |filename|
       text = pdftotext(filename)
