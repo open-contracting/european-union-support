@@ -72,8 +72,8 @@ def indices(text)
   text.scan(/\bsection_(\d)\b/).flatten.map{ |number| ROMAN_NUMERALS.fetch(number) } + text.scan(/\b[IV]+(?:\.\d+)*/).flatten
 end
 
-def help_text?(key)
-  key[/\AHD?_/] || %w(excl_vat request_qualification).include?(key)
+def help_text?(key, number: nil)
+  key[/\AHD?_/] || %w(excl_vat request_qualification).include?(key) || number == '08' && %w(directive_201424 directive_201425 directive_200981).include?(key)
 end
 
 Dir['tasks/*.rake'].each { |r| import r }

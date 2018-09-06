@@ -9,8 +9,8 @@ task :table do
     end
   end
 
-  def help_labels(labels)
-    index = labels.index{ |key| !help_text?(key) } || 1
+  def help_labels(labels, number: nil)
+    index = labels.index{ |key| !help_text?(key, number: number) } || 1
     help_labels = labels[0...index]
     labels.replace(labels[index..-1])
     help_labels
@@ -103,18 +103,18 @@ task :table do
 
       elsif ignore.any? && ignore[0]['label-key'] == key
         row = ignore.shift
-        builder.row(key, help_labels: help_labels(labels), index: row['index'])
+        builder.row(key, help_labels: help_labels(labels, number: number), index: row['index'])
 
       elsif enumerations.any? && enumerations[0]['label-key'] == key
         row = enumerations.shift
-        builder.row(key, help_labels: help_labels(labels), xpath: row['xpath'], value: row['value'], guidance: row['guidance'])
+        builder.row(key, help_labels: help_labels(labels, number: number), xpath: row['xpath'], value: row['value'], guidance: row['guidance'])
 
         seen[:enumerations] << key
 
       # Fields appear in a different order in the form and XSD.
       elsif i = data[0..5].index{ |row| row['label-key'] == key }
         row = data.delete_at(i)
-        builder.row(key, help_labels: help_labels(labels), xpath: row['xpath'], index: row['index'], guidance: row['guidance'])
+        builder.row(key, help_labels: help_labels(labels, number: number), xpath: row['xpath'], index: row['index'], guidance: row['guidance'])
 
         seen[filename] << key
 
@@ -133,10 +133,10 @@ task :table do
 
       elsif additional.any? && additional[0]['label-key'] == key
         row = additional.shift
-        builder.row(key, help_labels: help_labels(labels), guidance: row['guidance'])
+        builder.row(key, help_labels: help_labels(labels, number: number), guidance: row['guidance'])
 
       elsif seen[:enumerations].include?(key) || seen[filename].include?(key)
-        builder.row(key, help_labels: help_labels(labels), reference: true)
+        builder.row(key, help_labels: help_labels(labels, number: number), reference: true)
 
       else
         $stderr.puts builder
