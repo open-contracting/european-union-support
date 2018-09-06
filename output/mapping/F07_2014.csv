@@ -63,17 +63,17 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/RENEWAL_DESCR,qs_formalities_renewal,,,Set the renewals' `.description` (PROPOSAL)
 /OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_isEUFunded https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_EUFunded,"If not already added, [add a party](../operations#add-a-party), add 'funder' to its `.roles`, and set its `.name` to 'European Union'. (PROPOSAL)\n\nAdd a `Finance` object to the `planning.budget.finance` array, and set its `.financingParty.name` to 'European Union' and `.financingParty.id` to the party's `.id`. If a structured identifier is used to identify the project, map to `.id`; otherwise, set its `.id`, and map to `.title`. If the contract is divided into lots, set its `.relatedLot` to the lot's `.id`. (PROPOSAL)"
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds. (PROPOSAL)"
-/LEFTI,info_legal,III,,""
-/LEFTI/RESTRICTED_SHELTERED_WORKSHOP,restricted_sheltered_workshop,,,*Pending guidance from F01*
-/LEFTI/RESTRICTED_SHELTERED_PROGRAM,restricted_sheltered_program,,,*Pending guidance from F01*
-/LEFTI/QUALIFICATION,qs_qualification,III.1.9,,
-/LEFTI/QUALIFICATION/CONDITIONS,qs_conditions_qualify,,,
-/LEFTI/QUALIFICATION/METHODS,qs_methods_verified,,,
-/LEFTI/PARTICULAR_PROFESSION,particular_profession_reserved,,,*Pending guidance from F01*
-/LEFTI/PARTICULAR_PROFESSION/@CTYPE,,,,*Pending guidance from F01*
-/LEFTI/REFERENCE_TO_LAW,ref_law_reg_prov,,,*Pending guidance from F01*
-/LEFTI/PERFORMANCE_CONDITIONS,other_conditions,III.2.2,,*Pending guidance from F01*
-/LEFTI/PERFORMANCE_STAFF_QUALIFICATION,staff_responsible_indicate,,,*Pending guidance from F01*
+/LEFTI,info_legal,III,,"The standard forms express exclusion grounds and selection criteria in this section as unstructured text. In the [introductory note](https://github.com/eForms/eForms/raw/master/20180604_eForms_consultation_introduction.docx) to its [eForms consultation](https://github.com/eForms/eForms), the European Commission proposes to create an extension to eForms to implement the [European Single Procurement Document (ESPD)](http://ec.europa.eu/growth/single-market/public-procurement/e-procurement/espd/), which expresses this information as structured data, following the model of the [Core Criterion and Core Evidence Vocabulary](https://joinup.ec.europa.eu/solution/core-criterion-and-core-evidence-vocabulary). With respect to OCDS, work on this section is postponed until the extension to eForms is available."
+/LEFTI/RESTRICTED_SHELTERED_WORKSHOP,restricted_sheltered_workshop,,,""
+/LEFTI/RESTRICTED_SHELTERED_PROGRAM,restricted_sheltered_program,,,""
+/LEFTI/QUALIFICATION,qs_qualification,III.1.9,,""
+/LEFTI/QUALIFICATION/CONDITIONS,qs_conditions_qualify,,,""
+/LEFTI/QUALIFICATION/METHODS,qs_methods_verified,,,""
+/LEFTI/PARTICULAR_PROFESSION,particular_profession_reserved,,,""
+/LEFTI/PARTICULAR_PROFESSION/@CTYPE,,,,""
+/LEFTI/REFERENCE_TO_LAW,ref_law_reg_prov,,,""
+/LEFTI/PERFORMANCE_CONDITIONS,other_conditions,III.2.2,,""
+/LEFTI/PERFORMANCE_STAFF_QUALIFICATION,staff_responsible_indicate,,,""
 /PROCEDURE,procedure,IV,,""
 /PROCEDURE/EAUCTION_USED,eauction_will_used,,,*Pending guidance from F01*
 /PROCEDURE/INFO_ADD_EAUCTION,eauction_info_addit,,,*Pending guidance from F01*

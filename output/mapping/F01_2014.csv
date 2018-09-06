@@ -86,21 +86,21 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds. (PROPOSAL)"
 /OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,info_additional,II.2.14,,Append to `tender.description`\n\n*This results in a loss of structure.* (WARNING)
 /OBJECT_CONTRACT/DATE_PUBLICATION_NOTICE,date_of_contract_notice,II.3,,Map to `tender.tenderPeriod.startDate`
-/LEFTI,info_legal,III,,""
-/LEFTI/SUITABILITY,info_evaluating_requir,,,
-/LEFTI/ECONOMIC_CRITERIA_DOC,criteria_selection_docs,,,
-/LEFTI/ECONOMIC_FINANCIAL_INFO,info_evaluating_weth_requir,,,
-/LEFTI/ECONOMIC_FINANCIAL_MIN_LEVEL,min_standards_required,,,
-/LEFTI/TECHNICAL_CRITERIA_DOC,criteria_selection_docs,,,
-/LEFTI/TECHNICAL_PROFESSIONAL_INFO,info_evaluating_weth_requir,,,
-/LEFTI/TECHNICAL_PROFESSIONAL_MIN_LEVEL,min_standards_required,,,
-/LEFTI/RESTRICTED_SHELTERED_WORKSHOP,restricted_sheltered_workshop,,,
-/LEFTI/RESTRICTED_SHELTERED_PROGRAM,restricted_sheltered_program,,,
-/LEFTI/PARTICULAR_PROFESSION,particular_profession_reserved,,,
-/LEFTI/PARTICULAR_PROFESSION/@CTYPE,,,,
-/LEFTI/REFERENCE_TO_LAW,ref_law_reg_prov,,,
-/LEFTI/PERFORMANCE_CONDITIONS,other_conditions,III.2.2,,
-/LEFTI/PERFORMANCE_STAFF_QUALIFICATION,staff_responsible_indicate,,,
+/LEFTI,info_legal,III,,"The standard forms express exclusion grounds and selection criteria in this section as unstructured text. In the [introductory note](https://github.com/eForms/eForms/raw/master/20180604_eForms_consultation_introduction.docx) to its [eForms consultation](https://github.com/eForms/eForms), the European Commission proposes to create an extension to eForms to implement the [European Single Procurement Document (ESPD)](http://ec.europa.eu/growth/single-market/public-procurement/e-procurement/espd/), which expresses this information as structured data, following the model of the [Core Criterion and Core Evidence Vocabulary](https://joinup.ec.europa.eu/solution/core-criterion-and-core-evidence-vocabulary). With respect to OCDS, work on this section is postponed until the extension to eForms is available."
+/LEFTI/SUITABILITY,info_evaluating_requir,,,""
+/LEFTI/ECONOMIC_CRITERIA_DOC,criteria_selection_docs,,,""
+/LEFTI/ECONOMIC_FINANCIAL_INFO,info_evaluating_weth_requir,,,""
+/LEFTI/ECONOMIC_FINANCIAL_MIN_LEVEL,min_standards_required,,,""
+/LEFTI/TECHNICAL_CRITERIA_DOC,criteria_selection_docs,,,""
+/LEFTI/TECHNICAL_PROFESSIONAL_INFO,info_evaluating_weth_requir,,,""
+/LEFTI/TECHNICAL_PROFESSIONAL_MIN_LEVEL,min_standards_required,,,""
+/LEFTI/RESTRICTED_SHELTERED_WORKSHOP,restricted_sheltered_workshop,,,""
+/LEFTI/RESTRICTED_SHELTERED_PROGRAM,restricted_sheltered_program,,,""
+/LEFTI/PARTICULAR_PROFESSION,particular_profession_reserved,,,""
+/LEFTI/PARTICULAR_PROFESSION/@CTYPE,,,,""
+/LEFTI/REFERENCE_TO_LAW,ref_law_reg_prov,,,""
+/LEFTI/PERFORMANCE_CONDITIONS,other_conditions,III.2.2,,""
+/LEFTI/PERFORMANCE_STAFF_QUALIFICATION,staff_responsible_indicate,,,""
 /PROCEDURE,procedure,IV,,""
 /PROCEDURE/PT_RESTRICTED,proctype_restricted,,,Set `tender.procurementMethod` to 'selective'
 /PROCEDURE/PT_COMPETITIVE_NEGOTIATION,proctype_comp_negotiation,,,Set `tender.procurementMethod` to 'open'
