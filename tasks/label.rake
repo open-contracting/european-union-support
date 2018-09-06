@@ -161,6 +161,8 @@ namespace :label do
     CSV.open(path, 'w') do |csv|
       csv << headers
       rows.each do |row|
+        # Sort numbers for consistent output.
+        row['numbers'] = row['numbers'].split('|').sort.join('|')
         csv << row
       end
     end
