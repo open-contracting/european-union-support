@@ -76,12 +76,15 @@ Once completed, run `rake label:missing` to see which XML elements and attribute
 Many XPath's are common across forms. To copy guidance across forms, run:
 
     rake label:copy SOURCE=01
-    rake label:copy SOURCE=02 FILES=03,05,21,22,23
-    rake label:copy SOURCE=03 FILES=06,13,20,21,22,23,25
-    rake label:copy SOURCE=04 FILES=05,06,07,21,22,23
+    rake label:copy SOURCE=02 FILES=03,05,12,13,21,22,23,24
+    rake label:copy SOURCE=03 FILES=06,13,15,20,21,22,23,25
+    rake label:copy SOURCE=04 FILES=05,06,07,08,12,13,15,21,22,23,24,25
     rake label:copy SOURCE=06 FILES=20,22
     rake label:copy SOURCE=07 FILES=22
+    rake label:copy SOURCE=12 FILES=13
     rake label:copy SOURCE=21 FILES=22
+    rake label:copy SOURCE=23 FILES=25
+    rake label:copy SOURCE=24 FILES=25
 
 Many label keys are ignored across forms. To pre-populate across forms, run:
 
