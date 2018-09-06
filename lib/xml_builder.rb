@@ -220,6 +220,13 @@ class XMLBuilder < XmlBase
 
         node = lookup(reference, 'complexType', 'simpleType')
 
+        if node.name == 'complexType' && reference == 'text_ft_multi_lines'
+          # Hardcode common types to make sample smaller. Drops attributes. Only for CRITERIA_EVALUATION on F13.
+          paragraph = BuildNode.new('P')
+          paragraph.contents << SecureRandom.hex(8)
+          pointer.children << paragraph
+          return
+        end
         visit(node, pointer)
 
       # Based on the analysis in `visit`, we can skip visiting `base` if within a `complexType`, but not if within a `simpleType`.
