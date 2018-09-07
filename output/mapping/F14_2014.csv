@@ -1,7 +1,7 @@
 xpath,label-key,index,comment,guidance
 /@LG,,,,"Lowercase, and map to `language`"
 /@CATEGORY,,,,Discard. TED translates at form-level. OCDS translates at field-level.
-/LEGAL_BASIS,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_LegalBasis,Map to `tender.legalBasis` (PROPOSAL)
+/LEGAL_BASIS,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_LegalBasis,Map to `tender.legalBasis` (PROPOSAL #14)
 /LEGAL_BASIS_OTHER,,,,
 /CONTRACTING_BODY,,I,,""
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,name_address_contact,I.1,,"[Add a party](../operations#add-a-party), and add 'buyer' to its `.roles`\n\nSet `buyer.id` to its `.id` and `buyer.name` to its [`.name`](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
@@ -16,8 +16,8 @@ xpath,label-key,index,comment,guidance
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL,address_email,,,Map to `.contactPoint.email`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,address_fax,,,Map to `.contactPoint.faxNumber`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,nutscode,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,"Take the NUTS code in the `CODE` attribute, and map to `.address.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,url_general,,,Map to `.details.url` (PROPOSAL)
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,url_buyerprofile,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/organization_BuyerProfile,Map to `.details.buyerProfile` (PROPOSAL)
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,url_general,,,Map to `.details.url` (PROPOSAL #8)
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,url_buyerprofile,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/organization_BuyerProfile,Map to `.details.buyerProfile` (PROPOSAL #7)
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL,,,,"[Add a party](../operations#add-a-party), add 'buyer' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/OFFICIALNAME,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/NATIONALID,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID
@@ -36,8 +36,8 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/TITLE,title_contract,II.1.1,,Map to `tender.title`
 /OBJECT_CONTRACT/REFERENCE_NUMBER,fileref,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_BuyerInternalReferenceID,Map to `tender.id`
 /OBJECT_CONTRACT/CPV_MAIN,,II.1.2,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_Classification,""
-/OBJECT_CONTRACT/CPV_MAIN/CPV_CODE,cpv_main,,,"Set `tender.classification.scheme` to 'CPV', take the CPV code in the `CODE` attribute, and map to `tender.classification.id` (PROPOSAL)"
-/OBJECT_CONTRACT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,"For each `CODE` attribute, add a `Classification` object to the `tender.additionalClassifications` array, set `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to `.id` (PROPOSAL)"
+/OBJECT_CONTRACT/CPV_MAIN/CPV_CODE,cpv_main,,,"Set `tender.classification.scheme` to 'CPV', take the CPV code in the `CODE` attribute, and map to `tender.classification.id` (PROPOSAL #15)"
+/OBJECT_CONTRACT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,"For each `CODE` attribute, add a `Classification` object to the `tender.additionalClassifications` array, set `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to `.id` (PROPOSAL #16)"
 /OBJECT_CONTRACT/TYPE_CONTRACT,type_contract,II.1.3,,""
 /OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,,,,Set `tender.mainProcurementCategory` as follows:
 /OBJECT_CONTRACT/SHORT_DESCR,descr_short,II.1.4,,Map to `tender.description`
