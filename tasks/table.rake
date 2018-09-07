@@ -1,8 +1,13 @@
 desc 'Build a table with guidance'
 task :table do
-  def swap(labels, label_1, label_2)
-    index_1 = labels.index(label_1)
-    index_2 = labels.index(label_2)
+  def swap(labels, label_1, label_2, reverse: false)
+    if reverse
+      meth = :rindex
+    else
+      meth = :index
+    end
+    index_1 = labels.send(meth, label_1)
+    index_2 = labels.send(meth, label_2)
     if index_1 && index_2
       labels[index_1] = label_2
       labels[index_2] = label_1
@@ -69,7 +74,7 @@ task :table do
     swap(labels, 'maintype_localauth', 'maintype_publicbody')
     swap(labels, 'maintype_localauth', 'maintype_localagency')
     swap(labels, 'mainactiv_health', 'other_activity')
-    swap(labels, 'mainactiv_postal', 'other_activity')
+    swap(labels, 'mainactiv_postal', 'other_activity', reverse: true)
 
     ### Build
 
@@ -142,6 +147,7 @@ task :table do
         builder.row(key, help_labels: help_labels(labels, number: number), reference: true)
 
       else
+        # Print debug information to help diagnose the issue.
         $stderr.puts builder
         $stderr.puts data.map(&:to_h)
         $stderr.puts data.index{ |row| row['label-key'] == key }

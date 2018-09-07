@@ -104,6 +104,7 @@ Report any incoherences in mappings across forms. Note that some forms use check
 Before running this task, move the following in XPath CSVs to more closely match the order in the PDF templates:
 
 * F03 and F06 only: `LOT_DIVISION` after `SHORT_DESCR`, `NO_AWARDED_TO_GROUP` after `AWARDED_TO_GROUP`, `PT_AWARD_CONTRACT_WITHOUT_CALL` children after all
+* F15 only: `LOT_DIVISION` after `SHORT_DESCR`
 * F21 and F22 only: `LOT_DIVISION` and children after `@CURRENCY`, `PT_AWARD_CONTRACT_WITHOUT_CALL` children after all
 * F23 only: `LOT_DIVISION` and children after `@CURRENCY`, `PT_AWARD_CONTRACT_WITHOUT_PUBLICATION` children after all
 * F25 only: `LOT_DIVISION` after `CALCULATION_METHOD`, `NO_AWARDED_TO_GROUP` after `AWARDED_TO_GROUP`, `PT_AWARD_CONTRACT_WITHOUT_PUBLICATION` children after all

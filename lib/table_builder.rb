@@ -245,7 +245,20 @@ END
   def markdown(text)
     text = text.gsub('\n', "\n")
     BADGES.each do |key, label|
-      text = text.gsub(/\(#{key.upcase}([^)]+)?\)/){ %(<span class="badge badge-#{key}">#{label}#{($1 || '').downcase}</span>) }
+      text = text.gsub(/\(#{key.upcase}([^)#]+)?(?:#(\d+))?\)/) do
+        prefixes = [%(<span class="badge badge-#{key}">)]
+        suffixes = ['</span>']
+        content = label.dup
+        if $1
+          content << $1.downcase
+        end
+        if $2
+          prefixes << %(<a href="https://github.com/open-contracting-extensions/european-union/issues/#{$2}">)
+          suffixes << '</a>'
+          content << "##{$2}"
+        end
+        %(#{prefixes.join}#{content}#{suffixes.reverse.join})
+      end
     end
     add Kramdown::Document.new(text, auto_ids: false).to_html
   end
