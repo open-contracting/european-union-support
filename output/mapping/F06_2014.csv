@@ -36,10 +36,8 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/NO_LOT_DIVISION,_no,,,"Discard. If `tender.lots` isn't set, then the contract isn't divided into lots."
 /OBJECT_CONTRACT/VAL_TOTAL,value,,,*Pending guidance from F03*
 /OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY,currency,,,*Pending guidance from F03*
-/OBJECT_CONTRACT/VAL_TOTAL/@PUBLICATION,,,,
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL,,,This element sets the currency for its children.,*Pending guidance from F03*
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY,currency,,,*Pending guidance from F03*
-/OBJECT_CONTRACT/VAL_RANGE_TOTAL/@PUBLICATION,,,,
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/LOW,lowest_offer,,,*Pending guidance from F03*
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/HIGH,highest_offer,,,*Pending guidance from F03*
 /OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,"If the contract is divided into lots, add a `Lot` object to the `tender.lots` array"
@@ -53,7 +51,6 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE,mainsiteplace_works_delivery,,,*Pending guidance from F01*
 /OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,descr_procurement,II.2.4,,"If the contract is divided into lots, map to the lot's `.description`. Otherwise, append to `tender.description`.\n\n*If the contract isn't divided into lots, this results in a loss of structure.* (WARNING)"
 /OBJECT_CONTRACT/OBJECT_DESCR/AC,award_criteria,II.2.5,,""
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/@PUBLICATION,,,,
 /OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY,award_criterion_quality,,,*Pending guidance from F01*
 /OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY/AC_CRITERION,award_criterion_name,,,*Pending guidance from F01*
 /OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY/AC_WEIGHTING,weighting,,,*Pending guidance from F01*
@@ -92,14 +89,12 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT,_yes,,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/DATE_CONCLUSION_CONTRACT,date_award,V.2.1,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS,award_offers_info,V.2.2,,*Pending guidance from F03*
-/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/@PUBLICATION,,,,
 /AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED,offers_received,,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_SME,number_tenders_sme,,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_OTHER_EU,number_tenders_ms,,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_NON_EU,number_tenders_nonms,,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_EMEANS,offers_received_electronic,,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS,,,This element contains elements from V.2.2 and V.2.3.,*Pending guidance from F03*
-/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/@PUBLICATION,,,,
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/AWARDED_TO_GROUP,_yes,,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/NO_AWARDED_TO_GROUP,_no,,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR,,,"Contains ADDRESS_CONTRACTOR, SME, NO_SME.",*Pending guidance from F03*
@@ -118,7 +113,6 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/SME,_yes,,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/NO_SME,_no,,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES,value_contract_info,V.2.4,,*Pending guidance from F03*
-/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/@PUBLICATION,,,,
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL,value_estim_total_contract,,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY,currency,,,*Pending guidance from F03*
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL,value_total_final,,,*Pending guidance from F03*
