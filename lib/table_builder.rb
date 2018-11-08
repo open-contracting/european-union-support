@@ -107,7 +107,11 @@ class TableBuilder
     start_row
 
     # "Index" cell.
-    cell(index, id: index)
+    index_options = {}
+    if index
+      index_options[:id] = index
+    end
+    cell(index, index_options)
 
     # "Label and XPath" cell.
     start_cell(options)
