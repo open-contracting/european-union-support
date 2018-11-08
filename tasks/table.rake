@@ -83,6 +83,8 @@ task :table do
     # Shift `notice_pin`, `notice_contract`, `notice_contract_award`, etc.
     builder.heading(number, labels.shift)
 
+    builder.add(File.read(File.join('output', 'content', "F#{number}.md")) + "\n")
+
     if %w(03 06 25).include?(number)
       # Skip "Results of the procurement procedure" (notice_contract_award_sub).
       labels.shift
@@ -111,7 +113,9 @@ task :table do
 
       elsif ignore.any? && ignore[0]['label-key'] == key
         row = ignore.shift
-        builder.row(key, help_labels: help_labels(labels, number: number), index: row['index'])
+        if !%w(icar_noticeref icar_H_year_number).include?(key)
+          builder.row(key, help_labels: help_labels(labels, number: number), index: row['index'])
+        end
 
       elsif enumerations.any? && enumerations[0]['label-key'] == key
         row = enumerations.shift
