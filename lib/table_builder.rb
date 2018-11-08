@@ -107,7 +107,7 @@ class TableBuilder
     start_row
 
     # "Index" cell.
-    cell(index)
+    cell(index, id: index)
 
     # "Label and XPath" cell.
     start_cell(options)
@@ -230,10 +230,16 @@ END
 END
   end
 
-  def cell(text)
-    add <<-END
+  def cell(text, attributes = {})
+    if attributes.any?
+      add <<-END
+        <td #{attributes.map{ |k, v| %(#{k}="#{v}") }.join(' ')}>#{text}</td>
+END
+    else
+      add <<-END
         <td>#{text}</td>
 END
+    end
   end
 
   def paragraph(text)
