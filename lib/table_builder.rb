@@ -91,6 +91,9 @@ class TableBuilder
     if xpath
       content += "<br>#{code(xpath)}"
     end
+    EXTRA_XPATHS_TO_LIST.fetch(xpath, []).each do |extra|
+      content += "<br>#{code(extra)}"
+    end
     if value
       content += "is #{code(value)}"
     end

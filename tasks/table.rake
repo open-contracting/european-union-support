@@ -1,3 +1,16 @@
+EXTRA_XPATHS_TO_LIST = {
+  # A single `currency` label stands for 2-3 elements.
+  '/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY' => [
+    '/OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY',
+  ],
+  '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY' => [
+    '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY',
+    '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/@CURRENCY',
+  ],
+}
+EXTRA_XPATHS_TO_SKIP = EXTRA_XPATHS_TO_LIST.values.flatten
+KNOWN_SKIPPED_XPATHS = %w(/@LG /@CATEGORY)
+
 desc 'Build a table with guidance'
 task :table do
   def swap(labels, label_1, label_2, reverse: false)
@@ -41,14 +54,7 @@ task :table do
     number = basename.match(/\AF(\d+)/)[1]
 
     skipper = ->(row) do
-      row['label-key'].nil? || [
-        # A single `currency` label stands for 2-3 elements.
-        # `/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY`
-        '/OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY',
-        # `/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY`
-        '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY',
-        '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/@CURRENCY',
-      ].include?(row['xpath'])
+      row['label-key'].nil? || EXTRA_XPATHS_TO_SKIP.include?(row['xpath'])
     end
 
     ### Setup
@@ -63,7 +69,7 @@ task :table do
     additional = additional_csv.select{ |row| row['numbers'][number] }
     data = CSV.read(filename, headers: true)
 
-    data_skipped = data.take_while(&skipper)
+    data_skipped = data.take_while(&skipper).reject{ |row| KNOWN_SKIPPED_XPATHS.include?(row['xpath']) }
     data = data.drop_while(&skipper)
 
     # Skip "Supplement to the Official Journal of the European Union" (HD_ojs_) and "Info and online forms" (HD_info_forms).
@@ -133,8 +139,11 @@ task :table do
         data.each do |row|
           if skipper.call(row)
             if row['label-key']
-              data_skipped << row
+              if !EXTRA_XPATHS_TO_SKIP.include?(row['xpath'])
+                data_skipped << row
+              end
             else
+              $stderr.puts row.inspect
               builder.row(nil, xpath: row['xpath'], index: row['index'], guidance: row['guidance'])
             end
           else
