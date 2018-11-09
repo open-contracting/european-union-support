@@ -143,7 +143,6 @@ task :table do
                 data_skipped << row
               end
             else
-              $stderr.puts row.inspect
               builder.row(nil, xpath: row['xpath'], index: row['index'], guidance: row['guidance'])
             end
           else
