@@ -29,8 +29,7 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/CPV_MAIN,,II.1.2,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_Classification,""
 /OBJECT_CONTRACT/CPV_MAIN/CPV_CODE,cpv_main,,,"Set `tender.classification.scheme` to 'CPV', take the CPV code in the `CODE` attribute, and map to `tender.classification.id` (PROPOSAL #15)"
 /OBJECT_CONTRACT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,"For each `CODE` attribute, add a `Classification` object to the `tender.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id` (PROPOSAL #16)"
-/OBJECT_CONTRACT/TYPE_CONTRACT,type_contract,II.1.3,,""
-/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,,,,Set `tender.mainProcurementCategory` as follows:
+/OBJECT_CONTRACT/TYPE_CONTRACT,type_contract,II.1.3,,Set `tender.mainProcurementCategory` as follows:
 /OBJECT_CONTRACT/SHORT_DESCR,descr_short,II.1.4,,Map to `tender.description`
 /OBJECT_CONTRACT/LOT_DIVISION,_yes,,,"Discard. If `tender.lots` is set, then the contract is divided into lots."
 /OBJECT_CONTRACT/NO_LOT_DIVISION,_no,,,"Discard. If `tender.lots` isn't set, then the contract isn't divided into lots."
@@ -153,15 +152,10 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_EXTREME_URGENCY,d_extreme_urgency_ce,,,*Pending guidance from F03*
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_ADD_DELIVERIES_ORDERED,d_addit_ordered,,,*Pending guidance from F03*
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_REPETITION_EXISTING,d_repetition_existing,,,*Pending guidance from F03*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_REPETITION_EXISTING/@CTYPE,,,,*Pending guidance from F03*
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_CONTRACT_AWARDED_DESIGN_CONTEST,d_service_contract,,,*Pending guidance from F03*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_CONTRACT_AWARDED_DESIGN_CONTEST/@CTYPE,,,,*Pending guidance from F03*
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_COMMODITY_MARKET,d_commodity_market,,,*Pending guidance from F03*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_COMMODITY_MARKET/@CTYPE,,,,*Pending guidance from F03*
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_FROM_WINDING_PROVIDER,d_from_winding_supplier,,,*Pending guidance from F03*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_FROM_WINDING_PROVIDER/@CTYPE,,,,*Pending guidance from F03*
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_FROM_LIQUIDATOR_CREDITOR,d_from_receivers,,,*Pending guidance from F03*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_FROM_LIQUIDATOR_CREDITOR/@CTYPE,,,,*Pending guidance from F03*
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_BARGAIN_PURCHASE,d_bargain_advantage,,,
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_OUTSIDE_SCOPE,d_outside_scope,,,*Pending guidance from F03*
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_JUSTIFICATION,d_explain,,,*Pending guidance from F03*

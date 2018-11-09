@@ -18,7 +18,7 @@ namespace :label do
       Nokogiri::XML(File.read(filename)).xpath("/#{basename}//*|/#{basename}//@*").each do |element|
         xpath = element.path.sub(/\A\/F.._2014/, '').gsub(/\[\d+\]/, '').gsub(%r{\b(?:choice|group|sequence)/}, '')
         # Exclude XSD elements, paragraph tags, form identifier, and attributes for empty elements.
-        if !%w(choice group sequence P @CODE @FORM @PUBLICATION @TYPE @VALUE).include?(xpath.split('/')[-1])
+        if !%w(choice group sequence P @CODE @CTYPE @FORM @PUBLICATION @TYPE @VALUE).include?(xpath.split('/')[-1])
           xpaths << xpath
         end
       end

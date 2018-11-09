@@ -40,8 +40,7 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/CPV_MAIN,,II.1.2,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_Classification,""
 /OBJECT_CONTRACT/CPV_MAIN/CPV_CODE,cpv_main,,,"Set `tender.classification.scheme` to 'CPV', take the CPV code in the `CODE` attribute, and map to `tender.classification.id` (PROPOSAL #15)"
 /OBJECT_CONTRACT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,"For each `CODE` attribute, add a `Classification` object to the `tender.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id` (PROPOSAL #16)"
-/OBJECT_CONTRACT/TYPE_CONTRACT,type_contract,II.1.3,,""
-/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,,,,Set `tender.mainProcurementCategory` as follows:
+/OBJECT_CONTRACT/TYPE_CONTRACT,type_contract,II.1.3,,Set `tender.mainProcurementCategory` as follows:
 /OBJECT_CONTRACT/SHORT_DESCR,descr_short,II.1.4,,Map to `tender.description`
 /OBJECT_CONTRACT/VAL_ESTIMATED_TOTAL,value_excl_vat,,,Map to `tender.value.amount`
 /OBJECT_CONTRACT/VAL_ESTIMATED_TOTAL/@CURRENCY,currency,,,Map to `tender.value.currency`
