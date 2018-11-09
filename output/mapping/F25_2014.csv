@@ -39,7 +39,7 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/VAL_TOTAL,value,,,Discard. This is derived from the values of awards.
 /OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY,currency,,,Discard as above
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL,,,This element sets the currency for its children.,""
-/OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY,currency,,,Discard as above
+/OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY,currency,,,/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/LOW,lowest_offer,,,Discard as above
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/HIGH,highest_offer,,,Discard as above
 /OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,"Add an `Item` object to the `tender.items` array, and, if the contract is divided into lots, add a `Lot` object to the `tender.lots` array. If this notice is a call for competition, set the lot's `.status` to 'active'; otherwise, set it to 'planned'."
@@ -101,10 +101,10 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/SME,_yes,,,Set the party's `.details.scale` to 'sme'
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/NO_SME,_no,,,Set the party's `.details.scale` to 'large'
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES,value_concession_info,V.2.4,,""
-/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL,value_estim_total_contract_concess,,,*Pending guidance from F03*
-/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY,currency,,,*Pending guidance from F03*
-/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL,value_total_final_concess,,,*Pending guidance from F03*
-/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY,currency,,,*Pending guidance from F03*
+/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL,value_estim_total_contract_concess,,,Map to `tender.value.amount`
+/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY,currency,,,For the *Initial estimated total value of the contract/lot*
+/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL,value_total_final_concess,,,Map to the contract's `.value.amount`
+/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY,currency,,,/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY
 /AWARD_CONTRACT/AWARDED_CONTRACT/VAL_REVENUE,concess_fees_prices,,,*Pending guidance from F23*
 /AWARD_CONTRACT/AWARDED_CONTRACT/VAL_REVENUE/@CURRENCY,,,,*Pending guidance from F23*
 /AWARD_CONTRACT/AWARDED_CONTRACT/VAL_PRICE_PAYMENT,concess_payments,,,*Pending guidance from F23*

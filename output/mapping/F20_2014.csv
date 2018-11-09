@@ -66,8 +66,8 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/NO_SME,_no,,,Set the party's `.details.scale` to 'large'
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/NO_AWARDED_TO_GROUP,_no,,,Discard as above
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES,,V.2.4,,""
-/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL,,,,*Pending guidance from F03*
-/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY,currency,,,*Pending guidance from F03*
+/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL,,,,Map to the contract's `.value.amount`
+/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY,currency,,,/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY
 /COMPLEMENTARY_INFO,info_complement,VI,,""
 /COMPLEMENTARY_INFO/INFO_ADD,info_additional,VI.3,,Map to `description`
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY,appeals_body,VI.4.1,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations#add-a-party), and add 'reviewBody' to its `.roles`"

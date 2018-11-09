@@ -71,7 +71,7 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/PT_COMPETITIVE_NEGOTIATION,proctype_comp_negotiation,,,Set `tender.procurementMethod` to 'open'
 /PROCEDURE/PT_COMPETITIVE_DIALOGUE,proctype_comp_dialogue,,,*Pending guidance from F02*
 /PROCEDURE/PT_INNOVATION_PARTNERSHIP,proctype_innovation,,,*Pending guidance from F02*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL,award_wo_prior_pub_d1,,,
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL,award_wo_prior_pub_d1,,,See [Annex D1](#annex-d1-general-procurement)
 /PROCEDURE/FRAMEWORK,notice_involves_framework,,,*Pending guidance from F01*
 /PROCEDURE/DPS,dps_was_set_up,,,*Pending guidance from F01*
 /PROCEDURE/EAUCTION_USED,eauction_was_used,,,*Pending guidance from F01*
@@ -144,19 +144,19 @@ xpath,label-key,index,comment,guidance
 /COMPLEMENTARY_INFO/REVIEW_PROCEDURE,appeals_deadline,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,Map to `tender.reviewDetails` (PROPOSAL #6)
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_INFO,appeals_info,VI.4.4,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations#add-a-party), and add 'reviewContactPoint' to its `.roles` (PROPOSAL #25)"
 /COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,date_dispatch,VI.5,,Map to `date`
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE,d_just_for_wo_pub_201424,D1.1,,""
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_PROC_OPEN,d_proc_open,,,
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_PROC_RESTRICTED,d_proc_restricted,,,
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_MANUF_FOR_RESEARCH,d_manuf_for_research,,,
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_TECHNICAL,d_technical,,,
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_ARTISTIC,d_artistic,,,
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_PROTECT_RIGHTS,d_protect_rights,,,
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_EXTREME_URGENCY,d_extreme_urgency_ca,,,
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_ADD_DELIVERIES_ORDERED,d_addit_ordered,,,
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_REPETITION_EXISTING,d_repetition_existing,,,
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_CONTRACT_AWARDED_DESIGN_CONTEST,d_service_contract,,,
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_COMMODITY_MARKET,d_commodity_market,,,
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_FROM_WINDING_PROVIDER,d_from_winding_supplier,,,
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_FROM_LIQUIDATOR_CREDITOR,d_from_receivers,,,
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_OUTSIDE_SCOPE,d_outside_scope,,,
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_JUSTIFICATION,d_explain,,,
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE,d_just_for_wo_pub_201424,D1.1,,"For each of the following, add a `Classification` object to the `tender.procurementMethodRationaleCodes` array. Set the classification's `.scheme` to `TED_PT_AWARD_CONTRACT_WITHOUT_CALL`, and set its `.id` and `.name` as follows (PROPOSAL #)"
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_PROC_OPEN,d_proc_open,,,"Set `.id` to 'D_PROC_OPEN' and `.name` to 'No tenders or no suitable tenders/requests to participate in response to open procedure'"
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_PROC_RESTRICTED,d_proc_restricted,,,"Set `.id` to 'D_PROC_RESTRICTED' and `.name` to 'No tenders or no suitable tenders/requests to participate in response to restricted procedure'"
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_MANUF_FOR_RESEARCH,d_manuf_for_research,,,"Set `.id` to 'D_MANUF_FOR_RESEARCH' and `.name` to 'The products involved are manufactured purely for the purpose of research, experiment, study or development under the conditions stated in the directive'"
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_TECHNICAL,d_technical,,,"Set `.id` to 'D_TECHNICAL' and `.name` to 'The works, supplies or services can be provided only by a particular economic operator due to absence of competition for technical reasons'"
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_ARTISTIC,d_artistic,,,"Set `.id` to 'D_ARTISTIC' and `.name` to 'The works, supplies or services can be provided only by a particular economic operator due to procurement aiming at the creation or acquisition of a unique work of art or artistic performance'"
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_PROTECT_RIGHTS,d_protect_rights,,,"Set `.id` to 'D_PROTECT_RIGHTS' and `.name` to 'The works, supplies or services can be provided only by a particular economic operator due to protection of exclusive rights, including intellectual property rights'"
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_EXTREME_URGENCY,d_extreme_urgency_ca,,,"Set `.id` to 'D_EXTREME_URGENCY' and `.name` to 'Extreme urgency brought about by events unforeseeable for the contracting authority and in accordance with the strict conditions stated in the directive'"
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_ADD_DELIVERIES_ORDERED,d_addit_ordered,,,"Set `.id` to 'D_ADD_DELIVERIES_ORDERED' and `.name` to 'Additional deliveries by the original supplier ordered under the strict conditions stated in the directive'"
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_REPETITION_EXISTING,d_repetition_existing,,,"Set `.id` to 'D_REPETITION_EXISTING' and `.name` to 'New works/services, constituting a repetition of existing works/services and ordered in accordance with the strict conditions stated in the directive'"
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_CONTRACT_AWARDED_DESIGN_CONTEST,d_service_contract,,,"Set `.id` to 'D_CONTRACT_AWARDED_DESIGN_CONTEST' and `.name` to 'Service contract to be awarded to the winner or one of winners under the rules of a design contest'"
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_COMMODITY_MARKET,d_commodity_market,,,"Set `.id` to 'D_COMMODITY_MARKET' and `.name` to 'Procurement of supplies quoted and purchased on a commodity market'"
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_FROM_WINDING_PROVIDER,d_from_winding_supplier,,,"Set `.id` to 'D_FROM_WINDING_PROVIDER' and `.name` to 'Purchase of supplies or services on particularly advantageous terms from a supplier which is definitively winding up its business activities'"
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_FROM_LIQUIDATOR_CREDITOR,d_from_receivers,,,"Set `.id` to 'D_FROM_LIQUIDATOR_CREDITOR' and `.name` to 'Purchase of supplies or services on particularly advantageous terms from the liquidator in an insolvency procedure, an arrangement with creditors or a similar procedure under national laws and regulations'"
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_OUTSIDE_SCOPE,d_outside_scope,,,"Set `.id` to 'D_OUTSIDE_SCOPE' and `.name` to 'The procurement falls outside the scope of application of the directive'"
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_JUSTIFICATION,d_explain,,,Map to `tender.procurementMethodRationale`
