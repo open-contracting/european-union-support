@@ -8,7 +8,7 @@ desc 'Create sample XML files from XSD files'
 task :sample do
   FileUtils.mkdir_p('output/samples')
 
-  files('source/TED_publication_*/F{}_*.xsd').each do |filename|
+  files('source/TED_publication_*_007/F{}_*.xsd').each do |filename|
     builder = XMLBuilder.new(filename)
     builder.build
     File.open("output/samples/#{builder.basename}.xml", 'w') do |f|

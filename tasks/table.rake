@@ -73,7 +73,7 @@ task :table do
     data = data.drop_while(&skipper)
 
     # Skip "Supplement to the Official Journal of the European Union" (HD_ojs_) and "Info and online forms" (HD_info_forms).
-    labels = label_keys(pdftotext(Dir["source/*_TED_forms_templates/F#{number}_*.pdf"][0]))[2..-1]
+    labels = label_keys(pdftotext(Dir["source/TED_forms_templates_R2.0.9/F#{number}_*.pdf"][0]))[2..-1]
 
     # Swap the order of labels.
     swap(labels, 'maintype_natagency', 'maintype_localagency')

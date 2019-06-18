@@ -87,7 +87,7 @@ namespace :label do
 
     regex = /\A(annex_d\d|section_\d|directive_(?:200981|201423|201424|201425)|#{form_title_labels.join('|')})\z/
 
-    files('source/*_TED_forms_templates/F{}_*.pdf').each do |filename|
+    files('source/TED_forms_templates_R2.0.9/F{}_*.pdf').each do |filename|
       text = pdftotext(filename)
 
       difference = Set.new(label_keys(text).reject{ |key| help_text?(key) || key[regex] }) - label_keys_seen
@@ -142,7 +142,7 @@ namespace :label do
       mapped += ignore.fetch(number, [])
       mapped << '_or'
 
-      text = pdftotext(files("source/*_TED_forms_templates/F#{number}_*.pdf")[0])
+      text = pdftotext(files("source/TED_forms_templates_R2.0.9/F#{number}_*.pdf")[0])
       minimum_indices = Hash.new(-1)
       label_keys(text).each do |label_key|
         if !mapped.include?(label_key)
@@ -187,7 +187,7 @@ namespace :label do
         headers = row.headers
         target_number = File.basename(filename).match(/\AF(\d\d)/)[1]
 
-        template = files("source/*_TED_forms_templates/F#{target_number}_*.pdf")[0]
+        template = files("source/TED_forms_templates_R2.0.9/F#{target_number}_*.pdf")[0]
         text = pdftotext(template)
         label_keys = label_keys(text)
         indices = indices(text)
