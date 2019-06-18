@@ -73,6 +73,10 @@ Create or update files for mapping forms' XPath values to label keys:
 
     rake label:xpath
 
+Or:
+
+    rake label:xpath RELEASE=R2.0.8 FILES=F16,F17,F18,T01,T02
+
 You're now ready to map label keys to XPath values. As setup, if you have two monitors, open a form's template PDF and English PDF side-by-side in one monitor, to make it easy to see the text label of each label key in context. In a text editor, open `ignore.csv`, `enumerations.csv` and a form's sample XML and XPath CSV.
 
 Fill in each form's XPath CSV:

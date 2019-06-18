@@ -76,5 +76,18 @@ def help_text?(key, number: nil)
   key[/\AHD?_/] || %w(excl_vat notice_design_cont request_qualification).include?(key) || number == '08' && %w(directive_201424 directive_201425 directive_200981).include?(key)
 end
 
+def release_pattern(extension, r209_prefix, r208_prefix=nil)
+  if ENV['RELEASE']
+    r208_prefix ||= r209_prefix
+    if ENV['RELEASE']== 'R2.0.8'
+      "#{r208_prefix}/{}_*.#{extension}"
+    else
+      raise "unknown release '#{ENV['RELEASE']}'"
+    end
+  else
+    "#{r209_prefix}/F{}_*.#{extension}"
+  end
+end
+
 Dir['tasks/*.rake'].each { |r| import r }
 Dir['legacy/*.rake'].each { |r| import r }

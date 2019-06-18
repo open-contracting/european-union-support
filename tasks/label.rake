@@ -3,7 +3,9 @@ namespace :label do
   task :xpath do
     FileUtils.mkdir_p('output/mapping')
 
-    files('output/samples/F{}_*.xml').each do |filename|
+    pattern = release_pattern('xml', 'output/samples')
+
+    files(pattern).each do |filename|
       basename = File.basename(filename, '.xml')
       path = "output/mapping/#{basename}.csv"
 
@@ -15,7 +17,7 @@ namespace :label do
       end
 
       xpaths = Set.new
-      Nokogiri::XML(File.read(filename)).xpath("/#{basename}//*|/#{basename}//@*").each do |element|
+      Nokogiri::XML(File.read(filename)).xpath("/*//*|/*//@*").each do |element|
         xpath = element.path.sub(/\A\/F.._2014/, '').gsub(/\[\d+\]/, '').gsub(%r{\b(?:choice|group|sequence)/}, '')
         # Exclude XSD elements, paragraph tags, form identifier, and attributes for empty elements.
         if !%w(choice group sequence P @CODE @CTYPE @FORM @PUBLICATION @TYPE @VALUE).include?(xpath.split('/')[-1])
