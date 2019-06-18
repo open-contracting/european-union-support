@@ -34,7 +34,11 @@ class XMLBuilder < XmlBase
   #
   # @return [Nokogiri::XML::Node] the schema's root node
   def root
-    @schema.xpath("./xs:element[@name='#{@basename}']")[0]
+    if ENV['RELEASE'] == 'R2.0.8'
+      @schema.xpath('./xs:element[last()]')[0]
+    else
+      @schema.xpath("./xs:element[@name='#{@basename}']")[0]
+    end
   end
 
   # Builds the XML document.
@@ -186,6 +190,9 @@ class XMLBuilder < XmlBase
 
     elsif n.key?('type')
       reference = n['type']
+      if default_value_r208(pointer, reference)
+        return
+      end
 
       node = lookup(reference, 'complexType', 'simpleType')
 
@@ -197,7 +204,7 @@ class XMLBuilder < XmlBase
           # Do nothing with empty elements.
         when 'val', 'val_range', 'country', 'nuts', 'no_works', 'supplies', 'non_published'
           # Do nothing with simple elements.
-        when 'text_ft_single_line', 'text_ft_multi_lines'
+        when 'text_ft_single_line', 'text_ft_multi_lines', 'btx'
           # Hardcode common types to make sample smaller.
           paragraph = BuildNode.new('P')
           paragraph.contents << SecureRandom.hex(8)
@@ -221,10 +228,13 @@ class XMLBuilder < XmlBase
     elsif n.key?('base')
       if n.name == 'extension'
         reference = n['base']
+        if default_value_r208(pointer, reference)
+          return
+        end
 
         node = lookup(reference, 'complexType', 'simpleType')
 
-        if node.name == 'complexType' && reference == 'text_ft_multi_lines'
+        if node.name == 'complexType' && ['text_ft_multi_lines', 'btx'].include?(reference)
           # Hardcode common types to make sample smaller. Drops attributes. Only for CRITERIA_EVALUATION on F13.
           paragraph = BuildNode.new('P')
           paragraph.contents << SecureRandom.hex(8)
@@ -395,5 +405,24 @@ class XMLBuilder < XmlBase
     end
 
     follow(n, pointer)
+  end
+
+  def default_value_r208(pointer, reference)
+    if reference[':']
+      namespace, reference = reference.split(':', 2)
+    end
+    if namespace == 'xs'
+      case reference
+      when 'anySimpleType'
+        pointer.contents << 'anything'
+      when 'string'
+        pointer.contents << 'string'
+      when 'integer'
+        pointer.contents << 123
+      else
+        raise reference
+      end
+      true
+    end
   end
 end

@@ -16,12 +16,12 @@ Using the fish shell:
     in2csv 'Forms labels R2.09.xlsx' > 'Forms labels R2.09.csv'
     rm -f Forms_Labels_R209S01.zip 'Forms labels R2.09.xlsx'
 
-    # Get the template PDFs containing label keys for R2.09.
+    # Get the template PDFs containing label keys for R2.0.9.
     curl -o Archive.zip 'https://publications.europa.eu/documents/3938058/5358176/Archive.zip/ce7ceb02-94b0-04e8-8b9f-7fb4acf1ccdb'
     unzip Archive.zip -d TED_forms_templates_R2.0.9
     rm -rf Archive.zip TED_forms_templates_R2.0.9/__MACOSX
 
-    # Get the template PDFs containing label keys for R2.08.
+    # Get the template PDFs containing label keys for R2.0.8.
     mkdir -p TED_forms_templates_R2.0.8
     curl -o TED_forms_templates_R2.08.pdf https://publications.europa.eu/documents/3938058/5358176/2011_09-04_LB_2.pdf/be1e3e03-30e7-34ac-465e-39da20dfc154
     set form 01 02 03 04 05 06 07 08 09 10 11 12 13 15 16 17 18 19
@@ -35,12 +35,19 @@ Using the fish shell:
     for i in 01 02 03 04 05 06 07 08 12 13 14 15 16 17 18 20 21 22 23 24 25; curl -o English/EN_F$i.pdf https://simap.ted.europa.eu/documents/10184/49059/sf_0{$i}_en.pdf; end
     for i in 01 02; curl -o English/EN_T$i.pdf https://simap.ted.europa.eu/documents/10184/49059/t{$i}_en.pdf; end
 
-    # Get the XML schema.
+    # Get the XML schema for R2.0.9.
     curl -o TEDFTP_Schema_20181030_TED_publication.zip https://publications.europa.eu/documents/3938058/5358455/latest_publication_R2.0.9.S03.E01_007-20181030.zip/d3adafe5-cb3a-4ac5-5dca-f4aea09b99a8
     unzip TEDFTP_Schema_20181030_TED_publication.zip TED_publication_R2.0.9.S03.E01_007-20181030.zip
     unzip TED_publication_R2.0.9.S03.E01_007-20181030.zip -d TED_publication_R2.0.9.S03.E01_007
     rm -f TEDFTP_Schema_20181030_TED_publication.zip TED_publication_R2.0.9.S03.E01_007-20181030.zip
     rm -f TED_publication_R2.0.9.S03.E01_007/{common_prod.xsd,DEVCO.xsd,MOVE.xsd,TED_EXPORT.xsd,xlink.xsd}
+
+    # Get the XML schema for R2.0.8.
+    curl -o TEDFTP_Schema_20180515_TED_publication.zip https://publications.europa.eu/documents/3938058/5358176/latest_publication_R2.0.8.S04.E01_003-20180515.zip/4aa79bef-bee7-ff35-b7bd-9365bad7f488
+    unzip TEDFTP_Schema_20180515_TED_publication.zip TED_publication_R2.0.8.S04.E01_003-20180515.zip
+    unzip TED_publication_R2.0.8.S04.E01_003-20180515.zip -d TED_publication_R2.0.8.S04.E01_003
+    rm -f TEDFTP_Schema_20180515_TED_publication.zip TED_publication_R2.0.8.S04.E01_003-20180515.zip
+    rm -f TED_publication_R2.0.8.S04.E01_003/{common_prod.xsd,EEIG.xsd,OTH_NOT.xsd,TED_EXPORT.xd,TED_EXPORT.xsd,xlink.xsd}
 
     cd ..
 
@@ -53,6 +60,10 @@ Create sample XML files for each form schema:
 Or for specific form schema:
 
     rake sample FILES=01,02,03,14,20
+
+Or for specific schema release:
+
+    rake sample RELEASE=R2.0.8 FILES=F16,F17,F18,T01,T02
 
 See the comments in `sample.rake` to understand why tools like Oxygen are insufficient.
 
