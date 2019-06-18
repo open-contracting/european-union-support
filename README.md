@@ -40,7 +40,7 @@ Using the fish shell:
     unzip TEDFTP_Schema_20181030_TED_publication.zip TED_publication_R2.0.9.S03.E01_007-20181030.zip
     unzip TED_publication_R2.0.9.S03.E01_007-20181030.zip -d TED_publication_R2.0.9.S03.E01_007
     rm -f TEDFTP_Schema_20181030_TED_publication.zip TED_publication_R2.0.9.S03.E01_007-20181030.zip
-    rm -f TED_publication_R2.0.9.S03.E01_007/{common_prod.xsd,DEVCO.xsd,MOVE.xsd,TED_EXPORT.xsd,xlink.xsd}
+    rm -f TED_publication_R2.0.9.S03.E01_007/{common_prod.xsd,DEVCO.xsd,TED_EXPORT.xsd,xlink.xsd}
 
     # Get the XML schema for R2.0.8.
     curl -o TEDFTP_Schema_20180515_TED_publication.zip https://publications.europa.eu/documents/3938058/5358176/latest_publication_R2.0.8.S04.E01_003-20180515.zip/4aa79bef-bee7-ff35-b7bd-9365bad7f488

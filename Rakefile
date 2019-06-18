@@ -39,13 +39,29 @@ module RegexpExamples
   end
 end
 
-def files(glob)
-  if ENV['FILES']
-    glob = glob.sub('{}', "{#{ENV['FILES']}}")
+def release_pattern(extension, r209_prefix, r208_prefix=nil)
+  case ENV['RELEASE']
+  when 'R2.0.9', nil
+    prefix = r209_prefix
+  when 'R2.0.8'
+    prefix = r208_prefix || r209_prefix
   else
-    glob = glob.sub('{}', '*')
+    raise "unknown release '#{ENV['RELEASE']}'"
   end
-  Dir[glob].sort
+  "#{prefix}/F{}*.#{extension}"
+end
+
+def files(glob)
+  search = '{}'
+  if ENV['FILES']
+    if ENV['FILES'].split(',').map(&:to_i).all?(&:zero?)
+      search = 'F{}'
+    end
+    replacement = "{#{ENV['FILES']}}"
+  else
+    replacement = '*'
+  end
+  Dir[glob.sub(search, replacement)].sort
 end
 
 def pdftotext(path)
@@ -74,19 +90,6 @@ end
 
 def help_text?(key, number: nil)
   key[/\AHD?_/] || %w(excl_vat notice_design_cont request_qualification).include?(key) || number == '08' && %w(directive_201424 directive_201425 directive_200981).include?(key)
-end
-
-def release_pattern(extension, r209_prefix, r208_prefix=nil)
-  if ENV['RELEASE']
-    r208_prefix ||= r209_prefix
-    if ENV['RELEASE']== 'R2.0.8'
-      "#{r208_prefix}/{}_*.#{extension}"
-    else
-      raise "unknown release '#{ENV['RELEASE']}'"
-    end
-  else
-    "#{r209_prefix}/F{}_*.#{extension}"
-  end
 end
 
 Dir['tasks/*.rake'].each { |r| import r }

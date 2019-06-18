@@ -34,10 +34,13 @@ class XMLBuilder < XmlBase
   #
   # @return [Nokogiri::XML::Node] the schema's root node
   def root
-    if ENV['RELEASE'] == 'R2.0.8'
+    case ENV['RELEASE'] # XXX a bit of a hack
+    when 'R2.0.9', nil
+      @schema.xpath("./xs:element[@name='#{@basename}']")[0]
+    when 'R2.0.8'
       @schema.xpath('./xs:element[last()]')[0]
     else
-      @schema.xpath("./xs:element[@name='#{@basename}']")[0]
+      raise "unknown release '#{ENV['RELEASE']}'"
     end
   end
 
@@ -310,6 +313,9 @@ class XMLBuilder < XmlBase
     when 'enumeration'
       pointer.comments['enumeration'] ||= []
       pointer.comments['enumeration'] << n.attributes['value'].value
+
+    when 'fractionDigits'
+      pointer.comments['fractionDigits'] = Integer(n.attributes['value'].value)
 
     when 'maxLength'
       pointer.comments['maxLength'] = Integer(n.attributes['value'].value)
