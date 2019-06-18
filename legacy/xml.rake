@@ -76,7 +76,7 @@ namespace :legacy do
     references = Set.new
 
     # Get the `base`, `ref` and `type` re-used across forms.
-    files('source/TED_publication_*/F{}_*.xsd').each do |filename|
+    files('source/TED_publication_*_006/F{}_*.xsd').each do |filename|
       parser = XmlParser.new(filename)
 
       references += parser.schema.xpath('.//*[@ref]').reject{ |n|
@@ -93,7 +93,7 @@ namespace :legacy do
     # The above will not collect the references in NO_FOLLOW.
     references += NO_FOLLOW
 
-    parser = XmlParser.new(Dir['source/TED_publication_*/common_2014.xsd'][0])
+    parser = XmlParser.new(Dir['source/TED_publication_*_006/common_2014.xsd'][0])
 
     ns = parser.node_set(parser.schema.element_children, size: 0..999, names: %w(import include element group complexType simpleType), name_only: true)
     ns.each do |c|
@@ -111,7 +111,7 @@ namespace :legacy do
   task :forms do
     FileUtils.mkdir_p('output/summaries')
 
-    files('source/TED_publication_*/F{}_*.xsd').each do |filename|
+    files('source/TED_publication_*_006/F{}_*.xsd').each do |filename|
       parser = XmlParser.new(filename, follow: false)
 
       abbreviation = parser.basename.sub('_2014', '')
@@ -135,7 +135,7 @@ namespace :legacy do
   task review: :common do
     text = File.read('output/summaries/common_2014.csv')
 
-    parser = XmlParser.new(Dir['source/TED_publication_*/common_2014.xsd'][0])
+    parser = XmlParser.new(Dir['source/TED_publication_*_006/common_2014.xsd'][0])
 
     counts = Hash.new(0)
     %w(base ref type).each do |name|

@@ -16,22 +16,31 @@ Using the fish shell:
     in2csv 'Forms labels R2.09.xlsx' > 'Forms labels R2.09.csv'
     rm -f Forms_Labels_R209S01.zip 'Forms labels R2.09.xlsx'
 
-    # Get the template PDFs containing label keys.
-    curl -O 'ftp://eu-tenders:eu-tenders-123@ted.europa.eu/Resources/XML schema 2.0.9/Forms_Templates_R209S01.zip'
-    unzip Forms_Templates_R209S01.zip
-    rm -rf Forms_Templates_R209S01.zip __MACOSX
+    # Get the template PDFs containing label keys for R2.09.
+    curl -o Archive.zip 'https://publications.europa.eu/documents/3938058/5358176/Archive.zip/ce7ceb02-94b0-04e8-8b9f-7fb4acf1ccdb'
+    unzip Archive.zip -d TED_forms_templates_R2.0.9
+    rm -rf Archive.zip TED_forms_templates_R2.0.9/__MACOSX
+
+    # Get the template PDFs containing label keys for R2.08.
+    mkdir -p TED_forms_templates_R2.0.8
+    curl -o TED_forms_templates_R2.08.pdf https://publications.europa.eu/documents/3938058/5358176/2011_09-04_LB_2.pdf/be1e3e03-30e7-34ac-465e-39da20dfc154
+    set form 01 02 03 04 05 06 07 08 09 10 11 12 13 15 16 17 18 19
+    set l 7 18 26 38 49 58 65 68 72 77 82 88 93 105 111 123 131 138
+    set f 1
+    for i in (seq 1 18); pdfseparate -f $f -l $l[$i] TED_forms_templates_R2.08.pdf t-%d.pdf; pdfunite t-*.pdf TED_forms_templates_R2.0.8/F{$form[$i]}.pdf; rm -f t-*.pdf; set f (echo "$l[$i] + 1" | bc); end
 
     # Get the English PDFs.
     # http://simap.ted.europa.eu/standard-forms-for-public-procurement
     mkdir -p English
-    for i in 01 02 03 04 05 06 07 08 12 13 14 15 20 21 22 23 24 25; curl -o English/EN_F$i.pdf http://simap.ted.europa.eu/documents/10184/99173/EN_F$i.pdf; end
+    for i in 01 02 03 04 05 06 07 08 12 13 14 15 16 17 18 20 21 22 23 24 25; curl -o English/EN_F$i.pdf https://simap.ted.europa.eu/documents/10184/49059/sf_0{$i}_en.pdf; end
+    for i in 01 02; curl -o English/EN_T$i.pdf https://simap.ted.europa.eu/documents/10184/49059/t{$i}_en.pdf; end
 
     # Get the XML schema.
-    curl -O 'ftp://eu-tenders:eu-tenders-123@ted.europa.eu/Resources/TEDFTP_Schema_20180704_TED_publication.zip'
-    unzip TEDFTP_Schema_20180704_TED_publication.zip TED_publication_R2.0.9.S03.E01_006-20180608.zip
-    unzip TED_publication_R2.0.9.S03.E01_006-20180608.zip -d TED_publication_R2.0.9.S03.E01_006
-    rm -f TEDFTP_Schema_20180704_TED_publication.zip TED_publication_R2.0.9.S03.E01_006-20180608.zip
-    rm -f TED_publication_R2.0.9.S03.E01_006/{common_prod.xsd,DEVCO.xsd,MOVE.xsd,TED_EXPORT.xsd,xlink.xsd}
+    curl -o TEDFTP_Schema_20181030_TED_publication.zip https://publications.europa.eu/documents/3938058/5358455/latest_publication_R2.0.9.S03.E01_007-20181030.zip/d3adafe5-cb3a-4ac5-5dca-f4aea09b99a8
+    unzip TEDFTP_Schema_20181030_TED_publication.zip TED_publication_R2.0.9.S03.E01_007-20181030.zip
+    unzip TED_publication_R2.0.9.S03.E01_007-20181030.zip -d TED_publication_R2.0.9.S03.E01_007
+    rm -f TEDFTP_Schema_20181030_TED_publication.zip TED_publication_R2.0.9.S03.E01_007-20181030.zip
+    rm -f TED_publication_R2.0.9.S03.E01_007/{common_prod.xsd,DEVCO.xsd,MOVE.xsd,TED_EXPORT.xsd,xlink.xsd}
 
     cd ..
 
