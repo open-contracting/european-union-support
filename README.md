@@ -151,6 +151,7 @@ Before running this task, move the following in XPath CSVs to more closely match
 You can now generate a table for each form, displaying, for each element and attribute, the index within the PDF ("I.1"), the label (in any language) and the XPath, to which you can then add guidance for OCDS.
 
     for i in F01 F02 F03; rake table LANGUAGE=EN FILES=F$i > path/to/F$i.md; end
+    for i in T01 T02; rake table LANGUAGE=EN FILES=MOVE FORM=$i > ../../open-contracting-extensions/european-union/docs/$i.md; end
 
 ## Design
 

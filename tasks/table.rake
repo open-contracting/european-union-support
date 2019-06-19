@@ -3,8 +3,8 @@ EXTRA_XPATHS_TO_LIST = {
   '/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY' => [
     '/OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY',
   ],
-  '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY' => [
-    '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY',
+  '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY' => [
+    '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY',
     '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/@CURRENCY',
   ],
 }
@@ -63,8 +63,13 @@ task :table do
     # Skip "Supplement to the Official Journal of the European Union" (HD_ojs_) and "Info and online forms" (HD_info_forms).
     labels = labels[2..-1]
 
+    if basename == 'MOVE'
+      extra_xpaths_to_skip = []
+    else
+      extra_xpaths_to_skip = EXTRA_XPATHS_TO_SKIP
+    end
     skipper = ->(row) do
-      row['label-key'].nil? || EXTRA_XPATHS_TO_SKIP.include?(row['xpath'])
+      row['label-key'].nil? || extra_xpaths_to_skip.include?(row['xpath'])
     end
 
     ### Setup
@@ -97,7 +102,7 @@ task :table do
 
     ### Build
 
-    builder = TableBuilder.new(ENV['LANGUAGE'] || 'EN')
+    builder = TableBuilder.new(ENV['LANGUAGE'] || 'EN', EXTRA_XPATHS_TO_LIST)
 
     # Shift `notice_pin`, `notice_contract`, `notice_contract_award`, etc.
     builder.heading(number, labels.shift)
@@ -156,7 +161,7 @@ task :table do
         data.each do |row|
           if skipper.call(row)
             if row['label-key']
-              if !EXTRA_XPATHS_TO_SKIP.include?(row['xpath'])
+              if !extra_xpaths_to_skip.include?(row['xpath'])
                 data_skipped << row
               end
             else

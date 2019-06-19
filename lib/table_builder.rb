@@ -30,8 +30,9 @@ class TableBuilder
     end
   end
 
-  def initialize(language)
+  def initialize(language, extra_xpaths_to_list)
     @language = language
+    @extra_xpaths_to_list = extra_xpaths_to_list
     @targets = {}
     @guidances = {}
     @output = ''
@@ -91,7 +92,7 @@ class TableBuilder
     if xpath
       content += "<br>#{code(xpath)}"
     end
-    EXTRA_XPATHS_TO_LIST.fetch(xpath, []).each do |extra|
+    @extra_xpaths_to_list.fetch(xpath, []).each do |extra|
       content += "<br>#{code(extra)}"
     end
     if value
