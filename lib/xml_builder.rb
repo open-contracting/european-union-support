@@ -5,10 +5,11 @@ class XMLBuilder < XmlBase
   attr_reader :basename
 
   # @param [String] path the path to the XSD file
-  def initialize(path)
+  def initialize(path, release: nil)
     @basename = File.basename(path, '.xsd')
     @schemas = import(path).values
     @schema = @schemas[0]
+    @release = release
 
     @schemas.each do |schema|
       schema.xpath('.//xs:annotation').remove
@@ -34,13 +35,13 @@ class XMLBuilder < XmlBase
   #
   # @return [Nokogiri::XML::Node] the schema's root node
   def root
-    case ENV['RELEASE'] # XXX a bit of a hack
+    case @release
     when 'R2.0.9', nil
       @schema.xpath("./xs:element[@name='#{@basename}']")[0]
     when 'R2.0.8'
       @schema.xpath('./xs:element[last()]')[0]
     else
-      raise "unknown release '#{ENV['RELEASE']}'"
+      raise "unexpected release: #{@release}"
     end
   end
 
