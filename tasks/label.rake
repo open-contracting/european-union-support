@@ -101,9 +101,15 @@ namespace :label do
 
       if basename == 'MOVE'
         labels = CSV.read("output/labels/EN_#{number}.csv").flatten
+        indices = CSV.read("output/indices/EN_#{number}.csv").flatten
 
         # Identical to below.
         difference = Set.new(labels.reject{ |key| help_text?(key) || key[regex] }) - label_keys_seen
+        if difference.any?
+          puts "#{basename}: #{difference.to_a.join(', ')}"
+        end
+
+        difference = Set.new(indices) - indices_seen
         if difference.any?
           puts "#{basename}: #{difference.to_a.join(', ')}"
         end
@@ -115,13 +121,14 @@ namespace :label do
 
       text = pdftotext(filename)
       labels = label_keys(text)
+      indices = indices(text)
 
       difference = Set.new(labels.reject{ |key| help_text?(key) || key[regex] }) - label_keys_seen
       if difference.any?
         puts "#{basename}: #{difference.to_a.join(', ')}"
       end
 
-      difference = Set.new(indices(text)) - indices_seen
+      difference = Set.new(indices) - indices_seen
       if difference.any?
         puts "#{basename}: #{difference.to_a.join(', ')}"
       end
@@ -300,6 +307,7 @@ namespace :label do
   desc 'Reverse-engineer the label keys for transport forms'
   task :reverse do
     FileUtils.mkdir_p('output/labels')
+    FileUtils.mkdir_p('output/indices')
 
     ignore_labels = [
       # First header
@@ -315,8 +323,8 @@ namespace :label do
     ]
 
     label_fixes = {
-      'Bus transport services (urban/regional)' => 'Bus transport services (urban/regional) ', # extra space
-      'Direct awards' => 'Direct award', # "modified to singular"
+      'Bus transport services (urban/regional)' => ['Bus transport services (urban/regional) '], # extra space
+      'Direct awards' => ['Direct award'], # "modified to singular"
       # Multiple labels (T01).
       'Name and addresses (please identify all competent authorities responsible for this procedure)' => ['Name and addresses', 'please identify all competent authorities responsible for this procedure'],
       'Type of contract Services' => ['Type of contract', 'Services'],
@@ -359,19 +367,24 @@ namespace :label do
         end
       end
 
-      labels = strings.flat_map do |string|
-        # Remove indices.
-        label = string.sub(/\b[IV]+(\.\d+)+\) /, '').strip
+      labels = []
+      indices = []
+
+      strings.each do |label|
+        pattern = /\b([IV]+(?:\.\d+)+)\) /
+        if label[pattern]
+          # Collect and remove indices.
+          indices << $1
+          label.sub!(pattern, '')
+        end
+
+        label.strip!
 
         if !label.empty? && !ignore_labels.include?(label)
-          # Remove parentheses.
           if label[0] == '(' && label[-1] == ')'
             label = label[1..-2]
           end
-
-          label_fixes.fetch(label, label)
-        else
-          []
+          labels += label_fixes.fetch(label, [label])
         end
       end
 
@@ -394,6 +407,10 @@ namespace :label do
 
       File.open("output/labels/#{basename}.csv", 'w') do |f|
         f.write success.join("\n")
+      end
+
+      File.open("output/indices/#{basename}.csv", 'w') do |f|
+        f.write indices.join("\n")
       end
     end
   end
