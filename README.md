@@ -125,6 +125,18 @@ Report any incoherences in mappings across forms. Note that some forms use check
 
     rake label:coherence
 
+T01 and T02 are particular: both use the same schema (`MOVE.xsd`), and neither has a PDF template. The most efficient process is to: reverse-engineer the label keys from the English PDF; create an XPath CSV for `MOVE.xsd`; copy guidance; manually update some `label-key` values; pre-populate `ignore.csv`; then check for missing items:
+
+    rake label:reverse
+    rake label:xpath FILES=MOVE
+    rake label:copy SOURCE=F01 FILES=MOVE
+    rake label:copy SOURCE=F03 FILES=MOVE
+    rake label:copy SOURCE=F14 FILES=MOVE
+    rake label:ignore FILES=MOVE FORM=T01
+    rake label:ignore FILES=MOVE FORM=T02
+    rake label:missing FILES=MOVE FORM=T01
+    rake label:missing FILES=MOVE FORM=T02
+
 ### Build tables for OCDS guidance
 
 Before running this task, move the following in XPath CSVs to more closely match the order in the PDF templates:
