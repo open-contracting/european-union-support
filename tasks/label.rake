@@ -139,10 +139,10 @@ namespace :label do
 
       if basename != 'MOVE'
         number = File.basename(filename).match(/\A(F\d\d)/)[1]
-        text = pdftotext(files("source/TED_forms_templates_R2.0.9/#{number}_*.pdf")[0])
+        label_keys = label_keys(pdftotext(files("source/TED_forms_templates_R2.0.9/#{number}_*.pdf")[0]))
       else
-        number = basename
-        text = ''
+        number = ENV.fetch('FORM')
+        label_keys = CSV.read("output/labels/EN_#{ENV['FORM']}.csv").flatten
       end
 
       mapped = CSV.read(filename, headers: true).map{ |row| row['label-key'] }
@@ -151,7 +151,7 @@ namespace :label do
       mapped << '_or'
 
       minimum_indices = Hash.new(-1)
-      label_keys(text).each do |label_key|
+      label_keys.each do |label_key|
         if !mapped.include?(label_key)
           index = enum.find_index do |row, i|
             row['label-key'] == label_key && i > minimum_indices[label_key]

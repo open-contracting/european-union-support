@@ -49,9 +49,19 @@ task :table do
   # Some forms have elements before Section 1.
   has_header = %w(01 04 07 08 12 13 15 21 22 23)
 
-  files('output/mapping/F{}*.csv').each do |filename|
-    basename = File.basename(filename)
-    number = basename.match(/\AF(\d+)/)[1]
+  files('output/mapping/{}*.csv').each do |filename|
+    basename = File.basename(filename, '.csv').sub('_2014', '')
+
+    if basename != 'MOVE'
+      number = basename.match(/\A(F\d\d)/)[1]
+      labels = label_keys(pdftotext(Dir["source/TED_forms_templates_R2.0.9/#{number}_*.pdf"][0]))
+    else
+      number = ENV.fetch('FORM')
+      labels = CSV.read("output/labels/EN_#{ENV['FORM']}.csv").flatten
+    end
+
+    # Skip "Supplement to the Official Journal of the European Union" (HD_ojs_) and "Info and online forms" (HD_info_forms).
+    labels = labels[2..-1]
 
     skipper = ->(row) do
       row['label-key'].nil? || EXTRA_XPATHS_TO_SKIP.include?(row['xpath'])
@@ -72,15 +82,14 @@ task :table do
     data_skipped = data.take_while(&skipper).reject{ |row| KNOWN_SKIPPED_XPATHS.include?(row['xpath']) }
     data = data.drop_while(&skipper)
 
-    # Skip "Supplement to the Official Journal of the European Union" (HD_ojs_) and "Info and online forms" (HD_info_forms).
-    labels = label_keys(pdftotext(Dir["source/TED_forms_templates_R2.0.9/F#{number}_*.pdf"][0]))[2..-1]
-
     # Swap the order of labels.
-    swap(labels, 'maintype_natagency', 'maintype_localagency')
-    swap(labels, 'maintype_localauth', 'maintype_publicbody')
-    swap(labels, 'maintype_localauth', 'maintype_localagency')
-    swap(labels, 'mainactiv_health', 'other_activity')
-    swap(labels, 'mainactiv_postal', 'other_activity', reverse: true)
+    if basename != 'MOVE'
+      swap(labels, 'maintype_natagency', 'maintype_localagency')
+      swap(labels, 'maintype_localauth', 'maintype_publicbody')
+      swap(labels, 'maintype_localauth', 'maintype_localagency')
+      swap(labels, 'mainactiv_health', 'other_activity')
+      swap(labels, 'mainactiv_postal', 'other_activity', reverse: true)
+    end
 
     ### Build
 
@@ -89,7 +98,7 @@ task :table do
     # Shift `notice_pin`, `notice_contract`, `notice_contract_award`, etc.
     builder.heading(number, labels.shift)
 
-    builder.add(File.read(File.join('output', 'content', "F#{number}.md")) + "\n")
+    builder.add(File.read(File.join('output', 'content', "#{basename}.md")) + "\n")
 
     if %w(03 06 25).include?(number)
       # Skip "Results of the procurement procedure" (notice_contract_award_sub).
@@ -97,6 +106,11 @@ task :table do
     end
     if !%w(08 12 13 15).include?(number)
       # Skip "Directive 2014/24/EU" (directive_201424).
+      labels.shift
+    end
+    if basename == 'MOVE'
+      # Skip notice_pubservice_pin and H_note_50000km (T01) or notice_pubservice_award_expl and H_note_voluntary_if (T02).
+      labels.shift
       labels.shift
     end
 
@@ -160,8 +174,12 @@ task :table do
 
       else
         # Print debug information to help diagnose the issue.
+        $stderr.puts "\noutput:"
         $stderr.puts builder
+        $stderr.puts "\nunprocessed rows:"
         $stderr.puts data.map(&:to_h)
+        $stderr.puts "\nunprocessed labels:"
+        $stderr.puts labels.inspect
         $stderr.puts data.index{ |row| row['label-key'] == key }
         $stderr.puts "ignore: #{ignore.any? && ignore[0]['label-key']}"
         $stderr.puts "enumerations: #{enumerations.any? && enumerations[0]['label-key']}"
