@@ -3,8 +3,8 @@ EXTRA_XPATHS_TO_LIST = {
   '/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY' => [
     '/OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY',
   ],
-  '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY' => [
-    '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY',
+  '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY' => [
+    '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY',
     '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/@CURRENCY',
   ],
 }
@@ -47,7 +47,7 @@ task :table do
   additional_csv = CSV.read('output/mapping/additional.csv', headers: true)
 
   # Some forms have elements before Section 1.
-  has_header = %w(01 04 07 08 12 13 15 21 22 23)
+  has_header = %w(F01 F04 F07 F08 F12 F13 F15 F21 F22 F23)
 
   files('output/mapping/{}*.csv').each do |filename|
     basename = File.basename(filename, '.csv').sub('_2014', '')
@@ -57,7 +57,7 @@ task :table do
       labels = label_keys(pdftotext(Dir["source/TED_forms_templates_R2.0.9/#{number}_*.pdf"][0]))
     else
       number = ENV.fetch('FORM')
-      labels = CSV.read("output/labels/EN_#{ENV['FORM']}.csv").flatten
+      labels = CSV.read("output/labels/EN_#{number}.csv").flatten
     end
 
     # Skip "Supplement to the Official Journal of the European Union" (HD_ojs_) and "Info and online forms" (HD_info_forms).
@@ -79,6 +79,10 @@ task :table do
     additional = additional_csv.select{ |row| row['numbers'][number] }
     data = CSV.read(filename, headers: true)
 
+    if basename == 'MOVE'
+      data = select_move_rows(data, number)
+    end
+
     data_skipped = data.take_while(&skipper).reject{ |row| KNOWN_SKIPPED_XPATHS.include?(row['xpath']) }
     data = data.drop_while(&skipper)
 
@@ -98,19 +102,18 @@ task :table do
     # Shift `notice_pin`, `notice_contract`, `notice_contract_award`, etc.
     builder.heading(number, labels.shift)
 
-    builder.add(File.read(File.join('output', 'content', "#{basename}.md")) + "\n")
+    builder.add(File.read("output/content/#{number}.md") + "\n")
 
-    if %w(03 06 25).include?(number)
+    if %w(F03 F06 F25).include?(number)
       # Skip "Results of the procurement procedure" (notice_contract_award_sub).
       labels.shift
     end
-    if !%w(08 12 13 15).include?(number)
+    if !%w(F08 F12 F13 F15).include?(number)
       # Skip "Directive 2014/24/EU" (directive_201424).
       labels.shift
     end
     if basename == 'MOVE'
-      # Skip notice_pubservice_pin and H_note_50000km (T01) or notice_pubservice_award_expl and H_note_voluntary_if (T02).
-      labels.shift
+      # Skip H_note_50000km (T01) or H_note_voluntary_if (T02).
       labels.shift
     end
 
@@ -180,11 +183,12 @@ task :table do
         $stderr.puts data.map(&:to_h)
         $stderr.puts "\nunprocessed labels:"
         $stderr.puts labels.inspect
+        $stderr.puts "\nindex of key in data:"
         $stderr.puts data.index{ |row| row['label-key'] == key }
-        $stderr.puts "ignore: #{ignore.any? && ignore[0]['label-key']}"
+        $stderr.puts "\nignore: #{ignore.any? && ignore[0]['label-key']}"
         $stderr.puts "enumerations: #{enumerations.any? && enumerations[0]['label-key']}"
         $stderr.puts "additional: #{additional.any? && additional[0]['label-key']}"
-        raise "unexpected key '#{key}'"
+        raise "unexpected key: #{key}"
       end
     end
 

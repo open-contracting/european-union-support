@@ -46,31 +46,6 @@ namespace :label do
 
   desc 'Report any XPath values without corresponding label keys, and vice versa'
   task :missing do
-    label_keys_seen = Set.new(['_or'])
-    indices_seen = Set.new
-
-    %w(ignore.csv enumerations.csv additional.csv).each do |basename|
-      CSV.read(File.join('output', 'mapping', basename), headers: true).each do |row|
-        label_keys_seen << row['label-key']
-        indices_seen << row['index']
-      end
-    end
-
-    files('output/mapping/{}*.csv').each do |filename|
-      CSV.foreach(filename, headers: true) do |row|
-        if row['label-key'].nil?
-          if row['comment'].nil? && row['guidance'].nil?
-            puts "#{filename}: #{row['xpath']} has no label-key, comment or guidance"
-          end
-        else
-          label_keys_seen << row['label-key']
-        end
-        if row['index']
-          indices_seen << row['index']
-        end
-      end
-    end
-
     form_title_labels = [
       'notice_contract_award', # F03
       'notice_contract_award_sub', # F03
@@ -83,21 +58,72 @@ namespace :label do
       'notice_social_public', # F21
       'notice_social_util', # F22
       'notice_social_concess', # F23
+      'notice_pubservice_pin', # T01
+      'notice_pubservice_pin_expl', # T01
+      'notice_pubservice_award', # T02
+      'notice_pubservice_award_expl', # T02
     ]
 
     regex = /\A(annex_d\d|section_\d|directive_(?:200981|201423|201424|201425)|#{form_title_labels.join('|')})\z/
 
-    files('source/TED_forms_templates_R2.0.9/{}*.pdf').each do |filename|
-      text = pdftotext(filename)
+    label_keys_seen = Set.new(['_or'])
+    indices_seen = Set.new
 
-      difference = Set.new(label_keys(text).reject{ |key| help_text?(key) || key[regex] }) - label_keys_seen
+    %w(ignore.csv enumerations.csv additional.csv).each do |basename|
+      CSV.read(File.join('output', 'mapping', basename), headers: true).each do |row|
+        label_keys_seen << row['label-key']
+        indices_seen << row['index']
+      end
+    end
+
+    files('output/mapping/{}*.csv').each do |filename|
+      basename = File.basename(filename, '.csv')
+
+      data = CSV.read(filename, headers: true)
+
+      if basename == 'MOVE'
+        number = ENV.fetch('FORM')
+        data = select_move_rows(data, number)
+      end
+
+      data.each do |row|
+        if row['label-key'].nil?
+          if row['comment'].nil? && row['guidance'].nil?
+            puts "#{filename}: #{row['xpath']} has no label-key, comment or guidance"
+          end
+        else
+          label_keys_seen << row['label-key']
+        end
+        if row['index']
+          indices_seen << row['index']
+        end
+      end
+
+      if basename == 'MOVE'
+        labels = CSV.read("output/labels/EN_#{number}.csv").flatten
+
+        # Identical to below.
+        difference = Set.new(labels.reject{ |key| help_text?(key) || key[regex] }) - label_keys_seen
+        if difference.any?
+          puts "#{basename}: #{difference.to_a.join(', ')}"
+        end
+      end
+    end
+
+    files('source/TED_forms_templates_R2.0.9/{}*.pdf').each do |filename|
+      basename = File.basename(filename)
+
+      text = pdftotext(filename)
+      labels = label_keys(text)
+
+      difference = Set.new(labels.reject{ |key| help_text?(key) || key[regex] }) - label_keys_seen
       if difference.any?
-        puts "#{File.basename(filename)}: #{difference.to_a.join(', ')}"
+        puts "#{basename}: #{difference.to_a.join(', ')}"
       end
 
       difference = Set.new(indices(text)) - indices_seen
       if difference.any?
-        puts "#{File.basename(filename)}: #{difference.to_a.join(', ')}"
+        puts "#{basename}: #{difference.to_a.join(', ')}"
       end
     end
   end
@@ -117,14 +143,14 @@ namespace :label do
   task :ignore do
     # Some form titles are used on later forms and therefore ignored with ignore.csv.
     ignore = {
-      '01' => ['notice_pin', 'directive_201424'], # F02
-      '02' => ['notice_contract', 'directive_201424'], # F03
-      '04' => ['notice_periodic_utilities'], # F05
-      '05' => ['notice_contract_utilities'], # F06
-      '07' => ['notice_qualification_utilities'], # F22
-      '12' => ['notice_design_cont'], # F13
-      '24' => ['notice_concession'], # F25
-      '25' => ['notice_concession_award'], # F23
+      'F01' => ['notice_pin', 'directive_201424'], # F02
+      'F02' => ['notice_contract', 'directive_201424'], # F03
+      'F04' => ['notice_periodic_utilities'], # F05
+      'F05' => ['notice_contract_utilities'], # F06
+      'F07' => ['notice_qualification_utilities'], # F22
+      'F12' => ['notice_design_cont'], # F13
+      'F24' => ['notice_concession'], # F25
+      'F25' => ['notice_concession_award'], # F23
     }
 
     path = File.join('output', 'mapping', 'ignore.csv')
@@ -139,10 +165,10 @@ namespace :label do
 
       if basename != 'MOVE'
         number = File.basename(filename).match(/\A(F\d\d)/)[1]
-        label_keys = label_keys(pdftotext(files("source/TED_forms_templates_R2.0.9/#{number}_*.pdf")[0]))
+        labels = label_keys(pdftotext(files("source/TED_forms_templates_R2.0.9/#{number}_*.pdf")[0]))
       else
         number = ENV.fetch('FORM')
-        label_keys = CSV.read("output/labels/EN_#{ENV['FORM']}.csv").flatten
+        labels = CSV.read("output/labels/EN_#{number}.csv").flatten
       end
 
       mapped = CSV.read(filename, headers: true).map{ |row| row['label-key'] }
@@ -151,7 +177,7 @@ namespace :label do
       mapped << '_or'
 
       minimum_indices = Hash.new(-1)
-      label_keys.each do |label_key|
+      labels.each do |label_key|
         if !mapped.include?(label_key)
           index = enum.find_index do |row, i|
             row['label-key'] == label_key && i > minimum_indices[label_key]
@@ -195,9 +221,7 @@ namespace :label do
         basename = File.basename(filename, '.csv')
 
         if basename != 'MOVE'
-          target_number = basename.match(/\A(F\d\d)/)[1]
-          template = files("source/TED_forms_templates_R2.0.9/#{target_number}_*.pdf")[0]
-          text = pdftotext(template)
+          text = pdftotext(files("source/TED_forms_templates_R2.0.9/#{basename.match(/\A(F\d\d)/)[1]}_*.pdf")[0])
         else
           text = ''
         end
@@ -355,7 +379,10 @@ namespace :label do
       failure = []
       labels.each do |label|
         if label_keys.include?(label)
-          success << label_keys[label]
+          label_key = label_keys[label]
+          if !label_key[/\AH_foot_\d\z/]
+            success << label_key
+          end
         else
           failure << label
         end

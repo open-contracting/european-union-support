@@ -73,7 +73,23 @@ def indices(text)
 end
 
 def help_text?(key, number: nil)
-  key[/\AHD?_/] || %w(excl_vat notice_design_cont request_qualification).include?(key) || number == '08' && %w(directive_201424 directive_201425 directive_200981).include?(key)
+  key[/\AHD?_/] || %w(excl_vat notice_design_cont request_qualification).include?(key) || number == 'F08' && %w(directive_201424 directive_201425 directive_200981).include?(key)
+end
+
+# The same XSD is used for both T01 and T02, but each form uses different parts.
+def select_move_rows(data, number)
+  case number
+  when 'T01'
+    label_key = 'envisaged_start'
+    pattern = 'AWARD_CONTRACT|LEFTI|OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS'
+  when 'T02'
+    label_key = 'start_date_duration'
+    pattern = 'PROCEDURE'
+  else
+    raise "unexpected form: #{number}"
+  end
+  data.find{ |row| row['xpath'] == '/OBJECT_CONTRACT/OBJECT_DESCR/DURATION' }['label-key'] = label_key
+  data.reject{ |row| row['xpath'][%r{\A/(?:#{pattern})}] }
 end
 
 Dir['tasks/*.rake'].each { |r| import r }
