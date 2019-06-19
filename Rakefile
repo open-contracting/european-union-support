@@ -40,16 +40,12 @@ module RegexpExamples
 end
 
 def files(glob)
-  search = '{}'
   if ENV['FILES']
-    if ENV['FILES'].split(',').map(&:to_i).all?(&:zero?)
-      search = /[FT]{}/
-    end
     replacement = "{#{ENV['FILES']}}"
   else
     replacement = '*'
   end
-  Dir[glob.sub(search, replacement)].sort
+  Dir[glob.sub('{}', replacement)].sort
 end
 
 def pdftotext(path)
