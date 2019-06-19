@@ -9,13 +9,13 @@ xpath,label-key,index,comment,guidance
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,national_id,,,"Map to the party's `.identifier.id`, and set `.identifier.scheme`"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS,address_postal,,,Map to the party's `.address.streetAddress`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN,address_town,,,Map to the party's `.address.locality`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,nutscode,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,"Take the NUTS code in the `CODE` attribute, and map to the party's `.address.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE,address_postcode,,,Map to the party's `.address.postalCode`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY,address_country,,,"Take the country code in the `VALUE` attribute, translate to a country name, and map to the party's `.address.countryName`\n\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation. (ISSUE)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT,contactpoint,,,Map to the party's `.contactPoint.name`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE,address_phone,,,Map to the party's `.contactPoint.telephone`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL,address_email,,,Map to the party's `.contactPoint.email`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,address_fax,,,Map to the party's `.contactPoint.faxNumber`
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,nutscode,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,"Take the NUTS code in the `CODE` attribute, and map to the party's `.address.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,url_general,,,Map to the party's `.details.url` (PROPOSAL #8)
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,url_buyerprofile,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/organization_BuyerProfile,Map to the party's `.details.buyerProfile` (PROPOSAL #7)
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL,,,,"[Add a party](../operations#add-a-party), add 'buyer' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
@@ -53,38 +53,38 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE,mainsiteplace_works_delivery,,,Map to the item's `.deliveryLocation.description`
 /OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,descr_procurement,II.2.4,,"Map to the item's `.description`, and, if the contract is divided into lots, map to the lot's `.description`"
 /OBJECT_CONTRACT/OBJECT_DESCR/DATE_START,starting,,,"If the contract is divided into lots, map to the lot's `.contractPeriod.startDate`; otherwise, map to `tender.contractPeriod.startDate` (PROPOSAL #19)"
-/OBJECT_CONTRACT/OBJECT_DESCR/DURATION,envisaged_start,II.2.7,,""
-/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/EXTENDED_CONTRACT_DURATION,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/LIST,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/SIGNIFICANCE,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/PREDOMINANCE,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/NO_EXTENDED_CONTRACT_DURATION,,,,
+/OBJECT_CONTRACT/OBJECT_DESCR/DURATION,"",II.2.7,The Rake task sets the label-key on each form.,""
+/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS,assets_extended_contract,,,
+/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/EXTENDED_CONTRACT_DURATION,_yes,,,
+/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/LIST,assets_list,,,
+/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/SIGNIFICANCE,assets_significance,,,
+/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/PREDOMINANCE,assets_predominant,,,
+/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/NO_EXTENDED_CONTRACT_DURATION,_no,,,
 /LEFTI,info_legal,III,,"The standard forms express exclusion grounds and selection criteria in this section as unstructured text. In the [introductory note](https://github.com/eForms/eForms/raw/master/20180604_eForms_consultation_introduction.docx) to its [eForms consultation](https://github.com/eForms/eForms), the European Commission proposes to create an extension to eForms to implement the [European Single Procurement Document (ESPD)](http://ec.europa.eu/growth/single-market/public-procurement/e-procurement/espd/), which expresses this information as structured data, following the model of the [Core Criterion and Core Evidence Vocabulary](https://joinup.ec.europa.eu/solution/core-criterion-and-core-evidence-vocabulary). With respect to OCDS, work on this section is postponed until either the extension to eForms is available or until the [ESPD Exchange Data Model](https://github.com/ESPD/ESPD-EDM) is stable."
-/LEFTI/COST_PARAMETERS,,,,
-/LEFTI/EXCLUSIVE_RIGHTS_GRANTED,,,,
-/LEFTI/NO_EXCLUSIVE_RIGHTS_GRANTED,,,,
-/LEFTI/PCT_ALLOCATED_OPERATOR,,,,
-/LEFTI/SOCIAL_STANDARDS,,,,
-/LEFTI/PUBLIC_SERVICE_OBLIGATIONS,,,,
-/LEFTI/OTHER_PARTICULAR_CONDITIONS,,,,
-/LEFTI/INFORMATION_TICKETS,,,,
-/LEFTI/PUNCTUALITY_RELIABILITY,,,,
-/LEFTI/CANCELLATIONS_SERVICES,,,,
-/LEFTI/CLEANLINESS_ROLLING_STOCK,,,,
-/LEFTI/CUST_SATISFACTION_SURVEY,,,,
-/LEFTI/COMPLAINT_HANDLING,,,,
-/LEFTI/ASSIST_PERSONS_REDUCTED_MOB,,,,
-/LEFTI/OTHER_QUALITY_TARGET,,,,
-/LEFTI/REWARDS_PENALITIES,,,,
+/LEFTI/COST_PARAMETERS,parameters_cost,,,
+/LEFTI/EXCLUSIVE_RIGHTS_GRANTED,_yes,,,
+/LEFTI/NO_EXCLUSIVE_RIGHTS_GRANTED,_no,,,
+/LEFTI/PCT_ALLOCATED_OPERATOR,allocation_percentage,,,
+/LEFTI/SOCIAL_STANDARDS,social_standards_list,,
+/LEFTI/PUBLIC_SERVICE_OBLIGATIONS,public_service_obligations,III.1.5,,
+/LEFTI/OTHER_PARTICULAR_CONDITIONS,other_particular_cond,III.1.6,,
+/LEFTI/INFORMATION_TICKETS,target_info,,,
+/LEFTI/PUNCTUALITY_RELIABILITY,target_punctuality,,,
+/LEFTI/CANCELLATIONS_SERVICES,target_cancellation,,,
+/LEFTI/CLEANLINESS_ROLLING_STOCK,target_cleanliness,,,
+/LEFTI/CUST_SATISFACTION_SURVEY,target_satisfaction,,,
+/LEFTI/COMPLAINT_HANDLING,target_complaints,,,
+/LEFTI/ASSIST_PERSONS_REDUCTED_MOB,target_assistance,,,
+/LEFTI/OTHER_QUALITY_TARGET,target_other,,,
+/LEFTI/REWARDS_PENALITIES,info_rewards_penalties,,,
 /PROCEDURE,procedure,IV,,""
-/PROCEDURE/PT_COMPETITIVE_TENDERING,,,,
-/PROCEDURE/PT_DA_INTERNAL_OPERATOR,,,,
-/PROCEDURE/PT_DA_SMALL_CONTRACT,,,,
-/PROCEDURE/PT_DA_MEDIUM_ENTERPRISE,,,,
-/PROCEDURE/PT_DA_RAILWAY_TRANSPORT,,,,
+/PROCEDURE/PT_COMPETITIVE_TENDERING,proctype_competitive,,,
+/PROCEDURE/PT_DA_INTERNAL_OPERATOR,type_direct_award_internal,,,
+/PROCEDURE/PT_DA_SMALL_CONTRACT,type_direct_award_small,,,
+/PROCEDURE/PT_DA_MEDIUM_ENTERPRISE,type_direct_award_small_sme,,,
+/PROCEDURE/PT_DA_RAILWAY_TRANSPORT,type_direct_award_railway,,,
 /AWARD_CONTRACT,award_of_contract,V,,Add an `Award` object to the `awards` array
-/AWARD_CONTRACT/AWARDED_CONTRACT,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/contract_statusDetails,"Set the award's `.status` to 'active'\n\nAdd a `Contract` object to the `contracts` array, set its `.id` and `.awardID` to the award's `.id`, set its `.title` to the award's `.title`, and set its `.status` to 'active'."
+/AWARD_CONTRACT/AWARDED_CONTRACT,award_of_contract,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/contract_statusDetails,"Set the award's `.status` to 'active'\n\nAdd a `Contract` object to the `contracts` array, set its `.id` and `.awardID` to the award's `.id`, set its `.title` to the award's `.title`, and set its `.status` to 'active'."
 /AWARD_CONTRACT/AWARDED_CONTRACT/DATE_CONCLUSION_CONTRACT,date_award,V.2.1,,Map to the contract's `.dateSigned`
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS,,,This element contains elements from V.2.2 and V.2.3.,""
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR,,,"Contains ADDRESS_CONTRACTOR, SME, NO_SME.",""
@@ -100,8 +100,8 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/FAX,address_fax,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/NUTS,nutscode,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/URL,internet,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL
-/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/OWNERSHIP,,,,
-/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_PARTY,,,,
+/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/OWNERSHIP,indication_relation,,,
+/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_PARTY,address_legal_control,,,
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_PARTY/OFFICIALNAME,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_PARTY/NATIONALID,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_PARTY/ADDRESS,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS
@@ -113,10 +113,10 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_PARTY/FAX,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_PARTY/NUTS,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_PARTY/URL,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL
-/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES,value_contract_info,V.2.4,,""
-/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL,value_total_final,,,Map to the contract's `.value.amount`
+/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES,info_value_contract,V.2.4,,""
+/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL,value_total_contract,,,Map to the contract's `.value.amount`
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY,currency,,,/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY
-/AWARD_CONTRACT/AWARDED_CONTRACT/NB_KILOMETRES,,,,
+/AWARD_CONTRACT/AWARDED_CONTRACT/NB_KILOMETRES,km_services,,,
 /COMPLEMENTARY_INFO,info_complement,VI,,""
 /COMPLEMENTARY_INFO/INFO_ADD,info_additional,VI.3,,Map to `description`
 /COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,date_dispatch,VI.5,,Map to `date`
