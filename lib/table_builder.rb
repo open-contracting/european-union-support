@@ -52,7 +52,7 @@ class TableBuilder
   # Helpers
 
   def heading(number, label)
-    header 1, "F#{number}: #{t(label)}"
+    header 1, "#{number}: #{t(label)}"
   end
 
   def subheading(label)

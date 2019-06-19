@@ -76,7 +76,7 @@ namespace :legacy do
     references = Set.new
 
     # Get the `base`, `ref` and `type` re-used across forms.
-    files('source/TED_publication_*_006/F{}_*.xsd').each do |filename|
+    files('source/TED_publication_*_006/{}_*.xsd').each do |filename|
       parser = XmlParser.new(filename)
 
       references += parser.schema.xpath('.//*[@ref]').reject{ |n|
@@ -111,7 +111,7 @@ namespace :legacy do
   task :forms do
     FileUtils.mkdir_p('output/summaries')
 
-    files('source/TED_publication_*_006/F{}_*.xsd').each do |filename|
+    files('source/TED_publication_*_006/{}_*.xsd').each do |filename|
       parser = XmlParser.new(filename, follow: false)
 
       abbreviation = parser.basename.sub('_2014', '')

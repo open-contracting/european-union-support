@@ -53,17 +53,17 @@ Using the fish shell:
 
 ### Create sample XML files
 
-Create sample XML files for each form schema:
+Create sample XML files for each form's schema:
 
     rake sample
 
-Or for specific form schema:
+Or for specific schema:
 
-    rake sample FILES=01,02,03,14,20
+    rake sample FILES=F01,F02,F03,F14,F20
 
-Or for specific schema release:
+Or for a specific release:
 
-    rake sample RELEASE=R2.0.8 FILES=16,17,18
+    rake sample RELEASE=R2.0.8 FILES=F16,F17,F18
 
 See the comments in `sample.rake` to understand why tools like Oxygen are insufficient.
 
@@ -73,9 +73,9 @@ Create or update files for mapping forms' XPath values to label keys:
 
     rake label:xpath
 
-Or:
+For release R2.0.8:
 
-    rake label:xpath RELEASE=R2.0.8 FILES=F16,F17,F18,T01,T02
+    rake label:xpath RELEASE=R2.0.8 FILES=F16,F17,F18
 
 You're now ready to map label keys to XPath values. As setup, if you have two monitors, open a form's template PDF and English PDF side-by-side in one monitor, to make it easy to see the text label of each label key in context. In a text editor, open `ignore.csv`, `enumerations.csv` and a form's sample XML and XPath CSV.
 
@@ -95,23 +95,23 @@ Fill in `enumerations.csv`:
 
 Once completed, run `rake label:missing` to see which XML elements and attributes have no key, and which keys have no XML element or attribute and aren't in `ignore.csv`:
 
-    rake label:missing FILES=01,02,03
+    rake label:missing FILES=F01,F02,F03
 
 Many XPath's are common across forms. To copy guidance across forms, run:
 
-    rake label:copy SOURCE=01
-    rake label:copy SOURCE=02 FILES=03,05,12,13,21,22,23,24
-    rake label:copy SOURCE=03 FILES=06,13,15,20,21,22,23,25
-    rake label:copy SOURCE=04 FILES=05,06,07,08,12,13,15,21,22,23,24,25
-    rake label:copy SOURCE=06 FILES=20,22
-    rake label:copy SOURCE=07 FILES=22
-    rake label:copy SOURCE=12 FILES=13
-    rake label:copy SOURCE=15 FILES=23,25
-    rake label:copy SOURCE=21 FILES=22
-    rake label:copy SOURCE=23 FILES=25
-    rake label:copy SOURCE=24 FILES=25
-    rake label:copy SOURCE=03 FILES=MOVE
-    rake label:copy SOURCE=14 FILES=MOVE
+    rake label:copy SOURCE=F01
+    rake label:copy SOURCE=F02 FILES=F03,F05,F12,F13,F21,F22,F23,F24
+    rake label:copy SOURCE=F03 FILES=F06,F13,F15,F20,F21,F22,F23,F25
+    rake label:copy SOURCE=F04 FILES=F05,F06,F07,F08,F12,F13,F15,F21,F22,F23,F24,F25
+    rake label:copy SOURCE=F06 FILES=F20,F22
+    rake label:copy SOURCE=F07 FILES=F22
+    rake label:copy SOURCE=F12 FILES=F13
+    rake label:copy SOURCE=F15 FILES=F23,F25
+    rake label:copy SOURCE=F21 FILES=F22
+    rake label:copy SOURCE=F23 FILES=F25
+    rake label:copy SOURCE=F24 FILES=F25
+    rake label:copy SOURCE=F03 FILES=MOVE
+    rake label:copy SOURCE=F14 FILES=MOVE
 
 Many label keys are ignored across forms. To pre-populate across forms, run:
 
@@ -138,7 +138,7 @@ Before running this task, move the following in XPath CSVs to more closely match
 
 You can now generate a table for each form, displaying, for each element and attribute, the index within the PDF ("I.1"), the label (in any language) and the XPath, to which you can then add guidance for OCDS.
 
-    for i in 01 02 03; rake table LANGUAGE=EN FILES=$i > path/to/F$i.md; end
+    for i in F01 F02 F03; rake table LANGUAGE=EN FILES=F$i > path/to/F$i.md; end
 
 ## Design
 
@@ -155,7 +155,7 @@ Transform all form schema into CSV files:
 
 Or transform a specific directory and specific form schema:
 
-    rake legacy:common legacy:forms DIRECTORY=source/TED_publication_R2.0.9.S03.E01_006 FILES=01,02,03,14,20
+    rake legacy:common legacy:forms DIRECTORY=source/TED_publication_R2.0.9.S03.E01_006 FILES=F01,F02,F03,F14,F20
 
 I also attempted to map elements and attributes in the XML to labels on the forms using the Publication Office's [form label mappings](https://publications.europa.eu/en/web/eu-vocabularies/tedschemas), but the file covers only forms 1-6, doesn't cover all XML elements, doesn't use full XPaths, isn't machine-interpretable, etc.; manual interpretation would require at least the same effort as the above process. The Excel validation rules in the reception schema files map elements and attributes to descriptions, but these are not the same as the labels on the forms.
 

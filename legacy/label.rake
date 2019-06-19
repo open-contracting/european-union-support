@@ -102,7 +102,7 @@ namespace :legacy do
       },
     }
 
-    files('output/summaries/F{}_*.csv').each do |output|
+    files('output/summaries/{}_*.csv').each do |output|
       label_key_to_label = {}
       CSV.read('source/XML Labels mapping R2.09_7.csv', headers: true).each do |row|
         label_key_to_label[row['Label']] = row['EN']

@@ -17,7 +17,7 @@ task :sample do
     raise "unexpected release: #{ENV['RELEASE']}"
   end
 
-  files("#{prefix}/F{}*.xsd").each do |filename|
+  files("#{prefix}/{}*.xsd").each do |filename|
     builder = XMLBuilder.new(filename, release: ENV['RELEASE'])
     builder.build
     File.open("output/samples/#{builder.basename}.xml", 'w') do |f|

@@ -3,7 +3,7 @@ namespace :label do
   task :xpath do
     FileUtils.mkdir_p('output/mapping')
 
-    files('output/samples/F{}*.xml').each do |filename|
+    files('output/samples/{}*.xml').each do |filename|
       basename = File.basename(filename, '.xml')
       path = "output/mapping/#{basename}.csv"
 
@@ -35,7 +35,7 @@ namespace :label do
 
   desc 'Report any CSV quoting errors'
   task :validate do
-    files('output/mapping/F{}*.csv').each do |filename|
+    files('output/mapping/{}*.csv').each do |filename|
       CSV.foreach(filename, headers: true) do |row|
         if row.size != 5
           raise "#{filename}: #{row['xpath']} unquoted comma!"
@@ -56,7 +56,7 @@ namespace :label do
       end
     end
 
-    files('output/mapping/F{}*.csv').each do |filename|
+    files('output/mapping/{}*.csv').each do |filename|
       CSV.foreach(filename, headers: true) do |row|
         if row['label-key'].nil?
           if row['comment'].nil? && row['guidance'].nil?
@@ -87,7 +87,7 @@ namespace :label do
 
     regex = /\A(annex_d\d|section_\d|directive_(?:200981|201423|201424|201425)|#{form_title_labels.join('|')})\z/
 
-    files('source/TED_forms_templates_R2.0.9/F{}*.pdf').each do |filename|
+    files('source/TED_forms_templates_R2.0.9/{}*.pdf').each do |filename|
       text = pdftotext(filename)
 
       difference = Set.new(label_keys(text).reject{ |key| help_text?(key) || key[regex] }) - label_keys_seen
@@ -104,7 +104,7 @@ namespace :label do
 
   desc 'Report any notes about mappings'
   task :comments do
-    files('output/mapping/F{}*.csv').each do |filename|
+    files('output/mapping/{}*.csv').each do |filename|
       CSV.foreach(filename, headers: true) do |row|
         if row['comment']
           puts "#{filename}: %-60s %s" % [row['xpath'], row['comment']]
@@ -134,12 +134,12 @@ namespace :label do
 
     enumerations = CSV.read(File.join('output', 'mapping', 'enumerations.csv'), headers: true)
 
-    files('output/mapping/F{}*.csv').each do |filename|
+    files('output/mapping/{}*.csv').each do |filename|
       basename = File.basename(filename, '.csv')
 
       if basename != 'MOVE'
-        number = File.basename(filename).match(/\AF(\d\d)/)[1]
-        text = pdftotext(files("source/TED_forms_templates_R2.0.9/F#{number}_*.pdf")[0])
+        number = File.basename(filename).match(/\A(F\d\d)/)[1]
+        text = pdftotext(files("source/TED_forms_templates_R2.0.9/#{number}_*.pdf")[0])
       else
         number = basename
         text = ''
@@ -178,14 +178,14 @@ namespace :label do
   desc 'Copy label keys, indices and OCDS guidance across forms'
   task :copy do
     source_number = ENV['SOURCE']
-    source = files("output/mapping/F#{source_number}_*.csv")[0]
+    source = files("output/mapping/#{source_number}_*.csv")[0]
 
     xpaths = {}
     CSV.foreach(source, headers: true) do |row|
       xpaths[row['xpath']] = row
     end
 
-    filenames = files('output/mapping/F{}*.csv') - [source]
+    filenames = files('output/mapping/{}*.csv') - [source]
     filenames.each do |filename|
       headers = nil
       rows = []
@@ -195,8 +195,8 @@ namespace :label do
         basename = File.basename(filename, '.csv')
 
         if basename != 'MOVE'
-          target_number = basename.match(/\AF(\d\d)/)[1]
-          template = files("source/TED_forms_templates_R2.0.9/F#{target_number}_*.pdf")[0]
+          target_number = basename.match(/\A(F\d\d)/)[1]
+          template = files("source/TED_forms_templates_R2.0.9/#{target_number}_*.pdf")[0]
           text = pdftotext(template)
         else
           text = ''
@@ -221,7 +221,7 @@ namespace :label do
           if guidance
             row['guidance'] = guidance
           else
-            row['guidance'] = "*Pending guidance from F#{source_number}*"
+            row['guidance'] = "*Pending guidance from #{source_number}*"
           end
         end
         rows << row
@@ -240,11 +240,11 @@ namespace :label do
   task :coherence do
     mappings = {}
 
-    files('output/mapping/F{}*.csv').each do |filename|
+    files('output/mapping/{}*.csv').each do |filename|
       CSV.foreach(filename, headers: true) do |row|
         if row['label-key']
           # Exception for label:copy command.
-          if row['guidance'] && row['guidance'][/\A\*Pending guidance from F\d\d\*\z/]
+          if row['guidance'] && row['guidance'][/\A\*Pending guidance from [FT]\d\d\*\z/]
             row['guidance'] = nil
           end
 
