@@ -18,7 +18,7 @@ namespace :label do
 
       xpaths = Set.new
       Nokogiri::XML(File.read(filename)).xpath("/*//*|/*//@*").each do |element|
-        xpath = element.path.sub(/\A\/F.._2014/, '').gsub(/\[\d+\]/, '').gsub(%r{\b(?:choice|group|sequence)/}, '')
+        xpath = element.path.sub(/\A\/(F.._2014|MOVE)/, '').gsub(/\[\d+\]/, '').gsub(%r{\b(?:choice|group|sequence)/}, '')
         # Exclude XSD elements, paragraph tags, form identifier, and attributes for empty elements.
         if !%w(choice group sequence P @CODE @CTYPE @FORM @PUBLICATION @TYPE @VALUE).include?(xpath.split('/')[-1])
           xpaths << xpath
@@ -37,7 +37,7 @@ namespace :label do
 
   desc 'Report any CSV quoting errors'
   task :validate do
-    files('output/mapping/F{}_*.csv').each do |filename|
+    files('output/mapping/F{}*.csv').each do |filename|
       CSV.foreach(filename, headers: true) do |row|
         if row.size != 5
           raise "#{filename}: #{row['xpath']} unquoted comma!"
@@ -58,7 +58,7 @@ namespace :label do
       end
     end
 
-    files('output/mapping/F{}_*.csv').each do |filename|
+    files('output/mapping/F{}*.csv').each do |filename|
       CSV.foreach(filename, headers: true) do |row|
         if row['label-key'].nil?
           if row['comment'].nil? && row['guidance'].nil?
@@ -89,7 +89,7 @@ namespace :label do
 
     regex = /\A(annex_d\d|section_\d|directive_(?:200981|201423|201424|201425)|#{form_title_labels.join('|')})\z/
 
-    files('source/TED_forms_templates_R2.0.9/F{}_*.pdf').each do |filename|
+    files('source/TED_forms_templates_R2.0.9/F{}*.pdf').each do |filename|
       text = pdftotext(filename)
 
       difference = Set.new(label_keys(text).reject{ |key| help_text?(key) || key[regex] }) - label_keys_seen
@@ -106,7 +106,7 @@ namespace :label do
 
   desc 'Report any notes about mappings'
   task :comments do
-    files('output/mapping/F{}_*.csv').each do |filename|
+    files('output/mapping/F{}*.csv').each do |filename|
       CSV.foreach(filename, headers: true) do |row|
         if row['comment']
           puts "#{filename}: %-60s %s" % [row['xpath'], row['comment']]
@@ -136,7 +136,7 @@ namespace :label do
 
     enumerations = CSV.read(File.join('output', 'mapping', 'enumerations.csv'), headers: true)
 
-    files('output/mapping/F{}_*.csv').each do |filename|
+    files('output/mapping/F{}*.csv').each do |filename|
       number = File.basename(filename).match(/\AF(\d\d)/)[1]
 
       mapped = CSV.read(filename, headers: true).map{ |row| row['label-key'] }
@@ -180,27 +180,33 @@ namespace :label do
       xpaths[row['xpath']] = row
     end
 
-    filenames = files('output/mapping/F{}_*.csv') - [source]
+    filenames = files('output/mapping/F{}*.csv') - [source]
     filenames.each do |filename|
       headers = nil
       rows = []
 
       CSV.foreach(filename, headers: true) do |row|
         headers = row.headers
-        target_number = File.basename(filename).match(/\AF(\d\d)/)[1]
+        basename = File.basename(filename)
 
-        template = files("source/TED_forms_templates_R2.0.9/F#{target_number}_*.pdf")[0]
-        text = pdftotext(template)
+        if basename != 'MOVE.csv'
+          target_number = basename.match(/\AF(\d\d)/)[1]
+          template = files("source/TED_forms_templates_R2.0.9/F#{target_number}_*.pdf")[0]
+          text = pdftotext(template)
+        else
+          text = ''
+        end
+
         label_keys = label_keys(text)
         indices = indices(text)
 
         key = row['xpath']
         other = xpaths[key]
         if other
-          if row['label-key'].nil? && label_keys.include?(other['label-key'])
+          if row['label-key'].nil? && label_keys.include?(other['label-key']) || basename == 'MOVE.csv'
             row['label-key'] = other['label-key']
           end
-          if row['index'].nil? && indices.include?(other['index'])
+          if row['index'].nil? && indices.include?(other['index']) || basename == 'MOVE.csv'
             row['index'] = other['index']
           end
 
@@ -229,7 +235,7 @@ namespace :label do
   task :coherence do
     mappings = {}
 
-    files('output/mapping/F{}_*.csv').each do |filename|
+    files('output/mapping/F{}*.csv').each do |filename|
       CSV.foreach(filename, headers: true) do |row|
         if row['label-key']
           # Exception for label:copy command.

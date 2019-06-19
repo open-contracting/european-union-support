@@ -110,6 +110,8 @@ Many XPath's are common across forms. To copy guidance across forms, run:
     rake label:copy SOURCE=21 FILES=22
     rake label:copy SOURCE=23 FILES=25
     rake label:copy SOURCE=24 FILES=25
+    rake label:copy SOURCE=03 FILES=MOVE
+    rake label:copy SOURCE=14 FILES=MOVE
 
 Many label keys are ignored across forms. To pre-populate across forms, run:
 

@@ -49,7 +49,7 @@ task :table do
   # Some forms have elements before Section 1.
   has_header = %w(01 04 07 08 12 13 15 21 22 23)
 
-  files('output/mapping/F{}_*.csv').each do |filename|
+  files('output/mapping/F{}*.csv').each do |filename|
     basename = File.basename(filename)
     number = basename.match(/\AF(\d+)/)[1]
 
