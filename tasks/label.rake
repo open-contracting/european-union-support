@@ -3,9 +3,7 @@ namespace :label do
   task :xpath do
     FileUtils.mkdir_p('output/mapping')
 
-    pattern = release_pattern('xml', 'output/samples')
-
-    files(pattern).each do |filename|
+    files('output/samples/F{}*.xml').each do |filename|
       basename = File.basename(filename, '.xml')
       path = "output/mapping/#{basename}.csv"
 
@@ -137,14 +135,21 @@ namespace :label do
     enumerations = CSV.read(File.join('output', 'mapping', 'enumerations.csv'), headers: true)
 
     files('output/mapping/F{}*.csv').each do |filename|
-      number = File.basename(filename).match(/\AF(\d\d)/)[1]
+      basename = File.basename(filename, '.csv')
+
+      if basename != 'MOVE'
+        number = File.basename(filename).match(/\AF(\d\d)/)[1]
+        text = pdftotext(files("source/TED_forms_templates_R2.0.9/F#{number}_*.pdf")[0])
+      else
+        number = basename
+        text = ''
+      end
 
       mapped = CSV.read(filename, headers: true).map{ |row| row['label-key'] }
       mapped += enumerations.select{ |row| row['numbers'][number] }.map{ |row| row['label-key'] }
       mapped += ignore.fetch(number, [])
       mapped << '_or'
 
-      text = pdftotext(files("source/TED_forms_templates_R2.0.9/F#{number}_*.pdf")[0])
       minimum_indices = Hash.new(-1)
       label_keys(text).each do |label_key|
         if !mapped.include?(label_key)
@@ -187,9 +192,9 @@ namespace :label do
 
       CSV.foreach(filename, headers: true) do |row|
         headers = row.headers
-        basename = File.basename(filename)
+        basename = File.basename(filename, '.csv')
 
-        if basename != 'MOVE.csv'
+        if basename != 'MOVE'
           target_number = basename.match(/\AF(\d\d)/)[1]
           template = files("source/TED_forms_templates_R2.0.9/F#{target_number}_*.pdf")[0]
           text = pdftotext(template)
@@ -203,10 +208,10 @@ namespace :label do
         key = row['xpath']
         other = xpaths[key]
         if other
-          if row['label-key'].nil? && label_keys.include?(other['label-key']) || basename == 'MOVE.csv'
+          if row['label-key'].nil? && label_keys.include?(other['label-key']) || basename == 'MOVE'
             row['label-key'] = other['label-key']
           end
-          if row['index'].nil? && indices.include?(other['index']) || basename == 'MOVE.csv'
+          if row['index'].nil? && indices.include?(other['index']) || basename == 'MOVE'
             row['index'] = other['index']
           end
 
@@ -264,6 +269,104 @@ namespace :label do
             mappings[key] = {filename: filename, value: actual}
           end
         end
+      end
+    end
+  end
+
+  desc 'Reverse-engineer the label keys for transport forms'
+  task :reverse do
+    FileUtils.mkdir_p('output/labels')
+
+    ignore_labels = [
+      # First header
+      'enotices.ted.europa.eu',
+      # Footnotes
+      '1', '2', '3', '4',
+      # Right margin
+      'PDF T01 EN 2018-10-02 12:12',
+      'PDF T02 EN 2018-10-02 12:38',
+      # Footer
+      'EN Standard form T01 – 1370/07 – Art 7(2) – Prior information notice for public service contract',
+      'EN Standard form T02 – 1370/07 – Art 7(3) – Information notice for award of public service contract',
+    ]
+
+    label_fixes = {
+      'Bus transport services (urban/regional)' => 'Bus transport services (urban/regional) ', # extra space
+      'Direct awards' => 'Direct award', # "modified to singular"
+      # Multiple labels (T01).
+      'Name and addresses (please identify all competent authorities responsible for this procedure)' => ['Name and addresses', 'please identify all competent authorities responsible for this procedure'],
+      'Type of contract Services' => ['Type of contract', 'Services'],
+      'or Duration in days' => ['or', 'Duration in days'],
+      # Multiple labels (T02).
+      'yes  no' => ['yes', 'no'],
+      'Exclusive rights are granted  yes  no' => ['Exclusive rights are granted', 'yes', 'no'],
+      'Social standards (transfer of staff under Dir. 2001/23/EC)' => ['Social standards', 'transfer of staff under Dir. 2001/23/EC'],
+      'Description (choose at least one)' => ['Description', 'choose at least one'],
+      'Information on value of the contract (excluding VAT)' => ['Information on value of the contract', 'excluding VAT'],
+    }
+
+    label_keys = {}
+    CSV.read(TableBuilder::FORM_LABELS_CSV_PATH, headers: true).each do |row|
+      if row.fields.any?
+        label_keys[row['EN']] = row['Label']
+      end
+    end
+
+    files('source/English/EN_T{}.pdf').each do |filename|
+      basename = File.basename(filename, '.pdf')
+
+      text = `pdftotext #{filename} -`.
+        # Put long strings onto one line.
+        gsub(/\n([a-z])(?!f applicable)/, ' \1').
+        # Ignore non-label keys.
+        gsub(/ [1-4]\b(, [1-4]\b)*/, ''). # reference
+        gsub("\u20de", ''). # check box
+        gsub("◯", ''). # radio button
+        gsub(/\[\s+\]| \. /, ''). # code data entry
+        gsub('/  /', ''). # date data entry
+        gsub(/\bT-\d\d\b/, ''). # code
+        gsub(/%$/, '') # percentage
+
+      strings = text.each_line.flat_map do |line|
+        if line[/:\s/]
+          line.split(':')
+        else
+          line
+        end
+      end
+
+      labels = strings.flat_map do |string|
+        # Remove indices.
+        label = string.sub(/\b[IV]+(\.\d+)+\) /, '').strip
+
+        if !label.empty? && !ignore_labels.include?(label)
+          # Remove parentheses.
+          if label[0] == '(' && label[-1] == ')'
+            label = label[1..-2]
+          end
+
+          label_fixes.fetch(label, label)
+        else
+          []
+        end
+      end
+
+      success = []
+      failure = []
+      labels.each do |label|
+        if label_keys.include?(label)
+          success << label_keys[label]
+        else
+          failure << label
+        end
+      end
+
+      failure.each do |label|
+        puts "unexpected label: #{label}"
+      end
+
+      File.open("output/labels/#{basename}.csv", 'w') do |f|
+        f.write success.join("\n")
       end
     end
   end

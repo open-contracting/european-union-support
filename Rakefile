@@ -39,23 +39,11 @@ module RegexpExamples
   end
 end
 
-def release_pattern(extension, r209_prefix, r208_prefix=nil)
-  case ENV['RELEASE']
-  when 'R2.0.9', nil
-    prefix = r209_prefix
-  when 'R2.0.8'
-    prefix = r208_prefix || r209_prefix
-  else
-    raise "unknown release '#{ENV['RELEASE']}'"
-  end
-  "#{prefix}/F{}*.#{extension}"
-end
-
 def files(glob)
   search = '{}'
   if ENV['FILES']
     if ENV['FILES'].split(',').map(&:to_i).all?(&:zero?)
-      search = 'F{}'
+      search = /[FT]{}/
     end
     replacement = "{#{ENV['FILES']}}"
   else

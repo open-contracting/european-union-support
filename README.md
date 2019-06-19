@@ -63,7 +63,7 @@ Or for specific form schema:
 
 Or for specific schema release:
 
-    rake sample RELEASE=R2.0.8 FILES=F16,F17,F18,T01,T02
+    rake sample RELEASE=R2.0.8 FILES=16,17,18
 
 See the comments in `sample.rake` to understand why tools like Oxygen are insufficient.
 
