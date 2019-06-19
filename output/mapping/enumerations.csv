@@ -1,50 +1,59 @@
 xpath,value,label-key,numbers,guidance
-/NOTICE/@TYPE,PRI_ONLY,notice_is_prior_info_only,01,"Add 'planning' to `tag`, and set `tender.status` to 'planned'\n\nThis is equivalent to a [notice of planned procurement](https://www.wto.org/english/docs_e/legal_e/rev-gpr-94_01_e.htm#_Toc320546103) in the GPA."
-/NOTICE/@TYPE,PRI_REDUCING_TIME_LIMITS,notice_reduces_timelimits,01,"Add 'planning' to `tag`, and set `tender.status` to 'planned'\n\nAccording to [Article XI:4](https://www.wto.org/english/docs_e/legal_e/rev-gpr-94_01_e.htm#articleXI) of the GPA, which is reflected in [2014/24/EU](https://eur-lex.europa.eu/eli/dir/2014/24/oj), a contracting authority may reduce time limits by publishing a prior information notice that is not a call for competition."
-/NOTICE/@TYPE,PRI_CALL_COMPETITION,notice_is_call,01,"Add 'planning' and 'tender' to `tag`, and set `tender.status` to 'active'\n\nThis is equivalent to a [notice of planned procurement](https://www.wto.org/english/docs_e/legal_e/rev-gpr-94_01_e.htm#_Toc320546103) being used as a [notice of intended procurement](https://www.wto.org/english/docs_e/legal_e/rev-gpr-94_01_e.htm#articleVII) in the GPA."
-/NOTICE/@TYPE,PER_ONLY,notice_is_periodic_only,04,"Add 'planning' to `tag`, and set `tender.status` to 'planned'\n\nThis is equivalent to a [notice of planned procurement](https://www.wto.org/english/docs_e/legal_e/rev-gpr-94_01_e.htm#_Toc320546103) in the GPA."
-/NOTICE/@TYPE,PER_REDUCING_TIME_LIMITS,notice_reduces_timelimits,04,"Add 'planning' to `tag`, and set `tender.status` to 'planned'\n\nAccording to [Article XI:4](https://www.wto.org/english/docs_e/legal_e/rev-gpr-94_01_e.htm#articleXI) of the GPA, which is reflected in [2014/24/EU](https://eur-lex.europa.eu/eli/dir/2014/24/oj), a contracting authority may reduce time limits by publishing a prior information notice that is not a call for competition."
-/NOTICE/@TYPE,PER_CALL_COMPETITION,notice_is_call,04|07,"Add 'planning' and 'tender' to `tag`, and set `tender.status` to 'active'\n\nThis is equivalent to a [notice of planned procurement](https://www.wto.org/english/docs_e/legal_e/rev-gpr-94_01_e.htm#_Toc320546103) being used as a [notice of intended procurement](https://www.wto.org/english/docs_e/legal_e/rev-gpr-94_01_e.htm#articleVII) in the GPA."
-/NOTICE/@TYPE,PRI_ONLY,notice_pin,21,
-/NOTICE/@TYPE,PRI_CALL_COMPETITION,notice_is_call,21,
-/NOTICE/@TYPE,CONTRACT,notice_contract,21,
-/NOTICE/@TYPE,AWARD_CONTRACT,notice_contract_award,21,
-/NOTICE/@TYPE,PER_ONLY,notice_periodic_indicative,22,
-/NOTICE/@TYPE,PER_CALL_COMPETITION,notice_is_call,22,
-/NOTICE/@TYPE,QSU_ONLY,qualification_system,22,
-/NOTICE/@TYPE,QSU_CALL_COMPETITION,notice_is_call,22,
-/NOTICE/@TYPE,CONTRACT,notice_contract,22,
-/NOTICE/@TYPE,AWARD_CONTRACT,notice_contract_award,22,
-/NOTICE/@TYPE,PRI_ONLY,notice_pin,23,
-/NOTICE/@TYPE,CONCESSION_AWARD_CONTRACT,notice_concession_award,23,
-/CONTRACTING_BODY/CA_TYPE/@VALUE,MINISTRY,maintype_ministry,01|02|03|08|12|13|15|21|23|24|25,"Map to `.id`, and set `.name` to 'Ministry or any other national or federal authority, including their regional or local subdivisions'"
-/CONTRACTING_BODY/CA_TYPE/@VALUE,NATIONAL_AGENCY,maintype_natagency,01|02|03|08|12|13|15|21|23|24|25,"Map to `.id`, and set `.name` to 'National or federal agency/office'"
-/CONTRACTING_BODY/CA_TYPE/@VALUE,REGIONAL_AUTHORITY,maintype_localauth,01|02|03|08|12|13|15|21|23|24|25,"Map to `.id`, and set `.name` to 'Regional or local authority'"
-/CONTRACTING_BODY/CA_TYPE/@VALUE,REGIONAL_AGENCY,maintype_localagency,01|02|03|08|12|13|15|21|23|24|25,"Map to `.id`, and set `.name` to 'Regional or local agency/office'"
-/CONTRACTING_BODY/CA_TYPE/@VALUE,BODY_PUBLIC,maintype_publicbody,01|02|03|08|12|13|15|21|23|24|25,"Map to `.id`, and set `.name` to 'Body governed by public law'"
-/CONTRACTING_BODY/CA_TYPE/@VALUE,EU_INSTITUTION,maintype_eu,01|02|03|08|12|13|15|21|23|24|25,"Map to `.id`, and set `.name` to 'European institution/agency or international organisation'"
-/CONTRACTING_BODY/CA_ACTIVITY/@VALUE,GENERAL_PUBLIC_SERVICES,mainactiv_general,01|02|03|08|12|13|15|21|23|24|25,Set `.id` to '01' and `.name` to 'General public services'
-/CONTRACTING_BODY/CA_ACTIVITY/@VALUE,HOUSING_AND_COMMUNITY_AMENITIES,mainactiv_housing,01|02|03|08|12|13|15|21|23|24|25,Set `.id` to '06' and `.name` to 'Housing and community amenities'
-/CONTRACTING_BODY/CA_ACTIVITY/@VALUE,DEFENCE,mainactiv_defence,01|02|03|08|12|13|15|21|23|24|25,Set `.id` to '02' and `.name` to 'Defence'
-/CONTRACTING_BODY/CA_ACTIVITY/@VALUE,SOCIAL_PROTECTION,mainactiv_social,01|02|03|08|12|13|15|21|23|24|25,Set `.id` to '10' and `.name` to 'Social protection'
-/CONTRACTING_BODY/CA_ACTIVITY/@VALUE,PUBLIC_ORDER_AND_SAFETY,mainactiv_safety,01|02|03|08|12|13|15|21|23|24|25,Set `.id` to '03' and `.name` to 'Public order and safety'
-/CONTRACTING_BODY/CA_ACTIVITY/@VALUE,RECREATION_CULTURE_AND_RELIGION,mainactiv_culture,01|02|03|08|12|13|15|21|23|24|25,"Set `.id` to '08' and `.name` to 'Recreation, culture and religion'"
-/CONTRACTING_BODY/CA_ACTIVITY/@VALUE,ENVIRONMENT,mainactiv_environment,01|02|03|08|12|13|15|21|23|24|25,Set `.id` to '05' and `.name` to 'Environmental protection'
-/CONTRACTING_BODY/CA_ACTIVITY/@VALUE,EDUCATION,mainactiv_education,01|02|03|08|12|13|15|21|23|24|25,Set `.id` to '09' and `.name` to 'Education'
-/CONTRACTING_BODY/CA_ACTIVITY/@VALUE,ECONOMIC_AND_FINANCIAL_AFFAIRS,mainactiv_economic,01|02|03|08|12|13|15|21|23|24|25,Set `.id` to '04' and `.name` to 'Economic affairs'
-/CONTRACTING_BODY/CA_ACTIVITY/@VALUE,HEALTH,mainactiv_health,01|02|03|08|12|13|15|21|23|24|25,Set `.id` to '07' and `.name` to 'Health'
-/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,PRODUCTION_TRANSPORT_DISTRIBUTION_GAS_HEAT,mainactiv_gas_product,04|05|06|07|08|12|13|15|22|23|24|25,"Map to `.id`, and set `.name` to 'Production, transport and distribution of gas and heat'\n\n(Relates to 2014/25/EU Annex 3, point A)"
-/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,RAILWAY_SERVICES,mainactiv_railway,04|05|06|07|08|12|13|15|22|23|24|25,"Map to `.id`, and set `.name` to 'Railway services'\n\n(Relates to 2014/25/EU Annex 3, point D)"
-/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,ELECTRICITY,mainactiv_electricity,04|05|06|07|08|12|13|15|22|23|24|25,"Map to `.id`, and set `.name` to 'Electricity'\n\n(Relates to 2014/25/EU Annex 3, point B)"
-/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,URBAN_RAILWAY_TRAMWAY_TROLLEYBUS_BUS_SERVICES,mainactiv_bus,04|05|06|07|08|12|13|15|22|23|24|25,"Map to `.id`, and set `.name` to 'Urban railway, tramway, trolleybus or bus services'\n\n(Relates to 2014/25/EU Annex 3, point E)"
-/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,EXPLORATION_EXTRACTION_GAS_OIL,mainactiv_gas_explor,04|05|06|07|08|12|13|15|22|23|24|25,"Map to `.id`, and set `.name` to 'Extraction of gas and oil'\n\n(Relates to 2014/25/EU Annex 3, point G)"
-/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,PORT_RELATED_ACTIVITIES,mainactiv_port,04|05|06|07|08|12|13|15|22|23|24|25,"Map to `.id`, and set `.name` to 'Port-related activities'\n\n(Relates to 2014/25/EU Annex 3, point I)"
-/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,EXPLORATION_EXTRACTION_COAL_OTHER_SOLID_FUEL,mainactiv_coal,04|05|06|07|08|12|13|15|22|23|24|25,"Map to `.id`, and set `.name` to 'Exploration and extraction of coal and other solid fuels'\n\n(Relates to 2014/25/EU Annex 3, point H)"
-/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,AIRPORT_RELATED_ACTIVITIES,mainactiv_airportrelated,04|05|06|07|08|12|13|15|22|23|24|25,"Map to `.id`, and set `.name` to 'Airport-related activities'\n\n(Relates to 2014/25/EU Annex 3, point J)"
-/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,WATER,mainactiv_water,04|05|06|07|08|12|13|15|22|23|24|25,"Map to `.id`, and set `.name` to 'Water'\n\n(Relates to 2014/25/EU Annex 3, point C)"
-/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,POSTAL_SERVICES,mainactiv_postal,04|05|06|07|08|12|13|15|22|23|24|25,"Map to `.id`, and set `.name` to 'Postal services'\n\n(Relates to 2014/25/EU Annex 3, point F)"
-/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,WORKS,works,01|02|03|04|05|06|07|08|15|24|25,Map to 'works'
-/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,SUPPLIES,supplies,01|02|03|04|05|06|07|08|15,Map to 'goods'
-/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,SERVICES,services,01|02|03|04|05|06|07|08|15|21|22|23|24|25,Map to 'services'
-/OBJECT_CONTRACT/OBJECT_DESCR/DURATION/@TYPE,MONTH,duration_months,01|02|04|05|21|22|23|24|25,"Multiply by 30, and, if the contract is divided into lots, map to the lot's `.contractPeriod.durationInDays`; otherwise, map to `tender.contractPeriod.durationInDays` (PROPOSAL #19)\n\nThere's an open issue ([#723](https://github.com/open-contracting/standard/issues/723)) about durations in months. (ISSUE)"
-/OBJECT_CONTRACT/OBJECT_DESCR/DURATION/@TYPE,DAY,indays,01|02|04|05|21|22|23|24|25,"If the contract is divided into lots, map to the lot's `.contractPeriod.durationInDays`; otherwise, map to `tender.contractPeriod.durationInDays` (PROPOSAL #19)"
+/NOTICE/@TYPE,PRI_ONLY,notice_is_prior_info_only,F01,"Add 'planning' to `tag`, and set `tender.status` to 'planned'\n\nThis is equivalent to a [notice of planned procurement](https://www.wto.org/english/docs_e/legal_e/rev-gpr-94_01_e.htm#_Toc320546103) in the GPA."
+/NOTICE/@TYPE,PRI_REDUCING_TIME_LIMITS,notice_reduces_timelimits,F01,"Add 'planning' to `tag`, and set `tender.status` to 'planned'\n\nAccording to [Article XI:4](https://www.wto.org/english/docs_e/legal_e/rev-gpr-94_01_e.htm#articleXI) of the GPA, which is reflected in [2014/24/EU](https://eur-lex.europa.eu/eli/dir/2014/24/oj), a contracting authority may reduce time limits by publishing a prior information notice that is not a call for competition."
+/NOTICE/@TYPE,PRI_CALL_COMPETITION,notice_is_call,F01,"Add 'planning' and 'tender' to `tag`, and set `tender.status` to 'active'\n\nThis is equivalent to a [notice of planned procurement](https://www.wto.org/english/docs_e/legal_e/rev-gpr-94_01_e.htm#_Toc320546103) being used as a [notice of intended procurement](https://www.wto.org/english/docs_e/legal_e/rev-gpr-94_01_e.htm#articleVII) in the GPA."
+/NOTICE/@TYPE,PER_ONLY,notice_is_periodic_only,F04,"Add 'planning' to `tag`, and set `tender.status` to 'planned'\n\nThis is equivalent to a [notice of planned procurement](https://www.wto.org/english/docs_e/legal_e/rev-gpr-94_01_e.htm#_Toc320546103) in the GPA."
+/NOTICE/@TYPE,PER_REDUCING_TIME_LIMITS,notice_reduces_timelimits,F04,"Add 'planning' to `tag`, and set `tender.status` to 'planned'\n\nAccording to [Article XI:4](https://www.wto.org/english/docs_e/legal_e/rev-gpr-94_01_e.htm#articleXI) of the GPA, which is reflected in [2014/24/EU](https://eur-lex.europa.eu/eli/dir/2014/24/oj), a contracting authority may reduce time limits by publishing a prior information notice that is not a call for competition."
+/NOTICE/@TYPE,PER_CALL_COMPETITION,notice_is_call,F04|F07,"Add 'planning' and 'tender' to `tag`, and set `tender.status` to 'active'\n\nThis is equivalent to a [notice of planned procurement](https://www.wto.org/english/docs_e/legal_e/rev-gpr-94_01_e.htm#_Toc320546103) being used as a [notice of intended procurement](https://www.wto.org/english/docs_e/legal_e/rev-gpr-94_01_e.htm#articleVII) in the GPA."
+/NOTICE/@TYPE,PRI_ONLY,notice_pin,F21,
+/NOTICE/@TYPE,PRI_CALL_COMPETITION,notice_is_call,F21,
+/NOTICE/@TYPE,CONTRACT,notice_contract,F21,
+/NOTICE/@TYPE,AWARD_CONTRACT,notice_contract_award,F21,
+/NOTICE/@TYPE,PER_ONLY,notice_periodic_indicative,F22,
+/NOTICE/@TYPE,PER_CALL_COMPETITION,notice_is_call,F22,
+/NOTICE/@TYPE,QSU_ONLY,qualification_system,F22,
+/NOTICE/@TYPE,QSU_CALL_COMPETITION,notice_is_call,F22,
+/NOTICE/@TYPE,CONTRACT,notice_contract,F22,
+/NOTICE/@TYPE,AWARD_CONTRACT,notice_contract_award,F22,
+/NOTICE/@TYPE,PRI_ONLY,notice_pin,F23,
+/NOTICE/@TYPE,CONCESSION_AWARD_CONTRACT,notice_concession_award,F23,
+/CONTRACTING_BODY/CA_TYPE/@VALUE,MINISTRY,maintype_ministry,F01|F02|F03|F08|F12|F13|F15|F21|F23|F24|F25|T01,"Map to `.id`, and set `.name` to 'Ministry or any other national or federal authority, including their regional or local subdivisions'"
+/CONTRACTING_BODY/CA_TYPE/@VALUE,NATIONAL_AGENCY,maintype_natagency,F01|F02|F03|F08|F12|F13|F15|F21|F23|F24|F25|T01,"Map to `.id`, and set `.name` to 'National or federal agency/office'"
+/CONTRACTING_BODY/CA_TYPE/@VALUE,REGIONAL_AUTHORITY,maintype_localauth,F01|F02|F03|F08|F12|F13|F15|F21|F23|F24|F25|T01,"Map to `.id`, and set `.name` to 'Regional or local authority'"
+/CONTRACTING_BODY/CA_TYPE/@VALUE,REGIONAL_AGENCY,maintype_localagency,F01|F02|F03|F08|F12|F13|F15|F21|F23|F24|F25|T01,"Map to `.id`, and set `.name` to 'Regional or local agency/office'"
+/CONTRACTING_BODY/CA_TYPE/@VALUE,BODY_PUBLIC,maintype_publicbody,F01|F02|F03|F08|F12|F13|F15|F21|F23|F24|F25|T01,"Map to `.id`, and set `.name` to 'Body governed by public law'"
+/CONTRACTING_BODY/CA_TYPE/@VALUE,EU_INSTITUTION,maintype_eu,F01|F02|F03|F08|F12|F13|F15|F21|F23|F24|F25,"Map to `.id`, and set `.name` to 'European institution/agency or international organisation'"
+/CONTRACTING_BODY/CA_ACTIVITY/@VALUE,GENERAL_PUBLIC_SERVICES,mainactiv_general,F01|F02|F03|F08|F12|F13|F15|F21|F23|F24|F25,Set `.id` to '01' and `.name` to 'General public services'
+/CONTRACTING_BODY/CA_ACTIVITY/@VALUE,HOUSING_AND_COMMUNITY_AMENITIES,mainactiv_housing,F01|F02|F03|F08|F12|F13|F15|F21|F23|F24|F25,Set `.id` to '06' and `.name` to 'Housing and community amenities'
+/CONTRACTING_BODY/CA_ACTIVITY/@VALUE,DEFENCE,mainactiv_defence,F01|F02|F03|F08|F12|F13|F15|F21|F23|F24|F25,Set `.id` to '02' and `.name` to 'Defence'
+/CONTRACTING_BODY/CA_ACTIVITY/@VALUE,SOCIAL_PROTECTION,mainactiv_social,F01|F02|F03|F08|F12|F13|F15|F21|F23|F24|F25,Set `.id` to '10' and `.name` to 'Social protection'
+/CONTRACTING_BODY/CA_ACTIVITY/@VALUE,PUBLIC_ORDER_AND_SAFETY,mainactiv_safety,F01|F02|F03|F08|F12|F13|F15|F21|F23|F24|F25,Set `.id` to '03' and `.name` to 'Public order and safety'
+/CONTRACTING_BODY/CA_ACTIVITY/@VALUE,RECREATION_CULTURE_AND_RELIGION,mainactiv_culture,F01|F02|F03|F08|F12|F13|F15|F21|F23|F24|F25,"Set `.id` to '08' and `.name` to 'Recreation, culture and religion'"
+/CONTRACTING_BODY/CA_ACTIVITY/@VALUE,ENVIRONMENT,mainactiv_environment,F01|F02|F03|F08|F12|F13|F15|F21|F23|F24|F25,Set `.id` to '05' and `.name` to 'Environmental protection'
+/CONTRACTING_BODY/CA_ACTIVITY/@VALUE,EDUCATION,mainactiv_education,F01|F02|F03|F08|F12|F13|F15|F21|F23|F24|F25,Set `.id` to '09' and `.name` to 'Education'
+/CONTRACTING_BODY/CA_ACTIVITY/@VALUE,ECONOMIC_AND_FINANCIAL_AFFAIRS,mainactiv_economic,F01|F02|F03|F08|F12|F13|F15|F21|F23|F24|F25,Set `.id` to '04' and `.name` to 'Economic affairs'
+/CONTRACTING_BODY/CA_ACTIVITY/@VALUE,HEALTH,mainactiv_health,F01|F02|F03|F08|F12|F13|F15|F21|F23|F24|F25,Set `.id` to '07' and `.name` to 'Health'
+/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,PRODUCTION_TRANSPORT_DISTRIBUTION_GAS_HEAT,mainactiv_gas_product,F04|F05|F06|F07|F08|F12|F13|F15|F22|F23|F24|F25,"Map to `.id`, and set `.name` to 'Production, transport and distribution of gas and heat'\n\n(Relates to 2014/25/EU Annex 3, point A)"
+/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,RAILWAY_SERVICES,mainactiv_railway,F04|F05|F06|F07|F08|F12|F13|F15|F22|F23|F24|F25,"Map to `.id`, and set `.name` to 'Railway services'\n\n(Relates to 2014/25/EU Annex 3, point D)"
+/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,ELECTRICITY,mainactiv_electricity,F04|F05|F06|F07|F08|F12|F13|F15|F22|F23|F24|F25,"Map to `.id`, and set `.name` to 'Electricity'\n\n(Relates to 2014/25/EU Annex 3, point B)"
+/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,URBAN_RAILWAY_TRAMWAY_TROLLEYBUS_BUS_SERVICES,mainactiv_bus,F04|F05|F06|F07|F08|F12|F13|F15|F22|F23|F24|F25,"Map to `.id`, and set `.name` to 'Urban railway, tramway, trolleybus or bus services'\n\n(Relates to 2014/25/EU Annex 3, point E)"
+/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,EXPLORATION_EXTRACTION_GAS_OIL,mainactiv_gas_explor,F04|F05|F06|F07|F08|F12|F13|F15|F22|F23|F24|F25,"Map to `.id`, and set `.name` to 'Extraction of gas and oil'\n\n(Relates to 2014/25/EU Annex 3, point G)"
+/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,PORT_RELATED_ACTIVITIES,mainactiv_port,F04|F05|F06|F07|F08|F12|F13|F15|F22|F23|F24|F25,"Map to `.id`, and set `.name` to 'Port-related activities'\n\n(Relates to 2014/25/EU Annex 3, point I)"
+/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,EXPLORATION_EXTRACTION_COAL_OTHER_SOLID_FUEL,mainactiv_coal,F04|F05|F06|F07|F08|F12|F13|F15|F22|F23|F24|F25,"Map to `.id`, and set `.name` to 'Exploration and extraction of coal and other solid fuels'\n\n(Relates to 2014/25/EU Annex 3, point H)"
+/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,AIRPORT_RELATED_ACTIVITIES,mainactiv_airportrelated,F04|F05|F06|F07|F08|F12|F13|F15|F22|F23|F24|F25,"Map to `.id`, and set `.name` to 'Airport-related activities'\n\n(Relates to 2014/25/EU Annex 3, point J)"
+/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,WATER,mainactiv_water,F04|F05|F06|F07|F08|F12|F13|F15|F22|F23|F24|F25,"Map to `.id`, and set `.name` to 'Water'\n\n(Relates to 2014/25/EU Annex 3, point C)"
+/CONTRACTING_BODY/CE_ACTIVITY/@VALUE,POSTAL_SERVICES,mainactiv_postal,F04|F05|F06|F07|F08|F12|F13|F15|F22|F23|F24|F25,"Map to `.id`, and set `.name` to 'Postal services'\n\n(Relates to 2014/25/EU Annex 3, point F)"
+/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,WORKS,works,F01|F02|F03|F04|F05|F06|F07|F08|F15|F24|F25,Map to 'works'
+/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,SUPPLIES,supplies,F01|F02|F03|F04|F05|F06|F07|F08|F15,Map to 'goods'
+/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,SERVICES,services,F01|F02|F03|F04|F05|F06|F07|F08|F15|F21|F22|F23|F24|F25,Map to 'services'
+/OBJECT_CONTRACT/CATEGORY/@CTYPE,1,servicecat_transport_rail,T01,
+/OBJECT_CONTRACT/CATEGORY/@CTYPE,2,servicecat_inlandwater,T01,
+/OBJECT_CONTRACT/CATEGORY/@CTYPE,3,servicecat_metro,T01,
+/OBJECT_CONTRACT/CATEGORY/@CTYPE,4,servicecat_tram,T01,
+/OBJECT_CONTRACT/CATEGORY/@CTYPE,5,servicecat_bus,T01,
+/OBJECT_CONTRACT/CATEGORY/@CTYPE,6,servicecat_coach,T01,
+/OBJECT_CONTRACT/CATEGORY/@CTYPE,7,servicecat_trolleybus,T01,
+/OBJECT_CONTRACT/CATEGORY/@CTYPE,8,servicecat_lightrail,T01,
+/OBJECT_CONTRACT/CATEGORY/@CTYPE,9,servicecat_transport_other,T01,
+/OBJECT_CONTRACT/OBJECT_DESCR/DURATION/@TYPE,MONTH,duration_months,F01|F02|F04|F05|F21|F22|F23|F24|F25|T01,"Multiply by 30, and, if the contract is divided into lots, map to the lot's `.contractPeriod.durationInDays`; otherwise, map to `tender.contractPeriod.durationInDays` (PROPOSAL #19)\n\nThere's an open issue ([#723](https://github.com/open-contracting/standard/issues/723)) about durations in months. (ISSUE)"
+/OBJECT_CONTRACT/OBJECT_DESCR/DURATION/@TYPE,DAY,indays,F01|F02|F04|F05|F21|F22|F23|F24|F25|T01,"If the contract is divided into lots, map to the lot's `.contractPeriod.durationInDays`; otherwise, map to `tender.contractPeriod.durationInDays` (PROPOSAL #19)"
