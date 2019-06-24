@@ -52,12 +52,12 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE,mainsiteplace_works_delivery,,,Map to the item's `.deliveryLocation.description`
 /OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,descr_procurement,II.2.4,,"Map to the item's `.description`, and, if the contract is divided into lots, map to the lot's `.description`"
 /OBJECT_CONTRACT/OBJECT_DESCR/AC,award_criteria,II.2.5,,""
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY,award_criterion_quality,,,*Pending guidance from F01*
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY/AC_CRITERION,award_criterion_name,,,*Pending guidance from F01*
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY/AC_WEIGHTING,weighting,,,*Pending guidance from F01*
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_COST,award_lowest_cost,,,*Pending guidance from F01*
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE,price,,,*Pending guidance from F01*
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE/AC_WEIGHTING,weighting,,,*Pending guidance from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY,award_criterion_quality,,,*Waiting for mapping from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY/AC_CRITERION,award_criterion_name,,,*Waiting for mapping from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY/AC_WEIGHTING,weighting,,,*Waiting for mapping from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_COST,award_lowest_cost,,,*Waiting for mapping from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE,price,,,*Waiting for mapping from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE/AC_WEIGHTING,weighting,,,*Waiting for mapping from F01*
 /OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Options,"Add an `Options` object to the `tender.options` array, and set its `.id`. If the contract is divided into lots, set its `.relatedLot` to the lot's `.id`. (PROPOSAL #21)"
 /OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS_DESCR,options_descr,,,Set the options' `.description` (PROPOSAL #21)
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_OPTIONS,_no,,,"Discard. If there is no corresponding `Options` object in the `tender.options` array, then there are no options."
@@ -65,19 +65,19 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds."
 /OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,info_additional,II.2.14,,Append to the item's `.description`\n\nThis results in a loss of structure. (WARNING #28)
 /PROCEDURE,procedure,IV,,""
-/PROCEDURE/PT_OPEN,proctype_open,,,*Pending guidance from F02*
-/PROCEDURE/ACCELERATED_PROC,justification,,,*Pending guidance from F02*
+/PROCEDURE/PT_OPEN,proctype_open,,,*Waiting for mapping from F02*
+/PROCEDURE/ACCELERATED_PROC,justification,,,*Waiting for mapping from F02*
 /PROCEDURE/PT_RESTRICTED,proctype_restricted,,,Set `tender.procurementMethod` to 'selective'
 /PROCEDURE/PT_COMPETITIVE_NEGOTIATION,proctype_comp_negotiation,,,Set `tender.procurementMethod` to 'open'
-/PROCEDURE/PT_COMPETITIVE_DIALOGUE,proctype_comp_dialogue,,,*Pending guidance from F02*
-/PROCEDURE/PT_INNOVATION_PARTNERSHIP,proctype_innovation,,,*Pending guidance from F02*
+/PROCEDURE/PT_COMPETITIVE_DIALOGUE,proctype_comp_dialogue,,,*Waiting for mapping from F02*
+/PROCEDURE/PT_INNOVATION_PARTNERSHIP,proctype_innovation,,,*Waiting for mapping from F02*
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL,award_wo_prior_pub_d1,,,See [Annex D1](#annex-d1-general-procurement)
-/PROCEDURE/FRAMEWORK,notice_involves_framework,,,*Pending guidance from F01*
-/PROCEDURE/DPS,dps_was_set_up,,,*Pending guidance from F01*
-/PROCEDURE/EAUCTION_USED,eauction_was_used,,,*Pending guidance from F01*
+/PROCEDURE/FRAMEWORK,notice_involves_framework,,,*Waiting for mapping from F01*
+/PROCEDURE/DPS,dps_was_set_up,,,*Waiting for mapping from F01*
+/PROCEDURE/EAUCTION_USED,eauction_was_used,,,*Waiting for mapping from F01*
 /PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to `tender.coveredBy`
 /PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in `tender.coveredBy`, then the procurement isn't covered by the GPA."
-/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,,*Pending guidance from F02*
+/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,,*Waiting for mapping from F02*
 /PROCEDURE/TERMINATION_DPS,termination_dps,,,
 /PROCEDURE/TERMINATION_PIN,pin_as_call_no_contracts,,,
 /AWARD_CONTRACT,award_of_contract,V,,Add an `Award` object to the `awards` array

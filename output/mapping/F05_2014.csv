@@ -60,13 +60,13 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE,mainsiteplace_works_delivery,,,Map to the item's `.deliveryLocation.description`
 /OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,descr_procurement,II.2.4,,"Map to the item's `.description`, and, if the contract is divided into lots, map to the lot's `.description`"
 /OBJECT_CONTRACT/OBJECT_DESCR/AC,award_criteria,II.2.5,,""
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY,award_criterion_quality,,,*Pending guidance from F01*
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY/AC_CRITERION,award_criterion_name,,,*Pending guidance from F01*
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY/AC_WEIGHTING,weighting,,,*Pending guidance from F01*
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_COST,award_lowest_cost,,,*Pending guidance from F01*
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE,price,,,*Pending guidance from F01*
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE/AC_WEIGHTING,weighting,,,*Pending guidance from F01*
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PROCUREMENT_DOC,award_criteria_descriptive,,,*Pending guidance from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY,award_criterion_quality,,,*Waiting for mapping from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY/AC_CRITERION,award_criterion_name,,,*Waiting for mapping from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY/AC_WEIGHTING,weighting,,,*Waiting for mapping from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_COST,award_lowest_cost,,,*Waiting for mapping from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE,price,,,*Waiting for mapping from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE/AC_WEIGHTING,weighting,,,*Waiting for mapping from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PROCUREMENT_DOC,award_criteria_descriptive,,,*Waiting for mapping from F01*
 /OBJECT_CONTRACT/OBJECT_DESCR/VAL_OBJECT,value_excl_vat,,,"If the contract is divided into lots, map to the lot's `.value.amount`; otherwise, this should match [II.1.5](#II.1.5)."
 /OBJECT_CONTRACT/OBJECT_DESCR/VAL_OBJECT/@CURRENCY,currency,,,"If the contract is divided into lots, map to the lot's `.value.currency`; otherwise, this should match [II.1.5](#II.1.5)."
 /OBJECT_CONTRACT/OBJECT_DESCR/DURATION,duration_contract_framework_dps,II.2.7,,""
@@ -75,16 +75,16 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/RENEWAL,renewals_subject,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Renewals,"Add a `Renewals` object to the `tender.renewals` array, and set its `.id`. If the contract is divided into lots, set its `.relatedLot` to the lot's `.id`. (PROPOSAL #22)"
 /OBJECT_CONTRACT/OBJECT_DESCR/RENEWAL_DESCR,renewals_descr,,,Set the renewals' `.description` (PROPOSAL #22)
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_RENEWAL,_no,,,"Discard. If there is no corresponding `Renewals` object in the `tender.renewals` array, then the contract isn't subject to renewals."
-/OBJECT_CONTRACT/OBJECT_DESCR/NB_ENVISAGED_CANDIDATE,envisaged_number,,,*Pending guidance from F02*
-/OBJECT_CONTRACT/OBJECT_DESCR/NB_MIN_LIMIT_CANDIDATE,envisaged_min,,,*Pending guidance from F02*
-/OBJECT_CONTRACT/OBJECT_DESCR/NB_MAX_LIMIT_CANDIDATE,max_number,,,*Pending guidance from F02*
-/OBJECT_CONTRACT/OBJECT_DESCR/CRITERIA_CANDIDATE,criteria_choosing_limited,,,*Pending guidance from F02*
+/OBJECT_CONTRACT/OBJECT_DESCR/NB_ENVISAGED_CANDIDATE,envisaged_number,,,*Waiting for mapping from F02*
+/OBJECT_CONTRACT/OBJECT_DESCR/NB_MIN_LIMIT_CANDIDATE,envisaged_min,,,*Waiting for mapping from F02*
+/OBJECT_CONTRACT/OBJECT_DESCR/NB_MAX_LIMIT_CANDIDATE,max_number,,,*Waiting for mapping from F02*
+/OBJECT_CONTRACT/OBJECT_DESCR/CRITERIA_CANDIDATE,criteria_choosing_limited,,,*Waiting for mapping from F02*
 /OBJECT_CONTRACT/OBJECT_DESCR/ACCEPTED_VARIANTS,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Variants,"Add a `Variants` object to the `tender.variants` array, and set its `.id`. If the contract is divided into lots, set its `.relatedLot` to the lot's `.id`. (PROPOSAL #17)\n\nTo provide conditions for variants, use `.description`"
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_ACCEPTED_VARIANTS,_no,,,"Discard. If there is no corresponding `Variants` object in the `tender.variants` array, then variants won't be accepted."
 /OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Options,"Add an `Options` object to the `tender.options` array, and set its `.id`. If the contract is divided into lots, set its `.relatedLot` to the lot's `.id`. (PROPOSAL #21)"
 /OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS_DESCR,options_descr,,,Set the options' `.description` (PROPOSAL #21)
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_OPTIONS,_no,,,"Discard. If there is no corresponding `Options` object in the `tender.options` array, then there are no options."
-/OBJECT_CONTRACT/OBJECT_DESCR/ECATALOGUE_REQUIRED,electronic_catalogue_required,,,*Pending guidance from F02*
+/OBJECT_CONTRACT/OBJECT_DESCR/ECATALOGUE_REQUIRED,electronic_catalogue_required,,,*Waiting for mapping from F02*
 /OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_isEUFunded https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_EUFunded,"Get the `Organization` object for the European Union; if none exists yet, [add a party](../operations#add-a-party), and set its `.name` to 'European Union'. Then, add 'funder' to its `.roles`.\n\nGet the `Finance` object for this project; if none exists yet, add a `Finance` object to the `planning.budget.finance` array, map to its `.description`, set its `.id`, set its `.financingParty.name` to 'European Union', and set its `.financingParty.id` to the party's `.id`. Then, if the contract is divided into lots, add the lot's `.id` to its `.relatedLots`. (PROPOSAL #20)"
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds."
 /OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,info_additional,II.2.14,,Append to the item's `.description`\n\nThis results in a loss of structure. (WARNING #28)
@@ -107,40 +107,40 @@ xpath,label-key,index,comment,guidance
 /LEFTI/PERFORMANCE_CONDITIONS,other_conditions,III.2.2,,""
 /LEFTI/PERFORMANCE_STAFF_QUALIFICATION,staff_responsible_indicate,,,""
 /PROCEDURE,procedure,IV,,""
-/PROCEDURE/PT_OPEN,proctype_open,,,*Pending guidance from F02*
+/PROCEDURE/PT_OPEN,proctype_open,,,*Waiting for mapping from F02*
 /PROCEDURE/PT_RESTRICTED,proctype_restricted,,,Set `tender.procurementMethod` to 'selective'
-/PROCEDURE/PT_NEGOTIATED_WITH_PRIOR_CALL,proctype_negot_w_call,,,*Pending guidance from F04*
-/PROCEDURE/PT_COMPETITIVE_DIALOGUE,proctype_comp_dialogue,,,*Pending guidance from F02*
-/PROCEDURE/PT_INNOVATION_PARTNERSHIP,proctype_innovation,,,*Pending guidance from F02*
-/PROCEDURE/FRAMEWORK,notice_involves_framework,,,*Pending guidance from F01*
-/PROCEDURE/FRAMEWORK/SEVERAL_OPERATORS,framework_several,,,*Pending guidance from F01*
-/PROCEDURE/FRAMEWORK/NB_PARTICIPANTS,framework_particip_envis,,,*Pending guidance from F01*
-/PROCEDURE/FRAMEWORK/SINGLE_OPERATOR,framework_single,,,*Pending guidance from F01*
-/PROCEDURE/FRAMEWORK/JUSTIFICATION,framework_just_eight,,,*Pending guidance from F01*
-/PROCEDURE/DPS,notice_involves_dps,,,*Pending guidance from F01*
-/PROCEDURE/DPS_ADDITIONAL_PURCHASERS,dps_purchasers,,,*Pending guidance from F01*
-/PROCEDURE/REDUCTION_RECOURSE,reduction_recourse,,,*Pending guidance from F02*
-/PROCEDURE/EAUCTION_USED,eauction_will_used,,,*Pending guidance from F01*
-/PROCEDURE/INFO_ADD_EAUCTION,eauction_info_addit,,,*Pending guidance from F01*
+/PROCEDURE/PT_NEGOTIATED_WITH_PRIOR_CALL,proctype_negot_w_call,,,*Waiting for mapping from F04*
+/PROCEDURE/PT_COMPETITIVE_DIALOGUE,proctype_comp_dialogue,,,*Waiting for mapping from F02*
+/PROCEDURE/PT_INNOVATION_PARTNERSHIP,proctype_innovation,,,*Waiting for mapping from F02*
+/PROCEDURE/FRAMEWORK,notice_involves_framework,,,*Waiting for mapping from F01*
+/PROCEDURE/FRAMEWORK/SEVERAL_OPERATORS,framework_several,,,*Waiting for mapping from F01*
+/PROCEDURE/FRAMEWORK/NB_PARTICIPANTS,framework_particip_envis,,,*Waiting for mapping from F01*
+/PROCEDURE/FRAMEWORK/SINGLE_OPERATOR,framework_single,,,*Waiting for mapping from F01*
+/PROCEDURE/FRAMEWORK/JUSTIFICATION,framework_just_eight,,,*Waiting for mapping from F01*
+/PROCEDURE/DPS,notice_involves_dps,,,*Waiting for mapping from F01*
+/PROCEDURE/DPS_ADDITIONAL_PURCHASERS,dps_purchasers,,,*Waiting for mapping from F01*
+/PROCEDURE/REDUCTION_RECOURSE,reduction_recourse,,,*Waiting for mapping from F02*
+/PROCEDURE/EAUCTION_USED,eauction_will_used,,,*Waiting for mapping from F01*
+/PROCEDURE/INFO_ADD_EAUCTION,eauction_info_addit,,,*Waiting for mapping from F01*
 /PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to `tender.coveredBy`
 /PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in `tender.coveredBy`, then the procurement isn't covered by the GPA."
-/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,,*Pending guidance from F02*
+/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,,*Waiting for mapping from F02*
 /PROCEDURE/DATE_RECEIPT_TENDERS,date,,,Map to the date component of `tender.tenderPeriod.endDate`
 /PROCEDURE/TIME_RECEIPT_TENDERS,time,,,Map to the time component of `tender.tenderPeriod.endDate`
-/PROCEDURE/DATE_DISPATCH_INVITATIONS,date,,,*Pending guidance from F02*
+/PROCEDURE/DATE_DISPATCH_INVITATIONS,date,,,*Waiting for mapping from F02*
 /PROCEDURE/LANGUAGES,languages_allowed,IV.2.4,,""
 /PROCEDURE/LANGUAGES/LANGUAGE,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_SubmissionLanguages,Map to `tender.submissionLanguages` (PROPOSAL #23)
-/PROCEDURE/DATE_TENDER_VALID,date_tender_valid,,,*Pending guidance from F02*
-/PROCEDURE/DURATION_TENDER_VALID,duration_months,,,*Pending guidance from F02*
-/PROCEDURE/OPENING_CONDITION,opening_conditions,IV.2.7,,*Pending guidance from F02*
+/PROCEDURE/DATE_TENDER_VALID,date_tender_valid,,,*Waiting for mapping from F02*
+/PROCEDURE/DURATION_TENDER_VALID,duration_months,,,*Waiting for mapping from F02*
+/PROCEDURE/OPENING_CONDITION,opening_conditions,IV.2.7,,*Waiting for mapping from F02*
 /PROCEDURE/OPENING_CONDITION/DATE_OPENING_TENDERS,date,,,Map to the date component of `tender.awardPeriod.startDate`
 /PROCEDURE/OPENING_CONDITION/TIME_OPENING_TENDERS,time,,,Map to the time component of `tender.awardPeriod.startDate`
-/PROCEDURE/OPENING_CONDITION/PLACE,opening_place,,,*Pending guidance from F02*
-/PROCEDURE/OPENING_CONDITION/INFO_ADD,opening_addit_info,,,*Pending guidance from F02*
+/PROCEDURE/OPENING_CONDITION/PLACE,opening_place,,,*Waiting for mapping from F02*
+/PROCEDURE/OPENING_CONDITION/INFO_ADD,opening_addit_info,,,*Waiting for mapping from F02*
 /COMPLEMENTARY_INFO,info_complement,VI,,""
-/COMPLEMENTARY_INFO/RECURRENT_PROCUREMENT,_yes,,,*Pending guidance from F02*
-/COMPLEMENTARY_INFO/ESTIMATED_TIMING,further_notices_timing,,,*Pending guidance from F02*
-/COMPLEMENTARY_INFO/NO_RECURRENT_PROCUREMENT,_no,,,*Pending guidance from F02*
+/COMPLEMENTARY_INFO/RECURRENT_PROCUREMENT,_yes,,,*Waiting for mapping from F02*
+/COMPLEMENTARY_INFO/ESTIMATED_TIMING,further_notices_timing,,,*Waiting for mapping from F02*
+/COMPLEMENTARY_INFO/NO_RECURRENT_PROCUREMENT,_no,,,*Waiting for mapping from F02*
 /COMPLEMENTARY_INFO/EORDERING,eordering_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows,Add 'electronicOrdering' to `tender.techniques` (PROPOSAL #5)
 /COMPLEMENTARY_INFO/EINVOICING,einvoicing_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows https://github.com/eForms/eForms/issues/88,Add 'electronicInvoicing' to `tender.techniques`
 /COMPLEMENTARY_INFO/EPAYMENT,epayment_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows https://github.com/eForms/eForms/issues/88,Add 'electronicPayment' to `tender.techniques`

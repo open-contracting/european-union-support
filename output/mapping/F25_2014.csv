@@ -53,7 +53,7 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE,mainsiteplace_works_delivery,,,Map to the item's `.deliveryLocation.description`
 /OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,descr_procurement,II.2.4,,"Map to the item's `.description`, and, if the contract is divided into lots, map to the lot's `.description`"
 /OBJECT_CONTRACT/OBJECT_DESCR/AC,award_criteria,II.2.5,,""
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_CRITERION,criteria,,,*Pending guidance from F24*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_CRITERION,criteria,,,*Waiting for mapping from F24*
 /OBJECT_CONTRACT/OBJECT_DESCR/DURATION,duration_concession,II.2.7,,""
 /OBJECT_CONTRACT/OBJECT_DESCR/DATE_START,starting,,,"If the contract is divided into lots, map to the lot's `.contractPeriod.startDate`; otherwise, map to `tender.contractPeriod.startDate` (PROPOSAL #19)"
 /OBJECT_CONTRACT/OBJECT_DESCR/DATE_END,end,,,"If the contract is divided into lots, map to the lot's `.contractPeriod.endDate`; otherwise, map to `tender.contractPeriod.endDate` (PROPOSAL #19)"
@@ -61,12 +61,12 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds."
 /OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,info_additional,II.2.14,,Append to the item's `.description`\n\nThis results in a loss of structure. (WARNING #28)
 /PROCEDURE,procedure,IV,,""
-/PROCEDURE/PT_AWARD_CONTRACT_WITH_PRIOR_PUBLICATION,proctype_with_concess_notice,,,*Pending guidance from F23*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION,award_wo_prior_pub_d4,,,*Pending guidance from F23*
+/PROCEDURE/PT_AWARD_CONTRACT_WITH_PRIOR_PUBLICATION,proctype_with_concess_notice,,,*Waiting for mapping from F23*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION,award_wo_prior_pub_d4,,,*Waiting for mapping from F23*
 /PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to `tender.coveredBy`
 /PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in `tender.coveredBy`, then the procurement isn't covered by the GPA."
-/PROCEDURE/MAIN_FEATURES_AWARD,award_main_features,IV.1.11,,*Pending guidance from F21*
-/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,,*Pending guidance from F02*
+/PROCEDURE/MAIN_FEATURES_AWARD,award_main_features,IV.1.11,,*Waiting for mapping from F21*
+/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,,*Waiting for mapping from F02*
 /AWARD_CONTRACT,award_of_concession,V,,Add an `Award` object to the `awards` array
 /AWARD_CONTRACT/@ITEM,,,,Discard
 /AWARD_CONTRACT/LOT_NO,lot_number,,,Add to the award's `.relatedLots`
@@ -105,11 +105,11 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY,currency,,,For the *Initial estimated total value of the contract/lot*
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL,value_total_final_concess,,,Map to the contract's `.value.amount`
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY,currency,,,/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY
-/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_REVENUE,concess_fees_prices,,,*Pending guidance from F23*
-/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_REVENUE/@CURRENCY,,,,*Pending guidance from F23*
-/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_PRICE_PAYMENT,concess_payments,,,*Pending guidance from F23*
-/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_PRICE_PAYMENT/@CURRENCY,,,,*Pending guidance from F23*
-/AWARD_CONTRACT/AWARDED_CONTRACT/INFO_ADD_VALUE,concess_other_details,,,*Pending guidance from F23*
+/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_REVENUE,concess_fees_prices,,,*Waiting for mapping from F23*
+/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_REVENUE/@CURRENCY,,,,*Waiting for mapping from F23*
+/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_PRICE_PAYMENT,concess_payments,,,*Waiting for mapping from F23*
+/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_PRICE_PAYMENT/@CURRENCY,,,,*Waiting for mapping from F23*
+/AWARD_CONTRACT/AWARDED_CONTRACT/INFO_ADD_VALUE,concess_other_details,,,*Waiting for mapping from F23*
 /COMPLEMENTARY_INFO,info_complement,VI,,""
 /COMPLEMENTARY_INFO/INFO_ADD,info_additional,VI.3,,Map to `description`
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY,appeals_body,VI.4.1,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations#add-a-party), and add 'reviewBody' to its `.roles`"
@@ -126,11 +126,11 @@ xpath,label-key,index,comment,guidance
 /COMPLEMENTARY_INFO/REVIEW_PROCEDURE,appeals_deadline,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,Map to `tender.reviewDetails` (PROPOSAL #6)
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_INFO,appeals_info,VI.4.4,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations#add-a-party), and add 'reviewContactPoint' to its `.roles` (PROPOSAL #25)"
 /COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,date_dispatch,VI.5,,Map to `date`
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE,,,,*Pending guidance from F23*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_NO_TENDERS_REQUESTS,d_no_applications,,,*Pending guidance from F23*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_ARTISTIC,d_artistic_concess,,,*Pending guidance from F23*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_TECHNICAL,d_technical,,,*Pending guidance from F23*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_EXCLUSIVE_RIGHT,d_existence_exclusive,,,*Pending guidance from F23*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_PROTECT_RIGHTS,d_intellectual_concess,,,*Pending guidance from F23*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_OUTSIDE_SCOPE,d_outside_scope,,,*Pending guidance from F23*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_JUSTIFICATION,d_explain,,,*Pending guidance from F23*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE,,,,*Waiting for mapping from F23*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_NO_TENDERS_REQUESTS,d_no_applications,,,*Waiting for mapping from F23*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_ARTISTIC,d_artistic_concess,,,*Waiting for mapping from F23*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_TECHNICAL,d_technical,,,*Waiting for mapping from F23*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_EXCLUSIVE_RIGHT,d_existence_exclusive,,,*Waiting for mapping from F23*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_PROTECT_RIGHTS,d_intellectual_concess,,,*Waiting for mapping from F23*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_OUTSIDE_SCOPE,d_outside_scope,,,*Waiting for mapping from F23*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_JUSTIFICATION,d_explain,,,*Waiting for mapping from F23*

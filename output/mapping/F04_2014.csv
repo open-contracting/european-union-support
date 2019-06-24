@@ -62,13 +62,13 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE,mainsiteplace_works_delivery,,,Map to the item's `.deliveryLocation.description`
 /OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,descr_procurement,II.2.4,,"Map to the item's `.description`, and, if the contract is divided into lots, map to the lot's `.description`"
 /OBJECT_CONTRACT/OBJECT_DESCR/AC,award_criteria,II.2.5,,""
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY,award_criterion_quality,,,*Pending guidance from F01*
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY/AC_CRITERION,award_criterion_name,,,*Pending guidance from F01*
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY/AC_WEIGHTING,weighting,,,*Pending guidance from F01*
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_COST,award_lowest_cost,,,*Pending guidance from F01*
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE,price,,,*Pending guidance from F01*
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE/AC_WEIGHTING,weighting,,,*Pending guidance from F01*
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PROCUREMENT_DOC,award_criteria_descriptive,,,*Pending guidance from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY,award_criterion_quality,,,*Waiting for mapping from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY/AC_CRITERION,award_criterion_name,,,*Waiting for mapping from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY/AC_WEIGHTING,weighting,,,*Waiting for mapping from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_COST,award_lowest_cost,,,*Waiting for mapping from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE,price,,,*Waiting for mapping from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE/AC_WEIGHTING,weighting,,,*Waiting for mapping from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PROCUREMENT_DOC,award_criteria_descriptive,,,*Waiting for mapping from F01*
 /OBJECT_CONTRACT/OBJECT_DESCR/VAL_OBJECT,value_excl_vat,,,"If the contract is divided into lots, map to the lot's `.value.amount`; otherwise, this should match [II.1.5](#II.1.5)."
 /OBJECT_CONTRACT/OBJECT_DESCR/VAL_OBJECT/@CURRENCY,currency,,,"If the contract is divided into lots, map to the lot's `.value.currency`; otherwise, this should match [II.1.5](#II.1.5)."
 /OBJECT_CONTRACT/OBJECT_DESCR/DURATION,duration_contract_framework_dps,II.2.7,,""
@@ -101,15 +101,15 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE,procedure,IV,,""
 /PROCEDURE/PT_RESTRICTED,proctype_restricted,,,Set `tender.procurementMethod` to 'selective'
 /PROCEDURE/PT_NEGOTIATED_WITH_PRIOR_CALL,proctype_negot_w_call,,,
-/PROCEDURE/FRAMEWORK,notice_involves_framework,,,*Pending guidance from F01*
-/PROCEDURE/FRAMEWORK/SEVERAL_OPERATORS,framework_several,,,*Pending guidance from F01*
-/PROCEDURE/FRAMEWORK/NB_PARTICIPANTS,framework_particip_envis,,,*Pending guidance from F01*
-/PROCEDURE/FRAMEWORK/SINGLE_OPERATOR,framework_single,,,*Pending guidance from F01*
-/PROCEDURE/FRAMEWORK/JUSTIFICATION,framework_just_eight,,,*Pending guidance from F01*
-/PROCEDURE/DPS,notice_involves_dps,,,*Pending guidance from F01*
-/PROCEDURE/DPS_ADDITIONAL_PURCHASERS,dps_purchasers,,,*Pending guidance from F01*
-/PROCEDURE/EAUCTION_USED,eauction_will_used,,,*Pending guidance from F01*
-/PROCEDURE/INFO_ADD_EAUCTION,eauction_info_addit,,,*Pending guidance from F01*
+/PROCEDURE/FRAMEWORK,notice_involves_framework,,,*Waiting for mapping from F01*
+/PROCEDURE/FRAMEWORK/SEVERAL_OPERATORS,framework_several,,,*Waiting for mapping from F01*
+/PROCEDURE/FRAMEWORK/NB_PARTICIPANTS,framework_particip_envis,,,*Waiting for mapping from F01*
+/PROCEDURE/FRAMEWORK/SINGLE_OPERATOR,framework_single,,,*Waiting for mapping from F01*
+/PROCEDURE/FRAMEWORK/JUSTIFICATION,framework_just_eight,,,*Waiting for mapping from F01*
+/PROCEDURE/DPS,notice_involves_dps,,,*Waiting for mapping from F01*
+/PROCEDURE/DPS_ADDITIONAL_PURCHASERS,dps_purchasers,,,*Waiting for mapping from F01*
+/PROCEDURE/EAUCTION_USED,eauction_will_used,,,*Waiting for mapping from F01*
+/PROCEDURE/INFO_ADD_EAUCTION,eauction_info_addit,,,*Waiting for mapping from F01*
 /PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to `tender.coveredBy`
 /PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in `tender.coveredBy`, then the procurement isn't covered by the GPA."
 /PROCEDURE/DATE_RECEIPT_TENDERS,date,,,Map to the date component of `tender.tenderPeriod.endDate`

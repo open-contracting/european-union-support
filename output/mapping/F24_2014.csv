@@ -60,7 +60,7 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE,mainsiteplace_works_delivery,,,Map to the item's `.deliveryLocation.description`
 /OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,descr_procurement,II.2.4,,"Map to the item's `.description`, and, if the contract is divided into lots, map to the lot's `.description`"
 /OBJECT_CONTRACT/OBJECT_DESCR/AC,award_criteria,II.2.5,,""
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PROCUREMENT_DOC,award_criteria_in_docs,,,*Pending guidance from F01*
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PROCUREMENT_DOC,award_criteria_in_docs,,,*Waiting for mapping from F01*
 /OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_CRITERION,criteria,,,
 /OBJECT_CONTRACT/OBJECT_DESCR/VAL_OBJECT,value_excl_vat,,,"If the contract is divided into lots, map to the lot's `.value.amount`; otherwise, this should match [II.1.5](#II.1.5)."
 /OBJECT_CONTRACT/OBJECT_DESCR/VAL_OBJECT/@CURRENCY,currency,,,"If the contract is divided into lots, map to the lot's `.value.currency`; otherwise, this should match [II.1.5](#II.1.5)."
@@ -92,9 +92,9 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/LANGUAGES,languages_allowed,IV.2.4,,""
 /PROCEDURE/LANGUAGES/LANGUAGE,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_SubmissionLanguages,Map to `tender.submissionLanguages` (PROPOSAL #23)
 /COMPLEMENTARY_INFO,info_complement,VI,,""
-/COMPLEMENTARY_INFO/RECURRENT_PROCUREMENT,_yes,,,*Pending guidance from F02*
-/COMPLEMENTARY_INFO/ESTIMATED_TIMING,further_notices_timing,,,*Pending guidance from F02*
-/COMPLEMENTARY_INFO/NO_RECURRENT_PROCUREMENT,_no,,,*Pending guidance from F02*
+/COMPLEMENTARY_INFO/RECURRENT_PROCUREMENT,_yes,,,*Waiting for mapping from F02*
+/COMPLEMENTARY_INFO/ESTIMATED_TIMING,further_notices_timing,,,*Waiting for mapping from F02*
+/COMPLEMENTARY_INFO/NO_RECURRENT_PROCUREMENT,_no,,,*Waiting for mapping from F02*
 /COMPLEMENTARY_INFO/EORDERING,eordering_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows,Add 'electronicOrdering' to `tender.techniques` (PROPOSAL #5)
 /COMPLEMENTARY_INFO/EINVOICING,einvoicing_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows https://github.com/eForms/eForms/issues/88,Add 'electronicInvoicing' to `tender.techniques`
 /COMPLEMENTARY_INFO/EPAYMENT,epayment_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows https://github.com/eForms/eForms/issues/88,Add 'electronicPayment' to `tender.techniques`

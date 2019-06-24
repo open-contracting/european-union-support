@@ -252,7 +252,7 @@ namespace :label do
           if guidance
             row['guidance'] = guidance
           else
-            row['guidance'] = "*Pending guidance from #{source_number}*"
+            row['guidance'] = "*Waiting for mapping from #{source_number}*"
           end
         end
         rows << row
@@ -275,7 +275,7 @@ namespace :label do
       CSV.foreach(filename, headers: true) do |row|
         if row['label-key']
           # Exception for label:copy command.
-          if row['guidance'] && row['guidance'][/\A\*Pending guidance from [FT]\d\d\*\z/]
+          if row['guidance'] && row['guidance'][/\A\*Waiting for mapping from [FT]\d\d\*\z/]
             row['guidance'] = nil
           end
 
