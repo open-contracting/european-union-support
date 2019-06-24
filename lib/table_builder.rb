@@ -134,7 +134,7 @@ class TableBuilder
         end_cell
       else
         start_cell
-        paragraph('<i>Need to integrate prior work</i>')
+        paragraph('<i>Not yet mapped</i>')
         end_cell
       end
     end
