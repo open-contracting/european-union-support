@@ -64,7 +64,7 @@ Or for specific schema:
 
 Or for a specific release:
 
-    rake sample RELEASE=R2.0.8 FILES=F16,F17,F18
+    rake sample RELEASE=R2.0.8 FILES=F16,F17,F18,F19
 
 See the comments in `sample.rake` to understand why tools like Oxygen are insufficient.
 
@@ -76,7 +76,7 @@ Create or update files for mapping forms' XPath values to label keys:
 
 For release R2.0.8:
 
-    rake label:xpath RELEASE=R2.0.8 FILES=F16,F17,F18
+    rake label:xpath RELEASE=R2.0.8 FILES=F16,F17,F18,F19
 
 You're now ready to map label keys to XPath values. As setup, if you have two monitors, open a form's template PDF and English PDF side-by-side in one monitor, to make it easy to see the text label of each label key in context. In a text editor, open `ignore.csv`, `enumerations.csv` and a form's sample XML and XPath CSV.
 
