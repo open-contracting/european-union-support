@@ -133,9 +133,7 @@ task :table do
 
       elsif ignore.any? && ignore[0]['label-key'] == key
         row = ignore.shift
-        if !%w(icar_noticeref icar_H_year_number).include?(key)
-          builder.row(key, help_labels: help_labels(labels, number: number), index: row['index'])
-        end
+        builder.row(key, help_labels: help_labels(labels, number: number), index: row['index'])
 
       elsif enumerations.any? && enumerations[0]['label-key'] == key
         row = enumerations.shift
