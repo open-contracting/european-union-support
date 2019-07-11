@@ -42,6 +42,7 @@ task :table do
     end
   end
 
+  omit_csv = CSV.read('output/mapping/omit.csv', headers: true)
   ignore_csv = CSV.read('output/mapping/ignore.csv', headers: true)
   enumerations_csv = CSV.read('output/mapping/enumerations.csv', headers: true)
   additional_csv = CSV.read('output/mapping/additional.csv', headers: true)
@@ -79,6 +80,7 @@ task :table do
       filename => Set.new,
     }
 
+    omit = omit_csv.select{ |row| row['numbers'][number] }
     ignore = ignore_csv.select{ |row| row['numbers'][number] }
     enumerations = enumerations_csv.select{ |row| row['numbers'][number] }
     additional = additional_csv.select{ |row| row['numbers'][number] }
@@ -109,19 +111,6 @@ task :table do
 
     builder.add(File.read("output/content/#{number}.md") + "\n")
 
-    if %w(F03 F06 F25).include?(number)
-      # Skip "Results of the procurement procedure" (notice_contract_award_sub).
-      labels.shift
-    end
-    if !%w(F08 F12 F13 F15).include?(number)
-      # Skip "Directive 2014/24/EU" (directive_201424).
-      labels.shift
-    end
-    if basename == 'MOVE'
-      # Skip H_note_50000km (T01) or H_note_voluntary_if (T02).
-      labels.shift
-    end
-
     if has_header.include?(number)
       builder.table
     end
@@ -138,6 +127,9 @@ task :table do
 
       elsif key == '_or'
         builder.row(key)
+
+      elsif omit.any? && omit[0]['label-key'] == key
+        omit.shift
 
       elsif ignore.any? && ignore[0]['label-key'] == key
         row = ignore.shift
@@ -190,7 +182,8 @@ task :table do
         $stderr.puts labels.inspect
         $stderr.puts "\nindex of key in data:"
         $stderr.puts data.index{ |row| row['label-key'] == key }
-        $stderr.puts "\nignore: #{ignore.any? && ignore[0]['label-key']}"
+        $stderr.puts "\nomit: #{omit.any? && omit[0]['label-key']}"
+        $stderr.puts "ignore: #{ignore.any? && ignore[0]['label-key']}"
         $stderr.puts "enumerations: #{enumerations.any? && enumerations[0]['label-key']}"
         $stderr.puts "additional: #{additional.any? && additional[0]['label-key']}"
         raise "unexpected key: #{key}"

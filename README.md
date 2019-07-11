@@ -86,9 +86,10 @@ Fill in each form's XPath CSV:
 1. If the label key is immediately preceded by an index (like `II.1.1`), fill in the `index` column with the index.
 1. If an XPath value has no corresponding label key in the PDF, fill in the `comment` column with a rationale, unless it has no label because it's new (`LEGAL_BASIS`) implied (`ADDRESS_CONTRACTING_BODY_ADDITIONAL`) or an index (`@ITEM`), or because its values are labelled instead (`NOTICE`).
 
-Add rows to `ignore.csv` as needed:
+Add rows to `omit.csv` or `ignore.csv` as needed. If a label key has no corresponding editable field in the PDF, it may not have a corresponding XPath value. If so: 
 
-1. If a label key has no corresponding editable field in the PDF, it may not have a corresponding XPath value. If so, unless it appears in the footer or endnotes or is a section number (`section_1`, etc.), form name (`notice_pin`, etc.) or legal basis (`directive_201424`), fill in `index` with the index as above, `label-key` with the label key, and `numbers` with a pipe-separated list (`|`) of form numbers. Follow the order in the PDF templates.
+1. If it appears after the form name (`notice_pin`, etc.) and before any form elements, like the legal basis (`directive_201424`), add it to `omit.csv`. Fill in `label-key` with the label key and `numbers` with a pipe-separated list (`|`) of form numbers. Follow the order in the PDF templates. This will omit the label from the guidance.
+1. Unless it appears in the footer or endnotes or is a section number (`section_1`, etc.) or form name (`notice_pin`, etc.), add it to `ignore.csv`. Fill in `index` with the index as above, `label-key` with the label key, and `numbers` with a pipe-separated list (`|`) of form numbers. Follow the order in the PDF templates. This will include the label without a mapping in the guidance.
 
 Fill in `enumerations.csv`:
 
