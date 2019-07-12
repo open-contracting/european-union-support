@@ -1,14 +1,17 @@
-EXTRA_XPATHS_TO_LIST = {
-  # A single `currency` label stands for 2-3 elements.
-  '/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY' => [
-    '/OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY',
-  ],
-  '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY' => [
-    '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY',
-    '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/@CURRENCY',
-  ],
+HELP_TEXT = {
+  'F08' => %w(directive_201424 directive_201425 directive_200981),
 }
-EXTRA_XPATHS_TO_SKIP = EXTRA_XPATHS_TO_LIST.values.flatten
+
+# If the label keys appear after "One of the following:".
+CONDITIONAL_HELP_TEXT = {
+  'F03' => %w(notice_contract notice_ex_ante),
+  'F06' => %w(notice_contract_utilities notice_ex_ante),
+  'F21' => %w(notice_pin notice_buyer_profile notice_contract notice_ex_ante),
+  'F22' => %w(notice_periodic_indicative notice_buyer_profile notice_qualification_utilities notice_contract notice_ex_ante),
+  'F23' => %w(notice_pin notice_ex_ante),
+  'F25' => %w(notice_concession notice_ex_ante),
+}
+
 KNOWN_SKIPPED_XPATHS = %w(/@LG /@CATEGORY)
 
 desc 'Build a table with guidance'
@@ -28,7 +31,13 @@ task :table do
   end
 
   def help_labels(labels, number: nil)
-    index = labels.index{ |key| !help_text?(key, number: number) } || 1
+    if labels[0] == 'H_one_following'
+      override = CONDITIONAL_HELP_TEXT.fetch(number, [])
+    else
+      override = HELP_TEXT.fetch(number, [])
+    end
+
+    index = labels.index{ |key| !help_text?(key, number: number, override: override) } || 1
     help_labels = labels[0...index]
     labels.replace(labels[index..-1] || [])
     help_labels
@@ -53,22 +62,33 @@ task :table do
   files('output/mapping/{}*.csv').each do |filename|
     basename = File.basename(filename, '.csv').sub('_2014', '')
 
-    if basename != 'MOVE'
-      number = basename.match(/\A(F\d\d)/)[1]
-      labels = label_keys(pdftotext(Dir["source/TED_forms_templates_R2.0.9/#{number}_*.pdf"][0]))
-    else
+    if basename == 'MOVE'
       number = ENV.fetch('FORM')
       labels = CSV.read("output/labels/EN_#{number}.csv").flatten
+      extra_xpaths_to_list = {}
+    else
+      number = basename.match(/\A(F\d\d)/)[1]
+      labels = label_keys(pdftotext(Dir["source/TED_forms_templates_R2.0.9/#{number}_*.pdf"][0]))
+      extra_xpaths_to_list = {
+        # A single `currency` label stands for 2-3 elements.
+        '/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY' => [
+          '/OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY',
+        ],
+        '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY' => [
+          '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY',
+          '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/@CURRENCY',
+        ],
+      }
+      if %w(F23 F25).include?(number)
+        extra_xpaths_to_list['/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY'].pop
+      end
     end
+
+    extra_xpaths_to_skip = extra_xpaths_to_list.values.flatten
 
     # Skip "Supplement to the Official Journal of the European Union" (HD_ojs_) and "Info and online forms" (HD_info_forms).
     labels = labels[2..-1]
 
-    if basename == 'MOVE'
-      extra_xpaths_to_skip = []
-    else
-      extra_xpaths_to_skip = EXTRA_XPATHS_TO_SKIP
-    end
     skipper = ->(row) do
       row['label-key'].nil? || extra_xpaths_to_skip.include?(row['xpath'])
     end
@@ -104,7 +124,7 @@ task :table do
 
     ### Build
 
-    builder = TableBuilder.new(ENV['LANGUAGE'] || 'EN', EXTRA_XPATHS_TO_LIST)
+    builder = TableBuilder.new(ENV['LANGUAGE'] || 'EN', extra_xpaths_to_list)
 
     # Shift `notice_pin`, `notice_contract`, `notice_contract_award`, etc.
     builder.heading(number, labels.shift)

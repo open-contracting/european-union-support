@@ -2,7 +2,7 @@ xpath,label-key,index,comment,guidance
 /@LG,,,,"Lowercase, and map to `language`"
 /@CATEGORY,,,,Discard. TED translates at form-level. OCDS translates at field-level.
 /LEGAL_BASIS,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_LegalBasis,Map to `tender.legalBasis` (PROPOSAL #14)
-/LEGAL_BASIS_OTHER,,,,
+/LEGAL_BASIS_OTHER,,,,*Waiting for mapping from F01*
 /CONTRACTING_BODY,ca_ce,I,,""
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,name_address_contact,I.1,,"[Add a party](../operations#add-a-party), and add 'buyer' to its `.roles`\n\nSet `buyer.id` to its `.id`, and set `buyer.name` to its [`.name`](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,name_official,,,Map to the party's `.name` and `.identifier.legalName`
@@ -37,9 +37,9 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/VAL_TOTAL,value,,,Discard. This is derived from the values of awards.
 /OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY,currency,,,Discard as above
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL,,,This element sets the currency for its children.,""
-/OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY,currency,,,/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY
-/OBJECT_CONTRACT/VAL_RANGE_TOTAL/LOW,lowest_offer,,,Discard as above
-/OBJECT_CONTRACT/VAL_RANGE_TOTAL/HIGH,highest_offer,,,Discard as above
+/OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY,currency,,,*Waiting for mapping from F03*
+/OBJECT_CONTRACT/VAL_RANGE_TOTAL/LOW,lowest_offer,,,*Waiting for mapping from F03*
+/OBJECT_CONTRACT/VAL_RANGE_TOTAL/HIGH,highest_offer,,,*Waiting for mapping from F03*
 /OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,"Add an `Item` object to the `tender.items` array, and, if the contract is divided into lots, add a `Lot` object to the `tender.lots` array. If this notice is a call for competition, set the lot's `.status` to 'active'; otherwise, set it to 'planned'."
 /OBJECT_CONTRACT/OBJECT_DESCR/@ITEM,,,,Discard
 /OBJECT_CONTRACT/OBJECT_DESCR/TITLE,title_contract,II.2.1,,"Map to the item's `.title`, and, if the contract is divided into lots, map to the lot's `.title` (PROPOSAL #29)"
@@ -99,7 +99,7 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/CONTRACT_NO,contract_number,,,Map to the award's `.id`
 /AWARD_CONTRACT/LOT_NO,lot_number,,,Add to the award's `.relatedLots`
 /AWARD_CONTRACT/TITLE,title_contract,,,Map to the award's `.title`
-/AWARD_CONTRACT/AWARDED_CONTRACT,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/contract_statusDetails,"Set the award's `.status` to 'active'\n\nAdd a `Contract` object to the `contracts` array, set its `.id` and `.awardID` to the award's `.id`, set its `.title` to the award's `.title`, and set its `.status` to 'active'."
+/AWARD_CONTRACT/AWARDED_CONTRACT,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/contract_statusDetails,"Set the award's `.status` to 'active'\n\nAdd a `Contract` object to the `contracts` array, set its `.id` and `.awardID` to the award's `.id`, set its `.title` to the award's `.title`, and set its `.status` to 'active'."
 /AWARD_CONTRACT/AWARDED_CONTRACT/DATE_CONCLUSION_CONTRACT,date_award_contract_concess,V.2.1,,Map to the contract's `.dateSigned`
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS,award_offers_info,,This element contains elements from V.2.2 and V.2.3.,""
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/AWARDED_TO_GROUP,_yes,,,"Discard. If there are multiple suppliers, then the contract has been awarded to a group of economic operators."
@@ -121,8 +121,7 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/NO_SME,_no,,,Set the party's `.details.scale` to 'large'
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES,value_contract_concession_info,V.2.4,,""
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL,value_estim_total_contract_concess,,,Map to `tender.value.amount`
-/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY,currency,,,For the *Initial estimated total value of the contract/lot*
-/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL,value_total_final_contract_concess,,,Map to the contract's `.value.amount`
+/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY,currency,,,"For the *Initial estimated total value of the contract/lot*, map to `tender.value.currency`. For the *Total value of the contract/lot*, map to the contract's `.value.currency`.",value_total_final_contract_concess,,,Map to the contract's `.value.amount`
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY,currency,,,/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL,,,This element sets the currency for its children.,""
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/@CURRENCY,currency,,,/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY
