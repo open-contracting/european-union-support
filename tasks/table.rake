@@ -30,7 +30,7 @@ task :table do
   def help_labels(labels, number: nil)
     index = labels.index{ |key| !help_text?(key, number: number) } || 1
     help_labels = labels[0...index]
-    labels.replace(labels[index..-1])
+    labels.replace(labels[index..-1] || [])
     help_labels
   end
 
@@ -48,7 +48,7 @@ task :table do
   additional_csv = CSV.read('output/mapping/additional.csv', headers: true)
 
   # Some forms have elements before Section 1.
-  has_header = %w(F01 F04 F07 F08 F12 F13 F15 F21 F22 F23)
+  has_header = %w(F01 F04 F07 F08 F12 F13 F15 F20 F21 F22 F23)
 
   files('output/mapping/{}*.csv').each do |filename|
     basename = File.basename(filename, '.csv').sub('_2014', '')
@@ -128,9 +128,6 @@ task :table do
       elsif key == '_or'
         builder.row(key)
 
-      elsif omit.any? && omit[0]['label-key'] == key
-        omit.shift
-
       elsif ignore.any? && ignore[0]['label-key'] == key
         row = ignore.shift
         builder.row(key, help_labels: help_labels(labels, number: number), index: row['index'])
@@ -167,7 +164,10 @@ task :table do
         row = additional.shift
         builder.row(key, help_labels: help_labels(labels, number: number), guidance: row['guidance'])
 
-      elsif seen[:enumerations].include?(key) || seen[filename].include?(key)
+      elsif omit.any? && omit[0]['label-key'] == key
+        omit.shift
+
+      elsif seen[:enumerations].include?(key) || seen[filename].include?(key) && number != 'F14'
         builder.row(key, help_labels: help_labels(labels, number: number), reference: true)
 
       else
@@ -192,6 +192,7 @@ task :table do
 
     puts builder
 
+    report(omit, 'omit.csv')
     report(ignore, 'ignore.csv')
     report(enumerations, 'enumerations.csv')
     report(additional, 'additional.csv')
