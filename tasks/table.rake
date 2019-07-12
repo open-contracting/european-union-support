@@ -36,7 +36,7 @@ task :table do
 
   def report(rows, message)
     if rows.any?
-      $stderr.puts message
+      $stderr.puts "#{rows.size} #{message}"
       $stderr.puts rows
       $stderr.puts
     end
@@ -192,11 +192,11 @@ task :table do
 
     puts builder
 
-    report(omit, 'omit.csv')
-    report(ignore, 'ignore.csv')
-    report(enumerations, 'enumerations.csv')
-    report(additional, 'additional.csv')
-    report(data, basename)
-    report(data_skipped, 'skipped')
+    report(omit, 'unprocessed rows from omit.csv')
+    report(ignore, 'unprocessed rows from ignore.csv')
+    report(enumerations, 'unprocessed rows from enumerations.csv')
+    report(additional, 'unprocessed rows from additional.csv')
+    report(data, "unprocessed rows from #{basename}")
+    report(data_skipped, "skipped rows from #{basename}")
   end
 end
