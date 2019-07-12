@@ -71,7 +71,7 @@ namespace :label do
     label_keys_seen = Set.new(['_or'])
     indices_seen = Set.new
 
-    %w(ignore.csv enumerations.csv additional.csv).each do |basename|
+    %w(additional.csv enumerations.csv ignore.csv omit.csv).each do |basename|
       CSV.read(File.join('output', 'mapping', 'shared', basename), headers: true).each do |row|
         label_keys_seen << row['label-key']
         indices_seen << row['index']
@@ -84,6 +84,7 @@ namespace :label do
       data = CSV.read(filename, headers: true)
 
       if basename == 'MOVE'
+        next if ENV['FORM'].nil?
         number = ENV.fetch('FORM')
         data = select_move_rows(data, number)
       end
@@ -182,19 +183,13 @@ namespace :label do
       basename = File.basename(filename, '.csv')
 
       if basename == 'MOVE'
-        if ENV['FORM']
-          number = ENV.fetch('FORM')
-          labels = CSV.read("output/labels/EN_#{number}.csv").flatten
-        else
-          next
-        end
+        next if ENV['FORM'].nil?
+        number = ENV.fetch('FORM')
+        labels = CSV.read("output/labels/EN_#{number}.csv").flatten
       else
         number = File.basename(filename).match(/\A(F\d\d)/)[1]
-        if %w(F16 F17 F18 F19).include?(number)
-          next
-        else
-          labels = label_keys(pdftotext(files("source/TED_forms_templates_R2.0.9/#{number}_*.pdf")[0]))
-        end
+        next if %w(F16 F17 F18 F19).include?(number)
+        labels = label_keys(pdftotext(files("source/TED_forms_templates_R2.0.9/#{number}_*.pdf")[0]))
       end
 
       mapped = CSV.read(filename, headers: true).map{ |row| row['label-key'] }
@@ -248,11 +243,8 @@ namespace :label do
         text = ''
       else
         number = basename.match(/\A(F\d\d)/)[1]
-        if %w(F16 F17 F18 F19).include?(number)
-          next
-        else
-          text = pdftotext(files("source/TED_forms_templates_R2.0.9/#{number}_*.pdf")[0])
-        end
+        next if %w(F16 F17 F18 F19).include?(number)
+        text = pdftotext(files("source/TED_forms_templates_R2.0.9/#{number}_*.pdf")[0])
       end
 
       label_keys = label_keys(text)
