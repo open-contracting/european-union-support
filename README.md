@@ -145,14 +145,7 @@ T01 and T02 are particular: both use the same schema (`MOVE.xsd`), and neither h
 
 ### Build tables for OCDS guidance
 
-Before running this task, move the following in XPath CSVs to more closely match the order in the PDF templates:
-
-* F03 and F06 only: `LOT_DIVISION` after `SHORT_DESCR`, `NO_AWARDED_TO_GROUP` after `AWARDED_TO_GROUP`, `PT_AWARD_CONTRACT_WITHOUT_CALL` children after all
-* F15 only: `LOT_DIVISION` after `SHORT_DESCR`
-* F21 and F22 only: `LOT_DIVISION` and children after `@CURRENCY`, `PT_AWARD_CONTRACT_WITHOUT_CALL` children after all
-* F23 only: `LOT_DIVISION` and children after `@CURRENCY`, `PT_AWARD_CONTRACT_WITHOUT_PUBLICATION` children after all
-* F25 only: `LOT_DIVISION` after `CALCULATION_METHOD`, `NO_AWARDED_TO_GROUP` after `AWARDED_TO_GROUP`, `PT_AWARD_CONTRACT_WITHOUT_PUBLICATION` children after all
-* `NUTS` after `TOWN`, `NO_LOT_DIVISION` after `LOT_DIVISION`
+Before running this task, [move](move.fish) the following in XPath CSVs to more closely match the order in the PDF templates.
 
 You can now generate a table for each form, displaying, for each element and attribute, the index within the PDF ("I.1"), the label (in any language) and the XPath, to which you can then add guidance for OCDS.
 
