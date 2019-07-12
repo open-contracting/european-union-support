@@ -73,7 +73,9 @@ def indices(text)
 end
 
 def help_text?(key, number: nil)
-  key[/\AHD?_/] || %w(allocation_rest excl_vat notice_design_cont request_qualification social_transfer_staff).include?(key) || number == 'F08' && %w(directive_201424 directive_201425 directive_200981).include?(key)
+  key[/\AHD?_/] ||
+    %w(allocation_rest excl_vat icar_H_provide_numbers notice_design_cont request_qualification social_transfer_staff).include?(key) ||
+    number == 'F08' && %w(directive_201424 directive_201425 directive_200981).include?(key)
 end
 
 # The same XSD is used for both T01 and T02, but each form uses different parts.

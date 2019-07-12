@@ -3,19 +3,19 @@ xpath,label-key,index,comment,guidance
 /@CATEGORY,,,,Discard. TED translates at form-level. OCDS translates at field-level.
 /LEGAL_BASIS,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_LegalBasis,Map to `tender.legalBasis` (PROPOSAL #14)
 /LEGAL_BASIS_OTHER,,,,
-/CONTRACTING_BODY,,I,,""
+/CONTRACTING_BODY,ca_ce,I,,""
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,name_address_contact,I.1,,"[Add a party](../operations#add-a-party), and add 'buyer' to its `.roles`\n\nSet `buyer.id` to its `.id`, and set `buyer.name` to its [`.name`](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,name_official,,,Map to the party's `.name` and `.identifier.legalName`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,national_id,,,"Map to the party's `.identifier.id`, and set `.identifier.scheme`"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS,address_postal,,,Map to the party's `.address.streetAddress`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN,address_town,,,Map to the party's `.address.locality`
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,nutscode,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,"Take the NUTS code in the `CODE` attribute, and map to the party's `.address.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE,address_postcode,,,Map to the party's `.address.postalCode`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY,address_country,,,"Take the country code in the `VALUE` attribute, translate to a country name, and map to the party's `.address.countryName`\n\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation. (ISSUE)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT,contactpoint,,,Map to the party's `.contactPoint.name`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE,address_phone,,,Map to the party's `.contactPoint.telephone`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL,address_email,,,Map to the party's `.contactPoint.email`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,address_fax,,,Map to the party's `.contactPoint.faxNumber`
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,nutscode,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,"Take the NUTS code in the `CODE` attribute, and map to the party's `.address.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,url_general,,,Map to the party's `.details.url` (PROPOSAL #8)
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,url_buyerprofile,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/organization_BuyerProfile,Map to the party's `.details.buyerProfile` (PROPOSAL #7)
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL,,,,"[Add a party](../operations#add-a-party), add 'buyer' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
@@ -42,33 +42,33 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/SHORT_DESCR,descr_short,II.1.4,,Map to `tender.description`
 /COMPLEMENTARY_INFO,info_complement,VI,,""
 /COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,date_dispatch,VI.5,,Map to `date`
-/COMPLEMENTARY_INFO/NOTICE_NUMBER_OJ,,,,
-/CHANGES,,,,
-/CHANGES/CHANGE,,,,
+/COMPLEMENTARY_INFO/NOTICE_NUMBER_OJ,number_oj,,,
+/CHANGES,changes,VII,,
+/CHANGES/CHANGE,icar_text_corrected,VII.1.2,,
 /CHANGES/CHANGE/WHERE,,,,
-/CHANGES/CHANGE/WHERE/SECTION,,,,
-/CHANGES/CHANGE/WHERE/LOT_NO,,,,
-/CHANGES/CHANGE/WHERE/LABEL,,,,
-/CHANGES/CHANGE/OLD_VALUE,,,,
+/CHANGES/CHANGE/WHERE/SECTION,section_no,,,
+/CHANGES/CHANGE/OLD_VALUE,icar_instead,,,
+/CHANGES/CHANGE/NEW_VALUE,icar_read,,,
+/CHANGES/CHANGE/WHERE/LOT_NO,lot_number,,,
+/CHANGES/CHANGE/WHERE/LABEL,icar_text_corr_place,,,
 /CHANGES/CHANGE/OLD_VALUE/NOTHING,,,,
-/CHANGES/CHANGE/OLD_VALUE/CPV_MAIN,,,,
-/CHANGES/CHANGE/OLD_VALUE/CPV_MAIN/CPV_CODE,,,,
-/CHANGES/CHANGE/OLD_VALUE/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,,,,
-/CHANGES/CHANGE/OLD_VALUE/CPV_ADDITIONAL,,,,
+/CHANGES/CHANGE/NEW_VALUE/NOTHING,,,,
+/CHANGES/CHANGE/OLD_VALUE/TEXT,,,,
+/CHANGES/CHANGE/NEW_VALUE/TEXT,,,,
+/CHANGES/CHANGE/OLD_VALUE/CPV_MAIN,,,,""
+/CHANGES/CHANGE/NEW_VALUE/CPV_MAIN,,,,""
+/CHANGES/CHANGE/OLD_VALUE/CPV_MAIN/CPV_CODE,cpv_main,,,
+/CHANGES/CHANGE/NEW_VALUE/CPV_MAIN/CPV_CODE,cpv_main,,,
+/CHANGES/CHANGE/OLD_VALUE/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,
+/CHANGES/CHANGE/NEW_VALUE/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,
+/CHANGES/CHANGE/OLD_VALUE/CPV_ADDITIONAL,,,,""
 /CHANGES/CHANGE/OLD_VALUE/CPV_ADDITIONAL/CPV_CODE,,,,
 /CHANGES/CHANGE/OLD_VALUE/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,,,,
-/CHANGES/CHANGE/OLD_VALUE/TEXT,,,,
-/CHANGES/CHANGE/OLD_VALUE/DATE,,,,
-/CHANGES/CHANGE/OLD_VALUE/TIME,,,,
-/CHANGES/CHANGE/NEW_VALUE,,,,
-/CHANGES/CHANGE/NEW_VALUE/NOTHING,,,,
-/CHANGES/CHANGE/NEW_VALUE/CPV_MAIN,,,,
-/CHANGES/CHANGE/NEW_VALUE/CPV_MAIN/CPV_CODE,,,,
-/CHANGES/CHANGE/NEW_VALUE/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,,,,
-/CHANGES/CHANGE/NEW_VALUE/CPV_ADDITIONAL,,,,
+/CHANGES/CHANGE/NEW_VALUE/CPV_ADDITIONAL,,,,""
 /CHANGES/CHANGE/NEW_VALUE/CPV_ADDITIONAL/CPV_CODE,,,,
 /CHANGES/CHANGE/NEW_VALUE/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,,,,
-/CHANGES/CHANGE/NEW_VALUE/TEXT,,,,
-/CHANGES/CHANGE/NEW_VALUE/DATE,,,,
-/CHANGES/CHANGE/NEW_VALUE/TIME,,,,
-/CHANGES/INFO_ADD,,,,
+/CHANGES/CHANGE/OLD_VALUE/DATE,date,,,
+/CHANGES/CHANGE/NEW_VALUE/DATE,date,,,
+/CHANGES/CHANGE/OLD_VALUE/TIME,time,,,
+/CHANGES/CHANGE/NEW_VALUE/TIME,time,,,
+/CHANGES/INFO_ADD,icar_other_info,VII.2,,

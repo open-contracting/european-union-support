@@ -54,7 +54,9 @@ namespace :label do
       'notice_relates_to', # F08
       'notice_result_design_cont', # F13
       'notice_corrigendum', # F14
+      'notice_corrigendum_sub', # F14
       'notice_mod', # F20
+      'notice_mod_sub', # F20
       'notice_social_public', # F21
       'notice_social_util', # F22
       'notice_social_concess', # F23
@@ -271,7 +273,7 @@ namespace :label do
   task :coherence do
     mappings = {}
 
-    files('output/mapping/{}*.csv').each do |filename|
+    files('output/mapping/F{}*.csv').each do |filename|
       CSV.foreach(filename, headers: true) do |row|
         if row['label-key']
           # Exception for label:copy command.

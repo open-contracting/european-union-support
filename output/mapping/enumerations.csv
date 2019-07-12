@@ -43,9 +43,9 @@ xpath,value,label-key,numbers,guidance
 /CONTRACTING_BODY/CE_ACTIVITY/@VALUE,AIRPORT_RELATED_ACTIVITIES,mainactiv_airportrelated,F04|F05|F06|F07|F08|F12|F13|F15|F22|F23|F24|F25,"Map to `.id`, and set `.name` to 'Airport-related activities'\n\n(Relates to 2014/25/EU Annex 3, point J)"
 /CONTRACTING_BODY/CE_ACTIVITY/@VALUE,WATER,mainactiv_water,F04|F05|F06|F07|F08|F12|F13|F15|F22|F23|F24|F25,"Map to `.id`, and set `.name` to 'Water'\n\n(Relates to 2014/25/EU Annex 3, point C)"
 /CONTRACTING_BODY/CE_ACTIVITY/@VALUE,POSTAL_SERVICES,mainactiv_postal,F04|F05|F06|F07|F08|F12|F13|F15|F22|F23|F24|F25,"Map to `.id`, and set `.name` to 'Postal services'\n\n(Relates to 2014/25/EU Annex 3, point F)"
-/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,WORKS,works,F01|F02|F03|F04|F05|F06|F07|F08|F15|F24|F25,Map to 'works'
-/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,SUPPLIES,supplies,F01|F02|F03|F04|F05|F06|F07|F08|F15,Map to 'goods'
-/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,SERVICES,services,F01|F02|F03|F04|F05|F06|F07|F08|F15|F21|F22|F23|F24|F25|T01|T02,Map to 'services'
+/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,WORKS,works,F01|F02|F03|F04|F05|F06|F07|F08|F14|F15|F20|F24|F25,Map to 'works'
+/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,SUPPLIES,supplies,F01|F02|F03|F04|F05|F06|F07|F08|F14|F15|F20,Map to 'goods'
+/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE,SERVICES,services,F01|F02|F03|F04|F05|F06|F07|F08|F14|F15|F20|F21|F22|F23|F24|F25|T01|T02,Map to 'services'
 /OBJECT_CONTRACT/CATEGORY/@CTYPE,1,servicecat_transport_rail,T01|T02,
 /OBJECT_CONTRACT/CATEGORY/@CTYPE,2,servicecat_inlandwater,T01,
 /OBJECT_CONTRACT/CATEGORY/@CTYPE,3,servicecat_metro,T01,
@@ -55,5 +55,7 @@ xpath,value,label-key,numbers,guidance
 /OBJECT_CONTRACT/CATEGORY/@CTYPE,7,servicecat_trolleybus,T01,
 /OBJECT_CONTRACT/CATEGORY/@CTYPE,8,servicecat_lightrail,T01,
 /OBJECT_CONTRACT/CATEGORY/@CTYPE,9,servicecat_transport_other,T01,
-/OBJECT_CONTRACT/OBJECT_DESCR/DURATION/@TYPE,MONTH,duration_months,F01|F02|F04|F05|F21|F22|F23|F24|F25|T01|T02,"Multiply by 30, and, if the contract is divided into lots, map to the lot's `.contractPeriod.durationInDays`; otherwise, map to `tender.contractPeriod.durationInDays` (PROPOSAL #19)\n\nThere's an open issue ([#723](https://github.com/open-contracting/standard/issues/723)) about durations in months. (ISSUE)"
-/OBJECT_CONTRACT/OBJECT_DESCR/DURATION/@TYPE,DAY,indays,F01|F02|F04|F05|F21|F22|F23|F24|F25|T01|T02,"If the contract is divided into lots, map to the lot's `.contractPeriod.durationInDays`; otherwise, map to `tender.contractPeriod.durationInDays` (PROPOSAL #19)"
+/OBJECT_CONTRACT/OBJECT_DESCR/DURATION/@TYPE,MONTH,duration_months,F01|F02|F04|F05|F20|F21|F22|F23|F24|F25|T01|T02,"Multiply by 30, and, if the contract is divided into lots, map to the lot's `.contractPeriod.durationInDays`; otherwise, map to `tender.contractPeriod.durationInDays` (PROPOSAL #19)\n\nThere's an open issue ([#723](https://github.com/open-contracting/standard/issues/723)) about durations in months. (ISSUE)"
+/OBJECT_CONTRACT/OBJECT_DESCR/DURATION/@TYPE,DAY,indays,F01|F02|F04|F05|F20|F21|F22|F23|F24|F25|T01|T02,"If the contract is divided into lots, map to the lot's `.contractPeriod.durationInDays`; otherwise, map to `tender.contractPeriod.durationInDays` (PROPOSAL #19)"
+/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/DURATION/@TYPE,MONTH,duration_months,F20,
+/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/DURATION/@TYPE,DAY,indays,F20,
