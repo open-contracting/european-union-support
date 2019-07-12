@@ -72,7 +72,7 @@ namespace :label do
     indices_seen = Set.new
 
     %w(ignore.csv enumerations.csv additional.csv).each do |basename|
-      CSV.read(File.join('output', 'mapping', basename), headers: true).each do |row|
+      CSV.read(File.join('output', 'mapping', 'shared', basename), headers: true).each do |row|
         label_keys_seen << row['label-key']
         indices_seen << row['index']
       end
@@ -162,12 +162,12 @@ namespace :label do
       'F25' => ['notice_concession_award'], # F23
     }
 
-    path = File.join('output', 'mapping', 'ignore.csv')
+    path = File.join('output', 'mapping', 'shared', 'ignore.csv')
     rows = CSV.read(path, headers: true)
     headers = rows[0].headers
     enum = rows.to_enum.with_index
 
-    enumerations = CSV.read(File.join('output', 'mapping', 'enumerations.csv'), headers: true)
+    enumerations = CSV.read(File.join('output', 'mapping', 'shared', 'enumerations.csv'), headers: true)
 
     files('output/mapping/{}*.csv').each do |filename|
       basename = File.basename(filename, '.csv')
@@ -225,26 +225,32 @@ namespace :label do
       headers = nil
       rows = []
 
+      basename = File.basename(filename, '.csv')
+
+      if basename != 'MOVE'
+        number = basename.match(/\A(F\d\d)/)[1]
+        if %w(F16 F17 F18 F19).include?(number)
+          next
+        else
+          text = pdftotext(files("source/TED_forms_templates_R2.0.9/#{number}_*.pdf")[0])
+        end
+      else
+        text = ''
+      end
+
+      label_keys = label_keys(text)
+      indices = indices(text)
+
       CSV.foreach(filename, headers: true) do |row|
         headers = row.headers
-        basename = File.basename(filename, '.csv')
-
-        if basename != 'MOVE'
-          text = pdftotext(files("source/TED_forms_templates_R2.0.9/#{basename.match(/\A(F\d\d)/)[1]}_*.pdf")[0])
-        else
-          text = ''
-        end
-
-        label_keys = label_keys(text)
-        indices = indices(text)
 
         key = row['xpath']
         other = xpaths[key]
         if other
-          if row['label-key'].nil? && label_keys.include?(other['label-key']) || basename == 'MOVE'
+          if row['label-key'].nil? && (label_keys.include?(other['label-key']) || basename == 'MOVE')
             row['label-key'] = other['label-key']
           end
-          if row['index'].nil? && indices.include?(other['index']) || basename == 'MOVE'
+          if row['index'].nil? && (indices.include?(other['index']) || basename == 'MOVE')
             row['index'] = other['index']
           end
 
@@ -273,7 +279,7 @@ namespace :label do
   task :coherence do
     mappings = {}
 
-    files('output/mapping/F{}*.csv').each do |filename|
+    files('output/mapping/{}*.csv').each do |filename|
       CSV.foreach(filename, headers: true) do |row|
         if row['label-key']
           # Exception for label:copy command.

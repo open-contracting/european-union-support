@@ -42,10 +42,10 @@ task :table do
     end
   end
 
-  omit_csv = CSV.read('output/mapping/omit.csv', headers: true)
-  ignore_csv = CSV.read('output/mapping/ignore.csv', headers: true)
-  enumerations_csv = CSV.read('output/mapping/enumerations.csv', headers: true)
-  additional_csv = CSV.read('output/mapping/additional.csv', headers: true)
+  omit_csv = CSV.read('output/mapping/shared/omit.csv', headers: true)
+  ignore_csv = CSV.read('output/mapping/shared/ignore.csv', headers: true)
+  enumerations_csv = CSV.read('output/mapping/shared/enumerations.csv', headers: true)
+  additional_csv = CSV.read('output/mapping/shared/additional.csv', headers: true)
 
   # Some forms have elements before Section 1.
   has_header = %w(F01 F04 F07 F08 F12 F13 F15 F20 F21 F22 F23)
