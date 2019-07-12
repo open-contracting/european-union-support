@@ -150,15 +150,24 @@ namespace :label do
 
   desc 'Add form numbers to ignore.csv'
   task :ignore do
-    # Some form titles are used on later forms and therefore ignored with ignore.csv.
+    # Some form titles are used on later forms, but shouldn't be ignored on their original form. Some legal bases are
+    # omitted on some and ignored on others. "Conditions related to the contract" is III.2 except on T02.
     ignore = {
-      'F01' => ['notice_pin', 'directive_201424'], # F02
-      'F02' => ['notice_contract', 'directive_201424'], # F03
-      'F04' => ['notice_periodic_utilities'], # F05
-      'F05' => ['notice_contract_utilities'], # F06
-      'F07' => ['notice_qualification_utilities'], # F22
-      'F12' => ['notice_design_cont'], # F13
-      'F24' => ['notice_concession'], # F25
+      'F01' => ['notice_pin', 'directive_201424', 'conditions_contract'], # F02 F08 F21 F23
+      'F02' => ['notice_contract', 'directive_201424', 'conditions_contract'], # F03 F21 F22
+      'F03' => ['directive_201424'],
+      'F04' => ['notice_periodic_utilities', 'directive_201425', 'conditions_contract'], # F05
+      'F05' => ['notice_contract_utilities', 'directive_201425', 'conditions_contract'], # F06
+      'F06' => ['directive_201425'],
+      'F07' => ['notice_qualification_utilities', 'directive_201425', 'conditions_contract'], # F22
+      'F08' => ['notice_buyer_profile', 'notice_pin', 'directive_201424', 'directive_201425'], # F02 F05 F21 F22
+      'F12' => ['notice_design_cont', 'directive_201424', 'directive_201425', 'conditions_contract'], # F13
+      'F13' => ['directive_201424', 'directive_201425'],
+      'F14' => ['directive_201423', 'directive_201424', 'directive_201425'],
+      'F20' => ['directive_201423', 'directive_201424', 'directive_201425'],
+      'F21' => ['directive_201424', 'conditions_contract'],
+      'F22' => ['directive_201425', 'conditions_contract'],
+      'F24' => ['notice_concession', 'directive_201423'], # F25
       'F25' => ['notice_concession_award'], # F23
     }
 
@@ -172,12 +181,20 @@ namespace :label do
     files('output/mapping/{}*.csv').each do |filename|
       basename = File.basename(filename, '.csv')
 
-      if basename != 'MOVE'
-        number = File.basename(filename).match(/\A(F\d\d)/)[1]
-        labels = label_keys(pdftotext(files("source/TED_forms_templates_R2.0.9/#{number}_*.pdf")[0]))
+      if basename == 'MOVE'
+        if ENV['FORM']
+          number = ENV.fetch('FORM')
+          labels = CSV.read("output/labels/EN_#{number}.csv").flatten
+        else
+          next
+        end
       else
-        number = ENV.fetch('FORM')
-        labels = CSV.read("output/labels/EN_#{number}.csv").flatten
+        number = File.basename(filename).match(/\A(F\d\d)/)[1]
+        if %w(F16 F17 F18 F19).include?(number)
+          next
+        else
+          labels = label_keys(pdftotext(files("source/TED_forms_templates_R2.0.9/#{number}_*.pdf")[0]))
+        end
       end
 
       mapped = CSV.read(filename, headers: true).map{ |row| row['label-key'] }
@@ -227,15 +244,15 @@ namespace :label do
 
       basename = File.basename(filename, '.csv')
 
-      if basename != 'MOVE'
+      if basename == 'MOVE'
+        text = ''
+      else
         number = basename.match(/\A(F\d\d)/)[1]
         if %w(F16 F17 F18 F19).include?(number)
           next
         else
           text = pdftotext(files("source/TED_forms_templates_R2.0.9/#{number}_*.pdf")[0])
         end
-      else
-        text = ''
       end
 
       label_keys = label_keys(text)
