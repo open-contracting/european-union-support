@@ -131,8 +131,8 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/DATE_DISPATCH_INVITATIONS,date,,,"If it’s for a selection stage, map to `tender.invitationsForInterestDispatchDate`\n\nIf it’s a call for bids to selected candidates, map to `tender.invitationsForBidsDispatchDate`"
 /PROCEDURE/LANGUAGES,languages_allowed,IV.2.4,,
 /PROCEDURE/LANGUAGES/LANGUAGE,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_SubmissionLanguages,Map to `tender.submissionLanguages` (PROPOSAL #23)
-/PROCEDURE/DATE_TENDER_VALID,date_tender_valid,,,
-/PROCEDURE/DURATION_TENDER_VALID,duration_months,,,Map to `tender.bidMinimumValidityDurationMonths`
+/PROCEDURE/DATE_TENDER_VALID,date_tender_valid,,,Map to `tender.minimumBidValidityPeriod.endDate` (PROPOSAL #33)
+/PROCEDURE/DURATION_TENDER_VALID,duration_months,,,Multiply the value by 30 and map the result to `tender.minimumBidValidityPeriod.durationInDays` (PROPOSAL #33)
 /PROCEDURE/OPENING_CONDITION,opening_conditions,IV.2.7,,
 /PROCEDURE/OPENING_CONDITION/DATE_OPENING_TENDERS,date,,,Map to the date component of `tender.awardPeriod.startDate`
 /PROCEDURE/OPENING_CONDITION/TIME_OPENING_TENDERS,time,,,Map to the time component of `tender.awardPeriod.startDate`
