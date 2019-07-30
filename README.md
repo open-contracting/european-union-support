@@ -127,9 +127,9 @@ Report any CSV quoting errors:
 
     rake label:validate
 
-Report any incoherences in mappings across forms. Note that some forms use check boxes instead of radio buttons, and some change tense from present to past.
+Report any inconsistencies in mappings across forms. Note that some forms use check boxes instead of radio buttons, and some change tense from present to past.
 
-    rake label:coherence
+    rake label:consistent
 
 T01 and T02 are particular: both use the same schema (`MOVE.xsd`), and neither has a PDF template. The most efficient process is to: reverse-engineer the label keys from the English PDF; create an XPath CSV for `MOVE.xsd`; copy guidance; manually update some `label-key` values; pre-populate `ignore.csv`; then check for missing items:
 

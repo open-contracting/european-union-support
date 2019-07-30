@@ -284,11 +284,18 @@ namespace :label do
     end
   end
 
-  desc 'Report any incoherences in mappings across forms'
-  task :coherence do
+  desc 'Report any inconsistencies in mappings across forms'
+  task :consistent do
     mappings = {}
 
     files('output/mapping/{}*.csv').each do |filename|
+      if ENV['INCLUDE_LABEL_KEY']
+        index = 1
+      elsif ENV['INCLUDE_INDEX']
+        index = 2
+      else
+        index = 3
+      end
       CSV.foreach(filename, headers: true) do |row|
         if row['label-key']
           # Exception for label:copy command.
@@ -297,21 +304,21 @@ namespace :label do
           end
 
           key = row['xpath']
-          actual = row.fields[1..-1]
+          actual = row.fields[index..-1]
           if mappings.key?(key)
             mapping = mappings[key]
             expected = mapping[:value]
             if expected != actual
-              message = "#{filename} (#{mapping[:filename]})"
+              message = "#{filename.ljust(27)} (#{mapping[:filename].ljust(27)}) #{row[0]}"
               added = actual - expected
               if added.any?
-                message << " added; #{added}"
+                message << "\nadded: #{added}"
               end
               removed = expected - actual
               if removed.any?
-                message << " removed: #{removed}"
+                message << "\nremoved: #{removed}"
               end
-              puts message
+              puts "#{message}\n\n"
             end
           else
             mappings[key] = {filename: filename, value: actual}
