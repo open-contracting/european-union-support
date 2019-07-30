@@ -128,20 +128,20 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,,Discard. The information about previous publications concerning this procedure is covered by OCDS releases with the same `ocid` as this notice and `planning` in the `tag` field.
 /PROCEDURE/DATE_RECEIPT_TENDERS,date,,,Map to the date component of `tender.tenderPeriod.endDate`
 /PROCEDURE/TIME_RECEIPT_TENDERS,time,,,Map to the time component of `tender.tenderPeriod.endDate`
-/PROCEDURE/DATE_DISPATCH_INVITATIONS,date,,,
-/PROCEDURE/LANGUAGES,languages_allowed,IV.2.4,,""
+/PROCEDURE/DATE_DISPATCH_INVITATIONS,date,,,"If it’s for a selection stage, map to `tender.invitationsForInterestDispatchDate`\n\nIf it’s a call for bids to selected candidates, map to `tender.invitationsForBidsDispatchDate`"
+/PROCEDURE/LANGUAGES,languages_allowed,IV.2.4,,
 /PROCEDURE/LANGUAGES/LANGUAGE,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_SubmissionLanguages,Map to `tender.submissionLanguages` (PROPOSAL #23)
 /PROCEDURE/DATE_TENDER_VALID,date_tender_valid,,,
-/PROCEDURE/DURATION_TENDER_VALID,duration_months,,,
+/PROCEDURE/DURATION_TENDER_VALID,duration_months,,,Map to `tender.bidMinimumValidityDurationMonths`
 /PROCEDURE/OPENING_CONDITION,opening_conditions,IV.2.7,,
 /PROCEDURE/OPENING_CONDITION/DATE_OPENING_TENDERS,date,,,Map to the date component of `tender.awardPeriod.startDate`
 /PROCEDURE/OPENING_CONDITION/TIME_OPENING_TENDERS,time,,,Map to the time component of `tender.awardPeriod.startDate`
-/PROCEDURE/OPENING_CONDITION/PLACE,opening_place,,,
-/PROCEDURE/OPENING_CONDITION/INFO_ADD,opening_addit_info,,,
-/COMPLEMENTARY_INFO,info_complement,VI,,""
-/COMPLEMENTARY_INFO/RECURRENT_PROCUREMENT,_yes,,,
-/COMPLEMENTARY_INFO/ESTIMATED_TIMING,further_notices_timing,,,
-/COMPLEMENTARY_INFO/NO_RECURRENT_PROCUREMENT,_no,,,
+/PROCEDURE/OPENING_CONDITION/PLACE,opening_place,,,Map to `tender.bidOpeningPlace`
+/PROCEDURE/OPENING_CONDITION/INFO_ADD,opening_addit_info,,,Map to `tender.bidOpeningProcedure`
+/COMPLEMENTARY_INFO,info_complement,VI,,
+/COMPLEMENTARY_INFO/RECURRENT_PROCUREMENT,_yes,,,Set `tender.recurrentProcurement` to ‘true’
+/COMPLEMENTARY_INFO/ESTIMATED_TIMING,further_notices_timing,,,Map to `tender.recurrentProcurementDetails`
+/COMPLEMENTARY_INFO/NO_RECURRENT_PROCUREMENT,_no,,,Set `tender.recurrentProcurement` to ‘false’
 /COMPLEMENTARY_INFO/EORDERING,eordering_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows,Add 'electronicOrdering' to `tender.techniques` (PROPOSAL #5)
 /COMPLEMENTARY_INFO/EINVOICING,einvoicing_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows https://github.com/eForms/eForms/issues/88,Add 'electronicInvoicing' to `tender.techniques`
 /COMPLEMENTARY_INFO/EPAYMENT,epayment_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows https://github.com/eForms/eForms/issues/88,Add 'electronicPayment' to `tender.techniques`
