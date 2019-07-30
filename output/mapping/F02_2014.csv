@@ -87,7 +87,7 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Options,"Add an `Options` object to the `tender.options` array, and set its `.id`. If the contract is divided into lots, set its `.relatedLot` to the lot's `.id`. (PROPOSAL #21)"
 /OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS_DESCR,options_descr,,,Set the options' `.description` (PROPOSAL #21)
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_OPTIONS,_no,,,"Discard. If there is no corresponding `Options` object in the `tender.options` array, then there are no options."
-/OBJECT_CONTRACT/OBJECT_DESCR/ECATALOGUE_REQUIRED,electronic_catalogue_required,,,
+/OBJECT_CONTRACT/OBJECT_DESCR/ECATALOGUE_REQUIRED,electronic_catalogue_required,,,Set `tender.electronicCatalogue` to ‘required’.
 /OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_isEUFunded https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_EUFunded,"Get the `Organization` object for the European Union; if none exists yet, [add a party](../operations#add-a-party), and set its `.name` to 'European Union'. Then, add 'funder' to its `.roles`.\n\nGet the `Finance` object for this project; if none exists yet, add a `Finance` object to the `planning.budget.finance` array, map to its `.description`, set its `.id`, set its `.financingParty.name` to 'European Union', and set its `.financingParty.id` to the party's `.id`. Then, if the contract is divided into lots, add the lot's `.id` to its `.relatedLots`. (PROPOSAL #20)\n\nIn [future forms](https://github.com/eForms/eForms/issues/181#issuecomment-439861320), this field will be de-emphasized."
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds."
 /OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,info_additional,II.2.14,,Append to the item's `.description`\n\nThis results in a loss of structure. (WARNING #28)
@@ -106,12 +106,12 @@ xpath,label-key,index,comment,guidance
 /LEFTI/PERFORMANCE_CONDITIONS,other_conditions,III.2.2,,""
 /LEFTI/PERFORMANCE_STAFF_QUALIFICATION,staff_responsible_indicate,,,""
 /PROCEDURE,procedure,IV,,""
-/PROCEDURE/PT_OPEN,proctype_open,,,
-/PROCEDURE/ACCELERATED_PROC,justification,,,
-/PROCEDURE/PT_RESTRICTED,proctype_restricted,,,Set `tender.procurementMethod` to 'selective'
-/PROCEDURE/PT_COMPETITIVE_NEGOTIATION,proctype_comp_negotiation,,,Set `tender.procurementMethod` to 'open'
-/PROCEDURE/PT_COMPETITIVE_DIALOGUE,proctype_comp_dialogue,,,
-/PROCEDURE/PT_INNOVATION_PARTNERSHIP,proctype_innovation,,,
+/PROCEDURE/PT_OPEN,proctype_open,,,Set `tender.procurementMethod` to 'open' and `tender.procurementMethodName` to ‘open’
+/PROCEDURE/ACCELERATED_PROC,justification,,,Map to `tender.acceleratedProcedureRationale` and set `tender.acceleratedProcedure` to ‘true’ 
+/PROCEDURE/PT_RESTRICTED,proctype_restricted,,,Set `tender.procurementMethod` to 'selective' and  `tender.procurementMethodName` to ‘restricted’
+/PROCEDURE/PT_COMPETITIVE_NEGOTIATION,proctype_comp_negotiation,,,Set `tender.procurementMethod` to 'selective' and  `tender.procurementMethodName` to ‘negotiatedWithCFC’
+/PROCEDURE/PT_COMPETITIVE_DIALOGUE,proctype_comp_dialogue,,,Set `tender.procurementMethod` to 'selective' and  `tender.procurementMethodName` to ‘competitiveDialogue’
+/PROCEDURE/PT_INNOVATION_PARTNERSHIP,proctype_innovation,,,Set `tender.procurementMethod` to 'selective' and  `tender.procurementMethodName` to ‘innovationPartnership’
 /PROCEDURE/FRAMEWORK,notice_involves_framework,,,*Waiting for mapping from F01*
 /PROCEDURE/FRAMEWORK/SEVERAL_OPERATORS,framework_several,,,*Waiting for mapping from F01*
 /PROCEDURE/FRAMEWORK/NB_PARTICIPANTS,framework_particip_envis,,,*Waiting for mapping from F01*
@@ -119,29 +119,29 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/FRAMEWORK/JUSTIFICATION,framework_just_four,,,*Waiting for mapping from F01*
 /PROCEDURE/DPS,notice_involves_dps,,,*Waiting for mapping from F01*
 /PROCEDURE/DPS_ADDITIONAL_PURCHASERS,dps_purchasers,,,*Waiting for mapping from F01*
-/PROCEDURE/REDUCTION_RECOURSE,reduction_recourse,,,
-/PROCEDURE/RIGHT_CONTRACT_INITIAL_TENDERS,negotiation_without,,,
+/PROCEDURE/REDUCTION_RECOURSE,reduction_recourse,,,Set ‘tender.stagedProcedure’ to ‘true’
+/PROCEDURE/RIGHT_CONTRACT_INITIAL_TENDERS,negotiation_without,,,Set ‘tender.possiblyNoNegotiation’ to ‘true’
 /PROCEDURE/EAUCTION_USED,eauction_will_used,,,*Waiting for mapping from F01*
 /PROCEDURE/INFO_ADD_EAUCTION,eauction_info_addit,,,*Waiting for mapping from F01*
 /PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to `tender.coveredBy`
 /PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in `tender.coveredBy`, then the procurement isn't covered by the GPA."
-/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,,
-/PROCEDURE/DATE_RECEIPT_TENDERS,date,,,Map to the date component of `tender.tenderPeriod.endDate`
+/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,,Discard. The information about previous publications concerning this procedure is covered by OCDS releases with the same `ocid` as this notice and `planning` in the `tag` field.
+/PROCEDURE/DATE_RECEIPT_TENDERS,date,,,Map to the date component of `tender.tenderPeriod.endDate` and to the date component of `tender.minimumBidValidityPeriod.startDate` (PROPOSAL #33)
 /PROCEDURE/TIME_RECEIPT_TENDERS,time,,,Map to the time component of `tender.tenderPeriod.endDate`
-/PROCEDURE/DATE_DISPATCH_INVITATIONS,date,,,
-/PROCEDURE/LANGUAGES,languages_allowed,IV.2.4,,""
+/PROCEDURE/DATE_DISPATCH_INVITATIONS,date,,,"If it’s for a selection stage, map to `tender.invitationsForInterestDispatchDate`\n\nIf it’s a call for bids to selected candidates, map to `tender.invitationsForBidsDispatchDate`"
+/PROCEDURE/LANGUAGES,languages_allowed,IV.2.4,,
 /PROCEDURE/LANGUAGES/LANGUAGE,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_SubmissionLanguages,Map to `tender.submissionLanguages` (PROPOSAL #23)
-/PROCEDURE/DATE_TENDER_VALID,date_tender_valid,,,
-/PROCEDURE/DURATION_TENDER_VALID,duration_months,,,
+/PROCEDURE/DATE_TENDER_VALID,date_tender_valid,,,Map to `tender.minimumBidValidityPeriod.endDate` (PROPOSAL #33)
+/PROCEDURE/DURATION_TENDER_VALID,duration_months,,,Multiply the value by 30 and map the result to `tender.minimumBidValidityPeriod.durationInDays` (PROPOSAL #33)
 /PROCEDURE/OPENING_CONDITION,opening_conditions,IV.2.7,,
 /PROCEDURE/OPENING_CONDITION/DATE_OPENING_TENDERS,date,,,Map to the date component of `tender.awardPeriod.startDate`
 /PROCEDURE/OPENING_CONDITION/TIME_OPENING_TENDERS,time,,,Map to the time component of `tender.awardPeriod.startDate`
-/PROCEDURE/OPENING_CONDITION/PLACE,opening_place,,,
-/PROCEDURE/OPENING_CONDITION/INFO_ADD,opening_addit_info,,,
-/COMPLEMENTARY_INFO,info_complement,VI,,""
-/COMPLEMENTARY_INFO/RECURRENT_PROCUREMENT,_yes,,,
-/COMPLEMENTARY_INFO/ESTIMATED_TIMING,further_notices_timing,,,
-/COMPLEMENTARY_INFO/NO_RECURRENT_PROCUREMENT,_no,,,
+/PROCEDURE/OPENING_CONDITION/PLACE,opening_place,,,Map to `tender.bidOpeningPlace`
+/PROCEDURE/OPENING_CONDITION/INFO_ADD,opening_addit_info,,,Map to `tender.bidOpeningProcedure`
+/COMPLEMENTARY_INFO,info_complement,VI,,
+/COMPLEMENTARY_INFO/RECURRENT_PROCUREMENT,_yes,,,Set `tender.recurrentProcurement` to ‘true’
+/COMPLEMENTARY_INFO/ESTIMATED_TIMING,further_notices_timing,,,Map to `tender.recurrentProcurementDetails`
+/COMPLEMENTARY_INFO/NO_RECURRENT_PROCUREMENT,_no,,,Set `tender.recurrentProcurement` to ‘false’
 /COMPLEMENTARY_INFO/EORDERING,eordering_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows,Add 'electronicOrdering' to `tender.techniques` (PROPOSAL #5)
 /COMPLEMENTARY_INFO/EINVOICING,einvoicing_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows https://github.com/eForms/eForms/issues/88,Add 'electronicInvoicing' to `tender.techniques`
 /COMPLEMENTARY_INFO/EPAYMENT,epayment_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows https://github.com/eForms/eForms/issues/88,Add 'electronicPayment' to `tender.techniques`
