@@ -64,28 +64,14 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/NUTS,nutscode,,,"Take the NUTS code in the `CODE` attribute, and map to the item's `.deliveryAddress.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
 /OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE,mainsiteplace_works_delivery,,,Map to the item's `.deliveryLocation.description`
 /OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,descr_procurement,II.2.4,,"Map to the item's `.description`, and map to the lot's `.description`"
-/OBJECT_CONTRACT/OBJECT_DESCR/AC,award_criteria,II.2.5,,"If only `AC_QUALITY` is set,  set `tender.awardCriteria` to 'qualityOnly'.
-If only `AC_COST` is set, set `tender.awardCriteria` to 'costOnly'.
-If only `AC_PRICE` is set, set `tender.awardCriteria` to 'priceOnly'.
-If a mix of `AC_QUALITY`, `AC_COST` and `AC_PRICE` is set, set `tender.awardCriteria` to 'ratedCriteria'.
-Add an `AwardWeightedCriteria` object to the `tender.awardWeightedCriteriaPerLot` array.
-"
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY,award_criterion_quality,,https://github.com/open-contracting-extensions/ocds_eu_criteria,"In the `AwardWeightedCriteria` object:
-Add an `AwardWeightedCriterion` object to the `awardWeightedCriteria` array.
-Set `criterionType` to 'quality'."
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY/AC_CRITERION,award_criterion_name,,,Map to `criterionName`
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY/AC_WEIGHTING,weighting,,,Map to `criterionDescription`
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_COST,award_lowest_cost,,,"In the `AwardWeightedCriteria` object:
-Add an `AwardWeightedCriterion` object to the `awardWeightedCriteria` array.
-Set `criterionType` to 'cost'.
-Map `AC_CRITERION` to `criterionName`
-Map `AC_WEIGHTING` to `criterionDescription`"
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE,price,,,"In the `AwardWeightedCriteria` object:
-Add an `AwardWeightedCriterion` object to the `awardWeightedCriteria` array.
-Set `criterionType` to 'price'.
-Map `AC_CRITERION` to `criterionName`"
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE/AC_WEIGHTING,weighting,,,Map to `criterionDescription`
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PROCUREMENT_DOC,award_criteria_descriptive,,,Discard.
+/OBJECT_CONTRACT/OBJECT_DESCR/AC,award_criteria,II.2.5,,""
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY,award_criterion_quality,,,"Add an `AwardCriterion` object to the lot's `.awardCriteria.criteria` array, and set its `.type` to 'quality'."
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY/AC_CRITERION,award_criterion_name,,,Map to the criterion's `.name`
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY/AC_WEIGHTING,weighting,,,Map to the criterion's `.description`
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_COST,award_lowest_cost,,,"Add an `AwardCriterion` object to the lot's `.awardCriteria.criteria` array, and set its `.type` to 'cost'."
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE,price,,,"Add an `AwardCriterion` object to the lot's `.awardCriteria.criteria` array, and set its `.type` to 'price'."
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE/AC_WEIGHTING,weighting,,,Map to the criterion's `.description`
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PROCUREMENT_DOC,award_criteria_descriptive,,,"Discard. If the lot's `.awardCriteria.criteria` isn't set, then price is not the only award criterion and all criteria are stated only in the procurement documents."
 /OBJECT_CONTRACT/OBJECT_DESCR/VAL_OBJECT,value_excl_vat,,,Map to the lot's `.value.amount`
 /OBJECT_CONTRACT/OBJECT_DESCR/VAL_OBJECT/@CURRENCY,currency,,,Map to the lot's `.value.currency`
 /OBJECT_CONTRACT/OBJECT_DESCR/DURATION,duration_contract_framework_dps,II.2.7,,""
@@ -115,17 +101,17 @@ Map `AC_CRITERION` to `criterionName`"
 /LEFTI/PERFORMANCE_CONDITIONS,other_conditions,III.2.2,,""
 /LEFTI/PERFORMANCE_STAFF_QUALIFICATION,staff_responsible_indicate,,,""
 /PROCEDURE,procedure,IV,,""
-/PROCEDURE/PT_RESTRICTED,proctype_restricted,,,Set `tender.procurementMethod` to 'selective'
-/PROCEDURE/PT_COMPETITIVE_NEGOTIATION,proctype_comp_negotiation,,,Set `tender.procurementMethod` to 'open'
-/PROCEDURE/FRAMEWORK,notice_involves_framework,,,"Discard. If `tender.procurementTechnique.maximumNumberTenderers` or `tender.procurementTechnique.frameworkAgreementDurationJustification` is set, the notice involves a framework agreement."
-/PROCEDURE/FRAMEWORK/SEVERAL_OPERATORS,framework_several,,,Set `tender.procurementTechnique.maximumNumberTenderers` to 0
-/PROCEDURE/FRAMEWORK/NB_PARTICIPANTS,framework_particip_envis,,,Map to `tender.procurementTechnique.maximumNumberTenderers`
-/PROCEDURE/FRAMEWORK/SINGLE_OPERATOR,framework_single,,,Set `tender.procurementTechnique.maximumNumberTenderers` to 1
-/PROCEDURE/FRAMEWORK/JUSTIFICATION,framework_just_four,,,Map to `tender.procurementTechnique.frameworkAgreementDurationJustification`
-/PROCEDURE/DPS,notice_involves_dps,,,"If ‘DPS’ is set but ‘DPS_ADDITIONAL_PURCHASERS’ isn’t, set `tender.procurementTechnique.dynamicPurchasingSystem` to ‘dpsClosed’"
-/PROCEDURE/DPS_ADDITIONAL_PURCHASERS,dps_purchasers,,,Set `tender.procurementTechnique.dynamicPurchasingSystem` to ‘dpsOpen’
-/PROCEDURE/EAUCTION_USED,eauction_will_used,,,Set `tender.procurementTechnique.electronicAuction` to ‘true’
-/PROCEDURE/INFO_ADD_EAUCTION,eauction_info_addit,,,Map to `tender.procurementTechnique.electronicAuctionDescription`
+/PROCEDURE/PT_RESTRICTED,proctype_restricted,,,Set `tender.procurementMethod` to 'selective' and `tender.procurementMethodName` to 'Restricted procedure'
+/PROCEDURE/PT_COMPETITIVE_NEGOTIATION,proctype_comp_negotiation,,,Set `tender.procurementMethod` to 'selective' and  `tender.procurementMethodName` to 'Competitive procedure with negotiation'
+/PROCEDURE/FRAMEWORK,notice_involves_framework,,,"Set `tender.techniques.hasFrameworkAgreement` to `true`"
+/PROCEDURE/FRAMEWORK/SEVERAL_OPERATORS,framework_several,,,"If *Envisaged maximum number of participants to the framework agreement* isn't set, set `tender.techniques.frameworkAgreement.maximumNumberParticipants` to 1e9999 (which parses to infinity)"
+/PROCEDURE/FRAMEWORK/NB_PARTICIPANTS,framework_particip_envis,,,Map to `tender.techniques.frameworkAgreement.maximumNumberParticipants`
+/PROCEDURE/FRAMEWORK/SINGLE_OPERATOR,framework_single,,,Set `tender.techniques.frameworkAgreement.maximumNumberParticipants` to 1
+/PROCEDURE/FRAMEWORK/JUSTIFICATION,framework_just_four,,,Map to `tender.techniques.frameworkAgreement.durationRationale`
+/PROCEDURE/DPS,notice_involves_dps,,,"Set `tender.techniques.hasDynamicPurchasingSystem` to `true`"
+/PROCEDURE/DPS_ADDITIONAL_PURCHASERS,dps_purchasers,,,Set `tender.techniques.dynamicPurchasingSystem.type` to 'open'
+/PROCEDURE/EAUCTION_USED,eauction_will_used,,,Set `tender.techniques.hasElectronicAuction` to `true`
+/PROCEDURE/INFO_ADD_EAUCTION,eauction_info_addit,,,Map to `tender.techniques.electronicAuction.description`
 /PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to `tender.coveredBy`
 /PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in `tender.coveredBy`, then the procurement isn't covered by the GPA."
 /PROCEDURE/DATE_RECEIPT_TENDERS,date,,,Map to the date component of `tender.tenderPeriod.endDate`
