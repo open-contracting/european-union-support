@@ -32,24 +32,24 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,"For each `CODE` attribute, add a `Classification` object to the `tender.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id` (PROPOSAL #16)"
 /OBJECT_CONTRACT/TYPE_CONTRACT,type_contract,II.1.3,,Set `tender.mainProcurementCategory` as follows:
 /OBJECT_CONTRACT/SHORT_DESCR,descr_short,II.1.4,,Map to `tender.description`
-/OBJECT_CONTRACT/LOT_DIVISION,_yes,,,"Discard. If `tender.lots` is set, then the contract is divided into lots."
-/OBJECT_CONTRACT/NO_LOT_DIVISION,_no,,,"Discard. If `tender.lots` isn't set, then the contract isn't divided into lots."
+/OBJECT_CONTRACT/LOT_DIVISION,_yes,,,"Discard. If `tender.lots` contains more than one object, then the contract is divided into lots."
+/OBJECT_CONTRACT/NO_LOT_DIVISION,_no,,,"Discard. If `tender.lots` contains one or fewer objects, then the contract isn't divided into lots.\n\nIf the contract isn't divided into lots, the guidance is to nonetheless add a single, virtual lot below."
 /OBJECT_CONTRACT/VAL_TOTAL,value,,,Discard. This is derived from the values of awards.
 /OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY,currency,,,Discard as above
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL,,,This element sets the currency for its children.,""
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY,currency,,,*Waiting for mapping from F03*
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/LOW,lowest_offer,,,*Waiting for mapping from F03*
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/HIGH,highest_offer,,,*Waiting for mapping from F03*
-/OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,"Add an `Item` object to the `tender.items` array, and, if the contract is divided into lots, add a `Lot` object to the `tender.lots` array. If this notice is a call for competition, set the lot's `.status` to 'active'; otherwise, set it to 'planned'."
+/OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,"Add an `Item` object to the `tender.items` array, and, add a `Lot` object to the `tender.lots` array. If this notice is a call for competition, set the lot's `.status` to 'active'; otherwise, set it to 'planned'."
 /OBJECT_CONTRACT/OBJECT_DESCR/@ITEM,,,,Discard
-/OBJECT_CONTRACT/OBJECT_DESCR/TITLE,title_contract,II.2.1,,"Map to the item's `.title`, and, if the contract is divided into lots, map to the lot's `.title` (PROPOSAL #29)"
-/OBJECT_CONTRACT/OBJECT_DESCR/LOT_NO,lot_number,,,"If the contract is divided into lots, map to the lot's `.id` and to the item's `.relatedLot`; otherwise, this should be empty."
+/OBJECT_CONTRACT/OBJECT_DESCR/TITLE,title_contract,II.2.1,,"Map to the item's `.title`, and map to the lot's `.title` (PROPOSAL #29)"
+/OBJECT_CONTRACT/OBJECT_DESCR/LOT_NO,lot_number,,,Map to the lot's `.id` and to the item's `.relatedLot`
 /OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL,cpv_additional,II.2.2,,""
 /OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_CODE,cpv_main,,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPV', and map to its `.id`."
 /OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id`."
 /OBJECT_CONTRACT/OBJECT_DESCR/NUTS,nutscode,,,"Take the NUTS code in the `CODE` attribute, and map to the item's `.deliveryAddress.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
 /OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE,mainsiteplace_works_delivery,,,Map to the item's `.deliveryLocation.description`
-/OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,descr_procurement,II.2.4,,"Map to the item's `.description`, and, if the contract is divided into lots, map to the lot's `.description`"
+/OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,descr_procurement,II.2.4,,"Map to the item's `.description`, and map to the lot's `.description`"
 /OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU,,,,
 /OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC,,,,
 /OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC/AC_QUALITY,award_criterion_quality,,,
@@ -71,10 +71,10 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2009_81_EC/AC,,,,
 /OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2009_81_EC/AC/AC_PRICE,lowest_price,,,
 /OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2009_81_EC/AC/AC_CRITERIA,award_criteria_advant,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Options,"Add an `Options` object to the `tender.options` array, and set its `.id`. If the contract is divided into lots, set its `.relatedLot` to the lot's `.id`. (PROPOSAL #21)"
+/OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Options,"Add an `Options` object to the `tender.options` array, and set its `.id`. Set its `.relatedLot` to the lot's `.id`. (PROPOSAL #21)"
 /OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS_DESCR,options_descr,,,Set the options' `.description` (PROPOSAL #21)
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_OPTIONS,_no,,,"Discard. If there is no corresponding `Options` object in the `tender.options` array, then there are no options."
-/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_isEUFunded https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_EUFunded,"Get the `Organization` object for the European Union; if none exists yet, [add a party](../operations#add-a-party), and set its `.name` to 'European Union'. Then, add 'funder' to its `.roles`.\n\nGet the `Finance` object for this project; if none exists yet, add a `Finance` object to the `planning.budget.finance` array, map to its `.description`, set its `.id`, set its `.financingParty.name` to 'European Union', and set its `.financingParty.id` to the party's `.id`. Then, if the contract is divided into lots, add the lot's `.id` to its `.relatedLots`. (PROPOSAL #20)\n\nIn [future forms](https://github.com/eForms/eForms/issues/181#issuecomment-439861320), this field will be de-emphasized."
+/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_isEUFunded https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_EUFunded,"Get the `Organization` object for the European Union; if none exists yet, [add a party](../operations#add-a-party), and set its `.name` to 'European Union'. Then, add 'funder' to its `.roles`.\n\nGet the `Finance` object for this project; if none exists yet, add a `Finance` object to the `planning.budget.finance` array, map to its `.description`, set its `.id`, set its `.financingParty.name` to 'European Union', and set its `.financingParty.id` to the party's `.id`. Then, add the lot's `.id` to its `.relatedLots`. (PROPOSAL #20)\n\nIn [future forms](https://github.com/eForms/eForms/issues/181#issuecomment-439861320), this field will be de-emphasized."
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds."
 /OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,info_additional,II.2.14,,Append to the item's `.description`\n\nThis results in a loss of structure. (WARNING #28)
 /PROCEDURE,procedure,IV,,""
@@ -90,16 +90,16 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/DIRECTIVE_2014_25_EU/PT_AWARD_CONTRACT_WITHOUT_CALL,,,,/PROCEDURE/DIRECTIVE_2014_25_EU/PT_AWARD_CONTRACT_WITHOUT_CALL
 /PROCEDURE/DIRECTIVE_2009_81_EC/PT_AWARD_CONTRACT_WITHOUT_CALL,,,,/PROCEDURE/DIRECTIVE_2014_25_EU/PT_AWARD_CONTRACT_WITHOUT_CALL
 /PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_CALL,,,,/PROCEDURE/DIRECTIVE_2014_25_EU/PT_AWARD_CONTRACT_WITHOUT_CALL
-/PROCEDURE/FRAMEWORK,notice_involves_framework,,,*Waiting for mapping from F01*
+/PROCEDURE/FRAMEWORK,notice_involves_framework,,,Set `tender.techniques.hasFrameworkAgreement` to `true`
 /PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to `tender.coveredBy`
 /PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in `tender.coveredBy`, then the procurement isn't covered by the GPA."
-/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,,*Waiting for mapping from F02*
+/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,,Discard. The *previous publication concerning this procedure* is the OCDS release with the same `ocid` as this release and with 'planning' in its `tag`.
 /AWARD_CONTRACT,award_of_contract_concess,V,,Add an `Award` object to the `awards` array
 /AWARD_CONTRACT/@ITEM,,,,Discard
 /AWARD_CONTRACT/CONTRACT_NO,contract_number,,,Map to the award's `.id`
 /AWARD_CONTRACT/LOT_NO,lot_number,,,Add to the award's `.relatedLots`
 /AWARD_CONTRACT/TITLE,title_contract,,,Map to the award's `.title`
-/AWARD_CONTRACT/AWARDED_CONTRACT,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/contract_statusDetails,"Set the award's `.status` to 'active'\n\nAdd a `Contract` object to the `contracts` array, set its `.id` and `.awardID` to the award's `.id`, set its `.title` to the award's `.title`, and set its `.status` to 'active'."
+/AWARD_CONTRACT/AWARDED_CONTRACT,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/contract_statusDetails,"Set the award's `.status` to 'active'\n\nAdd a `Contract` object to the `contracts` array, set its `.id` and `.awardID` to the award's `.id`, set its `.title` to the award's `.title`, and set its `.status` to 'active'."
 /AWARD_CONTRACT/AWARDED_CONTRACT/DATE_CONCLUSION_CONTRACT,date_award_contract_concess,V.2.1,,Map to the contract's `.dateSigned`
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS,award_offers_info,,This element contains elements from V.2.2 and V.2.3.,""
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/AWARDED_TO_GROUP,_yes,,,"Discard. If there are multiple suppliers, then the contract has been awarded to a group of economic operators."
@@ -126,13 +126,13 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY,currency,,,/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL,,,This element sets the currency for its children.,""
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/@CURRENCY,currency,,,/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY
-/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/LOW,lowest_offer,,,*Waiting for mapping from F03*
-/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/HIGH,highest_offer,,,*Waiting for mapping from F03*
-/AWARD_CONTRACT/AWARDED_CONTRACT/LIKELY_SUBCONTRACTED,subcontr_likely_contract_concess,,,*Waiting for mapping from F03*
-/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_SUBCONTRACTING,value_excl_vat,,,*Waiting for mapping from F03*
-/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_SUBCONTRACTING/@CURRENCY,currency,,,*Waiting for mapping from F03*
-/AWARD_CONTRACT/AWARDED_CONTRACT/PCT_SUBCONTRACTING,proportion,,,*Waiting for mapping from F03*
-/AWARD_CONTRACT/AWARDED_CONTRACT/INFO_ADD_SUBCONTRACTING,subcontr_descr_short,,,*Waiting for mapping from F03*
+/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/LOW,lowest_offer,,,"Add a `BidsStatistic` object to the `bids.statistics` array, set its `.measure` to 'lowestValidBidValue', set its `.id`, and map to its `.value`. Set its `.relatedLot` if the award is related to a lot."
+/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/HIGH,highest_offer,,,"Add a `BidsStatistic` object to the `bids.statistics` array, set its `.measure` to 'highestValidBidValue', set its `.id`, and map to its `.value`. Set its `.relatedLot` if the award is related to a lot."
+/AWARD_CONTRACT/AWARDED_CONTRACT/LIKELY_SUBCONTRACTED,subcontr_likely_contract_concess,,,Set the award's `.hasSubcontracting` to `true` (PROPOSAL #37)
+/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_SUBCONTRACTING,value_excl_vat,,,Map to the award's `.subcontracting.value.amount` (PROPOSAL #37)
+/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_SUBCONTRACTING/@CURRENCY,currency,,,Map to the award's `.subcontracting.value.currency` (PROPOSAL #37)
+/AWARD_CONTRACT/AWARDED_CONTRACT/PCT_SUBCONTRACTING,proportion,,,Map to the award's `.subcontracting.percentage` (PROPOSAL #37)
+/AWARD_CONTRACT/AWARDED_CONTRACT/INFO_ADD_SUBCONTRACTING,subcontr_descr_short,,,Map to the award's `.subcontracting.details` (PROPOSAL #37)
 /AWARD_CONTRACT/AWARDED_CONTRACT/DIRECTIVE_2009_81_EC,,,,
 /AWARD_CONTRACT/AWARDED_CONTRACT/DIRECTIVE_2009_81_EC/AWARDED_SUBCONTRACTING,subcontr_all_competitive,,,
 /AWARD_CONTRACT/AWARDED_CONTRACT/DIRECTIVE_2009_81_EC/PCT_RANGE_SHARE_SUBCONTRACTING,subcontr_share_competitive,,,
