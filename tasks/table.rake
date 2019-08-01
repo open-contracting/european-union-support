@@ -4,7 +4,9 @@ HELP_TEXT = {
 
 # If the label keys appear after "One of the following:".
 CONDITIONAL_HELP_TEXT = {
+  'F02' => %w(notice_pin notice_buyer_profile),
   'F03' => %w(notice_contract notice_ex_ante),
+  'F05' => %w(notice_periodic_utilities notice_buyer_profile),
   'F06' => %w(notice_contract_utilities notice_ex_ante),
   'F21' => %w(notice_pin notice_buyer_profile notice_contract notice_ex_ante),
   'F22' => %w(notice_periodic_indicative notice_buyer_profile notice_qualification_utilities notice_contract notice_ex_ante),
@@ -159,7 +161,7 @@ task :table do
         seen[:enumerations] << key
 
       # Fields appear in a different order in the form and XSD.
-      elsif i = data[0..5].index{ |row| row['label-key'] == key }
+      elsif (i = data[0..5].index{ |row| row['label-key'] == key }) && (key != 'weighting' || i == 0)
         row = data.delete_at(i)
         builder.row(key, help_labels: help_labels(labels, number: number), xpath: row['xpath'], index: row['index'], guidance: row['guidance'])
 
