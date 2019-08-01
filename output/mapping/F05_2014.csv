@@ -109,7 +109,7 @@ xpath,label-key,index,comment,guidance
 /LEFTI/PERFORMANCE_STAFF_QUALIFICATION,staff_responsible_indicate,,,""
 /PROCEDURE,procedure,IV,,""
 /PROCEDURE/PT_OPEN,proctype_open,,,"Set `tender.procurementMethod` to 'open', and set `tender.procurementMethodName` to 'Open procedure'"
-/PROCEDURE/PT_RESTRICTED,proctype_restricted,,,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodName` to 'Restricted procedure'"
+/PROCEDURE/PT_RESTRICTED,proctype_restricted,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_AcceleratedProcedure,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodName` to 'Restricted procedure'"
 /PROCEDURE/PT_NEGOTIATED_WITH_PRIOR_CALL,proctype_negot_w_call,,,*Waiting for mapping from F04*
 /PROCEDURE/PT_COMPETITIVE_DIALOGUE,proctype_comp_dialogue,,,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodName` to 'Competitive dialogue'"
 /PROCEDURE/PT_INNOVATION_PARTNERSHIP,proctype_innovation,,,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodName` to 'Innovation partnership'"
@@ -125,19 +125,19 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/INFO_ADD_EAUCTION,eauction_info_addit,,,Map to `tender.techniques.electronicAuction.description`
 /PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to `tender.coveredBy`
 /PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in `tender.coveredBy`, then the procurement isn't covered by the GPA."
-/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,,Discard. The *previous publication concerning this procedure* is the OCDS release with the same `ocid` as this release and with 'planning' in its `tag`.
+/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,Discard. The *previous publication concerning this procedure* is the OCDS release with the same `ocid` as this release and with 'planning' in its `tag`.
 /PROCEDURE/DATE_RECEIPT_TENDERS,date,,,Map to the date component of `tender.tenderPeriod.endDate`
 /PROCEDURE/TIME_RECEIPT_TENDERS,time,,,Map to the time component of `tender.tenderPeriod.endDate`
 /PROCEDURE/DATE_DISPATCH_INVITATIONS,date,,,Map to the date component of `tender.secondStage.invitationDate`.
 /PROCEDURE/LANGUAGES,languages_allowed,IV.2.4,,""
 /PROCEDURE/LANGUAGES/LANGUAGE,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_SubmissionLanguages,Map to `tender.submissionLanguages` (PROPOSAL #23)
 /PROCEDURE/DATE_TENDER_VALID,date_tender_valid,,,Map to `tender.bidValidityPeriod.endDate` (PROPOSAL #33)
-/PROCEDURE/DURATION_TENDER_VALID,duration_months,,,Multiply by 30
+/PROCEDURE/DURATION_TENDER_VALID,duration_months,,,"Multiply by 30, and map to `tender.bidValidityPeriod.durationInDays` (PROPOSAL #33)"
 /PROCEDURE/OPENING_CONDITION,opening_conditions,IV.2.7,,*Waiting for mapping from F02*
-/PROCEDURE/OPENING_CONDITION/DATE_OPENING_TENDERS,date,,,Map to the date component of `tender.awardPeriod.startDate` and to the date component of `tender.bidOpening.date` 
-/PROCEDURE/OPENING_CONDITION/TIME_OPENING_TENDERS,time,,,Map to the time component of `tender.awardPeriod.startDate` and to the time component of `tender.bidOpening.date`
-/PROCEDURE/OPENING_CONDITION/PLACE,opening_place,,,Map to `tender.bidOpening.address.streetAddress`
-/PROCEDURE/OPENING_CONDITION/INFO_ADD,opening_addit_info,,,Map to `tender.bidOpening.description`
+/PROCEDURE/OPENING_CONDITION/DATE_OPENING_TENDERS,date,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/milestone_RelatedParties,Map to the date component of `tender.awardPeriod.startDate` and to the date component of `tender.bidOpening.date` 
+/PROCEDURE/OPENING_CONDITION/TIME_OPENING_TENDERS,time,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/milestone_RelatedParties,Map to the time component of `tender.awardPeriod.startDate` and to the time component of `tender.bidOpening.date`
+/PROCEDURE/OPENING_CONDITION/PLACE,opening_place,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/milestone_RelatedParties,Map to `tender.bidOpening.address.streetAddress`
+/PROCEDURE/OPENING_CONDITION/INFO_ADD,opening_addit_info,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/milestone_RelatedParties,Map to `tender.bidOpening.description`
 /COMPLEMENTARY_INFO,info_complement,VI,,""
 /COMPLEMENTARY_INFO/RECURRENT_PROCUREMENT,_yes,,,Set `tender.hasRecurrence` to `true`
 /COMPLEMENTARY_INFO/ESTIMATED_TIMING,further_notices_timing,,,Map to `tender.recurrence.description`

@@ -96,14 +96,14 @@ xpath,label-key,index,comment,guidance
 /LEFTI/PERFORMANCE_STAFF_QUALIFICATION,staff_responsible_indicate,,,""
 /PROCEDURE,procedure,IV,,""
 /PROCEDURE/PT_OPEN,proctype_open,,,"Set `tender.procurementMethod` to 'open', and set `tender.procurementMethodName` to 'Open procedure'"
-/PROCEDURE/PT_RESTRICTED,proctype_restricted,,,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodName` to 'Restricted procedure'"
+/PROCEDURE/PT_RESTRICTED,proctype_restricted,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_AcceleratedProcedure,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodName` to 'Restricted procedure'"
 /PROCEDURE/PT_INVOLVING_NEGOTIATION,proctype_negotiations_involved,,,*Waiting for mapping from F21*
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL,award_wo_prior_pub_d1,,,See [Annex D1](#annex-d1-general-procurement)
 /PROCEDURE/FRAMEWORK,notice_involves_framework,,,Set `tender.techniques.hasFrameworkAgreement` to `true`
 /PROCEDURE/FRAMEWORK/JUSTIFICATION,framework_just_eight,,,Map to `tender.techniques.frameworkAgreement.durationRationale`
 /PROCEDURE/URL_NATIONAL_PROCEDURE,url_national_rules,,,*Waiting for mapping from F21*
 /PROCEDURE/MAIN_FEATURES_AWARD,award_main_features,IV.1.11,,*Waiting for mapping from F21*
-/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,,Discard. The *previous publication concerning this procedure* is the OCDS release with the same `ocid` as this release and with 'planning' in its `tag`.
+/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,Discard. The *previous publication concerning this procedure* is the OCDS release with the same `ocid` as this release and with 'planning' in its `tag`.
 /PROCEDURE/DATE_RECEIPT_TENDERS,date,,,Map to the date component of `tender.tenderPeriod.endDate`
 /PROCEDURE/TIME_RECEIPT_TENDERS,time,,,Map to the time component of `tender.tenderPeriod.endDate`
 /PROCEDURE/LANGUAGES,languages_allowed,IV.2.4,,""
