@@ -27,7 +27,7 @@ xpath,label-key,index,comment,guidance
 /CONTRACTING_BODY/URL_DOCUMENT,,,,Map to the party's `.contactPoint.url`
 /CONTRACTING_BODY/ADDRESS_FURTHER_INFO_IDEM,as_contacts_above,,,Discard. Additional information can be obtained from the abovementioned address unless otherwised specified.
 /CONTRACTING_BODY/ADDRESS_FURTHER_INFO,address_another,,,"If only the contact person is different, use the [Additional Contact Points](https://github.com/open-contracting-extensions/ocds_additionalContactPoints_extension) extension, get the `Organization` object for the buyer, add a `ContactPoint` object to its `.additionalContactPoints` array, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT).\n\nOtherwise, [add a party](../operations#add-a-party), add 'processContactPoint' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME). (PROPOSAL #9)"
-/CONTRACTING_BODY/URL_PARTICIPATION,address_send_tenders,,,"Add 'electronicSubmission' to `tender.submissionMethod`, and map to `tender.submissionMethodDetails`\n\nIf *to the following address* is selected, this results in a loss of structure. (WARNING #27)"
+/CONTRACTING_BODY/URL_PARTICIPATION,address_send_tenders,,,"Add 'electronicSubmission' to `tender.submissionMethod` and map to `tender.submissionMethodDetails` `\n\nSet `tender.submissionTerms.electronicSubmissionPolicy` to ‘required’\n\nIf *to the following address* is selected, this results in a loss of structure. (WARNING #27)"
 /CONTRACTING_BODY/ADDRESS_PARTICIPATION_IDEM,address_to_above,,,"Add 'written' to `tender.submissionMethod`, and discard. Tenders or requests to participate must be submitted to the abovementioned address unless otherwised specified."
 /CONTRACTING_BODY/ADDRESS_PARTICIPATION,address_following,,,"Add 'written' to `tender.submissionMethod`, and map to `tender.submissionMethodDetails`\n\nIf *electronically via* is checked, this results in a loss of structure. (WARNING #27)"
 /CONTRACTING_BODY/URL_TOOL,url_communication_tools,,,Map to `tender.communicationDetails.accessToolUrl` (PROPOSAL #13)
@@ -82,8 +82,8 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/NB_MIN_LIMIT_CANDIDATE,envisaged_min,,,Map to the lot's `.secondStage.minimumCandidates`
 /OBJECT_CONTRACT/OBJECT_DESCR/NB_MAX_LIMIT_CANDIDATE,max_number,,,Map to the lot's `.secondStage.maximumCandidates`
 /OBJECT_CONTRACT/OBJECT_DESCR/CRITERIA_CANDIDATE,criteria_choosing_limited,,,Map to the lot's `.selectionCriteria.description`
-/OBJECT_CONTRACT/OBJECT_DESCR/ACCEPTED_VARIANTS,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Variants,"Add a `Variants` object to the `tender.variants` array, and set its `.id`. Set its `.relatedLot` to the lot's `.id`. (PROPOSAL #17)\n\nTo provide conditions for variants, use `.description`"
-/OBJECT_CONTRACT/OBJECT_DESCR/NO_ACCEPTED_VARIANTS,_no,,,"Discard. If there is no corresponding `Variants` object in the `tender.variants` array, then variants won't be accepted."
+/OBJECT_CONTRACT/OBJECT_DESCR/ACCEPTED_VARIANTS,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Variants,Set the lot’s `.submissionTerms.variantPolicy` to ‘allowed’
+/OBJECT_CONTRACT/OBJECT_DESCR/NO_ACCEPTED_VARIANTS,_no,,,Set the lot’s `.submissionTerms.variantPolicy` to ‘notAllowed’
 /OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Options,"Add an `Options` object to the `tender.options` array, and set its `.id`. Set its `.relatedLot` to the lot's `.id`. (PROPOSAL #21)"
 /OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS_DESCR,options_descr,,,Set the options' `.description` (PROPOSAL #21)
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_OPTIONS,_no,,,"Discard. If there is no corresponding `Options` object in the `tender.options` array, then there are no options."
@@ -130,9 +130,9 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/TIME_RECEIPT_TENDERS,time,,,Map to the time component of `tender.tenderPeriod.endDate`
 /PROCEDURE/DATE_DISPATCH_INVITATIONS,date,,,Map to the date component of `tender.secondStage.invitationDate`.
 /PROCEDURE/LANGUAGES,languages_allowed,IV.2.4,,""
-/PROCEDURE/LANGUAGES/LANGUAGE,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_SubmissionLanguages,Map to `tender.submissionLanguages` (PROPOSAL #23)
-/PROCEDURE/DATE_TENDER_VALID,date_tender_valid,,,Map to `tender.bidValidityPeriod.endDate` (PROPOSAL #33)
-/PROCEDURE/DURATION_TENDER_VALID,duration_months,,,"Multiply by 30, and map to `tender.bidValidityPeriod.durationInDays` (PROPOSAL #33)"
+/PROCEDURE/LANGUAGES/LANGUAGE,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_SubmissionLanguages,Lowercase and add to the `tender.submissionTerms.language` array
+/PROCEDURE/DATE_TENDER_VALID,date_tender_valid,,,Map to `tender.submissionTerms.minimumBidValidityPeriod.endDate`
+/PROCEDURE/DURATION_TENDER_VALID,duration_months,,,"Multiply by 30, and map to `tender.submissionTerms.minimumBidValidityPeriod.durationInDays`"
 /PROCEDURE/OPENING_CONDITION,opening_conditions,IV.2.7,,
 /PROCEDURE/OPENING_CONDITION/DATE_OPENING_TENDERS,date,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/milestone_RelatedParties,Map to the date component of `tender.awardPeriod.startDate` and to the date component of `tender.bidOpening.date` 
 /PROCEDURE/OPENING_CONDITION/TIME_OPENING_TENDERS,time,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/milestone_RelatedParties,Map to the time component of `tender.awardPeriod.startDate` and to the time component of `tender.bidOpening.date`
