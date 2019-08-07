@@ -34,8 +34,8 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/SHORT_DESCR,descr_short,II.1.4,,Map to `tender.description`
 /OBJECT_CONTRACT/LOT_DIVISION,_yes,,,"Discard. If `tender.lots` contains more than one object, then the contract is divided into lots."
 /OBJECT_CONTRACT/NO_LOT_DIVISION,_no,,,"Discard. If `tender.lots` contains one or fewer objects, then the contract isn't divided into lots.\n\nIf the contract isn't divided into lots, the guidance is to nonetheless add a single, virtual lot below."
-/OBJECT_CONTRACT/VAL_TOTAL,value,,,Discard. This is derived from the values of awards.
-/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY,currency,,,Discard as above
+/OBJECT_CONTRACT/VAL_TOTAL,value,,,*Waiting for mapping from F03*
+/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY,currency,,,*Waiting for mapping from F03*
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL,,,This element sets the currency for its children.,""
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY,currency,,,*Waiting for mapping from F03*
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/LOW,lowest_offer,,,*Waiting for mapping from F03*
@@ -93,7 +93,7 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/FRAMEWORK,notice_involves_framework,,,Set `tender.techniques.hasFrameworkAgreement` to `true`
 /PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to `tender.coveredBy`
 /PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in `tender.coveredBy`, then the procurement isn't covered by the GPA."
-/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,,Discard. The *previous publication concerning this procedure* is the OCDS release with the same `ocid` as this release and with 'planning' in its `tag`.
+/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,Discard. The *previous publication concerning this procedure* is the OCDS release with the same `ocid` as this release and with 'planning' in its `tag`.
 /AWARD_CONTRACT,award_of_contract_concess,V,,Add an `Award` object to the `awards` array
 /AWARD_CONTRACT/@ITEM,,,,Discard
 /AWARD_CONTRACT/CONTRACT_NO,contract_number,,,Map to the award's `.id`

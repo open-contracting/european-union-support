@@ -34,8 +34,8 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/SHORT_DESCR,descr_short,II.1.4,,Map to `tender.description`
 /OBJECT_CONTRACT/LOT_DIVISION,_yes,,,"Discard. If `tender.lots` contains more than one object, then the contract is divided into lots."
 /OBJECT_CONTRACT/NO_LOT_DIVISION,_no,,,"Discard. If `tender.lots` contains one or fewer objects, then the contract isn't divided into lots.\n\nIf the contract isn't divided into lots, the guidance is to nonetheless add a single, virtual lot below."
-/OBJECT_CONTRACT/VAL_TOTAL,value,,,Discard. This is derived from the values of awards.
-/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY,currency,,,Discard as above
+/OBJECT_CONTRACT/VAL_TOTAL,value,,,*Waiting for mapping from F03*
+/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY,currency,,,*Waiting for mapping from F03*
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL,,,This element sets the currency for its children.,""
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY,currency,,,*Waiting for mapping from F03*
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/LOW,lowest_offer,,,*Waiting for mapping from F03*
@@ -65,7 +65,7 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,info_additional,II.2.14,,Append to the item's `.description`\n\nThis results in a loss of structure. (WARNING #28)
 /PROCEDURE,procedure,IV,,""
 /PROCEDURE/PT_OPEN,proctype_open,,,"Set `tender.procurementMethod` to 'open', and set `tender.procurementMethodName` to 'Open procedure'"
-/PROCEDURE/PT_RESTRICTED,proctype_restricted,,,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodName` to 'Restricted procedure'"
+/PROCEDURE/PT_RESTRICTED,proctype_restricted,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_AcceleratedProcedure,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodName` to 'Restricted procedure'"
 /PROCEDURE/PT_NEGOTIATED_WITH_PRIOR_CALL,proctype_negot_w_call,,,*Waiting for mapping from F04*
 /PROCEDURE/PT_COMPETITIVE_DIALOGUE,proctype_comp_dialogue,,,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodName` to 'Competitive dialogue'"
 /PROCEDURE/PT_INNOVATION_PARTNERSHIP,proctype_innovation,,,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodName` to 'Innovation partnership'"
@@ -75,7 +75,7 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/EAUCTION_USED,eauction_was_used,,,Set `tender.techniques.hasElectronicAuction` to `true`
 /PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to `tender.coveredBy`
 /PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in `tender.coveredBy`, then the procurement isn't covered by the GPA."
-/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,,Discard. The *previous publication concerning this procedure* is the OCDS release with the same `ocid` as this release and with 'planning' in its `tag`.
+/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,Discard. The *previous publication concerning this procedure* is the OCDS release with the same `ocid` as this release and with 'planning' in its `tag`.
 /PROCEDURE/TERMINATION_DPS,termination_dps,,,*Waiting for mapping from F03*
 /PROCEDURE/TERMINATION_PIN,pin_as_call_no_contracts_ce,,,*Waiting for mapping from F03*
 /AWARD_CONTRACT,award_of_contract,V,,Add an `Award` object to the `awards` array
