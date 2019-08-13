@@ -28,7 +28,7 @@ xpath,label-key,index,comment,guidance
 /CONTRACTING_BODY/URL_DOCUMENT,,,,Map to the party's `.contactPoint.url`
 /CONTRACTING_BODY/ADDRESS_FURTHER_INFO_IDEM,as_contacts_above,,,Discard. Additional information can be obtained from the abovementioned address unless otherwised specified.
 /CONTRACTING_BODY/ADDRESS_FURTHER_INFO,address_another,,,"If only the contact person is different, use the [Additional Contact Points](https://github.com/open-contracting-extensions/ocds_additionalContactPoints_extension) extension, get the `Organization` object for the buyer, add a `ContactPoint` object to its `.additionalContactPoints` array, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT).\n\nOtherwise, [add a party](../operations#add-a-party), add 'processContactPoint' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME). (PROPOSAL #9)"
-/CONTRACTING_BODY/URL_PARTICIPATION,address_send_tenders,,,"Add 'electronicSubmission' to `tender.submissionMethod`, and map to `tender.submissionMethodDetails`\n\nIf *to the following address* is selected, this results in a loss of structure. (WARNING #27)"
+/CONTRACTING_BODY/URL_PARTICIPATION,address_send_tenders,,,"Add 'electronicSubmission' to `tender.submissionMethod`, and map to `tender.submissionMethodDetails`\n\nSet `tender.submissionTerms.electronicSubmissionPolicy` to 'required'\n\nIf *to the following address* is selected, this results in a loss of structure. (WARNING #27)"
 /CONTRACTING_BODY/ADDRESS_PARTICIPATION_IDEM,address_to_above,,,"Add 'written' to `tender.submissionMethod`, and discard. Tenders or requests to participate must be submitted to the abovementioned address unless otherwised specified."
 /CONTRACTING_BODY/ADDRESS_PARTICIPATION,address_following,,,"Add 'written' to `tender.submissionMethod`, and map to `tender.submissionMethodDetails`\n\nIf *electronically via* is checked, this results in a loss of structure. (WARNING #27)"
 /CONTRACTING_BODY/URL_TOOL,url_communication_tools,,,Map to `tender.communicationDetails.accessToolUrl` (PROPOSAL #13)
@@ -75,11 +75,11 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/VAL_OBJECT,value_excl_vat,,,Map to the lot's `.value.amount`
 /OBJECT_CONTRACT/OBJECT_DESCR/VAL_OBJECT/@CURRENCY,currency,,,Map to the lot's `.value.currency`
 /OBJECT_CONTRACT/OBJECT_DESCR/DURATION,duration_contract_framework_dps,II.2.7,,""
-/OBJECT_CONTRACT/OBJECT_DESCR/DATE_START,starting,,,"Map to the lot's `.contractPeriod.startDate` (PROPOSAL #19)"
-/OBJECT_CONTRACT/OBJECT_DESCR/DATE_END,end,,,"Map to the lot's `.contractPeriod.endDate` (PROPOSAL #19)"
+/OBJECT_CONTRACT/OBJECT_DESCR/DATE_START,starting,,,Map to the lot's `.contractPeriod.startDate` (PROPOSAL #19)
+/OBJECT_CONTRACT/OBJECT_DESCR/DATE_END,end,,,Map to the lot's `.contractPeriod.endDate` (PROPOSAL #19)
 /OBJECT_CONTRACT/OBJECT_DESCR/RENEWAL,renewals_subject,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Renewals,"Add a `Renewals` object to the `tender.renewals` array, and set its `.id`. Set its `.relatedLot` to the lot's `.id`. (PROPOSAL #22)"
 /OBJECT_CONTRACT/OBJECT_DESCR/RENEWAL_DESCR,renewals_descr,,,Set the renewals' `.description` (PROPOSAL #22)
-/OBJECT_CONTRACT/OBJECT_DESCR/ACCEPTED_VARIANTS,variants_accepted,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Variants,"Add a `Variants` object to the `tender.variants` array, and set its `.id`. Set its `.relatedLot` to the lot's `.id`. (PROPOSAL #17)\n\nTo provide conditions for variants, use `.description`"
+/OBJECT_CONTRACT/OBJECT_DESCR/ACCEPTED_VARIANTS,variants_accepted,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Variants,Set the lot's `.submissionTerms.variantPolicy` to 'allowed'
 /OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS,options,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Options,"Add an `Options` object to the `tender.options` array, and set its `.id`. Set its `.relatedLot` to the lot's `.id`. (PROPOSAL #21)"
 /OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS_DESCR,options_descr,,,Set the options' `.description` (PROPOSAL #21)
 /OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_isEUFunded https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_EUFunded,"Get the `Organization` object for the European Union; if none exists yet, [add a party](../operations#add-a-party), and set its `.name` to 'European Union'. Then, add 'funder' to its `.roles`.\n\nGet the `Finance` object for this project; if none exists yet, add a `Finance` object to the `planning.budget.finance` array, map to its `.description`, set its `.id`, set its `.financingParty.name` to 'European Union', and set its `.financingParty.id` to the party's `.id`. Then, add the lot's `.id` to its `.relatedLots`. (PROPOSAL #20)\n\nIn [future forms](https://github.com/eForms/eForms/issues/181#issuecomment-439861320), this field will be de-emphasized."
@@ -95,20 +95,20 @@ xpath,label-key,index,comment,guidance
 /LEFTI/TECHNICAL_PROFESSIONAL_INFO,info_evaluating_weth_requir,,,""
 /LEFTI/TECHNICAL_PROFESSIONAL_MIN_LEVEL,min_standards_required,,,""
 /LEFTI/RESTRICTED_SHELTERED_WORKSHOP,restricted_sheltered_workshop,,,""
-/LEFTI/RESTRICTED_SHELTERED_PROGRAM,restricted_sheltered_program,,,""
+/LEFTI/RESTRICTED_SHELTERED_PROGRAM,restricted_sheltered_program,,,Set `tender.contractTerms.reservedExecution` to `true`
 /LEFTI/PARTICULAR_PROFESSION,particular_profession_reserved,,,""
 /LEFTI/REFERENCE_TO_LAW,ref_law_reg_prov,,,""
-/LEFTI/PERFORMANCE_CONDITIONS,other_conditions,III.2.2,,""
+/LEFTI/PERFORMANCE_CONDITIONS,other_conditions,III.2.2,,Map to `tender.contractTerms.termsPerformance`
 /LEFTI/PERFORMANCE_STAFF_QUALIFICATION,staff_responsible_indicate,,,""
 /PROCEDURE,procedure,IV,,""
-/PROCEDURE/PT_RESTRICTED,proctype_restricted,,,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodName` to 'Restricted procedure'"
+/PROCEDURE/PT_RESTRICTED,proctype_restricted,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_AcceleratedProcedure,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodName` to 'Restricted procedure'"
 /PROCEDURE/PT_COMPETITIVE_NEGOTIATION,proctype_comp_negotiation,,,"Set `tender.procurementMethod` to 'selective', and set  `tender.procurementMethodName` to 'Competitive procedure with negotiation'"
-/PROCEDURE/FRAMEWORK,notice_involves_framework,,,"Set `tender.techniques.hasFrameworkAgreement` to `true`"
+/PROCEDURE/FRAMEWORK,notice_involves_framework,,,Set `tender.techniques.hasFrameworkAgreement` to `true`
 /PROCEDURE/FRAMEWORK/SEVERAL_OPERATORS,framework_several,,,"If *Envisaged maximum number of participants to the framework agreement* isn't set, set `tender.techniques.frameworkAgreement.maximumNumberParticipants` to 1e9999 (which parses to infinity)"
 /PROCEDURE/FRAMEWORK/NB_PARTICIPANTS,framework_particip_envis,,,Map to `tender.techniques.frameworkAgreement.maximumNumberParticipants`
 /PROCEDURE/FRAMEWORK/SINGLE_OPERATOR,framework_single,,,Set `tender.techniques.frameworkAgreement.maximumNumberParticipants` to 1
 /PROCEDURE/FRAMEWORK/JUSTIFICATION,framework_just_four,,,Map to `tender.techniques.frameworkAgreement.durationRationale`
-/PROCEDURE/DPS,notice_involves_dps,,,"Set `tender.techniques.hasDynamicPurchasingSystem` to `true`"
+/PROCEDURE/DPS,notice_involves_dps,,,Set `tender.techniques.hasDynamicPurchasingSystem` to `true`
 /PROCEDURE/DPS_ADDITIONAL_PURCHASERS,dps_purchasers,,,Set `tender.techniques.dynamicPurchasingSystem.type` to 'open'
 /PROCEDURE/EAUCTION_USED,eauction_will_used,,,Set `tender.techniques.hasElectronicAuction` to `true`
 /PROCEDURE/INFO_ADD_EAUCTION,eauction_info_addit,,,Map to `tender.techniques.electronicAuction.description`
@@ -117,12 +117,12 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/DATE_RECEIPT_TENDERS,date,,,Map to the date component of `tender.tenderPeriod.endDate`
 /PROCEDURE/TIME_RECEIPT_TENDERS,time,,,Map to the time component of `tender.tenderPeriod.endDate`
 /PROCEDURE/LANGUAGES,languages_allowed,IV.2.4,,""
-/PROCEDURE/LANGUAGES/LANGUAGE,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_SubmissionLanguages,Map to `tender.submissionLanguages` (PROPOSAL #23)
+/PROCEDURE/LANGUAGES/LANGUAGE,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_SubmissionLanguages,Lowercase and add to the `tender.submissionTerms.languages` array
 /PROCEDURE/DATE_AWARD_SCHEDULED,award_scheduled,IV.2.5,,Map to `tender.awardPeriod.startDate`
 /COMPLEMENTARY_INFO,info_complement,VI,,""
-/COMPLEMENTARY_INFO/EORDERING,eordering_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows,Add 'electronicOrdering' to `tender.techniques` (PROPOSAL #5)
-/COMPLEMENTARY_INFO/EINVOICING,einvoicing_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows https://github.com/eForms/eForms/issues/88,Add 'electronicInvoicing' to `tender.techniques`
-/COMPLEMENTARY_INFO/EPAYMENT,epayment_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows https://github.com/eForms/eForms/issues/88,Add 'electronicPayment' to `tender.techniques`
+/COMPLEMENTARY_INFO/EORDERING,eordering_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows,Set `tender.contractTerms.hasElectronicOrdering` to `true`
+/COMPLEMENTARY_INFO/EINVOICING,einvoicing_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows https://github.com/eForms/eForms/issues/88,Set `tender.contractTerms.electronicInvoicing` to 'allowed'
+/COMPLEMENTARY_INFO/EPAYMENT,epayment_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows https://github.com/eForms/eForms/issues/88,Set `tender.contractTerms.hasElectronicPayment` to `true`
 /COMPLEMENTARY_INFO/INFO_ADD,info_additional,VI.3,,Map to `description`
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY,appeals_body,VI.4.1,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations#add-a-party), and add 'reviewBody' to its `.roles`"
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/OFFICIALNAME,name_official,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME
