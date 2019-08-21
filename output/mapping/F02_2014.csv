@@ -77,16 +77,16 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/DATE_END,end,,,Map to the lot's `.contractPeriod.endDate` (PROPOSAL #19)
 /OBJECT_CONTRACT/OBJECT_DESCR/RENEWAL,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Renewals,Set the lot's `.hasRenewal` to `true` (PROPOSAL #22)
 /OBJECT_CONTRACT/OBJECT_DESCR/RENEWAL_DESCR,renewals_descr,,,Map to the lot's `.renewal.description` (PROPOSAL #22)
-/OBJECT_CONTRACT/OBJECT_DESCR/NO_RENEWAL,_no,,,"Set the lot's `.hasRenewal` to `false`"
+/OBJECT_CONTRACT/OBJECT_DESCR/NO_RENEWAL,_no,,,Set the lot's `.hasRenewal` to `false`
 /OBJECT_CONTRACT/OBJECT_DESCR/NB_ENVISAGED_CANDIDATE,envisaged_number,,,Map to the lot's `.secondStage.minimumCandidates` and `.secondStage.maximumCandidates`
 /OBJECT_CONTRACT/OBJECT_DESCR/NB_MIN_LIMIT_CANDIDATE,envisaged_min,,,Map to the lot's `.secondStage.minimumCandidates`
 /OBJECT_CONTRACT/OBJECT_DESCR/NB_MAX_LIMIT_CANDIDATE,max_number,,,Map to the lot's `.secondStage.maximumCandidates`
 /OBJECT_CONTRACT/OBJECT_DESCR/CRITERIA_CANDIDATE,criteria_choosing_limited,,,Map to the lot's `.selectionCriteria.description`
 /OBJECT_CONTRACT/OBJECT_DESCR/ACCEPTED_VARIANTS,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Variants,Set the lot's `.submissionTerms.variantPolicy` to 'allowed'
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_ACCEPTED_VARIANTS,_no,,,Set the lot's `.submissionTerms.variantPolicy` to 'notAllowed'
-/OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Options,"Add an `Options` object to the `tender.options` array, and set its `.id`. Set its `.relatedLot` to the lot's `.id`. (PROPOSAL #21)"
-/OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS_DESCR,options_descr,,,Set the options' `.description` (PROPOSAL #21)
-/OBJECT_CONTRACT/OBJECT_DESCR/NO_OPTIONS,_no,,,"Discard. If there is no corresponding `Options` object in the `tender.options` array, then there are no options."
+/OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Options,Set the lot's `.hasOptions` to `true` (PROPOSAL #21)
+/OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS_DESCR,options_descr,,,Map to the lot's `.options.description` (PROPOSAL #21)
+/OBJECT_CONTRACT/OBJECT_DESCR/NO_OPTIONS,_no,,,"Set the lot's `.hasOptions` to `false`"
 /OBJECT_CONTRACT/OBJECT_DESCR/ECATALOGUE_REQUIRED,electronic_catalogue_required,,,Set the lot's `.submissionTerms.electronicCatalogue` to 'required'.
 /OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_isEUFunded https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_EUFunded,"Get the `Organization` object for the European Union; if none exists yet, [add a party](../operations#add-a-party), and set its `.name` to 'European Union'. Then, add 'funder' to its `.roles`.\n\nGet the `Finance` object for this project; if none exists yet, add a `Finance` object to the `planning.budget.finance` array, map to its `.description`, set its `.id`, set its `.financingParty.name` to 'European Union', and set its `.financingParty.id` to the party's `.id`. Then, add the lot's `.id` to its `.relatedLots`. (PROPOSAL #20)\n\nIn [future forms](https://github.com/eForms/eForms/issues/181#issuecomment-439861320), this field will be de-emphasized."
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds."
