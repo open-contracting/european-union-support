@@ -36,8 +36,8 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/SHORT_DESCR,descr_short,II.1.4,,Map to `tender.description`
 /OBJECT_CONTRACT/LOT_DIVISION,_yes,,,"Discard. If `tender.lots` contains more than one object, then the contract is divided into lots."
 /OBJECT_CONTRACT/NO_LOT_DIVISION,_no,,,"Discard. If `tender.lots` contains one or fewer objects, then the contract isn't divided into lots.\n\nIf the contract isn't divided into lots, the guidance is to nonetheless add a single, virtual lot below."
-/OBJECT_CONTRACT/VAL_TOTAL,value,,,
-/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY,currency,,,
+/OBJECT_CONTRACT/VAL_TOTAL,value,,,Discard. This is derived from the `value` of awards.
+/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY,currency,,,Discard `/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY` as above.
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL,,,This element sets the currency for its children.,""
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY,currency,,,
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/LOW,lowest_offer,,,
