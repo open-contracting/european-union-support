@@ -23,8 +23,8 @@ xpath,label-key,index,comment,guidance
 /CONTRACTING_BODY/JOINT_PROCUREMENT_INVOLVED,joint_procurement_involves,,,"Discard. If there are multiple parties with the role 'buyer', then the contract involves joint procurement. (When *The contract involves joint procurement* is checked, at least one additional contracting authority is provided.)"
 /CONTRACTING_BODY/PROCUREMENT_LAW,joint_national_law,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_JointProcurement,Map to `tender.crossBorderLaw` (PROPOSAL #12)
 /CONTRACTING_BODY/CENTRAL_PURCHASING,joint_procurement_central,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,Add 'centralPurchasingBody' to the `.roles` of the party (PROPOSAL #11)
-/CONTRACTING_BODY/DOCUMENT_FULL,address_obtain_docs,,,"Discard. If no `ParticipationFee` object in the `tender.participationFees` array has a `.type` of 'document', then access is unrestricted.\n\nTo provide direct access to procurement documents, add `Document` objects to the `tender.documents` array, and set their `.id` and other fields."
-/CONTRACTING_BODY/DOCUMENT_RESTRICTED,docs_restricted,,,"Add a `ParticipationFee` object to the `tender.participationFees` array, set its `.type` to 'document', and set its `.id`.\n\nTo provide details of restrictions, see the [Participation Fees](https://github.com/open-contracting-extensions/ocds_participationFee_extension) extension."
+/CONTRACTING_BODY/DOCUMENT_FULL,address_obtain_docs,,,"Discard. If no `ParticipationFee` object in the `tender.participationFees` array has a `.type` of 'document', then access is unrestricted."
+/CONTRACTING_BODY/DOCUMENT_RESTRICTED,docs_restricted,,,"Add a `ParticipationFee` object to the `tender.participationFees` array, set its `.type` to 'document', and set its `.id`."
 /CONTRACTING_BODY/URL_DOCUMENT,,,,Map to the party's `.contactPoint.url`
 /CONTRACTING_BODY/ADDRESS_FURTHER_INFO_IDEM,as_contacts_above,,,Discard. Additional information can be obtained from the abovementioned address unless otherwised specified.
 /CONTRACTING_BODY/ADDRESS_FURTHER_INFO,address_another,,,"If only the contact person is different, use the [Additional Contact Points](https://github.com/open-contracting-extensions/ocds_additionalContactPoints_extension) extension, get the `Organization` object for the buyer, add a `ContactPoint` object to its `.additionalContactPoints` array, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT).\n\nOtherwise, [add a party](../operations#add-a-party), add 'processContactPoint' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME). (PROPOSAL #9)"
@@ -50,7 +50,7 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/LOT_DIVISION/LOT_MAX_NUMBER,lots_max,,,Map to `tender.lotDetails.maximumLotsBidPerSupplier`
 /OBJECT_CONTRACT/LOT_DIVISION/LOT_ONE_ONLY,lot_one_only,,,Set `tender.lotDetails.maximumLotsBidPerSupplier` to 1
 /OBJECT_CONTRACT/LOT_DIVISION/LOT_MAX_ONE_TENDERER,lots_max_awarded,,,Map to `tender.lotDetails.maximumLotsAwardedPerSupplier`
-/OBJECT_CONTRACT/LOT_DIVISION/LOT_COMBINING_CONTRACT_RIGHT,lots_combination_possible,,,"Map to `tender.lotDetails.awardCriteriaDetails`\n\nTo provide groups of lots, use `tender.lotGroups`"
+/OBJECT_CONTRACT/LOT_DIVISION/LOT_COMBINING_CONTRACT_RIGHT,lots_combination_possible,,,Map to `tender.lotDetails.awardCriteriaDetails`
 /OBJECT_CONTRACT/VAL_TOTAL,value,,,*Waiting for mapping from F03*
 /OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY,currency,,,*Waiting for mapping from F03*
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL,,,This element sets the currency for its children.,""
