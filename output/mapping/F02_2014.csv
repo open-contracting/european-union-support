@@ -52,16 +52,16 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/LOT_DIVISION/LOT_ONE_ONLY,lot_one_only,,,Set `tender.lotDetails.maximumLotsBidPerSupplier` to 1
 /OBJECT_CONTRACT/LOT_DIVISION/LOT_MAX_ONE_TENDERER,lots_max_awarded,,,Map to `tender.lotDetails.maximumLotsAwardedPerSupplier`
 /OBJECT_CONTRACT/LOT_DIVISION/LOT_COMBINING_CONTRACT_RIGHT,lots_combination_possible,,,Map to `tender.lotDetails.awardCriteriaDetails`
-/OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,"Add an `Item` object to the `tender.items` array, and, add a `Lot` object to the `tender.lots` array. If this notice is a call for competition, set the lot's `.status` to 'active'; otherwise, set it to 'planned'."
+/OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,"Add a `Lot` object to the `tender.lots` array, and add an `Item` object to the `tender.items` array. If this notice is a call for competition, set the lot's `.status` to 'active'; otherwise, set it to 'planned'."
 /OBJECT_CONTRACT/OBJECT_DESCR/@ITEM,,,,Discard
-/OBJECT_CONTRACT/OBJECT_DESCR/TITLE,title_contract,II.2.1,,"Map to the item's `.title`, and map to the lot's `.title` (PROPOSAL #29)"
+/OBJECT_CONTRACT/OBJECT_DESCR/TITLE,title_contract,II.2.1,,"Map to the lot's `.title`, and map to the item's `.title` (PROPOSAL #29)"
 /OBJECT_CONTRACT/OBJECT_DESCR/LOT_NO,lot_number,,,Map to the lot's `.id` and to the item's `.relatedLot`
 /OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL,cpv_additional,II.2.2,,""
 /OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_CODE,cpv_main,,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPV', and map to its `.id`."
 /OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id`."
 /OBJECT_CONTRACT/OBJECT_DESCR/NUTS,nutscode,,,"Take the NUTS code in the `CODE` attribute, and map to the item's `.deliveryAddress.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
 /OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE,mainsiteplace_works_delivery,,,Map to the item's `.deliveryLocation.description`
-/OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,descr_procurement,II.2.4,,"Map to the item's `.description`, and map to the lot's `.description`"
+/OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,descr_procurement,II.2.4,,"Map to the lot's `.description`, and map to the item's `.description`"
 /OBJECT_CONTRACT/OBJECT_DESCR/AC,award_criteria,II.2.5,,""
 /OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY,award_criterion_quality,,,"Add an `AwardCriterion` object to the lot's `.awardCriteria.criteria` array, and set its `.type` to 'quality'."
 /OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_QUALITY/AC_CRITERION,award_criterion_name,,,Map to the criterion's `.name`
@@ -86,11 +86,11 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_ACCEPTED_VARIANTS,_no,,,Set the lot's `.submissionTerms.variantPolicy` to 'notAllowed'
 /OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Options,Set the lot's `.hasOptions` to `true` (PROPOSAL #21)
 /OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS_DESCR,options_descr,,,Map to the lot's `.options.description` (PROPOSAL #21)
-/OBJECT_CONTRACT/OBJECT_DESCR/NO_OPTIONS,_no,,,"Set the lot's `.hasOptions` to `false`"
+/OBJECT_CONTRACT/OBJECT_DESCR/NO_OPTIONS,_no,,,Set the lot's `.hasOptions` to `false`
 /OBJECT_CONTRACT/OBJECT_DESCR/ECATALOGUE_REQUIRED,electronic_catalogue_required,,,Set the lot's `.submissionTerms.electronicCatalogue` to 'required'.
 /OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_isEUFunded https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_EUFunded,"Get the `Organization` object for the European Union; if none exists yet, [add a party](../operations#add-a-party), and set its `.name` to 'European Union'. Then, add 'funder' to its `.roles`.\n\nGet the `Finance` object for this project; if none exists yet, add a `Finance` object to the `planning.budget.finance` array, map to its `.description`, set its `.id`, set its `.financingParty.name` to 'European Union', and set its `.financingParty.id` to the party's `.id`. Then, add the lot's `.id` to its `.relatedLots`. (PROPOSAL #20)\n\nIn [future forms](https://github.com/eForms/eForms/issues/181#issuecomment-439861320), this field will be de-emphasized."
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds."
-/OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,info_additional,II.2.14,,Append to the item's `.description`\n\nThis results in a loss of structure. (WARNING #28)
+/OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,info_additional,II.2.14,,Append to the lot's `.description`
 /LEFTI,info_legal,III,,"The standard forms express exclusion grounds and selection criteria in this section as unstructured text. In the [introductory note](https://github.com/eForms/eForms/raw/master/20180604_eForms_consultation_introduction.docx) to its [eForms consultation](https://github.com/eForms/eForms), the European Commission proposes to create an extension to eForms to implement the [European Single Procurement Document (ESPD)](http://ec.europa.eu/growth/single-market/public-procurement/e-procurement/espd/), which expresses this information as structured data, following the model of the [Core Criterion and Core Evidence Vocabulary](https://joinup.ec.europa.eu/solution/core-criterion-and-core-evidence-vocabulary). With respect to OCDS, work on this section is postponed until either the extension to eForms is available or until the [ESPD Exchange Data Model](https://github.com/ESPD/ESPD-EDM) is stable."
 /LEFTI/SUITABILITY,info_evaluating_requir,,,""
 /LEFTI/ECONOMIC_CRITERIA_DOC,criteria_selection_docs,,,""
