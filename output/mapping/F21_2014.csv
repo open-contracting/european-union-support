@@ -54,8 +54,8 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/LOT_DIVISION/LOT_ONE_ONLY,lot_one_only,,,Set `tender.lotDetails.maximumLotsBidPerSupplier` to 1
 /OBJECT_CONTRACT/LOT_DIVISION/LOT_MAX_ONE_TENDERER,lots_max_awarded,,,Map to `tender.lotDetails.maximumLotsAwardedPerSupplier`
 /OBJECT_CONTRACT/LOT_DIVISION/LOT_COMBINING_CONTRACT_RIGHT,lots_combination_possible,,,Map to `tender.lotDetails.awardCriteriaDetails`
-/OBJECT_CONTRACT/VAL_TOTAL,value,,,*Waiting for mapping from F03*
-/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY,currency,,,*Waiting for mapping from F03*
+/OBJECT_CONTRACT/VAL_TOTAL,value,,,Discard. This is derived from the `value` of awards.
+/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY,currency,,,Discard `/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY` as above.
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL,,,This element sets the currency for its children.,""
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY,currency,,,*Waiting for mapping from F03*
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/LOW,lowest_offer,,,*Waiting for mapping from F03*
