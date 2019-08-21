@@ -64,11 +64,11 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds."
 /OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,info_additional,II.2.14,,Append to the item's `.description`\n\nThis results in a loss of structure. (WARNING #28)
 /PROCEDURE,procedure,IV,,""
-/PROCEDURE/PT_OPEN,proctype_open,,,"Set `tender.procurementMethod` to 'open', and set `tender.procurementMethodName` to 'Open procedure'"
-/PROCEDURE/PT_RESTRICTED,proctype_restricted,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_AcceleratedProcedure,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodName` to 'Restricted procedure'"
-/PROCEDURE/PT_NEGOTIATED_WITH_PRIOR_CALL,proctype_negot_w_call,,,"Set `tender.procurementMethod` to 'selective', and set `tender.procedure.name` to 'Negotiated procedure with prior call for competition'"
-/PROCEDURE/PT_COMPETITIVE_DIALOGUE,proctype_comp_dialogue,,,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodName` to 'Competitive dialogue'"
-/PROCEDURE/PT_INNOVATION_PARTNERSHIP,proctype_innovation,,,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodName` to 'Innovation partnership'"
+/PROCEDURE/PT_OPEN,proctype_open,,,"Set `tender.procurementMethod` to 'open', and set `tender.procurementMethodDetails` to 'Open procedure'"
+/PROCEDURE/PT_RESTRICTED,proctype_restricted,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_AcceleratedProcedure,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodDetails` to 'Restricted procedure'"
+/PROCEDURE/PT_NEGOTIATED_WITH_PRIOR_CALL,proctype_negot_w_call,,,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodDetails` to 'Negotiated procedure with prior call for competition'"
+/PROCEDURE/PT_COMPETITIVE_DIALOGUE,proctype_comp_dialogue,,,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodDetails` to 'Competitive dialogue'"
+/PROCEDURE/PT_INNOVATION_PARTNERSHIP,proctype_innovation,,,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodDetails` to 'Innovation partnership'"
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL,award_wo_prior_pub_d1,,,See [Annex D1](#annex-d1-general-procurement)
 /PROCEDURE/FRAMEWORK,notice_involves_framework,,,Set `tender.techniques.hasFrameworkAgreement` to `true`
 /PROCEDURE/DPS,dps_was_set_up,,,Set `tender.techniques.hasDynamicPurchasingSystem` to `true`
