@@ -103,7 +103,7 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/NO_SME,_no,,,Set the party's `.details.scale` to 'large'
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES,value_concession_info,V.2.4,,""
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL,value_estim_total_contract_concess,,,Discard. The *Initial estimated total value of the contract/lot* is available in the OCDS release with the same `ocid` as this release and with 'tender' in its `tag`.
-/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY,currency,,,"For the *Initial estimated total value of the contract/lot*, map to `tender.value.currency`. For the *Total value of the contract/lot*, map to the contract's `.value.currency`."
+/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY,currency,,,"For the *Initial estimated total value of the contract/lot*, discard as above. For the *Total value of the contract/lot*, map to the contract's `.value.currency`."
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL,value_total_final_concess,,,Map to the contract's `.value.amount`
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY,currency,,,/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY
 /AWARD_CONTRACT/AWARDED_CONTRACT/VAL_REVENUE,concess_fees_prices,,,*Waiting for mapping from F23*
