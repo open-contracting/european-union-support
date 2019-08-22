@@ -73,7 +73,7 @@ def indices(text)
 end
 
 def help_text?(key, number: nil, override: [])
-  key[/\AHD?_/] || %w(allocation_rest excl_vat icar_H_provide_numbers notice_design_cont request_qualification social_transfer_staff).include?(key) || override.include?(key)
+  key[/\AHD?_/] && key != 'H_agree_to_publish' || %w(allocation_rest excl_vat icar_H_provide_numbers notice_design_cont request_qualification social_transfer_staff).include?(key) || override.include?(key)
 end
 
 # The same XSD is used for both T01 and T02, but each form uses different parts.

@@ -154,12 +154,6 @@ task :table do
         row = ignore.shift
         builder.row(key, help_labels: help_labels(labels, number: number), index: row['index'])
 
-      elsif enumerations.any? && enumerations[0]['label-key'] == key
-        row = enumerations.shift
-        builder.row(key, help_labels: help_labels(labels, number: number), xpath: row['xpath'], value: row['value'], guidance: row['guidance'])
-
-        seen[:enumerations] << key
-
       # Fields appear in a different order in the form and XSD.
       elsif (i = data[0..5].index{ |row| row['label-key'] == key }) && (key != 'weighting' || i == 0)
         row = data.delete_at(i)
@@ -181,6 +175,12 @@ task :table do
           end
         end
         data = data.drop_while(&skipper)
+
+      elsif enumerations.any? && enumerations[0]['label-key'] == key
+        row = enumerations.shift
+        builder.row(key, help_labels: help_labels(labels, number: number), xpath: row['xpath'], value: row['value'], guidance: row['guidance'])
+
+        seen[:enumerations] << key
 
       elsif additional.any? && additional[0]['label-key'] == key
         row = additional.shift

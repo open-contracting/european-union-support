@@ -18,7 +18,12 @@ namespace :label do
       Nokogiri::XML(File.read(filename)).xpath("/*//*|/*//@*").each do |element|
         xpath = element.path.sub(/\A\/(F.._2014|MOVE)/, '').gsub(/\[\d+\]/, '').gsub(%r{\b(?:choice|group|sequence)/}, '')
         # Exclude XSD elements, paragraph tags, form identifier, and attributes for empty elements.
-        if !%w(choice group sequence P @CODE @CTYPE @FORM @PUBLICATION @TYPE @VALUE).include?(xpath.split('/')[-1])
+        component = xpath.split('/')[-1]
+        if !%w(choice group sequence P @CODE @CTYPE @FORM @PUBLICATION @TYPE @VALUE).include?(component)
+          xpaths << xpath
+        end
+        # The PUBLICATION attribute has corresponding form elements on F06.
+        if basename[0..2] == 'F06' && component == '@PUBLICATION'
           xpaths << xpath
         end
       end
@@ -187,7 +192,7 @@ namespace :label do
         number = ENV.fetch('FORM')
         labels = CSV.read("output/labels/EN_#{number}.csv").flatten
       else
-        number = File.basename(filename).match(/\A(F\d\d)/)[1]
+        number = basename.match(/\A(F\d\d)/)[1]
         next if %w(F16 F17 F18 F19).include?(number)
         labels = label_keys(pdftotext(files("source/TED_forms_templates_R2.0.9/#{number}_*.pdf")[0]))
       end
