@@ -189,7 +189,10 @@ task :table do
       elsif omit.any? && omit[0]['label-key'] == key
         omit.shift
 
-      elsif seen[:enumerations].include?(key) || seen[filename].include?(key) && number != 'F14'
+      elsif seen[:enumerations].include?(key)
+        builder.row(key, help_labels: help_labels(labels, number: number), value: :sentinel, reference: true)
+
+      elsif seen[filename].include?(key) && number != 'F14'
         builder.row(key, help_labels: help_labels(labels, number: number), reference: true)
 
       else

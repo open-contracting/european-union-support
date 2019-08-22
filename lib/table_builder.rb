@@ -33,7 +33,8 @@ class TableBuilder
   def initialize(language, extra_xpaths_to_list)
     @language = language
     @extra_xpaths_to_list = extra_xpaths_to_list
-    @targets = {}
+    @elem_targets = {}
+    @enum_targets = {}
     @guidances = {}
     @output = ''
   end
@@ -72,7 +73,11 @@ class TableBuilder
 
   def row(label, help_labels: [], index: nil, xpath: nil, value: nil, reference: nil, guidance: false)
     if xpath
-      @targets[label] = xpath
+      if value
+        @enum_targets[label] = xpath
+      else
+        @elem_targets[label] = xpath
+      end
     end
     if xpath && guidance
       @guidances[xpath] = guidance
@@ -95,7 +100,7 @@ class TableBuilder
     @extra_xpaths_to_list.fetch(xpath, []).each do |extra|
       content += "<br>#{code(extra)}"
     end
-    if value
+    if value && !reference
       content += "is #{code(value)}"
     end
 
@@ -124,7 +129,12 @@ class TableBuilder
 
     # "OCDS guidance" cell.
     if reference
-      cell(link_to('See above', "##{@targets[label]}"))
+      if value
+        target = @enum_targets.fetch(label)
+      else
+        target = @elem_targets.fetch(label)
+      end
+      cell(link_to('See above', "##{target}"))
     elsif !no_guidance
       if @guidances.include?(guidance)
         cell(link_to('See above', "##{guidance}"))
