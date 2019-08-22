@@ -56,7 +56,7 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE,price,,,"Add an `AwardCriterion` object to the lot's `.awardCriteria.criteria` array, and set its `.type` to 'price'."
 /OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PRICE/AC_WEIGHTING,weighting,,,Map to the criterion's `.description`
 /OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PROCUREMENT_DOC,award_criteria_descriptive,,,"Discard. If the lot's `.awardCriteria.criteria` isn't set, then price is not the only award criterion and all criteria are stated only in the procurement documents."
-/OBJECT_CONTRACT/OBJECT_DESCR/INDEFINITE_DURATION,qs_duration_indefinite,,,
+/OBJECT_CONTRACT/OBJECT_DESCR/INDEFINITE_DURATION,qs_duration_indefinite,,,Discard. Absence of period means indefinite duration.  (PROPOSAL #19)
 /OBJECT_CONTRACT/OBJECT_DESCR/DATE_START,starting,,,Map to the lot's `.contractPeriod.startDate` (PROPOSAL #19)
 /OBJECT_CONTRACT/OBJECT_DESCR/DATE_END,end,,,Map to the lot's `.contractPeriod.endDate` (PROPOSAL #19)
 /OBJECT_CONTRACT/OBJECT_DESCR/RENEWAL,qs_renewal,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Renewals,Set the lot's `.hasRenewal` to `true` (PROPOSAL #22)
@@ -76,7 +76,7 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE,procedure,IV,,""
 /PROCEDURE/EAUCTION_USED,eauction_will_used,,,Set `tender.techniques.hasElectronicAuction` to `true`
 /PROCEDURE/INFO_ADD_EAUCTION,eauction_info_addit,,,Map to `tender.techniques.electronicAuction.description`
-/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,,
+/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,,Discard. The previous publication concerning this procedure is the OCDS release with the same ocid as this release and with the latest `.date`.
 /PROCEDURE/LANGUAGES,languages_allowed,IV.2.4,,""
 /PROCEDURE/LANGUAGES/LANGUAGE,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_SubmissionLanguages,Lowercase and add to the `tender.submissionTerms.languages` array
 /COMPLEMENTARY_INFO,info_complement,VI,,""
