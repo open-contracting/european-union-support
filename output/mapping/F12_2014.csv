@@ -57,11 +57,11 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE,procedure,IV,,""
 /PROCEDURE/PT_OPEN,open,,,"Set `tender.procurementMethod` to 'open', and set `tender.procurementMethodDetails` to 'Open procedure'"
 /PROCEDURE/PT_RESTRICTED,type_restricted,,,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodDetails` to 'Restricted procedure'"
-/PROCEDURE/NB_PARTICIPANTS,number_participants,,,
-/PROCEDURE/NB_MIN_PARTICIPANTS,min_number,,,
-/PROCEDURE/NB_MAX_PARTICIPANTS,max_number,,,
+/PROCEDURE/NB_PARTICIPANTS,number_participants,,,Map to `tender.secondStage.minimumCandidates` and `.secondStage.maximumCandidates`
+/PROCEDURE/NB_MIN_PARTICIPANTS,min_number,,,Map to `tender.secondStage.minimumCandidates`
+/PROCEDURE/NB_MAX_PARTICIPANTS,max_number,,,Map to `tender.secondStage.maximumCandidates`
 /PROCEDURE/PARTICIPANT_NAME,dc_names_selected,IV.1.7,,
-/PROCEDURE/CRITERIA_EVALUATION,dc_criteria_evaluation,IV.1.9,,
+/PROCEDURE/CRITERIA_EVALUATION,dc_criteria_evaluation,IV.1.9,,Map to `tender.awardCriteriaDetails`
 /PROCEDURE/DATE_RECEIPT_TENDERS,date,,,Map to the date component of `tender.tenderPeriod.endDate`
 /PROCEDURE/TIME_RECEIPT_TENDERS,time,,,Map to the time component of `tender.tenderPeriod.endDate`
 /PROCEDURE/DATE_DISPATCH_INVITATIONS,date_dispatch_participate_selected,IV.2.3,,Map to the date component of `tender.secondStage.invitationDate`.
