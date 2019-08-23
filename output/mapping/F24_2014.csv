@@ -62,7 +62,7 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,descr_procurement,II.2.4,,"Map to the lot's `.description`, and map to the item's `.description`"
 /OBJECT_CONTRACT/OBJECT_DESCR/AC,award_criteria,II.2.5,,""
 /OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_PROCUREMENT_DOC,award_criteria_in_docs,,,"Discard. If the lot's `.awardCriteria.criteria` isn't set, then price is not the only award criterion and all criteria are stated only in the procurement documents."
-/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_CRITERION,criteria,,,
+/OBJECT_CONTRACT/OBJECT_DESCR/AC/AC_CRITERION,criteria,,,"Add an `AwardCriterion` object to the lot's `.awardCriteria.criteria` array, and map to the criterion's `.name`"
 /OBJECT_CONTRACT/OBJECT_DESCR/VAL_OBJECT,value_excl_vat,,,Map to the lot's `.value.amount`
 /OBJECT_CONTRACT/OBJECT_DESCR/VAL_OBJECT/@CURRENCY,currency,,,Map to the lot's `.value.currency`
 /OBJECT_CONTRACT/OBJECT_DESCR/DURATION,duration_concession,II.2.7,,""
