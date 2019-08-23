@@ -57,7 +57,7 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY,currency,,,/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/LOW,lowest_offer,,,"Add a `BidsStatistic` object to the `bids.statistics` array, set its `.measure` to 'lowestValidBidValue', set its `.id`, and map to its `.value`."
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/HIGH,highest_offer,,,"Add a `BidsStatistic` object to the `bids.statistics` array, set its `.measure` to 'highestValidBidValue', set its `.id`, and map to its `.value`."
-/OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,"Add a `Lot` object to the `tender.lots` array, and add an `Item` object to the `tender.items` array.\n\n**F01, F04, F07**: If this notice is a call for competition, set the lot's `.status` to 'active'; otherwise, set it to 'planned'.\n\n**F02, F05, F12**: Set the lot's `.status` to 'active'.\n\n**F08**: Set the lot's `.status` to 'planned'.\n\n**F12, F13**: Set the lot's `.id` to '1', and set the item's `.id` to '1'."
+/OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,"Add a `Lot` object to the `tender.lots` array, and add an `Item` object to the `tender.items` array. Set the lot's `.status` to the same value as `tender.status`.\n\n**F12, F13**: Set the lot's `.id` to '1', and set the item's `.id` to '1'."
 /OBJECT_CONTRACT/OBJECT_DESCR/@ITEM,,,,Discard
 /OBJECT_CONTRACT/OBJECT_DESCR/TITLE,title_contract,II.2.1,,"Map to the lot's `.title`, and map to the item's `.title` (PROPOSAL #29)"
 /OBJECT_CONTRACT/OBJECT_DESCR/LOT_NO,lot_number,,,"If not set, let *Lot No* be '1'. Map to the lot's `.id`, map to the item's `.id`, and map to the item's `.relatedLot`."
@@ -84,9 +84,9 @@ xpath,label-key,index,comment,guidance
 /LEFTI/PERFORMANCE_CONDITIONS,concession_performance_conditions,III.2.2,,Map to `tender.contractTerms.termsPerformance`
 /LEFTI/PERFORMANCE_STAFF_QUALIFICATION,staff_responsible_indicate_concess,,,""
 /PROCEDURE,procedure,IV,,""
-/PROCEDURE/PT_AWARD_CONTRACT_WITH_PRIOR_PUBLICATION,proctype_with_concess_notice,,,
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION,award_wo_prior_pub_d4,,,
-/PROCEDURE/MAIN_FEATURES_AWARD,award_main_features,IV.1.11,,*Waiting for mapping from F21*
+/PROCEDURE/PT_AWARD_CONTRACT_WITH_PRIOR_PUBLICATION,proctype_with_concess_notice,,,Set `tender.procurementMethodDetails` to 'Award procedure with prior publication of a call for competition'.
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION,award_wo_prior_pub_d4,,,"Set `tender.procurementMethod` to 'limited', and set `tender.procurementMethodDetails` to 'Award procedure without prior publication of a call for competition'. See [Annex D4](#annex-d4-concession)"
+/PROCEDURE/MAIN_FEATURES_AWARD,award_main_features,IV.1.11,,Map to `tender.awardCriteriaDetails`
 /PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,Discard. The *previous publication concerning this procedure* is the OCDS release with the same `ocid` as this release and with an earlier `date` that is nearest that of this release.
 /PROCEDURE/DATE_RECEIPT_TENDERS,date,,,Map to the date component of `tender.tenderPeriod.endDate`
 /PROCEDURE/TIME_RECEIPT_TENDERS,time,,,Map to the time component of `tender.tenderPeriod.endDate`
@@ -153,10 +153,10 @@ xpath,label-key,index,comment,guidance
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_INFO,appeals_info,VI.4.4,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations#add-a-party), and add 'reviewContactPoint' to its `.roles` (PROPOSAL #25)"
 /COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,date_dispatch,VI.5,,Map to `date`
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE,d_just_for_wo_pub_201423,D4.1,,""
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_NO_TENDERS_REQUESTS,d_no_applications,,,
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_ARTISTIC,d_artistic_concess,,,
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_TECHNICAL,d_technical,,,
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_EXCLUSIVE_RIGHT,d_existence_exclusive,,,
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_PROTECT_RIGHTS,d_intellectual_concess,,,
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_OUTSIDE_SCOPE,d_outside_scope,,,
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_JUSTIFICATION,d_explain,,,
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_NO_TENDERS_REQUESTS,d_no_applications,,,"Set `.id` to 'D_NO_TENDERS_REQUESTS' and `.name` to 'No applications, no tenders or no suitable tenders/applications in response to a prior concession award procedure'"
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_ARTISTIC,d_artistic_concess,,,Set `.id` to 'D_ARTISTIC' and `.name` to 'The services can be provided only by a particular economic operator due to concession aiming at the creation or acquisition of a unique work of art or artistic performance'
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_TECHNICAL,d_technical,,,Set `.id` to 'D_ARTISTIC' and `.name` to 'The services can be provided only by a particular economic operator due to absence of competition for technical reasons'
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_EXCLUSIVE_RIGHT,d_existence_exclusive,,,Set `.id` to 'D_ARTISTIC' and `.name` to 'The services can be provided only by a particular economic operator due to existence of an exclusive right'
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_PROTECT_RIGHTS,d_intellectual_concess,,,Set `.id` to 'D_ARTISTIC' and `.name` to 'The services can be provided only by a particular economic operator due to protection of intellectual property rights and exclusive rights other than those defined in point (10) of Article 5 of the directive'
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_OUTSIDE_SCOPE,d_outside_scope,,,Set `.id` to 'D_OUTSIDE_SCOPE' and `.name` to 'The procurement falls outside the scope of application of the directive'
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_JUSTIFICATION,d_explain,,,Map to `tender.procurementMethodRationale`
