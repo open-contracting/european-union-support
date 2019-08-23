@@ -62,8 +62,8 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds."
 /OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,info_additional,II.2.14,,"Append to the lot's `.description`, and append to the item's `.description`\n\nThis results in a loss of structure. (WARNING #28)"
 /PROCEDURE,procedure,IV,,""
-/PROCEDURE/PT_AWARD_CONTRACT_WITH_PRIOR_PUBLICATION,proctype_with_concess_notice,,,*Waiting for mapping from F23*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION,award_wo_prior_pub_d4,,,*Waiting for mapping from F23*
+/PROCEDURE/PT_AWARD_CONTRACT_WITH_PRIOR_PUBLICATION,proctype_with_concess_notice,,,Set `tender.procurementMethodDetails` to 'Award procedure with prior publication of a call for competition'. (PROPOSAL #46)
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION,award_wo_prior_pub_d4,,,"Set `tender.procurementMethod` to 'limited', and set `tender.procurementMethodDetails` to 'Award procedure without prior publication of a call for competition'.\n\nSee [Annex D4](#annex-d4-concession)"
 /PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to `tender.coveredBy`
 /PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in `tender.coveredBy`, then the procurement isn't covered by the GPA."
 /PROCEDURE/MAIN_FEATURES_AWARD,award_main_features,IV.1.11,,Map to `tender.awardCriteriaDetails`
@@ -128,10 +128,10 @@ xpath,label-key,index,comment,guidance
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_INFO,appeals_info,VI.4.4,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations#add-a-party), and add 'reviewContactPoint' to its `.roles` (PROPOSAL #25)"
 /COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,date_dispatch,VI.5,,Map to `date`
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE,d_just_for_wo_pub_201423,D4.1,,""
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_NO_TENDERS_REQUESTS,d_no_applications,,,*Waiting for mapping from F23*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_ARTISTIC,d_artistic_concess,,,*Waiting for mapping from F23*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_TECHNICAL,d_technical,,,*Waiting for mapping from F23*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_EXCLUSIVE_RIGHT,d_existence_exclusive,,,*Waiting for mapping from F23*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_PROTECT_RIGHTS,d_intellectual_concess,,,*Waiting for mapping from F23*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_OUTSIDE_SCOPE,d_outside_scope,,,*Waiting for mapping from F23*
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_JUSTIFICATION,d_explain,,,*Waiting for mapping from F23*
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_NO_TENDERS_REQUESTS,d_no_applications,,,"Set `.id` to 'D_NO_TENDERS_REQUESTS' and `.name` to 'No applications, no tenders or no suitable tenders/applications in response to a prior concession award procedure'"
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_ARTISTIC,d_artistic_concess,,,Set `.id` to 'D_ARTISTIC' and `.name` to 'The services can be provided only by a particular economic operator due to concession aiming at the creation or acquisition of a unique work of art or artistic performance'
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_TECHNICAL,d_technical,,,Set `.id` to 'D_ARTISTIC' and `.name` to 'The services can be provided only by a particular economic operator due to absence of competition for technical reasons'
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_EXCLUSIVE_RIGHT,d_existence_exclusive,,,Set `.id` to 'D_ARTISTIC' and `.name` to 'The services can be provided only by a particular economic operator due to existence of an exclusive right'
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_PROTECT_RIGHTS,d_intellectual_concess,,,Set `.id` to 'D_ARTISTIC' and `.name` to 'The services can be provided only by a particular economic operator due to protection of intellectual property rights and exclusive rights other than those defined in point (10) of Article 5 of the directive'
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_OUTSIDE_SCOPE,d_outside_scope,,,Set `.id` to 'D_OUTSIDE_SCOPE' and `.name` to 'The procurement falls outside the scope of application of the directive'
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_JUSTIFICATION,d_explain,,,Map to `tender.procurementMethodRationale`
