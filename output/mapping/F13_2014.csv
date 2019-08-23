@@ -34,7 +34,7 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/CPV_MAIN,,II.1.2,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_Classification,""
 /OBJECT_CONTRACT/CPV_MAIN/CPV_CODE,cpv_main,,,"Set `tender.classification.scheme` to 'CPV', take the CPV code in the `CODE` attribute, and map to `tender.classification.id` (PROPOSAL #15)"
 /OBJECT_CONTRACT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,"For each `CODE` attribute, add a `Classification` object to the `tender.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id` (PROPOSAL #16)"
-/OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,"Add a `Lot` object to the `tender.lots` array, and add an `Item` object to the `tender.items` array.\n\n**F01, F04, F07**: If this notice is a call for competition, set the lot's `.status` to 'active'; otherwise, set it to 'planned'.\n\n**F02, F05, F12**: Set the lot's `.status` to 'active'.\n\n**F08**: Set the lot's `.status` to 'planned'."
+/OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,"Add a `Lot` object to the `tender.lots` array, and add an `Item` object to the `tender.items` array.\n\n**F01, F04, F07**: If this notice is a call for competition, set the lot's `.status` to 'active'; otherwise, set it to 'planned'.\n\n**F02, F05, F12**: Set the lot's `.status` to 'active'.\n\n**F08**: Set the lot's `.status` to 'planned'.\n\n**F12, F13**: Set the lot's `.id` to '1', and set the item's `.id` to '1'."
 /OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL,cpv_additional,II.2.2,,""
 /OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_CODE,cpv_main,,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPV', and map to its `.id`."
 /OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id`."
@@ -50,12 +50,12 @@ xpath,label-key,index,comment,guidance
 /RESULTS/NO_AWARDED_PRIZE,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/contract_statusDetails,Set the award's `.status` to 'unsuccessful'
 /RESULTS/NO_AWARDED_PRIZE/PROCUREMENT_DISCONTINUED,award_discontinued,,,Set the award's `.statusDetails` to 'discontinued'
 /RESULTS/NO_AWARDED_PRIZE/PROCUREMENT_UNSUCCESSFUL,award_no_projects,,,Set the award's `.statusDetails` to 'unsuccessful'\n\nThere's an open issue ([#764](https://github.com/open-contracting/standard/issues/764)) about status details. (ISSUE)
-/RESULTS/AWARDED_PRIZE,_no,,,
-/RESULTS/AWARDED_PRIZE/DATE_DECISION_JURY,dc_date_decision,V.3.1,,
-/RESULTS/AWARDED_PRIZE/PARTICIPANTS,info_paricipants,V.3.2,,
-/RESULTS/AWARDED_PRIZE/PARTICIPANTS/NB_PARTICIPANTS,number_participants,,,
-/RESULTS/AWARDED_PRIZE/PARTICIPANTS/NB_PARTICIPANTS_SME,number_participants_sme,,,
-/RESULTS/AWARDED_PRIZE/PARTICIPANTS/NB_PARTICIPANTS_OTHER_EU,number_participants_foreign,,,
+/RESULTS/AWARDED_PRIZE,_no,,,"Set the award's `.status` to 'active'\n\nAdd a `Contract` object to the `contracts` array, set its `.id` and `.awardID` to the award's `.id`, and set its `.status` to 'active'."
+/RESULTS/AWARDED_PRIZE/DATE_DECISION_JURY,dc_date_decision,V.3.1,,Map to the contract's `.dateSigned`
+/RESULTS/AWARDED_PRIZE/PARTICIPANTS,info_paricipants,V.3.2,,""
+/RESULTS/AWARDED_PRIZE/PARTICIPANTS/NB_PARTICIPANTS,number_participants,,,"Add a `BidsStatistic` object to the `bids.statistics` array, set its `.id`, set its `.measure` to 'bids', set its `.relatedLot` to '1', and map to its `.value`."
+/RESULTS/AWARDED_PRIZE/PARTICIPANTS/NB_PARTICIPANTS_SME,number_participants_sme,,,"Add a `BidsStatistic` object to the `bids.statistics` array, set its `.id`, set its `.measure` to 'smeBids', set its `.relatedLot` to '1', and map to its `.value`."
+/RESULTS/AWARDED_PRIZE/PARTICIPANTS/NB_PARTICIPANTS_OTHER_EU,number_participants_foreign,,,"Add a `BidsStatistic` object to the `bids.statistics` array, set its `.id`, set its `.measure` to 'foreignBidsFromEU', set its `.relatedLot` to '1', and map to its `.value`."
 /RESULTS/AWARDED_PRIZE/WINNERS,,,,""
 /RESULTS/AWARDED_PRIZE/WINNERS/WINNER,,,"Contains ADDRESS_WINNER, SME, NO_SME.",""
 /RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER,dc_name_winner,V.3.3,,"[Add a party](../operations#add-a-party), and add 'supplier' to its `.roles`\n\nAdd an `OrganizationReference` object to the award's `.suppliers` array, set its `.id` to the party's `.id`, and set its `.name` to the party's [`.name`](#/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/OFFICIALNAME)"
@@ -70,10 +70,10 @@ xpath,label-key,index,comment,guidance
 /RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/E_MAIL,address_email,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL
 /RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/FAX,address_fax,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX
 /RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/URL,internet,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL
-/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/SME,_yes,,,
-/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/NO_SME,_no,,,
-/RESULTS/AWARDED_PRIZE/VAL_PRIZE,dc_value_prizes_excl_vat,,,
-/RESULTS/AWARDED_PRIZE/VAL_PRIZE/@CURRENCY,currency,,,
+/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/SME,_yes,,,Set the party's `.details.scale` to 'sme'
+/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/NO_SME,_no,,,Set the party's `.details.scale` to 'large'
+/RESULTS/AWARDED_PRIZE/VAL_PRIZE,dc_value_prizes_excl_vat,,,Map to the contract's `.value.amount`
+/RESULTS/AWARDED_PRIZE/VAL_PRIZE/@CURRENCY,currency,,,Map to the contract's `.value.currency`
 /COMPLEMENTARY_INFO,info_complement,VI,,""
 /COMPLEMENTARY_INFO/INFO_ADD,info_additional,VI.3,,Map to `description`
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY,appeals_body,VI.4.1,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations#add-a-party), and add 'reviewBody' to its `.roles`"
