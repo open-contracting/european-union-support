@@ -113,7 +113,7 @@ Many XPath's are common across forms. To copy guidance across forms, run:
     rake label:copy SOURCE=F07 FILES=F22
     rake label:copy SOURCE=F12 FILES=F13
     rake label:copy SOURCE=F15 FILES=F23,F25
-    rake label:copy SOURCE=F21 FILES=F22
+    rake label:copy SOURCE=F21 FILES=F22,F23,F25
     rake label:copy SOURCE=F23 FILES=F25
     rake label:copy SOURCE=F24 FILES=F25
     rake label:copy SOURCE=F03 FILES=MOVE

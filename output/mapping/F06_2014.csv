@@ -42,7 +42,7 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/@PUBLICATION,,,,/OBJECT_CONTRACT/VAL_TOTAL/@PUBLICATION
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/LOW,lowest_offer,,,"Add a `BidsStatistic` object to the `bids.statistics` array, set its `.measure` to 'lowestValidBidValue', set its `.id`, and map to its `.value`."
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/HIGH,highest_offer,,,"Add a `BidsStatistic` object to the `bids.statistics` array, set its `.measure` to 'highestValidBidValue', set its `.id`, and map to its `.value`."
-/OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,"Add a `Lot` object to the `tender.lots` array, and add an `Item` object to the `tender.items` array.\n\n**F01, F04, F07**: If this notice is a call for competition, set the lot's `.status` to 'active'; otherwise, set it to 'planned'.\n\n**F02, F05, F12**: Set the lot's `.status` to 'active'.\n\n**F08**: Set the lot's `.status` to 'planned'.\n\n**F12, F13**: Set the lot's `.id` to '1', and set the item's `.id` to '1'."
+/OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,"Add a `Lot` object to the `tender.lots` array, and add an `Item` object to the `tender.items` array. Set the lot's `.status` to the same value as `tender.status`.\n\n**F12, F13**: Set the lot's `.id` to '1', and set the item's `.id` to '1'."
 /OBJECT_CONTRACT/OBJECT_DESCR/@ITEM,,,,Discard
 /OBJECT_CONTRACT/OBJECT_DESCR/TITLE,title_contract,II.2.1,,"Map to the lot's `.title`, and map to the item's `.title` (PROPOSAL #29)"
 /OBJECT_CONTRACT/OBJECT_DESCR/LOT_NO,lot_number,,,"If not set, let *Lot No* be '1'. Map to the lot's `.id`, map to the item's `.id`, and map to the item's `.relatedLot`."
@@ -72,7 +72,7 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/PT_NEGOTIATED_WITH_PRIOR_CALL,proctype_negot_w_call,,,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodDetails` to 'Negotiated procedure with prior call for competition'"
 /PROCEDURE/PT_COMPETITIVE_DIALOGUE,proctype_comp_dialogue,,,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodDetails` to 'Competitive dialogue'"
 /PROCEDURE/PT_INNOVATION_PARTNERSHIP,proctype_innovation,,,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodDetails` to 'Innovation partnership'"
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL,award_wo_prior_pub_d1,,,See [Annex D1](#annex-d1-general-procurement)
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL,award_wo_prior_pub_d1,,,"Set `tender.procurementMethod` to 'limited', and set `tender.procurementMethodDetails` to 'Award procedure without prior publication of a call for competition'.\n\n**F03, F21:** See [Annex D1](#annex-d1-general-procurement)\n\n**F06, F22:** See [Annex D2](#annex-d2-utilities)"
 /PROCEDURE/FRAMEWORK,notice_involves_framework,,,Set `tender.techniques.hasFrameworkAgreement` to `true`
 /PROCEDURE/DPS,dps_was_set_up,,,Set `tender.techniques.hasDynamicPurchasingSystem` to `true`
 /PROCEDURE/EAUCTION_USED,eauction_was_used,,,Set `tender.techniques.hasElectronicAuction` to `true`
