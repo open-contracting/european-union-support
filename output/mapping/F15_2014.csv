@@ -40,10 +40,10 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY,currency,,,/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/LOW,lowest_offer,,,"Add a `BidsStatistic` object to the `bids.statistics` array, set its `.measure` to 'lowestValidBidValue', set its `.id`, and map to its `.value`."
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/HIGH,highest_offer,,,"Add a `BidsStatistic` object to the `bids.statistics` array, set its `.measure` to 'highestValidBidValue', set its `.id`, and map to its `.value`."
-/OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,"Add a `Lot` object to the `tender.lots` array, and add an `Item` object to the `tender.items` array.\n\n**F01, F04, F07**: If this notice is a call for competition, set the lot's `.status` to 'active'; otherwise, set it to 'planned'.\n\n**F02, F05, F12**: Set the lot's `.status` to 'active'.\n\n**F08**: Set the lot's `.status` to 'planned'."
+/OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,"Add a `Lot` object to the `tender.lots` array, and add an `Item` object to the `tender.items` array.\n\n**F01, F04, F07**: If this notice is a call for competition, set the lot's `.status` to 'active'; otherwise, set it to 'planned'.\n\n**F02, F05, F12**: Set the lot's `.status` to 'active'.\n\n**F08**: Set the lot's `.status` to 'planned'.\n\n**F12, F13**: Set the lot's `.id` to '1', and set the item's `.id` to '1'."
 /OBJECT_CONTRACT/OBJECT_DESCR/@ITEM,,,,Discard
 /OBJECT_CONTRACT/OBJECT_DESCR/TITLE,title_contract,II.2.1,,"Map to the lot's `.title`, and map to the item's `.title` (PROPOSAL #29)"
-/OBJECT_CONTRACT/OBJECT_DESCR/LOT_NO,lot_number,,,Map to the lot's `.id` and to the item's `.relatedLot`
+/OBJECT_CONTRACT/OBJECT_DESCR/LOT_NO,lot_number,,,"If not set, let *Lot No* be '1'. Map to the lot's `.id`, map to the item's `.id`, and map to the item's `.relatedLot`."
 /OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL,cpv_additional,II.2.2,,""
 /OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_CODE,cpv_main,,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPV', and map to its `.id`."
 /OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id`."
@@ -97,7 +97,7 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT,award_of_contract_concess,V,,Add an `Award` object to the `awards` array
 /AWARD_CONTRACT/@ITEM,,,,Discard
 /AWARD_CONTRACT/CONTRACT_NO,contract_number,,,Map to the award's `.id`
-/AWARD_CONTRACT/LOT_NO,lot_number,,,Add to the award's `.relatedLots`
+/AWARD_CONTRACT/LOT_NO,lot_number,,,"If not set, let *Lot No* be '1'. Add to the award's `.relatedLots`."
 /AWARD_CONTRACT/TITLE,title_contract,,,Map to the award's `.title`
 /AWARD_CONTRACT/AWARDED_CONTRACT,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/contract_statusDetails,"Set the award's `.status` to 'active'\n\nAdd a `Contract` object to the `contracts` array, set its `.id` and `.awardID` to the award's `.id`, set its `.title` to the award's `.title`, and set its `.status` to 'active'."
 /AWARD_CONTRACT/AWARDED_CONTRACT/DATE_CONCLUSION_CONTRACT,date_award_contract_concess,V.2.1,,Map to the contract's `.dateSigned`
@@ -126,8 +126,8 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY,currency,,,/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL,,,This element sets the currency for its children.,""
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/@CURRENCY,currency,,,/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY
-/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/LOW,lowest_offer,,,"Add a `BidsStatistic` object to the `bids.statistics` array, set its `.measure` to 'lowestValidBidValue', set its `.id`, and map to its `.value`. Set its `.relatedLot` if the award is related to a lot."
-/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/HIGH,highest_offer,,,"Add a `BidsStatistic` object to the `bids.statistics` array, set its `.measure` to 'highestValidBidValue', set its `.id`, and map to its `.value`. Set its `.relatedLot` if the award is related to a lot."
+/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/LOW,lowest_offer,,,"Add a `BidsStatistic` object to the `bids.statistics` array, set its `.id`, set its `.measure` to 'lowestValidBidValue', set its `.relatedLot` to the award's only `.relatedLots` entry, and map to its `.value`."
+/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/HIGH,highest_offer,,,"Add a `BidsStatistic` object to the `bids.statistics` array, set its `.id`, set its `.measure` to 'highestValidBidValue', set its `.relatedLot` to the award's only `.relatedLots` entry, and map to its `.value`."
 /AWARD_CONTRACT/AWARDED_CONTRACT/LIKELY_SUBCONTRACTED,subcontr_likely_contract_concess,,,Set the award's `.hasSubcontracting` to `true` (PROPOSAL #37)
 /AWARD_CONTRACT/AWARDED_CONTRACT/VAL_SUBCONTRACTING,value_excl_vat,,,Map to the award's `.subcontracting.value.amount` (PROPOSAL #37)
 /AWARD_CONTRACT/AWARDED_CONTRACT/VAL_SUBCONTRACTING/@CURRENCY,currency,,,Map to the award's `.subcontracting.value.currency` (PROPOSAL #37)

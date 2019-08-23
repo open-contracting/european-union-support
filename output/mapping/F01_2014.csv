@@ -54,10 +54,10 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/LOT_DIVISION/LOT_ONE_ONLY,lot_one_only,,,Set `tender.lotDetails.maximumLotsBidPerSupplier` to 1
 /OBJECT_CONTRACT/LOT_DIVISION/LOT_MAX_ONE_TENDERER,lots_max_awarded,,,Map to `tender.lotDetails.maximumLotsAwardedPerSupplier`
 /OBJECT_CONTRACT/LOT_DIVISION/LOT_COMBINING_CONTRACT_RIGHT,lots_combination_possible,,,Map to `tender.lotDetails.awardCriteriaDetails`
-/OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,"Add a `Lot` object to the `tender.lots` array, and add an `Item` object to the `tender.items` array.\n\n**F01, F04, F07**: If this notice is a call for competition, set the lot's `.status` to 'active'; otherwise, set it to 'planned'.\n\n**F02, F05, F12**: Set the lot's `.status` to 'active'.\n\n**F08**: Set the lot's `.status` to 'planned'."
+/OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,"Add a `Lot` object to the `tender.lots` array, and add an `Item` object to the `tender.items` array.\n\n**F01, F04, F07**: If this notice is a call for competition, set the lot's `.status` to 'active'; otherwise, set it to 'planned'.\n\n**F02, F05, F12**: Set the lot's `.status` to 'active'.\n\n**F08**: Set the lot's `.status` to 'planned'.\n\n**F12, F13**: Set the lot's `.id` to '1', and set the item's `.id` to '1'."
 /OBJECT_CONTRACT/OBJECT_DESCR/@ITEM,,,,Discard
 /OBJECT_CONTRACT/OBJECT_DESCR/TITLE,title_contract,II.2.1,,"Map to the lot's `.title`, and map to the item's `.title` (PROPOSAL #29)"
-/OBJECT_CONTRACT/OBJECT_DESCR/LOT_NO,lot_number,,,Map to the lot's `.id` and to the item's `.relatedLot`
+/OBJECT_CONTRACT/OBJECT_DESCR/LOT_NO,lot_number,,,"If not set, let *Lot No* be '1'. Map to the lot's `.id`, map to the item's `.id`, and map to the item's `.relatedLot`."
 /OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL,cpv_additional,II.2.2,,""
 /OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_CODE,cpv_main,,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPV', and map to its `.id`."
 /OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id`."
