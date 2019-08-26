@@ -60,22 +60,22 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/NB_PARTICIPANTS,number_participants,,,Map to `tender.secondStage.minimumCandidates` and `.secondStage.maximumCandidates`
 /PROCEDURE/NB_MIN_PARTICIPANTS,min_number,,,Map to `tender.secondStage.minimumCandidates`
 /PROCEDURE/NB_MAX_PARTICIPANTS,max_number,,,Map to `tender.secondStage.maximumCandidates`
-/PROCEDURE/PARTICIPANT_NAME,dc_names_selected,IV.1.7,,
+/PROCEDURE/PARTICIPANT_NAME,dc_names_selected,IV.1.7,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_DesignContests,
 /PROCEDURE/CRITERIA_EVALUATION,dc_criteria_evaluation,IV.1.9,,Map to `tender.awardCriteriaDetails`
 /PROCEDURE/DATE_RECEIPT_TENDERS,date,,,Map to the date component of `tender.tenderPeriod.endDate`
 /PROCEDURE/TIME_RECEIPT_TENDERS,time,,,Map to the time component of `tender.tenderPeriod.endDate`
 /PROCEDURE/DATE_DISPATCH_INVITATIONS,date_dispatch_participate_selected,IV.2.3,,Map to the date component of `tender.secondStage.invitationDate`.
 /PROCEDURE/LANGUAGES,languages_allowed_project,IV.2.4,,""
 /PROCEDURE/LANGUAGES/LANGUAGE,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_SubmissionLanguages,Lowercase and add to the `tender.submissionTerms.languages` array
-/PROCEDURE/PRIZE_AWARDED,_yes,,,
-/PROCEDURE/NUMBER_VALUE_PRIZE,dc_number_value_prizes,,,
-/PROCEDURE/NO_PRIZE_AWARDED,_no,,,
-/PROCEDURE/DETAILS_PAYMENT,dc_details_payment,IV.3.2,,
-/PROCEDURE/FOLLOW_UP_CONTRACTS,_yes,,,
-/PROCEDURE/NO_FOLLOW_UP_CONTRACTS,_no,,,
-/PROCEDURE/DECISION_BINDING_CONTRACTING,_yes,,,
-/PROCEDURE/NO_DECISION_BINDING_CONTRACTING,_no,,,
-/PROCEDURE/MEMBER_NAME,dc_names_jury,IV.3.5,,
+/PROCEDURE/PRIZE_AWARDED,_yes,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_DesignContests,
+/PROCEDURE/NUMBER_VALUE_PRIZE,dc_number_value_prizes,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_DesignContests,
+/PROCEDURE/NO_PRIZE_AWARDED,_no,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_DesignContests,
+/PROCEDURE/DETAILS_PAYMENT,dc_details_payment,IV.3.2,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_DesignContests,
+/PROCEDURE/FOLLOW_UP_CONTRACTS,_yes,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_DesignContests,
+/PROCEDURE/NO_FOLLOW_UP_CONTRACTS,_no,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_DesignContests,
+/PROCEDURE/DECISION_BINDING_CONTRACTING,_yes,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_DesignContests,
+/PROCEDURE/NO_DECISION_BINDING_CONTRACTING,_no,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_DesignContests,
+/PROCEDURE/MEMBER_NAME,dc_names_jury,IV.3.5,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_DesignContests,
 /COMPLEMENTARY_INFO,info_complement,VI,,""
 /COMPLEMENTARY_INFO/INFO_ADD,info_additional,VI.3,,Map to `description`
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY,appeals_body,VI.4.1,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations#add-a-party), and add 'reviewBody' to its `.roles`"
