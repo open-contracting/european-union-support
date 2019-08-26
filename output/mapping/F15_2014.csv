@@ -50,25 +50,25 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/NUTS,nutscode,,,"Take the NUTS code in the `CODE` attribute, and map to the item's `.deliveryAddress.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
 /OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE,mainsiteplace_works_delivery,,,Map to the item's `.deliveryLocation.description`
 /OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,descr_procurement,II.2.4,,"Map to the lot's `.description`, and map to the item's `.description`"
-/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC/AC_QUALITY,award_criterion_quality,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC/AC_QUALITY/AC_CRITERION,award_criterion_name,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC/AC_QUALITY/AC_WEIGHTING,weighting,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC/AC_COST,award_lowest_cost,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC/AC_PRICE,price,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC/AC_PRICE/AC_WEIGHTING,weighting,,,
+/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU,,,,""
+/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC,,,,""
+/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC/AC_QUALITY,award_criterion_quality,,,"Add an `AwardCriterion` object to the lot's `.awardCriteria.criteria` array, and set its `.type` to 'quality'."
+/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC/AC_QUALITY/AC_CRITERION,award_criterion_name,,,Map to the criterion's `.name`
+/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC/AC_QUALITY/AC_WEIGHTING,weighting,,,Map to the criterion's `.description`
+/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC/AC_COST,award_lowest_cost,,,"Add an `AwardCriterion` object to the lot's `.awardCriteria.criteria` array, and set its `.type` to 'cost'."
+/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC/AC_PRICE,price,,,"Add an `AwardCriterion` object to the lot's `.awardCriteria.criteria` array, and set its `.type` to 'price'."
+/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC/AC_PRICE/AC_WEIGHTING,weighting,,,Map to the criterion's `.description`
 /OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_25_EU,,,,/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU
 /OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_25_EU/AC,,,,/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC
 /OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_25_EU/AC/AC_QUALITY,,,,/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC/AC_QUALITY
 /OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_25_EU/AC/AC_COST,,,,/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC/AC_COST
 /OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_25_EU/AC/AC_PRICE,,,,/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC/AC_PRICE
 /OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_25_EU/AC/AC_PRICE/AC_WEIGHTING,,,,/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC/AC_PRICE/AC_WEIGHTING
-/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_23_EU,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_23_EU/AC,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_23_EU/AC/AC_CRITERION,criteria,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2009_81_EC,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2009_81_EC/AC,,,,
+/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_23_EU,,,,""
+/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_23_EU/AC,,,,""
+/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_23_EU/AC/AC_CRITERION,criteria,,,"Add an `AwardCriterion` object to the lot's `.awardCriteria.criteria` array, and map to the criterion's `.name`"
+/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2009_81_EC,,,,""
+/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2009_81_EC/AC,,,,""
 /OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2009_81_EC/AC/AC_PRICE,lowest_price,,,
 /OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2009_81_EC/AC/AC_CRITERIA,award_criteria_advant,,,
 /OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Options,Set the lot's `.hasOptions` to `true` (PROPOSAL #21)
@@ -78,18 +78,18 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds."
 /OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,info_additional,II.2.14,,"Append to the lot's `.description`, and append to the item's `.description`\n\nThis results in a loss of structure. (WARNING #28)"
 /PROCEDURE,procedure,IV,,""
-/PROCEDURE/DIRECTIVE_2014_24_EU,,,,
-/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION,proctype_negotiated_wo_pub,,,
-/PROCEDURE/DIRECTIVE_2014_25_EU,,,,
-/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION,proctype_negotiated_wo_call,,,
-/PROCEDURE/DIRECTIVE_2009_81_EC,,,,
+/PROCEDURE/DIRECTIVE_2014_24_EU,,,,""
+/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION,proctype_negotiated_wo_pub,,,"Set `tender.procurementMethod` to 'limited', and set `tender.procurementMethodDetails` to 'Award procedure without prior publication of a call for competition'.\n\nSee [Annex D1](#annex-d1-general-procurement)"
+/PROCEDURE/DIRECTIVE_2014_25_EU,,,,""
+/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION,proctype_negotiated_wo_call,,,"Set `tender.procurementMethod` to 'limited', and set `tender.procurementMethodDetails` to 'Award procedure without prior publication of a call for competition'.\n\nSee [Annex D2](#annex-d2-utilities)"
+/PROCEDURE/DIRECTIVE_2009_81_EC,,,,""
 /PROCEDURE/DIRECTIVE_2009_81_EC/PT_NEGOTIATED_WITHOUT_PUBLICATION,proctype_negotiated_wo_notice,,,
-/PROCEDURE/DIRECTIVE_2014_23_EU,,,,
-/PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION,proctype_concession_wo_pub,,,
-/PROCEDURE/DIRECTIVE_2014_24_EU/PT_AWARD_CONTRACT_WITHOUT_CALL,award_wo_prior_pub_d1,,,
-/PROCEDURE/DIRECTIVE_2014_25_EU/PT_AWARD_CONTRACT_WITHOUT_CALL,,,,/PROCEDURE/DIRECTIVE_2014_25_EU/PT_AWARD_CONTRACT_WITHOUT_CALL
-/PROCEDURE/DIRECTIVE_2009_81_EC/PT_AWARD_CONTRACT_WITHOUT_CALL,,,,/PROCEDURE/DIRECTIVE_2014_25_EU/PT_AWARD_CONTRACT_WITHOUT_CALL
-/PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_CALL,,,,/PROCEDURE/DIRECTIVE_2014_25_EU/PT_AWARD_CONTRACT_WITHOUT_CALL
+/PROCEDURE/DIRECTIVE_2014_23_EU,,,,""
+/PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION,proctype_concession_wo_pub,,,"Set `tender.procurementMethod` to 'limited', and set `tender.procurementMethodDetails` to 'Award procedure without prior publication of a call for competition'.\n\nSee [Annex D4](#annex-d4-concession)"
+/PROCEDURE/DIRECTIVE_2014_24_EU/PT_AWARD_CONTRACT_WITHOUT_CALL,award_wo_prior_pub_d1,,,"Set `tender.procurementMethod` to 'limited', and set `tender.procurementMethodDetails` to 'Award procedure without prior publication of a call for competition'.\n\nSee Annex D"
+/PROCEDURE/DIRECTIVE_2014_25_EU/PT_AWARD_CONTRACT_WITHOUT_CALL,,,,/PROCEDURE/DIRECTIVE_2014_24_EU/PT_AWARD_CONTRACT_WITHOUT_CALL
+/PROCEDURE/DIRECTIVE_2009_81_EC/PT_AWARD_CONTRACT_WITHOUT_CALL,,,,/PROCEDURE/DIRECTIVE_2014_24_EU/PT_AWARD_CONTRACT_WITHOUT_CALL
+/PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_CALL,,,,/PROCEDURE/DIRECTIVE_2014_24_EU/PT_AWARD_CONTRACT_WITHOUT_CALL
 /PROCEDURE/FRAMEWORK,notice_involves_framework,,,Set `tender.techniques.hasFrameworkAgreement` to `true`
 /PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to `tender.coveredBy`
 /PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in `tender.coveredBy`, then the procurement isn't covered by the GPA."
@@ -133,7 +133,7 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/VAL_SUBCONTRACTING/@CURRENCY,currency,,,Map to the award's `.subcontracting.value.currency` (PROPOSAL #37)
 /AWARD_CONTRACT/AWARDED_CONTRACT/PCT_SUBCONTRACTING,proportion,,,Map to the award's `.subcontracting.percentage` (PROPOSAL #37)
 /AWARD_CONTRACT/AWARDED_CONTRACT/INFO_ADD_SUBCONTRACTING,subcontr_descr_short,,,Map to the award's `.subcontracting.details` (PROPOSAL #37)
-/AWARD_CONTRACT/AWARDED_CONTRACT/DIRECTIVE_2009_81_EC,,,,
+/AWARD_CONTRACT/AWARDED_CONTRACT/DIRECTIVE_2009_81_EC,,,,""
 /AWARD_CONTRACT/AWARDED_CONTRACT/DIRECTIVE_2009_81_EC/AWARDED_SUBCONTRACTING,subcontr_all_competitive,,,
 /AWARD_CONTRACT/AWARDED_CONTRACT/DIRECTIVE_2009_81_EC/PCT_RANGE_SHARE_SUBCONTRACTING,subcontr_share_competitive,,,
 /AWARD_CONTRACT/AWARDED_CONTRACT/DIRECTIVE_2009_81_EC/PCT_RANGE_SHARE_SUBCONTRACTING/MIN,min_percentage,,,
@@ -154,40 +154,40 @@ xpath,label-key,index,comment,guidance
 /COMPLEMENTARY_INFO/REVIEW_PROCEDURE,appeals_deadline,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,Map to `tender.reviewDetails` (PROPOSAL #6)
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_INFO,appeals_info,VI.4.4,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations#add-a-party), and add 'reviewContactPoint' to its `.roles` (PROPOSAL #25)"
 /COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,date_dispatch,VI.5,,Map to `date`
-/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE,d_just_for_wo_pub_201424,D1.1,,
-/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_PROC_OPEN,d_proc_open,,,
-/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_PROC_RESTRICTED,d_proc_restricted,,,
-/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_MANUF_FOR_RESEARCH,d_manuf_for_research,,,
-/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_TECHNICAL,d_technical,,,
-/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_ARTISTIC,d_artistic,,,
-/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_PROTECT_RIGHTS,d_protect_rights,,,
-/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_EXTREME_URGENCY,d_extreme_urgency_ca,,,
-/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_ADD_DELIVERIES_ORDERED,d_addit_ordered,,,
-/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_REPETITION_EXISTING,d_repetition_existing,,,
-/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_CONTRACT_AWARDED_DESIGN_CONTEST,d_service_contract,,,
-/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_COMMODITY_MARKET,d_commodity_market,,,
-/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_FROM_WINDING_PROVIDER,d_from_winding_supplier,,,
-/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_FROM_LIQUIDATOR_CREDITOR,d_from_receivers,,,
-/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_JUSTIFICATION,,,,
-/PROCEDURE/DIRECTIVE_2014_24_EU/PT_AWARD_CONTRACT_WITHOUT_CALL/D_OUTSIDE_SCOPE,d_outside_scope,,,
-/PROCEDURE/DIRECTIVE_2014_24_EU/PT_AWARD_CONTRACT_WITHOUT_CALL/D_JUSTIFICATION,d_explain,,,
-/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE,d_just_for_wo_pub_201425,D2.1,,
-/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_NO_TENDERS_REQUESTS,d_no_tenders_in_response_call,,,
-/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_PURE_RESEARCH,d_pure_research,,,
-/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_TECHNICAL,d_technical,,,
-/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_ARTISTIC,d_artistic,,,
-/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_PROTECT_RIGHTS,d_protect_rights,,,
-/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_EXTREME_URGENCY,d_extreme_urgency_ce,,,
-/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_ADD_DELIVERIES_ORDERED,d_addit_ordered,,,
-/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_REPETITION_EXISTING,d_repetition_existing,,,
-/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_CONTRACT_AWARDED_DESIGN_CONTEST,d_service_contract,,,
-/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_COMMODITY_MARKET,d_commodity_market,,,
-/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_FROM_WINDING_PROVIDER,d_from_winding_supplier,,,
-/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_FROM_LIQUIDATOR_CREDITOR,d_from_receivers,,,
-/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_BARGAIN_PURCHASE,d_bargain_advantage,,,
-/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_JUSTIFICATION,,,,
-/PROCEDURE/DIRECTIVE_2014_25_EU/PT_AWARD_CONTRACT_WITHOUT_CALL/D_OUTSIDE_SCOPE,,,,
-/PROCEDURE/DIRECTIVE_2014_25_EU/PT_AWARD_CONTRACT_WITHOUT_CALL/D_JUSTIFICATION,d_explain,,,
+/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE,d_just_for_wo_pub_201424,D1.1,,"For each of the following, add a `Classification` object to the `tender.procurementMethodRationaleCodes` array. Set the classification's `.scheme` to `TED_PT_AWARD_CONTRACT_WITHOUT_CALL`, and set its `.id` and `.name` as follows (PROPOSAL #30)"
+/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_PROC_OPEN,d_proc_open,,,Set `.id` to 'D_PROC_OPEN' and `.name` to 'No tenders or no suitable tenders/requests to participate in response to open procedure'
+/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_PROC_RESTRICTED,d_proc_restricted,,,Set `.id` to 'D_PROC_RESTRICTED' and `.name` to 'No tenders or no suitable tenders/requests to participate in response to restricted procedure'
+/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_MANUF_FOR_RESEARCH,d_manuf_for_research,,,"Set `.id` to 'D_MANUF_FOR_RESEARCH' and `.name` to 'The products involved are manufactured purely for the purpose of research, experiment, study or development under the conditions stated in the directive'"
+/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_TECHNICAL,d_technical,,,"Set `.id` to 'D_TECHNICAL' and `.name` to 'The works, supplies or services can be provided only by a particular economic operator due to absence of competition for technical reasons'"
+/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_ARTISTIC,d_artistic,,,"Set `.id` to 'D_ARTISTIC' and `.name` to 'The works, supplies or services can be provided only by a particular economic operator due to procurement aiming at the creation or acquisition of a unique work of art or artistic performance'"
+/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_PROTECT_RIGHTS,d_protect_rights,,,"Set `.id` to 'D_PROTECT_RIGHTS' and `.name` to 'The works, supplies or services can be provided only by a particular economic operator due to protection of exclusive rights, including intellectual property rights'"
+/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_EXTREME_URGENCY,d_extreme_urgency_ca,,,Set `.id` to 'D_EXTREME_URGENCY' and `.name` to 'Extreme urgency brought about by events unforeseeable for the contracting authority and in accordance with the strict conditions stated in the directive'
+/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_ADD_DELIVERIES_ORDERED,d_addit_ordered,,,Set `.id` to 'D_ADD_DELIVERIES_ORDERED' and `.name` to 'Additional deliveries by the original supplier ordered under the strict conditions stated in the directive'
+/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_REPETITION_EXISTING,d_repetition_existing,,,"Set `.id` to 'D_REPETITION_EXISTING' and `.name` to 'New works/services, constituting a repetition of existing works/services and ordered in accordance with the strict conditions stated in the directive'"
+/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_CONTRACT_AWARDED_DESIGN_CONTEST,d_service_contract,,,Set `.id` to 'D_CONTRACT_AWARDED_DESIGN_CONTEST' and `.name` to 'Service contract to be awarded to the winner or one of winners under the rules of a design contest'
+/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_COMMODITY_MARKET,d_commodity_market,,,Set `.id` to 'D_COMMODITY_MARKET' and `.name` to 'Procurement of supplies quoted and purchased on a commodity market'
+/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_FROM_WINDING_PROVIDER,d_from_winding_supplier,,,Set `.id` to 'D_FROM_WINDING_PROVIDER' and `.name` to 'Purchase of supplies or services on particularly advantageous terms from a supplier which is definitively winding up its business activities'
+/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_FROM_LIQUIDATOR_CREDITOR,d_from_receivers,,,"Set `.id` to 'D_FROM_LIQUIDATOR_CREDITOR' and `.name` to 'Purchase of supplies or services on particularly advantageous terms from the liquidator in an insolvency procedure, an arrangement with creditors or a similar procedure under national laws and regulations'"
+/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_JUSTIFICATION,,,,Map to `tender.procurementMethodRationale`
+/PROCEDURE/DIRECTIVE_2014_24_EU/PT_AWARD_CONTRACT_WITHOUT_CALL/D_OUTSIDE_SCOPE,d_outside_scope,,,Set `.id` to 'D_OUTSIDE_SCOPE' and `.name` to 'The procurement falls outside the scope of application of the directive'
+/PROCEDURE/DIRECTIVE_2014_24_EU/PT_AWARD_CONTRACT_WITHOUT_CALL/D_JUSTIFICATION,d_explain,,,Map to `tender.procurementMethodRationale`
+/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE,d_just_for_wo_pub_201425,D2.1,,"For each of the following, add a `Classification` object to the `tender.procurementMethodRationaleCodes` array. Set the classification's `.scheme` to `TED_PT_AWARD_CONTRACT_WITHOUT_CALL`, and set its `.id` and `.name` as follows (PROPOSAL #30)"
+/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_NO_TENDERS_REQUESTS,d_no_tenders_in_response_call,,,Set `.id` to 'D_NO_TENDERS_REQUESTS' and `.name` to 'No tenders or no suitable tenders/requests to participate in response to a procedure with prior call for competition'
+/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_PURE_RESEARCH,d_pure_research,,,"Set `.id` to 'D_PURE_RESEARCH' and `.name` to 'The contract involved is purely for the purpose of research, experiment, study or development under the conditions stated in the directive'"
+/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_TECHNICAL,d_technical,,,"Set `.id` to 'D_TECHNICAL' and `.name` to 'The works, supplies or services can be provided only by a particular economic operator due to absence of competition for technical reasons'"
+/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_ARTISTIC,d_artistic,,,"Set `.id` to 'D_ARTISTIC' and `.name` to 'The works, supplies or services can be provided only by a particular economic operator due to procurement aiming at the creation or acquisition of a unique work of art or artistic performance'"
+/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_PROTECT_RIGHTS,d_protect_rights,,,"Set `.id` to 'D_PROTECT_RIGHTS' and `.name` to 'The works, supplies or services can be provided only by a particular economic operator due to protection of exclusive rights, including intellectual property rights'"
+/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_EXTREME_URGENCY,d_extreme_urgency_ce,,,Set `.id` to 'D_EXTREME_URGENCY' and `.name` to 'Extreme urgency brought about by events unforeseeable for the contracting authority and in accordance with the strict conditions stated in the directive'
+/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_ADD_DELIVERIES_ORDERED,d_addit_ordered,,,Set `.id` to 'D_ADD_DELIVERIES_ORDERED' and `.name` to 'Additional deliveries by the original supplier ordered under the strict conditions stated in the directive'
+/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_REPETITION_EXISTING,d_repetition_existing,,,"Set `.id` to 'D_REPETITION_EXISTING' and `.name` to 'New works/services, constituting a repetition of existing works/services and ordered in accordance with the strict conditions stated in the directive'"
+/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_CONTRACT_AWARDED_DESIGN_CONTEST,d_service_contract,,,Set `.id` to 'D_CONTRACT_AWARDED_DESIGN_CONTEST' and `.name` to 'Service contract to be awarded to the winner or one of winners under the rules of a design contest'
+/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_COMMODITY_MARKET,d_commodity_market,,,Set `.id` to 'D_COMMODITY_MARKET' and `.name` to 'Procurement of supplies quoted and purchased on a commodity market'
+/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_FROM_WINDING_PROVIDER,d_from_winding_supplier,,,Set `.id` to 'D_FROM_WINDING_PROVIDER' and `.name` to 'Purchase of supplies or services on particularly advantageous terms from a supplier which is definitively winding up its business activities'
+/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_FROM_LIQUIDATOR_CREDITOR,d_from_receivers,,,"Set `.id` to 'D_FROM_LIQUIDATOR_CREDITOR' and `.name` to 'Purchase of supplies or services on particularly advantageous terms from the liquidator in an insolvency procedure, an arrangement with creditors or a similar procedure under national laws and regulations'"
+/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_BARGAIN_PURCHASE,d_bargain_advantage,,,Set `.id` to 'D_BARGAIN_PURCHASE' and `.name` to 'Bargain purchase taking advantage of a particularly advantageous opportunity available for a very short time at a price considerably lower than market prices'
+/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_JUSTIFICATION,,,,Map to `tender.procurementMethodRationale`
+/PROCEDURE/DIRECTIVE_2014_25_EU/PT_AWARD_CONTRACT_WITHOUT_CALL/D_OUTSIDE_SCOPE,,,,Set `.id` to 'D_OUTSIDE_SCOPE' and `.name` to 'The procurement falls outside the scope of application of the directive'
+/PROCEDURE/DIRECTIVE_2014_25_EU/PT_AWARD_CONTRACT_WITHOUT_CALL/D_JUSTIFICATION,d_explain,,,Map to `tender.procurementMethodRationale`
 /PROCEDURE/DIRECTIVE_2009_81_EC/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE,d_just_for_wo_pub_200981,D3.1,,
 /PROCEDURE/DIRECTIVE_2009_81_EC/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_PROC_RESTRICTED,d_proc_restricted,,,
 /PROCEDURE/DIRECTIVE_2009_81_EC/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_PROC_NEGOTIATED_PRIOR_CALL_COMPETITION,d_proc_negot_w_notice,,,
@@ -209,12 +209,12 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/DIRECTIVE_2009_81_EC/PT_AWARD_CONTRACT_WITHOUT_CALL/D_SERVICES_LISTED,d_serv_listed_a2b,,,
 /PROCEDURE/DIRECTIVE_2009_81_EC/PT_AWARD_CONTRACT_WITHOUT_CALL/D_OUTSIDE_SCOPE,,,,
 /PROCEDURE/DIRECTIVE_2009_81_EC/PT_AWARD_CONTRACT_WITHOUT_CALL/D_JUSTIFICATION,,,,
-/PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE,d_just_for_wo_pub_201423,D4.1,,
-/PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_NO_TENDERS_REQUESTS,d_no_applications,,,
-/PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_ARTISTIC,d_artistic_concess,,,
-/PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_TECHNICAL,d_technical,,,
-/PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_EXCLUSIVE_RIGHT,d_existence_exclusive,,,
-/PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_PROTECT_RIGHTS,d_intellectual_concess,,,
-/PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_JUSTIFICATION,,,,
-/PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_CALL/D_OUTSIDE_SCOPE,,,,
-/PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_CALL/D_JUSTIFICATION,,,,
+/PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE,d_just_for_wo_pub_201423,D4.1,,"For each of the following, add a `Classification` object to the `tender.procurementMethodRationaleCodes` array. Set the classification's `.scheme` to `TED_PT_AWARD_CONTRACT_WITHOUT_CALL`, and set its `.id` and `.name` as follows (PROPOSAL #30)"
+/PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_NO_TENDERS_REQUESTS,d_no_applications,,,"Set `.id` to 'D_NO_TENDERS_REQUESTS' and `.name` to 'No applications, no tenders or no suitable tenders/applications in response to a prior concession award procedure'"
+/PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_ARTISTIC,d_artistic_concess,,,Set `.id` to 'D_ARTISTIC' and `.name` to 'The services can be provided only by a particular economic operator due to concession aiming at the creation or acquisition of a unique work of art or artistic performance'
+/PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_TECHNICAL,d_technical,,,Set `.id` to 'D_ARTISTIC' and `.name` to 'The services can be provided only by a particular economic operator due to absence of competition for technical reasons'
+/PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_EXCLUSIVE_RIGHT,d_existence_exclusive,,,Set `.id` to 'D_ARTISTIC' and `.name` to 'The services can be provided only by a particular economic operator due to existence of an exclusive right'
+/PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_PROTECT_RIGHTS,d_intellectual_concess,,,Set `.id` to 'D_ARTISTIC' and `.name` to 'The services can be provided only by a particular economic operator due to protection of intellectual property rights and exclusive rights other than those defined in point (10) of Article 5 of the directive'
+/PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_JUSTIFICATION,,,,Map to `tender.procurementMethodRationale`
+/PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_CALL/D_OUTSIDE_SCOPE,,,,Set `.id` to 'D_OUTSIDE_SCOPE' and `.name` to 'The procurement falls outside the scope of application of the directive'
+/PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_CALL/D_JUSTIFICATION,,,,Map to `tender.procurementMethodRationale`
