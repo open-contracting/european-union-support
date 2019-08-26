@@ -20,6 +20,11 @@ end
 for i in F03 F06 F25
     ex -c (grep -n /NO_AWARDED_TO_GROUP {$i}*.csv | cut -d: -f1)m(grep -n /AWARDED_TO_GROUP {$i}*.csv | cut -d: -f1) -c w -c q {$i}*.csv
 end
+for i in F20
+    for x in AWARDED_CONTRACT DESCRIPTION_PROCUREMENT
+        ex -c (grep -n $x/CONTRACTORS/NO_AWARDED_TO_GROUP {$i}*.csv | cut -d: -f1)m(grep -n $x/CONTRACTORS/AWARDED_TO_GROUP {$i}*.csv | cut -d: -f1) -c w -c q {$i}*.csv
+    end
+end
 
 # F03, F06, F21, F22 only: `D_ACCORDANCE_ARTICLE` and children after all
 for i in F03 F06 F21 F22 F23 F25
