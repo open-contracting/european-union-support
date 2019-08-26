@@ -41,15 +41,16 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_isEUFunded https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_EUFunded,"Get the `Organization` object for the European Union; if none exists yet, [add a party](../operations#add-a-party), and set its `.name` to 'European Union'. Then, add 'funder' to its `.roles`.\n\nGet the `Finance` object for this project; if none exists yet, add a `Finance` object to the `planning.budget.finance` array, map to its `.description`, set its `.id`, set its `.financingParty.name` to 'European Union', and set its `.financingParty.id` to the party's `.id`. Then, add the lot's `.id` to its `.relatedLots`. (PROPOSAL #20)\n\nIn [future forms](https://github.com/eForms/eForms/issues/181#issuecomment-439861320), this field will be de-emphasized."
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds."
 /PROCEDURE,procedure,IV,,""
-/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,Discard. The *contract award notice concerning this contract* is the OCDS release with the same `ocid` as this release and with an earlier `date` that is nearest that of this release.
+/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,Discard. The *contract award notice concerning this contract* is the OCDS release with the same `ocid` as this release, with 'award' in its `tag`, and with an earlier `date` that is nearest that of this release.
 /AWARD_CONTRACT,award_of_contract_concess,V,,Add an `Award` object to the `awards` array
 /AWARD_CONTRACT/CONTRACT_NO,contract_number,,,Map to the award's `.id`
 /AWARD_CONTRACT/LOT_NO,lot_number,,,"If not set, let *Lot No* be '1'. Add to the award's `.relatedLots`."
 /AWARD_CONTRACT/TITLE,title_contract,,,Map to the award's `.title`
-/AWARD_CONTRACT/AWARDED_CONTRACT,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/contract_statusDetails,"Set the award's `.status` to 'active'\n\nAdd a `Contract` object to the `contracts` array, set its `.id` and `.awardID` to the award's `.id`, set its `.title` to the award's `.title`, and set its `.status` to 'active'."
+/AWARD_CONTRACT/AWARDED_CONTRACT,award_of_contract_concess,V.2,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/contract_statusDetails,"Set the award's `.status` to 'active'\n\nAdd a `Contract` object to the `contracts` array, set its `.id` and `.awardID` to the award's `.id`, set its `.title` to the award's `.title`, and set its `.status` to 'active'."
 /AWARD_CONTRACT/AWARDED_CONTRACT/DATE_CONCLUSION_CONTRACT,date_award_contract_concess,V.2.1,,Map to the contract's `.dateSigned`
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS,,,This element contains elements from V.2.2 and V.2.3.,""
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/AWARDED_TO_GROUP,_yes,,,"Discard. If there are multiple suppliers, then the contract has been awarded to a group of economic operators."
+/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/NO_AWARDED_TO_GROUP,_no,,,"Discard. If there is one supplier, then the contract hasn't been awarded to a group of economic operators."
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR,,,"Contains ADDRESS_CONTRACTOR, SME, NO_SME.",""
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR,awarded_to_contract_concess,V.2.3,,"[Add a party](../operations#add-a-party), and add 'supplier' to its `.roles`\n\nAdd an `OrganizationReference` object to the award's `.suppliers` array, set its `.id` to the party's `.id`, and set its `.name` to the party's [`.name`](#/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME)"
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME,name_official,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME
@@ -65,10 +66,9 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/URL,internet,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/SME,_yes,,,Set the party's `.details.scale` to 'sme'
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/NO_SME,_no,,,Set the party's `.details.scale` to 'large'
-/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/NO_AWARDED_TO_GROUP,_no,,,"Discard. If there is one supplier, then the contract hasn't been awarded to a group of economic operators."
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES,value_contract_concession_info,V.2.4,,""
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL,value_total,,,Map to the contract's `.value.amount`
-/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY,currency,,,/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY
+/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY,currency,,,Map to the contract's `.value.currency`
 /COMPLEMENTARY_INFO,info_complement,VI,,""
 /COMPLEMENTARY_INFO/INFO_ADD,info_additional,VI.3,,Map to `description`
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY,appeals_body,VI.4.1,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations#add-a-party), and add 'reviewBody' to its `.roles`"
@@ -85,36 +85,36 @@ xpath,label-key,index,comment,guidance
 /COMPLEMENTARY_INFO/REVIEW_PROCEDURE,appeals_deadline,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,Map to `tender.reviewDetails` (PROPOSAL #6)
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_INFO,appeals_info,VI.4.4,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations#add-a-party), and add 'reviewContactPoint' to its `.roles` (PROPOSAL #25)"
 /COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,date_dispatch,VI.5,,Map to `date`
-/MODIFICATIONS_CONTRACT,mod_to_contract,VII,,
-/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT,mod_descr_after,VII.1,,
-/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_MAIN,,VII.1.1,,
+/MODIFICATIONS_CONTRACT,mod_to_contract,VII,,""
+/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT,mod_descr_after,VII.1,,""
+/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_MAIN,,VII.1.1,,""
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_MAIN/CPV_CODE,cpv_main,,,
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,
-/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_ADDITIONAL,cpv_additional,VII.1.2,,
+/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_ADDITIONAL,cpv_additional,VII.1.2,,""
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_ADDITIONAL/CPV_CODE,cpv_main,,,
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/NUTS,nutscode,,,
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/MAIN_SITE,mainsiteplace_works_delivery,,,
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/SHORT_DESCR,descr_procurement,VII.1.4,,
-/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/DURATION,duration_contr_framew_dps_concess,VII.1.5,,
+/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/DURATION,duration_contr_framew_dps_concess,VII.1.5,,""
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/DATE_START,starting,,,
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/DATE_END,end,,,
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/JUSTIFICATION,framework_just_four,,,
-/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/VALUES,,VII.1.6,,
+/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/VALUES,,VII.1.6,,""
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/VALUES/VAL_TOTAL,value_total_final_contract_concess,,,
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/VALUES/VAL_TOTAL/@CURRENCY,currency,,,
-/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTORS,,,,
+/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTORS,,,,""
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTORS/AWARDED_TO_GROUP,_yes,,,
-/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTORS/CONTRACTOR,,VII.1.7,,
+/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTORS/NO_AWARDED_TO_GROUP,_no,,,
+/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTORS/CONTRACTOR,,VII.1.7,"Contains ADDRESS_CONTRACTOR, SME, NO_SME.",""
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR,,,,
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTORS/CONTRACTOR/SME,,,,
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTORS/CONTRACTOR/NO_SME,,,,
-/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTORS/NO_AWARDED_TO_GROUP,_no,,,
-/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS,mod_info,VII.2,,
+/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS,mod_info,VII.2,,""
 /MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/SHORT_DESCR,mod_nature,,,
 /MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/ADDITIONAL_NEED,mod_need_for_additional,,,
 /MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/UNFORESEEN_CIRCUMSTANCE,mod_need_by_circums,,,
-/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VALUES,mod_price_increase,VII.2.3,,
+/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VALUES,mod_price_increase,VII.2.3,,""
 /MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VALUES/VAL_TOTAL_BEFORE,value_excl_vat,,,
 /MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VALUES/VAL_TOTAL_BEFORE/@CURRENCY,currency,,,
 /MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VALUES/VAL_TOTAL_AFTER,value_excl_vat,,,
