@@ -81,6 +81,9 @@ task :table do
           '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/@CURRENCY',
         ],
       }
+      if number == 'F20'
+        extra_xpaths_to_list.delete('/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY')
+      end
       if %w(F23 F25).include?(number)
         extra_xpaths_to_list['/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY'].pop
       end
