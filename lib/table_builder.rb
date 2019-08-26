@@ -74,13 +74,13 @@ class TableBuilder
   def row(label, help_labels: [], index: nil, xpath: nil, value: nil, reference: nil, guidance: false)
     if xpath
       if value
-        @enum_targets[label] = xpath
+        @enum_targets[label] ||= xpath
       else
-        @elem_targets[label] = xpath
+        @elem_targets[label] ||= xpath
       end
     end
     if xpath && guidance
-      @guidances[xpath] = guidance
+      @guidances[xpath] ||= guidance
     end
 
     no_guidance = reference.nil? && (guidance == false || guidance == '')
