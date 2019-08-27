@@ -100,9 +100,9 @@ xpath,label-key,index,comment,guidance
 /LEFTI/RULES_CRITERIA,descr_brief_rules,,,""
 /LEFTI/RESTRICTED_SHELTERED_WORKSHOP,restricted_sheltered_workshop,,,""
 /LEFTI/RESTRICTED_SHELTERED_PROGRAM,restricted_sheltered_program,,,Set `tender.contractTerms.reservedExecution` to `true`
-/LEFTI/DEPOSIT_GUARANTEE_REQUIRED,deposits_required,III.1.6,,""
-/LEFTI/MAIN_FINANCING_CONDITION,financing_conditions,III.1.7,,""
-/LEFTI/LEGAL_FORM,legal_form_taken,III.1.8,,""
+/LEFTI/DEPOSIT_GUARANTEE_REQUIRED,deposits_required,III.1.6,,"Map to `tender.participationConditions.depositsGuarantees`"
+/LEFTI/MAIN_FINANCING_CONDITION,financing_conditions,III.1.7,,Map to `tender.participationConditions.financingConditions`
+/LEFTI/LEGAL_FORM,legal_form_taken,III.1.8,,"Map to `tender.participationConditions.groupLegalForm`"
 /LEFTI/PARTICULAR_PROFESSION,particular_profession_reserved,,,""
 /LEFTI/REFERENCE_TO_LAW,ref_law_reg_prov,,,""
 /LEFTI/PERFORMANCE_CONDITIONS,other_conditions,III.2.2,,Map to `tender.contractTerms.termsPerformance`
@@ -134,7 +134,7 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/DATE_TENDER_VALID,date_tender_valid,,,Map to `tender.submissionTerms.bidValidityPeriod.endDate`
 /PROCEDURE/DURATION_TENDER_VALID,duration_months,,,"Multiply by 30, and map to `tender.submissionTerms.bidValidityPeriod.durationInDays`"
 /PROCEDURE/OPENING_CONDITION,opening_conditions,IV.2.7,,""
-/PROCEDURE/OPENING_CONDITION/DATE_OPENING_TENDERS,date,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/milestone_RelatedParties,Map to the date component of `tender.awardPeriod.startDate` and to the date component of `tender.bidOpening.date` 
+/PROCEDURE/OPENING_CONDITION/DATE_OPENING_TENDERS,date,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/milestone_RelatedParties,Map to the date component of `tender.awardPeriod.startDate` and to the date component of `tender.bidOpening.date`
 /PROCEDURE/OPENING_CONDITION/TIME_OPENING_TENDERS,time,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/milestone_RelatedParties,Map to the time component of `tender.awardPeriod.startDate` and to the time component of `tender.bidOpening.date`
 /PROCEDURE/OPENING_CONDITION/PLACE,opening_place,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/milestone_RelatedParties,Map to `tender.bidOpening.address.streetAddress`
 /PROCEDURE/OPENING_CONDITION/INFO_ADD,opening_addit_info,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/milestone_RelatedParties,Map to `tender.bidOpening.description`
