@@ -67,8 +67,8 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/SME,_yes,,,Set the party's `.details.scale` to 'sme'
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/NO_SME,_no,,,Set the party's `.details.scale` to 'large'
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES,value_contract_concession_info,V.2.4,,""
-/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL,value_total,,,Map to the contract's `.value.amount`
-/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY,currency,,,Map to the contract's `.value.currency`
+/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL,value_total,,,"Discard. The *information on value of the contract/lot/concession (at the time of conclusion of the contract)* is available in the OCDS release with the same `ocid` as this release, with 'award' in its `tag`, and with an earlier `date` that is nearest that of this release."
+/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY,currency,,,Discard as above
 /COMPLEMENTARY_INFO,info_complement,VI,,""
 /COMPLEMENTARY_INFO/INFO_ADD,info_additional,VI.3,,Map to `description`
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY,appeals_body,VI.4.1,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations#add-a-party), and add 'reviewBody' to its `.roles`"
@@ -86,23 +86,23 @@ xpath,label-key,index,comment,guidance
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_INFO,appeals_info,VI.4.4,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations#add-a-party), and add 'reviewContactPoint' to its `.roles` (PROPOSAL #25)"
 /COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,date_dispatch,VI.5,,Map to `date`
 /MODIFICATIONS_CONTRACT,mod_to_contract,VII,,""
-/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT,mod_descr_after,VII.1,,""
+/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT,mod_descr_after,VII.1,,"Get the `Contract` object in `contracts`, get the `Item` object in `tender.items`, copy the item to the contract's `.items`, and delete the contract's item's `.classification` and `.additionalClassifications`."
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_MAIN,,VII.1.1,,""
-/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_MAIN/CPV_CODE,cpv_main,,,
-/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,
+/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_MAIN/CPV_CODE,cpv_main,,,"Set the item's `.classification.scheme` to 'CPV', take the CPV code in the `CODE` attribute, and map to the item's `.classification.id`"
+/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id`"
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_ADDITIONAL,cpv_additional,VII.1.2,,""
-/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_ADDITIONAL/CPV_CODE,cpv_main,,,
-/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,
-/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/NUTS,nutscode,,,
-/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/MAIN_SITE,mainsiteplace_works_delivery,,,
-/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/SHORT_DESCR,descr_procurement,VII.1.4,,
+/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_ADDITIONAL/CPV_CODE,cpv_main,,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPV', and map to its `.id`."
+/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id`."
+/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/NUTS,nutscode,,,"Take the NUTS code in the `CODE` attribute, and map to the item's `.deliveryAddress.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
+/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/MAIN_SITE,mainsiteplace_works_delivery,,,Map to the item's `.deliveryLocation.description`
+/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/SHORT_DESCR,descr_procurement,VII.1.4,,"Map to the item's `.description`"
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/DURATION,duration_contr_framew_dps_concess,VII.1.5,,""
-/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/DATE_START,starting,,,
-/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/DATE_END,end,,,
-/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/JUSTIFICATION,framework_just_four,,,
-/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/VALUES,,VII.1.6,,""
-/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/VALUES/VAL_TOTAL,value_total_final_contract_concess,,,
-/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/VALUES/VAL_TOTAL/@CURRENCY,currency,,,
+/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/DATE_START,starting,,,Map to the contract's `.period.startDate`
+/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/DATE_END,end,,,Map to the contract's `.period.endDate`
+/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/JUSTIFICATION,framework_just_four,,,Map to the contract's `.periodRationale`
+/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/VALUES,value_contract_concession_info,VII.1.6,,""
+/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/VALUES/VAL_TOTAL,value_total_final_contract_concess,,,Map to the contract's `.value.amount`
+/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/VALUES/VAL_TOTAL/@CURRENCY,currency,,,Map to the contract's `.value.currency`
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTORS,,,,""
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTORS/AWARDED_TO_GROUP,_yes,,,"Discard. If there are multiple suppliers, then the contract has been awarded to a group of economic operators."
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTORS/NO_AWARDED_TO_GROUP,_no,,,"Discard. If there is one supplier, then the contract hasn't been awarded to a group of economic operators."
@@ -112,8 +112,8 @@ xpath,label-key,index,comment,guidance
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTORS/CONTRACTOR/NO_SME,_no,,,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/NO_SME
 /MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS,mod_info,VII.2,,"Add an `Amendment` object to the contract's `.amendments` array, and set its `.id`."
 /MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/SHORT_DESCR,mod_nature,,,Map to the amendment's `.description`
-/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/ADDITIONAL_NEED,mod_need_for_additional,,,"Prefix by ""Need for additional works, services or supplies by the original contractor/concessionaire: "", and map to the amendment's `.rationale`"
-/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/UNFORESEEN_CIRCUMSTANCE,mod_need_by_circums,,,"Prefix by ""Need for modification brought about by circumstances which a diligent contracting authority/entity could not foresee: "", and map to the amendment's `.rationale`"
+/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/ADDITIONAL_NEED,mod_need_for_additional,,,"Prefix by the translation of ""Need for additional works, services or supplies by the original contractor/concessionaire: "", and map to the amendment's `.rationale`"
+/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/UNFORESEEN_CIRCUMSTANCE,mod_need_by_circums,,,"Prefix by the translation of ""Need for modification brought about by circumstances which a diligent contracting authority/entity could not foresee: "", and map to the amendment's `.rationale`"
 /MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VALUES,mod_price_increase,VII.2.3,,""
 /MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VALUES/VAL_TOTAL_BEFORE,value_excl_vat,,,"Discard. The *updated total contract value before the modifications* is available in the OCDS release with the same `ocid` as this release, with 'contract' or 'contractUpdate' in its `tag`, and with an earlier `date` that is nearest that of this release."
 /MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VALUES/VAL_TOTAL_BEFORE/@CURRENCY,currency,,,Discard as above
