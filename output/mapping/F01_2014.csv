@@ -87,13 +87,13 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,info_additional,II.2.14,,"Append to the lot's `.description`, and append to the item's `.description`\n\nThis results in a loss of structure. (WARNING #28)"
 /OBJECT_CONTRACT/DATE_PUBLICATION_NOTICE,date_of_contract_notice,II.3,,Map to `tender.communication.futureNoticeDate`
 /LEFTI,info_legal,III,,"The standard forms express exclusion grounds and selection criteria in this section as unstructured text. In the [introductory note](https://github.com/eForms/eForms/raw/master/20180604_eForms_consultation_introduction.docx) to its [eForms consultation](https://github.com/eForms/eForms), the European Commission proposes to create an extension to eForms to implement the [European Single Procurement Document (ESPD)](http://ec.europa.eu/growth/single-market/public-procurement/e-procurement/espd/), which expresses this information as structured data, following the model of the [Core Criterion and Core Evidence Vocabulary](https://joinup.ec.europa.eu/solution/core-criterion-and-core-evidence-vocabulary). With respect to OCDS, work on this section is postponed until either the extension to eForms is available or until the [ESPD Exchange Data Model](https://github.com/ESPD/ESPD-EDM) is stable."
-/LEFTI/SUITABILITY,info_evaluating_requir,,,"Map to `tender.participationConditions.pursuingProfessionalActivity`"
+/LEFTI/SUITABILITY,info_evaluating_requir,,,"Add a `SelectionCriterion` object to the `tender.selectionCriteria` array. Map to `.description`, and set its '.type' to 'suitability'"
 /LEFTI/ECONOMIC_CRITERIA_DOC,criteria_selection_docs,,,"Add a `Document` object to the `tender.documents` array, set its `.type` to 'economicCriteriaSelection', and set its `.id`."
-/LEFTI/ECONOMIC_FINANCIAL_INFO,info_evaluating_weth_requir,,,"Map to `tender.participationConditions.economicSelectionCritera`"
 /LEFTI/ECONOMIC_FINANCIAL_MIN_LEVEL,min_standards_required,,,"Map to `tender.participationConditions.economicRequiredStandards`"
+/LEFTI/ECONOMIC_FINANCIAL_INFO,info_evaluating_weth_requir,,,"Add a `SelectionCriterion` object to the `tender.selectionCriteria` array. Map to `.description`, and set its '.type' to 'economicFinancial'"
 /LEFTI/TECHNICAL_CRITERIA_DOC,criteria_selection_docs,,"Add a `Document` object to the `tender.documents` array, set its `.type` to 'technicalCriteriaSelection', and set its `.id`."
-/LEFTI/TECHNICAL_PROFESSIONAL_INFO,info_evaluating_weth_requir,,,"Map to `tender.participationConditions.technicalSelectionCritera`"
 /LEFTI/TECHNICAL_PROFESSIONAL_MIN_LEVEL,min_standards_required,,,"Map to `tender.participationConditions.technicalRequiredStandards`"
+/LEFTI/TECHNICAL_PROFESSIONAL_INFO,info_evaluating_weth_requir,,,"Add a `SelectionCriterion` object to the `tender.selectionCriteria` array. Map to `.description`, and set its '.type' to 'technical'"
 /LEFTI/RESTRICTED_SHELTERED_WORKSHOP,restricted_sheltered_workshop,,,"Set `tender.participationConditions.hasReservedParticipation` to `true`"
 /LEFTI/RESTRICTED_SHELTERED_PROGRAM,restricted_sheltered_program,,,Set `tender.contractTerms.hasReservedExecution` to `true`
 /LEFTI/PARTICULAR_PROFESSION,particular_profession_reserved,,,Set `tender.contractTerms.hasReservedToProfession` to `true`
