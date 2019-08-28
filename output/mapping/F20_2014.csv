@@ -95,7 +95,7 @@ xpath,label-key,index,comment,guidance
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id`."
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/NUTS,nutscode,,,"Take the NUTS code in the `CODE` attribute, and map to the item's `.deliveryAddress.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/MAIN_SITE,mainsiteplace_works_delivery,,,Map to the item's `.deliveryLocation.description`
-/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/SHORT_DESCR,descr_procurement,VII.1.4,,"Map to the item's `.description`"
+/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/SHORT_DESCR,descr_procurement,VII.1.4,,Map to the item's `.description`
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/DURATION,duration_contr_framew_dps_concess,VII.1.5,,""
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/DATE_START,starting,,,Map to the contract's `.period.startDate`
 /MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/DATE_END,end,,,Map to the contract's `.period.endDate`
