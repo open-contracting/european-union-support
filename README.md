@@ -32,7 +32,8 @@ Using the fish shell:
     # Get the English PDFs.
     # http://simap.ted.europa.eu/standard-forms-for-public-procurement
     mkdir -p English
-    for i in 01 02 03 04 05 06 07 08 12 13 14 15 16 17 18 20 21 22 23 24 25; curl -o English/EN_F$i.pdf https://simap.ted.europa.eu/documents/10184/49059/sf_{$i}_en.pdf; end
+    for i in 01 02 03 04 05 06 07 08 12 13 14 15 20 21 22 23 24 25; curl -o English/EN_F$i.pdf http://simap.ted.europa.eu/documents/10184/99173/EN_F{$i}.pdf; end
+    for i in 16 17 18; curl -o English/EN_F$i.pdf https://simap.ted.europa.eu/documents/10184/49059/sf_{$i}_en.pdf; end
     curl -o English/EN_F19.pdf https://simap.ted.europa.eu/documents/10184/49059/sf_019_en.pdf/179d1c44-05d3-4f35-b25e-bb8d619d9733
     for i in 01 02; curl -o English/EN_T$i.pdf https://simap.ted.europa.eu/documents/10184/49059/t{$i}_en.pdf; end
 
@@ -107,17 +108,22 @@ Many XPath's are common across forms. To copy guidance across forms, run:
 
     rake label:copy SOURCE=F01
     rake label:copy SOURCE=F02 FILES=F03,F05,F06,F07,F12,F13,F15,F21,F22,F23,F24
-    rake label:copy SOURCE=F03 FILES=F06,F13,F15,F20,F21,F22,F23,F25
+    rake label:copy SOURCE=F03 FILES=F06,F13,F15,F21,F22,F23,F25
     rake label:copy SOURCE=F04 FILES=F05,F06,F07,F08,F12,F13,F15,F21,F22,F23,F24,F25
-    rake label:copy SOURCE=F06 FILES=F20,F22
+    rake label:copy SOURCE=F06 FILES=F22
     rake label:copy SOURCE=F07 FILES=F22
     rake label:copy SOURCE=F12 FILES=F13
-    rake label:copy SOURCE=F15 FILES=F23,F25
     rake label:copy SOURCE=F21 FILES=F22,F23,F25
     rake label:copy SOURCE=F23 FILES=F25
     rake label:copy SOURCE=F24 FILES=F25
     rake label:copy SOURCE=F03 FILES=MOVE
     rake label:copy SOURCE=F14 FILES=MOVE
+
+Review the copied guidance after running:
+
+    rake label:copy SOURCE=F03 FILES=F20
+    rake label:copy SOURCE=F06 FILES=F20
+    rake label:copy SOURCE=F15 FILES=F23,F25
 
 Many label keys are ignored across forms. To pre-populate across forms, run:
 
@@ -149,8 +155,8 @@ Before running this task, [move](move.fish) the following in XPath CSVs to more 
 
 You can now generate a table for each form, displaying, for each element and attribute, the index within the PDF ("I.1"), the label (in any language) and the XPath, to which you can then add guidance for OCDS.
 
-    for i in F01 F02 F03; rake table LANGUAGE=EN FILES=F$i > path/to/F$i.md; end
-    for i in T01 T02; rake table LANGUAGE=EN FILES=MOVE FORM=$i > ../../open-contracting-extensions/european-union/docs/$i.md; end
+    for i in 01 02 03 04 05 06 07 08 12 13 14 15 20 21 22 23 24 25; rake table LANGUAGE=EN FILES=F$i > path/to/european-union/docs/F$i.md; end
+    for i in 01 02; rake table LANGUAGE=EN FILES=MOVE FORM=T$i > path/to/european-union/docs/T$i.md; end
 
 ## Design
 

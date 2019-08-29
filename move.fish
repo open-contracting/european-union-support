@@ -16,8 +16,8 @@ for i in F21 F22 F23
     ex -c $l,$l+5m(grep -n LOT_COMBINING_CONTRACT_RIGHT {$i}*.csv | cut -d: -f1) -c w -c q {$i}*.csv
 end
 
-# F03, F06, F25 only: `NO_AWARDED_TO_GROUP` after `AWARDED_TO_GROUP`
-for i in F03 F06 F25
+# F03, F06, F15, F25 only: `NO_AWARDED_TO_GROUP` after `AWARDED_TO_GROUP`
+for i in F03 F06 F15 F25
     ex -c (grep -n /NO_AWARDED_TO_GROUP {$i}*.csv | cut -d: -f1)m(grep -n /AWARDED_TO_GROUP {$i}*.csv | cut -d: -f1) -c w -c q {$i}*.csv
 end
 for i in F20
@@ -30,7 +30,16 @@ end
 for i in F03 F06 F21 F22 F23 F25
     ex -c (grep -n D_ACCORDANCE_ARTICLE, {$i}*.csv | cut -d: -f1),(grep -n D_JUSTIFICATION {$i}*.csv | cut -d: -f1)m\$ -c w -c q {$i}*.csv
 end
+
 for i in F15
+    ex -c (grep -n OBJECT_DESCR/DIRECTIVE_2014_23_EU, {$i}*.csv | cut -d: -f1),(grep -n DIRECTIVE_2014_23_EU/AC/ {$i}*.csv | cut -d: -f1)m(grep -n DIRECTIVE_2014_25_EU/AC/AC_PRICE/ {$i}*.csv | cut -d: -f1) -c w -c q {$i}*.csv
+    ex -c (grep -n PROCEDURE/DIRECTIVE_2014_23_EU, {$i}*.csv | cut -d: -f1),(grep -n PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION, {$i}*.csv | cut -d: -f1)m(grep -n DIRECTIVE_2009_81_EC/PT_NEGOTIATED_WITHOUT_PUBLICATION, {$i}*.csv | cut -d: -f1) -c w -c q {$i}*.csv
+
+    ex -c (grep -n DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_CALL, {$i}*.csv | cut -d: -f1)m(grep -n DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION, {$i}*.csv | cut -d: -f1) -c w -c q {$i}*.csv
+    ex -c (grep -n DIRECTIVE_2009_81_EC/PT_AWARD_CONTRACT_WITHOUT_CALL, {$i}*.csv | cut -d: -f1)m(grep -n DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION, {$i}*.csv | cut -d: -f1) -c w -c q {$i}*.csv
+    ex -c (grep -n DIRECTIVE_2014_25_EU/PT_AWARD_CONTRACT_WITHOUT_CALL, {$i}*.csv | cut -d: -f1)m(grep -n DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION, {$i}*.csv | cut -d: -f1) -c w -c q {$i}*.csv
+    ex -c (grep -n DIRECTIVE_2014_24_EU/PT_AWARD_CONTRACT_WITHOUT_CALL, {$i}*.csv | cut -d: -f1)m(grep -n DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION, {$i}*.csv | cut -d: -f1) -c w -c q {$i}*.csv
+
     for x in DIRECTIVE_2014_24_EU DIRECTIVE_2014_25_EU DIRECTIVE_2009_81_EC
         ex -c (grep -n $x/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE, {$i}*.csv | cut -d: -f1),(grep -n $x/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_JUSTIFICATION {$i}*.csv | cut -d: -f1)m\$ -c w -c q {$i}*.csv
         ex -c (grep -n $x/PT_AWARD_CONTRACT_WITHOUT_CALL, {$i}*.csv | head -n 1 | cut -d: -f1),(grep -n $x/PT_AWARD_CONTRACT_WITHOUT_CALL/D_JUSTIFICATION {$i}*.csv | cut -d: -f1)m\$ -c w -c q {$i}*.csv
@@ -45,7 +54,7 @@ end
 for i in F01 F02 F03 F04 F05 F06 F07 F08 F12 F13 F14 F15 F20 F21 F22 F23 F24 F25 MOVE
     ex -c (grep -n ADDRESS_CONTRACTING_BODY/NUTS, {$i}*.csv | cut -d: -f1)m(grep -n ADDRESS_CONTRACTING_BODY/TOWN, {$i}*.csv | cut -d: -f1) -c w -c q {$i}*.csv
 end
-for i in F03 F06 F22 F23
+for i in F03 F06 F15 F22 F23
     ex -c (grep -n ADDRESS_CONTRACTOR/NUTS, {$i}*.csv | cut -d: -f1)m(grep -n ADDRESS_CONTRACTOR/TOWN, {$i}*.csv | cut -d: -f1) -c w -c q {$i}*.csv
 end
 for i in F13
