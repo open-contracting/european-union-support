@@ -1,6 +1,6 @@
 """
-python scripts/patched_release_schema.py > release-schema-patched.json
-ocdskit mapping-sheet --infer-required --extension-field extension release-schema-patched.json > mapping-sheet.csv
+python scripts/patched_release_schema.py > scripts/release-schema-patched.json
+ocdskit mapping-sheet --infer-required --extension-field extension release-schema-patched.json > scripts/mapping-sheet.csv
 """
 
 import json
