@@ -22,7 +22,7 @@ xpath,label-key,index,comment,guidance
 /CONTRACTING_BODY/CA_TYPE_OTHER,other_type,,,Map to `.name`
 /CONTRACTING_BODY/CA_ACTIVITY,mainactivity,I.5,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification's `.scheme` to ['COFOG'](https://unstats.un.org/unsd/publications/catalogue?selectID=145), and set its `.id` and `.name` as follows: (PROPOSAL #10)"
 /CONTRACTING_BODY/CA_ACTIVITY_OTHER,other_activity,,,Map to `.name`
-/CONTRACTING_BODY/CE_ACTIVITY,mainactivity,I.6,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification's `.scheme` to 'TED_CE_ACTIVITY', and set its `.id` as follows: (PROPOSAL #10)\n\n(The codes are drawn from [Directive 2014/25/EU](https://eur-lex.europa.eu/legal-content/en/TXT/?uri=CELEX%3A32014L0025#L_2014094EN.01033901))"
+/CONTRACTING_BODY/CE_ACTIVITY,mainactivity,I.6,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification's `.scheme` to 'TED_CE_ACTIVITY', and set its `.id` and/or `.name` as follows: (PROPOSAL #10)\n\n(The codes are drawn from [Directive 2014/25/EU](https://eur-lex.europa.eu/legal-content/en/TXT/?uri=CELEX%3A32014L0025#L_2014094EN.01033901))"
 /CONTRACTING_BODY/CE_ACTIVITY_OTHER,other_activity,,,Map to `.name`
 /OBJECT_CONTRACT,object,II,,""
 /OBJECT_CONTRACT/TITLE,title_contract,II.1.1,,Map to `tender.title`
@@ -58,8 +58,8 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC/AC_COST,award_lowest_cost,,,"Add an `AwardCriterion` object to the lot's `.awardCriteria.criteria` array, and set its `.type` to 'cost'."
 /OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC/AC_PRICE,price,,,"Add an `AwardCriterion` object to the lot's `.awardCriteria.criteria` array, and set its `.type` to 'price'."
 /OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC/AC_PRICE/AC_WEIGHTING,weighting,,,Map to the criterion's `.description`
-/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_25_EU,,,,/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU
-/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_25_EU/AC,,,,/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC
+/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_25_EU,,,,""
+/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_25_EU/AC,,,,""
 /OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_25_EU/AC/AC_QUALITY,,,,/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC/AC_QUALITY
 /OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_25_EU/AC/AC_COST,,,,/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC/AC_COST
 /OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_25_EU/AC/AC_PRICE,,,,/OBJECT_CONTRACT/OBJECT_DESCR/DIRECTIVE_2014_24_EU/AC/AC_PRICE
@@ -93,7 +93,7 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/FRAMEWORK,notice_involves_framework,,,Set `tender.techniques.hasFrameworkAgreement` to `true`
 /PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to `tender.coveredBy`
 /PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in `tender.coveredBy`, then the procurement isn't covered by the GPA."
-/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,Discard. The *previous publication concerning this procedure* is the OCDS release with the same `ocid` as this release and with an earlier `date` that is nearest that of this release.
+/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,Discard. The *previous publication concerning this procedure* is the OCDS release with the same `ocid` as this release and with the nearest earlier `date` to this release.
 /AWARD_CONTRACT,award_of_contract_concess,V,,Add an `Award` object to the `awards` array
 /AWARD_CONTRACT/@ITEM,,,,Discard
 /AWARD_CONTRACT/CONTRACT_NO,contract_number,,,Map to the award's `.id`
@@ -154,7 +154,7 @@ xpath,label-key,index,comment,guidance
 /COMPLEMENTARY_INFO/REVIEW_PROCEDURE,appeals_deadline,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,Map to `tender.reviewDetails` (PROPOSAL #6)
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_INFO,appeals_info,VI.4.4,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations#add-a-party), and add 'reviewContactPoint' to its `.roles` (PROPOSAL #25)"
 /COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,date_dispatch,VI.5,,Map to `date`
-/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE,d_just_for_wo_pub_201424,D1.1,,"For each of the following, add a `Classification` object to the `tender.procurementMethodRationaleCodes` array. Set the classification's `.scheme` to `TED_PT_AWARD_CONTRACT_WITHOUT_CALL`, and set its `.id` and `.name` as follows (PROPOSAL #30)"
+/PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE,d_just_for_wo_pub_201424,D1.1,,"For each of the following, add a `Classification` object to the `tender.procurementMethodRationaleCodes` array. Set the classification's `.scheme` to 'TED_PT_AWARD_CONTRACT_WITHOUT_CALL', and set its `.id` and `.name` as follows (PROPOSAL #30)"
 /PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_PROC_OPEN,d_proc_open,,,Set `.id` to 'D_PROC_OPEN' and `.name` to 'No tenders or no suitable tenders/requests to participate in response to open procedure'
 /PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_PROC_RESTRICTED,d_proc_restricted,,,Set `.id` to 'D_PROC_RESTRICTED' and `.name` to 'No tenders or no suitable tenders/requests to participate in response to restricted procedure'
 /PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_MANUF_FOR_RESEARCH,d_manuf_for_research,,,"Set `.id` to 'D_MANUF_FOR_RESEARCH' and `.name` to 'The products involved are manufactured purely for the purpose of research, experiment, study or development under the conditions stated in the directive'"
@@ -171,7 +171,7 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/DIRECTIVE_2014_24_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_JUSTIFICATION,,,,Map to `tender.procurementMethodRationale`
 /PROCEDURE/DIRECTIVE_2014_24_EU/PT_AWARD_CONTRACT_WITHOUT_CALL/D_OUTSIDE_SCOPE,d_outside_scope,,,Set `.id` to 'D_OUTSIDE_SCOPE' and `.name` to 'The procurement falls outside the scope of application of the directive'
 /PROCEDURE/DIRECTIVE_2014_24_EU/PT_AWARD_CONTRACT_WITHOUT_CALL/D_JUSTIFICATION,d_explain,,,Map to `tender.procurementMethodRationale`
-/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE,d_just_for_wo_pub_201425,D2.1,,"For each of the following, add a `Classification` object to the `tender.procurementMethodRationaleCodes` array. Set the classification's `.scheme` to `TED_PT_AWARD_CONTRACT_WITHOUT_CALL`, and set its `.id` and `.name` as follows (PROPOSAL #30)"
+/PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE,d_just_for_wo_pub_201425,D2.1,,"For each of the following, add a `Classification` object to the `tender.procurementMethodRationaleCodes` array. Set the classification's `.scheme` to 'TED_PT_AWARD_CONTRACT_WITHOUT_CALL', and set its `.id` and `.name` as follows (PROPOSAL #30)"
 /PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_NO_TENDERS_REQUESTS,d_no_tenders_in_response_call,,,Set `.id` to 'D_NO_TENDERS_REQUESTS' and `.name` to 'No tenders or no suitable tenders/requests to participate in response to a procedure with prior call for competition'
 /PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_PURE_RESEARCH,d_pure_research,,,"Set `.id` to 'D_PURE_RESEARCH' and `.name` to 'The contract involved is purely for the purpose of research, experiment, study or development under the conditions stated in the directive'"
 /PROCEDURE/DIRECTIVE_2014_25_EU/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_TECHNICAL,d_technical,,,"Set `.id` to 'D_TECHNICAL' and `.name` to 'The works, supplies or services can be provided only by a particular economic operator due to absence of competition for technical reasons'"
@@ -209,7 +209,7 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/DIRECTIVE_2009_81_EC/PT_AWARD_CONTRACT_WITHOUT_CALL/D_SERVICES_LISTED,d_serv_listed_a2b,,,
 /PROCEDURE/DIRECTIVE_2009_81_EC/PT_AWARD_CONTRACT_WITHOUT_CALL/D_OUTSIDE_SCOPE,,,,
 /PROCEDURE/DIRECTIVE_2009_81_EC/PT_AWARD_CONTRACT_WITHOUT_CALL/D_JUSTIFICATION,,,,
-/PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE,d_just_for_wo_pub_201423,D4.1,,"For each of the following, add a `Classification` object to the `tender.procurementMethodRationaleCodes` array. Set the classification's `.scheme` to `TED_PT_AWARD_CONTRACT_WITHOUT_CALL`, and set its `.id` and `.name` as follows (PROPOSAL #30)"
+/PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE,d_just_for_wo_pub_201423,D4.1,,"For each of the following, add a `Classification` object to the `tender.procurementMethodRationaleCodes` array. Set the classification's `.scheme` to 'TED_PT_AWARD_CONTRACT_WITHOUT_CALL', and set its `.id` and `.name` as follows (PROPOSAL #30)"
 /PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_NO_TENDERS_REQUESTS,d_no_applications,,,"Set `.id` to 'D_NO_TENDERS_REQUESTS' and `.name` to 'No applications, no tenders or no suitable tenders/applications in response to a prior concession award procedure'"
 /PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_ARTISTIC,d_artistic_concess,,,Set `.id` to 'D_ARTISTIC' and `.name` to 'The services can be provided only by a particular economic operator due to concession aiming at the creation or acquisition of a unique work of art or artistic performance'
 /PROCEDURE/DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE/D_TECHNICAL,d_technical,,,Set `.id` to 'D_ARTISTIC' and `.name` to 'The services can be provided only by a particular economic operator due to absence of competition for technical reasons'
