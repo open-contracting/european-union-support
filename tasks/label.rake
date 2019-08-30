@@ -42,6 +42,9 @@ namespace :label do
   task :validate do
     files('output/mapping/{}*.csv').each do |filename|
       CSV.foreach(filename, headers: true) do |row|
+        if row['guidance'].nil? && row['comment'] && !row['comment'].start_with?('https://')
+          raise "#{filename}: #{row['xpath']} short row!"
+        end
         if row.size != 5
           raise "#{filename}: #{row['xpath']} unquoted comma!"
         end

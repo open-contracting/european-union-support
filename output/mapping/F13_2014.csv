@@ -26,7 +26,7 @@ xpath,label-key,index,comment,guidance
 /CONTRACTING_BODY/CA_TYPE_OTHER,other_type,,,Map to `.name`
 /CONTRACTING_BODY/CA_ACTIVITY,mainactivity,I.5,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification's `.scheme` to ['COFOG'](https://unstats.un.org/unsd/publications/catalogue?selectID=145), and set its `.id` and `.name` as follows: (PROPOSAL #10)"
 /CONTRACTING_BODY/CA_ACTIVITY_OTHER,other_activity,,,Map to `.name`
-/CONTRACTING_BODY/CE_ACTIVITY,mainactivity,I.6,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification's `.scheme` to 'TED_CE_ACTIVITY', and set its `.id` as follows: (PROPOSAL #10)\n\n(The codes are drawn from [Directive 2014/25/EU](https://eur-lex.europa.eu/legal-content/en/TXT/?uri=CELEX%3A32014L0025#L_2014094EN.01033901))"
+/CONTRACTING_BODY/CE_ACTIVITY,mainactivity,I.6,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification's `.scheme` to 'TED_CE_ACTIVITY', and set its `.id` and/or `.name` as follows: (PROPOSAL #10)\n\n(The codes are drawn from [Directive 2014/25/EU](https://eur-lex.europa.eu/legal-content/en/TXT/?uri=CELEX%3A32014L0025#L_2014094EN.01033901))"
 /CONTRACTING_BODY/CE_ACTIVITY_OTHER,other_activity,,,Map to `.name`
 /OBJECT_CONTRACT,object,II,,""
 /OBJECT_CONTRACT/TITLE,title_contract,II.1.1,,Map to `tender.title`
@@ -45,7 +45,7 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/PT_OPEN,open,,,"Set `tender.procurementMethod` to 'open', and set `tender.procurementMethodDetails` to 'Open procedure'"
 /PROCEDURE/PT_RESTRICTED,type_restricted,,,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodDetails` to 'Restricted procedure'"
 /PROCEDURE/CRITERIA_EVALUATION,dc_criteria_evaluation,IV.1.9,,Map to `tender.awardCriteriaDetails`
-/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,Discard. The *previous publication concerning this procedure* is the OCDS release with the same `ocid` as this release and with an earlier `date` that is nearest that of this release.
+/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,Discard. The *previous publication concerning this procedure* is the OCDS release with the same `ocid` as this release and with the nearest earlier `date` to this release.
 /RESULTS,dc_results_contest,V,,""
 /RESULTS/NO_AWARDED_PRIZE,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/contract_statusDetails,Set the award's `.status` to 'unsuccessful'
 /RESULTS/NO_AWARDED_PRIZE/PROCUREMENT_DISCONTINUED,award_discontinued,,,Set the award's `.statusDetails` to 'discontinued'
@@ -63,7 +63,7 @@ xpath,label-key,index,comment,guidance
 /RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/NATIONALID,national_id,,,"Map to `.identifier.id`, and set `.identifier.scheme`"
 /RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/ADDRESS,address_postal,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS
 /RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/TOWN,address_town,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN
-/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/NUTS,nutscode,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,"Take the NUTS code in the `CODE` attribute, and map to `.address.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
+/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/NUTS,nutscode,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS
 /RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/POSTAL_CODE,address_postcode,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE
 /RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/COUNTRY,address_country,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY
 /RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/PHONE,address_phone,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE

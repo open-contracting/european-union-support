@@ -79,25 +79,25 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds."
 /OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,info_additional,II.2.14,,"Append to the lot's `.description`, and append to the item's `.description`\n\nThis results in a loss of structure. (WARNING #28)"
 /OBJECT_CONTRACT/DATE_PUBLICATION_NOTICE,date_of_contract_notice,II.3,,Map to `tender.communication.futureNoticeDate`
-/LEFTI,info_legal,III,,"The standard forms express exclusion grounds and selection criteria in this section as unstructured text. In the [introductory note](https://github.com/eForms/eForms/raw/master/20180604_eForms_consultation_introduction.docx) to its [eForms consultation](https://github.com/eForms/eForms), the European Commission proposes to create an extension to eForms to implement the [European Single Procurement Document (ESPD)](http://ec.europa.eu/growth/single-market/public-procurement/e-procurement/espd/), which expresses this information as structured data, following the model of the [Core Criterion and Core Evidence Vocabulary](https://joinup.ec.europa.eu/solution/core-criterion-and-core-evidence-vocabulary). With respect to OCDS, work on this section is postponed until either the extension to eForms is available or until the [ESPD Exchange Data Model](https://github.com/ESPD/ESPD-EDM) is stable."
-/LEFTI/RULES_CRITERIA,descr_brief_rules,,,""
-/LEFTI/RESTRICTED_SHELTERED_WORKSHOP,restricted_sheltered_workshop,,,""
-/LEFTI/RESTRICTED_SHELTERED_PROGRAM,restricted_sheltered_program,,,Set `tender.contractTerms.reservedExecution` to `true`
-/LEFTI/RESERVED_ORGANISATIONS_SERVICE_MISSION,reserved_public_mission,,,""
-/LEFTI/PARTICULAR_PROFESSION,particular_profession_reserved,,,""
-/LEFTI/REFERENCE_TO_LAW,ref_law_reg_prov,,,""
-/LEFTI/PERFORMANCE_CONDITIONS,other_conditions,III.2.2,,Map to `tender.contractTerms.termsPerformance`
-/LEFTI/PERFORMANCE_STAFF_QUALIFICATION,staff_responsible_indicate,,,""
+/LEFTI,info_legal,III,,"The standard forms express exclusion grounds and selection criteria in this section as unstructured text. In the introductory note to its [eForms consultation](https://github.com/eForms/eForms), the European Commission had proposed to create an extension to eForms to implement the [European Single Procurement Document (ESPD)](http://ec.europa.eu/growth/single-market/public-procurement/e-procurement/espd/) [Exchange Data Model](https://github.com/ESPD/ESPD-EDM), which expresses this information as structured data, following the model of the [Core Criterion and Core Evidence Vocabulary](https://joinup.ec.europa.eu/solution/core-criterion-and-core-evidence-vocabulary)."
+/LEFTI/RULES_CRITERIA,descr_brief_rules,,,Map to `tender.otherRequirements.reductionCriteria`
+/LEFTI/RESTRICTED_SHELTERED_WORKSHOP,restricted_sheltered_workshop,,,Set `tender.otherRequirements.reservedParticipation` to 'shelteredWorkshop'
+/LEFTI/RESTRICTED_SHELTERED_PROGRAM,restricted_sheltered_program,,,"Set `tender.contractTerms.hasReservedExecution` to `true`, and set `tender.contractTerms.reservedExecution` to 'Sheltered employment programmes'"
+/LEFTI/RESERVED_ORGANISATIONS_SERVICE_MISSION,reserved_public_mission,,,Set `tender.selectionCriteria.reservedParticipation` to 'publicServiceMissionOrganization'
+/LEFTI/PARTICULAR_PROFESSION,particular_profession_reserved,,,Set `tender.contractTerms.hasReservedExecution` to `true`
+/LEFTI/REFERENCE_TO_LAW,ref_law_reg_prov,,,Map to `tender.contractTerms.reservedExecution`
+/LEFTI/PERFORMANCE_CONDITIONS,other_conditions,III.2.2,,Map to `tender.contractTerms.performanceTerms`
+/LEFTI/PERFORMANCE_STAFF_QUALIFICATION,staff_responsible_indicate,,,Set `tender.otherRequirements.requiresStaffNamesQualifications` to `true`
 /PROCEDURE,procedure,IV,,""
 /PROCEDURE/PT_OPEN,proctype_open,,,"Set `tender.procurementMethod` to 'open', and set `tender.procurementMethodDetails` to 'Open procedure'"
 /PROCEDURE/PT_RESTRICTED,proctype_restricted,,,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodDetails` to 'Restricted procedure'"
 /PROCEDURE/PT_INVOLVING_NEGOTIATION,proctype_negotiations_involved,,,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodDetails` to 'Procedure involving negotiations'"
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL,award_wo_prior_pub_d1,,,"Set `tender.procurementMethod` to 'limited', and set `tender.procurementMethodDetails` to 'Award procedure without prior publication of a call for competition'.\n\n**F03, F21:** See [Annex D1](#annex-d1-general-procurement)\n\n**F06, F22:** See [Annex D2](#annex-d2-utilities)"
 /PROCEDURE/FRAMEWORK,notice_involves_framework,,,Set `tender.techniques.hasFrameworkAgreement` to `true`
-/PROCEDURE/FRAMEWORK/JUSTIFICATION,framework_just_four,,,Map to `tender.techniques.frameworkAgreement.durationRationale`
+/PROCEDURE/FRAMEWORK/JUSTIFICATION,framework_just_four,,,Map to `tender.techniques.frameworkAgreement.periodRationale`
 /PROCEDURE/URL_NATIONAL_PROCEDURE,url_national_rules,,,
 /PROCEDURE/MAIN_FEATURES_AWARD,award_main_features,IV.1.11,,Map to `tender.awardCriteriaDetails`
-/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,Discard. The *previous publication concerning this procedure* is the OCDS release with the same `ocid` as this release and with an earlier `date` that is nearest that of this release.
+/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,Discard. The *previous publication concerning this procedure* is the OCDS release with the same `ocid` as this release and with the nearest earlier `date` to this release.
 /PROCEDURE/DATE_RECEIPT_TENDERS,date,,,Map to the date component of `tender.tenderPeriod.endDate`
 /PROCEDURE/TIME_RECEIPT_TENDERS,time,,,Map to the time component of `tender.tenderPeriod.endDate`
 /PROCEDURE/LANGUAGES,languages_allowed,IV.2.4,,""
@@ -152,7 +152,7 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/INFO_ADD_SUBCONTRACTING,subcontr_descr_short,,,Map to the award's `.subcontracting.details` (PROPOSAL #37)
 /COMPLEMENTARY_INFO,info_complement,VI,,""
 /COMPLEMENTARY_INFO/EORDERING,eordering_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows,Set `tender.contractTerms.hasElectronicOrdering` to `true`
-/COMPLEMENTARY_INFO/EINVOICING,einvoicing_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows https://github.com/eForms/eForms/issues/88,Set `tender.contractTerms.electronicInvoicing` to 'allowed'
+/COMPLEMENTARY_INFO/EINVOICING,einvoicing_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows https://github.com/eForms/eForms/issues/88,Set `tender.contractTerms.electronicInvoicingPolicy` to 'allowed'
 /COMPLEMENTARY_INFO/EPAYMENT,epayment_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows https://github.com/eForms/eForms/issues/88,Set `tender.contractTerms.hasElectronicPayment` to `true`
 /COMPLEMENTARY_INFO/INFO_ADD,info_additional,VI.3,,Map to `description`
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY,appeals_body,VI.4.1,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations#add-a-party), and add 'reviewBody' to its `.roles`"
@@ -169,7 +169,7 @@ xpath,label-key,index,comment,guidance
 /COMPLEMENTARY_INFO/REVIEW_PROCEDURE,appeals_deadline,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,Map to `tender.reviewDetails` (PROPOSAL #6)
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_INFO,appeals_info,VI.4.4,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations#add-a-party), and add 'reviewContactPoint' to its `.roles` (PROPOSAL #25)"
 /COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,date_dispatch,VI.5,,Map to `date`
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE,d_just_for_wo_pub_201424,D1.1,,"For each of the following, add a `Classification` object to the `tender.procurementMethodRationaleCodes` array. Set the classification's `.scheme` to `TED_PT_AWARD_CONTRACT_WITHOUT_CALL`, and set its `.id` and `.name` as follows (PROPOSAL #30)"
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE,d_just_for_wo_pub_201424,D1.1,,"For each of the following, add a `Classification` object to the `tender.procurementMethodRationaleCodes` array. Set the classification's `.scheme` to 'TED_PT_AWARD_CONTRACT_WITHOUT_CALL', and set its `.id` and `.name` as follows (PROPOSAL #30)"
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_PROC_OPEN,d_proc_open,,,Set `.id` to 'D_PROC_OPEN' and `.name` to 'No tenders or no suitable tenders/requests to participate in response to open procedure'
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_PROC_RESTRICTED,d_proc_restricted,,,Set `.id` to 'D_PROC_RESTRICTED' and `.name` to 'No tenders or no suitable tenders/requests to participate in response to restricted procedure'
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_TECHNICAL,d_technical,,,"Set `.id` to 'D_TECHNICAL' and `.name` to 'The works, supplies or services can be provided only by a particular economic operator due to absence of competition for technical reasons'"

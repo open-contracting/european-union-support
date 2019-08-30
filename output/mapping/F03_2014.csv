@@ -78,7 +78,7 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/EAUCTION_USED,eauction_was_used,,,Set `tender.techniques.hasElectronicAuction` to `true`
 /PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to `tender.coveredBy`
 /PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in `tender.coveredBy`, then the procurement isn't covered by the GPA."
-/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,Discard. The *previous publication concerning this procedure* is the OCDS release with the same `ocid` as this release and with an earlier `date` that is nearest that of this release.
+/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,Discard. The *previous publication concerning this procedure* is the OCDS release with the same `ocid` as this release and with the nearest earlier `date` to this release.
 /PROCEDURE/TERMINATION_DPS,termination_dps,,,Set `tender.techniques.dynamicPurchasingSystem.status` to 'terminated'
 /PROCEDURE/TERMINATION_PIN,pin_as_call_no_contracts,,,Set `tender.status` to 'complete'
 /AWARD_CONTRACT,award_of_contract,V,,Add an `Award` object to the `awards` array
@@ -145,7 +145,7 @@ xpath,label-key,index,comment,guidance
 /COMPLEMENTARY_INFO/REVIEW_PROCEDURE,appeals_deadline,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,Map to `tender.reviewDetails` (PROPOSAL #6)
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_INFO,appeals_info,VI.4.4,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations#add-a-party), and add 'reviewContactPoint' to its `.roles` (PROPOSAL #25)"
 /COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,date_dispatch,VI.5,,Map to `date`
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE,d_just_for_wo_pub_201424,D1.1,,"For each of the following, add a `Classification` object to the `tender.procurementMethodRationaleCodes` array. Set the classification's `.scheme` to `TED_PT_AWARD_CONTRACT_WITHOUT_CALL`, and set its `.id` and `.name` as follows (PROPOSAL #30)"
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE,d_just_for_wo_pub_201424,D1.1,,"For each of the following, add a `Classification` object to the `tender.procurementMethodRationaleCodes` array. Set the classification's `.scheme` to 'TED_PT_AWARD_CONTRACT_WITHOUT_CALL', and set its `.id` and `.name` as follows (PROPOSAL #30)"
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_PROC_OPEN,d_proc_open,,,Set `.id` to 'D_PROC_OPEN' and `.name` to 'No tenders or no suitable tenders/requests to participate in response to open procedure'
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_PROC_RESTRICTED,d_proc_restricted,,,Set `.id` to 'D_PROC_RESTRICTED' and `.name` to 'No tenders or no suitable tenders/requests to participate in response to restricted procedure'
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_MANUF_FOR_RESEARCH,d_manuf_for_research,,,"Set `.id` to 'D_MANUF_FOR_RESEARCH' and `.name` to 'The products involved are manufactured purely for the purpose of research, experiment, study or development under the conditions stated in the directive'"

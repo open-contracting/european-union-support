@@ -74,13 +74,13 @@ class TableBuilder
   def row(label, help_labels: [], index: nil, xpath: nil, value: nil, reference: nil, guidance: false)
     if xpath
       if value
-        @enum_targets[label] ||= xpath
+        @enum_targets[label] ||= [xpath, guidance]
       else
-        @elem_targets[label] ||= xpath
+        @elem_targets[label] ||= [xpath, guidance]
       end
     end
     if xpath && guidance
-      @guidances[xpath] ||= guidance
+      @guidances[xpath] ||= [label, guidance]
     end
 
     no_guidance = reference.nil? && (guidance == false || guidance == '')
@@ -130,14 +130,33 @@ class TableBuilder
     # "OCDS guidance" cell.
     if reference
       if value
-        target = @enum_targets.fetch(label)
+        target, text = @enum_targets.fetch(label)
       else
-        target = @elem_targets.fetch(label)
+        target, text = @elem_targets.fetch(label)
       end
-      cell(link_to('See above', "##{target}"))
+      if text.start_with?('/')
+        text = @guidances.fetch(text)[1]
+      end
+      start_cell
+      paragraph(link_to("Same as <i>#{t(label)}</i> above", "##{target}"))
+      if !text.empty?
+        markdown(text)
+      end
+      end_cell
     elsif !no_guidance
-      if @guidances.include?(guidance)
-        cell(link_to('See above', "##{guidance}"))
+      if @guidances.key?(guidance)  # guidance is an xpath
+        label_key, text = @guidances[guidance]
+        if label_key
+          infix = "<i>#{t(label_key)}</i>"
+        else
+          infix = "<code>#{guidance}</code>"
+        end
+        start_cell
+        paragraph(link_to("Same as #{infix} above", "##{guidance}"))
+        if !text.empty?
+          markdown(text)
+        end
+        end_cell
       elsif guidance
         start_cell
         markdown(guidance)

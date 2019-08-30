@@ -87,24 +87,24 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Options,Set the lot's `.hasOptions` to `true` (PROPOSAL #21)
 /OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS_DESCR,options_descr,,,Map to the lot's `.options.description` (PROPOSAL #21)
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_OPTIONS,_no,,,Set the lot's `.hasOptions` to `false`
-/OBJECT_CONTRACT/OBJECT_DESCR/ECATALOGUE_REQUIRED,electronic_catalogue_required,,,Set the lot's `.submissionTerms.electronicCatalogue` to 'required'.
+/OBJECT_CONTRACT/OBJECT_DESCR/ECATALOGUE_REQUIRED,electronic_catalogue_required,,,Set the lot's `.submissionTerms.electronicCataloguePolicy` to 'required'.
 /OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_isEUFunded https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_EUFunded,"Get the `Organization` object for the European Union; if none exists yet, [add a party](../operations#add-a-party), and set its `.name` to 'European Union'. Then, add 'funder' to its `.roles`.\n\nGet the `Finance` object for this project; if none exists yet, add a `Finance` object to the `planning.budget.finance` array, map to its `.description`, set its `.id`, set its `.financingParty.name` to 'European Union', and set its `.financingParty.id` to the party's `.id`. Then, add the lot's `.id` to its `.relatedLots`. (PROPOSAL #20)\n\nIn [future forms](https://github.com/eForms/eForms/issues/181#issuecomment-439861320), this field will be de-emphasized."
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds."
 /OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,info_additional,II.2.14,,"Append to the lot's `.description`, and append to the item's `.description`\n\nThis results in a loss of structure. (WARNING #28)"
-/LEFTI,info_legal,III,,"The standard forms express exclusion grounds and selection criteria in this section as unstructured text. In the [introductory note](https://github.com/eForms/eForms/raw/master/20180604_eForms_consultation_introduction.docx) to its [eForms consultation](https://github.com/eForms/eForms), the European Commission proposes to create an extension to eForms to implement the [European Single Procurement Document (ESPD)](http://ec.europa.eu/growth/single-market/public-procurement/e-procurement/espd/), which expresses this information as structured data, following the model of the [Core Criterion and Core Evidence Vocabulary](https://joinup.ec.europa.eu/solution/core-criterion-and-core-evidence-vocabulary). With respect to OCDS, work on this section is postponed until either the extension to eForms is available or until the [ESPD Exchange Data Model](https://github.com/ESPD/ESPD-EDM) is stable."
-/LEFTI/SUITABILITY,info_evaluating_requir,,,""
-/LEFTI/ECONOMIC_CRITERIA_DOC,criteria_selection_docs,,,""
-/LEFTI/ECONOMIC_FINANCIAL_INFO,info_evaluating_weth_requir,,,""
-/LEFTI/ECONOMIC_FINANCIAL_MIN_LEVEL,min_standards_required,,,""
-/LEFTI/TECHNICAL_CRITERIA_DOC,criteria_selection_docs,,,""
-/LEFTI/TECHNICAL_PROFESSIONAL_INFO,info_evaluating_weth_requir,,,""
-/LEFTI/TECHNICAL_PROFESSIONAL_MIN_LEVEL,min_standards_required,,,""
-/LEFTI/RESTRICTED_SHELTERED_WORKSHOP,restricted_sheltered_workshop,,,""
-/LEFTI/RESTRICTED_SHELTERED_PROGRAM,restricted_sheltered_program,,,Set `tender.contractTerms.reservedExecution` to `true`
-/LEFTI/PARTICULAR_PROFESSION,particular_profession_reserved,,,""
-/LEFTI/REFERENCE_TO_LAW,ref_law_reg_prov,,,""
-/LEFTI/PERFORMANCE_CONDITIONS,other_conditions,III.2.2,,Map to `tender.contractTerms.termsPerformance`
-/LEFTI/PERFORMANCE_STAFF_QUALIFICATION,staff_responsible_indicate,,,""
+/LEFTI,info_legal,III,,"The standard forms express exclusion grounds and selection criteria in this section as unstructured text. In the introductory note to its [eForms consultation](https://github.com/eForms/eForms), the European Commission had proposed to create an extension to eForms to implement the [European Single Procurement Document (ESPD)](http://ec.europa.eu/growth/single-market/public-procurement/e-procurement/espd/) [Exchange Data Model](https://github.com/ESPD/ESPD-EDM), which expresses this information as structured data, following the model of the [Core Criterion and Core Evidence Vocabulary](https://joinup.ec.europa.eu/solution/core-criterion-and-core-evidence-vocabulary)."
+/LEFTI/SUITABILITY,info_evaluating_requir,,,"Add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array, set its `.type` to 'suitability', and map to its `.description`."
+/LEFTI/ECONOMIC_CRITERIA_DOC,criteria_selection_docs,,,"Add a `Document` object to the `tender.documents` array, set its `.documentType` to 'economicSelectionCriteria', and set its `.id`."
+/LEFTI/ECONOMIC_FINANCIAL_INFO,info_evaluating_weth_requir,,,"Add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array, set its `.type` to 'economic', and map to its `.description`."
+/LEFTI/ECONOMIC_FINANCIAL_MIN_LEVEL,min_standards_required,,,"Get the `SelectionCriterion` object whose `.type` is 'economic', and map to its `.minimum`"
+/LEFTI/TECHNICAL_CRITERIA_DOC,criteria_selection_docs,,,"Add a `Document` object to the `tender.documents` array, set its `.documentType` to 'technicalSelectionCriteria', and set its `.id`."
+/LEFTI/TECHNICAL_PROFESSIONAL_INFO,info_evaluating_weth_requir,,,"Add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array, set its `.type` to 'technical', and map to its `.description`."
+/LEFTI/TECHNICAL_PROFESSIONAL_MIN_LEVEL,min_standards_required,,,"Get the `SelectionCriterion` object whose `.type` is 'technical', and map to its `.minimum`"
+/LEFTI/RESTRICTED_SHELTERED_WORKSHOP,restricted_sheltered_workshop,,,Set `tender.otherRequirements.reservedParticipation` to 'shelteredWorkshop'
+/LEFTI/RESTRICTED_SHELTERED_PROGRAM,restricted_sheltered_program,,,"Set `tender.contractTerms.hasReservedExecution` to `true`, and set `tender.contractTerms.reservedExecution` to 'Sheltered employment programmes'"
+/LEFTI/PARTICULAR_PROFESSION,particular_profession_reserved,,,Set `tender.contractTerms.hasReservedExecution` to `true`
+/LEFTI/REFERENCE_TO_LAW,ref_law_reg_prov,,,Map to `tender.contractTerms.reservedExecution`
+/LEFTI/PERFORMANCE_CONDITIONS,other_conditions,III.2.2,,Map to `tender.contractTerms.performanceTerms`
+/LEFTI/PERFORMANCE_STAFF_QUALIFICATION,staff_responsible_indicate,,,Set `tender.otherRequirements.requiresStaffNamesQualifications` to `true`
 /PROCEDURE,procedure,IV,,""
 /PROCEDURE/PT_OPEN,proctype_open,,,"Set `tender.procurementMethod` to 'open', and set `tender.procurementMethodDetails` to 'Open procedure'"
 /PROCEDURE/ACCELERATED_PROC,justification,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_AcceleratedProcedure,"Set `tender.procedure.isAccelerated` to `true`, and map to `tender.procedure.acceleratedRationale`"
@@ -113,10 +113,10 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/PT_COMPETITIVE_DIALOGUE,proctype_comp_dialogue,,,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodDetails` to 'Competitive dialogue'"
 /PROCEDURE/PT_INNOVATION_PARTNERSHIP,proctype_innovation,,,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodDetails` to 'Innovation partnership'"
 /PROCEDURE/FRAMEWORK,notice_involves_framework,,,Set `tender.techniques.hasFrameworkAgreement` to `true`
-/PROCEDURE/FRAMEWORK/SEVERAL_OPERATORS,framework_several,,,"If *Envisaged maximum number of participants to the framework agreement* isn't set, set `tender.techniques.frameworkAgreement.maximumNumberParticipants` to 1e9999 (which parses to infinity)"
-/PROCEDURE/FRAMEWORK/NB_PARTICIPANTS,framework_particip_envis,,,Map to `tender.techniques.frameworkAgreement.maximumNumberParticipants`
-/PROCEDURE/FRAMEWORK/SINGLE_OPERATOR,framework_single,,,Set `tender.techniques.frameworkAgreement.maximumNumberParticipants` to 1
-/PROCEDURE/FRAMEWORK/JUSTIFICATION,framework_just_four,,,Map to `tender.techniques.frameworkAgreement.durationRationale`
+/PROCEDURE/FRAMEWORK/SEVERAL_OPERATORS,framework_several,,,"If *Envisaged maximum number of participants to the framework agreement* isn't set, set `tender.techniques.frameworkAgreement.maximumParticipants` to 1e9999 (which parses to infinity)"
+/PROCEDURE/FRAMEWORK/NB_PARTICIPANTS,framework_particip_envis,,,Map to `tender.techniques.frameworkAgreement.maximumParticipants`
+/PROCEDURE/FRAMEWORK/SINGLE_OPERATOR,framework_single,,,Set `tender.techniques.frameworkAgreement.maximumParticipants` to 1
+/PROCEDURE/FRAMEWORK/JUSTIFICATION,framework_just_four,,,Map to `tender.techniques.frameworkAgreement.periodRationale`
 /PROCEDURE/DPS,notice_involves_dps,,,Set `tender.techniques.hasDynamicPurchasingSystem` to `true`
 /PROCEDURE/DPS_ADDITIONAL_PURCHASERS,dps_purchasers,,,Set `tender.techniques.dynamicPurchasingSystem.type` to 'open'
 /PROCEDURE/REDUCTION_RECOURSE,reduction_recourse,,,Set `tender.secondStage.successiveReduction` to `true`
@@ -125,7 +125,7 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/INFO_ADD_EAUCTION,eauction_info_addit,,,Map to `tender.techniques.electronicAuction.description`
 /PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to `tender.coveredBy`
 /PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in `tender.coveredBy`, then the procurement isn't covered by the GPA."
-/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,Discard. The *previous publication concerning this procedure* is the OCDS release with the same `ocid` as this release and with an earlier `date` that is nearest that of this release.
+/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,Discard. The *previous publication concerning this procedure* is the OCDS release with the same `ocid` as this release and with the nearest earlier `date` to this release.
 /PROCEDURE/DATE_RECEIPT_TENDERS,date,,,Map to the date component of `tender.tenderPeriod.endDate`
 /PROCEDURE/TIME_RECEIPT_TENDERS,time,,,Map to the time component of `tender.tenderPeriod.endDate`
 /PROCEDURE/DATE_DISPATCH_INVITATIONS,date,,,Map to the date component of `tender.secondStage.invitationDate`.
@@ -134,7 +134,7 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/DATE_TENDER_VALID,date_tender_valid,,,Map to `tender.submissionTerms.bidValidityPeriod.endDate`
 /PROCEDURE/DURATION_TENDER_VALID,duration_months,,,"Multiply by 30, and map to `tender.submissionTerms.bidValidityPeriod.durationInDays`"
 /PROCEDURE/OPENING_CONDITION,opening_conditions,IV.2.7,,""
-/PROCEDURE/OPENING_CONDITION/DATE_OPENING_TENDERS,date,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/milestone_RelatedParties,Map to the date component of `tender.awardPeriod.startDate` and to the date component of `tender.bidOpening.date` 
+/PROCEDURE/OPENING_CONDITION/DATE_OPENING_TENDERS,date,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/milestone_RelatedParties,Map to the date component of `tender.awardPeriod.startDate` and to the date component of `tender.bidOpening.date`
 /PROCEDURE/OPENING_CONDITION/TIME_OPENING_TENDERS,time,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/milestone_RelatedParties,Map to the time component of `tender.awardPeriod.startDate` and to the time component of `tender.bidOpening.date`
 /PROCEDURE/OPENING_CONDITION/PLACE,opening_place,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/milestone_RelatedParties,Map to `tender.bidOpening.address.streetAddress`
 /PROCEDURE/OPENING_CONDITION/INFO_ADD,opening_addit_info,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/milestone_RelatedParties,Map to `tender.bidOpening.description`
@@ -143,7 +143,7 @@ xpath,label-key,index,comment,guidance
 /COMPLEMENTARY_INFO/ESTIMATED_TIMING,further_notices_timing,,,Map to `tender.recurrence.description`
 /COMPLEMENTARY_INFO/NO_RECURRENT_PROCUREMENT,_no,,,Set `tender.hasRecurrence` to `false`
 /COMPLEMENTARY_INFO/EORDERING,eordering_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows,Set `tender.contractTerms.hasElectronicOrdering` to `true`
-/COMPLEMENTARY_INFO/EINVOICING,einvoicing_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows https://github.com/eForms/eForms/issues/88,Set `tender.contractTerms.electronicInvoicing` to 'allowed'
+/COMPLEMENTARY_INFO/EINVOICING,einvoicing_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows https://github.com/eForms/eForms/issues/88,Set `tender.contractTerms.electronicInvoicingPolicy` to 'allowed'
 /COMPLEMENTARY_INFO/EPAYMENT,epayment_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows https://github.com/eForms/eForms/issues/88,Set `tender.contractTerms.hasElectronicPayment` to `true`
 /COMPLEMENTARY_INFO/INFO_ADD,info_additional,VI.3,,Map to `description`
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY,appeals_body,VI.4.1,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations#add-a-party), and add 'reviewBody' to its `.roles`"
