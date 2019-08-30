@@ -158,6 +158,20 @@ You can now generate a table for each form, displaying, for each element and att
     for i in 01 02 03 04 05 06 07 08 12 13 14 15 20 21 22 23 24 25; rake table LANGUAGE=EN FILES=F$i > path/to/european-union/docs/F$i.md; end
     for i in 01 02; rake table LANGUAGE=EN FILES=MOVE FORM=T$i > path/to/european-union/docs/T$i.md; end
 
+### Find fields for which to write extensions
+
+Generate a release schema with all extensions applied, except the PPP extension (which removes fields):
+
+    python scripts/patched_release_schema.py > scripts/release-schema-patched.json
+
+Generate a CSV file with all fields from the extended schema, including a column for the extension name:
+
+    ocdskit mapping-sheet --infer-required --extension-field extension scripts/release-schema-patched.json > scripts/mapping-sheet.csv
+
+Print a list of fields for which there are no extensions:
+
+    python scripts/mapped_ocds_fields.py
+
 ## Design
 
 * Label keys are expected to change less frequently than labels. The code therefore focuses on label keys.

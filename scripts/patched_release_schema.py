@@ -1,8 +1,3 @@
-"""
-python scripts/patched_release_schema.py > scripts/release-schema-patched.json
-ocdskit mapping-sheet --infer-required --extension-field extension release-schema-patched.json > scripts/mapping-sheet.csv
-"""
-
 import json
 import sys
 
@@ -13,9 +8,12 @@ extensions = {}
 
 url = 'https://raw.githubusercontent.com/open-contracting/extension_registry/master/extension_versions.csv'
 for version in ExtensionRegistry(url):
+    if version.id == 'ppp':  # PPP extension deletes core fields
+        continue
     if version.id not in extensions:
         extensions[version.id] = []
     extensions[version.id].append(version)
+
 urls = [get_latest_version(versions).download_url for versions in extensions.values()]
 
 # TODO: Uncomment extensions once PRs merged.
