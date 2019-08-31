@@ -127,7 +127,7 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/LIKELY_SUBCONTRACTED,subcontr_likely,,,Set the award's `.hasSubcontracting` to `true` (PROPOSAL #37)
 /AWARD_CONTRACT/AWARDED_CONTRACT/VAL_SUBCONTRACTING,value_excl_vat,,,Map to the award's `.subcontracting.value.amount` (PROPOSAL #37)
 /AWARD_CONTRACT/AWARDED_CONTRACT/VAL_SUBCONTRACTING/@CURRENCY,currency,,,Map to the award's `.subcontracting.value.currency` (PROPOSAL #37)
-/AWARD_CONTRACT/AWARDED_CONTRACT/PCT_SUBCONTRACTING,proportion,,,Map to the award's `.subcontracting.percentage` (PROPOSAL #37)
+/AWARD_CONTRACT/AWARDED_CONTRACT/PCT_SUBCONTRACTING,proportion,,,Map to the award's `.subcontracting.minPercentage` and `.subcontracting.maxPercentage` (PROPOSAL #37)
 /AWARD_CONTRACT/AWARDED_CONTRACT/INFO_ADD_SUBCONTRACTING,subcontr_descr_short,,,Map to the award's `.subcontracting.details` (PROPOSAL #37)
 /COMPLEMENTARY_INFO,info_complement,VI,,""
 /COMPLEMENTARY_INFO/INFO_ADD,info_additional,VI.3,,Map to `description`
@@ -152,7 +152,7 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_TECHNICAL,d_technical,,,"Set `.id` to 'D_TECHNICAL' and `.name` to 'The works, supplies or services can be provided only by a particular economic operator due to absence of competition for technical reasons'"
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_ARTISTIC,d_artistic,,,"Set `.id` to 'D_ARTISTIC' and `.name` to 'The works, supplies or services can be provided only by a particular economic operator due to procurement aiming at the creation or acquisition of a unique work of art or artistic performance'"
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_PROTECT_RIGHTS,d_protect_rights,,,"Set `.id` to 'D_PROTECT_RIGHTS' and `.name` to 'The works, supplies or services can be provided only by a particular economic operator due to protection of exclusive rights, including intellectual property rights'"
-/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_EXTREME_URGENCY,d_extreme_urgency_ca,,,Set `.id` to 'D_EXTREME_URGENCY' and `.name` to 'Extreme urgency brought about by events unforeseeable for the contracting authority and in accordance with the strict conditions stated in the directive'
+/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_EXTREME_URGENCY,d_extreme_urgency_ca,,,Set `.id` to 'D_EXTREME_URGENCY' and `.name` to 'Extreme urgency brought about by events unforeseeable for the contracting authority/entity and in accordance with the strict conditions stated in the directive'
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_ADD_DELIVERIES_ORDERED,d_addit_ordered,,,Set `.id` to 'D_ADD_DELIVERIES_ORDERED' and `.name` to 'Additional deliveries by the original supplier ordered under the strict conditions stated in the directive'
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_REPETITION_EXISTING,d_repetition_existing,,,"Set `.id` to 'D_REPETITION_EXISTING' and `.name` to 'New works/services, constituting a repetition of existing works/services and ordered in accordance with the strict conditions stated in the directive'"
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_CONTRACT_AWARDED_DESIGN_CONTEST,d_service_contract,,,Set `.id` to 'D_CONTRACT_AWARDED_DESIGN_CONTEST' and `.name` to 'Service contract to be awarded to the winner or one of winners under the rules of a design contest'
