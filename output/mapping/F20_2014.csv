@@ -70,7 +70,7 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL,value_total,,,"Discard. The *information on value of the contract/lot/concession (at the time of conclusion of the contract)* is available in the OCDS release with the same `ocid` as this release, with 'award' in its `tag`, and with the nearest earlier `date` to this release."
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY,currency,,,Discard as above
 /COMPLEMENTARY_INFO,info_complement,VI,,""
-/COMPLEMENTARY_INFO/INFO_ADD,info_additional,VI.3,,Map to `description`
+/COMPLEMENTARY_INFO/INFO_ADD,info_additional,VI.3,,"Map to the release's `description`, from the [Process level title and description](https://extensions.open-contracting.org/en/extensions/process_title/) extension"
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY,appeals_body,VI.4.1,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations#add-a-party), and add 'reviewBody' to its `.roles`"
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/OFFICIALNAME,name_official,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/ADDRESS,address_postal,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS
