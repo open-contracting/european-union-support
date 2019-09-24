@@ -78,7 +78,7 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/EAUCTION_USED,eauction_was_used,,,Set `tender.techniques.hasElectronicAuction` to `true`
 /PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to `tender.coveredBy`
 /PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in `tender.coveredBy`, then the procurement isn't covered by the GPA."
-/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,Discard. The *previous publication concerning this procedure* is the OCDS release with the same `ocid` as this release and with the nearest earlier `date` to this release.
+/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,[Reference a previous publication](../operations#reference-a-previous-publication)
 /PROCEDURE/TERMINATION_DPS,termination_dps,,,Set `tender.techniques.dynamicPurchasingSystem.status` to 'terminated'
 /PROCEDURE/TERMINATION_PIN,pin_as_call_no_contracts_ce,,,Set `tender.status` to 'complete'
 /AWARD_CONTRACT,award_of_contract,V,,Add an `Award` object to the `awards` array
