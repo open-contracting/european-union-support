@@ -10,7 +10,7 @@ Using the fish shell:
     cd source
 
     # Get the mapping from label keys to text labels.
-    # https://publications.europa.eu/en/web/eu-vocabularies/tedschemas
+    # https://publications.europa.eu/en/web/eu-vocabularies/e-procurement/tedschemas
     curl -o Forms_Labels_R209S01.zip https://publications.europa.eu/documents/3938058/5358176/Forms_Labels_R209.zip/6e5fa3bc-62bf-0b66-0ae2-c1979d445355
     unzip Forms_Labels_R209S01.zip
     in2csv Forms_labels_R209.xlsx > 'Forms labels R2.09.csv'
@@ -189,7 +189,7 @@ Or transform a specific directory and specific form schema:
 
     rake legacy:common legacy:forms DIRECTORY=source/TED_publication_R2.0.9.S03.E01_006 FILES=F01,F02,F03,F14,F20
 
-I also attempted to map elements and attributes in the XML to labels on the forms using the Publication Office's [form label mappings](https://publications.europa.eu/en/web/eu-vocabularies/tedschemas), but the file covers only forms 1-6, doesn't cover all XML elements, doesn't use full XPaths, isn't machine-interpretable, etc.; manual interpretation would require at least the same effort as the above process. The Excel validation rules in the reception schema files map elements and attributes to descriptions, but these are not the same as the labels on the forms.
+I also attempted to map elements and attributes in the XML to labels on the forms using the Publication Office's [form label mappings](https://publications.europa.eu/en/web/eu-vocabularies/e-procurement/tedschemas), but the file covers only forms 1-6, doesn't cover all XML elements, doesn't use full XPaths, isn't machine-interpretable, etc.; manual interpretation would require at least the same effort as the above process. The Excel validation rules in the reception schema files map elements and attributes to descriptions, but these are not the same as the labels on the forms.
 
 ## Reference
 
@@ -205,7 +205,7 @@ In addition to the resources linked under prerequisites above, there is a [TED e
 
 The "Tree browser" on the ["Pages" page](https://webgate.ec.europa.eu/fpfis/wikis/collector/pages.action?key=TEDeSender) serves as a table of contents.
 
-The [reception schema files](https://publications.europa.eu/en/web/eu-vocabularies/tedschemas) include Excel validation rules, which also maps XML elements to human-readable text. **This is the most useful summary of the TED schema.** It is described in the [wiki](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/XML+Schema+2.0.9#XMLSchema2.0.9-5.Descriptionofvalidationrules). They also contains an XLST validation tool.
+The [reception schema files](https://publications.europa.eu/en/web/eu-vocabularies/e-procurement/tedschemas) include Excel validation rules, which also maps XML elements to human-readable text. **This is the most useful summary of the TED schema.** It is described in the [wiki](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/XML+Schema+2.0.9#XMLSchema2.0.9-5.Descriptionofvalidationrules). They also contains an XLST validation tool.
 
 The FTP server (ftp://eu-tenders:eu-tenders-123@ted.europa.eu) has a document (ftp://eu-tenders:eu-tenders-123@ted.europa.eu/Resources/TED-XML_general_description_v2%200_20160219.pdf) (PDF) describing the structure of the FTP server, of individual resources and of notices (without much detail on the FORM section), and information on mapping forms labels and XML elements in R2.0.9 (essentially asking the user do the work of this repository 🤯). I haven't figured out how to use the "HTML/PDF rendering web service" it describes.
 
