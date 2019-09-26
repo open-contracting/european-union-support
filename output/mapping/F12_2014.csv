@@ -60,7 +60,7 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/NB_PARTICIPANTS,number_participants,,,Map to `tender.secondStage.minimumCandidates` and `.secondStage.maximumCandidates`
 /PROCEDURE/NB_MIN_PARTICIPANTS,min_number,,,Map to `tender.secondStage.minimumCandidates`
 /PROCEDURE/NB_MAX_PARTICIPANTS,max_number,,,Map to `tender.secondStage.maximumCandidates`
-/PROCEDURE/PARTICIPANT_NAME,dc_names_selected,IV.1.7,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_DesignContests,"[Add a party](../operations#add-a-party), add 'contestSelectedParticipant' to its `.roles`, and map to '.name'."
+/PROCEDURE/PARTICIPANT_NAME,dc_names_selected,IV.1.7,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_DesignContests,"[Add a party](../operations#add-a-party), add 'contestSelectedParticipant' to its `.roles`, and map to '.name'. Add an `OrganizationReference` object to the `tender.designContest.selectedParticipants` array, set its `id`, and map to `name`."
 /PROCEDURE/CRITERIA_EVALUATION,dc_criteria_evaluation,IV.1.9,,Map to `tender.awardCriteriaDetails`
 /PROCEDURE/DATE_RECEIPT_TENDERS,date,,,Map to the date component of `tender.tenderPeriod.endDate`
 /PROCEDURE/TIME_RECEIPT_TENDERS,time,,,Map to the time component of `tender.tenderPeriod.endDate`
