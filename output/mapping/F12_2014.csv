@@ -67,9 +67,9 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/DATE_DISPATCH_INVITATIONS,date_dispatch_participate_selected,IV.2.3,,Map to the date component of `tender.secondStage.invitationDate`.
 /PROCEDURE/LANGUAGES,languages_allowed_project,IV.2.4,,""
 /PROCEDURE/LANGUAGES/LANGUAGE,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_SubmissionLanguages,Lowercase and add to the `tender.submissionTerms.languages` array
-/PROCEDURE/PRIZE_AWARDED,_yes,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_DesignContests,"Discard."
+/PROCEDURE/PRIZE_AWARDED,_yes,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_DesignContests,"Set `tender.designContest.hasPrize` to `true`."
 /PROCEDURE/NUMBER_VALUE_PRIZE,dc_number_value_prizes,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_DesignContests,"Map to `tender.designContest.description`."
-/PROCEDURE/NO_PRIZE_AWARDED,_no,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_DesignContests,"Discard."
+/PROCEDURE/NO_PRIZE_AWARDED,_no,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_DesignContests,"Set `tender.designContest.hasPrize` to `false`."
 /PROCEDURE/DETAILS_PAYMENT,dc_details_payment,IV.3.2,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_DesignContests,"Map to `tender.designContest.paymentDetails`."
 /PROCEDURE/FOLLOW_UP_CONTRACTS,_yes,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_DesignContests,
 /PROCEDURE/NO_FOLLOW_UP_CONTRACTS,_no,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_DesignContests,
