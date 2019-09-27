@@ -50,8 +50,8 @@ xpath,label-key,index,comment,guidance
 /RESULTS/NO_AWARDED_PRIZE,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/contract_statusDetails,Set the award's `.status` to 'unsuccessful'
 /RESULTS/NO_AWARDED_PRIZE/PROCUREMENT_DISCONTINUED,award_discontinued,,,Set the award's `.statusDetails` to 'discontinued'
 /RESULTS/NO_AWARDED_PRIZE/PROCUREMENT_UNSUCCESSFUL,award_no_projects,,,Set the award's `.statusDetails` to 'unsuccessful'\n\nThere's an open issue ([#764](https://github.com/open-contracting/standard/issues/764)) about status details. (ISSUE)
-/RESULTS/AWARDED_PRIZE,_no,,,"Set the award's `.status` to 'active'\n\nAdd a `Contract` object to the `contracts` array, set its `.id` and `.awardID` to the award's `.id`, and set its `.status` to 'active'."
-/RESULTS/AWARDED_PRIZE/DATE_DECISION_JURY,dc_date_decision,V.3.1,,Map to the contract's `.dateSigned`
+/RESULTS/AWARDED_PRIZE,_no,,,"Set the award's `.status` to 'active'"
+/RESULTS/AWARDED_PRIZE/DATE_DECISION_JURY,dc_date_decision,V.3.1,,Map to the award's `.date`
 /RESULTS/AWARDED_PRIZE/PARTICIPANTS,info_paricipants,V.3.2,,""
 /RESULTS/AWARDED_PRIZE/PARTICIPANTS/NB_PARTICIPANTS,number_participants,,,"Add a `BidsStatistic` object to the `bids.statistics` array, set its `.id`, set its `.measure` to 'bids', set its `.relatedLot` to '1', and map to its `.value`."
 /RESULTS/AWARDED_PRIZE/PARTICIPANTS/NB_PARTICIPANTS_SME,number_participants_sme,,,"Add a `BidsStatistic` object to the `bids.statistics` array, set its `.id`, set its `.measure` to 'smeBids', set its `.relatedLot` to '1', and map to its `.value`."
@@ -72,8 +72,8 @@ xpath,label-key,index,comment,guidance
 /RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/URL,internet,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL
 /RESULTS/AWARDED_PRIZE/WINNERS/WINNER/SME,_yes,,,Set the party's `.details.scale` to 'sme'
 /RESULTS/AWARDED_PRIZE/WINNERS/WINNER/NO_SME,_no,,,Set the party's `.details.scale` to 'large'
-/RESULTS/AWARDED_PRIZE/VAL_PRIZE,dc_value_prizes_excl_vat,,,Map to the contract's `.value.amount`
-/RESULTS/AWARDED_PRIZE/VAL_PRIZE/@CURRENCY,currency,,,Map to the contract's `.value.currency`
+/RESULTS/AWARDED_PRIZE/VAL_PRIZE,dc_value_prizes_excl_vat,,,Map to the award's `.value.amount`
+/RESULTS/AWARDED_PRIZE/VAL_PRIZE/@CURRENCY,currency,,,Map to the award's `.value.currency`
 /COMPLEMENTARY_INFO,info_complement,VI,,""
 /COMPLEMENTARY_INFO/INFO_ADD,info_additional,VI.3,,"Map to the release's `description`, from the [Process level title and description](https://extensions.open-contracting.org/en/extensions/process_title/) extension"
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY,appeals_body,VI.4.1,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations#add-a-party), and add 'reviewBody' to its `.roles`"
