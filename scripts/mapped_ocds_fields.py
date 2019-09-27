@@ -56,9 +56,9 @@ unknowns = {
         'MODIFICATIONS_CONTRACT': 'contracts/items',
     },
     '.description': {
-        '/LEFTI/ECONOMIC_FINANCIAL_INFO': 'tender/selectionCriteria/criteria',
-        '/LEFTI/SUITABILITY': 'tender/selectionCriteria/criteria',
-        '/LEFTI/TECHNICAL_PROFESSIONAL_INFO': 'tender/selectionCriteria/criteria',
+        # Root
+        'LEFTI': 'tender/selectionCriteria/criteria',
+        # XPath
         '/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED': 'planning/budget/finance',
     },
     '.id': {
@@ -107,12 +107,12 @@ unknowns = {
     '.name': {
         # Root
         'AWARD_CONTRACT': 'awards/suppliers',
-        'CONTRACTING_BODY': 'buyer',
         'MODIFICATIONS_CONTRACT': 'awards/suppliers',
         'OBJECT_CONTRACT': 'parties',
         'PROCEDURE': 'tender/procurementMethodRationaleCodes',
         'RESULTS': 'awards/suppliers',
         # XPath
+        '/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY': 'buyer',
         '/CONTRACTING_BODY/CA_ACTIVITY': 'parties/details/classifications',
         '/CONTRACTING_BODY/CA_ACTIVITY/@VALUE': 'parties/details/classifications',
         '/CONTRACTING_BODY/CA_ACTIVITY_OTHER': 'parties/details/classifications',
@@ -148,13 +148,8 @@ unknowns = {
     '.type': {
         # Root
         'CONTRACTING_BODY': 'tender/participationFees',
+        'LEFTI': 'tender.selectionCriteria.criteria',
         'OBJECT_CONTRACT': 'tender/lots/awardCriteria/criteria',
-        # XPath
-        '/LEFTI/ECONOMIC_FINANCIAL_INFO': 'tender/selectionCriteria/criteria',
-        '/LEFTI/ECONOMIC_FINANCIAL_MIN_LEVEL': 'tender/selectionCriteria/criteria',
-        '/LEFTI/SUITABILITY': 'tender/selectionCriteria/criteria',
-        '/LEFTI/TECHNICAL_PROFESSIONAL_INFO': 'tender/selectionCriteria/criteria',
-        '/LEFTI/TECHNICAL_PROFESSIONAL_MIN_LEVEL': 'tender/selectionCriteria/criteria',
     },
     '.value': {
         'AWARD_CONTRACT': 'bids/statistics',
