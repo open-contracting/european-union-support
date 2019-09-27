@@ -9,6 +9,7 @@ subjects = {
     'contract': 'contracts',
     'lot': 'tender/lots',
     'party': 'parties',
+    'release': '',
     'statistic': 'bids/statistics',
 
     # Ambiguous
@@ -47,6 +48,7 @@ unknowns = {
     '.roles': 'parties',
     '.secondStage.maximumCandidates': 'tender/lots',
     '.secondStage.minimumCandidates': 'tender/lots',
+    '.subcontracting.maxPercentage': 'awards',
     '.suppliers': 'awards',  # contract suppliers extension not used
 
     # Ambiguous
@@ -128,6 +130,9 @@ unknowns = {
     '.relatedLots': {
         'AWARD_CONTRACT': 'awards',
         'OBJECT_CONTRACT': 'planning/budget/finance',
+    },
+    '.region': {
+        '/OBJECT_CONTRACT/OBJECT_DESCR/NUTS': 'tender/items/deliveryAddresses',
     },
     '.scheme': {
         'MODIFICATIONS_CONTRACT': 'contracts/items/additionalClassifications',
