@@ -45,13 +45,13 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,"For each `CODE` attribute, add a `Classification` object to the `tender.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id` (PROPOSAL #16)"
 /OBJECT_CONTRACT/TYPE_CONTRACT,type_contract,II.1.3,,Set `tender.mainProcurementCategory` as follows:
 /OBJECT_CONTRACT/CATEGORY,,,,
-/OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,"Add a `Lot` object to the `tender.lots` array, and add an `Item` object to the `tender.items` array. Set the lot's `.status` to the same value as `tender.status`.\n\n**F12, F13**: Set the lot's `.id` to '1', and set the item's `.id` to '1'."
+/OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,"Add a `Lot` object to the `tender.lots` array, and add an `Item` object to the `tender.items` array. Set the lot's `.status` to the same value as `tender.status`.\n\n**F12, F13**: Instead, do nothing."
 /OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL,cpv_additional,II.2.2,,""
-/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_CODE,cpv_main,,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPV', and map to its `.id`."
-/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id`."
+/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_CODE,cpv_main,,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPV', and map to its `.id`.\n\n**F12, F13**: Instead, for each `CODE` attribute, add a `Classification` object to the `tender.additionalClassifications` array, set its `.scheme` to 'CPV', and map to its `.id`."
+/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id`.\n\n**F12, F13**: Instead, for each `CODE` attribute, add a `Classification` object to the `tender.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id`."
 /OBJECT_CONTRACT/OBJECT_DESCR/NUTS,nutscode,,,"For each `NUTS` element, take the NUTS code in its `CODE` attribute, add an `Address` object to the item's `.deliveryAddresses` array, and map to its `.region`.\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)"
 /OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE,mainsiteplace_works_delivery,,,Map to the item's `.deliveryLocation.description`
-/OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,descr_procurement,II.2.4,,"Map to the lot's `.description`, and map to the item's `.description`"
+/OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,descr_procurement,II.2.4,,"Map to the lot's `.description`\n\n**F12, F13**: Instead, map to `tender.description`"
 /OBJECT_CONTRACT/OBJECT_DESCR/DATE_START,starting,,,Map to the lot's `.contractPeriod.startDate` (PROPOSAL #19)
 /OBJECT_CONTRACT/OBJECT_DESCR/DURATION,duration_contract_framework_dps,II.2.7,,""
 /OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS,assets_extended_contract,,,
