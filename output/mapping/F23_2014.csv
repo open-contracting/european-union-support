@@ -128,11 +128,11 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY,currency,,,"For the *Initial estimated total value of the contract/lot*, discard as above. For the *Total value of the contract/lot*, map to the contract's `.value.currency`."
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL,value_total_final_concess,,,Map to the contract's `.value.amount`
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY,currency,,,/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY
-/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_REVENUE,concess_fees_prices,,,"Map to `award.concession.revenueFromFees.amount`."
-/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_REVENUE/@CURRENCY,,,,"Map to `award.concession.revenueFromFees.currency`."
-/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_PRICE_PAYMENT,concess_payments,,,"Map to `award.concession.revenueFromBuyer.amount`."
-/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_PRICE_PAYMENT/@CURRENCY,,,,"Map to `award.concession.revenueFromBuyer.currency`."
-/AWARD_CONTRACT/AWARDED_CONTRACT/INFO_ADD_VALUE,concess_other_details,,,"Map to `award.concession.valueCalculationMethod`."
+/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_REVENUE,concess_fees_prices,,,Map to `award.concession.revenueFromFees.amount`.
+/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_REVENUE/@CURRENCY,,,,Map to `award.concession.revenueFromFees.currency`.
+/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_PRICE_PAYMENT,concess_payments,,,Map to `award.concession.revenueFromBuyer.amount`.
+/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_PRICE_PAYMENT/@CURRENCY,,,,Map to `award.concession.revenueFromBuyer.currency`.
+/AWARD_CONTRACT/AWARDED_CONTRACT/INFO_ADD_VALUE,concess_other_details,,,Map to `award.concession.valueCalculationMethod`.
 /COMPLEMENTARY_INFO,info_complement,VI,,""
 /COMPLEMENTARY_INFO/EORDERING,eordering_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows,Set `tender.contractTerms.hasElectronicOrdering` to `true`
 /COMPLEMENTARY_INFO/EINVOICING,einvoicing_used,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ElectronicWorkflows https://github.com/eForms/eForms/issues/88,Set `tender.contractTerms.electronicInvoicingPolicy` to 'allowed'
