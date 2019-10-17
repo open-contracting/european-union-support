@@ -107,7 +107,7 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT,award_of_contract,V,,Add an `Award` object to the `awards` array
 /AWARD_CONTRACT/@ITEM,,,,Discard
 /AWARD_CONTRACT/CONTRACT_NO,contract_number,,,Map to the award's `.id`
-/AWARD_CONTRACT/LOT_NO,lot_number,,,"If not set, let *Lot No* be '1'. Add to the award's `.relatedLots`."
+/AWARD_CONTRACT/LOT_NO,lot_number,,,"If not set, let *Lot No* be '1'. Add to the award's `.relatedLots` (string)."
 /AWARD_CONTRACT/TITLE,title_contract,,,Map to the award's `.title`
 /AWARD_CONTRACT/NO_AWARDED_CONTRACT,_no,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/contract_statusDetails,Set the award's `.status` to 'unsuccessful'
 /AWARD_CONTRACT/NO_AWARDED_CONTRACT/PROCUREMENT_DISCONTINUED,award_discontinued,,,Set the award's `.statusDetails` to 'discontinued'
