@@ -76,8 +76,8 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/FRAMEWORK,notice_involves_framework,,,Set `tender.techniques.hasFrameworkAgreement` to `true`
 /PROCEDURE/DPS,dps_was_set_up,,,Set `tender.techniques.hasDynamicPurchasingSystem` to `true`
 /PROCEDURE/EAUCTION_USED,eauction_was_used,,,Set `tender.techniques.hasElectronicAuction` to `true`
-/PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to `tender.coveredBy`
-/PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in `tender.coveredBy`, then the procurement isn't covered by the GPA."
+/PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to the `tender.coveredBy` array
+/PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in the `tender.coveredBy` array, then the procurement isn't covered by the GPA."
 /PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,[Reference a previous publication](../operations#reference-a-previous-publication)
 /PROCEDURE/TERMINATION_DPS,termination_dps,,,Set `tender.techniques.dynamicPurchasingSystem.status` to 'terminated'
 /PROCEDURE/TERMINATION_PIN,pin_as_call_no_contracts,,,Set `tender.status` to 'complete'

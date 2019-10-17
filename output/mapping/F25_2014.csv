@@ -64,8 +64,8 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE,procedure,IV,,""
 /PROCEDURE/PT_AWARD_CONTRACT_WITH_PRIOR_PUBLICATION,proctype_with_concess_notice,,,Set `tender.procurementMethodDetails` to 'Award procedure with prior publication of a call for competition'. (PROPOSAL #46)
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION,award_wo_prior_pub_d4,,,"Set `tender.procurementMethod` to 'limited', and set `tender.procurementMethodDetails` to 'Award procedure without prior publication of a call for competition'.\n\nSee [Annex D4](#annex-d4-concession)"
-/PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to `tender.coveredBy`
-/PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in `tender.coveredBy`, then the procurement isn't covered by the GPA."
+/PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to the `tender.coveredBy` array
+/PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in the `tender.coveredBy` array, then the procurement isn't covered by the GPA."
 /PROCEDURE/MAIN_FEATURES_AWARD,award_main_features,IV.1.11,,Map to `tender.awardCriteriaDetails`
 /PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,[Reference a previous publication](../operations#reference-a-previous-publication)
 /AWARD_CONTRACT,award_of_concession,V,,Add an `Award` object to the `awards` array

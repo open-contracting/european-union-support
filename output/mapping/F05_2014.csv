@@ -123,8 +123,8 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/REDUCTION_RECOURSE,reduction_recourse,,,Set `tender.secondStage.successiveReduction` to `true`
 /PROCEDURE/EAUCTION_USED,eauction_will_used,,,Set `tender.techniques.hasElectronicAuction` to `true`
 /PROCEDURE/INFO_ADD_EAUCTION,eauction_info_addit,,,Map to `tender.techniques.electronicAuction.description`
-/PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to `tender.coveredBy`
-/PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in `tender.coveredBy`, then the procurement isn't covered by the GPA."
+/PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to the `tender.coveredBy` array
+/PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in the `tender.coveredBy` array, then the procurement isn't covered by the GPA."
 /PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,[Reference a previous publication](../operations#reference-a-previous-publication)
 /PROCEDURE/DATE_RECEIPT_TENDERS,date,,,Map to the date component of `tender.tenderPeriod.endDate`
 /PROCEDURE/TIME_RECEIPT_TENDERS,time,,,Map to the time component of `tender.tenderPeriod.endDate`

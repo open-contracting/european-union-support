@@ -86,8 +86,8 @@ xpath,label-key,index,comment,guidance
 /LEFTI/PERFORMANCE_CONDITIONS,concession_performance_conditions,III.2.2,,Map to `tender.contractTerms.performanceTerms`
 /LEFTI/PERFORMANCE_STAFF_QUALIFICATION,staff_responsible_indicate_concess,,,Set `tender.otherRequirements.requiresStaffNamesAndQualifications` to `true`
 /PROCEDURE,procedure,IV,,""
-/PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to `tender.coveredBy`
-/PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in `tender.coveredBy`, then the procurement isn't covered by the GPA."
+/PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to the `tender.coveredBy` array
+/PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in the `tender.coveredBy` array, then the procurement isn't covered by the GPA."
 /PROCEDURE/DATE_RECEIPT_TENDERS,date,,,Map to the date component of `tender.tenderPeriod.endDate`
 /PROCEDURE/TIME_RECEIPT_TENDERS,time,,,Map to the time component of `tender.tenderPeriod.endDate`
 /PROCEDURE/LANGUAGES,languages_allowed,IV.2.4,,""
