@@ -47,7 +47,7 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/VAL_ESTIMATED_TOTAL/@CURRENCY,currency,,,Map to `tender.value.currency`
 /OBJECT_CONTRACT/LOT_DIVISION,_yes,,,"Discard. If `tender.lots` contains more than one object, then the contract is divided into lots."
 /OBJECT_CONTRACT/NO_LOT_DIVISION,_no,,,"Discard. If `tender.lots` contains one or fewer objects, then the contract isn't divided into lots."
-/OBJECT_CONTRACT/LOT_DIVISION/LOT_ALL,lots_all,,,"Set `tender.lotDetails.maximumLotsBidPerSupplier` to 1e9999 (which parses to infinity i.e. ""all"")"
+/OBJECT_CONTRACT/LOT_DIVISION/LOT_ALL,lots_all,,,"Set `tender.lotDetails.maximumLotsBidPerSupplier` to the number (not the string) 1e9999 (which parses to infinity i.e. ""all"")"
 /OBJECT_CONTRACT/LOT_DIVISION/LOT_MAX_NUMBER,lots_max,,,Map to `tender.lotDetails.maximumLotsBidPerSupplier`
 /OBJECT_CONTRACT/LOT_DIVISION/LOT_ONE_ONLY,lot_one_only,,,Set `tender.lotDetails.maximumLotsBidPerSupplier` to 1
 /OBJECT_CONTRACT/LOT_DIVISION/LOT_MAX_ONE_TENDERER,lots_max_awarded,,,Map to `tender.lotDetails.maximumLotsAwardedPerSupplier`
@@ -103,7 +103,7 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/PT_RESTRICTED,proctype_restricted,,,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodDetails` to 'Restricted procedure'"
 /PROCEDURE/PT_NEGOTIATED_WITH_PRIOR_CALL,proctype_negot_w_call,,,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodDetails` to 'Negotiated procedure with prior call for competition'"
 /PROCEDURE/FRAMEWORK,notice_involves_framework,,,Set `tender.techniques.hasFrameworkAgreement` to `true`
-/PROCEDURE/FRAMEWORK/SEVERAL_OPERATORS,framework_several,,,"If *Envisaged maximum number of participants to the framework agreement* isn't set, set `tender.techniques.frameworkAgreement.maximumParticipants` to 1e9999 (which parses to infinity)"
+/PROCEDURE/FRAMEWORK/SEVERAL_OPERATORS,framework_several,,,"If *Envisaged maximum number of participants to the framework agreement* isn't set, set `tender.techniques.frameworkAgreement.maximumParticipants` to the number (not the string) 1e9999 (which parses to infinity)"
 /PROCEDURE/FRAMEWORK/NB_PARTICIPANTS,framework_particip_envis,,,Map to `tender.techniques.frameworkAgreement.maximumParticipants`
 /PROCEDURE/FRAMEWORK/SINGLE_OPERATOR,framework_single,,,Set `tender.techniques.frameworkAgreement.maximumParticipants` to 1
 /PROCEDURE/FRAMEWORK/JUSTIFICATION,framework_just_eight,,,Map to `tender.techniques.frameworkAgreement.periodRationale`
