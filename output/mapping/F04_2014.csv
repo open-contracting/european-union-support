@@ -94,9 +94,9 @@ xpath,label-key,index,comment,guidance
 /LEFTI/TECHNICAL_PROFESSIONAL_MIN_LEVEL,min_standards_required,,,"Get the `SelectionCriterion` object whose `.type` is 'technical', and map to its `.minimum`"
 /LEFTI/RULES_CRITERIA,descr_brief_rules,,,Map to `tender.otherRequirements.reductionCriteria`
 /LEFTI/RESTRICTED_SHELTERED_WORKSHOP,restricted_sheltered_workshop,,,Set `tender.otherRequirements.reservedParticipation` to 'shelteredWorkshop'
-/LEFTI/RESTRICTED_SHELTERED_PROGRAM,restricted_sheltered_program,,,"Set `tender.contractTerms.hasReservedExecution` to `true`, and set `tender.contractTerms.reservedExecution.shelteredEmployment` to `true`"
-/LEFTI/PARTICULAR_PROFESSION,particular_profession_reserved,,,"Set `tender.contractTerms.hasReservedExecution` to `true`, and set `tender.contractTerms.reservedExecution.particularProfession` to `true`"
-/LEFTI/REFERENCE_TO_LAW,ref_law_reg_prov,,,Map to `tender.contractTerms.reservedExecution.particularProfessionDetails`
+/LEFTI/RESTRICTED_SHELTERED_PROGRAM,restricted_sheltered_program,,,Set `tender.contractTerms.reservedExecution` to `true`
+/LEFTI/PARTICULAR_PROFESSION,particular_profession_reserved,,,"Add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array and set its `.type` to 'technical'. If *Reference to the relevant law, regulation or administrative provision* is set, map it to the criterion's `.description`. Otherwise, set the criterion's `.description` to 'Execution of the service is reserved to a particular profession'."
+/LEFTI/REFERENCE_TO_LAW,ref_law_reg_prov,,,See *Execution of the service is reserved to a particular profession*
 /LEFTI/PERFORMANCE_CONDITIONS,other_conditions,III.2.2,,Map to `tender.contractTerms.performanceTerms`
 /LEFTI/PERFORMANCE_STAFF_QUALIFICATION,staff_responsible_indicate,,,Set `tender.otherRequirements.requiresStaffNamesAndQualifications` to `true`
 /PROCEDURE,procedure,IV,,""
