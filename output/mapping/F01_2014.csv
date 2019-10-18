@@ -39,7 +39,7 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT,object,II,,""
 /OBJECT_CONTRACT/@ITEM,,,,Discard
 /OBJECT_CONTRACT/TITLE,title_contract,II.1.1,,Map to `tender.title`
-/OBJECT_CONTRACT/REFERENCE_NUMBER,fileref,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_BuyerInternalReferenceID,Map to `tender.id` (string)
+/OBJECT_CONTRACT/REFERENCE_NUMBER,fileref,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_BuyerInternalReferenceID,"If not set, let *Reference number* be equal to the `ocid` value. Map to `tender.id` (string)."
 /OBJECT_CONTRACT/CPV_MAIN,,II.1.2,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_Classification,""
 /OBJECT_CONTRACT/CPV_MAIN/CPV_CODE,cpv_main,,,"Set `tender.classification.scheme` to 'CPV', take the CPV code in the `CODE` attribute, and map to `tender.classification.id` (PROPOSAL #15)"
 /OBJECT_CONTRACT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,"For each `CODE` attribute, add a `Classification` object to the `tender.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id`. Remove any duplicate entries from the `tender.additionalClassifications` array. (PROPOSAL #16)"
