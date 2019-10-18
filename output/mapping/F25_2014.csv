@@ -41,8 +41,8 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY,currency,,,"For the *Value*, discard as above. For the *Lowest offer* and *Highest offer*, map to the bid statistic's `.currency`."
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL,,,This element sets the currency for its children.,""
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY,currency,,,/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY
-/OBJECT_CONTRACT/VAL_RANGE_TOTAL/LOW,lowest_offer,,,"[Add a bid statistic](../operations#add-a-bids-statistic), set its `.measure` to 'lowestValidBidValue', and map to its `.value`."
-/OBJECT_CONTRACT/VAL_RANGE_TOTAL/HIGH,highest_offer,,,"[Add a bid statistic](../operations#add-a-bids-statistic), set its `.measure` to 'highestValidBidValue', and map to its `.value`."
+/OBJECT_CONTRACT/VAL_RANGE_TOTAL/LOW,lowest_offer,,,"[Add a bids statistic](../operations#add-a-bids-statistic), set its `.measure` to 'lowestValidBidValue', and map to its `.value`."
+/OBJECT_CONTRACT/VAL_RANGE_TOTAL/HIGH,highest_offer,,,"[Add a bids statistic](../operations#add-a-bids-statistic), set its `.measure` to 'highestValidBidValue', and map to its `.value`."
 /OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,"Add a `Lot` object to the `tender.lots` array, and add an `Item` object to the `tender.items` array. Set the lot's `.status` to the same value as `tender.status`.\n\n**F12, F13**: Instead, do nothing."
 /OBJECT_CONTRACT/OBJECT_DESCR/@ITEM,,,,Discard
 /OBJECT_CONTRACT/OBJECT_DESCR/TITLE,title_contract,II.2.1,,"Map to the lot's `.title`, and map to the item's `.title` (PROPOSAL #29)"
@@ -78,11 +78,11 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/contract_statusDetails,"Set the award's `.status` to 'active'\n\nAdd a `Contract` object to the `contracts` array, set its `.id` and `.awardID` to the award's `.id`, set its `.title` to the award's `.title`, and set its `.status` to 'active'."
 /AWARD_CONTRACT/AWARDED_CONTRACT/DATE_CONCLUSION_CONTRACT,date_award_concess,V.2.1,,Map to the contract's `.dateSigned`
 /AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS,award_offers_info,V.2.2,,""
-/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED,offers_received,,,"[Add a bid statistic](../operations#add-a-bids-statistic), set its `.measure` to 'bids', set its `.relatedLot` to the award's only `.relatedLots` entry, and map to its `.value`."
-/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_SME,number_tenders_sme,,,"[Add a bid statistic](../operations#add-a-bids-statistic), set its `.measure` to 'smeBids', set its `.relatedLot` to the award's only `.relatedLots` entry, and map to its `.value`."
-/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_OTHER_EU,number_tenders_ms,,,"[Add a bid statistic](../operations#add-a-bids-statistic), set its `.measure` to 'foreignBidsFromEU',, set its `.relatedLot` to the award's only `.relatedLots` entry and map to its `.value`."
-/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_NON_EU,number_tenders_nonms,,,"[Add a bid statistic](../operations#add-a-bids-statistic), set its `.measure` to 'foreignBidsFromNonEU',, set its `.relatedLot` to the award's only `.relatedLots` entry and map to its `.value`."
-/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_EMEANS,offers_received_electronic,,,"[Add a bid statistic](../operations#add-a-bids-statistic), set its `.measure` to 'electronicBids',, set its `.relatedLot` to the award's only `.relatedLots` entry and map to its `.value`."
+/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED,offers_received,,,"[Add a bids statistic](../operations#add-a-bids-statistic), set its `.measure` to 'bids', set its `.relatedLot` to the award's only `.relatedLots` entry, and map to its `.value`."
+/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_SME,number_tenders_sme,,,"[Add a bids statistic](../operations#add-a-bids-statistic), set its `.measure` to 'smeBids', set its `.relatedLot` to the award's only `.relatedLots` entry, and map to its `.value`."
+/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_OTHER_EU,number_tenders_ms,,,"[Add a bids statistic](../operations#add-a-bids-statistic), set its `.measure` to 'foreignBidsFromEU',, set its `.relatedLot` to the award's only `.relatedLots` entry and map to its `.value`."
+/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_NON_EU,number_tenders_nonms,,,"[Add a bids statistic](../operations#add-a-bids-statistic), set its `.measure` to 'foreignBidsFromNonEU',, set its `.relatedLot` to the award's only `.relatedLots` entry and map to its `.value`."
+/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_EMEANS,offers_received_electronic,,,"[Add a bids statistic](../operations#add-a-bids-statistic), set its `.measure` to 'electronicBids',, set its `.relatedLot` to the award's only `.relatedLots` entry and map to its `.value`."
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS,,,This element contains elements from V.2.2 and V.2.3.,""
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/AWARDED_TO_GROUP,_yes,,,"Discard. If there are multiple suppliers, then the contract has been awarded to a group of economic operators."
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/NO_AWARDED_TO_GROUP,_no,,,"Discard. If there is one supplier, then the contract hasn't been awarded to a group of economic operators."

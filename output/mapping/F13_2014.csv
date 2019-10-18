@@ -53,9 +53,9 @@ xpath,label-key,index,comment,guidance
 /RESULTS/AWARDED_PRIZE,_no,,,Set the award's `.status` to 'active'
 /RESULTS/AWARDED_PRIZE/DATE_DECISION_JURY,dc_date_decision,V.3.1,,Map to the award's `.date`
 /RESULTS/AWARDED_PRIZE/PARTICIPANTS,info_paricipants,V.3.2,,""
-/RESULTS/AWARDED_PRIZE/PARTICIPANTS/NB_PARTICIPANTS,number_participants,,,"[Add a bid statistic](../operations#add-a-bids-statistic), set its `.measure` to 'bids', and map to its `.value`."
-/RESULTS/AWARDED_PRIZE/PARTICIPANTS/NB_PARTICIPANTS_SME,number_participants_sme,,,"[Add a bid statistic](../operations#add-a-bids-statistic), set its `.measure` to 'smeBids', and map to its `.value`."
-/RESULTS/AWARDED_PRIZE/PARTICIPANTS/NB_PARTICIPANTS_OTHER_EU,number_participants_foreign,,,"[Add a bid statistic](../operations#add-a-bids-statistic), set its `.measure` to 'foreignBidsFromEU', and map to its `.value`."
+/RESULTS/AWARDED_PRIZE/PARTICIPANTS/NB_PARTICIPANTS,number_participants,,,"[Add a bids statistic](../operations#add-a-bids-statistic), set its `.measure` to 'bids', and map to its `.value`."
+/RESULTS/AWARDED_PRIZE/PARTICIPANTS/NB_PARTICIPANTS_SME,number_participants_sme,,,"[Add a bids statistic](../operations#add-a-bids-statistic), set its `.measure` to 'smeBids', and map to its `.value`."
+/RESULTS/AWARDED_PRIZE/PARTICIPANTS/NB_PARTICIPANTS_OTHER_EU,number_participants_foreign,,,"[Add a bids statistic](../operations#add-a-bids-statistic), set its `.measure` to 'foreignBidsFromEU', and map to its `.value`."
 /RESULTS/AWARDED_PRIZE/WINNERS,,,,""
 /RESULTS/AWARDED_PRIZE/WINNERS/WINNER,,,"Contains ADDRESS_WINNER, SME, NO_SME.",""
 /RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER,dc_name_winner,V.3.3,,"[Add a party](../operations#add-a-party), and add 'supplier' to its `.roles`\n\nAdd an `OrganizationReference` object to the award's `.suppliers` array, set its `.id` to the party's `.id`, and set its `.name` to the party's [`.name`](#/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/OFFICIALNAME)"
