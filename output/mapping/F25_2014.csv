@@ -34,7 +34,7 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/SHORT_DESCR,descr_short,II.1.4,,Map to `tender.description`
 /OBJECT_CONTRACT/VAL_ESTIMATED_TOTAL,value_excl_vat,,,Map to `tender.value.amount`
 /OBJECT_CONTRACT/VAL_ESTIMATED_TOTAL/@CURRENCY,currency,,,Map to `tender.value.currency`
-/OBJECT_CONTRACT/CALCULATION_METHOD,concession_method_calculate,,,
+/OBJECT_CONTRACT/CALCULATION_METHOD,concession_method_calculate,,,Map to `tender.valueCalculationMethod`
 /OBJECT_CONTRACT/LOT_DIVISION,_yes,,,"Discard. If `tender.lots` contains more than one object, then the contract is divided into lots."
 /OBJECT_CONTRACT/NO_LOT_DIVISION,_no,,,"Discard. If `tender.lots` contains one or fewer objects, then the contract isn't divided into lots."
 /OBJECT_CONTRACT/VAL_TOTAL,value,,,Discard. This is derived from the `value` of awards.
