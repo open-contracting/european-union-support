@@ -48,7 +48,7 @@ unknowns = {
     '.roles': 'parties',
     '.secondStage.maximumCandidates': 'tender/lots',
     '.secondStage.minimumCandidates': 'tender/lots',
-    '.subcontracting.maxPercentage': 'awards',
+    '.subcontracting.maximumPercentage': 'awards',
     '.suppliers': 'awards',  # contract suppliers extension not used
 
     # Ambiguous
