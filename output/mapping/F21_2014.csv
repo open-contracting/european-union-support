@@ -81,9 +81,9 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/DATE_PUBLICATION_NOTICE,date_of_contract_notice,II.3,,Map to `tender.communication.futureNoticeDate`
 /LEFTI,info_legal,III,,"The standard forms express exclusion grounds and selection criteria in this section as unstructured text. In the introductory note to its [eForms consultation](https://github.com/eForms/eForms), the European Commission had proposed to create an extension to eForms to implement the [European Single Procurement Document (ESPD)](http://ec.europa.eu/growth/single-market/public-procurement/e-procurement/espd/) [Exchange Data Model](https://github.com/ESPD/ESPD-EDM), which expresses this information as structured data, following the model of the [Core Criterion and Core Evidence Vocabulary](https://joinup.ec.europa.eu/solution/core-criterion-and-core-evidence-vocabulary)."
 /LEFTI/RULES_CRITERIA,descr_brief_rules,,,Map to `tender.otherRequirements.reductionCriteria`
-/LEFTI/RESTRICTED_SHELTERED_WORKSHOP,restricted_sheltered_workshop,,,Set `tender.otherRequirements.reservedParticipation` to 'shelteredWorkshop'
+/LEFTI/RESTRICTED_SHELTERED_WORKSHOP,restricted_sheltered_workshop,,,Add 'shelteredWorkshop' to the `tender.otherRequirements.reservedParticipation` array
 /LEFTI/RESTRICTED_SHELTERED_PROGRAM,restricted_sheltered_program,,,Set `tender.contractTerms.reservedExecution` to `true`
-/LEFTI/RESERVED_ORGANISATIONS_SERVICE_MISSION,reserved_public_mission,,,Set `tender.otherRequirements.reservedParticipation` to 'publicServiceMissionOrganization'
+/LEFTI/RESERVED_ORGANISATIONS_SERVICE_MISSION,reserved_public_mission,,,Add 'publicServiceMissionOrganization' to the `tender.otherRequirements.reservedParticipation` array
 /LEFTI/PARTICULAR_PROFESSION,particular_profession_reserved,,,"Add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array and set its `.type` to 'technical'. If *Reference to the relevant law, regulation or administrative provision* is set, map it to the criterion's `.description`. Otherwise, set the criterion's `.description` to 'Execution of the service is reserved to a particular profession'."
 /LEFTI/REFERENCE_TO_LAW,ref_law_reg_prov,,,See *Execution of the service is reserved to a particular profession*
 /LEFTI/PERFORMANCE_CONDITIONS,other_conditions,III.2.2,,Map to `tender.contractTerms.performanceTerms`

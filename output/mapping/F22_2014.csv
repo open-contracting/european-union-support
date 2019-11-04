@@ -84,9 +84,9 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/DATE_PUBLICATION_NOTICE,date_of_contract_notice,II.3,,Map to `tender.communication.futureNoticeDate`
 /LEFTI,info_legal,III,,"The standard forms express exclusion grounds and selection criteria in this section as unstructured text. In the introductory note to its [eForms consultation](https://github.com/eForms/eForms), the European Commission had proposed to create an extension to eForms to implement the [European Single Procurement Document (ESPD)](http://ec.europa.eu/growth/single-market/public-procurement/e-procurement/espd/) [Exchange Data Model](https://github.com/ESPD/ESPD-EDM), which expresses this information as structured data, following the model of the [Core Criterion and Core Evidence Vocabulary](https://joinup.ec.europa.eu/solution/core-criterion-and-core-evidence-vocabulary)."
 /LEFTI/RULES_CRITERIA,descr_brief_rules,,,Map to `tender.otherRequirements.reductionCriteria`
-/LEFTI/RESTRICTED_SHELTERED_WORKSHOP,restricted_sheltered_workshop,,,Set `tender.otherRequirements.reservedParticipation` to 'shelteredWorkshop'
+/LEFTI/RESTRICTED_SHELTERED_WORKSHOP,restricted_sheltered_workshop,,,Add 'shelteredWorkshop' to the `tender.otherRequirements.reservedParticipation` array
 /LEFTI/RESTRICTED_SHELTERED_PROGRAM,restricted_sheltered_program,,,Set `tender.contractTerms.reservedExecution` to `true`
-/LEFTI/RESERVED_ORGANISATIONS_SERVICE_MISSION,reserved_public_mission_25,,,Set `tender.otherRequirements.reservedParticipation` to 'publicServiceMissionOrganization'
+/LEFTI/RESERVED_ORGANISATIONS_SERVICE_MISSION,reserved_public_mission_25,,,Add 'publicServiceMissionOrganization' to the `tender.otherRequirements.reservedParticipation` array
 /LEFTI/QUALIFICATION,qs_qualification,III.1.9,,""
 /LEFTI/QUALIFICATION/CONDITIONS,qs_conditions_qualify,,,Add to the `tender.otherRequirements.qualificationSystemConditions` array
 /LEFTI/QUALIFICATION/METHODS,qs_methods_verified,,,Add to the `tender.otherRequirements.qualificationSystemMethods` array
