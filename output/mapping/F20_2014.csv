@@ -43,7 +43,7 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE,procedure,IV,,""
 /PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,"Discard. The *contract award notice concerning this contract* is the OCDS release with the same `ocid` as this release, with 'award' in its `tag`, and with the nearest earlier `date` to this release."
 /AWARD_CONTRACT,award_of_contract_concess,V,,Add an `Award` object to the `awards` array
-/AWARD_CONTRACT/CONTRACT_NO,contract_number,,,Map to the award's `.id`
+/AWARD_CONTRACT/CONTRACT_NO,contract_number,,,Map to the award's `.id`\n\nThis assumes the contract award notice set `/AWARD_CONTRACT/CONTRACT_NO` (WARNING)
 /AWARD_CONTRACT/LOT_NO,lot_number,,,"If not set, let *Lot No* be '1'. Add to the award's `.relatedLots`."
 /AWARD_CONTRACT/TITLE,title_contract,,,Map to the award's `.title`
 /AWARD_CONTRACT/AWARDED_CONTRACT,award_of_contract_concess,V.2,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/contract_statusDetails,"Set the award's `.status` to 'active'\n\nAdd a `Contract` object to the `contracts` array, set its `.id` and `.awardID` to the award's `.id`, set its `.title` to the award's `.title`, and set its `.status` to 'active'."
