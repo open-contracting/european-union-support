@@ -106,11 +106,11 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY,currency,,,"For the *Initial estimated total value of the contract/lot*, discard as above. For the *Total value of the contract/lot*, map to the contract's `.value.currency`."
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL,value_total_final_concess,,,Map to the contract's `.value.amount`
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY,currency,,,/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY
-/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_REVENUE,concess_fees_prices,,,Add a `Charge` object to the contract's `.implementation.charges` array
-/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_REVENUE/@CURRENCY,,,,Map to the charge's `.estimatedValue.currency`.
-/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_PRICE_PAYMENT,concess_payments,,,Add a `Charge` object to the contract's `.implementation.charges` array
-/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_PRICE_PAYMENT/@CURRENCY,,,,Map to the charge's `.estimatedValue.currency`.
-/AWARD_CONTRACT/AWARDED_CONTRACT/INFO_ADD_VALUE,concess_other_details,,,Map to the award's `.valueCalculationMethod`.
+/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_REVENUE,concess_fees_prices,,,"Add a `Charge` object to the contract's `.implementation.charges` array, set its `.id` to 'user', set its `.paidBy` to 'user', set its `.title` to the [translation](../operations#get-a-translation) of 'Revenue from the payment of fees and fines by the users', and map to its `.estimatedValue.amount`."
+/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_REVENUE/@CURRENCY,,,,Map to the user charge's `.estimatedValue.currency`
+/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_PRICE_PAYMENT,concess_payments,,,"Add a `Charge` object to the contract's `.implementation.charges` array, set its `.id` to 'government', set its `.paidBy` to 'government', set its `.title` to the [translation](../operations#get-a-translation) of 'Prizes, payments or other financial advantages provided by the contracting authority/entity', and map to its `.estimatedValue.amount`."
+/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_PRICE_PAYMENT/@CURRENCY,,,,Map to the government charge's `.estimatedValue.currency`
+/AWARD_CONTRACT/AWARDED_CONTRACT/INFO_ADD_VALUE,concess_other_details,,,Map to the award's `.valueCalculationMethod`
 /COMPLEMENTARY_INFO,info_complement,VI,,""
 /COMPLEMENTARY_INFO/INFO_ADD,info_additional,VI.3,,"Map to the release's `description`, from the [Process level title and description](https://extensions.open-contracting.org/en/extensions/process_title/) extension"
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY,appeals_body,VI.4.1,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations#add-a-party), and add 'reviewBody' to its `.roles`"
