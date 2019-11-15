@@ -68,7 +68,7 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in the `tender.coveredBy` array, then the procurement isn't covered by the GPA."
 /PROCEDURE/MAIN_FEATURES_AWARD,award_main_features,IV.1.11,,Map to `tender.awardCriteriaDetails`
 /PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,[Reference a previous publication](../operations#reference-a-previous-publication)
-/AWARD_CONTRACT,award_of_concession,V,,Add an `Award` object to the `awards` array
+/AWARD_CONTRACT,award_of_concession,V,,"Add an `Award` object to the `awards` array, and set its `.id` to the notice number followed by a hyphen '-' followed by the value of the `ITEM` attribute of the `AWARD_CONTRACT` element."
 /AWARD_CONTRACT/@ITEM,,,,Discard
 /AWARD_CONTRACT/LOT_NO,lot_number,,,"If not set, let *Lot No* be '1'. Add to the award's `.relatedLots` (string)."
 /AWARD_CONTRACT/TITLE,title_contract,,,Map to the award's `.title`
