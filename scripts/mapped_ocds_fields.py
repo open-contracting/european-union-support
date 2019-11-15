@@ -35,6 +35,7 @@ subjects = {
 unknowns = {
     # Unambiguous
     '.additionalContactPoints': 'parties',
+    '.awardCriteria': 'tender',
     '.awardID': 'contracts',
     '.countryCode': 'parties/address',
     '.details.classifications': 'parties',
