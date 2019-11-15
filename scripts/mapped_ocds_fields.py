@@ -11,6 +11,7 @@ subjects = {
     'party': 'parties',
     'release': '',
     'statistic': 'bids/statistics',
+    'charge': 'contracts/implementation/charges',
 
     # Ambiguous
     'amendment': {
@@ -38,6 +39,7 @@ unknowns = {
     '.countryCode': 'parties/address',
     '.details.classifications': 'parties',
     '.documentType': 'tender/documents',
+    '.estimatedValue.amount': 'contracts/implementation/charges',
     '.financingParty.id': 'planning/budget/finance',
     '.financingParty.name': 'planning/budget/finance',
     '.identifier.id': 'parties',
@@ -45,6 +47,7 @@ unknowns = {
     '.identifier.scheme': 'parties',
     '.measure': 'bids/statistics',  # metrics extension not used
     '.minimum': 'tender/selectionCriteria/criteria',
+    '.paidBy': 'contracts/implementation/charges',
     '.roles': 'parties',
     '.secondStage.maximumCandidates': 'tender/lots',
     '.secondStage.minimumCandidates': 'tender/lots',
@@ -67,6 +70,7 @@ unknowns = {
         'LEFTI': 'tender/documents',
         'PROCEDURE': 'tender/procurementMethodRationaleCodes',
         # XPath
+        '/AWARD_CONTRACT': 'awards',
         '/AWARD_CONTRACT/AWARDED_CONTRACT': 'contracts',
         '/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR': 'awards/suppliers',
         '/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED': 'bids/statistics',
@@ -74,6 +78,8 @@ unknowns = {
         '/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_NON_EU': 'bids/statistics',
         '/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_OTHER_EU': 'bids/statistics',
         '/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_SME': 'bids/statistics',
+        '/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_PRICE_PAYMENT': 'contracts/implementation/charges',
+        '/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_REVENUE': 'contracts/implementation/charges',
         '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/HIGH': 'bids/statistics',
         '/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/LOW': 'bids/statistics',
         '/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY': 'parties',
@@ -133,6 +139,7 @@ unknowns = {
     },
     '.region': {
         '/OBJECT_CONTRACT/OBJECT_DESCR/NUTS': 'tender/items/deliveryAddresses',
+        '/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/NUTS': 'contracts/items/deliveryAddresses',
     },
     '.scheme': {
         'MODIFICATIONS_CONTRACT': 'contracts/items/additionalClassifications',
