@@ -161,6 +161,12 @@ You can now generate a table for each form, displaying, for each element and att
 
 ### Find fields for which to write extensions
 
+You need `ocdskit` and `ocdsextensionregistry` Python modules. You can install them both using pip:
+
+```
+pip install ocdskit
+```
+
 Generate a release schema with all extensions applied, except the PPP extension (which removes fields):
 
     python scripts/patched_release_schema.py > scripts/release-schema-patched.json
