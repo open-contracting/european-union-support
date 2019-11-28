@@ -4,7 +4,7 @@ xpath,label-key,index,comment,guidance
 /LEGAL_BASIS,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_LegalBasis,Map to `tender.legalBasis` (PROPOSAL #14)
 /LEGAL_BASIS_OTHER,,,,Map to `tender.legalBasis` (PROPOSAL #14)
 /CONTRACTING_BODY,competent_authority,I,,""
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,name_address_contact,I.1,,"[Add a party](../operations#add-a-party), and add 'buyer' to its `.roles`\n\nSet `buyer.id` to its `.id`, and set `buyer.name` to its [`.name`](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,name_address_contact,I.1,,"[Add a party](../operations/add-a-party), and add 'buyer' to its `.roles`\n\nSet `buyer.id` to its `.id`, and set `buyer.name` to its [`.name`](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,name_official,,,Map to the party's `.name` and `.identifier.legalName`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,national_id,,,"Map to the party's `.identifier.id`, and set `.identifier.scheme`"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS,address_postal,,,Map to the party's `.address.streetAddress`
@@ -18,7 +18,7 @@ xpath,label-key,index,comment,guidance
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,address_fax,,,Map to the party's `.contactPoint.faxNumber`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,url_general,,,Map to the party's `.details.url` (PROPOSAL #8)
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,url_buyerprofile,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/organization_BuyerProfile,Map to the party's `.details.buyerProfile` (PROPOSAL #7)
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL,,,,"[Add a party](../operations#add-a-party), add 'buyer' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL,,,,"[Add a party](../operations/add-a-party), add 'buyer' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/OFFICIALNAME,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/NATIONALID,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/ADDRESS,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS
@@ -34,7 +34,7 @@ xpath,label-key,index,comment,guidance
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/URL_BUYER,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER
 /CONTRACTING_BODY/CENTRAL_PURCHASING,purchase_on_behalf_ca,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,Add 'centralPurchasingBody' to the `.roles` of the party (PROPOSAL #11)
 /CONTRACTING_BODY/ADDRESS_FURTHER_INFO_IDEM,as_contacts_above,,,Discard. Additional information can be obtained from the abovementioned address unless otherwised specified.
-/CONTRACTING_BODY/ADDRESS_FURTHER_INFO,address_another,,,"If only the contact person is different, use the [Additional Contact Points](https://github.com/open-contracting-extensions/ocds_additionalContactPoints_extension) extension, get the `Organization` object for the buyer, add a `ContactPoint` object to its `.additionalContactPoints` array, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT).\n\nOtherwise, [add a party](../operations#add-a-party), add 'processContactPoint' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME). (PROPOSAL #9)"
+/CONTRACTING_BODY/ADDRESS_FURTHER_INFO,address_another,,,"If only the contact person is different, use the [Additional Contact Points](https://github.com/open-contracting-extensions/ocds_additionalContactPoints_extension) extension, get the `Organization` object for the buyer, add a `ContactPoint` object to its `.additionalContactPoints` array, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT).\n\nOtherwise, [add a party](../operations/add-a-party), add 'processContactPoint' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME). (PROPOSAL #9)"
 /CONTRACTING_BODY/CA_TYPE,type_competent_authority,I.4,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification's `.scheme` to 'TED_CA_TYPE', and set its `.id` and/or `.name` as follows: (PROPOSAL #10)"
 /CONTRACTING_BODY/CA_TYPE_OTHER,other_type,,,Map to `.name`
 /OBJECT_CONTRACT,object,II,,""
@@ -88,7 +88,7 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/DATE_CONCLUSION_CONTRACT,date_award,V.2.1,,Map to the contract's `.dateSigned`
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS,,,This element contains elements from V.2.2 and V.2.3.,""
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR,,,"Contains ADDRESS_CONTRACTOR, SME, NO_SME.",""
-/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR,awarded_to_name,V.2.3,,"[Add a party](../operations#add-a-party), and add 'supplier' to its `.roles`\n\nAdd an `OrganizationReference` object to the award's `.suppliers` array, set its `.id` to the party's `.id`, and set its `.name` to the party's [`.name`](#/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME)"
+/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR,awarded_to_name,V.2.3,,"[Add a party](../operations/add-a-party), and add 'supplier' to its `.roles`\n\nAdd an `OrganizationReference` object to the award's `.suppliers` array, set its `.id` to the party's `.id`, and set its `.name` to the party's [`.name`](#/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME)"
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME,name_official,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/NATIONALID,national_id,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/ADDRESS,address_postal,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS

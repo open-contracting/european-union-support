@@ -4,7 +4,7 @@ xpath,label-key,index,comment,guidance
 /LEGAL_BASIS,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_LegalBasis,Map to `tender.legalBasis` (PROPOSAL #14)
 /LEGAL_BASIS_OTHER,,,,Map to `tender.legalBasis` (PROPOSAL #14)
 /CONTRACTING_BODY,ca_ce,I,,""
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,name_address_contact,I.1,,"[Add a party](../operations#add-a-party), and add 'buyer' to its `.roles`\n\nSet `buyer.id` to its `.id`, and set `buyer.name` to its [`.name`](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,name_address_contact,I.1,,"[Add a party](../operations/add-a-party), and add 'buyer' to its `.roles`\n\nSet `buyer.id` to its `.id`, and set `buyer.name` to its [`.name`](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,name_official,,,Map to the party's `.name` and `.identifier.legalName`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,national_id,,,"Map to the party's `.identifier.id`, and set `.identifier.scheme`"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS,address_postal,,,Map to the party's `.address.streetAddress`
@@ -18,7 +18,7 @@ xpath,label-key,index,comment,guidance
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,address_fax,,,Map to the party's `.contactPoint.faxNumber`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,url_general,,,Map to the party's `.details.url` (PROPOSAL #8)
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,url_buyerprofile,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/organization_BuyerProfile,Map to the party's `.details.buyerProfile` (PROPOSAL #7)
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL,,,,"[Add a party](../operations#add-a-party), add 'buyer' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL,,,,"[Add a party](../operations/add-a-party), add 'buyer' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/OFFICIALNAME,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/NATIONALID,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/ADDRESS,,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS
@@ -42,7 +42,7 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/SHORT_DESCR,descr_short,II.1.4,,Map to `tender.description`
 /COMPLEMENTARY_INFO,info_complement,VI,,""
 /COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,date_dispatch,VI.5,,Map to `date`
-/COMPLEMENTARY_INFO/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,[Reference a previous publication](../operations#reference-a-previous-publication)
+/COMPLEMENTARY_INFO/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,[Reference a previous publication](../operations/reference-a-previous-publication)
 /CHANGES,changes,VII,,"Add an `Amendment` object to the `tender.amendments` array, and set its `.id` (string) sequentially, across all F14 notices for this procedure. (The first notice sets it to '1', the second to '2', etc.)"
 /CHANGES/CHANGE,icar_text_corrected,VII.1.2,,See [Guidance for `/CHANGES/CHANGE`](#guidance-for-changes-change)
 /CHANGES/CHANGE/WHERE,,,,""
