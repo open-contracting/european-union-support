@@ -28,7 +28,7 @@ builder = ProfileBuilder('1__1__4', [
     # 'https://github.com/open-contracting-extensions/ocds_eu_extension/archive/master.zip',
     'https://github.com/open-contracting-extensions/ocds_options_extension/archive/master.zip',
     'https://github.com/open-contracting-extensions/ocds_otherRequirements_extension/archive/master.zip',
-    # 'https://github.com/open-contracting-extensions/ocds_organizationClassification_extension/archive/master.zip',
+    'https://github.com/open-contracting-extensions/ocds_organizationClassification_extension/archive/master.zip',
     'https://github.com/open-contracting-extensions/ocds_procedure_extension/archive/master.zip',
     'https://github.com/open-contracting-extensions/ocds_secondStageDescription_extension/archive/master.zip',
     'https://github.com/open-contracting-extensions/ocds_selectionCriteria_extension/archive/master.zip',
