@@ -43,8 +43,8 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/CPV_MAIN,,II.1.2,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_Classification,""
 /OBJECT_CONTRACT/CPV_MAIN/CPV_CODE,cpv_main,,,"Set `tender.classification.scheme` to 'CPV', take the CPV code in the `CODE` attribute, and map to `tender.classification.id`"
 /OBJECT_CONTRACT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,"For each `CODE` attribute, add a `Classification` object to the `tender.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id`. Remove any duplicate entries from the `tender.additionalClassifications` array."
-/OBJECT_CONTRACT/TYPE_CONTRACT,type_contract,II.1.3,,Set `tender.mainProcurementCategory` as follows:
-/OBJECT_CONTRACT/CATEGORY,,,,
+/OBJECT_CONTRACT/TYPE_CONTRACT,type_contract,II.1.3,,"Set `tender.mainProcurementCategory` to 'services'."
+/OBJECT_CONTRACT/CATEGORY,,,,"Map to `tender.additionalProcurementCategories` (see [#59](https://github.com/open-contracting-extensions/european-union/issues/59) for implementation)."
 /OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,"Add a `Lot` object to the `tender.lots` array, and add an `Item` object to the `tender.items` array. Set the lot's `.status` to the same value as `tender.status`.\n\n**F12, F13**: Instead, do nothing."
 /OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL,cpv_additional,II.2.2,,""
 /OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_CODE,cpv_main,,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPV', and map to its `.id`. Remove any duplicate entries from the item's `.additionalClassifications` array.\n\n**F12, F13**: Instead, for each `CODE` attribute, add a `Classification` object to the `tender.additionalClassifications` array, set its `.scheme` to 'CPV', and map to its `.id`. Remove any duplicate entries from the `tender.additionalClassifications` array."
@@ -78,11 +78,11 @@ xpath,label-key,index,comment,guidance
 /LEFTI/OTHER_QUALITY_TARGET,target_other,,,
 /LEFTI/REWARDS_PENALITIES,info_rewards_penalties,III.2.2,,
 /PROCEDURE,procedure,IV,,""
-/PROCEDURE/PT_COMPETITIVE_TENDERING,proctype_competitive,,,
-/PROCEDURE/PT_DA_INTERNAL_OPERATOR,type_direct_award_internal,,,
-/PROCEDURE/PT_DA_SMALL_CONTRACT,type_direct_award_small,,,
-/PROCEDURE/PT_DA_MEDIUM_ENTERPRISE,type_direct_award_small_sme,,,
-/PROCEDURE/PT_DA_RAILWAY_TRANSPORT,type_direct_award_railway,,,
+/PROCEDURE/PT_COMPETITIVE_TENDERING,proctype_competitive,,,"Set `tender.procurementMethod` to 'open'."
+/PROCEDURE/PT_DA_INTERNAL_OPERATOR,type_direct_award_internal,,,"Set `tender.procurementMethod` to 'direct' and `tender.procurementMethodDetails` to 'Internal operator (art. 5(2) of 1370/2007)'."
+/PROCEDURE/PT_DA_SMALL_CONTRACT,type_direct_award_small,,,"Set `tender.procurementMethod` to 'direct' and `tender.procurementMethodDetails` to 'Small scale contract (art. 5(4) of 1370/2007)'."
+/PROCEDURE/PT_DA_MEDIUM_ENTERPRISE,type_direct_award_small_sme,,,"Set `tender.procurementMethod` to 'direct' and `tender.procurementMethodDetails` to 'Small scale contract to a small and medium sized enterprise (art. 5(4) of 1370/2007, 2nd paragraph)'."
+/PROCEDURE/PT_DA_RAILWAY_TRANSPORT,type_direct_award_railway,,,"Set `tender.procurementMethod` to 'direct' and `tender.procurementMethodDetails` to 'Railway transport (art. 5(6) of 1370/2007)'."
 /AWARD_CONTRACT,award_of_contract,V,,"Add an `Award` object to the `awards` array, and set its `.id` to the notice number followed by a hyphen '-' followed by the value of the `ITEM` attribute of the `AWARD_CONTRACT` element."
 /AWARD_CONTRACT/AWARDED_CONTRACT,award_of_contract,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/contract_statusDetails,"Set the award's `.status` to 'active'\n\nAdd a `Contract` object to the `contracts` array, set its `.id` and `.awardID` to the award's `.id`, set its `.title` to the award's `.title`, and set its `.status` to 'active'."
 /AWARD_CONTRACT/AWARDED_CONTRACT/DATE_CONCLUSION_CONTRACT,date_award,V.2.1,,Map to the contract's `.dateSigned`
