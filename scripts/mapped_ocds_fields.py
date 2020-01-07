@@ -62,8 +62,8 @@ unknowns = {
     '.description': {
         # Root
         'LEFTI': 'tender/selectionCriteria/criteria',
+        'PROCEDURE': 'tender/procurementMethodRationaleCodes',
         # XPath
-        '/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED': 'planning/budget/finance',
         '/CONTRACTING_BODY/CA_ACTIVITY': 'parties/details/classifications',
         '/CONTRACTING_BODY/CA_ACTIVITY/@VALUE': 'parties/details/classifications',
         '/CONTRACTING_BODY/CA_ACTIVITY_OTHER': 'parties/details/classifications',
@@ -73,6 +73,9 @@ unknowns = {
         '/CONTRACTING_BODY/CE_ACTIVITY': 'parties/details/classifications',
         '/CONTRACTING_BODY/CE_ACTIVITY/@VALUE': 'parties/details/classifications',
         '/CONTRACTING_BODY/CE_ACTIVITY_OTHER': 'parties/details/classifications',
+        '/OBJECT_CONTRACT/CATEGORY': 'tender/additionalClassifications',
+        '/OBJECT_CONTRACT/CATEGORY/@CTYPE': 'tender/additionalClassifications',
+        '/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED': 'planning/budget/finance',
     },
     '.id': {
         # Root
@@ -105,6 +108,8 @@ unknowns = {
         '/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE': 'contracts/items/additionalClassifications',  # noqa
         '/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE': 'contracts/items/additionalClassifications',  # noqa
         '/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS': 'contracts/amendments',
+        '/OBJECT_CONTRACT/CATEGORY': 'tender/additionalClassifications',
+        '/OBJECT_CONTRACT/CATEGORY/@CTYPE': 'tender/additionalClassifications',
         '/OBJECT_CONTRACT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE': 'tender/items/additionalClassifications',
         '/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_CODE': 'tender/items/additionalClassifications',
         '/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE': 'tender/items/additionalClassifications',  # noqa
@@ -125,10 +130,11 @@ unknowns = {
         'AWARD_CONTRACT': 'awards/suppliers',
         'MODIFICATIONS_CONTRACT': 'awards/suppliers',
         'OBJECT_CONTRACT': 'parties',
-        'PROCEDURE': 'tender/procurementMethodRationaleCodes',
         'RESULTS': 'awards/suppliers',
         # XPath
         '/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY': 'buyer',
+        '/PROCEDURE/PARTICIPANT_NAME': 'parties',
+        '/PROCEDURE/MEMBER_NAME': 'tender/designContest/juryMembers',
     },
     '.relatedLot': {
         'AWARD_CONTRACT': 'bids/statistics',
@@ -144,7 +150,11 @@ unknowns = {
     },
     '.scheme': {
         'MODIFICATIONS_CONTRACT': 'contracts/items/additionalClassifications',
-        'OBJECT_CONTRACT': 'tender/items/additionalClassifications',
+        # XPath
+        '/OBJECT_CONTRACT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE': 'tender/items/additionalClassifications',
+        '/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_CODE': 'tender/items/additionalClassifications',
+        '/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE': 'tender/items/additionalClassifications',
+        '/OBJECT_CONTRACT/CATEGORY': 'tender/additionalClassifications',
     },
     '.status': {
         'AWARD_CONTRACT': 'contracts',
