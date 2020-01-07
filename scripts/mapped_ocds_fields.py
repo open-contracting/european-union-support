@@ -64,6 +64,15 @@ unknowns = {
         'LEFTI': 'tender/selectionCriteria/criteria',
         # XPath
         '/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED': 'planning/budget/finance',
+        '/CONTRACTING_BODY/CA_ACTIVITY': 'parties/details/classifications',
+        '/CONTRACTING_BODY/CA_ACTIVITY/@VALUE': 'parties/details/classifications',
+        '/CONTRACTING_BODY/CA_ACTIVITY_OTHER': 'parties/details/classifications',
+        '/CONTRACTING_BODY/CA_TYPE': 'parties/details/classifications',
+        '/CONTRACTING_BODY/CA_TYPE/@VALUE': 'parties/details/classifications',
+        '/CONTRACTING_BODY/CA_TYPE_OTHER': 'parties/details/classifications',
+        '/CONTRACTING_BODY/CE_ACTIVITY': 'parties/details/classifications',
+        '/CONTRACTING_BODY/CE_ACTIVITY/@VALUE': 'parties/details/classifications',
+        '/CONTRACTING_BODY/CE_ACTIVITY_OTHER': 'parties/details/classifications',
     },
     '.id': {
         # Root
@@ -120,15 +129,6 @@ unknowns = {
         'RESULTS': 'awards/suppliers',
         # XPath
         '/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY': 'buyer',
-        '/CONTRACTING_BODY/CA_ACTIVITY': 'parties/details/classifications',
-        '/CONTRACTING_BODY/CA_ACTIVITY/@VALUE': 'parties/details/classifications',
-        '/CONTRACTING_BODY/CA_ACTIVITY_OTHER': 'parties/details/classifications',
-        '/CONTRACTING_BODY/CA_TYPE': 'parties/details/classifications',
-        '/CONTRACTING_BODY/CA_TYPE/@VALUE': 'parties/details/classifications',
-        '/CONTRACTING_BODY/CA_TYPE_OTHER': 'parties/details/classifications',
-        '/CONTRACTING_BODY/CE_ACTIVITY': 'parties/details/classifications',
-        '/CONTRACTING_BODY/CE_ACTIVITY/@VALUE': 'parties/details/classifications',
-        '/CONTRACTING_BODY/CE_ACTIVITY_OTHER': 'parties/details/classifications',
     },
     '.relatedLot': {
         'AWARD_CONTRACT': 'bids/statistics',
