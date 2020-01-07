@@ -55,11 +55,11 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/DATE_START,starting,,,Map to the lot's `.contractPeriod.startDate`
 /OBJECT_CONTRACT/OBJECT_DESCR/DURATION,duration_contract_framework_dps,II.2.7,,""
 /OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS,assets_extended_contract,,,""
-/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/EXTENDED_CONTRACT_DURATION,_yes,,,Set `tender.hasEssentialAssets` to `true` (extension issue [#60](https://github.com/open-contracting-extensions/european-union/issues/60)).
-/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/LIST,assets_list,,,Add the content of each &lt;P&gt; to the `tender.essentialAssets.assets` array.
-/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/SIGNIFICANCE,assets_significance,,,Map to `tender.essentialAssets.significance` (number).
-/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/PREDOMINANCE,assets_predominant,,,Map to `tender.essentialAssets.predominant` (number).
-/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/NO_EXTENDED_CONTRACT_DURATION,_no,,,Set `tender.hasEssentialAssets` to `false`.
+/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/EXTENDED_CONTRACT_DURATION,_yes,,,Set `tender.hasEssentialAssets` to `true`
+/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/LIST,assets_list,,,Map to `tender.essentialAssets.description`
+/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/SIGNIFICANCE,assets_significance,,,Map to `tender.essentialAssets.significance`
+/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/PREDOMINANCE,assets_predominant,,,Map to `tender.essentialAssets.predominance`
+/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/NO_EXTENDED_CONTRACT_DURATION,_no,,,Set `tender.hasEssentialAssets` to `false`
 /LEFTI,info_legal,III,,"The standard forms express exclusion grounds and selection criteria in this section as unstructured text. In the introductory note to its [eForms consultation](https://github.com/eForms/eForms), the European Commission had proposed to create an extension to eForms to implement the [European Single Procurement Document (ESPD)](http://ec.europa.eu/growth/single-market/public-procurement/e-procurement/espd/) [Exchange Data Model](https://github.com/ESPD/ESPD-EDM), which expresses this information as structured data, following the model of the [Core Criterion and Core Evidence Vocabulary](https://joinup.ec.europa.eu/solution/core-criterion-and-core-evidence-vocabulary)."
 /LEFTI/COST_PARAMETERS,parameters_cost,,,
 /LEFTI/EXCLUSIVE_RIGHTS_GRANTED,_yes,,,
