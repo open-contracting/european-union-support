@@ -205,8 +205,8 @@ I also attempted to map elements and attributes in the XML to labels on the form
 In addition to the resources linked under prerequisites above, there is a [TED eSenders wiki](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender), which contains:
 
 * [XML Schema 2.0.9](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9), in particular: [Overview](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.1.Overview) and [Form structure](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.2.Formstructure)
-* [Standard forms guidance](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/Standard+forms+guidance), in particular: Field explanations ([public link](https://ec.europa.eu/docsroom/documents/24191/attachments/1/translations/en/renditions/native)) (PDF)
-* [Instructions for the use of 14](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/Instructions+for+the+use+of+F14) ([public link](http://simap.ted.europa.eu/documents/10184/166101/Instructions+for+the+use+of+F14_EN.pdf/909e4b38-1871-49a1-a206-7a5976a2d262)) (PDF)
+* [Standard forms guidance](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/2.4.1.+Standard+forms+guidance), in particular: Field explanations ([public link](https://ec.europa.eu/docsroom/documents/24191/attachments/1/translations/en/renditions/native)) (PDF)
+* [Instructions for the use of 14](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/2.4.2.+Instructions+for+the+use+of+F14) ([public link](http://simap.ted.europa.eu/documents/10184/166101/Instructions+for+the+use+of+F14_EN.pdf/909e4b38-1871-49a1-a206-7a5976a2d262)) (PDF)
 * [FAQ](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/FAQ) (click "Expand all")
 * [Contacts](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/Contacts)
 
