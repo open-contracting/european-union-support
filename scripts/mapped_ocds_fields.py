@@ -236,3 +236,8 @@ with open('scripts/mapping-sheet.csv') as f:
     for path in sorted(list(paths)):
         if path not in seen:
             print(path)
+
+# Uncomment to print all the paths for a specific object.
+# for path in sorted(list(paths)):
+#     if '/items' in path:
+#         print(path)
