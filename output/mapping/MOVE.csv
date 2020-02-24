@@ -61,22 +61,22 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/PREDOMINANCE,assets_predominant,,,Map to `tender.essentialAssets.predominance`
 /OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/NO_EXTENDED_CONTRACT_DURATION,_no,,,Set `tender.hasEssentialAssets` to `false`
 /LEFTI,info_legal,III,,"The standard forms express exclusion grounds and selection criteria in this section as unstructured text. In the introductory note to its [eForms consultation](https://github.com/eForms/eForms), the European Commission had proposed to create an extension to eForms to implement the [European Single Procurement Document (ESPD)](http://ec.europa.eu/growth/single-market/public-procurement/e-procurement/espd/) [Exchange Data Model](https://github.com/ESPD/ESPD-EDM), which expresses this information as structured data, following the model of the [Core Criterion and Core Evidence Vocabulary](https://joinup.ec.europa.eu/solution/core-criterion-and-core-evidence-vocabulary)."
-/LEFTI/COST_PARAMETERS,parameters_cost,,,
-/LEFTI/EXCLUSIVE_RIGHTS_GRANTED,_yes,,,
-/LEFTI/NO_EXCLUSIVE_RIGHTS_GRANTED,_no,,,
-/LEFTI/PCT_ALLOCATED_OPERATOR,allocation_percentage,,,
-/LEFTI/SOCIAL_STANDARDS,social_standards_list,,,
-/LEFTI/PUBLIC_SERVICE_OBLIGATIONS,public_service_obligations,III.1.5,,
-/LEFTI/OTHER_PARTICULAR_CONDITIONS,other_particular_cond,III.1.6,,
-/LEFTI/INFORMATION_TICKETS,target_info,,,
-/LEFTI/PUNCTUALITY_RELIABILITY,target_punctuality,,,
-/LEFTI/CANCELLATIONS_SERVICES,target_cancellation,,,
-/LEFTI/CLEANLINESS_ROLLING_STOCK,target_cleanliness,,,
-/LEFTI/CUST_SATISFACTION_SURVEY,target_satisfaction,,,
-/LEFTI/COMPLAINT_HANDLING,target_complaints,,,
-/LEFTI/ASSIST_PERSONS_REDUCTED_MOB,target_assistance,,,
-/LEFTI/OTHER_QUALITY_TARGET,target_other,,,
-/LEFTI/REWARDS_PENALITIES,info_rewards_penalties,III.2.2,,
+/LEFTI/COST_PARAMETERS,parameters_cost,,,Map to `tender.contractTerms.financialTerms`
+/LEFTI/EXCLUSIVE_RIGHTS_GRANTED,_yes,,,"Set `tender.contractTerms.hasExclusiveRights` to `true`, and map to `tender.contractTerms.exclusiveRights`"
+/LEFTI/NO_EXCLUSIVE_RIGHTS_GRANTED,_no,,,Set `tender.contractTerms.hasExclusiveRights` to `false`
+/LEFTI/PCT_ALLOCATED_OPERATOR,allocation_percentage,,,Map to the `tender.contractTerms.operatorRevenueShare`
+/LEFTI/SOCIAL_STANDARDS,social_standards_list,,,Map to `tender.contractTerms.socialStandards`
+/LEFTI/PUBLIC_SERVICE_OBLIGATIONS,public_service_obligations,III.1.5,,Map to `tender.contractTerms.performanceTerms`
+/LEFTI/OTHER_PARTICULAR_CONDITIONS,other_particular_cond,III.1.6,,Map to `tender.contractTerms.otherTerms`
+/LEFTI/INFORMATION_TICKETS,target_info,,,"Add a `Metric` object to the `tender.targets` array, set its `.id` to 'INFORMATION_TICKETS', set its `.title` to 'Information and tickets', and map to its `.description`"
+/LEFTI/PUNCTUALITY_RELIABILITY,target_punctuality,,,"Add a `Metric` object to the `tender.targets` array, set its `.id` to 'PUNCTUALITY_RELIABILITY', set its `.title` to 'Punctuality and reliability', and map to its `.description`"
+/LEFTI/CANCELLATIONS_SERVICES,target_cancellation,,,"Add a `Metric` object to the `tender.targets` array, set its `.id` to 'CANCELLATIONS_SERVICES', set its `.title` to 'Cancellations of services', and map to its `.description`"
+/LEFTI/CLEANLINESS_ROLLING_STOCK,target_cleanliness,,,"Add a `Metric` object to the `tender.targets` array, set its `.id` to 'CLEANLINESS_ROLLING_STOCK', set its `.title` to 'Cleanliness of rolling stock and station facilities', and map to its `.description`"
+/LEFTI/CUST_SATISFACTION_SURVEY,target_satisfaction,,,"Add a `Metric` object to the `tender.targets` array, set its `.id` to 'CUST_SATISFACTION_SURVEY', set its `.title` to 'Customer Satisfaction Survey', and map to its `.description`"
+/LEFTI/COMPLAINT_HANDLING,target_complaints,,,"Add a `Metric` object to the `tender.targets` array, set its `.id` to 'COMPLAINT_HANDLING', set its `.title` to 'Complaint handling', and map to its `.description`"
+/LEFTI/ASSIST_PERSONS_REDUCTED_MOB,target_assistance,,,"Add a `Metric` object to the `tender.targets` array, set its `.id` to 'ASSIST_PERSONS_REDUCTED_MOB', set its `.title` to 'Assistance for persons with reduced mobility', and map to its `.description`"
+/LEFTI/OTHER_QUALITY_TARGET,target_other,,,"Add a `Metric` object to the `tender.targets` array, set its `.id` to 'OTHER_QUALITY_TARGET', set its `.title` to 'Other quality targets', and map to its `.description`"
+/LEFTI/REWARDS_PENALITIES,info_rewards_penalties,III.2.2,,Map to `tender.contractTerms.rewardsAndPenalties`
 /PROCEDURE,procedure,IV,,""
 /PROCEDURE/PT_COMPETITIVE_TENDERING,proctype_competitive,,,"Set `tender.procurementMethod` to 'open', and set `tender.procurementMethodDetails` to 'Competitive tendering procedure'"
 /PROCEDURE/PT_DA_INTERNAL_OPERATOR,type_direct_award_internal,,,"Set `tender.procurementMethod` to 'direct', and set `tender.procurementMethodDetails` to 'Direct award to an internal operator (art. 5(2) of 1370/2007)'"
