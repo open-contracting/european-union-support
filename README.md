@@ -106,7 +106,7 @@ Once completed, run `rake label:missing` to see which XML elements and attribute
 
 Many XPath's are common across forms. To copy guidance across forms, run:
 
-    rake label:copy SOURCE=F01 # Revert change to /OBJECT_CONTRACT/TYPE_CONTRACT in MOVE.csv
+    rake label:copy SOURCE=F01 # Revert change to LEFTI/PARTICULAR_PROFESSION in F12_2014.csv
     rake label:copy SOURCE=F02 FILES=F03,F05,F06,F07,F12,F13,F15,F21,F22,F24
     rake label:copy SOURCE=F03 FILES=F06,F13,F15,F21,F22
     rake label:copy SOURCE=F04 FILES=F05,F06,F07,F08,F12,F13,F15,F21,F22,F23,F24,F25
