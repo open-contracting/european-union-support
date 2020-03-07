@@ -11,9 +11,11 @@ builder = ProfileBuilder('1__1__4', {
     'finance': 'master',
     'location': 'master',
     'lots': 'master',
+    'metrics': 'master',
     'participation_fee': 'master',
     'partyScale': 'master',
     'process_title': 'master',
+    'shareholders': 'master',
 })
 
 schema = builder.patched_release_schema(extension_field='extension')
