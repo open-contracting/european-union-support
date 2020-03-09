@@ -20,7 +20,7 @@ subjects = {
     },
     'classification': {
         'CONTRACTING_BODY': 'parties/details/classifications',
-        'PROCEDURE': 'tender/procurementMethodRationaleCodes',
+        'PROCEDURE': 'tender/procurementMethodRationaleClassifications',
     },
     'criterion': {
         'LEFTI': 'tender/selectionCriteria/criteria',
@@ -62,7 +62,7 @@ unknowns = {
     '.description': {
         # Root
         'LEFTI': 'tender/selectionCriteria/criteria',
-        'PROCEDURE': 'tender/procurementMethodRationaleCodes',
+        'PROCEDURE': 'tender/procurementMethodRationaleClassifications',
         # XPath
         '/CONTRACTING_BODY/CA_ACTIVITY': 'parties/details/classifications',
         '/CONTRACTING_BODY/CA_ACTIVITY/@VALUE': 'parties/details/classifications',
@@ -81,7 +81,7 @@ unknowns = {
         # Root
         'CHANGES': 'tender/amendments',
         'LEFTI': 'tender/documents',
-        'PROCEDURE': 'tender/procurementMethodRationaleCodes',
+        'PROCEDURE': 'tender/procurementMethodRationaleClassifications',
         # XPath
         '/AWARD_CONTRACT': 'awards',
         '/AWARD_CONTRACT/AWARDED_CONTRACT': 'contracts',
