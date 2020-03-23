@@ -44,31 +44,31 @@ xpath,label-key,index,comment,guidance
 /COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,date_dispatch,VI.5,,Map to `date`
 /COMPLEMENTARY_INFO/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,[Reference a previous publication](../operations/#reference-a-previous-publication)
 /CHANGES,changes,VII,,"Add an `Amendment` object to the `tender.amendments` array, and set its `.id` (string) sequentially, across all F14 notices for this procedure. (The first notice sets it to '1', the second to '2', etc.)"
-/CHANGES/CHANGE,icar_text_corrected,VII.1.2,,See [Guidance for `/CHANGES/CHANGE`](#guidance-for-changes-change)
+/CHANGES/CHANGE,icar_text_corrected,VII.1.2,,"For each `CHANGE` element, add an `UnstructuredChange` object to the amendment's `.unstructuredChanges` array, and set its `.where`, `.oldValue` and `.newValue` as follows:"
 /CHANGES/CHANGE/WHERE,,,,""
-/CHANGES/CHANGE/WHERE/SECTION,section_no,,,""
+/CHANGES/CHANGE/WHERE/SECTION,section_no,,,Map to `.where.section`.
 /CHANGES/CHANGE/OLD_VALUE,icar_instead,,,""
 /CHANGES/CHANGE/NEW_VALUE,icar_read,,,""
-/CHANGES/CHANGE/WHERE/LOT_NO,lot_number,,,""
-/CHANGES/CHANGE/WHERE/LABEL,icar_text_corr_place,,,""
-/CHANGES/CHANGE/OLD_VALUE/NOTHING,,,,""
-/CHANGES/CHANGE/NEW_VALUE/NOTHING,,,,""
-/CHANGES/CHANGE/OLD_VALUE/TEXT,,,,""
-/CHANGES/CHANGE/NEW_VALUE/TEXT,,,,""
+/CHANGES/CHANGE/WHERE/LOT_NO,lot_number,,,Map to `.where.lot`.
+/CHANGES/CHANGE/WHERE/LABEL,icar_text_corr_place,,,Map to `.where.label`.
+/CHANGES/CHANGE/OLD_VALUE/NOTHING,,,,Set `.oldValue.text` to `null`.
+/CHANGES/CHANGE/NEW_VALUE/NOTHING,,,,Set `.newValue.text` to `null`.
+/CHANGES/CHANGE/OLD_VALUE/TEXT,,,,Map to `.oldValue.text`.
+/CHANGES/CHANGE/NEW_VALUE/TEXT,,,,Map to `.newValue.text`.
 /CHANGES/CHANGE/OLD_VALUE/CPV_MAIN,,,,""
 /CHANGES/CHANGE/NEW_VALUE/CPV_MAIN,,,,""
-/CHANGES/CHANGE/OLD_VALUE/CPV_MAIN/CPV_CODE,cpv_main,,,""
-/CHANGES/CHANGE/NEW_VALUE/CPV_MAIN/CPV_CODE,cpv_main,,,""
-/CHANGES/CHANGE/OLD_VALUE/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,""
-/CHANGES/CHANGE/NEW_VALUE/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,""
+/CHANGES/CHANGE/OLD_VALUE/CPV_MAIN/CPV_CODE,cpv_main,,,Map to `.oldValue.mainCpv`.
+/CHANGES/CHANGE/NEW_VALUE/CPV_MAIN/CPV_CODE,cpv_main,,,Map to `.newValue.mainCpv`
+/CHANGES/CHANGE/OLD_VALUE/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,Map to `.oldValue.mainCpvSupplementary`
+/CHANGES/CHANGE/NEW_VALUE/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,,Map to `.newValue.mainCpvSupplementary`
 /CHANGES/CHANGE/OLD_VALUE/CPV_ADDITIONAL,,,,""
-/CHANGES/CHANGE/OLD_VALUE/CPV_ADDITIONAL/CPV_CODE,,,,""
-/CHANGES/CHANGE/OLD_VALUE/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,,,,""
+/CHANGES/CHANGE/OLD_VALUE/CPV_ADDITIONAL/CPV_CODE,,,,Map to `.oldValue.additionalCpv`
+/CHANGES/CHANGE/OLD_VALUE/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,,,,Map to `.oldValue.additionalCpvSupplementary`
 /CHANGES/CHANGE/NEW_VALUE/CPV_ADDITIONAL,,,,""
-/CHANGES/CHANGE/NEW_VALUE/CPV_ADDITIONAL/CPV_CODE,,,,""
-/CHANGES/CHANGE/NEW_VALUE/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,,,,""
-/CHANGES/CHANGE/OLD_VALUE/DATE,date,,,""
-/CHANGES/CHANGE/NEW_VALUE/DATE,date,,,""
-/CHANGES/CHANGE/OLD_VALUE/TIME,time,,,""
-/CHANGES/CHANGE/NEW_VALUE/TIME,time,,,""
+/CHANGES/CHANGE/NEW_VALUE/CPV_ADDITIONAL/CPV_CODE,,,,Map to `.newValue.additionalCpv`
+/CHANGES/CHANGE/NEW_VALUE/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,,,,Map to `.newValue.additionalCpvSupplementary`
+/CHANGES/CHANGE/OLD_VALUE/DATE,date,,,Map to `.oldValue.date`
+/CHANGES/CHANGE/NEW_VALUE/DATE,date,,,Map to `.newValue.date`
+/CHANGES/CHANGE/OLD_VALUE/TIME,time,,,Map to `.oldValue.time`
+/CHANGES/CHANGE/NEW_VALUE/TIME,time,,,Map to `.newValue.time`
 /CHANGES/INFO_ADD,icar_other_info,VII.2,,Map to the amendment's `.description`
