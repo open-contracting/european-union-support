@@ -24,19 +24,22 @@ schema = builder.patched_release_schema(extension_field='extension')
 builder = ProfileBuilder('1__1__4', [
     'https://github.com/open-contracting-extensions/ocds_awardCriteria_extension/archive/master.zip',
     'https://github.com/open-contracting-extensions/ocds_bidOpening_extension/archive/master.zip',
-    # 'https://github.com/open-contracting-extensions/ocds_communication_extension/archive/master.zip',
+    'https://github.com/open-contracting-extensions/ocds_communication_extension/archive/master.zip',
     'https://github.com/open-contracting-extensions/ocds_contractTerms_extension/archive/master.zip',
     'https://github.com/open-contracting-extensions/ocds_coveredBy_extension/archive/master.zip',
+    # 'https://github.com/open-contracting-extensions/ocds_designContest_extension/archive/master.zip',
     # 'https://github.com/open-contracting-extensions/ocds_eu_extension/archive/master.zip',
     'https://github.com/open-contracting-extensions/ocds_options_extension/archive/master.zip',
     'https://github.com/open-contracting-extensions/ocds_otherRequirements_extension/archive/master.zip',
     'https://github.com/open-contracting-extensions/ocds_organizationClassification_extension/archive/master.zip',
     'https://github.com/open-contracting-extensions/ocds_procedure_extension/archive/master.zip',
+    'https://github.com/open-contracting-extensions/ocds_procurementMethodRationaleClassifications_extension/archive/master.zip',  # noqa: E501
     'https://github.com/open-contracting-extensions/ocds_secondStageDescription_extension/archive/master.zip',
     'https://github.com/open-contracting-extensions/ocds_selectionCriteria_extension/archive/master.zip',
     'https://github.com/open-contracting-extensions/ocds_subcontracting_extension/archive/master.zip',
     'https://github.com/open-contracting-extensions/ocds_submissionTerms_extension/archive/master.zip',
     'https://github.com/open-contracting-extensions/ocds_techniques_extension/archive/master.zip',
+    'https://github.com/open-contracting-extensions/ocds_unstructuredChanges_extension/archive/master.zip',
 ])
 
 schema = builder.patched_release_schema(extension_field='extension', schema=schema)

@@ -86,6 +86,7 @@ unknowns = {
         '/AWARD_CONTRACT': 'awards',
         '/AWARD_CONTRACT/AWARDED_CONTRACT': 'contracts',
         '/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR': 'awards/suppliers',
+        '/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_PARTY': 'parties/shareholders',
         '/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED': 'bids/statistics',
         '/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_EMEANS': 'bids/statistics',
         '/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_NON_EU': 'bids/statistics',
@@ -136,25 +137,64 @@ unknowns = {
         '/PROCEDURE/PARTICIPANT_NAME': 'parties',
         '/PROCEDURE/MEMBER_NAME': 'tender/designContest/juryMembers',
     },
+    '.newValue': {
+        'CHANGES': 'tender/amendments/unstructuredChanges'
+    },
+    '.newValue.classifications': {
+        'CHANGES': 'tender/amendments/unstructuredChanges'
+    },
+    '.newValue.date': {
+        'CHANGES': 'tender/amendments/unstructuredChanges'
+    },
+    '.newValue.text': {
+        'CHANGES': 'tender/amendments/unstructuredChanges'
+    },
+    '.oldValue': {
+        'CHANGES': 'tender/amendments/unstructuredChanges'
+    },
+    '.oldValue.classifications': {
+        'CHANGES': 'tender/amendments/unstructuredChanges'
+    },
+    '.oldValue.date': {
+        'CHANGES': 'tender/amendments/unstructuredChanges'
+    },
+    '.oldValue.text': {
+        'CHANGES': 'tender/amendments/unstructuredChanges'
+    },
+    '.region': {
+        '/OBJECT_CONTRACT/OBJECT_DESCR/NUTS': 'tender/items/deliveryAddresses',
+        '/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/NUTS': 'contracts/items/deliveryAddresses',
+    },
     '.relatedLot': {
         'AWARD_CONTRACT': 'bids/statistics',
+        'CHANGES': 'tender/amendments/unstructuredChanges',
         'RESULTS': 'bids/statistics',
     },
     '.relatedLots': {
         'AWARD_CONTRACT': 'awards',
         'OBJECT_CONTRACT': 'planning/budget/finance',
     },
-    '.region': {
-        '/OBJECT_CONTRACT/OBJECT_DESCR/NUTS': 'tender/items/deliveryAddresses',
-        '/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/NUTS': 'contracts/items/deliveryAddresses',
-    },
     '.scheme': {
         'MODIFICATIONS_CONTRACT': 'contracts/items/additionalClassifications',
         # XPath
+        '/CHANGES/CHANGE/NEW_VALUE/CPV_ADDITIONAL/CPV_CODE': 'tender/amendments/unstructuredChanges/newValue/classifications',
+        '/CHANGES/CHANGE/NEW_VALUE/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE': 'tender/amendments/unstructuredChanges/newValue/classifications',
+        '/CHANGES/CHANGE/NEW_VALUE/CPV_MAIN/CPV_CODE': 'tender/amendments/unstructuredChanges/newValue/classifications',
+        '/CHANGES/CHANGE/NEW_VALUE/CPV_MAIN/CPV_SUPPLEMENTARY_CODE': 'tender/amendments/unstructuredChanges/newValue/classifications',
+        '/CHANGES/CHANGE/OLD_VALUE/CPV_ADDITIONAL/CPV_CODE': 'tender/amendments/unstructuredChanges/oldValue/classifications',
+        '/CHANGES/CHANGE/OLD_VALUE/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE': 'tender/amendments/unstructuredChanges/oldValue/classifications',
+        '/CHANGES/CHANGE/OLD_VALUE/CPV_MAIN/CPV_CODE': 'tender/amendments/unstructuredChanges/oldValue/classifications',
+        '/CHANGES/CHANGE/OLD_VALUE/CPV_MAIN/CPV_SUPPLEMENTARY_CODE': 'tender/amendments/unstructuredChanges/oldValue/classifications',
         '/OBJECT_CONTRACT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE': 'tender/items/additionalClassifications',
         '/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_CODE': 'tender/items/additionalClassifications',
         '/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE': 'tender/items/additionalClassifications',
         '/OBJECT_CONTRACT/CATEGORY': 'tender/additionalClassifications',
+    },
+    '.shareholder.id': {
+        'AWARD_CONTRACT': 'parties/shareholders',
+    },
+    '.shareholder.name': {
+        'AWARD_CONTRACT': 'parties/shareholders',
     },
     '.status': {
         'AWARD_CONTRACT': 'contracts',
@@ -162,6 +202,7 @@ unknowns = {
     },
     '.title': {
         'AWARD_CONTRACT': 'contracts',
+        'LEFTI': 'tender/contracts'
     },
     '.type': {
         # Root
@@ -173,6 +214,15 @@ unknowns = {
         'AWARD_CONTRACT': 'bids/statistics',
         'OBJECT_CONTRACT': 'bids/statistics',
         'RESULTS': 'bids/statistics',
+    },
+    '.where': {
+        'CHANGES': 'tender/amendments/unstructuredChanges',
+    },
+    '.where.label': {
+        'CHANGES': 'tender/amendments/unstructuredChanges',
+    },
+    '.where.section': {
+        'CHANGES': 'tender/amendments/unstructuredChanges',
     },
 }
 
