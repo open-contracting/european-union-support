@@ -27,7 +27,7 @@ builder = ProfileBuilder('1__1__4', [
     'https://github.com/open-contracting-extensions/ocds_communication_extension/archive/master.zip',
     'https://github.com/open-contracting-extensions/ocds_contractTerms_extension/archive/master.zip',
     'https://github.com/open-contracting-extensions/ocds_coveredBy_extension/archive/master.zip',
-    # 'https://github.com/open-contracting-extensions/ocds_designContest_extension/archive/master.zip',
+    'https://github.com/open-contracting-extensions/ocds_designContest_extension/archive/master.zip',
     # 'https://github.com/open-contracting-extensions/ocds_eu_extension/archive/master.zip',
     'https://github.com/open-contracting-extensions/ocds_options_extension/archive/master.zip',
     'https://github.com/open-contracting-extensions/ocds_otherRequirements_extension/archive/master.zip',
