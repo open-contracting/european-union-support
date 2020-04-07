@@ -155,8 +155,8 @@ Before running this task, [move](move.fish) the following in XPath CSVs to more 
 
 You can now generate a table for each form, displaying, for each element and attribute, the index within the PDF ("I.1"), the label (in any language) and the XPath, to which you can then add guidance for OCDS.
 
-    for i in 01 02 03 04 05 06 07 08 12 13 14 15 20 21 22 23 24 25; rake table LANGUAGE=EN FILES=F$i > path/to/european-union/docs/F$i.md; end
-    for i in 01 02; rake table LANGUAGE=EN FILES=MOVE FORM=T$i > path/to/european-union/docs/T$i.md; end
+    for i in 01 02 03 04 05 06 07 08 12 13 14 15 20 21 22 23 24 25; rake table LANGUAGE=EN FILES=F$i > path/to/european-union/docs/forms/F$i.md; end
+    for i in 01 02; rake table LANGUAGE=EN FILES=MOVE FORM=T$i > path/to/european-union/docs/forms/T$i.md; end
 
 ### Find fields for which to write extensions
 
