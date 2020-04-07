@@ -4,7 +4,7 @@ xpath,label-key,index,comment,guidance
 /LEGAL_BASIS,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_LegalBasis,Map to `tender.legalBasis`
 /LEGAL_BASIS_OTHER,,,,Map to `tender.legalBasis`
 /CONTRACTING_BODY,ce,I,,""
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,name_address_contact,I.1,,"[Add a party](../operations/#add-a-party), and add 'buyer' to its `.roles`\n\nSet `buyer.id` to its `.id`, and set `buyer.name` to its [`.name`](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,name_address_contact,I.1,,"[Add a party](../../operations/#add-a-party), and add 'buyer' to its `.roles`\n\nSet `buyer.id` to its `.id`, and set `buyer.name` to its [`.name`](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,name_official,,,Map to the party's `.name` and `.identifier.legalName`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,national_id,,,"Map to the party's `.identifier.id`, and [set `.identifier.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids)"
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS,address_postal,,,Map to the party's `.address.streetAddress`
@@ -18,7 +18,7 @@ xpath,label-key,index,comment,guidance
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,address_fax,,,Map to the party's `.contactPoint.faxNumber`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,url_general,,,Map to the party's `.details.url`
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,url_buyerprofile,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/organization_BuyerProfile,Map to the party's `.details.buyerProfile`
-/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL,,,,"[Add a party](../operations/#add-a-party), add 'buyer' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
+/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL,,,,"[Add a party](../../operations/#add-a-party), add 'buyer' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
 /CONTRACTING_BODY/JOINT_PROCUREMENT_INVOLVED,joint_procurement_involves,,,"Discard. If there are multiple parties with the role 'buyer', then the contract involves joint procurement. (When *The contract involves joint procurement* is checked, at least one additional contracting authority is provided.)"
 /CONTRACTING_BODY/PROCUREMENT_LAW,joint_national_law,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_JointProcurement,Map to `tender.crossBorderLaw`
 /CONTRACTING_BODY/CENTRAL_PURCHASING,joint_procurement_central,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,Add 'centralPurchasingBody' to the `.roles` of the party
@@ -40,8 +40,8 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL,,,This element sets the currency for its children.,""
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/@CURRENCY,currency,,,/OBJECT_CONTRACT/VAL_TOTAL/@CURRENCY
 /OBJECT_CONTRACT/VAL_RANGE_TOTAL/@PUBLICATION,,,,/OBJECT_CONTRACT/VAL_TOTAL/@PUBLICATION
-/OBJECT_CONTRACT/VAL_RANGE_TOTAL/LOW,lowest_offer,,,"[Add a bids statistic](../operations/#add-a-bids-statistic), set its `.measure` to 'lowestValidBidValue', and map to its `.value`."
-/OBJECT_CONTRACT/VAL_RANGE_TOTAL/HIGH,highest_offer,,,"[Add a bids statistic](../operations/#add-a-bids-statistic), set its `.measure` to 'highestValidBidValue', and map to its `.value`."
+/OBJECT_CONTRACT/VAL_RANGE_TOTAL/LOW,lowest_offer,,,"[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to 'lowestValidBidValue', and map to its `.value`."
+/OBJECT_CONTRACT/VAL_RANGE_TOTAL/HIGH,highest_offer,,,"[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to 'highestValidBidValue', and map to its `.value`."
 /OBJECT_CONTRACT/OBJECT_DESCR,description,II.2,,"Add a `Lot` object to the `tender.lots` array, and add an `Item` object to the `tender.items` array. Set the lot's `.status` to the same value as `tender.status`.\n\n**F12, F13**: Instead, do nothing."
 /OBJECT_CONTRACT/OBJECT_DESCR/@ITEM,,,,Discard
 /OBJECT_CONTRACT/OBJECT_DESCR/TITLE,title_contract,II.2.1,,Map to the lot's `.title`
@@ -63,7 +63,7 @@ xpath,label-key,index,comment,guidance
 /OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/lot_Options,Set the lot's `.hasOptions` to `true`
 /OBJECT_CONTRACT/OBJECT_DESCR/OPTIONS_DESCR,options_descr,,,Map to the lot's `.options.description`
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_OPTIONS,_no,,,Set the lot's `.hasOptions` to `false`
-/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_isEUFunded https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_EUFunded,"* Get the `Organization` object whose `.name` is 'European Union'. If none exists yet:\n  * [Add a party](../operations/#add-a-party)\n  * Set its `.name` to 'European Union'\n* Add 'funder' to its `.roles`\n\n* Get the `Finance` object whose `.description` is the *Identification of the project*. If none exists yet:\n  * Add a `Finance` object to the `planning.budget.finance` array\n  * Map the *Identification of the project* to its `.description`\n  * Set its `.id` incrementally\n  * Set its `.financingParty.name` to 'European Union'\n  * Set its `.financingParty.id` to the party's `.id`\n  * Add the lot's `.id` to its `.relatedLots` (**F12, F13**: Instead, do nothing)\n\nIn [future forms](https://github.com/eForms/eForms/issues/181#issuecomment-439861320), this field will be de-emphasized."
+/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_isEUFunded https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_EUFunded,"* Get the `Organization` object whose `.name` is 'European Union'. If none exists yet:\n  * [Add a party](../../operations/#add-a-party)\n  * Set its `.name` to 'European Union'\n* Add 'funder' to its `.roles`\n\n* Get the `Finance` object whose `.description` is the *Identification of the project*. If none exists yet:\n  * Add a `Finance` object to the `planning.budget.finance` array\n  * Map the *Identification of the project* to its `.description`\n  * Set its `.id` incrementally\n  * Set its `.financingParty.name` to 'European Union'\n  * Set its `.financingParty.id` to the party's `.id`\n  * Add the lot's `.id` to its `.relatedLots` (**F12, F13**: Instead, do nothing)\n\nIn [future forms](https://github.com/eForms/eForms/issues/181#issuecomment-439861320), this field will be de-emphasized."
 /OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds."
 /OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD,info_additional,II.2.14,,Append to the lot's `.description`\n\nThis results in a loss of structure. (WARNING #28)
 /PROCEDURE,procedure,IV,,""
@@ -78,7 +78,7 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/EAUCTION_USED,eauction_was_used,,,Set `tender.techniques.hasElectronicAuction` to `true`
 /PROCEDURE/CONTRACT_COVERED_GPA,_yes,,,Add 'GPA' to the `tender.coveredBy` array
 /PROCEDURE/NO_CONTRACT_COVERED_GPA,_no,,,"Discard. If 'GPA' isn't in the `tender.coveredBy` array, then the procurement isn't covered by the GPA."
-/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,[Reference a previous publication](../operations/#reference-a-previous-publication)
+/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,[Reference a previous publication](../../operations/#reference-a-previous-publication)
 /PROCEDURE/TERMINATION_DPS,termination_dps,,,Set `tender.techniques.dynamicPurchasingSystem.status` to 'terminated'
 /PROCEDURE/TERMINATION_PIN,pin_as_call_no_contracts_ce,,,Set `tender.status` to 'complete'
 /AWARD_CONTRACT,award_of_contract,V,,Add an `Award` object to the `awards` array
@@ -93,17 +93,17 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/DATE_CONCLUSION_CONTRACT,date_award,V.2.1,,Map to the contract's `.dateSigned`
 /AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS,award_offers_info,V.2.2,,""
 /AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/@PUBLICATION,H_agree_to_publish,,,""
-/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED,offers_received,,,"[Add a bids statistic](../operations/#add-a-bids-statistic), set its `.measure` to 'bids', set its `.relatedLot` to the award's only `.relatedLots` entry, and map to its `.value`."
-/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_SME,number_tenders_sme,,,"[Add a bids statistic](../operations/#add-a-bids-statistic), set its `.measure` to 'smeBids', set its `.relatedLot` to the award's only `.relatedLots` entry, and map to its `.value`."
-/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_OTHER_EU,number_tenders_ms,,,"[Add a bids statistic](../operations/#add-a-bids-statistic), set its `.measure` to 'foreignBidsFromEU',, set its `.relatedLot` to the award's only `.relatedLots` entry and map to its `.value`."
-/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_NON_EU,number_tenders_nonms,,,"[Add a bids statistic](../operations/#add-a-bids-statistic), set its `.measure` to 'foreignBidsFromNonEU',, set its `.relatedLot` to the award's only `.relatedLots` entry and map to its `.value`."
-/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_EMEANS,offers_received_electronic,,,"[Add a bids statistic](../operations/#add-a-bids-statistic), set its `.measure` to 'electronicBids',, set its `.relatedLot` to the award's only `.relatedLots` entry and map to its `.value`."
+/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED,offers_received,,,"[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to 'bids', set its `.relatedLot` to the award's only `.relatedLots` entry, and map to its `.value`."
+/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_SME,number_tenders_sme,,,"[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to 'smeBids', set its `.relatedLot` to the award's only `.relatedLots` entry, and map to its `.value`."
+/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_OTHER_EU,number_tenders_ms,,,"[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to 'foreignBidsFromEU',, set its `.relatedLot` to the award's only `.relatedLots` entry and map to its `.value`."
+/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_NON_EU,number_tenders_nonms,,,"[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to 'foreignBidsFromNonEU',, set its `.relatedLot` to the award's only `.relatedLots` entry and map to its `.value`."
+/AWARD_CONTRACT/AWARDED_CONTRACT/TENDERS/NB_TENDERS_RECEIVED_EMEANS,offers_received_electronic,,,"[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to 'electronicBids',, set its `.relatedLot` to the award's only `.relatedLots` entry and map to its `.value`."
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS,,,This element contains elements from V.2.2 and V.2.3.,""
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/@PUBLICATION,H_agree_to_publish,,,""
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/AWARDED_TO_GROUP,_yes,,,"Discard. If there are multiple suppliers, then the contract has been awarded to a group of economic operators."
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/NO_AWARDED_TO_GROUP,_no,,,"Discard. If there is one supplier, then the contract hasn't been awarded to a group of economic operators."
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR,,,"Contains ADDRESS_CONTRACTOR, SME, NO_SME.",""
-/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR,awarded_to_name,V.2.3,,"[Add a party](../operations/#add-a-party), and add 'supplier' to its `.roles`\n\nAdd an `OrganizationReference` object to the award's `.suppliers` array, set its `.id` to the party's `.id`, and set its `.name` to the party's [`.name`](#/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME)"
+/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR,awarded_to_name,V.2.3,,"[Add a party](../../operations/#add-a-party), and add 'supplier' to its `.roles`\n\nAdd an `OrganizationReference` object to the award's `.suppliers` array, set its `.id` to the party's `.id`, and set its `.name` to the party's [`.name`](#/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME)"
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME,name_official,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/NATIONALID,national_id,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID
 /AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/ADDRESS,address_postal,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS
@@ -125,8 +125,8 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY,currency,,,/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL,,,This element sets the currency for its children.,""
 /AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/@CURRENCY,currency,,,/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_ESTIMATED_TOTAL/@CURRENCY
-/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/LOW,lowest_offer,,,"[Add a bids statistic](../operations/#add-a-bids-statistic), set its `.measure` to 'lowestValidBidValue', set its `.relatedLot` to the award's only `.relatedLots` entry, and map to its `.value`."
-/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/HIGH,highest_offer,,,"[Add a bids statistic](../operations/#add-a-bids-statistic), set its `.measure` to 'highestValidBidValue', set its `.relatedLot` to the award's only `.relatedLots` entry, and map to its `.value`."
+/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/LOW,lowest_offer,,,"[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to 'lowestValidBidValue', set its `.relatedLot` to the award's only `.relatedLots` entry, and map to its `.value`."
+/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_RANGE_TOTAL/HIGH,highest_offer,,,"[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to 'highestValidBidValue', set its `.relatedLot` to the award's only `.relatedLots` entry, and map to its `.value`."
 /AWARD_CONTRACT/AWARDED_CONTRACT/LIKELY_SUBCONTRACTED,subcontr_likely,,,Set the award's `.hasSubcontracting` to `true`
 /AWARD_CONTRACT/AWARDED_CONTRACT/VAL_SUBCONTRACTING,value_excl_vat,,,Map to the award's `.subcontracting.value.amount`
 /AWARD_CONTRACT/AWARDED_CONTRACT/VAL_SUBCONTRACTING/@CURRENCY,currency,,,Map to the award's `.subcontracting.value.currency`
@@ -136,7 +136,7 @@ xpath,label-key,index,comment,guidance
 /AWARD_CONTRACT/AWARDED_CONTRACT/VAL_BARGAIN_PURCHASE/@CURRENCY,currency,,,Discard as above
 /COMPLEMENTARY_INFO,info_complement,VI,,""
 /COMPLEMENTARY_INFO/INFO_ADD,info_additional,VI.3,,Map to the release's `description`
-/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY,appeals_body,VI.4.1,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations/#add-a-party), and add 'reviewBody' to its `.roles`"
+/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY,appeals_body,VI.4.1,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../../operations/#add-a-party), and add 'reviewBody' to its `.roles`"
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/OFFICIALNAME,name_official,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/ADDRESS,address_postal,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/TOWN,address_town,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN
@@ -146,9 +146,9 @@ xpath,label-key,index,comment,guidance
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/E_MAIL,address_email,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/FAX,address_fax,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX
 /COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/URL,internet,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL
-/COMPLEMENTARY_INFO/ADDRESS_MEDIATION_BODY,mediation_body,VI.4.2,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations/#add-a-party), and add 'mediationBody' to its `.roles`"
+/COMPLEMENTARY_INFO/ADDRESS_MEDIATION_BODY,mediation_body,VI.4.2,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../../operations/#add-a-party), and add 'mediationBody' to its `.roles`"
 /COMPLEMENTARY_INFO/REVIEW_PROCEDURE,appeals_deadline,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,Map to `tender.reviewDetails`
-/COMPLEMENTARY_INFO/ADDRESS_REVIEW_INFO,appeals_info,VI.4.4,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../operations/#add-a-party), and add 'reviewContactPoint' to its `.roles`"
+/COMPLEMENTARY_INFO/ADDRESS_REVIEW_INFO,appeals_info,VI.4.4,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../../operations/#add-a-party), and add 'reviewContactPoint' to its `.roles`"
 /COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,date_dispatch,VI.5,,Map to `date`
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE,d_just_for_wo_pub_201425,D2.1,,"For each of the following, add a `Classification` object to the `tender.procurementMethodRationaleClassifications` array. Set the classification's `.scheme` to 'TED_PT_AWARD_CONTRACT_WITHOUT_CALL', and set its `.id` and `.description` as follows"
 /PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE/D_NO_TENDERS_REQUESTS,d_no_tenders_in_response_call,,,Set `.id` to 'D_NO_TENDERS_REQUESTS' and `.description` to 'No tenders or no suitable tenders/requests to participate in response to a procedure with prior call for competition'
