@@ -14,8 +14,6 @@ CONDITIONAL_HELP_TEXT = {
   'F25' => %w(notice_concession notice_ex_ante),
 }
 
-KNOWN_SKIPPED_XPATHS = %w(/@LG /@CATEGORY)
-
 desc 'Build a table with guidance'
 task :table do
   def swap(labels, label_1, label_2, reverse: false)
@@ -57,9 +55,6 @@ task :table do
   ignore_csv = CSV.read('output/mapping/shared/ignore.csv', headers: true)
   enumerations_csv = CSV.read('output/mapping/shared/enumerations.csv', headers: true)
   additional_csv = CSV.read('output/mapping/shared/additional.csv', headers: true)
-
-  # Some forms have elements before Section 1.
-  has_header = %w(F01 F04 F07 F08 F12 F13 F15 F20 F21 F22 F23)
 
   files('output/mapping/{}*.csv').each do |filename|
     basename = File.basename(filename, '.csv').sub('_2014', '')
@@ -109,14 +104,13 @@ task :table do
     ignore = ignore_csv.select{ |row| row['numbers'][number] }
     enumerations = enumerations_csv.select{ |row| row['numbers'][number] }
     additional = additional_csv.select{ |row| row['numbers'][number] }
-    data = CSV.read(filename, headers: true)
+    data = CSV.read(filename, headers: true).map{ |row| row }
 
     if basename == 'MOVE'
       data = select_move_rows(data, number)
     end
 
-    data_skipped = data.take_while(&skipper).reject{ |row| KNOWN_SKIPPED_XPATHS.include?(row['xpath']) }
-    data = data.drop_while(&skipper)
+    data_skipped = []
 
     # Swap the order of labels.
     if basename != 'MOVE'
@@ -136,17 +130,16 @@ task :table do
 
     builder.add(File.read("output/content/#{number}.md") + "\n")
 
-    if has_header.include?(number)
-      builder.table
-    end
+    preamble = true
+    builder.table
 
     while labels.any?
       key = labels.shift
 
       if key[/\A(annex_d\d|section_\d)\z/]
-        if has_header.include?(number) || $1 != 'section_1'
-          builder.end_table
-        end
+        preamble = false
+        builder.end_table
+
         builder.subheading(key)
         builder.table
 
@@ -191,6 +184,10 @@ task :table do
 
       elsif omit.any? && omit[0]['label-key'] == key
         omit.shift
+
+      elsif preamble
+        row = data.delete_at(0)
+        builder.row(nil, xpath: row['xpath'], guidance: row['guidance'])
 
       elsif seen[:enumerations].include?(key)
         builder.row(key, help_labels: help_labels(labels, number: number), value: :sentinel, reference: true)
