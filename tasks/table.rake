@@ -104,13 +104,11 @@ task :table do
     ignore = ignore_csv.select{ |row| row['numbers'][number] }
     enumerations = enumerations_csv.select{ |row| row['numbers'][number] }
     additional = additional_csv.select{ |row| row['numbers'][number] }
-    data = CSV.read(filename, headers: true).map{ |row| row }
+    data = CSV.read(filename, headers: true)
 
     if basename == 'MOVE'
       data = select_move_rows(data, number)
     end
-
-    data_skipped = []
 
     # Swap the order of labels.
     if basename != 'MOVE'
@@ -130,16 +128,20 @@ task :table do
 
     builder.add(File.read("output/content/#{number}.md") + "\n")
 
-    preamble = true
+    builder.header(2, 'Preamble')
     builder.table
+    data.take_while(&skipper).each do |row|
+      builder.row(nil, xpath: row['xpath'], guidance: row['guidance'])
+    end
+
+    data_skipped = []
+    data = data.drop_while(&skipper)
 
     while labels.any?
       key = labels.shift
 
       if key[/\A(annex_d\d|section_\d)\z/]
-        preamble = false
         builder.end_table
-
         builder.subheading(key)
         builder.table
 
@@ -184,10 +186,6 @@ task :table do
 
       elsif omit.any? && omit[0]['label-key'] == key
         omit.shift
-
-      elsif preamble
-        row = data.delete_at(0)
-        builder.row(nil, xpath: row['xpath'], guidance: row['guidance'])
 
       elsif seen[:enumerations].include?(key)
         builder.row(key, help_labels: help_labels(labels, number: number), value: :sentinel, reference: true)
