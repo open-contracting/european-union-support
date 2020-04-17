@@ -175,7 +175,7 @@ namespace :label do
       'F14' => ['directive_201423', 'directive_201424', 'directive_201425'],
       'F20' => ['directive_201423', 'directive_201424', 'directive_201425'],
       'F21' => ['directive_201424', 'conditions_contract'],
-      'F22' => ['directive_201425', 'conditions_contract'],
+      'F22' => ['directive_201425', 'conditions_contract', 'notice_qualification_utilities'],
       'F24' => ['notice_concession', 'directive_201423'], # F25
       'F25' => ['notice_concession_award'], # F23
     }

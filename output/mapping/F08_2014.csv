@@ -1,7 +1,7 @@
 xpath,label-key,index,comment,guidance
 /@LG,,,,"Lowercase, and map to `language`"
 /@CATEGORY,,,,Discard. TED translates at form-level. OCDS translates at field-level.
-/LEGAL_BASIS,notice_relates_to,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_LegalBasis,"Set `tender.legalBasis.scheme` to ['CELEX'](https://eur-lex.europa.eu/content/help/faq/intro.html#help8), and map to `tender.legalBasis.id`"
+/LEGAL_BASIS,,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_LegalBasis,"Set `tender.legalBasis.scheme` to ['CELEX'](https://eur-lex.europa.eu/content/help/faq/intro.html#help8), and map to `tender.legalBasis.id`"
 /LEGAL_BASIS_OTHER,,,,"Set `tender.legalBasis.scheme` to 'CELEX', and map to `tender.legalBasis.id`"
 /CONTRACTING_BODY,ca_ce,I,,""
 /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,name_address_contact,I.1,,"[Add a party](../../operations/#add-a-party), and add 'buyer' to its `.roles`\n\nSet `buyer.id` to its `.id`, and set `buyer.name` to its [`.name`](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)"
