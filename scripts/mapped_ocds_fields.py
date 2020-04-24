@@ -202,7 +202,7 @@ unknowns = {
     },
     '.title': {
         'AWARD_CONTRACT': 'contracts',
-        'LEFTI': 'tender/contracts'
+        'LEFTI': 'tender/targets',
     },
     '.type': {
         # Root
