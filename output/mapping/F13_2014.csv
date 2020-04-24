@@ -46,7 +46,7 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/PT_RESTRICTED,type_restricted,,,"Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodDetails` to 'Restricted procedure'"
 /PROCEDURE/CRITERIA_EVALUATION,dc_criteria_evaluation,IV.1.9,,Map to `tender.awardCriteriaDetails`
 /PROCEDURE/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,[Reference a previous publication](../../operations/#reference-a-previous-publication)
-/RESULTS,dc_results_contest,V,,""
+/RESULTS,dc_results_contest,V,,Add an `Award` object to the `awards` array
 /RESULTS/NO_AWARDED_PRIZE,_yes,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/contract_statusDetails,Set the award's `.status` to 'unsuccessful'
 /RESULTS/NO_AWARDED_PRIZE/PROCUREMENT_DISCONTINUED,award_discontinued,,,Set the award's `.statusDetails` to 'discontinued'
 /RESULTS/NO_AWARDED_PRIZE/PROCUREMENT_UNSUCCESSFUL,award_no_projects,,,Set the award's `.statusDetails` to 'unsuccessful'\n\nThere's an open issue ([#764](https://github.com/open-contracting/standard/issues/764)) about status details. (ISSUE)
