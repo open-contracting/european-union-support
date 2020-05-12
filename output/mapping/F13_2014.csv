@@ -60,7 +60,7 @@ xpath,label-key,index,comment,guidance
 /RESULTS/AWARDED_PRIZE/WINNERS/WINNER,,,"Contains ADDRESS_WINNER, SME, NO_SME.",""
 /RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER,dc_name_winner,V.3.3,,"[Add a party](../../operations/#add-a-party), and add 'supplier' to its `.roles`\n\nAdd an `OrganizationReference` object to the award's `.suppliers` array, set its `.id` to the party's `.id`, and set its `.name` to the party's [`.name`](#/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/OFFICIALNAME)"
 /RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/OFFICIALNAME,name_official,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME
-/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/NATIONALID,national_id,,,"Map to `.identifier.id`, and set `.identifier.scheme`"
+/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/NATIONALID,national_id,,,"Map to the party's `.identifier.id`, and set the party's `.identifier.scheme`"
 /RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/ADDRESS,address_postal,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS
 /RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/TOWN,address_town,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN
 /RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER/NUTS,nutscode,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS
