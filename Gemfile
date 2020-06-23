@@ -1,0 +1,7 @@
+source 'https://rubygems.org'
+gem 'activesupport'
+gem 'hashdiff'
+gem 'kramdown'
+gem 'nokogiri'
+gem 'rake'
+gem 'regexp-examples'
