@@ -117,5 +117,5 @@ xpath,label-key,index,comment,guidance
 /MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VALUES,mod_price_increase,VII.2.3,,""
 /MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VALUES/VAL_TOTAL_BEFORE,value_excl_vat,,,"Discard. The *updated total contract value before the modifications* is available in the OCDS release with the same `ocid` as this release, with 'contract' or 'contractUpdate' in its `tag`, and with the nearest earlier `date` to this release."
 /MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VALUES/VAL_TOTAL_BEFORE/@CURRENCY,currency,,,Discard as above
-/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VALUES/VAL_TOTAL_AFTER,value_excl_vat,,,Map to the contract's `.value.amount`
+/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VALUES/VAL_TOTAL_AFTER,value_excl_vat,,,"Map to the contract's `.value.amount`. If present, this takes precedence over the [total value of the contract/lot/concession](#/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/VALUES/VAL_TOTAL)."
 /MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VALUES/VAL_TOTAL_AFTER/@CURRENCY,currency,,,Map to the contract's `.value.currency`
