@@ -43,7 +43,7 @@ xpath,label-key,index,comment,guidance
 /COMPLEMENTARY_INFO,info_complement,VI,,""
 /COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,date_dispatch,VI.5,,Map to `date`
 /COMPLEMENTARY_INFO/NOTICE_NUMBER_OJ,number_oj,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,[Reference a previous publication](../../operations/#reference-a-previous-publication)
-/CHANGES,changes,VII,,"Add an `Amendment` object to the `tender.amendments` array, and set its `.id` (string) sequentially, across all F14 notices for this procedure. (The first notice sets it to '1', the second to '2', etc.)"
+/CHANGES,changes,VII,,"Add an `Amendment` object to the `tender.amendments` array, and set its `.id` (string). The `.id` can be any value guaranteed to be globally unique. For example, it can be set to a [version 4 UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier), or it can be assigned sequentially across all F14/F20 notices for this procedure (the first notice sets it to '1', the second to '2', etc.)."
 /CHANGES/CHANGE,icar_text_corrected,VII.1.2,,"For each `CHANGE` element, add an `UnstructuredChange` object to the amendment's `.unstructuredChanges` array, and set its `.where`, `.oldValue` and `.newValue` as follows:"
 /CHANGES/CHANGE/WHERE,,,,""
 /CHANGES/CHANGE/WHERE/SECTION,section_no,,,Map to `.where.section`
