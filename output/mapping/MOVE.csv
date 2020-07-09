@@ -79,10 +79,10 @@ xpath,label-key,index,comment,guidance
 /LEFTI/REWARDS_PENALITIES,info_rewards_penalties,III.2.2,,Map to `tender.contractTerms.rewardsAndPenalties`
 /PROCEDURE,procedure,IV,,""
 /PROCEDURE/PT_COMPETITIVE_TENDERING,proctype_competitive,,,"Set `tender.procurementMethod` to 'open', and set `tender.procurementMethodDetails` to 'Competitive tendering procedure'"
-/PROCEDURE/PT_DA_INTERNAL_OPERATOR,type_direct_award_internal,,,"Set `tender.procurementMethod` to 'direct', and set `tender.procurementMethodDetails` to 'Direct award to an internal operator (art. 5(2) of 1370/2007)'"
-/PROCEDURE/PT_DA_SMALL_CONTRACT,type_direct_award_small,,,"Set `tender.procurementMethod` to 'direct', and set `tender.procurementMethodDetails` to 'Direct award of a small scale contract (art. 5(4) of 1370/2007)'"
-/PROCEDURE/PT_DA_MEDIUM_ENTERPRISE,type_direct_award_small_sme,,,"Set `tender.procurementMethod` to 'direct', and set `tender.procurementMethodDetails` to 'Direct award of a small scale contract to a small and medium sized enterprise (art. 5(4) of 1370/2007, 2nd paragraph)'"
-/PROCEDURE/PT_DA_RAILWAY_TRANSPORT,type_direct_award_railway,,,"Set `tender.procurementMethod` to 'direct', and set `tender.procurementMethodDetails` to 'Direct award for railway transport (art. 5(6) of 1370/2007)'"
+/PROCEDURE/PT_DA_INTERNAL_OPERATOR,type_direct_award_internal,,,"Set `tender.procurementMethod` to 'direct', and set `tender.procurementMethodDetails` to 'Direct award to an internal operator'"
+/PROCEDURE/PT_DA_SMALL_CONTRACT,type_direct_award_small,,,"Set `tender.procurementMethod` to 'direct', and set `tender.procurementMethodDetails` to 'Direct award of a small scale contract'"
+/PROCEDURE/PT_DA_MEDIUM_ENTERPRISE,type_direct_award_small_sme,,,"Set `tender.procurementMethod` to 'direct', and set `tender.procurementMethodDetails` to 'Direct award of a small scale contract to a small and medium sized enterprise'"
+/PROCEDURE/PT_DA_RAILWAY_TRANSPORT,type_direct_award_railway,,,"Set `tender.procurementMethod` to 'direct', and set `tender.procurementMethodDetails` to 'Direct award for railway transport'"
 /AWARD_CONTRACT,award_of_contract,V,,"Add an `Award` object to the `awards` array, and set its `.id` to the notice number followed by a hyphen '-' followed by the value of the `ITEM` attribute of the `AWARD_CONTRACT` element."
 /AWARD_CONTRACT/AWARDED_CONTRACT,award_of_contract,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/contract_statusDetails,"Set the award's `.status` to 'active'\n\nAdd a `Contract` object to the `contracts` array, set its `.id` and `.awardID` to the award's `.id`, set its `.title` to the award's `.title`, and set its `.status` to 'active'."
 /AWARD_CONTRACT/AWARDED_CONTRACT/DATE_CONCLUSION_CONTRACT,date_award,V.2.1,,Map to the contract's `.dateSigned`
