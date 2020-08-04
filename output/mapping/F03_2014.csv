@@ -23,9 +23,9 @@ xpath,label-key,index,comment,guidance
 /CONTRACTING_BODY/PROCUREMENT_LAW,joint_national_law,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_JointProcurement,Map to `tender.crossBorderLaw`
 /CONTRACTING_BODY/CENTRAL_PURCHASING,joint_procurement_central,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,Add 'centralPurchasingBody' to the `.roles` of the party
 /CONTRACTING_BODY/CA_TYPE,ca_type,I.4,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification's `.scheme` to 'TED_CA_TYPE', and set its `.id` and/or `.description` as follows:"
-/CONTRACTING_BODY/CA_TYPE_OTHER,other_type,,,Map to `.description`
+/CONTRACTING_BODY/CA_TYPE_OTHER,other_type,,,Map to `.description` (`.id` won't be set)
 /CONTRACTING_BODY/CA_ACTIVITY,mainactivity,I.5,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification's `.scheme` to ['COFOG'](https://unstats.un.org/unsd/publications/catalogue?selectID=145), and set its `.id` and/or `.description` as follows:"
-/CONTRACTING_BODY/CA_ACTIVITY_OTHER,other_activity,,,Map to `.description`
+/CONTRACTING_BODY/CA_ACTIVITY_OTHER,other_activity,,,Map to `.description` (`.id` won't be set)
 /OBJECT_CONTRACT,object,II,,""
 /OBJECT_CONTRACT/TITLE,title_contract,II.1.1,,Map to `tender.title`
 /OBJECT_CONTRACT/REFERENCE_NUMBER,fileref,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_BuyerInternalReferenceID,"If not set, let *Reference number* be equal to the `ocid` value. Map to `tender.id` (string)."

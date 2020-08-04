@@ -23,9 +23,9 @@ xpath,label-key,index,comment,guidance
 /CONTRACTING_BODY/PROCUREMENT_LAW,joint_national_law,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_JointProcurement,Map to `tender.crossBorderLaw`
 /CONTRACTING_BODY/CENTRAL_PURCHASING,joint_procurement_central_contest,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,Add 'centralPurchasingBody' to the `.roles` of the party
 /CONTRACTING_BODY/CA_TYPE,ca_type,I.4,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification's `.scheme` to 'TED_CA_TYPE', and set its `.id` and/or `.description` as follows:"
-/CONTRACTING_BODY/CA_TYPE_OTHER,other_type,,,Map to `.description`
+/CONTRACTING_BODY/CA_TYPE_OTHER,other_type,,,Map to `.description` (`.id` won't be set)
 /CONTRACTING_BODY/CA_ACTIVITY,mainactivity,I.5,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification's `.scheme` to ['COFOG'](https://unstats.un.org/unsd/publications/catalogue?selectID=145), and set its `.id` and/or `.description` as follows:"
-/CONTRACTING_BODY/CA_ACTIVITY_OTHER,other_activity,,,Map to `.description`
+/CONTRACTING_BODY/CA_ACTIVITY_OTHER,other_activity,,,Map to `.description` (`.id` won't be set)
 /CONTRACTING_BODY/CE_ACTIVITY,mainactivity,I.6,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification's `.scheme` to 'TED_CE_ACTIVITY', and set its `.id` and/or `.description` as follows:\n\n(The codes are drawn from [Directive 2014/25/EU](https://eur-lex.europa.eu/legal-content/en/TXT/?uri=CELEX%3A32014L0025#L_2014094EN.01033901))"
 /CONTRACTING_BODY/CE_ACTIVITY_OTHER,other_activity,,,Map to `.description`
 /OBJECT_CONTRACT,object,II,,""
