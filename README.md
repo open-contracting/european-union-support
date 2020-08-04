@@ -57,15 +57,15 @@ Using the fish shell:
 
 Create sample XML files for each form's schema:
 
-    rake sample
+    bundle exec rake sample
 
 Or for specific schema:
 
-    rake sample FILES=F01,F02,F03,F14,F20
+    bundle exec rake sample FILES=F01,F02,F03,F14,F20
 
 Or for a specific release:
 
-    rake sample RELEASE=R2.0.8 FILES=F16,F17,F18,F19
+    bundle exec rake sample RELEASE=R2.0.8 FILES=F16,F17,F18,F19
 
 See the comments in `sample.rake` to understand why tools like Oxygen are insufficient.
 
@@ -73,11 +73,11 @@ See the comments in `sample.rake` to understand why tools like Oxygen are insuff
 
 Create or update files for mapping forms' XPath values to label keys:
 
-    rake label:xpath
+    bundle exec rake label:xpath
 
 For release R2.0.8:
 
-    rake label:xpath RELEASE=R2.0.8 FILES=F16,F17,F18,F19
+    bundle exec rake label:xpath RELEASE=R2.0.8 FILES=F16,F17,F18,F19
 
 You're now ready to map label keys to XPath values. As setup, if you have two monitors, open a form's template PDF and English PDF side-by-side in one monitor, to make it easy to see the text label of each label key in context. In a text editor, open `ignore.csv`, `enumerations.csv` and a form's sample XML and XPath CSV.
 
@@ -102,52 +102,52 @@ Fill in `enumerations.csv`:
 
 Once completed, run `rake label:missing` to see which XML elements and attributes have no key, and which keys have no XML element or attribute and aren't in `ignore.csv`:
 
-    rake label:missing FILES=F01,F02,F03
+    bundle exec rake label:missing FILES=F01,F02,F03
 
 Many XPath's are common across forms. To copy guidance across forms, run:
 
-    rake label:copy SOURCE=F01 # Revert change to /LEFTI/PARTICULAR_PROFESSION in F12_2014.csv and /OBJECT_CONTRACT/OBJECT_DESCR in F20_2014.csv
-    rake label:copy SOURCE=F02 FILES=F03,F05,F06,F07,F12,F13,F15,F21,F22,F24
-    rake label:copy SOURCE=F03 FILES=F06,F13,F15,F21,F22
-    rake label:copy SOURCE=F04 FILES=F05,F06,F07,F08,F12,F13,F15,F21,F22,F23,F24,F25 # Revert change to LEFTI/PARTICULAR_PROFESSION in F12_2014.csv
-    rake label:copy SOURCE=F06 FILES=F22
-    rake label:copy SOURCE=F07 FILES=F22
-    rake label:copy SOURCE=F12 FILES=F13
-    rake label:copy SOURCE=F21 FILES=F22,F23,F25
-    rake label:copy SOURCE=F23 FILES=F25
-    rake label:copy SOURCE=F24 FILES=F25
-    rake label:copy SOURCE=F03 FILES=MOVE
-    rake label:copy SOURCE=F14 FILES=MOVE
+    bundle exec rake label:copy SOURCE=F01 # Revert change to /LEFTI/PARTICULAR_PROFESSION in F12_2014.csv and /OBJECT_CONTRACT/OBJECT_DESCR in F20_2014.csv
+    bundle exec rake label:copy SOURCE=F02 FILES=F03,F05,F06,F07,F12,F13,F15,F21,F22,F24
+    bundle exec rake label:copy SOURCE=F03 FILES=F06,F13,F15,F21,F22
+    bundle exec rake label:copy SOURCE=F04 FILES=F05,F06,F07,F08,F12,F13,F15,F21,F22,F23,F24,F25 # Revert change to LEFTI/PARTICULAR_PROFESSION in F12_2014.csv
+    bundle exec rake label:copy SOURCE=F06 FILES=F22
+    bundle exec rake label:copy SOURCE=F07 FILES=F22
+    bundle exec rake label:copy SOURCE=F12 FILES=F13
+    bundle exec rake label:copy SOURCE=F21 FILES=F22,F23,F25
+    bundle exec rake label:copy SOURCE=F23 FILES=F25
+    bundle exec rake label:copy SOURCE=F24 FILES=F25
+    bundle exec rake label:copy SOURCE=F03 FILES=MOVE
+    bundle exec rake label:copy SOURCE=F14 FILES=MOVE
 
 Review the copied guidance after running:
 
-    rake label:copy SOURCE=F03 FILES=F20,F23,F25,MOVE
-    rake label:copy SOURCE=F06 FILES=F20
-    rake label:copy SOURCE=F15 FILES=F23,F25
+    bundle exec rake label:copy SOURCE=F03 FILES=F20,F23,F25,MOVE
+    bundle exec rake label:copy SOURCE=F06 FILES=F20
+    bundle exec rake label:copy SOURCE=F15 FILES=F23,F25
 
 Many label keys are ignored across forms. To pre-populate across forms, run:
 
-    rake label:ignore
+    bundle exec rake label:ignore
 
 Report any CSV quoting errors:
 
-    rake label:validate
+    bundle exec rake label:validate
 
 Report any inconsistencies in mappings across forms. Note that some forms use check boxes instead of radio buttons, and some change tense from present to past.
 
-    rake label:consistent
+    bundle exec rake label:consistent
 
 T01 and T02 are particular: both use the same schema (`MOVE.xsd`), and neither has a PDF template. The most efficient process is to: reverse-engineer the label keys from the English PDF; create an XPath CSV for `MOVE.xsd`; copy guidance; manually update some `label-key` values; pre-populate `ignore.csv`; then check for missing items:
 
-    rake label:reverse
-    rake label:xpath FILES=MOVE
-    rake label:copy SOURCE=F01 FILES=MOVE
-    rake label:copy SOURCE=F03 FILES=MOVE
-    rake label:copy SOURCE=F14 FILES=MOVE
-    rake label:ignore FILES=MOVE FORM=T01
-    rake label:ignore FILES=MOVE FORM=T02
-    rake label:missing FILES=MOVE FORM=T01
-    rake label:missing FILES=MOVE FORM=T02
+    bundle exec rake label:reverse
+    bundle exec rake label:xpath FILES=MOVE
+    bundle exec rake label:copy SOURCE=F01 FILES=MOVE
+    bundle exec rake label:copy SOURCE=F03 FILES=MOVE
+    bundle exec rake label:copy SOURCE=F14 FILES=MOVE
+    bundle exec rake label:ignore FILES=MOVE FORM=T01
+    bundle exec rake label:ignore FILES=MOVE FORM=T02
+    bundle exec rake label:missing FILES=MOVE FORM=T01
+    bundle exec rake label:missing FILES=MOVE FORM=T02
 
 ### Build tables for OCDS guidance
 
@@ -189,11 +189,11 @@ Early on, I transformed the XML schema to CSV summaries, both to understand the 
 
 Transform all form schema into CSV files:
 
-    rake legacy:common legacy:forms
+    bundle exec rake legacy:common legacy:forms
 
 Or transform a specific directory and specific form schema:
 
-    rake legacy:common legacy:forms DIRECTORY=source/TED_publication_R2.0.9.S03.E01_006 FILES=F01,F02,F03,F14,F20
+    bundle exec rake legacy:common legacy:forms DIRECTORY=source/TED_publication_R2.0.9.S03.E01_006 FILES=F01,F02,F03,F14,F20
 
 I also attempted to map elements and attributes in the XML to labels on the forms using the Publication Office's [form label mappings](https://publications.europa.eu/en/web/eu-vocabularies/e-procurement/tedschemas), but the file covers only forms 1-6, doesn't cover all XML elements, doesn't use full XPaths, isn't machine-interpretable, etc.; manual interpretation would require at least the same effort as the above process. The Excel validation rules in the reception schema files map elements and attributes to descriptions, but these are not the same as the labels on the forms.
 
