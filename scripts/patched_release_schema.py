@@ -7,7 +7,7 @@ from ocdsextensionregistry.util import get_latest_version
 
 url = 'https://raw.githubusercontent.com/open-contracting-extensions/european-union/master/docs/extension_versions.json'  # noqa: E501
 
-builder = ProfileBuilder('1__1__4', requests.get(url).json())
+builder = ProfileBuilder('1__1__5', requests.get(url).json())
 
 schema = builder.patched_release_schema(extension_field='extension')
 
