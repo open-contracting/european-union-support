@@ -11,4 +11,4 @@ builder = ProfileBuilder('1__1__5', requests.get(url).json())
 
 schema = builder.patched_release_schema(extension_field='extension')
 
-json.dump(schema, sys.stdout, ensure_ascii=False, indent=2, separators=(',', ': '))
+json.dump(schema, sys.stdout, ensure_ascii=False, indent=2)
