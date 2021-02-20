@@ -4,7 +4,7 @@ import sys
 import requests
 from ocdsextensionregistry import ProfileBuilder
 
-url = 'https://raw.githubusercontent.com/open-contracting-extensions/european-union/master/docs/extension_versions.json'  # noqa: E501
+url = 'https://raw.githubusercontent.com/open-contracting-extensions/european-union/latest/docs/extension_versions.json'  # noqa: E501
 
 builder = ProfileBuilder('1__1__5', requests.get(url).json())
 
