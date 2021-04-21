@@ -83,7 +83,7 @@ xpath,label-key,index,comment,guidance
 /PROCEDURE/TERMINATION_PIN,pin_as_call_no_contracts,,,Set `tender.status` to 'complete'
 /AWARD_CONTRACT,award_of_contract,V,,Add an `Award` object to the `awards` array
 /AWARD_CONTRACT/@ITEM,,,,Discard
-/AWARD_CONTRACT/CONTRACT_NO,contract_number,,,"If not set, let *Contract No* be the notice number followed by a hyphen '-' followed by the value of the `ITEM` attribute of the `AWARD_CONTRACT` element. Map to the award's `.id`."
+/AWARD_CONTRACT/CONTRACT_NO,contract_number,,,"If not set, let *Contract No* be the notice number followed by a hyphen '-' followed by the value of the `ITEM` attribute of the `AWARD_CONTRACT` element. Map to the award's `.id`.\n\nThis assumes the *Contract No* is unique within the contracting process. (WARNING #92)"
 /AWARD_CONTRACT/LOT_NO,lot_number,,,"If not set, let *Lot No* be '1'. Add to the award's `.relatedLots` (string)."
 /AWARD_CONTRACT/TITLE,title_contract,,,Map to the award's `.title`
 /AWARD_CONTRACT/NO_AWARDED_CONTRACT,_no,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/contract_statusDetails,Set the award's `.status` to 'unsuccessful'
