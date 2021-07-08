@@ -44,7 +44,7 @@ class TableBuilder
   end
 
   def to_s
-    @output
+    @output.chomp
   end
 
   def t(key)
