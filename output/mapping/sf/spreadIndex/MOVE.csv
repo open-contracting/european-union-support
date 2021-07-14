@@ -1,0 +1,122 @@
+,xpath,label-key,comment,guidance,index
+0,/@LG,,,"Lowercase, and map to `language`",
+1,/@CATEGORY,,,Discard. TED translates at form-level. OCDS translates at field-level.,
+2,/LEGAL_BASIS,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_LegalBasis,"Set `tender.legalBasis.scheme` to ['CELEX'](https://eur-lex.europa.eu/content/help/faq/intro.html#help8), and map to `tender.legalBasis.id`",
+3,/LEGAL_BASIS_OTHER,,,"Set `tender.legalBasis.scheme` to 'CELEX', and map to `tender.legalBasis.id`",
+4,/CONTRACTING_BODY,competent_authority,,,I
+5,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,name_address_contact,,"[Add a party](../../operations/#add-a-party), and add 'buyer' to its `.roles`\n\nSet `buyer.id` to its `.id`, and set `buyer.name` to its [`.name`](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)",I.1
+6,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,name_official,,Map to the party's `.name` and `.identifier.legalName`,
+7,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,national_id,,"Map to the party's `.identifier.id`, and [set `.identifier.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids)",
+8,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS,address_postal,,Map to the party's `.address.streetAddress`,
+9,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN,address_town,,Map to the party's `.address.locality`,
+10,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,nutscode,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,"Take the NUTS code in the `CODE` attribute, and map to the party's `.address.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)",
+11,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE,address_postcode,,Map to the party's `.address.postalCode`,
+12,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY,address_country,,"Take the country code in the `VALUE` attribute, translate to a country name, and map to the party's `.address.countryName`\n\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation. (ISSUE)",
+13,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT,contactpoint,,Map to the party's `.contactPoint.name`,
+14,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE,address_phone,,Map to the party's `.contactPoint.telephone`,
+15,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL,address_email,,Map to the party's `.contactPoint.email`,
+16,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,address_fax,,Map to the party's `.contactPoint.faxNumber`,
+17,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,url_general,,Map to the party's `.details.url`,
+18,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,url_buyerprofile,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/organization_BuyerProfile,Map to the party's `.details.buyerProfile`,
+19,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL,,,"[Add a party](../../operations/#add-a-party), add 'buyer' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)",
+20,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/OFFICIALNAME,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,
+21,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/NATIONALID,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+22,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/ADDRESS,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS,
+23,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/TOWN,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN,
+24,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/POSTAL_CODE,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE,
+25,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/COUNTRY,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY,
+26,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/CONTACT_POINT,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT,
+27,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/PHONE,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE,
+28,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/E_MAIL,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL,
+29,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/FAX,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,
+30,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/NUTS,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,
+31,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/URL_GENERAL,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,
+32,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL/URL_BUYER,,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,
+33,/CONTRACTING_BODY/CENTRAL_PURCHASING,purchase_on_behalf_ca,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,Add 'centralPurchasingBody' to the `.roles` of the party,
+34,/CONTRACTING_BODY/ADDRESS_FURTHER_INFO_IDEM,as_contacts_above,,Discard. Additional information can be obtained from the abovementioned address unless otherwised specified.,
+35,/CONTRACTING_BODY/ADDRESS_FURTHER_INFO,address_another,,"If only the contact person is different, get the `Organization` object for the buyer, add a `ContactPoint` object to its `.additionalContactPoints` array, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT).\n\nOtherwise, [add a party](../../operations/#add-a-party), add 'processContactPoint' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME).",
+36,/CONTRACTING_BODY/CA_TYPE,type_competent_authority,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification's `.scheme` to 'TED_CA_TYPE', and set its `.id` and/or `.description` as follows:",I.4
+37,/CONTRACTING_BODY/CA_TYPE_OTHER,other_type,,Map to `.description`,
+38,/OBJECT_CONTRACT,object,,,II
+39,/OBJECT_CONTRACT/TITLE,title_contract,,Map to `tender.title`,II.1.1
+40,/OBJECT_CONTRACT/REFERENCE_NUMBER,fileref,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_BuyerInternalReferenceID,"If not set, let *Reference number* be equal to the `ocid` value. Map to `tender.id` (string).",
+41,/OBJECT_CONTRACT/CPV_MAIN,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_Classification,,II.1.2
+42,/OBJECT_CONTRACT/CPV_MAIN/CPV_CODE,cpv_main,,"Set `tender.classification.scheme` to 'CPV', take the CPV code in the `CODE` attribute, and map to `tender.classification.id`",
+43,/OBJECT_CONTRACT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,"For each `CODE` attribute, add a `Classification` object to the `tender.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id`. Remove any duplicate entries from the `tender.additionalClassifications` array.",
+44,/OBJECT_CONTRACT/TYPE_CONTRACT,type_contract,,Set `tender.mainProcurementCategory` as follows:,II.1.3
+45,/OBJECT_CONTRACT/CATEGORY,areas_covered,,"For each `CATEGORY` element, add a `Classification` object to the `tender.additionalClassifications` array, set its `.scheme` to 'TED_CATEGORY', and set its `.id` and `.description` as follows:",
+46,/OBJECT_CONTRACT/OBJECT_DESCR,description,,"Add a `Lot` object to the `tender.lots` array, and add an `Item` object to the `tender.items` array. Set the lot's `.status` to the same value as `tender.status`.\n\n**F12, F13**: Instead, do nothing.",II.2
+47,/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL,cpv_additional,,,II.2.2
+48,/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_CODE,cpv_main,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPV', and map to its `.id`. Remove any duplicate entries from the item's `.additionalClassifications` array.\n\n**F12, F13**: Instead, for each `CODE` attribute, add a `Classification` object to the `tender.additionalClassifications` array, set its `.scheme` to 'CPV', and map to its `.id`. Remove any duplicate entries from the `tender.additionalClassifications` array.",
+49,/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id`. Remove any duplicate entries from the item's `.additionalClassifications` array.\n\n**F12, F13**: Instead, for each `CODE` attribute, add a `Classification` object to the `tender.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id`. Remove any duplicate entries from the `tender.additionalClassifications` array.",
+50,/OBJECT_CONTRACT/OBJECT_DESCR/NUTS,nutscode,,"For each `NUTS` element, take the NUTS code in its `CODE` attribute, add an `Address` object to the item's `.deliveryAddresses` array, and map to its `.region`.\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)",
+51,/OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE,mainsiteplace_works_delivery,,Map to the item's `.deliveryLocation.description`,
+52,/OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,descr_procurement,,"Map to the lot's `.description`\n\n**F12, F13**: Instead, map to `tender.description`",II.2.4
+53,/OBJECT_CONTRACT/OBJECT_DESCR/DATE_START,starting,,Map to the lot's `.contractPeriod.startDate`,
+54,/OBJECT_CONTRACT/OBJECT_DESCR/DURATION,duration_contract_framework_dps,,,II.2.7
+55,/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS,assets_extended_contract,,,
+56,/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/EXTENDED_CONTRACT_DURATION,_yes,,Set `tender.hasEssentialAssets` to `true`,
+57,/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/LIST,assets_list,,Map to `tender.essentialAssets.description`,
+58,/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/SIGNIFICANCE,assets_significance,,Map to `tender.essentialAssets.significance`,
+59,/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/PREDOMINANCE,assets_predominant,,Map to `tender.essentialAssets.predominance`,
+60,/OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS/NO_EXTENDED_CONTRACT_DURATION,_no,,Set `tender.hasEssentialAssets` to `false`,
+61,/LEFTI,info_legal,,"The standard forms express exclusion grounds and selection criteria in this section as unstructured text. In the introductory note to its [eForms consultation](https://github.com/eForms/eForms), the European Commission had proposed to create an extension to eForms to implement the [European Single Procurement Document (ESPD)](http://ec.europa.eu/growth/single-market/public-procurement/e-procurement/espd/) [Exchange Data Model](https://github.com/ESPD/ESPD-EDM), which expresses this information as structured data, following the model of the [Core Criterion and Core Evidence Vocabulary](https://joinup.ec.europa.eu/solution/core-criterion-and-core-evidence-vocabulary).",III
+62,/LEFTI/COST_PARAMETERS,parameters_cost,,Map to `tender.contractTerms.financialTerms`,
+63,/LEFTI/EXCLUSIVE_RIGHTS_GRANTED,_yes,,"Set `tender.contractTerms.hasExclusiveRights` to `true`, and map to `tender.contractTerms.exclusiveRights`",
+64,/LEFTI/NO_EXCLUSIVE_RIGHTS_GRANTED,_no,,Set `tender.contractTerms.hasExclusiveRights` to `false`,
+65,/LEFTI/PCT_ALLOCATED_OPERATOR,allocation_percentage,,Map to the `tender.contractTerms.operatorRevenueShare`,
+66,/LEFTI/SOCIAL_STANDARDS,social_standards_list,,Map to `tender.contractTerms.socialStandards`,
+67,/LEFTI/PUBLIC_SERVICE_OBLIGATIONS,public_service_obligations,,Map to `tender.contractTerms.performanceTerms`,III.1.5
+68,/LEFTI/OTHER_PARTICULAR_CONDITIONS,other_particular_cond,,Map to `tender.contractTerms.otherTerms`,III.1.6
+69,/LEFTI/INFORMATION_TICKETS,target_info,,"Add a `Metric` object to the `tender.targets` array, set its `.id` to 'INFORMATION_TICKETS', set its `.title` to 'Information and tickets', and map to its `.description`",
+70,/LEFTI/PUNCTUALITY_RELIABILITY,target_punctuality,,"Add a `Metric` object to the `tender.targets` array, set its `.id` to 'PUNCTUALITY_RELIABILITY', set its `.title` to 'Punctuality and reliability', and map to its `.description`",
+71,/LEFTI/CANCELLATIONS_SERVICES,target_cancellation,,"Add a `Metric` object to the `tender.targets` array, set its `.id` to 'CANCELLATIONS_SERVICES', set its `.title` to 'Cancellations of services', and map to its `.description`",
+72,/LEFTI/CLEANLINESS_ROLLING_STOCK,target_cleanliness,,"Add a `Metric` object to the `tender.targets` array, set its `.id` to 'CLEANLINESS_ROLLING_STOCK', set its `.title` to 'Cleanliness of rolling stock and station facilities', and map to its `.description`",
+73,/LEFTI/CUST_SATISFACTION_SURVEY,target_satisfaction,,"Add a `Metric` object to the `tender.targets` array, set its `.id` to 'CUST_SATISFACTION_SURVEY', set its `.title` to 'Customer Satisfaction Survey', and map to its `.description`",
+74,/LEFTI/COMPLAINT_HANDLING,target_complaints,,"Add a `Metric` object to the `tender.targets` array, set its `.id` to 'COMPLAINT_HANDLING', set its `.title` to 'Complaint handling', and map to its `.description`",
+75,/LEFTI/ASSIST_PERSONS_REDUCTED_MOB,target_assistance,,"Add a `Metric` object to the `tender.targets` array, set its `.id` to 'ASSIST_PERSONS_REDUCTED_MOB', set its `.title` to 'Assistance for persons with reduced mobility', and map to its `.description`",
+76,/LEFTI/OTHER_QUALITY_TARGET,target_other,,"Add a `Metric` object to the `tender.targets` array, set its `.id` to 'OTHER_QUALITY_TARGET', set its `.title` to 'Other quality targets', and map to its `.description`",
+77,/LEFTI/REWARDS_PENALITIES,info_rewards_penalties,,Map to `tender.contractTerms.rewardsAndPenalties`,III.2.2
+78,/PROCEDURE,procedure,,,IV
+79,/PROCEDURE/PT_COMPETITIVE_TENDERING,proctype_competitive,,"Set `tender.procurementMethod` to 'open', and set `tender.procurementMethodDetails` to 'Competitive tendering procedure'",
+80,/PROCEDURE/PT_DA_INTERNAL_OPERATOR,type_direct_award_internal,,"Set `tender.procurementMethod` to 'direct', and set `tender.procurementMethodDetails` to 'Direct award to an internal operator'",
+81,/PROCEDURE/PT_DA_SMALL_CONTRACT,type_direct_award_small,,"Set `tender.procurementMethod` to 'direct', and set `tender.procurementMethodDetails` to 'Direct award of a small scale contract'",
+82,/PROCEDURE/PT_DA_MEDIUM_ENTERPRISE,type_direct_award_small_sme,,"Set `tender.procurementMethod` to 'direct', and set `tender.procurementMethodDetails` to 'Direct award of a small scale contract to a small and medium sized enterprise'",
+83,/PROCEDURE/PT_DA_RAILWAY_TRANSPORT,type_direct_award_railway,,"Set `tender.procurementMethod` to 'direct', and set `tender.procurementMethodDetails` to 'Direct award for railway transport'",
+84,/AWARD_CONTRACT,award_of_contract,,"Add an `Award` object to the `awards` array, and set its `.id` to the notice number followed by a hyphen '-' followed by the value of the `ITEM` attribute of the `AWARD_CONTRACT` element.",V
+85,/AWARD_CONTRACT/AWARDED_CONTRACT,award_of_contract,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/contract_statusDetails,"Set the award's `.status` to 'active'\n\nAdd a `Contract` object to the `contracts` array, set its `.id` and `.awardID` to the award's `.id`, set its `.title` to the award's `.title`, and set its `.status` to 'active'.",V.2
+86,/AWARD_CONTRACT/AWARDED_CONTRACT/DATE_CONCLUSION_CONTRACT,date_award,,Map to the contract's `.dateSigned`,V.2.1
+87,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS,,This element contains elements from V.2.2 and V.2.3.,,
+88,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR,,"Contains ADDRESS_CONTRACTOR, SME, NO_SME.",,
+89,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR,awarded_to_name,,"[Add a party](../../operations/#add-a-party), and add 'supplier' to its `.roles`\n\nAdd an `OrganizationReference` object to the award's `.suppliers` array, set its `.id` to the party's `.id`, and set its `.name` to the party's [`.name`](#/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME)",V.2.3
+90,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME,name_official,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,
+91,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/NATIONALID,national_id,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+92,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/ADDRESS,address_postal,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS,
+93,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/TOWN,address_town,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN,
+94,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/POSTAL_CODE,address_postcode,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE,
+95,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/COUNTRY,address_country,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY,
+96,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/PHONE,address_phone,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE,
+97,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/E_MAIL,address_email,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL,
+98,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/FAX,address_fax,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,
+99,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/NUTS,nutscode,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,
+100,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/URL,internet,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,
+101,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/OWNERSHIP,indication_relation,,Map to the party's `.beneficialOwnership.description`,
+102,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_PARTY,address_legal_control,,"[Add a shareholder party](../../operations/#add-a-party)\n\nAdd a `Shareholder` object to the supplier party's `.shareholders` array, set its `.id` and `.shareholder.id` to the shareholder party's `.id`, and set its `.shareholder.name` to the shareholder party's [`.name`](#/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME)",
+103,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_PARTY/OFFICIALNAME,name_official,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,
+104,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_PARTY/NATIONALID,national_id,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+105,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_PARTY/ADDRESS,address_postal,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS,
+106,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_PARTY/TOWN,address_town,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN,
+107,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_PARTY/POSTAL_CODE,address_postcode,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE,
+108,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_PARTY/COUNTRY,address_country,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY,
+109,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_PARTY/PHONE,address_phone,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE,
+110,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_PARTY/E_MAIL,address_email,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL,
+111,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_PARTY/FAX,address_fax,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,
+112,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_PARTY/NUTS,nutscode,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,
+113,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_PARTY/URL,internet,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,
+114,/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES,info_value_contract,,,V.2.4
+115,/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL,value_total_contract,,Map to the contract's `.value.amount`,
+116,/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY,currency,,Map to the contract's `.value.currency`,
+117,/AWARD_CONTRACT/AWARDED_CONTRACT/NB_KILOMETRES,km_services,,Map to the contract's `.publicPassengerTransportServicesKilometers`,
+118,/COMPLEMENTARY_INFO,info_complement,,,VI
+119,/COMPLEMENTARY_INFO/INFO_ADD,info_additional,,Map to the release's `description`,VI.3
+120,/COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,date_dispatch,,Map to `date`,VI.5

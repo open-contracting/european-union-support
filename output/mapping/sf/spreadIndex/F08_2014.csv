@@ -1,0 +1,53 @@
+,xpath,label-key,comment,guidance,index
+0,/@LG,,,"Lowercase, and map to `language`",
+1,/@CATEGORY,,,Discard. TED translates at form-level. OCDS translates at field-level.,
+2,/LEGAL_BASIS,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_LegalBasis,"Set `tender.legalBasis.scheme` to ['CELEX'](https://eur-lex.europa.eu/content/help/faq/intro.html#help8), and map to `tender.legalBasis.id`",
+3,/LEGAL_BASIS_OTHER,,,"Set `tender.legalBasis.scheme` to 'CELEX', and map to `tender.legalBasis.id`",
+4,/CONTRACTING_BODY,ca_ce,,,I
+5,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,name_address_contact,,"[Add a party](../../operations/#add-a-party), and add 'buyer' to its `.roles`\n\nSet `buyer.id` to its `.id`, and set `buyer.name` to its [`.name`](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)",I.1
+6,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,name_official,,Map to the party's `.name` and `.identifier.legalName`,
+7,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,national_id,,"Map to the party's `.identifier.id`, and [set `.identifier.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids)",
+8,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS,address_postal,,Map to the party's `.address.streetAddress`,
+9,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN,address_town,,Map to the party's `.address.locality`,
+10,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,nutscode,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,"Take the NUTS code in the `CODE` attribute, and map to the party's `.address.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)",
+11,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE,address_postcode,,Map to the party's `.address.postalCode`,
+12,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY,address_country,,"Take the country code in the `VALUE` attribute, translate to a country name, and map to the party's `.address.countryName`\n\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation. (ISSUE)",
+13,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT,contactpoint,,Map to the party's `.contactPoint.name`,
+14,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE,address_phone,,Map to the party's `.contactPoint.telephone`,
+15,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL,address_email,,Map to the party's `.contactPoint.email`,
+16,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,address_fax,,Map to the party's `.contactPoint.faxNumber`,
+17,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,url_general,,Map to the party's `.details.url`,
+18,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,url_buyerprofile,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/organization_BuyerProfile,Map to the party's `.details.buyerProfile`,
+19,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY_ADDITIONAL,,,"[Add a party](../../operations/#add-a-party), add 'buyer' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)",
+20,/CONTRACTING_BODY/JOINT_PROCUREMENT_INVOLVED,joint_procurement_involves,,"Discard. If there are multiple parties with the role 'buyer', then the contract involves joint procurement. (When *The contract involves joint procurement* is checked, at least one additional contracting authority is provided.)",
+21,/CONTRACTING_BODY/PROCUREMENT_LAW,joint_national_law,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_JointProcurement,Map to `tender.crossBorderLaw`,
+22,/CONTRACTING_BODY/CENTRAL_PURCHASING,joint_procurement_central,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,Add 'centralPurchasingBody' to the `.roles` of the party,
+23,/CONTRACTING_BODY/DOCUMENT_FULL,address_obtain_docs,,"Discard. If no `ParticipationFee` object in the `tender.participationFees` array has a `.type` of 'document', then access is unrestricted.",
+24,/CONTRACTING_BODY/DOCUMENT_RESTRICTED,docs_restricted,,"Add a `ParticipationFee` object to the `tender.participationFees` array, set its `.type` to 'document', and set its `.id` to '1'.",
+25,/CONTRACTING_BODY/URL_DOCUMENT,,,"Map to the party's `.contactPoint.url`. If there is no URL scheme, prefix by 'http://'.",
+26,/CONTRACTING_BODY/ADDRESS_FURTHER_INFO_IDEM,as_contacts_above,,Discard. Additional information can be obtained from the abovementioned address unless otherwised specified.,
+27,/CONTRACTING_BODY/ADDRESS_FURTHER_INFO,address_another,,"If only the contact person is different, get the `Organization` object for the buyer, add a `ContactPoint` object to its `.additionalContactPoints` array, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT).\n\nOtherwise, [add a party](../../operations/#add-a-party), add 'processContactPoint' to its `.roles`, and set its [fields as above](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME).",
+28,/CONTRACTING_BODY/URL_TOOL,url_communication_tools,,Map to `tender.communication.atypicalToolUrl`,
+29,/CONTRACTING_BODY/CA_TYPE,ca_type,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification's `.scheme` to 'TED_CA_TYPE', and set its `.id` and/or `.description` as follows:",I.4
+30,/CONTRACTING_BODY/CA_TYPE_OTHER,other_type,,Map to `.description`,
+31,/CONTRACTING_BODY/CA_ACTIVITY,mainactivity,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification's `.scheme` to ['COFOG'](https://unstats.un.org/unsd/publications/catalogue?selectID=145), and set its `.id` and/or `.description` as follows:",I.5
+32,/CONTRACTING_BODY/CA_ACTIVITY_OTHER,other_activity,,Map to `.description`,
+33,/CONTRACTING_BODY/CE_ACTIVITY,mainactivity,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/parties_details_COFOG,"Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification's `.scheme` to 'TED_CE_ACTIVITY', and set its `.id` and/or `.description` as follows:\n\n(The codes are drawn from [Directive 2014/25/EU](https://eur-lex.europa.eu/legal-content/en/TXT/?uri=CELEX%3A32014L0025#L_2014094EN.01033901))",I.6
+34,/CONTRACTING_BODY/CE_ACTIVITY_OTHER,other_activity,,Map to `.description`,
+35,/OBJECT_CONTRACT,object,,,II
+36,/OBJECT_CONTRACT/TITLE,title_contract,,Map to `tender.title`,II.1.1
+37,/OBJECT_CONTRACT/REFERENCE_NUMBER,fileref,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_BuyerInternalReferenceID,"If not set, let *Reference number* be equal to the `ocid` value. Map to `tender.id` (string).",
+38,/OBJECT_CONTRACT/CPV_MAIN,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_Classification,,II.1.2
+39,/OBJECT_CONTRACT/CPV_MAIN/CPV_CODE,cpv_main,,"Set `tender.classification.scheme` to 'CPV', take the CPV code in the `CODE` attribute, and map to `tender.classification.id`",
+40,/OBJECT_CONTRACT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,"For each `CODE` attribute, add a `Classification` object to the `tender.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id`. Remove any duplicate entries from the `tender.additionalClassifications` array.",
+41,/OBJECT_CONTRACT/TYPE_CONTRACT,type_contract,,Set `tender.mainProcurementCategory` as follows:,II.1.3
+42,/OBJECT_CONTRACT/OBJECT_DESCR,description,,"Add a `Lot` object to the `tender.lots` array, and add an `Item` object to the `tender.items` array. Set the lot's `.status` to the same value as `tender.status`.\n\n**F12, F13**: Instead, do nothing.",II.2
+43,/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL,cpv_additional,,,II.2.2
+44,/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_CODE,cpv_main,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPV', and map to its `.id`. Remove any duplicate entries from the item's `.additionalClassifications` array.\n\n**F12, F13**: Instead, for each `CODE` attribute, add a `Classification` object to the `tender.additionalClassifications` array, set its `.scheme` to 'CPV', and map to its `.id`. Remove any duplicate entries from the `tender.additionalClassifications` array.",
+45,/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id`. Remove any duplicate entries from the item's `.additionalClassifications` array.\n\n**F12, F13**: Instead, for each `CODE` attribute, add a `Classification` object to the `tender.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id`. Remove any duplicate entries from the `tender.additionalClassifications` array.",
+46,/OBJECT_CONTRACT/OBJECT_DESCR/NUTS,nutscode,,"For each `NUTS` element, take the NUTS code in its `CODE` attribute, add an `Address` object to the item's `.deliveryAddresses` array, and map to its `.region`.\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)",
+47,/OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE,mainsiteplace_works_delivery,,Map to the item's `.deliveryLocation.description`,
+48,/OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,descr_procurement,,"Map to the lot's `.description`\n\n**F12, F13**: Instead, map to `tender.description`",II.2.4
+49,/COMPLEMENTARY_INFO,info_complement,,,VI
+50,/COMPLEMENTARY_INFO/INFO_ADD,info_additional,,Map to the release's `description`,VI.3
+51,/COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,date_dispatch,,Map to `date`,VI.5

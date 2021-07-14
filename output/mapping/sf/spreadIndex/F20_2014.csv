@@ -1,0 +1,121 @@
+,xpath,label-key,comment,guidance,index
+0,/@LG,,,"Lowercase, and map to `language`",
+1,/@CATEGORY,,,Discard. TED translates at form-level. OCDS translates at field-level.,
+2,/LEGAL_BASIS,,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_LegalBasis,"Set `tender.legalBasis.scheme` to ['CELEX'](https://eur-lex.europa.eu/content/help/faq/intro.html#help8), and map to `tender.legalBasis.id`",
+3,/LEGAL_BASIS_OTHER,,,"Set `tender.legalBasis.scheme` to 'CELEX', and map to `tender.legalBasis.id`",
+4,/CONTRACTING_BODY,ca_ce,,,I
+5,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY,name_address_contact,,"[Add a party](../../operations/#add-a-party), and add 'buyer' to its `.roles`\n\nSet `buyer.id` to its `.id`, and set `buyer.name` to its [`.name`](#/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME)",I.1
+6,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,name_official,,Map to the party's `.name` and `.identifier.legalName`,
+7,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,national_id,,"Map to the party's `.identifier.id`, and [set `.identifier.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids)",
+8,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS,address_postal,,Map to the party's `.address.streetAddress`,
+9,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN,address_town,,Map to the party's `.address.locality`,
+10,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,nutscode,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/parties_details_NUTS,"Take the NUTS code in the `CODE` attribute, and map to the party's `.address.region`\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)",
+11,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE,address_postcode,,Map to the party's `.address.postalCode`,
+12,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY,address_country,,"Take the country code in the `VALUE` attribute, translate to a country name, and map to the party's `.address.countryName`\n\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation. (ISSUE)",
+13,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/CONTACT_POINT,contactpoint,,Map to the party's `.contactPoint.name`,
+14,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE,address_phone,,Map to the party's `.contactPoint.telephone`,
+15,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL,address_email,,Map to the party's `.contactPoint.email`,
+16,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,address_fax,,Map to the party's `.contactPoint.faxNumber`,
+17,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,url_general,,Map to the party's `.details.url`,
+18,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER,url_buyerprofile,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/organization_BuyerProfile,Map to the party's `.details.buyerProfile`,
+19,/OBJECT_CONTRACT,object,,,II
+20,/OBJECT_CONTRACT/TITLE,title_contract,,Map to `tender.title`,II.1.1
+21,/OBJECT_CONTRACT/REFERENCE_NUMBER,fileref,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_BuyerInternalReferenceID,"If not set, let *Reference number* be equal to the `ocid` value. Map to `tender.id` (string).",
+22,/OBJECT_CONTRACT/CPV_MAIN,,https://github.com/open-contracting-archive/trade/blob/master/draft_extensions/tender_Classification,,II.1.2
+23,/OBJECT_CONTRACT/CPV_MAIN/CPV_CODE,cpv_main,,"Set `tender.classification.scheme` to 'CPV', take the CPV code in the `CODE` attribute, and map to `tender.classification.id`",
+24,/OBJECT_CONTRACT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,"For each `CODE` attribute, add a `Classification` object to the `tender.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id`. Remove any duplicate entries from the `tender.additionalClassifications` array.",
+25,/OBJECT_CONTRACT/TYPE_CONTRACT,type_contract,,Set `tender.mainProcurementCategory` as follows:,II.1.3
+26,/OBJECT_CONTRACT/OBJECT_DESCR,description,,"Add a `Lot` object to the `tender.lots` array, and add an `Item` object to the `tender.items` array.",II.2
+27,/OBJECT_CONTRACT/OBJECT_DESCR/TITLE,title_contract,,Map to the lot's `.title`,II.2.1
+28,/OBJECT_CONTRACT/OBJECT_DESCR/LOT_NO,lot_number,,"If not set, let *Lot No* be '1'. Map to the lot's `.id` (string), map to the item's `.id` (string), and map to the item's `.relatedLot` (string).",
+29,/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL,cpv_additional,,,II.2.2
+30,/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_CODE,cpv_main,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPV', and map to its `.id`. Remove any duplicate entries from the item's `.additionalClassifications` array.\n\n**F12, F13**: Instead, for each `CODE` attribute, add a `Classification` object to the `tender.additionalClassifications` array, set its `.scheme` to 'CPV', and map to its `.id`. Remove any duplicate entries from the `tender.additionalClassifications` array.",
+31,/OBJECT_CONTRACT/OBJECT_DESCR/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id`. Remove any duplicate entries from the item's `.additionalClassifications` array.\n\n**F12, F13**: Instead, for each `CODE` attribute, add a `Classification` object to the `tender.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id`. Remove any duplicate entries from the `tender.additionalClassifications` array.",
+32,/OBJECT_CONTRACT/OBJECT_DESCR/NUTS,nutscode,,"For each `NUTS` element, take the NUTS code in its `CODE` attribute, add an `Address` object to the item's `.deliveryAddresses` array, and map to its `.region`.\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)",
+33,/OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE,mainsiteplace_works_delivery,,Map to the item's `.deliveryLocation.description`,
+34,/OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR,mod_descr_at_conclusion,,"Map to the lot's `.description`\n\n**F12, F13**: Instead, map to `tender.description`",II.2.4
+35,/OBJECT_CONTRACT/OBJECT_DESCR/DURATION,duration_contr_framew_dps_concess,,,II.2.7
+36,/OBJECT_CONTRACT/OBJECT_DESCR/DATE_START,starting,,Map to the lot's `.contractPeriod.startDate`,
+37,/OBJECT_CONTRACT/OBJECT_DESCR/DATE_END,end,,Map to the lot's `.contractPeriod.endDate`,
+38,/OBJECT_CONTRACT/OBJECT_DESCR/JUSTIFICATION,framework_just_four,,Map to `tender.techniques.frameworkAgreement.periodRationale`,
+39,/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED,_yes,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_isEUFunded https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/budget_EUFunded,"* Get the `Organization` object whose `.name` is 'European Union'. If none exists yet:\n  * [Add a party](../../operations/#add-a-party)\n  * Set its `.name` to 'European Union'\n* Add 'funder' to its `.roles`\n\n* Get the `Finance` object whose `.description` is the *Identification of the project*. If none exists yet:\n  * Add a `Finance` object to the `planning.budget.finance` array\n  * Map the *Identification of the project* to its `.description`\n  * Set its `.id` incrementally\n  * Set its `.financingParty.name` to 'European Union'\n  * Set its `.financingParty.id` to the party's `.id`\n  * Add the lot's `.id` to its `.relatedLots` (**F12, F13**: Instead, do nothing)\n\nIn [future forms](https://github.com/eForms/eForms/issues/181#issuecomment-439861320), this field will be de-emphasized.",
+40,/OBJECT_CONTRACT/OBJECT_DESCR/NO_EU_PROGR_RELATED,_no,,"Discard. If there's no party with the role 'funder' and the name 'European Union', then the procurement isn't related to a project and/or programme financed by European Union funds.",
+41,/PROCEDURE,procedure,,,IV
+42,/PROCEDURE/NOTICE_NUMBER_OJ,number_oj,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/release_relatedNotice,"Discard. The *contract award notice concerning this contract* is the OCDS release with the same `ocid` as this release, with 'award' in its `tag`, and with the nearest earlier `date` to this release.",
+43,/AWARD_CONTRACT,award_of_contract_concess,,Add an `Award` object to the `awards` array,V
+44,/AWARD_CONTRACT/CONTRACT_NO,contract_number,,Map to the award's `.id`\n\nThis assumes the contract award notice set `/AWARD_CONTRACT/CONTRACT_NO` (WARNING),
+45,/AWARD_CONTRACT/LOT_NO,lot_number,,"If not set, let *Lot No* be '1'. Add to the award's `.relatedLots` (string).",
+46,/AWARD_CONTRACT/TITLE,title_contract,,Map to the award's `.title`,
+47,/AWARD_CONTRACT/AWARDED_CONTRACT,award_of_contract_concess,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/contract_statusDetails,"Set the award's `.status` to 'active'\n\nAdd a `Contract` object to the `contracts` array, set its `.id` and `.awardID` to the award's `.id`, set its `.title` to the award's `.title`, and set its `.status` to 'active'.",V.2
+48,/AWARD_CONTRACT/AWARDED_CONTRACT/DATE_CONCLUSION_CONTRACT,date_award_contract_concess,,Map to the contract's `.dateSigned`,V.2.1
+49,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS,,This element contains elements from V.2.2 and V.2.3.,,
+50,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/AWARDED_TO_GROUP,_yes,,"Discard. If there are multiple suppliers, then the contract has been awarded to a group of economic operators.",
+51,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/NO_AWARDED_TO_GROUP,_no,,"Discard. If there is one supplier, then the contract hasn't been awarded to a group of economic operators.",
+52,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR,,"Contains ADDRESS_CONTRACTOR, SME, NO_SME.",,
+53,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR,awarded_to_contract_concess,,"[Add a party](../../operations/#add-a-party), and add 'supplier' to its `.roles`\n\nAdd an `OrganizationReference` object to the award's `.suppliers` array, set its `.id` to the party's `.id`, and set its `.name` to the party's [`.name`](#/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME)",V.2.3
+54,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/OFFICIALNAME,name_official,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,
+55,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/NATIONALID,national_id,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID,
+56,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/ADDRESS,address_postal,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS,
+57,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/TOWN,address_town,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN,
+58,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/POSTAL_CODE,address_postcode,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE,
+59,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/COUNTRY,address_country,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY,
+60,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/PHONE,address_phone,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE,
+61,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/E_MAIL,address_email,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL,
+62,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/FAX,address_fax,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,
+63,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/NUTS,nutscode,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NUTS,
+64,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/URL,internet,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,
+65,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/SME,_yes,,Set the party's `.details.scale` to 'sme',
+66,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/NO_SME,_no,,Set the party's `.details.scale` to 'large',
+67,/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES,value_contract_concession_info,,,V.2.4
+68,/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL,value_total,,"Discard. The *information on value of the contract/lot/concession (at the time of conclusion of the contract)* is available in the OCDS release with the same `ocid` as this release, with 'award' in its `tag`, and with the nearest earlier `date` to this release.",
+69,/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY,currency,,Discard as above,
+70,/COMPLEMENTARY_INFO,info_complement,,,VI
+71,/COMPLEMENTARY_INFO/INFO_ADD,info_additional,,Map to the release's `description`,VI.3
+72,/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY,appeals_body,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../../operations/#add-a-party), and add 'reviewBody' to its `.roles`",VI.4.1
+73,/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/OFFICIALNAME,name_official,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME,
+74,/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/ADDRESS,address_postal,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS,
+75,/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/TOWN,address_town,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN,
+76,/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/POSTAL_CODE,address_postcode,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE,
+77,/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/COUNTRY,address_country,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY,
+78,/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/PHONE,address_phone,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE,
+79,/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/E_MAIL,address_email,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL,
+80,/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/FAX,address_fax,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX,
+81,/COMPLEMENTARY_INFO/ADDRESS_REVIEW_BODY/URL,internet,,/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL,
+82,/COMPLEMENTARY_INFO/ADDRESS_MEDIATION_BODY,mediation_body,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../../operations/#add-a-party), and add 'mediationBody' to its `.roles`",VI.4.2
+83,/COMPLEMENTARY_INFO/REVIEW_PROCEDURE,appeals_deadline,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,Map to `tender.reviewDetails`,
+84,/COMPLEMENTARY_INFO/ADDRESS_REVIEW_INFO,appeals_info,https://github.com/open-contracting-archive/trade/tree/master/draft_extensions/tender_ReviewProcedure,"[Add a party](../../operations/#add-a-party), and add 'reviewContactPoint' to its `.roles`",VI.4.4
+85,/COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE,date_dispatch,,Map to `date`,VI.5
+86,/MODIFICATIONS_CONTRACT,mod_to_contract,,,VII
+87,/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT,mod_descr_after,,"Copy the `Item` object in `tender.items` to `.items` on the `Contract` object in `contracts`, and delete the contract's item's `.classification` and `.additionalClassifications`.",VII.1
+88,/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_MAIN,,,,VII.1.1
+89,/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_MAIN/CPV_CODE,cpv_main,,"Set the item's `.classification.scheme` to 'CPV', take the CPV code in the `CODE` attribute, and map to the item's `.classification.id`",
+90,/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_MAIN/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id`",
+91,/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_ADDITIONAL,cpv_additional,,,VII.1.2
+92,/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_ADDITIONAL/CPV_CODE,cpv_main,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPV', and map to its `.id`.",
+93,/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE,cpv_supplem,,"For each `CODE` attribute, add a `Classification` object to the item's `.additionalClassifications` array, set its `.scheme` to 'CPVS', prefix by the *Main CPV code*, and map to its `.id`.",
+94,/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/NUTS,nutscode,,"For each `NUTS` element, take the NUTS code in its `CODE` attribute, add an `Address` object to the item's `.deliveryAddresses` array, and map to its `.region`.\n\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes. (ISSUE)",
+95,/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/MAIN_SITE,mainsiteplace_works_delivery,,Map to the item's `.deliveryLocation.description`,
+96,/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/SHORT_DESCR,descr_procurement,,"Map to the lot's `.description`\n\n**F12, F13**: Instead, map to `tender.description`\n\n If present, this takes precedence over the [Description of the procurement at the time of conclusion of the contract](#/OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR).",VII.1.4
+97,/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/DURATION,duration_contr_framew_dps_concess,,,VII.1.5
+98,/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/DATE_START,starting,,Map to the contract's `.period.startDate`,
+99,/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/DATE_END,end,,Map to the contract's `.period.endDate`,
+100,/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/JUSTIFICATION,framework_just_four,,Map to the contract's `.periodRationale`,
+101,/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/VALUES,value_contract_concession_info,,,VII.1.6
+102,/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/VALUES/VAL_TOTAL,value_total_final_contract_concess,,Map to the contract's `.value.amount`,
+103,/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/VALUES/VAL_TOTAL/@CURRENCY,currency,,Map to the contract's `.value.currency`,
+104,/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTORS,,,,
+105,/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTORS/AWARDED_TO_GROUP,_yes,,"Discard. If there are multiple suppliers, then the contract has been awarded to a group of economic operators.",
+106,/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTORS/NO_AWARDED_TO_GROUP,_no,,"Discard. If there is one supplier, then the contract hasn't been awarded to a group of economic operators.",
+107,/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTORS/CONTRACTOR,,"Contains ADDRESS_CONTRACTOR, SME, NO_SME.",,VII.1.7
+108,/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR,awarded_to_contract_concess,,"[Add a party](../../operations/#add-a-party), and add 'supplier' to its `.roles`\n\nAdd an `OrganizationReference` object to the award's `.suppliers` array, set its `.id` to the party's `.id`, and set its `.name` to the party's `.name`.\n\nThere's an open issue ([#232](https://github.com/open-contracting/standard/issues/232)) relevant to removing previous entries from the `parties` and `.suppliers` arrays. (ISSUE)",
+109,/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTORS/CONTRACTOR/SME,_yes,,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/SME,
+110,/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTORS/CONTRACTOR/NO_SME,_no,,/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/NO_SME,
+111,/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS,mod_info,,"Add an `Amendment` object to the contract's `.amendments` array, and set its `.id` (string). The `.id` can be any value guaranteed to be globally unique. For example, it can be set to a [version 4 UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier), or it can be assigned sequentially across all F14/F20 notices for this procedure (the first notice sets it to '1', the second to '2', etc.).",VII.2
+112,/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/SHORT_DESCR,mod_nature,,Map to the amendment's `.description`,
+113,/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/ADDITIONAL_NEED,mod_need_for_additional,,"Prefix by the [translation](../../operations/#get-a-translation) of ""Need for additional works, services or supplies by the original contractor/concessionaire: "", and map to the amendment's `.rationale`",
+114,/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/UNFORESEEN_CIRCUMSTANCE,mod_need_by_circums,,"Prefix by the [translation](../../operations/#get-a-translation) of ""Need for modification brought about by circumstances which a diligent contracting authority/entity could not foresee: "", and map to the amendment's `.rationale`",
+115,/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VALUES,mod_price_increase,,,VII.2.3
+116,/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VALUES/VAL_TOTAL_BEFORE,value_excl_vat,,"Discard. The *updated total contract value before the modifications* is available in the OCDS release with the same `ocid` as this release, with 'contract' or 'contractUpdate' in its `tag`, and with the nearest earlier `date` to this release.",
+117,/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VALUES/VAL_TOTAL_BEFORE/@CURRENCY,currency,,Discard as above,
+118,/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VALUES/VAL_TOTAL_AFTER,value_excl_vat,,"Map to the contract's `.value.amount`. If present, this takes precedence over the [total value of the contract/lot/concession](#/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/VALUES/VAL_TOTAL).",
+119,/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/VALUES/VAL_TOTAL_AFTER/@CURRENCY,currency,,Map to the contract's `.value.currency`,

@@ -237,7 +237,7 @@ def report(path, row):
     unhandled.add(value)
 
 
-for pattern in ('output/mapping/*.csv', 'output/mapping/*/*.csv'):
+for pattern in ('output/mapping/sf/*.csv', 'output/mapping/sf/*/*.csv'):
     for filename in glob(pattern):
         with open(filename) as f:
             reader = csv.DictReader(f)
