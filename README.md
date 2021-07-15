@@ -1,6 +1,51 @@
-# Support scripts for TED mapping
+# Support scripts for TED (standard forms) and eForms mapping
 
 ## Usage
+
+### eForms mapping scripts
+
+#### Setup the environment
+
+Read more about Python virtual environments in the [Python documentation](https://docs.python.org/3/tutorial/venv.html).
+
+1. Create and activate a virtual environment using the `venv` module:
+
+```shell
+# Create the virtual environment
+python3 -m venv .venv
+
+# Activate it
+# For bash:
+source .venv/bin/activate 
+
+# For fish:
+source .venv/bin/activate.fish
+```
+
+2. Install the required Python modules in the environment:
+
+```shell
+pip3 install -r requirements.txt
+```
+
+#### Concatenate the OCDS guidance CSVs for standard forms in order spread the levels (index column)
+
+The following command creates:
+
+- `output/mapping/sf/shared/concat.csv`
+- copies of the CSVs with spread index column in the `output/mapping/sf/spreadIndex` directory
+
+```shell
+python3 scripts/mapping_sfXpath_sfLevel.py [path to CSVs, defaults to output/mapping/sf]
+```
+
+#### Concatenate and normalize the SF level to eForms BT mappings
+
+The following command creates `output/mapping/eForms/BT-sfLevel.csv`.
+
+```shell
+python3 scripts/mapping_BT_sfLevel.py [path to mapping CSVs, defaults to output/mapping/eForms/eFormsVsStandardForms]
+```
 
 ### Download prerequisites
 
