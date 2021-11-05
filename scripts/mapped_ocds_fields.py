@@ -233,7 +233,7 @@ paths = set()
 def report(path, row):
     value = (path, row.get('xpath'))
     if value not in unhandled:
-        print('unhandled: {} ({}: {})'.format(path, row.get('xpath'), row['guidance']), file=sys.stderr)
+        print(f"unhandled: {path} ({row.get('xpath')}: {row['guidance']})", file=sys.stderr)
     unhandled.add(value)
 
 
