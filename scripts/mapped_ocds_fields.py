@@ -30,6 +30,9 @@ subjects = {
         'MODIFICATIONS_CONTRACT': 'contracts/items',
         'OBJECT_CONTRACT': 'tender/items',
     },
+    'object': {
+        '/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED': '/planning/budget/finance',
+    },
 }
 
 unknowns = {
@@ -100,10 +103,13 @@ unknowns = {
         '/CONTRACTING_BODY/DOCUMENT_RESTRICTED': 'tender/participationFees',
         '/CONTRACTING_BODY/CA_ACTIVITY': 'parties/details/classifications',
         '/CONTRACTING_BODY/CA_ACTIVITY/@VALUE': 'parties/details/classifications',
+        '/CONTRACTING_BODY/CA_ACTIVITY_OTHER': 'parties/details/classifications',
         '/CONTRACTING_BODY/CA_TYPE': 'parties/details/classifications',
         '/CONTRACTING_BODY/CA_TYPE/@VALUE': 'parties/details/classifications',
+        '/CONTRACTING_BODY/CA_TYPE_OTHER': 'parties/details/classifications',
         '/CONTRACTING_BODY/CE_ACTIVITY': 'parties/details/classifications',
         '/CONTRACTING_BODY/CE_ACTIVITY/@VALUE': 'parties/details/classifications',
+        '/CONTRACTING_BODY/CE_ACTIVITY_OTHER': 'parties/details/classifications',
         '/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR': 'awards/suppliers',  # noqa: E501
         '/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_ADDITIONAL/CPV_CODE': 'contracts/items/additionalClassifications',  # noqa: E501
         '/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/CPV_ADDITIONAL/CPV_SUPPLEMENTARY_CODE': 'contracts/items/additionalClassifications',  # noqa: E501
@@ -237,7 +243,7 @@ def report(path, row):
     unhandled.add(value)
 
 
-for pattern in ('output/mapping/*.csv', 'output/mapping/*/*.csv'):
+for pattern in ('output/mapping/*.csv', 'output/mapping/shared/*.csv'):
     for filename in glob(pattern):
         with open(filename) as f:
             reader = csv.DictReader(f)
@@ -258,9 +264,16 @@ for pattern in ('output/mapping/*.csv', 'output/mapping/*/*.csv'):
 
                         prefix = ''
                         if subject:
-                            prefix = subjects[subject]
+                            try:
+                                prefix = subjects[subject]
+                            except KeyError as e:
+                                print(f"KeyError: Add a {e} key to the `subjects` list")
                         elif path in unknowns:
-                            prefix = unknowns[path]
+                            try:
+                                prefix = unknowns[path]
+                            except KeyError as e:
+                                print(f"KeyError: Add a {e} key to the `unknowns` list")
+                            except KeyError as e:
                         elif path[0] == '.':
                             report(path, row)
                             continue
