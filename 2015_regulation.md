@@ -1,4 +1,4 @@
-# Support scripts for TED mapping
+# 2015 Regulation
 
 ## Usage
 
