@@ -1,0 +1,26 @@
+[
+  {
+    "xpath": "/ContractAwardNotice/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent",
+    "guidance": [""],
+    "comments": [],
+    "children": [
+      {
+        "xpath": "efac:NoticeResult",
+        "guidance": "Add a new Award object in the `.awards` array.",
+        "children": [
+          {
+            "xpath": "cbc:TotalAmount",
+            "BT": "BT-161",
+            "guidance": ["Map it to the award's `.value.amount`, and map `@currencyID` to the award's `.value.currency`."]
+          },
+          {
+            "xpath": "efac:LotResult",
+            "guidance": [
+              "Create"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

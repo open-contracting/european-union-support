@@ -1,0 +1,134 @@
+# Support scripts for eForms mapping
+
+## Setup the environment
+
+Read more about Python virtual environments in the [Python documentation](https://docs.python.org/3/tutorial/venv.html).
+
+You can also use [pipenv](https://pypi.org/project/pipenv/).
+
+1. Create and activate a virtual environment using the `venv` module:
+
+```shell
+# Create the virtual environment
+python3 -m venv .venv
+
+# Activate it
+# For bash:
+source .venv/bin/activate 
+
+# For fish:
+source .venv/bin/activate.fish
+```
+
+2. Install the required Python modules in the environment:
+
+```shell
+pip3 install -r requirements.txt
+```
+
+## Concatenate the OCDS guidance CSVs for standard forms in order spread the levels (index column)
+
+Required files:
+
+- standard forms OCDS guidance CSVs (one CSV per form)
+
+The following command creates:
+
+- `output/mapping/shared/concatenated.csv`
+- copies of the CSVs with spread index column in the `output/mapping/spreadIndex` directory
+
+```shell
+python3 scripts/mapping_sfXpath_sfLevel.py [path to CSVs, defaults to output/mapping]
+```
+
+## Concatenating and normalizing the SF level to eForms BT mappings
+
+The script concatenates and prepares the SF level/eForms BTs mapping CSVs.
+
+Required files:
+
+- SF/eForms mapping CSVs in `output/mapping/eForms/eFormsVsStandardForms/` (created from
+`Task 5_Support_Standard Forms-eForms mappings_v.3.zip`, received from the European Commission via email)
+- BT/Xpath mapping CSV in `output/mapping/eForms/xpath_bt_mapping.csv` created from the data published in [XPATHs provisional release v. 1.0.docx](https://simap.ted.europa.eu/documents/10184/320101/XPATHs+provisional+release+v.+1.0/f74a6976-af15-4bad-99ce-9a4684b60dba)([SIMAP eForms Web site](https://simap.ted.europa.eu/en_GB/web/simap/eforms), 25th of May 2020)
+
+This is done with the following command and creates `output/mapping/eForms/BT-xpath-sfLevel.csv`.
+
+```shell
+python3 scripts/mapping_BT_xpath_sfLevel.py [path to mapping CSVs, defaults to output/mapping/eForms/eFormsVsStandardForms]
+```
+## Importing guidance from SF
+
+Through a BT/SF level mapping, OCDS guidance for eForms can be imported from standard forms.
+
+Required files:
+
+- `output/mapping/eForms/BT-xpath-sfLevel.csv`
+- `output/mapping/eForms/bg_bt.csv` (BT/BG mapping extracted from the [eForms annex](https://ec.europa.eu/docsroom/documents/43488))
+- `output/mapping/shared/concatenated.csv` (concatenated standard forms OCDS guidance generated above)
+
+This is done with the following command and creates `output/mapping/eForms/BT-xpath-sfGuidance.json`:
+
+```bash
+python3 scripts/mapping_import_sf_guidance.py 
+```
+
+`output/mapping/eForms/eforms-guidance.csv` and its JSON counterpart contain the OCDS guidance to map eForms XML elements to OCDS data structures.
+These files are copies of `BT-xpath-sfGuidance.json` that have later been updated, improved. There is unfortunately no automatic way to import
+updated standard form guidance into `eforms-guidance.csv` and `eforms-guidance.json` as 
+
+- some of the imported standard forms guidance has been adapted to the eForms structure and semantics
+- there is no way to distinguish the imported guidance that has been left untouched from the imported guidance that has been adapted
+
+Automatically overwriting the guidance that has been imported would consequently lead to the loss of the adapted guidance. The recommended method is
+to pick the BTs that had their standard form guidance updated and manually update them in `eforms-guidance.json`, taking into account the
+context of eForms and adapt the guidance when necessary. Then, spread the guidance with `scripts/mapping_spread_guidance.py` (see below)
+
+## Spreading the guidance of BTs for all notices
+
+In the guidance files (`output/mapping/eForms/eforms-guidance.*`), each row represents the details of the combination of a BT and a notice in which it is
+present. The guidance of BT applies for all the notices where it is present, this guidance must consequently be spread every time a BT has its guidance
+updated.
+
+The end of the script is tweaked to return the `id` of the next row to tackle (e.g. next with empty guidance), so that you don't need to scroll too much.
+
+Required files:
+
+- `output/mapping/eForms/eforms-guidance.json`
+
+This is done with the following command, updates `eforms-guidance.json` and `output/mapping/eForms/eforms-guidance.csv`:
+
+```bash
+python3 scripts/mapping_spread_guidance.py 
+```
+
+## Showing statistics about the progress of the eForms mapping
+
+This script gives an overview of the progress of the mapping. Its output should regularly be added to `output/mapping/eForms/README.md`
+to make this progress public.
+
+Required files:
+
+- `output/mapping/eForms/eforms-guidance.csv`
+
+This is done with the following command:
+
+```shell
+python3 scripts/mapping_eforms_stats.py
+```
+
+## Updating BT details from the Annex
+
+Required files:
+
+- `output/mapping/eForms/annex.csv`, where the updated BT details come from
+- `output/mapping/eForms/eforms-guidance.csv`
+
+This is done with the following command:
+
+```shell
+python3 scripts/mapping_add_annex_bt_details.py 
+```
+
+## Guidance in JSON
+
+The guidance is easier to edit in JSON format.
