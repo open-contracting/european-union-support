@@ -1,10 +1,9 @@
 import os
-import pandas as pd
 from copy import deepcopy
 from pathlib import Path
 from typing import List
 
-
+import pandas as pd
 # This script concatenates the eForm-SF mapping CSV extracted from the Excel files
 # It deduplicates identical rows
 # It explodes rows that hold several BT to SF level mappings

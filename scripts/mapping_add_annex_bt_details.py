@@ -1,5 +1,6 @@
-import pandas as pd
 import os
+
+import pandas as pd
 
 # This script adds or updates
 # - legal status fields (M or O)

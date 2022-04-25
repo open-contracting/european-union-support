@@ -1,7 +1,8 @@
-import sys
 import os
+import sys
 import time
 from pathlib import Path
+
 import pandas as pd
 
 # This script spreads the index values across all mappings.
@@ -37,9 +38,7 @@ csvsTime = sorted(csvsTime, key=lambda item: item['time'], reverse=True)
 # For each CSV, only keep the xpath and index (SF level/section) columns and append it to the df_concat dataframe
 df_concat = pd.DataFrame()
 for file in csvsTime:
-    df = pd.read_csv(file['path'], usecols=[
-                 'xpath', 'guidance', 'label-key']
-                 , keep_default_na=False)
+    df = pd.read_csv(file['path'], usecols=['xpath', 'guidance', 'label-key'], keep_default_na=False)
     df = pd.merge(df, identifiers, 'left', on='xpath')
     *others, df['file'] = str(file['path']).split('/')
     df_concat = pd.concat([df_concat, df], ignore_index=True)

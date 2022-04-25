@@ -48,12 +48,9 @@ to_remove = [
     'Form type'
 ]
 
-
-
 for column in df.columns:
     if column in to_remove or 'Unnamed' in column:
         df.drop([column], inplace=True, axis='columns')
-
 
 # Add new columns
 df.loc[df['guidance'].str.len() > 0, 'status'] = 'imported_from_sf'
@@ -73,5 +70,3 @@ if type(df['eforms_xpath'][0]) == str:
 
 # To JSON
 df.to_json('output/mapping/eForms/BT-xpath-sfGuidance.json', orient='records', indent=2, lines=False)
-
-

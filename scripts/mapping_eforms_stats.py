@@ -1,5 +1,4 @@
 import pandas as pd
-from decimal import getcontext, Decimal
 
 # Read the eForms guidance file
 df: pd.DataFrame = pd.read_csv('output/mapping/eForms/eforms-guidance.csv', keep_default_na=False)
@@ -40,7 +39,7 @@ print(f'''# Description of the files
 - forms_noticeTypes.csv: a table that gives, for each eForms notice, its form type, its document type and the related legislation.
 - xpath_bt_mapping.csv: handmade mapping table made from the tables in "XPATHs provisional release v. 1.0.docx" published by the EU in May 2020 on their [eForms news](https://simap.ted.europa.eu/en_GB/web/simap/eforms)
 
-# eForms mapping progress   
+# eForms mapping progress
 
 Tracking of the progress of the guidance that will help implementors to publish OCDS data from eForms data.
 
@@ -66,4 +65,4 @@ Total number of rows (BT + notice number pair): {totalGuidance} (100%)
             - Mandatory: {issueM} rows ({str(int(issueM) / int(totalM) * 100)[0:5]}% of all M)
             - Optional: {issueO} rows ({str(int(issueO) / int(totalO) * 100)[0:5]}% of all O)
 - No guidance and no issue (= untouched yet): {woIssuewoGuidance} rows ({str(int(woIssuewoGuidance) / int(totalGuidance) * 100)[0:5]}% of total)
-''')
+''')  # noqa: E501

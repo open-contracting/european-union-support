@@ -1,5 +1,6 @@
-import pandas as pd
 import ast
+
+import pandas as pd
 
 
 def spreadGuidance(row1: pd.Series) -> None:
