@@ -1,44 +1,17 @@
 # 2019 Regulation (eForms)
 
-## Setup the environment
-
-Read more about Python virtual environments in the [Python documentation](https://docs.python.org/3/tutorial/venv.html).
-
-You can also use [pipenv](https://pypi.org/project/pipenv/).
-
-1. Create and activate a virtual environment using the `venv` module:
+## Install requirements
 
 ```shell
-# Create the virtual environment
-python3 -m venv .venv
-
-# Activate it
-# For bash:
-source .venv/bin/activate 
-
-# For fish:
-source .venv/bin/activate.fish
+pip install -r requirements.txt
 ```
 
-2. Install the required Python modules in the environment:
+## Concatenate the 2015 guidance
+
+This concatenates the 2015 guidance CSV files into a `concatenated.csv` file. It also merges the `standard-form-element-identifiers.csv` file, which replaces the `index` column with a new identifier.
 
 ```shell
-pip3 install -r requirements.txt
-```
-
-## Concatenate the OCDS guidance CSVs for standard forms in order spread the levels (index column)
-
-Required files:
-
-- standard forms OCDS guidance CSVs (one CSV per form)
-
-The following command creates:
-
-- `output/mapping/shared/concatenated.csv`
-- copies of the CSVs with spread index column in the `output/mapping/spreadIndex` directory
-
-```shell
-python3 scripts/mapping_sfXpath_sfLevel.py [path to CSVs, defaults to output/mapping]
+python scripts/mapping_sfXpath_sfLevel.py
 ```
 
 ## Concatenating and normalizing the SF level to eForms BT mappings
@@ -54,7 +27,7 @@ Required files:
 This is done with the following command and creates `output/mapping/eForms/BT-xpath-sfLevel.csv`.
 
 ```shell
-python3 scripts/mapping_BT_xpath_sfLevel.py [path to mapping CSVs, defaults to output/mapping/eForms/eFormsVsStandardForms]
+python scripts/mapping_BT_xpath_sfLevel.py [path to mapping CSVs, defaults to output/mapping/eForms/eFormsVsStandardForms]
 ```
 ## Importing guidance from SF
 
@@ -69,7 +42,7 @@ Required files:
 This is done with the following command and creates `output/mapping/eForms/BT-xpath-sfGuidance.json`:
 
 ```bash
-python3 scripts/mapping_import_sf_guidance.py 
+python scripts/mapping_import_sf_guidance.py
 ```
 
 `output/mapping/eForms/eforms-guidance.csv` and its JSON counterpart contain the OCDS guidance to map eForms XML elements to OCDS data structures.
@@ -98,7 +71,7 @@ Required files:
 This is done with the following command, updates `eforms-guidance.json` and `output/mapping/eForms/eforms-guidance.csv`:
 
 ```bash
-python3 scripts/mapping_spread_guidance.py 
+python scripts/mapping_spread_guidance.py
 ```
 
 ## Showing statistics about the progress of the eForms mapping
@@ -113,7 +86,7 @@ Required files:
 This is done with the following command:
 
 ```shell
-python3 scripts/mapping_eforms_stats.py
+python scripts/mapping_eforms_stats.py
 ```
 
 ## Updating BT details from the Annex
@@ -126,7 +99,7 @@ Required files:
 This is done with the following command:
 
 ```shell
-python3 scripts/mapping_add_annex_bt_details.py 
+python scripts/mapping_add_annex_bt_details.py
 ```
 
 ## Guidance in JSON
