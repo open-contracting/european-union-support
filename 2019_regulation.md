@@ -1,5 +1,7 @@
 # 2019 Regulation (eForms)
 
+Use `--help` for any `manage.py` command to learn about its function.
+
 ## Install requirements
 
 ```shell
@@ -8,10 +10,8 @@ pip install -r requirements.txt
 
 ## Concatenate the 2015 guidance
 
-This concatenates the 2015 guidance CSV files into a `concatenated.csv` file. It also merges the `standard-form-element-identifiers.csv` file, which replaces the `index` column with a new identifier.
-
 ```shell
-python scripts/mapping_sfXpath_sfLevel.py
+./manage.py concatenate
 ```
 
 ## Concatenating and normalizing the SF level to eForms BT mappings
