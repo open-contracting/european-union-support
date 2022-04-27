@@ -10,14 +10,14 @@ task :sample do
 
   case ENV['RELEASE']
   when 'R2.0.9', nil
-    prefix = 'source/TED_publication_R2.0.9.S03.E01_007'
+    prefix = 'source/TED_publication_R2.0.9'
   when 'R2.0.8'
-    prefix = 'source/TED_publication_R2.0.8.S04.E01_003'
+    prefix = 'source/TED_publication_R2.0.8'
   else
     raise "unexpected release: #{ENV['RELEASE']}"
   end
 
-  files("#{prefix}/{}*.xsd").each do |filename|
+  files("#{prefix}/{F,MOVE}{}*.xsd").each do |filename|
     builder = XMLBuilder.new(filename, release: ENV['RELEASE'])
     builder.build
     File.open("output/samples/#{builder.basename}.xml", 'w') do |f|
