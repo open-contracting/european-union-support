@@ -11,45 +11,54 @@ Using the fish shell:
 
     # Get the mapping from label keys to text labels.
     # https://publications.europa.eu/en/web/eu-vocabularies/e-procurement/tedschemas
-    curl -o Forms_Labels_R209S01.zip https://publications.europa.eu/documents/3938058/5358176/Forms_Labels_R209.zip/6e5fa3bc-62bf-0b66-0ae2-c1979d445355
-    unzip Forms_Labels_R209S01.zip
+    curl -sS -o Forms_labels_R209.xlsx https://op.europa.eu/documents/3938058/9351229/Forms_Labels_R209.xlsx/ff1f70e3-7aad-1648-d564-559c49ee70c4
     in2csv Forms_labels_R209.xlsx > 'Forms labels R2.09.csv'
-    rm -f Forms_Labels_R209S01.zip Forms_labels_R209.xlsx
+    rm -f Forms_labels_R209.xlsx
 
     # Get the template PDFs containing label keys for R2.0.9.
-    curl -o Archive.zip 'https://publications.europa.eu/documents/3938058/5358176/Archive.zip/ce7ceb02-94b0-04e8-8b9f-7fb4acf1ccdb'
-    unzip Archive.zip -d TED_forms_templates_R2.0.9
+    curl -sS -o Archive.zip https://op.europa.eu/documents/3938058/5358176/Archive.zip/ce7ceb02-94b0-04e8-8b9f-7fb4acf1ccdb
+    unzip -q Archive.zip -d TED_forms_templates_R2.0.9
     rm -rf Archive.zip TED_forms_templates_R2.0.9/__MACOSX
 
     # Get the template PDFs containing label keys for R2.0.8.
     mkdir -p TED_forms_templates_R2.0.8
-    curl -o TED_forms_templates_R2.08.pdf https://publications.europa.eu/documents/3938058/5358176/2011_09-04_LB_2.pdf/be1e3e03-30e7-34ac-465e-39da20dfc154
+    curl -sS -o TED_forms_templates_R2.08.pdf https://op.europa.eu/documents/3938058/5358176/2011_09-04_LB_2.pdf/be1e3e03-30e7-34ac-465e-39da20dfc154
     set form 01 02 03 04 05 06 07 08 09 10 11 12 13 15 16 17 18 19
-    set l 7 18 26 38 49 58 65 68 72 77 82 88 93 105 111 123 131 138
+    # First page.
     set f 1
-    for i in (seq 1 18); pdfseparate -f $f -l $l[$i] TED_forms_templates_R2.08.pdf t-%d.pdf; pdfunite t-*.pdf TED_forms_templates_R2.0.8/F{$form[$i]}.pdf; rm -f t-*.pdf; set f (echo "$l[$i] + 1" | bc); end
+    # Last page.
+    set l 7 18 26 38 49 58 65 68 72 77 82 88 93 105 111 123 131 138
+    for i in (seq 1 18)
+        pdfseparate -f $f -l $l[$i] TED_forms_templates_R2.08.pdf t-%d.pdf
+        pdfunite t-*.pdf TED_forms_templates_R2.0.8/F{$form[$i]}.pdf
+        rm -f t-*.pdf
+        set f (echo "$l[$i] + 1" | bc)
+    end
+    rm -f TED_forms_templates_R2.08.pdf
 
     # Get the English PDFs.
     # http://simap.ted.europa.eu/standard-forms-for-public-procurement
     mkdir -p English
-    for i in 01 02 03 04 05 06 07 08 12 13 14 15 20 21 22 23 24 25; curl -o English/EN_F$i.pdf https://simap.ted.europa.eu/documents/10184/99173/EN_F{$i}.pdf; end
-    for i in 16 17 18; curl -o English/EN_F$i.pdf https://simap.ted.europa.eu/documents/10184/49059/sf_{$i}_en.pdf; end
-    curl -o English/EN_F19.pdf https://simap.ted.europa.eu/documents/10184/49059/sf_019_en.pdf/179d1c44-05d3-4f35-b25e-bb8d619d9733
-    for i in 01 02; curl -o English/EN_T$i.pdf https://simap.ted.europa.eu/documents/10184/49059/t{$i}_en.pdf; end
+    for i in 01 02 03 04 05 06 07 08 12 13 14 15 20 21 22 23 24 25
+        curl -sS -o English/EN_F$i.pdf https://simap.ted.europa.eu/documents/10184/99173/EN_F{$i}.pdf
+    end
+    for i in 16 17 18
+        curl -sS -o English/EN_F$i.pdf https://simap.ted.europa.eu/documents/10184/49059/sf_{$i}_en.pdf
+    end
+    curl -sS -o English/EN_F19.pdf https://simap.ted.europa.eu/documents/10184/49059/sf_019_en.pdf/179d1c44-05d3-4f35-b25e-bb8d619d9733
+    for i in 01 02
+        curl -sS -o English/EN_T$i.pdf https://simap.ted.europa.eu/documents/10184/49059/t{$i}_en.pdf
+    end
 
     # Get the XML schema for R2.0.9.
-    curl -o TEDFTP_Schema_20181030_TED_publication.zip https://publications.europa.eu/documents/3938058/5358455/latest_publication_R2.0.9.S03.E01_007-20181030.zip/d3adafe5-cb3a-4ac5-5dca-f4aea09b99a8
-    unzip TEDFTP_Schema_20181030_TED_publication.zip TED_publication_R2.0.9.S03.E01_007-20181030.zip
-    unzip TED_publication_R2.0.9.S03.E01_007-20181030.zip -d TED_publication_R2.0.9.S03.E01_007
-    rm -f TEDFTP_Schema_20181030_TED_publication.zip TED_publication_R2.0.9.S03.E01_007-20181030.zip
-    rm -f TED_publication_R2.0.9.S03.E01_007/{common_prod.xsd,DEVCO.xsd,TED_EXPORT.xsd,xlink.xsd}
+    curl -sS -o TED_publication_R2.0.9.zip https://op.europa.eu/documents/3938058/9351229/TED_publication_R2.0.9.S05.E01_001-20210730.zip/0fc38de3-a2ae-a239-0885-4017d12f8a22
+    unzip -q TED_publication_R2.0.9.zip -d TED_publication_R2.0.9
+    rm -f TED_publication_R2.0.9.zip TED_publication_R2.0.9/{common_prod.xsd,TED_EXPORT.xsd,xlink.xsd}
 
     # Get the XML schema for R2.0.8.
-    curl -o TEDFTP_Schema_20180515_TED_publication.zip https://publications.europa.eu/documents/3938058/5358176/latest_publication_R2.0.8.S04.E01_003-20180515.zip/4aa79bef-bee7-ff35-b7bd-9365bad7f488
-    unzip TEDFTP_Schema_20180515_TED_publication.zip TED_publication_R2.0.8.S04.E01_003-20180515.zip
-    unzip TED_publication_R2.0.8.S04.E01_003-20180515.zip -d TED_publication_R2.0.8.S04.E01_003
-    rm -f TEDFTP_Schema_20180515_TED_publication.zip TED_publication_R2.0.8.S04.E01_003-20180515.zip
-    rm -f TED_publication_R2.0.8.S04.E01_003/{common_prod.xsd,EEIG.xsd,OTH_NOT.xsd,TED_EXPORT.xd,TED_EXPORT.xsd,xlink.xsd}
+    curl -sS -o TED_publication_R2.0.8.zip https://op.europa.eu/documents/3938058/8012911/TED_publication_R2.0.8.S05.E01_002-20201027.zip/78530eed-1879-d8c1-df16-e4bcf8d54ea0
+    unzip -q TED_publication_R2.0.8.zip -d TED_publication_R2.0.8
+    rm -f TED_publication_R2.0.8.zip TED_publication_R2.0.8/{common_prod.xsd,EEIG.xsd,OTH_NOT.xsd,TED_EXPORT.xd,TED_EXPORT.xsd,xlink.xsd}
 
     cd ..
 
@@ -61,11 +70,11 @@ Create sample XML files for each form's schema:
 
 Or for specific schema:
 
-    bundle exec rake sample FILES=F01,F02,F03,F14,F20
+    bundle exec rake sample FILES=01,02,03,14,20
 
 Or for a specific release:
 
-    bundle exec rake sample RELEASE=R2.0.8 FILES=F16,F17,F18,F19
+    bundle exec rake sample RELEASE=R2.0.8 FILES=16,17,18,19
 
 See the comments in `sample.rake` to understand why tools like Oxygen are insufficient.
 
@@ -102,7 +111,7 @@ Fill in `enumerations.csv`:
 
 Once completed, run `rake label:missing` to see which XML elements and attributes have no key, and which keys have no XML element or attribute and aren't in `ignore.csv`:
 
-    bundle exec rake label:missing FILES=F01,F02,F03
+    bundle exec rake label:missing FILES=F01,F02,F03,F04,F05,F06,F07,F08,F12,F13,F14,F15,F20,F21,F22,F23,F24,F25,MOVE
 
 Many XPath's are common across forms. To copy guidance across forms, run:
 
