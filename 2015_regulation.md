@@ -195,17 +195,17 @@ Print a list of fields for which there are no extensions:
 
 In addition to the resources linked under prerequisites above, there is a [TED eSenders wiki](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender), which contains:
 
-* [XML Schema 2.0.9](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9), in particular: [Overview](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.1.Overview) and [Form structure](https://webgate.ec.europa.eu/fpfis/wikis/pages/viewpage.action?spaceKey=TEDeSender&title=XML+Schema+2.0.9#XMLSchema2.0.9-2.2.Formstructure)
+* [XML Schema 2.0.9](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/3.3.+XML+Schema+2.0.9), in particular: [Overview](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/3.3.+XML+Schema+2.0.9#id-3.3.XMLSchema2.0.9-Overview.) and [Form structure](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/3.3.+XML+Schema+2.0.9#id-3.3.XMLSchema2.0.9-2.2.Formstructure)
 * [Standard forms guidance](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/2.4.1.+Standard+forms+guidance), in particular: Field explanations ([public link](https://ec.europa.eu/docsroom/documents/24191/attachments/1/translations/en/renditions/native)) (PDF)
 * [Instructions for the use of 14](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/2.4.2.+Instructions+for+the+use+of+F14) ([public link](http://simap.ted.europa.eu/documents/10184/166101/Instructions+for+the+use+of+F14_EN.pdf/909e4b38-1871-49a1-a206-7a5976a2d262)) (PDF)
-* [FAQ](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/FAQ) (click "Expand all")
-* [Contacts](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/Contacts)
+* [FAQ](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/11.+FAQ) (click "Expand all")
+* [Contacts](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/7.+Contacts)
 
 The "Tree browser" on the ["Pages" page](https://webgate.ec.europa.eu/fpfis/wikis/collector/pages.action?key=TEDeSender) serves as a table of contents.
 
-The [reception schema files](https://publications.europa.eu/en/web/eu-vocabularies/e-procurement/tedschemas) include Excel validation rules, which also maps XML elements to human-readable text. **This is the most useful summary of the TED schema.** It is described in the [wiki](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/XML+Schema+2.0.9#XMLSchema2.0.9-5.Descriptionofvalidationrules). They also contains an XLST validation tool.
+The [reception schema files](https://op.europa.eu/en/web/eu-vocabularies/e-procurement/tedschemas) include Excel validation rules, which also maps XML elements to human-readable text. **This is the most useful summary of the TED schema.** It is described in the [wiki](https://webgate.ec.europa.eu/fpfis/wikis/display/TEDeSender/3.3.+XML+Schema+2.0.9#id-3.3.XMLSchema2.0.9-5.Descriptionofvalidationrules). They also contains an XLST validation tool.
 
-The FTP server (ftp://eu-tenders:eu-tenders-123@ted.europa.eu) has a document (ftp://eu-tenders:eu-tenders-123@ted.europa.eu/Resources/TED-XML_general_description_v2%200_20160219.pdf) (PDF) describing the structure of the FTP server, of individual resources and of notices (without much detail on the FORM section), and information on mapping forms labels and XML elements in R2.0.9 (essentially asking the user do the work of this repository 🤯). I haven't figured out how to use the "HTML/PDF rendering web service" it describes.
+The [FTP server](ftp://eu-tenders:eu-tenders-123@ted.europa.eu) has a [document](ftp://eu-tenders:eu-tenders-123@ted.europa.eu/Resources/TED-XML_general_description_v2.0_20160219.pdf) (PDF) describing the structure of the FTP server, of individual resources and of notices (without much detail on the FORM section), and information on mapping forms labels and XML elements in R2.0.9 (essentially asking the user do the work of this repository 🤯). I haven't figured out how to use the "HTML/PDF rendering web service" it describes.
 
 #### Schema notes
 
@@ -222,7 +222,7 @@ TED has reception, internal and publication schema. We use the publication schem
 
 * Replace `R2\.0\.9\.S0[A-Z\d.]+` with `R2.0.9.S0X` (no semantic change)
 * Replace `Last update ?:[\d/ ]+` with `Last update :` (no semantic change)
-* Run `diff -ruw <folderA> <folderB>`
+* Run `diff -ruw <directoryA> <directoryB>`
 
 The publication schema sometimes has `minOccurs="0"` where the reception and internal schema don't. To ignore that:
 
@@ -250,7 +250,7 @@ The remaining differences are in `F14_2014.xsd` (choice), `F20_2014.xsd` (`PUBLI
 
 #### By OCP
 
-By March 2017, Data Unlocked (Simon Whitehouse) authored a [draft mapping](https://drive.google.com/drive/folders/0B5qzJROt-jZ0Vm9UNHNMVE5JOHM) to OCDS from a spreadsheet that was among the materials in a [consultation on eForms](http://ec.europa.eu/growth/content/targeted-consultation-eforms-next-generation-public-procurement-standard-forms-0_en) ending January 30, 2017. An [updated version](https://docs.google.com/spreadsheets/d/1W6eJiYEHkuQVSNzHtUdFbsYse0aTfZXtU-XjLRVVSyg/edit) of the [original spreadsheet](https://docs.google.com/spreadsheets/d/11uDaomY1mK-_h9FPW9D1o7D8_z_vR6Z4nxWgqbHc39g/edit?usp=sharing) accompanying the consultation was shared with OCP. This mapping was [reviewed](https://drive.google.com/drive/folders/0B7agx7YesblKS2NxQTdJMEw5Q2s). Some next steps and use cases were discussed at a [workshop in Kiev](https://docs.google.com/document/d/1gBOVMsiSVholLfS4s41bX4FOjLqIustdtKGYtqoAndU/edit#heading=h.v6nxv59w4s43). However, both spreadsheets were abandoned in the latest consultation. [Draft extensions](https://github.com/open-contracting-archive/trade) where authored; these were all reviewed as part of this project, and are mentioned in the `comment` columns of mapping files where relevant.
+By March 2017, Data Unlocked (Simon Whitehouse) authored a [draft mapping](https://drive.google.com/drive/folders/0B5qzJROt-jZ0Vm9UNHNMVE5JOHM) to OCDS from a spreadsheet that was among the materials in a [consultation on eForms](http://ec.europa.eu/growth/content/targeted-consultation-eforms-next-generation-public-procurement-standard-forms-0_en) ending January 30, 2017. An [updated version](https://docs.google.com/spreadsheets/d/1W6eJiYEHkuQVSNzHtUdFbsYse0aTfZXtU-XjLRVVSyg/edit) of the [original spreadsheet](https://docs.google.com/spreadsheets/d/11uDaomY1mK-_h9FPW9D1o7D8_z_vR6Z4nxWgqbHc39g/edit?usp=sharing) accompanying the consultation was shared with OCP. This mapping was [reviewed](https://drive.google.com/drive/folders/0B7agx7YesblKS2NxQTdJMEw5Q2s). Some next steps and use cases were discussed at a [workshop in Kiev](https://docs.google.com/document/d/1gBOVMsiSVholLfS4s41bX4FOjLqIustdtKGYtqoAndU/edit#heading=h.v6nxv59w4s43). However, both spreadsheets were abandoned in the latest consultation. [Draft extensions](https://github.com/open-contracting-archive/trade) were authored; these were all reviewed as part of this project, and are mentioned in the `comment` columns of mapping files where relevant.
 
 Other work from 2015 includes [ocds-ted](https://github.com/timgdavies/ocds-ted) by Tim Davies, which has draft extensions and links to a [very early draft mapping](https://docs.google.com/spreadsheets/d/13AMbfIhjg9j-7IsKWJ3-tdnVXWzHdqnARtHpzMownoU/edit#gid=1338855215) based on Publication Office's: XML labels mapping spreadsheet, forms labels spreadsheet, and a subset of possible XPaths in XML data. There is earlier, similar work in a [gist](https://gist.github.com/timgdavies/cc0e571aef7224d5e546), in particular this [documentation](https://gist.github.com/timgdavies/cc0e571aef7224d5e546#file-1-ocds-to-ted-mapping-documentation-md) and [script](https://gist.github.com/timgdavies/cc0e571aef7224d5e546#file-tedxml-py). These efforts are largely superseded by the later work by Data Unlocked. A copy of the TED schema can be browsed in this repository:
 
