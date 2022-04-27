@@ -97,11 +97,10 @@ def xlsx2csv():
             }, errors='raise', inplace=True)
 
             # The first column is empty.
-            # TODO: Uncomment
-            # if df['Empty'].isna().all():
-            #     df.drop(columns='Empty', inplace=True)
-            # else:
-            #     raise click.ClickException(f"The first column was expected to be empty.")
+            if df['Empty'].isna().all():
+                df.drop(columns='Empty', inplace=True)
+            else:
+                raise click.ClickException(f"The first column was expected to be empty.")
 
             # Make values easier to work with (must occur after `isna` above).
             df.fillna('', inplace=True)
