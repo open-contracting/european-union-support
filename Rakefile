@@ -45,7 +45,10 @@ def files(glob)
   else
     replacement = '*'
   end
-  Dir[glob.sub('{}', replacement)].sort
+
+  matches = Dir[glob.sub('{}', replacement)]
+  raise "expected files to be found" if matches.empty?
+  matches.sort
 end
 
 def pdftotext(path)
@@ -93,4 +96,3 @@ def select_move_rows(data, number)
 end
 
 Dir['tasks/*.rake'].each { |r| import r }
-Dir['legacy/*.rake'].each { |r| import r }
