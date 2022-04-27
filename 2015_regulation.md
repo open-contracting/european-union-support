@@ -68,11 +68,7 @@ Create sample XML files for each form's schema:
 
     bundle exec rake sample
 
-Or for specific schema:
-
-    bundle exec rake sample FILES=01,02,03,14,20
-
-Or for a specific release:
+For release R2.0.8:
 
     bundle exec rake sample RELEASE=R2.0.8 FILES=16,17,18,19
 
@@ -111,6 +107,7 @@ Fill in `enumerations.csv`:
 
 Once completed, run `rake label:missing` to see which XML elements and attributes have no key, and which keys have no XML element or attribute and aren't in `ignore.csv`:
 
+    # Excludes F16,F17,F18,F19.
     bundle exec rake label:missing FILES=F01,F02,F03,F04,F05,F06,F07,F08,F12,F13,F14,F15,F20,F21,F22,F23,F24,F25,MOVE
 
 Many XPath's are common across forms. To copy guidance across forms, run:
@@ -191,20 +188,6 @@ Print a list of fields for which there are no extensions:
 
 * Label keys are expected to change less frequently than labels. The code therefore focuses on label keys.
 * XML schema are expected to change more frequently than the XML they describe (e.g. reordering and refactoring). However, no XML samples provided by the Publication Office or generated from XSD by tools like Oxygen describe the same range of possibilities as described by XML schema. The code therefore generates its own eccentric samples.
-
-## Exploration
-
-Early on, I transformed the XML schema to CSV summaries, both to understand the structure of the schema through implementation, and to get an easy overview of the XML schema, which were otherwise quite referential.
-
-Transform all form schema into CSV files:
-
-    bundle exec rake legacy:common legacy:forms
-
-Or transform a specific directory and specific form schema:
-
-    bundle exec rake legacy:common legacy:forms DIRECTORY=source/TED_publication_R2.0.9.S03.E01_006 FILES=F01,F02,F03,F14,F20
-
-I also attempted to map elements and attributes in the XML to labels on the forms using the Publication Office's [form label mappings](https://publications.europa.eu/en/web/eu-vocabularies/e-procurement/tedschemas), but the file covers only forms 1-6, doesn't cover all XML elements, doesn't use full XPaths, isn't machine-interpretable, etc.; manual interpretation would require at least the same effort as the above process. The Excel validation rules in the reception schema files map elements and attributes to descriptions, but these are not the same as the labels on the forms.
 
 ## Reference
 
