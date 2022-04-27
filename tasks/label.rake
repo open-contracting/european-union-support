@@ -57,17 +57,22 @@ namespace :label do
     form_title_labels = [
       'notice_contract_award', # F03
       'notice_contract_award_sub', # F03
+      'notice_periodic_utilities', # F04
+      'notice_contract_utilities', # F05
       'notice_award_utilities', # F06
       'notice_contract_award_sub', # F06
+      'notice_buyer_profile', # F08
       'notice_relates_to', # F08
       'notice_result_design_cont', # F13
       'notice_corrigendum', # F14
       'notice_corrigendum_sub', # F14
+      'notice_ex_ante', # F15
       'notice_mod', # F20
       'notice_mod_sub', # F20
       'notice_social_public', # F21
       'notice_social_util', # F22
       'notice_social_concess', # F23
+      'notice_concession', # F24
       'notice_pubservice_pin', # T01
       'notice_pubservice_pin_expl', # T01
       'notice_pubservice_award', # T02
