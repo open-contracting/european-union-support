@@ -97,7 +97,7 @@ def extract_xlsx():
         r'^F\d\d vs eN\d\d( \(2\))?$',
         r'^SF\d\d vs eForm ?\d\d(,\d\d)*$'
     )]
-    keep = re.compile(r'^(?:eForm|eN) ?(\d\d?(?:,\d\d)*) vs S?F(\d\d ?)$')
+    keep = re.compile(r'^(?:eForm|eN) ?(\d\d?(?:,\d\d)*) vs S?F(\d\d) ?$')
 
     overrides = {
         'III.2.1.1.1': 'Information and formalities necessary for evaluating if the requirements are met:',
@@ -241,7 +241,7 @@ def merge():
     ).merge(
         df, left_on='ID', right_on='BT ID', how='outer'
     ).sort_values(
-        ['BT ID', 'eformsNotice', 'sfNotice']
+        ['ID', 'eformsNotice', 'sfNotice']
     ).to_csv(eformsdir / '3-bt-xpath-indices-mapping.csv', index=False, columns=[
         # 2-bt-indices-mapping.csv except "Indent level" and 1-xpath-bt-mapping.csv except "Additional information".
         'ID', 'Name', 'Data type', 'Repeatable', 'Description', 'Legal Status', 'Level', 'Element', 'eformsNotice',
