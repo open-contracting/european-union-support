@@ -1,8 +1,9 @@
 mkdir -p source
 cd source
 
+# https://op.europa.eu/en/web/eu-vocabularies/e-procurement/tedschemas
+
 # Get the mapping from label keys to text labels.
-# https://publications.europa.eu/en/web/eu-vocabularies/e-procurement/tedschemas
 curl -sS -o Forms_labels_R209.xlsx https://op.europa.eu/documents/3938058/9351229/Forms_Labels_R209.xlsx/ff1f70e3-7aad-1648-d564-559c49ee70c4
 in2csv Forms_labels_R209.xlsx > 'Forms labels R2.09.csv'
 rm -f Forms_labels_R209.xlsx
@@ -28,8 +29,9 @@ for i in (seq 1 18)
 end
 rm -f TED_forms_templates_R2.08.pdf
 
-# Get the English PDFs.
 # http://simap.ted.europa.eu/standard-forms-for-public-procurement
+
+# Get the English PDFs.
 mkdir -p English
 for i in 01 02 03 04 05 06 07 08 12 13 14 15 20 21 22 23 24 25
     curl -sS -o English/EN_F$i.pdf https://simap.ted.europa.eu/documents/10184/99173/EN_F{$i}.pdf
@@ -51,5 +53,3 @@ rm -f TED_publication_R2.0.9.zip TED_publication_R2.0.9/{common_prod.xsd,TED_EXP
 curl -sS -o TED_publication_R2.0.8.zip https://op.europa.eu/documents/3938058/8012911/TED_publication_R2.0.8.S05.E01_002-20201027.zip/78530eed-1879-d8c1-df16-e4bcf8d54ea0
 unzip -q TED_publication_R2.0.8.zip -d TED_publication_R2.0.8
 rm -f TED_publication_R2.0.8.zip TED_publication_R2.0.8/{common_prod.xsd,EEIG.xsd,OTH_NOT.xsd,TED_EXPORT.xd,TED_EXPORT.xsd,xlink.xsd}
-
-cd ..
