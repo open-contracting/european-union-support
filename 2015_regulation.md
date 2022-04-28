@@ -11,7 +11,7 @@ pip install -r requirements.txt
 
 ### Download prerequisites
 
-    fish scripts/download.fish
+    fish scripts/2015_download.fish
 
 ### Create sample XML files
 
