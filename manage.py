@@ -13,6 +13,7 @@ from docx import Document
 basedir = Path(__file__).resolve().parent
 sourcedir = basedir / 'source'
 mappingdir = basedir / 'output' / 'mapping'
+eformsdir = mappingdir / 'eForms'
 
 
 def excel_files():
@@ -21,19 +22,6 @@ def excel_files():
             with zipfile.open(name) as fileobj:
                 with pd.ExcelFile(fileobj) as xlsx:
                     yield name, xlsx
-
-
-def text(row):
-    # Newlines occur in all columns except the first, e.g.:
-    # /*/cac:ContractingParty/cac:ContractingRepresentationType/cbc:RepresentationTypeCode
-    # /*/cac:ProcurementProjectLot/cac:TenderingTerms/cac:TenderRecipientParty/cbc:EndpointID
-    # Leading or trailing whitespace occur in the first and third columns, e.g.:
-    # /*/cac:ProcurementProjectLot/cac:ProcurementProject/cbc:EstimatedOverallContractQuantity
-    # /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Change/efbc:ChangedNoticeIdentifier
-    cells = [cell.text.replace('\n', ' ').strip() for cell in row.cells]
-    # Correct a typo.
-    cells[0] = cells[0].replace('[@n listName=', '[@listName=')
-    return cells
 
 
 @click.group()
@@ -58,8 +46,21 @@ def find(sheet):
 @cli.command()
 def extract_docx():
     """
-    Extract CSV file from DOCX file.
+    Extract the mapping from eForms XPaths to Business Terms, as a CSV file from the DOCX file.
     """
+
+    def text(row):
+        # Newlines occur in all columns except the first, e.g.:
+        # /*/cac:ContractingParty/cac:ContractingRepresentationType/cbc:RepresentationTypeCode
+        # /*/cac:ProcurementProjectLot/cac:TenderingTerms/cac:TenderRecipientParty/cbc:EndpointID
+        # Leading or trailing whitespace occur in the first and third columns, e.g.:
+        # /*/cac:ProcurementProjectLot/cac:ProcurementProject/cbc:EstimatedOverallContractQuantity
+        # /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Change/efbc:C...
+        cells = [cell.text.replace('\n', ' ').strip() for cell in row.cells]
+        # Correct a typo.
+        cells[0] = cells[0].replace('[@n listName=', '[@listName=')
+        return cells
+
     docx = Document(sourcedir / 'XPATHs provisional release v. 1.0.docx')
 
     length = len(docx.tables)
@@ -77,15 +78,13 @@ def extract_docx():
             continue
         data.append(cells)
 
-    df = pd.DataFrame(data, columns=['eforms_xpath', 'bt', 'name', 'notes'])
-
-    df.to_csv(mappingdir / 'eForms' / 'xpath_bt_mapping.csv', index=False)
+    pd.DataFrame(data, columns=columns).to_csv(eformsdir / '1-xpath-bt-mapping.csv', index=False)
 
 
 @cli.command()
 def extract_xlsx():
     """
-    Extract CSV files from XLSX files.
+    Extract a mapping from Business Terms to form indices for multiple forms, as a CSV file from the XLSX files.
     """
     ignore = {
         'Annex table 2',
@@ -207,7 +206,47 @@ def extract_xlsx():
 
             dfs.append(df)
 
-    pd.concat(dfs, ignore_index=True).to_csv(mappingdir / 'eForms' / 'extract.csv')
+    pd.concat(dfs, ignore_index=True).to_csv(eformsdir / '2-bt-indices-mapping.csv', index=False)
+
+
+
+@cli.command()
+def merge():
+    """
+    Merge CSV files to generate a mapping across eForms XPaths, Business Terms and form indices.
+    """
+    # Sort by 'BT ID' to simplify the for-loop.
+    df = pd.read_csv(eformsdir / '1-xpath-bt-mapping.csv').sort_values('BT ID')
+
+    current_row = {'BT ID': None}
+
+    # 1-xpath-bt-mapping.csv repeats XPaths 8 times, which we want to combine.
+    data = []
+    for i, row in df.iterrows():
+        if not i:
+            current_row = row
+        elif row['BT ID'] != current_row['BT ID']:
+            data.append(current_row)
+            if row['BT ID'] == "":
+                row['BT ID'] = f'no_BT_{row["XPATH"].rsplit(":", 1)[-1]}_{i}'  # invent a unique ID
+            current_row = row
+        else:
+            current_row['XPATH'] += f';{row["XPATH"]}'
+
+    df = pd.DataFrame(data, columns=df.columns)
+
+    # Without `dtype`, pandas writes the integers as floats with decimals.
+    pd.read_csv(
+        eformsdir / '2-bt-indices-mapping.csv', dtype={'eformsNotice': str, 'sfNotice': str}
+    ).merge(
+        df, left_on='ID', right_on='BT ID', how='outer'
+    ).sort_values(
+        ['BT ID', 'eformsNotice', 'sfNotice']
+    ).to_csv(eformsdir / '3-bt-xpath-indices-mapping.csv', index=False, columns=[
+        # 2-bt-indices-mapping.csv except "Indent level" and 1-xpath-bt-mapping.csv except "Additional information".
+        'ID', 'Name', 'Data type', 'Repeatable', 'Description', 'Legal Status', 'Level', 'Element', 'eformsNotice',
+        'sfNotice', 'XPATH', 'BT Name'
+    ])
 
 
 @cli.command()
@@ -219,7 +258,7 @@ def concatenate():
     - Concatenate the CSV files for the 2015 regulation.
     - Merge the standard-form-element-identifiers.csv file, which replaces the index column with a new identifier.
     """
-    identifiers = pd.read_csv(mappingdir / 'eForms' / 'standard-form-element-identifiers.csv')
+    identifiers = pd.read_csv(eformsdir / 'standard-form-element-identifiers.csv')
 
     dfs = []
     for path in mappingdir.glob('*.csv'):
