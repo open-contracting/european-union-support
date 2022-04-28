@@ -1,34 +1,20 @@
 # 2019 Regulation (eForms)
 
-Use `--help` for any `manage.py` command to learn about its function.
+## Download prerequisites
 
-## Install requirements
+    fish scripts/2019_download.fish
 
-```shell
-pip install -r requirements.txt
-```
+`Task 5_Support_Standard Forms-eForms mappings_v.3.zip` was received via email from the European Commission.
+
+## Pre-process prerequisites
+
+    ./manage.py extract_docx
+    ./manage.py extract_xlsx
 
 ## Concatenate the 2015 guidance
 
-```shell
-./manage.py concatenate
-```
+    ./manage.py concatenate
 
-## Concatenating and normalizing the SF level to eForms BT mappings
-
-The script concatenates and prepares the SF level/eForms BTs mapping CSVs.
-
-Required files:
-
-- SF/eForms mapping CSVs in `output/mapping/eForms/eFormsVsStandardForms/` (created from
-`Task 5_Support_Standard Forms-eForms mappings_v.3.zip`, received from the European Commission via email)
-- BT/Xpath mapping CSV in `output/mapping/eForms/xpath_bt_mapping.csv` created from the data published in [XPATHs provisional release v. 1.0.docx](https://simap.ted.europa.eu/documents/10184/320101/XPATHs+provisional+release+v.+1.0/f74a6976-af15-4bad-99ce-9a4684b60dba)([SIMAP eForms Web site](https://simap.ted.europa.eu/en_GB/web/simap/eforms), 25th of May 2020)
-
-This is done with the following command and creates `output/mapping/eForms/BT-xpath-sfLevel.csv`.
-
-```shell
-python scripts/mapping_BT_xpath_sfLevel.py [path to mapping CSVs, defaults to output/mapping/eForms/eFormsVsStandardForms]
-```
 ## Importing guidance from SF
 
 Through a BT/SF level mapping, OCDS guidance for eForms can be imported from standard forms.

@@ -2,13 +2,6 @@
 
 ## Usage
 
-### Install dependencies
-
-```
-bundle
-pip install -r requirements.txt
-```
-
 ### Download prerequisites
 
     fish scripts/2015_download.fish
