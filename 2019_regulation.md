@@ -8,8 +8,8 @@
 
 ## Pre-process prerequisites
 
-    ./manage.py extract_docx
-    ./manage.py extract_xlsx
+    ./manage.py extract-docx
+    ./manage.py extract-xlsx
 
 ## Concatenate the 2015 guidance
 
