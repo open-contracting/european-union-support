@@ -157,7 +157,7 @@ T01 and T02 are particular: both use the same schema (`MOVE.xsd`), and neither h
 
 Re-order rows to more closely match the PDF templates:
 
-    fish scripts/move.fish
+    fish scripts/reorder.fish
 
 You can now generate a table for each form, displaying, for each element and attribute, the index within the PDF ("I.1"), the label (in any language) and the XPath, to which you can then add guidance for OCDS.
 
