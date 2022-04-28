@@ -41,12 +41,10 @@ for i in F15
     ex --noplugin -s -V1 -c (grep -n DIRECTIVE_2014_24_EU/PT_AWARD_CONTRACT_WITHOUT_CALL, {$i}*.csv | cut -d: -f1)m(grep -n DIRECTIVE_2014_23_EU/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION, {$i}*.csv | cut -d: -f1) --noplugin -c wq {$i}*.csv
 
     for x in DIRECTIVE_2014_24_EU DIRECTIVE_2014_25_EU DIRECTIVE_2009_81_EC
-        ex --noplugin -s -V1 -c (grep -n $x/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE, {$i}*.csv | cut -d: -f1),(grep -n $x/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_JUSTIFICATION {$i}*.csv | cut -d: -f1)m\$ --noplugin -c wq {$i}*.csv
-        ex --noplugin -s -V1 -c (grep -n $x/PT_AWARD_CONTRACT_WITHOUT_CALL, {$i}*.csv | head -n 1 | cut -d: -f1),(grep -n $x/PT_AWARD_CONTRACT_WITHOUT_CALL/D_JUSTIFICATION {$i}*.csv | cut -d: -f1)m\$ --noplugin -c wq {$i}*.csv
+        ex --noplugin -s -V1 -c (grep -n $x/PT_NEGOTIATED_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE, {$i}*.csv | cut -d: -f1),(grep -n $x/PT_AWARD_CONTRACT_WITHOUT_CALL/D_JUSTIFICATION {$i}*.csv | cut -d: -f1)m\$ --noplugin -c wq {$i}*.csv
     end
     for x in DIRECTIVE_2014_23_EU
-        ex --noplugin -s -V1 -c (grep -n $x/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE, {$i}*.csv | cut -d: -f1),(grep -n $x/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_JUSTIFICATION {$i}*.csv | cut -d: -f1)m\$ --noplugin -c wq {$i}*.csv
-        ex --noplugin -s -V1 -c (grep -n $x/PT_AWARD_CONTRACT_WITHOUT_CALL, {$i}*.csv | head -n 1 | cut -d: -f1),(grep -n $x/PT_AWARD_CONTRACT_WITHOUT_CALL/D_JUSTIFICATION {$i}*.csv | cut -d: -f1)m\$ --noplugin -c wq {$i}*.csv
+        ex --noplugin -s -V1 -c (grep -n $x/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_ACCORDANCE_ARTICLE, {$i}*.csv | cut -d: -f1),(grep -n $x/PT_AWARD_CONTRACT_WITHOUT_CALL/D_JUSTIFICATION {$i}*.csv | cut -d: -f1)m\$ --noplugin -c wq {$i}*.csv
     end
 end
 
