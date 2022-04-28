@@ -28,10 +28,6 @@ For release R2.0.8:
 
     bundle exec rake label:xpath RELEASE=R2.0.8 FILES=F16,F17,F18,F19
 
-Then, re-order rows to more closely match the PDF templates:
-
-    fish scripts/move.fish
-
 You're now ready to map label keys to XPath values. As setup, if you have two monitors, open a form's template PDF and English PDF side-by-side in one monitor, to make it easy to see the text label of each label key in context. In a text editor, open `ignore.csv`, `enumerations.csv` and a form's sample XML and XPath CSV.
 
 Fill in each form's XPath CSV:
@@ -56,54 +52,101 @@ Fill in `enumerations.csv`:
 Once completed, run `rake label:missing` to see which XML elements and attributes have no key, and which keys have no XML element or attribute and aren't in `ignore.csv`:
 
     # Excludes F16,F17,F18,F19.
-    bundle exec rake label:missing FILES=F01,F02,F03,F04,F05,F06,F07,F08,F12,F13,F14,F15,F20,F21,F22,F23,F24,F25,MOVE
+    bundle exec rake label:missing FILES=F01,F02,F03,F04,F05,F06,F07,F08,F12,F13,F14,F15,F20,F21,F22,F23,F24,F25
 
-Many XPath's are common across forms. To copy guidance across forms, run:
+Many XPath's are common across forms. Copy guidance across forms:
 
-    bundle exec rake label:copy SOURCE=F01 # Revert change to /LEFTI/PARTICULAR_PROFESSION in F12_2014.csv and /OBJECT_CONTRACT/OBJECT_DESCR in F20_2014.csv
-    bundle exec rake label:copy SOURCE=F02 FILES=F03,F05,F06,F07,F12,F13,F15,F21,F22,F24 # Revert change to /LEFTI/PARTICULAR_PROFESSION in F12_2014.csv
-    bundle exec rake label:copy SOURCE=F03 FILES=F06,F13,F15,F21,F22
-    bundle exec rake label:copy SOURCE=F04 FILES=F05,F06,F07,F08,F12,F13,F15,F21,F22,F23,F24,F25 # Revert change to LEFTI/PARTICULAR_PROFESSION in F12_2014.csv
+    bundle exec rake label:copy SOURCE=F01
+    bundle exec rake label:copy SOURCE=F02 FILES=F03,F05,F06,F07,F12,F13,F15,F21,F22,F23,F24,F25
+    bundle exec rake label:copy SOURCE=F03 FILES=F06,F13,F15,F21,F22,F23,F25
+    bundle exec rake label:copy SOURCE=F04 FILES=F05,F06,F07,F08,F12,F13,F15,F21,F22,F23,F24,F25
     bundle exec rake label:copy SOURCE=F06 FILES=F22
     bundle exec rake label:copy SOURCE=F07 FILES=F22
     bundle exec rake label:copy SOURCE=F12 FILES=F13
     bundle exec rake label:copy SOURCE=F21 FILES=F22,F23,F25
     bundle exec rake label:copy SOURCE=F23 FILES=F25
     bundle exec rake label:copy SOURCE=F24 FILES=F25
-    bundle exec rake label:copy SOURCE=F03 FILES=MOVE
-    bundle exec rake label:copy SOURCE=F14 FILES=MOVE
 
-Review the copied guidance after running:
+Then, revert undesired changes to:
 
-    bundle exec rake label:copy SOURCE=F03 FILES=F20,F23,F25,MOVE
+* `F12_2014.csv`: `/LEFTI/PARTICULAR_PROFESSION`
+* `F20_2014.csv`: `/OBJECT_CONTRACT/OBJECT_DESCR`
+* `F23_2014.csv`: `/AWARD_CONTRACT`
+* `F25_2014.csv`: `/AWARD_CONTRACT`
+
+Copy guidance across forms with a greater number of uncertain changes:
+
+    bundle exec rake label:copy SOURCE=F03 FILES=F20
     bundle exec rake label:copy SOURCE=F06 FILES=F20
     bundle exec rake label:copy SOURCE=F15 FILES=F23,F25
+
+Then, review and, if appropriate, revert undesired changes to:
+
+* `F20_2014.csv`:
+  * `/OBJECT_CONTRACT/OBJECT_DESCR`
+  * `/PROCEDURE/NOTICE_NUMBER_OJ`
+  * `/AWARD_CONTRACT/CONTRACT_NO`
+  * `/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL`
+  * `/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY`
+* `F23_2014.csv`
+  * `/AWARD_CONTRACT`
+  * `/AWARD_CONTRACT/AWARDED_CONTRACT`
+  * `/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS`
+* `F25_2014.csv`:
+  * `/AWARD_CONTRACT`
+  * `/AWARD_CONTRACT/AWARDED_CONTRACT`
+  * `/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS`
 
 Many label keys are ignored across forms. To pre-populate across forms, run:
 
     bundle exec rake label:ignore
 
+Note: Running `label:ignore` at a later time might reintroduce values in the `numbers` column that were manually removed.
+
 Report any CSV quoting errors:
 
     bundle exec rake label:validate
 
-Report any inconsistencies in mappings across forms. Note that some forms use check boxes instead of radio buttons, and some change tense from present to past.
+Report any inconsistencies in mappings across forms. Some differences are appropriate; for example, some forms use check boxes instead of radio buttons, and some change the tense of the label from present to past. The XPaths mentioned above are expected to be inconsistent.
 
     bundle exec rake label:consistent
 
-T01 and T02 are particular: both use the same schema (`MOVE.xsd`), and neither has a PDF template. The most efficient process is to: reverse-engineer the label keys from the English PDF; create an XPath CSV for `MOVE.xsd`; copy guidance; manually update some `label-key` values; pre-populate `ignore.csv`; then check for missing items:
+#### T01 and T02
 
-    bundle exec rake label:reverse
-    bundle exec rake label:xpath FILES=MOVE
-    bundle exec rake label:copy SOURCE=F01 FILES=MOVE
-    bundle exec rake label:copy SOURCE=F03 FILES=MOVE
-    bundle exec rake label:copy SOURCE=F14 FILES=MOVE
-    bundle exec rake label:ignore FILES=MOVE FORM=T01
-    bundle exec rake label:ignore FILES=MOVE FORM=T02
-    bundle exec rake label:missing FILES=MOVE FORM=T01
-    bundle exec rake label:missing FILES=MOVE FORM=T02
+T01 and T02 are particular: both use the same schema (`MOVE.xsd`), and neither has a PDF template. The most efficient process is to:
+
+* Reverse-engineer the label keys from the English PDF:
+
+        bundle exec rake label:reverse
+
+* Create an XPath CSV for `MOVE.xsd`:
+
+        bundle exec rake label:xpath FILES=MOVE
+
+* Copy guidance:
+
+        bundle exec rake label:copy SOURCE=F01 FILES=MOVE
+        bundle exec rake label:copy SOURCE=F03 FILES=MOVE
+        bundle exec rake label:copy SOURCE=F14 FILES=MOVE
+
+* Manually update some `label-key` values
+* Pre-populate `ignore.csv` (see above caveat):
+
+        bundle exec rake label:ignore FILES=MOVE FORM=T01
+        bundle exec rake label:ignore FILES=MOVE FORM=T02
+
+* Check for missing items:
+
+        bundle exec rake label:missing FILES=MOVE FORM=T01
+        bundle exec rake label:missing FILES=MOVE FORM=T02
+
+* Review and, if appropriate, revert undesired changes to `/AWARD_CONTRACT` and `/AWARD_CONTRACT/AWARDED_CONTRACT/VALUES/VAL_TOTAL/@CURRENCY` in `MOVE.csv`.
 
 ### Build tables for OCDS guidance
+
+Re-order rows to more closely match the PDF templates:
+
+    fish scripts/move.fish
 
 You can now generate a table for each form, displaying, for each element and attribute, the index within the PDF ("I.1"), the label (in any language) and the XPath, to which you can then add guidance for OCDS.
 

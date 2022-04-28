@@ -132,21 +132,24 @@ namespace :label do
       end
     end
 
-    files('source/TED_forms_templates_R2.0.9/{}*.pdf').each do |filename|
-      basename = File.basename(filename)
+    # The T01 and T02 forms don't have a PDF with labels to compare to.
+    if ENV['FILES'] != 'MOVE'
+      files('source/TED_forms_templates_R2.0.9/{}*.pdf').each do |filename|
+        basename = File.basename(filename)
 
-      text = pdftotext(filename)
-      labels = label_keys(text)
-      indices = indices(text)
+        text = pdftotext(filename)
+        labels = label_keys(text)
+        indices = indices(text)
 
-      difference = Set.new(labels.reject{ |key| help_text?(key) || key[regex] }) - label_keys_seen
-      if difference.any?
-        puts "#{basename}: #{difference.to_a.join(', ')}"
-      end
+        difference = Set.new(labels.reject{ |key| help_text?(key) || key[regex] }) - label_keys_seen
+        if difference.any?
+          puts "#{basename}: #{difference.to_a.join(', ')}"
+        end
 
-      difference = Set.new(indices) - indices_seen
-      if difference.any?
-        puts "#{basename}: #{difference.to_a.join(', ')}"
+        difference = Set.new(indices) - indices_seen
+        if difference.any?
+          puts "#{basename}: #{difference.to_a.join(', ')}"
+        end
       end
     end
   end
@@ -352,7 +355,7 @@ namespace :label do
       # Footnotes
       '1', '2', '3', '4',
       # Right margin
-      'PDF T01 EN 2018-10-02 12:12',
+      'PDF T01 EN 2021-12-01 11:28',
       'PDF T02 EN 2018-10-02 12:38',
       # Footer
       'EN Standard form T01 – 1370/07 – Art 7(2) – Prior information notice for public service contract',
@@ -360,7 +363,9 @@ namespace :label do
     ]
 
     label_fixes = {
-      'Bus transport services (urban/regional)' => ['Bus transport services (urban/regional) '], # extra space
+      'Bus transport services (urban / regional)' => ['Bus transport services (urban / regional) '], # extra whitespace
+      'National or federal agency/office' => ['National or federal agency / office'], # extra whitespace
+      'Regional or local agency/office' => ['Regional or local agency / office'], # extra whitespace
       'Direct awards' => ['Direct award'], # "modified to singular"
       # Multiple labels (T01).
       'Name and addresses (please identify all competent authorities responsible for this procedure)' => ['Name and addresses', 'please identify all competent authorities responsible for this procedure'],
@@ -439,7 +444,7 @@ namespace :label do
       end
 
       failure.each do |label|
-        puts "unexpected label: #{label}"
+        puts "unexpected label: #{label.inspect}"
       end
 
       File.open("output/labels/#{basename}.csv", 'w') do |f|

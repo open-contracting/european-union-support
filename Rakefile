@@ -45,9 +45,10 @@ def files(glob)
   else
     replacement = '*'
   end
+  glob.sub!('{}', replacement)
 
-  matches = Dir[glob.sub('{}', replacement)]
-  raise "expected files to be found" if matches.empty?
+  matches = Dir[glob]
+  raise "expected files to be found (#{glob})" if matches.empty?
   matches.sort
 end
 
