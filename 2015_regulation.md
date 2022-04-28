@@ -2,6 +2,13 @@
 
 ## Usage
 
+### Install dependencies
+
+```
+bundle
+pip install -r requirements.txt
+```
+
 ### Download prerequisites
 
     fish scripts/download.fish
@@ -54,6 +61,8 @@ Once completed, run `rake label:missing` to see which XML elements and attribute
     # Excludes F16,F17,F18,F19.
     bundle exec rake label:missing FILES=F01,F02,F03,F04,F05,F06,F07,F08,F12,F13,F14,F15,F20,F21,F22,F23,F24,F25
 
+### Copy guidance across forms
+
 Many XPath's are common across forms. Copy guidance across forms:
 
     bundle exec rake label:copy SOURCE=F01
@@ -97,6 +106,8 @@ Then, review and, if appropriate, revert undesired changes to:
   * `/AWARD_CONTRACT/AWARDED_CONTRACT`
   * `/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS`
 
+### Check the CSV files
+
 Many label keys are ignored across forms. To pre-populate across forms, run:
 
     bundle exec rake label:ignore
@@ -111,7 +122,7 @@ Report any inconsistencies in mappings across forms. Some differences are approp
 
     bundle exec rake label:consistent
 
-#### T01 and T02
+### Map the T01 and T02 forms
 
 T01 and T02 are particular: both use the same schema (`MOVE.xsd`), and neither has a PDF template. The most efficient process is to:
 
@@ -154,12 +165,6 @@ You can now generate a table for each form, displaying, for each element and att
     for i in 01 02; rake table LANGUAGE=EN FILES=MOVE FORM=T$i > path/to/european-union/docs/forms/T$i.md; end
 
 ### Find fields for which to write extensions
-
-You need `ocdskit` and `ocdsextensionregistry` Python modules. You can install them both using pip:
-
-```
-pip install ocdskit
-```
 
 Generate a release schema with all extensions applied, except the PPP extension (which removes fields):
 
