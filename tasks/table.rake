@@ -46,7 +46,7 @@ task :table do
   def report(rows, message)
     if rows.any?
       $stderr.puts "#{rows.size} #{message}"
-      $stderr.puts rows
+      $stderr.puts rows.map(&:to_a).inspect
       $stderr.puts
     end
   end

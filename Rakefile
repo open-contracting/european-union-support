@@ -85,15 +85,15 @@ def select_move_rows(data, number)
   case number
   when 'T01'
     label_key = 'envisaged_start'
-    pattern = 'AWARD_CONTRACT|LEFTI|OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS'
+    reject_pattern = 'AWARD_CONTRACT|LEFTI|OBJECT_CONTRACT/OBJECT_DESCR/ESSENTIAL_ASSETS'
   when 'T02'
     label_key = 'start_date_duration'
-    pattern = 'PROCEDURE'
+    reject_pattern = 'PROCEDURE'
   else
     raise "unexpected form: #{number}"
   end
   data.find{ |row| row['xpath'] == '/OBJECT_CONTRACT/OBJECT_DESCR/DURATION' }['label-key'] = label_key
-  data.reject{ |row| row['xpath'][%r{\A/(?:#{pattern})}] }
+  data.reject{ |row| row['xpath'][%r{\A/(?:#{reject_pattern})}] }
 end
 
 Dir['tasks/*.rake'].each { |r| import r }

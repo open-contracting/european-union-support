@@ -443,6 +443,15 @@ namespace :label do
         end
       end
 
+      # The XML files have these elements, but the PDF files do not have corresponding text.
+      if basename == 'EN_T01'
+        success.insert(success.find_index('type_direct_award_internal'), 'type_direct_award_circumstance_rail')
+      elsif basename == 'EN_T02'
+        success.insert(success.find_index('address_legal_control') + 1, 'national_id')
+      else
+        raise "unexpected basename: #{basename}"
+      end
+
       failure.each do |label|
         puts "unexpected label: #{label.inspect}"
       end
