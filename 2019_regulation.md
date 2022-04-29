@@ -18,11 +18,21 @@ Merge the extracted data:
 
     ./manage.py merge
 
-Combine guidance for the 2015 regulation:
+Concatenate guidance for the 2015 regulation:
 
     ./manage.py concatenate
 
-At this point, we have a `3-bt-xpath-indices-mapping.csv` file, which maps eForms XPaths to form indices, and a `concatenated.csv` file, which maps form indices to guidance for the 2015 regulation.
+At this point, we have:
+
+- `3-bt-xpath-indices-mapping.csv`: Maps eForms XPaths to form indices (combining `1-xpath-bt-mapping.csv` and `2-bt-indices-mapping.csv`).
+- `4-bt-bg-hierarchy.csv`: Lists each Business Term's and Business Group's ancestors.
+- `concatenated.csv`: Maps form indices to guidance for the 2015 regulation (merging `standard-form-element-identifiers.csv`, which is manually edited).
+
+
+
+To update the progress of the mapping, run:
+
+    ./manage.py statistics
 
 
 
@@ -51,24 +61,7 @@ Required files:
 
 This is done with the following command, updates `eforms-guidance.json` and `output/mapping/eForms/eforms-guidance.csv`:
 
-```bash
-python script/mapping_spread_guidance.py
-```
-
-## Showing statistics about the progress of the eForms mapping
-
-This script gives an overview of the progress of the mapping. Its output should regularly be added to `output/mapping/eForms/README.md`
-to make this progress public.
-
-Required files:
-
-- `output/mapping/eForms/eforms-guidance.csv`
-
-This is done with the following command:
-
-```shell
-python script/mapping_eforms_stats.py
-```
+    python script/mapping_spread_guidance.py
 
 ## Updating BT details from the Annex
 
@@ -79,10 +72,14 @@ Required files:
 
 This is done with the following command:
 
-```shell
-python script/mapping_add_annex_bt_details.py
-```
+    python script/mapping_add_annex_bt_details.py
 
-## Guidance in JSON
+# Description of the files
 
-The guidance is easier to edit in JSON format.
+- annex.csv: CSV copy of the annex to the eForms directive downloaded at [https://ec.europa.eu/docsroom/documents/43488]
+- BT-xpath-sfGuidance.csv and BT-xpath-sfGuidance.json: this is the result of running `mapping_import_sf_guidance.py`. It is a guidance file pre-filled with guidance imported from the standard forms guidance. This is the same as eforms-guidance.csv and eforms-guidance.json, but without the new guidance and the corrections made to the imported guidance.
+- BT_xpath_corrections.csv: corrections to the official BT to Xpath mapping
+- common_operations.md: guidance for common operations for eForms to OCDS mapping
+- eforms-guidance.csv and eforms-guidance.json: intially produced by `mapping_import_sf_guidance.py`, then filled by hand and with `mapping_spread_guidance.py`. It is the working file to edit the guidance to map eForms BT to OCDS. A CSV copy is generated when `mapping_spread_guidance.py` is run. The CSV copy is not supposed to be edited by hand.
+- forms_noticeTypes.csv: a table that gives, for each eForms notice, its form type, its document type and the related legislation.
+- xpath_bt_mapping.csv: handmade mapping table made from the tables in "XPATHs provisional release v. 1.0.docx" published by the EU in May 2020 on their [eForms news](https://simap.ted.europa.eu/en_GB/web/simap/eforms)

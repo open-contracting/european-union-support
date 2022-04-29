@@ -348,6 +348,57 @@ def concatenate():
 
 
 @cli.command()
+def statistics():
+    df = pd.read_csv(eformsdir / 'eforms-guidance.csv', keep_default_na=False)
+    df_with_issue = df.loc[df['status'].str.startswith('issue')]
+
+    with_guidance = len(df.loc[df['guidance'] != ''].index)
+    manual_guidance = len(df.loc[df['status'].str.startswith('done')].index)
+    with_issue = df_with_issue.index.size
+    with_issue_with_guidance = len(df_with_issue.loc[df['guidance'] == ''].index)
+    with_issue_without_guidance = len(df_with_issue.loc[df['guidance'] != ''].index)
+    imported_guidance = len(df.loc[df['status'] == 'imported from standard forms'].index)
+    total_guidance = len(df.index)
+    without_issue_without_guidance = len(df.loc[(df['guidance'] == '') & (df['status'] == '')].index)
+    total_mandatory = len(df.loc[(df['legal_status'] == 'M')].index)
+    total_optional = len(df.loc[(df['legal_status'] == 'O')].index)
+    done_mandatory = len(df.loc[((df['legal_status'] == 'M') & (df['status'].str.startswith('done')))].index)
+    done_optional = len(df.loc[(df['legal_status'] == 'O') & (df['status'].str.startswith('done'))].index)
+    issue_mandatory = len(df_with_issue.loc[(df['legal_status'] == 'M')].index)
+    issue_optional = len(df_with_issue.loc[(df['legal_status'] == 'O')].index)
+    ready_review = imported_guidance + manual_guidance
+
+    # Stats per BT (instead of BT/notice pair)
+    df_bts = df.drop_duplicates(subset='BT')
+    bts_number = df_bts.index.size
+    status_done_nb = df_bts[df_bts['status'].str.startswith('done')].index.size
+    status_not_done_nb = bts_number - status_done_nb
+
+    click.echo(dedent(f"""\
+    Total number of rows (BT + notice number pair): {total_guidance} (100%)
+
+    - Ready for review: {ready_review} ({ready_review / total_guidance:.1%} of total)
+        - imported from standard forms guidance: {imported_guidance} rows ({imported_guidance / total_guidance:.1%} of total)
+        - new guidance: {manual_guidance} rows ({manual_guidance / total_guidance:.1%} of total)
+            - per BT legal status
+                - Mandatory: {done_mandatory} rows ({done_mandatory / total_mandatory:.1%} of all M)
+                - Optional: {done_optional} rows ({done_optional / total_optional:.1%} of all O)
+        - per BT (instead of per BT/notice pair)
+            - total number of BT: {bts_number}
+            - BTs that have guidance ready for review: {status_done_nb} ({status_done_nb / bts_number:.1%})
+            - BTs that don't have satisfactory guidance (no guidance or issue pending): {status_not_done_nb} ({status_not_done_nb / bts_number:.1%})
+    - With [open issue](https://github.com/open-contracting/european-union-support/labels/eforms): {with_issue} rows ({with_issue / total_guidance:.1%} of total)
+      - with guidance: {with_issue_with_guidance} rows
+      - without guidance yet: {with_issue_without_guidance} rows
+      - per BT legal status
+                - Mandatory: {issue_mandatory} rows ({issue_mandatory / total_mandatory:.1%} of all M)
+                - Optional: {issue_optional} rows ({issue_optional / total_optional:.1%} of all O)
+    - No guidance and no issue (= untouched yet): {without_issue_without_guidance} rows ({without_issue_without_guidance / total_guidance:.1%} of total)
+    """))  # noqa: E501
+
+
+
+@cli.command()
 @click.argument('file', type=click.File())
 def fields_without_extensions(file):
     subjects = {
