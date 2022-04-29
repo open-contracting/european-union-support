@@ -351,27 +351,27 @@ def statistics():
     df = pd.read_csv(eformsdir / 'eforms-guidance.csv', keep_default_na=False)
 
     df_terms = df.drop_duplicates(subset='BT')
-    total_terms = df_terms.index.size
-    done_terms = df_terms[df_terms['status'].str.startswith('done')].index.size
+    total_terms = df_terms.shape[0]
+    done_terms = df_terms[df_terms['status'].str.startswith('done')].shape[0]
 
-    total = df.index.size
-    imported = df.loc[df['status'] == 'imported from standard forms'].index.size
-    done = df.loc[df['status'].str.startswith('done')].index.size
+    total = df.shape[0]
+    imported = df[df['status'] == 'imported from standard forms'].shape[0]
+    done = df[df['status'].str.startswith('done')].shape[0]
     ready = imported + done
-    no_issue_no_guidance = df.loc[(df['status'] == '') & (df['guidance'] == '')].index.size
+    no_issue_no_guidance = df[(df['status'] == '') & (df['guidance'] == '')].shape[0]
 
-    df_issue = df.loc[df['status'].str.startswith('issue')]
-    issue = df_issue.index.size
-    issue_no_guidance = df_issue.loc[df['guidance'] == ''].index.size
+    df_issue = df[df['status'].str.startswith('issue')]
+    issue = df_issue.shape[0]
+    issue_no_guidance = df_issue[df_issue['guidance'] == ''].shape[0]
 
-    df_mandatory = df.loc[df['legal_status'] == 'M']
-    df_optional = df.loc[df['legal_status'] == 'O']
-    total_mandatory = df_mandatory.index.size
-    total_optional = df_optional.index.size
-    done_mandatory = df_mandatory.loc[df['status'].str.startswith('done')].index.size
-    done_optional = df_optional.loc[df['status'].str.startswith('done')].index.size
-    issue_mandatory = df_mandatory.loc[df['status'].str.startswith('issue')].index.size
-    issue_optional = df_optional.loc[df['status'].str.startswith('issue')].index.size
+    df_mandatory = df[df['legal_status'] == 'M']
+    df_optional = df[df['legal_status'] == 'O']
+    total_mandatory = df_mandatory.shape[0]
+    total_optional = df_optional.shape[0]
+    done_mandatory = df_mandatory[df_mandatory['status'].str.startswith('done')].shape[0]
+    done_optional = df_optional[df_optional['status'].str.startswith('done')].shape[0]
+    issue_mandatory = df_mandatory[df_mandatory['status'].str.startswith('issue')].shape[0]
+    issue_optional = df_optional[df_optional['status'].str.startswith('issue')].shape[0]
 
     click.echo(dedent(f"""\
     - BTs ready for review: {done_terms}/{total_terms} ({done_terms / total_terms:.1%})

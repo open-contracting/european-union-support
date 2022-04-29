@@ -12,11 +12,14 @@ Extract data from the source files:
 
     ./manage.py extract-docx
     ./manage.py extract-xlsx-mapping
-    ./manage.py extract-xlsx-hierarchy
 
 Merge the extracted data:
 
     ./manage.py merge
+
+Extract data from another source file:
+
+    ./manage.py extract-xlsx-hierarchy
 
 Concatenate guidance for the 2015 regulation:
 
@@ -28,13 +31,19 @@ At this point, we have:
 - `4-bt-bg-hierarchy.csv`: Lists each Business Term's and Business Group's ancestors.
 - `concatenated.csv`: Maps form indices to guidance for the 2015 regulation (merging `standard-form-element-identifiers.csv`, which is manually edited).
 
-
+---
 
 To update the progress of the mapping, run:
 
     ./manage.py statistics
 
+## Design
 
+### CLI
+
+* Each source file has a single corresponding command, which extracts data to a tracked file. Corrections to the source file are made here, exclusively. In this way, it is easy to review whether any changes to the final outputs are caused by changes to the source files.
+
+---
 
 `output/mapping/eForms/eforms-guidance.csv` and its JSON counterpart contain the OCDS guidance to map eForms XML elements to OCDS data structures.
 These files are copies of `BT-xpath-sfGuidance.json` that have later been updated, improved. There is unfortunately no automatic way to import
@@ -82,4 +91,3 @@ This is done with the following command:
 - common_operations.md: guidance for common operations for eForms to OCDS mapping
 - eforms-guidance.csv and eforms-guidance.json: intially produced by `mapping_import_sf_guidance.py`, then filled by hand and with `mapping_spread_guidance.py`. It is the working file to edit the guidance to map eForms BT to OCDS. A CSV copy is generated when `mapping_spread_guidance.py` is run. The CSV copy is not supposed to be edited by hand.
 - forms_noticeTypes.csv: a table that gives, for each eForms notice, its form type, its document type and the related legislation.
-- xpath_bt_mapping.csv: handmade mapping table made from the tables in "XPATHs provisional release v. 1.0.docx" published by the EU in May 2020 on their [eForms news](https://simap.ted.europa.eu/en_GB/web/simap/eforms)
