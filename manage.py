@@ -50,6 +50,9 @@ def find(sheet):
 def extract_docx():
     """
     Extract the mapping from eForms XPaths to Business Terms, as a CSV file from the DOCX file.
+
+    \b
+    Creates or updates output/mapping/eForms/1-xpath-bt-mapping.csv
     """
 
     def text(row):
@@ -90,6 +93,9 @@ def extract_docx():
 def extract_xlsx():
     """
     Extract a mapping from Business Terms to form indices for multiple forms, as a CSV file from the XLSX files.
+
+    \b
+    Creates or updates output/mapping/eForms/2-bt-indices-mapping.csv
     """
     ignore = {
         'Annex table 2',
@@ -152,6 +158,9 @@ def extract_xlsx():
             # Add notice number columns, using '1' instead of '01' to ease joins with forms_noticeTypes.csv.
             df['eformsNotice'] = [[number.lstrip('0') for number in eforms_notice_number.split(',')] for i in df.index]
             df['sfNotice'] = sf_notice_number
+
+            # Trim whitespace.
+            df['Name'] = df['Name'].str.strip()
 
             # Make values easier to work with (must occur after `isna` above).
             df.fillna('', inplace=True)
@@ -228,6 +237,9 @@ def extract_xlsx():
 def merge():
     """
     Merge CSV files to generate a mapping across eForms XPaths, Business Terms and form indices.
+
+    \b
+    Creates or updates output/mapping/eForms/3-bt-xpath-indices-mapping.csv
     """
 
     def add(data, current_row):
@@ -293,7 +305,7 @@ def concatenate():
 
     # ignore_index is required, as each data frame repeats indices. Re-order the columns.
     pd.concat(dfs, ignore_index=True).to_csv(
-        mappingdir / 'shared' / 'concatenated.csv',
+        eformsdir / 'concatenated.csv',
         columns=['xpath', 'label-key', 'index', 'guidance', 'file']
     )
 
