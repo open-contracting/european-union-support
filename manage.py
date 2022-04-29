@@ -60,7 +60,7 @@ def extract_docx():
         # /*/cac:ProcurementProjectLot/cac:ProcurementProject/cbc:EstimatedOverallContractQuantity
         # /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Change/efbc:C...
         cells = [cell.text.replace('\n', ' ').strip() for cell in row.cells]
-        # Correct a typo.
+        # XXX: Correct a typo.
         cells[0] = cells[0].replace('[@n listName=', '[@listName=')
         return cells
 
@@ -79,7 +79,8 @@ def extract_docx():
         # Skip subheadings.
         if not xpath.startswith('/'):
             continue
-        if cells[1] == '–':  # n-dash
+        # XXX: Correct a typo (n-dash instead of empty).
+        if cells[1] == '–':
             cells[1] = ''
         data.append(cells)
 
@@ -107,6 +108,7 @@ def extract_xlsx_mapping():
     )]
     keep = re.compile(r'^(?:eForm|eN) ?(\d\d?(?:,\d\d)*) vs S?F(\d\d) ?$')
 
+    remove_newlines = re.compile(r'\n(?=\(|(2009|Title III|and|requirements|subcontractor|will)\b)')
     explode = ['Level', 'Element']
 
     if 'DEBUG' in os.environ:
@@ -160,15 +162,19 @@ def extract_xlsx_mapping():
             # `explode` requires lists with the same number of elements, but an "Element" is not repeated if it is
             # the same for all "Level". Extra newlines also complicate things.
             for _, row in df.iterrows():
-                location = f'eForm {eforms_notice_number} - SF {sf_notice_number}: {row["ID"]}: '
+                location = f'eForm{eforms_notice_number} - SF{sf_notice_number}: {row["ID"]}: '
 
                 # Remove spurious newlines in "Element" values.
-                row['Element'] = re.sub(
-                    r'\n(?=\(|(2009|Title III|and|requirements|subcontractor|will)\b)', ' ',
-                    row['Element'].replace('\n\n', '\n')
-                )
+                row['Element'] = row['Element'].replace('\n\n', '\n')
+                if remove_newlines.search(row['Element']):
+                    # Display the newlines that were removed, for user to review.
+                    highlight = remove_newlines.sub(lambda m: click.style(m.group(0), blink=True), row['Element'])
+                    # Replace outside f-string ("SyntaxError: f-string expression part cannot include a backslash").
+                    highlight = highlight.replace('\n', '\\n')
+                    click.echo(f'{location}removed \\n: {highlight}')
+                    row['Element'] = remove_newlines.sub(' ', row['Element'])
 
-                # Hardcode corrections or cases requiring human interpretation.
+                # XXX: Hardcode corrections or cases requiring human interpretation.
                 if (
                     eforms_notice_number == '15'
                     and sf_notice_number == '7'
@@ -195,7 +201,7 @@ def extract_xlsx_mapping():
                 if '\n' not in row['Level']:
                     # Warn about remaining newlines (BT-531 twice).
                     if '\n' in row['Element']:
-                        click.secho(f'{location}unexpected \\n in "Element": {repr(row["Element"])}', fg='yellow')
+                        click.secho(f'{location}unexpected \\n: {repr(row["Element"])}', fg='yellow')
                     continue
 
                 # Split values, after removing leading and trailing newlines (occurs in "Level" values).
@@ -336,50 +342,42 @@ def concatenate():
 
 @cli.command()
 def statistics():
+    # `keep_default_na` avoids "ValueError: Cannot mask with non-boolean array containing NA / NaN values".
     df = pd.read_csv(eformsdir / 'eforms-guidance.csv', keep_default_na=False)
-    df_with_issue = df.loc[df['status'].str.startswith('issue')]
 
-    manual_guidance = len(df.loc[df['status'].str.startswith('done')].index)
-    with_issue = df_with_issue.index.size
-    with_issue_with_guidance = len(df_with_issue.loc[df['guidance'] == ''].index)
-    with_issue_without_guidance = len(df_with_issue.loc[df['guidance'] != ''].index)
-    imported_guidance = len(df.loc[df['status'] == 'imported from standard forms'].index)
-    total_guidance = len(df.index)
-    without_issue_without_guidance = len(df.loc[(df['guidance'] == '') & (df['status'] == '')].index)
-    total_mandatory = len(df.loc[(df['legal_status'] == 'M')].index)
-    total_optional = len(df.loc[(df['legal_status'] == 'O')].index)
-    done_mandatory = len(df.loc[((df['legal_status'] == 'M') & (df['status'].str.startswith('done')))].index)
-    done_optional = len(df.loc[(df['legal_status'] == 'O') & (df['status'].str.startswith('done'))].index)
-    issue_mandatory = len(df_with_issue.loc[(df['legal_status'] == 'M')].index)
-    issue_optional = len(df_with_issue.loc[(df['legal_status'] == 'O')].index)
-    ready_review = imported_guidance + manual_guidance
+    df_terms = df.drop_duplicates(subset='BT')
+    total_terms = df_terms.index.size
+    done_terms = df_terms[df_terms['status'].str.startswith('done')].index.size
 
-    # Stats per BT (instead of BT/notice pair)
-    df_bts = df.drop_duplicates(subset='BT')
-    bts_number = df_bts.index.size
-    status_done_nb = df_bts[df_bts['status'].str.startswith('done')].index.size
-    status_not_done_nb = bts_number - status_done_nb
+    total = df.index.size
+    imported = df.loc[df['status'] == 'imported from standard forms'].index.size
+    done = df.loc[df['status'].str.startswith('done')].index.size
+    ready = imported + done
+    no_issue_no_guidance = df.loc[(df['status'] == '') & (df['guidance'] == '')].index.size
+
+    df_issue = df.loc[df['status'].str.startswith('issue')]
+    issue = df_issue.index.size
+    issue_no_guidance = df_issue.loc[df['guidance'] == ''].index.size
+
+    df_mandatory = df.loc[df['legal_status'] == 'M']
+    df_optional = df.loc[df['legal_status'] == 'O']
+    total_mandatory = df_mandatory.index.size
+    total_optional = df_optional.index.size
+    done_mandatory = df_mandatory.loc[df['status'].str.startswith('done')].index.size
+    done_optional = df_optional.loc[df['status'].str.startswith('done')].index.size
+    issue_mandatory = df_mandatory.loc[df['status'].str.startswith('issue')].index.size
+    issue_optional = df_optional.loc[df['status'].str.startswith('issue')].index.size
 
     click.echo(dedent(f"""\
-    Total number of rows (BT + notice number pair): {total_guidance} (100%)
-
-    - Ready for review: {ready_review} ({ready_review / total_guidance:.1%} of total)
-        - imported from standard forms guidance: {imported_guidance} rows ({imported_guidance / total_guidance:.1%} of total)
-        - new guidance: {manual_guidance} rows ({manual_guidance / total_guidance:.1%} of total)
-            - per BT legal status
-                - Mandatory: {done_mandatory} rows ({done_mandatory / total_mandatory:.1%} of all M)
-                - Optional: {done_optional} rows ({done_optional / total_optional:.1%} of all O)
-        - per BT (instead of per BT/notice pair)
-            - total number of BT: {bts_number}
-            - BTs that have guidance ready for review: {status_done_nb} ({status_done_nb / bts_number:.1%})
-            - BTs that don't have satisfactory guidance (no guidance or issue pending): {status_not_done_nb} ({status_not_done_nb / bts_number:.1%})
-    - With [open issue](https://github.com/open-contracting/european-union-support/labels/eforms): {with_issue} rows ({with_issue / total_guidance:.1%} of total)
-      - with guidance: {with_issue_with_guidance} rows
-      - without guidance yet: {with_issue_without_guidance} rows
-      - per BT legal status
-                - Mandatory: {issue_mandatory} rows ({issue_mandatory / total_mandatory:.1%} of all M)
-                - Optional: {issue_optional} rows ({issue_optional / total_optional:.1%} of all O)
-    - No guidance and no issue (= untouched yet): {without_issue_without_guidance} rows ({without_issue_without_guidance / total_guidance:.1%} of total)
+    - BTs ready for review: {done_terms}/{total_terms} ({done_terms / total_terms:.1%})
+    - Rows ready for review: {ready}/{total} ({ready / total:.1%})
+        - Imported from 2015 guidance: {imported} ({imported / total:.1%})
+        - Added or edited after import: {done} ({done / total:.1%})
+        - Per legal status:
+            - Mandatory: {done_mandatory} ({done_mandatory / total_mandatory:.1%} of all M), {issue_mandatory} with open issues ({issue_mandatory / total_mandatory:.1%} of all M)
+            - Optional: {done_optional} ({done_optional / total_optional:.1%} of all O), {issue_optional} with open issues ({issue_optional / total_optional:.1%} of all O)
+    - Rows with [open issues](https://github.com/open-contracting/european-union-support/labels/eforms): {issue} ({issue / total:.1%}), {issue_no_guidance} without guidance
+    - Rows without issues and without guidance: {no_issue_no_guidance} ({no_issue_no_guidance / total:.1%})
     """))  # noqa: E501
 
 
