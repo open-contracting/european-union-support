@@ -48,7 +48,7 @@ def find(sheet):
 
 
 @cli.command()
-def extract_docx():
+def extract_xpath_mapping():
     """
     Extract a mapping between Business Terms and eForms XPaths.
 
@@ -92,7 +92,7 @@ def extract_docx():
 
 
 @cli.command()
-def extract_xlsx_mapping():
+def extract_indices_mapping():
     """
     Extract a mapping between Business Terms and form indices.
 
@@ -233,7 +233,7 @@ def extract_xlsx_mapping():
 
 
 @cli.command()
-def extract_xlsx_hierarchy():
+def extract_hierarchy():
     """
     Extract the hierarchy of Business Groups and Business Terms.
 
@@ -271,55 +271,6 @@ def extract_xlsx_hierarchy():
 
 
 @cli.command()
-def merge():
-    """
-    Merge CSV files to generate a mapping across eForms XPaths, Business Terms and form indices.
-
-    \b
-    Create or update output/mapping/eForms/3-bt-xpath-indices-mapping.csv
-    """
-
-    def add(data, current_row):
-        current_row['XPATH'] = ';'.join(sorted(current_row['XPATH']))  # for easy comparison
-        data.append(current_row)
-
-    # Sort by 'BT ID' to simplify the logic of the for-loop.
-    df = pd.read_csv(eformsdir / 'bt-xpath-mapping.csv').sort_values('BT ID')
-
-    # bt-xpath-mapping.csv repeats XPaths 8 times, which we want to combine.
-    data = []
-
-    current_row = {'BT ID': None, 'XPATH': []}
-
-    for _, row in df.iterrows():
-        if row['BT ID'] != current_row['BT ID']:
-            if current_row['XPATH']:
-                add(data, current_row)
-            row['XPATH'] = [row['XPATH']]
-            current_row = row
-        else:
-            current_row['XPATH'].append(row['XPATH'])
-
-    add(data, current_row)
-
-    df = pd.DataFrame(data, columns=df.columns)
-
-    # Without `dtype`, pandas writes the integers as floats with decimals.
-    pd.read_csv(
-        eformsdir / 'bt-indices-mapping.csv', dtype={'eformsNotice': str, 'sfNotice': str}
-    ).merge(
-        df, how='outer', left_on='ID', right_on='BT ID'
-    ).sort_values(
-        ['ID', 'eformsNotice', 'sfNotice', 'Level', 'XPATH']
-    ).to_csv(eformsdir / '3-bt-xpath-indices-mapping.csv', index=False, columns=[
-        # bt-indices-mapping.csv except "Indent level"
-        # bt-xpath-mapping.csv except "Additional information" and "BT Name" (semantically the same as "Name").
-        'ID', 'Name', 'Data type', 'Repeatable', 'Description', 'Legal Status', 'Level', 'Element', 'eformsNotice',
-        'sfNotice', 'XPATH'
-    ])
-
-
-@cli.command()
 def update_ted_xml_indices():
     pass
 
@@ -335,14 +286,14 @@ def extract_2015_guidance():
     - Concatenate the CSV files for the 2015 regulation.
     - Merge the ted-xml-indices.csv file, which replaces the "index" column.
     """
-    indices = pd.read_csv(eformsdir / 'ted-xml-indices.csv')
+    df_indices = pd.read_csv(eformsdir / 'ted-xml-indices.csv')
 
     dfs = []
     for path in mappingdir.glob('*.csv'):
         # The other columns are "index" and "comment".
         df = pd.read_csv(path, usecols=['xpath', 'label-key', 'guidance'])
         # Add the "index" column from the other file.
-        df = pd.merge(df, indices, how='left', on='xpath')
+        df = df.merge(df_indices, how='left', on='xpath')
         # Add a "file" column for the source of the row.
         df['file'] = path.name
         dfs.append(df)
@@ -351,6 +302,101 @@ def extract_2015_guidance():
     pd.concat(dfs, ignore_index=True).to_csv(
         eformsdir / '2015-guidance.csv', columns=['xpath', 'label-key', 'index', 'guidance', 'file'], index=False
     )
+
+
+@cli.command()
+def prepopulate():
+    """
+    Prepopulate the guidance for the 2019 regulation, based on that for the 2015 regulation.
+
+    \b
+    Create or update output/mapping/eForms/2019-guidance-imported.json and .csv.
+    """
+
+    def add(data, current_row):
+        current_row['XPATH'] = ';'.join(sorted(current_row['XPATH']))  # for briefer diff
+        data.append(current_row)
+
+    # Start with the eForms file that contains indices used by the 2015 guidance.
+    # Without `dtype`, pandas writes the integers as floats (i.e. with decimals).
+    df = pd.read_csv(eformsdir / 'bt-indices-mapping.csv', dtype={'eformsNotice': str, 'sfNotice': str})
+
+    # Merge in the eForms XPaths. Sort by "BT ID" to simplify the for-loop's logic below.
+    df_xpath = pd.read_csv(eformsdir / 'bt-xpath-mapping.csv').sort_values('BT ID')
+
+    # 8 rows contain duplicate XPaths. Combine these with the original occurrences.
+    data = []
+
+    current_row = {'BT ID': None, 'XPATH': []}
+
+    for _, row in df_xpath.iterrows():
+        if row['BT ID'] != current_row['BT ID']:
+            if current_row['XPATH']:
+                add(data, current_row)
+            row['XPATH'] = [row['XPATH']]
+            current_row = row
+        else:
+            current_row['XPATH'].append(row['XPATH'])
+
+    add(data, current_row)
+
+    df = df.merge(pd.DataFrame(data, columns=df_xpath.columns), how='left', left_on='ID', right_on='BT ID')
+
+    # TODO: This sort changes the output!
+    df.sort_values(['ID', 'eformsNotice', 'sfNotice', 'Level', 'XPATH'], inplace=True)
+
+    # Merge in hierarchy information and 2015 guidance.
+    # TODO: Remove keep_default_na=False once comparison finished (changes sort order).
+    df = df.merge(pd.read_csv(eformsdir / 'bt-bg-hierarchy.csv', keep_default_na=False), how='left', left_on='ID', right_on='BT')
+    df = df.merge(pd.read_csv(eformsdir / '2015-guidance.csv'), how='left', left_on='Level', right_on='index')
+
+    # TODO: Double-check this.
+    df.drop_duplicates(['ID', 'eformsNotice'], inplace=True)
+
+    # Avoid "ValueError: DataFrame columns must be unique for orient='records'."
+    df.drop(columns='BT', inplace=True)  # same as "ID"
+
+    df.loc[df['guidance'].notna(), 'status'] = 'imported_from_sf'
+    df['comments'] = ''
+
+    df.sort_values(['eformsNotice', 'BG_lvl1', 'BG_lvl2', 'BG_lvl3', 'ID'], inplace=True)
+
+    df.rename(columns={
+        'ID': 'BT',
+        'Level': 'sfLevel',
+        'XPATH': 'eforms_xpath',
+    }, errors='raise', inplace=True)
+
+    # Re-order columns. This effectively drops 13 columns:
+    #
+    # bt-indices-mapping.csv
+    # - Indent level: superseded by bt-bg-mapping.csv
+    # - Data type: re-added by sync-with-annex
+    # - Repeatable
+    # - Description: re-added by sync-with-annex
+    # - Legal Status: re-added by sync-with-annex
+    # - Element
+    #
+    # bt-xpath-mapping.csv
+    # - BT ID: merge column
+    # - BT Name: semantically the same as "Name"
+    # - Additional information
+    #
+    # 2015-guidance.csv (only "guidance" needed)
+    # - xpath
+    # - label-key
+    # - index: merge column
+    # - file
+    df = df[[
+        'Name', 'eformsNotice', 'sfNotice', 'eforms_xpath', 'BT', 'sfLevel', 'BG_lvl1', 'BG_lvl2', 'BG_lvl3',
+        'guidance', 'status', 'comments'
+    ]]  # 12 columns
+
+    df.to_csv(eformsdir / '2019-guidance-imported.csv', index=False)
+
+    df['eforms_xpath'] = df['eforms_xpath'].str.split(';')
+
+    df.to_json(eformsdir / '2019-guidance-imported.json', orient='records', indent=2)
 
 
 @cli.command()

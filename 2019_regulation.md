@@ -6,35 +6,26 @@
 
 `Task 5_Support_Standard Forms-eForms mappings_v.3.zip` was received via email from the European Commission.
 
-## Prepare preliminary guidance
+## Prepopulate 2019 guidance
 
 Extract data from the source files:
 
-    ./manage.py extract-docx
-    ./manage.py extract-xlsx-mapping
-
-Merge the extracted data:
-
-    ./manage.py merge
+    ./manage.py extract-indices-mapping
+    ./manage.py extract-xpath-mapping
 
 Extract data from another source file:
 
-    ./manage.py extract-xlsx-hierarchy
+    ./manage.py extract-hierarchy
 
 Concatenate guidance for the 2015 regulation:
 
     ./manage.py extract-2015-guidance
 
-At this point, we have:
-
-- `bt-bg-hierarchy.csv`: Lists each Business Term's and Business Group's ancestors.
-- `2015-guidance.csv`: Maps form indices to guidance for the 2015 regulation (merging `ted-xml-indices.csv`, see *Maintenance*).
-
-Use these to prepopulate guidance for the 2019 regulation:
+Use the files created to prepopulate guidance for the 2019 regulation:
 
     ./manage.py prepopulate
 
-From here, you can create a copy of the prepopulated files, to add and tailor the guidance for the 2019 regulation.
+From here, you can create copies of the prepopulated files, to add and tailor the guidance for the 2019 regulation.
 
 ## Maintenance
 
@@ -42,14 +33,15 @@ From here, you can create a copy of the prepopulated files, to add and tailor th
 
     ./manage.py update-ted-xml-indices
 
+**If any XPath lacks an index, its 2015 guidance cannot be imported by the `prepopulate` command.**
+
 To update the progress of the guidance for the 2019 regulation, run:
 
     ./manage.py statistics
 
 ## Design
 
-### CLI
-
+* The mapping is BT-based and form-based, following the structure of the source files.
 * Each source file has a single corresponding command, which extracts data to a tracked file. Corrections to the source file are made here, exclusively. In this way, it is easy to review whether any changes to the final outputs are caused by changes to the source files.
 
 ---
