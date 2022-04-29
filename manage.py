@@ -77,6 +77,8 @@ def extract_docx():
         # Skip subheadings.
         if not xpath.startswith('/'):
             continue
+        if cells[1] == '–':  # n-dash
+            cells[1] = ''
         data.append(cells)
 
     pd.DataFrame(data, columns=columns).to_csv(eformsdir / '1-xpath-bt-mapping.csv', index=False)
@@ -226,23 +228,28 @@ def merge():
     Merge CSV files to generate a mapping across eForms XPaths, Business Terms and form indices.
     """
 
+    def add(data, current_row):
+        current_row['XPATH'] = ';'.join(sorted(current_row['XPATH']))  # for easy comparison
+        data.append(current_row)
+
     # Sort by 'BT ID' to simplify the for-loop.
     df = pd.read_csv(eformsdir / '1-xpath-bt-mapping.csv').sort_values('BT ID')
 
-    current_row = {'BT ID': False}
-
     # 1-xpath-bt-mapping.csv repeats XPaths 8 times, which we want to combine.
     data = []
+
+    current_row = {'BT ID': None, 'XPATH': []}
+
     for _, row in df.iterrows():
         if row['BT ID'] != current_row['BT ID']:
-            if current_row['BT ID'] is not False:
-                current_row['XPATH'] = ';'.join(sorted(current_row['XPATH']))  # for easy comparison
-                data.append(current_row)
-            row['BT ID'] = row['BT ID'] or f'no_BT_{row["XPATH"].rsplit(":", 1)[-1]}_{i}'  # invent a unique ID
+            if current_row['XPATH']:
+                add(data, current_row)
             row['XPATH'] = [row['XPATH']]
             current_row = row
         else:
             current_row['XPATH'].append(row['XPATH'])
+
+    add(data, current_row)
 
     df = pd.DataFrame(data, columns=df.columns)
 
