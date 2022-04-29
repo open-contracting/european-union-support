@@ -3,6 +3,7 @@ import csv
 import json
 import os
 import re
+from collections import defaultdict
 from glob import glob
 from io import StringIO
 from pathlib import Path
@@ -90,7 +91,7 @@ def extract_docx():
 
 
 @cli.command()
-def extract_xlsx():
+def extract_xlsx_mapping():
     """
     Extract a mapping from Business Terms to form indices for multiple forms, as a CSV file from the XLSX files.
 
@@ -234,6 +235,43 @@ def extract_xlsx():
 
 
 @cli.command()
+def extract_xlsx_hierarchy():
+    """
+    Extract the hierarchy of Business Groups and Business Terms, as a CSV file from the XLSX file.
+
+    \b
+    Creates or updates output/mapping/eForms/4-bt-bg-hierarchy.csv
+    """
+    data = []
+    line = []
+    previous_level = 0
+
+    with pd.ExcelFile(sourcedir / 'CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx') as xlsx:
+        # A warning is issued, because the Excel file has an unsupported extension.
+        df = pd.read_excel(xlsx, 'Annex')
+        for _, row in df.iterrows():
+            if pd.isna(row['ID']):
+                continue
+
+            identifier = row['ID']
+            current_level = len(row['Level'])
+
+            # Adjust the size of this line of the "tree", then update the head.
+            if current_level > previous_level:
+                line.append(None)
+            elif current_level < previous_level:
+                line = line[:current_level]
+            line[-1] = identifier
+
+            data.append([identifier, *line[:-1]])
+            previous_level = current_level
+
+    pd.DataFrame(data, columns=['BT', 'BG_lvl1', 'BG_lvl2', 'BG_lvl3']).to_csv(
+        eformsdir / '4-bt-bg-hierarchy.csv', index=False
+    )
+
+
+@cli.command()
 def merge():
     """
     Merge CSV files to generate a mapping across eForms XPaths, Business Terms and form indices.
@@ -305,8 +343,7 @@ def concatenate():
 
     # ignore_index is required, as each data frame repeats indices. Re-order the columns.
     pd.concat(dfs, ignore_index=True).to_csv(
-        eformsdir / 'concatenated.csv',
-        columns=['xpath', 'label-key', 'index', 'guidance', 'file']
+        eformsdir / 'concatenated.csv', columns=['xpath', 'label-key', 'index', 'guidance', 'file']
     )
 
 

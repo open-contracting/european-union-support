@@ -1,35 +1,30 @@
 # 2019 Regulation (eForms)
 
-## Download prerequisites
+## Download source files
 
     fish script/2019_download.fish
 
 `Task 5_Support_Standard Forms-eForms mappings_v.3.zip` was received via email from the European Commission.
 
-## Pre-process prerequisites
+## Prepare preliminary guidance
+
+Extract data from the source files:
 
     ./manage.py extract-docx
-    ./manage.py extract-xlsx
+    ./manage.py extract-xlsx-mapping
+    ./manage.py extract-xlsx-hierarchy
 
-## Concatenate the 2015 guidance
+Merge the extracted data:
+
+    ./manage.py merge
+
+Combine guidance for the 2015 regulation:
 
     ./manage.py concatenate
 
-## Importing guidance from SF
+At this point, we have a `3-bt-xpath-indices-mapping.csv` file, which maps eForms XPaths to form indices, and a `concatenated.csv` file, which maps form indices to guidance for the 2015 regulation.
 
-Through a BT/SF level mapping, OCDS guidance for eForms can be imported from standard forms.
 
-Required files:
-
-- `output/mapping/eForms/BT-xpath-sfLevel.csv`
-- `output/mapping/eForms/bg_bt.csv` (BT/BG mapping extracted from the [eForms annex](https://ec.europa.eu/docsroom/documents/43488))
-- `output/mapping/shared/concatenated.csv` (concatenated standard forms OCDS guidance generated above)
-
-This is done with the following command and creates `output/mapping/eForms/BT-xpath-sfGuidance.json`:
-
-```bash
-python script/mapping_import_sf_guidance.py
-```
 
 `output/mapping/eForms/eforms-guidance.csv` and its JSON counterpart contain the OCDS guidance to map eForms XML elements to OCDS data structures.
 These files are copies of `BT-xpath-sfGuidance.json` that have later been updated, improved. There is unfortunately no automatic way to import
