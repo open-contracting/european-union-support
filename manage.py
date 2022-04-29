@@ -49,7 +49,7 @@ def extract_docx():
     Extract the mapping from eForms XPaths to Business Terms, as a CSV file from the DOCX file.
 
     \b
-    Creates or updates output/mapping/eForms/1-xpath-bt-mapping.csv
+    Create or update output/mapping/eForms/1-xpath-bt-mapping.csv
     """
 
     def text(row):
@@ -93,7 +93,7 @@ def extract_xlsx_mapping():
     Extract a mapping from Business Terms to form indices for multiple forms, as a CSV file from the XLSX files.
 
     \b
-    Creates or updates output/mapping/eForms/2-bt-indices-mapping.csv
+    Create or update output/mapping/eForms/2-bt-indices-mapping.csv
     """
     ignore = {
         'Annex table 2',
@@ -233,7 +233,7 @@ def extract_xlsx_hierarchy():
     Extract the hierarchy of Business Groups and Business Terms, as a CSV file from the XLSX file.
 
     \b
-    Creates or updates output/mapping/eForms/4-bt-bg-hierarchy.csv
+    Create or update output/mapping/eForms/4-bt-bg-hierarchy.csv
     """
     data = []
     line = []
@@ -270,7 +270,7 @@ def merge():
     Merge CSV files to generate a mapping across eForms XPaths, Business Terms and form indices.
 
     \b
-    Creates or updates output/mapping/eForms/3-bt-xpath-indices-mapping.csv
+    Create or update output/mapping/eForms/3-bt-xpath-indices-mapping.csv
     """
 
     def add(data, current_row):
@@ -319,6 +319,8 @@ def concatenate():
     Create the concatenated.csv file.
 
     \b
+    Create or update output/mapping/eForms/concatenated.csv:
+
     - Concatenate the CSV files for the 2015 regulation.
     - Merge the standard-form-element-identifiers.csv file, which replaces the index column with a new identifier.
     """
@@ -342,6 +344,9 @@ def concatenate():
 
 @cli.command()
 def statistics():
+    """
+    Print statistics on the progress of the guidance for the 2019 regulation.
+    """
     # `keep_default_na` avoids "ValueError: Cannot mask with non-boolean array containing NA / NaN values".
     df = pd.read_csv(eformsdir / 'eforms-guidance.csv', keep_default_na=False)
 
@@ -384,6 +389,9 @@ def statistics():
 @cli.command()
 @click.argument('file', type=click.File())
 def fields_without_extensions(file):
+    """
+    Print undefined fields in the guidance for the 2015 regulation.
+    """
     subjects = {
         # Unambiguous
         'award': 'awards',
