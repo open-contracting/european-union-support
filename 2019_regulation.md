@@ -23,17 +23,26 @@ Extract data from another source file:
 
 Concatenate guidance for the 2015 regulation:
 
-    ./manage.py concatenate
+    ./manage.py extract-2015-guidance
 
 At this point, we have:
 
-- `3-bt-xpath-indices-mapping.csv`: Maps eForms XPaths to form indices (combining `1-xpath-bt-mapping.csv` and `2-bt-indices-mapping.csv`).
-- `4-bt-bg-hierarchy.csv`: Lists each Business Term's and Business Group's ancestors.
-- `concatenated.csv`: Maps form indices to guidance for the 2015 regulation (merging `ted-xml-indices.csv`, see *Maintenance*).
+- `bt-bg-hierarchy.csv`: Lists each Business Term's and Business Group's ancestors.
+- `2015-guidance.csv`: Maps form indices to guidance for the 2015 regulation (merging `ted-xml-indices.csv`, see *Maintenance*).
 
----
+Use these to prepopulate guidance for the 2019 regulation:
 
-To update the progress of the mapping, run:
+    ./manage.py prepopulate
+
+From here, you can create a copy of the prepopulated files, to add and tailor the guidance for the 2019 regulation.
+
+## Maintenance
+
+`ted-xml-indices.csv` is manually edited. If any XPaths are added to TED-XML, update this file with:
+
+    ./manage.py update-ted-xml-indices
+
+To update the progress of the guidance for the 2019 regulation, run:
 
     ./manage.py statistics
 
@@ -44,17 +53,6 @@ To update the progress of the mapping, run:
 * Each source file has a single corresponding command, which extracts data to a tracked file. Corrections to the source file are made here, exclusively. In this way, it is easy to review whether any changes to the final outputs are caused by changes to the source files.
 
 ---
-
-`output/mapping/eForms/eforms-guidance.csv` and its JSON counterpart contain the OCDS guidance to map eForms XML elements to OCDS data structures.
-These files are copies of `BT-xpath-sfGuidance.json` that have later been updated, improved. There is unfortunately no automatic way to import
-updated standard form guidance into `eforms-guidance.csv` and `eforms-guidance.json` as 
-
-- some of the imported standard forms guidance has been adapted to the eForms structure and semantics
-- there is no way to distinguish the imported guidance that has been left untouched from the imported guidance that has been adapted
-
-Automatically overwriting the guidance that has been imported would consequently lead to the loss of the adapted guidance. The recommended method is
-to pick the BTs that had their standard form guidance updated and manually update them in `eforms-guidance.json`, taking into account the
-context of eForms and adapt the guidance when necessary. Then, spread the guidance with `script/mapping_spread_guidance.py` (see below)
 
 ## Spreading the guidance of BTs for all notices
 

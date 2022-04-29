@@ -27,7 +27,8 @@ def excel_files():
                     yield name, xlsx
 
 
-@click.group()
+# https://github.com/pallets/click/issues/486
+@click.group(context_settings={'max_content_width': 150})
 def cli():
     pass
 
@@ -49,10 +50,10 @@ def find(sheet):
 @cli.command()
 def extract_docx():
     """
-    Extract the mapping from eForms XPaths to Business Terms, as a CSV file from the DOCX file.
+    Extract a mapping between Business Terms and eForms XPaths.
 
     \b
-    Create or update output/mapping/eForms/1-xpath-bt-mapping.csv
+    Create or update output/mapping/eForms/bt-xpath-mapping.csv from source/XPATHs provisional release v. 1.0.docx
     """
 
     def text(row):
@@ -87,16 +88,17 @@ def extract_docx():
             cells[1] = ''
         data.append(cells)
 
-    pd.DataFrame(data, columns=columns).to_csv(eformsdir / '1-xpath-bt-mapping.csv', index=False)
+    pd.DataFrame(data, columns=columns).to_csv(eformsdir / 'bt-xpath-mapping.csv', index=False)
 
 
 @cli.command()
 def extract_xlsx_mapping():
     """
-    Extract a mapping from Business Terms to form indices for multiple forms, as a CSV file from the XLSX files.
+    Extract a mapping between Business Terms and form indices.
 
     \b
-    Create or update output/mapping/eForms/2-bt-indices-mapping.csv
+    Create or update output/mapping/eForms/bt-indices-mapping.csv from
+    source/Task 5_Support_Standard Forms-eForms mappings_v.3.zip
     """
     ignore = {
         'Annex table 2',
@@ -227,16 +229,17 @@ def extract_xlsx_mapping():
 
             dfs.append(df)
 
-    pd.concat(dfs, ignore_index=True).to_csv(eformsdir / '2-bt-indices-mapping.csv', index=False)
+    pd.concat(dfs, ignore_index=True).to_csv(eformsdir / 'bt-indices-mapping.csv', index=False)
 
 
 @cli.command()
 def extract_xlsx_hierarchy():
     """
-    Extract the hierarchy of Business Groups and Business Terms, as a CSV file from the XLSX file.
+    Extract the hierarchy of Business Groups and Business Terms.
 
     \b
-    Create or update output/mapping/eForms/4-bt-bg-hierarchy.csv
+    Create or update output/mapping/eForms/bt-bg-hierarchy.csv from
+    source/CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx
     """
     data = []
     line = []
@@ -263,7 +266,7 @@ def extract_xlsx_hierarchy():
             previous_level = current_level
 
     pd.DataFrame(data, columns=['BT', 'BG_lvl1', 'BG_lvl2', 'BG_lvl3']).to_csv(
-        eformsdir / '4-bt-bg-hierarchy.csv', index=False
+        eformsdir / 'bt-bg-hierarchy.csv', index=False
     )
 
 
@@ -281,9 +284,9 @@ def merge():
         data.append(current_row)
 
     # Sort by 'BT ID' to simplify the logic of the for-loop.
-    df = pd.read_csv(eformsdir / '1-xpath-bt-mapping.csv').sort_values('BT ID')
+    df = pd.read_csv(eformsdir / 'bt-xpath-mapping.csv').sort_values('BT ID')
 
-    # 1-xpath-bt-mapping.csv repeats XPaths 8 times, which we want to combine.
+    # bt-xpath-mapping.csv repeats XPaths 8 times, which we want to combine.
     data = []
 
     current_row = {'BT ID': None, 'XPATH': []}
@@ -303,26 +306,31 @@ def merge():
 
     # Without `dtype`, pandas writes the integers as floats with decimals.
     pd.read_csv(
-        eformsdir / '2-bt-indices-mapping.csv', dtype={'eformsNotice': str, 'sfNotice': str}
+        eformsdir / 'bt-indices-mapping.csv', dtype={'eformsNotice': str, 'sfNotice': str}
     ).merge(
         df, how='outer', left_on='ID', right_on='BT ID'
     ).sort_values(
         ['ID', 'eformsNotice', 'sfNotice', 'Level', 'XPATH']
     ).to_csv(eformsdir / '3-bt-xpath-indices-mapping.csv', index=False, columns=[
-        # 2-bt-indices-mapping.csv except "Indent level"
-        # 1-xpath-bt-mapping.csv except "Additional information" and "BT Name" (semantically the same as "Name").
+        # bt-indices-mapping.csv except "Indent level"
+        # bt-xpath-mapping.csv except "Additional information" and "BT Name" (semantically the same as "Name").
         'ID', 'Name', 'Data type', 'Repeatable', 'Description', 'Legal Status', 'Level', 'Element', 'eformsNotice',
         'sfNotice', 'XPATH'
     ])
 
 
 @cli.command()
-def concatenate():
+def update_ted_xml_indices():
+    pass
+
+
+@cli.command()
+def extract_2015_guidance():
     """
-    Create the concatenated.csv file.
+    Concatenate guidance for the 2015 regulation.
 
     \b
-    Create or update output/mapping/eForms/concatenated.csv:
+    Create or update output/mapping/eForms/2015-guidance.csv:
 
     - Concatenate the CSV files for the 2015 regulation.
     - Merge the ted-xml-indices.csv file, which replaces the "index" column.
@@ -341,7 +349,7 @@ def concatenate():
 
     # ignore_index is required, as each data frame repeats indices. Re-order the columns.
     pd.concat(dfs, ignore_index=True).to_csv(
-        eformsdir / 'concatenated.csv', columns=['xpath', 'label-key', 'index', 'guidance', 'file'], index=False
+        eformsdir / '2015-guidance.csv', columns=['xpath', 'label-key', 'index', 'guidance', 'file'], index=False
     )
 
 
