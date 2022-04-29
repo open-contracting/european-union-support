@@ -4,7 +4,7 @@
 
 ### Download prerequisites
 
-    fish scripts/2015_download.fish
+    fish script/2015_download.fish
 
 ### Create sample XML files
 
@@ -150,7 +150,7 @@ T01 and T02 are particular: both use the same schema (`MOVE.xsd`), and neither h
 
 Re-order rows to more closely match the PDF templates:
 
-    fish scripts/reorder.fish
+    fish script/reorder.fish
 
 You can now generate a table for each form, displaying, for each element and attribute, the index within the PDF ("I.1"), the label (in any language) and the XPath, to which you can then add guidance for OCDS.
 
@@ -163,17 +163,17 @@ You can now generate a table for each form, displaying, for each element and att
 
 ### Find fields for which to write extensions
 
-Generate a release schema with all extensions applied, except the PPP extension (which removes fields):
+Get the EU profile's patched release schema:
 
-    python scripts/patched_release_schema.py > scripts/release-schema-patched.json
+    curl -O https://standard.open-contracting.org/profiles/eu/latest/en/_static/patched/release-schema.json
 
-Generate a CSV file with all fields from the extended schema, including a column for the extension name:
+Convert the patched release schema to CSV:
 
-    ocdskit mapping-sheet --infer-required --extension-field extension scripts/release-schema-patched.json > scripts/mapping-sheet.csv
+    ocdskit mapping-sheet --infer-required release-schema.json > mapping-sheet.csv
 
 Print a list of fields for which there are no extensions:
 
-    python scripts/mapped_ocds_fields.py
+    ./manage.py fields-without-extensions mapping-sheet.csv
 
 ## Design
 

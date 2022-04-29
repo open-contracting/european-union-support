@@ -2,7 +2,7 @@
 
 ## Download prerequisites
 
-    fish scripts/2019_download.fish
+    fish script/2019_download.fish
 
 `Task 5_Support_Standard Forms-eForms mappings_v.3.zip` was received via email from the European Commission.
 
@@ -28,7 +28,7 @@ Required files:
 This is done with the following command and creates `output/mapping/eForms/BT-xpath-sfGuidance.json`:
 
 ```bash
-python scripts/mapping_import_sf_guidance.py
+python script/mapping_import_sf_guidance.py
 ```
 
 `output/mapping/eForms/eforms-guidance.csv` and its JSON counterpart contain the OCDS guidance to map eForms XML elements to OCDS data structures.
@@ -40,7 +40,7 @@ updated standard form guidance into `eforms-guidance.csv` and `eforms-guidance.j
 
 Automatically overwriting the guidance that has been imported would consequently lead to the loss of the adapted guidance. The recommended method is
 to pick the BTs that had their standard form guidance updated and manually update them in `eforms-guidance.json`, taking into account the
-context of eForms and adapt the guidance when necessary. Then, spread the guidance with `scripts/mapping_spread_guidance.py` (see below)
+context of eForms and adapt the guidance when necessary. Then, spread the guidance with `script/mapping_spread_guidance.py` (see below)
 
 ## Spreading the guidance of BTs for all notices
 
@@ -57,7 +57,7 @@ Required files:
 This is done with the following command, updates `eforms-guidance.json` and `output/mapping/eForms/eforms-guidance.csv`:
 
 ```bash
-python scripts/mapping_spread_guidance.py
+python script/mapping_spread_guidance.py
 ```
 
 ## Showing statistics about the progress of the eForms mapping
@@ -72,7 +72,7 @@ Required files:
 This is done with the following command:
 
 ```shell
-python scripts/mapping_eforms_stats.py
+python script/mapping_eforms_stats.py
 ```
 
 ## Updating BT details from the Annex
@@ -85,7 +85,7 @@ Required files:
 This is done with the following command:
 
 ```shell
-python scripts/mapping_add_annex_bt_details.py
+python script/mapping_add_annex_bt_details.py
 ```
 
 ## Guidance in JSON
