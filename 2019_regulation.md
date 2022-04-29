@@ -29,7 +29,7 @@ At this point, we have:
 
 - `3-bt-xpath-indices-mapping.csv`: Maps eForms XPaths to form indices (combining `1-xpath-bt-mapping.csv` and `2-bt-indices-mapping.csv`).
 - `4-bt-bg-hierarchy.csv`: Lists each Business Term's and Business Group's ancestors.
-- `concatenated.csv`: Maps form indices to guidance for the 2015 regulation (merging `standard-form-element-identifiers.csv`, which is manually edited).
+- `concatenated.csv`: Maps form indices to guidance for the 2015 regulation (merging `ted-xml-indices.csv`, see *Maintenance*).
 
 ---
 

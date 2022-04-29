@@ -15,6 +15,9 @@ sourcedir = basedir / 'source'
 mappingdir = basedir / 'output' / 'mapping'
 eformsdir = mappingdir / 'eForms'
 
+# We try to use pandas' N/A logic. However, in some cases we use `keep_default_na` to avoid
+# "ValueError: Cannot mask with non-boolean array containing NA / NaN values".
+
 
 def excel_files():
     with ZipFile(sourcedir / 'Task 5_Support_Standard Forms-eForms mappings_v.3.zip') as zipfile:
@@ -302,7 +305,7 @@ def merge():
     pd.read_csv(
         eformsdir / '2-bt-indices-mapping.csv', dtype={'eformsNotice': str, 'sfNotice': str}
     ).merge(
-        df, left_on='ID', right_on='BT ID', how='outer'
+        df, how='outer', left_on='ID', right_on='BT ID'
     ).sort_values(
         ['ID', 'eformsNotice', 'sfNotice', 'Level', 'XPATH']
     ).to_csv(eformsdir / '3-bt-xpath-indices-mapping.csv', index=False, columns=[
@@ -322,16 +325,16 @@ def concatenate():
     Create or update output/mapping/eForms/concatenated.csv:
 
     - Concatenate the CSV files for the 2015 regulation.
-    - Merge the standard-form-element-identifiers.csv file, which replaces the index column with a new identifier.
+    - Merge the ted-xml-indices.csv file, which replaces the "index" column.
     """
-    identifiers = pd.read_csv(eformsdir / 'standard-form-element-identifiers.csv')
+    indices = pd.read_csv(eformsdir / 'ted-xml-indices.csv')
 
     dfs = []
     for path in mappingdir.glob('*.csv'):
         # The other columns are "index" and "comment".
         df = pd.read_csv(path, usecols=['xpath', 'label-key', 'guidance'])
-        # Add the "index" column from the identifiers file.
-        df = pd.merge(df, identifiers, how='left', on='xpath')
+        # Add the "index" column from the other file.
+        df = pd.merge(df, indices, how='left', on='xpath')
         # Add a "file" column for the source of the row.
         df['file'] = path.name
         dfs.append(df)
@@ -347,7 +350,6 @@ def statistics():
     """
     Print statistics on the progress of the guidance for the 2019 regulation.
     """
-    # `keep_default_na` avoids "ValueError: Cannot mask with non-boolean array containing NA / NaN values".
     df = pd.read_csv(eformsdir / 'eforms-guidance.csv', keep_default_na=False)
 
     df_terms = df.drop_duplicates(subset='BT')
