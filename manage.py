@@ -1,11 +1,7 @@
 #!/usr/bin/env python
 import csv
-import json
 import os
 import re
-from collections import defaultdict
-from glob import glob
-from io import StringIO
 from pathlib import Path
 from textwrap import dedent
 from zipfile import ZipFile
@@ -111,14 +107,6 @@ def extract_xlsx_mapping():
     )]
     keep = re.compile(r'^(?:eForm|eN) ?(\d\d?(?:,\d\d)*) vs S?F(\d\d) ?$')
 
-    overrides = {
-        'III.2.1.1.1': 'Information and formalities necessary for evaluating if the requirements are met:',
-        'III.2.2.2': 'Information and formalities necessary for evaluating if the requirements are met:',
-        'III.2.2.3': 'Minimum level(s) of standards possibly required: (if applicable)',
-        'III.2.3.1.1': 'Information and formalities necessary for evaluating if the requirements are met:',
-        'III.2.3.1.2': 'Minimum level(s) of standards possibly required: (if applicable)',
-    }
-
     explode = ['Level', 'Element']
 
     if 'DEBUG' in os.environ:
@@ -154,7 +142,7 @@ def extract_xlsx_mapping():
             if df['Empty'].isna().all():
                 df.drop(columns='Empty', inplace=True)
             else:
-                raise click.ClickException(f"The first column was expected to be empty.")
+                raise click.ClickException("The first column was expected to be empty.")
 
             # Add notice number columns, using '1' instead of '01' to ease joins with forms_noticeTypes.csv.
             df['eformsNotice'] = [[number.lstrip('0') for number in eforms_notice_number.split(',')] for i in df.index]
@@ -231,7 +219,6 @@ def extract_xlsx_mapping():
             dfs.append(df)
 
     pd.concat(dfs, ignore_index=True).to_csv(eformsdir / '2-bt-indices-mapping.csv', index=False)
-
 
 
 @cli.command()
@@ -352,7 +339,6 @@ def statistics():
     df = pd.read_csv(eformsdir / 'eforms-guidance.csv', keep_default_na=False)
     df_with_issue = df.loc[df['status'].str.startswith('issue')]
 
-    with_guidance = len(df.loc[df['guidance'] != ''].index)
     manual_guidance = len(df.loc[df['status'].str.startswith('done')].index)
     with_issue = df_with_issue.index.size
     with_issue_with_guidance = len(df_with_issue.loc[df['guidance'] == ''].index)
@@ -395,7 +381,6 @@ def statistics():
                 - Optional: {issue_optional} rows ({issue_optional / total_optional:.1%} of all O)
     - No guidance and no issue (= untouched yet): {without_issue_without_guidance} rows ({without_issue_without_guidance / total_guidance:.1%} of total)
     """))  # noqa: E501
-
 
 
 @cli.command()
@@ -633,13 +618,11 @@ def fields_without_extensions(file):
     unhandled = set()
     paths = set()
 
-
     def report(path, row):
         value = (path, row.get('xpath'))
         if value not in unhandled:
             print(f"unhandled: {path} ({row.get('xpath')}: {row['guidance']})", err=True)
         unhandled.add(value)
-
 
     for path in (mappingdir, mappingdir / 'shared'):
         for filename in path.glob('*.csv'):
