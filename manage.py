@@ -128,7 +128,7 @@ def extract_xlsx_mapping():
             sf_notice_number = match.group(2).lstrip('0')
 
             # Read the Excel file. The first row is a title for the table.
-            df = pd.read_excel(xlsx, sheet, skiprows=[0])
+            df = pd.read_excel(xlsx, sheet, skiprows=[0], na_values='---')
 
             # Avoid empty or duplicate headings.
             df.rename(columns={
