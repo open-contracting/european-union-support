@@ -336,7 +336,7 @@ def concatenate():
 
     # ignore_index is required, as each data frame repeats indices. Re-order the columns.
     pd.concat(dfs, ignore_index=True).to_csv(
-        eformsdir / 'concatenated.csv', columns=['xpath', 'label-key', 'index', 'guidance', 'file']
+        eformsdir / 'concatenated.csv', columns=['xpath', 'label-key', 'index', 'guidance', 'file'], index=False
     )
 
 
