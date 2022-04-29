@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import csv
+import os
 import re
 from io import StringIO
 from pathlib import Path
@@ -109,6 +110,9 @@ def extract_xlsx():
 
     explode = ['Level', 'Element']
 
+    if 'DEBUG' in os.environ:
+        (sourcedir / 'xlsx').mkdir(exist_ok=True)
+
     dfs = []
     for name, xlsx in excel_files():
         for sheet in xlsx.sheet_names:
@@ -148,13 +152,19 @@ def extract_xlsx():
             # Make values easier to work with (must occur after `isna` above).
             df.fillna('', inplace=True)
 
+            if 'DEBUG' in os.environ:
+                df.to_csv(sourcedir / 'xlsx' / f'eForm{eforms_notice_number} - SF{sf_notice_number}.csv', index=False)
+
             # `explode` requires lists with the same number of elements, but an "Element" is not repeated if it is
             # the same for all "Level". Extra newlines also complicate things.
             for _, row in df.iterrows():
                 location = f'eForm {eforms_notice_number} - SF {sf_notice_number}: {row["ID"]}: '
 
                 # Remove spurious newlines in "Element" values.
-                row['Element'] = re.sub(r'\n(?=[a-z(]|Title\b|2009\b)', ' ', row['Element'].replace('\n\n', '\n'))
+                row['Element'] = re.sub(
+                    r'\n(?=\(|(2009|Title III|and|requirements|subcontractor|will)\b)', ' ',
+                    row['Element'].replace('\n\n', '\n')
+                )
 
                 # Hardcode corrections or cases requiring human interpretation.
                 if (
@@ -215,23 +225,24 @@ def merge():
     """
     Merge CSV files to generate a mapping across eForms XPaths, Business Terms and form indices.
     """
+
     # Sort by 'BT ID' to simplify the for-loop.
     df = pd.read_csv(eformsdir / '1-xpath-bt-mapping.csv').sort_values('BT ID')
 
-    current_row = {'BT ID': None}
+    current_row = {'BT ID': False}
 
     # 1-xpath-bt-mapping.csv repeats XPaths 8 times, which we want to combine.
     data = []
-    for i, row in df.iterrows():
-        if not i:
-            current_row = row
-        elif row['BT ID'] != current_row['BT ID']:
-            data.append(current_row)
-            if row['BT ID'] == "":
-                row['BT ID'] = f'no_BT_{row["XPATH"].rsplit(":", 1)[-1]}_{i}'  # invent a unique ID
+    for _, row in df.iterrows():
+        if row['BT ID'] != current_row['BT ID']:
+            if current_row['BT ID'] is not False:
+                current_row['XPATH'] = ';'.join(sorted(current_row['XPATH']))  # for easy comparison
+                data.append(current_row)
+            row['BT ID'] = row['BT ID'] or f'no_BT_{row["XPATH"].rsplit(":", 1)[-1]}_{i}'  # invent a unique ID
+            row['XPATH'] = [row['XPATH']]
             current_row = row
         else:
-            current_row['XPATH'] += f';{row["XPATH"]}'
+            current_row['XPATH'].append(row['XPATH'])
 
     df = pd.DataFrame(data, columns=df.columns)
 
@@ -241,11 +252,12 @@ def merge():
     ).merge(
         df, left_on='ID', right_on='BT ID', how='outer'
     ).sort_values(
-        ['ID', 'eformsNotice', 'sfNotice']
+        ['ID', 'eformsNotice', 'sfNotice', 'Level', 'XPATH']
     ).to_csv(eformsdir / '3-bt-xpath-indices-mapping.csv', index=False, columns=[
-        # 2-bt-indices-mapping.csv except "Indent level" and 1-xpath-bt-mapping.csv except "Additional information".
+        # 2-bt-indices-mapping.csv except "Indent level" and 1-xpath-bt-mapping.csv except "Additional information" and
+        # "BT Name" (semantically the same as "Name").
         'ID', 'Name', 'Data type', 'Repeatable', 'Description', 'Legal Status', 'Level', 'Element', 'eformsNotice',
-        'sfNotice', 'XPATH', 'BT Name'
+        'sfNotice', 'XPATH'
     ])
 
 
