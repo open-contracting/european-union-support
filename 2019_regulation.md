@@ -77,7 +77,6 @@ This is done with the following command:
 
 - annex.csv: CSV copy of the annex to the eForms directive downloaded at [https://ec.europa.eu/docsroom/documents/43488]
 - BT-xpath-sfGuidance.csv and BT-xpath-sfGuidance.json: this is the result of running `mapping_import_sf_guidance.py`. It is a guidance file pre-filled with guidance imported from the standard forms guidance. This is the same as eforms-guidance.csv and eforms-guidance.json, but without the new guidance and the corrections made to the imported guidance.
-- BT_xpath_corrections.csv: corrections to the official BT to Xpath mapping
 - common_operations.md: guidance for common operations for eForms to OCDS mapping
 - eforms-guidance.csv and eforms-guidance.json: intially produced by `mapping_import_sf_guidance.py`, then filled by hand and with `mapping_spread_guidance.py`. It is the working file to edit the guidance to map eForms BT to OCDS. A CSV copy is generated when `mapping_spread_guidance.py` is run. The CSV copy is not supposed to be edited by hand.
 - forms_noticeTypes.csv: a table that gives, for each eForms notice, its form type, its document type and the related legislation.
