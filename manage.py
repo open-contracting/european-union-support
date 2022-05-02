@@ -100,20 +100,20 @@ def extract_indices_mapping():
     Create or update output/mapping/eForms/bt-indices-mapping.csv from
     source/Task 5_Support_Standard Forms-eForms mappings_v.3.zip
     """
-    ignore = {
+    ignore_sheets = {
         'Annex table 2',
         'eN40 vs F20',
         'Legend',
         'Legend Annex table 2',
         'S.F. vs eForms mapping list ',
     }
-    ignore_regex = [re.compile(pattern) for pattern in (
+    ignore_sheet_regex = [re.compile(pattern) for pattern in (
         r'^F\d\d vs eN\d\d( \(2\))?$',
         r'^SF\d\d vs eForm ?\d\d(,\d\d)*$'
     )]
-    keep = re.compile(r'^(?:eForm|eN) ?(\d\d?(?:,\d\d)*) vs S?F(\d\d) ?$')
+    keep_sheet_regex = re.compile(r'^(?:eForm|eN) ?(\d\d?(?:,\d\d)*) vs S?F(\d\d) ?$')
 
-    remove_newlines = re.compile(r'\n(?=\(|(2009|Title III|and|requirements|subcontractor|will)\b)')
+    replace_newlines = re.compile(r'\n(?=\(|(2009|Title III|and|requirements|subcontractor|will)\b)')
     explode = ['Level', 'Element']
 
     if 'DEBUG' in os.environ:
@@ -122,10 +122,10 @@ def extract_indices_mapping():
     dfs = []
     for name, xlsx in excel_files():
         for sheet in xlsx.sheet_names:
-            if sheet in ignore or any(regex.search(sheet) for regex in ignore_regex):
+            if sheet in ignore_sheets or any(regex.search(sheet) for regex in ignore_sheet_regex):
                 continue
 
-            match = keep.search(sheet)
+            match = keep_sheet_regex.search(sheet)
             if not match:
                 raise click.ClickException(f"The sheet name {sheet!r} doesn't match a known pattern.")
 
@@ -142,7 +142,7 @@ def extract_indices_mapping():
                 df.columns[8]: 'Level',  # "Level.1" after `read_excel` if column 1 was "Level"
             }, errors='raise', inplace=True)
 
-            # Remove rows without "Level", for which we have no mapping information.
+            # Remove rows with an empty "Level", for which we have no mapping information.
             df = df[df['Level'].notna()]
 
             # Remove the first column if it is empty.
@@ -171,13 +171,13 @@ def extract_indices_mapping():
 
                 # Remove spurious newlines in "Element" values.
                 row['Element'] = row['Element'].replace('\n\n', '\n')
-                if remove_newlines.search(row['Element']):
+                if replace_newlines.search(row['Element']):
                     # Display the newlines that were removed, for user to review.
-                    highlight = remove_newlines.sub(lambda m: click.style(m.group(0), blink=True), row['Element'])
+                    highlight = replace_newlines.sub(lambda m: click.style(m.group(0), blink=True), row['Element'])
                     # Replace outside f-string ("SyntaxError: f-string expression part cannot include a backslash").
                     highlight = highlight.replace('\n', '\\n')
                     click.echo(f'{location}removed \\n: {highlight}')
-                    row['Element'] = remove_newlines.sub(' ', row['Element'])
+                    row['Element'] = replace_newlines.sub(' ', row['Element'])
 
                 # XXX: Hardcode corrections or cases requiring human interpretation.
                 if (
@@ -219,6 +219,12 @@ def extract_indices_mapping():
                     row['Element'] *= length
                 if length != len(row['Element']):
                     click.secho(f'{location}size differs: {row["Level"]} {row["Element"]}', fg='red')
+
+                # Remove rows with a B... "Level" after split, for which we have no mapping information.
+                for i, (level, element) in enumerate(zip(row['Level'], row['Element'])):
+                    if level.startswith('B'):  # one row is "B 4.2" instead of "B.4.2"
+                        del row['Level'][i]
+                        del row['Element'][i]
 
             try:
                 df = df.explode(explode)
