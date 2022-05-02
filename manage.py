@@ -151,7 +151,7 @@ def extract_indices_mapping():
             else:
                 raise click.ClickException("The first column was expected to be empty.")
 
-            # Add notice number columns, using '1' instead of '01' to ease joins with forms_noticeTypes.csv.
+            # Add notice number columns, using '1' instead of '01' to ease joins.
             df['eformsNotice'] = [[number.lstrip('0') for number in eforms_notice_number.split(',')] for i in df.index]
             df['sfNotice'] = sf_notice_number
 
