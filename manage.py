@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import csv
+import json
 import os
 import re
 from pathlib import Path
@@ -25,6 +26,26 @@ def excel_files():
             with zipfile.open(name) as fileobj:
                 with pd.ExcelFile(fileobj) as xlsx:
                     yield name, xlsx
+
+
+def annex_rows():
+    with pd.ExcelFile(sourcedir / 'CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx') as xlsx:
+        # A warning is issued, because the Excel file has an unsupported extension.
+        df = pd.read_excel(xlsx, 'Annex')
+
+        # Use the notice number columns.
+        df.rename(columns={df.columns[i]: str(df.iloc[0][i]) for i in range(6, 51)}, errors='raise', inplace=True)
+
+        for i, row in df.iterrows():
+            if pd.notna(row['ID']):
+                yield row
+
+
+def write_guidance_pair(basename, df, **kwargs):
+    df.to_csv(eformsdir / f'{basename}.csv', **kwargs)
+    if not df['eforms_xpath'].apply(isinstance, args=[list]).any():
+        df['eforms_xpath'] = df['eforms_xpath'].str.split(';')
+    df.to_json(eformsdir / f'{basename}.json', orient='records', indent=2)
 
 
 # https://github.com/pallets/click/issues/486
@@ -251,25 +272,19 @@ def extract_hierarchy():
     line = []
     previous_level = 0
 
-    with pd.ExcelFile(sourcedir / 'CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx') as xlsx:
-        # A warning is issued, because the Excel file has an unsupported extension.
-        df = pd.read_excel(xlsx, 'Annex')
-        for _, row in df.iterrows():
-            if pd.isna(row['ID']):
-                continue
+    for row in annex_rows():
+        identifier = row['ID']
+        current_level = len(row['Level'])
 
-            identifier = row['ID']
-            current_level = len(row['Level'])
+        # Adjust the size of this line of the "tree", then update the head.
+        if current_level > previous_level:
+            line.append(None)
+        elif current_level < previous_level:
+            line = line[:current_level]
+        line[-1] = identifier
 
-            # Adjust the size of this line of the "tree", then update the head.
-            if current_level > previous_level:
-                line.append(None)
-            elif current_level < previous_level:
-                line = line[:current_level]
-            line[-1] = identifier
-
-            data.append([identifier, *line[:-1]])
-            previous_level = current_level
+        data.append([identifier, *line[:-1]])
+        previous_level = current_level
 
     pd.DataFrame(data, columns=['BT', 'BG_lvl1', 'BG_lvl2', 'BG_lvl3']).to_csv(
         eformsdir / 'bt-bg-hierarchy.csv', index=False
@@ -398,11 +413,42 @@ def prepopulate():
         'guidance', 'status', 'comments'
     ]]  # 12 columns
 
-    df.to_csv(eformsdir / '2019-guidance-imported.csv', index=False)
+    write_guidance_pair('2019-guidance-imported', df, index=False)
 
-    df['eforms_xpath'] = df['eforms_xpath'].str.split(';')
 
-    df.to_json(eformsdir / '2019-guidance-imported.json', orient='records', indent=2)
+@cli.command()
+def update_with_annex():
+    """
+    Update the guidance with details from the 2019 regulation's annex.
+
+    eforms-guidance.csv is read to write both eforms-guidance.csv and eforms-guidance.json.
+    """
+    df = pd.read_csv(
+        eformsdir / 'eforms-guidance.csv',
+        dtype={'eformsNotice': str, 'sfNotice': str},
+        converters={'eforms_xpath': eval}  # TODO: Change the CSV to use ";"
+    )
+
+    df_annex = pd.DataFrame(annex_rows()).set_index('ID', verify_integrity=True)
+
+    for label, row in df.iterrows():
+        term = row['BT']
+        status = df_annex.at[term, row['eformsNotice']]
+        if status in ('CM', 'EM'):  # if "conditions" met or if it "exists"
+            status = 'M'
+        df.at[label, 'legal_status'] = status
+        df.at[label, 'bt_description'] = df_annex.at[term, 'Description']
+        df.at[label, 'bt_datatype'] = df_annex.at[term, 'Data type']
+
+    for column in ('legal_status', 'guidance', 'status', 'comments'):  # TODO: Change to use null
+        df[column].fillna('', inplace=True)
+
+    df = df[[
+        'id', 'Name', 'eformsNotice', 'sfNotice', 'legal_status', 'eforms_xpath', 'BT', 'bt_description',
+        'bt_datatype', 'sfLevel', 'guidance', 'status', 'comments',
+    ]]
+
+    write_guidance_pair('eforms-guidance', df, index_label='id')
 
 
 @cli.command()
