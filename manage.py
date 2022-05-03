@@ -336,27 +336,28 @@ def prepopulate():
 
     df.sort_values(['eformsNotice', 'ID'], inplace=True)
 
-    # Re-order columns. This effectively drops 13 columns:
-    #
-    # bt-indices-mapping.csv
-    # - Indent level: superseded by bt-bg-mapping.csv
-    # - Data type: re-added by sync-with-annex
-    # - Repeatable
-    # - Description: re-added by sync-with-annex
-    # - Legal Status: re-added by sync-with-annex
-    # - Element
-    #
-    # bt-xpath-mapping.csv
-    # - BT ID: merge column
-    # - BT Name: semantically the same as "Name"
-    # - Additional information
-    #
-    # 2015-guidance.csv (only "guidance" needed)
-    # - xpath
-    # - label-key
-    # - index: merge column
-    # - file
-    df = df[['Name', 'eformsNotice', 'sfNotice', 'XPATH', 'ID', 'Level', 'guidance', 'status', 'comments']]
+    df.drop(columns=[
+        # bt-indices-mapping.csv: Defer these columns to the 2019 regulation's annex.
+        'Indent level',
+        'Name',
+        'Data type',
+        'Repeatable',
+        'Description',
+        'Legal Status',
+
+        # bt-xpath-mapping.csv: Defer these columns to the 2019 regulation's annex.
+        'BT ID',  # merge column
+        'BT Name',
+
+        # 2015-guidance.csv: Only want guidance related to 2015 regulation.
+        'xpath',
+        'label-key',
+        'index',  # merge column
+        'file',
+    ], inplace=True)
+
+    # TODO: Remove this line once satisfied with comparison.
+    df = df[['ID', 'Level', 'eformsNotice', 'sfNotice', 'XPATH', 'guidance', 'status', 'comments']]
 
     df.to_json(eformsdir / f'eforms-guidance-pre.json', orient='records', indent=2)
 
