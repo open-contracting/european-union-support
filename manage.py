@@ -16,9 +16,6 @@ sourcedir = basedir / 'source'
 mappingdir = basedir / 'output' / 'mapping'
 eformsdir = mappingdir / 'eForms'
 
-# We try to use pandas' N/A logic. However, in some cases we use `keep_default_na` to avoid
-# "ValueError: Cannot mask with non-boolean array containing NA / NaN values".
-
 
 def excel_files():
     with ZipFile(sourcedir / 'Task 5_Support_Standard Forms-eForms mappings_v.3.zip') as zipfile:
@@ -253,39 +250,8 @@ def extract_indices_mapping():
 
 
 @cli.command()
-def extract_hierarchy():
-    """
-    Extract the hierarchy of Business Groups and Business Terms.
-
-    \b
-    Create or update output/mapping/eForms/bt-bg-hierarchy.csv from
-    source/CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx
-    """
-    data = []
-    line = []
-    previous_level = 0
-
-    for row in annex_rows():
-        identifier = row['ID']
-        current_level = len(row['Level'])
-
-        # Adjust the size of this line of the "tree", then update the head.
-        if current_level > previous_level:
-            line.append(None)
-        elif current_level < previous_level:
-            line = line[:current_level]
-        line[-1] = identifier
-
-        data.append([identifier, *line[:-1]])
-        previous_level = current_level
-
-    pd.DataFrame(data, columns=['BT', 'BG_lvl1', 'BG_lvl2', 'BG_lvl3']).to_csv(
-        eformsdir / 'bt-bg-hierarchy.csv', index=False
-    )
-
-
-@cli.command()
 def update_ted_xml_indices():
+    # TODO
     pass
 
 
@@ -359,27 +325,16 @@ def prepopulate():
     # TODO: This sort changes the output!
     df.sort_values(['ID', 'eformsNotice', 'sfNotice', 'Level', 'XPATH'], inplace=True)
 
-    # Merge in hierarchy information and 2015 guidance.
-    # TODO: Remove keep_default_na=False once comparison finished (changes sort order).
-    df = df.merge(pd.read_csv(eformsdir / 'bt-bg-hierarchy.csv', keep_default_na=False), how='left', left_on='ID', right_on='BT')
+    # Merge in 2015 guidance.
     df = df.merge(pd.read_csv(eformsdir / '2015-guidance.csv'), how='left', left_on='Level', right_on='index')
 
     # TODO: Double-check this.
     df.drop_duplicates(['ID', 'eformsNotice'], inplace=True)
 
-    # Avoid "ValueError: DataFrame columns must be unique for orient='records'."
-    df.drop(columns='BT', inplace=True)  # same as "ID"
-
     df.loc[df['guidance'].notna(), 'status'] = 'imported_from_sf'
     df['comments'] = ''
 
-    df.sort_values(['eformsNotice', 'BG_lvl1', 'BG_lvl2', 'BG_lvl3', 'ID'], inplace=True)
-
-    df.rename(columns={
-        'ID': 'BT',
-        'Level': 'sfLevel',
-        'XPATH': 'eforms_xpath',
-    }, errors='raise', inplace=True)
+    df.sort_values(['eformsNotice', 'ID'], inplace=True)
 
     # Re-order columns. This effectively drops 13 columns:
     #
@@ -401,10 +356,7 @@ def prepopulate():
     # - label-key
     # - index: merge column
     # - file
-    df = df[[
-        'Name', 'eformsNotice', 'sfNotice', 'eforms_xpath', 'BT', 'sfLevel', 'BG_lvl1', 'BG_lvl2', 'BG_lvl3',
-        'guidance', 'status', 'comments'
-    ]]  # 12 columns
+    df = df[['Name', 'eformsNotice', 'sfNotice', 'XPATH', 'ID', 'Level', 'guidance', 'status', 'comments']]
 
     df.to_json(eformsdir / f'eforms-guidance-pre.json', orient='records', indent=2)
 
@@ -447,7 +399,7 @@ def statistics():
     """
     df = pd.read_json(eformsdir / 'eforms-guidance.json', orient='records')
 
-    df_terms = df.drop_duplicates(subset='BT')
+    df_terms = df.drop_duplicates(subset='ID')
     total_terms = df_terms.shape[0]
     done_terms = df_terms[df_terms['status'].str.startswith('done')].shape[0]
 
