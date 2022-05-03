@@ -41,13 +41,6 @@ def annex_rows():
                 yield row
 
 
-def write_guidance_pair(basename, df, **kwargs):
-    df.to_csv(eformsdir / f'{basename}.csv', **kwargs)
-    if not df['eforms_xpath'].apply(isinstance, args=[list]).any():
-        df['eforms_xpath'] = df['eforms_xpath'].str.split(';')
-    df.to_json(eformsdir / f'{basename}.json', orient='records', indent=2)
-
-
 # https://github.com/pallets/click/issues/486
 @click.group(context_settings={'max_content_width': 150})
 def cli():
@@ -331,7 +324,7 @@ def prepopulate():
     Prepopulate the guidance for the 2019 regulation, based on that for the 2015 regulation.
 
     \b
-    Create or update output/mapping/eForms/2019-guidance-imported.json and .csv.
+    Create or update output/mapping/eForms/eforms-guidance-pre.json.
     """
 
     def add(data, current_row):
@@ -377,6 +370,7 @@ def prepopulate():
     # Avoid "ValueError: DataFrame columns must be unique for orient='records'."
     df.drop(columns='BT', inplace=True)  # same as "ID"
 
+    df['XPATH'] = df['XPATH'].str.split(';')
     df.loc[df['guidance'].notna(), 'status'] = 'imported_from_sf'
     df['comments'] = ''
 
@@ -413,7 +407,7 @@ def prepopulate():
         'guidance', 'status', 'comments'
     ]]  # 12 columns
 
-    write_guidance_pair('2019-guidance-imported', df, index=False)
+    df.to_json(eformsdir / f'eforms-guidance-pre.json', orient='records', indent=2)
 
 
 @cli.command()
