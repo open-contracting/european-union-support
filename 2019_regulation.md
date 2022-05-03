@@ -8,7 +8,7 @@
 
 ## Prepopulate with the 2015 guidance
 
-Extract data from the source files:
+Extract data from the source files, mapping Business Terms (BTs) to form indices and to eForms XPaths:
 
     ./manage.py extract-indices-mapping
     ./manage.py extract-xpath-mapping

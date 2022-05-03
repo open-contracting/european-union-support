@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import ast
 import csv
 import json
 import os
@@ -426,7 +427,7 @@ def update_with_annex():
     df = pd.read_csv(
         eformsdir / 'eforms-guidance.csv',
         dtype={'eformsNotice': str, 'sfNotice': str},
-        converters={'eforms_xpath': eval}  # TODO: Change the CSV to use ";"
+        converters={'eforms_xpath': ast.literal_eval}  # TODO: Change the CSV to use ";"
     )
 
     df_annex = pd.DataFrame(annex_rows()).set_index('ID', verify_integrity=True)
