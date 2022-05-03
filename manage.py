@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-import ast
 import csv
 import json
 import os
@@ -424,17 +423,13 @@ def update_with_annex():
 
     eforms-guidance.csv is read to write both eforms-guidance.csv and eforms-guidance.json.
     """
-    df = pd.read_csv(
-        eformsdir / 'eforms-guidance.csv',
-        dtype={'eformsNotice': str, 'sfNotice': str},
-        converters={'eforms_xpath': ast.literal_eval}  # TODO: Change the CSV to use ";"
-    )
+    df = pd.read_json(eformsdir / 'eforms-guidance.json', orient='records')
 
     df_annex = pd.DataFrame(annex_rows()).set_index('ID', verify_integrity=True)
 
     for label, row in df.iterrows():
         term = row['BT']
-        status = df_annex.at[term, row['eformsNotice']]
+        status = df_annex.at[term, str(row['eformsNotice'])]
         if status in ('CM', 'EM'):  # if "conditions" met or if it "exists"
             status = 'M'
         df.at[label, 'legal_status'] = status
@@ -449,7 +444,7 @@ def update_with_annex():
         'bt_datatype', 'sfLevel', 'guidance', 'status', 'comments',
     ]]
 
-    write_guidance_pair('eforms-guidance', df, index_label='id')
+    df.to_json(eformsdir / 'eforms-guidance.json', orient='records', indent=2)
 
 
 @cli.command()
