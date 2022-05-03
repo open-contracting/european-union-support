@@ -279,9 +279,7 @@ def extract_2015_guidance():
         dfs.append(df)
 
     # ignore_index is required, as each data frame repeats indices. Re-order the columns.
-    pd.concat(dfs, ignore_index=True).to_csv(
-        eformsdir / '2015-guidance.csv', columns=['xpath', 'label-key', 'index', 'guidance', 'file'], index=False
-    )
+    pd.concat(dfs, ignore_index=True).to_csv(eformsdir / '2015-guidance.csv', index=False)
 
 
 @cli.command()
@@ -290,7 +288,7 @@ def prepopulate():
     Prepopulate the guidance for the 2019 regulation, based on that for the 2015 regulation.
 
     \b
-    Create or update output/mapping/eForms/eforms-guidance-pre.json.
+    Create or update output/mapping/eForms/eforms-guidance-pre.json
     """
 
     def add(data, current_row):
@@ -416,7 +414,7 @@ def statistics():
 
     legal_status = {}
     for value in ('M', 'O', ''):
-        df_legal_status = df[df['legal_status'] == value]
+        df_legal_status = df[df['Legal status'] == value]
         legal_status[value] = {
             'total': df_legal_status.shape[0],
             'done': df_legal_status[df_legal_status['status'].str.startswith('done')].shape[0],
