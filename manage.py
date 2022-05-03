@@ -446,7 +446,7 @@ def statistics():
     """
     Print statistics on the progress of the guidance for the 2019 regulation.
     """
-    df = pd.read_csv(eformsdir / 'eforms-guidance.csv', keep_default_na=False)
+    df = pd.read_json(eformsdir / 'eforms-guidance.json', orient='records')
 
     df_terms = df.drop_duplicates(subset='BT')
     total_terms = df_terms.shape[0]
@@ -462,14 +462,14 @@ def statistics():
     issue = df_issue.shape[0]
     issue_no_guidance = df_issue[df_issue['guidance'] == ''].shape[0]
 
-    df_mandatory = df[df['legal_status'] == 'M']
-    df_optional = df[df['legal_status'] == 'O']
-    total_mandatory = df_mandatory.shape[0]
-    total_optional = df_optional.shape[0]
-    done_mandatory = df_mandatory[df_mandatory['status'].str.startswith('done')].shape[0]
-    done_optional = df_optional[df_optional['status'].str.startswith('done')].shape[0]
-    issue_mandatory = df_mandatory[df_mandatory['status'].str.startswith('issue')].shape[0]
-    issue_optional = df_optional[df_optional['status'].str.startswith('issue')].shape[0]
+    legal_status = {}
+    for value in ('M', 'O', ''):
+        df_legal_status = df[df['legal_status'] == value]
+        legal_status[value] = {
+            'total': df_legal_status.shape[0],
+            'done': df_legal_status[df_legal_status['status'].str.startswith('done')].shape[0],
+            'issue': df_legal_status[df_legal_status['status'].str.startswith('issue')].shape[0],
+        }
 
     click.echo(dedent(f"""\
     - BTs ready for review: {done_terms}/{total_terms} ({done_terms / total_terms:.1%})
@@ -477,8 +477,9 @@ def statistics():
         - Imported from 2015 guidance: {imported} ({imported / total:.1%})
         - Added or edited after import: {done} ({done / total:.1%})
         - Per legal status:
-            - Mandatory: {done_mandatory} ({done_mandatory / total_mandatory:.1%} of all M), {issue_mandatory} with open issues ({issue_mandatory / total_mandatory:.1%} of all M)
-            - Optional: {done_optional} ({done_optional / total_optional:.1%} of all O), {issue_optional} with open issues ({issue_optional / total_optional:.1%} of all O)
+            - Mandatory: {legal_status['M']['done']}/{legal_status['M']['total']} ({legal_status['M']['done'] / legal_status['M']['total']:.1%}), {legal_status['M']['issue']} with open issues ({legal_status['M']['issue'] / legal_status['M']['total']:.1%})
+            - Optional: {legal_status['O']['done']}/{legal_status['O']['total']} ({legal_status['O']['done'] / legal_status['O']['total']:.1%}), {legal_status['O']['issue']} with open issues ({legal_status['O']['issue'] / legal_status['O']['total']:.1%})
+            - Empty: {legal_status['']['done']}/{legal_status['']['total']} ({legal_status['']['done'] / legal_status['']['total']:.1%}), {legal_status['']['issue']} with open issues ({legal_status['']['issue'] / legal_status['']['total']:.1%})
     - Rows with [open issues](https://github.com/open-contracting/european-union-support/labels/eforms): {issue} ({issue / total:.1%}), {issue_no_guidance} without guidance
     - Rows without issues and without guidance: {no_issue_no_guidance} ({no_issue_no_guidance / total:.1%})
     """))  # noqa: E501
