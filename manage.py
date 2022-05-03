@@ -328,7 +328,7 @@ def prepopulate():
     """
 
     def add(data, current_row):
-        current_row['XPATH'] = ';'.join(sorted(current_row['XPATH']))  # for briefer diff
+        current_row['XPATH'] = tuple(sorted(current_row['XPATH']))  # for briefer diff
         data.append(current_row)
 
     # Start with the eForms file that contains indices used by the 2015 guidance.
@@ -370,7 +370,6 @@ def prepopulate():
     # Avoid "ValueError: DataFrame columns must be unique for orient='records'."
     df.drop(columns='BT', inplace=True)  # same as "ID"
 
-    df['XPATH'] = df['XPATH'].str.split(';')
     df.loc[df['guidance'].notna(), 'status'] = 'imported_from_sf'
     df['comments'] = ''
 
