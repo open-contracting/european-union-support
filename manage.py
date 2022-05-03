@@ -160,7 +160,7 @@ def extract_indices_mapping():
             if df['Empty'].isna().all():
                 df.drop(columns='Empty', inplace=True)
             else:
-                raise click.ClickException("The first column was expected to be empty.")
+                raise click.ClickException('The first column was expected to be empty.')
 
             # Add notice number columns, using '1' instead of '01' to ease joins.
             df['eformsNotice'] = [[number.lstrip('0') for number in eforms_notice_number.split(',')] for i in df.index]
@@ -270,12 +270,13 @@ def extract_2015_guidance():
 
     dfs = []
     for path in mappingdir.glob('*.csv'):
-        # The other columns are "index" and "comment".
+        # The other columns are "index", which will be replaced, and "comment", which is a GitHub URL.
         df = pd.read_csv(path, usecols=['xpath', 'label-key', 'guidance'])
         # Add the "index" column from the other file.
         df = df.merge(df_indices, how='left', on='xpath')
         # Add a "file" column for the source of the row.
         df['file'] = path.name
+
         dfs.append(df)
 
     # ignore_index is required, as each data frame repeats indices. Re-order the columns.
@@ -296,8 +297,7 @@ def prepopulate():
         data.append(current_row)
 
     # Start with the eForms file that contains indices used by the 2015 guidance.
-    # Without `dtype`, pandas writes the integers as floats (i.e. with decimals).
-    df = pd.read_csv(eformsdir / 'bt-indices-mapping.csv', dtype={'eformsNotice': str, 'sfNotice': str})
+    df = pd.read_csv(eformsdir / 'bt-indices-mapping.csv')
 
     # Merge in the eForms XPaths. Sort by "BT ID" to simplify the for-loop's logic below.
     df_xpath = pd.read_csv(eformsdir / 'bt-xpath-mapping.csv').sort_values('BT ID')
@@ -329,10 +329,11 @@ def prepopulate():
     # TODO: Double-check this.
     df.drop_duplicates(['ID', 'eformsNotice'], inplace=True)
 
-    df.loc[df['guidance'].notna(), 'status'] = 'imported_from_sf'
+    # Add two manually-edited columns.
+    df.loc[df['guidance'].notna(), 'status'] = 'imported from standard forms'
     df['comments'] = ''
 
-    df.sort_values(['eformsNotice', 'ID'], inplace=True)
+    df.sort_values(['eformsNotice', 'sfNotice', 'ID'], inplace=True)
 
     df.drop(columns=[
         # bt-indices-mapping.csv: Defer these columns to the 2019 regulation's annex.
@@ -342,11 +343,9 @@ def prepopulate():
         'Repeatable',
         'Description',
         'Legal Status',
-
         # bt-xpath-mapping.csv: Defer these columns to the 2019 regulation's annex.
         'BT ID',  # merge column
         'BT Name',
-
         # 2015-guidance.csv: Only want guidance related to 2015 regulation.
         'xpath',
         'label-key',
