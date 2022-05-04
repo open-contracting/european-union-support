@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import csv
-import json
 import os
 import re
 from pathlib import Path
@@ -8,7 +7,6 @@ from textwrap import dedent
 from zipfile import ZipFile
 
 import click
-import numpy as np
 import pandas as pd
 from docx import Document
 
@@ -64,6 +62,7 @@ def extract_xpath_mapping():
         # Newlines occur in all columns except the first, e.g.:
         # /*/cac:ContractingParty/cac:ContractingRepresentationType/cbc:RepresentationTypeCode
         # /*/cac:ProcurementProjectLot/cac:TenderingTerms/cac:TenderRecipientParty/cbc:EndpointID
+        #
         # Leading or trailing whitespace occur in the first and third columns, e.g.:
         # /*/cac:ProcurementProjectLot/cac:ProcurementProject/cbc:EstimatedOverallContractQuantity
         # /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Change/efbc:C...
@@ -81,16 +80,22 @@ def extract_xpath_mapping():
     data = []
     for row in docx.tables[0].rows[1:]:
         cells = text(row)
-        xpath = cells[0]
         # Skip subheadings.
-        if not xpath.startswith('/'):
+        if not cells[0].startswith('/'):
             continue
         # XXX: Correct a typo (n-dash instead of empty).
         if cells[1] == '–':
             cells[1] = ''
         data.append(cells)
 
-    pd.DataFrame(data, columns=columns).to_csv(eformsdir / 'bt-xpath-mapping.csv', index=False)
+    # Note: 4 XPaths map to multiple BTs. (Otherwise, BT:XPath is 1:n.)
+    #
+    # - /*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference/cbc:DocumentDescription BT-01 BT-09
+    # - /*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference/cbc:ID BT-01 BT-09
+    # - /*/cac:ProcurementProjectLot/cac:ProcurementProject/cac:ProcurementAdditionalType/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/cbc:Description BT-755 BT-777 # noqa: E501
+    # - /ContractAwardNotice/cac:TenderResult/cac:AwardedTenderedProject/cac:ProcurementProjectLot/cac:TenderingProcess/cac:FrameworkAgreement/cbc:MaximumValueAmount BT-156 BT-709 # noqa: E501
+
+    pd.DataFrame(data, columns=columns).drop_duplicates().to_csv(eformsdir / 'bt-xpath-mapping.csv', index=False)
 
 
 @cli.command()
@@ -389,7 +394,6 @@ def update_with_2015_guidance():
     # Merge in the eForms XPaths. Sort by "BT ID" to simplify the for-loop's logic below.
     df_xpath = pd.read_csv(eformsdir / 'bt-xpath-mapping.csv').sort_values('BT ID')
 
-    # 8 rows contain duplicate XPaths. Combine these with the original occurrences.
     data = []
 
     current_row = {'BT ID': None, 'XPATH': []}
