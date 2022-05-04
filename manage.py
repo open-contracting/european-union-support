@@ -196,6 +196,8 @@ def extract_indices_mapping():
 
             # Trim whitespace.
             df['Name'] = df['Name'].str.strip()
+            df['Element'] = df['Element'].str.strip()
+
             # Normalize indices ("D1 - 1.1.1" to "D1.1.1.1").
             df['Level'] = df['Level'].str.replace(' - ', '.')
 
