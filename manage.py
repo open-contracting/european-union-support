@@ -17,6 +17,11 @@ mappingdir = basedir / 'output' / 'mapping'
 eformsdir = mappingdir / 'eForms'
 
 
+def check(actual, expected, noun):
+    assert actual == expected, f'expected {expected} {noun}, got {actual}'
+    return actual
+
+
 def excel_files():
     with ZipFile(sourcedir / 'Task 5_Support_Standard Forms-eForms mappings_v.3.zip') as zipfile:
         for name in zipfile.namelist():
@@ -80,12 +85,10 @@ def extract_xpath_mapping():
         return cells
 
     docx = Document(sourcedir / 'XPATHs provisional release v. 1.0.docx')
-
-    length = len(docx.tables)
-    assert length == 1, f'unexpected table, found {length}'
-
     columns = text(docx.tables[0].rows[0])
-    assert columns == ['XPATH', 'BT ID', 'BT Name', 'Additional information'], f'unexpected headers, got {columns}'
+
+    check(len(docx.tables), 1, 'table')
+    check(columns, ['XPATH', 'BT ID', 'BT Name', 'Additional information'], 'headers')
 
     data = []
     for row in docx.tables[0].rows[1:]:
@@ -125,8 +128,6 @@ def extract_indices_mapping():
     keep_sheet_regex = re.compile(r'^(?:eForm|eN) ?(\d\d?(?:,\d\d)*) vs S?F(\d\d) ?$')
 
     replace_newlines = re.compile(r'\n(?=\(|(2009|Title III|and|requirements|subcontractor|will)\b)')
-
-    explode = ['Level', 'Element']
 
     remove_standard = {
         # Additional Information is top-level like VI.3, not lot-specific.
@@ -202,41 +203,43 @@ def extract_indices_mapping():
             if sf_notice_number in ('16', '17', '18', '19'):
                 continue
 
-            # `explode` requires lists with the same number of elements, but an "Element" is not repeated if it is
+            # `explode()` requires lists with the same number of elements, but an "Element" is not repeated if it is
             # the same for all "Level". Extra newlines also complicate things.
-            for _, row in df.iterrows():
+            for label, row in df.iterrows():
                 bt_id = row['ID']
+                levels = row['Level']
+                elements = row['Element']
                 location = f'{basename}: {bt_id}: '
 
                 # Remove spurious newlines in "Element" values.
-                row['Element'] = row['Element'].replace('\n\n', '\n')
-                if replace_newlines.search(row['Element']):
+                elements = elements.replace('\n\n', '\n')
+                if replace_newlines.search(elements):
                     # Display the newlines that were removed, for user to review.
-                    highlight = replace_newlines.sub(lambda m: click.style(m.group(0), blink=True), row['Element'])
+                    highlight = replace_newlines.sub(lambda m: click.style(m.group(0), blink=True), elements)
                     # Replace outside f-string ("SyntaxError: f-string expression part cannot include a backslash").
                     highlight = highlight.replace('\n', '\\n')
                     click.echo(f'{location}removed \\n: {highlight}')
-                    row['Element'] = replace_newlines.sub(' ', row['Element'])
+                    elements = replace_newlines.sub(' ', elements)
 
                 # XXX: Hardcode corrections or cases requiring human interpretation.
                 if (
                     eforms_notice_number == '15'
                     and sf_notice_number == '7'
                     and bt_id == 'BT-18'
-                    and row['Level'] == 'I.3.4.1.1'
-                    and len(row['Element'].split('\n')) == 2
+                    and levels == 'I.3.4.1.1'
+                    and len(elements.split('\n')) == 2
                 ):
                     # Add the missing "Level".
-                    row['Level'] = 'I.3.4.1.1\nI.3.4.1.2'
+                    levels = 'I.3.4.1.1\nI.3.4.1.2'
                 elif (
                     eforms_notice_number == '18'
                     and sf_notice_number == '17'
                     and bt_id == 'BT-750'
-                    and row['Level'] == 'III.2.1.1.1\nIII.2.2.2\nIII.2.2.3\nIII.2.3.1.1\nIII.2.3.1.2'
-                    and len(row['Element'].split('\n')) == 2
+                    and levels == 'III.2.1.1.1\nIII.2.2.2\nIII.2.2.3\nIII.2.3.1.1\nIII.2.3.1.2'
+                    and len(elements.split('\n')) == 2
                 ):
                     # Unambiguously repeat the "Element".
-                    row['Element'] = dedent("""\
+                    elements = dedent("""\
                     Information and formalities necessary for evaluating if the requirements are met:
                     Information and formalities necessary for evaluating if the requirements are met:
                     Minimum level(s) of standards possibly required: (if applicable)
@@ -244,28 +247,30 @@ def extract_indices_mapping():
                     Minimum level(s) of standards possibly required: (if applicable)
                     """)
 
-                if '\n' not in row['Level']:
+                if '\n' not in levels:
                     # Warn about remaining newlines (BT-531 in F17 and F18).
-                    if '\n' in row['Element']:
+                    if '\n' in elements:
                         click.secho(f'{location}unexpected \\n: {repr(row["Element"])}', fg='yellow')
+                    df.at[label, 'Level'] = levels
+                    df.at[label, 'Element'] = elements
                     continue
 
                 # Split values, after removing leading and trailing newlines (occurs in "Level" values).
-                for column in explode:
-                    row[column] = [value.strip() for value in row[column].strip("\n").split("\n")]
+                levels = [value.strip() for value in levels.strip("\n").split("\n")]
+                elements = [value.strip() for value in elements.strip("\n").split("\n")]
 
                 # Repeat "Element" as many times as there are "Level".
-                length = len(row['Level'])
-                if length > len(row['Element']):
-                    row['Element'] *= length
-                if length != len(row['Element']):
+                length = len(levels)
+                if length > len(elements):
+                    elements *= length
+                if length != len(elements):
                     click.secho(f'{location}size differs: {row["Level"]} {row["Element"]}', fg='red')
 
                 # Remove rows with a B... "Level" after split, for which we have no mapping information.
-                for i, (level, element) in enumerate(zip(row['Level'], row['Element'])):
+                for i, (level, element) in enumerate(zip(levels, elements)):
                     if 'B' in level:  # "B.1", "B 4.2", "(Annex B)"
-                        del row['Level'][i]
-                        del row['Element'][i]
+                        del levels[i]
+                        del elements[i]
 
                 # XXX: Correct the source file's incorrect mapping between 2019 BTs and 2015 indices.
                 if sf_notice_number in ('23', '25'):
@@ -273,20 +278,24 @@ def extract_indices_mapping():
                 else:
                     remove = remove_standard
                 if bt_id in remove:
-                    i = row['Level'].index(remove[bt_id])
-                    row['Level'].pop(i)
-                    row['Element'].pop(i)
+                    i = levels.index(remove[bt_id])
+                    levels.pop(i)
+                    elements.pop(i)
 
                 # Check for errors in the source file.
-                sections = set(level.split('.', 1)[0] for level in row['Level'])
+                sections = set(level.split('.', 1)[0] for level in levels)
                 if len(sections) > 1 and bt_id not in ignore:
                     raise click.ClickException(
                         f'{location}{row["Name"]} cannot map to multiple sections ({", ".join(row["Level"])}). '
                         'Edit manage.py to correct the source file.'
                     )
 
+                # Update the data frame.
+                df.at[label, 'Level'] = levels
+                df.at[label, 'Element'] = elements
+
             try:
-                df = df.explode(explode)
+                df = df.explode(['Level', 'Element'])
             except ValueError as e:
                 raise click.ClickException(f'{sheet}: {e}')
 
@@ -355,11 +364,11 @@ def prepopulate():
 
     current_row = {'BT ID': None, 'XPATH': []}
 
-    for _, row in df_xpath.iterrows():
+    for label, row in df_xpath.iterrows():
         if row['BT ID'] != current_row['BT ID']:
             if current_row['XPATH']:
                 add(data, current_row)
-            row['XPATH'] = [row['XPATH']]
+            df_xpath.at[label, 'XPATH'] = [row['XPATH']]
             current_row = row
         else:
             current_row['XPATH'].append(row['XPATH'])
@@ -375,6 +384,7 @@ def prepopulate():
     df = df.merge(pd.read_csv(eformsdir / '2015-guidance.csv'), how='left', left_on='Level', right_on='index')
 
     # TODO: Do we need to add 'Level' (and maybe 'sfNotice'?), to allow the mapping to be context dependent?
+    # Need to merge Level, guidance (anything else?) into an array.
     df.drop_duplicates(['eformsNotice', 'ID'], inplace=True)
 
     # Add two manually-edited columns.
