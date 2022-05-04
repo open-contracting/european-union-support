@@ -414,6 +414,9 @@ def update_with_annex(filename):
     \b
     Create or update FILE from source/CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx
     """
+    line = []
+    previous_level = 0
+
     with pd.ExcelFile(sourcedir / 'CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx') as xlsx:
         # A warning is issued, because the Excel file has an unsupported extension.
         df_annex = pd.read_excel(xlsx, 'Annex')
@@ -435,12 +438,28 @@ def update_with_annex(filename):
         # Trim whitespace.
         df_annex['Name'] = df_annex['Name'].str.strip()
 
+        # Add groups, to assist in mapping.
+        df_annex['Business groups'] = pd.Series(dtype=object)
+        for label, row in df_annex.iterrows():
+            current_level = len(row['Level'])
+
+            # Adjust the size of this line of the "tree", then update the head.
+            if current_level > previous_level:
+                line.append((None, None))
+            elif current_level < previous_level:
+                line = line[:current_level]
+            line[-1] = [label, row['Name']]
+
+            df_annex.at[label, 'Business groups'] = dict(line[:-1])
+            previous_level = current_level
+
     df_guidance = pd.read_json(filename, orient='records')
+    df_guidance['Business groups'] = pd.Series(dtype=object)
 
     for label, row in df_guidance.iterrows():
         annex_label = row['ID']
 
-        for column in ('Name', 'Data type', 'Description'):
+        for column in ('Business groups', 'Name', 'Data type', 'Repeatable', 'Description'):
             df_guidance.at[label, column] = df_annex.at[annex_label, column]
 
         status = df_annex.at[annex_label, row['eformsNotice']]
@@ -451,6 +470,7 @@ def update_with_annex(filename):
     for column in ('Legal status', 'guidance', 'status', 'comments'):
         df_guidance[column].fillna('', inplace=True)
 
+    # TODO: Uncomment columns once added via other command.
     df_guidance = df_guidance[[
         # Identification
         'ID',
@@ -463,16 +483,20 @@ def update_with_annex(filename):
         'comments',
 
         # 2019 regulation's annex (excludes "Level", like "+++")
+        'Business groups',
         'Name',
         'Data type',
+        'Repeatable',
         'Description',
         'Legal status',
 
-        # XPATH mapping
+        # XPath mapping
         'XPATH',
+        # 'Additional information',
 
-        # 2015 regulation
+        # Index mapping
         'Level',
+        # 'Element',
     ]]
 
     df_guidance.to_json(filename, orient='records', indent=2)
