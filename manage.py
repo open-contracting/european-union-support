@@ -144,11 +144,6 @@ def extract_indices_mapping():
         # Concession Value Description is lot-specific like V.2.4.6, not top-level.
         'BT-163': 'II.1.5.3',
     }
-    remove_defence = {
-        # Similar to above.
-        'BT-710': 'II.2.2.1.1',
-        'BT-711': 'II.2.3.1.1',
-    }
     ignore = {
         # Direct Award Justification Previous Procedure Identifier matches multiple Annex D.
         'BT-1252',
@@ -203,6 +198,10 @@ def extract_indices_mapping():
             if 'DEBUG' in os.environ:
                 df.to_csv(sourcedir / 'xlsx' / f'{basename}.csv', index=False)
 
+            # We don't have guidance for defence forms, and they don't use the same form indices in any case.
+            if sf_notice_number in ('16', '17', '18', '19'):
+                continue
+
             # `explode` requires lists with the same number of elements, but an "Element" is not repeated if it is
             # the same for all "Level". Extra newlines also complicate things.
             for _, row in df.iterrows():
@@ -227,6 +226,7 @@ def extract_indices_mapping():
                     and row['Level'] == 'I.3.4.1.1'
                     and len(row['Element'].split('\n')) == 2
                 ):
+                    # Add the missing "Level".
                     row['Level'] = 'I.3.4.1.1\nI.3.4.1.2'
                 elif (
                     eforms_notice_number == '18'
@@ -235,6 +235,7 @@ def extract_indices_mapping():
                     and row['Level'] == 'III.2.1.1.1\nIII.2.2.2\nIII.2.2.3\nIII.2.3.1.1\nIII.2.3.1.2'
                     and len(row['Element'].split('\n')) == 2
                 ):
+                    # Unambiguously repeat the "Element".
                     row['Element'] = dedent("""\
                     Information and formalities necessary for evaluating if the requirements are met:
                     Information and formalities necessary for evaluating if the requirements are met:
@@ -244,7 +245,7 @@ def extract_indices_mapping():
                     """)
 
                 if '\n' not in row['Level']:
-                    # Warn about remaining newlines (BT-531 twice).
+                    # Warn about remaining newlines (BT-531 in F17 and F18).
                     if '\n' in row['Element']:
                         click.secho(f'{location}unexpected \\n: {repr(row["Element"])}', fg='yellow')
                     continue
@@ -267,9 +268,7 @@ def extract_indices_mapping():
                         del row['Element'][i]
 
                 # XXX: Correct the source file's incorrect mapping between 2019 BTs and 2015 indices.
-                if sf_notice_number in ('16', '17', '18'):
-                    remove = remove_defence
-                elif sf_notice_number in ('23', '25'):
+                if sf_notice_number in ('23', '25'):
                     remove = remove_concession
                 else:
                     remove = remove_standard
