@@ -101,14 +101,16 @@ def extract_indices_mapping():
     \b
     Create or update output/mapping/eForms/bt-indices-mapping.csv from
     source/Task 5_Support_Standard Forms-eForms mappings_v.3.zip
+
+    The source files skip forms 9, 14 and E*: https://docs.ted.europa.eu/home/eforms/FAQ/index.html
     """
     ignore_sheets = {
-        'Annex table 2',
-        'eN40 vs F20',
-        'Legend',
+        'Legend',  # A legend (same for all workbooks).
+        'S.F. vs eForms mapping list ',  # A mapping from F## to eForms## (same for all workbooks).
+        'Annex table 2',  # A copy of the 2019 regulation's annex.
         'Legend Annex table 2',
-        'S.F. vs eForms mapping list ',
     }
+    # We only need the 2019 to 2015 direction.
     ignore_sheet_regex = [re.compile(pattern) for pattern in (
         r'^F\d\d vs eN\d\d( \(2\))?$',
         r'^SF\d\d vs eForm ?\d\d(,\d\d)*$'
@@ -117,6 +119,7 @@ def extract_indices_mapping():
 
     replace_newlines = re.compile(r'\n(?=\(|(2009|Title III|and|requirements|subcontractor|will)\b)')
 
+    # XXX: Correct the source file's incorrect mapping between 2019 BTs and 2015 indices.
     remove_standard = {
         # Additional Information is top-level like VI.3, not lot-specific.
         'BT-300': 'II.2.14',
@@ -159,7 +162,8 @@ def extract_indices_mapping():
             eforms_notice_number = match.group(1)
             sf_notice_number = match.group(2).lstrip('0')
 
-            # Read the Excel file. The first row is a title for the table.
+            # Read the Excel file. The first row is a title for the table. Per the "Legend" sheet, "---" means
+            # "Outdent level, not considered (e.g. title of business groups)".
             df = pd.read_excel(xlsx, sheet_name, skiprows=[0], na_values='---')
 
             # Avoid empty or duplicate headings.
@@ -192,7 +196,8 @@ def extract_indices_mapping():
             if 'DEBUG' in os.environ:
                 df.to_csv(sourcedir / 'xlsx' / f'{basename}.csv', index=False)
 
-            # We don't have guidance for defence forms, and they don't use the same form indices in any case.
+            # We don't have guidance for defence forms, and they don't use the same form indices in any case. As such,
+            # we have no rows for forms 9, 6 (F16), 18 (F17), 31 (F18), 22 (F19), but we do for 27 (F15) and 3 (F08).
             if sf_notice_number in ('16', '17', '18', '19'):
                 continue
 
