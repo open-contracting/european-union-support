@@ -102,7 +102,7 @@ def extract_indices_mapping():
     Create or update output/mapping/eForms/bt-indices-mapping.csv from
     source/Task 5_Support_Standard Forms-eForms mappings_v.3.zip
 
-    The source files skip forms 9, 14 and E*: https://docs.ted.europa.eu/home/eforms/FAQ/index.html
+    The source files don't cover forms 9, 14 and E*: https://docs.ted.europa.eu/home/eforms/FAQ/index.html
     """
     ignore_sheets = {
         'Legend',  # A legend (same for all workbooks).
@@ -110,7 +110,7 @@ def extract_indices_mapping():
         'Annex table 2',  # A copy of the 2019 regulation's annex.
         'Legend Annex table 2',
     }
-    # We only need the 2019 to 2015 direction.
+    # We only need the 2019-to-2015 direction.
     ignore_sheet_regex = [re.compile(pattern) for pattern in (
         r'^F\d\d vs eN\d\d( \(2\))?$',
         r'^SF\d\d vs eForm ?\d\d(,\d\d)*$'
@@ -147,8 +147,9 @@ def extract_indices_mapping():
     dfs = []
     for name, xlsx in excel_files():
         for sheet_name in xlsx.sheet_names:
-            # XXX: Typo in sheet name. (Corresponds to "SF22 vs eForm13".)
             sheet = sheet_name
+
+            # XXX: Typo in sheet name. (Corresponds to "SF22 vs eForm13" in the same workbook.)
             if sheet == 'eForm3 vs SF22':
                 sheet = 'eForm13 vs SF22'
 
@@ -159,8 +160,8 @@ def extract_indices_mapping():
             if not match:
                 raise click.ClickException(f"The sheet name {sheet!r} doesn't match a known pattern.")
 
-            eforms_notice_number = match.group(1)
-            sf_notice_number = match.group(2).lstrip('0')
+            form_2019 = match.group(1)
+            form_2015 = match.group(2)
 
             # Read the Excel file. The first row is a title for the table. Per the "Legend" sheet, "---" means
             # "Outdent level, not considered (e.g. title of business groups)".
@@ -183,9 +184,8 @@ def extract_indices_mapping():
                 raise click.ClickException('The first column was expected to be empty.')
 
             # Add notice number columns, using '1' instead of '01' to ease joins.
-            df['eformsNotice'] = [[number.lstrip('0') for number in eforms_notice_number.split(',')] for i in df.index]
-            df['sfNotice'] = sf_notice_number
-            basename = f'eForm{eforms_notice_number} - F{sf_notice_number.rjust(2, "0")}'
+            df['2019 form'] = [[number.lstrip('0') for number in form_2019.split(',')] for i in df.index]
+            df['2015 form'] = form_2015.lstrip('0')
 
             # Trim whitespace.
             df['Name'] = df['Name'].str.strip()
@@ -193,12 +193,13 @@ def extract_indices_mapping():
             # Make values easier to work with (must occur after `isna` above).
             df.fillna('', inplace=True)
 
+            basename = f'eForm{form_2019}-F{form_2015}'
             if 'DEBUG' in os.environ:
                 df.to_csv(sourcedir / 'xlsx' / f'{basename}.csv', index=False)
 
             # We don't have guidance for defence forms, and they don't use the same form indices in any case. As such,
             # we have no rows for forms 9, 6 (F16), 18 (F17), 31 (F18), 22 (F19), but we do for 27 (F15) and 3 (F08).
-            if sf_notice_number in ('16', '17', '18', '19'):
+            if form_2015 in ('16', '17', '18', '19'):
                 continue
 
             # `explode()` requires lists with the same number of elements, but an "Element" is not repeated if it is
@@ -216,6 +217,7 @@ def extract_indices_mapping():
                     highlight = replace_newlines.sub(lambda m: click.style(m.group(0), blink=True), elements)
                     # Replace outside f-string ("SyntaxError: f-string expression part cannot include a backslash").
                     highlight = highlight.replace('\n', '\\n')
+
                     click.echo(f'{location}removed \\n: {highlight}')
                     elements = replace_newlines.sub(' ', elements)
 
@@ -223,8 +225,8 @@ def extract_indices_mapping():
 
                 # XXX: Hardcode corrections or cases requiring human interpretation.
                 if (
-                    eforms_notice_number == '15'
-                    and sf_notice_number == '7'
+                    form_2019 == '15'
+                    and form_2015 == '07'
                     and bt_id == 'BT-18'
                     and levels == 'I.3.4.1.1'
                     and len(elements.split('\n')) == 2
@@ -232,8 +234,8 @@ def extract_indices_mapping():
                     # Add the missing "Level".
                     levels = 'I.3.4.1.1\nI.3.4.1.2'
                 elif (
-                    eforms_notice_number == '18'
-                    and sf_notice_number == '17'
+                    form_2019 == '18'
+                    and form_2015 == '17'
                     and bt_id == 'BT-750'
                     and levels == 'III.2.1.1.1\nIII.2.2.2\nIII.2.2.3\nIII.2.3.1.1\nIII.2.3.1.2'
                     and len(elements.split('\n')) == 2
@@ -251,8 +253,11 @@ def extract_indices_mapping():
                     # Warn about remaining newlines (BT-531 in F17 and F18).
                     if '\n' in elements:
                         click.secho(f'{location}unexpected \\n: {repr(row["Element"])}', fg='yellow')
+
+                    # Update the data frame before `continue`.
                     df.at[label, 'Level'] = levels
                     df.at[label, 'Element'] = elements
+
                     continue
 
                 # Split values, after removing leading and trailing newlines (occurs in "Level" values).
@@ -273,7 +278,7 @@ def extract_indices_mapping():
                         del elements[i]
 
                 # XXX: Correct the source file's incorrect mapping between 2019 BTs and 2015 indices.
-                if sf_notice_number in ('23', '25'):
+                if form_2015 in ('23', '25'):
                     remove = remove_concession
                 else:
                     remove = remove_standard
@@ -299,7 +304,7 @@ def extract_indices_mapping():
             except ValueError as e:
                 raise click.ClickException(f'{sheet}: {e}')
 
-            df = df.explode('eformsNotice')
+            df = df.explode('2019 form')
 
             dfs.append(df)
 
@@ -351,7 +356,7 @@ def extract_2015_guidance():
             x = row['index_old']
             y = row['index']
             if pd.notna(x) and x != y and not y == ignore.get(xpath):
-                raise click.ClickException(f'{xpath} is {x} in {path} but {y} in ted-xml-indices.csv')
+                raise click.ClickException(f'{xpath} is {x} in {path.name} but {y} in ted-xml-indices.csv')
 
         # Drop the "index" column from the guidance file.
         df.drop(columns='index_old', inplace=True)
@@ -401,20 +406,20 @@ def update_with_2015_guidance():
     df = df.merge(pd.DataFrame(data, columns=df_xpath.columns), how='left', left_on='ID', right_on='BT ID')
 
     # TODO: This sort changes the output!
-    df.sort_values(['ID', 'eformsNotice', 'sfNotice', 'Level', 'XPATH'], inplace=True)
+    df.sort_values(['ID', '2019 form', '2015 form', 'Level', 'XPATH'], inplace=True)
 
     # Merge in 2015 guidance.
     df = df.merge(pd.read_csv(eformsdir / '2015-guidance.csv'), how='left', left_on='Level', right_on='index')
 
-    # TODO: Do we need to add 'Level' (and maybe 'sfNotice'?), to allow the mapping to be context dependent?
+    # TODO: Do we need to add 'Level' (and maybe '2015 form'?), to allow the mapping to be context dependent?
     # Need to merge Level, guidance (anything else?) into an array.
-    df.drop_duplicates(['eformsNotice', 'ID'], inplace=True)
+    df.drop_duplicates(['2019 form', 'ID'], inplace=True)
 
     # Add two manually-edited columns.
     df.loc[df['guidance'].notna(), 'status'] = 'imported from standard forms'
     df['comments'] = ''
 
-    df.sort_values(['eformsNotice', 'sfNotice', 'ID'], inplace=True)
+    df.sort_values(['2019 form', '2015 form', 'ID'], inplace=True)
 
     df.drop(columns=[
         # bt-indices-mapping.csv: Defer these columns to the 2019 regulation's annex.
@@ -431,10 +436,11 @@ def update_with_2015_guidance():
         'xpath',
         'label-key',  # TODO: Lookup and add the English label?
         'index',  # merge column
+        'file',
     ], inplace=True)
 
     # TODO: Remove this line once satisfied with comparison.
-    df = df[['ID', 'Level', 'eformsNotice', 'sfNotice', 'XPATH', 'guidance', 'status', 'comments']]
+    df = df[['ID', 'Level', '2019 form', '2015 form', 'XPATH', 'guidance', 'status', 'comments']]
 
     df.to_json(eformsdir / f'eforms-guidance-pre.json', orient='records', indent=2)
 
@@ -497,7 +503,7 @@ def update_with_annex(filename):
         for column in ('Business groups', 'Name', 'Data type', 'Repeatable', 'Description'):
             df_guidance.at[label, column] = df_annex.at[annex_label, column]
 
-        status = df_annex.at[annex_label, row['eformsNotice']]
+        status = df_annex.at[annex_label, row['2019 form']]
         if status in ('CM', 'EM'):  # CM: if "conditions" met, EM: if it "exists"
             status = 'M'
         df_guidance.at[label, 'Legal status'] = status
@@ -509,8 +515,8 @@ def update_with_annex(filename):
     df_guidance = df_guidance[[
         # Identification
         'ID',
-        'eformsNotice',
-        'sfNotice',
+        '2019 form',
+        '2015 form',
 
         # Manual columns
         'guidance',

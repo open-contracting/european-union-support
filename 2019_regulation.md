@@ -25,8 +25,8 @@ If the file doesn't exist, it is created.
 
 Legend for Level column (copied from source file):
 
-* new term: New information available for this notice. There is no matching available between the Standard Form and the corresponding eForms identified
-* new term overall: New information introduced with eForms overall
+* *new term*: New information available for this notice. There is no matching available between the Standard Form and the corresponding eForms identified
+* *new term overall*: New information introduced with eForms overall
 
 ## Update with the regulation's annex
 
