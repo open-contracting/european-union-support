@@ -143,7 +143,12 @@ def extract_indices_mapping():
 
     dfs = []
     for name, xlsx in excel_files():
-        for sheet in xlsx.sheet_names:
+        for sheet_name in xlsx.sheet_names:
+            # XXX: Typo in sheet name. (Corresponds to "SF22 vs eForm13".)
+            sheet = sheet_name
+            if sheet == 'eForm3 vs SF22':
+                sheet = 'eForm13 vs SF22'
+
             if sheet in ignore_sheets or any(regex.search(sheet) for regex in ignore_sheet_regex):
                 continue
 
@@ -155,7 +160,7 @@ def extract_indices_mapping():
             sf_notice_number = match.group(2).lstrip('0')
 
             # Read the Excel file. The first row is a title for the table.
-            df = pd.read_excel(xlsx, sheet, skiprows=[0], na_values='---')
+            df = pd.read_excel(xlsx, sheet_name, skiprows=[0], na_values='---')
 
             # Avoid empty or duplicate headings.
             df.rename(columns={
