@@ -125,7 +125,34 @@ def extract_indices_mapping():
     keep_sheet_regex = re.compile(r'^(?:eForm|eN) ?(\d\d?(?:,\d\d)*) vs S?F(\d\d) ?$')
 
     replace_newlines = re.compile(r'\n(?=\(|(2009|Title III|and|requirements|subcontractor|will)\b)')
+
     explode = ['Level', 'Element']
+
+    remove_standard = {
+        # Additional Information is top-level like VI.3, not lot-specific.
+        'BT-300': 'II.2.14',
+        # Tender Value Lowest and Tender Value Highest are lot-specific like V.2.4.3 and V.2.4.4, not top-level.
+        'BT-710': 'II.1.7.2',
+        'BT-711': 'II.1.7.3',
+        # Submission Language has nothing to do with this (/CONTRACTING_BODY/ADDRESS_PARTICIPATION).
+        'BT-97': 'I.3.4.1.2',
+    }
+    remove_concession = {
+        **remove_standard,
+        # Estimated Value is top-level like II.1.5.1, not lot-specific.
+        'BT-27': 'V.2.4.1',
+        # Concession Value Description is lot-specific like V.2.4.6, not top-level.
+        'BT-163': 'II.1.5.3',
+    }
+    remove_defence = {
+        # Similar to above.
+        'BT-710': 'II.2.2.1.1',
+        'BT-711': 'II.2.3.1.1',
+    }
+    ignore = {
+        # Direct Award Justification Previous Procedure Identifier matches multiple Annex D.
+        'BT-1252',
+    }
 
     if 'DEBUG' in os.environ:
         (sourcedir / 'xlsx').mkdir(exist_ok=True)
@@ -165,6 +192,7 @@ def extract_indices_mapping():
             # Add notice number columns, using '1' instead of '01' to ease joins.
             df['eformsNotice'] = [[number.lstrip('0') for number in eforms_notice_number.split(',')] for i in df.index]
             df['sfNotice'] = sf_notice_number
+            basename = f'eForm{eforms_notice_number} - F{sf_notice_number.rjust(2, "0")}'
 
             # Trim whitespace.
             df['Name'] = df['Name'].str.strip()
@@ -173,12 +201,13 @@ def extract_indices_mapping():
             df.fillna('', inplace=True)
 
             if 'DEBUG' in os.environ:
-                df.to_csv(sourcedir / 'xlsx' / f'eForm{eforms_notice_number} - SF{sf_notice_number}.csv', index=False)
+                df.to_csv(sourcedir / 'xlsx' / f'{basename}.csv', index=False)
 
             # `explode` requires lists with the same number of elements, but an "Element" is not repeated if it is
             # the same for all "Level". Extra newlines also complicate things.
             for _, row in df.iterrows():
-                location = f'eForm{eforms_notice_number} - SF{sf_notice_number}: {row["ID"]}: '
+                bt_id = row['ID']
+                location = f'{basename}: {bt_id}: '
 
                 # Remove spurious newlines in "Element" values.
                 row['Element'] = row['Element'].replace('\n\n', '\n')
@@ -194,7 +223,7 @@ def extract_indices_mapping():
                 if (
                     eforms_notice_number == '15'
                     and sf_notice_number == '7'
-                    and row['ID'] == 'BT-18'
+                    and bt_id == 'BT-18'
                     and row['Level'] == 'I.3.4.1.1'
                     and len(row['Element'].split('\n')) == 2
                 ):
@@ -202,7 +231,7 @@ def extract_indices_mapping():
                 elif (
                     eforms_notice_number == '18'
                     and sf_notice_number == '17'
-                    and row['ID'] == 'BT-750'
+                    and bt_id == 'BT-750'
                     and row['Level'] == 'III.2.1.1.1\nIII.2.2.2\nIII.2.2.3\nIII.2.3.1.1\nIII.2.3.1.2'
                     and len(row['Element'].split('\n')) == 2
                 ):
@@ -222,7 +251,7 @@ def extract_indices_mapping():
 
                 # Split values, after removing leading and trailing newlines (occurs in "Level" values).
                 for column in explode:
-                    row[column] = row[column].strip("\n").split("\n")
+                    row[column] = [value.strip() for value in row[column].strip("\n").split("\n")]
 
                 # Repeat "Element" as many times as there are "Level".
                 length = len(row['Level'])
@@ -233,9 +262,29 @@ def extract_indices_mapping():
 
                 # Remove rows with a B... "Level" after split, for which we have no mapping information.
                 for i, (level, element) in enumerate(zip(row['Level'], row['Element'])):
-                    if level.startswith('B'):  # one row is "B 4.2" instead of "B.4.2"
+                    if 'B' in level:  # "B.1", "B 4.2", "(Annex B)"
                         del row['Level'][i]
                         del row['Element'][i]
+
+                # XXX: Correct the source file's incorrect mapping between 2019 BTs and 2015 indices.
+                if sf_notice_number in ('16', '17', '18'):
+                    remove = remove_defence
+                elif sf_notice_number in ('23', '25'):
+                    remove = remove_concession
+                else:
+                    remove = remove_standard
+                if bt_id in remove:
+                    i = row['Level'].index(remove[bt_id])
+                    row['Level'].pop(i)
+                    row['Element'].pop(i)
+
+                # Check for errors in the source file.
+                sections = set(level.split('.', 1)[0] for level in row['Level'])
+                if len(sections) > 1 and bt_id not in ignore:
+                    raise click.ClickException(
+                        f'{location}{row["Name"]} cannot map to multiple sections ({", ".join(row["Level"])}). '
+                        'Edit manage.py to correct the source file.'
+                    )
 
             try:
                 df = df.explode(explode)
@@ -326,8 +375,8 @@ def prepopulate():
     # Merge in 2015 guidance.
     df = df.merge(pd.read_csv(eformsdir / '2015-guidance.csv'), how='left', left_on='Level', right_on='index')
 
-    # TODO: Double-check this.
-    df.drop_duplicates(['ID', 'eformsNotice'], inplace=True)
+    # TODO: Do we need to add 'Level' (and maybe 'sfNotice'?), to allow the mapping to be context dependent?
+    df.drop_duplicates(['eformsNotice', 'ID'], inplace=True)
 
     # Add two manually-edited columns.
     df.loc[df['guidance'].notna(), 'status'] = 'imported from standard forms'
