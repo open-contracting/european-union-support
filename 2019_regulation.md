@@ -6,7 +6,7 @@
 
 `Task 5_Support_Standard Forms-eForms mappings_v.3.zip` was received via email from the European Commission.
 
-## Prepopulate with the 2015 guidance
+## Update with the 2015 guidance
 
 Extract data from the source files, mapping Business Terms (BTs) to form indices and to eForms XPaths:
 
@@ -17,11 +17,16 @@ Concatenate guidance for the 2015 regulation:
 
     ./manage.py extract-2015-guidance
 
-Use the files created to prepopulate guidance for the 2019 regulation:
+Add details from the output of the above to a file:
 
-    ./manage.py prepopulate
+    ./manage.py update-with-2015-guidance output/mapping/eForms/eforms-guidance.json
 
-From here, you can create a copy (`eforms-guidance.json`) of the prepopulated file (`eforms-guidance-pre.json`), to add and tailor the guidance for the 2019 regulation.
+If the file doesn't exist, it is created.
+
+Legend for Level column (copied from source file):
+
+* new term: New information available for this notice. There is no matching available between the Standard Form and the corresponding eForms identified
+* new term overall: New information introduced with eForms overall
 
 ## Update with the regulation's annex
 

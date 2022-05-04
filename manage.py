@@ -219,6 +219,8 @@ def extract_indices_mapping():
                     click.echo(f'{location}removed \\n: {highlight}')
                     elements = replace_newlines.sub(' ', elements)
 
+                # TODO: Replace D# - ... with D#....
+
                 # XXX: Hardcode corrections or cases requiring human interpretation.
                 if (
                     eforms_notice_number == '15'
@@ -321,30 +323,53 @@ def extract_2015_guidance():
     - Concatenate the CSV files for the 2015 regulation.
     - Merge the ted-xml-indices.csv file, which replaces the "index" column.
     """
+    ignore = {
+        # II.1.2 is moved from /OBJECT_CONTRACT/CPV_MAIN to /OBJECT_CONTRACT/CPV_MAIN/CPV_CODE.
+        '/OBJECT_CONTRACT/CPV_MAIN': 'no index',
+        # IV.2.4 is moved from /PROCEDURE/LANGUAGES to /PROCEDURE/LANGUAGES/LANGUAGE.
+        '/PROCEDURE/LANGUAGES': 'no index',
+        # The winner's address is at index V.2.3 on all forms except F13 (V.3.3). eForms collapses the two.
+        '/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER': 'V.2.3',
+        # This XPath is at index D1.1 (regular) or D2.1 (utilities). Anyhow, the eForms mapping doesn't use this index.
+        '/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE': 'D1.1/D2.1',
+    }
+
     df_indices = pd.read_csv(eformsdir / 'ted-xml-indices.csv')
 
     dfs = []
-    for path in mappingdir.glob('*.csv'):
-        # The other columns are "index", which will be replaced, and "comment", which is a GitHub URL.
-        df = pd.read_csv(path, usecols=['xpath', 'label-key', 'guidance'])
-        # Add the "index" column from the other file.
-        df = df.merge(df_indices, how='left', on='xpath')
+    for path in sorted(mappingdir.glob('*.csv')):
+        df = pd.read_csv(path)
+
+        # Add the "index" column from the indices file.
+        df = df.merge(df_indices, how='left', on='xpath', suffixes=('_old', ''))
         # Add a "file" column for the source of the row.
         df['file'] = path.name
 
+        # Check that the indices are consistent across files.
+        for label, row in df.iterrows():
+            xpath = row['xpath']
+            x = row['index_old']
+            y = row['index']
+            if pd.notna(x) and x != y and not y == ignore.get(xpath):
+                raise click.ClickException(f'{xpath} is {x} in {path} but {y} in ted-xml-indices.csv')
+
+        # Drop the "index" column from the guidance file.
+        df.drop(columns='index_old', inplace=True)
+
         dfs.append(df)
 
-    # ignore_index is required, as each data frame repeats indices. Re-order the columns.
+    # ignore_index is required, as each data frame repeats indices.
     pd.concat(dfs, ignore_index=True).to_csv(eformsdir / '2015-guidance.csv', index=False)
 
 
 @cli.command()
-def prepopulate():
+@click.argument('filename', type=click.Path())
+def update_with_2015_guidance():
     """
-    Prepopulate the guidance for the 2019 regulation, based on that for the 2015 regulation.
+    Update FILE with eForms XPaths and 2015 guidance.
 
     \b
-    Create or update output/mapping/eForms/eforms-guidance-pre.json
+    Create or update FILE from bt-indices-mapping.csv, bt-xpath-mapping.csv and 2015-guidance.csv.
     """
 
     def add(data, current_row):
@@ -404,9 +429,8 @@ def prepopulate():
         'BT Name',
         # 2015-guidance.csv: Only want guidance related to 2015 regulation.
         'xpath',
-        'label-key',
+        'label-key',  # TODO: Lookup and add the English label?
         'index',  # merge column
-        'file',
     ], inplace=True)
 
     # TODO: Remove this line once satisfied with comparison.
@@ -424,6 +448,7 @@ def update_with_annex(filename):
     \b
     Create or update FILE from source/CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx
     """
+    # TODO: Create rows for all BT/notice pairs. Also, there shouldn't be any empty legal statuses... A problem in the index mapping source file?
     line = []
     previous_level = 0
 
