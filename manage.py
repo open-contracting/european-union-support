@@ -8,6 +8,7 @@ from textwrap import dedent
 from zipfile import ZipFile
 
 import click
+import numpy as np
 import pandas as pd
 from docx import Document
 
@@ -28,19 +29,6 @@ def excel_files():
             with zipfile.open(name) as fileobj:
                 with pd.ExcelFile(fileobj) as xlsx:
                     yield name, xlsx
-
-
-def annex_rows():
-    with pd.ExcelFile(sourcedir / 'CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx') as xlsx:
-        # A warning is issued, because the Excel file has an unsupported extension.
-        df = pd.read_excel(xlsx, 'Annex')
-
-        # Use the notice number columns.
-        df.rename(columns={df.columns[i]: str(df.iloc[0][i]) for i in range(6, 51)}, errors='raise', inplace=True)
-
-        for i, row in df.iterrows():
-            if pd.notna(row['ID']):
-                yield row
 
 
 # https://github.com/pallets/click/issues/486
@@ -418,34 +406,76 @@ def prepopulate():
 
 
 @cli.command()
-def update_with_annex():
+@click.argument('filename', type=click.Path(exists=True))
+def update_with_annex(filename):
     """
-    Update the guidance with details from the 2019 regulation's annex.
+    Update FILE with details from the 2019 regulation's annex.
 
-    eforms-guidance.csv is read to write both eforms-guidance.csv and eforms-guidance.json.
+    \b
+    Create or update FILE from source/CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx
     """
-    df = pd.read_json(eformsdir / 'eforms-guidance.json', orient='records')
+    with pd.ExcelFile(sourcedir / 'CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx') as xlsx:
+        # A warning is issued, because the Excel file has an unsupported extension.
+        df_annex = pd.read_excel(xlsx, 'Annex')
 
-    df_annex = pd.DataFrame(annex_rows()).set_index('ID', verify_integrity=True)
+        # Use the notice number column names.
+        check(df_annex.shape[1], 52, 'columns')
+        df_annex.rename(columns={
+            # 0:Level, 1:ID, 2:Name, 3:Data type, 4:Repeatable, 5:Description, 52:Fields not included in the legal text
+            df_annex.columns[i]: df_annex.iloc[0][i] for i in range(6, 51)
+        }, errors='raise', inplace=True)
 
-    for label, row in df.iterrows():
-        term = row['BT']
-        status = df_annex.at[term, str(row['eformsNotice'])]
-        if status in ('CM', 'EM'):  # if "conditions" met or if it "exists"
+        # Remove extra header rows.
+        check(df_annex['ID'].isna().sum(), 3, 'extra header rows')
+        df_annex = df_annex[df_annex['ID'].notna()]
+
+        # Ensure there are no duplicates.
+        df_annex.set_index('ID', verify_integrity=True, inplace=True)
+
+        # Trim whitespace.
+        df_annex['Name'] = df_annex['Name'].str.strip()
+
+    df_guidance = pd.read_json(filename, orient='records')
+
+    for label, row in df_guidance.iterrows():
+        annex_label = row['ID']
+
+        for column in ('Name', 'Data type', 'Description'):
+            df_guidance.at[label, column] = df_annex.at[annex_label, column]
+
+        status = df_annex.at[annex_label, row['eformsNotice']]
+        if status in ('CM', 'EM'):  # CM: if "conditions" met, EM: if it "exists"
             status = 'M'
-        df.at[label, 'legal_status'] = status
-        df.at[label, 'bt_description'] = df_annex.at[term, 'Description']
-        df.at[label, 'bt_datatype'] = df_annex.at[term, 'Data type']
+        df_guidance.at[label, 'Legal status'] = status
 
-    for column in ('legal_status', 'guidance', 'status', 'comments'):  # TODO: Change to use null
-        df[column].fillna('', inplace=True)
+    for column in ('Legal status', 'guidance', 'status', 'comments'):
+        df_guidance[column].fillna('', inplace=True)
 
-    df = df[[
-        'id', 'Name', 'eformsNotice', 'sfNotice', 'legal_status', 'eforms_xpath', 'BT', 'bt_description',
-        'bt_datatype', 'sfLevel', 'guidance', 'status', 'comments',
+    df_guidance = df_guidance[[
+        # Identification
+        'ID',
+        'eformsNotice',
+        'sfNotice',
+
+        # Manual columns
+        'guidance',
+        'status',
+        'comments',
+
+        # 2019 regulation's annex (excludes "Level", like "+++")
+        'Name',
+        'Data type',
+        'Description',
+        'Legal status',
+
+        # XPATH mapping
+        'XPATH',
+
+        # 2015 regulation
+        'Level',
     ]]
 
-    df.to_json(eformsdir / 'eforms-guidance.json', orient='records', indent=2)
+    df_guidance.to_json(filename, orient='records', indent=2)
 
 
 @cli.command()

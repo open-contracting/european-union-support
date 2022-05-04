@@ -25,9 +25,9 @@ From here, you can create a copy (`eforms-guidance.json`) of the prepopulated fi
 
 ## Update with the regulation's annex
 
-Add details from the 2019 regulation's annex to the `eforms-guidance.json` file:
+Add details from the 2019 regulation's annex to a file:
 
-    ./manage.py update-with-annex
+    ./manage.py update-with-annex output/mapping/eForms/eforms-guidance.json
 
 ## Maintenance
 
