@@ -355,7 +355,7 @@ def extract_2015_guidance():
         # Add the "index" column from the indices file.
         df = df.merge(df_indices, how='left', on='xpath', suffixes=('_old', ''))
         # Add a "file" column for the source of the row.
-        df['file'] = path.name
+        df['file'] = path.stem.split('_')[0]
 
         # Check that the indices are consistent across files.
         for label, row in df.iterrows():
