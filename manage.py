@@ -176,6 +176,8 @@ def extract_indices_mapping():
 
             # Remove rows with an empty "Level", for which we have no mapping information.
             df = df[df['Level'].notna()]
+            if df.empty:  # eN40 vs F20
+                continue
 
             # Remove the first column if it is empty.
             if df['Empty'].isna().all():
@@ -189,6 +191,8 @@ def extract_indices_mapping():
 
             # Trim whitespace.
             df['Name'] = df['Name'].str.strip()
+            # Normalize indices ("D1 - 1.1.1" to "D1.1.1.1").
+            df['Level'] = df['Level'].str.replace(' - ', '.')
 
             # Make values easier to work with (must occur after `isna` above).
             df.fillna('', inplace=True)
@@ -220,8 +224,6 @@ def extract_indices_mapping():
 
                     click.echo(f'{location}removed \\n: {highlight}')
                     elements = replace_newlines.sub(' ', elements)
-
-                # TODO: Replace D# - ... with D#....
 
                 # XXX: Hardcode corrections or cases requiring human interpretation.
                 if (
