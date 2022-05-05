@@ -20,7 +20,7 @@ def check(actual, expected, noun):
     return actual
 
 
-def report(df, columns, series):
+def report_unmerged_rows(df, columns, series):
     df = df[series]
     if not df.empty:
         click.echo(f'Rows unmerged: {df.shape[0]}\n{df[columns].to_string(index=False)}')
@@ -31,11 +31,18 @@ def write(filename, df, overwrite=None, compare=None, how='left', **kwargs):
 
     if os.path.exists(filename):
         df_old = pd.read_json(filename, orient='records')
-        # Pandas has no option to overwrite cells, so we drop first.
-        df_old.drop(columns=overwrite, errors='ignore', inplace=True)
+
+        # Maintain the column order.
+        column_order = df_old.columns.format()
+        for column in overwrite:
+            if column not in column_order:
+                column_order.append(column)
+
+        # Pandas has no option to overwrite cells, so we drop first. Protect "id" from being overwritten.
+        df_old.drop(columns=[column for column in overwrite if column != 'id'], errors='ignore', inplace=True)
 
         df_outer = df_old.merge(df, how='outer', indicator=True, **kwargs)
-        # Return the unmerged rows.
+        # To return the unmerged rows.
         df_unmerged = df_outer[df_outer['_merge'] == 'right_only']
 
         if compare:
@@ -49,18 +56,22 @@ def write(filename, df, overwrite=None, compare=None, how='left', **kwargs):
         # Merge all the columns, then drop the non-overwritten columns.
         df = df_old.merge(df, how=how, **kwargs).drop(columns=drop)
 
-    # Initialize the manually-edited columns.
-    for column in ('guidance', 'status', 'comments'):
-        if column not in df.columns:
-            df[column] = pd.Series(dtype='string')
-            df[column].fillna('', inplace=True)
-
     # Stop pandas from writing ints as floats.
     for column in ('maxLength', '2019 form', '2015 form'):
         if column in df.columns:
             df[column] = df[column].astype('Int64')
 
-    df.to_json(filename, orient='records', indent=2)
+    # Initialize, fill in, and order the manually-edited columns.
+    for column in ('guidance', 'status', 'comments'):
+        if column not in df.columns:
+            df[column] = pd.Series(dtype='object')
+        else:
+            column_order.remove(column)
+        df[column].fillna('', inplace=True)
+        column_order.append(column)
+
+    df[column_order].to_json(filename, orient='records', indent=2)
+
     return df_unmerged
 
 
@@ -79,8 +90,7 @@ def update_with_sdk(filename):
     with (sourcedir / 'fields.json').open() as f:
         df = pd.DataFrame.from_dict(json.load(f)['fields'])
 
-    overwrite = [column for column in df.columns if column != 'id']
-    write(filename, df, overwrite, how='outer', on='id', validate='1:1')
+    write(filename, df, df.columns, how='outer', on='id', validate='1:1')
 
 
 @cli.command()
@@ -138,7 +148,7 @@ def update_with_annex(filename):
     # Adding `compare={'name': 'Name'}` shows that the names agree, and differ mainly due to field:bt being m:1.
     df = write(filename, df, overwrite, left_on='btId', right_on='ID', validate='m:1')
 
-    report(df, ['ID', 'Name'], ~df['ID'].isin({
+    report_unmerged_rows(df, ['ID', 'Name'], ~df['ID'].isin({
         # Removed indicators in favor of corresponding scalars.
         # https://docs.ted.europa.eu/eforms/0.5.0/schema/all-in-one.html#extensionsSection
         'BT-53',  # Options (BT-54 Options Description)
@@ -268,15 +278,12 @@ def update_with_2015_guidance(filename):
 
 
 @cli.command()
-def statistics():
+@click.argument('filename', type=click.Path(exists=True))
+def statistics(filename):
     """
     Print statistics on the progress of the guidance for the 2019 regulation.
     """
-    df = pd.read_json(eformsdir / 'eforms-guidance.json', orient='records')
-
-    df_terms = df.drop_duplicates(subset='ID')
-    total_terms = df_terms.shape[0]
-    done_terms = df_terms[df_terms['status'].str.startswith('done')].shape[0]
+    df = pd.read_json(filename, orient='records')
 
     total = df.shape[0]
     imported = df[df['status'] == 'imported from standard forms'].shape[0]
@@ -288,26 +295,25 @@ def statistics():
     issue = df_issue.shape[0]
     issue_no_guidance = df_issue[df_issue['guidance'] == ''].shape[0]
 
-    legal_status = {}
-    for value in ('M', 'O', ''):
-        df_legal_status = df[df['Legal status'] == value]
-        legal_status[value] = {
-            'total': df_legal_status.shape[0],
-            'done': df_legal_status[df_legal_status['status'].str.startswith('done')].shape[0],
-            'issue': df_legal_status[df_legal_status['status'].str.startswith('issue')].shape[0],
-        }
+    condition = df['mandatory'].isna()
+    df_mandatory = df[condition]
+    total_mandatory = df_mandatory.shape[0]
+    done_mandatory = df_mandatory[df_mandatory['status'].str.startswith('done')].shape[0]
+    issue_mandatory = df_mandatory[df_mandatory['status'].str.startswith('issue')].shape[0]
+    df_optional = df[~condition]
+    total_optional = df_optional.shape[0]
+    done_optional = df_optional[df_optional['status'].str.startswith('done')].shape[0]
+    issue_optional = df_optional[df_optional['status'].str.startswith('issue')].shape[0]
 
     click.echo(dedent(f"""\
-    - BTs ready for review: {done_terms}/{total_terms} ({done_terms / total_terms:.1%})
-    - Rows ready for review: {ready}/{total} ({ready / total:.1%})
+    - Fields ready for review: {ready}/{total} ({ready / total:.1%})
         - Imported from 2015 guidance: {imported} ({imported / total:.1%})
         - Added or edited after import: {done} ({done / total:.1%})
         - Per legal status:
-            - Mandatory: {legal_status['M']['done']}/{legal_status['M']['total']} ({legal_status['M']['done'] / legal_status['M']['total']:.1%}), {legal_status['M']['issue']} with open issues ({legal_status['M']['issue'] / legal_status['M']['total']:.1%})
-            - Optional: {legal_status['O']['done']}/{legal_status['O']['total']} ({legal_status['O']['done'] / legal_status['O']['total']:.1%}), {legal_status['O']['issue']} with open issues ({legal_status['O']['issue'] / legal_status['O']['total']:.1%})
-            - Empty: {legal_status['']['done']}/{legal_status['']['total']} ({legal_status['']['done'] / legal_status['']['total']:.1%}), {legal_status['']['issue']} with open issues ({legal_status['']['issue'] / legal_status['']['total']:.1%})
-    - Rows with [open issues](https://github.com/open-contracting/european-union-support/labels/eforms): {issue} ({issue / total:.1%}), {issue_no_guidance} without guidance
-    - Rows without issues and without guidance: {no_issue_no_guidance} ({no_issue_no_guidance / total:.1%})
+            - Mandatory: {done_mandatory}/{total_mandatory} ({done_mandatory / total_mandatory:.1%}), {issue_mandatory} with open issues ({issue_mandatory / total_mandatory:.1%})
+            - Optional: {done_optional}/{total_optional} ({done_optional / total_optional:.1%}), {issue_optional} with open issues ({issue_optional / total_optional:.1%})
+    - Fields with [open issues](https://github.com/open-contracting/european-union-support/labels/eforms): {issue} ({issue / total:.1%}), {issue_no_guidance} without guidance
+    - Fields without issues and without guidance: {no_issue_no_guidance} ({no_issue_no_guidance / total:.1%})
     """))  # noqa: E501
 
 
