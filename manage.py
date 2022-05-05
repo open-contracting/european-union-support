@@ -1,19 +1,18 @@
 #!/usr/bin/env python
 import csv
+import json
 import os
 import re
 from pathlib import Path
 from textwrap import dedent
-from zipfile import ZipFile
 
 import click
 import pandas as pd
-from docx import Document
 
 basedir = Path(__file__).resolve().parent
 sourcedir = basedir / 'source'
 mappingdir = basedir / 'output' / 'mapping'
-eformsdir = mappingdir / 'eForms'
+eformsdir = mappingdir / 'eforms'
 
 
 def check(actual, expected, noun):
@@ -21,12 +20,48 @@ def check(actual, expected, noun):
     return actual
 
 
-def excel_files():
-    with ZipFile(sourcedir / 'Task 5_Support_Standard Forms-eForms mappings_v.3.zip') as zipfile:
-        for name in zipfile.namelist():
-            with zipfile.open(name) as fileobj:
-                with pd.ExcelFile(fileobj) as xlsx:
-                    yield name, xlsx
+def report(df, columns, series):
+    df = df[series]
+    if not df.empty:
+        click.echo(f'Rows unmerged: {df.shape[0]}\n{df[columns].to_string(index=False)}')
+
+
+def write(filename, df, overwrite=None, compare=None, how='left', **kwargs):
+    df_unmerged = pd.DataFrame()
+
+    if os.path.exists(filename):
+        df_old = pd.read_json(filename, orient='records')
+        # Pandas has no option to overwrite cells, so we drop first.
+        df_old.drop(columns=overwrite, errors='ignore', inplace=True)
+
+        df_outer = df_old.merge(df, how='outer', indicator=True, **kwargs)
+        # Return the unmerged rows.
+        df_unmerged = df_outer[df_outer['_merge'] == 'right_only']
+
+        if compare:
+            for label, row in df_outer[df_outer['_merge'] == 'both'].iterrows():
+                for a, b in compare.items():
+                    actual, expected = row[a], row[b]
+                    if actual != expected:
+                        click.echo(f'{row["id"].ljust(35)}: {b} : {a} / {expected.ljust(50)} : {actual}')
+
+        drop = [column for column in df.columns if column not in overwrite]
+        # Merge all the columns, then drop the non-overwritten columns.
+        df = df_old.merge(df, how=how, **kwargs).drop(columns=drop)
+
+    # Initialize the manually-edited columns.
+    for column in ('guidance', 'status', 'comments'):
+        if column not in df.columns:
+            df[column] = pd.Series(dtype='string')
+            df[column].fillna('', inplace=True)
+
+    # Stop pandas from writing ints as floats.
+    for column in ('maxLength', '2019 form', '2015 form'):
+        if column in df.columns:
+            df[column] = df[column].astype('Int64')
+
+    df.to_json(filename, orient='records', indent=2)
+    return df_unmerged
 
 
 # https://github.com/pallets/click/issues/486
@@ -36,421 +71,16 @@ def cli():
 
 
 @cli.command()
-@click.argument('sheet')
-def find(sheet):
-    """
-    Find the workbook containing the SHEET.
-    """
-    for name, xlsx in excel_files():
-        if sheet in xlsx.sheet_names:
-            click.echo(f'First occurrence: {name}')
-            break
-    else:
-        click.secho(f"Sheet '{sheet}' not found", fg='red')
-
-
-@cli.command()
-def extract_xpath_mapping():
-    """
-    Extract a mapping between Business Terms and eForms XPaths.
-
-    \b
-    Create or update output/mapping/eForms/bt-xpath-mapping.csv from source/XPATHs provisional release v. 1.0.docx
-    """
-
-    def text(row):
-        # Newlines occur in all columns except the first, e.g.:
-        # /*/cac:ContractingParty/cac:ContractingRepresentationType/cbc:RepresentationTypeCode
-        # /*/cac:ProcurementProjectLot/cac:TenderingTerms/cac:TenderRecipientParty/cbc:EndpointID
-        #
-        # Leading or trailing whitespace occur in the first and third columns, e.g.:
-        # /*/cac:ProcurementProjectLot/cac:ProcurementProject/cbc:EstimatedOverallContractQuantity
-        # /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Change/efbc:C...
-        cells = [cell.text.replace('\n', ' ').strip() for cell in row.cells]
-        # XXX: Correct a typo.
-        cells[0] = cells[0].replace('[@n listName=', '[@listName=')
-        return cells
-
-    docx = Document(sourcedir / 'XPATHs provisional release v. 1.0.docx')
-    columns = text(docx.tables[0].rows[0])
-
-    check(len(docx.tables), 1, 'table')
-    check(columns, ['XPATH', 'BT ID', 'BT Name', 'Additional information'], 'headers')
-
-    data = []
-    for row in docx.tables[0].rows[1:]:
-        cells = text(row)
-        # Skip subheadings.
-        if not cells[0].startswith('/'):
-            continue
-        # XXX: Correct a typo (n-dash instead of empty).
-        if cells[1] == '–':
-            cells[1] = ''
-        data.append(cells)
-
-    # Note: 4 XPaths map to multiple BTs. (Otherwise, BT:XPath is 1:n.)
-    #
-    # - /*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference/cbc:DocumentDescription BT-01 BT-09
-    # - /*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference/cbc:ID BT-01 BT-09
-    # - /*/cac:ProcurementProjectLot/cac:ProcurementProject/cac:ProcurementAdditionalType/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/cbc:Description BT-755 BT-777 # noqa: E501
-    # - /ContractAwardNotice/cac:TenderResult/cac:AwardedTenderedProject/cac:ProcurementProjectLot/cac:TenderingProcess/cac:FrameworkAgreement/cbc:MaximumValueAmount BT-156 BT-709 # noqa: E501
-
-    pd.DataFrame(data, columns=columns).drop_duplicates().to_csv(eformsdir / 'bt-xpath-mapping.csv', index=False)
-
-
-@cli.command()
-def extract_indices_mapping():
-    """
-    Extract a mapping between Business Terms and form indices.
-
-    \b
-    Create or update output/mapping/eForms/bt-indices-mapping.csv from
-    source/Task 5_Support_Standard Forms-eForms mappings_v.3.zip
-
-    The source files don't cover forms 9, 14 and E*: https://docs.ted.europa.eu/home/eforms/FAQ/index.html
-    """
-    ignore_sheets = {
-        'Legend',  # A legend (same for all workbooks).
-        'S.F. vs eForms mapping list ',  # A mapping from F## to eForms## (same for all workbooks).
-        'Annex table 2',  # A copy of the 2019 regulation's annex.
-        'Legend Annex table 2',
-    }
-    # We only need the 2019-to-2015 direction.
-    ignore_sheet_regex = [re.compile(pattern) for pattern in (
-        r'^F\d\d vs eN\d\d( \(2\))?$',
-        r'^SF\d\d vs eForm ?\d\d(,\d\d)*$'
-    )]
-    keep_sheet_regex = re.compile(r'^(?:eForm|eN) ?(\d\d?(?:,\d\d)*) vs S?F(\d\d) ?$')
-
-    replace_newlines = re.compile(r'\n(?=\(|(2009|Title III|and|requirements|subcontractor|will)\b)')
-
-    # XXX: Correct the source file's incorrect mapping between 2019 BTs and 2015 indices.
-    remove_standard = {
-        # Additional Information is top-level like VI.3, not lot-specific.
-        'BT-300': 'II.2.14',
-        # Tender Value Lowest and Tender Value Highest are lot-specific like V.2.4.3 and V.2.4.4, not top-level.
-        'BT-710': 'II.1.7.2',
-        'BT-711': 'II.1.7.3',
-        # Submission Language has nothing to do with this (/CONTRACTING_BODY/ADDRESS_PARTICIPATION).
-        'BT-97': 'I.3.4.1.2',
-    }
-    remove_concession = {
-        **remove_standard,
-        # Estimated Value is top-level like II.1.5.1, not lot-specific.
-        'BT-27': 'V.2.4.1',
-        # Concession Value Description is lot-specific like V.2.4.6, not top-level.
-        'BT-163': 'II.1.5.3',
-    }
-    ignore = {
-        # Direct Award Justification Previous Procedure Identifier matches multiple Annex D.
-        'BT-1252',
-    }
-
-    if 'DEBUG' in os.environ:
-        (sourcedir / 'xlsx').mkdir(exist_ok=True)
-
-    dfs = []
-    for name, xlsx in excel_files():
-        for sheet_name in xlsx.sheet_names:
-            sheet = sheet_name
-
-            # XXX: Typo in sheet name. (Corresponds to "SF22 vs eForm13" in the same workbook.)
-            if sheet == 'eForm3 vs SF22':
-                sheet = 'eForm13 vs SF22'
-
-            if sheet in ignore_sheets or any(regex.search(sheet) for regex in ignore_sheet_regex):
-                continue
-
-            match = keep_sheet_regex.search(sheet)
-            if not match:
-                raise click.ClickException(f"The sheet name {sheet!r} doesn't match a known pattern.")
-
-            form_2019 = match.group(1)
-            form_2015 = match.group(2)
-
-            # Read the Excel file. The first row is a title for the table. Per the "Legend" sheet, "---" means
-            # "Outdent level, not considered (e.g. title of business groups)".
-            df = pd.read_excel(xlsx, sheet_name, skiprows=[0], na_values='---')
-
-            # Avoid empty or duplicate headings.
-            df.rename(columns={
-                df.columns[0]: 'Empty',  # was "" ("Unnamed: 0" after `read_excel`)
-                df.columns[1]: 'Indent level',  # was "Level" or "" ("Unnamed: 1" after `read_excel`)
-                df.columns[8]: 'Level',  # "Level.1" after `read_excel` if column 1 was "Level"
-            }, errors='raise', inplace=True)
-
-            # Remove rows with an empty "Level", for which we have no mapping information.
-            df = df[df['Level'].notna()]
-            if df.empty:  # eN40 vs F20
-                continue
-
-            # Remove the first column if it is empty.
-            if df['Empty'].isna().all():
-                df.drop(columns='Empty', inplace=True)
-            else:
-                raise click.ClickException('The first column was expected to be empty.')
-
-            # Add notice number columns, using '1' instead of '01' to ease joins.
-            df['2019 form'] = [[number.lstrip('0') for number in form_2019.split(',')] for i in df.index]
-            df['2015 form'] = form_2015.lstrip('0')
-
-            # Trim whitespace.
-            df['Name'] = df['Name'].str.strip()
-            df['Element'] = df['Element'].str.strip()
-
-            # Normalize indices ("D1 - 1.1.1" to "D1.1.1.1").
-            df['Level'] = df['Level'].str.replace(' - ', '.')
-
-            # Make values easier to work with (must occur after `isna` above).
-            df.fillna('', inplace=True)
-
-            basename = f'eForm{form_2019}-F{form_2015}'
-            if 'DEBUG' in os.environ:
-                df.to_csv(sourcedir / 'xlsx' / f'{basename}.csv', index=False)
-
-            # We don't have guidance for defence forms, and they don't use the same form indices in any case. As such,
-            # we have no rows for forms 9, 6 (F16), 18 (F17), 31 (F18), 22 (F19), but we do for 27 (F15) and 3 (F08).
-            if form_2015 in ('16', '17', '18', '19'):
-                continue
-
-            # `explode()` requires lists with the same number of elements, but an "Element" is not repeated if it is
-            # the same for all "Level". Extra newlines also complicate things.
-            for label, row in df.iterrows():
-                bt_id = row['ID']
-                levels = row['Level']
-                elements = row['Element']
-                location = f'{basename}: {bt_id}: '
-
-                # Remove spurious newlines in "Element" values.
-                elements = elements.replace('\n\n', '\n')
-                if replace_newlines.search(elements):
-                    # Display the newlines that were removed, for user to review.
-                    highlight = replace_newlines.sub(lambda m: click.style(m.group(0), blink=True), elements)
-                    # Replace outside f-string ("SyntaxError: f-string expression part cannot include a backslash").
-                    highlight = highlight.replace('\n', '\\n')
-
-                    click.echo(f'{location}removed \\n: {highlight}')
-                    elements = replace_newlines.sub(' ', elements)
-
-                # XXX: Hardcode corrections or cases requiring human interpretation.
-                if (
-                    form_2019 == '15'
-                    and form_2015 == '07'
-                    and bt_id == 'BT-18'
-                    and levels == 'I.3.4.1.1'
-                    and len(elements.split('\n')) == 2
-                ):
-                    # Add the missing "Level".
-                    levels = 'I.3.4.1.1\nI.3.4.1.2'
-                elif (
-                    form_2019 == '18'
-                    and form_2015 == '17'
-                    and bt_id == 'BT-750'
-                    and levels == 'III.2.1.1.1\nIII.2.2.2\nIII.2.2.3\nIII.2.3.1.1\nIII.2.3.1.2'
-                    and len(elements.split('\n')) == 2
-                ):
-                    # Unambiguously repeat the "Element".
-                    elements = dedent("""\
-                    Information and formalities necessary for evaluating if the requirements are met:
-                    Information and formalities necessary for evaluating if the requirements are met:
-                    Minimum level(s) of standards possibly required: (if applicable)
-                    Information and formalities necessary for evaluating if the requirements are met:
-                    Minimum level(s) of standards possibly required: (if applicable)
-                    """)
-
-                if '\n' not in levels:
-                    # Warn about remaining newlines (BT-531 in F17 and F18).
-                    if '\n' in elements:
-                        click.secho(f'{location}unexpected \\n: {repr(row["Element"])}', fg='yellow')
-
-                    # Update the data frame before `continue`.
-                    df.at[label, 'Level'] = levels
-                    df.at[label, 'Element'] = elements
-
-                    continue
-
-                # Split values, after removing leading and trailing newlines (occurs in "Level" values).
-                levels = [value.strip() for value in levels.strip("\n").split("\n")]
-                elements = [value.strip() for value in elements.strip("\n").split("\n")]
-
-                # Repeat "Element" as many times as there are "Level".
-                length = len(levels)
-                if length > len(elements):
-                    elements *= length
-                if length != len(elements):
-                    click.secho(f'{location}size differs: {row["Level"]} {row["Element"]}', fg='red')
-
-                # Remove rows with a B... "Level" after split, for which we have no mapping information.
-                for i, (level, element) in enumerate(zip(levels, elements)):
-                    if 'B' in level:  # "B.1", "B 4.2", "(Annex B)"
-                        del levels[i]
-                        del elements[i]
-
-                # XXX: Correct the source file's incorrect mapping between 2019 BTs and 2015 indices.
-                if form_2015 in ('23', '25'):
-                    remove = remove_concession
-                else:
-                    remove = remove_standard
-                if bt_id in remove:
-                    i = levels.index(remove[bt_id])
-                    levels.pop(i)
-                    elements.pop(i)
-
-                # Check for errors in the source file.
-                sections = set(level.split('.', 1)[0] for level in levels)
-                if len(sections) > 1 and bt_id not in ignore:
-                    raise click.ClickException(
-                        f'{location}{row["Name"]} cannot map to multiple sections ({", ".join(row["Level"])}). '
-                        'Edit manage.py to correct the source file.'
-                    )
-
-                # Update the data frame.
-                df.at[label, 'Level'] = levels
-                df.at[label, 'Element'] = elements
-
-            try:
-                df = df.explode(['Level', 'Element'])
-            except ValueError as e:
-                raise click.ClickException(f'{sheet}: {e}')
-
-            df = df.explode('2019 form')
-
-            dfs.append(df)
-
-    pd.concat(dfs, ignore_index=True).to_csv(eformsdir / 'bt-indices-mapping.csv', index=False)
-
-
-@cli.command()
-def update_ted_xml_indices():
-    # TODO
-    pass
-
-
-@cli.command()
-def extract_2015_guidance():
-    """
-    Concatenate guidance for the 2015 regulation.
-
-    \b
-    Create or update output/mapping/eForms/2015-guidance.csv:
-
-    - Concatenate the CSV files for the 2015 regulation.
-    - Merge the ted-xml-indices.csv file, which replaces the "index" column.
-    """
-    ignore = {
-        # II.1.2 is moved from /OBJECT_CONTRACT/CPV_MAIN to /OBJECT_CONTRACT/CPV_MAIN/CPV_CODE.
-        '/OBJECT_CONTRACT/CPV_MAIN': 'no index',
-        # IV.2.4 is moved from /PROCEDURE/LANGUAGES to /PROCEDURE/LANGUAGES/LANGUAGE.
-        '/PROCEDURE/LANGUAGES': 'no index',
-        # The winner's address is at index V.2.3 on all forms except F13 (V.3.3). eForms collapses the two.
-        '/RESULTS/AWARDED_PRIZE/WINNERS/WINNER/ADDRESS_WINNER': 'V.2.3',
-        # This XPath is at index D1.1 (regular) or D2.1 (utilities). Anyhow, the eForms mapping doesn't use this index.
-        '/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_CALL/D_ACCORDANCE_ARTICLE': 'D1.1/D2.1',
-    }
-
-    df_indices = pd.read_csv(eformsdir / 'ted-xml-indices.csv')
-
-    dfs = []
-    for path in sorted(mappingdir.glob('*.csv')):
-        df = pd.read_csv(path)
-
-        # Add the "index" column from the indices file.
-        df = df.merge(df_indices, how='left', on='xpath', suffixes=('_old', ''))
-        # Add a "file" column for the source of the row.
-        df['file'] = path.stem.split('_')[0]
-
-        # Check that the indices are consistent across files.
-        for label, row in df.iterrows():
-            xpath = row['xpath']
-            x = row['index_old']
-            y = row['index']
-            if pd.notna(x) and x != y and not y == ignore.get(xpath):
-                raise click.ClickException(f'{xpath} is {x} in {path.name} but {y} in ted-xml-indices.csv')
-
-        # Drop the "index" column from the guidance file.
-        df.drop(columns='index_old', inplace=True)
-
-        dfs.append(df)
-
-    # ignore_index is required, as each data frame repeats indices.
-    pd.concat(dfs, ignore_index=True).to_csv(eformsdir / '2015-guidance.csv', index=False)
-
-
-@cli.command()
 @click.argument('filename', type=click.Path())
-def update_with_2015_guidance():
+def update_with_sdk(filename):
     """
-    Update FILE with eForms XPaths and 2015 guidance.
-
-    \b
-    Create or update FILE from bt-indices-mapping.csv, bt-xpath-mapping.csv and 2015-guidance.csv.
+    Update FILE with fields metadata from the eForms SDK.
     """
+    with (sourcedir / 'fields.json').open() as f:
+        df = pd.DataFrame.from_dict(json.load(f)['fields'])
 
-    def add(data, current_row):
-        current_row['XPATH'] = tuple(sorted(current_row['XPATH']))  # for briefer diff
-        data.append(current_row)
-
-    # Start with the eForms file that contains indices used by the 2015 guidance.
-    df = pd.read_csv(eformsdir / 'bt-indices-mapping.csv')
-
-    # Merge in the eForms XPaths. Sort by "BT ID" to simplify the for-loop's logic below.
-    df_xpath = pd.read_csv(eformsdir / 'bt-xpath-mapping.csv').sort_values('BT ID')
-
-    data = []
-
-    current_row = {'BT ID': None, 'XPATH': []}
-
-    for label, row in df_xpath.iterrows():
-        if row['BT ID'] != current_row['BT ID']:
-            if current_row['XPATH']:
-                add(data, current_row)
-            df_xpath.at[label, 'XPATH'] = [row['XPATH']]
-            current_row = row
-        else:
-            current_row['XPATH'].append(row['XPATH'])
-
-    add(data, current_row)
-
-    df = df.merge(pd.DataFrame(data, columns=df_xpath.columns), how='left', left_on='ID', right_on='BT ID')
-
-    # TODO: This sort changes the output!
-    df.sort_values(['ID', '2019 form', '2015 form', 'Level', 'XPATH'], inplace=True)
-
-    # Merge in 2015 guidance.
-    df = df.merge(pd.read_csv(eformsdir / '2015-guidance.csv'), how='left', left_on='Level', right_on='index')
-
-    # TODO: Do we need to add 'Level' (and maybe '2015 form'?), to allow the mapping to be context dependent?
-    # Need to merge Level, guidance (anything else?) into an array.
-    df.drop_duplicates(['2019 form', 'ID'], inplace=True)
-
-    # Add two manually-edited columns.
-    df.loc[df['guidance'].notna(), 'status'] = 'imported from standard forms'
-    df['comments'] = ''
-
-    df.sort_values(['2019 form', '2015 form', 'ID'], inplace=True)
-
-    df.drop(columns=[
-        # bt-indices-mapping.csv: Defer these columns to the 2019 regulation's annex.
-        'Indent level',
-        'Name',
-        'Data type',
-        'Repeatable',
-        'Description',
-        'Legal Status',
-        # bt-xpath-mapping.csv: Defer these columns to the 2019 regulation's annex.
-        'BT ID',  # merge column
-        'BT Name',
-        # 2015-guidance.csv: Only want guidance related to 2015 regulation.
-        'xpath',
-        'label-key',  # TODO: Lookup and add the English label?
-        'index',  # merge column
-        'file',
-    ], inplace=True)
-
-    # TODO: Remove this line once satisfied with comparison.
-    df = df[['ID', 'Level', '2019 form', '2015 form', 'XPATH', 'guidance', 'status', 'comments']]
-
-    df.to_json(eformsdir / f'eforms-guidance-pre.json', orient='records', indent=2)
+    overwrite = [column for column in df.columns if column != 'id']
+    write(filename, df, overwrite, how='outer', on='id', validate='1:1')
 
 
 @cli.command()
@@ -458,97 +88,183 @@ def update_with_2015_guidance():
 def update_with_annex(filename):
     """
     Update FILE with details from the 2019 regulation's annex.
-
-    \b
-    Create or update FILE from source/CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx
     """
-    # TODO: Create rows for all BT/notice pairs. Also, there shouldn't be any empty legal statuses... A problem in the index mapping source file?
+    # A warning is issued, because the Excel file has an unsupported extension.
+    df = pd.read_excel(sourcedir / 'CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx', 'Annex')
+
+    # 0:Level, 1:ID, 2:Name, 3:Data type, 4:Repeatable, 5:Description, 6-50:Legal Status, 51:Fields not included in...
+    check(df.shape[1], 52, 'columns')
+
+    # Remove extra header rows.
+    check(df['ID'].isna().sum(), 3, 'extra header rows')
+    df = df[df['ID'].notna()]
+
+    # Ensure there are no duplicates.
+    df.set_index('ID', verify_integrity=True)
+
+    # Normalize whitespace (used in "Business groups").
+    df['Name'] = df['Name'].str.strip()
+
+    # Add "Business groups" column, to assist mapping by providing context.
+    df['Business groups'] = pd.Series(dtype='object')
+
     line = []
     previous_level = 0
+    for label, row in df.iterrows():
+        current_level = len(row['Level'])
 
-    with pd.ExcelFile(sourcedir / 'CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx') as xlsx:
-        # A warning is issued, because the Excel file has an unsupported extension.
-        df_annex = pd.read_excel(xlsx, 'Annex')
+        # Adjust the size of this line of the "tree", then update the head.
+        if current_level > previous_level:
+            line.append((None, None))
+        elif current_level < previous_level:
+            line = line[:current_level]
+        line[-1] = [row['ID'], row['Name']]
 
-        # Use the notice number column names.
-        check(df_annex.shape[1], 52, 'columns')
-        df_annex.rename(columns={
-            # 0:Level, 1:ID, 2:Name, 3:Data type, 4:Repeatable, 5:Description, 52:Fields not included in the legal text
-            df_annex.columns[i]: df_annex.iloc[0][i] for i in range(6, 51)
-        }, errors='raise', inplace=True)
+        df.at[label, 'Business groups'] = dict(line[:-1]) if len(line) > 1 else None
 
-        # Remove extra header rows.
-        check(df_annex['ID'].isna().sum(), 3, 'extra header rows')
-        df_annex = df_annex[df_annex['ID'].notna()]
+        previous_level = current_level
 
-        # Ensure there are no duplicates.
-        df_annex.set_index('ID', verify_integrity=True, inplace=True)
+    # We can now remove all rows for business groups.
+    df = df[~df['ID'].str.startswith('BG-')]
 
-        # Trim whitespace.
-        df_annex['Name'] = df_annex['Name'].str.strip()
+    # The fields metadata already has:
+    # - "name" ("Name")
+    # - "type" ("Data type")
+    # - "repeatable" ("Repeatable")
+    # - "forbidden" and "mandatory" ("Legal Status")
+    #
+    # "Level" is replaced by "Business groups". "Fields not included in the legal text" isn't informative.
+    overwrite = ['Description', 'Business groups']
+    # Adding `compare={'name': 'Name'}` shows that the names agree, and differ mainly due to field:bt being m:1.
+    df = write(filename, df, overwrite, left_on='btId', right_on='ID', validate='m:1')
 
-        # Add groups, to assist in mapping.
-        df_annex['Business groups'] = pd.Series(dtype=object)
-        for label, row in df_annex.iterrows():
-            current_level = len(row['Level'])
+    report(df, ['ID', 'Name'], ~df['ID'].isin({
+        # Removed indicators in favor of corresponding scalars.
+        # https://docs.ted.europa.eu/eforms/0.5.0/schema/all-in-one.html#extensionsSection
+        'BT-53',  # Options (BT-54 Options Description)
+        # https://docs.ted.europa.eu/eforms/0.5.0/schema/all-in-one.html#toolNameSection
+        'BT-724',  # Tool Atypical (BT-124 Tool Atypical URL)
+        # https://docs.ted.europa.eu/eforms/0.5.0/schema/all-in-one.html#_footnotedef_21
+        'BT-778',  # Framework Maximum Participants (BT-113 Framework Maximum Participants Number)
 
-            # Adjust the size of this line of the "tree", then update the head.
-            if current_level > previous_level:
-                line.append((None, None))
-            elif current_level < previous_level:
-                line = line[:current_level]
-            line[-1] = [label, row['Name']]
+        # Replaced by OPT-155 and OPT-156.
+        # https://docs.ted.europa.eu/eforms/0.5.0/schema/competition-results.html#lotResultComponentsTable
+        'BT-715',
+        'BT-725',
+        'BT-716',
 
-            df_annex.at[label, 'Business groups'] = dict(line[:-1])
-            previous_level = current_level
+        # See Table 3.
+        # https://docs.ted.europa.eu/eforms/0.5.0/schema/parties.html#mappingOrganizationBTsSchemaComponentsTable
+        'BT-08',
+        'BT-770',
 
-    df_guidance = pd.read_json(filename, orient='records')
-    df_guidance['Business groups'] = pd.Series(dtype=object)
+        # See Table 4 (also includes BT-330 and BT-1375).
+        # https://docs.ted.europa.eu/eforms/0.5.0/schema/identifiers.html#pointlessDueToDesignSection
+        'BT-557',
+        'BT-1371',
+        'BT-1372',
+        'BT-1373',
+        'BT-1374',
+        'BT-1376',
+        'BT-1377',
+        'BT-1378',
+        'BT-1379',
+        'BT-13710',
+        'BT-13711',
+        'BT-13712',
+        'BT-13715',
+        'BT-13717',
+        'BT-13718',
+        'BT-13719',
+        'BT-13720',
+        'BT-13721',
+        'BT-13722',
+    }))
 
-    for label, row in df_guidance.iterrows():
-        annex_label = row['ID']
 
-        for column in ('Business groups', 'Name', 'Data type', 'Repeatable', 'Description'):
-            df_guidance.at[label, column] = df_annex.at[annex_label, column]
+@cli.command()
+@click.argument('filename', type=click.Path(exists=True))
+def update_with_2015_guidance(filename):
+    """
+    Update FILE with eForms XPaths and 2015 guidance.
+    """
 
-        status = df_annex.at[annex_label, row['2019 form']]
-        if status in ('CM', 'EM'):  # CM: if "conditions" met, EM: if it "exists"
-            status = 'M'
-        df_guidance.at[label, 'Legal status'] = status
+    def unique(value):
+        return value.unique()
 
-    for column in ('Legal status', 'guidance', 'status', 'comments'):
-        df_guidance[column].fillna('', inplace=True)
+    def translate(value):
+        return [df_strings.at[label, 'EN'] for label in value.unique() if pd.notna(label)]
 
-    # TODO: Uncomment columns once added via other command.
-    df_guidance = df_guidance[[
-        # Identification
-        'ID',
-        '2019 form',
-        '2015 form',
 
-        # Manual columns
-        'guidance',
-        'status',
-        'comments',
 
-        # 2019 regulation's annex (excludes "Level", like "+++")
-        'Business groups',
+    # See the "Legend" sheet for the data dictionary.
+    with pd.ExcelFile(sourcedir / 'TED-XML-to-eForms-mapping-OP-public-20220404.xlsx') as xlsx:
+        df = pd.read_excel(xlsx, 'tedxml_to_eforms_mapping.v0.4', na_values='---')
+
+    # TODO: print unmatched TED Xpaths for review
+
+
+
+    dfs = []
+    for path in sorted(mappingdir.glob('*.csv')):
+        df = pd.read_csv(path)
+
+        # Add a "file" column for the source of the row.
+        df['file'] = path.stem.split('_')[0]
+
+        dfs.append(df)
+
+    # ignore_index is required, as each data frame repeats indices.
+    pd.concat(dfs, ignore_index=True)
+
+
+
+    df_strings = pd.read_csv(sourcedir / 'Forms labels R2.09.csv').set_index('Label')
+
+    # Aggregate XPaths per BT. This drops "BT Name" (duplicate) and "Additional information" (of no use).
+    df_xpath = df_xpath.groupby('BT ID').agg({'XPATH': sorted})
+
+    df_2015 = pd.read_csv(eformsdir / '2015-guidance.csv')
+    # Remove rows with a "no index" index, as they won't merge below.
+    df_2015 = df_2015[df_2015['index'] != 'no index']
+    df_2015.rename(columns={'guidance': '2015 guidance'}, errors='raise', inplace=True)
+    # This drops "xpath" and "comment", which are of no assistance to mapping.
+    df_2015 = df_2015.groupby(['index']).agg({'2015 guidance': unique, 'label-key': translate, 'file': unique})
+
+    # Start with the eForms file that contains indices used by the 2015 guidance.
+    df = pd.read_csv(eformsdir / 'bt-indices-mapping.csv')
+    df = df.merge(df_xpath, how='left', left_on='ID', right_on='BT ID')
+    df = df.merge(df_2015, how='left', left_on='Level', right_on='index')
+    # TODO: Print all Level that have no match, to see if any additional guidance can be imported
+
+    # Add two manually-edited columns.
+    # df.loc[df['2019 guidance'].notna(), 'status'] = 'imported from standard forms'
+    df['comments'] = ''
+
+    df.sort_values(['2019 form', '2015 form', 'ID'], inplace=True)
+
+    df.drop(columns=[
+        # bt-indices-mapping.csv: Defer these columns to the 2019 regulation's annex.
+        # TODO: Test whether any of these are incorrect?
+        'Indent level',
         'Name',
         'Data type',
         'Repeatable',
         'Description',
-        'Legal status',
+        'Legal Status',
+    ], inplace=True)
 
-        # XPath mapping
-        'XPATH',
-        # 'Additional information',
+    remove_colon_and_parentheses = re.compile(r':?(?: \([^)]+\))?$')
 
-        # Index mapping
-        'Level',
-        # 'Element',
-    ]]
+    # Check that the Level corresponds to the Element. The error is either in ted-xml-indices.csv or in bt-indices-mapping.csv.
+    for label, row in df.iterrows():
+        if row['Element'] is not np.nan and row['label-key'] is not np.nan:
+            labels = [s.lower() for s in row['label-key'] if s not in ('yes', 'Date')]
+            element = remove_colon_and_parentheses.sub('', row['Element'])
+            if labels and element.lower() not in labels:
+                click.echo(row['Level'], element, labels)
 
-    df_guidance.to_json(filename, orient='records', indent=2)
+    write(filename, df)
 
 
 @cli.command()
@@ -836,7 +552,7 @@ def fields_without_extensions(file):
     def report(path, row):
         value = (path, row.get('xpath'))
         if value not in unhandled:
-            print(f"unhandled: {path} ({row.get('xpath')}: {row['guidance']})", err=True)
+            click.echo(f"unhandled: {path} ({row.get('xpath')}: {row['guidance']})", err=True)
         unhandled.add(value)
 
     for path in (mappingdir, mappingdir / 'shared'):
