@@ -1,11 +1,10 @@
-- BTs ready for review: 214/260 (82.3%)
-- Rows ready for review: 4514/5103 (88.5%)
-    - Imported from 2015 guidance: 27 (0.5%)
-    - Added or edited after import: 4487 (87.9%)
+- Fields ready for review: 0/698 (0.0%)
+    - Imported from 2015 guidance: 0 (0.0%)
+    - Added or edited after import: 0 (0.0%)
     - Per legal status:
-        - Mandatory: 2131/2173 (98.1%), 0 with open issues (0.0%)
-        - Optional: 2230/2765 (80.7%), 66 with open issues (2.4%)
-        - Empty: 126/165 (76.4%), 8 with open issues (4.8%)
-- Rows with [open issues](https://github.com/open-contracting/european-union-support/labels/eforms): 74 (1.5%), 74 without guidance
-- Rows without issues and without guidance: 515 (10.1%)
+        - Mandatory: 0/257 (0.0%), 0 with open issues (0.0%)
+        - Optional: 0/441 (0.0%), 0 with open issues (0.0%)
+- Fields with [open issues](https://github.com/open-contracting/european-union-support/labels/eforms): 0 (0.0%), 0 without guidance
+- Fields without issues and without 2019 guidance: 698 (100.0%)
+- Fields without 2015 guidance: 575 (82.4%)
 

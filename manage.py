@@ -7,6 +7,7 @@ from pathlib import Path
 from textwrap import dedent
 
 import click
+import numpy as np
 import pandas as pd
 
 basedir = Path(__file__).resolve().parent
@@ -15,19 +16,56 @@ mappingdir = basedir / 'output' / 'mapping'
 eformsdir = mappingdir / 'eforms'
 
 
+def unique(series):
+    """
+    Return the unique values of a series.
+    """
+    series.dropna(inplace=True)
+
+    # Write "null" not "[]".
+    if series.empty:
+        return None
+
+    # Lists of lists are not supported by `Series.unique()` ("2015 guidance").
+    if isinstance(series.iloc[0], np.ndarray):
+        return sorted(set(item for array in series for item in array))
+
+    return series.unique()
+
+
 def check(actual, expected, noun):
+    """
+    Assert that ``actual`` equals ``expected``, with a templated error message.
+    """
     assert actual == expected, f'expected {expected} {noun}, got {actual}'
-    return actual
 
 
-def report_unmerged_rows(df, columns, series):
-    df = df[series]
+def report_unmerged_rows(df, columns, series=None):
+    """
+    If the data frame (or the ``series`` within it) is non-empty, print the data frame's ``columns``.
+    """
+    if series:
+        df = df[series]
     if not df.empty:
-        click.echo(f'Rows unmerged: {df.shape[0]}\n{df[columns].to_string(index=False)}')
+        # Why, pandas? https://stackoverflow.com/a/67202912/244258
+        formatters = {col: f'{{:<{df[col].str.len().max()}s}}'.format for col in df.columns[df.dtypes == 'object']}
+        click.echo(f"{df[columns].to_string(index=False, formatters=formatters)}\nRows unmerged: {df.shape[0]}")
 
 
-def write(filename, df, overwrite=None, compare=None, how='left', **kwargs):
+def write(filename, df, overwrite=None, explode=None, compare=None, how='left', **kwargs):
+    """
+    Read the data frame from the file (if it exists) and merge it with ``df`` according to ``how`` and ``kwargs``,
+    overwriting only the ``overwrite`` columns.
+
+    If ``explode`` is a list, explode the data frame before merging, then group the data frame by the "id" column
+    after merging. (This option allows merging against a list.)
+
+    If ``compare`` is a dict, print any rows in which the cells that match the dict's key and value don't match.
+    """
     df_unmerged = pd.DataFrame()
+
+    # Default to the data frame's columns.
+    column_order = df.columns.format()
 
     if os.path.exists(filename):
         df_old = pd.read_json(filename, orient='records')
@@ -40,6 +78,9 @@ def write(filename, df, overwrite=None, compare=None, how='left', **kwargs):
 
         # Pandas has no option to overwrite cells, so we drop first. Protect "id" from being overwritten.
         df_old.drop(columns=[column for column in overwrite if column != 'id'], errors='ignore', inplace=True)
+
+        if explode:
+            df_old = df_old.explode(explode)
 
         df_outer = df_old.merge(df, how='outer', indicator=True, **kwargs)
         # To return the unmerged rows.
@@ -56,13 +97,18 @@ def write(filename, df, overwrite=None, compare=None, how='left', **kwargs):
         # Merge all the columns, then drop the non-overwritten columns.
         df = df_old.merge(df, how=how, **kwargs).drop(columns=drop)
 
+        if explode:
+            df = df.groupby('id').agg({
+                column: unique if column in explode or column in overwrite else 'first' for column in column_order
+            })
+
     # Stop pandas from writing ints as floats.
     for column in ('maxLength', '2019 form', '2015 form'):
         if column in df.columns:
             df[column] = df[column].astype('Int64')
 
     # Initialize, fill in, and order the manually-edited columns.
-    for column in ('guidance', 'status', 'comments'):
+    for column in ('2019 guidance', 'status', 'comments'):
         if column not in df.columns:
             df[column] = pd.Series(dtype='object')
         else:
@@ -71,6 +117,7 @@ def write(filename, df, overwrite=None, compare=None, how='left', **kwargs):
         column_order.append(column)
 
     df[column_order].to_json(filename, orient='records', indent=2)
+    click.echo(f'{df.shape[0]} rows written')
 
     return df_unmerged
 
@@ -85,7 +132,7 @@ def cli():
 @click.argument('filename', type=click.Path())
 def update_with_sdk(filename):
     """
-    Update FILE with fields metadata from the eForms SDK.
+    Create or update FILE with fields metadata from the eForms SDK.
     """
     with (sourcedir / 'fields.json').open() as f:
         df = pd.DataFrame.from_dict(json.load(f)['fields'])
@@ -137,39 +184,34 @@ def update_with_annex(filename):
     # We can now remove all rows for business groups.
     df = df[~df['ID'].str.startswith('BG-')]
 
-    # The fields metadata already has:
-    # - "name" ("Name")
-    # - "type" ("Data type")
-    # - "repeatable" ("Repeatable")
-    # - "forbidden" and "mandatory" ("Legal Status")
+    # The fields metadata covers "Name", "Data type", "Repeatable" and "Legal Status" ("forbidden" and "mandatory").
+    # "Business groups" replaces "Level". "Fields not included in the legal text" isn't informative.
     #
-    # "Level" is replaced by "Business groups". "Fields not included in the legal text" isn't informative.
-    overwrite = ['Description', 'Business groups']
     # Adding `compare={'name': 'Name'}` shows that the names agree, and differ mainly due to field:bt being m:1.
-    df = write(filename, df, overwrite, left_on='btId', right_on='ID', validate='m:1')
+    df = write(filename, df, ['Description', 'Business groups'], left_on='btId', right_on='ID', validate='m:1')
 
     report_unmerged_rows(df, ['ID', 'Name'], ~df['ID'].isin({
         # Removed indicators in favor of corresponding scalars.
-        # https://docs.ted.europa.eu/eforms/0.5.0/schema/all-in-one.html#extensionsSection
+        # https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#extensionsSection
         'BT-53',  # Options (BT-54 Options Description)
-        # https://docs.ted.europa.eu/eforms/0.5.0/schema/all-in-one.html#toolNameSection
+        # https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#toolNameSection
         'BT-724',  # Tool Atypical (BT-124 Tool Atypical URL)
-        # https://docs.ted.europa.eu/eforms/0.5.0/schema/all-in-one.html#_footnotedef_21
+        # https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#_footnotedef_21
         'BT-778',  # Framework Maximum Participants (BT-113 Framework Maximum Participants Number)
 
-        # Replaced by OPT-155 and OPT-156.
-        # https://docs.ted.europa.eu/eforms/0.5.0/schema/competition-results.html#lotResultComponentsTable
+        # See OPT-155 and OPT-156.
+        # https://docs.ted.europa.eu/eforms/0.6.0/schema/competition-results.html#lotResultComponentsTable
         'BT-715',
         'BT-725',
         'BT-716',
 
         # See Table 3.
-        # https://docs.ted.europa.eu/eforms/0.5.0/schema/parties.html#mappingOrganizationBTsSchemaComponentsTable
+        # https://docs.ted.europa.eu/eforms/0.6.0/schema/parties.html#mappingOrganizationBTsSchemaComponentsTable
         'BT-08',
         'BT-770',
 
         # See Table 4 (also includes BT-330 and BT-1375).
-        # https://docs.ted.europa.eu/eforms/0.5.0/schema/identifiers.html#pointlessDueToDesignSection
+        # https://docs.ted.europa.eu/eforms/0.6.0/schema/identifiers.html#pointlessDueToDesignSection
         'BT-557',
         'BT-1371',
         'BT-1372',
@@ -194,87 +236,60 @@ def update_with_annex(filename):
 
 @cli.command()
 @click.argument('filename', type=click.Path(exists=True))
-def update_with_2015_guidance(filename):
+def update_with_xpath(filename):
     """
-    Update FILE with eForms XPaths and 2015 guidance.
+    Update FILE with XPaths from TED XML.
     """
-
-    def unique(value):
-        return value.unique()
-
-    def translate(value):
-        return [df_strings.at[label, 'EN'] for label in value.unique() if pd.notna(label)]
-
-
 
     # See the "Legend" sheet for the data dictionary.
     with pd.ExcelFile(sourcedir / 'TED-XML-to-eForms-mapping-OP-public-20220404.xlsx') as xlsx:
-        df = pd.read_excel(xlsx, 'tedxml_to_eforms_mapping.v0.4', na_values='---')
+        df = pd.read_excel(xlsx, 'tedxml_to_eforms_mapping.v0.4', na_values=['---', 'no match', 'no direct match'])
 
-    # TODO: print unmatched TED Xpaths for review
+    for a, b, in (('Field ID', 'eForms BT ID'), ('eForms BT ID', 'Field ID')):
+        actual = df[df['TED Xpath'].notna() & df[a].isna() & df[b].notna()]
+        if not actual[b].empty:
+            # The BTs seem to be mapped for other forms, so the omissions seem to be accidental and inconsequential.
+            click.secho(f'Expected "{b}" to be N/A if "{a}" is N/A. Rows unmerged:', fg='yellow')
+            click.echo(actual[['eForms BT ID', 'TED level', 'TED Xpath']].to_string(index=False))
+
+    # We assume that the "Field ID" and "TED Xpath" are correct. Otherwise, we could check the eForms columns for
+    # discrepancies: "eForms BT ID", "BT name", "Type", "Codelist", "Code", "eForms Xpath".
+    #
+    # "EC notes" (~100) and "OP comments" (~10) aren't informative. "Mapping ID" is an internal identifier.
+    #
+    # "TED level" and "TED element" can be added, but they might not add anything new.
+
+    df = df.groupby('Field ID').agg({'TED Xpath': unique})
+    write(filename, df, ['TED Xpath'], left_on='id', right_on='Field ID', validate='1:m')
 
 
+@cli.command()
+@click.argument('filename', type=click.Path(exists=True))
+def update_with_ted_guidance(filename):
+    """
+    Update FILE with guidance for TED XML.
+    """
 
+    # Collect the guidance.
     dfs = []
     for path in sorted(mappingdir.glob('*.csv')):
         df = pd.read_csv(path)
-
-        # Add a "file" column for the source of the row.
-        df['file'] = path.stem.split('_')[0]
-
+        # Ignore rows without guidance (like defence forms).
+        df = df[df['guidance'].notna()]
+        # Prefix the XPath to match the spreadsheet used in `update-with-xpath`.
+        df['xpath'] = f'TED_EXPORT/FORM_SECTION/{path.stem}' + df['xpath']
         dfs.append(df)
 
     # ignore_index is required, as each data frame repeats indices.
-    pd.concat(dfs, ignore_index=True)
+    df = pd.concat(dfs, ignore_index=True).rename(columns={'guidance': '2015 guidance'}, errors='raise')
+    # This drops "index" and "comment", which are of no assistance to mapping, and "label-key".
+    df = df.groupby('xpath').agg({'2015 guidance': unique})
+    # We need to promote the "xpath" index to a column to use it in `report_unmerged_rows`.
+    df['_xpath'] = df.index
 
+    df = write(filename, df, ['2015 guidance'], explode=['TED Xpath'], left_on='TED Xpath', right_on='xpath')
 
-
-    df_strings = pd.read_csv(sourcedir / 'Forms labels R2.09.csv').set_index('Label')
-
-    # Aggregate XPaths per BT. This drops "BT Name" (duplicate) and "Additional information" (of no use).
-    df_xpath = df_xpath.groupby('BT ID').agg({'XPATH': sorted})
-
-    df_2015 = pd.read_csv(eformsdir / '2015-guidance.csv')
-    # Remove rows with a "no index" index, as they won't merge below.
-    df_2015 = df_2015[df_2015['index'] != 'no index']
-    df_2015.rename(columns={'guidance': '2015 guidance'}, errors='raise', inplace=True)
-    # This drops "xpath" and "comment", which are of no assistance to mapping.
-    df_2015 = df_2015.groupby(['index']).agg({'2015 guidance': unique, 'label-key': translate, 'file': unique})
-
-    # Start with the eForms file that contains indices used by the 2015 guidance.
-    df = pd.read_csv(eformsdir / 'bt-indices-mapping.csv')
-    df = df.merge(df_xpath, how='left', left_on='ID', right_on='BT ID')
-    df = df.merge(df_2015, how='left', left_on='Level', right_on='index')
-    # TODO: Print all Level that have no match, to see if any additional guidance can be imported
-
-    # Add two manually-edited columns.
-    # df.loc[df['2019 guidance'].notna(), 'status'] = 'imported from standard forms'
-    df['comments'] = ''
-
-    df.sort_values(['2019 form', '2015 form', 'ID'], inplace=True)
-
-    df.drop(columns=[
-        # bt-indices-mapping.csv: Defer these columns to the 2019 regulation's annex.
-        # TODO: Test whether any of these are incorrect?
-        'Indent level',
-        'Name',
-        'Data type',
-        'Repeatable',
-        'Description',
-        'Legal Status',
-    ], inplace=True)
-
-    remove_colon_and_parentheses = re.compile(r':?(?: \([^)]+\))?$')
-
-    # Check that the Level corresponds to the Element. The error is either in ted-xml-indices.csv or in bt-indices-mapping.csv.
-    for label, row in df.iterrows():
-        if row['Element'] is not np.nan and row['label-key'] is not np.nan:
-            labels = [s.lower() for s in row['label-key'] if s not in ('yes', 'Date')]
-            element = remove_colon_and_parentheses.sub('', row['Element'])
-            if labels and element.lower() not in labels:
-                click.echo(row['Level'], element, labels)
-
-    write(filename, df)
+    report_unmerged_rows(df, ['_xpath'])
 
 
 @cli.command()
@@ -289,11 +304,12 @@ def statistics(filename):
     imported = df[df['status'] == 'imported from standard forms'].shape[0]
     done = df[df['status'].str.startswith('done')].shape[0]
     ready = imported + done
-    no_issue_no_guidance = df[(df['status'] == '') & (df['guidance'] == '')].shape[0]
+    no_issue_no_2019_guidance = df[(df['status'] == '') & (df['2019 guidance'] == '')].shape[0]
+    no_2015_guidance = df[df['2015 guidance'].isna()].shape[0]
 
     df_issue = df[df['status'].str.startswith('issue')]
     issue = df_issue.shape[0]
-    issue_no_guidance = df_issue[df_issue['guidance'] == ''].shape[0]
+    issue_no_guidance = df_issue[df_issue['2019 guidance'] == ''].shape[0]
 
     condition = df['mandatory'].isna()
     df_mandatory = df[condition]
@@ -313,7 +329,8 @@ def statistics(filename):
             - Mandatory: {done_mandatory}/{total_mandatory} ({done_mandatory / total_mandatory:.1%}), {issue_mandatory} with open issues ({issue_mandatory / total_mandatory:.1%})
             - Optional: {done_optional}/{total_optional} ({done_optional / total_optional:.1%}), {issue_optional} with open issues ({issue_optional / total_optional:.1%})
     - Fields with [open issues](https://github.com/open-contracting/european-union-support/labels/eforms): {issue} ({issue / total:.1%}), {issue_no_guidance} without guidance
-    - Fields without issues and without guidance: {no_issue_no_guidance} ({no_issue_no_guidance / total:.1%})
+    - Fields without issues and without 2019 guidance: {no_issue_no_2019_guidance} ({no_issue_no_2019_guidance / total:.1%})
+    - Fields without 2015 guidance: {no_2015_guidance} ({no_2015_guidance / total:.1%})
     """))  # noqa: E501
 
 
@@ -321,7 +338,7 @@ def statistics(filename):
 @click.argument('file', type=click.File())
 def fields_without_extensions(file):
     """
-    Print undefined fields in the guidance for the 2015 regulation.
+    Print undefined fields in the guidance for TED XML.
     """
     subjects = {
         # Unambiguous
