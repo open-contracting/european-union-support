@@ -7,6 +7,7 @@ from pathlib import Path
 from textwrap import dedent
 
 import click
+import requests
 import numpy as np
 import pandas as pd
 
@@ -40,15 +41,18 @@ def check(actual, expected, noun):
     assert actual == expected, f'expected {expected} {noun}, got {actual}'
 
 
-def report_unmerged_rows(df, columns, series=None):
+def report_unmerged_rows(df, columns, series=None, unformatted=()):
     """
     If the data frame (or the ``series`` within it) is non-empty, print the data frame's ``columns``.
     """
-    if series:
+    if series is not None:
         df = df[series]
     if not df.empty:
         # Why, pandas? https://stackoverflow.com/a/67202912/244258
-        formatters = {col: f'{{:<{df[col].str.len().max()}s}}'.format for col in df.columns[df.dtypes == 'object']}
+        formatters = {
+            col: f'{{:<{df[col].str.len().max()}s}}'.format
+            for col in df.columns[df.dtypes == 'object'] if col not in unformatted
+        }
         click.echo(f"{df[columns].to_string(index=False, formatters=formatters)}\nRows unmerged: {df.shape[0]}")
 
 
@@ -274,22 +278,40 @@ def update_with_ted_guidance(filename):
     dfs = []
     for path in sorted(mappingdir.glob('*.csv')):
         df = pd.read_csv(path)
-        # Ignore rows without guidance (like defence forms).
+        # Ignore rows without guidance (like defence forms), or for which the guidance is to discard.
         df = df[df['guidance'].notna()]
         # Prefix the XPath to match the spreadsheet used in `update-with-xpath`.
         df['xpath'] = f'TED_EXPORT/FORM_SECTION/{path.stem}' + df['xpath']
+        # Add the form for more concise reporting.
+        df['form'] = path.stem.replace('_2014', '')
         dfs.append(df)
 
     # ignore_index is required, as each data frame repeats indices.
     df = pd.concat(dfs, ignore_index=True).rename(columns={'guidance': '2015 guidance'}, errors='raise')
     # This drops "index" and "comment", which are of no assistance to mapping, and "label-key".
-    df = df.groupby('xpath').agg({'2015 guidance': unique})
-    # We need to promote the "xpath" index to a column to use it in `report_unmerged_rows`.
-    df['_xpath'] = df.index
+    df = df.groupby('xpath').agg({'2015 guidance': unique, 'form': 'first'})
+    # We need to promote the "xpath" index to a column for it to be returned by `write`.
+    df['index'] = df.index
 
     df = write(filename, df, ['2015 guidance'], explode=['TED Xpath'], left_on='TED Xpath', right_on='xpath')
 
-    report_unmerged_rows(df, ['_xpath'])
+    # Some TED elements cannot be converted to eForms.
+    # https://github.com/OP-TED/ted-xml-data-converter/blob/main/ted-elements-not-convertible.md
+    url = 'https://raw.githubusercontent.com/OP-TED/ted-xml-data-converter/main/ted-elements-not-convertible.md'
+    elements = []
+    for line in requests.get(url).text.splitlines():
+        match = re.search(r'^\| ([A-Z_]+) \|', line)
+        if match:
+            elements.append(match.group(1))
+
+    # Ignore unmerged rows whose guidance is to discard.
+    df = df[~df['2015 guidance'].astype(str).str.startswith(("['Discard", '["Discard'))]
+    # Reduce duplication in the unmerged rows.
+    df['index'] = df['index'].str.replace(r'TED_EXPORT/FORM_SECTION/[^/]+', '', regex=True)
+    df = df.groupby('index').agg({'form': unique})
+    df['xpath'] = df.index
+
+    report_unmerged_rows(df, ['form', 'xpath'], ~df['xpath'].str.endswith(tuple(elements)), unformatted=['form'])
 
 
 @cli.command()
