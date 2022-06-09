@@ -112,7 +112,7 @@ def write(filename, df, overwrite=None, explode=None, compare=None, how='left', 
             df[column] = df[column].astype('Int64')
 
     # Initialize, fill in, and order the manually-edited columns.
-    for column in ('2019 guidance', 'sdk', 'status', 'comments'):
+    for column in ('2019 guidance', 'sdk'):
         if column not in df.columns:
             df[column] = pd.Series(dtype='object')
         else:
@@ -120,10 +120,10 @@ def write(filename, df, overwrite=None, explode=None, compare=None, how='left', 
         df[column].fillna('', inplace=True)
         column_order.append(column)
 
-    # Remove columns that do not assist the mapping process and that lengthen the JSON file.
-    for column in ('forbidden', 'mandatory'):
-        if column in df.columns:
-            column_order.remove(column)
+    # Remove or abbreviate columns that do not assist the mapping process and that lengthen the JSON file.
+    if 'forbidden' in df.columns:
+        column_order.remove('forbidden')
+    df['mandatory'] = df['mandatory'].notna()
 
     df[column_order].to_json(filename, orient='records', indent=2)
     click.echo(f'{df.shape[0]} rows written')
@@ -328,35 +328,22 @@ def statistics(filename):
     df = pd.read_json(filename, orient='records')
 
     total = df.shape[0]
-    imported = df[df['status'] == 'imported from standard forms'].shape[0]
-    done = df[df['status'].str.startswith('done')].shape[0]
-    ready = imported + done
-    no_issue_no_2019_guidance = df[(df['status'] == '') & (df['2019 guidance'] == '')].shape[0]
+    done = df[df['2019 guidance'] != ''].shape[0]
     no_2015_guidance = df[df['2015 guidance'].isna()].shape[0]
 
-    df_issue = df[df['status'].str.startswith('issue')]
-    issue = df_issue.shape[0]
-    issue_no_guidance = df_issue[df_issue['2019 guidance'] == ''].shape[0]
-
-    condition = df['mandatory'].isna()
+    condition = df['mandatory']
     df_mandatory = df[condition]
     total_mandatory = df_mandatory.shape[0]
-    done_mandatory = df_mandatory[df_mandatory['status'].str.startswith('done')].shape[0]
-    issue_mandatory = df_mandatory[df_mandatory['status'].str.startswith('issue')].shape[0]
+    done_mandatory = df_mandatory[df_mandatory['2019 guidance'] != ''].shape[0]
     df_optional = df[~condition]
     total_optional = df_optional.shape[0]
-    done_optional = df_optional[df_optional['status'].str.startswith('done')].shape[0]
-    issue_optional = df_optional[df_optional['status'].str.startswith('issue')].shape[0]
+    done_optional = df_optional[df_optional['2019 guidance'] != ''].shape[0]
 
     click.echo(dedent(f"""\
-    - Fields ready for review: {ready}/{total} ({ready / total:.1%})
-        - Imported from 2015 guidance: {imported} ({imported / total:.1%})
-        - Added or edited after import: {done} ({done / total:.1%})
+    - Fields mapped: {done}/{total} ({done / total:.1%})
         - Per legal status:
-            - Mandatory: {done_mandatory}/{total_mandatory} ({done_mandatory / total_mandatory:.1%}), {issue_mandatory} with open issues ({issue_mandatory / total_mandatory:.1%})
-            - Optional: {done_optional}/{total_optional} ({done_optional / total_optional:.1%}), {issue_optional} with open issues ({issue_optional / total_optional:.1%})
-    - Fields with [open issues](https://github.com/open-contracting/european-union-support/labels/eforms): {issue} ({issue / total:.1%}), {issue_no_guidance} without guidance
-    - Fields without issues and without 2019 guidance: {no_issue_no_2019_guidance} ({no_issue_no_2019_guidance / total:.1%})
+            - Mandatory: {done_mandatory}/{total_mandatory} ({done_mandatory / total_mandatory:.1%})
+            - Optional: {done_optional}/{total_optional} ({done_optional / total_optional:.1%})
     - Fields without 2015 guidance: {no_2015_guidance} ({no_2015_guidance / total:.1%})
     """))  # noqa: E501
 
