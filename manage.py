@@ -112,13 +112,18 @@ def write(filename, df, overwrite=None, explode=None, compare=None, how='left', 
             df[column] = df[column].astype('Int64')
 
     # Initialize, fill in, and order the manually-edited columns.
-    for column in ('2019 guidance', 'status', 'comments'):
+    for column in ('2019 guidance', 'sdk', 'status', 'comments'):
         if column not in df.columns:
             df[column] = pd.Series(dtype='object')
         else:
             column_order.remove(column)
         df[column].fillna('', inplace=True)
         column_order.append(column)
+
+    # Remove columns that do not assist the mapping process and that lengthen the JSON file.
+    for column in ('forbidden', 'mandatory'):
+        if column in df.columns:
+            column_order.remove(column)
 
     df[column_order].to_json(filename, orient='records', indent=2)
     click.echo(f'{df.shape[0]} rows written')
