@@ -27,7 +27,7 @@ def unique(series):
     if series.empty:
         return None
 
-    # Lists of lists are not supported by `Series.unique()` ("2015 guidance").
+    # Lists of lists are not supported by `Series.unique()` ("TED guidance").
     if isinstance(series.iloc[0], np.ndarray):
         return sorted(set(item for array in series for item in array))
 
@@ -107,23 +107,18 @@ def write(filename, df, overwrite=None, explode=None, compare=None, how='left', 
             })
 
     # Stop pandas from writing ints as floats.
-    for column in ('maxLength', '2019 form', '2015 form'):
+    for column in ('maxLength',):
         if column in df.columns:
             df[column] = df[column].astype('Int64')
 
     # Initialize, fill in, and order the manually-edited columns.
-    for column in ('2019 guidance', 'sdk'):
+    for column in ('eForms guidance', 'sdk'):
         if column not in df.columns:
             df[column] = pd.Series(dtype='object')
         else:
             column_order.remove(column)
         df[column].fillna('', inplace=True)
         column_order.append(column)
-
-    # Remove or abbreviate columns that do not assist the mapping process and that lengthen the JSON file.
-    if 'forbidden' in df.columns:
-        column_order.remove('forbidden')
-    df['mandatory'] = df['mandatory'].notna()
 
     df[column_order].to_json(filename, orient='records', indent=2)
     click.echo(f'{df.shape[0]} rows written')
@@ -146,6 +141,10 @@ def update_with_sdk(filename):
     with (sourcedir / 'fields.json').open() as f:
         df = pd.DataFrame.from_dict(json.load(f)['fields'])
 
+    # Remove or abbreviate columns that do not assist the mapping process and that lengthen the JSON file.
+    df.drop(columns=['forbidden'], errors='ignore', inplace=True)
+    df['mandatory'] = df['mandatory'].notna()
+
     write(filename, df, df.columns, how='outer', on='id', validate='1:1')
 
 
@@ -154,6 +153,12 @@ def update_with_sdk(filename):
 def update_with_annex(filename):
     """
     Update FILE with details from the 2019 regulation's annex.
+    \f
+
+    Add the columns:
+
+    - Description
+    - Business groups
     """
     # A warning is issued, because the Excel file has an unsupported extension.
     df = pd.read_excel(sourcedir / 'CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx', 'Annex')
@@ -248,6 +253,11 @@ def update_with_annex(filename):
 def update_with_xpath(filename):
     """
     Update FILE with XPaths from TED XML.
+    \f
+
+    Add the columns:
+
+    - TED Xpath
     """
 
     # See the "Legend" sheet for the data dictionary.
@@ -277,6 +287,11 @@ def update_with_xpath(filename):
 def update_with_ted_guidance(filename):
     """
     Update FILE with guidance for TED XML.
+    \f
+
+    Add the columns:
+
+    - TED guidance
     """
 
     # Collect the guidance.
@@ -292,13 +307,13 @@ def update_with_ted_guidance(filename):
         dfs.append(df)
 
     # ignore_index is required, as each data frame repeats indices.
-    df = pd.concat(dfs, ignore_index=True).rename(columns={'guidance': '2015 guidance'}, errors='raise')
+    df = pd.concat(dfs, ignore_index=True).rename(columns={'guidance': 'TED guidance'}, errors='raise')
     # This drops "index" and "comment", which are of no assistance to mapping, and "label-key".
-    df = df.groupby('xpath').agg({'2015 guidance': unique, 'form': 'first'})
+    df = df.groupby('xpath').agg({'TED guidance': unique, 'form': 'first'})
     # We need to promote the "xpath" index to a column for it to be returned by `write`.
     df['index'] = df.index
 
-    df = write(filename, df, ['2015 guidance'], explode=['TED Xpath'], left_on='TED Xpath', right_on='xpath')
+    df = write(filename, df, ['TED guidance'], explode=['TED Xpath'], left_on='TED Xpath', right_on='xpath')
 
     # Some TED elements cannot be converted to eForms.
     # https://github.com/OP-TED/ted-xml-data-converter/blob/main/ted-elements-not-convertible.md
@@ -310,7 +325,7 @@ def update_with_ted_guidance(filename):
             elements.append(match.group(1))
 
     # Ignore unmerged rows whose guidance is to discard.
-    df = df[~df['2015 guidance'].astype(str).str.startswith(("['Discard", '["Discard'))]
+    df = df[~df['TED guidance'].astype(str).str.startswith(("['Discard", '["Discard'))]
     # Reduce duplication in the unmerged rows.
     df['index'] = df['index'].str.replace(r'TED_EXPORT/FORM_SECTION/[^/]+', '', regex=True)
     df = df.groupby('index').agg({'form': unique})
@@ -328,23 +343,22 @@ def statistics(filename):
     df = pd.read_json(filename, orient='records')
 
     total = df.shape[0]
-    done = df[df['2019 guidance'] != ''].shape[0]
-    no_2015_guidance = df[df['2015 guidance'].isna()].shape[0]
+    done = df[df['eForms guidance'] != ''].shape[0]
+    no_ted_guidance = df[df['TED guidance'].isna()].shape[0]
 
     condition = df['mandatory']
     df_mandatory = df[condition]
     total_mandatory = df_mandatory.shape[0]
-    done_mandatory = df_mandatory[df_mandatory['2019 guidance'] != ''].shape[0]
+    done_mandatory = df_mandatory[df_mandatory['eForms guidance'] != ''].shape[0]
     df_optional = df[~condition]
     total_optional = df_optional.shape[0]
-    done_optional = df_optional[df_optional['2019 guidance'] != ''].shape[0]
+    done_optional = df_optional[df_optional['eForms guidance'] != ''].shape[0]
 
     click.echo(dedent(f"""\
     - Fields mapped: {done}/{total} ({done / total:.1%})
-        - Per legal status:
-            - Mandatory: {done_mandatory}/{total_mandatory} ({done_mandatory / total_mandatory:.1%})
-            - Optional: {done_optional}/{total_optional} ({done_optional / total_optional:.1%})
-    - Fields without 2015 guidance: {no_2015_guidance} ({no_2015_guidance / total:.1%})
+        - Mandatory: {done_mandatory}/{total_mandatory} ({done_mandatory / total_mandatory:.1%})
+        - Optional: {done_optional}/{total_optional} ({done_optional / total_optional:.1%})
+    - Fields without TED guidance: {no_ted_guidance} ({no_ted_guidance / total:.1%})\
     """))  # noqa: E501
 
 
