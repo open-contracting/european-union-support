@@ -22,6 +22,8 @@ Add the guidance for TED XML:
 
     ./manage.py update-with-ted-guidance output/mapping/eForms/guidance.json
 
+Manually fill in in `eForms guidance`, `eForms example`, `OCDS example` and `sdk`.
+
 ## Maintenance
 
 To update the progress of the guidance for the 2019 regulation, run:
@@ -35,4 +37,5 @@ To update the progress of the guidance for the 2019 regulation, run:
 
 ## Reference
 
+* [eForms SDK](https://docs.ted.europa.eu/eforms/0.6.0/) ([all-in-one](https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html))
 * [eForms FAQ](https://docs.ted.europa.eu/home/eforms/FAQ/index.html)
