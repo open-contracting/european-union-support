@@ -23,6 +23,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"Set `tender.legalBasis.scheme` to ['ELI'](https:\/\/eur-lex.europa.eu\/eli-register\/about.html), and map to `tender.legalBasis.id`.",
+    "eForms example":"<cac:ProcurementLegislationDocumentReference><cbc:ID schemeName=\"ELI\">http://data.europa.eu/eli/dir/2014/24/oj</cbc:ID></cac:ProcurementLegislationDocumentReference>",
+    "OCDS example":"{\"tender\":{\"legalBasis\":{\"scheme\":\"ELI\",\"id\":\"http://data.europa.eu/eli/dir/2014/24/oj\"}}}",
     "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/procedure-lot-part-information.html#otherLegalBasisSection"
   },
   {
@@ -49,6 +51,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"Map to `tender.legalBasis.description`.",
+    "eForms example":"<cac:ProcurementLegislationDocumentReference><cbc:DocumentDescription languageID=\"ENG\">Directive XYZ applies ...</cbc:DocumentDescription></cac:ProcurementLegislationDocumentReference>",
+    "OCDS example":"{\"tender\":{\"legalBasis\":{\"description\":\"Directive XYZ applies ...\"}}}",
     "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/procedure-lot-part-information.html#otherLegalBasisSection"
   },
   {
@@ -81,6 +85,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"Set `tender.legalBasis.scheme` to ['CELEX'](https:\/\/eur-lex.europa.eu\/content\/help\/faq\/intro.html#help8), and map to `tender.legalBasis.id`.",
+    "eForms example":"<cbc:RegulatoryDomain>32014L0024</cbc:RegulatoryDomain>",
+    "OCDS example":"{\"tender\":{\"legalBasis\":{\"scheme\":\"CELEX\",\"id\":\"32014L0024\"}}}",
     "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/notice-information.html#legalBasisSection"
   },
   {
@@ -113,6 +119,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"Discard.",
+    "eForms example":"<cbc:NoticeTypeCode>veat</cbc:NoticeTypeCode>",
+    "OCDS example":"N/A",
     "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/notice-information.html#subtypeSection"
   },
   {
@@ -144,7 +152,9 @@
     },
     "TED Xpath":null,
     "TED guidance":null,
-    "eForms guidance":"If the `@listName` [value](https:\/\/op.europa.eu\/en\/web\/eu-vocabularies\/concept-scheme\/-\/resource?uri=http:\/\/publications.europa.eu\/resource\/authority\/form-type) is:\n\n* planning: Add 'planning' to tag, and set `tender.status` to 'planned'.: \n* competition: Add 'tender' to tag, and set `tender.status` to 'active'.\n* change: Add 'tenderUpdate' to tag, and set `tender.status` to 'active'.\n* \n* result: Add 'award' and 'contract' to tag, and set `tender.status` to 'complete'.\n* dir-awa-pre: Add 'award' and 'contract' to tag, and set `tender.status` to 'complete'.\n* cont-modif: Add 'awardUpdate' and 'contractUpdate' to tag.",
+    "eForms guidance":"If the `@listName` [value](https:\/\/op.europa.eu\/en\/web\/eu-vocabularies\/concept-scheme\/-\/resource?uri=http:\/\/publications.europa.eu\/resource\/authority\/form-type) is:\n\n* planning: Add 'tender' to `tag`, and set `tender.status` to 'planned'.\n* competition: Add 'tender' to `tag`, and set `tender.status` to 'active'.\n* change: Add 'tenderUpdate' to `tag`.\n* result: Add 'award' and 'contract' to `tag`, and set `tender.status` to 'complete'.\n* dir-awa-pre: Add 'award' and 'contract' to `tag`, and set `tender.status` to 'complete'.\n* cont-modif: Add 'awardUpdate' and 'contractUpdate' to `tag`.",
+    "eForms example":"<cbc:NoticeTypeCode listName=\"competition\">cn-standard</cbc:NoticeTypeCode>",
+    "OCDS example":"{\"tag\":[\"tender\"],\"tender\":{\"status\":\"active\"}}",
     "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/notice-information.html#subtypeSection"
   },
   {
@@ -220,7 +230,9 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"Map to `tender.id`.",
-    "sdk":""
+    "eForms example":"<cbc:ContractFolderID>1e86a664-ae3c-41eb-8529-0242ac130003</cbc:ContractFolderID>",
+    "OCDS example":"{\"tender\":{\"id\":\"1e86a664-ae3c-41eb-8529-0242ac130003\"}}",
+    "sdk":"https://docs.ted.europa.eu/eforms/0.6.0/schema/notice-information.html#procedureIDSection"
   },
   {
     "id":"BT-05(a)-notice",
@@ -268,7 +280,9 @@
     "TED guidance":[
       "Map to `date`"
     ],
-    "eForms guidance":"Combine with BT-05(b)-notice to form an ISO 8601 [date time](https:\/\/standard.open-contracting.org\/latest\/en\/schema\/reference\/#date), and map to `date`.",
+    "eForms guidance":"Combine with [BT-05(b)-notice](#BT-05(b)-notice) to form an ISO 8601 [date time](https:\/\/standard.open-contracting.org\/latest\/en\/schema\/reference\/#date), and map to `date`.",
+    "eForms example":"<cbc:IssueDate>2019-11-26+01:00</cbc:IssueDate><cbc:IssueTime>13:38:54+01:00</cbc:IssueTime>",
+    "OCDS example":"{\"date\":\"2019-11-26T13:38:54+01:00\"}",
     "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/notice-information.html#dispatchDateSection"
   },
   {
@@ -297,7 +311,9 @@
     },
     "TED Xpath":null,
     "TED guidance":null,
-    "eForms guidance":"Combine with BT-05(a)-notice to form an ISO 8601 [date time](https:\/\/standard.open-contracting.org\/latest\/en\/schema\/reference\/#date), and map to `date`.",
+    "eForms guidance":"Combine with [BT-05(a)-notice](#BT-05(a)-notice) to form an ISO 8601 [date time](https:\/\/standard.open-contracting.org\/latest\/en\/schema\/reference\/#date), and map to `date`.",
+    "eForms example":"<cbc:IssueDate>2019-11-26+01:00</cbc:IssueDate><cbc:IssueTime>13:38:54+01:00</cbc:IssueTime>",
+    "OCDS example":"{\"date\":\"2019-11-26T13:38:54+01:00\"}",
     "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/notice-information.html#dispatchDateSection"
   },
   {
@@ -330,6 +346,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -371,6 +389,8 @@
       "Map to `tender.crossBorderLaw`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -397,6 +417,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -458,6 +480,8 @@
       "Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification's `.scheme` to ['COFOG'](https:\/\/unstats.un.org\/unsd\/publications\/catalogue?selectID=145), and set its `.id` and\/or `.description` as follows:"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -540,6 +564,8 @@
       "Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodDetails` to 'Restricted procedure'"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -578,6 +604,8 @@
       "Set `tender.procedure.isAccelerated` to `true`, and map to `tender.procedure.acceleratedRationale`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -615,6 +643,8 @@
       "Map to `tender.techniques.frameworkAgreement.periodRationale`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -663,6 +693,8 @@
       "Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification's `.scheme` to 'TED_CA_TYPE', and set its `.id` and\/or `.description` as follows:"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -689,6 +721,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -724,6 +758,8 @@
       "Map to `tender.techniques.frameworkAgreement.maximumParticipants`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -761,6 +797,8 @@
       "Add 'GPA' to the `tender.coveredBy` array"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -790,6 +828,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -816,6 +856,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -846,6 +888,8 @@
       "Set `tender.techniques.dynamicPurchasingSystem.status` to 'terminated'"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -877,6 +921,8 @@
       "Set `tender.secondStage.noNegotiationNecessary` to `true`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -911,6 +957,8 @@
       "Map to `tender.techniques.electronicAuction.description`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -940,6 +988,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -982,6 +1032,8 @@
       "Map to `tender.communication.atypicalToolUrl`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1018,6 +1070,8 @@
       "Map to `tender.communication.atypicalToolUrl`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1055,6 +1109,8 @@
       "[Reference a previous publication](..\/..\/operations\/#reference-a-previous-publication)"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1084,6 +1140,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1110,6 +1168,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1136,6 +1196,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1180,6 +1242,8 @@
       "Set `.id` to 'D_PROC_RESTRICTED' and `.description` to 'No tenders or no suitable tenders\/requests to participate in response to restricted procedure'"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1216,6 +1280,8 @@
       "Map to `tender.communication.futureNoticeDate`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1245,6 +1311,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1274,6 +1342,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1305,6 +1375,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1334,6 +1406,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1373,6 +1447,8 @@
       "Map to the date component of `tender.tenderPeriod.endDate`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1402,6 +1478,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1431,6 +1509,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1462,6 +1542,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1494,6 +1576,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1528,6 +1612,8 @@
       "Map to the date component of `tender.awardPeriod.startDate` and to the date component of `tender.bidOpening.date`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1562,6 +1648,8 @@
       "Map to the time component of `tender.awardPeriod.startDate` and to the time component of `tender.bidOpening.date`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1593,6 +1681,8 @@
       "Map to `tender.bidOpening.address.streetAddress`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1624,6 +1714,8 @@
       "Map to `tender.bidOpening.description`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1660,6 +1752,8 @@
       "Map to `tender.procurementMethodRationale`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1691,6 +1785,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1831,6 +1927,8 @@
       "Set `.id` to 'D_TECHNICAL' and `.description` to 'The works, supplies or services can be provided only by a particular economic operator due to absence of competition for technical reasons'"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1874,6 +1972,8 @@
       "If not set, let *Lot No* be '1'. Map to the lot's `.id` (string), map to the item's `.id` (string), and map to the item's `.relatedLot` (string)."
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1903,6 +2003,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1941,6 +2043,8 @@
       "If not set, let *Lot No* be '1'. Map to the lot's `.id` (string), map to the item's `.id` (string), and map to the item's `.relatedLot` (string)."
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -1981,6 +2085,8 @@
       "If not set, let *Lot No* be '1'. Add to the award's `.relatedLots` (string)."
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2011,6 +2117,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2040,6 +2148,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2070,6 +2180,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2107,6 +2219,8 @@
       "Add a `ParticipationFee` object to the `tender.participationFees` array, set its `.type` to 'document', and set its `.id` to '1'."
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2139,6 +2253,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2171,6 +2287,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2201,6 +2319,8 @@
       "Map to the amendment's `.description`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2240,6 +2360,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2289,6 +2411,8 @@
       "Set the award's `.statusDetails` to 'unsuccessful'\\n\\nThere's an open issue ([#764](https:\/\/github.com\/open-contracting\/standard\/issues\/764)) about status details. (ISSUE)"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2327,6 +2451,8 @@
       "Map to the contract's `.dateSigned`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2363,6 +2489,8 @@
       "Map to the contract's `.dateSigned`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2407,6 +2535,8 @@
       "Discard. If no `ParticipationFee` object in the `tender.participationFees` array has a `.type` of 'document', then access is unrestricted."
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2441,6 +2571,8 @@
       "Discard. If no `ParticipationFee` object in the `tender.participationFees` array has a `.type` of 'document', then access is unrestricted."
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2477,6 +2609,8 @@
       "Map to the award's `.id`\\n\\nThis assumes the contract award notice set `\/AWARD_CONTRACT\/CONTRACT_NO` and that the *Contract No* is unique within the contracting process. (WARNING #93)"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2506,6 +2640,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2535,6 +2671,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2565,6 +2703,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2592,6 +2732,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2619,6 +2761,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2645,6 +2789,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2671,6 +2817,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2702,6 +2850,8 @@
       "Add a `Charge` object to the contract's `.implementation.charges` array, set its `.id` to 'government', set its `.paidBy` to 'government', set its `.title` to the [translation](..\/..\/operations\/#get-a-translation) of 'Prizes, payments or other financial advantages provided by the contracting authority\/entity', and map to its `.estimatedValue.amount`."
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2735,6 +2885,8 @@
       "Map to the contract's `.value.amount`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2766,6 +2918,8 @@
       "Add a `Charge` object to the contract's `.implementation.charges` array, set its `.id` to 'user', set its `.paidBy` to 'user', set its `.title` to the [translation](..\/..\/operations\/#get-a-translation) of 'Revenue from the payment of fees and fines by the users', and map to its `.estimatedValue.amount`."
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2800,6 +2954,8 @@
       "Map to the award's `.valueCalculationMethod`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2843,6 +2999,8 @@
       "Set the party's `.details.scale` to 'sme'"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2888,6 +3046,8 @@
       "Add 'electronicSubmission' to `tender.submissionMethod`, and map to `tender.submissionMethodDetails`\\n\\nIf *to the following address* is selected, this results in a loss of structure. (WARNING #27)"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2915,6 +3075,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2960,6 +3122,8 @@
       "Add 'written' to `tender.submissionMethod`, and map to `tender.submissionMethodDetails` as a formatted address string\\n\\nIf *electronically via* is checked, this results in a loss of structure. (WARNING #27)"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -2993,6 +3157,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3026,6 +3192,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3053,6 +3221,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3085,6 +3255,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3117,6 +3289,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3149,6 +3323,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3181,6 +3357,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3213,6 +3391,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3245,6 +3425,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3277,6 +3459,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3309,6 +3493,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3341,6 +3527,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3373,6 +3561,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3405,6 +3595,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3437,6 +3629,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3469,6 +3663,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3501,6 +3697,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3533,6 +3731,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3565,6 +3765,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3597,6 +3799,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3629,6 +3833,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3661,6 +3867,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3693,6 +3901,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3725,6 +3935,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3757,6 +3969,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3789,6 +4003,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3821,6 +4037,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3853,6 +4071,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3885,6 +4105,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3917,6 +4139,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3949,6 +4173,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -3981,6 +4207,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4013,6 +4241,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4045,6 +4275,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4077,6 +4309,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4109,6 +4343,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4141,6 +4377,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4173,6 +4411,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4205,6 +4445,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4237,6 +4479,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4269,6 +4513,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4301,6 +4547,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4333,6 +4581,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4365,6 +4615,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4397,6 +4649,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4429,6 +4683,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4461,6 +4717,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4493,6 +4751,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4525,6 +4785,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4557,6 +4819,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4589,6 +4853,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4621,6 +4887,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4653,6 +4921,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4685,6 +4955,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4711,6 +4983,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4737,6 +5011,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4763,6 +5039,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4789,6 +5067,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4815,6 +5095,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4841,6 +5123,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4867,6 +5151,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4893,6 +5179,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4919,6 +5207,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4945,6 +5235,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4971,6 +5263,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -4997,6 +5291,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5023,6 +5319,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5049,6 +5347,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5075,6 +5375,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5101,6 +5403,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5127,6 +5431,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5153,6 +5459,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5179,6 +5487,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5205,6 +5515,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5231,6 +5543,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5257,6 +5571,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5283,6 +5599,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5309,6 +5627,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5335,6 +5655,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5361,6 +5683,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5387,6 +5711,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5413,6 +5739,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5439,6 +5767,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5465,6 +5795,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5491,6 +5823,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5517,6 +5851,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5543,6 +5879,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5569,6 +5907,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5595,6 +5935,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5621,6 +5963,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5647,6 +5991,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5673,6 +6019,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5699,6 +6047,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5725,6 +6075,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5751,6 +6103,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5777,6 +6131,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5803,6 +6159,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5829,6 +6187,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5855,6 +6215,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5881,6 +6243,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5907,6 +6271,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5933,6 +6299,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5959,6 +6327,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -5985,6 +6355,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6011,6 +6383,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6043,6 +6417,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6075,6 +6451,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6107,6 +6485,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6139,6 +6519,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6171,6 +6553,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6203,6 +6587,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6235,6 +6621,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6267,6 +6655,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6299,6 +6689,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6331,6 +6723,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6363,6 +6757,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6395,6 +6791,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6427,6 +6825,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6459,6 +6859,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6491,6 +6893,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6523,6 +6927,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6555,6 +6961,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6587,6 +6995,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6619,6 +7029,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6651,6 +7063,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6683,6 +7097,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6715,6 +7131,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6747,6 +7165,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6779,6 +7199,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6811,6 +7233,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6843,6 +7267,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6875,6 +7301,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6907,6 +7335,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6939,6 +7369,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -6971,6 +7403,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7003,6 +7437,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7035,6 +7471,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7067,6 +7505,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7099,6 +7539,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7131,6 +7573,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7163,6 +7607,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7195,6 +7641,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7227,6 +7675,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7259,6 +7709,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7291,6 +7743,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7323,6 +7777,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7355,6 +7811,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7387,6 +7845,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7419,6 +7879,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7451,6 +7913,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7483,6 +7947,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7515,6 +7981,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7547,6 +8015,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7579,6 +8049,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7611,6 +8083,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7643,6 +8117,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7672,6 +8148,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7701,6 +8179,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7730,6 +8210,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7759,6 +8241,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7788,6 +8272,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7817,6 +8303,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7846,6 +8334,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7875,6 +8365,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7904,6 +8396,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7933,6 +8427,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7962,6 +8458,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -7991,6 +8489,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8020,6 +8520,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8049,6 +8551,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8078,6 +8582,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8107,6 +8613,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8136,6 +8644,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8165,6 +8675,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8194,6 +8706,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8223,6 +8737,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8252,6 +8768,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8281,6 +8799,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8310,6 +8830,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8339,6 +8861,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8368,6 +8892,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8397,6 +8923,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8426,6 +8954,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8455,6 +8985,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8484,6 +9016,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8513,6 +9047,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8542,6 +9078,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8571,6 +9109,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8600,6 +9140,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8629,6 +9171,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8658,6 +9202,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8687,6 +9233,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8716,6 +9264,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8745,6 +9295,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8774,6 +9326,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8803,6 +9357,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8832,6 +9388,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8861,6 +9419,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8890,6 +9450,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8919,6 +9481,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8948,6 +9512,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -8977,6 +9543,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9006,6 +9574,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9035,6 +9605,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9064,6 +9636,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9093,6 +9667,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9122,6 +9698,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9154,6 +9732,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9180,6 +9760,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9206,6 +9788,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9246,6 +9830,8 @@
       "Map to the lot's `.title`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9272,6 +9858,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9306,6 +9894,8 @@
       "Map to the lot's `.title`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9357,6 +9947,8 @@
       "Map to the lot's `.title`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9389,6 +9981,8 @@
       "If not set, let *Reference number* be equal to the `ocid` value. Map to `tender.id` (string)."
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9415,6 +10009,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9441,6 +10037,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9486,6 +10084,8 @@
       "If not set, let *Reference number* be equal to the `ocid` value. Map to `tender.id` (string)."
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9522,6 +10122,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9555,6 +10157,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9605,6 +10209,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9655,6 +10261,8 @@
       "Map to the lot's `.description`\\n\\n**F12, F13**: Instead, map to `tender.description`\\n\\n If present, this takes precedence over the [Description of the procurement at the time of conclusion of the contract](#\/OBJECT_CONTRACT\/OBJECT_DESCR\/SHORT_DESCR)."
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9681,6 +10289,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9715,6 +10325,8 @@
       "Map to the lot's `.description`\\n\\n**F12, F13**: Instead, map to `tender.description`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9757,6 +10369,8 @@
       "Map to `tender.description`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9785,6 +10399,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9818,6 +10434,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9851,6 +10469,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9884,6 +10504,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9917,6 +10539,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9950,6 +10574,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -9983,6 +10609,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10023,6 +10651,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10056,6 +10686,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10113,6 +10745,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10146,6 +10780,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10179,6 +10815,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10212,6 +10850,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10260,6 +10900,8 @@
       "Map to the lot's `.value.amount`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10286,6 +10928,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10312,6 +10956,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10351,6 +10997,8 @@
       "Map to `tender.value.amount`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10409,6 +11057,8 @@
       "Map to the release's `description`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10435,6 +11085,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10470,6 +11122,8 @@
       "Append to the lot's `.description`\\n\\nThis results in a loss of structure. (WARNING #28)"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10503,6 +11157,8 @@
       "Map to the release's `description`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10548,6 +11204,8 @@
       "Set `tender.lotDetails.maximumLotsBidPerSupplier` to 1"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10575,6 +11233,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10605,6 +11265,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10641,6 +11303,8 @@
       "Map to `tender.lotDetails.maximumLotsAwardedPerSupplier`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10671,6 +11335,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10712,6 +11378,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10742,6 +11410,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10768,6 +11438,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10798,6 +11470,8 @@
       "Map to `tender.designContest.rewardsDetails`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10826,6 +11500,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10853,6 +11529,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10881,6 +11559,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10911,6 +11591,8 @@
       "Add a `JuryMember` object to the `tender.designContest.juryMembers` array, and map to its `.name`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10941,6 +11623,8 @@
       "[Add a party](..\/..\/operations\/#add-a-party), add 'selectedParticipant' to its `.roles`, and map to its `.name`. Add an `OrganizationReference` object to the `tender.designContest.selectedParticipants` array, set its `.id` to the party's `.id`, and map to its `.name`."
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -10976,6 +11660,8 @@
       "Map to the lot's `.secondStage.minimumCandidates`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -11002,6 +11688,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -11102,6 +11790,8 @@
       "Map to the party's `.name` and `.identifier.legalName`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -11128,6 +11818,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -11154,6 +11846,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -11180,6 +11874,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -11206,6 +11902,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -11275,6 +11973,8 @@
       "Map to the party's `.identifier.id`, and set the party's `.identifier.scheme`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -11315,6 +12015,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -11341,6 +12043,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -11407,6 +12111,8 @@
       "Map to the party's `.contactPoint.name`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -11433,6 +12139,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -11462,6 +12170,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -11563,6 +12273,8 @@
       "Map to the party's `.contactPoint.telephone`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -11592,6 +12304,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -11621,6 +12335,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -11650,6 +12366,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -11738,6 +12456,8 @@
       "Map to the party's `.details.url`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -11767,6 +12487,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -11796,6 +12518,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -11898,6 +12622,8 @@
       "Map to the party's `.contactPoint.email`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -11927,6 +12653,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -11956,6 +12684,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -11988,6 +12718,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12045,6 +12777,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12077,6 +12811,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12109,6 +12845,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12157,6 +12895,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12196,6 +12936,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12228,6 +12970,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12274,6 +13018,8 @@
       "Map to the party's `.details.buyerProfile`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12303,6 +13049,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12332,6 +13080,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12367,6 +13117,8 @@
       "Map to the lot's `.secondStage.maximumCandidates`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12393,6 +13145,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12493,6 +13247,8 @@
       "Map to the party's `.address.streetAddress`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12519,6 +13275,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12545,6 +13303,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12571,6 +13331,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12597,6 +13359,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12623,6 +13387,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12649,6 +13415,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12675,6 +13443,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12701,6 +13471,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12727,6 +13499,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12753,6 +13527,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12795,6 +13571,8 @@
       "Map to the item's `.deliveryLocation.description`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12830,6 +13608,8 @@
       "Map to the item's `.deliveryLocation.description`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12856,6 +13636,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12882,6 +13664,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12908,6 +13692,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12934,6 +13720,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12960,6 +13748,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -12986,6 +13776,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -13012,6 +13804,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -13038,6 +13832,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -13138,6 +13934,8 @@
       "Map to the party's `.address.postalCode`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -13164,6 +13962,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -13190,6 +13990,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -13216,6 +14018,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -13242,6 +14046,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -13268,6 +14074,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -13294,6 +14102,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -13394,6 +14204,8 @@
       "Map to the party's `.address.locality`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -13420,6 +14232,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -13446,6 +14260,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -13472,6 +14288,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -13498,6 +14316,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -13524,6 +14344,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -13556,6 +14378,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -13662,6 +14486,8 @@
       "Take the country code in the `VALUE` attribute, translate to a country name, and map to the party's `.address.countryName`\\n\\nThere's an open issue ([#524](https:\/\/github.com\/open-contracting\/standard\/issues\/524)) to add a `.countryCode` field to the `Address` object, to avoid translation. (ISSUE)"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -13694,6 +14520,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -13726,6 +14554,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -13758,6 +14588,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -13790,6 +14622,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -13822,6 +14656,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -13855,6 +14691,8 @@
       "Set `tender.secondStage.successiveReduction` to `true`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -13890,6 +14728,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -13923,6 +14763,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -13958,6 +14800,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14005,6 +14849,8 @@
       "Map to the lot's `.contractPeriod.startDate`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14037,6 +14883,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14084,6 +14932,8 @@
       "Map to the lot's `.contractPeriod.endDate`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14116,6 +14966,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14153,6 +15005,8 @@
       "Discard. If the lot's `.contractPeriod` isn't set, then the duration is indefinite."
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14186,6 +15040,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14222,6 +15078,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14255,6 +15113,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14292,6 +15152,8 @@
       "Map to the lot's `.options.description`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14319,6 +15181,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14346,6 +15210,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14374,6 +15240,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14402,6 +15270,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14436,6 +15306,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14470,6 +15342,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14504,6 +15378,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14538,6 +15414,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14572,6 +15450,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14606,6 +15486,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14632,6 +15514,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14658,6 +15542,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14692,6 +15578,8 @@
       "Map to the award's `.subcontracting.value.amount`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14727,6 +15615,8 @@
       "Map to the award's `.subcontracting.description`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14762,6 +15652,8 @@
       "Map to the award's `.subcontracting.minimumPercentage` and `.subcontracting.maximumPercentage`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14792,6 +15684,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14826,6 +15720,8 @@
       "Map to the lot's `.renewal.description`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14859,6 +15755,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14893,6 +15791,8 @@
       "Set the lot's `.hasRenewal` to `true`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14945,6 +15845,8 @@
       "* Get the `Organization` object whose `.name` is 'European Union'. If none exists yet:\\n  * [Add a party](..\/..\/operations\/#add-a-party)\\n  * Set its `.name` to 'European Union'\\n* Add 'funder' to its `.roles`\\n\\n* Get the `Finance` object whose `.description` is the *Identification of the project*. If none exists yet:\\n  * Add a `Finance` object to the `planning.budget.finance` array\\n  * Map the *Identification of the project* to its `.description`\\n  * Set its `.id` incrementally\\n  * Set its `.financingParty.name` to 'European Union'\\n  * Set its `.financingParty.id` to the party's `.id`\\n* Add the lot's `.id` to the Finance object's `.relatedLots` (**F12, F13**: Instead, do nothing)\\n\\nIn [future forms](https:\/\/github.com\/eForms\/eForms\/issues\/181#issuecomment-439861320), this field will be de-emphasized."
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -14979,6 +15881,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15019,6 +15923,8 @@
       "Add a `ParticipationFee` object to the `tender.participationFees` array, set its `.type` to 'document', and set its `.id` to '1'."
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15053,6 +15959,8 @@
       "Add a `ParticipationFee` object to the `tender.participationFees` array, set its `.type` to 'document', and set its `.id` to '1'."
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15085,6 +15993,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15125,6 +16035,8 @@
       "Set the lot's `.submissionTerms.variantPolicy` to 'allowed'"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15154,6 +16066,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15189,6 +16103,8 @@
       "Map to the time component of `tender.tenderPeriod.endDate`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15218,6 +16134,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15244,6 +16162,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15270,6 +16190,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15296,6 +16218,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15322,6 +16246,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15348,6 +16274,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15375,6 +16303,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15408,6 +16338,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15436,6 +16368,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15467,6 +16401,8 @@
       "Map to `tender.designContest.prizes.description`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15503,6 +16439,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15538,6 +16476,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15565,6 +16505,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15592,6 +16534,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15628,6 +16572,8 @@
       "Add to the `tender.otherRequirements.qualificationSystemConditions` array"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15654,6 +16600,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15692,6 +16640,8 @@
       "Map to `tender.contractTerms.performanceTerms`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15721,6 +16671,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15754,6 +16706,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15787,6 +16741,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15820,6 +16776,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15854,6 +16812,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15886,6 +16846,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15919,6 +16881,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15952,6 +16916,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -15979,6 +16945,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16026,6 +16994,8 @@
       "Add 'shelteredWorkshop' to the `tender.otherRequirements.reservedParticipation` array"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16060,6 +17030,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16093,6 +17065,8 @@
       "[Add a bids statistic](..\/..\/operations\/#add-a-bids-statistic), set its `.measure` to 'lowestValidBidValue', set its `.relatedLot` to the award's only `.relatedLots` entry, and map to its `.value`."
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16126,6 +17100,8 @@
       "[Add a bids statistic](..\/..\/operations\/#add-a-bids-statistic), set its `.measure` to 'highestValidBidValue', set its `.relatedLot` to the award's only `.relatedLots` entry, and map to its `.value`."
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16158,6 +17134,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16184,6 +17162,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16210,6 +17190,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16239,6 +17221,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16278,6 +17262,8 @@
       "Map to the contract's `.value.amount`. If present, this takes precedence over the [total value of the contract\/lot\/concession](#\/MODIFICATIONS_CONTRACT\/DESCRIPTION_PROCUREMENT\/VALUES\/VAL_TOTAL)."
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16315,6 +17301,8 @@
       "Map to the award's `.title`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16343,6 +17331,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16369,6 +17359,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16395,6 +17387,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16421,6 +17415,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16453,6 +17449,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16485,6 +17483,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16517,6 +17517,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16545,6 +17547,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16571,6 +17575,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16597,6 +17603,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16625,6 +17633,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16653,6 +17663,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16681,6 +17693,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16707,6 +17721,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16733,6 +17749,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16759,6 +17777,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16788,6 +17808,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16815,6 +17837,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16859,6 +17883,8 @@
       "Set `tender.contractTerms.reservedExecution` to `true`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16893,6 +17919,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16926,6 +17954,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16959,6 +17989,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -16988,6 +18020,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17017,6 +18051,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17118,6 +18154,8 @@
       "Map to the party's `.contactPoint.faxNumber`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17147,6 +18185,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17176,6 +18216,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17209,6 +18251,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17253,6 +18297,8 @@
       "Set `tender.contractTerms.electronicInvoicingPolicy` to 'allowed'"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17286,6 +18332,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17312,6 +18360,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17339,6 +18389,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17384,6 +18436,8 @@
       "Add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array and set its `.type` to 'technical'. If *Reference to the relevant law, regulation or administrative provision* is set, map it to the criterion's `.description`. Otherwise, set the criterion's `.description` to 'Execution of the service is reserved to a particular profession'."
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17416,6 +18470,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17459,6 +18515,8 @@
       "Add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array, set its `.type` to 'technical', and set its `.description` to \"As stated in the procurement documents\"."
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17488,6 +18546,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17533,6 +18593,8 @@
       "Get the `SelectionCriterion` object whose `.type` is 'technical'. If none exists, add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array, and set its `.type` to 'technical'. Then, map to its `.minimum`."
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17570,6 +18632,8 @@
       "Map to `tender.submissionTerms.depositsGuarantees`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17597,6 +18661,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17630,6 +18696,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17663,6 +18731,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17695,6 +18765,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17721,6 +18793,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17752,6 +18826,8 @@
       "Set `tender.status` to 'complete'"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17781,6 +18857,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17810,6 +18888,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17848,6 +18928,8 @@
       "[Add a bids statistic](..\/..\/operations\/#add-a-bids-statistic), set its `.measure` to 'bids', set its `.relatedLot` to the award's only `.relatedLots` entry, and map to its `.value`."
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17876,6 +18958,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17940,6 +19024,8 @@
       "[Add a bids statistic](..\/..\/operations\/#add-a-bids-statistic), set its `.measure` to 'smeBids', set its `.relatedLot` to the award's only `.relatedLots` entry, and map to its `.value`."
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -17977,6 +19063,8 @@
       "Map to `tender.contractTerms.tendererLegalForm`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18003,6 +19091,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18046,6 +19136,8 @@
       "Set `tender.lotDetails.maximumLotsBidPerSupplier` to the number (not the string) 1e9999 (which parses to infinity i.e. \"all\")"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18084,6 +19176,8 @@
       "Set the lot's `.submissionTerms.electronicCataloguePolicy` to 'required'."
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18128,6 +19222,8 @@
       "Set `tender.techniques.hasFrameworkAgreement` to `true`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18162,6 +19258,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18203,6 +19301,8 @@
       "Set `tender.techniques.hasDynamicPurchasingSystem` to `true`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18238,6 +19338,8 @@
       "Set `tender.techniques.hasElectronicAuction` to `true`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18265,6 +19367,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18297,6 +19401,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18328,6 +19434,8 @@
       "Map to `tender.contractTerms.financialTerms`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18360,6 +19468,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18386,6 +19496,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18427,6 +19539,8 @@
       "Set the award's `.hasSubcontracting` to `true`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18459,6 +19573,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18491,6 +19607,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18523,6 +19641,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18549,6 +19669,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18576,6 +19698,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18607,6 +19731,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18634,6 +19760,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18660,6 +19788,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18687,6 +19817,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18719,6 +19851,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18745,6 +19879,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18771,6 +19907,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18800,6 +19938,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18829,6 +19969,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18855,6 +19997,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18881,6 +20025,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18925,6 +20071,8 @@
       "Set `tender.otherRequirements.requiresStaffNamesAndQualifications` to `true`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18957,6 +20105,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -18989,6 +20139,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19021,6 +20173,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19047,6 +20201,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19076,6 +20232,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19102,6 +20260,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19134,6 +20294,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19163,6 +20325,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19189,6 +20353,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19222,6 +20388,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19251,6 +20419,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19280,6 +20450,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19313,6 +20485,8 @@
       "Map to `tender.awardCriteriaDetails`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19350,6 +20524,8 @@
       "Set `tender.contractTerms.hasElectronicOrdering` to `true`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19387,6 +20563,8 @@
       "Set `tender.contractTerms.hasElectronicPayment` to `true`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19418,6 +20596,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19451,6 +20631,8 @@
       "Map to `tender.recurrence.description`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19495,6 +20677,8 @@
     ],
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19527,6 +20711,8 @@
       "Multiply by 30, and map to `tender.submissionTerms.bidValidityPeriod.durationInDays`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19572,6 +20758,8 @@
       "Map to `tender.reviewDetails`"
     ],
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19599,6 +20787,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19626,6 +20816,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19653,6 +20845,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19677,6 +20871,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19701,6 +20897,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19725,6 +20923,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19749,6 +20949,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19779,6 +20981,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19803,6 +21007,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19827,6 +21033,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19857,6 +21065,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19881,6 +21091,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19911,6 +21123,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19935,6 +21149,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19959,6 +21175,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -19983,6 +21201,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20013,6 +21233,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20037,6 +21259,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20067,6 +21291,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20097,6 +21323,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20121,6 +21349,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20145,6 +21375,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20175,6 +21407,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20202,6 +21436,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20226,6 +21462,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20250,6 +21488,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20277,6 +21517,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20304,6 +21546,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20328,6 +21572,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20352,6 +21598,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20379,6 +21627,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20406,6 +21656,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20437,6 +21689,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20467,6 +21721,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20497,6 +21753,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20521,6 +21779,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20551,6 +21811,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20575,6 +21837,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20605,6 +21869,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20635,6 +21901,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20666,6 +21934,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20690,6 +21960,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20714,6 +21986,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20741,6 +22015,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20768,6 +22044,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20795,6 +22073,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20819,6 +22099,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20843,6 +22125,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20867,6 +22151,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20891,6 +22177,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20915,6 +22203,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20939,6 +22229,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20966,6 +22258,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -20993,6 +22287,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21020,6 +22316,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21047,6 +22345,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21071,6 +22371,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21095,6 +22397,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21125,6 +22429,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21155,6 +22461,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21179,6 +22487,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21203,6 +22513,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21227,6 +22539,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21254,6 +22568,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21281,6 +22597,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21308,6 +22626,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21335,6 +22655,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21362,6 +22684,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21386,6 +22710,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21413,6 +22739,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21440,6 +22768,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21467,6 +22797,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21494,6 +22826,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21521,6 +22855,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21548,6 +22884,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21575,6 +22913,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21602,6 +22942,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21629,6 +22971,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21656,6 +23000,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21683,6 +23029,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21710,6 +23058,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21737,6 +23087,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21764,6 +23116,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21791,6 +23145,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21818,6 +23174,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21845,6 +23203,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21872,6 +23232,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21899,6 +23261,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21926,6 +23290,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21953,6 +23319,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -21980,6 +23348,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -22007,6 +23377,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -22034,6 +23406,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -22061,6 +23435,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -22088,6 +23464,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -22115,6 +23493,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -22142,6 +23522,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -22169,6 +23551,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -22196,6 +23580,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -22223,6 +23609,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -22250,6 +23638,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -22277,6 +23667,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -22304,6 +23696,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   },
   {
@@ -22328,6 +23722,8 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
+    "eForms example":"",
+    "OCDS example":"",
     "sdk":""
   }
 ]

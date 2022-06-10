@@ -112,7 +112,7 @@ def write(filename, df, overwrite=None, explode=None, compare=None, how='left', 
             df[column] = df[column].astype('Int64')
 
     # Initialize, fill in, and order the manually-edited columns.
-    for column in ('eForms guidance', 'sdk'):
+    for column in ('eForms guidance', 'eForms example', 'OCDS example', 'sdk'):
         if column not in df.columns:
             df[column] = pd.Series(dtype='object')
         else:
