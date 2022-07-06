@@ -23,9 +23,9 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"Set `tender.legalBasis.scheme` to ['ELI'](https:\/\/eur-lex.europa.eu\/eli-register\/about.html), and map to `tender.legalBasis.id`.",
-    "eForms example":"<cac:ProcurementLegislationDocumentReference><cbc:ID schemeName=\"ELI\">http://data.europa.eu/eli/dir/2014/24/oj</cbc:ID></cac:ProcurementLegislationDocumentReference>",
-    "OCDS example":"{\"tender\":{\"legalBasis\":{\"scheme\":\"ELI\",\"id\":\"http://data.europa.eu/eli/dir/2014/24/oj\"}}}",
-    "sdk":"https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#otherLegalBasisSection"
+    "eForms example":"<cac:ProcurementLegislationDocumentReference><cbc:ID schemeName=\"ELI\">http:\/\/data.europa.eu\/eli\/dir\/2014\/24\/oj<\/cbc:ID><\/cac:ProcurementLegislationDocumentReference>",
+    "OCDS example":"{\"tender\":{\"legalBasis\":{\"scheme\":\"ELI\",\"id\":\"http:\/\/data.europa.eu\/eli\/dir\/2014\/24\/oj\"}}}",
+    "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/all-in-one.html#otherLegalBasisSection"
   },
   {
     "id":"BT-01(d)-Procedure",
@@ -51,9 +51,9 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"Map to `tender.legalBasis.description`.",
-    "eForms example":"<cac:ProcurementLegislationDocumentReference><cbc:DocumentDescription languageID=\"ENG\">Directive XYZ applies ...</cbc:DocumentDescription></cac:ProcurementLegislationDocumentReference>",
+    "eForms example":"<cac:ProcurementLegislationDocumentReference><cbc:DocumentDescription languageID=\"ENG\">Directive XYZ applies ...<\/cbc:DocumentDescription><\/cac:ProcurementLegislationDocumentReference>",
     "OCDS example":"{\"tender\":{\"legalBasis\":{\"description\":\"Directive XYZ applies ...\"}}}",
-    "sdk":"https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#otherLegalBasisSection"
+    "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/all-in-one.html#otherLegalBasisSection"
   },
   {
     "id":"BT-01-notice",
@@ -85,9 +85,9 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"Set `tender.legalBasis.scheme` to ['CELEX'](https:\/\/eur-lex.europa.eu\/content\/help\/faq\/intro.html#help8), and map to `tender.legalBasis.id`.",
-    "eForms example":"<cbc:RegulatoryDomain>32014L0024</cbc:RegulatoryDomain>",
+    "eForms example":"<cbc:RegulatoryDomain>32014L0024<\/cbc:RegulatoryDomain>",
     "OCDS example":"{\"tender\":{\"legalBasis\":{\"scheme\":\"CELEX\",\"id\":\"32014L0024\"}}}",
-    "sdk":"https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#legalBasisSection"
+    "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/all-in-one.html#legalBasisSection"
   },
   {
     "id":"BT-02-notice",
@@ -119,9 +119,9 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"Discard.",
-    "eForms example":"<cbc:NoticeTypeCode>veat</cbc:NoticeTypeCode>",
-    "OCDS example":"N/A",
-    "sdk":"https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#subtypeSection"
+    "eForms example":"<cbc:NoticeTypeCode>veat<\/cbc:NoticeTypeCode>",
+    "OCDS example":"N\/A",
+    "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/all-in-one.html#subtypeSection"
   },
   {
     "id":"BT-03-notice",
@@ -153,9 +153,9 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"The codes are drawn from the [Form type](https:\/\/op.europa.eu\/en\/web\/eu-vocabularies\/concept-scheme\/-\/resource?uri=http:\/\/publications.europa.eu\/resource\/authority\/form-type) authority table in EU Vocabularies.\n\nIf the code` is:\n\n* planning: Add 'tender' to `tag`, and set `tender.status` to 'planned'.\n* competition: Add 'tender' to `tag`, and set `tender.status` to 'active'.\n* change: Add 'tenderUpdate' to `tag`.\n* result: Add 'award' and 'contract' to `tag`, and set `tender.status` to 'complete'.\n* dir-awa-pre: Add 'award' and 'contract' to `tag`, and set `tender.status` to 'complete'.\n* cont-modif: Add 'awardUpdate' and 'contractUpdate' to `tag`.",
-    "eForms example":"<cbc:NoticeTypeCode listName=\"competition\">cn-standard</cbc:NoticeTypeCode>",
+    "eForms example":"<cbc:NoticeTypeCode listName=\"competition\">cn-standard<\/cbc:NoticeTypeCode>",
     "OCDS example":"{\"tag\":[\"tender\"],\"tender\":{\"status\":\"active\"}}",
-    "sdk":"https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#subtypeSection"
+    "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/all-in-one.html#subtypeSection"
   },
   {
     "id":"BT-04-notice",
@@ -230,9 +230,9 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"Map to `tender.id`.",
-    "eForms example":"<cbc:ContractFolderID>1e86a664-ae3c-41eb-8529-0242ac130003</cbc:ContractFolderID>",
+    "eForms example":"<cbc:ContractFolderID>1e86a664-ae3c-41eb-8529-0242ac130003<\/cbc:ContractFolderID>",
     "OCDS example":"{\"tender\":{\"id\":\"1e86a664-ae3c-41eb-8529-0242ac130003\"}}",
-    "sdk":"https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#procedureIDSection"
+    "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/all-in-one.html#procedureIDSection"
   },
   {
     "id":"BT-05(a)-notice",
@@ -281,9 +281,9 @@
       "Map to `date`"
     ],
     "eForms guidance":"Combine with [BT-05(b)-notice](#BT-05(b)-notice) to form an ISO 8601 [date time](https:\/\/standard.open-contracting.org\/latest\/en\/schema\/reference\/#date), and map to `date`.",
-    "eForms example":"<cbc:IssueDate>2019-11-26+01:00</cbc:IssueDate><cbc:IssueTime>13:38:54+01:00</cbc:IssueTime>",
+    "eForms example":"<cbc:IssueDate>2019-11-26+01:00<\/cbc:IssueDate><cbc:IssueTime>13:38:54+01:00<\/cbc:IssueTime>",
     "OCDS example":"{\"date\":\"2019-11-26T13:38:54+01:00\"}",
-    "sdk":"https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#dispatchDateSection"
+    "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/all-in-one.html#dispatchDateSection"
   },
   {
     "id":"BT-05(b)-notice",
@@ -312,9 +312,9 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"Combine with [BT-05(a)-notice](#BT-05(a)-notice) to form an ISO 8601 [date time](https:\/\/standard.open-contracting.org\/latest\/en\/schema\/reference\/#date), and map to `date`.",
-    "eForms example":"<cbc:IssueDate>2019-11-26+01:00</cbc:IssueDate><cbc:IssueTime>13:38:54+01:00</cbc:IssueTime>",
+    "eForms example":"<cbc:IssueDate>2019-11-26+01:00<\/cbc:IssueDate><cbc:IssueTime>13:38:54+01:00<\/cbc:IssueTime>",
     "OCDS example":"{\"date\":\"2019-11-26T13:38:54+01:00\"}",
-    "sdk":"https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#dispatchDateSection"
+    "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/all-in-one.html#dispatchDateSection"
   },
   {
     "id":"BT-06-Lot",
@@ -346,9 +346,9 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"",
-    "eForms example":"<cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName=\"strategic-procurement\">inn-pur</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>",
+    "eForms example":"<cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName=\"strategic-procurement\">inn-pur<\/cbc:ProcurementTypeCode><\/cac:ProcurementAdditionalType>",
     "OCDS example":"",
-    "sdk":"https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#strategicProcurementSection"
+    "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/all-in-one.html#strategicProcurementSection"
   },
   {
     "id":"BT-09(a)-Procedure",
@@ -389,9 +389,9 @@
       "Map to `tender.crossBorderLaw`"
     ],
     "eForms guidance":"See [BT-09(b)-Procedure](#BT-09(b)-Procedure).",
-    "eForms example":"N/A",
-    "OCDS example":"N/A",
-    "sdk":"https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#crossBorderLawSection"
+    "eForms example":"N\/A",
+    "OCDS example":"N\/A",
+    "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/all-in-one.html#crossBorderLawSection"
   },
   {
     "id":"BT-09(b)-Procedure",
@@ -417,9 +417,9 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"Map to `tender.crossBorderLaw`.",
-    "eForms example":"<cac:ProcurementLegislationDocumentReference><cbc:ID>CrossBorderLaw</cbc:ID><cbc:DocumentDescription languageID=\"ENG\">Directive XYZ on Cross Border ...</cbc:DocumentDescription>",
+    "eForms example":"<cac:ProcurementLegislationDocumentReference><cbc:ID>CrossBorderLaw<\/cbc:ID><cbc:DocumentDescription languageID=\"ENG\">Directive XYZ on Cross Border ...<\/cbc:DocumentDescription>",
     "OCDS example":"{\"tender\":{\"crossBorderLaw\": \"Directive XYZ on Cross Border ...\"}}",
-    "sdk":"https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#crossBorderLawSection"
+    "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/all-in-one.html#crossBorderLawSection"
   },
   {
     "id":"BT-10-Procedure-Buyer",
@@ -479,10 +479,10 @@
       "Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification's `.scheme` to 'TED_CE_ACTIVITY', and set its `.id` and\/or `.description` as follows:\\n\\n(The codes are drawn from [Directive 2014\/25\/EU](https:\/\/eur-lex.europa.eu\/legal-content\/en\/TXT\/?uri=CELEX%3A32014L0025#L_2014094EN.01033901))",
       "Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification's `.scheme` to ['COFOG'](https:\/\/unstats.un.org\/unsd\/publications\/catalogue?selectID=145), and set its `.id` and\/or `.description` as follows:"
     ],
-    "eForms guidance":"The codes are drawn from the [Main activity](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/main-activity) authority table in EU Vocabularies.\n\nGet the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Map to the classification's `.id`, and set its `.description` to the code's Label. If [\"COFOG\"](https:\/\/ec.europa.eu\/eurostat\/statistics-explained\/index.php?title=Glossary:Classification_of_the_functions_of_government_\\(COFOG\\)) is in the code's Label, set the classification's `.scheme` to 'COFOG'. Otherwise, set the classification's `.scheme` to 'TED_MAIN_ACTIVITY'.",
-    "eForms example":"<cac:ContractingParty><cac:Party><cac:PartyIdentification><cbc:ID schemeName=\"organization\">ORG-0001</cbc:ID></cac:PartyIdentification></cac:Party><cac:ContractingActivity><cbc:ActivityTypeCode listName=\"authority-activity\">gas-oil</cbc:ActivityTypeCode></cac:ContractingActivity></cac:ContractingParty>",
+    "eForms guidance":"The codes are drawn from the [Main activity](https:\/\/op.europa.eu\/en\/web\/eu-vocabularies\/concept-scheme\/-\/resource?uri=http:\/\/publications.europa.eu\/resource\/authority\/main-activity) authority table in EU Vocabularies.\n\nGet the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Map to the classification's `.id`, and set its `.description` to the code's Label. If [\"COFOG\"](https:\/\/ec.europa.eu\/eurostat\/statistics-explained\/index.php?title=Glossary:Classification_of_the_functions_of_government_\\(COFOG\\)) is in the code's Label, set the classification's `.scheme` to 'COFOG'. Otherwise, set the classification's `.scheme` to 'TED_MAIN_ACTIVITY'.",
+    "eForms example":"<cac:ContractingParty><cac:Party><cac:PartyIdentification><cbc:ID schemeName=\"organization\">ORG-0001<\/cbc:ID><\/cac:PartyIdentification><\/cac:Party><cac:ContractingActivity><cbc:ActivityTypeCode listName=\"authority-activity\">gas-oil<\/cbc:ActivityTypeCode><\/cac:ContractingActivity><\/cac:ContractingParty>",
     "OCDS example":"{\"parties\":[{\"id\":\"ORG-0001\",\"details\":{\"classifications\":[{\"scheme\":\"TED_MAIN_ACTIVITY\",\"id\":\"gas-oil\",\"description\":\"Activities related to the exploitation of a geographical area for the purpose of extracting oil or gas.\"}]}}]}",
-    "sdk":"https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#_buyer_information_2"
+    "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/all-in-one.html#_buyer_information_2"
   },
   {
     "id":"BT-105-Procedure",
@@ -563,10 +563,10 @@
       "Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodDetails` to 'Procedure involving negotiations'",
       "Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodDetails` to 'Restricted procedure'"
     ],
-    "eForms guidance":"The codes are drawn from the [Procurement procedure type](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/procurement-procedure-type) authority table in EU Vocabularies.\n\nSet `tender.procurementMethodDetails` to the code's Label. If the code is:\n\n* open: Set `tender.procurementMethod` to 'open'\n* comp-dial: Set `tender.procurementMethod` to 'selective'\n* comp-tend: Set `tender.procurementMethod` to 'selective'\n* innovation: Set `tender.procurementMethod` to 'selective'\n* neg-w-call: Set `tender.procurementMethod` to 'selective'\n* restricted: Set `tender.procurementMethod` to 'selective'\n* neg-wo-call: Set `tender.procurementMethod` to 'limited'\n\n```{note}\n`tender.procurementMethod` is not set for 'oth-mult' or 'oth-single'.\n```",
-    "eForms example":"<cbc:ProcedureCode listName=\"procurement-procedure-type\">open</cbc:ProcedureCode>",
+    "eForms guidance":"The codes are drawn from the [Procurement procedure type](https:\/\/op.europa.eu\/en\/web\/eu-vocabularies\/concept-scheme\/-\/resource?uri=http:\/\/publications.europa.eu\/resource\/authority\/procurement-procedure-type) authority table in EU Vocabularies.\n\nSet `tender.procurementMethodDetails` to the code's Label. If the code is:\n\n* open: Set `tender.procurementMethod` to 'open'\n* comp-dial: Set `tender.procurementMethod` to 'selective'\n* comp-tend: Set `tender.procurementMethod` to 'selective'\n* innovation: Set `tender.procurementMethod` to 'selective'\n* neg-w-call: Set `tender.procurementMethod` to 'selective'\n* restricted: Set `tender.procurementMethod` to 'selective'\n* neg-wo-call: Set `tender.procurementMethod` to 'limited'\n\n```{note}\n`tender.procurementMethod` is not set for 'oth-mult' or 'oth-single'.\n```",
+    "eForms example":"<cbc:ProcedureCode listName=\"procurement-procedure-type\">open<\/cbc:ProcedureCode>",
     "OCDS example":"{\"tender\":{\"procurementMethod\":\"open\",\"procurementMethodDetails\":\"Open procedure\"}}",
-    "sdk":"https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#procedureTypeSection"
+    "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/all-in-one.html#procedureTypeSection"
   },
   {
     "id":"BT-106-Procedure",
@@ -604,9 +604,9 @@
       "Set `tender.procedure.isAccelerated` to `true`, and map to `tender.procedure.acceleratedRationale`"
     ],
     "eForms guidance":"Map to `tender.procedure.isAccelerated` as a boolean.\n\n```{seealso}\n[BT-1351-Procedure](#BT-1351-Procedure)\n```",
-    "eForms example":"<cac:ProcessJustification><cbc:ProcessReasonCode listName=\"accelerated-procedure\">true</cbc:ProcessReasonCode><cbc:ProcessReason languageID=\"ENG\">Direct award is justified ...</cbc:ProcessReason></cac:ProcessJustification>",
+    "eForms example":"<cac:ProcessJustification><cbc:ProcessReasonCode listName=\"accelerated-procedure\">true<\/cbc:ProcessReasonCode><cbc:ProcessReason languageID=\"ENG\">Direct award is justified ...<\/cbc:ProcessReason><\/cac:ProcessJustification>",
     "OCDS example":"{\"tender\":{\"procedure\":{\"isAccelerated\":true}}}",
-    "sdk":"https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#acceleratedProcedureSection"
+    "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/all-in-one.html#acceleratedProcedureSection"
   },
   {
     "id":"BT-109-Lot",
@@ -643,9 +643,9 @@
       "Map to `tender.techniques.frameworkAgreement.periodRationale`"
     ],
     "eForms guidance":"Map to the lot's `.techniques.frameworkAgreement.periodRationale`.",
-    "eForms example":"<cac:FrameworkAgreement><cbc:Justification languageID=\"ENG\">The exceptional duration of ...</cbc:Justification></cac:FrameworkAgreement>",
+    "eForms example":"<cac:FrameworkAgreement><cbc:Justification languageID=\"ENG\">The exceptional duration of ...<\/cbc:Justification><\/cac:FrameworkAgreement>",
     "OCDS example":"{\"tender\":{\"lots\":[{\"techniques\":{\"frameworkAgreement\":{\"periodRationale\":\"The exceptional duration of ...\"}}}]}}",
-    "sdk":"https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#frameworkAgreementSection"
+    "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/all-in-one.html#frameworkAgreementSection"
   },
   {
     "id":"BT-11-Procedure-Buyer",
@@ -692,10 +692,10 @@
     "TED guidance":[
       "Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification's `.scheme` to 'TED_CA_TYPE', and set its `.id` and\/or `.description` as follows:"
     ],
-    "eForms guidance":"The codes are drawn from the [Buyer legal type](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/buyer-legal-type) authority table in EU Vocabularies.\n\nGet the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Map to the classification's `.id`, set its `.description` to the code's Label, and set its `.scheme` to 'TED_CA_TYPE'.",
-    "eForms example":"<cac:ContractingParty><cac:Party><cac:PartyIdentification><cbc:ID schemeName=\"organization\">ORG-0001</cbc:ID></cac:PartyIdentification></cac:Party><cac:ContractingPartyType><cbc:PartyTypeCode listName=\"buyer-legal-type\">body-pl</cbc:PartyTypeCode></cac:ContractingPartyType></cac:ContractingParty>",
+    "eForms guidance":"The codes are drawn from the [Buyer legal type](https:\/\/op.europa.eu\/en\/web\/eu-vocabularies\/concept-scheme\/-\/resource?uri=http:\/\/publications.europa.eu\/resource\/authority\/buyer-legal-type) authority table in EU Vocabularies.\n\nGet the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Map to the classification's `.id`, set its `.description` to the code's Label, and set its `.scheme` to 'TED_CA_TYPE'.",
+    "eForms example":"<cac:ContractingParty><cac:Party><cac:PartyIdentification><cbc:ID schemeName=\"organization\">ORG-0001<\/cbc:ID><\/cac:PartyIdentification><\/cac:Party><cac:ContractingPartyType><cbc:PartyTypeCode listName=\"buyer-legal-type\">body-pl<\/cbc:PartyTypeCode><\/cac:ContractingPartyType><\/cac:ContractingParty>",
     "OCDS example":"{\"parties\":[{\"id\":\"ORG-0001\",\"details\":{\"classifications\":[{\"scheme\":\"TED_CA_TYPE\",\"id\":\"body-pl\",\"description\":\"Body governed by public law.\"}]}}]}",
-    "sdk":"https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#_buyer_information_2"
+    "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/all-in-one.html#_buyer_information_2"
   },
   {
     "id":"BT-111-Lot",
@@ -721,9 +721,9 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"Map to the lot's `.techniques.frameworkAgreement.buyerCategories`.",
-    "eForms example":"<cac:FrameworkAgreement><cac:SubsequentProcessTenderRequirement><cbc:Name>buyer-categories</cbc:Name><cbc:Description languageID=\"ENG\">Offices of the \"greater region\" ...</cbc:Description></cac:FrameworkAgreement>",
+    "eForms example":"<cac:FrameworkAgreement><cac:SubsequentProcessTenderRequirement><cbc:Name>buyer-categories<\/cbc:Name><cbc:Description languageID=\"ENG\">Offices of the \"greater region\" ...<\/cbc:Description><\/cac:FrameworkAgreement>",
     "OCDS example":"{\"tender\":{\"lots\":[{\"techniques\":{\"frameworkAgreement\":{\"buyerCategories\":\"Offices of the \\\"greater region\\\" ...\"}}}]}}",
-    "sdk":"https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#frameworkAgreementSection"
+    "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/all-in-one.html#frameworkAgreementSection"
   },
   {
     "id":"BT-113-Lot",
@@ -758,9 +758,9 @@
       "Map to `tender.techniques.frameworkAgreement.maximumParticipants`"
     ],
     "eForms guidance":"Map to the lot's `.techniques.frameworkAgreement.maximumParticipants`.",
-    "eForms example":"<cac:FrameworkAgreement><cbc:MaximumOperatorQuantity>50</cbc:MaximumOperatorQuantity></cac:FrameworkAgreement>",
+    "eForms example":"<cac:FrameworkAgreement><cbc:MaximumOperatorQuantity>50<\/cbc:MaximumOperatorQuantity><\/cac:FrameworkAgreement>",
     "OCDS example":"{\"tender\":{\"lots\":[{\"techniques\":{\"frameworkAgreement\":{\"maximumParticipants\":50}}}]}}",
-    "sdk":"https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#frameworkAgreementSection"
+    "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/all-in-one.html#frameworkAgreementSection"
   },
   {
     "id":"BT-115-Lot",
@@ -797,9 +797,9 @@
       "Add 'GPA' to the `tender.coveredBy` array"
     ],
     "eForms guidance":"If `true`, add \"GPA\" to the lot's `.coveredBy` array. Otherwise, do nothing.",
-    "eForms example":"<cbc:GovernmentAgreementConstraintIndicator>true</cbc:GovernmentAgreementConstraintIndicator>",
+    "eForms example":"<cbc:GovernmentAgreementConstraintIndicator>true<\/cbc:GovernmentAgreementConstraintIndicator>",
     "OCDS example":"{\"tender\":{\"lots\":[{\"coveredBy\":[\"GPA\"]}]}}",
-    "sdk":"https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#GPASection"
+    "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/all-in-one.html#GPASection"
   },
   {
     "id":"BT-115-Part",
@@ -828,9 +828,9 @@
     ],
     "TED guidance":null,
     "eForms guidance":"If `true`, add \"GPA\" to the `tender.coveredBy` array. Otherwise, do nothing.",
-    "eForms example":"<cbc:GovernmentAgreementConstraintIndicator>true</cbc:GovernmentAgreementConstraintIndicator>",
+    "eForms example":"<cbc:GovernmentAgreementConstraintIndicator>true<\/cbc:GovernmentAgreementConstraintIndicator>",
     "OCDS example":"{\"tender\":{\"coveredBy\":[\"GPA\"]}}",
-    "sdk":"https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#GPASection"
+    "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/all-in-one.html#GPASection"
   },
   {
     "id":"BT-118-NoticeResult",
@@ -856,9 +856,9 @@
     "TED Xpath":null,
     "TED guidance":null,
     "eForms guidance":"Map to `tender.techniques.frameworkAgreement.value.amount`. Map `@currencyID` to the value's `.currency`.",
-    "eForms example":"<efac:NoticeResult><cbc:EstimatedOverallFrameworkContractsAmount currencyID=\"EUR\">6000</cbc:EstimatedOverallFrameworkContractsAmount></efac:NoticeResult>",
+    "eForms example":"<efac:NoticeResult><cbc:EstimatedOverallFrameworkContractsAmount currencyID=\"EUR\">6000<\/cbc:EstimatedOverallFrameworkContractsAmount><\/efac:NoticeResult>",
     "OCDS example":"{\"tender\":{\"techniques\":{\"frameworkAgreement\":{\"value\":{\"amount\":6000,\"currency\":\"EUR\"}}}}}",
-    "sdk":"https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#_notice_aggregated_amounts"
+    "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/all-in-one.html#_notice_aggregated_amounts"
   },
   {
     "id":"BT-119-LotResult",
@@ -888,9 +888,9 @@
       "Set `tender.techniques.dynamicPurchasingSystem.status` to 'terminated'"
     ],
     "eForms guidance":"If `true`, set the lot's `.techniques.dynamicPurchasingSystem.status` to 'terminated'. Otherwise, do nothing.",
-    "eForms example":"<efac:LotResult><efbc:DPSTerminationIndicator>true</efbc:DPSTerminationIndicator></efac:LotResult>",
+    "eForms example":"<efac:LotResult><efbc:DPSTerminationIndicator>true<\/efbc:DPSTerminationIndicator><\/efac:LotResult>",
     "OCDS example":"{\"tender\":{\"lots\":[{\"techniques\":{\"dynamicPurchasingSystem\":{\"status\":\"terminated\"}}}]}}",
-    "sdk":"https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#_lot_result"
+    "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/all-in-one.html#_lot_result"
   },
   {
     "id":"BT-120-Lot",
@@ -1785,9 +1785,9 @@
     ],
     "TED guidance":null,
     "eForms guidance":"Map to `tender.procedure.acceleratedRationale`.\n\n```{seealso}\n[BT-106-Procedure](#BT-106-Procedure)\n```",
-    "eForms example":"<cac:ProcessJustification><cbc:ProcessReasonCode listName=\"accelerated-procedure\">true</cbc:ProcessReasonCode><cbc:ProcessReason languageID=\"ENG\">Direct award is justified ...</cbc:ProcessReason></cac:ProcessJustification>",
+    "eForms example":"<cac:ProcessJustification><cbc:ProcessReasonCode listName=\"accelerated-procedure\">true<\/cbc:ProcessReasonCode><cbc:ProcessReason languageID=\"ENG\">Direct award is justified ...<\/cbc:ProcessReason><\/cac:ProcessJustification>",
     "OCDS example":"{\"tender\":{\"procedure\":{\"acceleratedRationale\":\"Direct award is justified ...\"}}}",
-    "sdk":"https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#acceleratedProcedureSection"
+    "sdk":"https:\/\/docs.ted.europa.eu\/eforms\/0.6.0\/schema\/all-in-one.html#acceleratedProcedureSection"
   },
   {
     "id":"BT-136-Procedure",
