@@ -24,6 +24,16 @@ Add the guidance for TED XML:
 
 Manually fill in in `eForms guidance`, `eForms example`, `OCDS example` and `sdk`.
 
+1. Look up the business term in the [eForms SDK](https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html)
+1. Paste the link to the relevant documentation in `sdk`
+1. Copy an abbreviated XML sample to `eForms example`
+1. Write the `eForms guidance` and `OCDS example`
+
+If the eForms field uses a codelist:
+
+1. Find the authority table in [EU Vocabularies](https://op.europa.eu/en/web/eu-vocabularies/authority-tables)
+1. Copy the "Browse content" link for the relevant authority table
+
 ## Maintenance
 
 To update the progress of the guidance for the 2019 regulation, run:
