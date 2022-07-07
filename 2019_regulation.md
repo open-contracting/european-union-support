@@ -35,9 +35,9 @@ xpathRelative | eForms SDK | Location of the field in an XML notice, relative to
 type | eForms SDK | Technical data type of the field. |
 legalType | eForms SDK | Data type of the business term, as indicated in the eForms Regulation. |
 maxLength | eForms SDK | Maximum number of characters allowed in the value of the field, optional. | Removed.
-[repeatable](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_repeatable) | eForms SDK | Indicates if the field can appear more than once inside its container. |
+[repeatable](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_repeatable) | eForms SDK | Indicates if the field can appear more than once inside its container. | Simplified to a boolean.
 [forbidden](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_forbidden) | eForms SDK | Indicates whether or not the field can be used in specific notice types. | Removed.
-[mandatory](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_mandatory) | eForms SDK | Indicates whether or not a field is required to have a value. | `true` if required on one or more forms.
+[mandatory](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_mandatory) | eForms SDK | Indicates whether or not a field is required to have a value. | Simplified to a boolean (`true` if required on one or more forms).
 [codeList](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_codelist) | eForms SDK | Identifier of the code list from which the field value must belong. Applicable only for fields of type "code" or "internal-code" |
 [pattern](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_pattern) | eForms SDK | Indicates that the value of the field must match a specific regular expression pattern. |
 Description | [2019 regulation annex](https://ec.europa.eu/growth/single-market/public-procurement/digital-procurement/eforms_en) | The description of the business term. |
