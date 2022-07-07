@@ -22,6 +22,8 @@ Add the guidance for TED XML:
 
     ./manage.py update-with-ted-guidance output/mapping/eForms/guidance.yaml
 
+Note: This last command reports unmerged rows. As such, it's possible that some TED guidance is missing from the YAML file.
+
 ### Data dictionary
 
 Key | Source | Description | Notes
@@ -56,10 +58,14 @@ Manually fill in in `eForms guidance`, `eForms example`, `OCDS example` and `sdk
 1. Copy an abbreviated XML sample to `eForms example`
 1. Write the `eForms guidance` and `OCDS example`
 
-If the eForms field uses a codelist:
+When writing the eForms guidance:
 
-1. Find the authority table in [EU Vocabularies](https://op.europa.eu/en/web/eu-vocabularies/authority-tables)
-1. Copy the "Browse content" link for the relevant authority table
+* If the eForms field uses a codelist:
+
+  1. Find the authority table in [EU Vocabularies](https://op.europa.eu/en/web/eu-vocabularies/authority-tables)
+  1. Copy the "Browse content" link for the relevant authority table
+
+* If a mapping has multiple steps, consider using a numbered list.
 
 ## Maintenance
 
@@ -76,3 +82,8 @@ To update the progress of the guidance for the 2019 regulation, run:
 
 * [eForms SDK](https://docs.ted.europa.eu/eforms/0.6.0/) ([all-in-one](https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html))
 * [eForms FAQ](https://docs.ted.europa.eu/home/eforms/FAQ/index.html)
+
+Useful links for authoring mappings:
+
+* [OCDS for EU profile](https://standard.open-contracting.org/profiles/eu/latest/en/forms/)
+* [OCDS Extensions Field and Code Search](https://open-contracting.github.io/editor-tools/)

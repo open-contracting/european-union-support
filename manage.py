@@ -71,6 +71,35 @@ def check(actual, expected, noun):
     assert actual == expected, f'expected {expected} {noun}, got {actual}'
 
 
+def get_column_order(df, drop=()):
+    # Pandas uses the order of appearance, within rows and *across* rows. Since we remove null values from the output,
+    # the order of appearance across rows can differ from the order in a given row. A hardcoded list is needed to have
+    # a consistent order.
+    column_order = [
+        'id',
+        'parentNodeId',
+        'name',
+        'btId',
+        'xpathAbsolute',
+        'type',
+        'legalType',
+        'repeatable',
+        'mandatory',
+        'codeList',
+        'pattern',
+    ]
+    for column in column_order:
+        if column not in df.columns:
+            column_order.remove(column)
+    for column in df.columns.format():
+        if column not in column_order:
+            column_order.append(column)
+    for column in drop:
+        if column in column_order:
+            column_order.remove(column)
+    return column_order
+
+
 def report_unmerged_rows(df, columns, series=None, unformatted=()):
     """
     If the data frame (or the ``series`` within it) is non-empty, print the data frame's ``columns``.
@@ -78,11 +107,12 @@ def report_unmerged_rows(df, columns, series=None, unformatted=()):
     if series is not None:
         df = df[series]
     if not df.empty:
-        # Why, pandas? https://stackoverflow.com/a/67202912/244258
+        # "Why, pandas?" https://stackoverflow.com/a/67202912/244258
         formatters = {
             col: f'{{:<{df[col].str.len().max()}s}}'.format
             for col in df.columns[df.dtypes == 'object'] if col not in unformatted
         }
+        click.echo("These rows were not included in the update:")
         click.echo(f"{df[columns].to_string(index=False, formatters=formatters)}\nRows unmerged: {df.shape[0]}")
 
 
@@ -99,20 +129,17 @@ def write(filename, df, overwrite=None, explode=None, compare=None, how='left', 
     df_unmerged = pd.DataFrame()
 
     # Default to the data frame's columns.
-    column_order = df.columns.format()
+    column_order = get_column_order(df, drop)
 
     if os.path.exists(filename):
         with open(filename) as f:
             df_old = pd.DataFrame.from_records(yaml.safe_load(f))
 
         # Maintain the column order.
-        column_order = df_old.columns.format()
+        column_order = get_column_order(df_old, drop)
         for column in overwrite:
-            if column not in column_order:
+            if column not in column_order and column not in drop:
                 column_order.append(column)
-        for column in drop:
-            if column in column_order:
-                column_order.remove(column)
 
         # Pandas has no option to overwrite cells, so we drop first. Protect "id" from being overwritten.
         df_old.drop(columns=[column for column in overwrite if column != 'id'], errors='ignore', inplace=True)
@@ -328,6 +355,8 @@ def update_with_xpath(filename):
     df = df.groupby('Field ID').agg({'TED Xpath': unique})
     write(filename, df, ['TED Xpath'], left_on='id', right_on='Field ID', validate='1:m')
 
+    # We don't report_unmerged_rows(), because rows are merged on field ID.
+
 
 @cli.command()
 @click.argument('filename', type=click.Path(exists=True))
@@ -362,6 +391,13 @@ def update_with_ted_guidance(filename):
 
     df = write(filename, df, ['TED guidance'], explode=['TED Xpath'], left_on='TED Xpath', right_on='xpath')
 
+    # Ignore unmerged rows whose guidance is to discard.
+    df = df[~df['TED guidance'].astype(str).str.startswith(("['Discard", '["Discard'))]
+    # Reduce duplication in the unmerged rows.
+    df['index'] = df['index'].str.replace(r'TED_EXPORT/FORM_SECTION/[^/]+', '', regex=True)
+    df = df.groupby('index').agg({'form': unique})
+    df['xpath'] = df.index
+
     # Some TED elements cannot be converted to eForms.
     # https://github.com/OP-TED/ted-xml-data-converter/blob/main/ted-elements-not-convertible.md
     url = 'https://raw.githubusercontent.com/OP-TED/ted-xml-data-converter/main/ted-elements-not-convertible.md'
@@ -370,13 +406,6 @@ def update_with_ted_guidance(filename):
         match = re.search(r'^\| ([A-Z_]+) \|', line)
         if match:
             elements.append(match.group(1))
-
-    # Ignore unmerged rows whose guidance is to discard.
-    df = df[~df['TED guidance'].astype(str).str.startswith(("['Discard", '["Discard'))]
-    # Reduce duplication in the unmerged rows.
-    df['index'] = df['index'].str.replace(r'TED_EXPORT/FORM_SECTION/[^/]+', '', regex=True)
-    df = df.groupby('index').agg({'form': unique})
-    df['xpath'] = df.index
 
     report_unmerged_rows(df, ['form', 'xpath'], ~df['xpath'].str.endswith(tuple(elements)), unformatted=['form'])
 
