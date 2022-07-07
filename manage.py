@@ -187,8 +187,9 @@ def update_with_sdk(filename):
     # * forbidden: It isn't informative to know which forms a field can't appear on.
     drop = ['xpathRelative', 'maxLength', 'forbidden']
     df['mandatory'] = df['mandatory'].notna()
-    # The `severity` of `repeatable` is "ERROR".
-    df['repeatable'] = [cell['value'] for cell in df['repeatable']]
+    # Simplify these columns if `severity` is the only other key.
+    for column in ('repeatable', 'pattern'):
+        df[column] = [cell['value'] if isinstance(cell, dict) and len(cell) == 2 else cell for cell in df[column]]
 
     write(filename, df, df.columns, how='outer', drop=drop, on='id', validate='1:1')
 
