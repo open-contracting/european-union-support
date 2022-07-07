@@ -10,11 +10,34 @@ import click
 import requests
 import numpy as np
 import pandas as pd
+import yaml
 
 basedir = Path(__file__).resolve().parent
 sourcedir = basedir / 'source'
 mappingdir = basedir / 'output' / 'mapping'
 eformsdir = mappingdir / 'eforms'
+
+
+class Dumper(yaml.SafeDumper):
+    pass
+
+
+def na_representer(dumper, data):
+    return dumper.represent_data(None)
+
+
+def ndarray_representer(dumper, data):
+    return dumper.represent_data(data.tolist())
+
+
+def str_representer(dumper, data):
+    # Use the literal style on multiline strings to reduce quoting, instead of the single-quoted style (default).
+    return dumper.represent_scalar('tag:yaml.org,2002:str', data, style='|' if '\n' in data else None)
+
+
+Dumper.add_representer(pd._libs.missing.NAType, na_representer)
+Dumper.add_representer(np.ndarray, ndarray_representer)
+Dumper.add_representer(str, str_representer)
 
 
 def unique(series):
@@ -72,7 +95,8 @@ def write(filename, df, overwrite=None, explode=None, compare=None, how='left', 
     column_order = df.columns.format()
 
     if os.path.exists(filename):
-        df_old = pd.read_json(filename, orient='records')
+        with open(filename) as f:
+            df_old = pd.DataFrame.from_records(yaml.safe_load(f))
 
         # Maintain the column order.
         column_order = df_old.columns.format()
@@ -120,7 +144,9 @@ def write(filename, df, overwrite=None, explode=None, compare=None, how='left', 
         df[column].fillna('', inplace=True)
         column_order.append(column)
 
-    df[column_order].to_json(filename, orient='records', indent=2)
+    with open(filename, 'w') as f:
+        # Make it easier to see indentation. Avoid line wrapping. sort_keys is True by default.
+        yaml.dump(df[column_order].to_dict(orient='records'), f, Dumper=Dumper, indent=4, width=1000, sort_keys=False)
     click.echo(f'{df.shape[0]} rows written')
 
     return df_unmerged
@@ -340,7 +366,8 @@ def statistics(filename):
     """
     Print statistics on the progress of the guidance for the 2019 regulation.
     """
-    df = pd.read_json(filename, orient='records')
+    with open(filename) as f:
+        df = pd.DataFrame.from_records(yaml.safe_load(f))
 
     total = df.shape[0]
     done = df[df['eForms guidance'] != ''].shape[0]

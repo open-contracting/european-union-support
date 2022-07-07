@@ -8,19 +8,19 @@
 
 Start with the [fields](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html) identified by the eForms SDK (creates the file if it doesn't exist):
 
-    ./manage.py update-with-sdk output/mapping/eForms/guidance.json
+    ./manage.py update-with-sdk output/mapping/eForms/guidance.yaml
 
 Add details from the 2019 regulation's annex, e.g. if descriptions change:
 
-    ./manage.py update-with-annex output/mapping/eForms/guidance.json
+    ./manage.py update-with-annex output/mapping/eForms/guidance.yaml
 
 Add the XPath from TED XML:
 
-    ./manage.py update-with-xpath output/mapping/eForms/guidance.json
+    ./manage.py update-with-xpath output/mapping/eForms/guidance.yaml
 
 Add the guidance for TED XML:
 
-    ./manage.py update-with-ted-guidance output/mapping/eForms/guidance.json
+    ./manage.py update-with-ted-guidance output/mapping/eForms/guidance.yaml
 
 Manually fill in in `eForms guidance`, `eForms example`, `OCDS example` and `sdk`.
 
