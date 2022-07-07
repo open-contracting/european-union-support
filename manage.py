@@ -3,16 +3,20 @@ import csv
 import json
 import os
 import re
+from copy import deepcopy
 from pathlib import Path
 from textwrap import dedent
 
 import click
+import json_merge_patch
 import lxml.html
 import mdformat
 import numpy as np
 import pandas as pd
 import requests
 import yaml
+from jsonschema import FormatChecker
+from jsonschema.validators import Draft4Validator as validator
 
 basedir = Path(__file__).resolve().parent
 sourcedir = basedir / 'source'
@@ -120,8 +124,20 @@ def report_unmerged_rows(df, columns, series=None, unformatted=()):
             col: f'{{:<{df[col].str.len().max()}s}}'.format
             for col in df.columns[df.dtypes == 'object'] if col not in unformatted
         }
-        click.echo("These rows were not included in the update:")
-        click.echo(f"{df[columns].to_string(index=False, formatters=formatters)}\nRows unmerged: {df.shape[0]}")
+        click.echo('These rows were not included in the update:')
+        click.echo(f'{df[columns].to_string(index=False, formatters=formatters)}\nRows unmerged: {df.shape[0]}')
+
+
+# From standard-maintenance-scripts/tests/test_readme.py
+def set_additional_properties_false(data):
+    if isinstance(data, list):
+        for item in data:
+            set_additional_properties_false(item)
+    elif isinstance(data, dict):
+        if 'properties' in data:
+            data['additionalProperties'] = False
+        for value in data.values():
+            set_additional_properties_false(value)
 
 
 def write(filename, df, overwrite=None, explode=None, compare=None, how='left', drop=(), **kwargs):
@@ -419,7 +435,7 @@ def update_with_ted_guidance(filename):
 @click.argument('filename', type=click.Path(exists=True))
 def lint(filename):
     """
-    Lint FILE (validate and format XML, JSON, Markdown).
+    Lint FILE (validate and format XML, JSON and Markdown, and report unrecognized OCDS fields).
     """
     head = (
         '<ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" '
@@ -433,10 +449,30 @@ def lint(filename):
     )
     tail = '</ContractNotice>'
 
+    # Similar to tests/fixtures/release_minimal.json in ocdskit.
+    minimal_release = {
+        "ocid": "ocds-213czf-1",
+        "id": "1",
+        "date": "2001-02-03T04:05:06Z",
+        "tag": ["planning"],
+        "initiationType": "tender",
+        "tender": {
+            "id": "1e86a664-ae3c-41eb-8529-0242ac130003",
+        },
+    }
+
     with open(filename) as f:
         fields = yaml.safe_load(f)
 
+    with open('release-schema.json') as f:
+        schema = json.load(f)
+
+    set_additional_properties_false(schema)
+    format_checker = FormatChecker()
+
     for field in fields:
+        identifier = field['id']
+
         field['eForms guidance'] = mdformat.text(field['eForms guidance']).rstrip()
 
         eforms_example = field['eForms example']
@@ -445,16 +481,25 @@ def lint(filename):
                 element = lxml.etree.fromstring(f'{head}{eforms_example}{tail}')
                 field['eForms example'] = lxml.etree.tostring(element).decode()[len(head):-len(tail)]
             except lxml.etree.XMLSyntaxError as e:
-                click.echo(f'XML is invalid: {e}: {eforms_example}')
+                click.echo(f'{identifier}: XML is invalid: {e}: {eforms_example}')
 
         ocds_example = field['OCDS example']
         if ocds_example and ocds_example != 'N/A':
             try:
-                field['OCDS example'] = json.dumps(json.loads(ocds_example), separators=(',', ':'))
+                data = json.loads(ocds_example)
+                field['OCDS example'] = json.dumps(data, separators=(',', ':'))
+
+                release = deepcopy(minimal_release)
+                json_merge_patch.merge(release, data)
+                if 'lots' in release['tender']:
+                    release['tender']['lots'][0]['id'] = '1'
+                for e in validator(schema, format_checker=format_checker).iter_errors(release):
+                    click.echo(f"{identifier}: OCDS is invalid: {e.message} ({'/'.join(e.absolute_schema_path)})")
             except json.decoder.JSONDecodeError as e:
-                click.echo(f'JSON is invalid: {e}: {ocds_example}')
+                click.echo(f'{identifier}: JSON is invalid: {e}: {ocds_example}')
 
     write_yaml_file(filename, fields)
+
 
 @cli.command()
 @click.argument('file', type=click.File())
