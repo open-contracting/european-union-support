@@ -437,6 +437,8 @@ def lint(filename):
     """
     Lint FILE (validate and format XML, JSON and Markdown, and report unrecognized OCDS fields).
     """
+    # From https://github.com/OP-TED/eForms-SDK/tree/main/examples
+    # See https://docs.ted.europa.eu/eforms/0.6.0/schema/schemas.html
     head = (
         '<ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" '
         'xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" '
@@ -480,6 +482,8 @@ def lint(filename):
             try:
                 element = lxml.etree.fromstring(f'{head}{eforms_example}{tail}')
                 field['eForms example'] = lxml.etree.tostring(element).decode()[len(head):-len(tail)]
+
+                # Note: The XML snippets are too short to validate against the eForms schema.
             except lxml.etree.XMLSyntaxError as e:
                 click.echo(f'{identifier}: XML is invalid: {e}: {eforms_example}')
 

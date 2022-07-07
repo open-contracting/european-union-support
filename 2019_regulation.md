@@ -90,6 +90,8 @@ To update the progress of the guidance for the 2019 regulation, run:
 * [FAQ](https://docs.ted.europa.eu/home/eforms/FAQ/index.html)
 * [Examples](https://github.com/OP-TED/eForms-SDK/tree/main/examples)
 
+The Publications Office has also started work on a [TED XML Data Converter](https://github.com/OP-TED/ted-xml-data-converter). However, as of 2022-07-07, it is incomplete and has not been updated since its first publication on 2022-05-20. Thus, it is not being used as an authoritative source (e.g. it could have been used in the "Add the XPath from TED XML" step).
+
 ### OCDS
 
 * [OCDS for EU profile](https://standard.open-contracting.org/profiles/eu/latest/en/forms/)
