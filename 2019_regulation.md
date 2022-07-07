@@ -8,19 +8,19 @@
 
 Start with the [fields](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html) identified by the eForms SDK (creates the file if it doesn't exist):
 
-    ./manage.py update-with-sdk output/mapping/eForms/guidance.yaml
+    ./manage.py update-with-sdk output/mapping/eforms/guidance.yaml
 
 Add details from the 2019 regulation's annex, e.g. if descriptions change:
 
-    ./manage.py update-with-annex output/mapping/eForms/guidance.yaml
+    ./manage.py update-with-annex output/mapping/eforms/guidance.yaml
 
 Add the XPath from TED XML:
 
-    ./manage.py update-with-xpath output/mapping/eForms/guidance.yaml
+    ./manage.py update-with-xpath output/mapping/eforms/guidance.yaml
 
 Add the guidance for TED XML:
 
-    ./manage.py update-with-ted-guidance output/mapping/eForms/guidance.yaml
+    ./manage.py update-with-ted-guidance output/mapping/eforms/guidance.yaml
 
 Note: This last command reports unmerged rows. As such, it's possible that some TED guidance is missing from the YAML file.
 
@@ -68,6 +68,10 @@ When writing the eForms guidance:
 * If a mapping has multiple steps, consider using a numbered list.
 
 ## Maintenance
+
+To lint the file, run:
+
+    ./manage.py lint output/mapping/eforms/guidance.yaml
 
 To update the progress of the guidance for the 2019 regulation, run:
 

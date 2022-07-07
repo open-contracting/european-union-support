@@ -92,14 +92,14 @@
     eForms guidance: |-
         The codes are drawn from the [Form type](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/form-type) authority table in EU Vocabularies.
 
-        If the code` is:
+        If the code is:
 
-        * planning: Add 'tender' to `tag`, and set `tender.status` to 'planned'.
-        * competition: Add 'tender' to `tag`, and set `tender.status` to 'active'.
-        * change: Add 'tenderUpdate' to `tag`.
-        * result: Add 'award' and 'contract' to `tag`, and set `tender.status` to 'complete'.
-        * dir-awa-pre: Add 'award' and 'contract' to `tag`, and set `tender.status` to 'complete'.
-        * cont-modif: Add 'awardUpdate' and 'contractUpdate' to `tag`.
+        - planning: Add 'tender' to `tag`, and set `tender.status` to 'planned'.
+        - competition: Add 'tender' to `tag`, and set `tender.status` to 'active'.
+        - change: Add 'tenderUpdate' to `tag`.
+        - result: Add 'award' and 'contract' to `tag`, and set `tender.status` to 'complete'.
+        - dir-awa-pre: Add 'award' and 'contract' to `tag`, and set `tender.status` to 'complete'.
+        - cont-modif: Add 'awardUpdate' and 'contractUpdate' to `tag`.
     eForms example: <cbc:NoticeTypeCode listName="competition">cn-standard</cbc:NoticeTypeCode>
     OCDS example: '{"tag":["tender"],"tender":{"status":"active"}}'
     sdk: https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#subtypeSection
@@ -194,7 +194,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE
     TED guidance:
     - Map to `date`
-    eForms guidance: Combine with [BT-05(b)-notice](#BT-05(b)-notice) to form an ISO 8601 [date time](https://standard.open-contracting.org/latest/en/schema/reference/#date), and map to `date`.
+    eForms guidance: Combine with [BT-05(b)-notice](<#BT-05(b)-notice>) to form an ISO 8601 [date time](https://standard.open-contracting.org/latest/en/schema/reference/#date), and map to `date`.
     eForms example: <cbc:IssueDate>2019-11-26+01:00</cbc:IssueDate><cbc:IssueTime>13:38:54+01:00</cbc:IssueTime>
     OCDS example: '{"date":"2019-11-26T13:38:54+01:00"}'
     sdk: https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#dispatchDateSection
@@ -211,7 +211,7 @@
     Description: The date and time when the notice has been sent to TED.
     Business groups:
         BG-1: Notice
-    eForms guidance: Combine with [BT-05(a)-notice](#BT-05(a)-notice) to form an ISO 8601 [date time](https://standard.open-contracting.org/latest/en/schema/reference/#date), and map to `date`.
+    eForms guidance: Combine with [BT-05(a)-notice](<#BT-05(a)-notice>) to form an ISO 8601 [date time](https://standard.open-contracting.org/latest/en/schema/reference/#date), and map to `date`.
     eForms example: <cbc:IssueDate>2019-11-26+01:00</cbc:IssueDate><cbc:IssueTime>13:38:54+01:00</cbc:IssueTime>
     OCDS example: '{"date":"2019-11-26T13:38:54+01:00"}'
     sdk: https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#dispatchDateSection
@@ -261,7 +261,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/CONTRACTING_BODY/PROCUREMENT_LAW
     TED guidance:
     - Map to `tender.crossBorderLaw`
-    eForms guidance: See [BT-09(b)-Procedure](#BT-09(b)-Procedure).
+    eForms guidance: See [BT-09(b)-Procedure](<#BT-09(b)-Procedure>).
     eForms example: N/A
     OCDS example: N/A
     sdk: https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#crossBorderLawSection
@@ -330,7 +330,7 @@
     eForms guidance: |-
         The codes are drawn from the [Main activity](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/main-activity) authority table in EU Vocabularies.
 
-        Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Map to the classification's `.id`, and set its `.description` to the code's Label. If ["COFOG"](https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Classification_of_the_functions_of_government_\(COFOG\)) is in the code's Label, set the classification's `.scheme` to 'COFOG'. Otherwise, set the classification's `.scheme` to 'TED_MAIN_ACTIVITY'.
+        Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Map to the classification's `.id`, and set its `.description` to the code's Label. If ["COFOG"](<https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Classification_of_the_functions_of_government_(COFOG)>) is in the code's Label, set the classification's `.scheme` to 'COFOG'. Otherwise, set the classification's `.scheme` to 'TED_MAIN_ACTIVITY'.
     eForms example: <cac:ContractingParty><cac:Party><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></cac:Party><cac:ContractingActivity><cbc:ActivityTypeCode listName="authority-activity">gas-oil</cbc:ActivityTypeCode></cac:ContractingActivity></cac:ContractingParty>
     OCDS example: '{"parties":[{"id":"ORG-0001","details":{"classifications":[{"scheme":"TED_MAIN_ACTIVITY","id":"gas-oil","description":"Activities related to the exploitation of a geographical area for the purpose of extracting oil or gas."}]}}]}'
     sdk: https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#_buyer_information_2
@@ -406,13 +406,13 @@
 
         Set `tender.procurementMethodDetails` to the code's Label. If the code is:
 
-        * open: Set `tender.procurementMethod` to 'open'
-        * comp-dial: Set `tender.procurementMethod` to 'selective'
-        * comp-tend: Set `tender.procurementMethod` to 'selective'
-        * innovation: Set `tender.procurementMethod` to 'selective'
-        * neg-w-call: Set `tender.procurementMethod` to 'selective'
-        * restricted: Set `tender.procurementMethod` to 'selective'
-        * neg-wo-call: Set `tender.procurementMethod` to 'limited'
+        - open: Set `tender.procurementMethod` to 'open'
+        - comp-dial: Set `tender.procurementMethod` to 'selective'
+        - comp-tend: Set `tender.procurementMethod` to 'selective'
+        - innovation: Set `tender.procurementMethod` to 'selective'
+        - neg-w-call: Set `tender.procurementMethod` to 'selective'
+        - restricted: Set `tender.procurementMethod` to 'selective'
+        - neg-wo-call: Set `tender.procurementMethod` to 'limited'
 
         ```{note}
         `tender.procurementMethod` is not set for 'oth-mult' or 'oth-single'.

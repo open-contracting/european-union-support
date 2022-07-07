@@ -7,9 +7,10 @@ from pathlib import Path
 from textwrap import dedent
 
 import click
-import requests
+import mdformat
 import numpy as np
 import pandas as pd
+import requests
 import yaml
 
 basedir = Path(__file__).resolve().parent
@@ -100,6 +101,12 @@ def get_column_order(df, drop=()):
     return column_order
 
 
+def write_yaml_file(filename, data):
+    with open(filename, 'w') as f:
+        # Make it easier to see indentation. Avoid line wrapping. sort_keys is True by default.
+        yaml.dump(data, f, Dumper=Dumper, indent=4, width=1000, sort_keys=False)
+
+
 def report_unmerged_rows(df, columns, series=None, unformatted=()):
     """
     If the data frame (or the ``series`` within it) is non-empty, print the data frame's ``columns``.
@@ -184,10 +191,7 @@ def write(filename, df, overwrite=None, explode=None, compare=None, how='left', 
         df[column].fillna('', inplace=True)
         column_order.append(column)
 
-    with open(filename, 'w') as f:
-        data = [row.dropna().to_dict() for label, row in df[column_order].iterrows()]
-        # Make it easier to see indentation. Avoid line wrapping. sort_keys is True by default.
-        yaml.dump(data, f, Dumper=Dumper, indent=4, width=1000, sort_keys=False)
+    write_yaml_file(filename, [row.dropna().to_dict() for label, row in df[column_order].iterrows()])
     click.echo(f'{df.shape[0]} rows written')
 
     return df_unmerged
@@ -412,12 +416,25 @@ def update_with_ted_guidance(filename):
 
 @cli.command()
 @click.argument('filename', type=click.Path(exists=True))
-def statistics(filename):
+def lint(filename):
+    """
+    Lint FILE (format Markdown).
+    """
+    with open(filename) as f:
+        fields = yaml.safe_load(f)
+
+    for field in fields:
+        field['eForms guidance'] = mdformat.text(field['eForms guidance']).rstrip()
+
+    write_yaml_file(filename, fields)
+
+@cli.command()
+@click.argument('file', type=click.File())
+def statistics(file):
     """
     Print statistics on the progress of the guidance for the 2019 regulation.
     """
-    with open(filename) as f:
-        df = pd.DataFrame.from_records(yaml.safe_load(f))
+    df = pd.DataFrame.from_records(yaml.safe_load(file))
 
     total = df.shape[0]
     done = df[df['eForms guidance'] != ''].shape[0]
