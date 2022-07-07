@@ -30,6 +30,12 @@ def ndarray_representer(dumper, data):
     return dumper.represent_data(data.tolist())
 
 
+def float_representer(dumper, data):
+    if np.isnan(data):
+        return dumper.represent_data(None)
+    return dumper.represent_float(data)
+
+
 def str_representer(dumper, data):
     # Use the literal style on multiline strings to reduce quoting, instead of the single-quoted style (default).
     return dumper.represent_scalar('tag:yaml.org,2002:str', data, style='|' if '\n' in data else None)
@@ -37,6 +43,7 @@ def str_representer(dumper, data):
 
 Dumper.add_representer(pd._libs.missing.NAType, na_representer)
 Dumper.add_representer(np.ndarray, ndarray_representer)
+Dumper.add_representer(float, float_representer)
 Dumper.add_representer(str, str_representer)
 
 
@@ -79,7 +86,7 @@ def report_unmerged_rows(df, columns, series=None, unformatted=()):
         click.echo(f"{df[columns].to_string(index=False, formatters=formatters)}\nRows unmerged: {df.shape[0]}")
 
 
-def write(filename, df, overwrite=None, explode=None, compare=None, how='left', **kwargs):
+def write(filename, df, overwrite=None, explode=None, compare=None, how='left', drop=(), **kwargs):
     """
     Read the data frame from the file (if it exists) and merge it with ``df`` according to ``how`` and ``kwargs``,
     overwriting only the ``overwrite`` columns.
@@ -103,6 +110,9 @@ def write(filename, df, overwrite=None, explode=None, compare=None, how='left', 
         for column in overwrite:
             if column not in column_order:
                 column_order.append(column)
+        for column in drop:
+            if column in column_order:
+                column_order.remove(column)
 
         # Pandas has no option to overwrite cells, so we drop first. Protect "id" from being overwritten.
         df_old.drop(columns=[column for column in overwrite if column != 'id'], errors='ignore', inplace=True)
@@ -121,9 +131,12 @@ def write(filename, df, overwrite=None, explode=None, compare=None, how='left', 
                     if actual != expected:
                         click.echo(f'{row["id"].ljust(35)}: {b} : {a} / {expected.ljust(50)} : {actual}')
 
-        drop = [column for column in df.columns if column not in overwrite]
+        untouched = [column for column in df.columns if column not in overwrite]
         # Merge all the columns, then drop the non-overwritten columns.
-        df = df_old.merge(df, how=how, **kwargs).drop(columns=drop)
+        df = df_old.merge(df, how=how, **kwargs).drop(columns=untouched)
+
+        if drop:
+            df.drop(columns=drop, errors='ignore', inplace=True)
 
         if explode:
             df = df.groupby('id').agg({
@@ -168,10 +181,14 @@ def update_with_sdk(filename):
         df = pd.DataFrame.from_dict(json.load(f)['fields'])
 
     # Remove or abbreviate columns that do not assist the mapping process and that lengthen the JSON file.
-    df.drop(columns=['forbidden'], errors='ignore', inplace=True)
+    #
+    # * xpathRelative: Contained in xpathAbsolute.
+    # * maxLength: The only fields with a maxLength less than 400 are identifiers, phone numbers and percentages.
+    # * forbidden: It isn't informative to know which forms a field can't appear on.
+    drop = ['xpathRelative', 'maxLength', 'forbidden']
     df['mandatory'] = df['mandatory'].notna()
 
-    write(filename, df, df.columns, how='outer', on='id', validate='1:1')
+    write(filename, df, df.columns, how='outer', drop=drop, on='id', validate='1:1')
 
 
 @cli.command()
