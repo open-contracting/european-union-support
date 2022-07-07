@@ -418,13 +418,19 @@ def update_with_ted_guidance(filename):
 @click.argument('filename', type=click.Path(exists=True))
 def lint(filename):
     """
-    Lint FILE (format Markdown).
+    Lint FILE (validate and format JSON, Markdown).
     """
     with open(filename) as f:
         fields = yaml.safe_load(f)
 
     for field in fields:
         field['eForms guidance'] = mdformat.text(field['eForms guidance']).rstrip()
+        ocds_example = field['OCDS example']
+        if ocds_example and ocds_example != 'N/A':
+            try:
+                field['OCDS example'] = json.dumps(json.loads(ocds_example), separators=(',', ':'))
+            except json.decoder.JSONDecodeError:
+                click.echo(f'JSON is invalid: {ocds_example}')
 
     write_yaml_file(filename, fields)
 
