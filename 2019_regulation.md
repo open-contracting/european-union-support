@@ -84,10 +84,13 @@ To update the progress of the guidance for the 2019 regulation, run:
 
 ## Reference
 
-* [eForms SDK](https://docs.ted.europa.eu/eforms/0.6.0/) ([all-in-one](https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html))
-* [eForms FAQ](https://docs.ted.europa.eu/home/eforms/FAQ/index.html)
+### eForms
 
-Useful links for authoring mappings:
+* [SDK](https://docs.ted.europa.eu/eforms/0.6.0/) ([all-in-one](https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html))
+* [FAQ](https://docs.ted.europa.eu/home/eforms/FAQ/index.html)
+* [Examples](https://github.com/OP-TED/eForms-SDK/tree/main/examples)
+
+### OCDS
 
 * [OCDS for EU profile](https://standard.open-contracting.org/profiles/eu/latest/en/forms/)
 * [OCDS Extensions Field and Code Search](https://open-contracting.github.io/editor-tools/)

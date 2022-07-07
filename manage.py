@@ -7,6 +7,7 @@ from pathlib import Path
 from textwrap import dedent
 
 import click
+import lxml.html
 import mdformat
 import numpy as np
 import pandas as pd
@@ -418,19 +419,40 @@ def update_with_ted_guidance(filename):
 @click.argument('filename', type=click.Path(exists=True))
 def lint(filename):
     """
-    Lint FILE (validate and format JSON, Markdown).
+    Lint FILE (validate and format XML, JSON, Markdown).
     """
+    head = (
+        '<ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" '
+        'xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" '
+        'xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2" '
+        'xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" '
+        'xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1" '
+        'xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1" '
+        'xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1" '
+        'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
+    )
+    tail = '</ContractNotice>'
+
     with open(filename) as f:
         fields = yaml.safe_load(f)
 
     for field in fields:
         field['eForms guidance'] = mdformat.text(field['eForms guidance']).rstrip()
+
+        eforms_example = field['eForms example']
+        if eforms_example and eforms_example != 'N/A':
+            try:
+                element = lxml.etree.fromstring(f'{head}{eforms_example}{tail}')
+                field['eForms example'] = lxml.etree.tostring(element).decode()[len(head):-len(tail)]
+            except lxml.etree.XMLSyntaxError as e:
+                click.echo(f'XML is invalid: {e}: {eforms_example}')
+
         ocds_example = field['OCDS example']
         if ocds_example and ocds_example != 'N/A':
             try:
                 field['OCDS example'] = json.dumps(json.loads(ocds_example), separators=(',', ':'))
-            except json.decoder.JSONDecodeError:
-                click.echo(f'JSON is invalid: {ocds_example}')
+            except json.decoder.JSONDecodeError as e:
+                click.echo(f'JSON is invalid: {e}: {ocds_example}')
 
     write_yaml_file(filename, fields)
 
