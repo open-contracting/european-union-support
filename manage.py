@@ -158,8 +158,9 @@ def write(filename, df, overwrite=None, explode=None, compare=None, how='left', 
         column_order.append(column)
 
     with open(filename, 'w') as f:
+        data = [row.dropna().to_dict() for label, row in df[column_order].iterrows()]
         # Make it easier to see indentation. Avoid line wrapping. sort_keys is True by default.
-        yaml.dump(df[column_order].to_dict(orient='records'), f, Dumper=Dumper, indent=4, width=1000, sort_keys=False)
+        yaml.dump(data, f, Dumper=Dumper, indent=4, width=1000, sort_keys=False)
     click.echo(f'{df.shape[0]} rows written')
 
     return df_unmerged
