@@ -229,12 +229,8 @@ def update_with_sdk(filename):
     with (sourcedir / 'fields.json').open() as f:
         df = pd.DataFrame.from_dict(json.load(f)['fields'])
 
-    # Remove or abbreviate columns that do not assist the mapping process and that lengthen the JSON file.
-    #
-    # * xpathRelative: Contained in xpathAbsolute.
-    # * maxLength: The only fields with a maxLength less than 400 are identifiers, phone numbers and percentages.
-    # * forbidden: It isn't informative to know which forms a field can't appear on.
-    drop = ['xpathRelative', 'maxLength', 'forbidden']
+    # Remove or abbreviate columns that do not assist the mapping process and that lengthen the JSON file. See README.
+    drop = ['xpathRelative', 'legalType', 'maxLength', 'forbidden']
     df['mandatory'] = df['mandatory'].notna()
     # Simplify these columns if `severity` is the only other top-level key.
     for column in ('repeatable', 'pattern'):
