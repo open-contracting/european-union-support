@@ -33,12 +33,8 @@ parentNodeId | eForms SDK | Identifier of the node (XML element) that contains t
 name | eForms SDK | Short name of the field. |
 btId | eForms SDK | Identifier of the business term to which the field corresponds. |
 xpathAbsolute | eForms SDK | Location of the field in an XML notice, as an absolute XPath. | Ensure `eForms example` matches.
-xpathRelative | eForms SDK | Location of the field in an XML notice, relative to its parent node. | Removed. Redundant with `xpathAbsolute`.
 type | eForms SDK | Technical data type of the field. |
-legalType | eForms SDK | Data type of the business term, as indicated in the eForms Regulation. | Removed. Redundant with `type`.
-maxLength | eForms SDK | Maximum number of characters allowed in the value of the field, optional. | Removed. The only fields with a maxLength less than 400 are identifiers, phone numbers and percentages.
 [repeatable](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_repeatable) | eForms SDK | Indicates if the field can appear more than once inside its container. | Simplified to the boolean (removed `severity`).
-[forbidden](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_forbidden) | eForms SDK | Indicates whether or not the field can be used in specific notice types. | Removed. It isn't informative to know which forms a field can't appear on.
 [mandatory](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_mandatory) | eForms SDK | Indicates whether or not a field is required to have a value. | Simplified to the boolean (`true` if required on one or more forms).
 [codeList](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_codelist) | eForms SDK | Identifier of the code list from which the field value must belong. Applicable only for fields of type "code" or "internal-code" | Simplified to the codelist (removed `severity`, `value.type`, `value.parentId`).
 [pattern](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_pattern) | eForms SDK | Indicates that the value of the field must match a specific regular expression pattern. | Simplied to the pattern (removed `severity`).
@@ -48,6 +44,17 @@ TED Xpath | [SIMAP](https://simap.ted.europa.eu/en_GB/web/simap/eforms) (13/04/2
 TED guidance | EU profile | The original guidance for the TED XPaths. |
 
 `eForms guidance`, `eForms example`, `OCDS example`, and `sdk` are manually edited as described below.
+
+### Removed metadata
+
+The following keys from the fields metadata are removed.
+
+Key | Description | Reason
+-- | -- | --
+xpathRelative | Location of the field in an XML notice, relative to its parent node. | Substring of `xpathAbsolute`.
+legalType | Data type of the business term, as indicated in the eForms Regulation. | Redundant with `type`.
+maxLength | Maximum number of characters allowed in the value of the field, optional. | The only fields with a maxLength less than 400 are identifiers, phone numbers and percentages.
+[forbidden](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_forbidden) | Indicates whether or not the field can be used in specific notice types. | It isn't informative to know which forms a field can't appear on.
 
 The correspondence between `legalType` and `type` is:
 
