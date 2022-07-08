@@ -32,14 +32,14 @@ id | [eForms SDK](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_fie
 parentNodeId | eForms SDK | Identifier of the node (XML element) that contains the field. |
 name | eForms SDK | Short name of the field. |
 btId | eForms SDK | Identifier of the business term to which the field corresponds. |
-xpathAbsolute | eForms SDK | Location of the field in an XML notice, as an absolute XPath. | Ensure `eForms example` matches.
-type | eForms SDK | Technical data type of the field. |
+xpathAbsolute | eForms SDK | Location of the field in an XML notice, as an absolute XPath. | Should appear in the `eForms example`.
+type | eForms SDK | Technical data type of the field. | Should match the OCDS field's type.
 [repeatable](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_repeatable) | eForms SDK | Indicates if the field can appear more than once inside its container. | Simplified to the boolean (removed `severity`).
 [mandatory](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_mandatory) | eForms SDK | Indicates whether or not a field is required to have a value. | Simplified to the boolean (`true` if required on one or more forms).
 [codeList](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_codelist) | eForms SDK | Identifier of the code list from which the field value must belong. Applicable only for fields of type "code" or "internal-code" | Simplified to the codelist (removed `severity`, `value.type`, `value.parentId`).
 [pattern](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_pattern) | eForms SDK | Indicates that the value of the field must match a specific regular expression pattern. | Simplied to the pattern (removed `severity`).
-Description | [2019 regulation annex](https://ec.europa.eu/growth/single-market/public-procurement/digital-procurement/eforms_en) | The description of the business term. |
-Business groups | 2019 regulation annex | The business groups to which the business term belongs, from top down. |
+Description | [Regulation annex](https://ec.europa.eu/growth/single-market/public-procurement/digital-procurement/eforms_en) | The description of the business term. |
+Business groups | Regulation annex | The business groups to which the business term belongs, from top down. |
 TED Xpath | [SIMAP](https://simap.ted.europa.eu/en_GB/web/simap/eforms) (13/04/2022) | The TED XPaths matching the eForms field. |
 TED guidance | EU profile | The original guidance for the TED XPaths. |
 
