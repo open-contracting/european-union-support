@@ -22,7 +22,7 @@ Add the guidance for TED XML:
 
     ./manage.py update-with-ted-guidance output/mapping/eforms/guidance.yaml
 
-Note: This last command reports unmerged rows. As such, it's possible that some TED guidance is missing from the YAML file.
+Note: This last command reports unmerged rows. As such, it's possible that some [TED guidance](https://standard.open-contracting.org/profiles/eu/latest/en/forms/) is missing from the YAML file.
 
 ### Data dictionary
 
@@ -40,7 +40,7 @@ maxLength | eForms SDK | Maximum number of characters allowed in the value of th
 [repeatable](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_repeatable) | eForms SDK | Indicates if the field can appear more than once inside its container. | Simplified to the boolean (removed `severity`).
 [forbidden](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_forbidden) | eForms SDK | Indicates whether or not the field can be used in specific notice types. | Removed.
 [mandatory](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_mandatory) | eForms SDK | Indicates whether or not a field is required to have a value. | Simplified to the boolean (`true` if required on one or more forms).
-[codeList](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_codelist) | eForms SDK | Identifier of the code list from which the field value must belong. Applicable only for fields of type "code" or "internal-code" |
+[codeList](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_codelist) | eForms SDK | Identifier of the code list from which the field value must belong. Applicable only for fields of type "code" or "internal-code" | Simplified to the codelist (removed `severity`, `value.type`, `value.parentId`).
 [pattern](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_pattern) | eForms SDK | Indicates that the value of the field must match a specific regular expression pattern. | Simplied to the pattern (removed `severity`).
 Description | [2019 regulation annex](https://ec.europa.eu/growth/single-market/public-procurement/digital-procurement/eforms_en) | The description of the business term. |
 Business groups | 2019 regulation annex | The business groups to which the business term belongs, from top down. |
@@ -60,6 +60,7 @@ Manually fill in in `eForms guidance`, `eForms example`, `OCDS example` and `sdk
 
 When writing the eForms guidance:
 
+* Check for [open issues](https://github.com/open-contracting/european-union-support/issues) for the business term
 * If the eForms field uses a codelist:
 
   1. Find the authority table in [EU Vocabularies](https://op.europa.eu/en/web/eu-vocabularies/authority-tables)

@@ -236,9 +236,14 @@ def update_with_sdk(filename):
     # * forbidden: It isn't informative to know which forms a field can't appear on.
     drop = ['xpathRelative', 'maxLength', 'forbidden']
     df['mandatory'] = df['mandatory'].notna()
-    # Simplify these columns if `severity` is the only other key.
+    # Simplify these columns if `severity` is the only other top-level key.
     for column in ('repeatable', 'pattern'):
         df[column] = [cell['value'] if isinstance(cell, dict) and len(cell) == 2 else cell for cell in df[column]]
+    # Simplify `codelist` as above, and if `type` and `parentId` (optional) are the only other second-level keys.
+    df['codeList'] = [
+        cell['value']['id'] if isinstance(cell, dict) and len(cell) == 2 and 2 <= len(cell['value']) <= 3 else cell
+        for cell in df['codeList']
+    ]
 
     write(filename, df, df.columns, how='outer', drop=drop, on='id', validate='1:1')
 
