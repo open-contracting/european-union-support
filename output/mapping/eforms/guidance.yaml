@@ -1244,6 +1244,7 @@
     btId: BT-137
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cbc:ID
     type: id
+    idScheme: LOT
     repeatable: false
     mandatory: true
     pattern: ^LOT-\d{4}$
@@ -1264,7 +1265,6 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/OBJECT_DESCR/LOT_NO
     TED guidance:
     - If not set, let *Lot No* be '1'. Map to the lot's `.id` (string), map to the item's `.id` (string), and map to the item's `.relatedLot` (string).
-    idScheme: LOT
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -1275,13 +1275,13 @@
     btId: BT-137
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cbc:ID
     type: id
+    idScheme: GLO
     repeatable: false
     mandatory: false
     pattern: ^GLO-\d{4}$
     Description: The identifier of a lot. In case of PINs used only for information, the identifier of a part of the notice that may later become a lot or a self-standing procedure. The information in the purpose section refers to this lot or part.
     Business groups:
         BG-2: Purpose
-    idScheme: GLO
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -1292,6 +1292,7 @@
     btId: BT-137
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cbc:ID
     type: id
+    idScheme: PAR
     repeatable: false
     mandatory: true
     pattern: ^PAR-\d{4}$
@@ -1307,7 +1308,6 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/OBJECT_CONTRACT/OBJECT_DESCR/LOT_NO
     TED guidance:
     - If not set, let *Lot No* be '1'. Map to the lot's `.id` (string), map to the item's `.id` (string), and map to the item's `.relatedLot` (string).
-    idScheme: PAR
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -1318,6 +1318,8 @@
     btId: BT-13713
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:TenderLot/cbc:ID
     type: id-ref
+    idSchemes:
+    - LOT
     repeatable: false
     mandatory: true
     pattern: ^LOT-\d{4}$
@@ -1335,8 +1337,6 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/AWARD_CONTRACT/LOT_NO
     TED guidance:
     - If not set, let *Lot No* be '1'. Add to the award's `.relatedLots` (string).
-    idSchemes:
-    - LOT
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -1347,6 +1347,9 @@
     btId: BT-13714
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:TenderLot/cbc:ID
     type: id-ref
+    idSchemes:
+    - LOT
+    - GLO
     repeatable: false
     mandatory: true
     pattern: ^(LOT|GLO)-\d{4}$
@@ -1354,9 +1357,6 @@
     Business groups:
         BG-7: Notice Result
         BG-320: Tender
-    idSchemes:
-    - LOT
-    - GLO
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -1383,6 +1383,8 @@
     btId: BT-1375
     xpathAbsolute: /*/cac:TenderingTerms/cac:LotDistribution/cac:LotsGroup/cac:ProcurementProjectLotReference/cbc:ID[@schemeName='Lot']
     type: id-ref
+    idSchemes:
+    - LOT
     repeatable: true
     mandatory: false
     pattern: ^LOT-\d{4}$
@@ -1390,8 +1392,6 @@
     Business groups:
         BG-6: Procedure
         BG-330: Group Lot Award
-    idSchemes:
-    - LOT
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -6135,6 +6135,8 @@
     btId: BT-3202
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:SettledContract/efac:LotTender/cbc:ID
     type: id-ref
+    idSchemes:
+    - TEN
     repeatable: true
     mandatory: true
     pattern: ^TEN-\d{4}$
@@ -6142,8 +6144,6 @@
     Business groups:
         BG-7: Notice Result
         BG-310: Contract
-    idSchemes:
-    - TEN
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -6179,6 +6179,8 @@
     btId: BT-330
     xpathAbsolute: /*/cac:TenderingTerms/cac:LotDistribution/cac:LotsGroup/cbc:LotsGroupID
     type: id-ref
+    idSchemes:
+    - GLO
     repeatable: true
     mandatory: false
     pattern: ^GLO-\d{4}$
@@ -6186,8 +6188,6 @@
     Business groups:
         BG-6: Procedure
         BG-330: Group Lot Award
-    idSchemes:
-    - GLO
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -8865,6 +8865,8 @@
     btId: BT-556
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:GroupFramework/efac:TenderLot/cbc:ID
     type: id-ref
+    idSchemes:
+    - GLO
     repeatable: false
     mandatory: false
     pattern: ^GLO-\d{4}$
@@ -8872,8 +8874,6 @@
     Business groups:
         BG-7: Notice Result
         BG-556: Group Framework Value
-    idSchemes:
-    - GLO
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12499,10 +12499,10 @@
     btId: OPT-200
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID
     type: id
+    idScheme: ORG
     repeatable: true
     mandatory: true
     pattern: ^ORG-\d{4}$
-    idScheme: ORG
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12513,10 +12513,10 @@
     btId: OPT-201
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:Organization/efac:TouchPoint/cac:PartyIdentification/cbc:ID
     type: id
+    idScheme: TPO
     repeatable: false
     mandatory: true
     pattern: ^TPO-\d{4}$
-    idScheme: TPO
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12527,10 +12527,10 @@
     btId: OPT-202
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:UltimateBeneficialOwner/cbc:ID
     type: id
+    idScheme: UBO
     repeatable: true
     mandatory: true
     pattern: ^UBO-\d{4}$
-    idScheme: UBO
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12541,10 +12541,10 @@
     btId: OPT-210
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:TenderingParty/cbc:ID
     type: id
+    idScheme: TPA
     repeatable: false
     mandatory: true
     pattern: ^TPA-\d{4}$
-    idScheme: TPA
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12555,11 +12555,11 @@
     btId: OPT-300
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:SettledContract/cac:SignatoryParty/cac:PartyIdentification/cbc:ID
     type: id-ref
+    idSchemes:
+    - ORG
     repeatable: true
     mandatory: false
     pattern: ^ORG-\d{4}$
-    idSchemes:
-    - ORG
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12570,10 +12570,10 @@
     btId: OPT-300
     xpathAbsolute: /*/cac:ContractingParty/cac:Party/cac:PartyIdentification/cbc:ID
     type: id-ref
-    repeatable: true
-    mandatory: true
     idSchemes:
     - ORG
+    repeatable: true
+    mandatory: true
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12584,11 +12584,11 @@
     btId: OPT-300
     xpathAbsolute: /*/cac:ContractingParty/cac:Party/cac:ServiceProviderParty/cac:Party/cac:PartyIdentification/cbc:ID
     type: id-ref
+    idSchemes:
+    - ORG
     repeatable: true
     mandatory: false
     pattern: ^ORG-\d{4}$
-    idSchemes:
-    - ORG
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12599,11 +12599,11 @@
     btId: OPT-300
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:TenderingParty/efac:Tenderer/cbc:ID
     type: id-ref
+    idSchemes:
+    - ORG
     repeatable: true
     mandatory: true
     pattern: ^ORG-\d{4}$
-    idSchemes:
-    - ORG
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12614,12 +12614,12 @@
     btId: OPT-301
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AdditionalInformationParty/cac:PartyIdentification/cbc:ID
     type: id-ref
-    repeatable: false
-    mandatory: true
-    pattern: ^(ORG|TPO)-\d{4}$
     idSchemes:
     - ORG
     - TPO
+    repeatable: false
+    mandatory: true
+    pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12630,12 +12630,12 @@
     btId: OPT-301
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:DocumentProviderParty/cac:PartyIdentification/cbc:ID
     type: id-ref
-    repeatable: false
-    mandatory: false
-    pattern: ^(ORG|TPO)-\d{4}$
     idSchemes:
     - ORG
     - TPO
+    repeatable: false
+    mandatory: false
+    pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12646,12 +12646,12 @@
     btId: OPT-301
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:EmploymentLegislationDocumentReference/cac:IssuerParty/cac:PartyIdentification/cbc:ID
     type: id-ref
-    repeatable: false
-    mandatory: true
-    pattern: ^(ORG|TPO)-\d{4}$
     idSchemes:
     - ORG
     - TPO
+    repeatable: false
+    mandatory: true
+    pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12662,12 +12662,12 @@
     btId: OPT-301
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:EnvironmentalLegislationDocumentReference/cac:IssuerParty/cac:PartyIdentification/cbc:ID
     type: id-ref
-    repeatable: false
-    mandatory: true
-    pattern: ^(ORG|TPO)-\d{4}$
     idSchemes:
     - ORG
     - TPO
+    repeatable: false
+    mandatory: true
+    pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12678,12 +12678,12 @@
     btId: OPT-301
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:FiscalLegislationDocumentReference/cac:IssuerParty/cac:PartyIdentification/cbc:ID
     type: id-ref
-    repeatable: false
-    mandatory: true
-    pattern: ^(ORG|TPO)-\d{4}$
     idSchemes:
     - ORG
     - TPO
+    repeatable: false
+    mandatory: true
+    pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12694,12 +12694,12 @@
     btId: OPT-301
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AppealTerms/cac:MediationParty/cac:PartyIdentification/cbc:ID
     type: id-ref
-    repeatable: false
-    mandatory: true
-    pattern: ^(ORG|TPO)-\d{4}$
     idSchemes:
     - ORG
     - TPO
+    repeatable: false
+    mandatory: true
+    pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12710,12 +12710,12 @@
     btId: OPT-301
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AppealTerms/cac:AppealInformationParty/cac:PartyIdentification/cbc:ID
     type: id-ref
-    repeatable: false
-    mandatory: true
-    pattern: ^(ORG|TPO)-\d{4}$
     idSchemes:
     - ORG
     - TPO
+    repeatable: false
+    mandatory: true
+    pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12726,12 +12726,12 @@
     btId: OPT-301
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AppealTerms/cac:AppealReceiverParty/cac:PartyIdentification/cbc:ID
     type: id-ref
-    repeatable: false
-    mandatory: true
-    pattern: ^(ORG|TPO)-\d{4}$
     idSchemes:
     - ORG
     - TPO
+    repeatable: false
+    mandatory: true
+    pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12742,12 +12742,12 @@
     btId: OPT-301
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TenderEvaluationParty/cac:PartyIdentification/cbc:ID
     type: id-ref
-    repeatable: false
-    mandatory: false
-    pattern: ^(ORG|TPO)-\d{4}$
     idSchemes:
     - ORG
     - TPO
+    repeatable: false
+    mandatory: false
+    pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12758,12 +12758,12 @@
     btId: OPT-301
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TenderRecipientParty/cac:PartyIdentification/cbc:ID
     type: id-ref
-    repeatable: false
-    mandatory: true
-    pattern: ^(ORG|TPO)-\d{4}$
     idSchemes:
     - ORG
     - TPO
+    repeatable: false
+    mandatory: true
+    pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12774,11 +12774,11 @@
     btId: OPT-301
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/cac:FinancingParty/cac:PartyIdentification/cbc:ID
     type: id-ref
+    idSchemes:
+    - ORG
     repeatable: true
     mandatory: false
     pattern: ^ORG-\d{4}$
-    idSchemes:
-    - ORG
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12789,11 +12789,11 @@
     btId: OPT-301
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/cac:PayerParty/cac:PartyIdentification/cbc:ID
     type: id-ref
+    idSchemes:
+    - ORG
     repeatable: true
     mandatory: false
     pattern: ^ORG-\d{4}$
-    idSchemes:
-    - ORG
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12804,12 +12804,12 @@
     btId: OPT-301
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:AdditionalInformationParty/cac:PartyIdentification/cbc:ID
     type: id-ref
-    repeatable: false
-    mandatory: true
-    pattern: ^(ORG|TPO)-\d{4}$
     idSchemes:
     - ORG
     - TPO
+    repeatable: false
+    mandatory: true
+    pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12820,12 +12820,12 @@
     btId: OPT-301
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:DocumentProviderParty/cac:PartyIdentification/cbc:ID
     type: id-ref
-    repeatable: false
-    mandatory: false
-    pattern: ^(ORG|TPO)-\d{4}$
     idSchemes:
     - ORG
     - TPO
+    repeatable: false
+    mandatory: false
+    pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12836,12 +12836,12 @@
     btId: OPT-301
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:EmploymentLegislationDocumentReference/cac:IssuerParty/cac:PartyIdentification/cbc:ID
     type: id-ref
-    repeatable: false
-    mandatory: true
-    pattern: ^(ORG|TPO)-\d{4}$
     idSchemes:
     - ORG
     - TPO
+    repeatable: false
+    mandatory: true
+    pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12852,12 +12852,12 @@
     btId: OPT-301
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:EnvironmentalLegislationDocumentReference/cac:IssuerParty/cac:PartyIdentification/cbc:ID
     type: id-ref
-    repeatable: false
-    mandatory: true
-    pattern: ^(ORG|TPO)-\d{4}$
     idSchemes:
     - ORG
     - TPO
+    repeatable: false
+    mandatory: true
+    pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12868,12 +12868,12 @@
     btId: OPT-301
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:FiscalLegislationDocumentReference/cac:IssuerParty/cac:PartyIdentification/cbc:ID
     type: id-ref
-    repeatable: false
-    mandatory: true
-    pattern: ^(ORG|TPO)-\d{4}$
     idSchemes:
     - ORG
     - TPO
+    repeatable: false
+    mandatory: true
+    pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12884,12 +12884,12 @@
     btId: OPT-301
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:AppealTerms/cac:MediationParty/cac:PartyIdentification/cbc:ID
     type: id-ref
-    repeatable: false
-    mandatory: true
-    pattern: ^(ORG|TPO)-\d{4}$
     idSchemes:
     - ORG
     - TPO
+    repeatable: false
+    mandatory: true
+    pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12900,12 +12900,12 @@
     btId: OPT-301
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:AppealTerms/cac:AppealInformationParty/cac:PartyIdentification/cbc:ID
     type: id-ref
-    repeatable: false
-    mandatory: true
-    pattern: ^(ORG|TPO)-\d{4}$
     idSchemes:
     - ORG
     - TPO
+    repeatable: false
+    mandatory: true
+    pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12916,12 +12916,12 @@
     btId: OPT-301
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:AppealTerms/cac:AppealReceiverParty/cac:PartyIdentification/cbc:ID
     type: id-ref
-    repeatable: false
-    mandatory: true
-    pattern: ^(ORG|TPO)-\d{4}$
     idSchemes:
     - ORG
     - TPO
+    repeatable: false
+    mandatory: true
+    pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12932,12 +12932,12 @@
     btId: OPT-301
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:TenderEvaluationParty/cac:PartyIdentification/cbc:ID
     type: id-ref
-    repeatable: false
-    mandatory: false
-    pattern: ^(ORG|TPO)-\d{4}$
     idSchemes:
     - ORG
     - TPO
+    repeatable: false
+    mandatory: false
+    pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12948,12 +12948,12 @@
     btId: OPT-301
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:TenderRecipientParty/cac:PartyIdentification/cbc:ID
     type: id-ref
-    repeatable: false
-    mandatory: true
-    pattern: ^(ORG|TPO)-\d{4}$
     idSchemes:
     - ORG
     - TPO
+    repeatable: false
+    mandatory: true
+    pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12990,11 +12990,11 @@
     btId: OPT-301
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:TenderingParty/efac:SubContractor/efac:MainContractor/cbc:ID
     type: id-ref
+    idSchemes:
+    - ORG
     repeatable: true
     mandatory: true
     pattern: ^ORG-\d{4}$
-    idSchemes:
-    - ORG
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13005,11 +13005,11 @@
     btId: OPT-301
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:TenderingParty/efac:SubContractor/cbc:ID
     type: id-ref
+    idSchemes:
+    - ORG
     repeatable: true
     mandatory: false
     pattern: ^ORG-\d{4}$
-    idSchemes:
-    - ORG
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13020,11 +13020,11 @@
     btId: OPT-302
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:Organization/efac:UltimateBeneficialOwner/cbc:ID
     type: id-ref
+    idSchemes:
+    - UBO
     repeatable: true
     mandatory: true
     pattern: ^UBO-\d{4}$
-    idSchemes:
-    - UBO
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13035,11 +13035,11 @@
     btId: OPT-310
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:TenderingParty/cbc:ID
     type: id-ref
+    idSchemes:
+    - TPA
     repeatable: false
     mandatory: true
     pattern: ^TPA-\d{4}$
-    idSchemes:
-    - TPA
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13050,11 +13050,11 @@
     btId: OPT-315
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:SettledContract/cbc:ID
     type: id-ref
+    idSchemes:
+    - CON
     repeatable: true
     mandatory: true
     pattern: ^CON-\d{4}$
-    idSchemes:
-    - CON
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13065,10 +13065,10 @@
     btId: OPT-316
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:SettledContract/cbc:ID
     type: id
+    idScheme: CON
     repeatable: false
     mandatory: true
     pattern: ^CON-\d{4}$
-    idScheme: CON
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13079,11 +13079,11 @@
     btId: OPT-320
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:LotTender/cbc:ID
     type: id-ref
+    idSchemes:
+    - TEN
     repeatable: true
     mandatory: true
     pattern: ^TEN-\d{4}$
-    idSchemes:
-    - TEN
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13094,10 +13094,10 @@
     btId: OPT-321
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/cbc:ID
     type: id
+    idScheme: TEN
     repeatable: false
     mandatory: true
     pattern: ^TEN-\d{4}$
-    idScheme: TEN
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''

@@ -89,6 +89,8 @@ def get_column_order(df, drop=()):
         'btId',
         'xpathAbsolute',
         'type',
+        'idScheme',
+        'idSchemes',
         'repeatable',
         'mandatory',
         'codeList',
