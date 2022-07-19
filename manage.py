@@ -89,7 +89,6 @@ def get_column_order(df, drop=()):
         'btId',
         'xpathAbsolute',
         'type',
-        'legalType',
         'repeatable',
         'mandatory',
         'codeList',
@@ -437,7 +436,7 @@ def update_with_ted_guidance(filename):
 @click.argument('filename', type=click.Path(exists=True))
 def lint(filename):
     """
-    Lint FILE (validate and format XML, JSON and Markdown, and report unrecognized OCDS fields).
+    Lint FILE (validate and format XML, JSON and Markdown, report unrecognized OCDS fields, and update eForms SDK URLs).
     """
     # From https://github.com/OP-TED/eForms-SDK/tree/main/examples
     # See https://docs.ted.europa.eu/eforms/0.7.0/schema/schemas.html
@@ -482,6 +481,7 @@ def lint(filename):
 
         # Update and check SDK URLs.
         if field['sdk']:
+            # Change this value to the new SDK version.
             field['sdk'] = sdk_regex.sub('/0.7.0/', field['sdk'])
 
             parts = urlsplit(field['sdk'])

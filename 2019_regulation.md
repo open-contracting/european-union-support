@@ -34,6 +34,8 @@ name | eForms SDK | Short name of the field. |
 btId | eForms SDK | Identifier of the business term to which the field corresponds. |
 xpathAbsolute | eForms SDK | Location of the field in an XML notice, as an absolute XPath. | Should appear in the `eForms example`.
 type | eForms SDK | Technical data type of the field. | Should match the OCDS field's type.
+idScheme | eForms SDK | Indicates the identifier scheme for this `id` field.
+idSchemes | eForms SDK | Indicates the identifier schemes for this `id-ref` field.
 [repeatable](https://docs.ted.europa.eu/eforms/0.7.0/fields/index.html#_dynamic_properties) | eForms SDK | Indicates if the field can appear more than once inside its container. | Simplified to the boolean (removed `severity`).
 mandatory | eForms SDK | Indicates whether or not a field is required to have a value. | Simplified to the boolean (`true` if required on one or more forms).
 codeList | eForms SDK | Identifier of the code list from which the field value must belong. Applicable only for fields of type "code" or "internal-code" | Simplified to the codelist (removed `severity`, `value.type`, `value.parentId`).
