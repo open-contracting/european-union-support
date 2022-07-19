@@ -6,6 +6,7 @@ import re
 from copy import deepcopy
 from pathlib import Path
 from textwrap import dedent
+from urllib.parse import urlsplit
 
 import click
 import json_merge_patch
@@ -302,26 +303,26 @@ def update_with_annex(filename):
 
     report_unmerged_rows(df, ['ID', 'Name'], ~df['ID'].isin({
         # Removed indicators in favor of corresponding scalars.
-        # https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#extensionsSection
+        # https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#extensionsSection
         'BT-53',  # Options (BT-54 Options Description)
-        # https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#toolNameSection
+        # https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#toolNameSection
         'BT-724',  # Tool Atypical (BT-124 Tool Atypical URL)
-        # https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html#_footnotedef_21
+        # https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#_footnotedef_21
         'BT-778',  # Framework Maximum Participants (BT-113 Framework Maximum Participants Number)
 
         # See OPT-155 and OPT-156.
-        # https://docs.ted.europa.eu/eforms/0.6.0/schema/competition-results.html#lotResultComponentsTable
+        # https://docs.ted.europa.eu/eforms/0.7.0/schema/competition-results.html#lotResultComponentsTable
         'BT-715',
         'BT-725',
         'BT-716',
 
         # See Table 3.
-        # https://docs.ted.europa.eu/eforms/0.6.0/schema/parties.html#mappingOrganizationBTsSchemaComponentsTable
+        # https://docs.ted.europa.eu/eforms/0.7.0/schema/parties.html#mappingOrganizationBTsSchemaComponentsTable
         'BT-08',
         'BT-770',
 
         # See Table 4 (also includes BT-330 and BT-1375).
-        # https://docs.ted.europa.eu/eforms/0.6.0/schema/identifiers.html#pointlessDueToDesignSection
+        # https://docs.ted.europa.eu/eforms/0.7.0/schema/identifiers.html#pointlessDueToDesignSection
         'BT-557',
         'BT-1371',
         'BT-1372',
@@ -439,7 +440,7 @@ def lint(filename):
     Lint FILE (validate and format XML, JSON and Markdown, and report unrecognized OCDS fields).
     """
     # From https://github.com/OP-TED/eForms-SDK/tree/main/examples
-    # See https://docs.ted.europa.eu/eforms/0.6.0/schema/schemas.html
+    # See https://docs.ted.europa.eu/eforms/0.7.0/schema/schemas.html
     head = (
         '<ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" '
         'xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" '
@@ -473,11 +474,29 @@ def lint(filename):
     set_additional_properties_false(schema)
     format_checker = FormatChecker()
 
+    sdk_regex = re.compile(r'/\d+\.\d+\.\d+/')
+    sdk_documents = {}
+
     for field in fields:
         identifier = field['id']
 
+        # Update and check SDK URLs.
+        if field['sdk']:
+            field['sdk'] = sdk_regex.sub('/0.7.0/', field['sdk'])
+
+            parts = urlsplit(field['sdk'])
+            fragment = parts.fragment
+            base_url = parts._replace(fragment='').geturl()
+            if base_url not in sdk_documents:
+                response = requests.get(base_url)
+                response.raise_for_status()
+                sdk_documents[base_url] = lxml.html.fromstring(response.content)
+            assert sdk_documents[base_url].xpath(f'//@id="{fragment}"'), f'{identifier}: anchor not found: {fragment}'
+
+        # Format Markdown.
         field['eForms guidance'] = mdformat.text(field['eForms guidance']).rstrip()
 
+        # Format XML.
         eforms_example = field['eForms example']
         if eforms_example and eforms_example != 'N/A':
             try:
@@ -488,6 +507,7 @@ def lint(filename):
             except lxml.etree.XMLSyntaxError as e:
                 click.echo(f'{identifier}: XML is invalid: {e}: {eforms_example}')
 
+        # Format and validate JSON.
         ocds_example = field['OCDS example']
         if ocds_example and ocds_example != 'N/A':
             try:

@@ -6,7 +6,7 @@
 
 ## Create the mapping file
 
-Start with the [fields](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html) identified by the eForms SDK (creates the file if it doesn't exist):
+Start with the [fields](https://docs.ted.europa.eu/eforms/0.7.0/fields/index.html) identified by the eForms SDK (creates the file if it doesn't exist):
 
     ./manage.py update-with-sdk output/mapping/eforms/guidance.yaml
 
@@ -28,16 +28,16 @@ Note: This last command reports unmerged rows. As such, it's possible that some 
 
 Key | Source | Description | Notes
 -- | -- | -- | --
-id | [eForms SDK](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_field_properties) | Identifier of the field. |
+id | [eForms SDK](https://docs.ted.europa.eu/eforms/0.7.0/fields/index.html#_field_properties) | Identifier of the field. |
 parentNodeId | eForms SDK | Identifier of the node (XML element) that contains the field. |
 name | eForms SDK | Short name of the field. |
 btId | eForms SDK | Identifier of the business term to which the field corresponds. |
 xpathAbsolute | eForms SDK | Location of the field in an XML notice, as an absolute XPath. | Should appear in the `eForms example`.
 type | eForms SDK | Technical data type of the field. | Should match the OCDS field's type.
-[repeatable](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_repeatable) | eForms SDK | Indicates if the field can appear more than once inside its container. | Simplified to the boolean (removed `severity`).
-[mandatory](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_mandatory) | eForms SDK | Indicates whether or not a field is required to have a value. | Simplified to the boolean (`true` if required on one or more forms).
-[codeList](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_codelist) | eForms SDK | Identifier of the code list from which the field value must belong. Applicable only for fields of type "code" or "internal-code" | Simplified to the codelist (removed `severity`, `value.type`, `value.parentId`).
-[pattern](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_pattern) | eForms SDK | Indicates that the value of the field must match a specific regular expression pattern. | Simplied to the pattern (removed `severity`).
+[repeatable](https://docs.ted.europa.eu/eforms/0.7.0/fields/index.html#_dynamic_properties) | eForms SDK | Indicates if the field can appear more than once inside its container. | Simplified to the boolean (removed `severity`).
+mandatory | eForms SDK | Indicates whether or not a field is required to have a value. | Simplified to the boolean (`true` if required on one or more forms).
+codeList | eForms SDK | Identifier of the code list from which the field value must belong. Applicable only for fields of type "code" or "internal-code" | Simplified to the codelist (removed `severity`, `value.type`, `value.parentId`).
+pattern | eForms SDK | Indicates that the value of the field must match a specific regular expression pattern. | Simplied to the pattern (removed `severity`).
 Description | [Regulation annex](https://ec.europa.eu/growth/single-market/public-procurement/digital-procurement/eforms_en) | The description of the business term. |
 Business groups | Regulation annex | The business groups to which the business term belongs, from top down. |
 TED Xpath | [SIMAP](https://simap.ted.europa.eu/en_GB/web/simap/eforms) (13/04/2022) | The TED XPaths matching the eForms field. |
@@ -54,7 +54,7 @@ Key | Description | Reason
 xpathRelative | Location of the field in an XML notice, relative to its parent node. | Substring of `xpathAbsolute`.
 legalType | Data type of the business term, as indicated in the eForms Regulation. | Redundant with `type`.
 maxLength | Maximum number of characters allowed in the value of the field, optional. | The only fields with a maxLength less than 400 are identifiers, phone numbers and percentages.
-[forbidden](https://docs.ted.europa.eu/eforms/0.6.0/fields/index.html#_forbidden) | Indicates whether or not the field can be used in specific notice types. | It isn't informative to know which forms a field can't appear on.
+forbidden | Indicates whether or not the field can be used in specific notice types. | It isn't informative to know which forms a field can't appear on.
 
 The correspondence between `legalType` and `type` is:
 
@@ -74,7 +74,7 @@ The correspondence between `legalType` and `type` is:
 
 Manually fill in in `eForms guidance`, `eForms example`, `OCDS example` and `sdk`.
 
-1. Look up the business term in the [eForms SDK](https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html)
+1. Look up the business term in the [eForms SDK](https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html)
 1. Paste the link to the relevant documentation in `sdk`
 1. Copy an abbreviated XML sample to `eForms example`
 1. Write the `eForms guidance` and `OCDS example`
@@ -108,11 +108,11 @@ To update the progress of the guidance for the 2019 regulation, run:
 
 ### eForms
 
-* [SDK](https://docs.ted.europa.eu/eforms/0.6.0/) ([all-in-one](https://docs.ted.europa.eu/eforms/0.6.0/schema/all-in-one.html))
+* [SDK](https://docs.ted.europa.eu/eforms/0.7.0/) ([all-in-one](https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html))
 * [FAQ](https://docs.ted.europa.eu/home/eforms/FAQ/index.html)
 * [Examples](https://github.com/OP-TED/eForms-SDK/tree/main/examples)
 
-The Publications Office has also started work on a [TED XML Data Converter](https://github.com/OP-TED/ted-xml-data-converter). However, as of 2022-07-07, it is incomplete and has not been updated since its first publication on 2022-05-20. Thus, it is not being used as an authoritative source (e.g. it could have been used in the "Add the XPath from TED XML" step).
+The Publications Office has also started work on a [TED XML Data Converter](https://github.com/OP-TED/ted-xml-data-converter). However, as of 2022-07-07, it is incomplete (it covers only F05, F12, F21, F22, F23, F24) and has not been updated since its first publication on 2022-05-20. Thus, it is not being used as an authoritative source (e.g. it could have been used in the "Add the XPath from TED XML" step). It does include a useful table of [XML elements that can't be converted from TED to eForms](https://github.com/OP-TED/ted-xml-data-converter/blob/main/ted-elements-not-convertible.md).
 
 ### OCDS
 
