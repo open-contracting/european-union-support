@@ -6255,7 +6255,7 @@
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/QUANTITY_SCOPE_WORKS_DEFENCE/F16_DIVISION_INTO_LOTS/F16_DIV_INTO_LOT_YES/LOT_PRIOR_INFORMATION/SCHEDULED_DATE_PERIOD/PERIOD_WORK_DATE_STARTING/(MONTHS|DAYS)
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/SCHEDULED_DATE_PERIOD/PERIOD_WORK_DATE_STARTING/MONTHS
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/PERIOD_WORK_DATE_STARTING/(MONTHS|DAYS)
-    eForms guidance: (UNREVIEWED) (REPEAT) If `@unitCode` is set to 'DAY', map to the lot's `.contractPeriod.durationInDays`.\\n\\nIf `@unitCode` is set to 'MONTH', multiply by 30. If `@unitCode` is set to 'YEAR', multiply by 365. In either case, map the result to the lot's `.contractPeriod.durationInDays`. \[https://github.com/open-contracting/european-union-support/issues/58\]
+    eForms guidance: (UNREVIEWED) (REPEAT) If `@unitCode` is set to 'DAY', map to `tender.contractPeriod.durationInDays`.\\n\\nIf `@unitCode` is set to 'MONTH', multiply by 30. If `@unitCode` is set to 'YEAR', multiply by 365. In either case, map the result to `tender.contractPeriod.durationInDays`. \[https://github.com/open-contracting/european-union-support/issues/58\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
