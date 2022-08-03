@@ -541,23 +541,29 @@ def statistics(file):
     Print statistics on the progress of the guidance for the 2019 regulation.
     """
     df = pd.DataFrame.from_records(yaml.safe_load(file))
+    key = 'eForms guidance'
 
     total = df.shape[0]
-    done = df[df['eForms guidance'] != ''].shape[0]
+    done = df[df[key] != ''].shape[0]
+    reviewed = done - df[df[key].str.startswith('(UNREVIEWED)')].shape[0]
     no_ted_guidance = df[df['TED guidance'].isna()].shape[0]
 
     condition = df['mandatory']
-    df_mandatory = df[condition]
-    total_mandatory = df_mandatory.shape[0]
-    done_mandatory = df_mandatory[df_mandatory['eForms guidance'] != ''].shape[0]
-    df_optional = df[~condition]
-    total_optional = df_optional.shape[0]
-    done_optional = df_optional[df_optional['eForms guidance'] != ''].shape[0]
+    df_m = df[condition]
+    total_m = df_m.shape[0]
+    done_m = df_m[df_m[key] != ''].shape[0]
+    reviewed_m = done_m - df_m[df_m[key].str.startswith('(UNREVIEWED)')].shape[0]
+    df_o = df[~condition]
+    total_o = df_o.shape[0]
+    done_o = df_o[df_o[key] != ''].shape[0]
+    reviewed_o = done_o - df_o[df_o[key].str.startswith('(UNREVIEWED)')].shape[0]
 
     click.echo(dedent(f"""\
-    - Fields mapped: {done}/{total} ({done / total:.1%})
-        - Mandatory: {done_mandatory}/{total_mandatory} ({done_mandatory / total_mandatory:.1%})
-        - Optional: {done_optional}/{total_optional} ({done_optional / total_optional:.1%})
+    reviewed/done/total (%reviewed %done)
+
+    - Fields mapped: {reviewed}/{done}/{total} ({reviewed / total:.1%} {done / total:.1%})
+        - Mandatory: {reviewed_m}/{done_m}/{total_m} ({reviewed_m / total_m:.1%} {done_m / total_m:.1%})
+        - Optional: {reviewed_o}/{done_o}/{total_o} ({reviewed_o / total_o:.1%} {done_o / total_o:.1%})
     - Fields without TED guidance: {no_ted_guidance} ({no_ted_guidance / total:.1%})\
     """))  # noqa: E501
 
