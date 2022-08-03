@@ -602,7 +602,7 @@
     - TED_EXPORT/FORM_SECTION/F02_2014/PROCEDURE/RIGHT_CONTRACT_INITIAL_TENDERS
     TED guidance:
     - Set `tender.secondStage.noNegotiationNecessary` to `true`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Set the lot's `.secondStage.noNegotiationNecessary` to `true`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -625,7 +625,7 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/AWARD_CRITERIA_CONTRACT_NOTICE_INFORMATION/IS_ELECTRONIC_AUCTION_USABLE/USE_ELECTRONIC_AUCTION
     TED guidance:
     - Map to `tender.techniques.electronicAuction.description`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.techniques.electronicAuction.description`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -641,7 +641,7 @@
     Description: The internet address of the electronic auction.
     Business groups:
         BG-706: Techniques
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.techniques.electronicAuction.url`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -670,7 +670,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/CONTRACTING_BODY/URL_TOOL
     TED guidance:
     - Map to `tender.communication.atypicalToolUrl`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.communication.atypicalToolUrl`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -693,7 +693,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/CONTRACTING_BODY/URL_TOOL
     TED guidance:
     - Map to `tender.communication.atypicalToolUrl`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the lot's `.communication.atypicalToolUrl`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -717,7 +717,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/PROCEDURE/NOTICE_NUMBER_OJ
     TED guidance:
     - '[Reference a previous publication](../../operations/#reference-a-previous-publication)'
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) [Reference a previous publication](../../operations/#reference-a-previous-publication) \[https://github.com/open-contracting/european-union-support/issues/54\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -733,7 +733,7 @@
     Description: The identifier of a prior information notice or another similar notice related to this notice.
     Business groups:
         BG-125: Previous Planning
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) [Reference a previous publication](../../operations/#reference-a-previous-publication) \[https://github.com/open-contracting/european-union-support/issues/54\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -748,7 +748,7 @@
     Description: The identifier of a part of a prior information notice or another similar notice related to this notice.
     Business groups:
         BG-125: Previous Planning
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) [Reference a previous publication](../../operations/#reference-a-previous-publication), and map to `.lotId`. \[https://github.com/open-contracting/european-union-support/issues/54\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -763,7 +763,7 @@
     Description: The identifier of a part of a prior information notice or another similar notice related to this notice.
     Business groups:
         BG-125: Previous Planning
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) [Reference a previous publication](../../operations/#reference-a-previous-publication), and map to `.lotId`. \[https://github.com/open-contracting/european-union-support/issues/54\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -794,7 +794,7 @@
     - Set `.id` to 'D_PROC_NEGOTIATED_PRIOR_CALL_COMPETITION' and `.description` to 'No tenders or no suitable tenders/requests to participate in response to negotiated procedure with prior publication of a contract notice'
     - Set `.id` to 'D_PROC_OPEN' and `.description` to 'No tenders or no suitable tenders/requests to participate in response to open procedure'
     - Set `.id` to 'D_PROC_RESTRICTED' and `.description` to 'No tenders or no suitable tenders/requests to participate in response to restricted procedure'
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) [Reference a previous publication](../../operations/#reference-a-previous-publication). \[https://github.com/open-contracting/european-union-support/issues/77\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -817,7 +817,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/OBJECT_CONTRACT/DATE_PUBLICATION_NOTICE
     TED guidance:
     - Map to `tender.communication.futureNoticeDate`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to `tender.communication.futureNoticeDate`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -833,7 +833,7 @@
     Description: The time limit for requesting additional information about the procurement procedure.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Combine the date and time into [a valid date time](https://standard.open-contracting.org/latest/en/schema/reference/?highlight=dates#date), and map to the lot's `.enquiryPeriod.endDate`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -849,7 +849,7 @@
     Description: The time limit for requesting additional information about the procurement procedure.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Combine the date and time into [a valid date time](https://standard.open-contracting.org/latest/en/schema/reference/?highlight=dates#date), and map to the lot's `.enquiryPeriod.endDate`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -867,7 +867,7 @@
         BG-101: Procurement Documents
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/ADMINISTRATIVE_INFORMATION_CONTRACT_NOTICE_DEFENCE/CONDITIONS_OBTAINING_SPECIFICATIONS/TIME_LIMIT
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Combine the date and time into [a valid date time](https://standard.open-contracting.org/latest/en/schema/reference/?highlight=dates#date), and map to the lot's `.enquiryPeriod.endDate`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -883,7 +883,7 @@
     Description: The time limit for requesting additional information about the procurement procedure.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Combine the date and time into [a valid date time](https://standard.open-contracting.org/latest/en/schema/reference/?highlight=dates#date), and map to the lot's `.enquiryPeriod.endDate`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -909,7 +909,7 @@
     TED guidance:
     - Map to the date component of `tender.secondStage.invitationDate`.
     - Map to the date component of `tender.tenderPeriod.endDate`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.secondStage.invitationDate`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -925,7 +925,7 @@
     Description: The time limit for receipt of tenders.
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the date component of the lot's `.tenderPeriod.endDate`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -941,7 +941,7 @@
     Description: The time limit for receipt of tenders.
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the date component of the lot's `.tenderPeriod.endDate`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -959,7 +959,7 @@
         BG-102: Submission Terms
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_CONCESSIONAIRE_DEFENCE/FD_CONTRACT_CONCESSIONAIRE_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_SUB_DEFENCE/ADMINISTRATIVE_INFORMATION_CONTRACT_SUB_NOTICE_DEFENCE/RECEIPT_LIMIT_DATE/fn:concat(YEAR,-", MONTH, "-", DAY)"
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the date component of lot's `.tenderPeriod.endDate`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -978,7 +978,7 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/ADMINISTRATIVE_INFORMATION_CONTRACT_NOTICE_DEFENCE/RECEIPT_LIMIT_DATE
     - TED_EXPORT/FORM_SECTION/CONTRACT_CONCESSIONAIRE_DEFENCE/FD_CONTRACT_CONCESSIONAIRE_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_SUB_DEFENCE/ADMINISTRATIVE_INFORMATION_CONTRACT_SUB_NOTICE_DEFENCE/RECEIPT_LIMIT_DATE/TIME
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the date component of lot's `.tenderPeriod.endDate`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -999,7 +999,7 @@
     - TED_EXPORT/FORM_SECTION/F05_2014/PROCEDURE/OPENING_CONDITION/DATE_OPENING_TENDERS
     TED guidance:
     - Map to the date component of `tender.awardPeriod.startDate` and to the date component of `tender.bidOpening.date`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the date component of the lot's `.awardPeriod.startDate` and to the date component of the lot's `.bidOpening.date`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1020,7 +1020,7 @@
     - TED_EXPORT/FORM_SECTION/F05_2014/PROCEDURE/OPENING_CONDITION/TIME_OPENING_TENDERS
     TED guidance:
     - Map to the time component of `tender.awardPeriod.startDate` and to the time component of `tender.bidOpening.date`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the date component of the lot's `.awardPeriod.startDate` and to the date component of the lot's `.bidOpening.date`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1040,7 +1040,7 @@
     - TED_EXPORT/FORM_SECTION/F05_2014/PROCEDURE/OPENING_CONDITION/PLACE
     TED guidance:
     - Map to `tender.bidOpening.address.streetAddress`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.bidOpening.address.streetAddress`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1060,7 +1060,7 @@
     - TED_EXPORT/FORM_SECTION/F05_2014/PROCEDURE/OPENING_CONDITION/INFO_ADD
     TED guidance:
     - Map to `tender.bidOpening.description`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (AUTO) Map to `tender.bidOpening.description`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1085,7 +1085,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_JUSTIFICATION
     TED guidance:
     - Map to `tender.procurementMethodRationale`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.procurementMethodRationale`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1234,7 +1234,7 @@
     - Set `.id` to 'D_SERVICES_LISTED' and `.description` to 'The contract has as its object services listed in Annex II B to the directive'
     - Set `.id` to 'D_TECHNICAL' and `.description` to 'The services can be provided only by a particular economic operator due to absence of competition for technical reasons'
     - Set `.id` to 'D_TECHNICAL' and `.description` to 'The works, supplies or services can be provided only by a particular economic operator due to absence of competition for technical reasons'
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map [the label of the code](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/direct-award-justification) to the lot's `.procurementMethodRationale`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1265,7 +1265,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/OBJECT_DESCR/LOT_NO
     TED guidance:
     - If not set, let *Lot No* be '1'. Map to the lot's `.id` (string), map to the item's `.id` (string), and map to the item's `.relatedLot` (string).
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Refer to the \[guidance for lot identifiers\](common-operations lot identifier).
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1282,7 +1282,7 @@
     Description: The identifier of a lot. In case of PINs used only for information, the identifier of a part of the notice that may later become a lot or a self-standing procedure. The information in the purpose section refers to this lot or part.
     Business groups:
         BG-2: Purpose
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Refer to the \[guidance for lot identifiers\](common-operations lot identifier).
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1308,7 +1308,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/OBJECT_CONTRACT/OBJECT_DESCR/LOT_NO
     TED guidance:
     - If not set, let *Lot No* be '1'. Map to the lot's `.id` (string), map to the item's `.id` (string), and map to the item's `.relatedLot` (string).
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Refer to the \[guidance for lot identifiers\](common-operations lot identifier).
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1392,7 +1392,7 @@
     Business groups:
         BG-6: Procedure
         BG-330: Group Lot Award
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Add the lot identifier to the Lot group's `.relatedLots` (see the [lot extension](https://extensions.open-contracting.org/en/extensions/lots/master/)) \[https://github.com/open-contracting/european-union-support/issues/71\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1413,7 +1413,7 @@
     - TED_EXPORT/FORM_SECTION/F12_2014/CONTRACTING_BODY/DOCUMENT_RESTRICTED
     TED guidance:
     - Add a `ParticipationFee` object to the `tender.participationFees` array, set its `.type` to 'document', and set its `.id` to '1'.
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Add a `ParticipationFee` object to the lot's `.participationFees` array, set its `.type` to 'document', and map `cac:CallForTendersDocumentReference/cdc:ID` to its `.id`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1429,7 +1429,7 @@
     Description: The access to certain procurement documents is restricted.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Add a `ParticipationFee` object to the lot's `.participationFees` array, set its `.type` to 'document', and map `cac:CallForTendersDocumentReference/cdc:ID` to its `.id`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1445,7 +1445,7 @@
     Description: The main reason for the change in the notice compared to the original notice.
     Business groups:
         BG-9: Change
-    eForms guidance: ''
+    eForms guidance: '(UNREVIEWED) (AUTO) Prefix by the [translation](../../operations/#get-a-translation) of "Need for additional works, services or supplies by the original contractor/concessionaire: ", and map to the amendment''s `.rationale`'
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1464,7 +1464,7 @@
     - TED_EXPORT/FORM_SECTION/F20_2014/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/SHORT_DESCR
     TED guidance:
     - Map to the amendment's `.description`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (AUTO) Map to the amendment's `.description`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1487,7 +1487,7 @@
     - TED_EXPORT/FORM_SECTION/F21_2014/AWARD_CONTRACT/*[matches(name(),'AWARDED_CONTRACT')]
     - TED_EXPORT/FORM_SECTION/F22_2014/AWARD_CONTRACT/*[matches(name(),'AWARDED_CONTRACT')]
     - TED_EXPORT/FORM_SECTION/F25_2014/AWARD_CONTRACT/*[matches(name(),'AWARDED_CONTRACT')]
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) If `true`, set the awards's `.status` to 'active'. If `false`, set the awards's `.status` to 'unsuccessful'
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1520,7 +1520,7 @@
     TED guidance:
     - Set the award's `.statusDetails` to 'discontinued'
     - Set the award's `.statusDetails` to 'unsuccessful'\n\nThere's an open issue ([#764](https://github.com/open-contracting/standard/issues/764)) about status details. (ISSUE)
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map [the label of the code](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-award-justification) to the award's `.statusDetails`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1545,7 +1545,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/AWARD_CONTRACT/AWARDED_CONTRACT/DATE_CONCLUSION_CONTRACT
     TED guidance:
     - Map to the contract's `.dateSigned`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the contract's `.dateSigned`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1568,7 +1568,7 @@
     TED guidance:
     - Map to the award's `.date`
     - Map to the contract's `.dateSigned`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the award's `.date`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1599,7 +1599,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/CONTRACTING_BODY/DOCUMENT_FULL
     TED guidance:
     - Discard. If no `ParticipationFee` object in the `tender.participationFees` array has a `.type` of 'document', then access is unrestricted.
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the party's `.contactPoint.url`. If there is no URL scheme, prefix by 'http://'.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1620,7 +1620,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/CONTRACTING_BODY/DOCUMENT_FULL
     TED guidance:
     - Discard. If no `ParticipationFee` object in the `tender.participationFees` array has a `.type` of 'document', then access is unrestricted.
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.contactPoint.url`. If there is no URL scheme, prefix by 'http://'.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1645,7 +1645,7 @@
     TED guidance:
     - 'If not set, let *Contract No* be the notice number followed by a hyphen ''-'' followed by the value of the `ITEM` attribute of the `AWARD_CONTRACT` element. Map to the award''s `.id`.\n\nThis assumes the *Contract No* is unique within the contracting process. (WARNING #93)'
     - 'Map to the award''s `.id`\n\nThis assumes the contract award notice set `/AWARD_CONTRACT/CONTRACT_NO` and that the *Contract No* is unique within the contracting process. (WARNING #93)'
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the award's `.id`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1661,7 +1661,7 @@
     Description: An identifier of one or more sections within a previous notice within the procedure. The information in the modification section refers to this section or these sections.
     Business groups:
         BG-77: Modification
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) No guidance. Relationships are either implied by the XML structure or explicit via references from a section to the organization.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1677,7 +1677,7 @@
     Description: An identifier of one or more sections within a previous notice within the procedure. The information in the modification section refers to this section or these sections.
     Business groups:
         BG-77: Modification
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) No guidance. Relationships are either implied by the XML structure or explicit via references from a section to the organization.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1726,7 +1726,7 @@
     Business groups:
         BG-2: Purpose
         BG-557: Group Framework Estimated Maximum Value
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Add a Lot group to the the `tender.lotGroups` array. Map to the lot group's `.maximumValue.amount` (number).
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1741,7 +1741,7 @@
     Description: The name of a part of an organisation (e.g. the relevant department of a large buyer).
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Append to the party's `.name`, separated from the original text with ' - ' (space, dash, space). See also [Using the Organization building block with an organizational hierarchy](https://standard.open-contracting.org/latest/en/guidance/map/organizational_units/?highlight=organization#using-the-organization-building-block-with-an-organizational-hierarchy)  \[https://github.com/open-contracting/european-union-support/issues/55\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1756,7 +1756,7 @@
     Description: The name of a part of an organisation (e.g. the relevant department of a large buyer).
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Append to the party's `.name`, separated from the original text with ' - ' (space, dash, space). See also [Using the Organization building block with an organizational hierarchy](https://standard.open-contracting.org/latest/en/guidance/map/organizational_units/?highlight=organization#using-the-organization-building-block-with-an-organizational-hierarchy)  \[https://github.com/open-contracting/european-union-support/issues/55\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1776,7 +1776,7 @@
     - TED_EXPORT/FORM_SECTION/F23_2014/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_PRICE_PAYMENT
     TED guidance:
     - Add a `Charge` object to the contract's `.implementation.charges` array, set its `.id` to 'government', set its `.paidBy` to 'government', set its `.title` to the [translation](../../operations/#get-a-translation) of 'Prizes, payments or other financial advantages provided by the contracting authority/entity', and map to its `.estimatedValue.amount`.
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Add a `Charge` object to the contract's `.implementation.charges` array, set its `.id` to 'user', set its `.paidBy` to 'user', set its `.title` to the [translation](../../operations/#get-a-translation) of 'Revenue from the payment of fees and fines by the users', and map to its `.estimatedValue.amount`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1798,7 +1798,7 @@
     TED guidance:
     - Discard. This is derived from the `value` of awards.
     - Map to the contract's `.value.amount`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the award's `.value.amount`. Map `@currencyID` to the value's `.currency`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1818,7 +1818,7 @@
     - TED_EXPORT/FORM_SECTION/F23_2014/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_REVENUE
     TED guidance:
     - Add a `Charge` object to the contract's `.implementation.charges` array, set its `.id` to 'user', set its `.paidBy` to 'user', set its `.title` to the [translation](../../operations/#get-a-translation) of 'Revenue from the payment of fees and fines by the users', and map to its `.estimatedValue.amount`.
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Add a `Charge` object to the contract's `.implementation.charges` array, set its `.id` to 'user', set its `.paidBy` to 'user', set its `.title` to the [translation](../../operations/#get-a-translation) of 'Revenue from the payment of fees and fines by the users', and map to its `.estimatedValue.amount`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1841,7 +1841,7 @@
     TED guidance:
     - Map to `tender.valueCalculationMethod`
     - Map to the award's `.valueCalculationMethod`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the award's `.valueCalculationMethod`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1868,7 +1868,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/*[matches(name(),'SME')]
     TED guidance:
     - Set the party's `.details.scale` to 'sme'
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the party's `.details.scale` \[https://github.com/open-contracting/european-union-support/issues/81\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1896,7 +1896,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/CONTRACTING_BODY/URL_PARTICIPATION
     TED guidance:
     - 'Add ''electronicSubmission'' to `tender.submissionMethod`, and map to `tender.submissionMethodDetails`\n\nIf *to the following address* is selected, this results in a loss of structure. (WARNING #27)'
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Add 'electronicSubmission' to the lot's `.submissionMethod`, and map to the lot's `.submissionTerms.electronicSubmissionPolicy`. \[https://github.com/open-contracting/european-union-support/issues/58\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1912,7 +1912,10 @@
     Business groups:
         BG-7: Notice Result
         BG-320: Tender
-    eForms guidance: ''
+    eForms guidance: |-
+        (UNREVIEWED) Add a new Cascade object to the award's `.cascade` array. Set its `.bid` to the identifier of the corresponding bid. For each related tenderer, add an Organization reference object to the cascade's `.suppliers` array. Copy its `.id` and `.name` from the corresponding Organization object.
+
+        The position of the cascade object in the `.cascade` array determines the rank of the bid. Example: `.cascade[0]` should return the highest ranking bid, `.cascade[1]` the second highest ranking bid, etc. \[https://github.com/open-contracting/european-union-support/issues/80\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1944,7 +1947,7 @@
     TED guidance:
     - Add 'written' to `tender.submissionMethod`, and discard. Tenders or requests to participate must be submitted to the abovementioned address unless otherwised specified.
     - 'Add ''written'' to `tender.submissionMethod`, and map to `tender.submissionMethodDetails` as a formatted address string\n\nIf *electronically via* is checked, this results in a loss of structure. (WARNING #27)'
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.submissionMethodDetails` \[https://github.com/open-contracting/european-union-support/issues/58\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1960,7 +1963,7 @@
     Description: The justification for electronic submission of tenders, requests to participate, or expressions of interest not being possible.
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.submissionTerms.nonElectronicRationale`. \[https://github.com/open-contracting/european-union-support/issues/55\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -1993,7 +1996,7 @@
     Business groups:
         BG-7: Notice Result
         BG-320: Tender
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Set the bid's `.variant` to `true` \[https://github.com/open-contracting/european-union-support/issues/82\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5222,7 +5225,10 @@
     Description: The main reason for modifying the contract.
     Business groups:
         BG-77: Modification
-    eForms guidance: ''
+    eForms guidance: |-
+        (UNREVIEWED) Add an `Amendment` object to the contract's `.amendments` array, and set its `.id` (string). The `.id` can be any value guaranteed to be globally unique. For example, it can be set to a [version 4 UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier), or it can be assigned sequentially across all notices for this procedure (the first notice sets it to '1', the second to '2', etc.).
+
+        Map the label of the code to the amendment's `.description`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5237,7 +5243,7 @@
     Description: The description of the main reason for modifying the contract.
     Business groups:
         BG-77: Modification
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the amendment's `.rationale`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5252,7 +5258,7 @@
     Description: The summary of the contract modification(s).
     Business groups:
         BG-77: Modification
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the amendment's `.description`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5281,7 +5287,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/OBJECT_DESCR/TITLE
     TED guidance:
     - Map to the lot's `.title`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to `tender.title` (`/*/cac:ProcurementProject`) or the lot's `.title` (`/*/cac:ProcurementProjectLot`)
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5296,7 +5302,7 @@
     Description: The name of the procurement procedure or lot.
     Business groups:
         BG-2: Purpose
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to `tender.title` (`/*/cac:ProcurementProject`) or the lot's `.title` (`/*/cac:ProcurementProjectLot`)
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5319,7 +5325,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/OBJECT_CONTRACT/OBJECT_DESCR/TITLE
     TED guidance:
     - Map to the lot's `.title`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to `tender.title` (`/*/cac:ProcurementProject`) or the lot's `.title` (`/*/cac:ProcurementProjectLot`)
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5359,7 +5365,7 @@
     TED guidance:
     - Map to `tender.title`
     - Map to the lot's `.title`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to `tender.title` (`/*/cac:ProcurementProject`) or the lot's `.title` (`/*/cac:ProcurementProjectLot`)
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5380,7 +5386,7 @@
     - TED_EXPORT/FORM_SECTION/F21_2014/OBJECT_CONTRACT/REFERENCE_NUMBER
     TED guidance:
     - If not set, let *Reference number* be equal to the `ocid` value. Map to `tender.id` (string).
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.description`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5395,7 +5401,7 @@
     Description: 'The internal identifier used for files regarding the procurement procedure or lot before a procedure identifier is given (e.g. coming from the buyer''s document management system or procurement planning system). '
     Business groups:
         BG-2: Purpose
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the lot's `.description`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5410,7 +5416,7 @@
     Description: 'The internal identifier used for files regarding the procurement procedure or lot before a procedure identifier is given (e.g. coming from the buyer''s document management system or procurement planning system). '
     Business groups:
         BG-2: Purpose
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the lot's `.description`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5444,7 +5450,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/REFERENCE_NUMBER
     TED guidance:
     - If not set, let *Reference number* be equal to the `ocid` value. Map to `tender.id` (string).
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the lot's `.description`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5463,7 +5469,7 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/TYPE_CONTRACT_DEFENCE/TYPE_CONTRACT/@VALUE
     - TED_EXPORT/FORM_SECTION/F21_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) If different from 'combined', map to the lot's `.mainProcurementCategory`. Otherwise, add 'combined' to the lot's `.additionalProcurementCategories` array. \[https://github.com/open-contracting/european-union-support/issues/56;https://github.com/open-contracting/european-union-support/issues/58\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5479,7 +5485,7 @@
     Description: The main nature (e.g. works) of what is being bought. In case of mixed procurement (e.g. a procedure for both works and services), the main nature may be, for example, the one with the highest estimated value. This information must be given for the whole procedure.
     Business groups:
         BG-2: Purpose
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) If different from 'combined', map to the lot's `.mainProcurementCategory`. Otherwise, add 'combined' to the lot's `.additionalProcurementCategories` array. \[https://github.com/open-contracting/european-union-support/issues/56;https://github.com/open-contracting/european-union-support/issues/58\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5512,7 +5518,7 @@
     - TED_EXPORT/FORM_SECTION/F23_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
     - TED_EXPORT/FORM_SECTION/F24_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) If different from 'combined', map to the lot's `.mainProcurementCategory`. Otherwise, add 'combined' to the lot's `.additionalProcurementCategories` array. \[https://github.com/open-contracting/european-union-support/issues/56;https://github.com/open-contracting/european-union-support/issues/58\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5551,7 +5557,7 @@
     - Map to `tender.description`
     - 'Map to the lot''s `.description`\n\n**F12, F13**: Instead, map to `tender.description`'
     - 'Map to the lot''s `.description`\n\n**F12, F13**: Instead, map to `tender.description`\n\n If present, this takes precedence over the [Description of the procurement at the time of conclusion of the contract](#/OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR).'
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map `/*/cac:ProcurementProject/cbc:Description` to `tender.description`.\\n\\nMap `/*/cac:ProcurementProjectLot/cac:ProcurementProject/cbc:Description` to the lot's `.description`. \[https://github.com/open-contracting/european-union-support/issues/57\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5566,7 +5572,7 @@
     Description: The description of the nature and quantity of what is being bought or of the needs and requirements that should be met in this procedure or lot. In case of a modification notice, the description of the procurement before and after the modification.
     Business groups:
         BG-2: Purpose
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map `/*/cac:ProcurementProject/cbc:Description` to `tender.description`.\\n\\nMap `/*/cac:ProcurementProjectLot/cac:ProcurementProject/cbc:Description` to the lot's `.description`. \[https://github.com/open-contracting/european-union-support/issues/57\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5589,7 +5595,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR
     TED guidance:
     - 'Map to the lot''s `.description`\n\n**F12, F13**: Instead, map to `tender.description`'
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map `/*/cac:ProcurementProject/cbc:Description` to `tender.description`.\\n\\nMap `/*/cac:ProcurementProjectLot/cac:ProcurementProject/cbc:Description` to the lot's `.description`. \[https://github.com/open-contracting/european-union-support/issues/57\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5620,7 +5626,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/SHORT_DESCR
     TED guidance:
     - Map to `tender.description`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map `/*/cac:ProcurementProject/cbc:Description` to `tender.description`.\\n\\nMap `/*/cac:ProcurementProjectLot/cac:ProcurementProject/cbc:Description` to the lot's `.description`. \[https://github.com/open-contracting/european-union-support/issues/57\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5637,7 +5643,7 @@
         BG-2: Purpose
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/F17_DIVISION_INTO_LOTS/F17_DIV_INTO_LOT_YES/F17_ANNEX_B/NATURE_QUANTITY_SCOPE/TOTAL_QUANTITY_OR_SCOPE
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the item's `.quantity` (number).
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5654,7 +5660,7 @@
     Business groups:
         BG-2: Purpose
         BG-261: Classification
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Capitalize, and map to the item's `.classification.scheme`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5671,7 +5677,7 @@
     Business groups:
         BG-2: Purpose
         BG-261: Classification
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Capitalize, and map to the item's `.classification.scheme`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5688,7 +5694,7 @@
     Business groups:
         BG-2: Purpose
         BG-261: Classification
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Capitalize, and map to the item's `.classification.scheme`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5705,7 +5711,7 @@
     Business groups:
         BG-2: Purpose
         BG-261: Classification
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Capitalize, and map to the item's `.classification.scheme`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5722,7 +5728,7 @@
     Business groups:
         BG-2: Purpose
         BG-261: Classification
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Capitalize, and map to the item's `.classification.scheme`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5739,7 +5745,7 @@
     Business groups:
         BG-2: Purpose
         BG-261: Classification
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Capitalize, and map to the item's `.classification.scheme`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5763,7 +5769,7 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_CONCESSIONAIRE_DEFENCE/FD_CONTRACT_CONCESSIONAIRE_DEFENCE/OBJECT_CONTRACT_SUB_DEFENCE/DESCRIPTION_CONTRACT_SUB_DEFENCE/CPV/CPV_MAIN/CPV_CODE/@CODE
     - TED_EXPORT/FORM_SECTION/CONTRACT_CONCESSIONAIRE_DEFENCE/FD_CONTRACT_CONCESSIONAIRE_DEFENCE/OBJECT_CONTRACT_SUB_DEFENCE/DESCRIPTION_CONTRACT_SUB_DEFENCE/CPV/CPV_ADDITIONAL/CPV_CODE/@CODE
     - TED_EXPORT/FORM_SECTION/F21_2014/OBJECT_CONTRACT/CPV_MAIN/CPV_CODE/@CODE
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the item's `.classification.id`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5780,7 +5786,7 @@
     Business groups:
         BG-2: Purpose
         BG-261: Classification
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the item's `.classification.id`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5821,7 +5827,7 @@
     - TED_EXPORT/FORM_SECTION/F23_2014/OBJECT_CONTRACT/CPV_MAIN/CPV_CODE/@CODE
     - TED_EXPORT/FORM_SECTION/F24_2014/OBJECT_CONTRACT/CPV_MAIN/CPV_CODE/@CODE
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/CPV_MAIN/CPV_CODE/@CODE
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the item's `.classification.id`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5838,7 +5844,7 @@
     Business groups:
         BG-2: Purpose
         BG-261: Classification
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add a Classification object to the item's `.additionalClassifications` array. Map to its `.id`, capitalize `@listName` and map to the classification's `.scheme`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5855,7 +5861,7 @@
     Business groups:
         BG-2: Purpose
         BG-261: Classification
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add a Classification object to the item's `.additionalClassifications` array. Map to its `.id`, capitalize `@listName` and map to the classification's `.scheme`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5872,7 +5878,7 @@
     Business groups:
         BG-2: Purpose
         BG-261: Classification
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add a Classification object to the item's `.additionalClassifications` array. Map to its `.id`, capitalize `@listName` and map to the classification's `.scheme`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5909,7 +5915,10 @@
     - Discard. The *Initial estimated total value of the contract/lot* is available in the OCDS release with the same `ocid` as this release and with 'tender' in its `tag`.
     - Map to `tender.value.amount`
     - Map to the lot's `.value.amount`
-    eForms guidance: ''
+    eForms guidance: |-
+        (UNREVIEWED) Map `/*/cac:ProcurementProject/cac:RequestedTenderTotal/cbc:EstimatedOverallContractAmount` to `tender.value.amount`.
+
+        Map `/*/cac:ProcurementProjectLot/cac:ProcurementProject/cac:RequestedTenderTotal/cbc:EstimatedOverallContractAmount` to the lot's `.value.amount`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5924,7 +5933,10 @@
     Description: The estimated maximum value of the procurement procedure or lot. Estimated refers to estimation at the time of launching the call for competition. Maximum value means a value covering all contracts to be awarded within a framework agreement or a dynamic purchasing system, over their whole duration, including options and renewals.
     Business groups:
         BG-2: Purpose
-    eForms guidance: ''
+    eForms guidance: |-
+        (UNREVIEWED) (REPEAT) Map `/*/cac:ProcurementProject/cac:RequestedTenderTotal/cbc:EstimatedOverallContractAmount` to `tender.value.amount`.
+
+        Map `/*/cac:ProcurementProjectLot/cac:ProcurementProject/cac:RequestedTenderTotal/cbc:EstimatedOverallContractAmount` to the lot's `.value.amount`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5939,7 +5951,10 @@
     Description: The estimated maximum value of the procurement procedure or lot. Estimated refers to estimation at the time of launching the call for competition. Maximum value means a value covering all contracts to be awarded within a framework agreement or a dynamic purchasing system, over their whole duration, including options and renewals.
     Business groups:
         BG-2: Purpose
-    eForms guidance: ''
+    eForms guidance: |-
+        (UNREVIEWED) (REPEAT) Map `/*/cac:ProcurementProject/cac:RequestedTenderTotal/cbc:EstimatedOverallContractAmount` to `tender.value.amount`.
+
+        Map `/*/cac:ProcurementProjectLot/cac:ProcurementProject/cac:RequestedTenderTotal/cbc:EstimatedOverallContractAmount` to the lot's `.value.amount`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -5967,7 +5982,10 @@
     TED guidance:
     - Discard. This is derived from the `value` of awards.
     - Map to `tender.value.amount`
-    eForms guidance: ''
+    eForms guidance: |-
+        (UNREVIEWED) (REPEAT) Map `/*/cac:ProcurementProject/cac:RequestedTenderTotal/cbc:EstimatedOverallContractAmount` to `tender.value.amount`.
+
+        Map `/*/cac:ProcurementProjectLot/cac:ProcurementProject/cac:RequestedTenderTotal/cbc:EstimatedOverallContractAmount` to the lot's `.value.amount`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6014,7 +6032,7 @@
     TED guidance:
     - 'Append to the lot''s `.description`\n\nThis results in a loss of structure. (WARNING #28)'
     - Map to the release's `description`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the release's `description`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6029,7 +6047,7 @@
     Description: Any information not mentioned elsewhere.
     Business groups:
         BG-710: Additional Information
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the release's `description`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6053,7 +6071,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD
     TED guidance:
     - 'Append to the lot''s `.description`\n\nThis results in a loss of structure. (WARNING #28)'
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the release's `description`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6075,7 +6093,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/COMPLEMENTARY_INFO/INFO_ADD
     TED guidance:
     - Map to the release's `description`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the release's `description`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6109,7 +6127,7 @@
     TED guidance:
     - Map to `tender.lotDetails.maximumLotsBidPerSupplier`
     - Set `tender.lotDetails.maximumLotsBidPerSupplier` to 1
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to `tender.lotDetails.maximumLotsBidPerSupplier`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6125,7 +6143,7 @@
     Business groups:
         BG-7: Notice Result
         BG-320: Tender
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Add a Bid object to the `bids.details` array, and map to its `.id`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6144,7 +6162,7 @@
     Business groups:
         BG-7: Notice Result
         BG-310: Contract
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to `tender.id`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6169,7 +6187,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/OBJECT_CONTRACT/LOT_DIVISION/LOT_MAX_ONE_TENDERER
     TED guidance:
     - Map to `tender.lotDetails.maximumLotsAwardedPerSupplier`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to `tender.lotDetails.maximumLotsAwardedPerSupplier`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6188,7 +6206,7 @@
     Business groups:
         BG-6: Procedure
         BG-330: Group Lot Award
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Add a Group lot object in the `tender.lotGroups` array. Map to its `.id`. See the [lot extension](https://extensions.open-contracting.org/en/extensions/lots/master/). \[https://github.com/open-contracting/european-union-support/issues/71\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6218,7 +6236,7 @@
     - TED_EXPORT/FORM_SECTION/F23_2014/OBJECT_CONTRACT/OBJECT_DESCR/DURATION
     - TED_EXPORT/FORM_SECTION/F24_2014/OBJECT_CONTRACT/OBJECT_DESCR/DURATION
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/OBJECT_DESCR/DURATION
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) If `@unitCode` is set to 'DAY', map to the lot's `.contractPeriod.durationInDays`.\\n\\nIf `@unitCode` is set to 'MONTH', multiply by 30. If `@unitCode` is set to 'YEAR', multiply by 365. In either case, map the result to the lot's `.contractPeriod.durationInDays`. \[https://github.com/open-contracting/european-union-support/issues/58\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6237,7 +6255,7 @@
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/QUANTITY_SCOPE_WORKS_DEFENCE/F16_DIVISION_INTO_LOTS/F16_DIV_INTO_LOT_YES/LOT_PRIOR_INFORMATION/SCHEDULED_DATE_PERIOD/PERIOD_WORK_DATE_STARTING/(MONTHS|DAYS)
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/SCHEDULED_DATE_PERIOD/PERIOD_WORK_DATE_STARTING/MONTHS
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/PERIOD_WORK_DATE_STARTING/(MONTHS|DAYS)
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) If `@unitCode` is set to 'DAY', map to the lot's `.contractPeriod.durationInDays`.\\n\\nIf `@unitCode` is set to 'MONTH', multiply by 30. If `@unitCode` is set to 'YEAR', multiply by 365. In either case, map the result to the lot's `.contractPeriod.durationInDays`. \[https://github.com/open-contracting/european-union-support/issues/58\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6252,7 +6270,7 @@
     Description: The criteria (or criterion) will (only) be used to select the candidates to be invited for the second stage of the procedure (if a maximum number of candidates was set).
     Business groups:
         BG-702: Selection Criteria
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Set the criterion's `.reductionCriterion` to `true` \[https://github.com/open-contracting/european-union-support/issues/72\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6271,7 +6289,7 @@
     - TED_EXPORT/FORM_SECTION/F12_2014/PROCEDURE/DETAILS_PAYMENT
     TED guidance:
     - Map to `tender.designContest.rewardsDetails`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Set the lot's `.designContest.followUpContracts` to `true`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6288,7 +6306,7 @@
         BG-704: Reward and Jury
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/F12_2014/PROCEDURE/*[matches(name(),'DECISION_BINDING_CONTRACTING')]
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Set the lot's `.designContest.bindingJuryDecision` to `true`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6304,7 +6322,7 @@
     Business groups:
         BG-704: Reward and Jury
         BG-44: Prize
-    eForms guidance: ''
+    eForms guidance: '(UNREVIEWED) Add a Prize object to the lot''s `.designContest.prizes.details` array. Set its `.id`. The position of the prize object in the `.details` array determines the rank of the prize. Example: `.details[0]` should return the highest ranking prize, `.details[1]` the second highest ranking prize, etc. \[https://github.com/open-contracting/european-union-support/issues/76\]'
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6321,7 +6339,7 @@
         BG-704: Reward and Jury
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/F12_2014/PROCEDURE/*[matches(name(),'FOLLOW_UP_CONTRACTS')]
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (AUTO) Set `tender.designContest.followUpContracts` to `true`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6340,7 +6358,7 @@
     - TED_EXPORT/FORM_SECTION/F12_2014/PROCEDURE/MEMBER_NAME
     TED guidance:
     - Add a `JuryMember` object to the `tender.designContest.juryMembers` array, and map to its `.name`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Add a `JuryMember` object to the lot's `.designContest.juryMembers` array, and map to its `.name`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6359,7 +6377,7 @@
     - TED_EXPORT/FORM_SECTION/F12_2014/PROCEDURE/PARTICIPANT_NAME
     TED guidance:
     - '[Add a party](../../operations/#add-a-party), add ''selectedParticipant'' to its `.roles`, and map to its `.name`. Add an `OrganizationReference` object to the `tender.designContest.selectedParticipants` array, set its `.id` to the party''s `.id`, and map to its `.name`.'
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) [Add a party](../../operations/#add-a-party), add 'selectedParticipant' to its `.roles`, and map to its `.name`. Add an `OrganizationReference` object to the lot's `.designContest.selectedParticipants` array, set its `.id` to the party's `.id`, and map to its `.name`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6383,7 +6401,7 @@
     TED guidance:
     - Map to `tender.secondStage.minimumCandidates`
     - Map to the lot's `.secondStage.minimumCandidates`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.secondStage.minimumCandidates`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6398,7 +6416,7 @@
     Description: The official name of the organisation.
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the party's `.name` and `.identifier.legalName`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6487,7 +6505,7 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME
     - Map to the party's `.name` and `.identifier.legalName`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.name` and `.identifier.legalName`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6502,7 +6520,7 @@
     Description: The official name of the organisation.
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.name` and `.identifier.legalName`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6517,7 +6535,7 @@
     Description: The official name of the organisation.
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.name` and `.identifier.legalName`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6532,7 +6550,7 @@
     Description: An identifier of the organisation. All of the organisation's identifiers shall be given.
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the party's `.identifier.id`, and [set `.identifier.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids)
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6547,7 +6565,7 @@
     Description: An identifier of the organisation. All of the organisation's identifiers shall be given.
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.identifier.id`, and [set `.identifier.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids)
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6605,7 +6623,7 @@
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID
     - Map to the party's `.identifier.id`, and [set `.identifier.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids)
     - Map to the party's `.identifier.id`, and set the party's `.identifier.scheme`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.identifier.id`, and [set `.identifier.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids)
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6629,7 +6647,7 @@
     - TED_EXPORT/FORM_SECTION/F15_2014/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED/P/FT/@TYPE
     - TED_EXPORT/FORM_SECTION/F22_2014/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED/P/FT/@TYPE
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED/P/FT/@TYPE
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (AUTO) Set `tender.contractTerms.electronicInvoicingPolicy` to 'allowed'
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6644,7 +6662,7 @@
     Description: The name of the department or other contact point for communicating with the organisation. To avoid unnecessary processing of personal data, the contact point may allow the identification of a physical person only when necessary (in the sense of Regulation (EU) 2016/679 and Regulation (EU) 2018/1725).
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the party's `.contactPoint.name`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6699,7 +6717,7 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL
     - Map to the party's `.contactPoint.name`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.contactPoint.name`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6714,7 +6732,7 @@
     Description: The name of the department or other contact point for communicating with the organisation. To avoid unnecessary processing of personal data, the contact point may allow the identification of a physical person only when necessary (in the sense of Regulation (EU) 2016/679 and Regulation (EU) 2018/1725).
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.contactPoint.name`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6730,7 +6748,7 @@
     Description: The telephone for contacting the organisation. To avoid unnecessary processing of personal data, the telephone may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the party's `.contactPoint.telephone`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6818,7 +6836,7 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE
     - Map to the party's `.contactPoint.telephone`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.contactPoint.telephone`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6834,7 +6852,7 @@
     Description: The telephone for contacting the organisation. To avoid unnecessary processing of personal data, the telephone may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.contactPoint.telephone`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6850,7 +6868,7 @@
     Description: The telephone for contacting the organisation. To avoid unnecessary processing of personal data, the telephone may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.contactPoint.telephone`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6866,7 +6884,7 @@
     Description: The website of the organisation.
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the party's `.details.url`. \[Copied from the 2015 guidance but not imported automatically.\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6941,7 +6959,7 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL
     - Map to the party's `.details.url`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.details.url`. \[Copied from the 2015 guidance but not imported automatically.\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6957,7 +6975,7 @@
     Description: The website of the organisation.
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.details.url`. \[Copied from the 2015 guidance but not imported automatically.\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6973,7 +6991,7 @@
     Description: The email for contacting the organisation. To avoid unnecessary processing of personal data, the email may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the party's `.contactPoint.email`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7062,7 +7080,7 @@
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL
     - Map to the party's `.contactPoint.email`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.contactPoint.email`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7078,7 +7096,7 @@
     Description: The email for contacting the organisation. To avoid unnecessary processing of personal data, the email may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.contactPoint.email`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7094,7 +7112,7 @@
     Description: The email for contacting the organisation. To avoid unnecessary processing of personal data, the email may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.contactPoint.email`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7110,7 +7128,7 @@
     Description: The location according to the common classification of territorial units for statistics (NUTS) of the organisation's physical address. The NUTS3 classification code must be used.
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the party's `.address.region`. There is an [open issue](https://github.com/open-contracting/standard/issues/739) about region codes. \[https://github.com/open-contracting/standard/issues/739\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7151,7 +7169,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/*:NUTS/@CODE
     - TED_EXPORT/FORM_SECTION/F25_2014/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/*:NUTS/@CODE
     - TED_EXPORT/FORM_SECTION/F25_2014/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/*:NUTS/@CODE
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.region`. There is an [open issue](https://github.com/open-contracting/standard/issues/739) about region codes. \[https://github.com/open-contracting/standard/issues/739\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7167,7 +7185,7 @@
     Description: The location according to the common classification of territorial units for statistics (NUTS) of the organisation's physical address. The NUTS3 classification code must be used.
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.region`. There is an [open issue](https://github.com/open-contracting/standard/issues/739) about region codes. \[https://github.com/open-contracting/standard/issues/739\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7183,7 +7201,7 @@
     Description: The location according to the common classification of territorial units for statistics (NUTS) of the organisation's physical address. The NUTS3 classification code must be used.
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.region`. There is an [open issue](https://github.com/open-contracting/standard/issues/739) about region codes. \[https://github.com/open-contracting/standard/issues/739\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7215,7 +7233,7 @@
     - TED_EXPORT/FORM_SECTION/F23_2014/OBJECT_CONTRACT/OBJECT_DESCR/*:NUTS/@CODE
     - TED_EXPORT/FORM_SECTION/F24_2014/OBJECT_CONTRACT/OBJECT_DESCR/*:NUTS/@CODE
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/OBJECT_DESCR/*:NUTS/@CODE
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Add an `Address` object to the item's `.deliveryAddresses` array, and map to its `.region`.\\n\\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7238,7 +7256,7 @@
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/TYPE_CONTRACT_PLACE_DELIVERY_DEFENCE/SITE_OR_LOCATION/*:NUTS/@CODE
     - TED_EXPORT/FORM_SECTION/F21_2014/OBJECT_CONTRACT/OBJECT_DESCR/*:NUTS/@CODE
     - TED_EXPORT/FORM_SECTION/F22_2014/OBJECT_CONTRACT/OBJECT_DESCR/*:NUTS/@CODE
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Add an `Address` object to the item's `.deliveryAddresses` array, and map to its `.region`.\\n\\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7254,7 +7272,7 @@
     Description: The location according to the common classification of territorial units for statistics (NUTS). The NUTS3 classification code must be used.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Add an `Address` object to the item's `.deliveryAddresses` array, and map to its `.region`.\\n\\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7287,7 +7305,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER
     TED guidance:
     - Map to the party's `.details.buyerProfile`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the party's `.details.buyerProfile`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7303,7 +7321,7 @@
     Description: The organisation's uniform resource locator for exchange of data and documents.
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the party's `.eDeliveryEndpoint` \[https://github.com/open-contracting/european-union-support/issues/62\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7319,7 +7337,7 @@
     Description: The organisation's uniform resource locator for exchange of data and documents.
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.eDeliveryEndpoint` \[https://github.com/open-contracting/european-union-support/issues/62\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7343,7 +7361,7 @@
     TED guidance:
     - Map to `tender.secondStage.maximumCandidates`
     - Map to the lot's `.secondStage.maximumCandidates`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.secondStage.maximumCandidates`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7358,7 +7376,7 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the party's `.address.streetAddress`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7447,7 +7465,7 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS
     - Map to the party's `.address.streetAddress`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.streetAddress`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7462,7 +7480,7 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.streetAddress`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7477,7 +7495,7 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.streetAddress`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7492,7 +7510,7 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.streetAddress`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7507,7 +7525,7 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.streetAddress`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7522,7 +7540,7 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.streetAddress`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7537,7 +7555,7 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.streetAddress`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7552,7 +7570,7 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.streetAddress`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7567,7 +7585,7 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.streetAddress`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7582,7 +7600,7 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.streetAddress`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7597,7 +7615,7 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.streetAddress`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7628,7 +7646,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE
     TED guidance:
     - Map to the item's `.deliveryLocation.description`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map `cbc:StreetName` to the address' `.streetAddress`. If applicable, append `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` to the address' `.streetAddress`, separating each string with ', ' (comma and space).
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7652,7 +7670,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE
     TED guidance:
     - Map to the item's `.deliveryLocation.description`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map `cbc:StreetName` to the address' `.streetAddress`. If applicable, append `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` to the address' `.streetAddress`, separating each string with ', ' (comma and space).
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7667,7 +7685,7 @@
     Description: The name of the street, road, avenue, etc., of the place of performance and further identification (e.g. building number).
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map `cbc:StreetName` to the address' `.streetAddress`. If applicable, append `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` to the address' `.streetAddress`, separating each string with ', ' (comma and space).
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7682,7 +7700,7 @@
     Description: The name of the street, road, avenue, etc., of the place of performance and further identification (e.g. building number).
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map `cbc:StreetName` to the address' `.streetAddress`. If applicable, append `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` to the address' `.streetAddress`, separating each string with ', ' (comma and space).
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7697,7 +7715,7 @@
     Description: The name of the street, road, avenue, etc., of the place of performance and further identification (e.g. building number).
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map `cbc:StreetName` to the address' `.streetAddress`. If applicable, append `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` to the address' `.streetAddress`, separating each string with ', ' (comma and space).
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7712,7 +7730,7 @@
     Description: The name of the street, road, avenue, etc., of the place of performance and further identification (e.g. building number).
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map `cbc:StreetName` to the address' `.streetAddress`. If applicable, append `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` to the address' `.streetAddress`, separating each string with ', ' (comma and space).
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7727,7 +7745,7 @@
     Description: The name of the street, road, avenue, etc., of the place of performance and further identification (e.g. building number).
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map `cbc:StreetName` to the address' `.streetAddress`. If applicable, append `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` to the address' `.streetAddress`, separating each string with ', ' (comma and space).
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7742,7 +7760,7 @@
     Description: The name of the street, road, avenue, etc., of the place of performance and further identification (e.g. building number).
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map `cbc:StreetName` to the address' `.streetAddress`. If applicable, append `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` to the address' `.streetAddress`, separating each string with ', ' (comma and space).
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7757,7 +7775,7 @@
     Description: The name of the street, road, avenue, etc., of the place of performance and further identification (e.g. building number).
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map `cbc:StreetName` to the address' `.streetAddress`. If applicable, append `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` to the address' `.streetAddress`, separating each string with ', ' (comma and space).
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7772,7 +7790,7 @@
     Description: The post code of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the party's `.address.postalCode`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7861,7 +7879,7 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE
     - Map to the party's `.address.postalCode`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.postalCode`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7876,7 +7894,7 @@
     Description: The post code of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.postalCode`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7891,7 +7909,7 @@
     Description: The post code of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.postalCode`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7906,7 +7924,7 @@
     Description: The postcode of the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the address' `.postalCode`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7921,7 +7939,7 @@
     Description: The postcode of the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the address' `.postalCode`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7936,7 +7954,7 @@
     Description: The postcode of the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the address' `.postalCode`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -7951,7 +7969,7 @@
     Description: The name of the locality (city, town or village) of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the party's `.address.locality`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8040,7 +8058,7 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN
     - Map to the party's `.address.locality`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.locality`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8055,7 +8073,7 @@
     Description: The name of the locality (city, town or village) of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.locality`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8070,7 +8088,7 @@
     Description: The name of the locality (city, town or village) of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.locality`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8085,7 +8103,7 @@
     Description: The name of the locality (city, town or village) of the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the address' `.locality`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8100,7 +8118,7 @@
     Description: The name of the locality (city, town or village) of the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the address' `.locality`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8115,7 +8133,7 @@
     Description: The name of the locality (city, town or village) of the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the address' `.locality`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8131,7 +8149,7 @@
     Description: The country of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Translate to a country name, and map to the party's `.address.countryName`\\n\\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8221,7 +8239,7 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY
     - Take the country code in the `VALUE` attribute, translate to a country name, and map to the party's `.address.countryName`\n\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation. (ISSUE)
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Translate to a country name, and map to the party's `.address.countryName`\\n\\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8237,7 +8255,7 @@
     Description: The country of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Translate to a country name, and map to the party's `.address.countryName`\\n\\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8253,7 +8271,7 @@
     Description: The country of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Translate to a country name, and map to the party's `.address.countryName`\\n\\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8269,7 +8287,7 @@
     Description: The country of the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Translate to a country name, and map to the address' `.countryName`\\n\\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8285,7 +8303,7 @@
     Description: The country of the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Translate to a country name, and map to the address' `.countryName`\\n\\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8301,7 +8319,7 @@
     Description: The country of the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Translate to a country name, and map to the address' `.countryName`\\n\\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8323,7 +8341,7 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/TYPE_OF_PROCEDURE_DEFENCE/REDUCTION_OF_THE_NUMBER/@VALUE
     TED guidance:
     - Set `tender.secondStage.successiveReduction` to `true`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Set the lot's `secondStage.successiveReduction` to `true`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8341,7 +8359,7 @@
         BG-2: Purpose
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/TYPE_CONTRACT_DEFENCE/(TYPE_WORK_CONTRACT/(DESIGN_EXECUTION|EXECUTION|REALISATION_REQUIREMENTS_SPECIFIED_CONTRACTING_AUTHORITIES)/fn:local-name()|TYPE_SUPPLIES_CONTRACT/@VALUE|SERVICE_CATEGORY_DEFENCE)
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Add to the lot's `.additionalProcurementCategories` \[https://github.com/open-contracting/european-union-support/issues/56;https://github.com/open-contracting/european-union-support/issues/58\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8357,7 +8375,7 @@
     Description: The nature (e.g. services) of what is being bought, additional to Main Nature.
     Business groups:
         BG-2: Purpose
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Add to the lot's `.additionalProcurementCategories` \[https://github.com/open-contracting/european-union-support/issues/56;https://github.com/open-contracting/european-union-support/issues/58\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8375,7 +8393,7 @@
         BG-2: Purpose
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_CONCESSIONAIRE_DEFENCE/FD_CONTRACT_CONCESSIONAIRE_DEFENCE/OBJECT_CONTRACT_SUB_DEFENCE/DESCRIPTION_CONTRACT_SUB_DEFENCE/TYPE_CONTRACT_DEFENCE/(TYPE_WORK_CONTRACT/(DESIGN_EXECUTION|EXECUTION|REALISATION_REQUIREMENTS_SPECIFIED_CONTRACTING_AUTHORITIES)/fn:local-name()|TYPE_SUPPLIES_CONTRACT/@VALUE|SERVICE_CATEGORY_DEFENCE)
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Add to the lot's `.additionalProcurementCategories` \[https://github.com/open-contracting/european-union-support/issues/56;https://github.com/open-contracting/european-union-support/issues/58\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8409,7 +8427,7 @@
     TED guidance:
     - Map to the contract's `.period.startDate`
     - Map to the lot's `.contractPeriod.startDate`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) [Format the date](common-operations), and map to the lot's `.contractPeriod.startDate`. \[https://github.com/open-contracting/european-union-support/issues/58\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8428,7 +8446,7 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/QUANTITY_SCOPE_WORKS_DEFENCE/F16_DIVISION_INTO_LOTS/F16_DIV_INTO_LOT_YES/LOT_PRIOR_INFORMATION/SCHEDULED_DATE_PERIOD/PERIOD_WORK_DATE_STARTING/INTERVAL_DATE/START_DATE
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/SCHEDULED_DATE_PERIOD/PERIOD_WORK_DATE_STARTING/INTERVAL_DATE/START_DATE
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) [Format the date](common-operations), and map to the lot's `.contractPeriod.startDate`. \[https://github.com/open-contracting/european-union-support/issues/58\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8462,7 +8480,7 @@
     TED guidance:
     - Map to the contract's `.period.endDate`
     - Map to the lot's `.contractPeriod.endDate`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) [Format the date](common-operations), and map to the lot's `.contractPeriod.endDate`. \[https://github.com/open-contracting/european-union-support/issues/58\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8481,7 +8499,7 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/QUANTITY_SCOPE_WORKS_DEFENCE/F16_DIVISION_INTO_LOTS/F16_DIV_INTO_LOT_YES/LOT_PRIOR_INFORMATION/SCHEDULED_DATE_PERIOD/PERIOD_WORK_DATE_STARTING/INTERVAL_DATE/END_DATE
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/SCHEDULED_DATE_PERIOD/PERIOD_WORK_DATE_STARTING/INTERVAL_DATE/END_DATE
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) [Format the date](common-operations), and map to the lot's `.contractPeriod.endDate`. \[https://github.com/open-contracting/european-union-support/issues/58\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8501,7 +8519,7 @@
     - TED_EXPORT/FORM_SECTION/F07_2014/OBJECT_CONTRACT/OBJECT_DESCR/INDEFINITE_DURATION
     TED guidance:
     - Discard. If the lot's `.contractPeriod` isn't set, then the duration is indefinite.
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.contractPeriod.other` \[https://github.com/open-contracting/european-union-support/issues/58;https://github.com/open-contracting/european-union-support/issues/70\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8517,7 +8535,7 @@
     Description: The duration is unknown, unlimited, etc.
     Business groups:
         BG-36: Duration
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the lot's `.contractPeriod.other` \[https://github.com/open-contracting/european-union-support/issues/58;https://github.com/open-contracting/european-union-support/issues/70\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8537,7 +8555,7 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/AWARD_CRITERIA_CONTRACT_NOTICE_INFORMATION/AWARD_CRITERIA_DETAIL/LOWEST_PRICE
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/AWARD_CRITERIA_CONTRACT_NOTICE_INFORMATION/AWARD_CRITERIA_DETAIL/MOST_ECONOMICALLY_ADVANTAGEOUS_TENDER
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the award criterion's `.type`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8554,7 +8572,7 @@
     Business groups:
         BG-707: Award Criteria
         BG-38: Award Criterion
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the award criterion's `.type`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8580,7 +8598,7 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/QUANTITY_SCOPE/OPTIONS/*[matches(name(),'PROVISIONAL_TIMETABLE')]
     TED guidance:
     - Map to the lot's `.options.description`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.options.description`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8596,7 +8614,7 @@
     Business groups:
         BG-707: Award Criteria
         BG-38: Award Criterion
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the award criterion's `.description`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8612,7 +8630,7 @@
     Business groups:
         BG-707: Award Criteria
         BG-38: Award Criterion
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the award criterion's `.description`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8629,7 +8647,7 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Add an award criterion number to the award criterion's `.numbers` array. Map to its `.number`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8646,7 +8664,7 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Add an award criterion number to the award criterion's `.numbers` array. Map to its `.number`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8664,7 +8682,7 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map the code according to the \[award criterion weight mapping table\], and map it to the award criterion number's `.weight`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8682,7 +8700,7 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map the code according to the \[award criterion weight mapping table\], and map it to the award criterion number's `.weight`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8700,7 +8718,7 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map the code according to the \[award criterion fixed mapping table\], and map it to the award criterion number's `.fixed`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8718,7 +8736,7 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map the code according to the \[award criterion fixed mapping table\], and map it to the award criterion number's `.fixed`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8736,7 +8754,7 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map the code according to the \[award criterion threshold mapping table\], and map it to the award criterion number's `.threshold`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8754,7 +8772,7 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map the code according to the \[award criterion threshold mapping table\], and map it to the award criterion number's `.threshold`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8769,7 +8787,7 @@
     Description: 'The mathematical equation or any other description used for complicated weighing of criteria (e.g. non-linear weighing, the analytic hierarchy process) when a weighing cannot be expressed per criterion. '
     Business groups:
         BG-707: Award Criteria
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.awardCriteria.weightingDescription`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8784,7 +8802,7 @@
     Description: 'The mathematical equation or any other description used for complicated weighing of criteria (e.g. non-linear weighing, the analytic hierarchy process) when a weighing cannot be expressed per criterion. '
     Business groups:
         BG-707: Award Criteria
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the lot's `.awardCriteria.weightingDescription`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8807,7 +8825,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_SUBCONTRACTING
     TED guidance:
     - Map to the award's `.subcontracting.value.amount`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the award's `.subcontracting.value.amount`.  Map `@currencyID` to the value's `.currency`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8831,7 +8849,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/AWARD_CONTRACT/AWARDED_CONTRACT/INFO_ADD_SUBCONTRACTING
     TED guidance:
     - Map to the award's `.subcontracting.description`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (AUTO) Map to the award's `.subcontracting.description`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8855,7 +8873,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/AWARD_CONTRACT/AWARDED_CONTRACT/PCT_SUBCONTRACTING
     TED guidance:
     - Map to the award's `.subcontracting.minimumPercentage` and `.subcontracting.maximumPercentage`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the award's `.subcontracting.minimumPercentage` and `.subcontracting.maximumPercentage`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8897,7 +8915,7 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/QUANTITY_SCOPE/RECURRENT_CONTRACT/*[matches(name(),'TIME_FRAME_SUBSEQUENT_CONTRACTS')]
     TED guidance:
     - Map to the lot's `.renewal.description`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.renewal.description`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8913,7 +8931,7 @@
     Description: A security clearance is required.
     Business groups:
         BG-705: Other Requirements
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Discard. If `.otherRequirements.securityClearance` is set, a security clearance is required.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8936,7 +8954,7 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/QUANTITY_SCOPE/RECURRENT_CONTRACT/NUMBER_POSSIBLE_RENEWALS
     TED guidance:
     - Set the lot's `.hasRenewal` to `true`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.renewal.maximumRenewals`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8972,7 +8990,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/OBJECT_DESCR/*[matches(name(),'EU_PROGR_RELATED')]
     TED guidance:
     - '* Get the `Organization` object whose `.name` is ''European Union''. If none exists yet:\n  * [Add a party](../../operations/#add-a-party)\n  * Set its `.name` to ''European Union''\n* Add ''funder'' to its `.roles`\n\n* Get the `Finance` object whose `.description` is the *Identification of the project*. If none exists yet:\n  * Add a `Finance` object to the `planning.budget.finance` array\n  * Map the *Identification of the project* to its `.description`\n  * Set its `.id` incrementally\n  * Set its `.financingParty.name` to ''European Union''\n  * Set its `.financingParty.id` to the party''s `.id`\n* Add the lot''s `.id` to the Finance object''s `.relatedLots` (**F12, F13**: Instead, do nothing)\n\nIn [future forms](https://github.com/eForms/eForms/issues/181#issuecomment-439861320), this field will be de-emphasized.'
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) * Get the `Organization` object whose `.name` is 'European Union'. If none exists yet:\\n  * [Add a party](../../operations/#add-a-party)\\n  * Set its `.name` to 'European Union'\\n\* Add 'funder' to its `.roles`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -8989,7 +9007,10 @@
     Business groups:
         BG-703: Organisation
         BG-3: Buyer
-    eForms guidance: ''
+    eForms guidance: |-
+        (UNREVIEWED) Get the Organization object, and add a Classification object to its `.details.classifications` array.  Map to its `.id`. Set its `.description` according to the definition corresponding to the code in the [EU Main Activity code list](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/main-activity).
+
+        If the code is in the [COFOG classification](<https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Classification_of_the_functions_of_government_(COFOG)>), set the classification's `.scheme` to ['COFOG'](https://unstats.un.org/unsd/publications/catalogue?selectID=145). Otherwise, set the classification's `.scheme` to ['Directive 2014/25/EU'](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32014L0025#d1e2854-243-1). \[https://github.com/open-contracting/european-union-support/issues/64\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9016,7 +9037,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/CONTRACTING_BODY/DOCUMENT_RESTRICTED
     TED guidance:
     - Add a `ParticipationFee` object to the `tender.participationFees` array, set its `.type` to 'document', and set its `.id` to '1'.
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the `ParticipationFee` object's `.description`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9037,7 +9058,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/CONTRACTING_BODY/DOCUMENT_RESTRICTED
     TED guidance:
     - Add a `ParticipationFee` object to the `tender.participationFees` array, set its `.type` to 'document', and set its `.id` to '1'.
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the `ParticipationFee` object's `.description`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9053,7 +9074,7 @@
     Description: 'The unit which the good, service, or work comes in, for example hours or kilograms. Where CPV code is a supply which does not need a further unit (e.g. cars), then no unit needs to be given and quantity is taken to be a count, e.g. the "number of cars". '
     Business groups:
         BG-2: Purpose
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the item's `.unit.id`. Set the item's `.unit.scheme` to ['EU Measurement unit'](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/measurement-unit).Set the item's `.unit.name` according to the [EU Measurement unit concept scheme's](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/measurement-unit) label.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9077,7 +9098,7 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/*[matches(name(),'ACCEPTED_VARIANTS')]
     TED guidance:
     - Set the lot's `.submissionTerms.variantPolicy` to 'allowed'
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Set the lot's `.submissionTerms.variantPolicy` according to [the allowed values](https://extensions.open-contracting.org/en/extensions/submissionTerms/master/codelists/).
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9093,7 +9114,7 @@
     Description: The time limit for receipt of expressions of interest.
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Format it as [a valid date time](https://standard.open-contracting.org/latest/en/schema/reference/?highlight=dates#date), and map to the lot's `tender.tenderPeriod.endDate`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9115,7 +9136,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/PROCEDURE/TIME_RECEIPT_TENDERS
     TED guidance:
     - Map to the time component of `tender.tenderPeriod.endDate`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Format it as [a valid date time](https://standard.open-contracting.org/latest/en/schema/reference/?highlight=dates#date), and map to the lot's `tender.tenderPeriod.endDate`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9131,7 +9152,7 @@
     Description: The estimated date of dispatch of the invitations to confirm interest.
     Business groups:
         BG-100: Communication
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.communication.invitationToConfirmInterest.startDate` \[https://github.com/open-contracting/european-union-support/issues/55\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9146,7 +9167,7 @@
     Description: The name of the electronic tool or device used for electronic communication.
     Business groups:
         BG-100: Communication
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.communication.atypicalToolName` \[https://github.com/open-contracting/european-union-support/issues/55\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9161,7 +9182,7 @@
     Description: The name of the electronic tool or device used for electronic communication.
     Business groups:
         BG-100: Communication
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the lot's `.communication.atypicalToolName` \[https://github.com/open-contracting/european-union-support/issues/55\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9176,7 +9197,7 @@
     Description: The organisation is a natural person.
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Discard. There's an open issue ([#883](https://github.com/open-contracting/standard/issues/883)) to distinguish natural persons from organizations.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9256,7 +9277,7 @@
         BG-711: Contract Terms
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/SUBCONTRACTING/SUBCONTRACT_SHARE/MIN_PERCENTAGE
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.subcontracting.competitiveMinimumPercentage`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9276,7 +9297,7 @@
     - TED_EXPORT/FORM_SECTION/F12_2014/PROCEDURE/NUMBER_VALUE_PRIZE
     TED guidance:
     - Map to `tender.designContest.prizes.description`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the prize's `.value.amount`. Map `@currencyID` to the value's `.currency`. \[https://github.com/open-contracting/european-union-support/issues/76\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9296,7 +9317,7 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/SUBCONTRACTING/INDICATE_ANY_CHANGE
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/SUBCONTRACTING/SUBCONTRACT_AWARD_PART
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/SUBCONTRACTING/SUBCONTRACT_SHARE
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) If different from 'none', retrieve the [label of the code](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/subcontracting-obligation), and map it to the lot's `.subcontracting.description` \[https://github.com/open-contracting/european-union-support/issues/75\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9315,7 +9336,7 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/SUBCONTRACTING/INDICATE_ANY_SHARE
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/SUBCONTRACTING/IDENTIFY_SUBCONTRACT
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Add to the lot's `.submissionTerms.subcontractingClauses` array. \[https://github.com/open-contracting/european-union-support/issues/74\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9331,7 +9352,7 @@
     Business groups:
         BG-7: Notice Result
         BG-137: Procedure Lot Result
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the award's `.estimatedValue.amount`. Map `@currencyID` to the value's `.currency`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9347,7 +9368,7 @@
     Business groups:
         BG-6: Procedure
         BG-709: Second Stage
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Discard.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9367,7 +9388,7 @@
     - TED_EXPORT/FORM_SECTION/F07_2014/LEFTI/QUALIFICATION/CONDITIONS
     TED guidance:
     - Add to the `tender.otherRequirements.qualificationSystemConditions` array
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to `tender.exclusionGrounds`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9382,7 +9403,7 @@
     Description: The brief description of criteria regarding the personal situation of tenderers that may lead to their exclusion. This must include a list of all such criteria and indicate required information (e.g. self-declaration, documentation). This can also include specific national exclusion grounds.
     Business groups:
         BG-701: Exclusion Grounds
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to `tender.exclusionGrounds`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9409,7 +9430,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/LEFTI/PERFORMANCE_CONDITIONS
     TED guidance:
     - Map to `tender.contractTerms.performanceTerms`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.contractTerms.performanceTerms`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9425,7 +9446,7 @@
     Description: The European Public Procurement Notice Identifier of this notice. Including this identifier in all published version of this notice (e.g. TED, national publication portals, regional publication portals) allows unique identification of procurement notices around the EU.
     Business groups:
         BG-1: Notice
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Refer to the **guidance for common operations (create a new release)**.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9441,7 +9462,7 @@
     Description: The language(s) in which this notice is officially available. These linguistic versions are equally legally valid.
     Business groups:
         BG-1: Notice
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Lowercase `/*/cbc:NoticeLanguageCode`, and map to `language`.\\n\\nDiscard `/*/cac:AdditionalNoticeLanguage/cbc:ID`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9457,7 +9478,7 @@
     Description: The language(s) in which this notice is officially available. These linguistic versions are equally legally valid.
     Business groups:
         BG-1: Notice
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Lowercase `/*/cbc:NoticeLanguageCode`, and map to `language`.\\n\\nDiscard `/*/cac:AdditionalNoticeLanguage/cbc:ID`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9492,7 +9513,7 @@
         BG-101: Procurement Documents
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_CONCESSIONAIRE_DEFENCE/FD_CONTRACT_CONCESSIONAIRE_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_SUB_DEFENCE/AWARD_CRITERIA_CONTRACT_NOTICE_INFORMATION_DEFENCE
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the `ParticipationFee` object's `.description`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9508,7 +9529,7 @@
     Description: The justification for restricting access to certain procurement documents.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the `ParticipationFee` object's `.description`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9524,7 +9545,7 @@
     Description: The language(s) in which the procurement documents are officially available. These linguistic versions are equally legally valid.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Lowercase and convert the code into a two-letter [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes). Add it to the document's `.languages` array. \[https://github.com/open-contracting/european-union-support/issues/55\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9540,7 +9561,7 @@
     Description: The language(s) in which the procurement documents are officially available. These linguistic versions are equally legally valid.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Lowercase and convert the code into a two-letter [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes). Add it to the document's `.languages` array. \[https://github.com/open-contracting/european-union-support/issues/55\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9556,7 +9577,7 @@
     Business groups:
         BG-7: Notice Result
         BG-137: Procedure Lot Result
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the award's `.maximumValue.amount`. Map `@currencyID` to the value's `.currency`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9587,7 +9608,7 @@
     TED guidance:
     - Add 'publicServiceMissionOrganization' to the `tender.otherRequirements.reservedParticipation` array
     - Add 'shelteredWorkshop' to the `tender.otherRequirements.reservedParticipation` array
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Add 'shelteredWorkshop' to the lot's `.otherRequirements.reservedParticipation` array
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9605,7 +9626,7 @@
         BG-705: Other Requirements
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/LEFTI_PRIOR_INFORMATION/RESERVED_CONTRACTS/RESTRICTED_TO_SHELTERED_WORKSHOPS
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Add 'shelteredWorkshop' to the lot's `.otherRequirements.reservedParticipation` array
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9627,7 +9648,7 @@
     TED guidance:
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''lowestValidBidValue'', and map to its `.value`.'
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''lowestValidBidValue'', set its `.relatedLot` to the award''s only `.relatedLots` entry, and map to its `.value`.'
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Add a bids statistic\](../../operations/#add-a-bids-statistic), set its `.measure` to 'lowestValidBidValue', and map to its `.value.amount`. Map `@currencyID` to its `.currency`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9649,7 +9670,7 @@
     TED guidance:
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''highestValidBidValue'', and map to its `.value`.'
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''highestValidBidValue'', set its `.relatedLot` to the award''s only `.relatedLots` entry, and map to its `.value`.'
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) [Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to 'highestValidBidValue', and map to its `.value.amount`. Map `@currencyID` to its `.currency`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9739,7 +9760,7 @@
     - Discard. The *Initial estimated total value of the contract/lot* is available in the OCDS release with the same `ocid` as this release and with 'tender' in its `tag`.
     - Map to the contract's `.value.amount`
     - Map to the contract's `.value.amount`. If present, this takes precedence over the [total value of the contract/lot/concession](#/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/VALUES/VAL_TOTAL).
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the bid's `.value.amount`. Map `@currencyID` to the value's `.currency`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9843,7 +9864,7 @@
     Description: 'There are other restrictions on the place of performance (e.g. "anywhere in the European Economic Area", "anywhere in the given country"). '
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Retrieve [the label of the code](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map it to the related items' `.deliveryLocation.description` \[https://github.com/open-contracting/european-union-support/issues/55\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9859,7 +9880,7 @@
     Description: 'There are other restrictions on the place of performance (e.g. "anywhere in the European Economic Area", "anywhere in the given country"). '
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Retrieve [the label of the code](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map it to the related items' `.deliveryLocation.description` \[https://github.com/open-contracting/european-union-support/issues/55\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9875,7 +9896,7 @@
     Description: 'There are other restrictions on the place of performance (e.g. "anywhere in the European Economic Area", "anywhere in the given country"). '
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Retrieve [the label of the code](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map it to the related items' `.deliveryLocation.description` \[https://github.com/open-contracting/european-union-support/issues/55\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9892,7 +9913,7 @@
         BG-708: Place of Performance
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/LOCATION_NUTS/LOCATION
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the item's `.deliveryLocation.description`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9907,7 +9928,7 @@
     Description: Additional information about the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the item's `.deliveryLocation.description`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9922,7 +9943,7 @@
     Description: Additional information about the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the item's `.deliveryLocation.description`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9939,7 +9960,7 @@
         BG-711: Contract Terms
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/SUBCONTRACTING/SUBCONTRACT_SHARE/MAX_PERCENTAGE
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.subcontracting.competitiveMaximumPercentage`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9956,7 +9977,7 @@
         BG-7: Notice Result
         BG-320: Tender
         BG-180: Subcontracting
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Discard. If the award's `.subcontracting.value` is not empty, the buyer knows the estimated value of the part of the contract that the contractor will subcontract to third parties.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9973,7 +9994,7 @@
         BG-7: Notice Result
         BG-320: Tender
         BG-180: Subcontracting
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Discard. If the award's `.subcontracting.minimumPercentage` and `.subcontracting.maximumPercentage` are not empty, the buyer knows the estimated value of the part of the contract that the contractor will subcontract to third parties.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -9988,7 +10009,7 @@
     Description: Additional information about the security clearance (e.g. which level of security clearance is required, which team members must have it, whether it is necessary already for accessing the procurement documents or only for contract execution).
     Business groups:
         BG-705: Other Requirements
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.otherRequirements.securityClearance`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10003,7 +10024,7 @@
     Description: The justification for only indicating the award criteria's order of importance, not their weighing.
     Business groups:
         BG-707: Award Criteria
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.awardCriteria.orderRationale`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10018,7 +10039,7 @@
     Description: The justification for only indicating the award criteria's order of importance, not their weighing.
     Business groups:
         BG-707: Award Criteria
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the lot's `.awardCriteria.orderRationale`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10036,7 +10057,7 @@
         BG-38: Award Criterion
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/AWARD_CRITERIA_CONTRACT_NOTICE_INFORMATION/AWARD_CRITERIA_DETAIL/MOST_ECONOMICALLY_ADVANTAGEOUS_TENDER/CRITERIA_STATED_BELOW
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the award criterion's `.name`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10052,7 +10073,7 @@
     Business groups:
         BG-707: Award Criteria
         BG-38: Award Criterion
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the award criterion's `.name`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10080,7 +10101,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/LEFTI/RESTRICTED_SHELTERED_PROGRAM
     TED guidance:
     - Set `tender.contractTerms.reservedExecution` to `true`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Set the lot's `.contractTerms.reservedExecution` to `true`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10098,7 +10119,7 @@
         BG-711: Contract Terms
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/LEFTI_PRIOR_INFORMATION/RESERVED_CONTRACTS/RESTRICTED_TO_FRAMEWORK
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Set the lot's `.contractTerms.reservedExecution` to `true`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10114,7 +10135,7 @@
     Description: The language(s) in which the procurement documents (or their parts) are unofficially available. These linguistic versions are not an official translation, they are provided only for information.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Set the document's `.unofficialTranslation` to `true` \[https://github.com/open-contracting/european-union-support/issues/55\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10130,7 +10151,7 @@
     Description: The language(s) in which the procurement documents (or their parts) are unofficially available. These linguistic versions are not an official translation, they are provided only for information.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Set the document's `.unofficialTranslation` to `true` \[https://github.com/open-contracting/european-union-support/issues/55\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10146,7 +10167,7 @@
     Description: 'The preferred date of publication of the notice on TED (e.g. to avoid publication during a national holiday). '
     Business groups:
         BG-1: Notice
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) [Format the date](common-operations), and map to `tender.communication.noticeRequestedPublicationDate`. \[https://github.com/open-contracting/european-union-support/issues/55\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10162,7 +10183,7 @@
     Description: The fax for contacting the organisation. To avoid unnecessary processing of personal data, the fax may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the party's `.contactPoint.faxNumber`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10250,7 +10271,7 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX
     - Map to the party's `.contactPoint.faxNumber`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.contactPoint.faxNumber`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10266,7 +10287,7 @@
     Description: The fax for contacting the organisation. To avoid unnecessary processing of personal data, the fax may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.contactPoint.faxNumber`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10282,7 +10303,7 @@
     Description: The fax for contacting the organisation. To avoid unnecessary processing of personal data, the fax may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
     Business groups:
         BG-703: Organisation
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.contactPoint.faxNumber`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10299,7 +10320,7 @@
     Business groups:
         BG-703: Organisation
         BG-3: Buyer
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) In the party object that has 'buyer' in its `.roles` array, add 'contractingEntity' to its `.roles` array \[https://github.com/open-contracting/european-union-support/issues/65\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10326,7 +10347,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/COMPLEMENTARY_INFO/EINVOICING
     TED guidance:
     - Set `tender.contractTerms.electronicInvoicingPolicy` to 'allowed'
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Set the lot's `.contractTerms.electronicInvoicingPolicy` to 'allowed'
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10342,7 +10363,7 @@
     Description: Advanced or qualified electronic signature or seal (as defined in Regulation (EU) No 910/2014) is required.
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Set the lot's `.submissionTerms.advancedElectronicSignaturePolicy` to 'required' \[https://github.com/open-contracting/european-union-support/issues/68\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10357,7 +10378,7 @@
     Description: The description of how to submit tenders, requests to participate, or expressions of interest non-electronically.
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.submissionMethodDetails`. \[https://github.com/open-contracting/european-union-support/issues/58\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10402,7 +10423,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/LEFTI/PARTICULAR_PROFESSION
     TED guidance:
     - Add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array and set its `.type` to 'technical'. If *Reference to the relevant law, regulation or administrative provision* is set, map it to the criterion's `.description`. Otherwise, set the criterion's `.description` to 'Execution of the service is reserved to a particular profession'.
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) If `cbc:CalculationExpressionCode[@listName='usage']` is set to 'used', add a `SelectionCriterion` object to the lot's `.selectionCriteria.criteria` array and set its `.type` according to the guidance in \[common operations\](#selection criterion type). Otherwise, discard.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10418,7 +10439,7 @@
     Description: The criteria (or criterion) of the given type are (is) used, unused, or (in case of prior information notice used as a call for competition or to reduce time limits) the use is not yet known.
     Business groups:
         BG-702: Selection Criteria
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Discard.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10450,7 +10471,7 @@
     - Add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array, set its `.type` to 'economic', and set its `.description` to "As stated in the procurement documents".
     - Add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array, set its `.type` to 'technical', and map to its `.description`.
     - Add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array, set its `.type` to 'technical', and set its `.description` to "As stated in the procurement documents".
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the Selection criterion's `.description`. \[Concatenate it with BT-750 Selection Criteria Description.\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10468,7 +10489,7 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/LEFTI_CONTRACT_DEFENCE/CONTRACT_RELATING_CONDITIONS/DEPOSITS_GUARANTEES_REQUIRED
     - TED_EXPORT/FORM_SECTION/CONTRACT_CONCESSIONAIRE_DEFENCE/FD_CONTRACT_CONCESSIONAIRE_DEFENCE/LEFTI_CONTRACT_SUB_DEFENCE/CONTRACT_RELATING_CONDITIONS/DEPOSITS_GUARANTEES_REQUIRED
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.submissionTerms.depositsGuarantees`. \[https://github.com/open-contracting/european-union-support/issues/58\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10502,7 +10523,7 @@
     TED guidance:
     - Get the `SelectionCriterion` object whose `.type` is 'economic'; if none exists, add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array, and set its `.type` to 'economic'. Then, map to its `.minimum`.
     - Get the `SelectionCriterion` object whose `.type` is 'technical'. If none exists, add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array, and set its `.type` to 'technical'. Then, map to its `.minimum`.
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the Selection criterion's `.description`. \[Concatenate it with BT-750 Selection Criteria Name.\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10522,7 +10543,7 @@
     - TED_EXPORT/FORM_SECTION/F05_2014/LEFTI/DEPOSIT_GUARANTEE_REQUIRED
     TED guidance:
     - Map to `tender.submissionTerms.depositsGuarantees`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Discard. If the lot's `.submissionTerms.depositsGuarantees` is not empty, a guarantee is required.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10538,7 +10559,7 @@
     Business groups:
         BG-702: Selection Criteria
         BG-72: Selection Criteria Second Stage Invite Number
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Add a Selection criterion object to the lot's `.selectionCriteria.criteria`. Map to its `.minimum`. \[https://github.com/open-contracting/european-union-support/issues/73\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10623,7 +10644,7 @@
     - TED_EXPORT/FORM_SECTION/F21_2014/PROCEDURE/TERMINATION_PIN
     TED guidance:
     - Set `tender.status` to 'complete'
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Set `tender.status` to 'complete'
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10639,7 +10660,7 @@
     Description: The version of the notice. This helps, for example, to avoid errors caused by multiple change notices sent at a similar time.
     Business groups:
         BG-1: Notice
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Discard.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10682,7 +10703,7 @@
     TED guidance:
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''bids'', and map to its `.value`.'
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''bids'', set its `.relatedLot` to the award''s only `.relatedLots` entry, and map to its `.value`.'
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) [Add a bids statistic](../../operations/#add-a-bids-statistic). Set its `.measure` according to the value of `efbc:StatisticsCode` and to the \[submission count types mapping table\], and map to its `.value`. \[https://github.com/open-contracting/european-union-support/issues/78\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10699,7 +10720,7 @@
         BG-711: Contract Terms
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/LEFTI_CONTRACT_DEFENCE/CONTRACT_RELATING_CONDITIONS/LEGAL_FORM
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.contractTerms.tendererLegalForm`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10747,7 +10768,7 @@
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''foreignBidsFromNonEU'',, set its `.relatedLot` to the award''s only `.relatedLots` entry and map to its `.value`.'
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''smeBids'', and map to its `.value`.'
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''smeBids'', set its `.relatedLot` to the award''s only `.relatedLots` entry, and map to its `.value`.'
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) [Add a bids statistic](../../operations/#add-a-bids-statistic). map to its `.measure` according to the \[submission count types mapping table\], and set its `.value` according to the value of `efbc:StatisticsNumeric`. \[https://github.com/open-contracting/european-union-support/issues/78\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10767,7 +10788,7 @@
     - TED_EXPORT/FORM_SECTION/F05_2014/LEFTI/LEGAL_FORM
     TED guidance:
     - Map to `tender.contractTerms.tendererLegalForm`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Discard. If the lot's `.contractTerms.tendererLegalForm` is not empty, tenderers must take a certain legal form.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10809,7 +10830,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/OBJECT_CONTRACT/LOT_DIVISION/LOT_ALL
     TED guidance:
     - Set `tender.lotDetails.maximumLotsBidPerSupplier` to the number (not the string) 1e9999 (which parses to infinity i.e. "all")
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Set `tender.lotDetails.maximumLotsBidPerSupplier` to the number (not the string) 1e9999 (which parses to infinity i.e. "all")
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10830,7 +10851,7 @@
     - TED_EXPORT/FORM_SECTION/F05_2014/OBJECT_CONTRACT/OBJECT_DESCR/ECATALOGUE_REQUIRED
     TED guidance:
     - Set the lot's `.submissionTerms.electronicCataloguePolicy` to 'required'.
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Set the lot's `.submissionTerms.electronicCataloguePolicy` according to [the allowed values](https://extensions.open-contracting.org/en/extensions/submissionTerms/master/codelists/).
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10858,7 +10879,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/PROCEDURE/FRAMEWORK
     TED guidance:
     - Set `tender.techniques.hasFrameworkAgreement` to `true`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) If different from 'none', set the lot's `.techniques.hasFrameworkAgreement` to `true`. Map the code according to the \[organisation role mapping table\] to the lot's `.techniques.method`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10876,7 +10897,7 @@
         BG-706: Techniques
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/*[matches(name(),'FRAMEWORK_AGREEMENT')]
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (REPEAT) If different from 'none', set the lot's `.techniques.hasFrameworkAgreement` to `true`. Map the code according to the \[organisation role mapping table\] to the lot's `.techniques.method`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10901,7 +10922,7 @@
     TED guidance:
     - Set `tender.techniques.dynamicPurchasingSystem.type` to 'open'
     - Set `tender.techniques.hasDynamicPurchasingSystem` to `true`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) If different from 'none', set the lot's `.techniques.hasDynamicPurchasingSystem` to `true`. Map the code according to the \[DPS type mapping table\] to the lot's `.techniques.dynamicPurchasingSystem.type`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10925,7 +10946,7 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/AWARD_CRITERIA_CONTRACT_NOTICE_INFORMATION/IS_ELECTRONIC_AUCTION_USABLE/*[matches(name(),'USE_ELECTRONIC_AUCTION')]
     TED guidance:
     - Set `tender.techniques.hasElectronicAuction` to `true`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Set the lot's `.techniques.hasElectronicAuction` to `true`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10941,7 +10962,7 @@
     Business groups:
         BG-7: Notice Result
         BG-310: Contract
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Discard. The contract is awarded within a framework agreement if the related lot's or tender's `.techniques.hasFrameworkAgreement` is `true`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10957,7 +10978,7 @@
     Description: Tenderers may submit more than one tender (for a given lot).
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Set the lot's `.submissionTerms.multipleTendersPolicy` to 'allowed'. \[https://github.com/open-contracting/european-union-support/issues/55\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10977,7 +10998,7 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/LEFTI_CONTRACT_DEFENCE/CONTRACT_RELATING_CONDITIONS/MAIN_FINANCING_CONDITIONS
     TED guidance:
     - Map to `tender.contractTerms.financialTerms`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.contractTerms.financialTerms`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10993,7 +11014,7 @@
     Description: Whether tenderer-related information can be supplemented even after the submission deadline.
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map the [definition of the code](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/missing-info-submission) to the lot's `.submissionMethodDetails` \[https://github.com/open-contracting/european-union-support/issues/69\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -11008,7 +11029,7 @@
     Description: Description of the tenderer-related information that can be supplemented even after the submission deadline.
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.submissionMethodDetails` \[https://github.com/open-contracting/european-union-support/issues/69\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -11033,7 +11054,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/AWARD_CONTRACT/AWARDED_CONTRACT/LIKELY_SUBCONTRACTED
     TED guidance:
     - Set the award's `.hasSubcontracting` to `true`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Set the award's `.hasSubcontracting` to `true`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -11130,7 +11151,7 @@
         BG-705: Other Requirements
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/LEFTI_CONTRACT_DEFENCE/CONTRACT_RELATING_CONDITIONS/CLEARING_LAST_DATE
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Add a new Milestone object to the `tender.milestones` array. Set its `id`, set its `.type` to 'securityClearanceDeadline' and map to its `.dueDate`.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -11313,7 +11334,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/LEFTI/PERFORMANCE_STAFF_QUALIFICATION
     TED guidance:
     - Set `tender.otherRequirements.requiresStaffNamesAndQualifications` to `true`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) If equal to 'par-requ' or 't-requ', set the lot's `.otherRequirements.requiresStaffNamesAndQualifications` to `true`. If equal to 'not-requ', set it to `false`. Otherwise, discard. \[https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/requirement-stage\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -11525,7 +11546,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/PROCEDURE/MAIN_FEATURES_AWARD
     TED guidance:
     - Map to `tender.awardCriteriaDetails`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to `tender.procurementMethodDetails`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -11551,7 +11572,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/COMPLEMENTARY_INFO/EORDERING
     TED guidance:
     - Set `tender.contractTerms.hasElectronicOrdering` to `true`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Set the lot's `.contractTerms.hasElectronicOrdering` to `true`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -11577,7 +11598,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/COMPLEMENTARY_INFO/EPAYMENT
     TED guidance:
     - Set `tender.contractTerms.hasElectronicPayment` to `true`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Set the lot's `.contractTerms.hasElectronicPayment` to `true`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -11597,7 +11618,7 @@
     - TED_EXPORT/FORM_SECTION/F05_2014/COMPLEMENTARY_INFO/*[matches(name(),'RECURRENT_PROCUREMENT')]
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/COMPLEMENTARY_INFORMATION_CONTRACT_NOTICE/*[matches(name(),'RECURRENT_PROCUREMENT')]
     - TED_EXPORT/FORM_SECTION/F24_2014/COMPLEMENTARY_INFO/*[matches(name(),'RECURRENT_PROCUREMENT')]
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (AUTO) Set `tender.hasRecurrence` to `true`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -11619,7 +11640,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/COMPLEMENTARY_INFO/ESTIMATED_TIMING
     TED guidance:
     - Map to `tender.recurrence.description`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) (AUTO) Map to `tender.recurrence.description`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -11647,7 +11668,7 @@
     - TED_EXPORT/FORM_SECTION/F21_2014/PROCEDURE/LANGUAGES
     - TED_EXPORT/FORM_SECTION/F22_2014/PROCEDURE/LANGUAGES
     - TED_EXPORT/FORM_SECTION/F24_2014/PROCEDURE/LANGUAGES
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Lowercase and add to the lot's `.submissionTerms.languages` array
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -11668,7 +11689,7 @@
     TED guidance:
     - Map to `tender.submissionTerms.bidValidityPeriod.endDate`
     - Multiply by 30, and map to `tender.submissionTerms.bidValidityPeriod.durationInDays`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.submissionTerms.bidValidityPeriod.endDate`
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -11702,7 +11723,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/COMPLEMENTARY_INFO/REVIEW_PROCEDURE
     TED guidance:
     - Map to `tender.reviewDetails`
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) Map to the lot's `.reviewDetails`
     eForms example: ''
     OCDS example: ''
     sdk: ''

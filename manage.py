@@ -478,6 +478,8 @@ def lint(filename):
     sdk_regex = re.compile(r'/\d+\.\d+\.\d+/')
     sdk_documents = {}
 
+    unreviewed = 0
+
     for field in fields:
         identifier = field['id']
 
@@ -497,6 +499,7 @@ def lint(filename):
 
         # Format Markdown.
         field['eForms guidance'] = mdformat.text(field['eForms guidance']).rstrip()
+        unreviewed += field['eForms guidance'].startswith('(UNREVIEWED)')
 
         # Format XML.
         eforms_example = field['eForms example']
@@ -524,6 +527,9 @@ def lint(filename):
                     click.echo(f"{identifier}: OCDS is invalid: {e.message} ({'/'.join(e.absolute_schema_path)})")
             except json.decoder.JSONDecodeError as e:
                 click.echo(f'{identifier}: JSON is invalid: {e}: {ocds_example}')
+
+    if unreviewed:
+        click.echo(f'{unreviewed} unreviewed eForms guidance')
 
     write_yaml_file(filename, fields)
 
