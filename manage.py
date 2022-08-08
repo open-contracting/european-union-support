@@ -535,6 +535,28 @@ def lint(filename):
 
 
 @cli.command()
+def business_groups():
+    # A warning is issued, because the Excel file has an unsupported extension.
+    df = pd.read_excel(sourcedir / 'CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx', 'Annex')
+
+    # Remove extra header rows.
+    df = df[df['ID'].notna()]
+
+    # Normalize whitespace.
+    df['Name'] = df['Name'].str.strip()
+
+    # Keep only rows for business groups.
+    df = df[df['ID'].str.startswith('BG-')]
+
+    # Simulate a fixed width file for easy reading.
+    for column, width in (('Level', 3), ('Repeatable', 3), ('ID', 6), ('Name', 45)):
+        df[column] = df[column].str.ljust(width)
+
+    df = df[['Level', 'ID', 'Name', 'Repeatable', 'Description']]
+    df.to_csv(eformsdir / 'business-groups.csv', sep='\t', index=False)
+
+
+@cli.command()
 @click.argument('file', type=click.File())
 def statistics(file):
     """
