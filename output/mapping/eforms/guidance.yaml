@@ -602,10 +602,10 @@
     - TED_EXPORT/FORM_SECTION/F02_2014/PROCEDURE/RIGHT_CONTRACT_INITIAL_TENDERS
     TED guidance:
     - Set `tender.secondStage.noNegotiationNecessary` to `true`
-    eForms guidance: (UNREVIEWED) Set the lot's `.secondStage.noNegotiationNecessary` to `true`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Set the lot's `.secondStage.noNegotiationNecessary` to `true`
+    eForms example: <cbc:NoFurtherNegotiationIndicator>true</cbc:NoFurtherNegotiationIndicator>
+    OCDS example: '{"tender":{"lots":[{"secondStage":{"noNegotiationNecessary":true}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#awardConsequencesSection
 -   id: BT-122-Lot
     parentNodeId: ND-AuctionTerms
     name: Electronic Auction Description
@@ -625,10 +625,10 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/AWARD_CRITERIA_CONTRACT_NOTICE_INFORMATION/IS_ELECTRONIC_AUCTION_USABLE/USE_ELECTRONIC_AUCTION
     TED guidance:
     - Map to `tender.techniques.electronicAuction.description`
-    eForms guidance: (UNREVIEWED) Map to the lot's `.techniques.electronicAuction.description`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's `.techniques.electronicAuction.description`
+    eForms example: <cac:AuctionTerms><cbc:Description languageID="ENG">The online auction solution ...</cbc:Description></cac:AuctionTerms>
+    OCDS example: '{"tender":{"lots":[{"techniques":{"electronicAuction":{"description":"The online auction solution ..."}}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#auctionTermsSection
 -   id: BT-123-Lot
     parentNodeId: ND-AuctionTerms
     name: Electronic Auction URL
@@ -641,10 +641,10 @@
     Description: The internet address of the electronic auction.
     Business groups:
         BG-706: Techniques
-    eForms guidance: (UNREVIEWED) Map to the lot's `.techniques.electronicAuction.url`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's `.techniques.electronicAuction.url`
+    eForms example: <cac:AuctionTerms><cbc:AuctionURI>https://my-online-eauction.eu/</cbc:AuctionURI></cac:AuctionTerms>
+    OCDS example: '{"tender":{"lots":[{"techniques":{"electronicAuction":{"url":"https://my-online-eauction.eu/"}}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#auctionTermsSection
 -   id: BT-124-Lot
     parentNodeId: ND-LotTenderingProcess
     name: Tool Atypical URL
@@ -670,10 +670,10 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/CONTRACTING_BODY/URL_TOOL
     TED guidance:
     - Map to `tender.communication.atypicalToolUrl`
-    eForms guidance: (UNREVIEWED) Map to the lot's `.communication.atypicalToolUrl`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's `.communication.atypicalToolUrl`
+    eForms example: <cbc:AccessToolsURI>https://my-atypical-tool.com/</cbc:AccessToolsURI>
+    OCDS example: '{"tender":{"lots":[{"communication":{"atypicalToolUrl":"https://my-atypical-tool.com/"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#atypicalToolSection
 -   id: BT-124-Part
     parentNodeId: ND-PartTenderingProcess
     name: Tool Atypical URL
@@ -693,10 +693,10 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/CONTRACTING_BODY/URL_TOOL
     TED guidance:
     - Map to `tender.communication.atypicalToolUrl`
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the lot's `.communication.atypicalToolUrl`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's `.communication.atypicalToolUrl`
+    eForms example: <cbc:AccessToolsURI>https://my-atypical-tool.com/</cbc:AccessToolsURI>
+    OCDS example: '{"tender":{"lots":[{"communication":{"atypicalToolUrl":"https://my-atypical-tool.com/"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#atypicalToolSection
 -   id: BT-125(i)-Lot
     parentNodeId: ND-LotPreviousPlanning
     name: Previous Planning Identifier
@@ -817,10 +817,10 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/OBJECT_CONTRACT/DATE_PUBLICATION_NOTICE
     TED guidance:
     - Map to `tender.communication.futureNoticeDate`
-    eForms guidance: (UNREVIEWED) Map to `tender.communication.futureNoticeDate`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to `tender.communication.futureNoticeDate`
+    eForms example: <cbc:PlannedDate>2020-03-15+01:00</cbc:PlannedDate>
+    OCDS example: '{"tender":{"communication":{"futureNoticeDate":"2020-03-15T00:00:00+01:00"}}}'
+    sdk: https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#futureNoticeSection
 -   id: BT-13(d)-Lot
     parentNodeId: ND-LotTenderingProcess
     name: Additional Information Deadline
@@ -833,10 +833,10 @@
     Description: The time limit for requesting additional information about the procurement procedure.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: (UNREVIEWED) Combine the date and time into [a valid date time](https://standard.open-contracting.org/latest/en/schema/reference/?highlight=dates#date), and map to the lot's `.enquiryPeriod.endDate`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the date component of the lot's `.enquiryPeriod.endDate`.
+    eForms example: <cac:AdditionalInformationRequestPeriod><cbc:EndDate>2019-11-08+01:00</cbc:EndDate></cac:AdditionalInformationRequestPeriod>
+    OCDS example: '{"tender": {"lots": [{"enquiryPeriod": {"endDate": "2019-11-08T18:00:00+01:00"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#additionalInfoDeadlineSection
 -   id: BT-13(d)-Part
     parentNodeId: ND-PartTenderingProcess
     name: Additional Information Deadline
@@ -849,10 +849,10 @@
     Description: The time limit for requesting additional information about the procurement procedure.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: (UNREVIEWED) (REPEAT) Combine the date and time into [a valid date time](https://standard.open-contracting.org/latest/en/schema/reference/?highlight=dates#date), and map to the lot's `.enquiryPeriod.endDate`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the date component of the lot's `.enquiryPeriod.endDate`.
+    eForms example: <cac:AdditionalInformationRequestPeriod><cbc:EndDate>2019-11-08+01:00</cbc:EndDate></cac:AdditionalInformationRequestPeriod>
+    OCDS example: '{"tender": {"lots": [{"enquiryPeriod": {"endDate": "2019-11-08T18:00:00+01:00"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#additionalInfoDeadlineSection
 -   id: BT-13(t)-Lot
     parentNodeId: ND-LotTenderingProcess
     name: Additional Information Deadline
@@ -867,10 +867,10 @@
         BG-101: Procurement Documents
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/ADMINISTRATIVE_INFORMATION_CONTRACT_NOTICE_DEFENCE/CONDITIONS_OBTAINING_SPECIFICATIONS/TIME_LIMIT
-    eForms guidance: (UNREVIEWED) (REPEAT) Combine the date and time into [a valid date time](https://standard.open-contracting.org/latest/en/schema/reference/?highlight=dates#date), and map to the lot's `.enquiryPeriod.endDate`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the time component of the lot's `.enquiryPeriod.endDate`.
+    eForms example: <cac:AdditionalInformationRequestPeriod><cbc:EndTime>18:00:00+01:00</cbc:EndTime></cac:AdditionalInformationRequestPeriod>
+    OCDS example: '{"tender": {"lots": [{"enquiryPeriod": {"endDate": "2019-11-08T18:00:00+01:00"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#additionalInfoDeadlineSection
 -   id: BT-13(t)-Part
     parentNodeId: ND-PartTenderingProcess
     name: Additional Information Deadline
@@ -883,10 +883,10 @@
     Description: The time limit for requesting additional information about the procurement procedure.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: (UNREVIEWED) (REPEAT) Combine the date and time into [a valid date time](https://standard.open-contracting.org/latest/en/schema/reference/?highlight=dates#date), and map to the lot's `.enquiryPeriod.endDate`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the time component of the lot's `.enquiryPeriod.endDate`.
+    eForms example: <cac:AdditionalInformationRequestPeriod><cbc:EndTime>18:00:00+01:00</cbc:EndTime></cac:AdditionalInformationRequestPeriod>
+    OCDS example: '{"tender": {"lots": [{"enquiryPeriod": {"endDate": "2019-11-08T18:00:00+01:00"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#additionalInfoDeadlineSection
 -   id: BT-130-Lot
     parentNodeId: ND-LotTenderingProcess
     name: Dispatch Invitation Tender
@@ -909,10 +909,10 @@
     TED guidance:
     - Map to the date component of `tender.secondStage.invitationDate`.
     - Map to the date component of `tender.tenderPeriod.endDate`
-    eForms guidance: (UNREVIEWED) Map to the lot's `.secondStage.invitationDate`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's `.secondStage.invitationDate`
+    eForms example: <cac:InvitationSubmissionPeriod><cbc:StartDate>2019-11-15+01:00</cbc:StartDate></cac:InvitationSubmissionPeriod>
+    OCDS example: '{"tender":{"lots":[{"secondStage":{"invitationDate":"2019-11-15T00:00:00+01:00"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#tenderInvitationSection
 -   id: BT-131(d)-Lot
     parentNodeId: ND-LotTenderingProcess
     name: Deadline Receipt Tenders
@@ -925,10 +925,10 @@
     Description: The time limit for receipt of tenders.
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: (UNREVIEWED) Map to the date component of the lot's `.tenderPeriod.endDate`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the date component of the lot's `.tenderPeriod.endDate`
+    eForms example: <cac:TenderSubmissionDeadlinePeriod><cbc:EndDate>2019-11-30+01:00</cbc:EndDate></cac:TenderSubmissionDeadlinePeriod>
+    OCDS example: '{"tender": {"lots": [{"tenderPeriod": {"endDate": "2019-11-30T12:00:00+01:00"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#tendersDeadlineSection
 -   id: BT-131(t)-Lot
     parentNodeId: ND-LotTenderingProcess
     name: Deadline Receipt Tenders
@@ -941,10 +941,10 @@
     Description: The time limit for receipt of tenders.
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the date component of the lot's `.tenderPeriod.endDate`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the time component of the lot's `.tenderPeriod.endDate`
+    eForms example: <cac:TenderSubmissionDeadlinePeriod><cbc:EndTime>12:00:00+01:00</cbc:EndTime></cac:TenderSubmissionDeadlinePeriod>
+    OCDS example: '{"tender": {"lots": [{"tenderPeriod": {"endDate": "2019-11-30T12:00:00+01:00"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#tendersDeadlineSection
 -   id: BT-1311(d)-Lot
     parentNodeId: ND-LotTenderingProcess
     name: Deadline Receipt Requests
@@ -999,10 +999,10 @@
     - TED_EXPORT/FORM_SECTION/F05_2014/PROCEDURE/OPENING_CONDITION/DATE_OPENING_TENDERS
     TED guidance:
     - Map to the date component of `tender.awardPeriod.startDate` and to the date component of `tender.bidOpening.date`
-    eForms guidance: (UNREVIEWED) Map to the date component of the lot's `.awardPeriod.startDate` and to the date component of the lot's `.bidOpening.date`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the date component of the lot's `.awardPeriod.startDate` and to the date component of the lot's `.bidOpening.date`
+    eForms example: <cac:OpenTenderEvent><cbc:OccurrenceDate>2019-11-05+01:00</cbc:OccurrenceDate></cac:OpenTenderEvent>
+    OCDS example: '{"tender": {"lots": [{"awardPeriod": {"startDate": "2019-11-05T14:00:00+01:00"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#openingEventSection
 -   id: BT-132(t)-Lot
     parentNodeId: ND-PublicOpening
     name: Public Opening Date
@@ -1020,10 +1020,10 @@
     - TED_EXPORT/FORM_SECTION/F05_2014/PROCEDURE/OPENING_CONDITION/TIME_OPENING_TENDERS
     TED guidance:
     - Map to the time component of `tender.awardPeriod.startDate` and to the time component of `tender.bidOpening.date`
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the date component of the lot's `.awardPeriod.startDate` and to the date component of the lot's `.bidOpening.date`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the time component of the lot's `.awardPeriod.startDate` and to the time component of the lot's `.bidOpening.date`
+    eForms example: <cac:OpenTenderEvent><cbc:OccurrenceTime>14:00:00+01:00</cbc:OccurrenceTime></cac:OpenTenderEvent>
+    OCDS example: '{"tender": "lots": [{"awardPeriod": {"startDate": "2019-11-05T14:00:00+01:00"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#openingEventSection'
 -   id: BT-133-Lot
     parentNodeId: ND-PublicOpening
     name: Public Opening Place
@@ -1040,10 +1040,10 @@
     - TED_EXPORT/FORM_SECTION/F05_2014/PROCEDURE/OPENING_CONDITION/PLACE
     TED guidance:
     - Map to `tender.bidOpening.address.streetAddress`
-    eForms guidance: (UNREVIEWED) Map to the lot's `.bidOpening.address.streetAddress`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's `.bidOpening.location.description`
+    eForms example: <cac:OpenTenderEvent><cac:OccurenceLocation><cbc:Description languageID="ENG">online at URL https://event-on-line.org/d22f65 ...</cbc:Description></cac:OccurenceLocation></cac:OpenTenderEvent>
+    OCDS example: '{"tender": {"lots": [{"bidOpening": {"location": {"description": "online at URL https://event-on-line.org/d22f65 ..."}}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#openingEventSection
 -   id: BT-134-Lot
     parentNodeId: ND-PublicOpening
     name: Public Opening Description
@@ -1060,10 +1060,10 @@
     - TED_EXPORT/FORM_SECTION/F05_2014/PROCEDURE/OPENING_CONDITION/INFO_ADD
     TED guidance:
     - Map to `tender.bidOpening.description`
-    eForms guidance: (UNREVIEWED) (AUTO) Map to `tender.bidOpening.description`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's `bidOpening.description`
+    eForms example: <cac:OpenTenderEvent><cbc:Description languageID="ENG">Any tenderer may attend ...</cbc:Description></cac:OpenTenderEvent>
+    OCDS example: '{"tender": {"lots": [{"bidOpening": {"description": "Any tenderer may attend ..."}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#openingEventSection
 -   id: BT-135-Procedure
     parentNodeId: ND-DirectAward
     name: Direct Award Justification Text
@@ -1085,10 +1085,10 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/PROCEDURE/PT_AWARD_CONTRACT_WITHOUT_PUBLICATION/D_JUSTIFICATION
     TED guidance:
     - Map to `tender.procurementMethodRationale`
-    eForms guidance: (UNREVIEWED) Map to the lot's `.procurementMethodRationale`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to `tender.procurementMethodRationale`
+    eForms example: <cac:ProcessJustification><cbc:ProcessReason languageID="ENG">Direct award is justified ...</cbc:ProcessReason></cac:ProcessJustification>
+    OCDS example: '{"tender": {"procurementMethodRationale": "Direct award is justified ..."}}'
+    sdk: https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#directAwardSection
 -   id: BT-1351-Procedure
     parentNodeId: ND-AcceleratedProcedure
     name: Procedure Accelerated Justification
@@ -1234,10 +1234,14 @@
     - Set `.id` to 'D_SERVICES_LISTED' and `.description` to 'The contract has as its object services listed in Annex II B to the directive'
     - Set `.id` to 'D_TECHNICAL' and `.description` to 'The services can be provided only by a particular economic operator due to absence of competition for technical reasons'
     - Set `.id` to 'D_TECHNICAL' and `.description` to 'The works, supplies or services can be provided only by a particular economic operator due to absence of competition for technical reasons'
-    eForms guidance: (UNREVIEWED) Map [the label of the code](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/direct-award-justification) to the lot's `.procurementMethodRationale`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+      Map to `tender.procurementMethodRationaleClassifications`:
+        1. Map the code to `.id`
+        2. Map the [the label of the code](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/direct-award-justification) to `.description`
+        3. Set `.scheme` to 'eforms-direct-award-justification'
+    eForms example: <cac:ProcessJustification><cbc:ProcessReasonCode listName="direct-award-justification">ecom-excl</cbc:ProcessReasonCode></cac:ProcessJustification>
+    OCDS example: '{"tender": {"procurementMethodRationaleClassifications": [{"id": "ecom-excl", "description": "Specific exclusion in the field of electronic communications", "scheme": "eforms-direct-award-justification"}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#directAwardSection
 -   id: BT-137-Lot
     parentNodeId: ND-Lot
     name: Purpose Lot Identifier
