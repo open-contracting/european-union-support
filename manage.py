@@ -548,12 +548,7 @@ def business_groups():
     # Keep only rows for business groups.
     df = df[df['ID'].str.startswith('BG-')]
 
-    # Simulate a fixed width file for easy reading.
-    for column, width in (('Level', 3), ('Repeatable', 3), ('ID', 6), ('Name', 45)):
-        df[column] = df[column].str.ljust(width)
-
-    df = df[['Level', 'ID', 'Name', 'Repeatable', 'Description']]
-    df.to_csv(eformsdir / 'business-groups.tsv', sep='\t', index=False)
+    df[['Level', 'ID', 'Name', 'Repeatable', 'Description']].to_csv(eformsdir / 'business-groups.csv', index=False)
 
 
 @cli.command()
