@@ -553,7 +553,7 @@ def business_groups():
         df[column] = df[column].str.ljust(width)
 
     df = df[['Level', 'ID', 'Name', 'Repeatable', 'Description']]
-    df.to_csv(eformsdir / 'business-groups.csv', sep='\t', index=False)
+    df.to_csv(eformsdir / 'business-groups.tsv', sep='\t', index=False)
 
 
 @cli.command()
