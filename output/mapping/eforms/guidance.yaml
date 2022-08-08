@@ -693,9 +693,9 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/CONTRACTING_BODY/URL_TOOL
     TED guidance:
     - Map to `tender.communication.atypicalToolUrl`
-    eForms guidance: Map to the lot's `.communication.atypicalToolUrl`
+    eForms guidance: Map to `tender.communication.atypicalToolUrl`
     eForms example: <cbc:AccessToolsURI>https://my-atypical-tool.com/</cbc:AccessToolsURI>
-    OCDS example: '{"tender":{"lots":[{"communication":{"atypicalToolUrl":"https://my-atypical-tool.com/"}}]}}'
+    OCDS example: '{"tender":{"communication":{"atypicalToolUrl":"https://my-atypical-tool.com/"}}}'
     sdk: https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#atypicalToolSection
 -   id: BT-125(i)-Lot
     parentNodeId: ND-LotPreviousPlanning
@@ -849,9 +849,9 @@
     Description: The time limit for requesting additional information about the procurement procedure.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: Map to the date component of the lot's `.enquiryPeriod.endDate`.
+    eForms guidance: Map to the date component of `tender.enquiryPeriod.endDate`.
     eForms example: <cac:AdditionalInformationRequestPeriod><cbc:EndDate>2019-11-08+01:00</cbc:EndDate></cac:AdditionalInformationRequestPeriod>
-    OCDS example: '{"tender":{"lots":[{"enquiryPeriod":{"endDate":"2019-11-08T18:00:00+01:00"}}]}}'
+    OCDS example: '{"tender":{"enquiryPeriod":{"endDate":"2019-11-08T18:00:00+01:00"}}}'
     sdk: https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#additionalInfoDeadlineSection
 -   id: BT-13(t)-Lot
     parentNodeId: ND-LotTenderingProcess
@@ -883,9 +883,9 @@
     Description: The time limit for requesting additional information about the procurement procedure.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: Map to the time component of the lot's `.enquiryPeriod.endDate`.
+    eForms guidance: Map to the time component of `tender.enquiryPeriod.endDate`.
     eForms example: <cac:AdditionalInformationRequestPeriod><cbc:EndTime>18:00:00+01:00</cbc:EndTime></cac:AdditionalInformationRequestPeriod>
-    OCDS example: '{"tender":{"lots":[{"enquiryPeriod":{"endDate":"2019-11-08T18:00:00+01:00"}}]}}'
+    OCDS example: '{"tender":{"enquiryPeriod":{"endDate":"2019-11-08T18:00:00+01:00"}}}'
     sdk: https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#additionalInfoDeadlineSection
 -   id: BT-130-Lot
     parentNodeId: ND-LotTenderingProcess
@@ -959,10 +959,10 @@
         BG-102: Submission Terms
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_CONCESSIONAIRE_DEFENCE/FD_CONTRACT_CONCESSIONAIRE_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_SUB_DEFENCE/ADMINISTRATIVE_INFORMATION_CONTRACT_SUB_NOTICE_DEFENCE/RECEIPT_LIMIT_DATE/fn:concat(YEAR,-", MONTH, "-", DAY)"
-    eForms guidance: (UNREVIEWED) Map to the date component of lot's `.tenderPeriod.endDate`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the date component of lot's `.tenderPeriod.endDate`
+    eForms example: <cac:ParticipationRequestReceptionPeriod><cbc:EndDate>2019-11-25+01:00</cbc:EndDate></cac:ParticipationRequestReceptionPeriod>
+    OCDS example: '{"tender": {"lots": [{"tenderPeriod": {"endDate": "2019-11-25T12:00:00+01:00"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#requestDeadlineSection
 -   id: BT-1311(t)-Lot
     parentNodeId: ND-LotTenderingProcess
     name: Deadline Receipt Requests
@@ -978,10 +978,10 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/ADMINISTRATIVE_INFORMATION_CONTRACT_NOTICE_DEFENCE/RECEIPT_LIMIT_DATE
     - TED_EXPORT/FORM_SECTION/CONTRACT_CONCESSIONAIRE_DEFENCE/FD_CONTRACT_CONCESSIONAIRE_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_SUB_DEFENCE/ADMINISTRATIVE_INFORMATION_CONTRACT_SUB_NOTICE_DEFENCE/RECEIPT_LIMIT_DATE/TIME
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the date component of lot's `.tenderPeriod.endDate`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the time component of lot's `.tenderPeriod.endDate`
+    eForms example: <cac:ParticipationRequestReceptionPeriod><cbc:EndTime>12:00:00+01:00</cbc:EndTime></cac:ParticipationRequestReceptionPeriod>
+    OCDS example: '{"tender": {"lots": [{"tenderPeriod": {"endDate": "2019-11-25T12:00:00+01:00"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#requestDeadlineSection
 -   id: BT-132(d)-Lot
     parentNodeId: ND-PublicOpening
     name: Public Opening Date
