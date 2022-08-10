@@ -1377,10 +1377,10 @@
     - TED_EXPORT/FORM_SECTION/F12_2014/CONTRACTING_BODY/DOCUMENT_RESTRICTED
     TED guidance:
     - Add a `ParticipationFee` object to the `tender.participationFees` array, set its `.type` to 'document', and set its `.id` to '1'.
-    eForms guidance: (UNREVIEWED) Add a `ParticipationFee` object to the lot's `.participationFees` array, set its `.type` to 'document', and map `cac:CallForTendersDocumentReference/cdc:ID` to its `.id`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Add a `ParticipationFee` object to the lot's `.participationFees` array, set its `.type` to 'document', and map `cac:CallForTendersDocumentReference/cdc:ID` to its `.id`.
+    eForms example: <cac:CallForTendersDocumentReference><cbc:DocumentType>restricted-document</cbc:DocumentType></cac:CallForTendersDocumentReference>
+    OCDS example: '{"tender":{"lots":[{"participationFees":[{"id":"1","type":"document"}]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#procurementDocsSection
 -   id: BT-14-Part
     parentNodeId: ND-PartProcurementDocument
     name: Documents Restricted
@@ -1393,10 +1393,10 @@
     Description: The access to certain procurement documents is restricted.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: (UNREVIEWED) (REPEAT) Add a `ParticipationFee` object to the lot's `.participationFees` array, set its `.type` to 'document', and map `cac:CallForTendersDocumentReference/cdc:ID` to its `.id`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Add a `ParticipationFee` object to the lot's `.participationFees` array, set its `.type` to 'document', and map `cac:CallForTendersDocumentReference/cdc:ID` to its `.id`.
+    eForms example: <cac:CallForTendersDocumentReference><cbc:DocumentType>restricted-document</cbc:DocumentType></cac:CallForTendersDocumentReference>
+    OCDS example: '{"tender":{"lots":[{"participationFees":[{"id":"1","type":"document"}]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#procurementDocsSection
 -   id: BT-140-notice
     parentNodeId: ND-ChangeReason
     name: Change Reason Code
@@ -1409,10 +1409,12 @@
     Description: The main reason for the change in the notice compared to the original notice.
     Business groups:
         BG-9: Change
-    eForms guidance: '(UNREVIEWED) (AUTO) Prefix by the [translation](../../operations/#get-a-translation) of "Need for additional works, services or supplies by the original contractor/concessionaire: ", and map to the amendment''s `.rationale`'
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        (UNREVIEWED)  The codes are drawn from the [Change corrig justification](https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/change-corrig-justification) authority table in EU Vocabularies.
+        Set `amendment.rationale` to the code's Label.
+    eForms example: <efac:ChangeReason><cbc:ReasonCode listName="change-corrig-justification">cor-buy </cbc:ReasonCode></efac:ChangeReason>
+    OCDS example: '{"contracts":[{"amendments":[{"rationale":"Buyer correction"}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#changeSection
 -   id: BT-141(a)-notice
     parentNodeId: ND-Change
     name: Change Description
@@ -1428,10 +1430,10 @@
     - TED_EXPORT/FORM_SECTION/F20_2014/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/SHORT_DESCR
     TED guidance:
     - Map to the amendment's `.description`
-    eForms guidance: (UNREVIEWED) (AUTO) Map to the amendment's `.description`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the amendment's `.description`
+    eForms example: <efac:Change><efbc:ChangeDescription languageID="ENG">The changes have been applied to ...</efbc:ChangeDescription></efac:Change>
+    OCDS example: '{"contracts":[{"amendments":[{"description":"The changes have been applied to..."}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#changeSection
 -   id: BT-142-LotResult
     parentNodeId: ND-LotResult
     name: Winner Chosen
@@ -1451,10 +1453,10 @@
     - TED_EXPORT/FORM_SECTION/F21_2014/AWARD_CONTRACT/*[matches(name(),'AWARDED_CONTRACT')]
     - TED_EXPORT/FORM_SECTION/F22_2014/AWARD_CONTRACT/*[matches(name(),'AWARDED_CONTRACT')]
     - TED_EXPORT/FORM_SECTION/F25_2014/AWARD_CONTRACT/*[matches(name(),'AWARDED_CONTRACT')]
-    eForms guidance: (UNREVIEWED) If `true`, set the awards's `.status` to 'active'. If `false`, set the awards's `.status` to 'unsuccessful'
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: (UNREVIEWED) If `selec-w`, set the awards's `.status` to 'active'. If `clos-nw`, set the awards's `.status` to 'unsuccessful'. If `open-nw`, set tender's `.status` to `active`
+    eForms example: <efac:LotResult><cbc:TenderResultCode listName="winner-selection-status">selec-w</cbc:TenderResultCode></efac:LotResult>
+    OCDS example: '{"awards":[{"status":"active"}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-144-LotResult
     parentNodeId: ND-LotResult
     name: Not Awarded Reason
@@ -1484,10 +1486,10 @@
     TED guidance:
     - Set the award's `.statusDetails` to 'discontinued'
     - Set the award's `.statusDetails` to 'unsuccessful'\n\nThere's an open issue ([#764](https://github.com/open-contracting/standard/issues/764)) about status details. (ISSUE)
-    eForms guidance: (UNREVIEWED) Map [the label of the code](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-award-justification) to the award's `.statusDetails`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Set the award's `.status` to 'unsuccessful' and map [the label of the code](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-award-justification) to the award's `.statusDetails`
+    eForms example: <efac:DecisionReason><efbc:DecisionReasonCode listName="non-award-justification">no-rece</efbc:DecisionReasonCode></efac:DecisionReason>
+    OCDS example: '{"awards":[{"status":"unsuccessful","statusDetails":"No tenders, requests to participate or projects were received"}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-145-Contract
     parentNodeId: ND-SettledContract
     name: Contract Conclusion Date
@@ -1510,9 +1512,9 @@
     TED guidance:
     - Map to the contract's `.dateSigned`
     eForms guidance: (UNREVIEWED) Map to the contract's `.dateSigned`
-    eForms example: ''
+    eForms example: <efac:SettledContract><cbc:IssueDate>2021-02-21+01:00</cbc:IssueDate></efac:SettledContract>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#settledContractSection
 -   id: BT-1451-Contract
     parentNodeId: ND-SettledContract
     name: Winner Decision Date
@@ -1532,10 +1534,10 @@
     TED guidance:
     - Map to the award's `.date`
     - Map to the contract's `.dateSigned`
-    eForms guidance: (UNREVIEWED) Map to the award's `.date`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the award's `.date`
+    eForms example: <efac:SettledContract><cbc:AwardDate>2021-02-19+01:00</cbc:AwardDate></efac:SettledContract>
+    OCDS example: '{"awards":[{"date":"2021-02-19T23:59:59+01:00"}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#settledContractSection
 -   id: BT-15-Lot
     parentNodeId: ND-LotDocumentsReference
     name: Documents URL
