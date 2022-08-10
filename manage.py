@@ -304,26 +304,26 @@ def update_with_annex(filename):
 
     report_unmerged_rows(df, ['ID', 'Name'], ~df['ID'].isin({
         # Removed indicators in favor of corresponding scalars.
-        # https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#extensionsSection
+        # https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#extensionsSection
         'BT-53',  # Options (BT-54 Options Description)
-        # https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#toolNameSection
+        # https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#toolNameSection
         'BT-724',  # Tool Atypical (BT-124 Tool Atypical URL)
-        # https://docs.ted.europa.eu/eforms/0.7.0/schema/all-in-one.html#_footnotedef_21
+        # https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_footnotedef_21
         'BT-778',  # Framework Maximum Participants (BT-113 Framework Maximum Participants Number)
 
         # See OPT-155 and OPT-156.
-        # https://docs.ted.europa.eu/eforms/0.7.0/schema/competition-results.html#lotResultComponentsTable
+        # https://docs.ted.europa.eu/eforms/1.0.0/schema/competition-results.html#lotResultComponentsTable
         'BT-715',
         'BT-725',
         'BT-716',
 
         # See Table 3.
-        # https://docs.ted.europa.eu/eforms/0.7.0/schema/parties.html#mappingOrganizationBTsSchemaComponentsTable
+        # https://docs.ted.europa.eu/eforms/1.0.0/schema/parties.html#mappingOrganizationBTsSchemaComponentsTable
         'BT-08',
         'BT-770',
 
         # See Table 4 (also includes BT-330 and BT-1375).
-        # https://docs.ted.europa.eu/eforms/0.7.0/schema/identifiers.html#pointlessDueToDesignSection
+        # https://docs.ted.europa.eu/eforms/1.0.0/schema/identifiers.html#pointlessDueToDesignSection
         'BT-557',
         'BT-1371',
         'BT-1372',
@@ -441,7 +441,7 @@ def lint(filename):
     Lint FILE (validate and format XML, JSON and Markdown, report unrecognized OCDS fields, and update eForms SDK URLs).
     """
     # From https://github.com/OP-TED/eForms-SDK/tree/main/examples
-    # See https://docs.ted.europa.eu/eforms/0.7.0/schema/schemas.html
+    # See https://docs.ted.europa.eu/eforms/1.0.0/schema/schemas.html
     head = (
         '<ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" '
         'xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" '
@@ -486,7 +486,7 @@ def lint(filename):
         # Update and check SDK URLs.
         if field['sdk']:
             # Change this value to the new SDK version.
-            field['sdk'] = sdk_regex.sub('/0.7.0/', field['sdk'])
+            field['sdk'] = sdk_regex.sub('/1.0.0/', field['sdk'])
 
             parts = urlsplit(field['sdk'])
             fragment = parts.fragment
