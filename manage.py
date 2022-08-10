@@ -232,7 +232,7 @@ def update_with_sdk(filename):
         df = pd.DataFrame.from_dict(json.load(f)['fields'])
 
     # Remove or abbreviate columns that do not assist the mapping process and that lengthen the JSON file. See README.
-    drop = ['xpathRelative', 'legalType', 'maxLength', 'forbidden']
+    drop = ['xpathRelative', 'legalType', 'maxLength', 'forbidden', 'assert', 'inChangeNotice', 'privacy']
     df['mandatory'] = df['mandatory'].notna()
     # Simplify these columns if `severity` is the only other top-level key.
     for column in ('repeatable', 'pattern'):

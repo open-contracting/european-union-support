@@ -40,6 +40,9 @@ idSchemes | eForms SDK | Indicates the identifier schemes for this `id-ref` fiel
 mandatory | eForms SDK | Indicates whether or not a field is required to have a value. | Simplified to the boolean (`true` if required on one or more forms).
 codeList | eForms SDK | Identifier of the code list from which the field value must belong. Applicable only for fields of type "code" or "internal-code" | Simplified to the codelist (removed `severity`, `value.type`, `value.parentId`).
 pattern | eForms SDK | Indicates that the value of the field must match a specific regular expression pattern. | Simplied to the pattern (removed `severity`).
+assert | eForms SDK | Undocumented |
+inChangeNotice | eForms SDK | Undocumented |
+privacy | eForms SDK | Undocumented |
 Description | [Regulation annex](https://ec.europa.eu/growth/single-market/public-procurement/digital-procurement/eforms_en) | The description of the business term. |
 Business groups | Regulation annex | The business groups to which the business term belongs, from top down. | eForms has a hierarchy of BGs. Use [business-groups.csv](https://github.com/open-contracting/european-union-support/blob/main/output/mapping/eforms/business-groups.csv) to look up the hierarchy and descriptions for each group.
 TED Xpath | [SIMAP](https://simap.ted.europa.eu/en_GB/web/simap/eforms) (13/04/2022) | The TED XPaths matching the eForms field. |
@@ -63,10 +66,10 @@ The correspondence between `legalType` and `type` is:
 `legalType` | `type` | Notes
 -- | -- | --
 `IDENTIFIER` | `id`, `id-ref` | `code` exceptionally used for BT-195 and BT-5011.
-`INDICATOR` | `indicator`, `code`, `internal-code` | Overlaps semantically with `CODE`.
-`CODE` | `code`, `internal-code` | `id` and `text-multilingual` exceptionally used for other versions of BT-01.
+`INDICATOR` | `indicator`, `code` | Overlaps semantically with `CODE`.
+`CODE` | `code` | `id` and `text-multilingual` exceptionally used for other versions of BT-01.
 `TEXT` | `text`, `text-multilingual`, `phone`, `email` | `id` exceptionally used for BT-22 and for part of BT-09. `code` exceptionally used for code version of BT-67.
-`DATE` | `date`, `time`, `zoned-date`, `zoned-time` |
+`DATE` | `date`, `time` |
 `URL` | `url` |
 `VALUE` | `amount` |
 `NUMBER` | `number`, `integer` | `code` exceptionally used for the withheld publication of BT-712.
