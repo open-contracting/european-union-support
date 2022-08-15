@@ -6374,7 +6374,7 @@
 -   id: BT-500-Business
     parentNodeId: ND-LocalEntity
     name: Official name
-    btId: BT-500Name
+    btId: BT-500
     xpathAbsolute: /*/cac:BusinessParty/cac:PartyLegalEntity[not(cbc:CompanyID/@schemeName = 'EU')]/cbc:RegistrationName
     type: text
     repeatable: false
@@ -13109,6 +13109,9 @@
     type: id
     repeatable: true
     mandatory: false
+    Description: The legal basis (e.g. a European Directive or Regulation, national law) under which the procurement procedure takes place.
+    Business groups:
+        BG-1: Notice
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13121,6 +13124,9 @@
     type: text-multilingual
     repeatable: false
     mandatory: true
+    Description: The legal basis (e.g. a European Directive or Regulation, national law) under which the procurement procedure takes place.
+    Business groups:
+        BG-1: Notice
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13133,6 +13139,9 @@
     type: code
     repeatable: false
     mandatory: false
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Business groups:
+        BG-8: Not Immediately Published
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13145,6 +13154,9 @@
     type: code
     repeatable: false
     mandatory: false
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Business groups:
+        BG-8: Not Immediately Published
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13157,6 +13169,9 @@
     type: text-multilingual
     repeatable: false
     mandatory: true
+    Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
+    Business groups:
+        BG-8: Not Immediately Published
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13169,6 +13184,9 @@
     type: text-multilingual
     repeatable: false
     mandatory: true
+    Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
+    Business groups:
+        BG-8: Not Immediately Published
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13181,6 +13199,9 @@
     type: code
     repeatable: false
     mandatory: true
+    Description: The justification for not immediately publishing a field.
+    Business groups:
+        BG-8: Not Immediately Published
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13193,6 +13214,9 @@
     type: code
     repeatable: false
     mandatory: true
+    Description: The justification for not immediately publishing a field.
+    Business groups:
+        BG-8: Not Immediately Published
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13205,6 +13229,9 @@
     type: date
     repeatable: false
     mandatory: true
+    Description: The later date at which the originally unpublished field shall be published.
+    Business groups:
+        BG-8: Not Immediately Published
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13217,6 +13244,9 @@
     type: date
     repeatable: false
     mandatory: true
+    Description: The later date at which the originally unpublished field shall be published.
+    Business groups:
+        BG-8: Not Immediately Published
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''

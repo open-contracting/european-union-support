@@ -26,7 +26,8 @@ eformsdir = mappingdir / 'eforms'
 
 
 class Dumper(yaml.SafeDumper):
-    pass
+    def ignore_aliases(self, data):
+        return True
 
 
 def na_representer(dumper, data):
