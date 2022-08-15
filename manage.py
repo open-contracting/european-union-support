@@ -536,6 +536,9 @@ def lint(filename):
 
 @cli.command()
 def business_groups():
+    """
+    Print information about eForms Business Groups (BGs).
+    """
     # A warning is issued, because the Excel file has an unsupported extension.
     df = pd.read_excel(sourcedir / 'CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx', 'Annex')
 
