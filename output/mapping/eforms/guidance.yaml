@@ -1595,9 +1595,9 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/CONTRACTING_BODY/DOCUMENT_FULL
     TED guidance:
     - Discard. If no `ParticipationFee` object in the `tender.participationFees` array has a `.type` of 'document', then access is unrestricted.
-    eForms guidance: (UNREVIEWED) Map to the party's `.contactPoint.url`. If there is no URL scheme, prefix by 'http://'.
+    eForms guidance: Add a document to `tender.documents` and map to the document's `.url`. Set the document's `.id` incrementally, set its `.documentType` to 'biddingDocuments', and add the lot's identifier to `.relatedLots`.
     eForms example: <cac:CallForTendersDocumentReference><cac:Attachment><cac:ExternalReference><cbc:URI>https://mywebsite.com/proc/2019024/accessinfo</cbc:URI></cac:ExternalReference></cac:Attachment></cac:CallForTendersDocumentReference>
-    OCDS example: ''
+    OCDS example: '{"tender":{"documents":[{"id":"1","documentType":"biddingDocuments","relatedLots":["1"],"url":"https://mywebsite.com/proc/2019024/accessinfo"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#procurementDocsSection
 -   id: BT-15-Part
     parentNodeId: ND-PartDocumentsReference
@@ -1616,9 +1616,9 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/CONTRACTING_BODY/DOCUMENT_FULL
     TED guidance:
     - Discard. If no `ParticipationFee` object in the `tender.participationFees` array has a `.type` of 'document', then access is unrestricted.
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.contactPoint.url`. If there is no URL scheme, prefix by 'http://'.
+    eForms guidance: Add a document to `tender.documents` and map to the document's `.url`. Set the document's `.id` incrementally and set its `.documentType` to 'biddingDocuments'.
     eForms example: <cac:CallForTendersDocumentReference><cac:Attachment><cac:ExternalReference><cbc:URI>https://mywebsite.com/proc/2019024/accessinfo</cbc:URI></cac:ExternalReference></cac:Attachment></cac:CallForTendersDocumentReference>
-    OCDS example: ''
+    OCDS example: '{"tender":{"documents":[{"id":"1","documentType":"biddingDocuments","url":"https://mywebsite.com/proc/2019024/accessinfo"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#procurementDocsSection
 -   id: BT-150-Contract
     parentNodeId: ND-SettledContract
