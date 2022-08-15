@@ -1566,9 +1566,9 @@
     TED guidance:
     - Discard. If no `ParticipationFee` object in the `tender.participationFees` array has a `.type` of 'document', then access is unrestricted.
     eForms guidance: (UNREVIEWED) Map to the party's `.contactPoint.url`. If there is no URL scheme, prefix by 'http://'.
-    eForms example: ''
+    eForms example: <cac:CallForTendersDocumentReference><cac:Attachment><cac:ExternalReference><cbc:URI>https://mywebsite.com/proc/2019024/accessinfo</cbc:URI></cac:ExternalReference></cac:Attachment></cac:CallForTendersDocumentReference>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#procurementDocsSection
 -   id: BT-15-Part
     parentNodeId: ND-PartDocumentsReference
     name: Documents URL
@@ -1587,9 +1587,9 @@
     TED guidance:
     - Discard. If no `ParticipationFee` object in the `tender.participationFees` array has a `.type` of 'document', then access is unrestricted.
     eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.contactPoint.url`. If there is no URL scheme, prefix by 'http://'.
-    eForms example: ''
+    eForms example: <cac:CallForTendersDocumentReference><cac:Attachment><cac:ExternalReference><cbc:URI>https://mywebsite.com/proc/2019024/accessinfo</cbc:URI></cac:ExternalReference></cac:Attachment></cac:CallForTendersDocumentReference>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#procurementDocsSection
 -   id: BT-150-Contract
     parentNodeId: ND-SettledContract
     name: Contract Identifier
@@ -1612,9 +1612,9 @@
     - 'If not set, let *Contract No* be the notice number followed by a hyphen ''-'' followed by the value of the `ITEM` attribute of the `AWARD_CONTRACT` element. Map to the award''s `.id`.\n\nThis assumes the *Contract No* is unique within the contracting process. (WARNING #93)'
     - 'Map to the award''s `.id`\n\nThis assumes the contract award notice set `/AWARD_CONTRACT/CONTRACT_NO` and that the *Contract No* is unique within the contracting process. (WARNING #93)'
     eForms guidance: (UNREVIEWED) Map to the award's `.id`
-    eForms example: ''
+    eForms example: <efac:SettledContract><efac:ContractReference><cbc:ID>CRN ABC:EFG/2020-01</cbc:ID></efac:ContractReference></efac:SettledContract>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#settledContractSection
 -   id: BT-1501(n)-Contract
     parentNodeId: ND-ContractModification
     name: Modification Previous Notice Identifier
@@ -1630,7 +1630,7 @@
     eForms guidance: (UNREVIEWED) No guidance. Relationships are either implied by the XML structure or explicit via references from a section to the organization.
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#contractModificationNoticeSection
 -   id: BT-1501(s)-Contract
     parentNodeId: ND-Modification
     name: Modification Previous Notice Section Identifier
@@ -1646,7 +1646,7 @@
     eForms guidance: (UNREVIEWED) (REPEAT) No guidance. Relationships are either implied by the XML structure or explicit via references from a section to the organization.
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#contractModificationNoticeSection
 -   id: BT-151-Contract
     parentNodeId: ND-SettledContract
     name: Contract URL
@@ -1661,9 +1661,9 @@
         BG-7: Notice Result
         BG-310: Contract
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:SettledContract><cbc:URI>http://mycontract.acme.com/1234/</cbc:URI></efac:SettledContract>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#settledContractSection
 -   id: BT-156-NoticeResult
     parentNodeId: ND-NoticeResultGroupFA
     name: Group Framework Value
@@ -1677,9 +1677,9 @@
         BG-7: Notice Result
         BG-556: Group Framework Value
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:NoticeResult><efac:GroupFramework><efbc:GroupFrameworkValueAmount currencyID="EUR">800000</efbc:GroupFrameworkValueAmount></efac:GroupFramework></efac:NoticeResult>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_notice_aggregated_amounts
 -   id: BT-157-LotsGroup
     parentNodeId: ND-LotsGroupFA
     name: Group Framework Estimated Maximum Value
@@ -1692,10 +1692,10 @@
     Business groups:
         BG-2: Purpose
         BG-557: Group Framework Estimated Maximum Value
-    eForms guidance: (UNREVIEWED) Add a Lot group to the the `tender.lotGroups` array. Map to the lot group's `.maximumValue.amount` (number).
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Add a Lot group to the the `tender.lotGroups` array. Map to the lot group's `.maximumValue.amount` (number).
+    eForms example: <cac:FrameworkAgreement><cbc:EstimatedMaximumValueAmount currencyID="EUR">200000</cbc:EstimatedMaximumValueAmount></cac:FrameworkAgreement>
+    OCDS example: '{"tender":{"lotGroups":[{"maximumValue":{"amount":200000,"currency":"EUR"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#frameworkAgreementSection
 -   id: BT-16-Organization-Company
     parentNodeId: ND-Company
     name: Organisation Part Name
@@ -1707,10 +1707,10 @@
     Description: The name of a part of an organisation (e.g. the relevant department of a large buyer).
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) Append to the party's `.name`, separated from the original text with ' - ' (space, dash, space). See also [Using the Organization building block with an organizational hierarchy](https://standard.open-contracting.org/latest/en/guidance/map/organizational_units/?highlight=organization#using-the-organization-building-block-with-an-organizational-hierarchy)  \[https://github.com/open-contracting/european-union-support/issues/55\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Append to the party's `.name`, separated from the original text with ' - ' (space, dash, space). See also [Using the Organization building block with an organizational hierarchy](https://standard.open-contracting.org/latest/en/guidance/map/organizational_units/#using-the-organization-building-block-with-an-organizational-hierarchy)
+    eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cbc:Department>Finance Department</cbc:Department></cac:PostalAddress></efac:Company></efac:Organization>
+    OCDS example: '{"parties":[{"name":"Ministry of Education - Finance Department"}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-16-Organization-TouchPoint
     parentNodeId: ND-Touchpoint
     name: Part Name
@@ -1722,10 +1722,10 @@
     Description: The name of a part of an organisation (e.g. the relevant department of a large buyer).
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Append to the party's `.name`, separated from the original text with ' - ' (space, dash, space). See also [Using the Organization building block with an organizational hierarchy](https://standard.open-contracting.org/latest/en/guidance/map/organizational_units/?highlight=organization#using-the-organization-building-block-with-an-organizational-hierarchy)  \[https://github.com/open-contracting/european-union-support/issues/55\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Append to the contact point's `.name`, separated from the original text with ' - ' (space, dash, space).
+    eForms example: <efac:Organization><efac:TouchPoint><cac:PartyName><cbc:Name languageID="ENG">Department XYZ</cbc:Name></cac:PartyName><cac:PostalAddress><cbc:Department>Department XYZ</cbc:Department></cac:PostalAddress></efac:TouchPoint></efac:Organization>
+    OCDS example: '{"parties":[{"additionalContactPoints":[{"name":"Department XYZ - Department XYZ"}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-160-Tender
     parentNodeId: ND-ConcessionRevenue
     name: Concession Revenue Buyer
@@ -6374,7 +6374,7 @@
 -   id: BT-500-Business
     parentNodeId: ND-LocalEntity
     name: Official name
-    btId: BT-500
+    btId: BT-500Name
     xpathAbsolute: /*/cac:BusinessParty/cac:PartyLegalEntity[not(cbc:CompanyID/@schemeName = 'EU')]/cbc:RegistrationName
     type: text
     repeatable: false
