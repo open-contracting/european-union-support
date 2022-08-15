@@ -94,6 +94,7 @@ When writing the eForms guidance:
 
 * If a mapping has multiple steps, consider using a numbered list.
 * If a mapping requires the creation of a new field, you don't need to create the field yet. Extensions can be updated once the mapping is completed and reviewed.
+* To see the relationship between elements and the overall structure of the notices, you can check the [XML notice examples](https://github.com/OP-TED/eForms-SDK/tree/develop/examples/notices). The examples suffixed with '_maximal' contain all possible elements and are annotated with the business term identifier for each element.
 
 ## Maintenance
 
