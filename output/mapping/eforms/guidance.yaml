@@ -28,6 +28,36 @@
     eForms example: <cac:ProcurementLegislationDocumentReference><cbc:DocumentDescription languageID="ENG">Directive XYZ applies ...</cbc:DocumentDescription></cac:ProcurementLegislationDocumentReference>
     OCDS example: '{"tender":{"legalBasis":{"description":"Directive XYZ applies ..."}}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#otherLegalBasisSection
+-   id: BT-01(e)-Procedure
+    parentNodeId: ND-ProcedureTerms
+    name: Procedure Legal Basis (NoID)
+    btId: BT-01
+    xpathAbsolute: /*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference/cbc:ID[text()='LocalLegalBasis']
+    type: id
+    repeatable: true
+    mandatory: false
+    Description: The legal basis (e.g. a European Directive or Regulation, national law) under which the procurement procedure takes place.
+    Business groups:
+        BG-1: Notice
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-01(f)-Procedure
+    parentNodeId: ND-LocalLegalBasisNoID
+    name: Procedure Legal Basis (NoID Description)
+    btId: BT-01
+    xpathAbsolute: /*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[cbc:ID/text()='LocalLegalBasis']/cbc:DocumentDescription
+    type: text-multilingual
+    repeatable: false
+    mandatory: true
+    Description: The legal basis (e.g. a European Directive or Regulation, national law) under which the procurement procedure takes place.
+    Business groups:
+        BG-1: Notice
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: BT-01-notice
     parentNodeId: ND-Root
     name: Procedure Legal Basis
@@ -2542,6 +2572,36 @@
     eForms example: ''
     OCDS example: ''
     sdk: ''
+-   id: BT-195(BT-635)-LotResult
+    parentNodeId: ND-ReviewRequestsStatisticsCountUnpublish
+    name: Unpublished Identifier
+    btId: BT-195
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-cou']/efbc:FieldIdentifierCode
+    type: code
+    repeatable: false
+    mandatory: false
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-195(BT-636)-LotResult
+    parentNodeId: ND-ReviewRequestsStatisticsTypeUnpublish
+    name: Unpublished Identifier
+    btId: BT-195
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-typ']/efbc:FieldIdentifierCode
+    type: code
+    repeatable: false
+    mandatory: false
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: BT-195(BT-709)-LotResult
     parentNodeId: ND-MaximalValueUnpublish
     name: Unpublished Identifier
@@ -3312,6 +3372,36 @@
     name: Unpublished Justification Description
     btId: BT-196
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:GroupFramework/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='gro-max-ide']/efbc:ReasonDescription
+    type: text-multilingual
+    repeatable: false
+    mandatory: true
+    Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-196(BT-635)-LotResult
+    parentNodeId: ND-ReviewRequestsStatisticsCountUnpublish
+    name: Unpublished Justification Description
+    btId: BT-196
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-cou']/efbc:ReasonDescription
+    type: text-multilingual
+    repeatable: false
+    mandatory: true
+    Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-196(BT-636)-LotResult
+    parentNodeId: ND-ReviewRequestsStatisticsTypeUnpublish
+    name: Unpublished Justification Description
+    btId: BT-196
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-typ']/efbc:ReasonDescription
     type: text-multilingual
     repeatable: false
     mandatory: true
@@ -4116,6 +4206,36 @@
     repeatable: false
     mandatory: true
     codeList: non-publication-justification
+    Description: The justification for not immediately publishing a field.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-197(BT-635)-LotResult
+    parentNodeId: ND-ReviewRequestsStatisticsCountUnpublish
+    name: Unpublished Justification Code
+    btId: BT-197
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-cou']/cbc:ReasonCode
+    type: code
+    repeatable: false
+    mandatory: true
+    Description: The justification for not immediately publishing a field.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-197(BT-636)-LotResult
+    parentNodeId: ND-ReviewRequestsStatisticsTypeUnpublish
+    name: Unpublished Justification Code
+    btId: BT-197
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-typ']/cbc:ReasonCode
+    type: code
+    repeatable: false
+    mandatory: true
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
@@ -4932,6 +5052,36 @@
     repeatable: false
     mandatory: true
     pattern: ^(?:(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:(?:0[13578]|1[02]))-31|(?:(?:0[13-9]|1[0-2])-(?:29|30))))|(?:(?:(?:(?:(?:1[6-9]|[2-9]\d)(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))-02-29))|(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:0[1-9])|(?:1[0-2]))-(?:0[1-9]|1\d|2[0-8])))(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
+    Description: The later date at which the originally unpublished field shall be published.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-198(BT-635)-LotResult
+    parentNodeId: ND-ReviewRequestsStatisticsCountUnpublish
+    name: Unpublished Accessibility Date
+    btId: BT-198
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-cou']/efbc:PublicationDate
+    type: date
+    repeatable: false
+    mandatory: true
+    Description: The later date at which the originally unpublished field shall be published.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-198(BT-636)-LotResult
+    parentNodeId: ND-ReviewRequestsStatisticsTypeUnpublish
+    name: Unpublished Accessibility Date
+    btId: BT-198
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-typ']/efbc:PublicationDate
+    type: date
+    repeatable: false
+    mandatory: true
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
@@ -13097,156 +13247,6 @@
     type: date
     repeatable: false
     mandatory: true
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-01(e)-Procedure
-    parentNodeId: ND-ProcedureTerms
-    name: Procedure Legal Basis (NoID)
-    btId: BT-01
-    xpathAbsolute: /*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference/cbc:ID[text()='LocalLegalBasis']
-    type: id
-    repeatable: true
-    mandatory: false
-    Description: The legal basis (e.g. a European Directive or Regulation, national law) under which the procurement procedure takes place.
-    Business groups:
-        BG-1: Notice
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-01(f)-Procedure
-    parentNodeId: ND-LocalLegalBasisNoID
-    name: Procedure Legal Basis (NoID Description)
-    btId: BT-01
-    xpathAbsolute: /*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[cbc:ID/text()='LocalLegalBasis']/cbc:DocumentDescription
-    type: text-multilingual
-    repeatable: false
-    mandatory: true
-    Description: The legal basis (e.g. a European Directive or Regulation, national law) under which the procurement procedure takes place.
-    Business groups:
-        BG-1: Notice
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-195(BT-635)-LotResult
-    parentNodeId: ND-ReviewRequestsStatisticsCountUnpublish
-    name: Unpublished Identifier
-    btId: BT-195
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-cou']/efbc:FieldIdentifierCode
-    type: code
-    repeatable: false
-    mandatory: false
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
-    Business groups:
-        BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-195(BT-636)-LotResult
-    parentNodeId: ND-ReviewRequestsStatisticsTypeUnpublish
-    name: Unpublished Identifier
-    btId: BT-195
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-typ']/efbc:FieldIdentifierCode
-    type: code
-    repeatable: false
-    mandatory: false
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
-    Business groups:
-        BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-196(BT-635)-LotResult
-    parentNodeId: ND-ReviewRequestsStatisticsCountUnpublish
-    name: Unpublished Justification Description
-    btId: BT-196
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-cou']/efbc:ReasonDescription
-    type: text-multilingual
-    repeatable: false
-    mandatory: true
-    Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
-    Business groups:
-        BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-196(BT-636)-LotResult
-    parentNodeId: ND-ReviewRequestsStatisticsTypeUnpublish
-    name: Unpublished Justification Description
-    btId: BT-196
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-typ']/efbc:ReasonDescription
-    type: text-multilingual
-    repeatable: false
-    mandatory: true
-    Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
-    Business groups:
-        BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-197(BT-635)-LotResult
-    parentNodeId: ND-ReviewRequestsStatisticsCountUnpublish
-    name: Unpublished Justification Code
-    btId: BT-197
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-cou']/cbc:ReasonCode
-    type: code
-    repeatable: false
-    mandatory: true
-    Description: The justification for not immediately publishing a field.
-    Business groups:
-        BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-197(BT-636)-LotResult
-    parentNodeId: ND-ReviewRequestsStatisticsTypeUnpublish
-    name: Unpublished Justification Code
-    btId: BT-197
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-typ']/cbc:ReasonCode
-    type: code
-    repeatable: false
-    mandatory: true
-    Description: The justification for not immediately publishing a field.
-    Business groups:
-        BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-198(BT-635)-LotResult
-    parentNodeId: ND-ReviewRequestsStatisticsCountUnpublish
-    name: Unpublished Accessibility Date
-    btId: BT-198
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-cou']/efbc:PublicationDate
-    type: date
-    repeatable: false
-    mandatory: true
-    Description: The later date at which the originally unpublished field shall be published.
-    Business groups:
-        BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-198(BT-636)-LotResult
-    parentNodeId: ND-ReviewRequestsStatisticsTypeUnpublish
-    name: Unpublished Accessibility Date
-    btId: BT-198
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-typ']/efbc:PublicationDate
-    type: date
-    repeatable: false
-    mandatory: true
-    Description: The later date at which the originally unpublished field shall be published.
-    Business groups:
-        BG-8: Not Immediately Published
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
