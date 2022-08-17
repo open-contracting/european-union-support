@@ -1483,10 +1483,10 @@
     - TED_EXPORT/FORM_SECTION/F21_2014/AWARD_CONTRACT/*[matches(name(),'AWARDED_CONTRACT')]
     - TED_EXPORT/FORM_SECTION/F22_2014/AWARD_CONTRACT/*[matches(name(),'AWARDED_CONTRACT')]
     - TED_EXPORT/FORM_SECTION/F25_2014/AWARD_CONTRACT/*[matches(name(),'AWARDED_CONTRACT')]
-    eForms guidance: (UNREVIEWED) If `selec-w`, set the awards's `.status` to 'active'. If `clos-nw`, set the awards's `.status` to 'unsuccessful'. If `open-nw`, set tender's `.status` to `active`
+    eForms guidance: The codes are drawn from the [Winner selection status](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/winner-selection-status) authority table in EU Vocabularies. If `selec-w`, set the awards's `.status` to 'active'. If `clos-nw`, set the awards's `.status` to 'unsuccessful'. If `open-nw`, set the lot's `.status` to `active`. Set `.statusDetails` to the code's label.
     eForms example: <efac:LotResult><cbc:TenderResultCode listName="winner-selection-status">selec-w</cbc:TenderResultCode></efac:LotResult>
-    OCDS example: '{"awards":[{"status":"active"}]}'
-    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#lotResultLevelSection
+    OCDS example: '{"awards":[{"status":"active","statusDetails":"At least one winner was chosen."}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_lot_result
 -   id: BT-144-LotResult
     parentNodeId: ND-LotResult
     name: Not Awarded Reason
@@ -1541,9 +1541,9 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/AWARD_CONTRACT/AWARDED_CONTRACT/DATE_CONCLUSION_CONTRACT
     TED guidance:
     - Map to the contract's `.dateSigned`
-    eForms guidance: (UNREVIEWED) Map to the contract's `.dateSigned`
+    eForms guidance: Map to the contract's `.dateSigned`
     eForms example: <efac:SettledContract><cbc:IssueDate>2021-02-21+01:00</cbc:IssueDate></efac:SettledContract>
-    OCDS example: ''
+    OCDS example: '{"contracts":[{"dateSigned":"2021-02-21T23:59:59+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#settledContractSection
 -   id: BT-1451-Contract
     parentNodeId: ND-SettledContract
@@ -1772,10 +1772,10 @@
     - TED_EXPORT/FORM_SECTION/F23_2014/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_PRICE_PAYMENT
     TED guidance:
     - Add a `Charge` object to the contract's `.implementation.charges` array, set its `.id` to 'government', set its `.paidBy` to 'government', set its `.title` to the [translation](../../operations/#get-a-translation) of 'Prizes, payments or other financial advantages provided by the contracting authority/entity', and map to its `.estimatedValue.amount`.
-    eForms guidance: (UNREVIEWED) Add a `Charge` object to the contract's `.implementation.charges` array, set its `.id` to 'user', set its `.paidBy` to 'user', set its `.title` to the [translation](../../operations/#get-a-translation) of 'Revenue from the payment of fees and fines by the users', and map to its `.estimatedValue.amount`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Add a `Charge` object to the contract's `.implementation.charges` array, set its `.id` to 'government', set its `.paidBy` to 'government', set its `.title` to the [translation](../../operations/#get-a-translation) of 'Revenue from the payment of prizes and payments by the buyer', and map to its `.estimatedValue.amount` and `@currencyID` to the estimatedValue's `.currency`.
+    eForms example: <efac:ConcessionRevenue><efbc:RevenueBuyerAmount currencyID="EUR">350</efbc:RevenueBuyerAmount></efac:ConcessionRevenue>
+    OCDS example: '{"contracts":[{"implementation":{"charges":[{"id":"government","title":"Revenue from the payment of prizes and payments by the buyer","estimatedValue":{"amount":350,"currency":"EUR"},"paidBy":"government"}]}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#lotTenderSection
 -   id: BT-161-NoticeResult
     parentNodeId: ND-NoticeResult
     name: Notice Value
@@ -1794,10 +1794,10 @@
     TED guidance:
     - Discard. This is derived from the `value` of awards.
     - Map to the contract's `.value.amount`
-    eForms guidance: (UNREVIEWED) Map to the award's `.value.amount`. Map `@currencyID` to the value's `.currency`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the award's `.value.amount`. Map `@currencyID` to the value's `.currency`.
+    eForms example: <efac:NoticeResult><cbc:TotalAmount currencyID="EUR">123456.00</cbc:TotalAmount></efac:NoticeResult>
+    OCDS example: '{"awards":[{"value":{"amount":123456,"currency":"EUR"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_notice_aggregated_amounts
 -   id: BT-162-Tender
     parentNodeId: ND-ConcessionRevenue
     name: Concession Revenue User
@@ -1814,10 +1814,10 @@
     - TED_EXPORT/FORM_SECTION/F23_2014/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_REVENUE
     TED guidance:
     - Add a `Charge` object to the contract's `.implementation.charges` array, set its `.id` to 'user', set its `.paidBy` to 'user', set its `.title` to the [translation](../../operations/#get-a-translation) of 'Revenue from the payment of fees and fines by the users', and map to its `.estimatedValue.amount`.
-    eForms guidance: (UNREVIEWED) Add a `Charge` object to the contract's `.implementation.charges` array, set its `.id` to 'user', set its `.paidBy` to 'user', set its `.title` to the [translation](../../operations/#get-a-translation) of 'Revenue from the payment of fees and fines by the users', and map to its `.estimatedValue.amount`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Add a `Charge` object to the contract's `.implementation.charges` array, set its `.id` to 'user', set its `.paidBy` to 'user', set its `.title` to the [translation](../../operations/#get-a-translation) of 'Revenue from the payment of fees and fines by the users', and map to its `.estimatedValue.amount` and `@currencyID` to the estimatedValue's `.currency`.
+    eForms example: <efac:ConcessionRevenue><efbc:RevenueUserAmount currencyID="EUR">350</efbc:RevenueUserAmount></efac:ConcessionRevenue>
+    OCDS example: '{"contracts":[{"implementation":{"charges":[{"id":"user","title":"Revenue from the payment of fees and fines by the users","estimatedValue":{"amount":350,"currency":"EUR"},"paidBy":"user"}]}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#lotTenderSection
 -   id: BT-163-Tender
     parentNodeId: ND-ConcessionRevenue
     name: Concession Value Description
@@ -1837,10 +1837,10 @@
     TED guidance:
     - Map to `tender.valueCalculationMethod`
     - Map to the award's `.valueCalculationMethod`
-    eForms guidance: (UNREVIEWED) Map to the award's `.valueCalculationMethod`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the award's `.valueCalculationMethod`
+    eForms example: <efac:ConcessionRevenue><efbc:ValueDescription>The awarded value takes into account the growing revenue expected from fees.</efbc:ValueDescription></efac:ConcessionRevenue>
+    OCDS example: '{"awards":[{"valueCalculationMethod":"The awarded value takes into account the growing revenue expected from fees."}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#lotTenderSection
 -   id: BT-165-Organization-Company
     parentNodeId: ND-WinningParty
     name: Winner Size
@@ -1864,10 +1864,10 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/*[matches(name(),'SME')]
     TED guidance:
     - Set the party's `.details.scale` to 'sme'
-    eForms guidance: (UNREVIEWED) Map to the party's `.details.scale` \[https://github.com/open-contracting/european-union-support/issues/81\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the party's `.details.scale`
+    eForms example: <efac:Company><efbc:CompanySizeCode listName="economic-operator-size">large</efbc:CompanySizeCode></efac:Company>
+    OCDS example: '{"parties":[{"details":{"scale":"large"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-17-Lot
     parentNodeId: ND-LotTenderingProcess
     name: SubmissionElectronic
@@ -1892,10 +1892,10 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/CONTRACTING_BODY/URL_PARTICIPATION
     TED guidance:
     - 'Add ''electronicSubmission'' to `tender.submissionMethod`, and map to `tender.submissionMethodDetails`\n\nIf *to the following address* is selected, this results in a loss of structure. (WARNING #27)'
-    eForms guidance: (UNREVIEWED) Add 'electronicSubmission' to the lot's `.submissionMethod`, and map to the lot's `.submissionTerms.electronicSubmissionPolicy`. \[https://github.com/open-contracting/european-union-support/issues/58\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's `.submissionTerms.electronicSubmissionPolicy`. If SubmissionMethodCode is 'allowed' or 'required' add 'electronicSubmission' to the lot's `.submissionMethod`.
+    eForms example: <cbc:SubmissionMethodCode listName="esubmission">allowed</cbc:SubmissionMethodCode>
+    OCDS example: '{"tender":{"lots":[{"submissionMethod":"electronicSubmission","submissionTerms":{"electronicSubmissionPolicy":"allowed"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#eSubmissionSection
 -   id: BT-171-Tender
     parentNodeId: ND-LotTender
     name: Tender Rank
@@ -1943,10 +1943,10 @@
     TED guidance:
     - Add 'written' to `tender.submissionMethod`, and discard. Tenders or requests to participate must be submitted to the abovementioned address unless otherwised specified.
     - 'Add ''written'' to `tender.submissionMethod`, and map to `tender.submissionMethodDetails` as a formatted address string\n\nIf *electronically via* is checked, this results in a loss of structure. (WARNING #27)'
-    eForms guidance: (UNREVIEWED) Map to the lot's `.submissionMethodDetails` \[https://github.com/open-contracting/european-union-support/issues/58\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's `.submissionMethodDetails`
+    eForms example: <cac:TenderRecipientParty><cbc:EndpointID>https://www.acme.com/tender-submission/</cbc:EndpointID></cac:TenderRecipientParty>
+    OCDS example: '{"tender":{"lots":[{"submissionMethodDetails":"https://www.acme.com/tender-submission/"}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#processingPartiesSection
 -   id: BT-19-Lot
     parentNodeId: ND-NonEsubmission
     name: Submission Nonelectronic Justification
@@ -1959,10 +1959,10 @@
     Description: The justification for electronic submission of tenders, requests to participate, or expressions of interest not being possible.
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: (UNREVIEWED) Map to the lot's `.submissionTerms.nonElectronicRationale`. \[https://github.com/open-contracting/european-union-support/issues/55\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Set the lot's `.submissionTerms.nonElectronicRationale` to the code's label. The codes are drawn from the [Communication justification](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/communication-justification) authority table in EU Vocabularies.
+    eForms example: <cac:ProcessJustification><cbc:ProcessReasonCode listName="no-esubmission-justification">phy-mod</cbc:ProcessReasonCode></cac:ProcessJustification>
+    OCDS example: '{"tender":{"lots":[{"submissionTerms":{"nonElectronicRationale":"Inclusion of a physical model"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#nonelectronicSection
 -   id: BT-191-Tender
     parentNodeId: ND-LotTender
     name: Country Origin
