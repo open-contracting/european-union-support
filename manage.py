@@ -591,9 +591,10 @@ def statistics(file):
 
 @cli.command()
 @click.argument('file', type=click.File())
-def fields_without_extensions(file):
+@click.option('--contains', help='Print fields containing this text.')
+def fields_without_extensions(file, contains):
     """
-    Print undefined fields in the guidance for TED XML.
+    Print fields that appear in the TED XML guidance but not in the FILE mapping sheet.
     """
     subjects = {
         # Unambiguous
@@ -888,10 +889,11 @@ def fields_without_extensions(file):
         if path not in seen:
             click.echo(path)
 
-    # Uncomment to print all the paths for a specific object.
-    # for path in sorted(list(paths)):
-    #     if '/items' in path:
-    #         click.echo(path)
+    if contains:
+        click.echo(f"Contains '{contains}':")
+        for path in sorted(list(paths)):
+            if contains in path:
+                click.echo(path)
 
 
 if __name__ == '__main__':
