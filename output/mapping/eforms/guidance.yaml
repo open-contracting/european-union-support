@@ -1992,10 +1992,10 @@
     Business groups:
         BG-7: Notice Result
         BG-320: Tender
-    eForms guidance: (UNREVIEWED) Set the bid's `.variant` to `true` \[https://github.com/open-contracting/european-union-support/issues/82\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Set the bid's `.variant` to `true` \[https://github.com/open-contracting/european-union-support/issues/82\]
+    eForms example: <efac:LotTender><efbc:TenderVariantIndicator>true</efbc:TenderVariantIndicator></efac:LotTender>
+    OCDS example: '{"bids":{"details":[{"variant":true}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#lotTenderSection
 -   id: BT-195(BT-09)-Procedure
     parentNodeId: ND-CrossBorderLawUnpublish
     name: Unpublished Identifier
@@ -5343,11 +5343,11 @@
         BG-77: Modification
     eForms guidance: |-
         (UNREVIEWED) Add an `Amendment` object to the contract's `.amendments` array, and set its `.id` (string). The `.id` can be any value guaranteed to be globally unique. For example, it can be set to a [version 4 UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier), or it can be assigned sequentially across all notices for this procedure (the first notice sets it to '1', the second to '2', etc.).
-
-        Map the label of the code to the amendment's `.description`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+        The codes are drawn from [Modification justification](https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/modification-justification) authority table in EU vocabularies.
+        Map the label of the code to the amendment's `.rationale`.
+    eForms example: <efac:ChangeReason><cbc:ReasonCode listName="modification-justification">add-wss</cbc:ReasonCode></efac:ChangeReason>
+    OCDS example: '{"contracts":[{"amendments":[{"rationale":"Need for additional works, services or supplies by the original contractor."}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#contractModificationNoticeSection
 -   id: BT-201-Contract
     parentNodeId: ND-ModificationReason
     name: Modification Reason Description
@@ -5360,9 +5360,9 @@
     Business groups:
         BG-77: Modification
     eForms guidance: (UNREVIEWED) Map to the amendment's `.rationale`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms example: <efac:ChangeReason><efbc:ReasonDescription languageID="ENG">The original business case was scoped as a technology replacement programme for a single system. It was agreed that the organisation should consider people and process in addition to systems replacement, and work has been re-scoped to accommodate this.</efbc:ReasonDescription></efac:ChangeReason>
+    OCDS example: '{"contracts":[{"amendments":[{"rationale":"The original business case was scoped as a technology replacement programme for a single system. It was agreed that the organisation should consider people and process in addition to systems replacement, and work has been re-scoped to accommodate this."}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#contractModificationNoticeSection
 -   id: BT-202-Contract
     parentNodeId: ND-Modification
     name: Modification Description
@@ -5375,9 +5375,9 @@
     Business groups:
         BG-77: Modification
     eForms guidance: (UNREVIEWED) Map to the amendment's `.description`
-    eForms example: ''
+    eForms example: <efac:Change><efbc:ChangeDescription languageID="ENG">Increase in framework value</efbc:ChangeDescription></efac:Change>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#contractModificationNoticeSection
 -   id: BT-21-Lot
     parentNodeId: ND-LotProcurementScope
     name: Title
@@ -5403,10 +5403,10 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/OBJECT_DESCR/TITLE
     TED guidance:
     - Map to the lot's `.title`
-    eForms guidance: (UNREVIEWED) Map to `tender.title` (`/*/cac:ProcurementProject`) or the lot's `.title` (`/*/cac:ProcurementProjectLot`)
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's `.title`
+    eForms example: <cbc:Name languageID="ENG">Computer Network extension</cbc:Name>
+    OCDS example: '{"tender":{"lots":[{"title":"Computer Network extension"}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#objectSection
 -   id: BT-21-LotsGroup
     parentNodeId: ND-LotsGroupProcurementScope
     name: Title
@@ -5419,9 +5419,9 @@
     Business groups:
         BG-2: Purpose
     eForms guidance: (UNREVIEWED) (REPEAT) Map to `tender.title` (`/*/cac:ProcurementProject`) or the lot's `.title` (`/*/cac:ProcurementProjectLot`)
-    eForms example: ''
+    eForms example: <cbc:Name languageID="ENG">Computer Network extension</cbc:Name>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#objectSection
 -   id: BT-21-Part
     parentNodeId: ND-PartProcurementScope
     name: Title
@@ -5441,10 +5441,10 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/OBJECT_CONTRACT/OBJECT_DESCR/TITLE
     TED guidance:
     - Map to the lot's `.title`
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to `tender.title` (`/*/cac:ProcurementProject`) or the lot's `.title` (`/*/cac:ProcurementProjectLot`)
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to `tender.title`
+    eForms example: <cbc:Name languageID="ENG">Computer Network extension</cbc:Name>
+    OCDS example: '{"tender":{"title":"Computer Network extension"}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#objectSection
 -   id: BT-21-Procedure
     parentNodeId: ND-ProcedureProcurementScope
     name: Title
@@ -5481,10 +5481,10 @@
     TED guidance:
     - Map to `tender.title`
     - Map to the lot's `.title`
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to `tender.title` (`/*/cac:ProcurementProject`) or the lot's `.title` (`/*/cac:ProcurementProjectLot`)
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to `tender.title`
+    eForms example: <cbc:Name languageID="ENG">Computer Network extension</cbc:Name>
+    OCDS example: '{"tender":{"title":"Computer Network extension"}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#objectSection
 -   id: BT-22-Lot
     parentNodeId: ND-LotProcurementScope
     name: Internal Identifier
@@ -5503,9 +5503,9 @@
     TED guidance:
     - If not set, let *Reference number* be equal to the `ocid` value. Map to `tender.id` (string).
     eForms guidance: (UNREVIEWED) Map to the lot's `.description`
-    eForms example: ''
+    eForms example: <cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#objectSection
 -   id: BT-22-LotsGroup
     parentNodeId: ND-LotsGroupProcurementScope
     name: Internal Identifier
@@ -5518,9 +5518,9 @@
     Business groups:
         BG-2: Purpose
     eForms guidance: (UNREVIEWED) (REPEAT) Map to the lot's `.description`
-    eForms example: ''
+    eForms example: <cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#objectSection
 -   id: BT-22-Part
     parentNodeId: ND-PartProcurementScope
     name: Internal Identifier
@@ -5532,10 +5532,10 @@
     Description: 'The internal identifier used for files regarding the procurement procedure or lot before a procedure identifier is given (e.g. coming from the buyer''s document management system or procurement planning system). '
     Business groups:
         BG-2: Purpose
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the lot's `.description`
-    eForms example: ''
+    eForms guidance: (UNREVIEWED) Map to `tender.identifiers.id`
+    eForms example: <cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#objectSection
 -   id: BT-22-Procedure
     parentNodeId: ND-ProcedureProcurementScope
     name: Internal Identifier
@@ -5566,10 +5566,10 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/REFERENCE_NUMBER
     TED guidance:
     - If not set, let *Reference number* be equal to the `ocid` value. Map to `tender.id` (string).
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the lot's `.description`
-    eForms example: ''
+    eForms guidance: (UNREVIEWED) Map to `tender.identifiers.id`
+    eForms example: <cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#objectSection
 -   id: BT-23-Lot
     parentNodeId: ND-LotProcurementScope
     name: Main Nature
@@ -5676,7 +5676,7 @@
     eForms guidance: (UNREVIEWED) Map `/*/cac:ProcurementProject/cbc:Description` to `tender.description`.\\n\\nMap `/*/cac:ProcurementProjectLot/cac:ProcurementProject/cbc:Description` to the lot's `.description`. \[https://github.com/open-contracting/european-union-support/issues/57\]
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#objectSection
 -   id: BT-24-LotsGroup
     parentNodeId: ND-LotsGroupProcurementScope
     name: Description
@@ -5691,7 +5691,7 @@
     eForms guidance: (UNREVIEWED) (REPEAT) Map `/*/cac:ProcurementProject/cbc:Description` to `tender.description`.\\n\\nMap `/*/cac:ProcurementProjectLot/cac:ProcurementProject/cbc:Description` to the lot's `.description`. \[https://github.com/open-contracting/european-union-support/issues/57\]
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#objectSection
 -   id: BT-24-Part
     parentNodeId: ND-PartProcurementScope
     name: Description
@@ -5714,7 +5714,7 @@
     eForms guidance: (UNREVIEWED) (REPEAT) Map `/*/cac:ProcurementProject/cbc:Description` to `tender.description`.\\n\\nMap `/*/cac:ProcurementProjectLot/cac:ProcurementProject/cbc:Description` to the lot's `.description`. \[https://github.com/open-contracting/european-union-support/issues/57\]
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#objectSection
 -   id: BT-24-Procedure
     parentNodeId: ND-ProcedureProcurementScope
     name: Description
@@ -5745,7 +5745,7 @@
     eForms guidance: (UNREVIEWED) (REPEAT) Map `/*/cac:ProcurementProject/cbc:Description` to `tender.description`.\\n\\nMap `/*/cac:ProcurementProjectLot/cac:ProcurementProject/cbc:Description` to the lot's `.description`. \[https://github.com/open-contracting/european-union-support/issues/57\]
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#objectSection
 -   id: BT-25-Lot
     parentNodeId: ND-LotProcurementScope
     name: Quantity
