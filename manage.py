@@ -4,6 +4,7 @@ import json
 import os
 import re
 from copy import deepcopy
+from io import StringIO
 from pathlib import Path
 from textwrap import dedent
 from urllib.parse import urlsplit
@@ -53,6 +54,22 @@ Dumper.add_representer(pd._libs.missing.NAType, na_representer)
 Dumper.add_representer(np.ndarray, ndarray_representer)
 Dumper.add_representer(float, float_representer)
 Dumper.add_representer(str, str_representer)
+
+
+def get(url):
+    """
+    GET a URL and return the response.
+    """
+    response = requests.get(url)
+    response.raise_for_status()
+    return response
+
+
+def get_html(url):
+    """
+    GET a URL and return the parsed HTML content.
+    """
+    return lxml.html.fromstring(get(url).content)
 
 
 def unique(series):
@@ -482,11 +499,28 @@ def lint(filename):
     set_additional_properties_false(schema)
     format_checker = FormatChecker()
 
+    if os.path.isfile('codes.txt'):
+        with open('codes.txt') as f:
+            known_codes = set(f.read().splitlines())
+    else:
+        known_codes = set()
+        url = 'https://standard.open-contracting.org/profiles/eu/latest/en/_static/patched/codelists/'
+        document = get_html(url)
+        document.make_links_absolute(url)
+        for url in document.xpath('//@href[contains(., ".csv")]'):
+            reader = csv.DictReader(StringIO(get(url).text))
+            for row in reader:
+                known_codes.add(row['Code'])
+
+        with open('codes.txt', 'w') as f:
+            f.write('\n'.join(sorted(known_codes)))
+
     sdk_regex = re.compile(r'/\d+\.\d+\.\d+/')
     sdk_documents = {}
 
     unreviewed = 0
 
+    codes = set()
     for field in fields:
         identifier = field['id']
 
@@ -499,14 +533,15 @@ def lint(filename):
             fragment = parts.fragment
             base_url = parts._replace(fragment='').geturl()
             if base_url not in sdk_documents:
-                response = requests.get(base_url)
-                response.raise_for_status()
-                sdk_documents[base_url] = lxml.html.fromstring(response.content)
+                sdk_documents[base_url] = get_html(base_url)
             assert sdk_documents[base_url].xpath(f'//@id="{fragment}"'), f'{identifier}: anchor not found: {fragment}'
 
         # Format Markdown.
         field['eForms guidance'] = mdformat.text(field['eForms guidance']).rstrip()
         unreviewed += field['eForms guidance'].startswith('(UNREVIEWED)')
+
+        for match in re.finditer(r"'(\S+)'", field['eForms guidance']):
+            codes.add(match.group(1))
 
         # Format XML.
         eforms_example = field['eForms example']
@@ -546,8 +581,13 @@ def lint(filename):
             except json.decoder.JSONDecodeError as e:
                 click.echo(f'{identifier}: JSON is invalid: {e}: {ocds_example}')
 
+    unknown_codes = codes - known_codes
+    if unknown_codes:
+        click.echo('\nCodes (tokens in single quotes) that do not appear in any codelist:')
+        click.echo('\n'.join(sorted(unknown_codes)))
+
     if unreviewed:
-        click.echo(f'{unreviewed} unreviewed eForms guidance')
+        click.echo(f'\n{unreviewed} unreviewed eForms guidance')
 
     write_yaml_file(filename, fields)
 
