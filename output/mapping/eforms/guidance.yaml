@@ -366,7 +366,7 @@
         - neg-wo-call: Set `tender.procurementMethod` to 'limited'
 
         ```{note}
-        `tender.procurementMethod` is not set for 'oth-mult' or 'oth-single'.
+        `tender.procurementMethod` is not set for "oth-mult" or "oth-single".
         ```
     eForms example: <cbc:ProcedureCode listName="procurement-procedure-type">open</cbc:ProcedureCode>
     OCDS example: '{"tender":{"procurementMethod":"open","procurementMethodDetails":"Open procedure"}}'
@@ -5342,7 +5342,7 @@
     Business groups:
         BG-77: Modification
     eForms guidance: |-
-        (UNREVIEWED) Add an `Amendment` object to the contract's `.amendments` array, and set its `.id` (string). The `.id` can be any value guaranteed to be globally unique. For example, it can be set to a [version 4 UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier), or it can be assigned sequentially across all notices for this procedure (the first notice sets it to '1', the second to '2', etc.).
+        (UNREVIEWED) Add an `Amendment` object to the contract's `.amendments` array, and set its `.id` (string). The `.id` can be any value guaranteed to be globally unique. For example, it can be set to a [version 4 UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier), or it can be assigned sequentially across all notices for this procedure (the first notice sets it to "1", the second to "2", etc.).
         The codes are drawn from [Modification justification](https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/modification-justification) authority table in EU vocabularies.
         Map the label of the code to the amendment's `.rationale`.
     eForms example: <efac:ChangeReason><cbc:ReasonCode listName="modification-justification">add-wss</cbc:ReasonCode></efac:ChangeReason>
@@ -6352,7 +6352,7 @@
     - TED_EXPORT/FORM_SECTION/F23_2014/OBJECT_CONTRACT/OBJECT_DESCR/DURATION
     - TED_EXPORT/FORM_SECTION/F24_2014/OBJECT_CONTRACT/OBJECT_DESCR/DURATION
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/OBJECT_DESCR/DURATION
-    eForms guidance: (UNREVIEWED) If `@unitCode` is set to 'DAY', map to the lot's `.contractPeriod.durationInDays`.\\n\\nIf `@unitCode` is set to 'MONTH', multiply by 30. If `@unitCode` is set to 'YEAR', multiply by 365. In either case, map the result to the lot's `.contractPeriod.durationInDays`. \[https://github.com/open-contracting/european-union-support/issues/58\]
+    eForms guidance: (UNREVIEWED) If `@unitCode` is set to "DAY", map to the lot's `.contractPeriod.durationInDays`.\\n\\nIf `@unitCode` is set to "MONTH", multiply by 30. If `@unitCode` is set to "YEAR", multiply by 365. In either case, map the result to the lot's `.contractPeriod.durationInDays`. \[https://github.com/open-contracting/european-union-support/issues/58\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -6371,7 +6371,7 @@
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/QUANTITY_SCOPE_WORKS_DEFENCE/F16_DIVISION_INTO_LOTS/F16_DIV_INTO_LOT_YES/LOT_PRIOR_INFORMATION/SCHEDULED_DATE_PERIOD/PERIOD_WORK_DATE_STARTING/(MONTHS|DAYS)
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/SCHEDULED_DATE_PERIOD/PERIOD_WORK_DATE_STARTING/MONTHS
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/PERIOD_WORK_DATE_STARTING/(MONTHS|DAYS)
-    eForms guidance: (UNREVIEWED) (REPEAT) If `@unitCode` is set to 'DAY', map to `tender.contractPeriod.durationInDays`.\\n\\nIf `@unitCode` is set to 'MONTH', multiply by 30. If `@unitCode` is set to 'YEAR', multiply by 365. In either case, map the result to `tender.contractPeriod.durationInDays`. \[https://github.com/open-contracting/european-union-support/issues/58\]
+    eForms guidance: (UNREVIEWED) (REPEAT) If `@unitCode` is set to "DAY", map to `tender.contractPeriod.durationInDays`.\\n\\nIf `@unitCode` is set to "MONTH", multiply by 30. If `@unitCode` is set to "YEAR", multiply by 365. In either case, map the result to `tender.contractPeriod.durationInDays`. \[https://github.com/open-contracting/european-union-support/issues/58\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -10539,7 +10539,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/LEFTI/PARTICULAR_PROFESSION
     TED guidance:
     - Add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array and set its `.type` to 'technical'. If *Reference to the relevant law, regulation or administrative provision* is set, map it to the criterion's `.description`. Otherwise, set the criterion's `.description` to 'Execution of the service is reserved to a particular profession'.
-    eForms guidance: (UNREVIEWED) If `cbc:CalculationExpressionCode[@listName='usage']` is set to 'used', add a `SelectionCriterion` object to the lot's `.selectionCriteria.criteria` array and set its `.type` according to the guidance in \[common operations\](#selection criterion type). Otherwise, discard.
+    eForms guidance: (UNREVIEWED) If `cbc:CalculationExpressionCode[@listName="usage"]` is set to "used", add a `SelectionCriterion` object to the lot's `.selectionCriteria.criteria` array and set its `.type` according to the guidance in \[common operations\](#selection criterion type). Otherwise, discard.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -11450,7 +11450,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/LEFTI/PERFORMANCE_STAFF_QUALIFICATION
     TED guidance:
     - Set `tender.otherRequirements.requiresStaffNamesAndQualifications` to `true`
-    eForms guidance: (UNREVIEWED) If equal to 'par-requ' or 't-requ', set the lot's `.otherRequirements.requiresStaffNamesAndQualifications` to `true`. If equal to 'not-requ', set it to `false`. Otherwise, discard. \[https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/requirement-stage\]
+    eForms guidance: (UNREVIEWED) If equal to "par-requ" or "t-requ", set the lot's `.otherRequirements.requiresStaffNamesAndQualifications` to `true`. If equal to "not-requ", set it to `false`. Otherwise, discard. \[https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/requirement-stage\]
     eForms example: ''
     OCDS example: ''
     sdk: ''
