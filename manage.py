@@ -466,6 +466,12 @@ def lint(filename):
             "id": "1e86a664-ae3c-41eb-8529-0242ac130003",
         },
     }
+    set_missing_ids = {
+        ('tender', 'lots'): ('id',),
+        ('tender', 'lotGroups'): ('id',),
+        ('awards',): ('id',),
+        ('contracts',): ('id', 'awardID'),
+    }
 
     with open(filename) as f:
         fields = yaml.safe_load(f)
@@ -522,8 +528,19 @@ def lint(filename):
 
                 release = deepcopy(minimal_release)
                 json_merge_patch.merge(release, data)
-                if 'lots' in release['tender']:
-                    release['tender']['lots'][0]['id'] = '1'
+
+                for parents, keys in set_missing_ids.items():
+                    obj = release
+                    for parent in parents:
+                        if parent in obj:
+                            obj = obj[parent]
+                        else:
+                            break
+                    else:
+                        for key in keys:
+                            if key not in obj[0]:
+                                obj[0][key] = '1'
+
                 for e in validator(schema, format_checker=format_checker).iter_errors(release):
                     click.echo(f"{identifier}: OCDS is invalid: {e.message} ({'/'.join(e.absolute_schema_path)})")
             except json.decoder.JSONDecodeError as e:
