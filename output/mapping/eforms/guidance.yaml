@@ -5418,9 +5418,9 @@
     Description: The name of the procurement procedure or lot.
     Business groups:
         BG-2: Purpose
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to `tender.title` (`/*/cac:ProcurementProject`) or the lot's `.title` (`/*/cac:ProcurementProjectLot`)
+    eForms guidance: Map to the lotGroup's `.title`
     eForms example: <cbc:Name languageID="ENG">Computer Network extension</cbc:Name>
-    OCDS example: ''
+    OCDS example: '{"tender":{"lotGroups":[{"title":"Computer Network extension"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#objectSection
 -   id: BT-21-Part
     parentNodeId: ND-PartProcurementScope
@@ -5502,9 +5502,9 @@
     - TED_EXPORT/FORM_SECTION/F21_2014/OBJECT_CONTRACT/REFERENCE_NUMBER
     TED guidance:
     - If not set, let *Reference number* be equal to the `ocid` value. Map to `tender.id` (string).
-    eForms guidance: (UNREVIEWED) Map to the lot's `.description`
+    eForms guidance: Map to the lot's `.identifiers.id` and set `.identifiers.scheme` to 'internal'.
     eForms example: <cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID>
-    OCDS example: ''
+    OCDS example: '{"tender":{"lots":[{"identifiers":[{"id":"PROC/2020/0024-ABC-FGHI"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#objectSection
 -   id: BT-22-LotsGroup
     parentNodeId: ND-LotsGroupProcurementScope
@@ -5517,9 +5517,9 @@
     Description: 'The internal identifier used for files regarding the procurement procedure or lot before a procedure identifier is given (e.g. coming from the buyer''s document management system or procurement planning system). '
     Business groups:
         BG-2: Purpose
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the lot's `.description`
+    eForms guidance: Map to the lotGroup's `.identifiers.id` and set `.identifiers.scheme` to 'internal'.
     eForms example: <cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID>
-    OCDS example: ''
+    OCDS example: '{"tender":{"lotGroups":[{"identifiers":[{"id":"PROC/2020/0024-ABC-FGHI"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#objectSection
 -   id: BT-22-Part
     parentNodeId: ND-PartProcurementScope
@@ -5532,9 +5532,9 @@
     Description: 'The internal identifier used for files regarding the procurement procedure or lot before a procedure identifier is given (e.g. coming from the buyer''s document management system or procurement planning system). '
     Business groups:
         BG-2: Purpose
-    eForms guidance: (UNREVIEWED) Map to `tender.identifiers.id`
+    eForms guidance: Map to `tender.identifiers.id` and set `identifiers.scheme` to 'internal'.
     eForms example: <cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID>
-    OCDS example: ''
+    OCDS example: '{"tender":{"identifiers":[{"id":"ANID0000"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#objectSection
 -   id: BT-22-Procedure
     parentNodeId: ND-ProcedureProcurementScope
@@ -5566,9 +5566,9 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/REFERENCE_NUMBER
     TED guidance:
     - If not set, let *Reference number* be equal to the `ocid` value. Map to `tender.id` (string).
-    eForms guidance: (UNREVIEWED) Map to `tender.identifiers.id`
+    eForms guidance: Map to `tender.identifiers.id` and set `identifiers.scheme` to 'internal'.
     eForms example: <cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID>
-    OCDS example: ''
+    OCDS example: '{"tender":{"identifiers":[{"id":"PROC/2020/0024-ABC-FGHI"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#objectSection
 -   id: BT-23-Lot
     parentNodeId: ND-LotProcurementScope
@@ -5673,9 +5673,9 @@
     - Map to `tender.description`
     - 'Map to the lot''s `.description`\n\n**F12, F13**: Instead, map to `tender.description`'
     - 'Map to the lot''s `.description`\n\n**F12, F13**: Instead, map to `tender.description`\n\n If present, this takes precedence over the [Description of the procurement at the time of conclusion of the contract](#/OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR).'
-    eForms guidance: (UNREVIEWED) Map `/*/cac:ProcurementProject/cbc:Description` to `tender.description`.\\n\\nMap `/*/cac:ProcurementProjectLot/cac:ProcurementProject/cbc:Description` to the lot's `.description`. \[https://github.com/open-contracting/european-union-support/issues/57\]
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: Map to the lot's `.description`.
+    eForms example: <cbc:Description languageID="ENG">Procedure for the procurement of ...</cbc:Description>
+    OCDS example: '{"tender":{"lots":[{"description":"Procedure for the procurement of ..."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#objectSection
 -   id: BT-24-LotsGroup
     parentNodeId: ND-LotsGroupProcurementScope
@@ -5688,9 +5688,9 @@
     Description: The description of the nature and quantity of what is being bought or of the needs and requirements that should be met in this procedure or lot. In case of a modification notice, the description of the procurement before and after the modification.
     Business groups:
         BG-2: Purpose
-    eForms guidance: (UNREVIEWED) (REPEAT) Map `/*/cac:ProcurementProject/cbc:Description` to `tender.description`.\\n\\nMap `/*/cac:ProcurementProjectLot/cac:ProcurementProject/cbc:Description` to the lot's `.description`. \[https://github.com/open-contracting/european-union-support/issues/57\]
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: Map to the lotGroup's `.description`.
+    eForms example: <cbc:Description languageID="ENG">Procedure for the procurement of ...</cbc:Description>
+    OCDS example: '{"tender":{"lotGroups":[{"description":"Procedure for the procurement of ..."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#objectSection
 -   id: BT-24-Part
     parentNodeId: ND-PartProcurementScope
@@ -5711,9 +5711,9 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR
     TED guidance:
     - 'Map to the lot''s `.description`\n\n**F12, F13**: Instead, map to `tender.description`'
-    eForms guidance: (UNREVIEWED) (REPEAT) Map `/*/cac:ProcurementProject/cbc:Description` to `tender.description`.\\n\\nMap `/*/cac:ProcurementProjectLot/cac:ProcurementProject/cbc:Description` to the lot's `.description`. \[https://github.com/open-contracting/european-union-support/issues/57\]
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: Map to `tender.description`.
+    eForms example: <cbc:Description languageID="ENG">Procedure for the procurement of ...</cbc:Description>
+    OCDS example: '{"tender":{"description":"Procedure for the procurement of ..."}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#objectSection
 -   id: BT-24-Procedure
     parentNodeId: ND-ProcedureProcurementScope
@@ -5742,9 +5742,9 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/SHORT_DESCR
     TED guidance:
     - Map to `tender.description`
-    eForms guidance: (UNREVIEWED) (REPEAT) Map `/*/cac:ProcurementProject/cbc:Description` to `tender.description`.\\n\\nMap `/*/cac:ProcurementProjectLot/cac:ProcurementProject/cbc:Description` to the lot's `.description`. \[https://github.com/open-contracting/european-union-support/issues/57\]
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: Map to `tender.description`.
+    eForms example: <cbc:Description languageID="ENG">Procedure for the procurement of ...</cbc:Description>
+    OCDS example: '{"tender":{"description":"Procedure for the procurement of ..."}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#objectSection
 -   id: BT-25-Lot
     parentNodeId: ND-LotProcurementScope
