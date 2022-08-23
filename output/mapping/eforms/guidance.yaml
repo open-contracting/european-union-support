@@ -5759,10 +5759,10 @@
         BG-2: Purpose
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/F17_DIVISION_INTO_LOTS/F17_DIV_INTO_LOT_YES/F17_ANNEX_B/NATURE_QUANTITY_SCOPE/TOTAL_QUANTITY_OR_SCOPE
-    eForms guidance: (UNREVIEWED) Map to the item's `.quantity` (number).
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the item's `.quantity`.
+    eForms example: <cbc:EstimatedOverallContractQuantity unitCode="TNE">45000</cbc:EstimatedOverallContractQuantity>
+    OCDS example: '{"tender":{"items":[{"quantity":45000}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#quantitySection
 -   id: BT-26(a)-Lot
     parentNodeId: ND-LotAdditionalClassification
     name: Classification Type (e.g. CPV)
@@ -5776,10 +5776,13 @@
     Business groups:
         BG-2: Purpose
         BG-261: Classification
-    eForms guidance: (UNREVIEWED) Capitalize, and map to the item's `.classification.scheme`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        This business term is mapped to the same objects as created for BT-263.
+
+        For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update a corresponding `Classification` object in the item's `.additionalClassifications`, capitalize and map to the classification's `.scheme`.
+    eForms example: <cac:AdditionalCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311200</cbc:ItemClassificationCode></cac:AdditionalCommodityClassification>
+    OCDS example: '{"tender":{"items":[{"additionalClassifications":[{"scheme":"CPV"}]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#classificationSection
 -   id: BT-26(a)-Part
     parentNodeId: ND-PartAdditionalClassification
     name: Classification Type (e.g. CPV)
@@ -5793,10 +5796,13 @@
     Business groups:
         BG-2: Purpose
         BG-261: Classification
-    eForms guidance: (UNREVIEWED) (REPEAT) Capitalize, and map to the item's `.classification.scheme`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        This business term is mapped to the same objects as created for BT-263.
+
+        For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update a corresponding `Classification` object in the item's `.additionalClassifications`, capitalize and map to the classification's `.scheme`.
+    eForms example: <cac:AdditionalCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311200</cbc:ItemClassificationCode></cac:AdditionalCommodityClassification>
+    OCDS example: '{"tender":{"items":[{"additionalClassifications":[{"scheme":"CPV"}]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#classificationSection
 -   id: BT-26(a)-Procedure
     parentNodeId: ND-ProcedureAdditionalCommodityClassification
     name: Classification Type (e.g. CPV)
@@ -5810,10 +5816,13 @@
     Business groups:
         BG-2: Purpose
         BG-261: Classification
-    eForms guidance: (UNREVIEWED) (REPEAT) Capitalize, and map to the item's `.classification.scheme`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        This business term is mapped to the same objects as created for BT-263.
+
+        For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update a corresponding `Classification` object in the item's `.additionalClassifications`, capitalize and map to the classification's `.scheme`.
+    eForms example: <cac:AdditionalCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311200</cbc:ItemClassificationCode></cac:AdditionalCommodityClassification>
+    OCDS example: '{"tender":{"items":[{"additionalClassifications":[{"scheme":"CPV"}]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#classificationSection
 -   id: BT-26(m)-Lot
     parentNodeId: ND-LotMainClassificationCode
     name: Classification Type (e.g. CPV)
@@ -5827,10 +5836,10 @@
     Business groups:
         BG-2: Purpose
         BG-261: Classification
-    eForms guidance: (UNREVIEWED) (REPEAT) Capitalize, and map to the item's `.classification.scheme`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Capitalize, and map to the item's `.classification.scheme`.
+    eForms example: <cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification>
+    OCDS example: '{"tender":{"items":[{"classification":{"scheme":"CPV"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#classificationSection
 -   id: BT-26(m)-Part
     parentNodeId: ND-PartMainClassificationCode
     name: Classification Type (e.g. CPV)
@@ -5844,10 +5853,10 @@
     Business groups:
         BG-2: Purpose
         BG-261: Classification
-    eForms guidance: (UNREVIEWED) (REPEAT) Capitalize, and map to the item's `.classification.scheme`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Capitalize, and map to the item's `.classification.scheme`.
+    eForms example: <cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification>
+    OCDS example: '{"tender":{"items":[{"classification":{"scheme":"CPV"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#classificationSection
 -   id: BT-26(m)-Procedure
     parentNodeId: ND-ProcedureMainClassificationCode
     name: Classification Type (e.g. CPV)
@@ -5861,10 +5870,10 @@
     Business groups:
         BG-2: Purpose
         BG-261: Classification
-    eForms guidance: (UNREVIEWED) (REPEAT) Capitalize, and map to the item's `.classification.scheme`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Capitalize, and map to the item's `.classification.scheme`.
+    eForms example: <cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification>
+    OCDS example: '{"tender":{"items":[{"classification":{"scheme":"CPV"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#classificationSection
 -   id: BT-262-Lot
     parentNodeId: ND-LotProcurementScope
     name: Main Classification Code
@@ -5885,10 +5894,10 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_CONCESSIONAIRE_DEFENCE/FD_CONTRACT_CONCESSIONAIRE_DEFENCE/OBJECT_CONTRACT_SUB_DEFENCE/DESCRIPTION_CONTRACT_SUB_DEFENCE/CPV/CPV_MAIN/CPV_CODE/@CODE
     - TED_EXPORT/FORM_SECTION/CONTRACT_CONCESSIONAIRE_DEFENCE/FD_CONTRACT_CONCESSIONAIRE_DEFENCE/OBJECT_CONTRACT_SUB_DEFENCE/DESCRIPTION_CONTRACT_SUB_DEFENCE/CPV/CPV_ADDITIONAL/CPV_CODE/@CODE
     - TED_EXPORT/FORM_SECTION/F21_2014/OBJECT_CONTRACT/CPV_MAIN/CPV_CODE/@CODE
-    eForms guidance: (UNREVIEWED) Map to the item's `.classification.id`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the item's `.classification.id`.
+    eForms example: <cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification>
+    OCDS example: '{"tender":{"items":[{"classification":{"id":"15311100"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#classificationSection
 -   id: BT-262-Part
     parentNodeId: ND-PartProcurementScope
     name: Main Classification Code
@@ -5902,10 +5911,10 @@
     Business groups:
         BG-2: Purpose
         BG-261: Classification
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the item's `.classification.id`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the item's `.classification.id`.
+    eForms example: <cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification>
+    OCDS example: '{"tender":{"items":[{"classification":{"id":"15311100"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#classificationSection
 -   id: BT-262-Procedure
     parentNodeId: ND-ProcedureProcurementScope
     name: Main Classification Code
@@ -5943,10 +5952,10 @@
     - TED_EXPORT/FORM_SECTION/F23_2014/OBJECT_CONTRACT/CPV_MAIN/CPV_CODE/@CODE
     - TED_EXPORT/FORM_SECTION/F24_2014/OBJECT_CONTRACT/CPV_MAIN/CPV_CODE/@CODE
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/CPV_MAIN/CPV_CODE/@CODE
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the item's `.classification.id`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the item's `.classification.id`.
+    eForms example: <cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification>
+    OCDS example: '{"tender":{"items":[{"classification":{"id":"15311100"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#classificationSection
 -   id: BT-263-Lot
     parentNodeId: ND-LotProcurementScope
     name: Additional Classification Code
@@ -5960,10 +5969,13 @@
     Business groups:
         BG-2: Purpose
         BG-261: Classification
-    eForms guidance: (UNREVIEWED) For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add a Classification object to the item's `.additionalClassifications` array. Map to its `.id`, capitalize `@listName` and map to the classification's `.scheme`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        This business term is mapped to the same objects as created for BT-26.
+
+        For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update a corresponding `Classification` object in the item's `.additionalClassifications` and map to the classification's `.id`.
+    eForms example: <cac:AdditionalCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311200</cbc:ItemClassificationCode></cac:AdditionalCommodityClassification>
+    OCDS example: '{"tender":{"items":[{"additionalClassifications":[{"id":"15311200"}]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#classificationSection
 -   id: BT-263-Part
     parentNodeId: ND-PartProcurementScope
     name: Additional Classification Code
@@ -5977,10 +5989,13 @@
     Business groups:
         BG-2: Purpose
         BG-261: Classification
-    eForms guidance: (UNREVIEWED) (REPEAT) For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add a Classification object to the item's `.additionalClassifications` array. Map to its `.id`, capitalize `@listName` and map to the classification's `.scheme`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        This business term is mapped to the same objects as created for BT-26.
+
+        For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update a corresponding `Classification` object in the item's `.additionalClassifications` and map to the classification's `.id`.
+    eForms example: <cac:AdditionalCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311200</cbc:ItemClassificationCode></cac:AdditionalCommodityClassification>
+    OCDS example: '{"tender":{"items":[{"additionalClassifications":[{"id":"15311200"}]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#classificationSection
 -   id: BT-263-Procedure
     parentNodeId: ND-ProcedureProcurementScope
     name: Additional Classification Code
@@ -5994,10 +6009,13 @@
     Business groups:
         BG-2: Purpose
         BG-261: Classification
-    eForms guidance: (UNREVIEWED) (REPEAT) For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add a Classification object to the item's `.additionalClassifications` array. Map to its `.id`, capitalize `@listName` and map to the classification's `.scheme`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        This business term is mapped to the same objects as created for BT-26.
+
+        For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update a corresponding `Classification` object in the item's `.additionalClassifications` and map to the classification's `.id`.
+    eForms example: <cac:AdditionalCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311200</cbc:ItemClassificationCode></cac:AdditionalCommodityClassification>
+    OCDS example: '{"tender":{"items":[{"additionalClassifications":[{"id":"15311200"}]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#classificationSection
 -   id: BT-27-Lot
     parentNodeId: ND-LotValueEstimate
     name: Estimated Value
@@ -6031,13 +6049,10 @@
     - Discard. The *Initial estimated total value of the contract/lot* is available in the OCDS release with the same `ocid` as this release and with 'tender' in its `tag`.
     - Map to `tender.value.amount`
     - Map to the lot's `.value.amount`
-    eForms guidance: |-
-        (UNREVIEWED) Map `/*/cac:ProcurementProject/cac:RequestedTenderTotal/cbc:EstimatedOverallContractAmount` to `tender.value.amount`.
-
-        Map `/*/cac:ProcurementProjectLot/cac:ProcurementProject/cac:RequestedTenderTotal/cbc:EstimatedOverallContractAmount` to the lot's `.value.amount`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's `.value.amount` and map `currencyID` to the lot's `value.currency`.
+    eForms example: <cac:RequestedTenderTotal><cbc:EstimatedOverallContractAmount currencyID="EUR">250000</cbc:EstimatedOverallContractAmount></cac:RequestedTenderTotal>
+    OCDS example: '{"tender":{"lots":[{"value":{"amount":250000,"currency":"EUR"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#estimatedValueSection
 -   id: BT-27-LotsGroup
     parentNodeId: ND-LotsGroupValueEstimate
     name: Estimated Value
@@ -6049,13 +6064,10 @@
     Description: The estimated maximum value of the procurement procedure or lot. Estimated refers to estimation at the time of launching the call for competition. Maximum value means a value covering all contracts to be awarded within a framework agreement or a dynamic purchasing system, over their whole duration, including options and renewals.
     Business groups:
         BG-2: Purpose
-    eForms guidance: |-
-        (UNREVIEWED) (REPEAT) Map `/*/cac:ProcurementProject/cac:RequestedTenderTotal/cbc:EstimatedOverallContractAmount` to `tender.value.amount`.
-
-        Map `/*/cac:ProcurementProjectLot/cac:ProcurementProject/cac:RequestedTenderTotal/cbc:EstimatedOverallContractAmount` to the lot's `.value.amount`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot group's `.maximumValue.amount` and map `currencyID` to the lot group's `maximumValue.currency`.
+    eForms example: <cac:RequestedTenderTotal><cbc:EstimatedOverallContractAmount currencyID="EUR">250000</cbc:EstimatedOverallContractAmount></cac:RequestedTenderTotal>
+    OCDS example: '{"tender":{"lotGroups":[{"maximumValue":{"amount":250000,"currency":"EUR"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#estimatedValueSection
 -   id: BT-27-Part
     parentNodeId: ND-PartValueEstimate
     name: Estimated Value
@@ -6067,13 +6079,10 @@
     Description: The estimated maximum value of the procurement procedure or lot. Estimated refers to estimation at the time of launching the call for competition. Maximum value means a value covering all contracts to be awarded within a framework agreement or a dynamic purchasing system, over their whole duration, including options and renewals.
     Business groups:
         BG-2: Purpose
-    eForms guidance: |-
-        (UNREVIEWED) (REPEAT) Map `/*/cac:ProcurementProject/cac:RequestedTenderTotal/cbc:EstimatedOverallContractAmount` to `tender.value.amount`.
-
-        Map `/*/cac:ProcurementProjectLot/cac:ProcurementProject/cac:RequestedTenderTotal/cbc:EstimatedOverallContractAmount` to the lot's `.value.amount`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to `tender.value.amount` and map `currencyID` to `tender.value.currency`.
+    eForms example: <cac:RequestedTenderTotal><cbc:EstimatedOverallContractAmount currencyID="EUR">250000</cbc:EstimatedOverallContractAmount></cac:RequestedTenderTotal>
+    OCDS example: '{"tender":{"value":{"amount":250000,"currency":"EUR"}}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#estimatedValueSection
 -   id: BT-27-Procedure
     parentNodeId: ND-ProcedureProcurementScope
     name: Estimated Value
@@ -6098,13 +6107,10 @@
     TED guidance:
     - Discard. This is derived from the `value` of awards.
     - Map to `tender.value.amount`
-    eForms guidance: |-
-        (UNREVIEWED) (REPEAT) Map `/*/cac:ProcurementProject/cac:RequestedTenderTotal/cbc:EstimatedOverallContractAmount` to `tender.value.amount`.
-
-        Map `/*/cac:ProcurementProjectLot/cac:ProcurementProject/cac:RequestedTenderTotal/cbc:EstimatedOverallContractAmount` to the lot's `.value.amount`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to `tender.value.amount` and map `currencyID` to `tender.value.currency`.
+    eForms example: <cac:RequestedTenderTotal><cbc:EstimatedOverallContractAmount currencyID="EUR">250000</cbc:EstimatedOverallContractAmount></cac:RequestedTenderTotal>
+    OCDS example: '{"tender":{"value":{"amount":250000,"currency":"EUR"}}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#estimatedValueSection
 -   id: BT-300-Lot
     parentNodeId: ND-LotProcurementScope
     name: Additional Information
