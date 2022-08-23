@@ -1440,10 +1440,11 @@
     Business groups:
         BG-9: Change
     eForms guidance: |-
-        (UNREVIEWED)  The codes are drawn from the [Change corrig justification](https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/change-corrig-justification) authority table in EU Vocabularies.
-        Set `amendment.rationale` to the code's Label.
+        (UNREVIEWED)   Add an `Amendment` object to the contract's `.amendments` array, and set its `.id` (string). The `.id` can be any value guaranteed to be globally unique. For example, it can be set to a [version 4 UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier), or it can be assigned sequentially across all notices for this procedure (the first notice sets it to "1", the second to "2", etc.).
+        The codes are drawn from the [Change corrig justification](https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/change-corrig-justification) authority table in EU Vocabularies.
+        Map the code to the amendment's `rationaleClassifications.id`. Set `rationalClassifications.description` to the code's label and set `rationaleClassifications.scheme` to 'change corrig justification'
     eForms example: <efac:ChangeReason><cbc:ReasonCode listName="change-corrig-justification">cor-buy </cbc:ReasonCode></efac:ChangeReason>
-    OCDS example: '{"contracts":[{"amendments":[{"rationale":"Buyer correction"}]}]}'
+    OCDS example: '{"contracts":[{"amendments":[{"rationaleClassifications":[{"id":"cor-buy","description":"Buyer correction.","scheme":"change corrig"justification"}]}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#changeSection
 -   id: BT-141(a)-notice
     parentNodeId: ND-Change
@@ -1460,7 +1461,7 @@
     - TED_EXPORT/FORM_SECTION/F20_2014/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/SHORT_DESCR
     TED guidance:
     - Map to the amendment's `.description`
-    eForms guidance: Map to the amendment's `.description`
+    eForms guidance: This value is mapped to the same object as created for BT-140-notice. Map to the amendment's `.description`
     eForms example: <efac:Change><efbc:ChangeDescription languageID="ENG">The changes have been applied to ...</efbc:ChangeDescription></efac:Change>
     OCDS example: '{"contracts":[{"amendments":[{"description":"The changes have been applied to..."}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#changeSection
@@ -5342,11 +5343,11 @@
     Business groups:
         BG-77: Modification
     eForms guidance: |-
-        (UNREVIEWED) Add an `Amendment` object to the contract's `.amendments` array, and set its `.id` (string). The `.id` can be any value guaranteed to be globally unique. For example, it can be set to a [version 4 UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier), or it can be assigned sequentially across all notices for this procedure (the first notice sets it to "1", the second to "2", etc.).
+        Add an `Amendment` object to the contract's `.amendments` array, and set its `.id` (string). The `.id` can be any value guaranteed to be globally unique. For example, it can be set to a [version 4 UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier), or it can be assigned sequentially across all notices for this procedure (the first notice sets it to "1", the second to "2", etc.).
         The codes are drawn from [Modification justification](https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/modification-justification) authority table in EU vocabularies.
-        Map the label of the code to the amendment's `.rationale`.
+        Map the code to the amendment's `rationaleClassifications.id`. Set `rationaleClassifications.description` to the code's label and set `rationaleClassifications.scheme` to 'modification justification'
     eForms example: <efac:ChangeReason><cbc:ReasonCode listName="modification-justification">add-wss</cbc:ReasonCode></efac:ChangeReason>
-    OCDS example: '{"contracts":[{"amendments":[{"rationale":"Need for additional works, services or supplies by the original contractor."}]}]}'
+    OCDS example: '{"contracts":[{"amendments":[{"rationaleClassifications":[{"id":"add-wss","description":"Need for additional works, services or supplies by the original contractor.","scheme":"Modification justification"}]}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#contractModificationNoticeSection
 -   id: BT-201-Contract
     parentNodeId: ND-ModificationReason
@@ -5359,7 +5360,7 @@
     Description: The description of the main reason for modifying the contract.
     Business groups:
         BG-77: Modification
-    eForms guidance: (UNREVIEWED) Map to the amendment's `.rationale`
+    eForms guidance: This value is mapped to the same object as created for BT-200. Map to the amendment's `.rationale`
     eForms example: <efac:ChangeReason><efbc:ReasonDescription languageID="ENG">The original business case was scoped as a technology replacement programme for a single system. It was agreed that the organisation should consider people and process in addition to systems replacement, and work has been re-scoped to accommodate this.</efbc:ReasonDescription></efac:ChangeReason>
     OCDS example: '{"contracts":[{"amendments":[{"rationale":"The original business case was scoped as a technology replacement programme for a single system. It was agreed that the organisation should consider people and process in addition to systems replacement, and work has been re-scoped to accommodate this."}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#contractModificationNoticeSection
@@ -5374,9 +5375,9 @@
     Description: The summary of the contract modification(s).
     Business groups:
         BG-77: Modification
-    eForms guidance: (UNREVIEWED) Map to the amendment's `.description`
+    eForms guidance: This value is mapped to the same object as created for BT-200. Map to the amendment's `.description`
     eForms example: <efac:Change><efbc:ChangeDescription languageID="ENG">Increase in framework value</efbc:ChangeDescription></efac:Change>
-    OCDS example: ''
+    OCDS example: '{"contracts":[{"amendments":[{"description":"Increase in framework value."}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#contractModificationNoticeSection
 -   id: BT-21-Lot
     parentNodeId: ND-LotProcurementScope
@@ -5534,7 +5535,7 @@
         BG-2: Purpose
     eForms guidance: Map to `tender.identifiers.id` and set `identifiers.scheme` to 'internal'.
     eForms example: <cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID>
-    OCDS example: '{"tender":{"identifiers":[{"id":"ANID0000"}]}}'
+    OCDS example: '{"tender":{"identifiers":[{"id":"PROC/2020/0024-ABC-FGHI"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#objectSection
 -   id: BT-22-Procedure
     parentNodeId: ND-ProcedureProcurementScope
@@ -5585,10 +5586,10 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/TYPE_CONTRACT_DEFENCE/TYPE_CONTRACT/@VALUE
     - TED_EXPORT/FORM_SECTION/F21_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
-    eForms guidance: (UNREVIEWED) If different from 'combined', map to the lot's `.mainProcurementCategory`. Otherwise, add 'combined' to the lot's `.additionalProcurementCategories` array. \[https://github.com/open-contracting/european-union-support/issues/56;https://github.com/open-contracting/european-union-support/issues/58\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: If different from 'combined', map to the lot's `.mainProcurementCategory`. Otherwise, add 'combined' to the lot's `.additionalProcurementCategories` array.
+    eForms example: <cbc:ProcurementTypeCode listName="contract-nature">works</cbc:ProcurementTypeCode>
+    OCDS example: '{"tender":{"lots":[{"mainProcurementCategory":"works"}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#natureSection
 -   id: BT-23-Part
     parentNodeId: ND-PartProcurementScope
     name: Main Nature
@@ -5601,10 +5602,10 @@
     Description: The main nature (e.g. works) of what is being bought. In case of mixed procurement (e.g. a procedure for both works and services), the main nature may be, for example, the one with the highest estimated value. This information must be given for the whole procedure.
     Business groups:
         BG-2: Purpose
-    eForms guidance: (UNREVIEWED) (REPEAT) If different from 'combined', map to the lot's `.mainProcurementCategory`. Otherwise, add 'combined' to the lot's `.additionalProcurementCategories` array. \[https://github.com/open-contracting/european-union-support/issues/56;https://github.com/open-contracting/european-union-support/issues/58\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: If different from 'combined', map to `tender.mainProcurementCategory`. Otherwise, add 'combined' to `tender.additionalProcurementCategories` array.
+    eForms example: <cbc:ProcurementTypeCode listName="contract-nature">works</cbc:ProcurementTypeCode>
+    OCDS example: '{"tender":{"mainProcurementCategory":"works"}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#natureSection
 -   id: BT-23-Procedure
     parentNodeId: ND-ProcedureProcurementScope
     name: Main Nature
@@ -5634,10 +5635,10 @@
     - TED_EXPORT/FORM_SECTION/F23_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
     - TED_EXPORT/FORM_SECTION/F24_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
-    eForms guidance: (UNREVIEWED) (REPEAT) If different from 'combined', map to the lot's `.mainProcurementCategory`. Otherwise, add 'combined' to the lot's `.additionalProcurementCategories` array. \[https://github.com/open-contracting/european-union-support/issues/56;https://github.com/open-contracting/european-union-support/issues/58\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: If different from 'combined', map to `tender.mainProcurementCategory`. Otherwise, add 'combined' to `tender.additionalProcurementCategories` array.
+    eForms example: <cbc:ProcurementTypeCode listName="contract-nature">works</cbc:ProcurementTypeCode>
+    OCDS example: '{"tender":{"mainProcurementCategory":"works"}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#natureSection
 -   id: BT-24-Lot
     parentNodeId: ND-LotProcurementScope
     name: Description
@@ -6154,10 +6155,10 @@
     TED guidance:
     - 'Append to the lot''s `.description`\n\nThis results in a loss of structure. (WARNING #28)'
     - Map to the release's `description`
-    eForms guidance: (UNREVIEWED) Map to the release's `description`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: 'Append to the lot''s `.description`\\n\\nThis results in a loss of structure. (WARNING #28)'
+    eForms example: <cbc:Note languageID="ENG">For the current procedure ...</cbc:Note>
+    OCDS example: '{"tender":{"lots":[{"description":"For the current procedure ..."}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#additionalInfoSection
 -   id: BT-300-LotsGroup
     parentNodeId: ND-LotsGroupProcurementScope
     name: Additional Information
@@ -6169,10 +6170,10 @@
     Description: Any information not mentioned elsewhere.
     Business groups:
         BG-710: Additional Information
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the release's `description`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: 'Append to the lotGroup''s `.description`\\n\\nThis results in a loss of structure. (WARNING #28)'
+    eForms example: <cbc:Note languageID="ENG">For the current procedure ...</cbc:Note>
+    OCDS example: '{"tender":{"lotGroups":[{"description":"For the current procedure ..."}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#additionalInfoSection
 -   id: BT-300-Part
     parentNodeId: ND-PartProcurementScope
     name: Additional Information
@@ -6193,10 +6194,10 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/OBJECT_CONTRACT/OBJECT_DESCR/INFO_ADD
     TED guidance:
     - 'Append to the lot''s `.description`\n\nThis results in a loss of structure. (WARNING #28)'
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the release's `description`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the release's `description`
+    eForms example: <cbc:Note languageID="ENG">For the current procedure ...</cbc:Note>
+    OCDS example: '{"description":"For the current procedure..."}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#additionalInfoSection
 -   id: BT-300-Procedure
     parentNodeId: ND-ProcedureProcurementScope
     name: Additional Information
@@ -6215,10 +6216,10 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/COMPLEMENTARY_INFO/INFO_ADD
     TED guidance:
     - Map to the release's `description`
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the release's `description`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the release's `description`
+    eForms example: <cbc:Note languageID="ENG">For the current procedure ...</cbc:Note>
+    OCDS example: '{"description":"For the current procedure..."}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#additionalInfoSection
 -   id: BT-31-Procedure
     parentNodeId: ND-LotDistribution
     name: Lots Max Allowed
@@ -6249,10 +6250,10 @@
     TED guidance:
     - Map to `tender.lotDetails.maximumLotsBidPerSupplier`
     - Set `tender.lotDetails.maximumLotsBidPerSupplier` to 1
-    eForms guidance: (UNREVIEWED) Map to `tender.lotDetails.maximumLotsBidPerSupplier`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to `tender.lotDetails.maximumLotsBidPerSupplier`
+    eForms example: <cac:LotDistribution><cbc:MaximumLotsSubmittedNumeric>6</cbc:MaximumLotsSubmittedNumeric></cac:LotDistribution>
+    OCDS example: '{"tender":{"lotDetails":{"maximumLotsBidPerSupplier":6}}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#maxLotsSection
 -   id: BT-3201-Tender
     parentNodeId: ND-LotTender
     name: Tender Identifier
@@ -6265,10 +6266,10 @@
     Business groups:
         BG-7: Notice Result
         BG-320: Tender
-    eForms guidance: (UNREVIEWED) Add a Bid object to the `bids.details` array, and map to its `.id`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Add a Bid object to the `bids.details` array, and map to its `.id`
+    eForms example: <efac:TenderReference><cbc:ID>BID ABD/GHI-SN/2020-002</cbc:ID></efac:TenderReference>
+    OCDS example: '{"bids":{"details":[{"id":"BID ABD/GHI-SN/2020-002"}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#lotTenderSection
 -   id: BT-3202-Contract
     parentNodeId: ND-SettledContract
     name: Contract Tender ID (Reference)
@@ -6284,10 +6285,10 @@
     Business groups:
         BG-7: Notice Result
         BG-310: Contract
-    eForms guidance: (UNREVIEWED) Map to `tender.id`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to `tender.id`.
+    eForms example: <efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID></efac:LotTender>
+    OCDS example: '{"tender":{"id":"TEN-0001"}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#settledContractSection
 -   id: BT-33-Procedure
     parentNodeId: ND-LotDistribution
     name: Lots Max Awarded
@@ -6309,10 +6310,10 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/OBJECT_CONTRACT/LOT_DIVISION/LOT_MAX_ONE_TENDERER
     TED guidance:
     - Map to `tender.lotDetails.maximumLotsAwardedPerSupplier`
-    eForms guidance: (UNREVIEWED) Map to `tender.lotDetails.maximumLotsAwardedPerSupplier`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to `tender.lotDetails.maximumLotsAwardedPerSupplier`
+    eForms example: <cac:LotDistribution><cbc:MaximumLotsAwardedNumeric>4</cbc:MaximumLotsAwardedNumeric></cac:LotDistribution>
+    OCDS example: '{"tender":{"lotDetails":{"maximumLotsAwardedPerSupplier":4}}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#maxLotsSection
 -   id: BT-330-Procedure
     parentNodeId: ND-LotDistribution
     name: Group Identifier
@@ -6328,10 +6329,10 @@
     Business groups:
         BG-6: Procedure
         BG-330: Group Lot Award
-    eForms guidance: (UNREVIEWED) Add a Group lot object in the `tender.lotGroups` array. Map to its `.id`. See the [lot extension](https://extensions.open-contracting.org/en/extensions/lots/master/). \[https://github.com/open-contracting/european-union-support/issues/71\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Add a Group lot object in the `tender.lotGroups` array. Map to its `.id`. \[https://github.com/open-contracting/european-union-support/issues/71\]
+    eForms example: <cac:LotsGroup><cbc:LotsGroupID schemeName="LotsGroup">GLO-0001</cbc:LotsGroupID></cac:LotsGroup>
+    OCDS example: '{"tender":{"lotGroups":[{"id":"GLO-0001"}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#maxLotsSection
 -   id: BT-36-Lot
     parentNodeId: ND-LotDuration
     name: Duration Period
@@ -6358,10 +6359,10 @@
     - TED_EXPORT/FORM_SECTION/F23_2014/OBJECT_CONTRACT/OBJECT_DESCR/DURATION
     - TED_EXPORT/FORM_SECTION/F24_2014/OBJECT_CONTRACT/OBJECT_DESCR/DURATION
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/OBJECT_DESCR/DURATION
-    eForms guidance: (UNREVIEWED) If `@unitCode` is set to "DAY", map to the lot's `.contractPeriod.durationInDays`.\\n\\nIf `@unitCode` is set to "MONTH", multiply by 30. If `@unitCode` is set to "YEAR", multiply by 365. In either case, map the result to the lot's `.contractPeriod.durationInDays`. \[https://github.com/open-contracting/european-union-support/issues/58\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: If `@unitCode` is set to "DAY", map to the lot's `.contractPeriod.durationInDays`.\\n\\nIf `@unitCode` is set to "MONTH", multiply by 30. If `@unitCode` is set to "YEAR", multiply by 365. In either case, map the result to the lot's `.contractPeriod.durationInDays`.
+    eForms example: <cac:PlannedPeriod><cbc:DurationMeasure unitCode="DAY">3</cbc:DurationMeasure></cac:PlannedPeriod>
+    OCDS example: '{"tender":{"lots":[{"contractPeriod":{"durationInDays":3}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#plannedPeriodSection
 -   id: BT-36-Part
     parentNodeId: ND-PartDuration
     name: Duration Period
@@ -6377,10 +6378,10 @@
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/QUANTITY_SCOPE_WORKS_DEFENCE/F16_DIVISION_INTO_LOTS/F16_DIV_INTO_LOT_YES/LOT_PRIOR_INFORMATION/SCHEDULED_DATE_PERIOD/PERIOD_WORK_DATE_STARTING/(MONTHS|DAYS)
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/SCHEDULED_DATE_PERIOD/PERIOD_WORK_DATE_STARTING/MONTHS
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/PERIOD_WORK_DATE_STARTING/(MONTHS|DAYS)
-    eForms guidance: (UNREVIEWED) (REPEAT) If `@unitCode` is set to "DAY", map to `tender.contractPeriod.durationInDays`.\\n\\nIf `@unitCode` is set to "MONTH", multiply by 30. If `@unitCode` is set to "YEAR", multiply by 365. In either case, map the result to `tender.contractPeriod.durationInDays`. \[https://github.com/open-contracting/european-union-support/issues/58\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: If `@unitCode` is set to "DAY", map to `tender.contractPeriod.durationInDays`.\\n\\nIf `@unitCode` is set to "MONTH", multiply by 30. If `@unitCode` is set to "YEAR", multiply by 365. In either case, map the result to `tender.contractPeriod.durationInDays`.
+    eForms example: <cac:PlannedPeriod><cbc:DurationMeasure unitCode="DAY">3</cbc:DurationMeasure></cac:PlannedPeriod>
+    OCDS example: '{"tender":{"contractPeriod":{"durationInDays":3}}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#plannedPeriodSection
 -   id: BT-40-Lot
     parentNodeId: ND-SelectionCriteria
     name: Selection Criteria Second Stage Invite
@@ -6392,10 +6393,10 @@
     Description: The criteria (or criterion) will (only) be used to select the candidates to be invited for the second stage of the procedure (if a maximum number of candidates was set).
     Business groups:
         BG-702: Selection Criteria
-    eForms guidance: (UNREVIEWED) Set the criterion's `.reductionCriterion` to `true` \[https://github.com/open-contracting/european-union-support/issues/72\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Set the criterion's `.reductionCriterion` to `true` \[https://github.com/open-contracting/european-union-support/issues/72\]
+    eForms example: <efac:SelectionCriteria><efbc:SecondStageIndicator>true</efbc:SecondStageIndicator></efac:SelectionCriteria>
+    OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"reductionCriterion":true}]}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#selectionCriteriaSection
 -   id: BT-41-Lot
     parentNodeId: ND-AwardingTerms
     name: Following Contract
@@ -6411,10 +6412,10 @@
     - TED_EXPORT/FORM_SECTION/F12_2014/PROCEDURE/DETAILS_PAYMENT
     TED guidance:
     - Map to `tender.designContest.rewardsDetails`
-    eForms guidance: (UNREVIEWED) Set the lot's `.designContest.followUpContracts` to `true`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Set the lot's `.designContest.followUpContracts` to `true`
+    eForms example: <cbc:FollowupContractIndicator>true</cbc:FollowupContractIndicator>
+    OCDS example: '{"tender":{"lots":[{"designContest":{"followUpContracts":true}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#awardConsequencesSection
 -   id: BT-42-Lot
     parentNodeId: ND-AwardingTerms
     name: Jury Decision Binding
@@ -6428,12 +6429,12 @@
         BG-704: Reward and Jury
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/F12_2014/PROCEDURE/*[matches(name(),'DECISION_BINDING_CONTRACTING')]
-    eForms guidance: (UNREVIEWED) Set the lot's `.designContest.bindingJuryDecision` to `true`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Set the lot's `.designContest.bindingJuryDecision` to `true`
+    eForms example: <cbc:BindingOnBuyerIndicator>true</cbc:BindingOnBuyerIndicator>
+    OCDS example: '{"tender":{"lots":[{"designContest":{"bindingJuryDecision":true}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#awardConsequencesSection
 -   id: BT-44-Lot
-    parentNodeId: ND-Prize
+    parentNodeId: ND-Prize(AUTO) Set `tender.designContest.followUpContracts` to `true`
     name: Prize Rank
     btId: BT-44
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:Prize/cbc:RankCode
@@ -6444,10 +6445,10 @@
     Business groups:
         BG-704: Reward and Jury
         BG-44: Prize
-    eForms guidance: '(UNREVIEWED) Add a Prize object to the lot''s `.designContest.prizes.details` array. Set its `.id`. The position of the prize object in the `.details` array determines the rank of the prize. Example: `.details[0]` should return the highest ranking prize, `.details[1]` the second highest ranking prize, etc. \[https://github.com/open-contracting/european-union-support/issues/76\]'
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: 'Add a Prize object to the lot''s `.designContest.prizes.details` array. Set its `.id`. The position of the prize object in the `.details` array determines the rank of the prize. Example: `.details[0]` should return the highest ranking prize, `.details[1]` the second highest ranking prize, etc. \[https://github.com/open-contracting/european-union-support/issues/76\]'
+    eForms example: <cac:Prize><cbc:RankCode>1</cbc:RankCode></cac:Prize>
+    OCDS example: '{"tender":{"lots":[{"designContest":{"prizes":{"details":[{"id":"1"}]}}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#prizeSection
 -   id: BT-45-Lot
     parentNodeId: ND-Prize
     name: Rewards Other
@@ -6461,10 +6462,10 @@
         BG-704: Reward and Jury
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/F12_2014/PROCEDURE/*[matches(name(),'FOLLOW_UP_CONTRACTS')]
-    eForms guidance: (UNREVIEWED) (AUTO) Set `tender.designContest.followUpContracts` to `true`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: (UNREVIEWED) This business term is mapped to the same objects as created for BT-44. Map to the lot''s `.designContest.prizes.details.description`.
+    eForms example: <cac:Prize><cbc:Description languageID="ENG">The first prize winner will be awarded ...</cbc:Description></cac:Prize>
+    OCDS example: '{"tender":{"lots":[{"designContest":{"prizes":{"details":[{"description":"The first prize winner will be awarded ..."}]}}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#prizeSection
 -   id: BT-46-Lot
     parentNodeId: ND-AwardingTerms
     name: Jury Member Name
@@ -6480,10 +6481,10 @@
     - TED_EXPORT/FORM_SECTION/F12_2014/PROCEDURE/MEMBER_NAME
     TED guidance:
     - Add a `JuryMember` object to the `tender.designContest.juryMembers` array, and map to its `.name`
-    eForms guidance: (UNREVIEWED) Add a `JuryMember` object to the lot's `.designContest.juryMembers` array, and map to its `.name`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Add a `JuryMember` object to the lot's `.designContest.juryMembers` array, and map to its `.name`
+    eForms example: <cac:TechnicalCommitteePerson><cbc:FamilyName>Mrs Pamela Smith</cbc:FamilyName></cac:TechnicalCommitteePerson>
+    OCDS example: '{"tender":{"lots":[{"designContest":{"juryMembers":[{"name":"Mrs Pamela Smith"}]}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#jurySection
 -   id: BT-47-Lot
     parentNodeId: ND-Participants
     name: Participant Name
@@ -6499,10 +6500,10 @@
     - TED_EXPORT/FORM_SECTION/F12_2014/PROCEDURE/PARTICIPANT_NAME
     TED guidance:
     - '[Add a party](../../operations/#add-a-party), add ''selectedParticipant'' to its `.roles`, and map to its `.name`. Add an `OrganizationReference` object to the `tender.designContest.selectedParticipants` array, set its `.id` to the party''s `.id`, and map to its `.name`.'
-    eForms guidance: (UNREVIEWED) [Add a party](../../operations/#add-a-party), add 'selectedParticipant' to its `.roles`, and map to its `.name`. Add an `OrganizationReference` object to the lot's `.designContest.selectedParticipants` array, set its `.id` to the party's `.id`, and map to its `.name`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Add a party and add 'selectedParticipant' to its `.roles`, and map to its `.name`. Add an `OrganizationReference` object to the lot's `.designContest.selectedParticipants` array, set its `.id` to the party's `.id`, and map to its `.name`.
+    eForms example: <cac:PartyName><cbc:Name>Mr P. Sanchez</cbc:Name></cac:PartyName>
+    OCDS example: '{"parties":[{"name":"Mr P. Sanchez","roles":["selectedParticipant"],"id":"1"}],"tender":{"lots":[{"designContest":{"selectedParticipants":[{"id":"1","name":"Mr P. Sanchez"}]}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#shortlistSection
 -   id: BT-50-Lot
     parentNodeId: ND-SecondStage
     name: Minimum Candidates
@@ -6523,10 +6524,10 @@
     TED guidance:
     - Map to `tender.secondStage.minimumCandidates`
     - Map to the lot's `.secondStage.minimumCandidates`
-    eForms guidance: (UNREVIEWED) Map to the lot's `.secondStage.minimumCandidates`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's `.secondStage.minimumCandidates`
+    eForms example: <cac:EconomicOperatorShortList><cbc:MinimumQuantity>3</cbc:MinimumQuantity></cac:EconomicOperatorShortList>
+    OCDS example: '{"tender":{"lots":[{"secondStage":{"minimumCandidates":3}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#maxCandidatesSection
 -   id: BT-500-Business
     parentNodeId: ND-LocalEntity
     name: Official name
@@ -6538,10 +6539,10 @@
     Description: The official name of the organisation.
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) Map to the party's `.name` and `.identifier.legalName`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the party's `.name` and `.identifier.legalName`
+    eForms example: <cac:PartyName><cbc:Name languageID="ENG">Financial Adinistration for ...</cbc:Name></cac:PartyName>
+    OCDS example: '{"parties":[{"name":"Financial Adinistration for ...","identifier":{"legalName":"Financial Adinistration for ..."}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-500-Organization-Company
     parentNodeId: ND-Company
     name: Organisation Name
@@ -6627,10 +6628,10 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME
     - Map to the party's `.name` and `.identifier.legalName`
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.name` and `.identifier.legalName`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the party's `.name` and `.identifier.legalName`
+    eForms example: <cac:PartyName><cbc:Name languageID="ENG">Financial Adinistration for ...</cbc:Name></cac:PartyName>
+    OCDS example: '{"parties":[{"name":"Financial Adinistration for ...","identifier":{"legalName":"Financial Adinistration for ..."}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-500-Organization-TouchPoint
     parentNodeId: ND-Touchpoint
     name: Name
@@ -6642,10 +6643,10 @@
     Description: The official name of the organisation.
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.name` and `.identifier.legalName`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the party's `.name` and `.identifier.legalName`
+    eForms example: <cac:PartyName><cbc:Name languageID="ENG">Financial Adinistration for ...</cbc:Name></cac:PartyName>
+    OCDS example: '{"parties":[{"name":"Financial Adinistration for ...","identifier":{"legalName":"Financial Adinistration for ..."}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-500-UBO
     parentNodeId: ND-UBO
     name: UBO Name
@@ -6657,10 +6658,10 @@
     Description: The official name of the organisation.
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.name` and `.identifier.legalName`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the party's `.name` and `.identifier.legalName`
+    eForms example: <cac:PartyName><cbc:Name languageID="ENG">Financial Adinistration for ...</cbc:Name></cac:PartyName>
+    OCDS example: '{"parties":[{"name":"Financial Adinistration for ...","identifier":{"legalName":"Financial Adinistration for ..."}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-501-Business-European
     parentNodeId: ND-BusinessParty
     name: EU Registration Number
@@ -9419,10 +9420,10 @@
     - TED_EXPORT/FORM_SECTION/F12_2014/PROCEDURE/NUMBER_VALUE_PRIZE
     TED guidance:
     - Map to `tender.designContest.prizes.description`
-    eForms guidance: (UNREVIEWED) Map to the prize's `.value.amount`. Map `@currencyID` to the value's `.currency`. \[https://github.com/open-contracting/european-union-support/issues/76\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: This business term is mapped to the same objects as created for BT-44. Map to the lot's `designContest.prizes.details.value.amount`. Map `@currencyID` to the value's `.currency`. \[https://github.com/open-contracting/european-union-support/issues/76\]
+    eForms example: <cac:Prize><cbc:ValueAmount currencyID="EUR">5000</cbc:ValueAmount></cac:Prize>
+    OCDS example: '{"tender":{"lots":[{"designContest":{"prizes":{"details":[{"value":{"amount":5000,"currency":"EUR"}}]}}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#prizeSection
 -   id: BT-65-Lot
     parentNodeId: ND-LotTenderingTerms
     name: Subcontracting Obligation
@@ -10925,7 +10926,7 @@
     Description: The description of the main reason for the change in the notice compared to the original notice.
     Business groups:
         BG-9: Change
-    eForms guidance: ''
+    eForms guidance: (UNREVIEWED) 'This value is mapped to the same object as created for BT-140-notice.'
     eForms example: ''
     OCDS example: ''
     sdk: ''
