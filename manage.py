@@ -646,8 +646,8 @@ def statistics(file):
     - Fields mapped: {reviewed}/{done}/{total} ({reviewed / total:.1%} {done / total:.1%})
         - Mandatory: {reviewed_m}/{done_m}/{total_m} ({reviewed_m / total_m:.1%} {done_m / total_m:.1%})
         - Optional: {reviewed_o}/{done_o}/{total_o} ({reviewed_o / total_o:.1%} {done_o / total_o:.1%})
-    - Fields without TED guidance: {no_ted_guidance} ({no_ted_guidance / total:.1%})\
-    """))  # noqa: E501
+    - Fields without TED guidance: {no_ted_guidance} ({no_ted_guidance / total:.1%})"""
+    ))
 
 
 @cli.command()
