@@ -484,6 +484,7 @@ def lint(filename):
         },
     }
     set_missing_ids = {
+        ('tender', 'items'): ('id',),
         ('tender', 'lots'): ('id',),
         ('tender', 'lotGroups'): ('id',),
         ('awards',): ('id',),
@@ -495,6 +496,9 @@ def lint(filename):
 
     with open('release-schema.json') as f:
         schema = json.load(f)
+
+    # Remove some `additionalProperties` to clarify output.
+    del schema['definitions']['Tender']['patternProperties']
 
     set_additional_properties_false(schema)
     format_checker = FormatChecker()
