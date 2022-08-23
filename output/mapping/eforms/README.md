@@ -1,6 +1,6 @@
 reviewed/done/total (%reviewed %done)
 
-- Fields mapped: 22/334/698 (3.2% 47.9%)
-    - Mandatory: 19/220/452 (4.2% 48.7%)
-    - Optional: 3/114/246 (1.2% 46.3%)
-- Fields without TED guidance: 575 (82.4%)    
+- Fields mapped: 93/334/708 (13.1% 47.2%)
+    - Mandatory: 64/220/460 (13.9% 47.8%)
+    - Optional: 29/114/248 (11.7% 46.0%)
+- Fields without TED guidance: 585 (82.6%)
