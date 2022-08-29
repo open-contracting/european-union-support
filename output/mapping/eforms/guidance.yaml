@@ -1739,8 +1739,8 @@
     Business groups:
         BG-703: Organisation
     eForms guidance: Append to the party's `.name`, separated from the original text with ' - ' (space, dash, space). See also [Using the Organization building block with an organizational hierarchy](https://standard.open-contracting.org/latest/en/guidance/map/organizational_units/#using-the-organization-building-block-with-an-organizational-hierarchy)
-    eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cbc:Department>Finance Department</cbc:Department></cac:PostalAddress></efac:Company></efac:Organization>
-    OCDS example: '{"parties":[{"name":"Ministry of Education - Finance Department"}]}'
+    eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cbc:Department>Procurement Department</cbc:Department></cac:PostalAddress></efac:Company></efac:Organization>
+    OCDS example: '{"parties":[{"name":"Ministry of Education - Procurement Department"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-16-Organization-TouchPoint
     parentNodeId: ND-Touchpoint
@@ -1753,9 +1753,9 @@
     Description: The name of a part of an organisation (e.g. the relevant department of a large buyer).
     Business groups:
         BG-703: Organisation
-    eForms guidance: Append to the contact point's `.name`, separated from the original text with ' - ' (space, dash, space).
-    eForms example: <efac:Organization><efac:TouchPoint><cac:PartyName><cbc:Name languageID="ENG">Department XYZ</cbc:Name></cac:PartyName><cac:PostalAddress><cbc:Department>Department XYZ</cbc:Department></cac:PostalAddress></efac:TouchPoint></efac:Organization>
-    OCDS example: '{"parties":[{"additionalContactPoints":[{"name":"Department XYZ - Department XYZ"}]}]}'
+    eForms guidance: Append to the party's `.name`, separated from the original text with ' - ' (space, dash, space). See also [Using the Organization building block with an organizational hierarchy](https://standard.open-contracting.org/latest/en/guidance/map/organizational_units/#using-the-organization-building-block-with-an-organizational-hierarchy)
+    eForms example: <efac:Organization><efac:TouchPoint><cac:PartyName><cbc:Name languageID="ENG">Legal Department</cbc:Name></cac:PartyName><cac:PostalAddress><cbc:Department>Department XYZ</cbc:Department></cac:PostalAddress></efac:TouchPoint></efac:Organization>
+    OCDS example: '{"parties":[{"name":"Ministry of Education - Legal Department"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-160-Tender
     parentNodeId: ND-ConcessionRevenue
@@ -6628,9 +6628,9 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME
     - Map to the party's `.name` and `.identifier.legalName`
-    eForms guidance: Map to the party's `.name` and `.identifier.legalName`
-    eForms example: <cac:PartyName><cbc:Name languageID="ENG">Financial Adinistration for ...</cbc:Name></cac:PartyName>
-    OCDS example: '{"parties":[{"name":"Financial Adinistration for ...","identifier":{"legalName":"Financial Adinistration for ..."}}]}'
+    eForms guidance: Map to the party's `.name`.
+    eForms example: <cac:PartyName><cbc:Name languageID="ENG">Ministry of Education</cbc:Name></cac:PartyName>
+    OCDS example: '{"parties":[{"name":"Ministry of Education"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-500-Organization-TouchPoint
     parentNodeId: ND-Touchpoint
@@ -6643,9 +6643,9 @@
     Description: The official name of the organisation.
     Business groups:
         BG-703: Organisation
-    eForms guidance: Map to the party's `.name` and `.identifier.legalName`
-    eForms example: <cac:PartyName><cbc:Name languageID="ENG">Financial Adinistration for ...</cbc:Name></cac:PartyName>
-    OCDS example: '{"parties":[{"name":"Financial Adinistration for ...","identifier":{"legalName":"Financial Adinistration for ..."}}]}'
+    eForms guidance: Map to the party's `.name`.
+    eForms example: <cac:PartyName><cbc:Name languageID="ENG">Ministry of Education</cbc:Name></cac:PartyName>
+    OCDS example: '{"parties":[{"name":"Ministry of Education"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-500-UBO
     parentNodeId: ND-UBO
@@ -6658,10 +6658,13 @@
     Description: The official name of the organisation.
     Business groups:
         BG-703: Organisation
-    eForms guidance: Map to the party's `.name` and `.identifier.legalName`
-    eForms example: <cac:PartyName><cbc:Name languageID="ENG">Financial Adinistration for ...</cbc:Name></cac:PartyName>
-    OCDS example: '{"parties":[{"name":"Financial Adinistration for ...","identifier":{"legalName":"Financial Adinistration for ..."}}]}'
-    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
+    eForms guidance: |-
+        These values are mapped to the same objects as created for BT-500-UBO, BT-503-UBO, BT-506-UBO, BT-507-UBO, BT-510(a)-UBO, BT-510(b)-UBO, BT-510(c)-UBO, BT-512-UBO, BT-513-UBO, BT-514-UBO, BT-706-UBO, BT-739-UBO, OPT-160-UBO and OPT-202-UBO.
+
+        Add or update a corresponding `Person` object in the organization's `.beneficialOwners` array and map to the person's `.name`.
+    eForms example: <efac:UltimateBeneficialOwner><cbc:FamilyName>Mouse</cbc:FamilyName></efac:UltimateBeneficialOwner>
+    OCDS example: '{"parties":[{"beneficialOwners":[{"name":"Mouse"}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
 -   id: BT-501-Business-European
     parentNodeId: ND-BusinessParty
     name: EU Registration Number
@@ -6770,10 +6773,20 @@
     - TED_EXPORT/FORM_SECTION/F15_2014/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED/P/FT/@TYPE
     - TED_EXPORT/FORM_SECTION/F22_2014/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED/P/FT/@TYPE
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED/P/FT/@TYPE
-    eForms guidance: (UNREVIEWED) (AUTO) Set `tender.contractTerms.electronicInvoicingPolicy` to 'allowed'
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        - Get the `Organization` object whose `.name` is 'European Union'. If none exists yet:
+          - [Add a party](common_operations.md#add-a-party)
+          - Set its `.name` to 'European Union'
+        - Add 'funder' to its `.roles`
+        - Get the `Finance` object whose `.description` is the *Identification of the project*. If none exists yet:
+          - Add a `Finance` object to the contract's `.finance` array
+          - Map the *Identification of the project* to its `.description`
+          - Set its `.id` incrementally
+          - Set its `.financingParty.name` to 'European Union'
+          - Set its `.financingParty.id` to the party's `.id`
+    eForms example: <efac:Funding><efbc:FinancingIdentifier>2021/1234</efbc:FinancingIdentifier></efac:Funding>
+    OCDS example: '{"parties":[{"id":"1","name":"European Union","roles":["funder"]}],"contracts":[{"finance":[{"id":"1","description":"2021/1234","financingParty":{"id":"1","name":"European Union"}}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#settledContractSection
 -   id: BT-502-Business
     parentNodeId: ND-BusinessContact
     name: Contact person
@@ -6840,10 +6853,10 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL
     - Map to the party's `.contactPoint.name`
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.contactPoint.name`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the party's `.contactPoint.name`
+    eForms example: <cac:Contact><cbc:Name>Press Department</cbc:Name></cac:Contact>
+    OCDS example: '{"parties":[{"contactPoint":{"name":"Press Department"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-502-Organization-TouchPoint
     parentNodeId: ND-Touchpoint
     name: Contact Point
@@ -6855,10 +6868,10 @@
     Description: The name of the department or other contact point for communicating with the organisation. To avoid unnecessary processing of personal data, the contact point may allow the identification of a physical person only when necessary (in the sense of Regulation (EU) 2016/679 and Regulation (EU) 2018/1725).
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.contactPoint.name`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the party's `.contactPoint.name`.
+    eForms example: <cac:Contact><cbc:Name>Head of Legal Department</cbc:Name></cac:Contact>
+    OCDS example: '{"parties":[{"contactPoint":{"name":"Head of Legal Department"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-503-Business
     parentNodeId: ND-BusinessContact
     name: Telephone
@@ -6959,10 +6972,10 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE
     - Map to the party's `.contactPoint.telephone`
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.contactPoint.telephone`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the party's `.contactPoint.telephone`
+    eForms example: <cac:Contact><cbc:Telephone>+123 45678</cbc:Telephone></cac:Contact>
+    OCDS example: '{"parties":[{"contactPoint":{"telephone":"+123 45678"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-503-Organization-TouchPoint
     parentNodeId: ND-Touchpoint
     name: Contact Telephone Number
@@ -6975,10 +6988,10 @@
     Description: The telephone for contacting the organisation. To avoid unnecessary processing of personal data, the telephone may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.contactPoint.telephone`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the party's `.contactPoint.telephone`
+    eForms example: <cac:Contact><cbc:Telephone>+123 45678</cbc:Telephone></cac:Contact>
+    OCDS example: '{"parties":[{"contactPoint":{"telephone":"+123 45678"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-503-UBO
     parentNodeId: ND-UBO
     name: UBO Telephone Number
@@ -6991,10 +7004,13 @@
     Description: The telephone for contacting the organisation. To avoid unnecessary processing of personal data, the telephone may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.contactPoint.telephone`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        These values are mapped to the same objects as created for BT-500-UBO, BT-503-UBO, BT-506-UBO, BT-507-UBO, BT-510(a)-UBO, BT-510(b)-UBO, BT-510(c)-UBO, BT-512-UBO, BT-513-UBO, BT-514-UBO, BT-706-UBO, BT-739-UBO, OPT-160-UBO and OPT-202-UBO.
+
+        Add or update a corresponding `Person` object in the organization's `.beneficialOwners` array and map to the person's `.telephone`.
+    eForms example: <efac:UltimateBeneficialOwner><cac:Contact><cbc:Telephone>+123 4567890</cbc:Telephone></cac:Contact></efac:UltimateBeneficialOwner>
+    OCDS example: '{"parties":[{"beneficialOwners":[{"telephone":"+123 456789"}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
 -   id: BT-505-Business
     parentNodeId: ND-BusinessParty
     name: Internet address
@@ -7082,10 +7098,10 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL
     - Map to the party's `.details.url`
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.details.url`. \[Copied from the 2015 guidance but not imported automatically.\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the party's `.details.url`.
+    eForms example: <efac:Company><cbc:WebsiteURI>http://xyz.europa.eu/</cbc:WebsiteURI></efac:Company>
+    OCDS example: '{"parties":[{"details":{"url":"http://xyz.europa.eu/"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-505-Organization-TouchPoint
     parentNodeId: ND-Touchpoint
     name: Internet Address
@@ -7098,10 +7114,10 @@
     Description: The website of the organisation.
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.details.url`. \[Copied from the 2015 guidance but not imported automatically.\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the party's `.details.url`.
+    eForms example: <efac:Company><cbc:WebsiteURI>http://abc.europa.eu/</cbc:WebsiteURI></efac:Company>
+    OCDS example: '{"parties":[{"details":{"url":"http://abc.europa.eu/"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-506-Business
     parentNodeId: ND-BusinessContact
     name: e-mail
@@ -7235,10 +7251,13 @@
     Description: The email for contacting the organisation. To avoid unnecessary processing of personal data, the email may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.contactPoint.email`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        These values are mapped to the same objects as created for BT-500-UBO, BT-503-UBO, BT-506-UBO, BT-507-UBO, BT-510(a)-UBO, BT-510(b)-UBO, BT-510(c)-UBO, BT-512-UBO, BT-513-UBO, BT-514-UBO, BT-706-UBO, BT-739-UBO, OPT-160-UBO and OPT-202-UBO.
+
+        Add or update a corresponding `Person` object in the organization's `.beneficialOwners` array and map to the person's `.email`.
+    eForms example: <efac:UltimateBeneficialOwner><cac:Contact><cbc:ElectronicMail>mickey.mouse@cheese-universe.com</cbc:ElectronicMail></cac:Contact></efac:UltimateBeneficialOwner>
+    OCDS example: '{"parties":[{"beneficialOwners":[{"email":"mickey.mouse@cheese-universe.com"}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
 -   id: BT-507-Business
     parentNodeId: ND-BusinessAddress
     name: NUTS code
@@ -7324,10 +7343,13 @@
     Description: The location according to the common classification of territorial units for statistics (NUTS) of the organisation's physical address. The NUTS3 classification code must be used.
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.region`. There is an [open issue](https://github.com/open-contracting/standard/issues/739) about region codes. \[https://github.com/open-contracting/standard/issues/739\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        These values are mapped to the same objects as created for BT-500-UBO, BT-503-UBO, BT-506-UBO, BT-507-UBO, BT-510(a)-UBO, BT-510(b)-UBO, BT-510(c)-UBO, BT-512-UBO, BT-513-UBO, BT-514-UBO, BT-706-UBO, BT-739-UBO, OPT-160-UBO and OPT-202-UBO.
+
+        Add or update a corresponding `Person` object in the organization's `.beneficialOwners` array and map to the person's `.address.region`.
+    eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:CountrySubentityCode listName="nuts">GBK62</cbc:CountrySubentityCode></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
+    OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"region":"GBK62"}}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
 -   id: BT-5071-Lot
     parentNodeId: ND-LotPlacePerformance
     name: Place Performance Country Subdivision
@@ -7618,10 +7640,13 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.streetAddress`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        These values are mapped to the same objects as created for BT-500-UBO, BT-503-UBO, BT-506-UBO, BT-507-UBO, BT-510(a)-UBO, BT-510(b)-UBO, BT-510(c)-UBO, BT-512-UBO, BT-513-UBO, BT-514-UBO, BT-706-UBO, BT-739-UBO, OPT-160-UBO and OPT-202-UBO.
+
+        Add or update a corresponding `Person` object in the organization's `.beneficialOwners` array and map to the person's `.address.streetAddress`.
+    eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:StreetName>2 CheeseStreet</cbc:StreetName></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
+    OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"streetAddress":"2 CheeseStreet"}}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
 -   id: BT-510(b)-Business
     parentNodeId: ND-BusinessAddress
     name: Street
@@ -7678,10 +7703,13 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.streetAddress`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        These values are mapped to the same objects as created for BT-500-UBO, BT-503-UBO, BT-506-UBO, BT-507-UBO, BT-510(a)-UBO, BT-510(b)-UBO, BT-510(c)-UBO, BT-512-UBO, BT-513-UBO, BT-514-UBO, BT-706-UBO, BT-739-UBO, OPT-160-UBO and OPT-202-UBO.
+
+        Add or update a corresponding `Person` object in the organization's `.beneficialOwners` array and map to the person's `.address.streetAddress`.
+    eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:AdditionalStreetName>Nelson Building</cbc:AdditionalStreetName></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
+    OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"streetAddress":"Nelson Building"}}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
 -   id: BT-510(c)-Business
     parentNodeId: ND-BusinessAddress
     name: addressline
@@ -7738,10 +7766,13 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.streetAddress`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        These values are mapped to the same objects as created for BT-500-UBO, BT-503-UBO, BT-506-UBO, BT-507-UBO, BT-510(a)-UBO, BT-510(b)-UBO, BT-510(c)-UBO, BT-512-UBO, BT-513-UBO, BT-514-UBO, BT-706-UBO, BT-739-UBO, OPT-160-UBO and OPT-202-UBO.
+
+        Add or update a corresponding `Person` object in the organization's `.beneficialOwners` array and map to the person's `.address.streetAddress`.
+    eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cac:AddressLine><cbc:Line>2nd floor</cbc:Line></cac:AddressLine></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
+    OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"streetAddress":"2nd floor"}}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
 -   id: BT-5101(a)-Lot
     parentNodeId: ND-LotPlacePerformance
     name: Place Performance Street
@@ -8032,10 +8063,13 @@
     Description: The post code of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.postalCode`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        These values are mapped to the same objects as created for BT-500-UBO, BT-503-UBO, BT-506-UBO, BT-507-UBO, BT-510(a)-UBO, BT-510(b)-UBO, BT-510(c)-UBO, BT-512-UBO, BT-513-UBO, BT-514-UBO, BT-706-UBO, BT-739-UBO, OPT-160-UBO and OPT-202-UBO.
+
+        Add or update a corresponding `Person` object in the organization's `.beneficialOwners` array and map to the person's `.address.postalCode`.
+    eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:PostalZone>C6HA782</cbc:PostalZone></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
+    OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"postalCode":"C6HA78"}}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
 -   id: BT-5121-Lot
     parentNodeId: ND-LotPlacePerformance
     name: Place Performance Post Code
@@ -8211,10 +8245,13 @@
     Description: The name of the locality (city, town or village) of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.locality`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        These values are mapped to the same objects as created for BT-500-UBO, BT-503-UBO, BT-506-UBO, BT-507-UBO, BT-510(a)-UBO, BT-510(b)-UBO, BT-510(c)-UBO, BT-512-UBO, BT-513-UBO, BT-514-UBO, BT-706-UBO, BT-739-UBO, OPT-160-UBO and OPT-202-UBO.
+
+        Add or update a corresponding `Person` object in the organization's `.beneficialOwners` array and map to the person's `.address.postalCode`.
+    eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:CityName>MouseTown</cbc:CityName></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
+    OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"locality":"MouseTown"}}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
 -   id: BT-5131-Lot
     parentNodeId: ND-LotPlacePerformance
     name: Place Performance City
@@ -8394,10 +8431,13 @@
     Description: The country of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Translate to a country name, and map to the party's `.address.countryName`\\n\\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        These values are mapped to the same objects as created for BT-500-UBO, BT-503-UBO, BT-506-UBO, BT-507-UBO, BT-510(a)-UBO, BT-510(b)-UBO, BT-510(c)-UBO, BT-512-UBO, BT-513-UBO, BT-514-UBO, BT-706-UBO, BT-739-UBO, OPT-160-UBO and OPT-202-UBO.
+
+        Add or update a corresponding `Person` object in the organization's `.beneficialOwners` array, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the person's `.address.country`.
+    eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cac:Country><cbc:IdentificationCode listName="country">GBR</cbc:IdentificationCode></cac:Country></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
+    OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"country":"GB"}}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
 -   id: BT-5141-Lot
     parentNodeId: ND-LotPlacePerformance
     name: Place Performance Country Code
@@ -9618,10 +9658,13 @@
     Business groups:
         BG-703: Organisation
         BG-4: Winner
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        These values are mapped to the same objects as created for BT-500-UBO, BT-503-UBO, BT-506-UBO, BT-507-UBO, BT-510(a)-UBO, BT-510(b)-UBO, BT-510(c)-UBO, BT-512-UBO, BT-513-UBO, BT-514-UBO, BT-706-UBO, BT-739-UBO, OPT-160-UBO and OPT-202-UBO.
+
+        Add or update a corresponding `Person` object in the organization's `.beneficialOwners` array, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the person's `.nationality`.
+    eForms example: <efac:UltimateBeneficialOwner><efac:Nationality><cbc:NationalityID>DEU</cbc:NationalityID></efac:Nationality></efac:UltimateBeneficialOwner>
+    OCDS example: '{"parties":[{"beneficialOwners":[{"nationality":"DE"}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
 -   id: BT-707-Lot
     parentNodeId: ND-LotRestrictedDocuments
     name: Documents Restricted Justification
@@ -10426,10 +10469,13 @@
     Description: The fax for contacting the organisation. To avoid unnecessary processing of personal data, the fax may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.contactPoint.faxNumber`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        These values are mapped to the same objects as created for BT-500-UBO, BT-503-UBO, BT-506-UBO, BT-507-UBO, BT-510(a)-UBO, BT-510(b)-UBO, BT-510(c)-UBO, BT-512-UBO, BT-513-UBO, BT-514-UBO, BT-706-UBO, BT-739-UBO, OPT-160-UBO and OPT-202-UBO.
+
+        Add or update a corresponding `Person` object in the organization's `.beneficialOwners` array and map to the person's `.faxNumber`.
+    eForms example: <efac:UltimateBeneficialOwner><cac:Contact><cbc:Telefax>+123 4567891</cbc:Telefax></cac:Contact></efac:UltimateBeneficialOwner>
+    OCDS example: '{"parties":[{"beneficialOwners":[{"faxNumber":"+123 4567891"}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
 -   id: BT-740-Procedure-Buyer
     parentNodeId: ND-ContractingParty
     name: Buyer Contracting Entity
@@ -12621,10 +12667,13 @@
     type: text
     repeatable: false
     mandatory: true
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        These values are mapped to the same objects as created for BT-500-UBO, BT-503-UBO, BT-506-UBO, BT-507-UBO, BT-510(a)-UBO, BT-510(b)-UBO, BT-510(c)-UBO, BT-512-UBO, BT-513-UBO, BT-514-UBO, BT-706-UBO, BT-739-UBO, OPT-160-UBO and OPT-202-UBO.
+
+        Add or update a corresponding `Person` object in the organization's `.beneficialOwners` array and map to the person's `.name`.
+    eForms example: <efac:UltimateBeneficialOwner><cbc:FirstName>Mickey</cbc:FirstName></efac:UltimateBeneficialOwner>
+    OCDS example: '{"parties":[{"beneficialOwners":[{"name":"Mickey"}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
 -   id: OPT-170-Tenderer
     parentNodeId: ND-Tenderer
     name: 'Tendering Party Leader '
