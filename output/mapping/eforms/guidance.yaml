@@ -6378,7 +6378,7 @@
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/QUANTITY_SCOPE_WORKS_DEFENCE/F16_DIVISION_INTO_LOTS/F16_DIV_INTO_LOT_YES/LOT_PRIOR_INFORMATION/SCHEDULED_DATE_PERIOD/PERIOD_WORK_DATE_STARTING/(MONTHS|DAYS)
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/SCHEDULED_DATE_PERIOD/PERIOD_WORK_DATE_STARTING/MONTHS
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/PERIOD_WORK_DATE_STARTING/(MONTHS|DAYS)
-    eForms guidance: If `@unitCode` is set to "DAY", map to `tender.contractPeriod.durationInDays`.\\n\\nIf `@unitCode` is set to "MONTH", multiply by 30. If `@unitCode` is set to "YEAR", multiply by 365. In either case, map the result to `tender.contractPeriod.durationInDays`.
+    eForms guidance: If `@unitCode` is set to "DAY", map to `tender.contractPeriod.durationInDays`.\\n\\nIf `@unitCode` is set to "MONTH", multiply by 30. If `@unitCode` is set to "YEAR", multiply by 365. In either case, map the result to `tender.contractPeriod.durationInDays`. If '@unitCode' is set to a specific day of the week or month map equivalent number of days to `tender.contractPeriod.durationInDays`.
     eForms example: <cac:PlannedPeriod><cbc:DurationMeasure unitCode="DAY">3</cbc:DurationMeasure></cac:PlannedPeriod>
     OCDS example: '{"tender":{"contractPeriod":{"durationInDays":3}}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#plannedPeriodSection
@@ -6679,7 +6679,7 @@
     eForms guidance: (UNREVIEWED) Map to the party's `.identifier.id`, and [set `.identifier.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids)
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-501-Business-National
     parentNodeId: ND-BusinessParty
     name: National registration number
@@ -6694,7 +6694,7 @@
     eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.identifier.id`, and [set `.identifier.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids)
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-501-Organization-Company
     parentNodeId: ND-Company
     name: Organisation Identifier
@@ -6752,7 +6752,7 @@
     eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.identifier.id`, and [set `.identifier.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids)
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-5011-Contract
     parentNodeId: ND-ContractEUFunds
     name: Contract EU Funds Identifier
@@ -8504,10 +8504,10 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/TYPE_OF_PROCEDURE_DEFENCE/REDUCTION_OF_THE_NUMBER/@VALUE
     TED guidance:
     - Set `tender.secondStage.successiveReduction` to `true`
-    eForms guidance: (UNREVIEWED) Set the lot's `secondStage.successiveReduction` to `true`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Set the lot's `secondStage.successiveReduction` to `true`
+    eForms example: <cbc:CandidateReductionConstraintIndicator>true</cbc:CandidateReductionConstraintIndicator>
+    OCDS example: '{"tender":{"lots":[{"secondStage":{"successiveReduction":true}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#successiveReductionSection
 -   id: BT-531-Lot
     parentNodeId: ND-LotProcurementScope
     name: Additional Nature (different from Main)
@@ -8522,10 +8522,10 @@
         BG-2: Purpose
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/TYPE_CONTRACT_DEFENCE/(TYPE_WORK_CONTRACT/(DESIGN_EXECUTION|EXECUTION|REALISATION_REQUIREMENTS_SPECIFIED_CONTRACTING_AUTHORITIES)/fn:local-name()|TYPE_SUPPLIES_CONTRACT/@VALUE|SERVICE_CATEGORY_DEFENCE)
-    eForms guidance: (UNREVIEWED) Add to the lot's `.additionalProcurementCategories` \[https://github.com/open-contracting/european-union-support/issues/56;https://github.com/open-contracting/european-union-support/issues/58\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Add to the lot's `.additionalProcurementCategories` array.
+    eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="contract-nature">works</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
+    OCDS example: '{"tender":{"lots":[{"additionalProcurementCategories":["works"]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#natureSection
 -   id: BT-531-Part
     parentNodeId: ND-PartAdditionalNature
     name: Additional Nature (different from Main)
@@ -8538,10 +8538,10 @@
     Description: The nature (e.g. services) of what is being bought, additional to Main Nature.
     Business groups:
         BG-2: Purpose
-    eForms guidance: (UNREVIEWED) (REPEAT) Add to the lot's `.additionalProcurementCategories` \[https://github.com/open-contracting/european-union-support/issues/56;https://github.com/open-contracting/european-union-support/issues/58\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Add to `tender.additionalProcurementCategories` array.
+    eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="contract-nature">works</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
+    OCDS example: '{"tender":{"additionalProcurementCategories":["works"]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#natureSection
 -   id: BT-531-Procedure
     parentNodeId: ND-ProcedureProcurementScope
     name: Additional Nature (different from Main)
@@ -8556,10 +8556,10 @@
         BG-2: Purpose
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_CONCESSIONAIRE_DEFENCE/FD_CONTRACT_CONCESSIONAIRE_DEFENCE/OBJECT_CONTRACT_SUB_DEFENCE/DESCRIPTION_CONTRACT_SUB_DEFENCE/TYPE_CONTRACT_DEFENCE/(TYPE_WORK_CONTRACT/(DESIGN_EXECUTION|EXECUTION|REALISATION_REQUIREMENTS_SPECIFIED_CONTRACTING_AUTHORITIES)/fn:local-name()|TYPE_SUPPLIES_CONTRACT/@VALUE|SERVICE_CATEGORY_DEFENCE)
-    eForms guidance: (UNREVIEWED) (REPEAT) Add to the lot's `.additionalProcurementCategories` \[https://github.com/open-contracting/european-union-support/issues/56;https://github.com/open-contracting/european-union-support/issues/58\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Add to `tender.additionalProcurementCategories` array.
+    eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="contract-nature">works</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
+    OCDS example: '{"tender":{"additionalProcurementCategories":["works"]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#natureSection
 -   id: BT-536-Lot
     parentNodeId: ND-LotDuration
     name: Duration Start Date
@@ -8590,10 +8590,10 @@
     TED guidance:
     - Map to the contract's `.period.startDate`
     - Map to the lot's `.contractPeriod.startDate`
-    eForms guidance: (UNREVIEWED) [Format the date](common-operations), and map to the lot's `.contractPeriod.startDate`. \[https://github.com/open-contracting/european-union-support/issues/58\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Format the date and map to the lot's `.contractPeriod.startDate`.
+    eForms example: <cac:PlannedPeriod><cbc:StartDate>2019-11-15+01:00</cbc:StartDate></cac:PlannedPeriod>
+    OCDS example: '{"tender":{"lots":[{"contractPeriod":{"startDate":"2019-11-15T00:00:00+01:00"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#plannedPeriodSection
 -   id: BT-536-Part
     parentNodeId: ND-PartDuration
     name: Duration Start Date
@@ -8609,10 +8609,10 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/QUANTITY_SCOPE_WORKS_DEFENCE/F16_DIVISION_INTO_LOTS/F16_DIV_INTO_LOT_YES/LOT_PRIOR_INFORMATION/SCHEDULED_DATE_PERIOD/PERIOD_WORK_DATE_STARTING/INTERVAL_DATE/START_DATE
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/SCHEDULED_DATE_PERIOD/PERIOD_WORK_DATE_STARTING/INTERVAL_DATE/START_DATE
-    eForms guidance: (UNREVIEWED) (REPEAT) [Format the date](common-operations), and map to the lot's `.contractPeriod.startDate`. \[https://github.com/open-contracting/european-union-support/issues/58\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Format the date and map to `tender.contractPeriod.startDate`.
+    eForms example: <cac:PlannedPeriod><cbc:StartDate>2019-11-15+01:00</cbc:StartDate></cac:PlannedPeriod>
+    OCDS example: '{"tender":{"contractPeriod":{"startDate":"2019-11-15T00:00:00+01:00"}}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#plannedPeriodSection
 -   id: BT-537-Lot
     parentNodeId: ND-LotDuration
     name: Duration End Date
@@ -8643,10 +8643,10 @@
     TED guidance:
     - Map to the contract's `.period.endDate`
     - Map to the lot's `.contractPeriod.endDate`
-    eForms guidance: (UNREVIEWED) [Format the date](common-operations), and map to the lot's `.contractPeriod.endDate`. \[https://github.com/open-contracting/european-union-support/issues/58\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Format the date and map to the lot's `.contractPeriod.endDate`.
+    eForms example: <cac:PlannedPeriod><cbc:EndDate>2019-11-19+01:00</cbc:EndDate></cac:PlannedPeriod>
+    OCDS example: '{"tender":{"lots":[{"contractPeriod":{"endDate":"2019-11-19T00:00:00+01:00"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#plannedPeriodSection
 -   id: BT-537-Part
     parentNodeId: ND-PartDuration
     name: Duration End Date
@@ -8662,10 +8662,10 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/QUANTITY_SCOPE_WORKS_DEFENCE/F16_DIVISION_INTO_LOTS/F16_DIV_INTO_LOT_YES/LOT_PRIOR_INFORMATION/SCHEDULED_DATE_PERIOD/PERIOD_WORK_DATE_STARTING/INTERVAL_DATE/END_DATE
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/SCHEDULED_DATE_PERIOD/PERIOD_WORK_DATE_STARTING/INTERVAL_DATE/END_DATE
-    eForms guidance: (UNREVIEWED) (REPEAT) [Format the date](common-operations), and map to the lot's `.contractPeriod.endDate`. \[https://github.com/open-contracting/european-union-support/issues/58\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Format the date and map to `tender.contractPeriod.endDate`.
+    eForms example: <cac:PlannedPeriod><cbc:EndDate>2019-11-19+01:00</cbc:EndDate></cac:PlannedPeriod>
+    OCDS example: '{"tender":{"contractPeriod":{"endDate":"2019-11-19T00:00:00+01:00"}}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#plannedPeriodSection
 -   id: BT-538-Lot
     parentNodeId: ND-LotDuration
     name: Duration Other
@@ -8682,10 +8682,10 @@
     - TED_EXPORT/FORM_SECTION/F07_2014/OBJECT_CONTRACT/OBJECT_DESCR/INDEFINITE_DURATION
     TED guidance:
     - Discard. If the lot's `.contractPeriod` isn't set, then the duration is indefinite.
-    eForms guidance: (UNREVIEWED) Map to the lot's `.contractPeriod.other` \[https://github.com/open-contracting/european-union-support/issues/58;https://github.com/open-contracting/european-union-support/issues/70\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's `.contractPeriod.other`.
+    eForms example: <cac:PlannedPeriod><cbc:DescriptionCode listName="timeperiod">UNLIMITED</cbc:DescriptionCode></cac:PlannedPeriod>
+    OCDS example: '{"tender":{"lots":[{"contractPeriod":{"other":"unknown"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#plannedPeriodSection
 -   id: BT-538-Part
     parentNodeId: ND-PartDuration
     name: Duration Other
@@ -8698,10 +8698,10 @@
     Description: The duration is unknown, unlimited, etc.
     Business groups:
         BG-36: Duration
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the lot's `.contractPeriod.other` \[https://github.com/open-contracting/european-union-support/issues/58;https://github.com/open-contracting/european-union-support/issues/70\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to `tender.contractPeriod.other`
+    eForms example: <cac:PlannedPeriod><cbc:DescriptionCode listName="timeperiod">UNLIMITED</cbc:DescriptionCode></cac:PlannedPeriod>
+    OCDS example: '{"tender":{"contractPeriod":{"other":"unknown"}}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#plannedPeriodSection
 -   id: BT-539-Lot
     parentNodeId: ND-LotAwardCriteria
     name: Award Criterion Type
@@ -8718,10 +8718,10 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/AWARD_CRITERIA_CONTRACT_NOTICE_INFORMATION/AWARD_CRITERIA_DETAIL/LOWEST_PRICE
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/AWARD_CRITERIA_CONTRACT_NOTICE_INFORMATION/AWARD_CRITERIA_DETAIL/MOST_ECONOMICALLY_ADVANTAGEOUS_TENDER
-    eForms guidance: (UNREVIEWED) Map to the award criterion's `.type`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's award criterion's `.type`
+    eForms example: <cac:SubordinateAwardingCriterion><cbc:AwardingCriterionTypeCode listName="award-criterion-type">quality</cbc:AwardingCriterionTypeCode></cac:SubordinateAwardingCriterion>
+    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"type":"quality"}]}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-539-LotsGroup
     parentNodeId: ND-LotsGroupAwardCriteria
     name: Award Criterion Type
@@ -8735,10 +8735,10 @@
     Business groups:
         BG-707: Award Criteria
         BG-38: Award Criterion
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the award criterion's `.type`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's award criterion's `.type`
+    eForms example: <cac:SubordinateAwardingCriterion><cbc:AwardingCriterionTypeCode listName="award-criterion-type">quality</cbc:AwardingCriterionTypeCode></cac:SubordinateAwardingCriterion>
+    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"type":"quality"}]}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-54-Lot
     parentNodeId: ND-OptionsAndRenewals
     name: Options Description
@@ -8761,10 +8761,10 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/QUANTITY_SCOPE/OPTIONS/*[matches(name(),'PROVISIONAL_TIMETABLE')]
     TED guidance:
     - Map to the lot's `.options.description`
-    eForms guidance: (UNREVIEWED) Map to the lot's `.options.description`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's `.options.description`
+    eForms example: <cac:ContractExtension><cbc:OptionsDescription languageID="ENG">The buyer reserves the right to ...</cbc:OptionsDescription></cac:ContractExtension>
+    OCDS example: '{"tender":{"lots":[{"options":{"description":"The buyer reserves the right to..."}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#extensionsSection
 -   id: BT-540-Lot
     parentNodeId: ND-LotAwardCriterion
     name: Award Criterion Description
@@ -8777,10 +8777,10 @@
     Business groups:
         BG-707: Award Criteria
         BG-38: Award Criterion
-    eForms guidance: (UNREVIEWED) Map to the award criterion's `.description`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's award criterion's `.description`
+    eForms example: <cac:SubordinateAwardingCriterion><cbc:Description languageID="ENG">Tenders with a quality score less than 65...</cbc:Description></cac:SubordinateAwardingCriterion>
+    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"description":"Tenders with a quality score less than 65..."}]}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-540-LotsGroup
     parentNodeId: ND-LotsGroupAwardCriterion
     name: Award Criterion Description
@@ -8793,10 +8793,10 @@
     Business groups:
         BG-707: Award Criteria
         BG-38: Award Criterion
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the award criterion's `.description`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lots' award criterion's `.description`
+    eForms example: <cac:SubordinateAwardingCriterion><cbc:Description languageID="ENG">Tenders with a quality score less than 65...</cbc:Description></cac:SubordinateAwardingCriterion>
+    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"description":"Tenders with a quality score less than 65..."}]}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-541-Lot
     parentNodeId: ND-LotAwardCriterionParameters
     name: Award Criterion Number
@@ -8810,10 +8810,10 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: (UNREVIEWED) Add an award criterion number to the award criterion's `.numbers` array. Map to its `.number`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Add an award criterion number to the lot's award criterion's `.numbers` array. Map to its `.number`.
+    eForms example: <efac:AwardCriterionParameter><efbc:ParameterNumeric>50</efbc:ParameterNumeric></efac:AwardCriterionParameter>
+    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-541-LotsGroup
     parentNodeId: ND-LotsGroupAwardCriterionParameters
     name: Award Criterion Number
@@ -8827,10 +8827,10 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: (UNREVIEWED) (REPEAT) Add an award criterion number to the award criterion's `.numbers` array. Map to its `.number`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Add an award criterion number to the lots' award criterion's `.numbers` array. Map to its `.number`.
+    eForms example: <efac:AwardCriterionParameter><efbc:ParameterNumeric>50</efbc:ParameterNumeric></efac:AwardCriterionParameter>
+    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-5421-Lot
     parentNodeId: ND-LotAwardCriterionParameter
     name: Award Criterion Number Weight
@@ -8845,10 +8845,10 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: (UNREVIEWED) Map the code according to the \[award criterion weight mapping table\], and map it to the award criterion number's `.weight`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: These values are mapped to the same objects as created for BT-541. Map the code according to the \[award criterion weight mapping table\], and map it to the lot's award criterion number's `.weight`.
+    eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-weight">per-exa</efbc:ParameterCode></efac:AwardCriterionParameter>
+    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"weight":"per-exa"}]}]}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-5421-LotsGroup
     parentNodeId: ND-LotsGroupAwardCriterionParameter
     name: Award Criterion Number Weight
@@ -8863,10 +8863,10 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: (UNREVIEWED) (REPEAT) Map the code according to the \[award criterion weight mapping table\], and map it to the award criterion number's `.weight`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: These values are mapped to the same objects as created for BT-541. Map the code according to the \[award criterion weight mapping table\], and map it to the lots' award criterion number's `.weight`.
+    eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-weight">per-exa</efbc:ParameterCode></efac:AwardCriterionParameter>
+    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"weight":"per-exa"}]}]}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-5422-Lot
     parentNodeId: ND-LotAwardCriterionParameter
     name: Award Criterion Number Fixed
@@ -8881,10 +8881,10 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: (UNREVIEWED) Map the code according to the \[award criterion fixed mapping table\], and map it to the award criterion number's `.fixed`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: (UNREVIEWED) These values are mapped to the same objects as created for BT-541. Map the code according to the \[award criterion fixed mapping table\], and map it to the lot's award criterion number's `.fixed`.
+    eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-fixed">fix-tot</efbc:ParameterCode></efac:AwardCriterionParameter>
+    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"fixed":"fix-tot"}]}]}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-5422-LotsGroup
     parentNodeId: ND-LotsGroupAwardCriterionParameter
     name: Award Criterion Number Fixed
@@ -8899,10 +8899,10 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: (UNREVIEWED) (REPEAT) Map the code according to the \[award criterion fixed mapping table\], and map it to the award criterion number's `.fixed`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: These values are mapped to the same objects as created for BT-541. Map the code according to the \[award criterion fixed mapping table\], and map it to the lots' award criterion number's `.fixed`.
+    eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-fixed">fix-tot</efbc:ParameterCode></efac:AwardCriterionParameter>
+    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"fixed":"fix-tot"}]}]}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-5423-Lot
     parentNodeId: ND-LotAwardCriterionParameter
     name: Award Criterion Number Threshold
@@ -8917,10 +8917,10 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: (UNREVIEWED) Map the code according to the \[award criterion threshold mapping table\], and map it to the award criterion number's `.threshold`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: These values are mapped to the same objects as created for BT-541. Map the code according to the \[award criterion threshold mapping table\], and map it to the lot's award criterion number's `.threshold`.
+    eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-threshold">max-pass</efbc:ParameterCode></efac:AwardCriterionParameter>
+    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"threshold":"max-pass"}]}]}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-5423-LotsGroup
     parentNodeId: ND-LotsGroupAwardCriterionParameter
     name: Award Criterion Number Threshold
@@ -8935,10 +8935,10 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: (UNREVIEWED) (REPEAT) Map the code according to the \[award criterion threshold mapping table\], and map it to the award criterion number's `.threshold`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: These values are mapped to the same objects as created for BT-541. Map the code according to the \[award criterion threshold mapping table\], and map it to the lots' award criterion number's `.threshold`.
+    eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-threshold">max-pass</efbc:ParameterCode></efac:AwardCriterionParameter>
+    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"threshold":"max-pass"}]}]}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-543-Lot
     parentNodeId: ND-LotAwardCriteria
     name: Award Criteria Complicated
@@ -8950,10 +8950,10 @@
     Description: 'The mathematical equation or any other description used for complicated weighing of criteria (e.g. non-linear weighing, the analytic hierarchy process) when a weighing cannot be expressed per criterion. '
     Business groups:
         BG-707: Award Criteria
-    eForms guidance: (UNREVIEWED) Map to the lot's `.awardCriteria.weightingDescription`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's `.awardCriteria.weightingDescription`
+    eForms example: <cac:AwardingCriterion><cbc:CalculationExpression languageID="ENG">Price-quality score calculation is based on &#8230;</cbc:CalculationExpression></cac:AwardingCriterion>
+    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"weightingDescription":"Price-quality score calculation is based on \u2026"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-543-LotsGroup
     parentNodeId: ND-LotsGroupAwardCriteria
     name: Award Criteria Complicated
@@ -8965,10 +8965,10 @@
     Description: 'The mathematical equation or any other description used for complicated weighing of criteria (e.g. non-linear weighing, the analytic hierarchy process) when a weighing cannot be expressed per criterion. '
     Business groups:
         BG-707: Award Criteria
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the lot's `.awardCriteria.weightingDescription`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's `.awardCriteria.weightingDescription`
+    eForms example: <cac:AwardingCriterion><cbc:CalculationExpression languageID="ENG">Price-quality score calculation is based on &#8230;</cbc:CalculationExpression></cac:AwardingCriterion>
+    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"weightingDescription":"Price-quality score calculation is based on \u2026"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-553-Tender
     parentNodeId: ND-SubcontractedActivity
     name: Subcontracting Value
@@ -8988,10 +8988,10 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_SUBCONTRACTING
     TED guidance:
     - Map to the award's `.subcontracting.value.amount`
-    eForms guidance: (UNREVIEWED) Map to the award's `.subcontracting.value.amount`.  Map `@currencyID` to the value's `.currency`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the award's `.subcontracting.value.amount`.  Map `@currencyID` to the value's `.currency`.
+    eForms example: <efac:SubcontractingTerm><efbc:TermAmount currencyID="EUR">9999999.99</efbc:TermAmount></efac:SubcontractingTerm>
+    OCDS example: '{"awards":[{"subcontracting":{"value":{"amount":9999999.99,"currency":"EUR"}}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#lotTenderSection
 -   id: BT-554-Tender
     parentNodeId: ND-SubcontractedActivity
     name: Subcontracting Description
@@ -9012,10 +9012,10 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/AWARD_CONTRACT/AWARDED_CONTRACT/INFO_ADD_SUBCONTRACTING
     TED guidance:
     - Map to the award's `.subcontracting.description`
-    eForms guidance: (UNREVIEWED) (AUTO) Map to the award's `.subcontracting.description`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the award's `.subcontracting.description`
+    eForms example: <efac:SubcontractingTerm><efbc:TermDescription languageID="ENG">The subcontracting will be...</efbc:TermDescription></efac:SubcontractingTerm>
+    OCDS example: '{"awards":[{"subcontracting":{"description":"The subcontracting will be..."}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#lotTenderSection
 -   id: BT-555-Tender
     parentNodeId: ND-SubcontractedActivity
     name: Subcontracting Percentage
@@ -9036,10 +9036,10 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/AWARD_CONTRACT/AWARDED_CONTRACT/PCT_SUBCONTRACTING
     TED guidance:
     - Map to the award's `.subcontracting.minimumPercentage` and `.subcontracting.maximumPercentage`
-    eForms guidance: (UNREVIEWED) Map to the award's `.subcontracting.minimumPercentage` and `.subcontracting.maximumPercentage`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Divide number by 100 and map to the award's `.subcontracting.minimumPercentage` and `.subcontracting.maximumPercentage`
+    eForms example: <efac:SubcontractingTerm><efbc:TermPercent>30</efbc:TermPercent></efac:SubcontractingTerm>
+    OCDS example: '{"awards":[{"subcontracting":{"minimumPercentage":0.3,"maximumPercentage":0.3}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#lotTenderSection
 -   id: BT-556-NoticeResult
     parentNodeId: ND-NoticeResultGroupFA
     name: Group Framework Value Lot Identifier
@@ -9056,7 +9056,7 @@
         BG-7: Notice Result
         BG-556: Group Framework Value
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:TenderLot><cbc:ID schemeName="LotsGroup">GLO-0001</cbc:ID></efac:TenderLot>
     OCDS example: ''
     sdk: ''
 -   id: BT-57-Lot
@@ -9078,10 +9078,10 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/QUANTITY_SCOPE/RECURRENT_CONTRACT/*[matches(name(),'TIME_FRAME_SUBSEQUENT_CONTRACTS')]
     TED guidance:
     - Map to the lot's `.renewal.description`
-    eForms guidance: (UNREVIEWED) Map to the lot's `.renewal.description`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's `.renewal.description`
+    eForms example: <cac:Period><cbc:Description languageID="ENG">The buyer reserves the right to ...</cbc:Description> </cac:Period>
+    OCDS example: '{"tender":{"lots":[{"renewal":{"description":"The buyer reserves the right to ..."}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#extensionsSection
 -   id: BT-578-Lot
     parentNodeId: ND-SecurityClearanceTerms
     name: Security Clearance
@@ -9094,10 +9094,10 @@
     Description: A security clearance is required.
     Business groups:
         BG-705: Other Requirements
-    eForms guidance: (UNREVIEWED) Discard. If `.otherRequirements.securityClearance` is set, a security clearance is required.
-    eForms example: ''
+    eForms guidance: Discard. If `.otherRequirements.securityClearance` is set, a security clearance is required.
+    eForms example: <cac:SecurityClearanceTerm><cbc:Code listName="required">true</cbc:Code></cac:SecurityClearanceTerm>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#securityClearanceSection
 -   id: BT-58-Lot
     parentNodeId: ND-OptionsAndRenewals
     name: Renewal Maximum
@@ -9117,10 +9117,10 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/QUANTITY_SCOPE/RECURRENT_CONTRACT/NUMBER_POSSIBLE_RENEWALS
     TED guidance:
     - Set the lot's `.hasRenewal` to `true`
-    eForms guidance: (UNREVIEWED) Map to the lot's `.renewal.maximumRenewals`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's `.renewal.maximumRenewals`
+    eForms example: <cac:ContractExtension><cbc:MaximumNumberNumeric>3</cbc:MaximumNumberNumeric></cac:ContractExtension>
+    OCDS example: '{"tender":{"lots":[{"renewal":{"maximumRenewals":3}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#extensionsSection
 -   id: BT-60-Lot
     parentNodeId: ND-LotTenderingTerms
     name: EU Funds
@@ -9152,11 +9152,11 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/OBJECT_CONTRACT/OBJECT_DESCR/*[matches(name(),'EU_PROGR_RELATED')]
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/OBJECT_DESCR/*[matches(name(),'EU_PROGR_RELATED')]
     TED guidance:
-    - '* Get the `Organization` object whose `.name` is ''European Union''. If none exists yet:\n  * [Add a party](../../operations/#add-a-party)\n  * Set its `.name` to ''European Union''\n* Add ''funder'' to its `.roles`\n\n* Get the `Finance` object whose `.description` is the *Identification of the project*. If none exists yet:\n  * Add a `Finance` object to the `planning.budget.finance` array\n  * Map the *Identification of the project* to its `.description`\n  * Set its `.id` incrementally\n  * Set its `.financingParty.name` to ''European Union''\n  * Set its `.financingParty.id` to the party''s `.id`\n* Add the lot''s `.id` to the Finance object''s `.relatedLots` (**F12, F13**: Instead, do nothing)\n\nIn [future forms](https://github.com/eForms/eForms/issues/181#issuecomment-439861320), this field will be de-emphasized.'
-    eForms guidance: (UNREVIEWED) * Get the `Organization` object whose `.name` is 'European Union'. If none exists yet:\\n  * [Add a party](../../operations/#add-a-party)\\n  * Set its `.name` to 'European Union'\\n\* Add 'funder' to its `.roles`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    - '*Get the `Organization` object whose `.name` is ''European Union''. If none exists yet:\n  * [Add a party](../../operations/#add-a-party)\n  * Set its `.name` to ''European Union''\n* Add ''funder'' to its `.roles`\n\n* Get the `Finance` object whose `.description` is the *Identification of the project*. If none exists yet:\n  * Add a `Finance` object to the `planning.budget.finance` array\n  * Map the *Identification of the project* to its `.description`\n  * Set its `.id` incrementally\n  * Set its `.financingParty.name` to ''European Union''\n  * Set its `.financingParty.id` to the party''s `.id`\n* Add the lot''s `.id` to the Finance object''s `.relatedLots` (**F12, F13**: Instead, do nothing)\n\nIn [future forms](https://github.com/eForms/eForms/issues/181#issuecomment-439861320), this field will be de-emphasized.'
+    eForms guidance: Get the `Organization` object whose `.name` is 'European Union'. If none exists yet:\\n  Add a party\\n  Set its `.name` to 'European Union'\\n  Add 'funder' to its `.roles`.
+    eForms example: <efac:Funding><cbc:FundingProgramCode listName="eu-funded">eu-funds</cbc:FundingProgramCode></efac:Funding>
+    OCDS example: '{"parties":[{"name":"European Union","roles":["funder"]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#EUFundsSection
 -   id: BT-610-Procedure-Buyer
     parentNodeId: ND-ContractingParty
     name: Activity Entity
@@ -10175,10 +10175,10 @@
     Description: Additional information about the security clearance (e.g. which level of security clearance is required, which team members must have it, whether it is necessary already for accessing the procurement documents or only for contract execution).
     Business groups:
         BG-705: Other Requirements
-    eForms guidance: (UNREVIEWED) Map to the lot's `.otherRequirements.securityClearance`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's `.otherRequirements.securityClearance`.
+    eForms example: <cac:SecurityClearanceTerm><cbc:Description languageID="ENG">EU Confidential security clearance of Key Management Personnel must be achieved before access to procurement documents be granted</cbc:Description></cac:SecurityClearanceTerm>
+    OCDS example: '{"tender":{"lots":[{"otherRequirements":{"securityClearance":"EU Confidential security clearance of Key Management Personnel must be achieved before access to procurement documents be granted"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#securityClearanceSection
 -   id: BT-733-Lot
     parentNodeId: ND-LotAwardCriteria
     name: Award Criteria Order Justification
@@ -10193,7 +10193,7 @@
     eForms guidance: (UNREVIEWED) Map to the lot's `.awardCriteria.orderRationale`
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-733-LotsGroup
     parentNodeId: ND-LotsGroupAwardCriteria
     name: Award Criteria Order Justification
@@ -10208,7 +10208,7 @@
     eForms guidance: (UNREVIEWED) (REPEAT) Map to the lot's `.awardCriteria.orderRationale`
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-734-Lot
     parentNodeId: ND-LotAwardCriterion
     name: Award Criterion Name
@@ -10226,7 +10226,7 @@
     eForms guidance: (UNREVIEWED) Map to the award criterion's `.name`
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-734-LotsGroup
     parentNodeId: ND-LotsGroupAwardCriterion
     name: Award Criterion Name
@@ -10242,7 +10242,7 @@
     eForms guidance: (UNREVIEWED) (REPEAT) Map to the award criterion's `.name`
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-736-Lot
     parentNodeId: ND-LotTenderingTerms
     name: Reserved Execution
