@@ -6650,21 +6650,6 @@
     eForms example: <efac:UltimateBeneficialOwner><cbc:FamilyName>Mouse</cbc:FamilyName></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"name":"Mouse"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
--   id: BT-501-Business-National
-    parentNodeId: ND-BusinessParty
-    name: National registration number
-    btId: BT-501
-    xpathAbsolute: /*/cac:BusinessParty/cac:PartyLegalEntity/cbc:CompanyID[not(@schemeName = 'EU')]
-    type: id
-    repeatable: false
-    mandatory: true
-    Description: An identifier of the organisation. All of the organisation's identifiers shall be given.
-    Business groups:
-        BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.identifier.id`, and [set `.identifier.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids)
-    eForms example: ''
-    OCDS example: ''
-    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-501-Organization-Company
     parentNodeId: ND-Company
     name: Organisation Identifier
@@ -6757,21 +6742,6 @@
     eForms example: <efac:Funding><efbc:FinancingIdentifier>2021/1234</efbc:FinancingIdentifier></efac:Funding>
     OCDS example: '{"parties":[{"id":"1","name":"European Union","roles":["funder"]}],"contracts":[{"finance":[{"id":"1","description":"2021/1234","financingParty":{"id":"1","name":"European Union"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#settledContractSection
--   id: BT-502-Business
-    parentNodeId: ND-BusinessContact
-    name: Contact person
-    btId: BT-502
-    xpathAbsolute: /*/cac:BusinessParty/cac:Contact/cbc:Name
-    type: text
-    repeatable: false
-    mandatory: true
-    Description: The name of the department or other contact point for communicating with the organisation. To avoid unnecessary processing of personal data, the contact point may allow the identification of a physical person only when necessary (in the sense of Regulation (EU) 2016/679 and Regulation (EU) 2018/1725).
-    Business groups:
-        BG-703: Organisation
-    eForms guidance: (UNREVIEWED) Map to the party's `.contactPoint.name`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
 -   id: BT-502-Organization-Company
     parentNodeId: ND-Company
     name: Organisation Contact Point
@@ -6842,22 +6812,6 @@
     eForms example: <cac:Contact><cbc:Name>Head of Legal Department</cbc:Name></cac:Contact>
     OCDS example: '{"parties":[{"contactPoint":{"name":"Head of Legal Department"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
--   id: BT-503-Business
-    parentNodeId: ND-BusinessContact
-    name: Telephone
-    btId: BT-503
-    xpathAbsolute: /*/cac:BusinessParty/cac:Contact/cbc:Telephone
-    type: phone
-    repeatable: false
-    mandatory: true
-    pattern: ^((\(\+?[0-9]+\))|\+?[0-9]+)( - |-| )?(((\(\d+\))|\d+)( - |-| )?)*(\d+)( )?$
-    Description: The telephone for contacting the organisation. To avoid unnecessary processing of personal data, the telephone may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
-    Business groups:
-        BG-703: Organisation
-    eForms guidance: (UNREVIEWED) Map to the party's `.contactPoint.telephone`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
 -   id: BT-503-Organization-Company
     parentNodeId: ND-Company
     name: Organisation Contact Telephone Number
@@ -6981,22 +6935,6 @@
     eForms example: <efac:UltimateBeneficialOwner><cac:Contact><cbc:Telephone>+123 4567890</cbc:Telephone></cac:Contact></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"telephone":"+123 456789"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
--   id: BT-505-Business
-    parentNodeId: ND-BusinessParty
-    name: Internet address
-    btId: BT-505
-    xpathAbsolute: /*/cac:BusinessParty/cbc:WebsiteURI
-    type: url
-    repeatable: false
-    mandatory: true
-    pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
-    Description: The website of the organisation.
-    Business groups:
-        BG-703: Organisation
-    eForms guidance: (UNREVIEWED) Map to the party's `.details.url`. \[Copied from the 2015 guidance but not imported automatically.\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
 -   id: BT-505-Organization-Company
     parentNodeId: ND-Company
     name: Organisation Internet Address
@@ -7088,22 +7026,6 @@
     eForms example: <efac:Company><cbc:WebsiteURI>http://abc.europa.eu/</cbc:WebsiteURI></efac:Company>
     OCDS example: '{"parties":[{"details":{"url":"http://abc.europa.eu/"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
--   id: BT-506-Business
-    parentNodeId: ND-BusinessContact
-    name: e-mail
-    btId: BT-506
-    xpathAbsolute: /*/cac:BusinessParty/cac:Contact/cbc:ElectronicMail
-    type: email
-    repeatable: false
-    mandatory: true
-    pattern: ^[a-zA-Z0-9][a-zA-Z0-9._%+-]*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,63}$
-    Description: The email for contacting the organisation. To avoid unnecessary processing of personal data, the email may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
-    Business groups:
-        BG-703: Organisation
-    eForms guidance: (UNREVIEWED) Map to the party's `.contactPoint.email`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
 -   id: BT-506-Organization-Company
     parentNodeId: ND-Company
     name: Organisation Contact Email Address
@@ -10245,22 +10167,6 @@
     eForms example: <cbc:RequestedPublicationDate>2020-03-15+01:00</cbc:RequestedPublicationDate>
     OCDS example: '{"tender":{"communication":{"noticeRequestedPublicationDate":"2020-03-15T00:00:00+01:00"}}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#preferredDateSection
--   id: BT-739-Business
-    parentNodeId: ND-BusinessContact
-    name: Fax
-    btId: BT-739
-    xpathAbsolute: /*/cac:BusinessParty/cac:Contact/cbc:Telefax
-    type: phone
-    repeatable: false
-    mandatory: true
-    pattern: ^((\(\+?[0-9]+\))|\+?[0-9]+)( - |-| )?(((\(\d+\))|\d+)( - |-| )?)*(\d+)( )?$
-    Description: The fax for contacting the organisation. To avoid unnecessary processing of personal data, the fax may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
-    Business groups:
-        BG-703: Organisation
-    eForms guidance: (UNREVIEWED) Map to the party's `.contactPoint.faxNumber`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
 -   id: BT-739-Organization-Company
     parentNodeId: ND-Company
     name: Organisation Contact Fax
@@ -12023,19 +11929,6 @@
     type: integer
     repeatable: false
     mandatory: false
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: OPP-122-Business
-    parentNodeId: ND-GazetteReference
-    name: URL of the announcement
-    btId: OPP-122
-    xpathAbsolute: /*/cac:AdditionalDocumentReference/cac:Attachment/cac:ExternalReference/cbc:URI
-    type: url
-    repeatable: false
-    mandatory: true
-    pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
