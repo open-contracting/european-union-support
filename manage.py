@@ -245,28 +245,34 @@ def cli():
 
 @cli.command()
 @click.argument("filename", type=click.Path())
-def update_with_sdk(filename):
+@click.option("-v", "--verbose", is_flag=True, help="Print verbose output")
+def update_with_sdk(filename, verbose):
     """
     Create or update FILE with fields metadata from the eForms SDK.
     """
     with (sourcedir / "fields.json").open() as f:
         df = pd.DataFrame.from_dict(json.load(f)["fields"])
 
-    all_notice_types = {str(i) for i in range(1, 41)} | {"CEI", "T01", "T02", "X01", "X02"}
-    for severity in ("ERROR", "WARN"):
-        for notice_types in (["X01", "X02"], ["X02"]):
-            condition = df["mandatory"] == {
-                "value": False,
-                "severity": "ERROR",
-                "constraints": [{"noticeTypes": notice_types, "value": True, "severity": severity}],
-            }
-            # Check that the removed rows are forbidden on all except the notice types X01 and X02.
-            for forbidden in df[condition]["forbidden"]:
-                actual = set(forbidden["constraints"][0]["noticeTypes"])
-                expected = all_notice_types - set(notice_types)
-                assert actual == expected, f"symmetric difference: {actual ^ expected}"
-            click.echo(df[condition]["id"].to_string(index=False))
-            df = df[~condition]
+    labels = {}
+    supported_notice_types = {str(i) for i in range(1, 41)} | {"CEI", "T01", "T02"}
+    expected = {"value": False, "severity": "ERROR", "constraints": [{"value": True, "severity": "ERROR"}]}
+    for label, row in df.iterrows():
+        forbidden = row["forbidden"]
+        if forbidden is np.nan:
+            continue
+        # Abbreviate the constraints (there is sometimes another constraint on X02, etc.).
+        forbidden["constraints"] = forbidden["constraints"][:1]
+        # If a field's forbidden types are a superset of all supported types, drop it.
+        if set(forbidden["constraints"][0].pop("noticeTypes")) >= supported_notice_types:
+            # Ensure the forbidden property's structure is as expected.
+            assert forbidden == expected
+            labels[label] = row["id"]
+
+    df.drop(index=labels, inplace=True)
+
+    if verbose:
+        click.echo("\n".join(sorted(labels.values())))
+        click.echo(f"{df.shape[0]} kept, {len(labels)} dropped")
 
     # Remove or abbreviate columns that do not assist the mapping process and that lengthen the JSON file. See README.
     drop = ["xpathRelative", "legalType", "maxLength", "forbidden", "assert", "inChangeNotice", "privacy"]
@@ -675,7 +681,7 @@ def statistics(file):
 
 @cli.command()
 @click.argument("file", type=click.File())
-@click.option("--contains", help="Print fields containing this text.")
+@click.option("--contains", help="Print fields containing this text")
 def fields_without_extensions(file, contains):
     """
     Print fields that appear in the TED XML guidance but not in the FILE mapping sheet.

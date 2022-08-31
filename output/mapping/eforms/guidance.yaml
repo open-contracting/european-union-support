@@ -7386,21 +7386,6 @@
     eForms example: ''
     OCDS example: ''
     sdk: ''
--   id: BT-510(a)-Business
-    parentNodeId: ND-BusinessAddress
-    name: Street
-    btId: BT-510
-    xpathAbsolute: /*/cac:BusinessParty/cac:PostalAddress/cbc:StreetName
-    type: text
-    repeatable: false
-    mandatory: false
-    Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
-    Business groups:
-        BG-703: Organisation
-    eForms guidance: (UNREVIEWED) Map to the party's `.address.streetAddress`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
 -   id: BT-510(a)-Organization-Company
     parentNodeId: ND-Company
     name: Street
@@ -7523,21 +7508,6 @@
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:StreetName>2 CheeseStreet</cbc:StreetName></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"streetAddress":"2 CheeseStreet"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
--   id: BT-510(b)-Business
-    parentNodeId: ND-BusinessAddress
-    name: Street
-    btId: BT-510
-    xpathAbsolute: /*/cac:BusinessParty/cac:PostalAddress/cbc:AdditionalStreetName
-    type: text
-    repeatable: false
-    mandatory: false
-    Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
-    Business groups:
-        BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.streetAddress`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
 -   id: BT-510(b)-Organization-Company
     parentNodeId: ND-Company
     name: Streetline 1
@@ -7586,21 +7556,6 @@
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:AdditionalStreetName>Nelson Building</cbc:AdditionalStreetName></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"streetAddress":"Nelson Building"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
--   id: BT-510(c)-Business
-    parentNodeId: ND-BusinessAddress
-    name: addressline
-    btId: BT-510
-    xpathAbsolute: /*/cac:BusinessParty/cac:PostalAddress/cac:AddressLine/cbc:Line
-    type: text
-    repeatable: false
-    mandatory: false
-    Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
-    Business groups:
-        BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.streetAddress`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
 -   id: BT-510(c)-Organization-Company
     parentNodeId: ND-Company
     name: Streetline 2
@@ -11104,22 +11059,6 @@
     eForms example: ''
     OCDS example: ''
     sdk: ''
--   id: BT-779-Tender
-    parentNodeId: ND-LotTender
-    name: Tender Payment Value
-    btId: BT-779
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:AggregatedAmounts/cbc:PaidAmount
-    type: amount
-    repeatable: false
-    mandatory: false
-    Description: The value of all payments executed for the tender or another result, including options and renewals.
-    Business groups:
-        BG-7: Notice Result
-        BG-320: Tender
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
 -   id: BT-78-Lot
     parentNodeId: ND-LotTenderingTerms
     name: Security Clearance Deadline
@@ -11135,161 +11074,6 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/LEFTI_CONTRACT_DEFENCE/CONTRACT_RELATING_CONDITIONS/CLEARING_LAST_DATE
     eForms guidance: (UNREVIEWED) Add a new Milestone object to the `tender.milestones` array. Set its `id`, set its `.type` to 'securityClearanceDeadline' and map to its `.dueDate`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-780-Tender
-    parentNodeId: ND-LotTender
-    name: Tender Payment Value Additional Information
-    btId: BT-780
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:AggregatedAmounts/efbc:PaidAmountDescription
-    type: text-multilingual
-    repeatable: false
-    mandatory: false
-    Description: Additional information about the value of all payment executed for the tender or another result, including options and renewals (e.g. justification for the actual value being different from the value given in the initial contract).
-    Business groups:
-        BG-7: Notice Result
-        BG-320: Tender
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-781-Lot
-    parentNodeId: ND-LotDuration
-    name: Duration Additional Information
-    btId: BT-781
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:PlannedPeriod/cbc:Description
-    type: text-multilingual
-    repeatable: false
-    mandatory: false
-    Description: Additional information about the duration of the contract (e.g. justification for the actual duration being different from the duration given in initial contract).
-    Business groups:
-        BG-36: Duration
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-782-Tender
-    parentNodeId: ND-LotTender
-    name: Tender Penalties
-    btId: BT-782
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:AggregatedAmounts/efbc:PenaltiesAmount
-    type: amount
-    repeatable: false
-    mandatory: false
-    Description: The value of all penalties paid by the winner as a result of late or insufficient implementation of the tender or another result.
-    Business groups:
-        BG-7: Notice Result
-        BG-320: Tender
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-783-Review
-    parentNodeId: ND-ReviewStatus
-    name: Review Request or Decision
-    btId: BT-783
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AppealsInformation/efac:AppealStatus/efbc:AppealStageCode
-    type: code
-    repeatable: false
-    mandatory: false
-    codeList: review-status
-    Description: Whether the information concerns a review request or a review decision.
-    Business groups:
-        BG-714: Review
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-784-Review
-    parentNodeId: ND-ReviewStatus
-    name: Review Identifier
-    btId: BT-784
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AppealsInformation/efac:AppealStatus/efbc:AppealStageID
-    type: id
-    repeatable: false
-    mandatory: false
-    Description: An identifier of a review request or a review decision. When appealed to a higher review body instance, a review requests must receive a new identifier.
-    Business groups:
-        BG-714: Review
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-785-Review
-    parentNodeId: ND-ReviewStatus
-    name: Review Previous Identifier
-    btId: BT-785
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AppealsInformation/efac:AppealStatus/efbc:AppealPreviousStageID
-    type: id
-    repeatable: false
-    mandatory: false
-    Description: An identifier of the review request(s) that led to this decision or a review decision that is being appealed by this review request. Review decision which were initiated by the review body ("ex officio") are not preceeded by a review request.
-    Business groups:
-        BG-714: Review
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-786-Review
-    parentNodeId: ND-ReviewStatus
-    name: Review Notice Section Identifier
-    btId: BT-786
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AppealsInformation/efac:AppealStatus/efac:AppealedItem/cbc:ID
-    type: id
-    repeatable: true
-    mandatory: false
-    pattern: ^(PROCEDURE|BUYER|RESULT|((PAR|LOT|GLO|RES|ORG)-\d{4}))$
-    Description: An identifier of one or more sections within this notice. The information in the review section refers to this section or these sections.
-    Business groups:
-        BG-714: Review
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-787-Review
-    parentNodeId: ND-ReviewStatus
-    name: Review Date
-    btId: BT-787
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AppealsInformation/efac:AppealStatus/cbc:Date
-    type: date
-    repeatable: false
-    mandatory: false
-    pattern: ^(?:(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:(?:0[13578]|1[02]))-31|(?:(?:0[13-9]|1[0-2])-(?:29|30))))|(?:(?:(?:(?:(?:1[6-9]|[2-9]\d)(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))-02-29))|(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:0[1-9])|(?:1[0-2]))-(?:0[1-9]|1\d|2[0-8])))(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
-    Description: The date and time when the review request was submitted or the review decision was taken.
-    Business groups:
-        BG-714: Review
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-788-Review
-    parentNodeId: ND-ReviewStatus
-    name: Review Title
-    btId: BT-788
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AppealsInformation/efac:AppealStatus/cbc:Title
-    type: text-multilingual
-    repeatable: false
-    mandatory: false
-    Description: The name of the review request or review decision.
-    Business groups:
-        BG-714: Review
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-789-Review
-    parentNodeId: ND-ReviewStatus
-    name: Review Description
-    btId: BT-789
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AppealsInformation/efac:AppealStatus/cbc:Description
-    type: text-multilingual
-    repeatable: false
-    mandatory: false
-    Description: The description of the review request or review decision or any other additional information.
-    Business groups:
-        BG-714: Review
-    eForms guidance: ''
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -11318,196 +11102,6 @@
     TED guidance:
     - Set `tender.otherRequirements.requiresStaffNamesAndQualifications` to `true`
     eForms guidance: (UNREVIEWED) If equal to "par-requ" or "t-requ", set the lot's `.otherRequirements.requiresStaffNamesAndQualifications` to `true`. If equal to "not-requ", set it to `false`. Otherwise, discard. \[https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/requirement-stage\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-790-Review
-    parentNodeId: ND-ReviewStatus
-    name: Review Decision Type
-    btId: BT-790
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AppealsInformation/efac:AppealStatus/efbc:DecisionTypeCode
-    type: code
-    repeatable: true
-    mandatory: false
-    codeList: review-decision-type
-    Description: The decision type (e.g. accepted, rejected because the complainant did not have legal standing).
-    Business groups:
-        BG-714: Review
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-791-Review
-    parentNodeId: ND-ReviewStatus
-    name: Review Irregularity Type
-    btId: BT-791
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AppealsInformation/efac:AppealStatus/efbc:IrregularityTypeCode
-    type: code
-    repeatable: true
-    mandatory: false
-    codeList: irregularity-type
-    Description: The type of irregularity alleged in the review request or confirmed in the review decision.
-    Business groups:
-        BG-714: Review
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-792-Review
-    parentNodeId: ND-ReviewStatus
-    name: Review Remedy Type
-    btId: BT-792
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AppealsInformation/efac:AppealStatus/efbc:RemedyTypeCode
-    type: code
-    repeatable: true
-    mandatory: false
-    codeList: remedy-type
-    Description: The remedy (e.g. interim measure, damages) requested in the review request or applied by the review decision.
-    Business groups:
-        BG-714: Review
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-793-Review
-    parentNodeId: ND-ReviewStatus
-    name: Review Remedy Value
-    btId: BT-793
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AppealsInformation/efac:AppealStatus/efbc:RemedyAmount
-    type: amount
-    repeatable: false
-    mandatory: false
-    Description: The value of the remedy (e.g. damages, fines).
-    Business groups:
-        BG-714: Review
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-794-Review
-    parentNodeId: ND-ReviewStatus
-    name: Review URL
-    btId: BT-794
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AppealsInformation/efac:AppealStatus/cbc:URI
-    type: url
-    repeatable: false
-    mandatory: false
-    pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
-    Description: The uniform resource locator (e.g. the web address) of the documents concerning the review request or a review decision.
-    Business groups:
-        BG-714: Review
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-795-Review
-    parentNodeId: ND-ReviewStatus
-    name: Review Request Fee
-    btId: BT-795
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AppealsInformation/efac:AppealStatus/cbc:FeeAmount
-    type: amount
-    repeatable: false
-    mandatory: false
-    Description: The fee paid for lodging the review request.
-    Business groups:
-        BG-714: Review
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-796-Review
-    parentNodeId: ND-ReviewStatus
-    name: Review Request Withdrawn
-    btId: BT-796
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AppealsInformation/efac:AppealStatus/efbc:WithdrawnAppealIndicator
-    type: indicator
-    repeatable: false
-    mandatory: false
-    codeList: indicator
-    Description: The review request was withdrawn.
-    Business groups:
-        BG-714: Review
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-797-Review
-    parentNodeId: ND-ReviewStatus
-    name: Review Request Withdrawn Date
-    btId: BT-797
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AppealsInformation/efac:AppealStatus/efbc:WithdrawnAppealDate
-    type: date
-    repeatable: false
-    mandatory: false
-    pattern: ^(?:(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:(?:0[13578]|1[02]))-31|(?:(?:0[13-9]|1[0-2])-(?:29|30))))|(?:(?:(?:(?:(?:1[6-9]|[2-9]\d)(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))-02-29))|(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:0[1-9])|(?:1[0-2]))-(?:0[1-9]|1\d|2[0-8])))(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
-    Description: The date and time when the request for review was withdrawn.
-    Business groups:
-        BG-714: Review
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-798-Review
-    parentNodeId: ND-ReviewStatus
-    name: Review Request Withdrawn Reasons
-    btId: BT-798
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AppealsInformation/efac:AppealStatus/efbc:WithdrawnAppealReasons
-    type: text-multilingual
-    repeatable: false
-    mandatory: false
-    Description: The reasons for withdrawing the request for review.
-    Business groups:
-        BG-714: Review
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-799-ReviewBody
-    parentNodeId: ND-ReviewStatus
-    name: Review Body Type
-    btId: BT-799
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AppealsInformation/efac:AppealStatus/efac:AppealProcessingParty/efbc:AppealProcessingPartyTypeCode
-    type: code
-    repeatable: false
-    mandatory: false
-    codeList: review-body-type
-    Description: The type of review body (e.g. buyer; first instance review body; second instance review body; other, e.g. a civil court setting damages).
-    Business groups:
-        BG-703: Organisation
-        BG-715: Review Body
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-800(d)-Lot
-    parentNodeId: ND-PMCAnswersDeadline
-    name: Deadline Receipt Answers (Date)
-    btId: BT-800
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AnswerReceptionPeriod/cbc:EndDate
-    type: date
-    repeatable: false
-    mandatory: false
-    pattern: ^(?:(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:(?:0[13578]|1[02]))-31|(?:(?:0[13-9]|1[0-2])-(?:29|30))))|(?:(?:(?:(?:(?:1[6-9]|[2-9]\d)(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))-02-29))|(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:0[1-9])|(?:1[0-2]))-(?:0[1-9]|1\d|2[0-8])))(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
-    Description: The time limit for receipt of answers to the preliminary market consultation.
-    Business groups:
-        BG-102: Submission Terms
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-800(t)-Lot
-    parentNodeId: ND-PMCAnswersDeadline
-    name: Deadline Receipt Answers (Time)
-    btId: BT-800
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AnswerReceptionPeriod/cbc:EndTime
-    type: time
-    repeatable: false
-    mandatory: false
-    pattern: ^(([01]\d|2[0-3])((:[0-5]\d){1,2}(\.\d+)?)?)(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
-    Description: The time limit for receipt of answers to the preliminary market consultation.
-    Business groups:
-        BG-102: Submission Terms
-    eForms guidance: ''
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -11933,18 +11527,6 @@
     eForms example: ''
     OCDS example: ''
     sdk: ''
--   id: OPP-130-Business
-    parentNodeId: ND-Root
-    name: Additional information
-    btId: OPP-130
-    xpathAbsolute: /*/cbc:Note
-    type: text-multilingual
-    repeatable: false
-    mandatory: false
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
 -   id: OPT-001-notice
     parentNodeId: ND-Root
     name: UBL version ID (UBL)
@@ -12069,43 +11651,6 @@
     repeatable: false
     mandatory: false
     codeList: buyer-categories
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: OPT-091-ReviewReq
-    parentNodeId: ND-ReviewStatus
-    name: Review Requester Type
-    btId: OPT-091
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AppealsInformation/efac:AppealStatus/efac:AppealingParty/efbc:AppealingPartyTypeCode
-    type: code
-    repeatable: true
-    mandatory: false
-    codeList: organisation-role-service
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: OPT-092-ReviewBody
-    parentNodeId: ND-ReviewStatus
-    name: Review Body Type Description
-    btId: OPT-092
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AppealsInformation/efac:AppealStatus/efac:AppealProcessingParty/efbc:AppealProcessingPartyTypeDescription
-    type: text-multilingual
-    repeatable: false
-    mandatory: false
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: OPT-092-ReviewReq
-    parentNodeId: ND-AppealingParty
-    name: Review Requester Type Description
-    btId: OPT-092
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AppealsInformation/efac:AppealStatus/efac:AppealingParty/efbc:AppealingPartyTypeDescription
-    type: text-multilingual
-    repeatable: false
-    mandatory: false
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12823,32 +12368,6 @@
     repeatable: false
     mandatory: true
     pattern: ^(ORG|TPO)-\d{4}$
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: OPT-301-ReviewBody
-    parentNodeId: ND-ReviewStatus
-    name: Review Body (Reference ID)
-    btId: OPT-301
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AppealsInformation/efac:AppealStatus/efac:AppealProcessingParty/cac:Party/cac:PartyIdentification/cbc:ID
-    type: id-ref
-    repeatable: false
-    mandatory: false
-    pattern: ^ORG-\d{4}$
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: OPT-301-ReviewReq
-    parentNodeId: ND-ReviewStatus
-    name: Review Requester (Reference ID)
-    btId: OPT-301
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AppealsInformation/efac:AppealStatus/efac:AppealingParty/cac:Party/cac:PartyIdentification/cbc:ID
-    type: id-ref
-    repeatable: true
-    mandatory: false
-    pattern: ^ORG-\d{4}$
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
