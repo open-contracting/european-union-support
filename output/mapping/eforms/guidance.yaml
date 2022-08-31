@@ -6434,7 +6434,7 @@
     OCDS example: '{"tender":{"lots":[{"designContest":{"bindingJuryDecision":true}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#awardConsequencesSection
 -   id: BT-44-Lot
-    parentNodeId: ND-Prize(AUTO) Set `tender.designContest.followUpContracts` to `true`
+    parentNodeId: ND-Prize
     name: Prize Rank
     btId: BT-44
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:Prize/cbc:RankCode
@@ -6528,21 +6528,6 @@
     eForms example: <cac:EconomicOperatorShortList><cbc:MinimumQuantity>3</cbc:MinimumQuantity></cac:EconomicOperatorShortList>
     OCDS example: '{"tender":{"lots":[{"secondStage":{"minimumCandidates":3}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#maxCandidatesSection
--   id: BT-500-Business
-    parentNodeId: ND-LocalEntity
-    name: Official name
-    btId: BT-500
-    xpathAbsolute: /*/cac:BusinessParty/cac:PartyLegalEntity[not(cbc:CompanyID/@schemeName = 'EU')]/cbc:RegistrationName
-    type: text
-    repeatable: false
-    mandatory: true
-    Description: The official name of the organisation.
-    Business groups:
-        BG-703: Organisation
-    eForms guidance: Map to the party's `.name` and `.identifier.legalName`
-    eForms example: <cac:PartyName><cbc:Name languageID="ENG">Financial Adinistration for ...</cbc:Name></cac:PartyName>
-    OCDS example: '{"parties":[{"name":"Financial Adinistration for ...","identifier":{"legalName":"Financial Adinistration for ..."}}]}'
-    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-500-Organization-Company
     parentNodeId: ND-Company
     name: Organisation Name
@@ -6665,21 +6650,6 @@
     eForms example: <efac:UltimateBeneficialOwner><cbc:FamilyName>Mouse</cbc:FamilyName></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"name":"Mouse"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
--   id: BT-501-Business-European
-    parentNodeId: ND-BusinessParty
-    name: EU Registration Number
-    btId: BT-501
-    xpathAbsolute: /*/cac:BusinessParty/cac:PartyLegalEntity/cbc:CompanyID[@schemeName = 'EU']
-    type: id
-    repeatable: false
-    mandatory: true
-    Description: An identifier of the organisation. All of the organisation's identifiers shall be given.
-    Business groups:
-        BG-703: Organisation
-    eForms guidance: (UNREVIEWED) Map to the party's `.identifier.id`, and [set `.identifier.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids)
-    eForms example: ''
-    OCDS example: ''
-    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-501-Business-National
     parentNodeId: ND-BusinessParty
     name: National registration number
@@ -7258,22 +7228,6 @@
     eForms example: <efac:UltimateBeneficialOwner><cac:Contact><cbc:ElectronicMail>mickey.mouse@cheese-universe.com</cbc:ElectronicMail></cac:Contact></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"email":"mickey.mouse@cheese-universe.com"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
--   id: BT-507-Business
-    parentNodeId: ND-BusinessAddress
-    name: NUTS code
-    btId: BT-507
-    xpathAbsolute: /*/cac:BusinessParty/cac:PostalAddress/cbc:CountrySubentityCode
-    type: code
-    repeatable: false
-    mandatory: true
-    codeList: nuts
-    Description: The location according to the common classification of territorial units for statistics (NUTS) of the organisation's physical address. The NUTS3 classification code must be used.
-    Business groups:
-        BG-703: Organisation
-    eForms guidance: (UNREVIEWED) Map to the party's `.address.region`. There is an [open issue](https://github.com/open-contracting/standard/issues/739) about region codes. \[https://github.com/open-contracting/standard/issues/739\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
 -   id: BT-507-Organization-Company
     parentNodeId: ND-Company
     name: Organisation Country Subdivision
@@ -7933,21 +7887,6 @@
     eForms example: ''
     OCDS example: ''
     sdk: ''
--   id: BT-512-Business
-    parentNodeId: ND-BusinessAddress
-    name: Postal code
-    btId: BT-512
-    xpathAbsolute: /*/cac:BusinessParty/cac:PostalAddress/cbc:PostalZone
-    type: text
-    repeatable: false
-    mandatory: true
-    Description: The post code of the organisation's physical address.
-    Business groups:
-        BG-703: Organisation
-    eForms guidance: (UNREVIEWED) Map to the party's `.address.postalCode`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
 -   id: BT-512-Organization-Company
     parentNodeId: ND-Company
     name: Organisation Post Code
@@ -8115,21 +8054,6 @@
     eForms example: ''
     OCDS example: ''
     sdk: ''
--   id: BT-513-Business
-    parentNodeId: ND-BusinessAddress
-    name: Town
-    btId: BT-513
-    xpathAbsolute: /*/cac:BusinessParty/cac:PostalAddress/cbc:CityName
-    type: text
-    repeatable: false
-    mandatory: true
-    Description: The name of the locality (city, town or village) of the organisation's physical address.
-    Business groups:
-        BG-703: Organisation
-    eForms guidance: (UNREVIEWED) Map to the party's `.address.locality`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
 -   id: BT-513-Organization-Company
     parentNodeId: ND-Company
     name: Organisation City
@@ -8294,22 +8218,6 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: (UNREVIEWED) (REPEAT) Map to the address' `.locality`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-514-Business
-    parentNodeId: ND-BusinessAddress
-    name: Country
-    btId: BT-514
-    xpathAbsolute: /*/cac:BusinessParty/cac:PostalAddress/cac:Country/cbc:IdentificationCode
-    type: code
-    repeatable: false
-    mandatory: true
-    codeList: country
-    Description: The country of the organisation's physical address.
-    Business groups:
-        BG-703: Organisation
-    eForms guidance: (UNREVIEWED) Translate to a country name, and map to the party's `.address.countryName`\\n\\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -12119,106 +12027,6 @@
     eForms example: ''
     OCDS example: ''
     sdk: ''
--   id: OPP-100-Business
-    parentNodeId: ND-OperationType
-    name: Notice Purpose
-    btId: OPP-100
-    xpathAbsolute: /*/efac:NoticePurpose/cbc:PurposeCode
-    type: code
-    repeatable: false
-    mandatory: true
-    codeList: notice-purpose
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: OPP-105-Business
-    parentNodeId: ND-Root
-    name: Sector of activity
-    btId: OPP-105
-    xpathAbsolute: /*/cac:BusinessCapability/cbc:CapabilityTypeCode
-    type: code
-    repeatable: true
-    mandatory: true
-    codeList: main-activity
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: OPP-110-Business
-    parentNodeId: ND-RegistrarAddress
-    name: Place of registration - Town
-    btId: OPP-110
-    xpathAbsolute: /*/cac:BusinessParty/cac:PartyLegalEntity[cbc:CompanyID/@schemeName = 'EU']/cac:CorporateRegistrationScheme/cac:JurisdictionRegionAddress/cbc:CityName
-    type: text
-    repeatable: false
-    mandatory: true
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: OPP-111-Business
-    parentNodeId: ND-RegistrarAddress
-    name: Place of registration - Postcode
-    btId: OPP-111
-    xpathAbsolute: /*/cac:BusinessParty/cac:PartyLegalEntity[cbc:CompanyID/@schemeName = 'EU']/cac:CorporateRegistrationScheme/cac:JurisdictionRegionAddress/cbc:PostalZone
-    type: text
-    repeatable: false
-    mandatory: true
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: OPP-112-Business
-    parentNodeId: ND-RegistrarAddress
-    name: Place of registration - Country
-    btId: OPP-112
-    xpathAbsolute: /*/cac:BusinessParty/cac:PartyLegalEntity[cbc:CompanyID/@schemeName = 'EU']/cac:CorporateRegistrationScheme/cac:JurisdictionRegionAddress/cac:Country/cbc:IdentificationCode
-    type: code
-    repeatable: false
-    mandatory: true
-    codeList: country
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: OPP-113-Business-European
-    parentNodeId: ND-EuEntity
-    name: Date of registration
-    btId: OPP-113
-    xpathAbsolute: /*/cac:BusinessParty/cac:PartyLegalEntity[cbc:CompanyID/@schemeName = 'EU']/cbc:RegistrationDate
-    type: date
-    repeatable: false
-    mandatory: true
-    pattern: ^(?:(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:(?:0[13578]|1[02]))-31|(?:(?:0[13-9]|1[0-2])-(?:29|30))))|(?:(?:(?:(?:(?:1[6-9]|[2-9]\d)(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))-02-29))|(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:0[1-9])|(?:1[0-2]))-(?:0[1-9]|1\d|2[0-8])))(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: OPP-120-Business
-    parentNodeId: ND-GazetteReference
-    name: Name of Publication
-    btId: OPP-120
-    xpathAbsolute: /*/cac:AdditionalDocumentReference/cbc:DocumentDescription
-    type: text
-    repeatable: false
-    mandatory: true
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: OPP-121-Business
-    parentNodeId: ND-GazetteReference
-    name: Title of the announcement
-    btId: OPP-121
-    xpathAbsolute: /*/cac:AdditionalDocumentReference/cbc:ReferencedDocumentInternalAddress
-    type: text
-    repeatable: false
-    mandatory: true
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
 -   id: OPP-122-Business
     parentNodeId: ND-GazetteReference
     name: URL of the announcement
@@ -12232,19 +12040,6 @@
     eForms example: ''
     OCDS example: ''
     sdk: ''
--   id: OPP-123-Business
-    parentNodeId: ND-GazetteReference
-    name: Date of publication
-    btId: OPP-123
-    xpathAbsolute: /*/cac:AdditionalDocumentReference/cbc:IssueDate
-    type: date
-    repeatable: false
-    mandatory: true
-    pattern: ^(?:(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:(?:0[13578]|1[02]))-31|(?:(?:0[13-9]|1[0-2])-(?:29|30))))|(?:(?:(?:(?:(?:1[6-9]|[2-9]\d)(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))-02-29))|(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:0[1-9])|(?:1[0-2]))-(?:0[1-9]|1\d|2[0-8])))(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
 -   id: OPP-130-Business
     parentNodeId: ND-Root
     name: Additional information
@@ -12253,18 +12048,6 @@
     type: text-multilingual
     repeatable: false
     mandatory: false
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: OPP-131-Business
-    parentNodeId: ND-SenderContact
-    name: Senders email address
-    btId: OPP-131
-    xpathAbsolute: /*/cac:SenderParty/cac:Contact/cbc:ElectronicMail
-    type: email
-    repeatable: false
-    mandatory: true
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
