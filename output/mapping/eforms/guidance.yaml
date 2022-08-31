@@ -1723,7 +1723,7 @@
     Business groups:
         BG-2: Purpose
         BG-557: Group Framework Estimated Maximum Value
-    eForms guidance: Add a Lot group to the the `tender.lotGroups` array. Map to the lot group's `.maximumValue.amount` (number).
+    eForms guidance: Add a Lot group to the the `tender.lotGroups` array. Map to the lot group's `.maximumValue.amount` (number) and map `currencyID` to the lot group's `maximumValue.currency`.
     eForms example: <cac:FrameworkAgreement><cbc:EstimatedMaximumValueAmount currencyID="EUR">200000</cbc:EstimatedMaximumValueAmount></cac:FrameworkAgreement>
     OCDS example: '{"tender":{"lotGroups":[{"maximumValue":{"amount":200000,"currency":"EUR"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#frameworkAgreementSection
@@ -9551,9 +9551,9 @@
     - TED_EXPORT/FORM_SECTION/F07_2014/LEFTI/QUALIFICATION/CONDITIONS
     TED guidance:
     - Add to the `tender.otherRequirements.qualificationSystemConditions` array
-    eForms guidance: (UNREVIEWED) Map to `tender.exclusionGrounds`
+    eForms guidance: (UNREVIEWED) Add an `SelectionCriterion` object to the `tender.exclusionGrounds` array and map to its `.type`.
     eForms example: <cac:SpecificTendererRequirement><cbc:TendererRequirementTypeCode listName="exclusion-ground">CRITERION.EXCLUSION.NATIONAL.OTHER</cbc:TendererRequirementTypeCode></cac:SpecificTendererRequirement>
-    OCDS example: ''
+    OCDS example: '{"tender":{"exclusionGrounds":[{"type":"CRITERION.EXCLUSION.NATIONAL.OTHER"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#reservedParticipationSection
 -   id: BT-67(b)-Procedure
     parentNodeId: ND-ExclusionGrounds
@@ -9566,9 +9566,9 @@
     Description: The brief description of criteria regarding the personal situation of tenderers that may lead to their exclusion. This must include a list of all such criteria and indicate required information (e.g. self-declaration, documentation). This can also include specific national exclusion grounds.
     Business groups:
         BG-701: Exclusion Grounds
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to `tender.exclusionGrounds`
+    eForms guidance: (UNREVIEWED) Map to the relevant `tender.exclusionGrounds` `SelectionCriterion` object's `.description`.
     eForms example: <cac:SpecificTendererRequirement><cbc:Description languageID="ENG">Applicants not satisfying ...</cbc:Description></cac:SpecificTendererRequirement>
-    OCDS example: ''
+    OCDS example: '{"tender":{"exclusionGrounds":[{"description":"Applicants not satisfying..."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#reservedParticipationSection
 -   id: BT-70-Lot
     parentNodeId: ND-ExecutionRequirements
@@ -9625,9 +9625,9 @@
     Description: The language(s) in which this notice is officially available. These linguistic versions are equally legally valid.
     Business groups:
         BG-1: Notice
-    eForms guidance: Lowercase `/*/cbc:NoticeLanguageCode`, and map to `language`.\\n\\nDiscard `/*/cac:AdditionalNoticeLanguage/cbc:ID`.
+    eForms guidance: Lowercase `/*/cbc:NoticeLanguageCode` and convert the code into a two-letter [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes), and map to `language`.\\n\\nDiscard `/*/cac:AdditionalNoticeLanguage/cbc:ID`.
     eForms example: <cbc:NoticeLanguageCode>ENG</cbc:NoticeLanguageCode>
-    OCDS example: '{"language":"eng"}'
+    OCDS example: '{"language":"en"}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#noticeLanguageSection
 -   id: BT-702(b)-notice
     parentNodeId: ND-Root
@@ -9711,10 +9711,10 @@
     Description: The language(s) in which the procurement documents are officially available. These linguistic versions are equally legally valid.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: (UNREVIEWED) Lowercase and convert the code into a two-letter [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes). Add it to the document's `.languages` array. \[https://github.com/open-contracting/european-union-support/issues/55\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Lowercase and convert the code into a two-letter [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes). Add it to the document's `.languages` array, and add the lot's identifier to `.relatedLots`.
+    eForms example: <cac:CallForTendersDocumentReference><cbc:LanguageID>ENG</cbc:LanguageID></cac:CallForTendersDocumentReference>
+    OCDS example: '{"tender":{"documents":[{"languages":["en"]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#procurementDocsSection
 -   id: BT-708-Part
     parentNodeId: ND-PartProcurementDocument
     name: Documents Official Language
@@ -9727,10 +9727,10 @@
     Description: The language(s) in which the procurement documents are officially available. These linguistic versions are equally legally valid.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: (UNREVIEWED) (REPEAT) Lowercase and convert the code into a two-letter [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes). Add it to the document's `.languages` array. \[https://github.com/open-contracting/european-union-support/issues/55\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Lowercase and convert the code into a two-letter [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes). Add it to the document's `.languages` array.
+    eForms example: <cac:CallForTendersDocumentReference><cbc:LanguageID>ENG</cbc:LanguageID></cac:CallForTendersDocumentReference>
+    OCDS example: '{"tender":{"documents":[{"languages":["en"]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#procurementDocsSection
 -   id: BT-709-LotResult
     parentNodeId: ND-LotResultFAValues
     name: Framework Maximum Value
@@ -9743,10 +9743,10 @@
     Business groups:
         BG-7: Notice Result
         BG-137: Procedure Lot Result
-    eForms guidance: (UNREVIEWED) Map to the award's `.maximumValue.amount`. Map `@currencyID` to the value's `.currency`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the award's `.maximumValue.amount`. Map `@currencyID` to the value's `.currency`.
+    eForms example: <efac:FrameworkAgreementValues><cbc:MaximumValueAmount currencyID="EUR">5000</cbc:MaximumValueAmount></efac:FrameworkAgreementValues>
+    OCDS example: '{"awards":[{"maximumValue":{"amount":5000,"currency":"EUR"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_lot_result
 -   id: BT-71-Lot
     parentNodeId: ND-LotReservedParticipation
     name: Reserved Participation
@@ -9774,9 +9774,9 @@
     TED guidance:
     - Add 'publicServiceMissionOrganization' to the `tender.otherRequirements.reservedParticipation` array
     - Add 'shelteredWorkshop' to the `tender.otherRequirements.reservedParticipation` array
-    eForms guidance: (UNREVIEWED) Add 'shelteredWorkshop' to the lot's `.otherRequirements.reservedParticipation` array
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: If `@TendererRequirementTypeCode` is 'res-pub-ser' add 'publicServiceMissionOrganization' to the lot's `.otherRequirements.reservedParticipation` array. If `@TendererRequirementTypeCode` is 'res-ws' add 'shelteredWorkshop' to the lot's `.otherRequirements.reservedParticipation` array. If `@TendererRequirementTypeCode` is 'none' discard.
+    eForms example: <cac:SpecificTendererRequirement><cbc:TendererRequirementTypeCode listName="reserved-procurement">res-ws</cbc:TendererRequirementTypeCode></cac:SpecificTendererRequirement>
+    OCDS example: '{"tender":{"lots":[{"otherRequirements":{"reservedParticipation":["shelteredWorkshop"]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#reservedParticipationSection
 -   id: BT-71-Part
     parentNodeId: ND-PartReservedParticipation
@@ -9792,9 +9792,9 @@
         BG-705: Other Requirements
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/LEFTI_PRIOR_INFORMATION/RESERVED_CONTRACTS/RESTRICTED_TO_SHELTERED_WORKSHOPS
-    eForms guidance: (UNREVIEWED) (REPEAT) Add 'shelteredWorkshop' to the lot's `.otherRequirements.reservedParticipation` array
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: If `@TendererRequirementTypeCode` is 'res-pub-ser' add 'publicServiceMissionOrganization' to `tender.otherRequirements.reservedParticipation` array. If `@TendererRequirementTypeCode` is 'res-ws' add 'shelteredWorkshop' to `tender.otherRequirements.reservedParticipation` array. If `@TendererRequirementTypeCode` is 'none' discard.
+    eForms example: <cac:SpecificTendererRequirement><cbc:TendererRequirementTypeCode listName="reserved-procurement">res-ws</cbc:TendererRequirementTypeCode></cac:SpecificTendererRequirement>
+    OCDS example: '{"tender":{"otherRequirements":{"reservedParticipation":["shelteredWorkshop"]}}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#reservedParticipationSection
 -   id: BT-710-LotResult
     parentNodeId: ND-LotResult
@@ -9814,10 +9814,10 @@
     TED guidance:
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''lowestValidBidValue'', and map to its `.value`.'
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''lowestValidBidValue'', set its `.relatedLot` to the award''s only `.relatedLots` entry, and map to its `.value`.'
-    eForms guidance: (UNREVIEWED) Add a bids statistic\](../../operations/#add-a-bids-statistic), set its `.measure` to 'lowestValidBidValue', and map to its `.value.amount`. Map `@currencyID` to its `.currency`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Add a bids statistic, set its `.measure` to 'lowestValidBidValue', map to its `.value`. Map `@currencyID` to its `.currency`. Set its `.relatedLot` to the lot's id.
+    eForms example: <efac:LotResult><cbc:LowerTenderAmount currencyID="EUR">1230000</cbc:LowerTenderAmount></efac:LotResult>
+    OCDS example: '{"bids":{"statistics":[{"measure":"lowestValidBidValue","value":1230000,"currency":"EUR"}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_lot_result
 -   id: BT-711-LotResult
     parentNodeId: ND-LotResult
     name: Tender Value Highest
@@ -9836,10 +9836,10 @@
     TED guidance:
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''highestValidBidValue'', and map to its `.value`.'
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''highestValidBidValue'', set its `.relatedLot` to the award''s only `.relatedLots` entry, and map to its `.value`.'
-    eForms guidance: (UNREVIEWED) [Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to 'highestValidBidValue', and map to its `.value.amount`. Map `@currencyID` to its `.currency`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Add a bids statistic, set its `.measure` to 'highestValidBidValue', and map to its `.value`. Map `@currencyID` to its `.currency`. Set its `.relatedLot` to the lot's id.
+    eForms example: <efac:LotResult><cbc:HigherTenderAmount currencyID="EUR">456</cbc:HigherTenderAmount></efac:LotResult>
+    OCDS example: '{"bids":{"statistics":[{"measure":"highestValidBidValue","value":456,"currency":"EUR"}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_lot_result
 -   id: BT-712(a)-LotResult
     parentNodeId: ND-LotResult
     name: Buyer Review Complainants (Code)
@@ -9926,10 +9926,10 @@
     - Discard. The *Initial estimated total value of the contract/lot* is available in the OCDS release with the same `ocid` as this release and with 'tender' in its `tag`.
     - Map to the contract's `.value.amount`
     - Map to the contract's `.value.amount`. If present, this takes precedence over the [total value of the contract/lot/concession](#/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/VALUES/VAL_TOTAL).
-    eForms guidance: (UNREVIEWED) Map to the bid's `.value.amount`. Map `@currencyID` to the value's `.currency`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the bid's `.value`. Map `@currencyID` to the value's `.currency`. Set its `.relatedLots` to the lot's id.
+    eForms example: <cac:LegalMonetaryTotal><cbc:PayableAmount currencyID="EUR">500</cbc:PayableAmount></cac:LegalMonetaryTotal>
+    OCDS example: '{"bids":{"details":[{"value":{"amount":500,"currency":"EUR"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#lotTenderSection
 -   id: BT-721-Contract
     parentNodeId: ND-SettledContract
     name: Contract Title
@@ -10030,10 +10030,10 @@
     Description: 'There are other restrictions on the place of performance (e.g. "anywhere in the European Economic Area", "anywhere in the given country"). '
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: (UNREVIEWED) Retrieve [the label of the code](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map it to the related items' `.deliveryLocation.description` \[https://github.com/open-contracting/european-union-support/issues/55\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Retrieve [the label of the code](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map it to the related items' `.deliveryLocation.description`.
+    eForms example: <cac:Address><cbc:Region>anyw-eea</cbc:Region></cac:Address>
+    OCDS example: '{"tender":{"items":[{"deliveryLocation":{"description":"Anywhere in the European Economic Area"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-727-Part
     parentNodeId: ND-PartPlacePerformance
     name: Place Performance Services Other
@@ -10046,10 +10046,10 @@
     Description: 'There are other restrictions on the place of performance (e.g. "anywhere in the European Economic Area", "anywhere in the given country"). '
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: (UNREVIEWED) (REPEAT) Retrieve [the label of the code](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map it to the related items' `.deliveryLocation.description` \[https://github.com/open-contracting/european-union-support/issues/55\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Retrieve [the label of the code](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map it to the related items' `.deliveryLocation.description`.
+    eForms example: <cac:Address><cbc:Region>anyw-eea</cbc:Region></cac:Address>
+    OCDS example: '{"tender":{"items":[{"deliveryLocation":{"description":"Anywhere in the European Economic Area"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-727-Procedure
     parentNodeId: ND-ProcedurePlacePerformance
     name: Place Performance Services Other
@@ -10062,10 +10062,10 @@
     Description: 'There are other restrictions on the place of performance (e.g. "anywhere in the European Economic Area", "anywhere in the given country"). '
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: (UNREVIEWED) (REPEAT) Retrieve [the label of the code](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map it to the related items' `.deliveryLocation.description` \[https://github.com/open-contracting/european-union-support/issues/55\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Retrieve [the label of the code](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map it to the related items' `.deliveryLocation.description` \[https://github.com/open-contracting/european-union-support/issues/55\]
+    eForms example: <cac:Address><cbc:Region>anyw-eea</cbc:Region></cac:Address>
+    OCDS example: '{"tender":{"items":[{"deliveryLocation":{"description":"Anywhere in the European Economic Area"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-728-Lot
     parentNodeId: ND-LotPlacePerformance
     name: Place Performance Additional Information
@@ -10079,10 +10079,10 @@
         BG-708: Place of Performance
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/LOCATION_NUTS/LOCATION
-    eForms guidance: (UNREVIEWED) Map to the item's `.deliveryLocation.description`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the item's `.deliveryLocation.description`
+    eForms example: <cac:RealizedLocation><cbc:Description languageID="ENG">Further realizations ...</cbc:Description></cac:RealizedLocation>
+    OCDS example: '{"tender":{"items":[{"deliveryLocation":{"description":"Further realizations..."}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-728-Part
     parentNodeId: ND-PartPlacePerformance
     name: Place Performance Additional Information
@@ -10094,10 +10094,10 @@
     Description: Additional information about the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the item's `.deliveryLocation.description`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the item's `.deliveryLocation.description`
+    eForms example: <cac:RealizedLocation><cbc:Description languageID="ENG">Further realizations ...</cbc:Description></cac:RealizedLocation>
+    OCDS example: '{"tender":{"items":[{"deliveryLocation":{"description":"Further realizations..."}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-728-Procedure
     parentNodeId: ND-ProcedurePlacePerformanceAdditionalInformation
     name: Place Performance Additional Information
@@ -10109,10 +10109,10 @@
     Description: Additional information about the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the item's `.deliveryLocation.description`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the item's `.deliveryLocation.description`
+    eForms example: <cac:RealizedLocation><cbc:Description languageID="ENG">Further realizations ...</cbc:Description></cac:RealizedLocation>
+    OCDS example: '{"tender":{"items":[{"deliveryLocation":{"description":"Further realizations..."}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-729-Lot
     parentNodeId: ND-SubcontractTerms
     name: Subcontracting Obligation Maximum
@@ -10143,10 +10143,10 @@
         BG-7: Notice Result
         BG-320: Tender
         BG-180: Subcontracting
-    eForms guidance: (UNREVIEWED) Discard. If the award's `.subcontracting.value` is not empty, the buyer knows the estimated value of the part of the contract that the contractor will subcontract to third parties.
-    eForms example: ''
+    eForms guidance: Discard. If the award's `.subcontracting.value` is not empty, the buyer knows the estimated value of the part of the contract that the contractor will subcontract to third parties.
+    eForms example: <efac:SubcontractingTerm><efbc:ValueKnownIndicator>false</efbc:ValueKnownIndicator></efac:SubcontractingTerm>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#lotTenderSection
 -   id: BT-731-Tender
     parentNodeId: ND-SubcontractedActivity
     name: Subcontracting Percentage Known
@@ -10160,10 +10160,10 @@
         BG-7: Notice Result
         BG-320: Tender
         BG-180: Subcontracting
-    eForms guidance: (UNREVIEWED) Discard. If the award's `.subcontracting.minimumPercentage` and `.subcontracting.maximumPercentage` are not empty, the buyer knows the estimated value of the part of the contract that the contractor will subcontract to third parties.
-    eForms example: ''
+    eForms guidance: Discard. If the award's `.subcontracting.minimumPercentage` and `.subcontracting.maximumPercentage` are not empty, the buyer knows the estimated value of the part of the contract that the contractor will subcontract to third parties.
+    eForms example: <efac:SubcontractingTerm><efbc:PercentageKnownIndicator>true</efbc:PercentageKnownIndicator></efac:SubcontractingTerm>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#lotTenderSection
 -   id: BT-732-Lot
     parentNodeId: ND-SecurityClearanceTerms
     name: Security Clearance Description
@@ -10190,9 +10190,9 @@
     Description: The justification for only indicating the award criteria's order of importance, not their weighing.
     Business groups:
         BG-707: Award Criteria
-    eForms guidance: (UNREVIEWED) Map to the lot's `.awardCriteria.orderRationale`
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: Map to the lot's `.awardCriteria.orderRationale`
+    eForms example: <cac:AwardingCriterion><cbc:Description languageID="ENG">Each criterion is evaluated separately ...</cbc:Description></cac:AwardingCriterion>
+    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"orderRationale":"Each criterion is evaluated separately ..."}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-733-LotsGroup
     parentNodeId: ND-LotsGroupAwardCriteria
@@ -10205,9 +10205,9 @@
     Description: The justification for only indicating the award criteria's order of importance, not their weighing.
     Business groups:
         BG-707: Award Criteria
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the lot's `.awardCriteria.orderRationale`
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: Map to the lot's `.awardCriteria.orderRationale`
+    eForms example: <cac:AwardingCriterion><cbc:Description languageID="ENG">Each criterion is evaluated separately ...</cbc:Description></cac:AwardingCriterion>
+    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"orderRationale":"Each criterion is evaluated separately ..."}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-734-Lot
     parentNodeId: ND-LotAwardCriterion
@@ -10223,9 +10223,9 @@
         BG-38: Award Criterion
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/AWARD_CRITERIA_CONTRACT_NOTICE_INFORMATION/AWARD_CRITERIA_DETAIL/MOST_ECONOMICALLY_ADVANTAGEOUS_TENDER/CRITERIA_STATED_BELOW
-    eForms guidance: (UNREVIEWED) Map to the award criterion's `.name`
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: Map to the lot's award criterion's `.name`
+    eForms example: <cac:SubordinateAwardingCriterion><cbc:Name languageID="ENG">Technical merit</cbc:Name></cac:SubordinateAwardingCriterion>
+    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"name":"Technical merit"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-734-LotsGroup
     parentNodeId: ND-LotsGroupAwardCriterion
@@ -10239,9 +10239,9 @@
     Business groups:
         BG-707: Award Criteria
         BG-38: Award Criterion
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the award criterion's `.name`
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: Map to the lot's award criterion's `.name`
+    eForms example: <cac:SubordinateAwardingCriterion><cbc:Name languageID="ENG">Technical merit</cbc:Name></cac:SubordinateAwardingCriterion>
+    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"name":"Technical merit"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-736-Lot
     parentNodeId: ND-LotTenderingTerms
@@ -10267,10 +10267,10 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/LEFTI/RESTRICTED_SHELTERED_PROGRAM
     TED guidance:
     - Set `tender.contractTerms.reservedExecution` to `true`
-    eForms guidance: (UNREVIEWED) Set the lot's `.contractTerms.reservedExecution` to `true`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Set the lot's `.contractTerms.reservedExecution` to `true` if `@ExecutionRequirementCode` is 'yes', otherwise discard.
+    eForms example: <cac:ContractExecutionRequirement><cbc:ExecutionRequirementCode listName="reserved-execution">yes</cbc:ExecutionRequirementCode></cac:ContractExecutionRequirement>
+    OCDS example: '{"tender":{"lots":[{"contractTerms":{"reservedExecution":true}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#reservedExecutionSection
 -   id: BT-736-Part
     parentNodeId: ND-PartTenderingTerms
     name: Reserved Execution
@@ -10285,10 +10285,10 @@
         BG-711: Contract Terms
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/LEFTI_PRIOR_INFORMATION/RESERVED_CONTRACTS/RESTRICTED_TO_FRAMEWORK
-    eForms guidance: (UNREVIEWED) (REPEAT) Set the lot's `.contractTerms.reservedExecution` to `true`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Set `tender.contractTerms.reservedExecution` to `true` if `@ExecutionRequirementCode` is 'yes', otherwise discard.
+    eForms example: <cac:ContractExecutionRequirement><cbc:ExecutionRequirementCode listName="reserved-execution">yes</cbc:ExecutionRequirementCode></cac:ContractExecutionRequirement>
+    OCDS example: '{"tender":{"contractTerms":{"reservedExecution":true}}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#reservedExecutionSection
 -   id: BT-737-Lot
     parentNodeId: ND-LotTenderingTerms
     name: Documents Unofficial Language
@@ -10301,10 +10301,10 @@
     Description: The language(s) in which the procurement documents (or their parts) are unofficially available. These linguistic versions are not an official translation, they are provided only for information.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: (UNREVIEWED) Set the document's `.unofficialTranslation` to `true` \[https://github.com/open-contracting/european-union-support/issues/55\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Set the document's `.unofficialTranslation` to `true`.
+    eForms example: <cac:CallForTendersDocumentReference><cbc:LanguageID>ENG</cbc:LanguageID><cbc:DocumentStatusCode listName="linguistic-status">non-official</cbc:DocumentStatusCode></cac:CallForTendersDocumentReference>
+    OCDS example: '{"tender":{"documents":[{"unofficialTranslation":true}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#procurementDocsSection
 -   id: BT-737-Part
     parentNodeId: ND-PartProcurementDocument
     name: Documents Unofficial Language
@@ -10317,10 +10317,10 @@
     Description: The language(s) in which the procurement documents (or their parts) are unofficially available. These linguistic versions are not an official translation, they are provided only for information.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: (UNREVIEWED) (REPEAT) Set the document's `.unofficialTranslation` to `true` \[https://github.com/open-contracting/european-union-support/issues/55\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Set the document's `.unofficialTranslation` to `true`.
+    eForms example: <cac:CallForTendersDocumentReference><cbc:LanguageID>ENG</cbc:LanguageID><cbc:DocumentStatusCode listName="linguistic-status">non-official</cbc:DocumentStatusCode></cac:CallForTendersDocumentReference>
+    OCDS example: '{"tender":{"documents":[{"unofficialTranslation":true}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#procurementDocsSection
 -   id: BT-738-notice
     parentNodeId: ND-Root
     name: Notice Publication Date Preferred
@@ -10333,10 +10333,10 @@
     Description: 'The preferred date of publication of the notice on TED (e.g. to avoid publication during a national holiday). '
     Business groups:
         BG-1: Notice
-    eForms guidance: (UNREVIEWED) [Format the date](common-operations), and map to `tender.communication.noticeRequestedPublicationDate`. \[https://github.com/open-contracting/european-union-support/issues/55\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Format the date and map to `tender.communication.noticeRequestedPublicationDate`.
+    eForms example: <cbc:RequestedPublicationDate>2020-03-15+01:00</cbc:RequestedPublicationDate>
+    OCDS example: '{"tender":{"communication":{"noticeRequestedPublicationDate":"2020-03-15T00:00:00+01:00"}}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#preferredDateSection
 -   id: BT-739-Business
     parentNodeId: ND-BusinessContact
     name: Fax
@@ -10490,9 +10490,9 @@
         BG-703: Organisation
         BG-3: Buyer
     eForms guidance: (UNREVIEWED) In the party object that has 'buyer' in its `.roles` array, add 'contractingEntity' to its `.roles` array \[https://github.com/open-contracting/european-union-support/issues/65\]
-    eForms example: ''
+    eForms example: <cac:ContractingPartyType><cbc:PartyTypeCode listName="buyer-contracting-type">cont-aut</cbc:PartyTypeCode></cac:ContractingPartyType>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_buyer_information_2
 -   id: BT-743-Lot
     parentNodeId: ND-LotTenderingTerms
     name: Electronic Invoicing
