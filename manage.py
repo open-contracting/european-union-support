@@ -149,15 +149,17 @@ def report_unmerged_rows(df, columns, series=None, unformatted=()):
 
 
 # From standard-maintenance-scripts/tests/test_readme.py
-def set_additional_properties_false(data):
+def set_additional_properties_false_and_remove_pattern_properties(data):
     if isinstance(data, list):
         for item in data:
-            set_additional_properties_false(item)
+            set_additional_properties_false_and_remove_pattern_properties(item)
     elif isinstance(data, dict):
         if 'properties' in data:
             data['additionalProperties'] = False
+        if 'patternProperties' in data:
+            del data['patternProperties']
         for value in data.values():
-            set_additional_properties_false(value)
+            set_additional_properties_false_and_remove_pattern_properties(value)
 
 
 def write(filename, df, overwrite=None, explode=None, compare=None, how='left', drop=(), **kwargs):
@@ -497,10 +499,8 @@ def lint(filename):
     with open('release-schema.json') as f:
         schema = json.load(f)
 
-    # Remove some `additionalProperties` to clarify output.
-    del schema['definitions']['Tender']['patternProperties']
-
-    set_additional_properties_false(schema)
+    # Remove `patternProperties` to clarify output.
+    set_additional_properties_false_and_remove_pattern_properties(schema)
     format_checker = FormatChecker()
 
     if os.path.isfile('codes.txt'):
