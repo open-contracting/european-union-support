@@ -1444,7 +1444,7 @@
         The codes are drawn from the [Change corrig justification](https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/change-corrig-justification) authority table in EU Vocabularies.
         Map the code to the amendment's `rationaleClassifications.id`. Set `rationalClassifications.description` to the code's label and set `rationaleClassifications.scheme` to 'change corrig justification'
     eForms example: <efac:ChangeReason><cbc:ReasonCode listName="change-corrig-justification">cor-buy </cbc:ReasonCode></efac:ChangeReason>
-    OCDS example: '{"contracts":[{"amendments":[{"rationaleClassifications":[{"id":"cor-buy","description":"Buyer correction.","scheme":"change corrig"justification"}]}]}]}'
+    OCDS example: '{"contracts":[{"amendments":[{"rationaleClassifications":[{"id":"cor-buy","description":"Buyer correction.","scheme":"change corrig justification"}]}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#changeSection
 -   id: BT-141(a)-notice
     parentNodeId: ND-Change
@@ -6613,7 +6613,7 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME
     - Map to the party's `.name` and `.identifier.legalName`
-    eForms guidance: Map to the party's `.name`.
+    eForms guidance: Get the organization for this company and map to the organization's `.name`.
     eForms example: <cac:PartyName><cbc:Name languageID="ENG">Ministry of Education</cbc:Name></cac:PartyName>
     OCDS example: '{"parties":[{"name":"Ministry of Education"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -6628,7 +6628,7 @@
     Description: The official name of the organisation.
     Business groups:
         BG-703: Organisation
-    eForms guidance: Map to the party's `.name`.
+    eForms guidance: Get the organization for this touchpoint and map to the organization's `.name`.
     eForms example: <cac:PartyName><cbc:Name languageID="ENG">Ministry of Education</cbc:Name></cac:PartyName>
     OCDS example: '{"parties":[{"name":"Ministry of Education"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -6643,10 +6643,7 @@
     Description: The official name of the organisation.
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-        These values are mapped to the same objects as created for BT-500-UBO, BT-503-UBO, BT-506-UBO, BT-507-UBO, BT-510(a)-UBO, BT-510(b)-UBO, BT-510(c)-UBO, BT-512-UBO, BT-513-UBO, BT-514-UBO, BT-706-UBO, BT-739-UBO, OPT-160-UBO and OPT-202-UBO.
-
-        Add or update a corresponding `Person` object in the organization's `.beneficialOwners` array and map to the person's `.name`.
+    eForms guidance: Get the person for this ultimate beneficial owner and map to the person's `.name`.
     eForms example: <efac:UltimateBeneficialOwner><cbc:FamilyName>Mouse</cbc:FamilyName></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"name":"Mouse"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -6704,9 +6701,9 @@
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID
     - Map to the party's `.identifier.id`, and [set `.identifier.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids)
     - Map to the party's `.identifier.id`, and set the party's `.identifier.scheme`
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.identifier.id`, and [set `.identifier.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids)
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: Get the organization for the company, map to the organization's `.identifier.id` and [set `.identifier.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids).
+    eForms example: <efac:Organization><efac:Company><cac:PartyLegalEntity><cbc:CompanyID>XYZ</cbc:CompanyID></cac:PartyLegalEntity></efac:Company></efac:Organization>
+    OCDS example: '{"parties":[{"identifier":{"id":"XYZ"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-5011-Contract
     parentNodeId: ND-ContractEUFunds
@@ -6793,7 +6790,7 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL
     - Map to the party's `.contactPoint.name`
-    eForms guidance: Map to the party's `.contactPoint.name`
+    eForms guidance: Get the organization for this company and map to the organization's `.contactPoint.name`
     eForms example: <cac:Contact><cbc:Name>Press Department</cbc:Name></cac:Contact>
     OCDS example: '{"parties":[{"contactPoint":{"name":"Press Department"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -6808,7 +6805,7 @@
     Description: The name of the department or other contact point for communicating with the organisation. To avoid unnecessary processing of personal data, the contact point may allow the identification of a physical person only when necessary (in the sense of Regulation (EU) 2016/679 and Regulation (EU) 2018/1725).
     Business groups:
         BG-703: Organisation
-    eForms guidance: Map to the party's `.contactPoint.name`.
+    eForms guidance: Get the organization for this touch point and map to the organization's `.contactPoint.name`.
     eForms example: <cac:Contact><cbc:Name>Head of Legal Department</cbc:Name></cac:Contact>
     OCDS example: '{"parties":[{"contactPoint":{"name":"Head of Legal Department"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -6896,7 +6893,7 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE
     - Map to the party's `.contactPoint.telephone`
-    eForms guidance: Map to the party's `.contactPoint.telephone`
+    eForms guidance: Get the organization for this company and map to the organization's `.contactPoint.telephone`
     eForms example: <cac:Contact><cbc:Telephone>+123 45678</cbc:Telephone></cac:Contact>
     OCDS example: '{"parties":[{"contactPoint":{"telephone":"+123 45678"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -6912,7 +6909,7 @@
     Description: The telephone for contacting the organisation. To avoid unnecessary processing of personal data, the telephone may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
     Business groups:
         BG-703: Organisation
-    eForms guidance: Map to the party's `.contactPoint.telephone`
+    eForms guidance: Get the organization for this touchpoint and map to the organization's `.contactPoint.telephone`
     eForms example: <cac:Contact><cbc:Telephone>+123 45678</cbc:Telephone></cac:Contact>
     OCDS example: '{"parties":[{"contactPoint":{"telephone":"+123 45678"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -6928,10 +6925,7 @@
     Description: The telephone for contacting the organisation. To avoid unnecessary processing of personal data, the telephone may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-        These values are mapped to the same objects as created for BT-500-UBO, BT-503-UBO, BT-506-UBO, BT-507-UBO, BT-510(a)-UBO, BT-510(b)-UBO, BT-510(c)-UBO, BT-512-UBO, BT-513-UBO, BT-514-UBO, BT-706-UBO, BT-739-UBO, OPT-160-UBO and OPT-202-UBO.
-
-        Add or update a corresponding `Person` object in the organization's `.beneficialOwners` array and map to the person's `.telephone`.
+    eForms guidance: Get the person for this ultimate beneficial owner and map to the person's `.telephone`.
     eForms example: <efac:UltimateBeneficialOwner><cac:Contact><cbc:Telephone>+123 4567890</cbc:Telephone></cac:Contact></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"telephone":"+123 456789"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -7006,7 +7000,7 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL
     - Map to the party's `.details.url`
-    eForms guidance: Map to the party's `.details.url`.
+    eForms guidance: Get the organization for this company and map to the organization's `.details.url`.
     eForms example: <efac:Company><cbc:WebsiteURI>http://xyz.europa.eu/</cbc:WebsiteURI></efac:Company>
     OCDS example: '{"parties":[{"details":{"url":"http://xyz.europa.eu/"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -7022,7 +7016,7 @@
     Description: The website of the organisation.
     Business groups:
         BG-703: Organisation
-    eForms guidance: Map to the party's `.details.url`.
+    eForms guidance: Get the organization for this touchpoint and map to the organization's `.details.url`.
     eForms example: <efac:Company><cbc:WebsiteURI>http://abc.europa.eu/</cbc:WebsiteURI></efac:Company>
     OCDS example: '{"parties":[{"details":{"url":"http://abc.europa.eu/"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -7111,10 +7105,10 @@
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL
     - Map to the party's `.contactPoint.email`
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.contactPoint.email`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the organization for this company and map to the organization's `.contactPoint.email`
+    eForms example: <efac:Organization><efac:Company><cac:Contact><cbc:ElectronicMail>press@xyz.europa.eu</cbc:ElectronicMail></cac:Contact></efac:Company></efac:Organization>
+    OCDS example: '{"parties":[{"contactPoint":{"email":"press@xyz.europa.eu"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-506-Organization-TouchPoint
     parentNodeId: ND-Touchpoint
     name: Contact Email Address
@@ -7127,10 +7121,10 @@
     Description: The email for contacting the organisation. To avoid unnecessary processing of personal data, the email may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.contactPoint.email`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the organization for this touchpoint and map to the organization's `.contactPoint.email`
+    eForms example: <efac:Organization><efac:TouchPoint><cac:Contact><cbc:ElectronicMail>abc@xyz.europa.eu</cbc:ElectronicMail></cac:Contact></efac:TouchPoint>a</efac:Organization>
+    OCDS example: '{"parties":[{"contactPoint":{"email":"press@xyz.europa.eu"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-506-UBO
     parentNodeId: ND-UBO
     name: UBO Email Address
@@ -7143,10 +7137,7 @@
     Description: The email for contacting the organisation. To avoid unnecessary processing of personal data, the email may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-        These values are mapped to the same objects as created for BT-500-UBO, BT-503-UBO, BT-506-UBO, BT-507-UBO, BT-510(a)-UBO, BT-510(b)-UBO, BT-510(c)-UBO, BT-512-UBO, BT-513-UBO, BT-514-UBO, BT-706-UBO, BT-739-UBO, OPT-160-UBO and OPT-202-UBO.
-
-        Add or update a corresponding `Person` object in the organization's `.beneficialOwners` array and map to the person's `.email`.
+    eForms guidance: Get the person for this ultimate beneficial owner and map to the person's `.email`.
     eForms example: <efac:UltimateBeneficialOwner><cac:Contact><cbc:ElectronicMail>mickey.mouse@cheese-universe.com</cbc:ElectronicMail></cac:Contact></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"email":"mickey.mouse@cheese-universe.com"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -7187,10 +7178,10 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/*:NUTS/@CODE
     - TED_EXPORT/FORM_SECTION/F25_2014/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/*:NUTS/@CODE
     - TED_EXPORT/FORM_SECTION/F25_2014/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/*:NUTS/@CODE
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.region`. There is an [open issue](https://github.com/open-contracting/standard/issues/739) about region codes. \[https://github.com/open-contracting/standard/issues/739\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the organization for this company and map to the organization's `.address.region`.
+    eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cbc:CountrySubentityCode listName="nuts">XY374</cbc:CountrySubentityCode></cac:PostalAddress></efac:Company></efac:Organization>
+    OCDS example: '{"parties":[{"address":{"region":"XY374"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-507-Organization-TouchPoint
     parentNodeId: ND-Touchpoint
     name: Country Subdivision
@@ -7203,10 +7194,10 @@
     Description: The location according to the common classification of territorial units for statistics (NUTS) of the organisation's physical address. The NUTS3 classification code must be used.
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.region`. There is an [open issue](https://github.com/open-contracting/standard/issues/739) about region codes. \[https://github.com/open-contracting/standard/issues/739\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the organization for this touchpoint and map to the organization's `.address.region`.
+    eForms example: <efac:Organization><efac:TouchPoint><cac:PostalAddress><cbc:CountrySubentityCode listName="nuts">XY374</cbc:CountrySubentityCode></cac:PostalAddress></efac:TouchPoint></efac:Organization>
+    OCDS example: '{"parties":[{"address":{"region":"XY374"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-507-UBO
     parentNodeId: ND-UBO
     name: Country Subdivision
@@ -7219,10 +7210,7 @@
     Description: The location according to the common classification of territorial units for statistics (NUTS) of the organisation's physical address. The NUTS3 classification code must be used.
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-        These values are mapped to the same objects as created for BT-500-UBO, BT-503-UBO, BT-506-UBO, BT-507-UBO, BT-510(a)-UBO, BT-510(b)-UBO, BT-510(c)-UBO, BT-512-UBO, BT-513-UBO, BT-514-UBO, BT-706-UBO, BT-739-UBO, OPT-160-UBO and OPT-202-UBO.
-
-        Add or update a corresponding `Person` object in the organization's `.beneficialOwners` array and map to the person's `.address.region`.
+    eForms guidance: Get the person for this ultimate beneficial owner and map to the person's `.address.region`.
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:CountrySubentityCode listName="nuts">GBK62</cbc:CountrySubentityCode></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"region":"GBK62"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -7254,10 +7242,10 @@
     - TED_EXPORT/FORM_SECTION/F23_2014/OBJECT_CONTRACT/OBJECT_DESCR/*:NUTS/@CODE
     - TED_EXPORT/FORM_SECTION/F24_2014/OBJECT_CONTRACT/OBJECT_DESCR/*:NUTS/@CODE
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/OBJECT_DESCR/*:NUTS/@CODE
-    eForms guidance: (UNREVIEWED) Add an `Address` object to the item's `.deliveryAddresses` array, and map to its `.region`.\\n\\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the item for this lot. These values are mapped to the same `Address` object as created for BT-728-Lot, BT-5131-Lot, BT-5121-Lot, BT-5071-Lot, BT-727-Lot, BT-5101-Lot and BT-5141-Lot. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array and map to its `.region`.
+    eForms example: <cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="nuts">UKG23</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation>
+    OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"region":"UKG23"}]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-5071-Part
     parentNodeId: ND-PartPlacePerformance
     name: Place Performance Country Subdivision
@@ -7277,10 +7265,10 @@
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/TYPE_CONTRACT_PLACE_DELIVERY_DEFENCE/SITE_OR_LOCATION/*:NUTS/@CODE
     - TED_EXPORT/FORM_SECTION/F21_2014/OBJECT_CONTRACT/OBJECT_DESCR/*:NUTS/@CODE
     - TED_EXPORT/FORM_SECTION/F22_2014/OBJECT_CONTRACT/OBJECT_DESCR/*:NUTS/@CODE
-    eForms guidance: (UNREVIEWED) (REPEAT) Add an `Address` object to the item's `.deliveryAddresses` array, and map to its `.region`.\\n\\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: These values are mapped to the same `Address` object as created for BT-728-Part, BT-5131-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, BT-5101-Part and BT-5141-Part. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to its `.region`.
+    eForms example: <cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="nuts">UKG23</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation>
+    OCDS example: '{"tender":{"deliveryAddresses":[{"region":"UKG23"}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-5071-Procedure
     parentNodeId: ND-ProcedurePlacePerformance
     name: Place Performance Country Subdivision
@@ -7293,10 +7281,10 @@
     Description: The location according to the common classification of territorial units for statistics (NUTS). The NUTS3 classification code must be used.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: (UNREVIEWED) (REPEAT) Add an `Address` object to the item's `.deliveryAddresses` array, and map to its `.region`.\\n\\nThere's an open issue ([#739](https://github.com/open-contracting/standard/issues/739)) about region codes.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: These values are mapped to the same `Address` object as created for BT-728-Procedure, BT-5131-Procedure, BT-5121-Procedure, BT-5071-Procedure, BT-727-Procedure, BT-5101-Procedure and BT-5141-Procedure. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to its `.region`.
+    eForms example: <cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="nuts">UKG23</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation>
+    OCDS example: '{"tender":{"deliveryAddresses":[{"region":"UKG23"}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-508-Procedure-Buyer
     parentNodeId: ND-ContractingParty
     name: Buyer Profile URL
@@ -7326,10 +7314,10 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER
     TED guidance:
     - Map to the party's `.details.buyerProfile`
-    eForms guidance: (UNREVIEWED) Map to the party's `.details.buyerProfile`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the `Organization` object in `parties` whose `id` is equal to the value of the xpath `ancestor::cac:ContractingParty/cac:Party/cac:PartyIdentification/cbc:ID`. If none exists yet, add an `Organization` object to `parties` and set its `id` to the value of the xpath `ancestor::cac:ContractingParty/cac:Party/cac:PartyIdentification/cbc:ID`. Map to the organization's `.details.buyerProfile`.
+    eForms example: <cac:ContractingParty><cbc:BuyerProfileURI>https://admin-abc.com/public-procurements/</cbc:BuyerProfileURI></cac:ContractingParty>
+    OCDS example: '{"parties":[{"details":{"buyerProfile":"https://admin-abc.com/public-procurements/"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_buyer_information_2
 -   id: BT-509-Organization-Company
     parentNodeId: ND-Company
     name: Organisation eDelivery Gateway
@@ -7342,10 +7330,10 @@
     Description: The organisation's uniform resource locator for exchange of data and documents.
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) Map to the party's `.eDeliveryEndpoint` \[https://github.com/open-contracting/european-union-support/issues/62\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the organization for this company and map to the organization's `.eDeliveryEndpoint` \[https://github.com/open-contracting/european-union-support/issues/62\]
+    eForms example: <efac:Organization><efac:Company><cbc:EndpointID>https://drive.xpertpro.eu/</cbc:EndpointID></efac:Company></efac:Organization>
+    OCDS example: '{"parties":{"eDeliveryEndpoint":"https://drive.xpertpro.eu"}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-509-Organization-TouchPoint
     parentNodeId: ND-Touchpoint
     name: eDelivery Gateway
@@ -7358,10 +7346,10 @@
     Description: The organisation's uniform resource locator for exchange of data and documents.
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.eDeliveryEndpoint` \[https://github.com/open-contracting/european-union-support/issues/62\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the organization for this touchpoint and map to the organization's `.eDeliveryEndpoint` \[https://github.com/open-contracting/european-union-support/issues/62\]
+    eForms example: <efac:Organization><efac:TouchPoint><cbc:EndpointID>https://drive.xpertpro.eu/</cbc:EndpointID></efac:TouchPoint></efac:Organization>
+    OCDS example: '{"parties":{"eDeliveryEndpoint":"https://drive.xpertpro.eu"}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-51-Lot
     parentNodeId: ND-SecondStage
     name: Maximum Candidates Number
@@ -7471,10 +7459,10 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS
     - Map to the party's `.address.streetAddress`
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.streetAddress`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the organization for this company, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the organization's `address.streetAddress`.
+    eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cbc:StreetName>2, rue de Europe</cbc:StreetName></cac:PostalAddress></efac:Company></efac:Organization>
+    OCDS example: '{"parties":[{"address":{"streetAddress":"2, rue de Europe, Building A, 3rd Floor"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-510(a)-Organization-TouchPoint
     parentNodeId: ND-Touchpoint
     name: Street
@@ -7486,10 +7474,10 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.streetAddress`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the organization for this touchpoint, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the organization's `address.streetAddress`.
+    eForms example: <efac:Organization><efac:TouchPoint><cac:PostalAddress><cbc:StreetName>2, rue de Europe</cbc:StreetName></cac:PostalAddress></efac:TouchPoint></efac:Organization>
+    OCDS example: '{"parties":[{"address":{"streetAddress":"2, rue de Europe, Building A, 3rd Floor"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-510(a)-UBO
     parentNodeId: ND-UBO
     name: Street
@@ -7501,12 +7489,9 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-        These values are mapped to the same objects as created for BT-500-UBO, BT-503-UBO, BT-506-UBO, BT-507-UBO, BT-510(a)-UBO, BT-510(b)-UBO, BT-510(c)-UBO, BT-512-UBO, BT-513-UBO, BT-514-UBO, BT-706-UBO, BT-739-UBO, OPT-160-UBO and OPT-202-UBO.
-
-        Add or update a corresponding `Person` object in the organization's `.beneficialOwners` array and map to the person's `.address.streetAddress`.
+    eForms guidance: Get the person for this ultimate beneficial owner, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the person's `address.streetAddress`.
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:StreetName>2 CheeseStreet</cbc:StreetName></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
-    OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"streetAddress":"2 CheeseStreet"}}]}]}'
+    OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"streetAddress":"2 CheeseStreet, Nelson Building, 2nd floor"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
 -   id: BT-510(b)-Organization-Company
     parentNodeId: ND-Company
@@ -7519,10 +7504,10 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.streetAddress`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the organization for this company, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the organization's `address.streetAddress`.
+    eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cbc:AdditionalStreetName>Building A</cbc:AdditionalStreetName></cac:PostalAddress></efac:Company></efac:Organization>
+    OCDS example: '{"parties":[{"address":{"streetAddress":"2, rue de Europe, Building A, 3rd Floor"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-510(b)-Organization-TouchPoint
     parentNodeId: ND-Touchpoint
     name: Streetline 1
@@ -7534,10 +7519,10 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.streetAddress`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the organization for this touchpoint, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the organization's `address.streetAddress`.
+    eForms example: <efac:Organization><efac:TouchPoint><cac:PostalAddress><cbc:AdditionalStreetName>Building A</cbc:AdditionalStreetName></cac:PostalAddress></efac:TouchPoint></efac:Organization>
+    OCDS example: '{"parties":[{"address":{"streetAddress":"2, rue de Europe, Building A, 3rd Floor"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-510(b)-UBO
     parentNodeId: ND-UBO
     name: Streetline 1
@@ -7549,12 +7534,9 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-        These values are mapped to the same objects as created for BT-500-UBO, BT-503-UBO, BT-506-UBO, BT-507-UBO, BT-510(a)-UBO, BT-510(b)-UBO, BT-510(c)-UBO, BT-512-UBO, BT-513-UBO, BT-514-UBO, BT-706-UBO, BT-739-UBO, OPT-160-UBO and OPT-202-UBO.
-
-        Add or update a corresponding `Person` object in the organization's `.beneficialOwners` array and map to the person's `.address.streetAddress`.
+    eForms guidance: Get the person for this ultimate beneficial owner, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the person's `address.streetAddress`.
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:AdditionalStreetName>Nelson Building</cbc:AdditionalStreetName></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
-    OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"streetAddress":"Nelson Building"}}]}]}'
+    OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"streetAddress":"2 CheeseStreet, Nelson Building, 2nd floor"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
 -   id: BT-510(c)-Organization-Company
     parentNodeId: ND-Company
@@ -7567,10 +7549,10 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.streetAddress`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the organization for this company, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the organization's `address.streetAddress`.
+    eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cac:AddressLine><cbc:Line>3rd Floor</cbc:Line></cac:AddressLine></cac:PostalAddress></efac:Company></efac:Organization>
+    OCDS example: '{"parties":[{"address":{"streetAddress":"2, rue de Europe, Building A, 3rd Floor"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-510(c)-Organization-TouchPoint
     parentNodeId: ND-Touchpoint
     name: Streetline 2
@@ -7582,10 +7564,10 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.streetAddress`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the organization for this touchpoint, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the organization's `address.streetAddress`.
+    eForms example: <efac:Organization><efac:TouchPoint><cac:PostalAddress><cac:AddressLine><cbc:Line>3rd Floor</cbc:Line></cac:AddressLine></cac:PostalAddress></efac:TouchPoint></efac:Organization>
+    OCDS example: '{"parties":[{"address":{"streetAddress":"2, rue de Europe, Building A, 3rd Floor"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-510(c)-UBO
     parentNodeId: ND-UBO
     name: Streetline 2
@@ -7597,12 +7579,9 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-        These values are mapped to the same objects as created for BT-500-UBO, BT-503-UBO, BT-506-UBO, BT-507-UBO, BT-510(a)-UBO, BT-510(b)-UBO, BT-510(c)-UBO, BT-512-UBO, BT-513-UBO, BT-514-UBO, BT-706-UBO, BT-739-UBO, OPT-160-UBO and OPT-202-UBO.
-
-        Add or update a corresponding `Person` object in the organization's `.beneficialOwners` array and map to the person's `.address.streetAddress`.
+    eForms guidance: Get the person for this ultimate beneficial owner, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the person's `address.streetAddress`.
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cac:AddressLine><cbc:Line>2nd floor</cbc:Line></cac:AddressLine></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
-    OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"streetAddress":"2nd floor"}}]}]}'
+    OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"streetAddress":"2 CheeseStreet, Nelson Building, 2nd floor"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
 -   id: BT-5101(a)-Lot
     parentNodeId: ND-LotPlacePerformance
@@ -7631,10 +7610,10 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE
     TED guidance:
     - Map to the item's `.deliveryLocation.description`
-    eForms guidance: (UNREVIEWED) Map `cbc:StreetName` to the address' `.streetAddress`. If applicable, append `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` to the address' `.streetAddress`, separating each string with ', ' (comma and space).
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the item for this lot. These values are mapped to the same `Address` object as created for BT-728-Lot, BT-5131-Lot, BT-5121-Lot, BT-5071-Lot, BT-727-Lot, BT-5101-Lot and BT-5141-Lot. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
+    eForms example: <cac:RealizedLocation><cac:Address><cbc:AdditionalStreetName>Building B1</cbc:AdditionalStreetName></cac:Address></cac:RealizedLocation>
+    OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"streetAddress":"Main Street, 2, Building B1, 3rd floor"}]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-5101(a)-Part
     parentNodeId: ND-PartPlacePerformance
     name: Place Performance Street
@@ -7655,10 +7634,10 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE
     TED guidance:
     - Map to the item's `.deliveryLocation.description`
-    eForms guidance: (UNREVIEWED) (REPEAT) Map `cbc:StreetName` to the address' `.streetAddress`. If applicable, append `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` to the address' `.streetAddress`, separating each string with ', ' (comma and space).
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: These values are mapped to the same `Address` object as created for BT-728-Part, BT-5131-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, BT-5101-Part and BT-5141-Part. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
+    eForms example: <cac:RealizedLocation><cac:Address><cbc:AdditionalStreetName>Building B1</cbc:AdditionalStreetName></cac:Address></cac:RealizedLocation>
+    OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"streetAddress":"Main Street, 2, Building B1, 3rd floor"}]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-5101(a)-Procedure
     parentNodeId: ND-ProcedurePlacePerformance
     name: Place Performance Street
@@ -7670,10 +7649,10 @@
     Description: The name of the street, road, avenue, etc., of the place of performance and further identification (e.g. building number).
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: (UNREVIEWED) (REPEAT) Map `cbc:StreetName` to the address' `.streetAddress`. If applicable, append `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` to the address' `.streetAddress`, separating each string with ', ' (comma and space).
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: These values are mapped to the same `Address` object as created for BT-728-Procedure, BT-5131-Procedure, BT-5121-Procedure, BT-5071-Procedure, BT-727-Procedure, BT-5101-Procedure and BT-5141-Procedure. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
+    eForms example: <cac:RealizedLocation><cac:Address><cbc:AdditionalStreetName>Building B1</cbc:AdditionalStreetName></cac:Address></cac:RealizedLocation>
+    OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"streetAddress":"Main Street, 2, Building B1, 3rd floor"}]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-5101(b)-Lot
     parentNodeId: ND-LotPlacePerformance
     name: Place Performance Streetline 1
@@ -7685,10 +7664,10 @@
     Description: The name of the street, road, avenue, etc., of the place of performance and further identification (e.g. building number).
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: (UNREVIEWED) (REPEAT) Map `cbc:StreetName` to the address' `.streetAddress`. If applicable, append `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` to the address' `.streetAddress`, separating each string with ', ' (comma and space).
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the item for this lot. These values are mapped to the same `Address` object as created for BT-728-Lot, BT-5131-Lot, BT-5121-Lot, BT-5071-Lot, BT-727-Lot, BT-5101-Lot and BT-5141-Lot. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
+    eForms example: <cac:RealizedLocation><cac:Address><cbc:AdditionalStreetName>Building B1</cbc:AdditionalStreetName></cac:Address></cac:RealizedLocation>
+    OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"streetAddress":"Main Street, 2, Building B1, 3rd floor"}]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-5101(b)-Part
     parentNodeId: ND-PartPlacePerformance
     name: Place Performance Streetline 1
@@ -7700,10 +7679,10 @@
     Description: The name of the street, road, avenue, etc., of the place of performance and further identification (e.g. building number).
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: (UNREVIEWED) (REPEAT) Map `cbc:StreetName` to the address' `.streetAddress`. If applicable, append `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` to the address' `.streetAddress`, separating each string with ', ' (comma and space).
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: These values are mapped to the same `Address` object as created for BT-728-Part, BT-5131-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, BT-5101-Part and BT-5141-Part. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
+    eForms example: <cac:RealizedLocation><cac:Address><cbc:AdditionalStreetName>Building B1</cbc:AdditionalStreetName></cac:Address></cac:RealizedLocation>
+    OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"streetAddress":"Main Street, 2, Building B1, 3rd floor"}]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-5101(b)-Procedure
     parentNodeId: ND-ProcedurePlacePerformance
     name: Place Performance Streetline 1
@@ -7715,10 +7694,10 @@
     Description: The name of the street, road, avenue, etc., of the place of performance and further identification (e.g. building number).
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: (UNREVIEWED) (REPEAT) Map `cbc:StreetName` to the address' `.streetAddress`. If applicable, append `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` to the address' `.streetAddress`, separating each string with ', ' (comma and space).
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: These values are mapped to the same `Address` object as created for BT-728-Procedure, BT-5131-Procedure, BT-5121-Procedure, BT-5071-Procedure, BT-727-Procedure, BT-5101-Procedure and BT-5141-Procedure. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
+    eForms example: <cac:RealizedLocation><cac:Address><cbc:AdditionalStreetName>Building B1</cbc:AdditionalStreetName></cac:Address></cac:RealizedLocation>
+    OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"streetAddress":"Main Street, 2, Building B1, 3rd floor"}]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-5101(c)-Lot
     parentNodeId: ND-LotPlacePerformance
     name: Place Performance Streetline 2
@@ -7730,10 +7709,10 @@
     Description: The name of the street, road, avenue, etc., of the place of performance and further identification (e.g. building number).
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: (UNREVIEWED) (REPEAT) Map `cbc:StreetName` to the address' `.streetAddress`. If applicable, append `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` to the address' `.streetAddress`, separating each string with ', ' (comma and space).
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the item for this lot. These values are mapped to the same `Address` object as created for BT-728-Lot, BT-5131-Lot, BT-5121-Lot, BT-5071-Lot, BT-727-Lot, BT-5101-Lot and BT-5141-Lot. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
+    eForms example: <cac:RealizedLocation><cac:Address><cbc:AdditionalStreetName>Building B1</cbc:AdditionalStreetName></cac:Address></cac:RealizedLocation>
+    OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"streetAddress":"Main Street, 2, Building B1, 3rd floor"}]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-5101(c)-Part
     parentNodeId: ND-PartPlacePerformance
     name: Place Performance Streetline 2
@@ -7745,10 +7724,10 @@
     Description: The name of the street, road, avenue, etc., of the place of performance and further identification (e.g. building number).
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: (UNREVIEWED) (REPEAT) Map `cbc:StreetName` to the address' `.streetAddress`. If applicable, append `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` to the address' `.streetAddress`, separating each string with ', ' (comma and space).
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: These values are mapped to the same `Address` object as created for BT-728-Part, BT-5131-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, BT-5101-Part and BT-5141-Part. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
+    eForms example: <cac:RealizedLocation><cac:Address><cbc:AdditionalStreetName>Building B1</cbc:AdditionalStreetName></cac:Address></cac:RealizedLocation>
+    OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"streetAddress":"Main Street, 2, Building B1, 3rd floor"}]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-5101(c)-Procedure
     parentNodeId: ND-ProcedurePlacePerformance
     name: Place Performance Streetline 2
@@ -7760,10 +7739,10 @@
     Description: The name of the street, road, avenue, etc., of the place of performance and further identification (e.g. building number).
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: (UNREVIEWED) (REPEAT) Map `cbc:StreetName` to the address' `.streetAddress`. If applicable, append `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` to the address' `.streetAddress`, separating each string with ', ' (comma and space).
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: These values are mapped to the same `Address` object as created for BT-728-Procedure, BT-5131-Procedure, BT-5121-Procedure, BT-5071-Procedure, BT-727-Procedure, BT-5101-Procedure and BT-5141-Procedure. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
+    eForms example: <cac:RealizedLocation><cac:Address><cbc:AdditionalStreetName>Building B1</cbc:AdditionalStreetName></cac:Address></cac:RealizedLocation>
+    OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"streetAddress":"Main Street, 2, Building B1, 3rd floor"}]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-512-Organization-Company
     parentNodeId: ND-Company
     name: Organisation Post Code
@@ -7849,10 +7828,10 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE
     - Map to the party's `.address.postalCode`
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.postalCode`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the organization for this company and map to the organization's `.address.postalCode`
+    eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cbc:PostalZone>2345</cbc:PostalZone></cac:PostalAddress></efac:Company></efac:Organization>a
+    OCDS example: '{"parties":[{"address":{"postalCode":"2345"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-512-Organization-TouchPoint
     parentNodeId: ND-Touchpoint
     name: Post Code
@@ -7864,10 +7843,10 @@
     Description: The post code of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.postalCode`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the organization for this touchpoint and map to the touchpoint's `.address.postalCode`
+    eForms example: <efac:Organization><efac:TouchPoint><cac:PostalAddress><cbc:PostalZone>2345</cbc:PostalZone></cac:PostalAddress></efac:TouchPoint></efac:Organization>a
+    OCDS example: '{"parties":[{"address":{"postalCode":"2345"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-512-UBO
     parentNodeId: ND-UBO
     name: Post Code
@@ -7879,10 +7858,7 @@
     Description: The post code of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-        These values are mapped to the same objects as created for BT-500-UBO, BT-503-UBO, BT-506-UBO, BT-507-UBO, BT-510(a)-UBO, BT-510(b)-UBO, BT-510(c)-UBO, BT-512-UBO, BT-513-UBO, BT-514-UBO, BT-706-UBO, BT-739-UBO, OPT-160-UBO and OPT-202-UBO.
-
-        Add or update a corresponding `Person` object in the organization's `.beneficialOwners` array and map to the person's `.address.postalCode`.
+    eForms guidance: Get the person for this ultimate beneficial owner and map to the person's `.address.postalCode`.
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:PostalZone>C6HA782</cbc:PostalZone></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"postalCode":"C6HA78"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -7897,10 +7873,10 @@
     Description: The postcode of the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: (UNREVIEWED) Map to the address' `.postalCode`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the item for this lot. These values are mapped to the same `Address` object as created for BT-728-Lot, BT-5131-Lot, BT-5121-Lot, BT-5071-Lot, BT-727-Lot, BT-5101-Lot and BT-5141-Lot. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array and map to its `.postalCode`.
+    eForms example: <cac:RealizedLocation><cac:Address><cbc:PostalZone>XY14 2LG</cbc:PostalZone></cac:Address></cac:RealizedLocation>
+    OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"postalCode":"XY14 2LG"}]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-5121-Part
     parentNodeId: ND-PartPlacePerformance
     name: Place Performance Post Code
@@ -7912,10 +7888,10 @@
     Description: The postcode of the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the address' `.postalCode`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: These values are mapped to the same `Address` object as created for BT-728-Part, BT-5131-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, BT-5101-Part and BT-5141-Part. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to its `.postalCode`.
+    eForms example: <cac:RealizedLocation><cac:Address><cbc:PostalZone>XY14 2LG</cbc:PostalZone></cac:Address></cac:RealizedLocation>
+    OCDS example: '{"tender":{"deliveryAddresses":[{"postalCode":"XY14 2LG"}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-5121-Procedure
     parentNodeId: ND-ProcedurePlacePerformance
     name: Place Performance Post Code
@@ -7927,10 +7903,10 @@
     Description: The postcode of the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the address' `.postalCode`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: These values are mapped to the same `Address` object as created for BT-728-Procedure, BT-5131-Procedure, BT-5121-Procedure, BT-5071-Procedure, BT-727-Procedure, BT-5101-Procedure and BT-5141-Procedure. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to its `.postalCode`.
+    eForms example: <cac:RealizedLocation><cac:Address><cbc:PostalZone>XY14 2LG</cbc:PostalZone></cac:Address></cac:RealizedLocation>
+    OCDS example: '{"tender":{"deliveryAddresses":[{"postalCode":"XY14 2LG"}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-513-Organization-Company
     parentNodeId: ND-Company
     name: Organisation City
@@ -8016,10 +7992,10 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN
     - Map to the party's `.address.locality`
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.locality`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the organization for this company and map to the organization's `.address.locality`.
+    eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cbc:CityName>SmallCity</cbc:CityName></cac:PostalAddress></efac:Company></efac:Organization>
+    OCDS example: '{"parties":[{"address":{"locality":"SmallCity"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-513-Organization-TouchPoint
     parentNodeId: ND-Touchpoint
     name: City
@@ -8031,10 +8007,10 @@
     Description: The name of the locality (city, town or village) of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.address.locality`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the organization for this touchpoint and map to the organization's `.address.locality`.
+    eForms example: <efac:Organization><efac:TouchPoint><cac:PostalAddress><cbc:CityName>SmallCity</cbc:CityName></cac:PostalAddress></efac:TouchPoint></efac:Organization>
+    OCDS example: '{"parties":[{"address":{"locality":"SmallCity"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-513-UBO
     parentNodeId: ND-UBO
     name: City
@@ -8046,10 +8022,7 @@
     Description: The name of the locality (city, town or village) of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-        These values are mapped to the same objects as created for BT-500-UBO, BT-503-UBO, BT-506-UBO, BT-507-UBO, BT-510(a)-UBO, BT-510(b)-UBO, BT-510(c)-UBO, BT-512-UBO, BT-513-UBO, BT-514-UBO, BT-706-UBO, BT-739-UBO, OPT-160-UBO and OPT-202-UBO.
-
-        Add or update a corresponding `Person` object in the organization's `.beneficialOwners` array and map to the person's `.address.postalCode`.
+    eForms guidance: Get the person for this ultimate beneficial owner and map to the person's `.address.postalCode`.
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:CityName>MouseTown</cbc:CityName></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"locality":"MouseTown"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -8064,10 +8037,10 @@
     Description: The name of the locality (city, town or village) of the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: (UNREVIEWED) Map to the address' `.locality`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the item for this lot. These values are mapped to the same `Address` object as created for BT-728-Lot, BT-5131-Lot, BT-5121-Lot, BT-5071-Lot, BT-727-Lot, BT-5101-Lot and BT-5141-Lot. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array and map to its `.locality`.
+    eForms example: <cac:RealizedLocation><cac:Address><cbc:CityName>BigCity</cbc:CityName></cac:Address></cac:RealizedLocation>
+    OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"locality":"BigCity"}]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-5131-Part
     parentNodeId: ND-PartPlacePerformance
     name: Place Performance City
@@ -8079,10 +8052,10 @@
     Description: The name of the locality (city, town or village) of the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the address' `.locality`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: These values are mapped to the same `Address` object as created for BT-728-Part, BT-5131-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, BT-5101-Part and BT-5141-Part. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to its `.locality`.
+    eForms example: <cac:RealizedLocation><cac:Address><cbc:CityName>BigCity</cbc:CityName></cac:Address></cac:RealizedLocation>
+    OCDS example: '{"tender":{"deliveryAddresses":[{"locality":"BigCity"}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-5131-Procedure
     parentNodeId: ND-ProcedurePlacePerformance
     name: Place Performance City
@@ -8094,10 +8067,10 @@
     Description: The name of the locality (city, town or village) of the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the address' `.locality`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: These values are mapped to the same `Address` object as created for BT-728-Procedure, BT-5131-Procedure, BT-5121-Procedure, BT-5071-Procedure, BT-727-Procedure, BT-5101-Procedure and BT-5141-Procedure. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to its `.locality`.
+    eForms example: <cac:RealizedLocation><cac:Address><cbc:CityName>BigCity</cbc:CityName></cac:Address></cac:RealizedLocation>
+    OCDS example: '{"tender":{"deliveryAddresses":[{"locality":"BigCity"}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-514-Organization-Company
     parentNodeId: ND-Company
     name: Organisation Country Code
@@ -8184,10 +8157,10 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY
     - Take the country code in the `VALUE` attribute, translate to a country name, and map to the party's `.address.countryName`\n\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation. (ISSUE)
-    eForms guidance: (UNREVIEWED) (REPEAT) Translate to a country name, and map to the party's `.address.countryName`\\n\\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the organization for this company, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the organization's `.address.country`.
+    eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cac:Country><cbc:IdentificationCode listName="country">GBR</cbc:IdentificationCode></cac:Country></cac:PostalAddress></efac:Company></efac:Organization>
+    OCDS example: '{"parties":[{"address":{"country":"GB"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-514-Organization-TouchPoint
     parentNodeId: ND-Touchpoint
     name: Country Code
@@ -8200,10 +8173,10 @@
     Description: The country of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Translate to a country name, and map to the party's `.address.countryName`\\n\\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the organization for this touchpoint, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the organization's `.address.country`.
+    eForms example: <efac:Organization><efac:TouchPoint><cac:PostalAddress><cac:Country><cbc:IdentificationCode listName="country">GBR</cbc:IdentificationCode></cac:Country></cac:PostalAddress></efac:TouchPoint></efac:Organization>
+    OCDS example: '{"parties":[{"address":{"country":"GB"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-514-UBO
     parentNodeId: ND-UBO
     name: Country Code
@@ -8216,10 +8189,7 @@
     Description: The country of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-        These values are mapped to the same objects as created for BT-500-UBO, BT-503-UBO, BT-506-UBO, BT-507-UBO, BT-510(a)-UBO, BT-510(b)-UBO, BT-510(c)-UBO, BT-512-UBO, BT-513-UBO, BT-514-UBO, BT-706-UBO, BT-739-UBO, OPT-160-UBO and OPT-202-UBO.
-
-        Add or update a corresponding `Person` object in the organization's `.beneficialOwners` array, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the person's `.address.country`.
+    eForms guidance: Get the person for this ultimate beneficial owner, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the person's `.address.country`.
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cac:Country><cbc:IdentificationCode listName="country">GBR</cbc:IdentificationCode></cac:Country></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"country":"GB"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -8235,10 +8205,10 @@
     Description: The country of the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: (UNREVIEWED) Translate to a country name, and map to the address' `.countryName`\\n\\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the item for this lot. These values are mapped to the same `Address` object as created for BT-728-Lot, BT-5131-Lot, BT-5121-Lot, BT-5071-Lot, BT-727-Lot, BT-5101-Lot and BT-5141-Lot. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the address's `.country`.
+    eForms example: <cac:RealizedLocation><cac:Address><cac:Country><cbc:IdentificationCode listName="country">GBR</cbc:IdentificationCode></cac:Country></cac:Address></cac:RealizedLocation>
+    OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"country":"GB"}]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-5141-Part
     parentNodeId: ND-PartPlacePerformance
     name: Place Performance Country Code
@@ -8251,10 +8221,10 @@
     Description: The country of the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: (UNREVIEWED) (REPEAT) Translate to a country name, and map to the address' `.countryName`\\n\\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: These values are mapped to the same `Address` object as created for BT-728-Part, BT-5131-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, BT-5101-Part and BT-5141-Part. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the address's `.country`.
+    eForms example: <cac:RealizedLocation><cac:Address><cac:Country><cbc:IdentificationCode listName="country">GBR</cbc:IdentificationCode></cac:Country></cac:Address></cac:RealizedLocation>
+    OCDS example: '{"tender":{"deliveryAddresses":[{"country":"GB"}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-5141-Procedure
     parentNodeId: ND-ProcedurePlacePerformance
     name: Place Performance Country Code
@@ -8267,10 +8237,10 @@
     Description: The country of the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: (UNREVIEWED) (REPEAT) Translate to a country name, and map to the address' `.countryName`\\n\\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: These values are mapped to the same `Address` object as created for BT-728-Procedure, BT-5131-Procedure, BT-5121-Procedure, BT-5071-Procedure, BT-727-Procedure, BT-5101-Procedure and BT-5141-Procedure. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the address's `.country`.
+    eForms example: <cac:RealizedLocation><cac:Address><cac:Country><cbc:IdentificationCode listName="country">GBR</cbc:IdentificationCode></cac:Country></cac:Address></cac:RealizedLocation>
+    OCDS example: '{"tender":{"deliveryAddresses":[{"country":"GB"}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-52-Lot
     parentNodeId: ND-LotTenderingProcess
     name: Successive Reduction Indicator (Lot)
@@ -9443,10 +9413,7 @@
     Business groups:
         BG-703: Organisation
         BG-4: Winner
-    eForms guidance: |-
-        These values are mapped to the same objects as created for BT-500-UBO, BT-503-UBO, BT-506-UBO, BT-507-UBO, BT-510(a)-UBO, BT-510(b)-UBO, BT-510(c)-UBO, BT-512-UBO, BT-513-UBO, BT-514-UBO, BT-706-UBO, BT-739-UBO, OPT-160-UBO and OPT-202-UBO.
-
-        Add or update a corresponding `Person` object in the organization's `.beneficialOwners` array, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the person's `.nationality`.
+    eForms guidance: Get the person for this ultimate beneficial owner, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the person's `.nationality`.
     eForms example: <efac:UltimateBeneficialOwner><efac:Nationality><cbc:NationalityID>DEU</cbc:NationalityID></efac:Nationality></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"nationality":"DE"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -9815,9 +9782,9 @@
     Description: 'There are other restrictions on the place of performance (e.g. "anywhere in the European Economic Area", "anywhere in the given country"). '
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: Retrieve [the label of the code](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map it to the related items' `.deliveryLocation.description`.
+    eForms guidance: Get the item for this lot. Add a `Location` object to the item's `.deliveryLocations` array, look up the code's Label in the \[authority table\]\](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map to the location's `.description`.
     eForms example: <cac:Address><cbc:Region>anyw-eea</cbc:Region></cac:Address>
-    OCDS example: '{"tender":{"items":[{"deliveryLocation":{"description":"Anywhere in the European Economic Area"}}]}}'
+    OCDS example: '{"tender":{"items":[{"deliveryLocations":[{"description":"Anywhere in the European Economic Area"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-727-Part
     parentNodeId: ND-PartPlacePerformance
@@ -9831,9 +9798,9 @@
     Description: 'There are other restrictions on the place of performance (e.g. "anywhere in the European Economic Area", "anywhere in the given country"). '
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: Retrieve [the label of the code](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map it to the related items' `.deliveryLocation.description`.
+    eForms guidance: Add a `Location` object to the `tender.deliveryLocations` array, look up the code's Label in the \[authority table\]\](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map to the location's `.description`.
     eForms example: <cac:Address><cbc:Region>anyw-eea</cbc:Region></cac:Address>
-    OCDS example: '{"tender":{"items":[{"deliveryLocation":{"description":"Anywhere in the European Economic Area"}}]}}'
+    OCDS example: '{"tender":{"deliveryLocations":[{"description":"Anywhere in the European Economic Area"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-727-Procedure
     parentNodeId: ND-ProcedurePlacePerformance
@@ -9847,9 +9814,9 @@
     Description: 'There are other restrictions on the place of performance (e.g. "anywhere in the European Economic Area", "anywhere in the given country"). '
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: Retrieve [the label of the code](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map it to the related items' `.deliveryLocation.description` \[https://github.com/open-contracting/european-union-support/issues/55\]
+    eForms guidance: Add a `Location` object to the `tender.deliveryLocations` array, look up the code's Label in the \[authority table\]\](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map to the location's `.description`.
     eForms example: <cac:Address><cbc:Region>anyw-eea</cbc:Region></cac:Address>
-    OCDS example: '{"tender":{"items":[{"deliveryLocation":{"description":"Anywhere in the European Economic Area"}}]}}'
+    OCDS example: '{"tender":{"deliveryLocations":[{"description":"Anywhere in the European Economic Area"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-728-Lot
     parentNodeId: ND-LotPlacePerformance
@@ -9864,7 +9831,7 @@
         BG-708: Place of Performance
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/LOCATION_NUTS/LOCATION
-    eForms guidance: Map to the item's `.deliveryLocation.description`
+    eForms guidance: Get the item for this lot. Add a `Location` object to the item's `.deliveryLocations` array and map to the location's `.description`.
     eForms example: <cac:RealizedLocation><cbc:Description languageID="ENG">Further realizations ...</cbc:Description></cac:RealizedLocation>
     OCDS example: '{"tender":{"items":[{"deliveryLocation":{"description":"Further realizations..."}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
@@ -9879,9 +9846,9 @@
     Description: Additional information about the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: Map to the item's `.deliveryLocation.description`
+    eForms guidance: Add a `Location` object to the `tender.deliveryLocations` array and map to the location's `.description`.
     eForms example: <cac:RealizedLocation><cbc:Description languageID="ENG">Further realizations ...</cbc:Description></cac:RealizedLocation>
-    OCDS example: '{"tender":{"items":[{"deliveryLocation":{"description":"Further realizations..."}}]}}'
+    OCDS example: '{"tender":{"deliveryLocations":[{"description":"Further realizations ..."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-728-Procedure
     parentNodeId: ND-ProcedurePlacePerformanceAdditionalInformation
@@ -9894,9 +9861,9 @@
     Description: Additional information about the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: Map to the item's `.deliveryLocation.description`
+    eForms guidance: Add a `Location` object to the `tender.deliveryLocations` array and map to the location's `.description`.
     eForms example: <cac:RealizedLocation><cbc:Description languageID="ENG">Further realizations ...</cbc:Description></cac:RealizedLocation>
-    OCDS example: '{"tender":{"items":[{"deliveryLocation":{"description":"Further realizations..."}}]}}'
+    OCDS example: '{"tender":{"deliveryLocations":[{"description":"Further realizations ..."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-729-Lot
     parentNodeId: ND-SubcontractTerms
@@ -10206,10 +10173,10 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX
     - Map to the party's `.contactPoint.faxNumber`
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.contactPoint.faxNumber`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the organization for this company and map to the organization's `.contactPoint.faxNumber`
+    eForms example: <efac:Organization><efac:Company><cac:Contact><cbc:Telefax>(+33) 2 34 56 78 91</cbc:Telefax></cac:Contact></efac:Company></efac:Organization>
+    OCDS example: '{"parties":[{"contactPoint":{"faxNumber":"(+33) 2 34 56 78 91"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-739-Organization-TouchPoint
     parentNodeId: ND-Touchpoint
     name: Contact Fax
@@ -10222,10 +10189,10 @@
     Description: The fax for contacting the organisation. To avoid unnecessary processing of personal data, the fax may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) (REPEAT) Map to the party's `.contactPoint.faxNumber`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the organization for this touchpoint and map to the organization's `.contactPoint.faxNumber`
+    eForms example: <efac:Organization><efac:TouchPoint><cac:Contact><cbc:Telefax>(+33) 2 34 56 78 91</cbc:Telefax></cac:Contact></efac:TouchPoint></efac:Organization>
+    OCDS example: '{"parties":[{"contactPoint":{"faxNumber":"(+33) 2 34 56 78 91"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-739-UBO
     parentNodeId: ND-UBO
     name: UBO Contact Fax
@@ -10238,10 +10205,7 @@
     Description: The fax for contacting the organisation. To avoid unnecessary processing of personal data, the fax may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-        These values are mapped to the same objects as created for BT-500-UBO, BT-503-UBO, BT-506-UBO, BT-507-UBO, BT-510(a)-UBO, BT-510(b)-UBO, BT-510(c)-UBO, BT-512-UBO, BT-513-UBO, BT-514-UBO, BT-706-UBO, BT-739-UBO, OPT-160-UBO and OPT-202-UBO.
-
-        Add or update a corresponding `Person` object in the organization's `.beneficialOwners` array and map to the person's `.faxNumber`.
+    eForms guidance: Get the person for this ultimate beneficial owner and map to the person's `.faxNumber`.
     eForms example: <efac:UltimateBeneficialOwner><cac:Contact><cbc:Telefax>+123 4567891</cbc:Telefax></cac:Contact></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"faxNumber":"+123 4567891"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -11888,10 +11852,7 @@
     type: text
     repeatable: false
     mandatory: true
-    eForms guidance: |-
-        These values are mapped to the same objects as created for BT-500-UBO, BT-503-UBO, BT-506-UBO, BT-507-UBO, BT-510(a)-UBO, BT-510(b)-UBO, BT-510(c)-UBO, BT-512-UBO, BT-513-UBO, BT-514-UBO, BT-706-UBO, BT-739-UBO, OPT-160-UBO and OPT-202-UBO.
-
-        Add or update a corresponding `Person` object in the organization's `.beneficialOwners` array and map to the person's `.name`.
+    eForms guidance: Get the person for this ultimate beneficial owner and map to the person's `.name`.
     eForms example: <efac:UltimateBeneficialOwner><cbc:FirstName>Mickey</cbc:FirstName></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"name":"Mickey"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -11945,10 +11906,10 @@
     repeatable: true
     mandatory: true
     pattern: ^UBO-\d{4}$
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the person for this ultimate beneficial owner and map to the person's `.id`.
+    eForms example: <efac:UltimateBeneficialOwner><cbc:ID schemeName="ubo">UBO-0001</cbc:ID></efac:UltimateBeneficialOwner>
+    OCDS example: '{"parties":[{"beneficialOwners":{"id":"UBO-0001"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
 -   id: OPT-210-Tenderer
     parentNodeId: ND-TenderingParty
     name: Tendering Party ID
