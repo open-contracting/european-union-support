@@ -5503,7 +5503,7 @@
     - TED_EXPORT/FORM_SECTION/F21_2014/OBJECT_CONTRACT/REFERENCE_NUMBER
     TED guidance:
     - If not set, let *Reference number* be equal to the `ocid` value. Map to `tender.id` (string).
-    eForms guidance: Map to the lot's `.identifiers.id` and set `.identifiers.scheme` to 'internal'.
+    eForms guidance: Map to the lot's `.identifiers.id` and set `.identifiers.scheme` to "internal".
     eForms example: <cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID>
     OCDS example: '{"tender":{"lots":[{"identifiers":[{"id":"PROC/2020/0024-ABC-FGHI"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#objectSection
@@ -5518,7 +5518,7 @@
     Description: 'The internal identifier used for files regarding the procurement procedure or lot before a procedure identifier is given (e.g. coming from the buyer''s document management system or procurement planning system). '
     Business groups:
         BG-2: Purpose
-    eForms guidance: Map to the lotGroup's `.identifiers.id` and set `.identifiers.scheme` to 'internal'.
+    eForms guidance: Map to the lotGroup's `.identifiers.id` and set `.identifiers.scheme` to "internal".
     eForms example: <cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID>
     OCDS example: '{"tender":{"lotGroups":[{"identifiers":[{"id":"PROC/2020/0024-ABC-FGHI"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#objectSection
@@ -5533,7 +5533,7 @@
     Description: 'The internal identifier used for files regarding the procurement procedure or lot before a procedure identifier is given (e.g. coming from the buyer''s document management system or procurement planning system). '
     Business groups:
         BG-2: Purpose
-    eForms guidance: Map to `tender.identifiers.id` and set `identifiers.scheme` to 'internal'.
+    eForms guidance: Map to `tender.identifiers.id` and set `identifiers.scheme` to "internal".
     eForms example: <cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID>
     OCDS example: '{"tender":{"identifiers":[{"id":"PROC/2020/0024-ABC-FGHI"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#objectSection
@@ -5567,7 +5567,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/REFERENCE_NUMBER
     TED guidance:
     - If not set, let *Reference number* be equal to the `ocid` value. Map to `tender.id` (string).
-    eForms guidance: Map to `tender.identifiers.id` and set `identifiers.scheme` to 'internal'.
+    eForms guidance: Map to `tender.identifiers.id` and set `identifiers.scheme` to "internal".
     eForms example: <cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID>
     OCDS example: '{"tender":{"identifiers":[{"id":"PROC/2020/0024-ABC-FGHI"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#objectSection
@@ -6378,7 +6378,7 @@
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/QUANTITY_SCOPE_WORKS_DEFENCE/F16_DIVISION_INTO_LOTS/F16_DIV_INTO_LOT_YES/LOT_PRIOR_INFORMATION/SCHEDULED_DATE_PERIOD/PERIOD_WORK_DATE_STARTING/(MONTHS|DAYS)
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/SCHEDULED_DATE_PERIOD/PERIOD_WORK_DATE_STARTING/MONTHS
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/PERIOD_WORK_DATE_STARTING/(MONTHS|DAYS)
-    eForms guidance: If `@unitCode` is set to "DAY", map to `tender.contractPeriod.durationInDays`.\\n\\nIf `@unitCode` is set to "MONTH", multiply by 30. If `@unitCode` is set to "YEAR", multiply by 365. In either case, map the result to `tender.contractPeriod.durationInDays`. If '@unitCode' is set to a specific day of the week or month map equivalent number of days to `tender.contractPeriod.durationInDays`.
+    eForms guidance: If `@unitCode` is set to "DAY", map to `tender.contractPeriod.durationInDays`.\\n\\nIf `@unitCode` is set to "MONTH", multiply by 30. If `@unitCode` is set to "YEAR", multiply by 365. In either case, map the result to `tender.contractPeriod.durationInDays`. If `@unitCode` is set to a specific day of the week or month map equivalent number of days to `tender.contractPeriod.durationInDays`.
     eForms example: <cac:PlannedPeriod><cbc:DurationMeasure unitCode="DAY">3</cbc:DurationMeasure></cac:PlannedPeriod>
     OCDS example: '{"tender":{"contractPeriod":{"durationInDays":3}}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#plannedPeriodSection
@@ -9561,7 +9561,7 @@
     TED guidance:
     - Add 'publicServiceMissionOrganization' to the `tender.otherRequirements.reservedParticipation` array
     - Add 'shelteredWorkshop' to the `tender.otherRequirements.reservedParticipation` array
-    eForms guidance: If `@TendererRequirementTypeCode` is 'res-pub-ser' add 'publicServiceMissionOrganization' to the lot's `.otherRequirements.reservedParticipation` array. If `@TendererRequirementTypeCode` is 'res-ws' add 'shelteredWorkshop' to the lot's `.otherRequirements.reservedParticipation` array. If `@TendererRequirementTypeCode` is 'none' discard.
+    eForms guidance: If `@TendererRequirementTypeCode` is "res-pub-ser", add 'publicServiceMissionOrganization' to the lot's `.otherRequirements.reservedParticipation` array. If `@TendererRequirementTypeCode` is "res-ws", add 'shelteredWorkshop' to the lot's `.otherRequirements.reservedParticipation` array. If `@TendererRequirementTypeCode` is "none", discard.
     eForms example: <cac:SpecificTendererRequirement><cbc:TendererRequirementTypeCode listName="reserved-procurement">res-ws</cbc:TendererRequirementTypeCode></cac:SpecificTendererRequirement>
     OCDS example: '{"tender":{"lots":[{"otherRequirements":{"reservedParticipation":["shelteredWorkshop"]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#reservedParticipationSection
@@ -9579,7 +9579,7 @@
         BG-705: Other Requirements
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/LEFTI_PRIOR_INFORMATION/RESERVED_CONTRACTS/RESTRICTED_TO_SHELTERED_WORKSHOPS
-    eForms guidance: If `@TendererRequirementTypeCode` is 'res-pub-ser' add 'publicServiceMissionOrganization' to `tender.otherRequirements.reservedParticipation` array. If `@TendererRequirementTypeCode` is 'res-ws' add 'shelteredWorkshop' to `tender.otherRequirements.reservedParticipation` array. If `@TendererRequirementTypeCode` is 'none' discard.
+    eForms guidance: If `@TendererRequirementTypeCode` is "res-pub-ser", add 'publicServiceMissionOrganization' to `tender.otherRequirements.reservedParticipation` array. If `@TendererRequirementTypeCode` is "res-ws", add 'shelteredWorkshop' to `tender.otherRequirements.reservedParticipation` array. If `@TendererRequirementTypeCode` is "none", discard.
     eForms example: <cac:SpecificTendererRequirement><cbc:TendererRequirementTypeCode listName="reserved-procurement">res-ws</cbc:TendererRequirementTypeCode></cac:SpecificTendererRequirement>
     OCDS example: '{"tender":{"otherRequirements":{"reservedParticipation":["shelteredWorkshop"]}}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#reservedParticipationSection
@@ -10120,7 +10120,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/LEFTI/RESTRICTED_SHELTERED_PROGRAM
     TED guidance:
     - Set `tender.contractTerms.reservedExecution` to `true`
-    eForms guidance: Set the lot's `.contractTerms.reservedExecution` to `true` if `@ExecutionRequirementCode` is 'yes', otherwise discard.
+    eForms guidance: Set the lot's `.contractTerms.reservedExecution` to `true` if `@ExecutionRequirementCode` is "yes", otherwise discard.
     eForms example: <cac:ContractExecutionRequirement><cbc:ExecutionRequirementCode listName="reserved-execution">yes</cbc:ExecutionRequirementCode></cac:ContractExecutionRequirement>
     OCDS example: '{"tender":{"lots":[{"contractTerms":{"reservedExecution":true}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#reservedExecutionSection
@@ -10138,7 +10138,7 @@
         BG-711: Contract Terms
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/LEFTI_PRIOR_INFORMATION/RESERVED_CONTRACTS/RESTRICTED_TO_FRAMEWORK
-    eForms guidance: Set `tender.contractTerms.reservedExecution` to `true` if `@ExecutionRequirementCode` is 'yes', otherwise discard.
+    eForms guidance: Set `tender.contractTerms.reservedExecution` to `true` if `@ExecutionRequirementCode` is "yes", otherwise discard.
     eForms example: <cac:ContractExecutionRequirement><cbc:ExecutionRequirementCode listName="reserved-execution">yes</cbc:ExecutionRequirementCode></cac:ContractExecutionRequirement>
     OCDS example: '{"tender":{"contractTerms":{"reservedExecution":true}}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#reservedExecutionSection
