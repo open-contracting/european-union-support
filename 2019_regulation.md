@@ -40,9 +40,9 @@ idSchemes | eForms SDK | Indicates the identifier schemes for this `id-ref` fiel
 mandatory | eForms SDK | Indicates whether or not a field is required to have a value. | Simplified to the boolean (`true` if required on one or more forms).
 codeList | eForms SDK | Identifier of the code list from which the field value must belong. Applicable only for fields of type "code" or "internal-code" | Simplified to the codelist (removed `severity`, `value.type`, `value.parentId`).
 pattern | eForms SDK | Indicates that the value of the field must match a specific regular expression pattern. | Simplied to the pattern (removed `severity`).
-assert | eForms SDK | Undocumented |
-inChangeNotice | eForms SDK | Undocumented |
-privacy | eForms SDK | Undocumented |
+assert | eForms SDK | Gives an assertion, as a boolean EFX expression, that is expected to evaluate to "true". |
+inChangeNotice | eForms SDK | Indicates whether the values of the field can be modified in a change notice, compared to the notice being changed (the original notice). |
+privacy | eForms SDK | The information necessary for the mechanism by which the field can be withheld from publication for a defined period. |
 Description | [Regulation annex](https://ec.europa.eu/growth/single-market/public-procurement/digital-procurement/eforms_en) | The description of the business term. |
 Business groups | Regulation annex | The business groups to which the business term belongs, from top down. | eForms has a hierarchy of BGs. Use [business-groups.csv](https://github.com/open-contracting/european-union-support/blob/main/output/mapping/eforms/business-groups.csv) to look up the hierarchy and descriptions for each group.
 TED Xpath | [SIMAP](https://simap.ted.europa.eu/en_GB/web/simap/eforms) (13/04/2022) | The TED XPaths matching the eForms field. |
