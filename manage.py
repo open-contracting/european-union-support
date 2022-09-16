@@ -263,16 +263,19 @@ def update_with_sdk(filename, verbose):
         # Abbreviate the constraints (there is sometimes another constraint on X02, etc.).
         forbidden["constraints"] = forbidden["constraints"][:1]
         # If a field's forbidden types are a superset of all supported types, drop it.
-        if set(forbidden["constraints"][0].pop("noticeTypes")) >= supported_notice_types:
+        if (
+            set(forbidden["constraints"][0].pop("noticeTypes")) >= supported_notice_types
+            and "condition" not in forbidden["constraints"][0]
+        ):
             # Ensure the forbidden property's structure is as expected.
-            assert forbidden == expected
+            assert forbidden == expected, f"{row['id']} {forbidden} !=\n{expected}"
             labels[label] = row["id"]
 
     df.drop(index=labels, inplace=True)
 
     if verbose:
-        click.echo("\n".join(sorted(labels.values())))
         click.echo(f"{df.shape[0]} kept, {len(labels)} dropped")
+        click.echo("\n".join(sorted(map(lambda s: f"- {s}", labels.values()))))
 
     # Remove or abbreviate columns that do not assist the mapping process and that lengthen the JSON file. See README.
     drop = ["xpathRelative", "legalType", "maxLength", "forbidden", "assert", "inChangeNotice", "privacy"]

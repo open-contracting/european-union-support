@@ -693,7 +693,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:NoticeDocumentReference/cbc:ID
     type: id
     repeatable: false
-    mandatory: true
+    mandatory: false
     pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|[1-9](\d{0,7})-(19|20)\d\d)$
     Description: The identifier of a prior information notice or another similar notice related to this notice.
     Business groups:
@@ -6473,7 +6473,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:TechnicalCommitteePerson/cbc:FamilyName
     type: text
     repeatable: true
-    mandatory: true
+    mandatory: false
     Description: A name of the jury member.
     Business groups:
         BG-704: Reward and Jury
@@ -6492,7 +6492,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:EconomicOperatorShortList/cac:PreSelectedParty/cac:PartyName/cbc:Name
     type: text
     repeatable: true
-    mandatory: true
+    mandatory: false
     Description: A name of an already selected participant. A participant could have been selected already at the time of the publication of the design contest notice because, for example, the information about the participation of a world renowned architect is intended to promote the contest amongst other potential participants.
     Business groups:
         BG-704: Reward and Jury
@@ -6705,15 +6705,26 @@
     eForms example: <efac:Organization><efac:Company><cac:PartyLegalEntity><cbc:CompanyID>XYZ</cbc:CompanyID></cac:PartyLegalEntity></efac:Company></efac:Organization>
     OCDS example: '{"parties":[{"identifier":{"id":"XYZ"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
+-   id: BT-5010-Lot
+    parentNodeId: ND-NonUBLTenderingTerms
+    name: EU Funds Financing Identifier
+    btId: BT-5010
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Funding/efbc:FinancingIdentifier
+    type: id
+    repeatable: true
+    mandatory: false
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: BT-5011-Contract
-    parentNodeId: ND-ContractEUFunds
+    parentNodeId: ND-SettledContract
     name: Contract EU Funds Identifier
     btId: BT-5011
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:SettledContract/efac:Funding/cbc:FundingProgramCode
-    type: code
-    repeatable: false
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:SettledContract/efac:Funding/efbc:FinancingIdentifier
+    type: id
+    repeatable: true
     mandatory: false
-    codeList: eu-programme
     Description: An identifier of the European Union funds used to at least partially finance the contract. The most concrete information must be given (e.g. about concrete projects, not just operational programs.)
     Business groups:
         BG-7: Notice Result
@@ -6936,7 +6947,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:Organization/efac:Company/cbc:WebsiteURI
     type: url
     repeatable: false
-    mandatory: true
+    mandatory: false
     pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
     Description: The website of the organisation.
     Business groups:
@@ -8501,7 +8512,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ContractExtension/cbc:OptionsDescription
     type: text-multilingual
     repeatable: false
-    mandatory: true
+    mandatory: false
     Description: The description of the options.
     Business groups:
         BG-2: Purpose
@@ -8932,6 +8943,30 @@
     eForms example: <cac:ContractingActivity><cbc:ActivityTypeCode listName="entity-activity">gas-oil</cbc:ActivityTypeCode></cac:ContractingActivity>
     OCDS example: '{"parties":[{"id":"ORG-0001","details":{"classifications":[{"scheme":"Directive 2014/25/EU","id":"gas-oil","description":"Activities related to the exploitation of a geographical area for the purpose of extracting oil or gas."}]}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#_buyer_information_2
+-   id: BT-6110-Contract
+    parentNodeId: ND-ContractEUFunds
+    name: Contract EU Funds Details
+    btId: BT-6110
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:SettledContract/efac:Funding/cbc:Description
+    type: text-multilingual
+    repeatable: false
+    mandatory: false
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-6140-Lot
+    parentNodeId: ND-Funding
+    name: EU Funds Details
+    btId: BT-6140
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Funding/cbc:Description
+    type: text-multilingual
+    repeatable: false
+    mandatory: false
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: BT-615-Lot
     parentNodeId: ND-LotRestrictedDocuments
     name: Documents Restricted URL
@@ -9623,6 +9658,19 @@
     eForms example: ''
     OCDS example: ''
     sdk: ''
+-   id: BT-717-Lot
+    parentNodeId: ND-StrategicProcurementLot
+    name: Clean Vehicles Directive
+    btId: BT-717
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:StrategicProcurement/efbc:ApplicableLegalBasis
+    type: code
+    repeatable: false
+    mandatory: false
+    codeList: cvd-scope
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: BT-718-notice
     parentNodeId: ND-Change
     name: Change Procurement Documents
@@ -9709,18 +9757,45 @@
     OCDS example: ''
     sdk: ''
 -   id: BT-722-Contract
-    parentNodeId: ND-ContractEUFunds
-    name: Contract EU Funds Name
+    parentNodeId: ND-SettledContract
+    name: Contract EU Funds Programme
     btId: BT-722
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:SettledContract/efac:Funding/cbc:FundingProgram
-    type: text-multilingual
-    repeatable: false
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:SettledContract/efac:Funding/efbc:FundingProgramCode
+    type: code
+    repeatable: true
     mandatory: false
+    codeList: eu-programme
     Description: The name of the European Union funds used to at least partially finance the contract. The most concrete information must be given (e.g. about concrete projects, not just operational programs.)
     Business groups:
         BG-7: Notice Result
         BG-310: Contract
         BG-611: Contract EU Funds
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-7220-Lot
+    parentNodeId: ND-NonUBLTenderingTerms
+    name: EU Funds Programme
+    btId: BT-7220
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Funding/efbc:FundingProgramCode
+    type: code
+    repeatable: true
+    mandatory: false
+    codeList: eu-programme
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-723-LotResult
+    parentNodeId: ND-ProcurementDetailsLotResult
+    name: Vehicle Category
+    btId: BT-723
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement/efac:StrategicProcurementInformation/efac:ProcurementDetails/efbc:AssetCategoryCode
+    type: code
+    repeatable: false
+    mandatory: false
+    codeList: vehicle-category
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -9938,7 +10013,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cbc:Description
     type: text-multilingual
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The justification for only indicating the award criteria's order of importance, not their weighing.
     Business groups:
         BG-707: Award Criteria
@@ -9953,7 +10028,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cbc:Description
     type: text-multilingual
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The justification for only indicating the award criteria's order of importance, not their weighing.
     Business groups:
         BG-707: Award Criteria
@@ -9995,6 +10070,32 @@
     eForms example: <cac:SubordinateAwardingCriterion><cbc:Name languageID="ENG">Technical merit</cbc:Name></cac:SubordinateAwardingCriterion>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"name":"Technical merit"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.0.0/schema/all-in-one.html#awardCriteriaSection
+-   id: BT-735-Lot
+    parentNodeId: ND-StrategicProcurementInformationLot
+    name: CVD Contract Type
+    btId: BT-735
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:StrategicProcurement/efac:StrategicProcurementInformation/efbc:ProcurementCategoryCode
+    type: code
+    repeatable: false
+    mandatory: false
+    codeList: cvd-contract-type
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-735-LotResult
+    parentNodeId: ND-StrategicProcurementInformationLotResult
+    name: CVD Contract Type
+    btId: BT-735
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement/efac:StrategicProcurementInformation/efbc:ProcurementCategoryCode
+    type: code
+    repeatable: false
+    mandatory: false
+    codeList: cvd-contract-type
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: BT-736-Lot
     parentNodeId: ND-LotTenderingTerms
     name: Reserved Execution
@@ -10003,7 +10104,7 @@
     type: code
     repeatable: false
     mandatory: true
-    codeList: applicability
+    codeList: reserved-execution
     Description: Whether the execution of the contract must be performed in the framework of sheltered employment programmes.
     Business groups:
         BG-711: Contract Terms
@@ -10031,7 +10132,7 @@
     type: code
     repeatable: false
     mandatory: false
-    codeList: applicability
+    codeList: reserved-execution
     Description: Whether the execution of the contract must be performed in the framework of sheltered employment programmes.
     Business groups:
         BG-711: Contract Terms
@@ -10096,7 +10197,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:Organization/efac:Company/cac:Contact/cbc:Telefax
     type: phone
     repeatable: false
-    mandatory: true
+    mandatory: false
     pattern: ^((\(\+?[0-9]+\))|\+?[0-9]+)( - |-| )?(((\(\d+\))|\d+)( - |-| )?)*(\d+)( )?$
     Description: The fax for contacting the organisation. To avoid unnecessary processing of personal data, the fax may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
     Business groups:
@@ -10828,6 +10929,19 @@
     eForms example: ''
     OCDS example: ''
     sdk: ''
+-   id: BT-766-Part
+    parentNodeId: ND-PartTenderingProcess
+    name: Dynamic Purchasing System
+    btId: BT-766
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingProcess/cac:ContractingSystem/cbc:ContractingSystemTypeCode[@listName='dps-usage']
+    type: code
+    repeatable: false
+    mandatory: false
+    codeList: dps-usage
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: BT-767-Lot
     parentNodeId: ND-AuctionTerms
     name: Electronic Auction
@@ -10980,7 +11094,7 @@
     parentNodeId: ND-LotProcurementScope
     name: Social Procurement
     btId: BT-775
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType/cbc:ProcurementTypeCode[@listName='social-procurement']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType/cbc:ProcurementTypeCode[@listName='social-objective']
     type: code
     repeatable: true
     mandatory: false
@@ -11066,6 +11180,55 @@
     TED guidance:
     - Set `tender.otherRequirements.requiresStaffNamesAndQualifications` to `true`
     eForms guidance: (UNREVIEWED) If equal to "par-requ" or "t-requ", set the lot's `.otherRequirements.requiresStaffNamesAndQualifications` to `true`. If equal to "not-requ", set it to `false`. Otherwise, discard. \[https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/requirement-stage\]
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-801-Lot
+    parentNodeId: ND-LotTenderingTerms
+    name: Non Disclosure Agreement
+    btId: BT-801
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:ContractExecutionRequirement/cbc:ExecutionRequirementCode[@listName='nda']
+    type: code
+    repeatable: false
+    mandatory: false
+    codeList: nda
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-802-Lot
+    parentNodeId: ND-NDA
+    name: Non Disclosure Agreement Description
+    btId: BT-802
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:ContractExecutionRequirement[cbc:ExecutionRequirementCode/@listName='nda']/cbc:Description
+    type: code
+    repeatable: false
+    mandatory: false
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-803(d)-notice
+    parentNodeId: ND-RootExtension
+    name: Notice Dispatch Date eSender (date)
+    btId: BT-803
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efbc:TransmissionDate
+    type: date
+    repeatable: false
+    mandatory: false
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-803(t)-notice
+    parentNodeId: ND-RootExtension
+    name: Notice Dispatch Date eSender (time)
+    btId: BT-803
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efbc:TransmissionTime
+    type: time
+    repeatable: false
+    mandatory: true
+    eForms guidance: ''
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -11268,6 +11431,42 @@
     eForms example: ''
     OCDS example: ''
     sdk: ''
+-   id: OPA-118-NoticeResult-Currency
+    parentNodeId: ND-NoticeResult
+    name: Currency of the notice framework value
+    btId: BT-118
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/cbc:EstimatedOverallFrameworkContractsAmount/@currencyID
+    type: code
+    repeatable: false
+    mandatory: true
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: OPA-161-NoticeResult-Currency
+    parentNodeId: ND-NoticeResult
+    name: Currency of the notice value
+    btId: BT-161
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/cbc:TotalAmount/@currencyID
+    type: code
+    repeatable: false
+    mandatory: true
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: OPA-27-Procedure-Currency
+    parentNodeId: ND-ProcedureProcurementScope
+    name: Currency of the estimated value of the procedure
+    btId: BT-27
+    xpathAbsolute: /*/cac:ProcurementProject/cac:RequestedTenderTotal/cbc:EstimatedOverallContractAmount/@currencyID
+    type: code
+    repeatable: false
+    mandatory: false
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: OPP-010-notice
     parentNodeId: ND-RootExtension
     name: Notice Publication Number
@@ -11437,7 +11636,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:Organization/efbc:GroupLeadIndicator
     type: indicator
     repeatable: false
-    mandatory: true
+    mandatory: false
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -11461,7 +11660,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:Organization/efbc:AcquiringCPBIndicator
     type: indicator
     repeatable: false
-    mandatory: true
+    mandatory: false
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -11486,6 +11685,18 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efbc:PublicTransportationCumulatedDistance
     type: integer
     repeatable: false
+    mandatory: false
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: OPP-090-Procedure
+    parentNodeId: ND-ProcedureTenderingProcess
+    name: Previous Notice
+    btId: OPP-090
+    xpathAbsolute: /*/cac:TenderingProcess/cac:NoticeDocumentReference/cbc:ID
+    type: id
+    repeatable: true
     mandatory: false
     eForms guidance: ''
     eForms example: ''
@@ -11823,7 +12034,7 @@
     parentNodeId: ND-ProcurementStatistics
     name: Vehicle Type
     btId: OPT-155
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurementStatistics/efbc:StatisticsCode
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement/efac:StrategicProcurementInformation/efac:ProcurementDetails/efac:StrategicProcurementStatistics/efbc:StatisticsCode
     type: code
     repeatable: false
     mandatory: false
@@ -11836,7 +12047,7 @@
     parentNodeId: ND-ProcurementStatistics
     name: Vehicle Numeric
     btId: OPT-156
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurementStatistics/efbc:StatisticsNumeric
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement/efac:StrategicProcurementInformation/efac:ProcurementDetails/efac:StrategicProcurementStatistics/efbc:StatisticsNumeric
     type: number
     repeatable: false
     mandatory: false
@@ -12073,7 +12284,7 @@
     - ORG
     - TPO
     repeatable: false
-    mandatory: true
+    mandatory: false
     pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: ''
     eForms example: ''
@@ -12327,7 +12538,7 @@
     - ORG
     - TPO
     repeatable: false
-    mandatory: true
+    mandatory: false
     pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: ''
     eForms example: ''
@@ -12447,6 +12658,20 @@
     repeatable: false
     mandatory: true
     pattern: ^TEN-\d{4}$
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: OPT-322-LotResult
+    parentNodeId: ND-LotResult
+    name: LotResult Technical Identifier
+    btId: OPT-322
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/cbc:ID
+    type: id
+    idScheme: RES
+    repeatable: false
+    mandatory: true
+    pattern: ^RES-\d{4}$
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''

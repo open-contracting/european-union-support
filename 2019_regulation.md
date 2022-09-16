@@ -110,6 +110,12 @@ To update the progress of the guidance for the 2019 regulation, run:
 
     ./manage.py statistics
 
+### Upgrade SDK version
+
+1. Update the URL in `2019_download.fish`
+1. Run `fish script/2019_download.fish`
+1. Run `./manage.py update-with-sdk --verbose output/mapping/eForms/guidance.yaml`
+
 ## Design
 
 * Track source files, in order to determine the origin of a change.
