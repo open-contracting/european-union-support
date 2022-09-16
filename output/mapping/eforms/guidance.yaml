@@ -8918,7 +8918,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/OBJECT_CONTRACT/OBJECT_DESCR/*[matches(name(),'EU_PROGR_RELATED')]
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/OBJECT_DESCR/*[matches(name(),'EU_PROGR_RELATED')]
     TED guidance:
-    - '*Get the `Organization` object whose `.name` is ''European Union''. If none exists yet:\n  * [Add a party](../../operations/#add-a-party)\n  * Set its `.name` to ''European Union''\n* Add ''funder'' to its `.roles`\n\n* Get the `Finance` object whose `.description` is the *Identification of the project*. If none exists yet:\n  * Add a `Finance` object to the `planning.budget.finance` array\n  * Map the *Identification of the project* to its `.description`\n  * Set its `.id` incrementally\n  * Set its `.financingParty.name` to ''European Union''\n  * Set its `.financingParty.id` to the party''s `.id`\n* Add the lot''s `.id` to the Finance object''s `.relatedLots` (**F12, F13**: Instead, do nothing)\n\nIn [future forms](https://github.com/eForms/eForms/issues/181#issuecomment-439861320), this field will be de-emphasized.'
+    - '* Get the `Organization` object whose `.name` is ''European Union''. If none exists yet:\n  * [Add a party](../../operations/#add-a-party)\n  * Set its `.name` to ''European Union''\n* Add ''funder'' to its `.roles`\n\n* Get the `Finance` object whose `.description` is the *Identification of the project*. If none exists yet:\n  * Add a `Finance` object to the `planning.budget.finance` array\n  * Map the *Identification of the project* to its `.description`\n  * Set its `.id` incrementally\n  * Set its `.financingParty.name` to ''European Union''\n  * Set its `.financingParty.id` to the party''s `.id`\n* Add the lot''s `.id` to the Finance object''s `.relatedLots` (**F12, F13**: Instead, do nothing)\n\nIn [future forms](https://github.com/eForms/eForms/issues/181#issuecomment-439861320), this field will be de-emphasized.'
     eForms guidance: Get the `Organization` object whose `.name` is 'European Union'. If none exists yet:\\n  Add a party\\n  Set its `.name` to 'European Union'\\n  Add 'funder' to its `.roles`.
     eForms example: <efac:Funding><cbc:FundingProgramCode listName="eu-funded">eu-funds</cbc:FundingProgramCode></efac:Funding>
     OCDS example: '{"parties":[{"name":"European Union","roles":["funder"]}]}'
@@ -10938,6 +10938,9 @@
     repeatable: false
     mandatory: false
     codeList: dps-usage
+    Description: Whether a dynamic purchasing system is involved and, in case of central purchasing bodies, whether it can be used by buyers not listed in this notice.
+    Business groups:
+        BG-706: Techniques
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -11439,6 +11442,9 @@
     type: code
     repeatable: false
     mandatory: true
+    Description: The maximum or estimated value which can be spent within the framework agreement(s) announced in this notice over its whole duration, in all lots, including options and renewals.
+    Business groups:
+        BG-7: Notice Result
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -11451,6 +11457,9 @@
     type: code
     repeatable: false
     mandatory: true
+    Description: The value of all contracts awarded in this notice, including options and renewals.
+    Business groups:
+        BG-7: Notice Result
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -11463,6 +11472,9 @@
     type: code
     repeatable: false
     mandatory: false
+    Description: The estimated maximum value of the procurement procedure or lot. Estimated refers to estimation at the time of launching the call for competition. Maximum value means a value covering all contracts to be awarded within a framework agreement or a dynamic purchasing system, over their whole duration, including options and renewals.
+    Business groups:
+        BG-2: Purpose
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''

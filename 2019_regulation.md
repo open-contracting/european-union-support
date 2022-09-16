@@ -113,9 +113,16 @@ To update the progress of the guidance for the 2019 regulation, run:
 ### Upgrade SDK version
 
 1. Update the URL in `2019_download.fish`
-1. Run `fish script/2019_download.fish`
-1. Run `./manage.py update-with-sdk --verbose output/mapping/eForms/guidance.yaml`
+1. Run:
+
+        fish script/2019_download.fish
+        ./manage.py update-with-sdk --verbose output/mapping/eForms/guidance.yaml
+        ./manage.py update-with-annex output/mapping/eforms/guidance.yaml
+        ./manage.py update-with-ted-guidance output/mapping/eforms/guidance.yaml
+
 1. Find and replace `eforms/<old-version>` with `eforms/<new-version>`
+1. Replace the older version with the new version following `sdk_regex.sub` in `manage.py`
+1. Run `./manage.py lint output/mapping/eforms/guidance.yaml`
 
 ## Design
 

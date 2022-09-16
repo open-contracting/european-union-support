@@ -560,7 +560,7 @@ def lint(filename):
         # Update and check SDK URLs.
         if field["sdk"]:
             # Change this value to the new SDK version.
-            field["sdk"] = sdk_regex.sub("/1.0.0/", field["sdk"])
+            field["sdk"] = sdk_regex.sub("/1.1.0/", field["sdk"])
 
             parts = urlsplit(field["sdk"])
             fragment = parts.fragment
