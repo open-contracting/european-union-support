@@ -707,9 +707,9 @@
     TED guidance:
     - '[Reference a previous publication](../../operations/#reference-a-previous-publication)'
     eForms guidance: (UNREVIEWED) [Reference a previous publication](../../operations/#reference-a-previous-publication) \[https://github.com/open-contracting/european-union-support/issues/54\]
-    eForms example: ''
+    eForms example: <cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID></cac:NoticeDocumentReference>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#previousPlanningSection
 -   id: BT-125(i)-Part
     parentNodeId: ND-PartPreviousPlanning
     name: Previous Planning Identifier
@@ -723,9 +723,9 @@
     Business groups:
         BG-125: Previous Planning
     eForms guidance: (UNREVIEWED) (REPEAT) [Reference a previous publication](../../operations/#reference-a-previous-publication) \[https://github.com/open-contracting/european-union-support/issues/54\]
-    eForms example: ''
+    eForms example: <cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID></cac:NoticeDocumentReference>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#previousPlanningSection
 -   id: BT-1251-Lot
     parentNodeId: ND-LotTenderingProcess
     name: Previous Planning Part Identifier
@@ -738,9 +738,9 @@
     Business groups:
         BG-125: Previous Planning
     eForms guidance: (UNREVIEWED) [Reference a previous publication](../../operations/#reference-a-previous-publication), and map to `.lotId`. \[https://github.com/open-contracting/european-union-support/issues/54\]
-    eForms example: ''
+    eForms example: <cac:NoticeDocumentReference><cbc:ReferencedDocumentInternalAddress>PAR-0001</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#previousPlanningSection
 -   id: BT-1251-Part
     parentNodeId: ND-PartTenderingProcess
     name: Previous Planning Part Identifier
@@ -753,9 +753,9 @@
     Business groups:
         BG-125: Previous Planning
     eForms guidance: (UNREVIEWED) (REPEAT) [Reference a previous publication](../../operations/#reference-a-previous-publication), and map to `.lotId`. \[https://github.com/open-contracting/european-union-support/issues/54\]
-    eForms example: ''
+    eForms example: <cac:NoticeDocumentReference><cbc:ReferencedDocumentInternalAddress>PAR-0001</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#previousPlanningSection
 -   id: BT-1252-Procedure
     parentNodeId: ND-DirectAward
     name: Direct Award Justification Previous Procedure Identifier
@@ -784,9 +784,9 @@
     - Set `.id` to 'D_PROC_OPEN' and `.description` to 'No tenders or no suitable tenders/requests to participate in response to open procedure'
     - Set `.id` to 'D_PROC_RESTRICTED' and `.description` to 'No tenders or no suitable tenders/requests to participate in response to restricted procedure'
     eForms guidance: (UNREVIEWED) [Reference a previous publication](../../operations/#reference-a-previous-publication). \[https://github.com/open-contracting/european-union-support/issues/77\]
-    eForms example: ''
+    eForms example: <cac:ProcessJustification><cbc:Description>123e4567-e89b-12d3-a456-426614174000</cbc:Description></cac:ProcessJustification>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#directAwardSection
 -   id: BT-127-notice
     parentNodeId: ND-Root
     name: Future Notice
@@ -1910,12 +1910,12 @@
         BG-7: Notice Result
         BG-320: Tender
     eForms guidance: |-
-        (UNREVIEWED) Add a new Cascade object to the award's `.cascade` array. Set its `.bid` to the identifier of the corresponding bid. For each related tenderer, add an Organization reference object to the cascade's `.suppliers` array. Copy its `.id` and `.name` from the corresponding Organization object.
+        Add a new Cascade object to the award's `.cascade` array. Set its `.bid` to the identifier of the corresponding bid. For each related tenderer, add an Organization reference object to the cascade's `.suppliers` array. Copy its `.id` and `.name` from the corresponding Organization object.
 
         The position of the cascade object in the `.cascade` array determines the rank of the bid. Example: `.cascade[0]` should return the highest ranking bid, `.cascade[1]` the second highest ranking bid, etc. \[https://github.com/open-contracting/european-union-support/issues/80\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms example: <efac:NoticeResult><cbc:RankCode>1</cbc:RankCode></efac:NoticeResult>
+    OCDS example: '{"awards":[{"cascade":[{"bid":"1","suppliers":[{"name":"BLabla Inc","id":"ORG-001"}]}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#lotTenderSection
 -   id: BT-18-Lot
     parentNodeId: ND-LotTenderingTerms
     name: Submission URL
@@ -6462,7 +6462,7 @@
         BG-704: Reward and Jury
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/F12_2014/PROCEDURE/*[matches(name(),'FOLLOW_UP_CONTRACTS')]
-    eForms guidance: (UNREVIEWED) This business term is mapped to the same objects as created for BT-44. Map to the lot''s `.designContest.prizes.details.description`.
+    eForms guidance: This business term is mapped to the same objects as created for BT-44. Map to the lot's `.designContest.prizes.details.description`.
     eForms example: <cac:Prize><cbc:Description languageID="ENG">The first prize winner will be awarded ...</cbc:Description></cac:Prize>
     OCDS example: '{"tender":{"lots":[{"designContest":{"prizes":{"details":[{"description":"The first prize winner will be awarded ..."}]}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#prizeSection
@@ -7381,10 +7381,10 @@
     TED guidance:
     - Map to `tender.secondStage.maximumCandidates`
     - Map to the lot's `.secondStage.maximumCandidates`
-    eForms guidance: (UNREVIEWED) Map to the lot's `.secondStage.maximumCandidates`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's `.secondStage.maximumCandidates`
+    eForms example: <cac:EconomicOperatorShortList><cbc:MaximumQuantity>10</cbc:MaximumQuantity></cac:EconomicOperatorShortList>
+    OCDS example: '{"tender":{"lots":[{"secondStage":{"maximumCandidates":10}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#maxCandidatesSection
 -   id: BT-510(a)-Organization-Company
     parentNodeId: ND-Company
     name: Street
@@ -8647,7 +8647,7 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: (UNREVIEWED) These values are mapped to the same objects as created for BT-541. Map the code according to the \[award criterion fixed mapping table\], and map it to the lot's award criterion number's `.fixed`.
+    eForms guidance: These values are mapped to the same objects as created for BT-541. Map the code according to the \[award criterion fixed mapping table\], and map it to the lot's award criterion number's `.fixed`.
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-fixed">fix-tot</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"fixed":"total"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#awardCriteriaSection
@@ -9151,9 +9151,9 @@
     Business groups:
         BG-703: Organisation
     eForms guidance: (UNREVIEWED) Discard. There's an open issue ([#883](https://github.com/open-contracting/standard/issues/883)) to distinguish natural persons from organizations.
-    eForms example: ''
+    eForms example: <efac:Organization><efbc:NaturalPersonIndicator>false</efbc:NaturalPersonIndicator></efac:Organization>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-634-Lot
     parentNodeId: ND-LotTenderingProcessExtension
     name: Procurement Relaunch
@@ -9289,7 +9289,7 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/SUBCONTRACTING/INDICATE_ANY_SHARE
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/SUBCONTRACTING/IDENTIFY_SUBCONTRACT
-    eForms guidance: (UNREVIEWED) Add to the lot's `.submissionTerms.subcontractingClauses` array.
+    eForms guidance: Add to the lot's `.submissionTerms.subcontractingClauses` array.
     eForms example: <efac:TenderSubcontractingRequirements><efbc:TenderSubcontractingRequirementsCode listName="subcontracting-indication">subc-oblig</efbc:TenderSubcontractingRequirementsCode></efac:TenderSubcontractingRequirements>
     OCDS example: '{"tender":{"lots":[{"subcontracting":{"subcontractingClauses":"subc-oblig"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#subcontractingObligationSection
@@ -9341,7 +9341,7 @@
     - TED_EXPORT/FORM_SECTION/F07_2014/LEFTI/QUALIFICATION/CONDITIONS
     TED guidance:
     - Add to the `tender.otherRequirements.qualificationSystemConditions` array
-    eForms guidance: (UNREVIEWED) Add an `SelectionCriterion` object to the `tender.exclusionGrounds` array and map to its `.type`.
+    eForms guidance: Add an `SelectionCriterion` object to the `tender.exclusionGrounds` array and map to its `.type`.
     eForms example: <cac:SpecificTendererRequirement><cbc:TendererRequirementTypeCode listName="exclusion-ground">CRITERION.EXCLUSION.NATIONAL.OTHER</cbc:TendererRequirementTypeCode></cac:SpecificTendererRequirement>
     OCDS example: '{"tender":{"exclusionGrounds":[{"type":"CRITERION.EXCLUSION.NATIONAL.OTHER"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#reservedParticipationSection
@@ -9356,7 +9356,7 @@
     Description: The brief description of criteria regarding the personal situation of tenderers that may lead to their exclusion. This must include a list of all such criteria and indicate required information (e.g. self-declaration, documentation). This can also include specific national exclusion grounds.
     Business groups:
         BG-701: Exclusion Grounds
-    eForms guidance: (UNREVIEWED) Map to the relevant `tender.exclusionGrounds` `SelectionCriterion` object's `.description`.
+    eForms guidance: Map to the relevant `tender.exclusionGrounds` `SelectionCriterion` object's `.description`.
     eForms example: <cac:SpecificTendererRequirement><cbc:Description languageID="ENG">Applicants not satisfying ...</cbc:Description></cac:SpecificTendererRequirement>
     OCDS example: '{"tender":{"exclusionGrounds":[{"description":"Applicants not satisfying..."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#reservedParticipationSection
@@ -10323,9 +10323,9 @@
     Business groups:
         BG-703: Organisation
         BG-3: Buyer
-    eForms guidance: (UNREVIEWED) In the party object that has 'buyer' in its `.roles` array, add 'contractingEntity' to its `.roles` array \[https://github.com/open-contracting/european-union-support/issues/65\]
-    eForms example: <cac:ContractingPartyType><cbc:PartyTypeCode listName="buyer-contracting-type">cont-aut</cbc:PartyTypeCode></cac:ContractingPartyType>
-    OCDS example: ''
+    eForms guidance: Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Map to the classification's `.id`, set its `.description` to the code according to the mapping in \[buyer contracting types mapping table\], and set its `.scheme` to 'TED_BUYER_TYPE'. \[https://github.com/open-contracting/european-union-support/issues/65\]
+    eForms example: <cac:ContractingPartyType><cbc:PartyTypeCode listName="buyer-contracting-type">cont-ent</cbc:PartyTypeCode></cac:ContractingPartyType>
+    OCDS example: '{"parties":[{"id":"ORG-0001","details":{"classifications":[{"scheme":"TED_BUYER_TYPE","id":"cont-ent","description":"Contracting Entity"}]}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#_buyer_information_2
 -   id: BT-743-Lot
     parentNodeId: ND-LotTenderingTerms
@@ -10647,9 +10647,9 @@
     - TED_EXPORT/FORM_SECTION/F21_2014/PROCEDURE/TERMINATION_PIN
     TED guidance:
     - Set `tender.status` to 'complete'
-    eForms guidance: (UNREVIEWED) Set `tender.status` to 'complete'
+    eForms guidance: If 'true' set `tender.status` to 'complete' otherwise discard.
     eForms example: <cbc:TerminatedIndicator>true</cbc:TerminatedIndicator>
-    OCDS example: ''
+    OCDS example: '{"tender":{"status":"complete"}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#competitionTerminationSection
 -   id: BT-757-notice
     parentNodeId: ND-Root
@@ -10854,10 +10854,10 @@
     - TED_EXPORT/FORM_SECTION/F05_2014/OBJECT_CONTRACT/OBJECT_DESCR/ECATALOGUE_REQUIRED
     TED guidance:
     - Set the lot's `.submissionTerms.electronicCataloguePolicy` to 'required'.
-    eForms guidance: (UNREVIEWED) Set the lot's `.submissionTerms.electronicCataloguePolicy` according to [the allowed values](https://extensions.open-contracting.org/en/extensions/submissionTerms/master/codelists/).
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Set the lot's `.submissionTerms.electronicCataloguePolicy` according to [the allowed values](https://extensions.open-contracting.org/en/extensions/submissionTerms/master/codelists/).
+    eForms example: <cac:ContractExecutionRequirement><cbc:ExecutionRequirementCode listName="ecatalog-submission">allowed</cbc:ExecutionRequirementCode></cac:ContractExecutionRequirement>
+    OCDS example: '{"tender":{"lots":[{"submissionTerms":{"electronicCateloguePolicy":"allowed"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#eCatalogueSubmissionSection
 -   id: BT-765-Lot
     parentNodeId: ND-LotTenderingProcess
     name: Framework Agreement
@@ -10882,10 +10882,10 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/PROCEDURE/FRAMEWORK
     TED guidance:
     - Set `tender.techniques.hasFrameworkAgreement` to `true`
-    eForms guidance: (UNREVIEWED) If different from 'none', set the lot's `.techniques.hasFrameworkAgreement` to `true`. Map the code according to the \[organisation role mapping table\] to the lot's `.techniques.method`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: If different from 'none', set the lot's `.techniques.hasFrameworkAgreement` to `true`. Map the code according to the \[framework agreement method mapping table\] to the lot's `.techniques.method`. Otherwise discard.
+    eForms example: <cac:ContractingSystem><cbc:ContractingSystemTypeCode listName="framework-agreement">fa-wo-rc</cbc:ContractingSystemTypeCode></cac:ContractingSystem>
+    OCDS example: '{"tender":{"lots":[{"techniques":{"hasFrameworkAgreement":true,"method":"withoutReopeningCompetition"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#frameworkAgreementSection
 -   id: BT-765-Part
     parentNodeId: ND-PartTenderingProcess
     name: Framework Agreement
@@ -10900,10 +10900,10 @@
         BG-706: Techniques
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/*[matches(name(),'FRAMEWORK_AGREEMENT')]
-    eForms guidance: (UNREVIEWED) (REPEAT) If different from 'none', set the lot's `.techniques.hasFrameworkAgreement` to `true`. Map the code according to the \[organisation role mapping table\] to the lot's `.techniques.method`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: If different from 'none', set `tender.techniques.hasFrameworkAgreement` to `true`. Map the code according to the \[framework agreement method mapping table\] to `tender.techniques.method`. Otherwise discard.
+    eForms example: <cac:ContractingSystem><cbc:ContractingSystemTypeCode listName="framework-agreement">fa-wo-rc</cbc:ContractingSystemTypeCode></cac:ContractingSystem>
+    OCDS example: '{"tender":{"techniques":{"hasFrameworkAgreement":true,"method":"withoutReopeningCompetition"}}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#frameworkAgreementSection
 -   id: BT-766-Lot
     parentNodeId: ND-LotTenderingProcess
     name: Dynamic Purchasing System
@@ -10925,10 +10925,10 @@
     TED guidance:
     - Set `tender.techniques.dynamicPurchasingSystem.type` to 'open'
     - Set `tender.techniques.hasDynamicPurchasingSystem` to `true`
-    eForms guidance: (UNREVIEWED) If different from 'none', set the lot's `.techniques.hasDynamicPurchasingSystem` to `true`. Map the code according to the \[DPS type mapping table\] to the lot's `.techniques.dynamicPurchasingSystem.type`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: If different from 'none', set the lot's `.techniques.hasDynamicPurchasingSystem` to `true`. Map the code according to the \[DPS type mapping table\] to the lot's `.techniques.dynamicPurchasingSystem.type`. Otherwise discard.
+    eForms example: <cac:ContractingSystem><cbc:ContractingSystemTypeCode listName="dps-usage">dps-nlist</cbc:ContractingSystemTypeCode></cac:ContractingSystem>
+    OCDS example: '{"tender":{"lots":[{"techniques":{"hasDynamicPurchasingSystem":true,"dynamidPurchasingSystem":{"type":"closed"}}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#DPSSection
 -   id: BT-766-Part
     parentNodeId: ND-PartTenderingProcess
     name: Dynamic Purchasing System
@@ -10941,10 +10941,10 @@
     Description: Whether a dynamic purchasing system is involved and, in case of central purchasing bodies, whether it can be used by buyers not listed in this notice.
     Business groups:
         BG-706: Techniques
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: If different from 'none', set `tender.techniques.hasDynamicPurchasingSystem` to `true`. Map the code according to the \[DPS type mapping table\] to `tender.techniques.dynamicPurchasingSystem.type`. Otherwise discard.
+    eForms example: <cac:ContractingSystem><cbc:ContractingSystemTypeCode listName="dps-usage">dps-nlist</cbc:ContractingSystemTypeCode></cac:ContractingSystem>
+    OCDS example: '{"tender":{"techniques":{"hasDynamicPurchasingSystem":true,"dynamidPurchasingSystem":{"type":"closed"}}}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#DPSSection
 -   id: BT-767-Lot
     parentNodeId: ND-AuctionTerms
     name: Electronic Auction
@@ -10965,10 +10965,10 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/AWARD_CRITERIA_CONTRACT_NOTICE_INFORMATION/IS_ELECTRONIC_AUCTION_USABLE/*[matches(name(),'USE_ELECTRONIC_AUCTION')]
     TED guidance:
     - Set `tender.techniques.hasElectronicAuction` to `true`
-    eForms guidance: (UNREVIEWED) Set the lot's `.techniques.hasElectronicAuction` to `true`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: If 'true' set the lot's `.techniques.hasElectronicAuction` to `true`, otherwise discard.
+    eForms example: <cac:AuctionTerms><cbc:AuctionConstraintIndicator>true</cbc:AuctionConstraintIndicator></cac:AuctionTerms>
+    OCDS example: '{"tender":{"lots":[{"techniques":{"hasElectronicAuction":true}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#auctionTermsSection
 -   id: BT-768-Contract
     parentNodeId: ND-SettledContract
     name: Contract Framework Agreement
@@ -10981,10 +10981,10 @@
     Business groups:
         BG-7: Notice Result
         BG-310: Contract
-    eForms guidance: (UNREVIEWED) Discard. The contract is awarded within a framework agreement if the related lot's or tender's `.techniques.hasFrameworkAgreement` is `true`.
-    eForms example: ''
+    eForms guidance: Discard. The contract is awarded within a framework agreement if the related lot's or tender's `.techniques.hasFrameworkAgreement` is `true`.
+    eForms example: <efac:SettledContract><efbc:ContractFrameworkIndicator>true</efbc:ContractFrameworkIndicator></efac:SettledContract>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#settledContractSection
 -   id: BT-769-Lot
     parentNodeId: ND-LotTenderingTerms
     name: Multiple Tenders
@@ -10997,10 +10997,10 @@
     Description: Tenderers may submit more than one tender (for a given lot).
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: (UNREVIEWED) Set the lot's `.submissionTerms.multipleTendersPolicy` to 'allowed'. \[https://github.com/open-contracting/european-union-support/issues/55\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Set the lot's `.submissionTerms.multipleTendersPolicy` according to [the allowed values](https://extensions.open-contracting.org/en/extensions/submissionTerms/master/codelists/).
+    eForms example: <cbc:MultipleTendersCode listName="permission">allowed</cbc:MultipleTendersCode>
+    OCDS example: '{"tender":{"lots":[{"submissionTerms":{"multipleTendersPolicy":"allowed"}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#multipleTendersSection
 -   id: BT-77-Lot
     parentNodeId: ND-PaymentTerms
     name: Terms Financial
@@ -11017,10 +11017,10 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/LEFTI_CONTRACT_DEFENCE/CONTRACT_RELATING_CONDITIONS/MAIN_FINANCING_CONDITIONS
     TED guidance:
     - Map to `tender.contractTerms.financialTerms`
-    eForms guidance: (UNREVIEWED) Map to the lot's `.contractTerms.financialTerms`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's `.contractTerms.financialTerms`
+    eForms example: <cac:PaymentTerms><cbc:Note languageID="ENG">Any payment ...</cbc:Note></cac:PaymentTerms>
+    OCDS example: '{"tender":{"lots":[{"contractTerms":{"financialTerms":"Any payment ..."}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#termsFinancialSection
 -   id: BT-771-Lot
     parentNodeId: ND-LateTendererInformation
     name: Late Tenderer Information
@@ -11033,9 +11033,9 @@
     Description: Whether tenderer-related information can be supplemented even after the submission deadline.
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: (UNREVIEWED) Map the [definition of the code](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/missing-info-submission) to the lot's `.submissionMethodDetails` \[https://github.com/open-contracting/european-union-support/issues/69\]
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: Map the [label of the code](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/missing-info-submission) to the lot's `.submissionMethodDetails`.
+    eForms example: <cac:SpecificTendererRequirement><cbc:TendererRequirementTypeCode listName="missing-info-submission">late-all</cbc:TendererRequirementTypeCode></cac:SpecificTendererRequirement>
+    OCDS example: '{"tender":{"lots":[{"submissionMethodDetails":"All missing tenderer-related documents can be submitted later."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tendererReqsSection
 -   id: BT-772-Lot
     parentNodeId: ND-LateTendererInformation
@@ -11048,9 +11048,9 @@
     Description: Description of the tenderer-related information that can be supplemented even after the submission deadline.
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: (UNREVIEWED) Map to the lot's `.submissionMethodDetails` \[https://github.com/open-contracting/european-union-support/issues/69\]
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: Map to the lot's `.submissionMethodDetails`. Append if other information is already mapped to this field.
+    eForms example: <cac:SpecificTendererRequirement><cbc:Description languageID="ENG">Economic operators who ...</cbc:Description></cac:SpecificTendererRequirement>
+    OCDS example: '{"tender":{"lots":[{"submissionMethodDetails":"Economic operators who ..."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tendererReqsSection
 -   id: BT-773-Tender
     parentNodeId: ND-SubcontractedContract
@@ -11073,10 +11073,10 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/AWARD_CONTRACT/AWARDED_CONTRACT/LIKELY_SUBCONTRACTED
     TED guidance:
     - Set the award's `.hasSubcontracting` to `true`
-    eForms guidance: (UNREVIEWED) Set the award's `.hasSubcontracting` to `true`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: If 'yes' set the award's `.hasSubcontracting` to `true`, if 'no' set the award's `.hasSubcontracting' to `false\`.
+    eForms example: <efac:SubcontractingTerm><efbc:TermCode listName="applicability">yes</efbc:TermCode></efac:SubcontractingTerm>
+    OCDS example: '{"awards":[{"hasSubcontracting":true}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#lotTenderSection
 -   id: BT-774-Lot
     parentNodeId: ND-LotProcurementScope
     name: Green Procurement
@@ -11090,9 +11090,9 @@
     Business groups:
         BG-713: Strategic Procurement
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="environmental-impact">emas-com</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#strategicProcurementSection
 -   id: BT-775-Lot
     parentNodeId: ND-LotProcurementScope
     name: Social Procurement
@@ -11108,7 +11108,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#strategicProcurementSection
 -   id: BT-776-Lot
     parentNodeId: ND-LotProcurementScope
     name: Innovative Procurement
@@ -11124,7 +11124,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#strategicProcurementSection
 -   id: BT-777-Lot
     parentNodeId: ND-StrategicProcurementType
     name: Strategic Procurement Description
@@ -11139,7 +11139,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#strategicProcurementSection
 -   id: BT-78-Lot
     parentNodeId: ND-LotTenderingTerms
     name: Security Clearance Deadline
@@ -11154,10 +11154,10 @@
         BG-705: Other Requirements
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/LEFTI_CONTRACT_DEFENCE/CONTRACT_RELATING_CONDITIONS/CLEARING_LAST_DATE
-    eForms guidance: (UNREVIEWED) Add a new Milestone object to the `tender.milestones` array. Set its `id`, set its `.type` to 'securityClearanceDeadline' and map to its `.dueDate`.
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Add a new Milestone object to the lot's `.milestones` array. Set its `id`, set its `.type` to 'securityClearanceDeadline', convert value to dateTime format and map to its `.dueDate`.
+    eForms example: <cbc:LatestSecurityClearanceDate>2019-11-15+01:00</cbc:LatestSecurityClearanceDate>
+    OCDS example: '{"tender":{"lots":[{"milestones":[{"id":"001","type":"securityClearanceDeadline","dueDate":"2019-11-15T00:00:00+01:00"}]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#clearanceDeadlineSection
 -   id: BT-79-Lot
     parentNodeId: ND-LotTenderingTerms
     name: Performing Staff Qualification
@@ -11182,10 +11182,10 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/LEFTI/PERFORMANCE_STAFF_QUALIFICATION
     TED guidance:
     - Set `tender.otherRequirements.requiresStaffNamesAndQualifications` to `true`
-    eForms guidance: (UNREVIEWED) If equal to "par-requ" or "t-requ", set the lot's `.otherRequirements.requiresStaffNamesAndQualifications` to `true`. If equal to "not-requ", set it to `false`. Otherwise, discard. \[https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/requirement-stage\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: If equal to "par-requ" or "t-requ", set the lot's `.otherRequirements.requiresStaffNamesAndQualifications` to `true`. If equal to "not-requ", set it to `false`. Otherwise, discard. \[https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/requirement-stage\]
+    eForms example: <cbc:RequiredCurriculaCode listName="requirement-stage">t-requ</cbc:RequiredCurriculaCode>
+    OCDS example: '{"tender":{"lots":[{"otherRequirements":{"requiresStaffNamesAndQualifications":true}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#staffQualificationSection
 -   id: BT-801-Lot
     parentNodeId: ND-LotTenderingTerms
     name: Non Disclosure Agreement
@@ -11253,10 +11253,10 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/PROCEDURE/MAIN_FEATURES_AWARD
     TED guidance:
     - Map to `tender.awardCriteriaDetails`
-    eForms guidance: (UNREVIEWED) Map to `tender.procurementMethodDetails`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to `tender.procurementMethodDetails`
+    eForms example: <cac:TenderingProcess><cbc:Description languageID="ENG">A two stage procedure ...</cbc:Description></cac:TenderingProcess>
+    OCDS example: '{"tender":{"procurementMethodDetails":"A two stage procedure..."}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#procedureFeaturesSection
 -   id: BT-92-Lot
     parentNodeId: ND-PostAwarProcess
     name: Electronic Ordering
@@ -11279,10 +11279,10 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/COMPLEMENTARY_INFO/EORDERING
     TED guidance:
     - Set `tender.contractTerms.hasElectronicOrdering` to `true`
-    eForms guidance: (UNREVIEWED) Set the lot's `.contractTerms.hasElectronicOrdering` to `true`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's `.contractTerms.hasElectronicOrdering`
+    eForms example: <cac:PostAwardProcess><cbc:ElectronicOrderUsageIndicator>true</cbc:ElectronicOrderUsageIndicator></cac:PostAwardProcess>
+    OCDS example: '{"tender":{"lots":[{"contractTerms":{"hasElectronicOrdering":true}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#postAwardSection
 -   id: BT-93-Lot
     parentNodeId: ND-PostAwarProcess
     name: Electronic Payment
@@ -11305,10 +11305,10 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/COMPLEMENTARY_INFO/EPAYMENT
     TED guidance:
     - Set `tender.contractTerms.hasElectronicPayment` to `true`
-    eForms guidance: (UNREVIEWED) Set the lot's `.contractTerms.hasElectronicPayment` to `true`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's `.contractTerms.hasElectronicPayment`
+    eForms example: <cac:PostAwardProcess><cbc:ElectronicPaymentUsageIndicator>true</cbc:ElectronicPaymentUsageIndicator></cac:PostAwardProcess>
+    OCDS example: '{"tender":{"lots":[{"contractTerms":{"hasElectronicPayment":true}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#postAwardSection
 -   id: BT-94-Lot
     parentNodeId: ND-LotTenderingTerms
     name: Recurrence
@@ -11325,10 +11325,10 @@
     - TED_EXPORT/FORM_SECTION/F05_2014/COMPLEMENTARY_INFO/*[matches(name(),'RECURRENT_PROCUREMENT')]
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/COMPLEMENTARY_INFORMATION_CONTRACT_NOTICE/*[matches(name(),'RECURRENT_PROCUREMENT')]
     - TED_EXPORT/FORM_SECTION/F24_2014/COMPLEMENTARY_INFO/*[matches(name(),'RECURRENT_PROCUREMENT')]
-    eForms guidance: (UNREVIEWED) (AUTO) Set `tender.hasRecurrence` to `true`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to lot's `.hasRecurrence`
+    eForms example: <cbc:RecurringProcurementIndicator>true</cbc:RecurringProcurementIndicator>
+    OCDS example: '{"tender":{"lots":[{"hasRecurrence":true}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#recurrenceSection
 -   id: BT-95-Lot
     parentNodeId: ND-LotTenderingTerms
     name: Recurrence Description
@@ -11347,10 +11347,10 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/COMPLEMENTARY_INFO/ESTIMATED_TIMING
     TED guidance:
     - Map to `tender.recurrence.description`
-    eForms guidance: (UNREVIEWED) (AUTO) Map to `tender.recurrence.description`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to lot's `.recurrence.description`
+    eForms example: <cbc:RecurringProcurementDescription languageID="ENG">The current procurement ...</cbc:RecurringProcurementDescription>
+    OCDS example: '{"tender":{"lots":[{"recurrence":{"description":"The current procurement..."}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#recurrenceSection
 -   id: BT-97-Lot
     parentNodeId: ND-LotTenderingTerms
     name: Submission Language
@@ -11375,10 +11375,10 @@
     - TED_EXPORT/FORM_SECTION/F21_2014/PROCEDURE/LANGUAGES
     - TED_EXPORT/FORM_SECTION/F22_2014/PROCEDURE/LANGUAGES
     - TED_EXPORT/FORM_SECTION/F24_2014/PROCEDURE/LANGUAGES
-    eForms guidance: (UNREVIEWED) Lowercase and add to the lot's `.submissionTerms.languages` array
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to ISO 639-1 in the [language authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/language) and add to the lot's `.submissionTerms.languages` array.
+    eForms example: <cac:Language><cbc:ID>FRA</cbc:ID></cac:Language>
+    OCDS example: '{"tender":{"lots":[{"submissionTerms":{"languages":["fr"]}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingLanguageSection
 -   id: BT-98-Lot
     parentNodeId: ND-LotTenderingTerms
     name: Tender Validity Deadline
@@ -11396,10 +11396,10 @@
     TED guidance:
     - Map to `tender.submissionTerms.bidValidityPeriod.endDate`
     - Multiply by 30, and map to `tender.submissionTerms.bidValidityPeriod.durationInDays`
-    eForms guidance: (UNREVIEWED) Map to the lot's `.submissionTerms.bidValidityPeriod.endDate`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: (UNREVIEWED) If @unitCode="DAY" map to the lot's `.submissionTerms.bidValidityPeriod.durationInDays`. If @unitCode="WEEK" multiply by 7 and map to the lot's `.submissionTerms.bidValidityPeriod.durationInDays`. If @unitCode="MONTH" multiply by 30 and map to the lot's `.submissionTerms.bidValidityPeriod.durationInDays`. If @unitCode="YEAR" multiply by 365 and map to the lot's `.submissionTerms.bidValidityPeriod.durationInDays`.
+    eForms example: <cac:TenderValidityPeriod><cbc:DurationMeasure unitCode="MONTH">4</cbc:DurationMeasure></cac:TenderValidityPeriod>
+    OCDS example: '{"tender":{"lots":[{"submissionTerms":{"bidValidityPeriod":{"durationInDays":120}}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderValiditySection
 -   id: BT-99-Lot
     parentNodeId: ND-LotReviewTerms
     name: Review Deadline Description
@@ -11430,10 +11430,10 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/COMPLEMENTARY_INFO/REVIEW_PROCEDURE
     TED guidance:
     - Map to `tender.reviewDetails`
-    eForms guidance: (UNREVIEWED) Map to the lot's `.reviewDetails`
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to the lot's `.reviewDetails`
+    eForms example: <cac:PresentationPeriod><cbc:Description languageID="ENG">Any review request shall be submitted ...</cbc:Description></cac:PresentationPeriod>
+    OCDS example: '{"tender":{"lots":[{"reviewDetails":"Any review request shall be submitted ..."}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#appealTermsSection
 -   id: OPA-118-NoticeResult-Currency
     parentNodeId: ND-NoticeResult
     name: Currency of the notice framework value
