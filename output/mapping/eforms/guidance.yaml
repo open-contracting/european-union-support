@@ -8954,7 +8954,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#settledContractSection
 -   id: BT-6140-Lot
     parentNodeId: ND-Funding
     name: EU Funds Details
@@ -9197,9 +9197,9 @@
         BG-612: Buyer Review Summary
         BG-613: Buyer Review Requests
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:AppealRequestsStatistics><efbc:StatisticsNumeric>2</efbc:StatisticsNumeric></efac:AppealRequestsStatistics>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#_lot_result
 -   id: BT-636-LotResult
     parentNodeId: ND-LotResult
     name: Buyer Review Requests Irregularity Type
@@ -9214,9 +9214,9 @@
         BG-612: Buyer Review Summary
         BG-613: Buyer Review Requests
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:AppealRequestsStatistics><efbc:StatisticsCode listName="irregularity-type">unj-lim-subc</efbc:StatisticsCode></efac:AppealRequestsStatistics>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#_lot_result
 -   id: BT-64-Lot
     parentNodeId: ND-SubcontractTerms
     name: Subcontracting Obligation Minimum
@@ -9642,7 +9642,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#_lot_result
 -   id: BT-712(b)-LotResult
     parentNodeId: ND-BuyerReviewComplainants
     name: Buyer Review Complainants (Number)
@@ -9657,7 +9657,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#_lot_result
 -   id: BT-717-Lot
     parentNodeId: ND-StrategicProcurementLot
     name: Clean Vehicles Directive
@@ -9668,9 +9668,9 @@
     mandatory: false
     codeList: cvd-scope
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:StrategicProcurement><efbc:ApplicableLegalBasis listName="cvd-scope">true</efbc:ApplicableLegalBasis></efac:StrategicProcurement>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#CVDDirectiveLotSection
 -   id: BT-718-notice
     parentNodeId: ND-Change
     name: Change Procurement Documents
@@ -9683,9 +9683,9 @@
     Business groups:
         BG-9: Change
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:Change><efbc:ProcurementDocumentsChangeIndicator>true</efbc:ProcurementDocumentsChangeIndicator></efac:Change>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#changeSection
 -   id: BT-719-notice
     parentNodeId: ND-Change
     name: Change Procurement Documents Date
@@ -9699,9 +9699,9 @@
     Business groups:
         BG-9: Change
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:Change><efbc:ProcurementDocumentsChangeDate>2019-10-24+01:00</efbc:ProcurementDocumentsChangeDate></efac:Change>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#changeSection
 -   id: BT-720-Tender
     parentNodeId: ND-LotTender
     name: Tender Value
@@ -9753,9 +9753,9 @@
     TED guidance:
     - Map to the award's `.title`
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:SettledContract><cbc:Title languageID="ENG">My contract title</cbc:Title></efac:SettledContract>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#settledContractSection
 -   id: BT-722-Contract
     parentNodeId: ND-SettledContract
     name: Contract EU Funds Programme
@@ -9771,9 +9771,9 @@
         BG-310: Contract
         BG-611: Contract EU Funds
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:Funding><cbc:FundingProgramCode listName="eu-programme">ABC123</cbc:FundingProgramCode></efac:Funding>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#settledContractSection
 -   id: BT-7220-Lot
     parentNodeId: ND-NonUBLTenderingTerms
     name: EU Funds Programme
@@ -9784,9 +9784,9 @@
     mandatory: false
     codeList: eu-programme
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:Funding><cbc:FundingProgramCode listName="eu-proramme">ERDF_2021</cbc:FundingProgramCode></efac:Funding>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#EUFundsSection
 -   id: BT-723-LotResult
     parentNodeId: ND-ProcurementDetailsLotResult
     name: Vehicle Category
@@ -9797,9 +9797,9 @@
     mandatory: false
     codeList: vehicle-category
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:ProcurementDetails><efbc:AssetCategoryCode listName="vehicle-category">n2-n3</efbc:AssetCategoryCode></efac:ProcurementDetails>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#_lot_result
 -   id: BT-726-Lot
     parentNodeId: ND-LotProcurementScope
     name: Suitable For SMEs
@@ -9812,9 +9812,9 @@
     Business groups:
         BG-710: Additional Information
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <cbc:SMESuitableIndicator>true</cbc:SMESuitableIndicator>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#suitableSMESection
 -   id: BT-726-LotsGroup
     parentNodeId: ND-LotsGroupProcurementScope
     name: Suitable For SMEs
@@ -9827,9 +9827,9 @@
     Business groups:
         BG-710: Additional Information
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <cbc:SMESuitableIndicator>true</cbc:SMESuitableIndicator>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#suitableSMESection
 -   id: BT-726-Part
     parentNodeId: ND-PartProcurementScope
     name: Suitable For SMEs
@@ -9842,9 +9842,9 @@
     Business groups:
         BG-710: Additional Information
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <cbc:SMESuitableIndicator>true</cbc:SMESuitableIndicator>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#suitableSMESection
 -   id: BT-727-Lot
     parentNodeId: ND-LotPlacePerformance
     name: Place Performance Services Other
@@ -10080,9 +10080,9 @@
     mandatory: false
     codeList: cvd-contract-type
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:StrategicProcurementInformation><efbc:ProcurementCategoryCode listName="cvd-contract-type">oth-serv-contract</efbc:ServiceContractType></efac:StrategicProcurementInformation>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#CVDDirectiveLotSection
 -   id: BT-735-LotResult
     parentNodeId: ND-StrategicProcurementInformationLotResult
     name: CVD Contract Type
@@ -10093,9 +10093,9 @@
     mandatory: false
     codeList: cvd-contract-type
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:StrategicProcurementInformation><efbc:ProcurementCategoryCode listName="cvd-contract-type">oth-serv-contract</efbc:ServiceContractType></efac:StrategicProcurementInformation>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#CVDDirectiveLotSection
 -   id: BT-736-Lot
     parentNodeId: ND-LotTenderingTerms
     name: Reserved Execution
@@ -10398,9 +10398,9 @@
         BG-703: Organisation
         BG-4: Winner
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:Organization><efbc:ListedOnRegulatedMarketIndicator>false</efbc:ListedOnRegulatedMarketIndicator></efac:Organization>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-747-Lot
     parentNodeId: ND-NonUBLTenderingTerms
     name: Selection Criteria Type
@@ -10580,7 +10580,7 @@
         BG-702: Selection Criteria
         BG-72: Selection Criteria Second Stage Invite Number
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:CriterionParameter><efbc:ParameterCode listName="number-weight">per-exa</efbc:ParameterCode></efac:CriterionParameter>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#selectionCriteriaSection
 -   id: BT-7532-Lot
@@ -10597,7 +10597,7 @@
         BG-702: Selection Criteria
         BG-72: Selection Criteria Second Stage Invite Number
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:CriterionParameter><efbc:ParameterCode listName="number-threshold">min-score</efbc:ParameterCode></efac:CriterionParameter>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#selectionCriteriaSection
 -   id: BT-754-Lot
@@ -10613,9 +10613,9 @@
     Business groups:
         BG-713: Strategic Procurement
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="accessibility">n-inc-just</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#accessibilitySection
 -   id: BT-755-Lot
     parentNodeId: ND-AccessibilityJustification
     name: Accessibility Justification
@@ -10628,9 +10628,9 @@
     Business groups:
         BG-713: Strategic Procurement
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementType languageID="ENG">Accessibility criteria are not included ...</cbc:ProcurementType></cac:ProcurementAdditionalType>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#accessibilitySection
 -   id: BT-756-Procedure
     parentNodeId: ND-ProcedureTenderingProcess
     name: PIN Competition Termination
@@ -11106,7 +11106,7 @@
     Business groups:
         BG-713: Strategic Procurement
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="social-objective">et-eq</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#strategicProcurementSection
 -   id: BT-776-Lot
@@ -11122,7 +11122,7 @@
     Business groups:
         BG-713: Strategic Procurement
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="innovative-acquisition">proc-innov</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#strategicProcurementSection
 -   id: BT-777-Lot
@@ -11137,7 +11137,7 @@
     Business groups:
         BG-713: Strategic Procurement
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementType languageID="ENG">This is a strategic procurement involving the innovative use of ...</cbc:ProcurementType></cac:ProcurementAdditionalType>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#strategicProcurementSection
 -   id: BT-78-Lot
@@ -11196,9 +11196,9 @@
     mandatory: false
     codeList: nda
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <cac:ContractExecutionRequirement><cbc:ExecutionRequirementCode listName="nda">true</cbc:ExecutionRequirementCode></cac:ContractExecutionRequirement>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#nonDisclosureAgreementSection
 -   id: BT-802-Lot
     parentNodeId: ND-NDA
     name: Non Disclosure Agreement Description
@@ -11208,9 +11208,9 @@
     repeatable: false
     mandatory: false
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <cac:ContractExecutionRequirement><cbc:Description languageID="ENG">A Non Disclosure Agreement will need to ...</cbc:Description></cac:ContractExecutionRequirement>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#nonDisclosureAgreementSection
 -   id: BT-803(d)-notice
     parentNodeId: ND-RootExtension
     name: Notice Dispatch Date eSender (date)
@@ -11220,9 +11220,9 @@
     repeatable: false
     mandatory: false
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efbc:TransmissionDate>2022-11-17+01:00</efbc:TransmissionDate>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#dispatchDateEsender
 -   id: BT-803(t)-notice
     parentNodeId: ND-RootExtension
     name: Notice Dispatch Date eSender (time)
@@ -11232,9 +11232,9 @@
     repeatable: false
     mandatory: true
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efbc:TransmissionTime>08:30:03+01:00</efbc:TransmissionTime>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#dispatchDateEsender
 -   id: BT-88-Procedure
     parentNodeId: ND-ProcedureTenderingProcess
     name: Procedure Features
@@ -11489,9 +11489,9 @@
     mandatory: false
     pattern: ^[1-9](\d{0,7})-(19|20)\d\d$
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:Publication><efbc:NoticePublicationID schemeName="ojs-notice-id">12345678-2023</efbc:NoticePublicationID></efac:Publication>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#pubInfoSection
 -   id: OPP-011-notice
     parentNodeId: ND-RootExtension
     name: OJEU Identifier
@@ -11502,9 +11502,9 @@
     mandatory: false
     pattern: ^[1-9]\d{0,2}/(19|20)\d\d$
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:Publication><efbc:GazetteID schemeName="ojs-id">123/2023</efbc:GazetteID></efac:Publication>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#pubInfoSection
 -   id: OPP-012-notice
     parentNodeId: ND-RootExtension
     name: OJEU Publication Date
@@ -11515,9 +11515,9 @@
     mandatory: false
     pattern: ^(?:(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:(?:0[13578]|1[02]))-31|(?:(?:0[13-9]|1[0-2])-(?:29|30))))|(?:(?:(?:(?:(?:1[6-9]|[2-9]\d)(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))-02-29))|(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:0[1-9])|(?:1[0-2]))-(?:0[1-9]|1\d|2[0-8])))(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:Publication><efbc:PublicationDate>2023-03-14+01:00</efbc:PublicationDate></efac:Publication>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#pubInfoSection
 -   id: OPP-020-Contract
     parentNodeId: ND-ExtendedDurationJustification
     name: Assets related contract extension indicator
@@ -11529,7 +11529,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#settledContractSection
 -   id: OPP-021-Contract
     parentNodeId: ND-Asset
     name: Used asset
@@ -11541,7 +11541,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#settledContractSection
 -   id: OPP-022-Contract
     parentNodeId: ND-Asset
     name: Significance (%)
@@ -11553,7 +11553,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#settledContractSection
 -   id: OPP-023-Contract
     parentNodeId: ND-Asset
     name: Predominance (%)
@@ -11565,7 +11565,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#settledContractSection
 -   id: OPP-030-Tender
     parentNodeId: ND-LotTender
     name: Contract conditions Code
@@ -11578,7 +11578,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#lotTenderSection
 -   id: OPP-031-Tender
     parentNodeId: ND-OtherContractExecutionConditions
     name: Contract Conditions Description (other than revenue allocation)
@@ -11590,7 +11590,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#lotTenderSection
 -   id: OPP-032-Tender
     parentNodeId: ND-RevenueAllocation
     name: Revenues Allocation
@@ -11602,7 +11602,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#lotTenderSection
 -   id: OPP-033-Tender
     parentNodeId: ND-LotTender
     name: Penalties and Rewards Code
@@ -11615,7 +11615,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#lotTenderSection
 -   id: OPP-034-Tender
     parentNodeId: ND-RewardsPenalties
     name: Penalties and Rewards Description
@@ -11627,7 +11627,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#lotTenderSection
 -   id: OPP-040-Procedure
     parentNodeId: ND-ProcedureProcurementScope
     name: Main Nature - Sub Type
@@ -11687,9 +11687,9 @@
     mandatory: true
     codeList: notice-subtype
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:NoticeSubType><cbc:SubTypeCode listName="notice-subtype">16</cbc:SubTypeCode></efac:NoticeSubType>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#subtypeSection
 -   id: OPP-080-Tender
     parentNodeId: ND-LotTender
     name: Kilometers Public Transport
@@ -11701,7 +11701,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#lotTenderSection
 -   id: OPP-090-Procedure
     parentNodeId: ND-ProcedureTenderingProcess
     name: Previous Notice
@@ -11711,9 +11711,9 @@
     repeatable: true
     mandatory: false
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID></cac:NoticeDocumentReference>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#previousNoticeSection
 -   id: OPT-001-notice
     parentNodeId: ND-Root
     name: UBL version ID (UBL)
@@ -11826,9 +11826,9 @@
     mandatory: false
     codeList: buyer-categories
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <cac:SubsequentProcessTenderRequirement><cbc:Name>buyer-categories</cbc:Name></cac:SubsequentProcessTenderRequirement>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#frameworkAgreementSection
 -   id: OPT-090-LotsGroup
     parentNodeId: ND-LotsGroupBuyerCategories
     name: Buyer Categories
@@ -11839,9 +11839,9 @@
     mandatory: false
     codeList: buyer-categories
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <cac:SubsequentProcessTenderRequirement><cbc:Name>buyer-categories</cbc:Name></cac:SubsequentProcessTenderRequirement>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#frameworkAgreementSection
 -   id: OPT-100-Contract
     parentNodeId: ND-SettledContract
     name: Framework Notice Identifier
@@ -12052,9 +12052,9 @@
     mandatory: false
     codeList: vehicles
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:StrategicProcurementStatistics><efbc:StatisticsCode listName="vehicles">vehicles-zero-emission</efbc:StatisticsCode></efac:StrategicProcurementStatistics>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#_lot_result
 -   id: OPT-156-LotResult
     parentNodeId: ND-ProcurementStatistics
     name: Vehicle Numeric
@@ -12064,9 +12064,9 @@
     repeatable: false
     mandatory: false
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:StrategicProcurementStatistics><efbc:StatisticsNumeric>0</efbc:StatisticsNumeric></efac:StrategicProcurementStatistics>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#_lot_result
 -   id: OPT-160-UBO
     parentNodeId: ND-UBO
     name: First Name
@@ -12088,9 +12088,9 @@
     repeatable: false
     mandatory: true
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:Tenderer><efbc:GroupLeadIndicator>true</efbc:GroupLeadIndicator></efac:Tenderer>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-200-Organization-Company
     parentNodeId: ND-Company
     name: Company Technical Identifier
@@ -12104,7 +12104,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: OPT-201-Organization-TouchPoint
     parentNodeId: ND-Touchpoint
     name: TouchPoint Technical Identifier
@@ -12118,7 +12118,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: OPT-202-UBO
     parentNodeId: ND-Organizations
     name: Beneficial Owner Technical Identifier
@@ -12146,7 +12146,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-300-Contract-Signatory
     parentNodeId: ND-SettledContract
     name: Signatory Identifier Reference
@@ -12161,7 +12161,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-300-Procedure-Buyer
     parentNodeId: ND-Root
     name: Buyer Technical Identifier Reference
@@ -12221,7 +12221,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Lot-DocProvider
     parentNodeId: ND-LotTenderingTerms
     name: Document Provider Technical Identifier Reference
@@ -12237,7 +12237,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Lot-EmployLegis
     parentNodeId: ND-LotEmploymentLegislation
     name: Employment Legislation Organization Technical Identifier Reference
@@ -12253,7 +12253,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Lot-EnvironLegis
     parentNodeId: ND-LotEnvironmentalLegislation
     name: Environmental Legislation Organization Technical Identifier Reference
@@ -12269,7 +12269,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Lot-FiscalLegis
     parentNodeId: ND-LotFiscalLegislation
     name: Fiscal Legislation Organization Technical Identifier Reference
@@ -12285,7 +12285,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Lot-Mediator
     parentNodeId: ND-LotReviewTerms
     name: Mediator Technical Identifier Reference
@@ -12301,7 +12301,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Lot-ReviewInfo
     parentNodeId: ND-LotReviewTerms
     name: Review Info Provider Technical Identifier Reference
@@ -12317,7 +12317,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Lot-ReviewOrg
     parentNodeId: ND-LotReviewTerms
     name: Review Organization Technical Identifier Reference
@@ -12333,7 +12333,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Lot-TenderEval
     parentNodeId: ND-LotTenderingTerms
     name: Tender Evaluator Technical Identifier Reference
@@ -12349,7 +12349,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Lot-TenderReceipt
     parentNodeId: ND-LotTenderingTerms
     name: Tender Recipient Technical Identifier Reference
@@ -12365,7 +12365,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-LotResult-Financing
     parentNodeId: ND-LotResult
     name: Financing Party (ID reference)
@@ -12380,7 +12380,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-LotResult-Paying
     parentNodeId: ND-LotResult
     name: Payer Party (ID reference)
@@ -12395,7 +12395,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Part-AddInfo
     parentNodeId: ND-PartTenderingTerms
     name: Additional Info Provider Technical Identifier Reference
@@ -12411,7 +12411,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Part-DocProvider
     parentNodeId: ND-PartTenderingTerms
     name: Document Provider Technical Identifier Reference
@@ -12427,7 +12427,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Part-EmployLegis
     parentNodeId: ND-PartEmploymentLegislation
     name: Employment Legislation Organization Technical Identifier Reference
@@ -12443,7 +12443,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Part-EnvironLegis
     parentNodeId: ND-PartEnvironmentalLegislation
     name: Environmental Legislation Organization Technical Identifier Reference
@@ -12459,7 +12459,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Part-FiscalLegis
     parentNodeId: ND-PartFiscalLegislation
     name: Fiscal Legislation Organization Technical Identifier Reference
@@ -12475,7 +12475,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Part-Mediator
     parentNodeId: ND-PartReviewTerms
     name: Mediator Technical Identifier Reference
@@ -12491,7 +12491,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Part-ReviewInfo
     parentNodeId: ND-PartReviewTerms
     name: Review Info Provider Technical Identifier Reference
@@ -12507,7 +12507,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Part-ReviewOrg
     parentNodeId: ND-PartReviewTerms
     name: Review Organization Technical Identifier Reference
@@ -12523,7 +12523,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Part-TenderEval
     parentNodeId: ND-PartTenderingTerms
     name: Tender Evaluator Technical Identifier Reference
@@ -12539,7 +12539,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Part-TenderReceipt
     parentNodeId: ND-PartTenderingTerms
     name: Tender Recipient Technical Identifier Reference
@@ -12555,7 +12555,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Tenderer-MainCont
     parentNodeId: ND-SubContractor
     name: Main Contractor ID Reference
@@ -12570,7 +12570,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Tenderer-SubCont
     parentNodeId: ND-TenderingParty
     name: Subcontractor ID Reference
@@ -12585,7 +12585,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-302-Organization
     parentNodeId: ND-Organization
     name: Beneficial Owner Reference
@@ -12600,7 +12600,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: OPT-310-Tender
     parentNodeId: ND-LotTender
     name: Tendering Party ID Reference
@@ -12615,7 +12615,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#lotTenderSection
 -   id: OPT-315-LotResult
     parentNodeId: ND-LotResult
     name: Contract Identifier Reference
@@ -12630,7 +12630,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#_lot_result
 -   id: OPT-316-Contract
     parentNodeId: ND-SettledContract
     name: Contract Technical Identifier
@@ -12644,7 +12644,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#settledContractSection
 -   id: OPT-320-LotResult
     parentNodeId: ND-LotResult
     name: Tender Identifier Reference
@@ -12659,7 +12659,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#_lot_result
 -   id: OPT-321-Tender
     parentNodeId: ND-LotTender
     name: Tender Technical Identifier
@@ -12673,7 +12673,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#lotTenderSection
 -   id: OPT-322-LotResult
     parentNodeId: ND-LotResult
     name: LotResult Technical Identifier
@@ -12687,7 +12687,7 @@
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#_lot_result
 -   id: OPT-999
     parentNodeId: ND-Root
     name: Dummy Tender Award Date
