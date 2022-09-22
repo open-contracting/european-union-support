@@ -1224,11 +1224,11 @@
     - Set `.id` to 'D_TECHNICAL' and `.description` to 'The services can be provided only by a particular economic operator due to absence of competition for technical reasons'
     - Set `.id` to 'D_TECHNICAL' and `.description` to 'The works, supplies or services can be provided only by a particular economic operator due to absence of competition for technical reasons'
     eForms guidance: |-
-        Map to `tender.procurementMethodRationaleClassifications`:
+        Add a `Classification` object to `tender.procurementMethodRationaleClassifications`:
 
-        1. Map the code to `.id`
-        1. Map the [the label of the code](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/direct-award-justification) to `.description`
-        1. Set `.scheme` to 'eforms-direct-award-justification'
+        1. Map the code to its `.id`
+        1. Map the [the label of the code](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/direct-award-justification) to its `.description`
+        1. Set `.scheme` to its 'eforms-direct-award-justification'
     eForms example: <cac:ProcessJustification><cbc:ProcessReasonCode listName="direct-award-justification">ecom-excl</cbc:ProcessReasonCode></cac:ProcessJustification>
     OCDS example: '{"tender":{"procurementMethodRationaleClassifications":[{"id":"ecom-excl","description":"Specific exclusion in the field of electronic communications","scheme":"eforms-direct-award-justification"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#directAwardSection
@@ -9857,7 +9857,7 @@
     Description: 'There are other restrictions on the place of performance (e.g. "anywhere in the European Economic Area", "anywhere in the given country"). '
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: Get the item for this lot. Add a `Location` object to the item's `.deliveryLocations` array, look up the code's Label in the \[authority table\]\](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map to the location's `.description`.
+    eForms guidance: Get the item for this lot. Add a `Location` object to the item's `.deliveryLocations` array, look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map to the location's `.description`.
     eForms example: <cac:Address><cbc:Region>anyw-eea</cbc:Region></cac:Address>
     OCDS example: '{"tender":{"items":[{"deliveryLocations":[{"description":"Anywhere in the European Economic Area"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#performancePlaceSection
