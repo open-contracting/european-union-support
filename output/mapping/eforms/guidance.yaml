@@ -6393,7 +6393,7 @@
     Description: The criteria (or criterion) will (only) be used to select the candidates to be invited for the second stage of the procedure (if a maximum number of candidates was set).
     Business groups:
         BG-702: Selection Criteria
-    eForms guidance: Add a Selection criterion object to the lot's `.selectionCriteria.criteria`.  Set the criterion's `.reductionCriterion` to `true` \[https://github.com/open-contracting/european-union-support/issues/72\]
+    eForms guidance: If `cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, this value is mapped to the same object as created for BT-747, BT-749, BT-750, BT-752, BT-7531 and BT-7532. For each `<efac:SelectionCriteria>`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`. Set the criterion's `.reductionCriterion` to `true`. \[https://github.com/open-contracting/european-union-support/issues/72\], \[https://github.com/open-contracting/european-union-support/issues/97\]
     eForms example: <efac:SelectionCriteria><efbc:SecondStageIndicator>true</efbc:SecondStageIndicator></efac:SelectionCriteria>
     OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"reductionCriterion":true}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#selectionCriteriaSection
@@ -10426,7 +10426,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/LEFTI/PARTICULAR_PROFESSION
     TED guidance:
     - Add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array and set its `.type` to 'technical'. If *Reference to the relevant law, regulation or administrative provision* is set, map it to the criterion's `.description`. Otherwise, set the criterion's `.description` to 'Execution of the service is reserved to a particular profession'.
-    eForms guidance: If `cbc:CalculationExpressionCode[@listName="usage"]` is set to "used", add a `SelectionCriterion` object to the lot's `.selectionCriteria.criteria` array and set its `.type` according to the guidance in \[common operations\](#selection criterion type). Otherwise, discard.
+    eForms guidance: If `cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, this value is mapped to the same object as created for BT-40, BT-749, BT-750, BT-752, BT-7531 and BT-7532. For each `<efac:SelectionCriteria>`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`. Identify the equivalent code in the [selectionCriterionType](<>) codelist and map to the criterion's `.type`. \[https://github.com/open-contracting/european-union-support/issues/97\], \[https://github.com/open-contracting/european-union-support/issues/106\]
     eForms example: <efac:SelectionCriteria><cbc:CriterionTypeCode listName="selection-criterion">ef-stand</cbc:CriterionTypeCode></efac:SelectionCriteria>
     OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"type":"economic"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#selectionCriteriaSection
@@ -10474,7 +10474,7 @@
     - Add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array, set its `.type` to 'economic', and set its `.description` to "As stated in the procurement documents".
     - Add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array, set its `.type` to 'technical', and map to its `.description`.
     - Add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array, set its `.type` to 'technical', and set its `.description` to "As stated in the procurement documents".
-    eForms guidance: This value is mapped to the same object as created for BT-747. Map to the Selection criterion's `.description`. \[Concatenate it with BT-750 Selection Criteria Description.\]
+    eForms guidance: If `cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, this value is mapped to the same object as created for BT-40, BT-747, BT-749, BT-750, BT-752, BT-7531 and BT-7532. For each `<efac:SelectionCriteria>`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`. Map to the criterion's `.description`. \[Concatenate it with BT-750 Selection Criteria Description.\] \[https://github.com/open-contracting/european-union-support/issues/97\]
     eForms example: <efac:SelectionCriteria><cbc:Name languageID="ENG">Minimum Turnover</cbc:Name></efac:SelectionCriteria>
     OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"description":"Minimum Turnover"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#selectionCriteriaSection
@@ -10526,7 +10526,7 @@
     TED guidance:
     - Get the `SelectionCriterion` object whose `.type` is 'economic'; if none exists, add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array, and set its `.type` to 'economic'. Then, map to its `.minimum`.
     - Get the `SelectionCriterion` object whose `.type` is 'technical'. If none exists, add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array, and set its `.type` to 'technical'. Then, map to its `.minimum`.
-    eForms guidance: This value is mapped to the same object as created for BT-747. Map to the Selection criterion's `.description`. \[Concatenate it with BT-749 Selection Criteria Name.\]
+    eForms guidance: If `cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, this value is mapped to the same object as created for BT-40, BT-747, BT-749, BT-752, BT-7531 and BT-7532. For each `<efac:SelectionCriteria>`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`. Map to the criterion's `.description`. \[Concatenate it with BT-749 Selection Criteria Name.\] \[https://github.com/open-contracting/european-union-support/issues/97\]
     eForms example: <efac:SelectionCriteria><cbc:Description languageID="ENG">Turnover over contract value rate</cbc:Description></efac:SelectionCriteria>
     OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"description":"Turnover over contract value rate"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#selectionCriteriaSection
@@ -10562,7 +10562,12 @@
     Business groups:
         BG-702: Selection Criteria
         BG-72: Selection Criteria Second Stage Invite Number
-    eForms guidance: (UNREVIEWED) This value is mapped to the same object as created for BT-40. Map to the criterion's `.numbers.number`. \[https://github.com/open-contracting/european-union-support/issues/73\]
+    eForms guidance: |-
+        If `ancestor::efac:SelectionCriteria/cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, this value is mapped to the same `SelectionCriterion` object as created for BT-40, BT-747, BT-749, BT-750, BT-7531 and BT-7532, and the same `SelectionCriterionNumber` object as created for BT-7531 and BT-7532.
+
+        For each `<efac:SelectionCriteria>`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria` and for each `efac:CriterionParameter`, add or update a corresponding `SelectionCriterionNumber` object in the criterion's `.numbers`.
+
+        Map to the number's `.number`. \[https://github.com/open-contracting/european-union-support/issues/73\], \[https://github.com/open-contracting/european-union-support/issues/97\]
     eForms example: <efac:CriterionParameter><efbc:ParameterNumeric>2</efbc:ParameterNumeric></efac:CriterionParameter>
     OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"numbers":[{"number":2}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#selectionCriteriaSection
@@ -10579,9 +10584,14 @@
     Business groups:
         BG-702: Selection Criteria
         BG-72: Selection Criteria Second Stage Invite Number
-    eForms guidance: ''
+    eForms guidance: |-
+        If `ancestor::efac:SelectionCriteria/cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, this value is mapped to the same `SelectionCriterion` object as created for BT-40, BT-747, BT-749, BT-750, BT-752 and BT-7532, and the same `SelectionCriterionNumber` object as created for BT-752 and BT-7532.
+
+        For each `<efac:SelectionCriteria>`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria` and for each `efac:CriterionParameter`, add or update a corresponding `SelectionCriterionNumber` object in the criterion's `.numbers`.
+
+        Identify the equivalent code in the [criterionWeight](https://extensions.open-contracting.org/en/extensions/awardCriteria/master/codelists/#criterionWeight.csv) codelist and map to the number's `.weight`. \[https://github.com/open-contracting/european-union-support/issues/73\], \[https://github.com/open-contracting/european-union-support/issues/97\]
     eForms example: <efac:CriterionParameter><efbc:ParameterCode listName="number-weight">per-exa</efbc:ParameterCode></efac:CriterionParameter>
-    OCDS example: ''
+    OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"numbers":[{"weight":"percentageExact"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#selectionCriteriaSection
 -   id: BT-7532-Lot
     parentNodeId: ND-SecondStageCriterionParameter
@@ -10596,9 +10606,14 @@
     Business groups:
         BG-702: Selection Criteria
         BG-72: Selection Criteria Second Stage Invite Number
-    eForms guidance: ''
+    eForms guidance: |-
+        If `ancestor::efac:SelectionCriteria/cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, this value is mapped to the same `SelectionCriterion` object as created for BT-40, BT-747, BT-749, BT-750, BT-752 and BT-7531, and the same `SelectionCriterionNumber` object as created for BT-752 and BT-7531.
+
+        For each `<efac:SelectionCriteria>`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria` and for each `efac:CriterionParameter`, add or update a corresponding `SelectionCriterionNumber` object in the criterion's `.numbers`.
+
+        Identify the equivalent code in the [criterionThreshold](https://extensions.open-contracting.org/en/extensions/awardCriteria/master/codelists/#criterionThreshold.csv) codelist and map to the number's `.threshold`. \[https://github.com/open-contracting/european-union-support/issues/73\], \[https://github.com/open-contracting/european-union-support/issues/97\]
     eForms example: <efac:CriterionParameter><efbc:ParameterCode listName="number-threshold">min-score</efbc:ParameterCode></efac:CriterionParameter>
-    OCDS example: ''
+    OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"numbers":[{"threshold":"minimumScore"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#selectionCriteriaSection
 -   id: BT-754-Lot
     parentNodeId: ND-LotProcurementScope
