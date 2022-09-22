@@ -11411,7 +11411,13 @@
     TED guidance:
     - Map to `tender.submissionTerms.bidValidityPeriod.endDate`
     - Multiply by 30, and map to `tender.submissionTerms.bidValidityPeriod.durationInDays`
-    eForms guidance: (UNREVIEWED) If @unitCode="DAY" map to the lot's `.submissionTerms.bidValidityPeriod.durationInDays`. If @unitCode="WEEK" multiply by 7 and map to the lot's `.submissionTerms.bidValidityPeriod.durationInDays`. If @unitCode="MONTH" multiply by 30 and map to the lot's `.submissionTerms.bidValidityPeriod.durationInDays`. If @unitCode="YEAR" multiply by 365 and map to the lot's `.submissionTerms.bidValidityPeriod.durationInDays`.
+    eForms guidance: |-
+      Multiply by:
+      * 1, if @unitCode="DAY"
+      * 7, if @unitCode="WEEK"
+      * 30, if @unitCode="MONTH"
+      * 365, if @unitCode="YEAR"
+      Map to the lot's `.submissionTerms.bidValidityPeriod.durationInDays`.
     eForms example: <cac:TenderValidityPeriod><cbc:DurationMeasure unitCode="MONTH">4</cbc:DurationMeasure></cac:TenderValidityPeriod>
     OCDS example: '{"tender":{"lots":[{"submissionTerms":{"bidValidityPeriod":{"durationInDays":120}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.0/schema/all-in-one.html#tenderValiditySection
