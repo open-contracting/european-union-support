@@ -12,4 +12,4 @@ curl -sS -o CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx https://ec.europa.eu/
 
 # https://github.com/OP-TED/eForms-SDK/blob/main/fields/fields.json
 
-curl -sS -O https://raw.githubusercontent.com/OP-TED/eForms-SDK/1.1.0/fields/fields.json
+curl -sS -O https://raw.githubusercontent.com/OP-TED/eForms-SDK/1.1.1/fields/fields.json
