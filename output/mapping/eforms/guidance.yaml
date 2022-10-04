@@ -1437,11 +1437,54 @@
     Business groups:
         BG-9: Change
     eForms guidance: |-
-        (UNREVIEWED)   Add an `Amendment` object to the contract's `.amendments` array, and set its `.id` (string). The `.id` can be any value guaranteed to be globally unique. For example, it can be set to a [version 4 UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier), or it can be assigned sequentially across all notices for this procedure (the first notice sets it to "1", the second to "2", etc.).
-        The codes are drawn from the [Change corrig justification](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/change-corrig-justification) authority table in EU Vocabularies.
-        Map the code to the amendment's `rationaleClassifications.id`. Set `rationaleClassifications.description` to the code's label and set `rationaleClassifications.scheme` to 'change corrig justification'
-    eForms example: <efac:ChangeReason><cbc:ReasonCode listName="change-corrig-justification">cor-buy </cbc:ReasonCode></efac:ChangeReason>
-    OCDS example: '{"contracts":[{"amendments":[{"rationaleClassifications":[{"id":"cor-buy","description":"Buyer correction.","scheme":"change corrig justification"}]}]}]}'
+      For each `ancestor::efac:Changes/efac:Change`:
+      * If the change's `/efbc:ChangedSectionIdentifier` (BT-13716) references a LotResult (`RES-XXXX`), [get the award for the LotResult](common-operations.md#get-the-award-for-the-lotresult) and add an `Amendment` object to the award's `.amendments` array. Otherwise, add an `Amendment` object to the `tender.amendments` array.
+      * If the change's `/efbc:ChangedSectionIdentifier` (BT-13716) references a Lot (`LOT-XXXX`), add the Lot's identifier to the amendment's `.relatedLots` array.
+      * Set the amendment's `.id` sequentially across all notices for this procedure. For example, if the first change notice for a procedure has three changes, it uses `id`'s '1' through '3'. A second change notice for the same procedure then uses `id`'s '4' and up, etc.
+      * Add a `Classification` object to the amendment's `rationaleClassifications` array and map to its `.id`.
+      * Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/change-corrig-justification) and map it to the classification's `.description`.
+      * Set the classification's `.scheme` to 'change-corrig-justification'.
+    eForms example: |-
+      <efac:Changes>
+          <efac:Change>
+              <efbc:ChangedSectionIdentifier>LOT-0001</efbc:ChangedSectionIdentifier>
+          </efac:Change>
+          <efac:Change>
+              <efbc:ChangedSectionIdentifier>LOT-0002</efbc:ChangedSectionIdentifier>
+          </efac:Change>
+          <efac:ChangeReason>
+              <cbc:ReasonCode listName="change-corrig-justification">update-add</cbc:ReasonCode>
+          </efac:ChangeReason>
+      </efac:Changes>
+    OCDS example: |-
+      {
+        "tender": {
+          "amendments": [
+            {
+              "relatedLots": ["LOT-0001"],
+              "id": "1",
+              "rationaleClassifications": [
+                {
+                  "id": "update-add",
+                  "description": "Information updated",
+                  "scheme": "change-corrig-justification"
+                }
+              ]
+            },
+            {
+              "relatedLots": ["LOT-0002"],
+              "id": "2",
+              "rationaleClassifications": [
+                {
+                  "id": "update-add",
+                  "description": "Information updated",
+                  "scheme": "change-corrig-justification"
+                }
+              ]
+            }
+          ]
+        }
+      }
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#changeSection
 -   id: BT-141(a)-notice
     parentNodeId: ND-Change
@@ -1458,9 +1501,9 @@
     - TED_EXPORT/FORM_SECTION/F20_2014/MODIFICATIONS_CONTRACT/INFO_MODIFICATIONS/SHORT_DESCR
     TED guidance:
     - Map to the amendment's `.description`
-    eForms guidance: This value is mapped to the same object as created for BT-140-notice. Map to the amendment's `.description`
+    eForms guidance: These values map to the same `Amendment` objects as created for BT-140. Update the corresponding `Amendment` object and map to its `.description`.
     eForms example: <efac:Change><efbc:ChangeDescription languageID="ENG">The changes have been applied to ...</efbc:ChangeDescription></efac:Change>
-    OCDS example: '{"contracts":[{"amendments":[{"description":"The changes have been applied to..."}]}]}'
+    OCDS example: '{"tender":{"amendments":[{"description": "The changes have been applied to..."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#changeSection
 -   id: BT-142-LotResult
     parentNodeId: ND-LotResult
@@ -9681,9 +9724,9 @@
     Description: The procurement documents have changed.
     Business groups:
         BG-9: Change
-    eForms guidance: ''
+    eForms guidance: These values map to the same `Amendment` objects as created for BT-140. Update the corresponding `Amendment` object and map to its `.documentsChanged`.
     eForms example: <efac:Change><efbc:ProcurementDocumentsChangeIndicator>true</efbc:ProcurementDocumentsChangeIndicator></efac:Change>
-    OCDS example: ''
+    OCDS example: '{"tender":{"amendments":[{"documentsChanged": true}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#changeSection
 -   id: BT-719-notice
     parentNodeId: ND-Change
@@ -9697,9 +9740,9 @@
     Description: The date and time when the procurement documents have changed.
     Business groups:
         BG-9: Change
-    eForms guidance: ''
+    eForms guidance: These values map to the same `Amendment` objects as created for BT-140. Update the corresponding `Amendment` object and map to its `.documentsChangeDate`.
     eForms example: <efac:Change><efbc:ProcurementDocumentsChangeDate>2019-10-24+01:00</efbc:ProcurementDocumentsChangeDate></efac:Change>
-    OCDS example: ''
+    OCDS example: '{"tender":{"amendments":[{"documentsChangeDate": "2019-10-24T00:00:00+01:00"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#changeSection
 -   id: BT-720-Tender
     parentNodeId: ND-LotTender
@@ -10826,9 +10869,9 @@
     Description: The description of the main reason for the change in the notice compared to the original notice.
     Business groups:
         BG-9: Change
-    eForms guidance: This value is mapped to the same object as created for BT-140-notice. Map to amendment's \`.description'.
+    eForms guidance: These values map to the same `Amendment` objects as created for BT-140. Update the corresponding `Amendment` objects and map to its `.rationale`.
     eForms example: <efac:ChangeReason><efbc:ReasonDescription languageID="ENG">Clerical corrections of ...</efbc:ReasonDescription></efac:ChangeReason>
-    OCDS example: '{"contracts":[{"amendments":[{"description":"Clerical corrections of ..."}]}]}'
+    OCDS example: '{"tender":{"amendments":[{"rationale": "Clerical corrections of ..."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#changeReasonSection
 -   id: BT-763-Procedure
     parentNodeId: ND-ProcedureTenderingProcess
