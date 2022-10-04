@@ -196,9 +196,9 @@
     Description: Use of a technical specification, selection criterion, award criterion, or contract performance condition aims to reduce the environmental impacts of the procurement, fulfil social objectives and/or buy an innovative work, supply or service.
     Business groups:
         BG-713: Strategic Procurement
-    eForms guidance: ''
+    eForms guidance: Add to the lot's `.additionalProcurementCategories` array.
     eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="strategic-procurement">inn-pur</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
-    OCDS example: ''
+    OCDS example: '{"tender":{"lots":[{"additionalProcurementCategories":["inn-pur"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#strategicProcurementSection
 -   id: BT-09(a)-Procedure
     parentNodeId: ND-ProcedureTerms
@@ -284,7 +284,7 @@
     - Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification's `.scheme` to 'TED_CE_ACTIVITY', and set its `.id` and/or `.description` as follows:\n\n(The codes are drawn from [Directive 2014/25/EU](https://eur-lex.europa.eu/legal-content/en/TXT/?uri=CELEX%3A32014L0025#L_2014094EN.01033901))
     - 'Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification''s `.scheme` to [''COFOG''](https://unstats.un.org/unsd/publications/catalogue?selectID=145), and set its `.id` and/or `.description` as follows:'
     eForms guidance: |-
-        The codes are drawn from the [Main activity]() authority table in EU Vocabularies.
+        The codes are drawn from the [Main activity](<>) authority table in EU Vocabularies.
 
         [Get the organization for the buyer](common-operations.md#get-the-organization-for-the-buyer) and add a `Classification` object to its `.details.classifications` array. Map to the classification's `.id`, look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/main-activity) and map it to `.description`. If the code's definition in the authority table includes ["COFOG"](<https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Classification_of_the_functions_of_government_(COFOG)>), set the classification's `.scheme` to 'COFOG'. Otherwise, set it to 'Directive 2014/25/EU'.
     eForms example: <cac:ContractingParty><cac:Party><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></cac:Party><cac:ContractingActivity><cbc:ActivityTypeCode listName="authority-activity">gas-oil</cbc:ActivityTypeCode></cac:ContractingActivity></cac:ContractingParty>
@@ -451,8 +451,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/CONTRACTING_BODY/CA_TYPE
     TED guidance:
     - 'Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification''s `.scheme` to ''TED_CA_TYPE'', and set its `.id` and/or `.description` as follows:'
-    eForms guidance: |-
-        [Get the organization for the buyer](common-operations.md#get-the-organization-for-the-buyer) and add a `Classification` object to its `.details.classifications` array. Map to the classification's `.id`, look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/buyer-legal-type) and map it to `.description`. Set the classification's `.scheme` to 'TED_CA_TYPE'.
+    eForms guidance: '[Get the organization for the buyer](common-operations.md#get-the-organization-for-the-buyer) and add a `Classification` object to its `.details.classifications` array. Map to the classification''s `.id`, look up the code''s label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/buyer-legal-type) and map it to `.description`. Set the classification''s `.scheme` to ''TED_CA_TYPE''.'
     eForms example: <cac:ContractingParty><cac:Party><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></cac:Party><cac:ContractingPartyType><cbc:PartyTypeCode listName="buyer-legal-type">body-pl</cbc:PartyTypeCode></cac:ContractingPartyType></cac:ContractingParty>
     OCDS example: '{"parties":[{"id":"ORG-0001","details":{"classifications":[{"scheme":"TED_CA_TYPE","id":"body-pl","description":"Body governed by public law."}]}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_buyer_information_2
@@ -1482,7 +1481,7 @@
     - TED_EXPORT/FORM_SECTION/F21_2014/AWARD_CONTRACT/*[matches(name(),'AWARDED_CONTRACT')]
     - TED_EXPORT/FORM_SECTION/F22_2014/AWARD_CONTRACT/*[matches(name(),'AWARDED_CONTRACT')]
     - TED_EXPORT/FORM_SECTION/F25_2014/AWARD_CONTRACT/*[matches(name(),'AWARDED_CONTRACT')]
-    eForms guidance:  If `open-nw`, [get the lot for the LotResult](common-operations.md#get-the-lot-for-the-lotresult) and set its `.status` to `active`. Otherwise, [get the award for the LotResult](common-operations.md#get-the-award-for-the-lot-result) and, if `selec-w`, set the awards's `.status` to 'active'. If `clos-nw`, set the awards's `.status` to 'unsuccessful'. Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/winner-selection-status) and map it to `.statusDetails`.
+    eForms guidance: If `open-nw`, [get the lot for the LotResult](common-operations.md#get-the-lot-for-the-lotresult) and set its `.status` to `active`. Otherwise, [get the award for the LotResult](common-operations.md#get-the-award-for-the-lot-result) and, if `selec-w`, set the awards's `.status` to 'active'. If `clos-nw`, set the awards's `.status` to 'unsuccessful'. Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/winner-selection-status) and map it to `.statusDetails`.
     eForms example: <efac:LotResult><cbc:TenderResultCode listName="winner-selection-status">selec-w</cbc:TenderResultCode></efac:LotResult>
     OCDS example: '{"awards":[{"status":"active","statusDetails":"At least one winner was chosen."}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_lot_result
@@ -1515,8 +1514,7 @@
     TED guidance:
     - Set the award's `.statusDetails` to 'discontinued'
     - Set the award's `.statusDetails` to 'unsuccessful'\n\nThere's an open issue ([#764](https://github.com/open-contracting/standard/issues/764)) about status details. (ISSUE)
-    eForms guidance: |-
-      [Get the award for the LotResult](common-operations.md#get-the-award-for-the-lot-result) and set the award's `.status` to 'unsuccessful'. Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-award-justification) and map it to the award's `.statusDetails`.
+    eForms guidance: '[Get the award for the LotResult](common-operations.md#get-the-award-for-the-lot-result) and set the award''s `.status` to ''unsuccessful''. Look up the code''s label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-award-justification) and map it to the award''s `.statusDetails`.'
     eForms example: <efac:DecisionReason><efbc:DecisionReasonCode listName="non-award-justification">no-rece</efbc:DecisionReasonCode></efac:DecisionReason>
     OCDS example: '{"awards":[{"status":"unsuccessful","statusDetails":"No tenders, requests to participate or projects were received"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
@@ -1564,13 +1562,7 @@
     TED guidance:
     - Map to the award's `.date`
     - Map to the contract's `.dateSigned`
-    eForms guidance: |-
-      For each `ancestor::efac:NoticeResult/efac:LotResult` with an `/efac:SettledContract/cbc:ID` equal to the value of `ancestor::efac:SettledContract/cbc:ID`:
-        * Get the `Award` object in `awards` whose `.id` is equal to the LotResult's `/cbc:ID`. If none exists yet:
-          * Add an `Award` to `awards`
-          * Set its `.id` to the value of the LotResult's `/cbc:ID`
-          * Add the value of the LotResult's `/efac:TenderLot​/cbc:ID` to the award's `.relatedLots`
-        * If the award's `.date` is not yet set or if the winner decision date is earlier than the award's `.date`, map to the award's `.date`. Otherwise, discard.  \[https://github.com/open-contracting/european-union-support/issues/110\]
+    eForms guidance: "For each `ancestor::efac:NoticeResult/efac:LotResult` with an `/efac:SettledContract/cbc:ID` equal to the value of `ancestor::efac:SettledContract/cbc:ID`:\n\n- Get the `Award` object in `awards` whose `.id` is equal to the LotResult's `/cbc:ID`. If none exists yet:\n  - Add an `Award` to `awards`\n  - Set its `.id` to the value of the LotResult's `/cbc:ID`\n  - Add the value of the LotResult's `/efac:TenderLot\u200B/cbc:ID` to the award's `.relatedLots`\n- If the award's `.date` is not yet set or if the winner decision date is earlier than the award's `.date`, map to the award's `.date`. Otherwise, discard.  \\[https://github.com/open-contracting/european-union-support/issues/110\\]"
     eForms example: <efac:SettledContract><cbc:AwardDate>2021-02-19+01:00</cbc:AwardDate></efac:SettledContract>
     OCDS example: '{"awards":[{"date":"2021-02-19T23:59:59+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#settledContractSection
@@ -2860,7 +2852,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-196(BT-105)-Procedure
@@ -2875,7 +2867,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-196(BT-106)-Procedure
@@ -2890,7 +2882,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-196(BT-118)-NoticeResult
@@ -2905,7 +2897,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-196(BT-1252)-Procedure
@@ -2920,7 +2912,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-196(BT-135)-Procedure
@@ -2935,7 +2927,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-196(BT-1351)-Procedure
@@ -2950,7 +2942,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-196(BT-136)-Procedure
@@ -2965,7 +2957,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-196(BT-142)-LotResult
@@ -2980,7 +2972,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-196(BT-144)-LotResult
@@ -2995,7 +2987,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-196(BT-156)-NoticeResult
@@ -3010,7 +3002,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-196(BT-160)-Tender
@@ -3025,7 +3017,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-196(BT-161)-NoticeResult
@@ -3040,7 +3032,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-196(BT-162)-Tender
@@ -3055,7 +3047,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-196(BT-163)-Tender
@@ -3070,7 +3062,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-196(BT-171)-Tender
@@ -3085,7 +3077,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-196(BT-191)-Tender
@@ -3100,7 +3092,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-196(BT-193)-Tender
@@ -3115,7 +3107,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-196(BT-539)-Lot
@@ -3130,7 +3122,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-196(BT-539)-LotsGroup
@@ -3145,7 +3137,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-196(BT-540)-Lot
@@ -3160,7 +3152,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-196(BT-540)-LotsGroup
@@ -3175,7 +3167,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-196(BT-541)-Lot
@@ -3190,7 +3182,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-196(BT-541)-LotsGroup
@@ -3205,7 +3197,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-196(BT-5421)-Lot
@@ -3220,7 +3212,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-196(BT-5421)-LotsGroup
@@ -3235,7 +3227,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-196(BT-5422)-Lot
@@ -3250,7 +3242,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-196(BT-5422)-LotsGroup
@@ -3265,7 +3257,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-196(BT-5423)-Lot
@@ -3280,7 +3272,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-196(BT-5423)-LotsGroup
@@ -3295,7 +3287,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-196(BT-543)-Lot
@@ -3310,7 +3302,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-196(BT-543)-LotsGroup
@@ -3325,7 +3317,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-196(BT-553)-Tender
@@ -3340,7 +3332,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-196(BT-554)-Tender
@@ -3355,7 +3347,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-196(BT-555)-Tender
@@ -3370,7 +3362,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-196(BT-556)-NoticeResult
@@ -3385,7 +3377,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-196(BT-635)-LotResult
@@ -3400,7 +3392,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-196(BT-636)-LotResult
@@ -3415,7 +3407,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-196(BT-709)-LotResult
@@ -3430,7 +3422,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-196(BT-710)-LotResult
@@ -3445,7 +3437,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-196(BT-711)-LotResult
@@ -3460,7 +3452,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-196(BT-712)-LotResult
@@ -3475,7 +3467,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-196(BT-720)-Tender
@@ -3490,7 +3482,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-196(BT-730)-Tender
@@ -3505,7 +3497,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-196(BT-731)-Tender
@@ -3520,7 +3512,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-196(BT-733)-Lot
@@ -3535,7 +3527,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-196(BT-733)-LotsGroup
@@ -3550,7 +3542,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-196(BT-734)-Lot
@@ -3565,7 +3557,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-196(BT-734)-LotsGroup
@@ -3580,7 +3572,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-196(BT-759)-LotResult
@@ -3595,7 +3587,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-196(BT-760)-LotResult
@@ -3610,7 +3602,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-196(BT-773)-Tender
@@ -3625,7 +3617,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-196(BT-88)-Procedure
@@ -3640,7 +3632,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-197(BT-09)-Procedure
@@ -3656,7 +3648,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-197(BT-105)-Procedure
@@ -3672,7 +3664,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-197(BT-106)-Procedure
@@ -3688,7 +3680,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-197(BT-118)-NoticeResult
@@ -3704,7 +3696,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-197(BT-1252)-Procedure
@@ -3720,7 +3712,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-197(BT-135)-Procedure
@@ -3736,7 +3728,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-197(BT-1351)-Procedure
@@ -3752,7 +3744,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-197(BT-136)-Procedure
@@ -3768,7 +3760,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-197(BT-142)-LotResult
@@ -3784,7 +3776,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-197(BT-144)-LotResult
@@ -3800,7 +3792,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-197(BT-156)-NoticeResult
@@ -3816,7 +3808,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-197(BT-160)-Tender
@@ -3832,7 +3824,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-197(BT-161)-NoticeResult
@@ -3848,7 +3840,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-197(BT-162)-Tender
@@ -3864,7 +3856,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-197(BT-163)-Tender
@@ -3880,7 +3872,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-197(BT-171)-Tender
@@ -3896,7 +3888,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-197(BT-191)-Tender
@@ -3912,7 +3904,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-197(BT-193)-Tender
@@ -3928,7 +3920,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-197(BT-539)-Lot
@@ -3944,7 +3936,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-197(BT-539)-LotsGroup
@@ -3960,7 +3952,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-197(BT-540)-Lot
@@ -3976,7 +3968,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-197(BT-540)-LotsGroup
@@ -3992,7 +3984,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-197(BT-541)-Lot
@@ -4008,7 +4000,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-197(BT-541)-LotsGroup
@@ -4024,7 +4016,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-197(BT-5421)-Lot
@@ -4040,7 +4032,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-197(BT-5421)-LotsGroup
@@ -4056,7 +4048,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-197(BT-5422)-Lot
@@ -4072,7 +4064,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-197(BT-5422)-LotsGroup
@@ -4088,7 +4080,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-197(BT-5423)-Lot
@@ -4104,7 +4096,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-197(BT-5423)-LotsGroup
@@ -4120,7 +4112,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-197(BT-543)-Lot
@@ -4136,7 +4128,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-197(BT-543)-LotsGroup
@@ -4152,7 +4144,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-197(BT-553)-Tender
@@ -4168,7 +4160,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-197(BT-554)-Tender
@@ -4184,7 +4176,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-197(BT-555)-Tender
@@ -4200,7 +4192,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-197(BT-556)-NoticeResult
@@ -4216,7 +4208,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-197(BT-635)-LotResult
@@ -4231,7 +4223,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-197(BT-636)-LotResult
@@ -4246,7 +4238,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-197(BT-709)-LotResult
@@ -4262,7 +4254,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-197(BT-710)-LotResult
@@ -4278,7 +4270,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-197(BT-711)-LotResult
@@ -4294,7 +4286,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-197(BT-712)-LotResult
@@ -4326,7 +4318,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-197(BT-730)-Tender
@@ -4342,7 +4334,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-197(BT-731)-Tender
@@ -4358,7 +4350,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-197(BT-733)-Lot
@@ -4374,7 +4366,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-197(BT-733)-LotsGroup
@@ -4390,7 +4382,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-197(BT-734)-Lot
@@ -4406,7 +4398,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-197(BT-734)-LotsGroup
@@ -4422,7 +4414,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-197(BT-759)-LotResult
@@ -4438,7 +4430,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-197(BT-760)-LotResult
@@ -4470,7 +4462,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-197(BT-88)-Procedure
@@ -4486,7 +4478,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-198(BT-09)-Procedure
@@ -4502,7 +4494,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-198(BT-105)-Procedure
@@ -4518,7 +4510,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-198(BT-106)-Procedure
@@ -4534,7 +4526,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-198(BT-118)-NoticeResult
@@ -4550,7 +4542,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-198(BT-1252)-Procedure
@@ -4566,7 +4558,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-198(BT-135)-Procedure
@@ -4582,7 +4574,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-198(BT-1351)-Procedure
@@ -4598,7 +4590,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-198(BT-136)-Procedure
@@ -4614,7 +4606,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-198(BT-142)-LotResult
@@ -4630,7 +4622,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-198(BT-144)-LotResult
@@ -4646,7 +4638,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-198(BT-156)-NoticeResult
@@ -4662,7 +4654,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-198(BT-160)-Tender
@@ -4678,7 +4670,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-198(BT-161)-NoticeResult
@@ -4694,7 +4686,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-198(BT-162)-Tender
@@ -4710,7 +4702,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-198(BT-163)-Tender
@@ -4726,7 +4718,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-198(BT-171)-Tender
@@ -4742,7 +4734,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-198(BT-191)-Tender
@@ -4758,7 +4750,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-198(BT-193)-Tender
@@ -4774,7 +4766,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-198(BT-539)-Lot
@@ -4790,7 +4782,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-539)-LotsGroup
@@ -4806,7 +4798,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-540)-Lot
@@ -4822,7 +4814,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-540)-LotsGroup
@@ -4838,7 +4830,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-541)-Lot
@@ -4854,7 +4846,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-541)-LotsGroup
@@ -4870,7 +4862,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-5421)-Lot
@@ -4886,7 +4878,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-5421)-LotsGroup
@@ -4902,7 +4894,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-5422)-Lot
@@ -4918,7 +4910,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-5422)-LotsGroup
@@ -4934,7 +4926,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-5423)-Lot
@@ -4950,7 +4942,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-5423)-LotsGroup
@@ -4966,7 +4958,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-543)-Lot
@@ -4982,7 +4974,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-543)-LotsGroup
@@ -4998,7 +4990,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-553)-Tender
@@ -5014,7 +5006,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-198(BT-554)-Tender
@@ -5030,7 +5022,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-198(BT-555)-Tender
@@ -5046,7 +5038,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-198(BT-556)-NoticeResult
@@ -5062,7 +5054,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-198(BT-635)-LotResult
@@ -5077,7 +5069,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-198(BT-636)-LotResult
@@ -5092,7 +5084,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-198(BT-709)-LotResult
@@ -5108,7 +5100,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-198(BT-710)-LotResult
@@ -5124,7 +5116,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-198(BT-711)-LotResult
@@ -5140,7 +5132,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-198(BT-712)-LotResult
@@ -5156,7 +5148,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-198(BT-720)-Tender
@@ -5172,7 +5164,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-198(BT-730)-Tender
@@ -5188,7 +5180,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-198(BT-731)-Tender
@@ -5204,7 +5196,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-198(BT-733)-Lot
@@ -5220,7 +5212,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-733)-LotsGroup
@@ -5252,7 +5244,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-734)-LotsGroup
@@ -5268,7 +5260,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-759)-LotResult
@@ -5284,7 +5276,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-198(BT-760)-LotResult
@@ -5300,7 +5292,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-198(BT-773)-Tender
@@ -5316,7 +5308,7 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-198(BT-88)-Procedure
@@ -5591,7 +5583,7 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/TYPE_CONTRACT_DEFENCE/TYPE_CONTRACT/@VALUE
     - TED_EXPORT/FORM_SECTION/F21_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
-    eForms guidance: If different from 'combined', map to the lot's `.mainProcurementCategory`. Otherwise, add 'combined' to the lot's `.additionalProcurementCategories` array.
+    eForms guidance: If 'works' or 'services', map to the lot's `.mainProcurementCategory`. If 'supplies' map 'goods' to the lot's `.mainProcurementCategory`. If 'combined' add to the lot's `.additionalProcurementCategories` array.
     eForms example: <cbc:ProcurementTypeCode listName="contract-nature">works</cbc:ProcurementTypeCode>
     OCDS example: '{"tender":{"lots":[{"mainProcurementCategory":"works"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#natureSection
@@ -5607,7 +5599,7 @@
     Description: The main nature (e.g. works) of what is being bought. In case of mixed procurement (e.g. a procedure for both works and services), the main nature may be, for example, the one with the highest estimated value. This information must be given for the whole procedure.
     Business groups:
         BG-2: Purpose
-    eForms guidance: If different from 'combined', map to `tender.mainProcurementCategory`. Otherwise, add 'combined' to `tender.additionalProcurementCategories` array.
+    eForms guidance: If 'works' or 'services', map to `tender.mainProcurementCategory`. If 'supplies' map 'goods' to `tender.mainProcurementCategory`. If 'combined' add to `tender.additionalProcurementCategories` array.
     eForms example: <cbc:ProcurementTypeCode listName="contract-nature">works</cbc:ProcurementTypeCode>
     OCDS example: '{"tender":{"mainProcurementCategory":"works"}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#natureSection
@@ -5640,7 +5632,7 @@
     - TED_EXPORT/FORM_SECTION/F23_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
     - TED_EXPORT/FORM_SECTION/F24_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
-    eForms guidance: If different from 'combined', map to `tender.mainProcurementCategory`. Otherwise, add 'combined' to `tender.additionalProcurementCategories` array.
+    eForms guidance: If 'works' or 'services', map to `tender.mainProcurementCategory`. If 'supplies' map 'goods' to `tender.mainProcurementCategory`. If 'combined' add to `tender.additionalProcurementCategories` array.
     eForms example: <cbc:ProcurementTypeCode listName="contract-nature">works</cbc:ProcurementTypeCode>
     OCDS example: '{"tender":{"mainProcurementCategory":"works"}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#natureSection
@@ -6505,8 +6497,7 @@
     - TED_EXPORT/FORM_SECTION/F12_2014/PROCEDURE/PARTICIPANT_NAME
     TED guidance:
     - '[Add a party](../../operations/#add-a-party), add ''selectedParticipant'' to its `.roles`, and map to its `.name`. Add an `OrganizationReference` object to the `tender.designContest.selectedParticipants` array, set its `.id` to the party''s `.id`, and map to its `.name`.'
-    eForms guidance: |-
-     [Add a party](common-operations.md#add-a-party) and add 'selectedParticipant' to its `.roles`, and map to its `.name`. Add an `OrganizationReference` object to the lot's `.designContest.selectedParticipants` array, set its `.id` to the party's `.id`, and map to its `.name`.
+    eForms guidance: '[Add a party](common-operations.md#add-a-party) and add ''selectedParticipant'' to its `.roles`, and map to its `.name`. Add an `OrganizationReference` object to the lot''s `.designContest.selectedParticipants` array, set its `.id` to the party''s `.id`, and map to its `.name`.'
     eForms example: <cac:PartyName><cbc:Name>Mr P. Sanchez</cbc:Name></cac:PartyName>
     OCDS example: '{"parties":[{"name":"Mr P. Sanchez","roles":["selectedParticipant"],"id":"1"}],"tender":{"lots":[{"designContest":{"selectedParticipants":[{"id":"1","name":"Mr P. Sanchez"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#shortlistSection
@@ -6619,8 +6610,7 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/OFFICIALNAME
     - Map to the party's `.name` and `.identifier.legalName`
-    eForms guidance: |-
-      [Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and map to the organization's `.name`.
+    eForms guidance: '[Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and map to the organization''s `.name`.'
     eForms example: <cac:PartyName><cbc:Name languageID="ENG">Ministry of Education</cbc:Name></cac:PartyName>
     OCDS example: '{"parties":[{"name":"Ministry of Education"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -6635,8 +6625,7 @@
     Description: The official name of the organisation.
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the organization's `.name`.
+    eForms guidance: '[Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the organization''s `.name`.'
     eForms example: <cac:PartyName><cbc:Name languageID="ENG">Ministry of Education</cbc:Name></cac:PartyName>
     OCDS example: '{"parties":[{"name":"Ministry of Education"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -6651,8 +6640,7 @@
     Description: The official name of the organisation.
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the person for the ultimate beneficial owner](common-operations.md#get-the-person-for-an-ultimate beneficial-owner) and map to the person's `.name`.
+    eForms guidance: \[Get the person for the ultimate beneficial owner\](common-operations.md#get-the-person-for-an-ultimate beneficial-owner) and map to the person's `.name`.
     eForms example: <efac:UltimateBeneficialOwner><cbc:FamilyName>Mouse</cbc:FamilyName></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"name":"Mouse"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -6710,8 +6698,7 @@
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID
     - Map to the party's `.identifier.id`, and [set `.identifier.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids)
     - Map to the party's `.identifier.id`, and set the party's `.identifier.scheme`
-    eForms guidance: |-
-      [Get the organization for the company](common-operations.md#get-the-organization-for-a-company), map to the organization's `.identifier.id` and [set `.identifier.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids).
+    eForms guidance: '[Get the organization for the company](common-operations.md#get-the-organization-for-a-company), map to the organization''s `.identifier.id` and [set `.identifier.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids).'
     eForms example: <efac:Organization><efac:Company><cac:PartyLegalEntity><cbc:CompanyID>XYZ</cbc:CompanyID></cac:PartyLegalEntity></efac:Company></efac:Organization>
     OCDS example: '{"parties":[{"identifier":{"id":"XYZ"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -6747,16 +6734,16 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED/P/FT/@TYPE
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED/P/FT/@TYPE
     eForms guidance: |-
-      - Get the `Organization` object whose `.name` is 'European Union'. If none exists yet:
-        - [Add a party](common-operations.md#add-a-party)
-        - Set its `.name` to 'European Union'
-      - Add 'funder' to its `.roles`
-      - Get the `Finance` object whose `.description` is the *Identification of the project*. If none exists yet:
-        - Add a `Finance` object to the contract's `.finance` array
-        - Map the *Identification of the project* to its `.description`
-        - Set its `.id` incrementally
-        - Set its `.financingParty.name` to 'European Union'
-        - Set its `.financingParty.id` to the party's `.id`
+        - Get the `Organization` object whose `.name` is 'European Union'. If none exists yet:
+          - [Add a party](common-operations.md#add-a-party)
+          - Set its `.name` to 'European Union'
+        - Add 'funder' to its `.roles`
+        - Get the `Finance` object whose `.description` is the *Identification of the project*. If none exists yet:
+          - Add a `Finance` object to the contract's `.finance` array
+          - Map the *Identification of the project* to its `.description`
+          - Set its `.id` incrementally
+          - Set its `.financingParty.name` to 'European Union'
+          - Set its `.financingParty.id` to the party's `.id`
     eForms example: <efac:Funding><efbc:FinancingIdentifier>2021/1234</efbc:FinancingIdentifier></efac:Funding>
     OCDS example: '{"parties":[{"id":"1","name":"European Union","roles":["funder"]}],"contracts":[{"finance":[{"id":"1","description":"2021/1234","financingParty":{"id":"1","name":"European Union"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#settledContractSection
@@ -6811,8 +6798,7 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL
     - Map to the party's `.contactPoint.name`
-    eForms guidance: |-
-      [Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and map to the organization's `.contactPoint.name`
+    eForms guidance: '[Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and map to the organization''s `.contactPoint.name`'
     eForms example: <cac:Contact><cbc:Name>Press Department</cbc:Name></cac:Contact>
     OCDS example: '{"parties":[{"contactPoint":{"name":"Press Department"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -6827,8 +6813,7 @@
     Description: The name of the department or other contact point for communicating with the organisation. To avoid unnecessary processing of personal data, the contact point may allow the identification of a physical person only when necessary (in the sense of Regulation (EU) 2016/679 and Regulation (EU) 2018/1725).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the organization's `.contactPoint.name`.
+    eForms guidance: '[Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the organization''s `.contactPoint.name`.'
     eForms example: <cac:Contact><cbc:Name>Head of Legal Department</cbc:Name></cac:Contact>
     OCDS example: '{"parties":[{"contactPoint":{"name":"Head of Legal Department"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -6916,8 +6901,7 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE
     - Map to the party's `.contactPoint.telephone`
-    eForms guidance: |-
-      [Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and map to the organization's `.contactPoint.telephone`
+    eForms guidance: '[Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and map to the organization''s `.contactPoint.telephone`'
     eForms example: <cac:Contact><cbc:Telephone>+123 45678</cbc:Telephone></cac:Contact>
     OCDS example: '{"parties":[{"contactPoint":{"telephone":"+123 45678"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -6933,8 +6917,7 @@
     Description: The telephone for contacting the organisation. To avoid unnecessary processing of personal data, the telephone may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the organization's `.contactPoint.telephone`
+    eForms guidance: '[Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the organization''s `.contactPoint.telephone`'
     eForms example: <cac:Contact><cbc:Telephone>+123 45678</cbc:Telephone></cac:Contact>
     OCDS example: '{"parties":[{"contactPoint":{"telephone":"+123 45678"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -6950,8 +6933,7 @@
     Description: The telephone for contacting the organisation. To avoid unnecessary processing of personal data, the telephone may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the person for the ultimate beneficial owner](common-operations.md#get-the-person-for-an-ultimate beneficial-owner) and map to the person's `.telephone`.
+    eForms guidance: \[Get the person for the ultimate beneficial owner\](common-operations.md#get-the-person-for-an-ultimate beneficial-owner) and map to the person's `.telephone`.
     eForms example: <efac:UltimateBeneficialOwner><cac:Contact><cbc:Telephone>+123 4567890</cbc:Telephone></cac:Contact></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"telephone":"+123 456789"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -7026,8 +7008,7 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL
     - Map to the party's `.details.url`
-    eForms guidance: |-
-      [Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and map to the organization's `.details.url`.
+    eForms guidance: '[Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and map to the organization''s `.details.url`.'
     eForms example: <efac:Company><cbc:WebsiteURI>http://xyz.europa.eu/</cbc:WebsiteURI></efac:Company>
     OCDS example: '{"parties":[{"details":{"url":"http://xyz.europa.eu/"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -7043,8 +7024,7 @@
     Description: The website of the organisation.
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the organization's `.details.url`.
+    eForms guidance: '[Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the organization''s `.details.url`.'
     eForms example: <efac:Company><cbc:WebsiteURI>http://abc.europa.eu/</cbc:WebsiteURI></efac:Company>
     OCDS example: '{"parties":[{"details":{"url":"http://abc.europa.eu/"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -7133,8 +7113,7 @@
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL
     - Map to the party's `.contactPoint.email`
-    eForms guidance: |-
-      [Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and map to the organization's `.contactPoint.email`
+    eForms guidance: '[Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and map to the organization''s `.contactPoint.email`'
     eForms example: <efac:Organization><efac:Company><cac:Contact><cbc:ElectronicMail>press@xyz.europa.eu</cbc:ElectronicMail></cac:Contact></efac:Company></efac:Organization>
     OCDS example: '{"parties":[{"contactPoint":{"email":"press@xyz.europa.eu"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -7150,8 +7129,7 @@
     Description: The email for contacting the organisation. To avoid unnecessary processing of personal data, the email may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the organization's `.contactPoint.email`
+    eForms guidance: '[Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the organization''s `.contactPoint.email`'
     eForms example: <efac:Organization><efac:TouchPoint><cac:Contact><cbc:ElectronicMail>abc@xyz.europa.eu</cbc:ElectronicMail></cac:Contact></efac:TouchPoint>a</efac:Organization>
     OCDS example: '{"parties":[{"contactPoint":{"email":"press@xyz.europa.eu"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -7167,8 +7145,7 @@
     Description: The email for contacting the organisation. To avoid unnecessary processing of personal data, the email may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the person for the ultimate beneficial owner](common-operations.md#get-the-person-for-an-ultimate beneficial-owner) and map to the person's `.email`.
+    eForms guidance: \[Get the person for the ultimate beneficial owner\](common-operations.md#get-the-person-for-an-ultimate beneficial-owner) and map to the person's `.email`.
     eForms example: <efac:UltimateBeneficialOwner><cac:Contact><cbc:ElectronicMail>mickey.mouse@cheese-universe.com</cbc:ElectronicMail></cac:Contact></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"email":"mickey.mouse@cheese-universe.com"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -7209,8 +7186,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/*:NUTS/@CODE
     - TED_EXPORT/FORM_SECTION/F25_2014/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/*:NUTS/@CODE
     - TED_EXPORT/FORM_SECTION/F25_2014/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/*:NUTS/@CODE
-    eForms guidance: |-
-      [Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and map to the organization's `.address.region`.
+    eForms guidance: '[Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and map to the organization''s `.address.region`.'
     eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cbc:CountrySubentityCode listName="nuts">XY374</cbc:CountrySubentityCode></cac:PostalAddress></efac:Company></efac:Organization>
     OCDS example: '{"parties":[{"address":{"region":"XY374"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -7226,8 +7202,7 @@
     Description: The location according to the common classification of territorial units for statistics (NUTS) of the organisation's physical address. The NUTS3 classification code must be used.
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the organization's `.address.region`.
+    eForms guidance: '[Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the organization''s `.address.region`.'
     eForms example: <efac:Organization><efac:TouchPoint><cac:PostalAddress><cbc:CountrySubentityCode listName="nuts">XY374</cbc:CountrySubentityCode></cac:PostalAddress></efac:TouchPoint></efac:Organization>
     OCDS example: '{"parties":[{"address":{"region":"XY374"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -7243,8 +7218,7 @@
     Description: The location according to the common classification of territorial units for statistics (NUTS) of the organisation's physical address. The NUTS3 classification code must be used.
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the person for the ultimate beneficial owner](common-operations.md#get-the-person-for-an-ultimate beneficial-owner) and map to the person's `.address.region`.
+    eForms guidance: \[Get the person for the ultimate beneficial owner\](common-operations.md#get-the-person-for-an-ultimate beneficial-owner) and map to the person's `.address.region`.
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:CountrySubentityCode listName="nuts">GBK62</cbc:CountrySubentityCode></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"region":"GBK62"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -7364,8 +7338,7 @@
     Description: The organisation's uniform resource locator for exchange of data and documents.
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and map to the organization's `.eDeliveryEndpoint` \[https://github.com/open-contracting/european-union-support/issues/62\]
+    eForms guidance: '[Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and map to the organization''s `.eDeliveryEndpoint` \[https://github.com/open-contracting/european-union-support/issues/62\]'
     eForms example: <efac:Organization><efac:Company><cbc:EndpointID>https://drive.xpertpro.eu/</cbc:EndpointID></efac:Company></efac:Organization>
     OCDS example: '{"parties":{"eDeliveryEndpoint":"https://drive.xpertpro.eu"}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -7381,8 +7354,7 @@
     Description: The organisation's uniform resource locator for exchange of data and documents.
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the organization's `.eDeliveryEndpoint` \[https://github.com/open-contracting/european-union-support/issues/62\]
+    eForms guidance: '[Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the organization''s `.eDeliveryEndpoint` \[https://github.com/open-contracting/european-union-support/issues/62\]'
     eForms example: <efac:Organization><efac:TouchPoint><cbc:EndpointID>https://drive.xpertpro.eu/</cbc:EndpointID></efac:TouchPoint></efac:Organization>
     OCDS example: '{"parties":{"eDeliveryEndpoint":"https://drive.xpertpro.eu"}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -7495,8 +7467,7 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS
     - Map to the party's `.address.streetAddress`
-    eForms guidance: |-
-      [Get the organization for the company](common-operations.md#get-the-organization-for-a-company), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the organization's `address.streetAddress`.
+    eForms guidance: '[Get the organization for the company](common-operations.md#get-the-organization-for-a-company), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with '', '' (comma and space) and map to the organization''s `address.streetAddress`.'
     eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cbc:StreetName>2, rue de Europe</cbc:StreetName></cac:PostalAddress></efac:Company></efac:Organization>
     OCDS example: '{"parties":[{"address":{"streetAddress":"2, rue de Europe, Building A, 3rd Floor"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -7511,8 +7482,7 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the organization's `address.streetAddress`.
+    eForms guidance: '[Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with '', '' (comma and space) and map to the organization''s `address.streetAddress`.'
     eForms example: <efac:Organization><efac:TouchPoint><cac:PostalAddress><cbc:StreetName>2, rue de Europe</cbc:StreetName></cac:PostalAddress></efac:TouchPoint></efac:Organization>
     OCDS example: '{"parties":[{"address":{"streetAddress":"2, rue de Europe, Building A, 3rd Floor"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -7527,8 +7497,7 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the person for the ultimate beneficial owner](common-operations.md#get-the-person-for-an-ultimate beneficial-owner), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the person's `address.streetAddress`.
+    eForms guidance: \[Get the person for the ultimate beneficial owner\](common-operations.md#get-the-person-for-an-ultimate beneficial-owner), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the person's `address.streetAddress`.
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:StreetName>2 CheeseStreet</cbc:StreetName></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"streetAddress":"2 CheeseStreet, Nelson Building, 2nd floor"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -7543,8 +7512,7 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the organization for the company](common-operations.md#get-the-organization-for-a-company), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the organization's `address.streetAddress`.
+    eForms guidance: '[Get the organization for the company](common-operations.md#get-the-organization-for-a-company), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with '', '' (comma and space) and map to the organization''s `address.streetAddress`.'
     eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cbc:AdditionalStreetName>Building A</cbc:AdditionalStreetName></cac:PostalAddress></efac:Company></efac:Organization>
     OCDS example: '{"parties":[{"address":{"streetAddress":"2, rue de Europe, Building A, 3rd Floor"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -7559,8 +7527,7 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the organization's `address.streetAddress`.
+    eForms guidance: '[Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with '', '' (comma and space) and map to the organization''s `address.streetAddress`.'
     eForms example: <efac:Organization><efac:TouchPoint><cac:PostalAddress><cbc:AdditionalStreetName>Building A</cbc:AdditionalStreetName></cac:PostalAddress></efac:TouchPoint></efac:Organization>
     OCDS example: '{"parties":[{"address":{"streetAddress":"2, rue de Europe, Building A, 3rd Floor"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -7575,8 +7542,7 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the person for the ultimate beneficial owner](common-operations.md#get-the-person-for-an-ultimate beneficial-owner), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the person's `address.streetAddress`.
+    eForms guidance: \[Get the person for the ultimate beneficial owner\](common-operations.md#get-the-person-for-an-ultimate beneficial-owner), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the person's `address.streetAddress`.
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:AdditionalStreetName>Nelson Building</cbc:AdditionalStreetName></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"streetAddress":"2 CheeseStreet, Nelson Building, 2nd floor"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -7591,8 +7557,7 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the organization for the company](common-operations.md#get-the-organization-for-a-company), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the organization's `address.streetAddress`.
+    eForms guidance: '[Get the organization for the company](common-operations.md#get-the-organization-for-a-company), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with '', '' (comma and space) and map to the organization''s `address.streetAddress`.'
     eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cac:AddressLine><cbc:Line>3rd Floor</cbc:Line></cac:AddressLine></cac:PostalAddress></efac:Company></efac:Organization>
     OCDS example: '{"parties":[{"address":{"streetAddress":"2, rue de Europe, Building A, 3rd Floor"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -7607,8 +7572,7 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the organization's `address.streetAddress`.
+    eForms guidance: '[Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with '', '' (comma and space) and map to the organization''s `address.streetAddress`.'
     eForms example: <efac:Organization><efac:TouchPoint><cac:PostalAddress><cac:AddressLine><cbc:Line>3rd Floor</cbc:Line></cac:AddressLine></cac:PostalAddress></efac:TouchPoint></efac:Organization>
     OCDS example: '{"parties":[{"address":{"streetAddress":"2, rue de Europe, Building A, 3rd Floor"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -7623,8 +7587,7 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the person for the ultimate beneficial owner](common-operations.md#get-the-person-for-an-ultimate beneficial-owner), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the person's `address.streetAddress`.
+    eForms guidance: \[Get the person for the ultimate beneficial owner\](common-operations.md#get-the-person-for-an-ultimate beneficial-owner), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the person's `address.streetAddress`.
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cac:AddressLine><cbc:Line>2nd floor</cbc:Line></cac:AddressLine></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"streetAddress":"2 CheeseStreet, Nelson Building, 2nd floor"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -7873,8 +7836,7 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/POSTAL_CODE
     - Map to the party's `.address.postalCode`
-    eForms guidance: |-
-      [Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and map to the organization's `.address.postalCode`
+    eForms guidance: '[Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and map to the organization''s `.address.postalCode`'
     eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cbc:PostalZone>2345</cbc:PostalZone></cac:PostalAddress></efac:Company></efac:Organization>a
     OCDS example: '{"parties":[{"address":{"postalCode":"2345"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -7889,8 +7851,7 @@
     Description: The post code of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the touchpoint's `.address.postalCode`
+    eForms guidance: '[Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the touchpoint''s `.address.postalCode`'
     eForms example: <efac:Organization><efac:TouchPoint><cac:PostalAddress><cbc:PostalZone>2345</cbc:PostalZone></cac:PostalAddress></efac:TouchPoint></efac:Organization>a
     OCDS example: '{"parties":[{"address":{"postalCode":"2345"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -7905,8 +7866,7 @@
     Description: The post code of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the person for the ultimate beneficial owner](common-operations.md#get-the-person-for-an-ultimate beneficial-owner) and map to the person's `.address.postalCode`.
+    eForms guidance: \[Get the person for the ultimate beneficial owner\](common-operations.md#get-the-person-for-an-ultimate beneficial-owner) and map to the person's `.address.postalCode`.
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:PostalZone>C6HA782</cbc:PostalZone></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"postalCode":"C6HA78"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -8040,8 +8000,7 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/TOWN
     - Map to the party's `.address.locality`
-    eForms guidance: |-
-      [Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and map to the organization's `.address.locality`.
+    eForms guidance: '[Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and map to the organization''s `.address.locality`.'
     eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cbc:CityName>SmallCity</cbc:CityName></cac:PostalAddress></efac:Company></efac:Organization>
     OCDS example: '{"parties":[{"address":{"locality":"SmallCity"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -8056,8 +8015,7 @@
     Description: The name of the locality (city, town or village) of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the organization's `.address.locality`.
+    eForms guidance: '[Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the organization''s `.address.locality`.'
     eForms example: <efac:Organization><efac:TouchPoint><cac:PostalAddress><cbc:CityName>SmallCity</cbc:CityName></cac:PostalAddress></efac:TouchPoint></efac:Organization>
     OCDS example: '{"parties":[{"address":{"locality":"SmallCity"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -8072,8 +8030,7 @@
     Description: The name of the locality (city, town or village) of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the person for the ultimate beneficial owner](common-operations.md#get-the-person-for-an-ultimate beneficial-owner) and map to the person's `.address.postalCode`.
+    eForms guidance: \[Get the person for the ultimate beneficial owner\](common-operations.md#get-the-person-for-an-ultimate beneficial-owner) and map to the person's `.address.postalCode`.
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:CityName>MouseTown</cbc:CityName></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"locality":"MouseTown"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -8208,8 +8165,7 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY
     - Take the country code in the `VALUE` attribute, translate to a country name, and map to the party's `.address.countryName`\n\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation. (ISSUE)
-    eForms guidance: |-
-      [Get the organization for the company](common-operations.md#get-the-organization-for-a-company), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the organization's `.address.country`.
+    eForms guidance: '[Get the organization for the company](common-operations.md#get-the-organization-for-a-company), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the organization''s `.address.country`.'
     eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cac:Country><cbc:IdentificationCode listName="country">GBR</cbc:IdentificationCode></cac:Country></cac:PostalAddress></efac:Company></efac:Organization>
     OCDS example: '{"parties":[{"address":{"country":"GB"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -8225,8 +8181,7 @@
     Description: The country of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the organization's `.address.country`.
+    eForms guidance: '[Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the organization''s `.address.country`.'
     eForms example: <efac:Organization><efac:TouchPoint><cac:PostalAddress><cac:Country><cbc:IdentificationCode listName="country">GBR</cbc:IdentificationCode></cac:Country></cac:PostalAddress></efac:TouchPoint></efac:Organization>
     OCDS example: '{"parties":[{"address":{"country":"GB"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -8242,8 +8197,7 @@
     Description: The country of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the person for the ultimate beneficial owner](common-operations.md#get-the-person-for-an-ultimate beneficial-owner), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the person's `.address.country`.
+    eForms guidance: \[Get the person for the ultimate beneficial owner\](common-operations.md#get-the-person-for-an-ultimate beneficial-owner), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the person's `.address.country`.
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cac:Country><cbc:IdentificationCode listName="country">GBR</cbc:IdentificationCode></cac:Country></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"country":"GB"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -8797,9 +8751,9 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_SUBCONTRACTING
     TED guidance:
     - Map to the award's `.subcontracting.value.amount`
-    eForms guidance: Map to the award's `.subcontracting.value.amount`.  Map `@currencyID` to the value's `.currency`.
+    eForms guidance: Map to the bid's `.subcontracting.value.amount`.  Map `@currencyID` to the value's `.currency`. If bid relates to a specific lot set its `.relatedLots` to the lot's id.
     eForms example: <efac:SubcontractingTerm><efbc:TermAmount currencyID="EUR">9999999.99</efbc:TermAmount></efac:SubcontractingTerm>
-    OCDS example: '{"awards":[{"subcontracting":{"value":{"amount":9999999.99,"currency":"EUR"}}}]}'
+    OCDS example: '{"bids":{"details":[{"subContracting":{"value":{"amount":9999999.99,"currency":"EUR"}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderSection
 -   id: BT-554-Tender
     parentNodeId: ND-SubcontractedActivity
@@ -8821,9 +8775,9 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/AWARD_CONTRACT/AWARDED_CONTRACT/INFO_ADD_SUBCONTRACTING
     TED guidance:
     - Map to the award's `.subcontracting.description`
-    eForms guidance: Map to the award's `.subcontracting.description`
+    eForms guidance: Map to the bid's `.subcontracting.description`. If bid relates to a specific lot set its `.relatedLots` to the lot's id.
     eForms example: <efac:SubcontractingTerm><efbc:TermDescription languageID="ENG">The subcontracting will be...</efbc:TermDescription></efac:SubcontractingTerm>
-    OCDS example: '{"awards":[{"subcontracting":{"description":"The subcontracting will be..."}}]}'
+    OCDS example: '{"bids":{"details":[{"subContracting":{"description":"The subcontracting will be..."}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderSection
 -   id: BT-555-Tender
     parentNodeId: ND-SubcontractedActivity
@@ -8845,9 +8799,9 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/AWARD_CONTRACT/AWARDED_CONTRACT/PCT_SUBCONTRACTING
     TED guidance:
     - Map to the award's `.subcontracting.minimumPercentage` and `.subcontracting.maximumPercentage`
-    eForms guidance: Divide number by 100 and map to the award's `.subcontracting.minimumPercentage` and `.subcontracting.maximumPercentage`
+    eForms guidance: Divide number by 100 and map to the bid's `.subcontracting.minimumPercentage` and `.subcontracting.maximumPercentage`.If bid relates to a specific lot set its `.relatedLots` to the lot's id.
     eForms example: <efac:SubcontractingTerm><efbc:TermPercent>30</efbc:TermPercent></efac:SubcontractingTerm>
-    OCDS example: '{"awards":[{"subcontracting":{"minimumPercentage":0.3,"maximumPercentage":0.3}}]}'
+    OCDS example: '{"bids":{"details":[{"subContracting":{"minimumPercentage":0.3,"maximumPercentage":0.3}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderSection
 -   id: BT-556-NoticeResult
     parentNodeId: ND-NoticeResultGroupFA
@@ -8963,10 +8917,11 @@
     TED guidance:
     - '* Get the `Organization` object whose `.name` is ''European Union''. If none exists yet:\n  * [Add a party](../../operations/#add-a-party)\n  * Set its `.name` to ''European Union''\n* Add ''funder'' to its `.roles`\n\n* Get the `Finance` object whose `.description` is the *Identification of the project*. If none exists yet:\n  * Add a `Finance` object to the `planning.budget.finance` array\n  * Map the *Identification of the project* to its `.description`\n  * Set its `.id` incrementally\n  * Set its `.financingParty.name` to ''European Union''\n  * Set its `.financingParty.id` to the party''s `.id`\n* Add the lot''s `.id` to the Finance object''s `.relatedLots` (**F12, F13**: Instead, do nothing)\n\nIn [future forms](https://github.com/eForms/eForms/issues/181#issuecomment-439861320), this field will be de-emphasized.'
     eForms guidance: |-
-      Get the `Organization` object whose `.name` is 'European Union'. If none exists yet:
-      - [Add a party](common-operations.md#add-a-party)
-      - Set its `.name` to 'European Union'
-      - Add 'funder' to its `.roles`
+        Get the `Organization` object whose `.name` is 'European Union'. If none exists yet:
+
+        - [Add a party](common-operations.md#add-a-party)
+        - Set its `.name` to 'European Union'
+        - Add 'funder' to its `.roles`
     eForms example: <efac:Funding><cbc:FundingProgramCode listName="eu-funded">eu-funds</cbc:FundingProgramCode></efac:Funding>
     OCDS example: '{"parties":[{"name":"European Union","roles":["funder"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#EUFundsSection
@@ -8983,8 +8938,7 @@
     Business groups:
         BG-703: Organisation
         BG-3: Buyer
-    eForms guidance: |-
-        [Get the organization for the buyer](common-operations.md#get-the-organization-for-the-buyer) and add a `Classification` object to its `.details.classifications` array. Map to the classification's `.id`, look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/main-activity) and map it to `.description`. If the code's definition in the authority table includes ["COFOG"](<https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Classification_of_the_functions_of_government_(COFOG)>), set the classification's `.scheme` to 'COFOG'. Otherwise, set it to 'Directive 2014/25/EU'.
+    eForms guidance: '[Get the organization for the buyer](common-operations.md#get-the-organization-for-the-buyer) and add a `Classification` object to its `.details.classifications` array. Map to the classification''s `.id`, look up the code''s label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/main-activity) and map it to `.description`. If the code''s definition in the authority table includes ["COFOG"](<https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Classification_of_the_functions_of_government_(COFOG)>), set the classification''s `.scheme` to ''COFOG''. Otherwise, set it to ''Directive 2014/25/EU''.'
     eForms example: <cac:ContractingActivity><cbc:ActivityTypeCode listName="entity-activity">gas-oil</cbc:ActivityTypeCode></cac:ContractingActivity>
     OCDS example: '{"parties":[{"id":"ORG-0001","details":{"classifications":[{"scheme":"Directive 2014/25/EU","id":"gas-oil","description":"Activities related to the exploitation of a geographical area for the purpose of extracting oil or gas."}]}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_buyer_information_2
@@ -9350,8 +9304,7 @@
     Business groups:
         BG-7: Notice Result
         BG-137: Procedure Lot Result
-    eForms guidance: |-
-      [Get the award for the LotResult](common-operations.md#get-the-award-for-the-lot-result) and map to the award's `.estimatedValue.amount`. Map `@currencyID` to the value's `.currency`.
+    eForms guidance: '[Get the award for the LotResult](common-operations.md#get-the-award-for-the-lot-result) and map to the award''s `.estimatedValue.amount`. Map `@currencyID` to the value''s `.currency`.'
     eForms example: <efac:FrameworkAgreementValues><cbc:EstimatedMaximumValueAmount currencyID="EUR">123</cbc:EstimatedMaximumValueAmount></efac:FrameworkAgreementValues>
     OCDS example: '{"awards":[{"estimatedValue":{"amount":123,"currency":"EUR"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_lot_result
@@ -9494,8 +9447,7 @@
     Business groups:
         BG-703: Organisation
         BG-4: Winner
-    eForms guidance: |-
-      [Get the person for the ultimate beneficial owner](common-operations.md#get-the-person-for-an-ultimate beneficial-owner), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the person's `.nationality`.
+    eForms guidance: \[Get the person for the ultimate beneficial owner\](common-operations.md#get-the-person-for-an-ultimate beneficial-owner), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the person's `.nationality`.
     eForms example: <efac:UltimateBeneficialOwner><efac:Nationality><cbc:NationalityID>DEU</cbc:NationalityID></efac:Nationality></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"nationality":"DE"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -9577,8 +9529,7 @@
     Business groups:
         BG-7: Notice Result
         BG-137: Procedure Lot Result
-    eForms guidance: |-
-      [Get the award for the LotResult](common-operations.md#get-the-award-for-the-lot-result) and map to the award's `.maximumValue.amount`. Map `@currencyID` to the value's `.currency`.
+    eForms guidance: '[Get the award for the LotResult](common-operations.md#get-the-award-for-the-lot-result) and map to the award''s `.maximumValue.amount`. Map `@currencyID` to the value''s `.currency`.'
     eForms example: <efac:FrameworkAgreementValues><cbc:MaximumValueAmount currencyID="EUR">5000</cbc:MaximumValueAmount></efac:FrameworkAgreementValues>
     OCDS example: '{"awards":[{"maximumValue":{"amount":5000,"currency":"EUR"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_lot_result
@@ -9649,8 +9600,7 @@
     TED guidance:
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''lowestValidBidValue'', and map to its `.value`.'
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''lowestValidBidValue'', set its `.relatedLot` to the award''s only `.relatedLots` entry, and map to its `.value`.'
-    eForms guidance: |-
-      [Add a bids statistic](common-operations.md#add-a-bids-statistic), set its `.measure` to 'lowestValidBidValue', map to its `.value`. Map `@currencyID` to its `.currency`. Set its `.relatedLot` to the lot's id.
+    eForms guidance: '[Add a bids statistic](common-operations.md#add-a-bids-statistic), set its `.measure` to ''lowestValidBidValue'', map to its `.value`. Map `@currencyID` to its `.currency`. Set its `.relatedLot` to the lot''s id.'
     eForms example: <efac:LotResult><cbc:LowerTenderAmount currencyID="EUR">1230000</cbc:LowerTenderAmount></efac:LotResult>
     OCDS example: '{"bids":{"statistics":[{"measure":"lowestValidBidValue","value":1230000,"currency":"EUR","relatedLot":"Lot-00001"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_lot_result
@@ -9672,8 +9622,7 @@
     TED guidance:
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''highestValidBidValue'', and map to its `.value`.'
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''highestValidBidValue'', set its `.relatedLot` to the award''s only `.relatedLots` entry, and map to its `.value`.'
-    eForms guidance: |-
-      [Add a bids statistic](common-operations.md#add-a-bids-statistic), set its `.measure` to 'highestValidBidValue', and map to its `.value`. Map `@currencyID` to its `.currency`. Set its `.relatedLot` to the lot's id.
+    eForms guidance: '[Add a bids statistic](common-operations.md#add-a-bids-statistic), set its `.measure` to ''highestValidBidValue'', and map to its `.value`. Map `@currencyID` to its `.currency`. Set its `.relatedLot` to the lot''s id.'
     eForms example: <efac:LotResult><cbc:HigherTenderAmount currencyID="EUR">456</cbc:HigherTenderAmount></efac:LotResult>
     OCDS example: '{"bids":{"statistics":[{"measure":"highestValidBidValue","value":456,"currency":"EUR","relatedLot":"Lot-0001"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_lot_result
@@ -10130,7 +10079,7 @@
     mandatory: false
     codeList: cvd-contract-type
     eForms guidance: ''
-    eForms example: <efac:StrategicProcurementInformation><efbc:ProcurementCategoryCode listName="cvd-contract-type">oth-serv-contract</efbc:ServiceContractType></efac:StrategicProcurementInformation>
+    eForms example: <efac:StrategicProcurementInformation><efbc:ProcurementCategoryCode listName="cvd-contract-type">oth-serv-contr</efbc:ProcurementCategoryCode></efac:StrategicProcurementInformation>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#CVDDirectiveLotSection
 -   id: BT-735-LotResult
@@ -10143,7 +10092,7 @@
     mandatory: false
     codeList: cvd-contract-type
     eForms guidance: ''
-    eForms example: <efac:StrategicProcurementInformation><efbc:ProcurementCategoryCode listName="cvd-contract-type">oth-serv-contract</efbc:ServiceContractType></efac:StrategicProcurementInformation>
+    eForms example: <efac:StrategicProcurementInformation><efbc:ProcurementCategoryCode listName="cvd-contract-type">oth-serv-contr</efbc:ProcurementCategoryCode></efac:StrategicProcurementInformation>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#CVDDirectiveLotSection
 -   id: BT-736-Lot
@@ -10324,8 +10273,7 @@
     TED guidance:
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/FAX
     - Map to the party's `.contactPoint.faxNumber`
-    eForms guidance: |-
-      [Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and map to the organization's `.contactPoint.faxNumber`
+    eForms guidance: '[Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and map to the organization''s `.contactPoint.faxNumber`'
     eForms example: <efac:Organization><efac:Company><cac:Contact><cbc:Telefax>(+33) 2 34 56 78 91</cbc:Telefax></cac:Contact></efac:Company></efac:Organization>
     OCDS example: '{"parties":[{"contactPoint":{"faxNumber":"(+33) 2 34 56 78 91"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -10341,8 +10289,7 @@
     Description: The fax for contacting the organisation. To avoid unnecessary processing of personal data, the fax may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the organization's `.contactPoint.faxNumber`
+    eForms guidance: '[Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the organization''s `.contactPoint.faxNumber`'
     eForms example: <efac:Organization><efac:TouchPoint><cac:Contact><cbc:Telefax>(+33) 2 34 56 78 91</cbc:Telefax></cac:Contact></efac:TouchPoint></efac:Organization>
     OCDS example: '{"parties":[{"contactPoint":{"faxNumber":"(+33) 2 34 56 78 91"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -10358,8 +10305,7 @@
     Description: The fax for contacting the organisation. To avoid unnecessary processing of personal data, the fax may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the person for the ultimate beneficial owner](common-operations.md#get-the-person-for-an-ultimate beneficial-owner) and map to the person's `.faxNumber`.
+    eForms guidance: \[Get the person for the ultimate beneficial owner\](common-operations.md#get-the-person-for-an-ultimate beneficial-owner) and map to the person's `.faxNumber`.
     eForms example: <efac:UltimateBeneficialOwner><cac:Contact><cbc:Telefax>+123 4567891</cbc:Telefax></cac:Contact></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"faxNumber":"+123 4567891"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -10376,8 +10322,7 @@
     Business groups:
         BG-703: Organisation
         BG-3: Buyer
-    eForms guidance: |-
-      [Get the organization for the buyer](common-operations.md#get-the-organization-for-the-buyer) and add a `Classification` object to its `.details.classifications` array. Map to the classification's `.id`, look up the code's label in the \[buyer contracting type mapping table\], map it to `.description`and set its `.scheme` to 'buyer-contracting-type'. \[https://github.com/open-contracting/european-union-support/issues/65\]
+    eForms guidance: '[Get the organization for the buyer](common-operations.md#get-the-organization-for-the-buyer) and add a `Classification` object to its `.details.classifications` array. Map to the classification''s `.id`, look up the code''s label in the \[buyer contracting type mapping table\], map it to `.description`and set its `.scheme` to ''buyer-contracting-type''. \[https://github.com/open-contracting/european-union-support/issues/65\]'
     eForms example: <cac:ContractingPartyType><cbc:PartyTypeCode listName="buyer-contracting-type">cont-ent</cbc:PartyTypeCode></cac:ContractingPartyType>
     OCDS example: '{"parties":[{"id":"ORG-0001","details":{"classifications":[{"scheme":"TED_BUYER_TYPE","id":"cont-ent","description":"Contracting Entity"}]}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_buyer_information_2
@@ -10776,9 +10721,9 @@
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''bids'', and map to its `.value`.'
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''bids'', set its `.relatedLot` to the award''s only `.relatedLots` entry, and map to its `.value`.'
     eForms guidance: |-
-      These values are mapped to the same `BidsStatistic` objects as created for BT-760.
-      
-      For each `<efac:ReceivedSubmissionsStatistics>`, [add a bids statistic](common-operations.md#add-a-bids-statistic) or update the corresponding `BidsStatistic` object and map to its `.value`.
+        These values are mapped to the same `BidsStatistic` objects as created for BT-760.
+
+        For each `<efac:ReceivedSubmissionsStatistics>`, [add a bids statistic](common-operations.md#add-a-bids-statistic) or update the corresponding `BidsStatistic` object and map to its `.value`.
     eForms example: <efac:ReceivedSubmissionsStatistics><efbc:StatisticsNumeric>12</efbc:StatisticsNumeric></efac:ReceivedSubmissionsStatistics>
     OCDS example: '{"bids":{"statistics":[{"value":12}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_lot_result
@@ -10844,9 +10789,9 @@
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''smeBids'', and map to its `.value`.'
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''smeBids'', set its `.relatedLot` to the award''s only `.relatedLots` entry, and map to its `.value`.'
     eForms guidance: |-
-      These values are mapped to the same `BidsStatistic` objects as created for BT-759.
-      
-      For each `<efac:ReceivedSubmissionsStatistics>`, [add a bids statistic](common-operations.md#add-a-bids-statistic) or update the corresponding `BidsStatistic` object and map to its `.measure` according to the \[submission count types mapping table\].
+        These values are mapped to the same `BidsStatistic` objects as created for BT-759.
+
+        For each `<efac:ReceivedSubmissionsStatistics>`, [add a bids statistic](common-operations.md#add-a-bids-statistic) or update the corresponding `BidsStatistic` object and map to its `.measure` according to the \[submission count types mapping table\].
     eForms example: <efac:ReceivedSubmissionsStatistics><efbc:StatisticsCode listName="received-submission-type">t-sme</efbc:StatisticsCode></efac:ReceivedSubmissionsStatistics>
     OCDS example: '{"bids":{"statistics":[{"measure":"smeBids"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#_lot_result
@@ -11148,9 +11093,9 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/AWARD_CONTRACT/AWARDED_CONTRACT/LIKELY_SUBCONTRACTED
     TED guidance:
     - Set the award's `.hasSubcontracting` to `true`
-    eForms guidance: If 'yes' set the award's `.hasSubcontracting` to `true`, if 'no' set the award's `.hasSubcontracting' to `false\`.
+    eForms guidance: If 'yes' set the bid's `.hasSubcontracting` to `true`, if 'no' set the bid's `.hasSubcontracting' to `false\`.
     eForms example: <efac:SubcontractingTerm><efbc:TermCode listName="applicability">yes</efbc:TermCode></efac:SubcontractingTerm>
-    OCDS example: '{"awards":[{"hasSubcontracting":true}]}'
+    OCDS example: '{"bids":{"details":[{"hasSubContracting":true}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderSection
 -   id: BT-774-Lot
     parentNodeId: ND-LotProcurementScope
@@ -11472,12 +11417,13 @@
     - Map to `tender.submissionTerms.bidValidityPeriod.endDate`
     - Multiply by 30, and map to `tender.submissionTerms.bidValidityPeriod.durationInDays`
     eForms guidance: |-
-      Multiply by:
-      * 1, if @unitCode="DAY"
-      * 7, if @unitCode="WEEK"
-      * 30, if @unitCode="MONTH"
-      * 365, if @unitCode="YEAR"
-      Map to the lot's `.submissionTerms.bidValidityPeriod.durationInDays`.
+        Multiply by:
+
+        - 1, if @unitCode="DAY"
+        - 7, if @unitCode="WEEK"
+        - 30, if @unitCode="MONTH"
+        - 365, if @unitCode="YEAR"
+          Map to the lot's `.submissionTerms.bidValidityPeriod.durationInDays`.
     eForms example: <cac:TenderValidityPeriod><cbc:DurationMeasure unitCode="MONTH">4</cbc:DurationMeasure></cac:TenderValidityPeriod>
     OCDS example: '{"tender":{"lots":[{"submissionTerms":{"bidValidityPeriod":{"durationInDays":120}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#tenderValiditySection
@@ -12156,8 +12102,7 @@
     type: text
     repeatable: false
     mandatory: true
-    eForms guidance: |-
-      [Get the person for the ultimate beneficial owner](common-operations.md#get-the-person-for-an-ultimate beneficial-owner) and map to the person's `.name`.
+    eForms guidance: \[Get the person for the ultimate beneficial owner\](common-operations.md#get-the-person-for-an-ultimate beneficial-owner) and map to the person's `.name`.
     eForms example: <efac:UltimateBeneficialOwner><cbc:FirstName>Mickey</cbc:FirstName></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"name":"Mickey"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -12211,8 +12156,7 @@
     repeatable: true
     mandatory: true
     pattern: ^UBO-\d{4}$
-    eForms guidance: |-
-      [Get the person for the ultimate beneficial owner](common-operations.md#get-the-person-for-an-ultimate beneficial-owner) and map to the person's `.id`.
+    eForms guidance: \[Get the person for the ultimate beneficial owner\](common-operations.md#get-the-person-for-an-ultimate beneficial-owner) and map to the person's `.id`.
     eForms example: <efac:UltimateBeneficialOwner><cbc:ID schemeName="ubo">UBO-0001</cbc:ID></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":{"id":"UBO-0001"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#ultimateBeneficialOwnerSection
