@@ -1605,7 +1605,13 @@
     TED guidance:
     - Map to the award's `.date`
     - Map to the contract's `.dateSigned`
-    eForms guidance: "For each `ancestor::efac:NoticeResult/efac:LotResult` with an `/efac:SettledContract/cbc:ID` equal to the value of `ancestor::efac:SettledContract/cbc:ID`:\n\n- Get the `Award` object in `awards` whose `.id` is equal to the LotResult's `/cbc:ID`. If none exists yet:\n  - Add an `Award` to `awards`\n  - Set its `.id` to the value of the LotResult's `/cbc:ID`\n  - Add the value of the LotResult's `/efac:TenderLot\u200B/cbc:ID` to the award's `.relatedLots`\n- If the award's `.date` is not yet set or if the winner decision date is earlier than the award's `.date`, map to the award's `.date`. Otherwise, discard.  \\[https://github.com/open-contracting/european-union-support/issues/110\\]"
+    eForms guidance: |-
+      For each `ancestor::efac:NoticeResult/efac:LotResult` with an `/efac:SettledContract/cbc:ID` equal to the value of `ancestor::efac:SettledContract/cbc:ID`:
+      * Get the `Award` object in `awards` whose `.id` is equal to the LotResult's `/cbc:ID`. If none exists yet:
+        * Add an `Award` to `awards`
+        * Set its `.id` to the value of the LotResult's `/cbc:ID`
+        * Add the value of the LotResult's `/efac:TenderLot​/cbc:ID` to the award's `.relatedLots`
+      * If the award's `.date` is not yet set or if the winner decision date is earlier than the award's `.date`, map to the award's `.date`. Otherwise, discard.
     eForms example: <efac:SettledContract><cbc:AwardDate>2021-02-19+01:00</cbc:AwardDate></efac:SettledContract>
     OCDS example: '{"awards":[{"date":"2021-02-19T23:59:59+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#settledContractSection
