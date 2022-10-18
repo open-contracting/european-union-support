@@ -1273,10 +1273,10 @@
     Description: The identifier of a lot. In case of PINs used only for information, the identifier of a part of the notice that may later become a lot or a self-standing procedure. The information in the purpose section refers to this lot or part.
     Business groups:
         BG-2: Purpose
-    eForms guidance: (UNREVIEWED) (REPEAT) Refer to the \[guidance for lot identifiers\](common-operations lot identifier).
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: If there is a `LotGroup` in `tender.lotGroups` whose `.id` is equal to the value of this field, discard. Otherwise, add a `LotGroup` to `tender.lotGroups` and map to its `.id`.
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="LotsGroup">GLO-0001</cbc:ID></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lotGroups":[{"id":"GLO-0001"}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#identifiersSection
 -   id: BT-137-Part
     parentNodeId: ND-Part
     name: Purpose Lot Identifier
@@ -1383,10 +1383,13 @@
     Business groups:
         BG-6: Procedure
         BG-330: Group Lot Award
-    eForms guidance: (UNREVIEWED) Add the lot identifier to the Lot group's `.relatedLots` (see the [lot extension](https://extensions.open-contracting.org/en/extensions/lots/master/)) \[https://github.com/open-contracting/european-union-support/issues/71\]
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        Get the `LotGroup` in `tender.lotGroups` whose `id` is equal to the value of the XPath `ancestor::cac:LotsGroup/cbc:LotsGroupID`. If none exists yet, add a `LotGroup` to `tender.lotGroups` and set it's `id` to the value of the XPath `ancestor::cac:LotsGroup/cbc:LotsGroupID`.
+
+        If not already present, add to the lot group's `.relatedLots`.
+    eForms example: <cac:LotDistribution><cac:LotsGroup><cac:ProcurementProjectLotReference><cbc:ID schemeName="Lot">LOT-0002</cbc:ID></cac:ProcurementProjectLotReference></cac:LotsGroup></cac:LotDistribution>
+    OCDS example: '{"tender":{"lotGroups":[{"relatedLots":["LOT-0002"]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#maxLotsSection
 -   id: BT-14-Lot
     parentNodeId: ND-LotProcurementDocument
     name: Documents Restricted
@@ -1437,54 +1440,27 @@
     Business groups:
         BG-9: Change
     eForms guidance: |-
-      For each `ancestor::efac:Changes/efac:Change`:
-      * If the change's `/efbc:ChangedSectionIdentifier` (BT-13716) references a LotResult (`RES-XXXX`), [get the award for the LotResult](common-operations.md#get-the-award-for-the-lotresult) and add an `Amendment` object to the award's `.amendments` array. Otherwise, add an `Amendment` object to the `tender.amendments` array.
-      * If the change's `/efbc:ChangedSectionIdentifier` (BT-13716) references a Lot (`LOT-XXXX`), add the Lot's identifier to the amendment's `.relatedLots` array.
-      * Set the amendment's `.id` sequentially across all notices for this procedure. For example, if the first change notice for a procedure has three changes, it uses `id`'s '1' through '3'. A second change notice for the same procedure then uses `id`'s '4' and up, etc.
-      * Add a `Classification` object to the amendment's `rationaleClassifications` array and map to its `.id`.
-      * Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/change-corrig-justification) and map it to the classification's `.description`.
-      * Set the classification's `.scheme` to 'change-corrig-justification'.
+        For each `ancestor::efac:Changes/efac:Change`:
+
+        - If the change's `/efbc:ChangedSectionIdentifier` (BT-13716) references a LotResult (`RES-XXXX`), [get the award for the LotResult](common-operations.md#get-the-award-for-the-lotresult) and add an `Amendment` object to the award's `.amendments` array. Otherwise, add an `Amendment` object to the `tender.amendments` array.
+        - If the change's `/efbc:ChangedSectionIdentifier` (BT-13716) references a Lot (`LOT-XXXX`), add the Lot's identifier to the amendment's `.relatedLots` array.
+        - Set the amendment's `.id` sequentially across all notices for this procedure. For example, if the first change notice for a procedure has three changes, it uses `id`'s '1' through '3'. A second change notice for the same procedure then uses `id`'s '4' and up, etc.
+        - Add a `Classification` object to the amendment's `rationaleClassifications` array and map to its `.id`.
+        - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/change-corrig-justification) and map it to the classification's `.description`.
+        - Set the classification's `.scheme` to 'change-corrig-justification'.
     eForms example: |-
-      <efac:Changes>
-          <efac:Change>
-              <efbc:ChangedSectionIdentifier>LOT-0001</efbc:ChangedSectionIdentifier>
-          </efac:Change>
-          <efac:Change>
-              <efbc:ChangedSectionIdentifier>LOT-0002</efbc:ChangedSectionIdentifier>
-          </efac:Change>
-          <efac:ChangeReason>
-              <cbc:ReasonCode listName="change-corrig-justification">update-add</cbc:ReasonCode>
-          </efac:ChangeReason>
-      </efac:Changes>
-    OCDS example: |-
-      {
-        "tender": {
-          "amendments": [
-            {
-              "relatedLots": ["LOT-0001"],
-              "id": "1",
-              "rationaleClassifications": [
-                {
-                  "id": "update-add",
-                  "description": "Information updated",
-                  "scheme": "change-corrig-justification"
-                }
-              ]
-            },
-            {
-              "relatedLots": ["LOT-0002"],
-              "id": "2",
-              "rationaleClassifications": [
-                {
-                  "id": "update-add",
-                  "description": "Information updated",
-                  "scheme": "change-corrig-justification"
-                }
-              ]
-            }
-          ]
-        }
-      }
+        <efac:Changes>
+            <efac:Change>
+                <efbc:ChangedSectionIdentifier>LOT-0001</efbc:ChangedSectionIdentifier>
+            </efac:Change>
+            <efac:Change>
+                <efbc:ChangedSectionIdentifier>LOT-0002</efbc:ChangedSectionIdentifier>
+            </efac:Change>
+            <efac:ChangeReason>
+                <cbc:ReasonCode listName="change-corrig-justification">update-add</cbc:ReasonCode>
+            </efac:ChangeReason>
+        </efac:Changes>
+    OCDS example: '{"tender":{"amendments":[{"relatedLots":["LOT-0001"],"id":"1","rationaleClassifications":[{"id":"update-add","description":"Information updated","scheme":"change-corrig-justification"}]},{"relatedLots":["LOT-0002"],"id":"2","rationaleClassifications":[{"id":"update-add","description":"Information updated","scheme":"change-corrig-justification"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#changeSection
 -   id: BT-141(a)-notice
     parentNodeId: ND-Change
@@ -1503,7 +1479,7 @@
     - Map to the amendment's `.description`
     eForms guidance: These values map to the same `Amendment` objects as created for BT-140. Update the corresponding `Amendment` object and map to its `.description`.
     eForms example: <efac:Change><efbc:ChangeDescription languageID="ENG">The changes have been applied to ...</efbc:ChangeDescription></efac:Change>
-    OCDS example: '{"tender":{"amendments":[{"description": "The changes have been applied to..."}]}}'
+    OCDS example: '{"tender":{"amendments":[{"description":"The changes have been applied to..."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#changeSection
 -   id: BT-142-LotResult
     parentNodeId: ND-LotResult
@@ -1605,13 +1581,7 @@
     TED guidance:
     - Map to the award's `.date`
     - Map to the contract's `.dateSigned`
-    eForms guidance: |-
-      For each `ancestor::efac:NoticeResult/efac:LotResult` with an `/efac:SettledContract/cbc:ID` equal to the value of `ancestor::efac:SettledContract/cbc:ID`:
-      * Get the `Award` object in `awards` whose `.id` is equal to the LotResult's `/cbc:ID`. If none exists yet:
-        * Add an `Award` to `awards`
-        * Set its `.id` to the value of the LotResult's `/cbc:ID`
-        * Add the value of the LotResult's `/efac:TenderLot​/cbc:ID` to the award's `.relatedLots`
-      * If the award's `.date` is not yet set or if the winner decision date is earlier than the award's `.date`, map to the award's `.date`. Otherwise, discard.
+    eForms guidance: "For each `ancestor::efac:NoticeResult/efac:LotResult` with an `/efac:SettledContract/cbc:ID` equal to the value of `ancestor::efac:SettledContract/cbc:ID`:\n\n- Get the `Award` object in `awards` whose `.id` is equal to the LotResult's `/cbc:ID`. If none exists yet:\n  - Add an `Award` to `awards`\n  - Set its `.id` to the value of the LotResult's `/cbc:ID`\n  - Add the value of the LotResult's `/efac:TenderLot\u200B/cbc:ID` to the award's `.relatedLots`\n- If the award's `.date` is not yet set or if the winner decision date is earlier than the award's `.date`, map to the award's `.date`. Otherwise, discard."
     eForms example: <efac:SettledContract><cbc:AwardDate>2021-02-19+01:00</cbc:AwardDate></efac:SettledContract>
     OCDS example: '{"awards":[{"date":"2021-02-19T23:59:59+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#settledContractSection
@@ -1769,7 +1739,7 @@
     Business groups:
         BG-2: Purpose
         BG-557: Group Framework Estimated Maximum Value
-    eForms guidance: Add a Lot group to the the `tender.lotGroups` array. Map to the lot group's `.maximumValue.amount` (number) and map `currencyID` to the lot group's `maximumValue.currency`.
+    eForms guidance: '[Get the lot group for the ProcurementProjectLot](common-operations.md#get-the-lot-group-for-a-procurementprojectlot), map to its `.maximumValue.amount` (number) and map `currencyID` to its `maximumValue.currency`.'
     eForms example: <cac:FrameworkAgreement><cbc:EstimatedMaximumValueAmount currencyID="EUR">200000</cbc:EstimatedMaximumValueAmount></cac:FrameworkAgreement>
     OCDS example: '{"tender":{"lotGroups":[{"maximumValue":{"amount":200000,"currency":"EUR"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#frameworkAgreementSection
@@ -5465,7 +5435,7 @@
     Description: The name of the procurement procedure or lot.
     Business groups:
         BG-2: Purpose
-    eForms guidance: Map to the lotGroup's `.title`
+    eForms guidance: '[Get the lot group for the ProcurementProjectLot](common-operations.md#get-the-lot-group-for-a-procurementprojectlot) and map to its `.title`.'
     eForms example: <cbc:Name languageID="ENG">Computer Network extension</cbc:Name>
     OCDS example: '{"tender":{"lotGroups":[{"title":"Computer Network extension"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#objectSection
@@ -5564,7 +5534,7 @@
     Description: 'The internal identifier used for files regarding the procurement procedure or lot before a procedure identifier is given (e.g. coming from the buyer''s document management system or procurement planning system). '
     Business groups:
         BG-2: Purpose
-    eForms guidance: Map to the lotGroup's `.identifiers.id` and set `.identifiers.scheme` to "internal".
+    eForms guidance: '[Get the lot group for the ProcurementProjectLot](common-operations.md#get-the-lot-group-for-a-procurementprojectlot) and add a `SimpleIdentifier` to its `.identifiers` array. Set the identifier''s `.scheme` to ''internal'' and map to its `.id`.'
     eForms example: <cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID>
     OCDS example: '{"tender":{"lotGroups":[{"identifiers":[{"id":"PROC/2020/0024-ABC-FGHI"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#objectSection
@@ -5735,7 +5705,7 @@
     Description: The description of the nature and quantity of what is being bought or of the needs and requirements that should be met in this procedure or lot. In case of a modification notice, the description of the procurement before and after the modification.
     Business groups:
         BG-2: Purpose
-    eForms guidance: Map to the lotGroup's `.description`.
+    eForms guidance: '[Get the lot group for the ProcurementProjectLot](common-operations.md#get-the-lot-group-for-a-procurementprojectlot) and map to its `.description`.'
     eForms example: <cbc:Description languageID="ENG">Procedure for the procurement of ...</cbc:Description>
     OCDS example: '{"tender":{"lotGroups":[{"description":"Procedure for the procurement of ..."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#objectSection
@@ -6111,7 +6081,7 @@
     Description: The estimated maximum value of the procurement procedure or lot. Estimated refers to estimation at the time of launching the call for competition. Maximum value means a value covering all contracts to be awarded within a framework agreement or a dynamic purchasing system, over their whole duration, including options and renewals.
     Business groups:
         BG-2: Purpose
-    eForms guidance: Map to the lot group's `.maximumValue.amount` and map `currencyID` to the lot group's `maximumValue.currency`.
+    eForms guidance: '[Get the lot group for the ProcurementProjectLot](common-operations.md#get-the-lot-group-for-a-procurementprojectlot), map to its `.maximumValue.amount` and map `currencyID` to its `maximumValue.currency`.'
     eForms example: <cac:RequestedTenderTotal><cbc:EstimatedOverallContractAmount currencyID="EUR">250000</cbc:EstimatedOverallContractAmount></cac:RequestedTenderTotal>
     OCDS example: '{"tender":{"lotGroups":[{"maximumValue":{"amount":250000,"currency":"EUR"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#estimatedValueSection
@@ -6216,7 +6186,7 @@
     Description: Any information not mentioned elsewhere.
     Business groups:
         BG-710: Additional Information
-    eForms guidance: 'Append to the lotGroup''s `.description`\\n\\nThis results in a loss of structure. (WARNING #28)'
+    eForms guidance: '[Get the lot group for the ProcurementProjectLot](common-operations.md#get-the-lot-group-for-a-procurementprojectlot) and append to its `.description`. This results in a loss of structure.'
     eForms example: <cbc:Note languageID="ENG">For the current procedure ...</cbc:Note>
     OCDS example: '{"tender":{"lotGroups":[{"description":"For the current procedure ..."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#additionalInfoSection
@@ -6375,7 +6345,7 @@
     Business groups:
         BG-6: Procedure
         BG-330: Group Lot Award
-    eForms guidance: Add a Group lot object in the `tender.lotGroups` array. Map to its `.id`. \[https://github.com/open-contracting/european-union-support/issues/71\]
+    eForms guidance: If there is a `LotGroup` in `tender.lotGroups` whose `.id` is equal to the value of this field, discard. Otherwise, add a `LotGroup` to `tender.lotGroups` and map to its `.id`.
     eForms example: <cac:LotsGroup><cbc:LotsGroupID schemeName="LotsGroup">GLO-0001</cbc:LotsGroupID></cac:LotsGroup>
     OCDS example: '{"tender":{"lotGroups":[{"id":"GLO-0001"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#maxLotsSection
@@ -8530,7 +8500,12 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/AWARD_CRITERIA_CONTRACT_NOTICE_INFORMATION/AWARD_CRITERIA_DETAIL/LOWEST_PRICE
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/AWARD_CRITERIA_CONTRACT_NOTICE_INFORMATION/AWARD_CRITERIA_DETAIL/MOST_ECONOMICALLY_ADVANTAGEOUS_TENDER
-    eForms guidance: Map to the lot's award criterion's `.type`
+    eForms guidance: |-
+        These values are mapped to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5421-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot.
+
+        - [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot).
+        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
+        - Map to the award critereon's `.type`.
     eForms example: <cac:SubordinateAwardingCriterion><cbc:AwardingCriterionTypeCode listName="award-criterion-type">quality</cbc:AwardingCriterionTypeCode></cac:SubordinateAwardingCriterion>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"type":"quality"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#awardCriteriaSection
@@ -8547,9 +8522,14 @@
     Business groups:
         BG-707: Award Criteria
         BG-38: Award Criterion
-    eForms guidance: Map to the lot's award criterion's `.type`
+    eForms guidance: |-
+        These values are mapped to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup.
+
+        - [Get the lot group for the ProcurementProjectLot](common-operations.md#get-the-lot-group-for-a-procurementprojectlot).
+        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
+        - Map to the award critereon's `.type`.
     eForms example: <cac:SubordinateAwardingCriterion><cbc:AwardingCriterionTypeCode listName="award-criterion-type">quality</cbc:AwardingCriterionTypeCode></cac:SubordinateAwardingCriterion>
-    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"type":"quality"}]}}]}}'
+    OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"type":"quality"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-54-Lot
     parentNodeId: ND-OptionsAndRenewals
@@ -8589,7 +8569,12 @@
     Business groups:
         BG-707: Award Criteria
         BG-38: Award Criterion
-    eForms guidance: Map to the lot's award criterion's `.description`
+    eForms guidance: |-
+        These values are mapped to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5421-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot.
+
+        - [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot).
+        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
+        - Map to the award criterion's `.description`.
     eForms example: <cac:SubordinateAwardingCriterion><cbc:Description languageID="ENG">Tenders with a quality score less than 65...</cbc:Description></cac:SubordinateAwardingCriterion>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"description":"Tenders with a quality score less than 65..."}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#awardCriteriaSection
@@ -8605,9 +8590,14 @@
     Business groups:
         BG-707: Award Criteria
         BG-38: Award Criterion
-    eForms guidance: Map to the lots' award criterion's `.description`
+    eForms guidance: |-
+        These values are mapped to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup.
+
+        - [Get the lot group for the ProcurementProjectLot](common-operations.md#get-the-lot-group-for-a-procurementprojectlot).
+        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
+        - Map to the award criterion's `.description`.
     eForms example: <cac:SubordinateAwardingCriterion><cbc:Description languageID="ENG">Tenders with a quality score less than 65...</cbc:Description></cac:SubordinateAwardingCriterion>
-    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"description":"Tenders with a quality score less than 65..."}]}}]}}'
+    OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"description":"Tenders with a quality score less than 65..."}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-541-Lot
     parentNodeId: ND-LotAwardCriterionParameters
@@ -8622,7 +8612,13 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: Add an award criterion number to the lot's award criterion's `.numbers` array. Map to its `.number`.
+    eForms guidance: |-
+        These values are mapped to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5421-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot and to the same `AwardCriterionNumber` objects as created for BT-5421-Lot, BT-5422-Lot and BT-5423-Lot.
+
+        - [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot).
+        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
+        - For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array.
+        - Map to the award criteron number's `.number`.
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterNumeric>50</efbc:ParameterNumeric></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#awardCriteriaSection
@@ -8639,9 +8635,15 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: Add an award criterion number to the lots' award criterion's `.numbers` array. Map to its `.number`.
+    eForms guidance: |-
+        These values are mapped to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup and to the same `AwardCriterionNumber` objects as created for BT-5421-LotsGroup, BT-5422-LotsGroup and BT-5423-LotsGroup.
+
+        - [Get the lot group for the ProcurementProjectLot](common-operations.md#get-the-lot-group-for-a-procurementprojectlot).
+        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
+        - For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array.
+        - Map to the award criteron number's `.number`.
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterNumeric>50</efbc:ParameterNumeric></efac:AwardCriterionParameter>
-    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
+    OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-5421-Lot
     parentNodeId: ND-LotAwardCriterionParameter
@@ -8657,7 +8659,13 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: These values are mapped to the same objects as created for BT-541. Map the code according to the \[award criterion weight mapping table\], and map it to the lot's award criterion number's `.weight`.
+    eForms guidance: |-
+        These values are mapped to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5421-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot and to the same `AwardCriterionNumber` objects as created for BT-5421-Lot, BT-5422-Lot and BT-5423-Lot.
+
+        - [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot).
+        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
+        - For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array.
+        - Map the code to the award criterion number's `.weight` according to the \[award criterion weight mapping table\].
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-weight">per-exa</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"weight":"percentageExact"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#awardCriteriaSection
@@ -8675,9 +8683,15 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: These values are mapped to the same objects as created for BT-541. Map the code according to the \[award criterion weight mapping table\], and map it to the lots' award criterion number's `.weight`.
+    eForms guidance: |-
+        These values are mapped to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup and to the same `AwardCriterionNumber` objects as created for BT-5421-LotsGroup, BT-5422-LotsGroup and BT-5423-LotsGroup.
+
+        - [Get the lot group for the ProcurementProjectLot](common-operations.md#get-the-lot-group-for-a-procurementprojectlot).
+        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
+        - For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array.
+        - Map the code to the award criterion number's `.weight` according to the \[award criterion weight mapping table\].
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-weight">per-exa</efbc:ParameterCode></efac:AwardCriterionParameter>
-    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"weight":"percentageExact"}]}]}}]}}'
+    OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"numbers":[{"weight":"percentageExact"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-5422-Lot
     parentNodeId: ND-LotAwardCriterionParameter
@@ -8693,7 +8707,13 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: These values are mapped to the same objects as created for BT-541. Map the code according to the \[award criterion fixed mapping table\], and map it to the lot's award criterion number's `.fixed`.
+    eForms guidance: |-
+        These values are mapped to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5421-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot and to the same `AwardCriterionNumber` objects as created for BT-5421-Lot, BT-5422-Lot and BT-5423-Lot.
+
+        - [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot).
+        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
+        - For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array.
+        - Map the code to the award criterion number's `.fixed` according to the \[award criterion fixed mapping table\].
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-fixed">fix-tot</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"fixed":"total"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#awardCriteriaSection
@@ -8711,9 +8731,15 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: These values are mapped to the same objects as created for BT-541. Map the code according to the \[award criterion fixed mapping table\], and map it to the lots' award criterion number's `.fixed`.
+    eForms guidance: |-
+        These values are mapped to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup and to the same `AwardCriterionNumber` objects as created for BT-5421-LotsGroup, BT-5422-LotsGroup and BT-5423-LotsGroup.
+
+        - [Get the lot group for the ProcurementProjectLot](common-operations.md#get-the-lot-group-for-a-procurementprojectlot).
+        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
+        - For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array.
+        - Map the code to the award criterion number's `.fixed` according to the \[award criterion fixed mapping table\].
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-fixed">fix-tot</efbc:ParameterCode></efac:AwardCriterionParameter>
-    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"fixed":"total"}]}]}}]}}'
+    OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"numbers":[{"fixed":"total"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-5423-Lot
     parentNodeId: ND-LotAwardCriterionParameter
@@ -8729,7 +8755,13 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: These values are mapped to the same objects as created for BT-541. Map the code according to the \[award criterion threshold mapping table\], and map it to the lot's award criterion number's `.threshold`.
+    eForms guidance: |-
+        These values are mapped to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5421-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot and to the same `AwardCriterionNumber` objects as created for BT-5421-Lot, BT-5422-Lot and BT-5423-Lot.
+
+        - [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot).
+        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
+        - For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array.
+        - Map the code to the award criterion number's `.threshold` according to the \[award criterion threshold mapping table\].
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-threshold">max-pass</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"threshold":"maximumBids"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#awardCriteriaSection
@@ -8747,9 +8779,15 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: These values are mapped to the same objects as created for BT-541. Map the code according to the \[award criterion threshold mapping table\], and map it to the lots' award criterion number's `.threshold`.
+    eForms guidance: |-
+        These values are mapped to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup and to the same `AwardCriterionNumber` objects as created for BT-5421-LotsGroup, BT-5422-LotsGroup and BT-5423-LotsGroup.
+
+        - [Get the lot group for the ProcurementProjectLot](common-operations.md#get-the-lot-group-for-a-procurementprojectlot).
+        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
+        - For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array.
+        - Map the code to the award criterion number's `.threshold` according to the \[award criterion threshold mapping table\].
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-threshold">max-pass</efbc:ParameterCode></efac:AwardCriterionParameter>
-    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"threshold":"maximumBids"}]}]}}]}}'
+    OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"numbers":[{"threshold":"maximumBids"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-543-Lot
     parentNodeId: ND-LotAwardCriteria
@@ -8762,7 +8800,7 @@
     Description: 'The mathematical equation or any other description used for complicated weighing of criteria (e.g. non-linear weighing, the analytic hierarchy process) when a weighing cannot be expressed per criterion. '
     Business groups:
         BG-707: Award Criteria
-    eForms guidance: Map to the lot's `.awardCriteria.weightingDescription`
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.awardCriteria.weightingDescription`.'
     eForms example: <cac:AwardingCriterion><cbc:CalculationExpression languageID="ENG">Price-quality score calculation is based on &#8230;</cbc:CalculationExpression></cac:AwardingCriterion>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"weightingDescription":"Price-quality score calculation is based on \u2026"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#awardCriteriaSection
@@ -8777,9 +8815,9 @@
     Description: 'The mathematical equation or any other description used for complicated weighing of criteria (e.g. non-linear weighing, the analytic hierarchy process) when a weighing cannot be expressed per criterion. '
     Business groups:
         BG-707: Award Criteria
-    eForms guidance: Map to the lot's `.awardCriteria.weightingDescription`
+    eForms guidance: '[Get the lot group for the ProcurementProjectLot](common-operations.md#get-the-lot-group-for-a-procurementprojectlot) and map to its `.awardCriteria.weightingDescription`.'
     eForms example: <cac:AwardingCriterion><cbc:CalculationExpression languageID="ENG">Price-quality score calculation is based on &#8230;</cbc:CalculationExpression></cac:AwardingCriterion>
-    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"weightingDescription":"Price-quality score calculation is based on \u2026"}}]}}'
+    OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"weightingDescription":"Price-quality score calculation is based on \u2026"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-553-Tender
     parentNodeId: ND-SubcontractedActivity
@@ -9732,7 +9770,7 @@
         BG-9: Change
     eForms guidance: These values map to the same `Amendment` objects as created for BT-140. Update the corresponding `Amendment` object and map to its `.documentsChanged`.
     eForms example: <efac:Change><efbc:ProcurementDocumentsChangeIndicator>true</efbc:ProcurementDocumentsChangeIndicator></efac:Change>
-    OCDS example: '{"tender":{"amendments":[{"documentsChanged": true}]}}'
+    OCDS example: '{"tender":{"amendments":[{"documentsChanged":true}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#changeSection
 -   id: BT-719-notice
     parentNodeId: ND-Change
@@ -9748,7 +9786,7 @@
         BG-9: Change
     eForms guidance: These values map to the same `Amendment` objects as created for BT-140. Update the corresponding `Amendment` object and map to its `.documentsChangeDate`.
     eForms example: <efac:Change><efbc:ProcurementDocumentsChangeDate>2019-10-24+01:00</efbc:ProcurementDocumentsChangeDate></efac:Change>
-    OCDS example: '{"tender":{"amendments":[{"documentsChangeDate": "2019-10-24T00:00:00+01:00"}]}}'
+    OCDS example: '{"tender":{"amendments":[{"documentsChangeDate":"2019-10-24T00:00:00+01:00"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#changeSection
 -   id: BT-720-Tender
     parentNodeId: ND-LotTender
@@ -9778,7 +9816,7 @@
     eForms example: <cac:LegalMonetaryTotal><cbc:PayableAmount currencyID="EUR">500</cbc:PayableAmount></cac:LegalMonetaryTotal>
     OCDS example: '{"bids":{"details":[{"value":{"amount":500,"currency":"EUR"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#lotTenderSection
--   id: BT-721-Contract
+-   id: B[Get the lot group for the ProcurementProjectLot](common-operations.md#get-the-lot-group-for-a-procurementprojectlot).21-Contract
     parentNodeId: ND-SettledContract
     name: Contract Title
     btId: BT-721
@@ -9859,9 +9897,9 @@
     Description: The buyer emphasizes that this procurement is also suitable for small and medium enterprises (SMEs).
     Business groups:
         BG-710: Additional Information
-    eForms guidance: ''
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.suitability.sme`.'
     eForms example: <cbc:SMESuitableIndicator>true</cbc:SMESuitableIndicator>
-    OCDS example: ''
+    OCDS example: '{"tender":{"lots":[{"suitability":{"sme":true}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#suitableSMESection
 -   id: BT-726-LotsGroup
     parentNodeId: ND-LotsGroupProcurementScope
@@ -9874,9 +9912,9 @@
     Description: The buyer emphasizes that this procurement is also suitable for small and medium enterprises (SMEs).
     Business groups:
         BG-710: Additional Information
-    eForms guidance: ''
+    eForms guidance: '[Get the lot group for the ProcurementProjectLot](common-operations.md#get-the-lot-group-for-a-procurementprojectlot) and map to the lot group''s `.suitability.sme`.'
     eForms example: <cbc:SMESuitableIndicator>true</cbc:SMESuitableIndicator>
-    OCDS example: ''
+    OCDS example: '{"tender":{"lotGroups":[{"suitability":{"sme":true}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#suitableSMESection
 -   id: BT-726-Part
     parentNodeId: ND-PartProcurementScope
@@ -9889,9 +9927,9 @@
     Description: The buyer emphasizes that this procurement is also suitable for small and medium enterprises (SMEs).
     Business groups:
         BG-710: Additional Information
-    eForms guidance: ''
+    eForms guidance: Map to `.tender.suitability.sme`.
     eForms example: <cbc:SMESuitableIndicator>true</cbc:SMESuitableIndicator>
-    OCDS example: ''
+    OCDS example: '{"tender":{"suitability":{"sme":true}}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#suitableSMESection
 -   id: BT-727-Lot
     parentNodeId: ND-LotPlacePerformance
@@ -10065,7 +10103,7 @@
     Description: The justification for only indicating the award criteria's order of importance, not their weighing.
     Business groups:
         BG-707: Award Criteria
-    eForms guidance: Map to the lot's `.awardCriteria.orderRationale`
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.awardCriteria.orderRationale`.'
     eForms example: <cac:AwardingCriterion><cbc:Description languageID="ENG">Each criterion is evaluated separately ...</cbc:Description></cac:AwardingCriterion>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"orderRationale":"Each criterion is evaluated separately ..."}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#awardCriteriaSection
@@ -10080,9 +10118,9 @@
     Description: The justification for only indicating the award criteria's order of importance, not their weighing.
     Business groups:
         BG-707: Award Criteria
-    eForms guidance: Map to the lot's `.awardCriteria.orderRationale`
+    eForms guidance: '[Get the lot group for the ProcurementProjectLot](common-operations.md#get-the-lot-group-for-a-procurementprojectlot) and map to its `.awardCriteria.orderRationale`.'
     eForms example: <cac:AwardingCriterion><cbc:Description languageID="ENG">Each criterion is evaluated separately ...</cbc:Description></cac:AwardingCriterion>
-    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"orderRationale":"Each criterion is evaluated separately ..."}}]}}'
+    OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"orderRationale":"Each criterion is evaluated separately ..."}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-734-Lot
     parentNodeId: ND-LotAwardCriterion
@@ -10098,7 +10136,12 @@
         BG-38: Award Criterion
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/AWARD_CRITERIA_CONTRACT_NOTICE_INFORMATION/AWARD_CRITERIA_DETAIL/MOST_ECONOMICALLY_ADVANTAGEOUS_TENDER/CRITERIA_STATED_BELOW
-    eForms guidance: Map to the lot's award criterion's `.name`
+    eForms guidance: |-
+        These values are mapped to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5421-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot.
+
+        - [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot).
+        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
+        - Map to the the award criterion's `.name`.
     eForms example: <cac:SubordinateAwardingCriterion><cbc:Name languageID="ENG">Technical merit</cbc:Name></cac:SubordinateAwardingCriterion>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"name":"Technical merit"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#awardCriteriaSection
@@ -10114,9 +10157,14 @@
     Business groups:
         BG-707: Award Criteria
         BG-38: Award Criterion
-    eForms guidance: Map to the lot's award criterion's `.name`
+    eForms guidance: |-
+        These values are mapped to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup.
+
+        - [Get the lot group for the ProcurementProjectLot](common-operations.md#get-the-lot-group-for-a-procurementprojectlot).
+        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
+        - Map to the the award criterion's `.name`.
     eForms example: <cac:SubordinateAwardingCriterion><cbc:Name languageID="ENG">Technical merit</cbc:Name></cac:SubordinateAwardingCriterion>
-    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"name":"Technical merit"}]}}]}}'
+    OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"name":"Technical merit"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#awardCriteriaSection
 -   id: BT-735-Lot
     parentNodeId: ND-StrategicProcurementInformationLot
@@ -10877,7 +10925,7 @@
         BG-9: Change
     eForms guidance: These values map to the same `Amendment` objects as created for BT-140. Update the corresponding `Amendment` objects and map to its `.rationale`.
     eForms example: <efac:ChangeReason><efbc:ReasonDescription languageID="ENG">Clerical corrections of ...</efbc:ReasonDescription></efac:ChangeReason>
-    OCDS example: '{"tender":{"amendments":[{"rationale": "Clerical corrections of ..."}]}}'
+    OCDS example: '{"tender":{"amendments":[{"rationale":"Clerical corrections of ..."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#changeReasonSection
 -   id: BT-763-Procedure
     parentNodeId: ND-ProcedureTenderingProcess
@@ -11901,7 +11949,7 @@
     repeatable: false
     mandatory: false
     codeList: buyer-categories
-    eForms guidance: ''
+    eForms guidance: Discard
     eForms example: <cac:SubsequentProcessTenderRequirement><cbc:Name>buyer-categories</cbc:Name></cac:SubsequentProcessTenderRequirement>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#frameworkAgreementSection
@@ -11914,7 +11962,7 @@
     repeatable: false
     mandatory: false
     codeList: buyer-categories
-    eForms guidance: ''
+    eForms guidance: Discard
     eForms example: <cac:SubsequentProcessTenderRequirement><cbc:Name>buyer-categories</cbc:Name></cac:SubsequentProcessTenderRequirement>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.1.1/schema/all-in-one.html#frameworkAgreementSection
