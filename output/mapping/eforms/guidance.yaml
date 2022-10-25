@@ -6799,7 +6799,7 @@
     type: id
     repeatable: true
     mandatory: false
-    eForms guidance: ''
+    eForms guidance: /https://github.com/open-contracting/european-union-support/issues/115
     eForms example: <efac:Funding><efbc:FinancingIdentifier>CON_PRO-123/ABC</efbc:FinancingIdentifier></efac:Funding>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.2.1/schema/all-in-one.html#EUFundsSection
@@ -6832,7 +6832,7 @@
           - Map the *Identification of the project* to its `.description`
           - Set its `.id` incrementally
           - Set its `.financingParty.name` to 'European Union'
-          - Set its `.financingParty.id` to the party's `.id`
+          - Set its `.financingParty.id` to the party's `.id` /https://github.com/open-contracting/european-union-support/issues/115
     eForms example: <efac:Funding><efbc:FinancingIdentifier>2021/1234</efbc:FinancingIdentifier></efac:Funding>
     OCDS example: '{"parties":[{"id":"1","name":"European Union","roles":["funder"]}],"contracts":[{"finance":[{"id":"1","description":"2021/1234","financingParty":{"id":"1","name":"European Union"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.2.1/schema/all-in-one.html#settledContractSection
@@ -9128,9 +9128,9 @@
     type: text-multilingual
     repeatable: false
     mandatory: false
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: \[UNREVIEWED} These values are mapped to the same `finance` object as created for BT-5011 and BT-722. For each `efac:Funding`, add or update the corresponding `Finance` object in the contract's `.finance` array and map to its `.description`. /https://github.com/open-contracting/european-union-support/issues/115
+    eForms example: <efac:Funding><cbc:FundingProgram>Program for the development ...</cbc:FundingProgram></efac:Funding>
+    OCDS example: '{"contracts":[{"finance":[{"description":"Program for the development ..."}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.2.1/schema/all-in-one.html#settledContractSection
 -   id: BT-6140-Lot
     parentNodeId: ND-Funding
@@ -9140,7 +9140,7 @@
     type: text-multilingual
     repeatable: false
     mandatory: false
-    eForms guidance: ''
+    eForms guidance: /https://github.com/open-contracting/european-union-support/issues/115
     eForms example: <efac:Funding><cbc:Description languageID="ENG">This project will be financed ...</cbc:Description></efac:Funding>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.2.1/schema/all-in-one.html#EUFundsSection
@@ -9968,9 +9968,9 @@
         BG-7: Notice Result
         BG-310: Contract
         BG-611: Contract EU Funds
-    eForms guidance: ''
+    eForms guidance: \[UNREVIEWD\] These values are mapped to the same `finance` object as created for BT-5011 and BT-6011. For each `efac:Funding`, add or update the corresponding `Finance` object in the contract's `.finance` array and map to its `.name`. /https://github.com/open-contracting/european-union-support/issues/115
     eForms example: <efac:Funding><cbc:FundingProgramCode listName="eu-programme">ABC123</cbc:FundingProgramCode></efac:Funding>
-    OCDS example: ''
+    OCDS example: '{"contracts":[{"finance":[{"name":"ABC123"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.2.1/schema/all-in-one.html#settledContractSection
 -   id: BT-7220-Lot
     parentNodeId: ND-NonUBLTenderingTerms
@@ -9981,7 +9981,7 @@
     repeatable: true
     mandatory: false
     codeList: eu-programme
-    eForms guidance: ''
+    eForms guidance: /https://github.com/open-contracting/european-union-support/issues/115
     eForms example: <efac:Funding><cbc:FundingProgramCode listName="eu-proramme">ERDF_2021</cbc:FundingProgramCode></efac:Funding>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.2.1/schema/all-in-one.html#EUFundsSection
