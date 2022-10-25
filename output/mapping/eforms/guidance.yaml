@@ -1717,7 +1717,7 @@
     Business groups:
         BG-7: Notice Result
         BG-310: Contract
-    eForms guidance: ''
+    eForms guidance: \[UNREVIEWED\] Map to the contract's `documents.url` and set `.type` to "contractSigned".
     eForms example: <efac:SettledContract><cbc:URI>http://mycontract.acme.com/1234/</cbc:URI></efac:SettledContract>
     OCDS example: '{"contracts":[{"documents":[{"url":"http://mycontract.acme.com/1234/","type":"contractSigned"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.2.1/schema/all-in-one.html#settledContractSection
@@ -1733,9 +1733,9 @@
     Business groups:
         BG-7: Notice Result
         BG-556: Group Framework Value
-    eForms guidance: ''
+    eForms guidance: \[UNREVIEWED\] Get the LotGroup in `tender.lotGroups` whose `.id` is equal to the value of the XPath `sibling::cac:TenderLot/cac:ID`. If none exists yet, add a LotGroup to `tender.lotGroups` and set its `.id` to the value of the XPath `sibling::cac:TenderLot/cac:ID.`, map to its `.techniques.frameworkAgreement.value.amount` and map `currencyID` to its `techniques.frameworkAgreement.value.currency`.
     eForms example: <efac:NoticeResult><efac:GroupFramework><efbc:GroupFrameworkValueAmount currencyID="EUR">800000</efbc:GroupFrameworkValueAmount></efac:GroupFramework></efac:NoticeResult>
-    OCDS example: ''
+    OCDS example: '{"tender":{"lotGroups":[{"techniques":{"frameworkAgreement":{"value":{"amount":800000,"currency":"EUR"}}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.2.1/schema/all-in-one.html#_notice_aggregated_amounts
 -   id: BT-157-LotsGroup
     parentNodeId: ND-LotsGroupFA
@@ -1821,7 +1821,7 @@
     TED guidance:
     - Discard. This is derived from the `value` of awards.
     - Map to the contract's `.value.amount`
-    eForms guidance: Map to the award's `.value.amount`. Map `@currencyID` to the value's `.currency`.
+    eForms guidance: \[UNREVIEWED\] Map to the award's `.value.amount`. Map `@currencyID` to the value's `.currency`.
     eForms example: <efac:NoticeResult><cbc:TotalAmount currencyID="EUR">123456.00</cbc:TotalAmount></efac:NoticeResult>
     OCDS example: '{"awards":[{"value":{"amount":123456,"currency":"EUR"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.2.1/schema/all-in-one.html#_notice_aggregated_amounts
@@ -2003,9 +2003,9 @@
     Business groups:
         BG-7: Notice Result
         BG-320: Tender
-    eForms guidance: ''
+    eForms guidance: \[UNREVIEWED\] Look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country), convert to lowercase and add to the bid's `.details.countryOfOrigin` array.
     eForms example: <efac:Origin><efbc:AreaCode listName="country">ITA</efbc:AreaCode></efac:Origin>
-    OCDS example: ''
+    OCDS example: '{"bids":{"details":[{"countryOfOrigin":["it"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.2.1/schema/all-in-one.html#lotTenderSection
 -   id: BT-193-Tender
     parentNodeId: ND-LotTender
@@ -8996,10 +8996,10 @@
     Business groups:
         BG-7: Notice Result
         BG-556: Group Framework Value
-    eForms guidance: ''
+    eForms guidance: \[UNREVIEWED\] If there is a LotGroup in `tender.lotGroups` whose `.id` is equal to the value of this field, discard. Otherwise, add a LotGroup to `tender.lotGroups` and map to its `.id`.
     eForms example: <efac:TenderLot><cbc:ID schemeName="LotsGroup">GLO-0001</cbc:ID></efac:TenderLot>
-    OCDS example: ''
-    sdk: ''
+    OCDS example: '{"tender":{"lotGroups":[{"id":"GLO-0001"}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.2.1/schema/all-in-one.html#_notice_aggregated_amounts
 -   id: BT-57-Lot
     parentNodeId: ND-OptionsAndRenewals
     name: Renewal Description
