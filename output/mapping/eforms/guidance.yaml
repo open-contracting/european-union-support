@@ -1256,10 +1256,10 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/OBJECT_DESCR/LOT_NO
     TED guidance:
     - If not set, let *Lot No* be '1'. Map to the lot's `.id` (string), map to the item's `.id` (string), and map to the item's `.relatedLot` (string).
-    eForms guidance: (UNREVIEWED) Refer to the \[guidance for lot identifiers\](common-operations lot identifier).
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: If there is a `Lot` in `tender.lots` whose `.id` is equal to the value of this field, discard. Otherwise, add a `Lot` to `tender.lots` and map to its `.id`.
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001"}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.2.1/schema/all-in-one.html#_introduction
 -   id: BT-137-LotsGroup
     parentNodeId: ND-LotsGroup
     name: Purpose Lot Identifier
@@ -1299,10 +1299,10 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/OBJECT_CONTRACT/OBJECT_DESCR/LOT_NO
     TED guidance:
     - If not set, let *Lot No* be '1'. Map to the lot's `.id` (string), map to the item's `.id` (string), and map to the item's `.relatedLot` (string).
-    eForms guidance: (UNREVIEWED) (REPEAT) Refer to the \[guidance for lot identifiers\](common-operations lot identifier).
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to `tender.id`.
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Part">PAR-0000</cbc:ID></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"id":"PAR-0000"}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.2.1/schema/all-in-one.html#_introduction
 -   id: BT-13713-LotResult
     parentNodeId: ND-LotResult
     name: Result Lot Identifier
@@ -1591,7 +1591,7 @@
     TED guidance:
     - Map to the award's `.date`
     - Map to the contract's `.dateSigned`
-    eForms guidance: "For each `ancestor::efac:NoticeResult/efac:LotResult` with an `/efac:SettledContract/cbc:ID` equal to the value of `ancestor::efac:SettledContract/cbc:ID`:\n\n- Get the `Award` object in `awards` whose `.id` is equal to the LotResult's `/cbc:ID`. If none exists yet:\n  - Add an `Award` to `awards`\n  - Set its `.id` to the value of the LotResult's `/cbc:ID`\n  - Add the value of the LotResult's `/efac:TenderLot\u200B/cbc:ID` to the award's `.relatedLots`\n- If the award's `.date` is not yet set or if the winner decision date is earlier than the award's `.date`, [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to the award's `.date`. Otherwise, discard."
+    eForms guidance: "For each `ancestor::efac:NoticeResult/efac:LotResult` with an `/efac:SettledContract/cbc:ID` equal to the value of `ancestor::efac:SettledContract/cbc:ID`:\n\n- Get the `Award` object in `awards` whose `.id` is equal to the LotResult's `/cbc:ID`. If none exists yet:\n  - Add an `Award` to `awards`\n  - Set its `.id` to the value of the LotResult's `/cbc:ID`\n  - Add the value of the LotResult's `/efac:TenderLot\u200B/cbc:ID` to the award's `.relatedLots`\n- If the award's `.date` is not yet set or if the winner decision date is earlier than the award's `.date`, map to the award's `.date`. Otherwise, discard."
     eForms example: <efac:SettledContract><cbc:AwardDate>2021-02-19+01:00</cbc:AwardDate></efac:SettledContract>
     OCDS example: '{"awards":[{"date":"2021-02-19T23:59:59+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.2.1/schema/all-in-one.html#settledContractSection
