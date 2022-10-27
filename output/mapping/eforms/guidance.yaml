@@ -1591,7 +1591,14 @@
     TED guidance:
     - Map to the award's `.date`
     - Map to the contract's `.dateSigned`
-    eForms guidance: "For each `ancestor::efac:NoticeResult/efac:LotResult` with an `/efac:SettledContract/cbc:ID` equal to the value of `ancestor::efac:SettledContract/cbc:ID`:\n\n- Get the `Award` object in `awards` whose `.id` is equal to the LotResult's `/cbc:ID`. If none exists yet:\n  - Add an `Award` to `awards`\n  - Set its `.id` to the value of the LotResult's `/cbc:ID`\n  - Add the value of the LotResult's `/efac:TenderLot\u200B/cbc:ID` to the award's `.relatedLots`\n- If the award's `.date` is not yet set or if the winner decision date is earlier than the award's `.date`, map to the award's `.date`. Otherwise, discard."
+    eForms guidance: |-
+        For each `ancestor::efac:NoticeResult/efac:LotResult` with an `/efac:SettledContract/cbc:ID` equal to the value of `ancestor::efac:SettledContract/cbc:ID`:
+
+        - Get the `Award` object in `awards` whose `.id` is equal to the LotResult's `/cbc:ID`. If none exists yet:
+          - Add an `Award` to `awards`
+          - Set its `.id` to the value of the LotResult's `/cbc:ID`
+          - Add the value of the LotResult's `/efac:TenderLot\u200B/cbc:ID` to the award's `.relatedLots`
+        - If the award's `.date` is not yet set or if the winner decision date is earlier than the award's `.date`, map to the award's `.date`. Otherwise, discard."
     eForms example: <efac:SettledContract><cbc:AwardDate>2021-02-19+01:00</cbc:AwardDate></efac:SettledContract>
     OCDS example: '{"awards":[{"date":"2021-02-19T23:59:59+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.2.1/schema/all-in-one.html#settledContractSection
@@ -6459,7 +6466,10 @@
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/QUANTITY_SCOPE_WORKS_DEFENCE/F16_DIVISION_INTO_LOTS/F16_DIV_INTO_LOT_YES/LOT_PRIOR_INFORMATION/SCHEDULED_DATE_PERIOD/PERIOD_WORK_DATE_STARTING/(MONTHS|DAYS)
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/SCHEDULED_DATE_PERIOD/PERIOD_WORK_DATE_STARTING/MONTHS
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/PERIOD_WORK_DATE_STARTING/(MONTHS|DAYS)
-    eForms guidance: If `@unitCode` is set to "DAY", map to `tender.contractPeriod.durationInDays`.\\n\\nIf `@unitCode` is set to "MONTH", multiply by 30. If `@unitCode` is set to "YEAR", multiply by 365. In either case, map the result to `tender.contractPeriod.durationInDays`. If `@unitCode` is set to a specific day of the week or month map equivalent number of days to `tender.contractPeriod.durationInDays`.
+    eForms guidance: |-
+        If `@unitCode` is set to "DAY", map to `tender.contractPeriod.durationInDays`.
+
+        If `@unitCode` is set to "MONTH", multiply by 30. If `@unitCode` is set to "YEAR", multiply by 365. In either case, map the result to `tender.contractPeriod.durationInDays`. If `@unitCode` is set to a specific day of the week or month map equivalent number of days to `tender.contractPeriod.durationInDays`.
     eForms example: <cac:PlannedPeriod><cbc:DurationMeasure unitCode="DAY">3</cbc:DurationMeasure></cac:PlannedPeriod>
     OCDS example: '{"tender":{"contractPeriod":{"durationInDays":3}}}'
     sdk: https://docs.ted.europa.eu/eforms/1.2.1/schema/all-in-one.html#plannedPeriodSection
@@ -9602,7 +9612,10 @@
     Description: The language(s) in which this notice is officially available. These linguistic versions are equally legally valid.
     Business groups:
         BG-1: Notice
-    eForms guidance: Lowercase `/*/cbc:NoticeLanguageCode` and convert the code into a two-letter [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes), and map to `language`.\\n\\nDiscard `/*/cac:AdditionalNoticeLanguage/cbc:ID`.
+    eForms guidance: |-
+        Lowercase `/*/cbc:NoticeLanguageCode` and convert the code into a two-letter [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes), and map to `language`.
+
+        Discard `/*/cac:AdditionalNoticeLanguage/cbc:ID`.
     eForms example: <cbc:NoticeLanguageCode>ENG</cbc:NoticeLanguageCode>
     OCDS example: '{"language":"en"}'
     sdk: https://docs.ted.europa.eu/eforms/1.2.1/schema/all-in-one.html#noticeLanguageSection
