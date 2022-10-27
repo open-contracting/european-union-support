@@ -150,17 +150,17 @@ def report_unmerged_rows(df, columns, series=None, unformatted=()):
 
 
 # From standard-maintenance-scripts/tests/test_readme.py
-def set_additional_properties_false_and_remove_pattern_properties(data):
+def set_additional_properties_and_remove_pattern_properties(data, additional_properties):
     if isinstance(data, list):
         for item in data:
-            set_additional_properties_false_and_remove_pattern_properties(item)
+            set_additional_properties_and_remove_pattern_properties(item, additional_properties)
     elif isinstance(data, dict):
         if "properties" in data:
-            data["additionalProperties"] = False
+            data["additionalProperties"] = additional_properties
         if "patternProperties" in data:
             del data["patternProperties"]
         for value in data.values():
-            set_additional_properties_false_and_remove_pattern_properties(value)
+            set_additional_properties_and_remove_pattern_properties(value, additional_properties)
 
 
 def write(filename, df, overwrite=None, explode=None, compare=None, how="left", drop=(), **kwargs):
@@ -485,7 +485,8 @@ def update_with_ted_guidance(filename):
 
 @cli.command()
 @click.argument("filename", type=click.Path(exists=True))
-def lint(filename):
+@click.option("-a", "--additional-properties", is_flag=True, help="Allow additional properties")
+def lint(filename, additional_properties):
     """
     Lint FILE (validate and format XML, JSON and Markdown, report unrecognized OCDS fields, update eForms SDK URLs).
     """
@@ -529,7 +530,7 @@ def lint(filename):
         schema = json.load(f)
 
     # Remove `patternProperties` to clarify output.
-    set_additional_properties_false_and_remove_pattern_properties(schema)
+    set_additional_properties_and_remove_pattern_properties(schema, additional_properties)
     format_checker = FormatChecker()
 
     if os.path.isfile("codes.txt"):
