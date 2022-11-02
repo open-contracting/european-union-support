@@ -9397,7 +9397,7 @@
     Business groups:
         BG-612: Buyer Review Summary
         BG-613: Buyer Review Requests
-    eForms guidance: /https://github.com/open-contracting/european-union-support/issues/116
+    eForms guidance: /https://github.com/open-contracting/european-union-support/issues/116, /https://github.com/open-contracting/european-union-support/issues/54
     eForms example: <efac:AppealRequestsStatistics><efbc:StatisticsNumeric>2</efbc:StatisticsNumeric></efac:AppealRequestsStatistics>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.2.1/schema/all-in-one.html#_lot_result
@@ -9414,7 +9414,7 @@
     Business groups:
         BG-612: Buyer Review Summary
         BG-613: Buyer Review Requests
-    eForms guidance: /https://github.com/open-contracting/european-union-support/issues/116
+    eForms guidance: /https://github.com/open-contracting/european-union-support/issues/116, /https://github.com/open-contracting/european-union-support/issues/54
     eForms example: <efac:AppealRequestsStatistics><efbc:StatisticsCode listName="irregularity-type">unj-lim-subc</efbc:StatisticsCode></efac:AppealRequestsStatistics>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.2.1/schema/all-in-one.html#_lot_result
@@ -9862,7 +9862,7 @@
     Business groups:
         BG-612: Buyer Review Summary
     eForms guidance: ''
-    eForms example: /https://github.com/open-contracting/european-union-support/issues/116
+    eForms example: /https://github.com/open-contracting/european-union-support/issues/116, /https://github.com/open-contracting/european-union-support/issues/54
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.2.1/schema/all-in-one.html#_lot_result
 -   id: BT-712(b)-LotResult
@@ -9877,7 +9877,7 @@
     Business groups:
         BG-612: Buyer Review Summary
     eForms guidance: ''
-    eForms example: /https://github.com/open-contracting/european-union-support/issues/116
+    eForms example: /https://github.com/open-contracting/european-union-support/issues/116, /https://github.com/open-contracting/european-union-support/issues/54
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.2.1/schema/all-in-one.html#_lot_result
 -   id: BT-717-Lot
@@ -10005,7 +10005,7 @@
     repeatable: true
     mandatory: false
     codeList: eu-programme
-    eForms guidance: /\[UNREVIEWED/\] These values are mapped to the same `finance` object as created for BT-5010 and BT-6140. If BT-5010 is not present follow the guidance for BT-5010, setting the `.id` of the `Finance` object incrementally based on its position in the `finance` array rather than the value of BT-5010. For each `ancestor::efac:Funding`, add or update the corresponding `Finance` object in the budget's `.finance` array and map to its `.title`./https://github.com/open-contracting/european-union-support/issues/115
+    eForms guidance: These values are mapped to the same `finance` object as created for BT-5010 and BT-6140. If BT-5010 is not present follow the guidance for BT-5010, setting the `.id` of the `Finance` object incrementally based on its position in the `finance` array rather than the value of BT-5010. For each `ancestor::efac:Funding`, add or update the corresponding `Finance` object in the budget's `.finance` array and map to its `.title`.
     eForms example: <efac:Funding><cbc:FundingProgramCode listName="eu-proramme">ERDF_2021</cbc:FundingProgramCode></efac:Funding>
     OCDS example: '{"planning":{"budget":{"finance":[{"title":"ERDF_2021"}]}}}'
     sdk: https://docs.ted.europa.eu/eforms/1.2.1/schema/all-in-one.html#EUFundsSection
