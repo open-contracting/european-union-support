@@ -10977,7 +10977,7 @@
     eForms guidance: |-
         These values are mapped to the same `BidsStatistic` objects as created for BT-760.
 
-        For each `<efac:ReceivedSubmissionsStatistics>`, [add a bids statistic](common-operations.md#add-a-bids-statistic) or update the corresponding `BidsStatistic` object and map to its `.value`.
+        For each `ancestor::efac:ReceivedSubmissionsStatistics`, [add a bids statistic](common-operations.md#add-a-bids-statistic) or update the corresponding `BidsStatistic` object and map to its `.value`.
     eForms example: <efac:ReceivedSubmissionsStatistics><efbc:StatisticsNumeric>12</efbc:StatisticsNumeric></efac:ReceivedSubmissionsStatistics>
     OCDS example: '{"bids":{"statistics":[{"value":12}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.2.1/schema/all-in-one.html#_lot_result
@@ -11045,7 +11045,7 @@
     eForms guidance: |-
         These values are mapped to the same `BidsStatistic` objects as created for BT-759.
 
-        For each `<efac:ReceivedSubmissionsStatistics>`, [add a bids statistic](common-operations.md#add-a-bids-statistic) or update the corresponding `BidsStatistic` object and map to its `.measure` according to the \[submission count types mapping table\].
+        For each `ancestor::efac:ReceivedSubmissionsStatistics`, [add a bids statistic](common-operations.md#add-a-bids-statistic) or update the corresponding `BidsStatistic` object and map to its `.measure` according to the \[submission count types mapping table\].
     eForms example: <efac:ReceivedSubmissionsStatistics><efbc:StatisticsCode listName="received-submission-type">t-sme</efbc:StatisticsCode></efac:ReceivedSubmissionsStatistics>
     OCDS example: '{"bids":{"statistics":[{"measure":"smeBids"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.2.1/schema/all-in-one.html#_lot_result
