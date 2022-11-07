@@ -354,23 +354,23 @@ def update_with_annex(filename):
         ~df["ID"].isin(
             {
                 # Removed indicators in favor of corresponding scalars.
-                # https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#extensionsSection
+                # https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#extensionsSection
                 "BT-53",  # Options (BT-54 Options Description)
-                # https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#toolNameSection
+                # https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#toolNameSection
                 "BT-724",  # Tool Atypical (BT-124 Tool Atypical URL)
-                # https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#_footnotedef_21
+                # https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_footnotedef_21
                 "BT-778",  # Framework Maximum Participants (BT-113 Framework Maximum Participants Number)
                 # See OPT-155 and OPT-156.
-                # https://docs.ted.europa.eu/eforms/1.3.0/schema/competition-results.html#lotResultComponentsTable
+                # https://docs.ted.europa.eu/eforms/1.3.1/schema/competition-results.html#lotResultComponentsTable
                 "BT-715",
                 "BT-725",
                 "BT-716",
                 # See Table 3.
-                # https://docs.ted.europa.eu/eforms/1.3.0/schema/parties.html#mappingOrganizationBTsSchemaComponentsTable
+                # https://docs.ted.europa.eu/eforms/1.3.1/schema/parties.html#mappingOrganizationBTsSchemaComponentsTable
                 "BT-08",
                 "BT-770",
                 # See Table 4 (also includes BT-330 and BT-1375).
-                # https://docs.ted.europa.eu/eforms/1.3.0/schema/identifiers.html#pointlessDueToDesignSection
+                # https://docs.ted.europa.eu/eforms/1.3.1/schema/identifiers.html#pointlessDueToDesignSection
                 "BT-557",
                 "BT-1371",
                 "BT-1372",
@@ -491,7 +491,7 @@ def lint(filename, additional_properties):
     Lint FILE (validate and format XML, JSON and Markdown, report unrecognized OCDS fields, update eForms SDK URLs).
     """
     # From https://github.com/OP-TED/eForms-SDK/tree/main/examples
-    # See https://docs.ted.europa.eu/eforms/1.3.0/schema/schemas.html
+    # See https://docs.ted.europa.eu/eforms/1.3.1/schema/schemas.html
     head = (
         '<ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" '
         'xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" '
