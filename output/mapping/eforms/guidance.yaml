@@ -11220,6 +11220,21 @@
     eForms example: <cac:TendererQualificationRequest><cbc:CompanyLegalForm languageID="ENG">The tenderer ...</cbc:CompanyLegalForm></cac:TendererQualificationRequest>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#tendererReqsSection
+-   id: BT-762-notice
+    parentNodeId: ND-ChangeReason
+    name: Change Reason Description
+    btId: BT-762
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Changes/efac:ChangeReason/efbc:ReasonDescription
+    type: text-multilingual
+    repeatable: false
+    mandatory: false
+    Description: The description of the main reason for the change in the notice compared to the original notice.
+    Business groups:
+        BG-9: Change
+    eForms guidance: These values map to the same `Amendment` objects as created for BT-140. Update the corresponding `Amendment` objects and map to its `.rationale`.
+    eForms example: <efac:ChangeReason><efbc:ReasonDescription languageID="ENG">Clerical corrections of ...</efbc:ReasonDescription></efac:ChangeReason>
+    OCDS example: '{"tender":{"amendments":[{"rationale":"Clerical corrections of ..."}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.2.1/schema/all-in-one.html#changeReasonSection
 -   id: BT-763-Procedure
     parentNodeId: ND-ProcedureTenderingProcess
     name: Lots All Required
@@ -11635,6 +11650,18 @@
     eForms example: <efbc:TransmissionDate>2022-11-17+01:00</efbc:TransmissionDate>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#dispatchDateEsender
+-   id: BT-803(t)-notice
+    parentNodeId: ND-RootExtension
+    name: Notice Dispatch Date eSender (time)
+    btId: BT-803
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efbc:TransmissionTime
+    type: time
+    repeatable: false
+    mandatory: false
+    eForms guidance: ''
+    eForms example: <efbc:TransmissionTime>08:30:03+01:00</efbc:TransmissionTime>
+    OCDS example: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.2.1/schema/all-in-one.html#dispatchDateEsender
 -   id: BT-805-Lot
     parentNodeId: ND-LotGreenCriteria
     name: Green Procurement Criteria
