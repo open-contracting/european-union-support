@@ -479,9 +479,9 @@
     repeatable: false
     mandatory: false
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:NoticeResult><cbc:OverallApproximateFrameworkContractsAmount currencyID="EUR">6000</cbc:OverallApproximateFrameworkContractsAmount></efac:NoticeResult>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#_notice_aggregated_amounts
 -   id: BT-113-Lot
     parentNodeId: ND-FA
     name: Framework Maximum Participants Number
@@ -562,7 +562,7 @@
     Business groups:
         BG-7: Notice Result
     eForms guidance: Map to `tender.techniques.frameworkAgreement.value.amount`. Map `@currencyID` to the value's `.currency`.
-    eForms example: <efac:NoticeResult><cbc:EstimatedOverallFrameworkContractsAmount currencyID="EUR">6000</cbc:EstimatedOverallFrameworkContractsAmount></efac:NoticeResult>
+    eForms example: <efac:NoticeResult><cbc:OverallMaximumFrameworkContractsAmount currencyID="EUR">6000</cbc:OverallMaximumFrameworkContractsAmount></efac:NoticeResult>
     OCDS example: '{"tender":{"techniques":{"frameworkAgreement":{"value":{"amount":6000,"currency":"EUR"}}}}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#_notice_aggregated_amounts
 -   id: BT-119-LotResult
@@ -1466,6 +1466,7 @@
 
         - If the change's `/efbc:ChangedSectionIdentifier` (BT-13716) references a LotResult (`RES-XXXX`), [get the award for the LotResult](common-operations.md#get-the-award-for-the-lotresult) and add an `Amendment` object to the award's `.amendments` array. Otherwise, add an `Amendment` object to the `tender.amendments` array.
         - If the change's `/efbc:ChangedSectionIdentifier` (BT-13716) references a Lot (`LOT-XXXX`), add the Lot's identifier to the amendment's `.relatedLots` array.
+        - If the change's `/efbc:ChangedSectionIdentifier` (BT-13716) references a LotsGroup (`GLO-XXXX`), add the LotGroup's identifier to the amendment's `.relatedLotGroups` array.
         - Set the amendment's `.id` sequentially across all notices for this procedure. For example, if the first change notice for a procedure has three changes, it uses `id`'s '1' through '3'. A second change notice for the same procedure then uses `id`'s '4' and up, etc.
         - Add a `Classification` object to the amendment's `rationaleClassifications` array and map to its `.id`.
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/change-corrig-justification) and map it to the classification's `.description`.
@@ -1753,7 +1754,7 @@
         BG-7: Notice Result
         BG-556: Group Framework Value
     eForms guidance: \[UNREVIEWED\] Get the LotGroup in `tender.lotGroups` whose `.id` is equal to the value of the XPath `sibling::cac:TenderLot/cac:ID`. If none exists yet, add a LotGroup to `tender.lotGroups` and set its `.id` to the value of the XPath `sibling::cac:TenderLot/cac:ID.`, map to its `.techniques.frameworkAgreement.value.amount` and map `currencyID` to its `techniques.frameworkAgreement.value.currency`.
-    eForms example: <efac:NoticeResult><efac:GroupFramework><efbc:GroupFrameworkValueAmount currencyID="EUR">800000</efbc:GroupFrameworkValueAmount></efac:GroupFramework></efac:NoticeResult>
+    eForms example: <efac:NoticeResult><efac:GroupFramework><efbc:GroupFrameworkMaximumValueAmount currencyID="EUR">800000</efbc:GroupFrameworkMaximumValueAmount></efac:GroupFramework></efac:NoticeResult>
     OCDS example: '{"tender":{"lotGroups":[{"techniques":{"frameworkAgreement":{"value":{"amount":800000,"currency":"EUR"}}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#_notice_aggregated_amounts
 -   id: BT-1561-NoticeResult
@@ -1765,9 +1766,9 @@
     repeatable: false
     mandatory: false
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:NoticeResult><efac:GroupFramework><efbc:GroupFrameworkReestimatedValueAmount currencyID="EUR">800000</efbc:GroupFrameworkReestimatedValueAmount></efac:GroupFramework></efac:NoticeResult>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#_notice_aggregated_amounts
 -   id: BT-157-LotsGroup
     parentNodeId: ND-LotsGroupFA
     name: Group Framework Estimated Maximum Value
@@ -1970,7 +1971,7 @@
         Add a new Cascade object to the award's `.cascade` array. Set its `.bid` to the identifier of the corresponding bid. For each related tenderer, add an Organization reference object to the cascade's `.suppliers` array. Copy its `.id` and `.name` from the corresponding Organization object.
 
         The position of the cascade object in the `.cascade` array determines the rank of the bid. Example: `.cascade[0]` should return the highest ranking bid, `.cascade[1]` the second highest ranking bid, etc. \[https://github.com/open-contracting/european-union-support/issues/80\]
-    eForms example: <efac:NoticeResult><cbc:RankCode>1</cbc:RankCode></efac:NoticeResult>
+    eForms example: <efac:LotTender><cbc:RankCode>1</cbc:RankCode></efac:LotTender>
     OCDS example: '{"awards":[{"cascade":[{"bid":"1","suppliers":[{"name":"BLabla Inc","id":"ORG-001"}]}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#lotTenderSection
 -   id: BT-1711-Tender
@@ -1983,9 +1984,9 @@
     mandatory: false
     codeList: indicator
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:LotTender><efbc:TenderRankedIndicator>true</efbc:TenderRankedIndicator></efac:LotTender>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#lotTenderSection
 -   id: BT-18-Lot
     parentNodeId: ND-TenderRecipient
     name: Submission URL
@@ -2048,7 +2049,7 @@
         BG-7: Notice Result
         BG-320: Tender
     eForms guidance: \[UNREVIEWED\] Look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country), convert to lowercase and add to the bid's `.details.countryOfOrigin` array.
-    eForms example: <efac:Origin><efbc:AreaCode listName="country">ITA</efbc:AreaCode></efac:Origin>
+    eForms example: <efac:Origin><efbc:AreaCode listName="eforms-country">ITA</efbc:AreaCode></efac:Origin>
     OCDS example: '{"bids":{"details":[{"countryOfOrigin":["it"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#lotTenderSection
 -   id: BT-193-Tender
@@ -7447,7 +7448,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/*:NUTS/@CODE
     - TED_EXPORT/FORM_SECTION/F25_2014/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/*:NUTS/@CODE
     eForms guidance: '[Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and map to the organization''s `.address.region`.'
-    eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cbc:CountrySubentityCode listName="nuts">XY374</cbc:CountrySubentityCode></cac:PostalAddress></efac:Company></efac:Organization>
+    eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cbc:CountrySubentityCode listName="nuts-lvl3">XY374</cbc:CountrySubentityCode></cac:PostalAddress></efac:Company></efac:Organization>
     OCDS example: '{"parties":[{"address":{"region":"XY374"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-507-Organization-TouchPoint
@@ -7463,7 +7464,7 @@
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the organization''s `.address.region`.'
-    eForms example: <efac:Organization><efac:TouchPoint><cac:PostalAddress><cbc:CountrySubentityCode listName="nuts">XY374</cbc:CountrySubentityCode></cac:PostalAddress></efac:TouchPoint></efac:Organization>
+    eForms example: <efac:Organization><efac:TouchPoint><cac:PostalAddress><cbc:CountrySubentityCode listName="nuts-lvl3">XY374</cbc:CountrySubentityCode></cac:PostalAddress></efac:TouchPoint></efac:Organization>
     OCDS example: '{"parties":[{"address":{"region":"XY374"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-507-UBO
@@ -7479,7 +7480,7 @@
     Business groups:
         BG-703: Organisation
     eForms guidance: \[Get the person for the ultimate beneficial owner\](common-operations.md#get-the-person-for-an-ultimate beneficial-owner) and map to the person's `.address.region`.
-    eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:CountrySubentityCode listName="nuts">GBK62</cbc:CountrySubentityCode></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
+    eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:CountrySubentityCode listName="nuts-lvl3">GBK62</cbc:CountrySubentityCode></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"region":"GBK62"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
 -   id: BT-5071-Lot
@@ -7514,7 +7515,7 @@
         These values are mapped to the same `Address` object as created for BT-728-Lot, BT-5131-Lot, BT-5121-Lot, BT-5071-Lot, BT-727-Lot, BT-5101-Lot and BT-5141-Lot.
 
         [Get the item for the ProcurementProjectLot](common-operations.md#get-the-item-for-a-procurementprojectlot). For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array and map to its `.region`.
-    eForms example: <cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="nuts">UKG23</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation>
+    eForms example: <cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="nuts=lvl3">UKG23</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"region":"UKG23"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-5071-Part
@@ -7537,7 +7538,7 @@
     - TED_EXPORT/FORM_SECTION/F21_2014/OBJECT_CONTRACT/OBJECT_DESCR/*:NUTS/@CODE
     - TED_EXPORT/FORM_SECTION/F22_2014/OBJECT_CONTRACT/OBJECT_DESCR/*:NUTS/@CODE
     eForms guidance: These values are mapped to the same `Address` object as created for BT-728-Part, BT-5131-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, BT-5101-Part and BT-5141-Part. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to its `.region`.
-    eForms example: <cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="nuts">UKG23</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation>
+    eForms example: <cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="-lvl3">UKG23</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"deliveryAddresses":[{"region":"UKG23"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-5071-Procedure
@@ -7553,7 +7554,7 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: These values are mapped to the same `Address` object as created for BT-728-Procedure, BT-5131-Procedure, BT-5121-Procedure, BT-5071-Procedure, BT-727-Procedure, BT-5101-Procedure and BT-5141-Procedure. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to its `.region`.
-    eForms example: <cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="nuts">UKG23</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation>
+    eForms example: <cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="nuts-lvl3">UKG23</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"deliveryAddresses":[{"region":"UKG23"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-508-Procedure-Buyer
@@ -8444,7 +8445,7 @@
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY
     - Take the country code in the `VALUE` attribute, translate to a country name, and map to the party's `.address.countryName`\n\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.countryCode` field to the `Address` object, to avoid translation. (ISSUE)
     eForms guidance: '[Get the organization for the company](common-operations.md#get-the-organization-for-a-company), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the organization''s `.address.country`.'
-    eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cac:Country><cbc:IdentificationCode listName="country">GBR</cbc:IdentificationCode></cac:Country></cac:PostalAddress></efac:Company></efac:Organization>
+    eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cac:Country><cbc:IdentificationCode listName="eforms-country">GBR</cbc:IdentificationCode></cac:Country></cac:PostalAddress></efac:Company></efac:Organization>
     OCDS example: '{"parties":[{"address":{"country":"GB"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-514-Organization-TouchPoint
@@ -8460,7 +8461,7 @@
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the organization''s `.address.country`.'
-    eForms example: <efac:Organization><efac:TouchPoint><cac:PostalAddress><cac:Country><cbc:IdentificationCode listName="country">GBR</cbc:IdentificationCode></cac:Country></cac:PostalAddress></efac:TouchPoint></efac:Organization>
+    eForms example: <efac:Organization><efac:TouchPoint><cac:PostalAddress><cac:Country><cbc:IdentificationCode listName="eforms-country">GBR</cbc:IdentificationCode></cac:Country></cac:PostalAddress></efac:TouchPoint></efac:Organization>
     OCDS example: '{"parties":[{"address":{"country":"GB"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-514-UBO
@@ -8476,7 +8477,7 @@
     Business groups:
         BG-703: Organisation
     eForms guidance: \[Get the person for the ultimate beneficial owner\](common-operations.md#get-the-person-for-an-ultimate beneficial-owner), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the person's `.address.country`.
-    eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cac:Country><cbc:IdentificationCode listName="country">GBR</cbc:IdentificationCode></cac:Country></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
+    eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cac:Country><cbc:IdentificationCode listName="eforms-country">GBR</cbc:IdentificationCode></cac:Country></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"country":"GB"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#ultimateBeneficialOwnerSection
 -   id: BT-5141-Lot
@@ -8495,7 +8496,7 @@
         These values are mapped to the same `Address` object as created for BT-728-Lot, BT-5131-Lot, BT-5121-Lot, BT-5071-Lot, BT-727-Lot, BT-5101-Lot and BT-5141-Lot.
 
         [Get the item for the ProcurementProjectLot](common-operations.md#get-the-item-for-a-procurementprojectlot). For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the address's `.country`.
-    eForms example: <cac:RealizedLocation><cac:Address><cac:Country><cbc:IdentificationCode listName="country">GBR</cbc:IdentificationCode></cac:Country></cac:Address></cac:RealizedLocation>
+    eForms example: <cac:RealizedLocation><cac:Address><cac:Country><cbc:IdentificationCode listName="eforms-country">GBR</cbc:IdentificationCode></cac:Country></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"country":"GB"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-5141-Part
@@ -8511,7 +8512,7 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: These values are mapped to the same `Address` object as created for BT-728-Part, BT-5131-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, BT-5101-Part and BT-5141-Part. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the address's `.country`.
-    eForms example: <cac:RealizedLocation><cac:Address><cac:Country><cbc:IdentificationCode listName="country">GBR</cbc:IdentificationCode></cac:Country></cac:Address></cac:RealizedLocation>
+    eForms example: <cac:RealizedLocation><cac:Address><cac:Country><cbc:IdentificationCode listName="eforms-country">GBR</cbc:IdentificationCode></cac:Country></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"deliveryAddresses":[{"country":"GB"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-5141-Procedure
@@ -8527,7 +8528,7 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: These values are mapped to the same `Address` object as created for BT-728-Procedure, BT-5131-Procedure, BT-5121-Procedure, BT-5071-Procedure, BT-727-Procedure, BT-5101-Procedure and BT-5141-Procedure. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the address's `.country`.
-    eForms example: <cac:RealizedLocation><cac:Address><cac:Country><cbc:IdentificationCode listName="country">GBR</cbc:IdentificationCode></cac:Country></cac:Address></cac:RealizedLocation>
+    eForms example: <cac:RealizedLocation><cac:Address><cac:Country><cbc:IdentificationCode listName="eforms-country">GBR</cbc:IdentificationCode></cac:Country></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"deliveryAddresses":[{"country":"GB"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#performancePlaceSection
 -   id: BT-52-Lot
@@ -9547,9 +9548,9 @@
     Business groups:
         BG-612: Buyer Review Summary
         BG-613: Buyer Review Requests
-    eForms guidance: /https://github.com/open-contracting/european-union-support/issues/116, /https://github.com/open-contracting/european-union-support/issues/54
+    eForms guidance: These values are mapped to the same `Statistic` objects as created for BT-636. For each `ancestor::AppealRequestStatistics`, [add a statistic](common-operations.md#add-a-statistic) or update the corresponding `Statistic` object and map to its `.value`.
     eForms example: <efac:AppealRequestsStatistics><efbc:StatisticsNumeric>2</efbc:StatisticsNumeric></efac:AppealRequestsStatistics>
-    OCDS example: ''
+    OCDS example: '{"statistics":[{"id":"1","value":"2","scope":"complaints"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#_lot_result
 -   id: BT-636-LotResult
     parentNodeId: ND-ReviewRequestsStatistics
@@ -9564,9 +9565,9 @@
     Business groups:
         BG-612: Buyer Review Summary
         BG-613: Buyer Review Requests
-    eForms guidance: /https://github.com/open-contracting/european-union-support/issues/116, /https://github.com/open-contracting/european-union-support/issues/54
+    eForms guidance: These values are mapped to the same `Statistic` objects as created for BT-635. For each `ancestor::AppealRequestStatistics`, [add a statistic](common-operations.md#add-a-statistic) or update the corresponding `Statistic` object and map to its `.measure`. Look-up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/irregularity-type) and map it to `.notes`
     eForms example: <efac:AppealRequestsStatistics><efbc:StatisticsCode listName="irregularity-type">unj-lim-subc</efbc:StatisticsCode></efac:AppealRequestsStatistics>
-    OCDS example: ''
+    OCDS example: '{"statistics":[{"id":"1","measure":"ab-low","scope":"complaints","notes":"Unjustified rejection of abnormally low tenders"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#_lot_result
 -   id: BT-64-Lot
     parentNodeId: ND-SubcontractTerms
@@ -9664,7 +9665,7 @@
         BG-7: Notice Result
         BG-137: Procedure Lot Result
     eForms guidance: '[Get the award for the LotResult](common-operations.md#get-the-award-for-the-lot-result) and map to the award''s `.estimatedValue.amount`. Map `@currencyID` to the value''s `.currency`.'
-    eForms example: <efac:FrameworkAgreementValues><cbc:EstimatedMaximumValueAmount currencyID="EUR">123</cbc:EstimatedMaximumValueAmount></efac:FrameworkAgreementValues>
+    eForms example: <efac:FrameworkAgreementValues><cbc:ReestimatedValueAmount currencyID="EUR">123</cbc:ReestimatedValueAmount></efac:FrameworkAgreementValues>
     OCDS example: '{"awards":[{"estimatedValue":{"amount":123,"currency":"EUR"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#_lot_result
 -   id: BT-661-Lot
@@ -10011,9 +10012,9 @@
     Description: The number of organisations that requested the buyer to review any of its decisions (e.g. the technical specifications, award decision).
     Business groups:
         BG-612: Buyer Review Summary
-    eForms guidance: ''
-    eForms example: /https://github.com/open-contracting/european-union-support/issues/116, /https://github.com/open-contracting/european-union-support/issues/54
-    OCDS example: ''
+    eForms guidance: "These values are mapped to the same `Statistic` objects as created for BT-712(b). For each `ancestor::AppealRequestStatistics`, [add a statistic](common-operations.md#add-a-statistic) or update the corresponding `Statistic` object, and set its `.measure` to \u201Ccomplainants\u201D."
+    eForms example: <efac:AppealRequestsStatistics><efbc:StatisticsCode listName="review-type">complainants</efbc:StatisticsCode></efac:AppealRequestsStatistics>
+    OCDS example: '{"statistics":[{"id":"1","value":"2","scope":"complaints"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#_lot_result
 -   id: BT-712(b)-LotResult
     parentNodeId: ND-BuyerReviewComplainants
@@ -10026,9 +10027,9 @@
     Description: The number of organisations that requested the buyer to review any of its decisions (e.g. the technical specifications, award decision).
     Business groups:
         BG-612: Buyer Review Summary
-    eForms guidance: ''
-    eForms example: /https://github.com/open-contracting/european-union-support/issues/116, /https://github.com/open-contracting/european-union-support/issues/54
-    OCDS example: ''
+    eForms guidance: These values are mapped to the same `Statistic` objects as created for BT-712(a). For each `ancestor::AppealRequestStatistics`, [add a statistic](common-operations.md#add-a-statistic) or update the corresponding `Statistic` object, map to its `.value`.
+    eForms example: <efac:AppealRequestsStatistics><efbc:StatisticsNumeric>2</efbc:StatisticsNumeric></efac:AppealRequestsStatistics>
+    OCDS example: '{"statistics":[{"id":"1","value":"2","measure":"complainants","scope":"complaints"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.0/schema/all-in-one.html#_lot_result
 -   id: BT-717-Lot
     parentNodeId: ND-StrategicProcurementLot
@@ -11097,7 +11098,7 @@
     Description: The reference to the version of the previous notice that should be changed. This helps, for example, to avoid errors caused by multiple change notices sent at a similar time.
     Business groups:
         BG-9: Change
-    eForms guidance: ''
+    eForms guidance: Discard.
     eForms example: ''
     OCDS example: ''
     sdk: ''
