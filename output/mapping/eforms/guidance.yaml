@@ -478,9 +478,9 @@
     type: amount
     repeatable: false
     mandatory: false
-    eForms guidance: ''
+    eForms guidance: Map to `awards.estimatedValue.amount`. Map `@currencyID` to `awards.estimatedValue.currency`.
     eForms example: <efac:NoticeResult><cbc:OverallApproximateFrameworkContractsAmount currencyID="EUR">6000</cbc:OverallApproximateFrameworkContractsAmount></efac:NoticeResult>
-    OCDS example: ''
+    OCDS example: '{"awards":[{"estimatedValue":{"amount":6000,"currency":"EUR"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_aggregated_amounts
 -   id: BT-113-Lot
     parentNodeId: ND-FA
@@ -561,9 +561,9 @@
     Description: The maximum or estimated value which can be spent within the framework agreement(s) announced in this notice over its whole duration, in all lots, including options and renewals.
     Business groups:
         BG-7: Notice Result
-    eForms guidance: Map to `tender.techniques.frameworkAgreement.value.amount`. Map `@currencyID` to the value's `.currency`.
+    eForms guidance: Map to `awards.maximumValue.amount`. Map `@currencyID` to `awards.maximumValue.currency`.
     eForms example: <efac:NoticeResult><cbc:OverallMaximumFrameworkContractsAmount currencyID="EUR">6000</cbc:OverallMaximumFrameworkContractsAmount></efac:NoticeResult>
-    OCDS example: '{"tender":{"techniques":{"frameworkAgreement":{"value":{"amount":6000,"currency":"EUR"}}}}}'
+    OCDS example: '{"awards":[{"maximumValue":{"amount":6000,"currency":"EUR"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_aggregated_amounts
 -   id: BT-119-LotResult
     parentNodeId: ND-LotResult
@@ -1753,9 +1753,9 @@
     Business groups:
         BG-7: Notice Result
         BG-556: Group Framework Value
-    eForms guidance: \[UNREVIEWED\] Get the LotGroup in `tender.lotGroups` whose `.id` is equal to the value of the XPath `sibling::cac:TenderLot/cac:ID`. If none exists yet, add a LotGroup to `tender.lotGroups` and set its `.id` to the value of the XPath `sibling::cac:TenderLot/cac:ID.`, map to its `.techniques.frameworkAgreement.value.amount` and map `currencyID` to its `techniques.frameworkAgreement.value.currency`.
+    eForms guidance: \[UNREVIEWED\] Get the LotGroup in `tender.lotGroups` whose `.id` is equal to the value of the XPath `sibling::cac:TenderLot/cac:ID`. If none exists yet, add a LotGroup to `tender.lotGroups` and set its `.id` to the value of the XPath `sibling::cac:TenderLot/cac:ID.`, map to its `.techniques.frameworkAgreement.maximumValue.amount` and map `currencyID` to its `techniques.frameworkAgreement.maximumValue.currency`.
     eForms example: <efac:NoticeResult><efac:GroupFramework><efbc:GroupFrameworkMaximumValueAmount currencyID="EUR">800000</efbc:GroupFrameworkMaximumValueAmount></efac:GroupFramework></efac:NoticeResult>
-    OCDS example: '{"tender":{"lotGroups":[{"techniques":{"frameworkAgreement":{"value":{"amount":800000,"currency":"EUR"}}}}]}}'
+    OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_aggregated_amounts
 -   id: BT-1561-NoticeResult
     parentNodeId: ND-NoticeResultGroupFA
@@ -1765,7 +1765,7 @@
     type: amount
     repeatable: false
     mandatory: false
-    eForms guidance: ''
+    eForms guidance: \[UNREVIEWED\] Get the LotGroup in `tender.lotGroups` whose `.id` is equal to the value of the XPath `sibling::cac:TenderLot/cac:ID`. If none exists yet, add a LotGroup to `tender.lotGroups` and set its `.id` to the value of the XPath `sibling::cac:TenderLot/cac:ID.`, map to its `.techniques.frameworkAgreement.value.amount` and map `currencyID` to its `techniques.frameworkAgreement.value.currency`.
     eForms example: <efac:NoticeResult><efac:GroupFramework><efbc:GroupFrameworkReestimatedValueAmount currencyID="EUR">800000</efbc:GroupFrameworkReestimatedValueAmount></efac:GroupFramework></efac:NoticeResult>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_aggregated_amounts
@@ -1781,9 +1781,9 @@
     Business groups:
         BG-2: Purpose
         BG-557: Group Framework Estimated Maximum Value
-    eForms guidance: '[Get the lot group for the ProcurementProjectLot](common-operations.md#get-the-lot-group-for-a-procurementprojectlot), map to its `.maximumValue.amount` (number) and map `currencyID` to its `maximumValue.currency`.'
+    eForms guidance: \[UNREVIEWED\] Get the LotGroup in `tender.lotGroups` whose `.id` is equal to the value of the XPath `sibling::cac:TenderLot/cac:ID`. If none exists yet, add a LotGroup to `tender.lotGroups` and set its `.id` to the value of the XPath `sibling::cac:TenderLot/cac:ID.`, map to its `.techniques.frameworkAgreement.value.amount` and map `currencyID` to its `techniques.frameworkAgreement.value.currency`.
     eForms example: <cac:FrameworkAgreement><cbc:EstimatedMaximumValueAmount currencyID="EUR">200000</cbc:EstimatedMaximumValueAmount></cac:FrameworkAgreement>
-    OCDS example: '{"tender":{"lotGroups":[{"maximumValue":{"amount":200000,"currency":"EUR"}}]}}'
+    OCDS example: '{"tender":{"lotGroups":[{"techniques":{"frameworkAgreement":{"value":{"amount":800000,"currency":"EUR"}}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#frameworkAgreementSection
 -   id: BT-16-Organization-Company
     parentNodeId: ND-CompanyAddress
@@ -2080,9 +2080,9 @@
     Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Look up Business Term that corresponds to the value `efbc:FieldIdentifierCode` in the [SDK Withheld Information tables](https://docs.ted.europa.eu/eforms/1.1.1/schema/withheld-publication.html). - Find the value of `ancestor::cbc:ContractFolderID` that corresponds to the notice `tender.id` and append this to the Business Term (BT-09) with a hyphen to generate an identifier. - Add a `withheldInformationItem` to the `withheldInformation` array - Map the identifier you have just generated to its `.id` - Set `.field` to "BT-09" - Set `.name` to "Cross Border Law".
     eForms example: <efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">cro-bor-law</efbc:FieldIdentifierCode></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"field":"BT-09","id":"BT-09-18d27a53-0109-4f93-9231-6659d931bce0","name":"Cross Border Law"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-195(BT-105)-Procedure
     parentNodeId: ND-ProcedureTypeUnpublish
@@ -2096,9 +2096,9 @@
     Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Look up Business Term that corresponds to the value `efbc:FieldIdentifierCode` in the [SDK Withheld Information tables](https://docs.ted.europa.eu/eforms/1.1.1/schema/withheld-publication.html). - Find the value of `ancestor::cbc:ContractFolderID` that corresponds to the notice `tender.id` and append this to the Business Term (BT-105) with a hyphen to generate an identifier. - Add a `withheldInformationItem` to the `withheldInformation` array - Map the identifier you have just generated to its `.id` - Set `.field` to "BT-105" - Set `.name` to "Procedure Type".
     eForms example: <efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">pro-typ</efbc:FieldIdentifierCode></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"field":"BT-105","id":"BT-105-18d27a53-0109-4f93-9231-6659d931bce0","name":"Procedure Type"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-195(BT-106)-Procedure
     parentNodeId: ND-ProcedureAcceleratedUnpublish
@@ -2112,9 +2112,9 @@
     Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Look up Business Term that corresponds to the value `efbc:FieldIdentifierCode` in the [SDK Withheld Information tables](https://docs.ted.europa.eu/eforms/1.1.1/schema/withheld-publication.html). - Find the value of `ancestor::cbc:ContractFolderID` that corresponds to the notice `tender.id` and append this to the Business Term (BT-105) with a hyphen to generate an identifier. - Add a `withheldInformationItem` to the `withheldInformation` array - Map the identifier you have just generated to its `.id` - Set `.field` to "BT-106" - Set `.name` to "Procedure Accelerated".
     eForms example: <efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">pro-acc</efbc:FieldIdentifierCode></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"field":"BT-106","id":"BT-106-18d27a53-0109-4f93-9231-6659d931bce0","name":"Procedure Accelerated"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-195(BT-1118)-NoticeResult
     parentNodeId: ND-NoticeApproximateValueUnpublish
@@ -2192,9 +2192,9 @@
     Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Look up Business Term that corresponds to the value `efbc:FieldIdentifierCode` in the [SDK Withheld Information tables](https://docs.ted.europa.eu/eforms/1.1.1/schema/withheld-publication.html). - Find the value of `ancestor::cbc:ContractFolderID` that corresponds to the notice `tender.id` and append this to the Business Term (BT-105) with a hyphen to generate an identifier. - Add a `withheldInformationItem` to the `withheldInformation` array - Map the identifier you have just generated to its `.id` - Set `.field` to "BT-1315" - Set `.name` to "Procedure Accelerated Justification".
     eForms example: <efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">pro-acc-jus</efbc:FieldIdentifierCode></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"field":"BT-1315","id":"BT-1315-18d27a53-0109-4f93-9231-6659d931bce0","name":"Procedure Accelerated Justification"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-195(BT-136)-Procedure
     parentNodeId: ND-DirectAwardJustificationCodeUnpublish
@@ -2957,9 +2957,9 @@
     Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-09) and map to its `.rationale`.
     eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"rationale":"Information delayed publication because of ..."}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-196(BT-105)-Procedure
     parentNodeId: ND-ProcedureTypeUnpublish
@@ -2972,9 +2972,9 @@
     Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-105) and map to its `.rationale`.
     eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"rationale":"Information delayed publication because of ..."}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-196(BT-106)-Procedure
     parentNodeId: ND-ProcedureAcceleratedUnpublish
@@ -2987,9 +2987,9 @@
     Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-106) and map to its `.rationale`.
     eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"rationale":"Information delayed publication because of ..."}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-196(BT-1118)-NoticeResult
     parentNodeId: ND-NoticeApproximateValueUnpublish
@@ -3062,9 +3062,9 @@
     Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-1351) and map to its `.rationale`.
     eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"rationale":"Information delayed publication because of ..."}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-196(BT-136)-Procedure
     parentNodeId: ND-DirectAwardJustificationCodeUnpublish
@@ -3783,9 +3783,9 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-09). Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-197(BT-105)-Procedure
     parentNodeId: ND-ProcedureTypeUnpublish
@@ -3799,9 +3799,9 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-105). Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-197(BT-106)-Procedure
     parentNodeId: ND-ProcedureAcceleratedUnpublish
@@ -3815,9 +3815,9 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-106). Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-197(BT-1118)-NoticeResult
     parentNodeId: ND-NoticeApproximateValueUnpublish
@@ -3895,9 +3895,9 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-1351). Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-197(BT-136)-Procedure
     parentNodeId: ND-DirectAwardJustificationCodeUnpublish
@@ -4661,9 +4661,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-09). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-198(BT-105)-Procedure
     parentNodeId: ND-ProcedureTypeUnpublish
@@ -4677,9 +4677,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-105). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-198(BT-106)-Procedure
     parentNodeId: ND-ProcedureAcceleratedUnpublish
@@ -4693,9 +4693,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-106). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-198(BT-1118)-NoticeResult
     parentNodeId: ND-NoticeApproximateValueUnpublish
@@ -4708,10 +4708,10 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-1118). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-198(BT-118)-NoticeResult
     parentNodeId: ND-NoticeMaximumValueUnpublish
     name: Unpublished Accessibility Date
@@ -4724,9 +4724,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-118). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-198(BT-1252)-Procedure
     parentNodeId: ND-DirectAwardJustificationPreviousUnpublish
@@ -4740,9 +4740,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-1252). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-198(BT-135)-Procedure
     parentNodeId: ND-DirectAwardJustificationTextUnpublish
@@ -4756,9 +4756,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-135). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-198(BT-1351)-Procedure
     parentNodeId: ND-ProcedureAcceleratedJustificationUnpublish
@@ -4772,9 +4772,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-1351). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-198(BT-136)-Procedure
     parentNodeId: ND-DirectAwardJustificationCodeUnpublish
@@ -4788,9 +4788,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-136). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-198(BT-142)-LotResult
     parentNodeId: ND-WinnerChosenUnpublish
@@ -4804,9 +4804,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-142). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-198(BT-144)-LotResult
     parentNodeId: ND-NotAwardedReasonUnpublish
@@ -4820,9 +4820,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-144). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-198(BT-156)-NoticeResult
     parentNodeId: ND-GroupMaximumValueUnpublish
@@ -4836,9 +4836,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-156). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-198(BT-1561)-NoticeResult
     parentNodeId: ND-GroupReestimatedValueUnpublish
@@ -4852,10 +4852,10 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-1561). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
+    sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-198(BT-160)-Tender
     parentNodeId: ND-ConcessionRevenueBuyerUnpublish
     name: Unpublished Accessibility Date
@@ -4868,9 +4868,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-160). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-198(BT-161)-NoticeResult
     parentNodeId: ND-NoticeValueUnpublish
@@ -4884,9 +4884,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-161). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-198(BT-162)-Tender
     parentNodeId: ND-ConcessionRevenueUserUnpublish
@@ -4900,9 +4900,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-162). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-198(BT-163)-Tender
     parentNodeId: ND-ValueConcessionDescriptionUnpublish
@@ -4916,9 +4916,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-163). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-198(BT-171)-Tender
     parentNodeId: ND-TenderRankUnpublish
@@ -4932,9 +4932,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-171). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-198(BT-191)-Tender
     parentNodeId: ND-CountryOriginUnpublish
@@ -4948,9 +4948,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-191). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-198(BT-193)-Tender
     parentNodeId: ND-WinningTenderVariantUnpublish
@@ -4964,9 +4964,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-193). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-198(BT-539)-Lot
     parentNodeId: ND-LotAwardCriterionTypeUnpublish
@@ -4980,9 +4980,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-539). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-539)-LotsGroup
     parentNodeId: ND-LotsGroupAwardCriterionTypeUnpublish
@@ -4996,9 +4996,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-539). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-540)-Lot
     parentNodeId: ND-LotAwardCriterionDescriptionUnpublish
@@ -5012,9 +5012,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-540). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-540)-LotsGroup
     parentNodeId: ND-LotsGroupAwardCriterionDescriptionUnpublish
@@ -5028,9 +5028,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-540). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-541)-Lot
     parentNodeId: ND-LotAwardCriterionNumberUnpublish
@@ -5044,9 +5044,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-541). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-541)-LotsGroup
     parentNodeId: ND-LotsGroupAwardCriterionNumberUnpublish
@@ -5060,9 +5060,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-541). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-5421)-Lot
     parentNodeId: ND-LotAwardCriterionNumberWeightUnpublish
@@ -5076,9 +5076,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-5421). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-5421)-LotsGroup
     parentNodeId: ND-LotsGroupAwardCriterionNumberWeightUnpublish
@@ -5092,9 +5092,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-5421). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-5422)-Lot
     parentNodeId: ND-LotAwardCriterionNumberFixUnpublish
@@ -5108,9 +5108,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-5422). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-5422)-LotsGroup
     parentNodeId: ND-LotsGroupAwardCriterionNumberFixUnpublish
@@ -5124,9 +5124,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-5422). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-5423)-Lot
     parentNodeId: ND-LotAwardCriterionNumberThresholdUnpublish
@@ -5140,9 +5140,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-5423). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-5423)-LotsGroup
     parentNodeId: ND-LotsGroupAwardCriterionNumberThresholdUnpublish
@@ -5156,9 +5156,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-5423). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-543)-Lot
     parentNodeId: ND-LotAwardCriterionNumberComplicatedUnpublish
@@ -5172,9 +5172,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-543). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-543)-LotsGroup
     parentNodeId: ND-LotsGroupAwardCriterionNumberComplicatedUnpublish
@@ -5188,9 +5188,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-543). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-553)-Tender
     parentNodeId: ND-SubcontractingValueUnpublish
@@ -5204,9 +5204,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-553). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-198(BT-554)-Tender
     parentNodeId: ND-SubcontractingDescriptionUnpublish
@@ -5220,9 +5220,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-554). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-198(BT-555)-Tender
     parentNodeId: ND-SubcontractingPercentageUnpublish
@@ -5236,9 +5236,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-555). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-198(BT-556)-NoticeResult
     parentNodeId: ND-GroupMaximalValueIdentifierUnpublish
@@ -5252,9 +5252,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-556). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-198(BT-635)-LotResult
     parentNodeId: ND-ReviewRequestsStatisticsCountUnpublish
@@ -5267,9 +5267,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-635). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-198(BT-636)-LotResult
     parentNodeId: ND-ReviewRequestsStatisticsTypeUnpublish
@@ -5282,9 +5282,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-636). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-198(BT-709)-LotResult
     parentNodeId: ND-MaximalValueUnpublish
@@ -5298,9 +5298,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-709). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-198(BT-710)-LotResult
     parentNodeId: ND-TenderValueLowestUnpublish
@@ -5314,9 +5314,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-710). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-198(BT-711)-LotResult
     parentNodeId: ND-TenderValueHighestUnpublish
@@ -5330,9 +5330,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-711). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-198(BT-712)-LotResult
     parentNodeId: ND-RevewRequestsUnpublish
@@ -5346,9 +5346,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-712). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-198(BT-720)-Tender
     parentNodeId: ND-WinningTenderValueUnpublish
@@ -5362,9 +5362,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-720). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-198(BT-730)-Tender
     parentNodeId: ND-SubcontractingValueKnownUnpublish
@@ -5378,9 +5378,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-730). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-198(BT-731)-Tender
     parentNodeId: ND-SubcontractingPercentageKnownUnpublish
@@ -5394,9 +5394,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-731). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-198(BT-733)-Lot
     parentNodeId: ND-LotAwardCriteriaOrderJustificationUnpublish
@@ -5410,9 +5410,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-733). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-733)-LotsGroup
     parentNodeId: ND-LotsGroupAwardCriteriaOrderJustificationUnpublish
@@ -5426,9 +5426,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-733). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: ''
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-734)-Lot
     parentNodeId: ND-LotAwardCriteriaNameUnpublish
@@ -5444,7 +5444,7 @@
         BG-8: Not Immediately Published
     eForms guidance: ''
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-734)-LotsGroup
     parentNodeId: ND-LotsGroupAwardCriteriaNameUnpublish
@@ -5460,7 +5460,7 @@
         BG-8: Not Immediately Published
     eForms guidance: ''
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-759)-LotResult
     parentNodeId: ND-ReceivedSubmissionCountUnpublish
@@ -5476,7 +5476,7 @@
         BG-8: Not Immediately Published
     eForms guidance: ''
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-198(BT-760)-LotResult
     parentNodeId: ND-ReceivedSubmissionTypeUnpublish
@@ -5492,7 +5492,7 @@
         BG-8: Not Immediately Published
     eForms guidance: ''
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotResultLevelSection
 -   id: BT-198(BT-773)-Tender
     parentNodeId: ND-SubcontractingUnpublish
@@ -5508,7 +5508,7 @@
         BG-8: Not Immediately Published
     eForms guidance: ''
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-198(BT-88)-Procedure
     parentNodeId: ND-ProcedureFeaturesUnpublish
@@ -5523,8 +5523,8 @@
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-200-Contract
     parentNodeId: ND-ModificationReason
@@ -6315,10 +6315,10 @@
     type: amount
     repeatable: false
     mandatory: false
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: \[UNREVIEWED\] Get the Lot in `tender.lots` whose `.id` is equal to the value of the XPath `sibling::cac:TenderLot/cac:ID`. If none exists yet, add a Lot to `tender.lots` and set its `.id` to the value of the XPath `sibling::cac:TenderLot/cac:ID.`, map to its `.techniques.frameworkAgreement.maximumValue.amount` and map `currencyID` to its `techniques.frameworkAgreement.maximumValue.currency`.
+    eForms example: <efext:EformsExtension><efbc:FrameworkMaximumAmount currencyID="EUR">120000</efbc:FrameworkMaximumAmount></efext:EformsExtension>
+    OCDS example: '{"tender":{"lots":[{"techniques":{"frameworkAgreement":{"maximumValue":{"amount":120000,"currency":"EUR"}}}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#estimatedValueSection
 -   id: BT-271-LotsGroup
     parentNodeId: ND-LotsGroupValueEstimate
     name: Framework Maximum Value
@@ -6327,10 +6327,10 @@
     type: amount
     repeatable: false
     mandatory: false
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: \[UNREVIEWED\] Get the LotGroup in `tender.lotGroups` whose `.id` is equal to the value of the XPath `sibling::cac:TenderLot/cac:ID`. If none exists yet, add a LotGroup to `tender.lotGroups` and set its `.id` to the value of the XPath `sibling::cac:TenderLot/cac:ID.`, map to its `.techniques.frameworkAgreement.maximumValue.amount` and map `currencyID` to its `techniques.frameworkAgreement.maximumValue.currency`.
+    eForms example: <efext:EformsExtension><efbc:FrameworkMaximumAmount currencyID="EUR">120000</efbc:FrameworkMaximumAmount></efext:EformsExtension>
+    OCDS example: '{"tender":{"lotGroups":[{"techniques":{"frameworkAgreement":{"maximumValue":{"amount":120000,"currency":"EUR"}}}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#estimatedValueSection
 -   id: BT-271-Procedure
     parentNodeId: ND-ProcedureValueEstimate
     name: Framework Maximum Value
@@ -6339,10 +6339,10 @@
     type: amount
     repeatable: false
     mandatory: false
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Map to `tender.techniques.frameworkAgreement.maximumValue.amount`. Map `@currencyID` to `tender.techniques.frameworkAgreement.maximumValue.currency`.
+    eForms example: <efext:EformsExtension><efbc:FrameworkMaximumAmount currencyID="EUR">120000</efbc:FrameworkMaximumAmount></efext:EformsExtension>
+    OCDS example: '{"tender":{"techniques":{"frameworkAgreement":{"maximumValue":{"amount":120000,"currency":"EUR"}}}}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#estimatedValueSection
 -   id: BT-300-Lot
     parentNodeId: ND-LotProcurementScope
     name: Additional Information
