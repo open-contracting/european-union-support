@@ -478,9 +478,9 @@
     type: amount
     repeatable: false
     mandatory: false
-    eForms guidance: Map to `awards.estimatedValue.amount`. Map `@currencyID` to `awards.estimatedValue.currency`.
+    eForms guidance: Discard.
     eForms example: <efac:NoticeResult><cbc:OverallApproximateFrameworkContractsAmount currencyID="EUR">6000</cbc:OverallApproximateFrameworkContractsAmount></efac:NoticeResult>
-    OCDS example: '{"awards":[{"estimatedValue":{"amount":6000,"currency":"EUR"}}]}'
+    OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_aggregated_amounts
 -   id: BT-113-Lot
     parentNodeId: ND-FA
@@ -561,9 +561,9 @@
     Description: The maximum or estimated value which can be spent within the framework agreement(s) announced in this notice over its whole duration, in all lots, including options and renewals.
     Business groups:
         BG-7: Notice Result
-    eForms guidance: Map to `awards.maximumValue.amount`. Map `@currencyID` to `awards.maximumValue.currency`.
+    eForms guidance: Discard.
     eForms example: <efac:NoticeResult><cbc:OverallMaximumFrameworkContractsAmount currencyID="EUR">6000</cbc:OverallMaximumFrameworkContractsAmount></efac:NoticeResult>
-    OCDS example: '{"awards":[{"maximumValue":{"amount":6000,"currency":"EUR"}}]}'
+    OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_aggregated_amounts
 -   id: BT-119-LotResult
     parentNodeId: ND-LotResult
@@ -1753,7 +1753,7 @@
     Business groups:
         BG-7: Notice Result
         BG-556: Group Framework Value
-    eForms guidance: \[UNREVIEWED\] Get the LotGroup in `tender.lotGroups` whose `.id` is equal to the value of the XPath `sibling::cac:TenderLot/cac:ID`. If none exists yet, add a LotGroup to `tender.lotGroups` and set its `.id` to the value of the XPath `sibling::cac:TenderLot/cac:ID.`, map to its `.techniques.frameworkAgreement.maximumValue.amount` and map `currencyID` to its `techniques.frameworkAgreement.maximumValue.currency`.
+    eForms guidance: Discard.
     eForms example: <efac:NoticeResult><efac:GroupFramework><efbc:GroupFrameworkMaximumValueAmount currencyID="EUR">800000</efbc:GroupFrameworkMaximumValueAmount></efac:GroupFramework></efac:NoticeResult>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_aggregated_amounts
@@ -1765,7 +1765,7 @@
     type: amount
     repeatable: false
     mandatory: false
-    eForms guidance: \[UNREVIEWED\] Get the LotGroup in `tender.lotGroups` whose `.id` is equal to the value of the XPath `sibling::cac:TenderLot/cac:ID`. If none exists yet, add a LotGroup to `tender.lotGroups` and set its `.id` to the value of the XPath `sibling::cac:TenderLot/cac:ID.`, map to its `.techniques.frameworkAgreement.value.amount` and map `currencyID` to its `techniques.frameworkAgreement.value.currency`.
+    eForms guidance: Discard.
     eForms example: <efac:NoticeResult><efac:GroupFramework><efbc:GroupFrameworkReestimatedValueAmount currencyID="EUR">800000</efbc:GroupFrameworkReestimatedValueAmount></efac:GroupFramework></efac:NoticeResult>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_aggregated_amounts
@@ -2112,7 +2112,7 @@
     Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Look up Business Term that corresponds to the value `efbc:FieldIdentifierCode` in the [SDK Withheld Information tables](https://docs.ted.europa.eu/eforms/1.1.1/schema/withheld-publication.html). - Find the value of `ancestor::cbc:ContractFolderID` that corresponds to the notice `tender.id` and append this to the Business Term (BT-105) with a hyphen to generate an identifier. - Add a `withheldInformationItem` to the `withheldInformation` array - Map the identifier you have just generated to its `.id` - Set `.field` to "BT-106" - Set `.name` to "Procedure Accelerated".
+    eForms guidance: Look up Business Term that corresponds to the value `efbc:FieldIdentifierCode` in the [SDK Withheld Information tables](https://docs.ted.europa.eu/eforms/1.1.1/schema/withheld-publication.html). - Find the value of `ancestor::cbc:ContractFolderID` that corresponds to the notice `tender.id` and append this to the Business Term (BT-106) with a hyphen to generate an identifier. - Add a `withheldInformationItem` to the `withheldInformation` array - Map the identifier you have just generated to its `.id` - Set `.field` to "BT-106" - Set `.name` to "Procedure Accelerated".
     eForms example: <efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">pro-acc</efbc:FieldIdentifierCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"field":"BT-106","id":"BT-106-18d27a53-0109-4f93-9231-6659d931bce0","name":"Procedure Accelerated"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
@@ -2128,10 +2128,10 @@
     Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
+    eForms guidance: Discard
+    eForms example: <efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">pro-acc</efbc:FieldIdentifierCode></efac:FieldsPrivacy>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-195(BT-118)-NoticeResult
     parentNodeId: ND-NoticeMaximumValueUnpublish
     name: Unpublished Identifier
@@ -2144,7 +2144,7 @@
     Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Discard.
     eForms example: <efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">not-max-val</efbc:FieldIdentifierCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
@@ -2160,9 +2160,9 @@
     Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Look up Business Term that corresponds to the value `efbc:FieldIdentifierCode` in the [SDK Withheld Information tables](https://docs.ted.europa.eu/eforms/1.1.1/schema/withheld-publication.html). - Find the value of `ancestor::cbc:ContractFolderID` that corresponds to the notice `tender.id` and append this to the Business Term (BT-1252) with a hyphen to generate an identifier. - Add a `withheldInformationItem` to the `withheldInformation` array - Map the identifier you have just generated to its `.id` - Set `.field` to "BT-1252" - Set `.name` to "Direct Award Justification Previous Procedure Identifier".
     eForms example: <efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">dir-awa-pre</efbc:FieldIdentifierCode></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"field":"BT-1252","id":"BT-1252-18d27a53-0109-4f93-9231-6659d931bce0","name":"Direct Award Justification Previous Procedure Identifier"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-195(BT-135)-Procedure
     parentNodeId: ND-DirectAwardJustificationTextUnpublish
@@ -2176,9 +2176,9 @@
     Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Look up Business Term that corresponds to the value `efbc:FieldIdentifierCode` in the [SDK Withheld Information tables](https://docs.ted.europa.eu/eforms/1.1.1/schema/withheld-publication.html). - Find the value of `ancestor::cbc:ContractFolderID` that corresponds to the notice `tender.id` and append this to the Business Term (BT-135) with a hyphen to generate an identifier. - Add a `withheldInformationItem` to the `withheldInformation` array - Map the identifier you have just generated to its `.id` - Set `.field` to "BT-135" - Set `.name` to "Direct Award Justification".
     eForms example: <efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">dir-awa-tex</efbc:FieldIdentifierCode></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"field":"BT-135","id":"BT-135-18d27a53-0109-4f93-9231-6659d931bce0","name":"Direct Award Justification"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-195(BT-1351)-Procedure
     parentNodeId: ND-ProcedureAcceleratedJustificationUnpublish
@@ -2192,7 +2192,7 @@
     Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Look up Business Term that corresponds to the value `efbc:FieldIdentifierCode` in the [SDK Withheld Information tables](https://docs.ted.europa.eu/eforms/1.1.1/schema/withheld-publication.html). - Find the value of `ancestor::cbc:ContractFolderID` that corresponds to the notice `tender.id` and append this to the Business Term (BT-105) with a hyphen to generate an identifier. - Add a `withheldInformationItem` to the `withheldInformation` array - Map the identifier you have just generated to its `.id` - Set `.field` to "BT-1315" - Set `.name` to "Procedure Accelerated Justification".
+    eForms guidance: Look up Business Term that corresponds to the value `efbc:FieldIdentifierCode` in the [SDK Withheld Information tables](https://docs.ted.europa.eu/eforms/1.1.1/schema/withheld-publication.html). - Find the value of `ancestor::cbc:ContractFolderID` that corresponds to the notice `tender.id` and append this to the Business Term (BT-1351) with a hyphen to generate an identifier. - Add a `withheldInformationItem` to the `withheldInformation` array - Map the identifier you have just generated to its `.id` - Set `.field` to "BT-1315" - Set `.name` to "Procedure Accelerated Justification".
     eForms example: <efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">pro-acc-jus</efbc:FieldIdentifierCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"field":"BT-1315","id":"BT-1315-18d27a53-0109-4f93-9231-6659d931bce0","name":"Procedure Accelerated Justification"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
@@ -2208,9 +2208,9 @@
     Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Look up Business Term that corresponds to the value `efbc:FieldIdentifierCode` in the [SDK Withheld Information tables](https://docs.ted.europa.eu/eforms/1.1.1/schema/withheld-publication.html). - Find the value of `ancestor::cbc:ContractFolderID` that corresponds to the notice `tender.id` and append this to the Business Term (BT-136) with a hyphen to generate an identifier. - Add a `withheldInformationItem` to the `withheldInformation` array - Map the identifier you have just generated to its `.id` - Set `.field` to "BT-136" - Set `.name` to "Direct Award Justification".
     eForms example: <efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">dir-awa-jus</efbc:FieldIdentifierCode></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"field":"BT-136","id":"BT-136-18d27a53-0109-4f93-9231-6659d931bce0","name":"Direct Award Justification"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-195(BT-142)-LotResult
     parentNodeId: ND-WinnerChosenUnpublish
@@ -2256,7 +2256,7 @@
     Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Discard.
     eForms example: <efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">gro-max-val</efbc:FieldIdentifierCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
@@ -2272,10 +2272,10 @@
     Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
+    eForms guidance: Discard.
+    eForms example: <efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">gro-max-val</efbc:FieldIdentifierCode></efac:FieldsPrivacy>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-195(BT-160)-Tender
     parentNodeId: ND-ConcessionRevenueBuyerUnpublish
     name: Unpublished Identifier
@@ -2304,7 +2304,7 @@
     Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Discard.
     eForms example: <efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">not-val</efbc:FieldIdentifierCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
@@ -2672,7 +2672,7 @@
     Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Discard.
     eForms example: <efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">gro-max-ide</efbc:FieldIdentifierCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
@@ -2942,9 +2942,9 @@
     Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Look up Business Term that corresponds to the value `efbc:FieldIdentifierCode` in the [SDK Withheld Information tables](https://docs.ted.europa.eu/eforms/1.1.1/schema/withheld-publication.html). - Find the value of `ancestor::cbc:ContractFolderID` that corresponds to the notice `tender.id` and append this to the Business Term (BT-88) with a hyphen to generate an identifier. - Add a `withheldInformationItem` to the `withheldInformation` array - Map the identifier you have just generated to its `.id` - Set `.field` to "BT-88" - Set `.name` to "Procedure Features".
     eForms example: <efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">pro-fea</efbc:FieldIdentifierCode></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"field":"BT-88","id":"BT-88-18d27a53-0109-4f93-9231-6659d931bce0","name":"Procedure Features"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-196(BT-09)-Procedure
     parentNodeId: ND-CrossBorderLawUnpublish
@@ -3002,10 +3002,10 @@
     Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
+    eForms guidance: Discard.
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-196(BT-118)-NoticeResult
     parentNodeId: ND-NoticeMaximumValueUnpublish
     name: Unpublished Justification Description
@@ -3017,7 +3017,7 @@
     Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Discard.
     eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
@@ -3032,9 +3032,9 @@
     Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-1252) and map to its `.rationale`.
     eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"rationale":"Information delayed publication because of ..."}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-196(BT-135)-Procedure
     parentNodeId: ND-DirectAwardJustificationTextUnpublish
@@ -3047,9 +3047,9 @@
     Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-135) and map to its `.rationale`.
     eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"rationale":"Information delayed publication because of ..."}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-196(BT-1351)-Procedure
     parentNodeId: ND-ProcedureAcceleratedJustificationUnpublish
@@ -3077,9 +3077,9 @@
     Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-136) and map to its `.rationale`.
     eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"rationale":"Information delayed publication because of ..."}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-196(BT-142)-LotResult
     parentNodeId: ND-WinnerChosenUnpublish
@@ -3122,7 +3122,7 @@
     Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Discard.
     eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
@@ -3137,10 +3137,10 @@
     Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
+    eForms guidance: Discard.
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-196(BT-160)-Tender
     parentNodeId: ND-ConcessionRevenueBuyerUnpublish
     name: Unpublished Justification Description
@@ -3167,7 +3167,7 @@
     Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Discard.
     eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
@@ -3512,7 +3512,7 @@
     Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Discard.
     eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
@@ -3767,9 +3767,9 @@
     Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-88) and map to its `.rationale`.
     eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"rationale":"Information delayed publication because of ..."}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-197(BT-09)-Procedure
     parentNodeId: ND-CrossBorderLawUnpublish
@@ -3831,10 +3831,10 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
+    eForms guidance: Discard.
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-197(BT-118)-NoticeResult
     parentNodeId: ND-NoticeMaximumValueUnpublish
     name: Unpublished Justification Code
@@ -3847,7 +3847,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Discard.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
@@ -3863,9 +3863,9 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-1252). Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-197(BT-135)-Procedure
     parentNodeId: ND-DirectAwardJustificationTextUnpublish
@@ -3879,9 +3879,9 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-1252). Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-197(BT-1351)-Procedure
     parentNodeId: ND-ProcedureAcceleratedJustificationUnpublish
@@ -3911,9 +3911,9 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-136). Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-197(BT-142)-LotResult
     parentNodeId: ND-WinnerChosenUnpublish
@@ -3959,7 +3959,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Discard.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
@@ -3975,10 +3975,10 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
+    eForms guidance: Discard.
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-197(BT-160)-Tender
     parentNodeId: ND-ConcessionRevenueBuyerUnpublish
     name: Unpublished Justification Code
@@ -4007,7 +4007,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Discard.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
@@ -4375,7 +4375,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Discard.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
@@ -4645,9 +4645,9 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-88). Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
 -   id: BT-198(BT-09)-Procedure
     parentNodeId: ND-CrossBorderLawUnpublish
@@ -4708,9 +4708,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-1118). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Discard.
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
+    OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-198(BT-118)-NoticeResult
     parentNodeId: ND-NoticeMaximumValueUnpublish
@@ -4724,9 +4724,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-118). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Discard.
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
+    OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-198(BT-1252)-Procedure
     parentNodeId: ND-DirectAwardJustificationPreviousUnpublish
@@ -4836,9 +4836,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-156). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Discard.
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
+    OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-198(BT-1561)-NoticeResult
     parentNodeId: ND-GroupReestimatedValueUnpublish
@@ -4852,9 +4852,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-1561). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Discard.
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
+    OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-198(BT-160)-Tender
     parentNodeId: ND-ConcessionRevenueBuyerUnpublish
@@ -4884,9 +4884,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-161). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Discard.
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
+    OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-198(BT-162)-Tender
     parentNodeId: ND-ConcessionRevenueUserUnpublish
@@ -5252,9 +5252,9 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-556). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Discard.
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
+    OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_result_level
 -   id: BT-198(BT-635)-LotResult
     parentNodeId: ND-ReviewRequestsStatisticsCountUnpublish
@@ -5522,7 +5522,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-88). '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#procedureLevelSection
@@ -9168,9 +9168,9 @@
     Business groups:
         BG-7: Notice Result
         BG-556: Group Framework Value
-    eForms guidance: \[UNREVIEWED\] If there is a LotGroup in `tender.lotGroups` whose `.id` is equal to the value of this field, discard. Otherwise, add a LotGroup to `tender.lotGroups` and map to its `.id`.
+    eForms guidance: Discard.
     eForms example: <efac:TenderLot><cbc:ID schemeName="LotsGroup">GLO-0001</cbc:ID></efac:TenderLot>
-    OCDS example: '{"tender":{"lotGroups":[{"id":"GLO-0001"}]}}'
+    OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#_notice_aggregated_amounts
 -   id: BT-57-Lot
     parentNodeId: ND-OptionsAndRenewals
