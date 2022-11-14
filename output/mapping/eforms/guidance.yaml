@@ -1581,7 +1581,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/AWARD_CONTRACT/AWARDED_CONTRACT/DATE_CONCLUSION_CONTRACT
     TED guidance:
     - Map to the contract's `.dateSigned`
-    eForms guidance: '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to the contract''s `.dateSigned`.'
+    eForms guidance: '[Get the contract for the SettledContract](common-operations.md#get-the-contract-for-a-settledcontract), [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to the contract''s `.dateSigned`.'
     eForms example: <efac:SettledContract><cbc:IssueDate>2021-02-21+01:00</cbc:IssueDate></efac:SettledContract>
     OCDS example: '{"contracts":[{"dateSigned":"2021-02-21T23:59:59+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#settledContractSection
@@ -1688,9 +1688,13 @@
     TED guidance:
     - 'If not set, let *Contract No* be the notice number followed by a hyphen ''-'' followed by the value of the `ITEM` attribute of the `AWARD_CONTRACT` element. Map to the award''s `.id`.\n\nThis assumes the *Contract No* is unique within the contracting process. (WARNING #93)'
     - 'Map to the award''s `.id`\n\nThis assumes the contract award notice set `/AWARD_CONTRACT/CONTRACT_NO` and that the *Contract No* is unique within the contracting process. (WARNING #93)'
-    eForms guidance: (UNREVIEWED) Map to the award's `.id`
+    eForms guidance: |-
+      * [Get the contract for the SettledContract](common-operations.md#get-the-contract-for-a-settledcontract)
+      * Add a `SimpleIdentifier` to the contract's `.identifiers` array
+      * If the scope of the list, register or scheme from which the contract identifier is drawn is subnational, set the simple identifier's `.scheme` to `{ISO 3166-1 alpha-2}-{system}`. Otherwise, set it to `{ISO 3166-2}-{system}`
+      * Map to the simple identifier's `.id`
     eForms example: <efac:SettledContract><efac:ContractReference><cbc:ID>CRN ABC:EFG/2020-01</cbc:ID></efac:ContractReference></efac:SettledContract>
-    OCDS example: ''
+    OCDS example: '{"contracts": [{"identifiers": [{"id": "CRN ABC:EFG/2020-01", "scheme": "NL-TENDERNED"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#settledContractSection
 -   id: BT-1501(n)-Contract
     parentNodeId: ND-ContractModification
@@ -1737,7 +1741,12 @@
     Business groups:
         BG-7: Notice Result
         BG-310: Contract
-    eForms guidance: \[UNREVIEWED\] Map to the contract's `documents.url` and set `.type` to "contractSigned".
+    eForms guidance: |-
+      * [Get the contract for the SettledContract](common-operations.md#get-the-contract-for-a-settledcontract)
+      * Add a `Document` to its `.documents` array and
+        * Set its `.id` incrementally
+        * Set its `.type` to 'contractSigned'
+        * Map to its `.url`
     eForms example: <efac:SettledContract><cbc:URI>http://mycontract.acme.com/1234/</cbc:URI></efac:SettledContract>
     OCDS example: '{"contracts":[{"documents":[{"url":"http://mycontract.acme.com/1234/","type":"contractSigned"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#settledContractSection
@@ -7000,7 +7009,7 @@
           - [Add a party](common-operations.md#add-a-party)
           - Set its `.name` to 'European Union'
           - Add 'funder' to its `.roles`
-        - Get the `Finance` object in `contracts` with the matcing '`.id`'. If none exists yet:
+        - [Get the contract for the SettledContract](common-operations.md#get-the-contract-for-a-settledcontract) and get the `Finance` object in the contract's `.finance` array with the matching `.id`. If none exists yet:
           - Add a `Finance` object to the contract's `.finance` array
           - Map to its `.id`
           - Set its `.financingParty.name` to 'European Union'
@@ -10125,9 +10134,9 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/AWARD_CONTRACT/TITLE
     TED guidance:
     - Map to the award's `.title`
-    eForms guidance: ''
+    eForms guidance: '[Get the contract for the SettledContract](common-operations.md#get-the-contract-for-a-settledcontract) and map to the contract's `.title`.'
     eForms example: <efac:SettledContract><cbc:Title languageID="ENG">My contract title</cbc:Title></efac:SettledContract>
-    OCDS example: ''
+    OCDS example: '{"contracts": [{"title": "My contract title"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#settledContractSection
 -   id: BT-722-Contract
     parentNodeId: ND-ContractEUFunds
@@ -12335,9 +12344,9 @@
     mandatory: false
     pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|[1-9](\d{0,7})-(19|20)\d\d)$
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:NoticeResult><efac:SettledContract><cac:NoticeDocumentReference><cbc:ID schemeName="ojs-notice-id">62783-2020</cbc:ID></cac:NoticeDocumentReference></efac:SettledContract></efac:NoticeResult>
     OCDS example: ''
-    sdk: ''
+    sdk: 'https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#settledContractSection'
 -   id: OPT-110-Lot-FiscalLegis
     parentNodeId: ND-LotFiscalLegislation
     name: URL to Fiscal Legislation
@@ -13124,9 +13133,9 @@
     repeatable: false
     mandatory: true
     pattern: ^CON-\d{4}$
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: '[Get the contract for the SettledContract](common-operations.md#get-the-contract-for-a-settledcontract) and map to its `.id`.'
+    eForms example: <efac:NoticeResult><efac:SettledContract><cbc:ID schemeName="contract">CON-0001</cbc:ID></efac:SettledContract></efac:NoticeResult>
+    OCDS example: '{"contracts": [{"id": "CON-0001"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.1/schema/all-in-one.html#settledContractSection
 -   id: OPT-320-LotResult
     parentNodeId: ND-LotResult
