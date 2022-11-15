@@ -797,7 +797,7 @@
 
         For example, if a first notice for a given procedure has nine related processes, it uses id's '1' through '9'. A second notice for the same procedure then uses id's '10' and up, etc.
 
-        Map the value of the field to `.identifier`. Set `.scheme` to 'eu-oj'. If the value of `sibling::cbc:ProcessReasonCode is 'irregular' or 'unsuitable' add 'unsuccessfulProcess' to the `.relationship` array. If it is 'additional', 'existing' or 'repetition' add 'prior' to the `.relationship` array.
+        Map the value of the field to `.identifier`. Set `.scheme` to 'eu-oj'. If the value of `sibling::cbc:ProcessReasonCode` is 'irregular' or 'unsuitable' add 'unsuccessfulProcess' to the `.relationship` array. If it is 'additional', 'existing' or 'repetition' add 'prior' to the `.relationship` array.
     eForms example: <cac:ProcessJustification><cbc:Description>123e4567-e89b-12d3-a456-426614174000</cbc:Description></cac:ProcessJustification>
     OCDS example: '{"relatedProcesses":[{"id":"1","identifier":"123e4567-e89b-12d3-a456-426614174000","scheme":"eu-oj","relationship":["prior"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#directAwardSection
@@ -1694,12 +1694,12 @@
     - 'If not set, let *Contract No* be the notice number followed by a hyphen ''-'' followed by the value of the `ITEM` attribute of the `AWARD_CONTRACT` element. Map to the award''s `.id`.\n\nThis assumes the *Contract No* is unique within the contracting process. (WARNING #93)'
     - 'Map to the award''s `.id`\n\nThis assumes the contract award notice set `/AWARD_CONTRACT/CONTRACT_NO` and that the *Contract No* is unique within the contracting process. (WARNING #93)'
     eForms guidance: |-
-        * [Get the contract for the SettledContract](common-operations.md#get-the-contract-for-a-settledcontract)
-        * Add a `SimpleIdentifier` to the contract's `.identifiers` array
-        * If the scope of the list, register or scheme from which the contract identifier is drawn is subnational, set the simple identifier's `.scheme` to `{ISO 3166-1 alpha-2}-{system}`. Otherwise, set it to `{ISO 3166-2}-{system}`
-        * Map to the simple identifier's `.id`
+        - [Get the contract for the SettledContract](common-operations.md#get-the-contract-for-a-settledcontract)
+        - Add a `SimpleIdentifier` to the contract's `.identifiers` array
+        - If the scope of the list, register or scheme from which the contract identifier is drawn is subnational, set the simple identifier's `.scheme` to `{ISO 3166-1 alpha-2}-{system}`. Otherwise, set it to `{ISO 3166-2}-{system}`
+        - Map to the simple identifier's `.id`
     eForms example: <efac:SettledContract><efac:ContractReference><cbc:ID>CRN ABC:EFG/2020-01</cbc:ID></efac:ContractReference></efac:SettledContract>
-    OCDS example: '{"contracts": [{"identifiers": [{"id": "CRN ABC:EFG/2020-01", "scheme": "NL-TENDERNED"}]}]}'
+    OCDS example: '{"contracts":[{"identifiers":[{"id":"CRN ABC:EFG/2020-01","scheme":"NL-TENDERNED"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#settledContractSection
 -   id: BT-1501(n)-Contract
     parentNodeId: ND-ContractModification
@@ -1747,11 +1747,11 @@
         BG-7: Notice Result
         BG-310: Contract
     eForms guidance: |-
-        * [Get the contract for the SettledContract](common-operations.md#get-the-contract-for-a-settledcontract)
-        * Add a `Document` to its `.documents` array and
-          * Set its `.id` incrementally
-          * Set its `.type` to 'contractSigned'
-          * Map to its `.url`
+        - [Get the contract for the SettledContract](common-operations.md#get-the-contract-for-a-settledcontract)
+        - Add a `Document` to its `.documents` array and
+          - Set its `.id` incrementally
+          - Set its `.type` to 'contractSigned'
+          - Map to its `.url`
     eForms example: <efac:SettledContract><cbc:URI>http://mycontract.acme.com/1234/</cbc:URI></efac:SettledContract>
     OCDS example: '{"contracts":[{"documents":[{"url":"http://mycontract.acme.com/1234/","type":"contractSigned"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#settledContractSection
@@ -2841,11 +2841,11 @@
     eForms guidance: |-
         Look up Business Term that corresponds to the value of `efbc:FieldIdentifierCode` in the [SDK Withheld Information tables](https://docs.ted.europa.eu/eforms/1.1.1/schema/withheld-publication.html).
 
-         - Find the value of `ancestor::efac:LotTender/cbc:ID` that corresponds to a `bids.id` with the `bids.relatedLot` that matches the associated `ancestor::efac:TenderLot/cbc:ID schemeName="Lot"` and append this to the Business Term (BT-553) with a hyphen to generate an identifier.
-         - Add a `withheldInformationItem` to the `withheldInformation` array
-         - Map the identifier you have just generated to its `.id`
-         - Set `.field` to "BT-553"
-         - Set `.name` to "Subcontracting Value".
+        - Find the value of `ancestor::efac:LotTender/cbc:ID` that corresponds to a `bids.id` with the `bids.relatedLot` that matches the associated `ancestor::efac:TenderLot/cbc:ID schemeName="Lot"` and append this to the Business Term (BT-553) with a hyphen to generate an identifier.
+        - Add a `withheldInformationItem` to the `withheldInformation` array
+        - Map the identifier you have just generated to its `.id`
+        - Set `.field` to "BT-553"
+        - Set `.name` to "Subcontracting Value".
     eForms example: <efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">sub-val</efbc:FieldIdentifierCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"field":"BT-553","id":"BT-553-TEN-0001","name":"Subcontracting Value"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#lotTenderLevelSection
@@ -10467,7 +10467,7 @@
     - Map to the award's `.title`
     eForms guidance: '[Get the contract for the SettledContract](common-operations.md#get-the-contract-for-a-settledcontract) and map to the contract''s `.title`.'
     eForms example: <efac:SettledContract><cbc:Title languageID="ENG">My contract title</cbc:Title></efac:SettledContract>
-    OCDS example: '{"contracts": [{"title": "My contract title"}]}'
+    OCDS example: '{"contracts":[{"title":"My contract title"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#settledContractSection
 -   id: BT-722-Contract
     parentNodeId: ND-ContractEUFunds
@@ -11124,10 +11124,10 @@
         BG-703: Organisation
         BG-4: Winner
     eForms guidance: |-
-        [UNREVIEWED] Get the `Organization` in `parties` whose `id` is equal to the xpath `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`. If none exists yet:
+        \[UNREVIEWED\] Get the `Organization` in `parties` whose `id` is equal to the xpath `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`. If none exists yet:
 
         1. Add an `Organization` to `parties`
-        2. Set its `.id` to the value of the xpath `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`.
+        1. Set its `.id` to the value of the xpath `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`.
 
         Map the value of the field to the party's `.details.listedOnRegulatedMarket`.
     eForms example: <efac:Organization><efbc:ListedOnRegulatedMarketIndicator>false</efbc:ListedOnRegulatedMarketIndicator></efac:Organization>
@@ -13472,7 +13472,7 @@
     pattern: ^CON-\d{4}$
     eForms guidance: '[Get the contract for the SettledContract](common-operations.md#get-the-contract-for-a-settledcontract) and map to its `.id`.'
     eForms example: <efac:NoticeResult><efac:SettledContract><cbc:ID schemeName="contract">CON-0001</cbc:ID></efac:SettledContract></efac:NoticeResult>
-    OCDS example: '{"contracts": [{"id": "CON-0001"}]}'
+    OCDS example: '{"contracts":[{"id":"CON-0001"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#settledContractSection
 -   id: OPT-320-LotResult
     parentNodeId: ND-LotResult
@@ -13500,7 +13500,7 @@
     mandatory: true
     pattern: ^TEN-\d{4}$
     eForms guidance: |-
-        [UNREVIEWED] If there is a `Bid` in `bids` whose `.id` is equal to the value of the field discard. Otherwise:
+        \[UNREVIEWED\] If there is a `Bid` in `bids` whose `.id` is equal to the value of the field discard. Otherwise:
 
         - Add a `Bid` to `bids`
         - Set to its `.id`
