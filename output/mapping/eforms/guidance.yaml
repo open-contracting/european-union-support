@@ -1978,12 +1978,9 @@
     Business groups:
         BG-7: Notice Result
         BG-320: Tender
-    eForms guidance: |-
-        Add a new Cascade object to the award's `.cascade` array. Set its `.bid` to the identifier of the corresponding bid. For each related tenderer, add an Organization reference object to the cascade's `.suppliers` array. Copy its `.id` and `.name` from the corresponding Organization object.
-
-        The position of the cascade object in the `.cascade` array determines the rank of the bid. Example: `.cascade[0]` should return the highest ranking bid, `.cascade[1]` the second highest ranking bid, etc. \[https://github.com/open-contracting/european-union-support/issues/80\]
+    eForms guidance: '[Get the bid for a LotTender](common-operations.md#get-the-bid-for-a-lottender) and map to the bid''s `.details.rank`.'
     eForms example: <efac:LotTender><cbc:RankCode>1</cbc:RankCode></efac:LotTender>
-    OCDS example: '{"awards":[{"cascade":[{"bid":"TEN-0003","suppliers":[{"name":"BLabla Inc","id":"ORG-001"}]},{"bid":"TEN-0001","suppliers":[{"name":"Sell Things Inc.","id":"ORG-004"}]}]}]}'
+    OCDS example: '{"bids":{"details":[{"rank":"1"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#lotTenderSection
 -   id: BT-1711-Tender
     parentNodeId: ND-LotTender
@@ -1994,9 +1991,9 @@
     repeatable: false
     mandatory: false
     codeList: indicator
-    eForms guidance: /[UNREVIEWED/] Map to the bid's `.hasRank` /https://github.com/open-contracting/european-union-support/issues/125
+    eForms guidance: '[Get the bid for a LotTender](common-operations.md#get-the-bid-for-a-lottender) and map to the bid''s `.details.hasRank`.'
     eForms example: <efac:LotTender><efbc:TenderRankedIndicator>true</efbc:TenderRankedIndicator></efac:LotTender>
-    OCDS example: ''
+    OCDS example: '{"bids":{"details":[{"hasRank":"true"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#lotTenderSection
 -   id: BT-18-Lot
     parentNodeId: ND-TenderRecipient
@@ -2059,7 +2056,7 @@
     Business groups:
         BG-7: Notice Result
         BG-320: Tender
-    eForms guidance: \[UNREVIEWED\] Look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country), convert to lowercase and add to the bid's `.details.countryOfOrigin` array.
+    eForms guidance: \[UNREVIEWED\] Look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and convert to lowercase. [Get the bid for a LotTender](common-operations.md#get-the-bid-for-a-lottender) and map to the bid's `.details.countryOfOrigin` array.
     eForms example: <efac:Origin><efbc:AreaCode listName="eforms-country">ITA</efbc:AreaCode></efac:Origin>
     OCDS example: '{"bids":{"details":[{"countryOfOrigin":["it"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#lotTenderSection
@@ -2075,7 +2072,7 @@
     Business groups:
         BG-7: Notice Result
         BG-320: Tender
-    eForms guidance: Set the bid's `.variant` to `true` \[https://github.com/open-contracting/european-union-support/issues/82\]
+    eForms guidance: '[Get the bid for a LotTender](common-operations.md#get-the-bid-for-a-lottender) and map the bid''s `.variant` to `true`.'
     eForms example: <efac:LotTender><efbc:TenderVariantIndicator>true</efbc:TenderVariantIndicator></efac:LotTender>
     OCDS example: '{"bids":{"details":[{"variant":true}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#lotTenderSection
@@ -2388,9 +2385,14 @@
     Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Look up Business Term that corresponds to the value of `efbc:FieldIdentifierCode` in the [SDK Withheld Information tables](https://docs.ted.europa.eu/eforms/1.1.1/schema/withheld-publication.html).
+             - Find the value of `ancestor::efac:LotTender/cbc:ID` that corresponds to a `bids.id` with the `bids.relatedLot` that matches the associated `ancestor::efac:TenderLot/cbc:ID schemeName="Lot"` and append this to the Business Term (BT-171) with a hyphen to generate an identifier.
+             - Add a `withheldInformationItem` to the `withheldInformation` array 
+             - Map the identifier you have just generated to its `.id` 
+             - Set `.field` to "BT-171"
+             - Set `.name` to "Tender Rank".
     eForms example: <efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">ten-ran</efbc:FieldIdentifierCode></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"field":"BT-171","id":"BT-171-TEN-0001","name":"Tender Rank"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-195(BT-191)-Tender
     parentNodeId: ND-CountryOriginUnpublish
@@ -3413,9 +3415,9 @@
     Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-171) and `ancestor::efac:LotTender/cbc:ID` and map to its `.rationale`.
     eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"rationale":"Information delayed publication because of ..."}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-196(BT-191)-Tender
     parentNodeId: ND-CountryOriginUnpublish
@@ -4256,9 +4258,9 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195 (BT-171) and `ancestor::efac:LotTender/cbc:ID`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
-    OCDS example: ''
+    OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#lotTenderLevelSection
 -   id: BT-197(BT-191)-Tender
     parentNodeId: ND-CountryOriginUnpublish
@@ -10984,9 +10986,13 @@
     Business groups:
         BG-703: Organisation
         BG-4: Winner
-    eForms guidance: ''
+    eForms guidance: '[UNREVIEWED] Get the `Organization` in `parties` whose `id` is equal to the xpath `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`. 
+        If none exists yet:
+            1. Add an `Organization` to `parties`
+            2. Set its `.id` to the value of the xpath `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`.
+        Map the value of the field to the party''s `.details.listedOnRegulatedMarket`.'
     eForms example: <efac:Organization><efbc:ListedOnRegulatedMarketIndicator>false</efbc:ListedOnRegulatedMarketIndicator></efac:Organization>
-    OCDS example: ''
+    OCDS example: '{"parties":[{"details":{"listedOnRegulatedMarket":"false"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-747-Lot
     parentNodeId: ND-SelectionCriteria
