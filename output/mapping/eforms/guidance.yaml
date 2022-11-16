@@ -6859,9 +6859,10 @@
     Business groups:
         BG-7: Notice Result
         BG-310: Contract
-    eForms guidance: \[UNREVIEWED\] Map to the `awards` `.relatedBids` array
+    eForms guidance: |-
+      [Get the contract for the SettledContract](common-operations.md#get-the-contract-for-a-settledcontract) and add to its `.relatedBids` array.
     eForms example: <efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID></efac:LotTender>
-    OCDS example: '{"awards":[{"relatedBids":["TEN-0001"]}]}'
+    OCDS example: '{"contracts":[{"relatedBids":["TEN-0001"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#settledContractSection
 -   id: BT-33-Procedure
     parentNodeId: ND-LotDistribution
@@ -13485,9 +13486,10 @@
     repeatable: true
     mandatory: false
     pattern: ^TEN-\d{4}$
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: |-
+      [Get the award for the LotResult](common-operations.md#get-the-award-for-the-lot-result) and add to its `.relatedBids` array.
+    eForms example: <efac:NoticeResult><efac:LotResult><efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID></efac:LotTender><efac:LotTender><cbc:ID schemeName="tender">TEN-0002</cbc:ID></efac:LotTender><efac:LotTender><cbc:ID schemeName="tender">TEN-0003</cbc:ID></efac:LotTender></efac:LotResult></efac:NoticeResult>
+    OCDS example: '{"awards": [{"relatedBids": ["TEN-0001", "TEN-0002", "TEN-0003"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_lot_result
 -   id: OPT-321-Tender
     parentNodeId: ND-LotTender
