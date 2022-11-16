@@ -95,6 +95,13 @@ When writing the eForms guidance:
 * If a mapping has multiple steps, consider using a numbered list.
 * If a mapping requires the creation of a new field, you don't need to create the field yet. Extensions can be updated once the mapping is completed and reviewed.
 * To see the relationship between elements and the overall structure of the notices, you can check the [XML notice examples](https://github.com/OP-TED/eForms-SDK/tree/develop/examples/notices). The examples suffixed with '_maximal' contain all possible elements and are annotated with the business term identifier for each element.
+* If the guidance involves mapping only the element specified in `xpathAbsolute`, it is sufficient to write 'Map to `<OCDS field>`' without explicitly referencing the element. If the guidance involves mapping several elements or attributes, reference the element specified in `xpathAbsolute` by its name, e.g. 'Map `cbc:ID` to `<OCDS field>`'.
+* To reference other XML elements, use [XML Path Language (XPath)](https://www.w3.org/TR/1999/REC-xpath-19991116/). In particular:
+  * Do not wrap the XPath in angle brackets (`<` and `>`)
+  * Fully reference the XPath in relation to the element specified in `xpathAbsolute`, using `ancestor::` etc. as needed
+  * Use `/` as the delimiter between elements
+  * Use `element[@attribute_name]` to reference XML attributes
+  * Don't prefix the XPath with the word 'XPath' unless it isn't clear from the context that the reference is to an XPath
 
 ## Maintenance
 
