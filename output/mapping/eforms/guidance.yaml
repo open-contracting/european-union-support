@@ -2075,7 +2075,7 @@
     Business groups:
         BG-7: Notice Result
         BG-320: Tender
-    eForms guidance: '[Get the bid for a LotTender](common-operations.md#get-the-bid-for-a-lottender) and map the bid''s `.variant` to `true`.'
+    eForms guidance: '[Get the bid for a LotTender](common-operations.md#get-the-bid-for-a-lottender) and set the bid''s `.variant` to `true`.'
     eForms example: <efac:LotTender><efbc:TenderVariantIndicator>true</efbc:TenderVariantIndicator></efac:LotTender>
     OCDS example: '{"bids":{"details":[{"variant":true}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#lotTenderSection
@@ -6840,7 +6840,7 @@
     Business groups:
         BG-7: Notice Result
         BG-320: Tender
-    eForms guidance: Add a Bid object to the `bids.details` array, and map to its `.id`
+    eForms guidance: '[Get the bid for the LotTender](common-operations.md#get-the-bid-for-a-lottender), and map to its `.id`.'
     eForms example: <efac:TenderReference><cbc:ID>BID ABD/GHI-SN/2020-002</cbc:ID></efac:TenderReference>
     OCDS example: '{"bids":{"details":[{"id":"BID ABD/GHI-SN/2020-002"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#lotTenderSection
@@ -9441,7 +9441,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_SUBCONTRACTING
     TED guidance:
     - Map to the award's `.subcontracting.value.amount`
-    eForms guidance: Map to the bid's `.subcontracting.value.amount`.  Map `@currencyID` to the value's `.currency`. If bid relates to a specific lot set its `.relatedLots` to the lot's id.
+    eForms guidance: '[Get the bid for the LotTender](common-operations.md#get-the-bid-for-a-lottender) and map to its `.subcontracting.value.amount`.  Map `@currencyID` to the value''s `.currency`.'
     eForms example: <efac:SubcontractingTerm><efbc:TermAmount currencyID="EUR">9999999.99</efbc:TermAmount></efac:SubcontractingTerm>
     OCDS example: '{"bids":{"details":[{"subContracting":{"value":{"amount":9999999.99,"currency":"EUR"}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#lotTenderSection
@@ -9465,7 +9465,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/AWARD_CONTRACT/AWARDED_CONTRACT/INFO_ADD_SUBCONTRACTING
     TED guidance:
     - Map to the award's `.subcontracting.description`
-    eForms guidance: Map to the bid's `.subcontracting.description`. If bid relates to a specific lot set its `.relatedLots` to the lot's id.
+    eForms guidance: '[Get the bid for the LotTender](common-operations.md#get-the-bid-for-a-lottender) and map to its `.subcontracting.description`.'
     eForms example: <efac:SubcontractingTerm><efbc:TermDescription languageID="ENG">The subcontracting will be...</efbc:TermDescription></efac:SubcontractingTerm>
     OCDS example: '{"bids":{"details":[{"subContracting":{"description":"The subcontracting will be..."}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#lotTenderSection
@@ -9489,7 +9489,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/AWARD_CONTRACT/AWARDED_CONTRACT/PCT_SUBCONTRACTING
     TED guidance:
     - Map to the award's `.subcontracting.minimumPercentage` and `.subcontracting.maximumPercentage`
-    eForms guidance: Divide number by 100 and map to the bid's `.subcontracting.minimumPercentage` and `.subcontracting.maximumPercentage`.If bid relates to a specific lot set its `.relatedLots` to the lot's id.
+    eForms guidance: '[Get the bid for the LotTender](common-operations.md#get-the-bid-for-a-lottender), divide number by 100 and map to the bid''s `.subcontracting.minimumPercentage` and `.subcontracting.maximumPercentage`.'
     eForms example: <efac:SubcontractingTerm><efbc:TermPercent>30</efbc:TermPercent></efac:SubcontractingTerm>
     OCDS example: '{"bids":{"details":[{"subContracting":{"minimumPercentage":0.3,"maximumPercentage":0.3}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#lotTenderSection
@@ -10314,7 +10314,7 @@
     TED guidance:
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''lowestValidBidValue'', and map to its `.value`.'
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''lowestValidBidValue'', set its `.relatedLot` to the award''s only `.relatedLots` entry, and map to its `.value`.'
-    eForms guidance: '[Add a bids statistic](common-operations.md#add-a-bids-statistic), set its `.measure` to ''lowestValidBidValue'', map to its `.value`. Map `@currencyID` to its `.currency`. Set its `.relatedLot` to the lot''s id.'
+    eForms guidance: '[Add a bids statistic](common-operations.md#add-a-statistic), set its `.measure` to ''lowestValidBidValue'', map to its `.value`. Map `@currencyID` to its `.currency`. Set its `.relatedLot` to the lot''s id.'
     eForms example: <efac:LotResult><cbc:LowerTenderAmount currencyID="EUR">1230000</cbc:LowerTenderAmount></efac:LotResult>
     OCDS example: '{"bids":{"statistics":[{"measure":"lowestValidBidValue","value":1230000,"currency":"EUR","relatedLot":"Lot-00001"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_lot_result
@@ -10336,7 +10336,7 @@
     TED guidance:
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''highestValidBidValue'', and map to its `.value`.'
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''highestValidBidValue'', set its `.relatedLot` to the award''s only `.relatedLots` entry, and map to its `.value`.'
-    eForms guidance: '[Add a bids statistic](common-operations.md#add-a-bids-statistic), set its `.measure` to ''highestValidBidValue'', and map to its `.value`. Map `@currencyID` to its `.currency`. Set its `.relatedLot` to the lot''s id.'
+    eForms guidance: '[Add a bids statistic](common-operations.md#add-a-statistic), set its `.measure` to ''highestValidBidValue'', and map to its `.value`. Map `@currencyID` to its `.currency`. Set its `.relatedLot` to the lot''s id.'
     eForms example: <efac:LotResult><cbc:HigherTenderAmount currencyID="EUR">456</cbc:HigherTenderAmount></efac:LotResult>
     OCDS example: '{"bids":{"statistics":[{"measure":"highestValidBidValue","value":456,"currency":"EUR","relatedLot":"Lot-0001"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_lot_result
@@ -10380,9 +10380,9 @@
     repeatable: false
     mandatory: false
     codeList: cvd-scope
-    eForms guidance: ''
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot). If "true" add "CVD" to the lot''s `.coveredBy` array. If false discard.'
     eForms example: <efac:StrategicProcurement><efbc:ApplicableLegalBasis listName="cvd-scope">true</efbc:ApplicableLegalBasis></efac:StrategicProcurement>
-    OCDS example: ''
+    OCDS example: '{"tender":{"lots":[{"coveredBy":["CVD"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#CVDDirectiveLotSection
 -   id: BT-718-notice
     parentNodeId: ND-Change
@@ -10439,7 +10439,7 @@
     - Discard. The *Initial estimated total value of the contract/lot* is available in the OCDS release with the same `ocid` as this release and with 'tender' in its `tag`.
     - Map to the contract's `.value.amount`
     - Map to the contract's `.value.amount`. If present, this takes precedence over the [total value of the contract/lot/concession](#/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/VALUES/VAL_TOTAL).
-    eForms guidance: Map to the bid's `.value`. Map `@currencyID` to the value's `.currency`. Set its `.relatedLots` to the lot's id.
+    eForms guidance: '[Get the bid for the LotTender](common-operations.md#get-the-bid-for-a-lottender) and map to the bid''s `.value`. Map `@currencyID` to the value''s `.currency`.'
     eForms example: <cac:LegalMonetaryTotal><cbc:PayableAmount currencyID="EUR">500</cbc:PayableAmount></cac:LegalMonetaryTotal>
     OCDS example: '{"bids":{"details":[{"value":{"amount":500,"currency":"EUR"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#lotTenderSection
@@ -10805,9 +10805,13 @@
     repeatable: false
     mandatory: false
     codeList: cvd-contract-type
-    eForms guidance: ''
+    eForms guidance: |-
+        - [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and add a `Classification` object to the lot's `additionalClassifications` array.
+        - Set the classification's `.scheme` to "cvd-contract-type".
+        - Map the value of the field to the classification's `.id`.
+        - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/cvd-contract-type) and map it to the classification's `.description`.
     eForms example: <efac:StrategicProcurementInformation><efbc:ProcurementCategoryCode listName="cvd-contract-type">oth-serv-contr</efbc:ProcurementCategoryCode></efac:StrategicProcurementInformation>
-    OCDS example: ''
+    OCDS example: '{"tender":{"lots":[{"additionalClassifications":[{"id":"oth-serv-contr","scheme":"cvd-contract-type","descriptions":"other service contract"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#CVDDirectiveLotSection
 -   id: BT-735-LotResult
     parentNodeId: ND-StrategicProcurementInformationLotResult
@@ -10818,9 +10822,13 @@
     repeatable: false
     mandatory: false
     codeList: cvd-contract-type
-    eForms guidance: ''
+    eForms guidance: |-
+        - [Get the lot for the LotResult](common-operations.md#get-the-lot-for-a-lotresult) and add a `Classification` object to the lot's `additionalClassifications` array.
+        - Set the classification's `.scheme` to "cvd-contract-type".
+        - Map the value of the field to the classification's `.id`.
+        - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/cvd-contract-type) and map it to the classification's `.description`.
     eForms example: <efac:StrategicProcurementInformation><efbc:ProcurementCategoryCode listName="cvd-contract-type">oth-serv-contr</efbc:ProcurementCategoryCode></efac:StrategicProcurementInformation>
-    OCDS example: ''
+    OCDS example: '{"tender":{"lots":[{"additionalClassifications":[{"id":"oth-serv-contr","scheme":"cvd-contract-type","descriptions":"other service contract"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#CVDDirectiveLotSection
 -   id: BT-736-Lot
     parentNodeId: ND-LotTenderingTerms
@@ -11377,9 +11385,9 @@
     Description: The use of accessibility criteria for persons with disabilities in the technical specifications.
     Business groups:
         BG-713: Strategic Procurement
-    eForms guidance: ''
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot). If the value is "inc" set the lot''s `.hasAccessibilityCriteria` to "true", otherwise set to "false". If the value is "n-inc" set the lot''s `.noAccessibilityCriteriaRationale` to "Procurement is not intended for use by natural persons".'
     eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="accessibility">n-inc-just</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
-    OCDS example: ''
+    OCDS example: '{"tender":{"lots":[{"hasAccessibilityCriteria":"false"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#accessibilitySection
 -   id: BT-755-Lot
     parentNodeId: ND-AccessibilityJustification
@@ -11392,9 +11400,9 @@
     Description: The justification for not including accessibility criteria even though the procurement is intended for use by natural persons.
     Business groups:
         BG-713: Strategic Procurement
-    eForms guidance: ''
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and map to the lot''s `.noAccessibilityCriteriaRationale`.'
     eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementType languageID="ENG">Accessibility criteria are not included ...</cbc:ProcurementType></cac:ProcurementAdditionalType>
-    OCDS example: ''
+    OCDS example: '{"tender":{"lots":[{"noAccessibilityCriteriaRationale":"Accessibility criteria are not included ..."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#accessibilitySection
 -   id: BT-756-Procedure
     parentNodeId: ND-ProcedureTenderingProcess
@@ -11472,9 +11480,9 @@
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''bids'', and map to its `.value`.'
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''bids'', set its `.relatedLot` to the award''s only `.relatedLots` entry, and map to its `.value`.'
     eForms guidance: |-
-        These values are mapped to the same `BidsStatistic` objects as created for BT-760.
+        These values are mapped to the same `Statistic` objects as created for BT-760.
 
-        For each `ancestor::efac:ReceivedSubmissionsStatistics`, [add a bids statistic](common-operations.md#add-a-bids-statistic) or update the corresponding `BidsStatistic` object and map to its `.value`.
+        For each `ancestor::efac:ReceivedSubmissionsStatistics`, [add a bids statistic](common-operations.md#add-a-statistic) or update the corresponding `Statistic` object and map to its `.value`.
     eForms example: <efac:ReceivedSubmissionsStatistics><efbc:StatisticsNumeric>12</efbc:StatisticsNumeric></efac:ReceivedSubmissionsStatistics>
     OCDS example: '{"bids":{"statistics":[{"value":12}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_lot_result
@@ -11540,9 +11548,9 @@
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''smeBids'', and map to its `.value`.'
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''smeBids'', set its `.relatedLot` to the award''s only `.relatedLots` entry, and map to its `.value`.'
     eForms guidance: |-
-        These values are mapped to the same `BidsStatistic` objects as created for BT-759.
+        These values are mapped to the same `Statistic` objects as created for BT-759.
 
-        For each `ancestor::efac:ReceivedSubmissionsStatistics`, [add a bids statistic](common-operations.md#add-a-bids-statistic) or update the corresponding `BidsStatistic` object and map to its `.measure` according to the \[submission count types mapping table\].
+        For each `ancestor::efac:ReceivedSubmissionsStatistics`, [add a bids statistic](common-operations.md#add-a-statistic) or update the corresponding `Statistic` object and map to its `.measure` according to the \[submission count types mapping table\].
     eForms example: <efac:ReceivedSubmissionsStatistics><efbc:StatisticsCode listName="received-submission-type">t-sme</efbc:StatisticsCode></efac:ReceivedSubmissionsStatistics>
     OCDS example: '{"bids":{"statistics":[{"measure":"smeBids"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_lot_result
@@ -11846,7 +11854,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/AWARD_CONTRACT/AWARDED_CONTRACT/LIKELY_SUBCONTRACTED
     TED guidance:
     - Set the award's `.hasSubcontracting` to `true`
-    eForms guidance: If 'yes' set the bid's `.hasSubcontracting` to `true`, if 'no' set the bid's `.hasSubcontracting' to `false\`.
+    eForms guidance: /[Get the bid for the LotTender](common-operations.md#get-the-bid-for-a-lottender). If "yes" set the bid's `.hasSubcontracting` to `true`, if "no" set the bid's `.hasSubcontracting' to `false\`.
     eForms example: <efac:SubcontractingTerm><efbc:TermCode listName="applicability">yes</efbc:TermCode></efac:SubcontractingTerm>
     OCDS example: '{"bids":{"details":[{"hasSubContracting":true}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#lotTenderSection
@@ -12681,17 +12689,18 @@
     mandatory: false
     pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|[1-9](\d{0,7})-(19|20)\d\d)$
     eForms guidance: |-
-      Add a `RelatedProcess` to the contract's `.relatedProcesses` array and:
-      * Set its `.id` incrementally
-      * Add 'framework' to its `.relationship` array
-      * If the referenced notice is available in OCDS:
-        * Set `.scheme` to 'ocid'
-        * Set `.identifier` to the `.ocid` of the referenced notice
-      * Otherwise:
-        * Set `.scheme` to the value of `cbc:ID[@schemeName]`
-        * Map `cbc:ID` to `.identifier`
+        Add a `RelatedProcess` to the contract's `.relatedProcesses` array and:
+
+        - Set its `.id` incrementally
+        - Add 'framework' to its `.relationship` array
+        - If the referenced notice is available in OCDS:
+          - Set `.scheme` to 'ocid'
+          - Set `.identifier` to the `.ocid` of the referenced notice
+        - Otherwise:
+          - Set `.scheme` to the value of `cbc:ID[@schemeName]`
+          - Map `cbc:ID` to `.identifier`
     eForms example: <efac:NoticeResult><efac:SettledContract><cac:NoticeDocumentReference><cbc:ID schemeName="ojs-notice-id">62783-2020</cbc:ID></cac:NoticeDocumentReference></efac:SettledContract></efac:NoticeResult>
-    OCDS example: '{"relatedProcesses": [{"id": "1", "scheme": "ojs-notice-id", "identifier": "62783-2020"}]}'
+    OCDS example: '{"relatedProcesses":[{"id":"1","scheme":"ojs-notice-id","identifier":"62783-2020"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#settledContractSection
 -   id: OPT-110-Lot-FiscalLegis
     parentNodeId: ND-LotFiscalLegislation
