@@ -12680,9 +12680,18 @@
     repeatable: false
     mandatory: false
     pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|[1-9](\d{0,7})-(19|20)\d\d)$
-    eForms guidance: ''
+    eForms guidance: |-
+      Add a `RelatedProcess` to the contract's `.relatedProcesses` array and:
+      * Set its `.id` incrementally
+      * Add 'framework' to its `.relationship` array
+      * If the referenced notice is available in OCDS:
+        * Set `.scheme` to 'ocid'
+        * Set `.identifier` to the `.ocid` of the referenced notice
+      * Otherwise:
+        * Set `.scheme` to the value of `cbc:ID[@schemeName]`
+        * Map `cbc:ID` to `.identifier`
     eForms example: <efac:NoticeResult><efac:SettledContract><cac:NoticeDocumentReference><cbc:ID schemeName="ojs-notice-id">62783-2020</cbc:ID></cac:NoticeDocumentReference></efac:SettledContract></efac:NoticeResult>
-    OCDS example: ''
+    OCDS example: '{"relatedProcesses": [{"id": "1", "scheme": "ojs-notice-id", "identifier": "62783-2020"}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#settledContractSection
 -   id: OPT-110-Lot-FiscalLegis
     parentNodeId: ND-LotFiscalLegislation
