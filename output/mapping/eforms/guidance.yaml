@@ -7785,7 +7785,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_BUYER
     TED guidance:
     - Map to the party's `.details.buyerProfile`
-    eForms guidance: Get the `Organization` object in `parties` whose `id` is equal to the value of the xpath `ancestor::cac:ContractingParty/cac:Party/cac:PartyIdentification/cbc:ID`. If none exists yet, add an `Organization` object to `parties` and set its `id` to the value of the xpath `ancestor::cac:ContractingParty/cac:Party/cac:PartyIdentification/cbc:ID`. Map to the organization's `.details.buyerProfile`.
+    eForms guidance: '[Get the organization for the buyer](common-operations.md#get-the-organization-for-the-buyer). Map to the organization''s `.details.buyerProfile`.'
     eForms example: <cac:ContractingParty><cbc:BuyerProfileURI>https://admin-abc.com/public-procurements/</cbc:BuyerProfileURI></cac:ContractingParty>
     OCDS example: '{"parties":[{"details":{"buyerProfile":"https://admin-abc.com/public-procurements/"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_buyer_information_2
@@ -12394,7 +12394,7 @@
     repeatable: false
     mandatory: true
     codeList: notice-subtype
-    eForms guidance: Discard.
+    eForms guidance: /https://opencontractingint.slack.com/archives/C03S8JL100P/p1669216510754849
     eForms example: <efac:NoticeSubType><cbc:SubTypeCode listName="notice-subtype">16</cbc:SubTypeCode></efac:NoticeSubType>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#subtypeSection
@@ -12432,8 +12432,8 @@
     repeatable: false
     mandatory: true
     pattern: ^2\.3$
-    eForms guidance: ''
-    eForms example: ''
+    eForms guidance: Discard.
+    eForms example: <cbc:UBLVersionID>2.3</cbc:UBLVersionID>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#identifiersSection
 -   id: OPT-002-notice
@@ -12445,8 +12445,8 @@
     repeatable: false
     mandatory: true
     pattern: ^eforms-sdk-\d\.\d$
-    eForms guidance: ''
-    eForms example: ''
+    eForms guidance: Discard.
+    eForms example: <cbc:CustomizationID>eforms-sdk-1.4</cbc:CustomizationID>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#identifiersSection
 -   id: OPT-030-Procedure-SProvider
@@ -12458,10 +12458,10 @@
     repeatable: false
     mandatory: false
     codeList: organisation-role-service
-    eForms guidance: ''
-    eForms example: ''
+    eForms guidance: /https://github.com/open-contracting/european-union-support/issues/132
+    eForms example: <cac:ServiceProviderParty><cbc:ServiceTypeCode listName="organisation-role">ted-esen</cbc:ServiceTypeCode></cac:ServiceProviderParty>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_buyer_and_service_providers
 -   id: OPT-050-Lot
     parentNodeId: ND-LotProcurementDocument
     name: Document Status
@@ -12471,10 +12471,10 @@
     repeatable: false
     mandatory: false
     codeList: document-status
-    eForms guidance: ''
-    eForms example: ''
+    eForms guidance: Discard. If field = "true" follow the guidance for [BT-708-Lot](guidance.yaml#bt-708-lot), if it = "false" follow the guidance for [BT-737-Lot](guidance.yaml#bt-737-lot)
+    eForms example: <cac:CallForTendersDocumentReference><cbc:DocumentStatusCode listName="linguistic-status">official</cbc:DocumentStatusCode></cac:CallForTendersDocumentReference>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#procurementDocsSection
 -   id: OPT-050-Part
     parentNodeId: ND-PartProcurementDocument
     name: Document Status
@@ -12484,10 +12484,10 @@
     repeatable: false
     mandatory: false
     codeList: document-status
-    eForms guidance: ''
-    eForms example: ''
+    eForms guidance: Discard. If field = "true" follow the guidance for [BT-708-Part](guidance.yaml#bt-708-part), if it = "false" follow the guidance for [BT-737-Part](guidance.yaml#bt-737-part)
+    eForms example: <cac:CallForTendersDocumentReference><cbc:DocumentStatusCode listName="linguistic-status">official</cbc:DocumentStatusCode></cac:CallForTendersDocumentReference>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#procurementDocsSection
 -   id: OPT-070-Lot
     parentNodeId: ND-ReservedExecution
     name: Reserved Execution justification
@@ -12496,10 +12496,10 @@
     type: text-multilingual
     repeatable: false
     mandatory: false
-    eForms guidance: ''
+    eForms guidance: /https://github.com/open-contracting/european-union-support/issues/133
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#reservedExecutionSection
 -   id: OPT-071-Lot
     parentNodeId: ND-QualityTarget
     name: Quality Target Code
