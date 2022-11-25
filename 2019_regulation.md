@@ -126,9 +126,9 @@ To update the progress of the guidance for the 2019 regulation, run:
         ./manage.py update-with-annex output/mapping/eforms/guidance.yaml
         ./manage.py update-with-ted-guidance output/mapping/eforms/guidance.yaml
 
-1. Find and replace `eforms/<old-version>` with `eforms/<new-version>`
-1. Replace the older version with the new version following `sdk_regex.sub` in `manage.py`
-1. Run `./manage.py lint output/mapping/eforms/guidance.yaml`
+1. Run and check the output of:
+
+        ./manage.py lint -a output/mapping/eforms/guidance.yaml
 
 ## Design
 

@@ -554,6 +554,7 @@ def lint(filename, additional_properties):
 
     unreviewed = 0
 
+    http_errors = set()
     codes = set()
     for field in fields:
         identifier = field["id"]
@@ -566,9 +567,14 @@ def lint(filename, additional_properties):
             parts = urlsplit(field["sdk"])
             fragment = parts.fragment
             base_url = parts._replace(fragment="").geturl()
-            if base_url not in sdk_documents:
-                sdk_documents[base_url] = get_html(base_url)
-            assert sdk_documents[base_url].xpath(f'//@id="{fragment}"'), f"{identifier}: anchor not found: {fragment}"
+            try:
+                if base_url not in sdk_documents:
+                    sdk_documents[base_url] = get_html(base_url)
+                assert sdk_documents[base_url].xpath(
+                    f'//@id="{fragment}"'
+                ), f"{identifier}: anchor not found: {fragment}"
+            except requests.exceptions.HTTPError:
+                http_errors.add(base_url)
 
         # Format Markdown.
         field["eForms guidance"] = mdformat.text(field["eForms guidance"]).rstrip()
@@ -622,6 +628,10 @@ def lint(filename, additional_properties):
 
     if unreviewed:
         click.echo(f"\n{unreviewed} unreviewed eForms guidance")
+
+    if http_errors:
+        click.echo("\nHTTP errors:")
+        click.echo("\n".join(sorted(http_errors)))
 
     write_yaml_file(filename, fields)
 
