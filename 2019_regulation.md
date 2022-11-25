@@ -119,7 +119,6 @@ To update the progress of the guidance for the 2019 regulation, run:
 
 ### Upgrade SDK version
 
-1. Update the URL in `2019_download.fish`
 1. Run:
 
         fish script/2019_download.fish

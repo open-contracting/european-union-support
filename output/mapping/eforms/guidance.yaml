@@ -1,10 +1,10 @@
 -   id: BT-01(c)-Procedure
-    parentNodeId: ND-ProcedureTerms
+    parentNodeId: ND-LocalLegalBasisWithID
     name: Procedure Legal Basis (ID)
     btId: BT-01
-    xpathAbsolute: /*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference/cbc:ID[not(text()=('CrossBorderLaw','LocalLegalBasis'))]
+    xpathAbsolute: /*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[not(cbc:ID/text()=('CrossBorderLaw','LocalLegalBasis'))]/cbc:ID[not(text()=('CrossBorderLaw','LocalLegalBasis'))]
     type: id
-    repeatable: true
+    repeatable: false
     mandatory: false
     Description: The legal basis (e.g. a European Directive or Regulation, national law) under which the procurement procedure takes place.
     Business groups:
@@ -29,12 +29,12 @@
     OCDS example: '{"tender":{"legalBasis":{"description":"Directive XYZ applies ..."}}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#otherLegalBasisSection
 -   id: BT-01(e)-Procedure
-    parentNodeId: ND-ProcedureTerms
+    parentNodeId: ND-LocalLegalBasisNoID
     name: Procedure Legal Basis (NoID)
     btId: BT-01
-    xpathAbsolute: /*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference/cbc:ID[text()='LocalLegalBasis']
+    xpathAbsolute: /*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[cbc:ID/text()='LocalLegalBasis']/cbc:ID[text()='LocalLegalBasis']
     type: id
-    repeatable: true
+    repeatable: false
     mandatory: false
     Description: The legal basis (e.g. a European Directive or Regulation, national law) under which the procurement procedure takes place.
     Business groups:
@@ -66,7 +66,7 @@
     type: code
     repeatable: false
     mandatory: true
-    codeList: legal-basis
+    codeList: eforms-legal-basis
     Description: The legal basis (e.g. a European Directive or Regulation, national law) under which the procurement procedure takes place.
     Business groups:
         BG-1: Notice
@@ -431,7 +431,7 @@
     type: code
     repeatable: false
     mandatory: true
-    codeList: buyer-legal-type
+    codeList: eforms-buyer-legal-type
     Description: The type of buyer according to procurement legislation (e.g. central government authority, body governed by public law, public undertaking).
     Business groups:
         BG-703: Organisation
@@ -1028,11 +1028,11 @@
     OCDS example: '{"tender":{"lots":[{"awardPeriod":{"startDate":"2019-11-05T14:00:00+01:00"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#openingEventSection
 -   id: BT-133-Lot
-    parentNodeId: ND-PublicOpening
+    parentNodeId: ND-PublicOpeningPlace
     name: Public Opening Place
     btId: BT-133
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:OpenTenderEvent/cac:OccurenceLocation/cbc:Description
-    type: text
+    type: text-multilingual
     repeatable: false
     mandatory: false
     Description: The place (e.g. physical address, URL) where the tenders will be publicly opened.
@@ -4586,6 +4586,7 @@
     type: code
     repeatable: false
     mandatory: false
+    codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
@@ -4601,6 +4602,7 @@
     type: code
     repeatable: false
     mandatory: false
+    codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
@@ -8771,12 +8773,12 @@
     OCDS example: '{"tender":{"lots":[{"additionalProcurementCategories":["works"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#natureSection
 -   id: BT-531-Part
-    parentNodeId: ND-PartAdditionalNature
+    parentNodeId: ND-PartProcurementScope
     name: Additional Nature (different from Main)
     btId: BT-531
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cac:ProcurementAdditionalType/cbc:ProcurementTypeCode[@listName='contract-nature']
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: false
     codeList: eforms-contract-nature
     Description: The nature (e.g. services) of what is being bought, additional to Main Nature.
@@ -10104,12 +10106,12 @@
     OCDS example: '{"awards":[{"maximumValue":{"amount":5000,"currency":"EUR"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_lot_result
 -   id: BT-71-Lot
-    parentNodeId: ND-LotReservedParticipation
+    parentNodeId: ND-LotReservedProcurement
     name: Reserved Participation
     btId: BT-71
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='missing-info-submission'])]/cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='reserved-procurement']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='missing-info-submission'])]/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='reserved-procurement']/cbc:TendererRequirementTypeCode[@listName='reserved-procurement']
     type: code
-    repeatable: true
+    repeatable: false
     mandatory: true
     codeList: reserved-procurement
     Description: Whether participation is reserved for specific organisations (e.g. sheltered workshops, organisations pursuing a public service mission).
@@ -11088,10 +11090,10 @@
     OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"description":"Minimum Turnover"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#selectionCriteriaSection
 -   id: BT-75-Lot
-    parentNodeId: ND-LotTenderingTerms
+    parentNodeId: ND-FinancialGuarantee
     name: Guarantee Required Description
     btId: BT-75
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:RequiredFinancialGuarantee[cbc:GuaranteeTypeCode/text()='true']/cbc:Description
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:RequiredFinancialGuarantee/cbc:Description
     type: text-multilingual
     repeatable: false
     mandatory: false
@@ -12012,7 +12014,7 @@
     type: code
     repeatable: true
     mandatory: true
-    codeList: language
+    codeList: eforms-language
     Description: A language in which tenders, requests to participate, or expressions of interest may be submitted.
     Business groups:
         BG-102: Submission Terms
@@ -12064,11 +12066,11 @@
     OCDS example: '{"tender":{"lots":[{"submissionTerms":{"bidValidityPeriod":{"durationInDays":120}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#tenderValiditySection
 -   id: BT-99-Lot
-    parentNodeId: ND-LotReviewTerms
+    parentNodeId: ND-ReviewPresentationPeriod
     name: Review Deadline Description
     btId: BT-99
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AppealTerms/cac:PresentationPeriod/cbc:Description
-    type: text
+    type: text-multilingual
     repeatable: false
     mandatory: false
     Description: The description of the time limits for review procedures.
@@ -12787,7 +12789,7 @@
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#ultimateBeneficialOwnerSection
 -   id: OPT-170-Tenderer
     parentNodeId: ND-Tenderer
-    name: 'Tendering Party Leader '
+    name: Tendering Party Leader
     btId: OPT-170
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:TenderingParty/efac:Tenderer/efbc:GroupLeadIndicator
     type: indicator
@@ -12899,7 +12901,7 @@
     sdk: ''
 -   id: OPT-300-Tenderer
     parentNodeId: ND-Tenderer
-    name: 'Tenderer ID Reference '
+    name: Tenderer ID Reference
     btId: OPT-300
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:TenderingParty/efac:Tenderer/cbc:ID
     type: id-ref
