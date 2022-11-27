@@ -1810,7 +1810,8 @@
     Description: The name of a part of an organisation (e.g. the relevant department of a large buyer).
     Business groups:
         BG-703: Organisation
-    eForms guidance: Append to the party's `.name`, separated from the original text with ' - ' (space, dash, space). See also [Using the Organization building block with an organizational hierarchy](https://standard.open-contracting.org/latest/en/guidance/map/organizational_units/#using-the-organization-building-block-with-an-organizational-hierarchy)
+    eForms guidance: |-
+      [Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and append to the organization's `.name`, separated from the original text with ' - ' (space, dash, space). See also [Using the Organization building block with an organizational hierarchy](https://standard.open-contracting.org/latest/en/guidance/map/organizational_units/#using-the-organization-building-block-with-an-organizational-hierarchy)
     eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cbc:Department>Procurement Department</cbc:Department></cac:PostalAddress></efac:Company></efac:Organization>
     OCDS example: '{"parties":[{"name":"Ministry of Education - Procurement Department"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -1825,7 +1826,7 @@
     Description: The name of a part of an organisation (e.g. the relevant department of a large buyer).
     Business groups:
         BG-703: Organisation
-    eForms guidance: Append to the party's `.name`, separated from the original text with ' - ' (space, dash, space). See also [Using the Organization building block with an organizational hierarchy](https://standard.open-contracting.org/latest/en/guidance/map/organizational_units/#using-the-organization-building-block-with-an-organizational-hierarchy)
+    eForms guidance: [Get the organization the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and append to the organization's `.name`, separated from the original text with ' - ' (space, dash, space). See also [Using the Organization building block with an organizational hierarchy](https://standard.open-contracting.org/latest/en/guidance/map/organizational_units/#using-the-organization-building-block-with-an-organizational-hierarchy)
     eForms example: <efac:Organization><efac:TouchPoint><cac:PartyName><cbc:Name languageID="ENG">Legal Department</cbc:Name></cac:PartyName><cac:PostalAddress><cbc:Department>Department XYZ</cbc:Department></cac:PostalAddress></efac:TouchPoint></efac:Organization>
     OCDS example: '{"parties":[{"name":"Ministry of Education - Legal Department"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -1937,7 +1938,8 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/*[matches(name(),'SME')]
     TED guidance:
     - Set the party's `.details.scale` to 'sme'
-    eForms guidance: Map to the party's `.details.scale`
+    eForms guidance: |-
+      [Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and map to the organization's `.details.scale`
     eForms example: <efac:Company><efbc:CompanySizeCode listName="economic-operator-size">large</efbc:CompanySizeCode></efac:Company>
     OCDS example: '{"parties":[{"details":{"scale":"large"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -10993,12 +10995,12 @@
         BG-703: Organisation
         BG-4: Winner
     eForms guidance: |-
-        \[UNREVIEWED\] Get the `Organization` in `parties` whose `id` is equal to the xpath `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`. If none exists yet:
+        Get the `Organization` in `parties` whose `id` is equal to the value of `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`. If none exists yet:
 
         1. Add an `Organization` to `parties`
-        1. Set its `.id` to the value of the xpath `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`.
+        1. Set its `.id` to the value of `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`.
 
-        Map the value of the field to the party's `.details.listedOnRegulatedMarket`.
+        Map to the organization's `.details.listedOnRegulatedMarket`.
     eForms example: <efac:Organization><efbc:ListedOnRegulatedMarketIndicator>false</efbc:ListedOnRegulatedMarketIndicator></efac:Organization>
     OCDS example: '{"parties":[{"details":{"listedOnRegulatedMarket":"false"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -12809,9 +12811,9 @@
     repeatable: false
     mandatory: true
     pattern: ^ORG-\d{4}$
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: If there is an `Organization` in `parties` whose `.id` is equal to the value of this field, discard. Otherwise, add an `Organization` to `parties` and map to its `.id`.
+    eForms example: <efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></efac:Company></efac:Organization>
+    OCDS example: '{"parties": [{"id": "ORG-0001"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: OPT-201-Organization-TouchPoint
     parentNodeId: ND-Touchpoint
@@ -12823,9 +12825,9 @@
     repeatable: false
     mandatory: false
     pattern: ^TPO-\d{4}$
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: If there is an `Organization` in `parties` whose `.id` is equal to the value of this field, discard. Otherwise, add an `Organization` to `parties` and map to its `.id`.
+    eForms example: <efac:Organization><efac:TouchPoint><cac:PartyIdentification><cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID></cac:PartyIdentification></efac:TouchPoint></efac:Organization>
+    OCDS example: '{"parties": [{"id": "TPO-0001"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: OPT-202-UBO
     parentNodeId: ND-UBO
@@ -13305,9 +13307,16 @@
     repeatable: true
     mandatory: false
     pattern: ^UBO-\d{4}$
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: |-
+      If there is an `Organization` in `parties` whose `.id` is equal to the value of this field, discard. Otherwise, add an `Organization` to `parties` and map to its `.id`.
+
+      Get the `Organization` in `parties` whose `id` is equal to the value of `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`. If none exists yet:
+      1. Add an `Organization` to `parties`
+      1. Set its `.id` to the value of `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`.
+      
+      If there is a `Person` in the organization's `.beneficialOwners` array whose `id` is equal to the value of this field, discard. Otherwise, add a `Person` to `.beneficialOwners` and map to its `.id`.
+    eForms example: <efac:Organization><efac:UltimateBeneficialOwner><cbc:ID schemeName="ubo">UBO-0001</cbc:ID></efac:UltimateBeneficialOwner></efac:Organization>
+    OCDS example: '{"parties": [{"beneficialOwners": [{"id": "UBO-0001"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: OPT-310-Tender
     parentNodeId: ND-LotTender
