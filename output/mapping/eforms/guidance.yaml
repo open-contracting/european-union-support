@@ -1810,8 +1810,7 @@
     Description: The name of a part of an organisation (e.g. the relevant department of a large buyer).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and append to the organization's `.name`, separated from the original text with ' - ' (space, dash, space). See also [Using the Organization building block with an organizational hierarchy](https://standard.open-contracting.org/latest/en/guidance/map/organizational_units/#using-the-organization-building-block-with-an-organizational-hierarchy)
+    eForms guidance: '[Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and append to the organization''s `.name`, separated from the original text with '' - '' (space, dash, space). See also [Using the Organization building block with an organizational hierarchy](https://standard.open-contracting.org/latest/en/guidance/map/organizational_units/#using-the-organization-building-block-with-an-organizational-hierarchy)'
     eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cbc:Department>Procurement Department</cbc:Department></cac:PostalAddress></efac:Company></efac:Organization>
     OCDS example: '{"parties":[{"name":"Ministry of Education - Procurement Department"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -1826,7 +1825,7 @@
     Description: The name of a part of an organisation (e.g. the relevant department of a large buyer).
     Business groups:
         BG-703: Organisation
-    eForms guidance: [Get the organization the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and append to the organization's `.name`, separated from the original text with ' - ' (space, dash, space). See also [Using the Organization building block with an organizational hierarchy](https://standard.open-contracting.org/latest/en/guidance/map/organizational_units/#using-the-organization-building-block-with-an-organizational-hierarchy)
+    eForms guidance: /[Get the organization the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and append to the organization's `.name`, separated from the original text with ' - ' (space, dash, space). See also [Using the Organization building block with an organizational hierarchy](https://standard.open-contracting.org/latest/en/guidance/map/organizational_units/#using-the-organization-building-block-with-an-organizational-hierarchy)
     eForms example: <efac:Organization><efac:TouchPoint><cac:PartyName><cbc:Name languageID="ENG">Legal Department</cbc:Name></cac:PartyName><cac:PostalAddress><cbc:Department>Department XYZ</cbc:Department></cac:PostalAddress></efac:TouchPoint></efac:Organization>
     OCDS example: '{"parties":[{"name":"Ministry of Education - Legal Department"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -1938,8 +1937,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/*[matches(name(),'SME')]
     TED guidance:
     - Set the party's `.details.scale` to 'sme'
-    eForms guidance: |-
-      [Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and map to the organization's `.details.scale`
+    eForms guidance: '[Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and map to the organization''s `.details.scale`'
     eForms example: <efac:Company><efbc:CompanySizeCode listName="economic-operator-size">large</efbc:CompanySizeCode></efac:Company>
     OCDS example: '{"parties":[{"details":{"scale":"large"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -12462,9 +12460,13 @@
     repeatable: false
     mandatory: false
     codeList: organisation-role-service
-    eForms guidance: /https://github.com/open-contracting/european-union-support/issues/132
+    eForms guidance: |-
+        Get the `Organization` in `parties` whose `id` is equal to the value of `ancestor::cac:ServiceProviderParty/cac:Party/cac:PartyIdentification/cbc:ID`. If none exists yet:
+        1\. Add an `Organization` to `parties`
+        2\. Set its `.id` to the value of `ancestor::cac:ServiceProviderParty/cac:Party/cac:PartyIdentification/cbc:ID`.
+        If the value of the field is "serv-prov" add `procurementServiceProvider` to the `.roles` array. If the value of the field is "ted-esen" add `esender` to the `.roles` array.
     eForms example: <cac:ServiceProviderParty><cbc:ServiceTypeCode listName="organisation-role">ted-esen</cbc:ServiceTypeCode></cac:ServiceProviderParty>
-    OCDS example: ''
+    OCDS example: '{"parties":[{"roles":["esender"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_buyer_and_service_providers
 -   id: OPT-050-Lot
     parentNodeId: ND-LotProcurementDocument
@@ -12513,7 +12515,7 @@
     repeatable: false
     mandatory: true
     codeList: customer-service
-    eForms guidance: ''
+    eForms guidance: Not in SDK, either the id or the field with the @listName. /https://github.com/open-contracting/european-union-support/issues/137
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -12525,7 +12527,7 @@
     type: text-multilingual
     repeatable: false
     mandatory: true
-    eForms guidance: ''
+    eForms guidance: Not in SDK, either the id or the field with the @listName. /https://github.com/open-contracting/european-union-support/issues/137
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -12575,9 +12577,9 @@
     mandatory: false
     pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <cac:ExternalReference><cbc:URI>https://fiscal-legislation.gov.stat</cbc:URI></cac:ExternalReference>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-110-Part-FiscalLegis
     parentNodeId: ND-PartFiscalLegislation
     name: URL to Fiscal Legislation
@@ -12588,9 +12590,9 @@
     mandatory: false
     pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <cac:ExternalReference><cbc:URI>https://fiscal-legislation.gov.stat</cbc:URI></cac:ExternalReference>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-111-Lot-FiscalLegis
     parentNodeId: ND-LotFiscalLegislation
     name: Fiscal Legislation Document ID
@@ -12600,9 +12602,9 @@
     repeatable: false
     mandatory: false
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <cac:FiscalLegislationDocumentReference><cbc:ID>Fiscal1</cbc:ID></cac:FiscalLegislationDocumentReference>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-111-Part-FiscalLegis
     parentNodeId: ND-PartFiscalLegislation
     name: Fiscal Legislation Document ID
@@ -12611,10 +12613,10 @@
     type: id
     repeatable: false
     mandatory: false
-    eForms guidance: ''
+    eForms guidance: <cac:FiscalLegislationDocumentReference><cbc:ID>Fiscal1\</cbc:ID>\</cac:FiscalLegislationDocumentReference>
     eForms example: ''
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-112-Lot-EnvironLegis
     parentNodeId: ND-LotEnvironmentalLegislation
     name: Environmental Legislation Document ID
@@ -12624,9 +12626,9 @@
     repeatable: false
     mandatory: false
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <cac:EnvironmentalLegislationDocumentReference><cbc:ID>Env1</cbc:ID></cac:EnvironmentalLegislationDocumentReference>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-112-Part-EnvironLegis
     parentNodeId: ND-PartEnvironmentalLegislation
     name: Environmental Legislation Document ID
@@ -12636,9 +12638,9 @@
     repeatable: false
     mandatory: false
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <cac:EnvironmentalLegislationDocumentReference><cbc:ID>Env1</cbc:ID></cac:EnvironmentalLegislationDocumentReference>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-113-Lot-EmployLegis
     parentNodeId: ND-LotEmploymentLegislation
     name: Employment Legislation Document ID
@@ -12648,9 +12650,9 @@
     repeatable: false
     mandatory: false
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <cac:EmploymentLegislationDocumentReference><cbc:ID>Empl1</cbc:ID></cac:EmploymentLegislationDocumentReference>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-113-Part-EmployLegis
     parentNodeId: ND-PartEmploymentLegislation
     name: Employment Legislation Document ID
@@ -12660,9 +12662,9 @@
     repeatable: false
     mandatory: false
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <cac:EmploymentLegislationDocumentReference><cbc:ID>Empl1</cbc:ID></cac:EmploymentLegislationDocumentReference>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-120-Lot-EnvironLegis
     parentNodeId: ND-LotEnvironmentalLegislation
     name: URL to Environmental Legislation
@@ -12673,9 +12675,9 @@
     mandatory: false
     pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <cac:ExternalReference><cbc:URI>https://environmental-legislation.gov.stat</cbc:URI></cac:ExternalReference>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-120-Part-EnvironLegis
     parentNodeId: ND-PartEnvironmentalLegislation
     name: URL to Environmental Legislation
@@ -12686,9 +12688,9 @@
     mandatory: false
     pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <cac:ExternalReference><cbc:URI>https://environmental-legislation.gov.stat</cbc:URI></cac:ExternalReference>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-130-Lot-EmployLegis
     parentNodeId: ND-LotEmploymentLegislation
     name: URL to Employment Legislation
@@ -12699,9 +12701,9 @@
     mandatory: false
     pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <cac:ExternalReference><cbc:URI>https://employment-legislation.gov.stat</cbc:URI></cac:ExternalReference>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-130-Part-EmployLegis
     parentNodeId: ND-PartEmploymentLegislation
     name: URL to Employment Legislation
@@ -12712,9 +12714,9 @@
     mandatory: false
     pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <cac:ExternalReference><cbc:URI>https://employment-legislation.gov.stat</cbc:URI></cac:ExternalReference>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-140-Lot
     parentNodeId: ND-LotProcurementDocument
     name: Procurement Documents ID
@@ -12813,7 +12815,7 @@
     pattern: ^ORG-\d{4}$
     eForms guidance: If there is an `Organization` in `parties` whose `.id` is equal to the value of this field, discard. Otherwise, add an `Organization` to `parties` and map to its `.id`.
     eForms example: <efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></efac:Company></efac:Organization>
-    OCDS example: '{"parties": [{"id": "ORG-0001"}]}'
+    OCDS example: '{"parties":[{"id":"ORG-0001"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: OPT-201-Organization-TouchPoint
     parentNodeId: ND-Touchpoint
@@ -12827,7 +12829,7 @@
     pattern: ^TPO-\d{4}$
     eForms guidance: If there is an `Organization` in `parties` whose `.id` is equal to the value of this field, discard. Otherwise, add an `Organization` to `parties` and map to its `.id`.
     eForms example: <efac:Organization><efac:TouchPoint><cac:PartyIdentification><cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID></cac:PartyIdentification></efac:TouchPoint></efac:Organization>
-    OCDS example: '{"parties": [{"id": "TPO-0001"}]}'
+    OCDS example: '{"parties":[{"id":"TPO-0001"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: OPT-202-UBO
     parentNodeId: ND-UBO
@@ -13308,15 +13310,16 @@
     mandatory: false
     pattern: ^UBO-\d{4}$
     eForms guidance: |-
-      If there is an `Organization` in `parties` whose `.id` is equal to the value of this field, discard. Otherwise, add an `Organization` to `parties` and map to its `.id`.
+        If there is an `Organization` in `parties` whose `.id` is equal to the value of this field, discard. Otherwise, add an `Organization` to `parties` and map to its `.id`.
 
-      Get the `Organization` in `parties` whose `id` is equal to the value of `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`. If none exists yet:
-      1. Add an `Organization` to `parties`
-      1. Set its `.id` to the value of `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`.
-      
-      If there is a `Person` in the organization's `.beneficialOwners` array whose `id` is equal to the value of this field, discard. Otherwise, add a `Person` to `.beneficialOwners` and map to its `.id`.
+        Get the `Organization` in `parties` whose `id` is equal to the value of `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`. If none exists yet:
+
+        1. Add an `Organization` to `parties`
+        1. Set its `.id` to the value of `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`.
+
+        If there is a `Person` in the organization's `.beneficialOwners` array whose `id` is equal to the value of this field, discard. Otherwise, add a `Person` to `.beneficialOwners` and map to its `.id`.
     eForms example: <efac:Organization><efac:UltimateBeneficialOwner><cbc:ID schemeName="ubo">UBO-0001</cbc:ID></efac:UltimateBeneficialOwner></efac:Organization>
-    OCDS example: '{"parties": [{"beneficialOwners": [{"id": "UBO-0001"}]}]}'
+    OCDS example: '{"parties":[{"beneficialOwners":[{"id":"UBO-0001"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: OPT-310-Tender
     parentNodeId: ND-LotTender
