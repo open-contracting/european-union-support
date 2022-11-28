@@ -1346,10 +1346,10 @@
     TED guidance:
     - If not set, let *Lot No* be '1'. Add to the award's `.relatedLots` (string).
     eForms guidance: |-
-        If there is an `Award` in `awards` whose `.id` is equal to the XPath `ancestor::efac:LotResult/cbcID`, discard. Otherwise:
+        If there is an `Award` in `awards` whose `.id` is equal to the value of `ancestor::efac:LotResult/cbcID`, discard. Otherwise:
 
         - Add an `Award` to `awards`
-        - Set its `.id` to the value of the XPath `ancestor::efac:LotResult/cbc:ID`
+        - Set its `.id` to the value of `ancestor::efac:LotResult/cbc:ID`
         - Add the value of the field to the award's `.relatedLots`
     eForms example: <efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot>
     OCDS example: '{"awards":[{"id":"RES-0002","relatedLots":["LOT-0001"]}]}'
@@ -1371,7 +1371,7 @@
         BG-7: Notice Result
         BG-320: Tender
     eForms guidance: |-
-        If there is a `Bid` in `bids` whose `.id` is equal to the XPath `ancestor::efac:LotTender/cbcID`, discard. Otherwise:
+        If there is a `Bid` in `bids` whose `.id` is equal to the value of `ancestor::efac:LotTender/cbcID`, discard. Otherwise:
 
         - Add a `Bid` to `bids`
         - Set its `.id` to the value of `ancestor::efac:LotTender/cbc:ID`
@@ -1411,7 +1411,7 @@
         BG-6: Procedure
         BG-330: Group Lot Award
     eForms guidance: |-
-        Get the `LotGroup` in `tender.lotGroups` whose `id` is equal to the value of the XPath `ancestor::cac:LotsGroup/cbc:LotsGroupID`. If none exists yet, add a `LotGroup` to `tender.lotGroups` and set it's `id` to the value of the XPath `ancestor::cac:LotsGroup/cbc:LotsGroupID`.
+        Get the `LotGroup` in `tender.lotGroups` whose `id` is equal to the value of `ancestor::cac:LotsGroup/cbc:LotsGroupID`. If none exists yet, add a `LotGroup` to `tender.lotGroups` and set it's `id` to the value of `ancestor::cac:LotsGroup/cbc:LotsGroupID`.
 
         If not already present, add to the lot group's `.relatedLots`.
     eForms example: <cac:LotDistribution><cac:LotsGroup><cac:ProcurementProjectLotReference><cbc:ID schemeName="Lot">LOT-0002</cbc:ID></cac:ProcurementProjectLotReference></cac:LotsGroup></cac:LotDistribution>
@@ -1795,7 +1795,7 @@
     Business groups:
         BG-2: Purpose
         BG-557: Group Framework Estimated Maximum Value
-    eForms guidance: \[UNREVIEWED\] Get the LotGroup in `tender.lotGroups` whose `.id` is equal to the value of the XPath `sibling::cac:TenderLot/cac:ID`. If none exists yet, add a LotGroup to `tender.lotGroups` and set its `.id` to the value of the XPath `sibling::cac:TenderLot/cac:ID.`, map to its `.techniques.frameworkAgreement.value.amount` and map `currencyID` to its `techniques.frameworkAgreement.value.currency`.
+    eForms guidance: \[UNREVIEWED\] Get the LotGroup in `tender.lotGroups` whose `.id` is equal to the value of `sibling::cac:TenderLot/cac:ID`. If none exists yet, add a LotGroup to `tender.lotGroups` and set its `.id` to the value of `sibling::cac:TenderLot/cac:ID.`, map to its `.techniques.frameworkAgreement.value.amount` and map `currencyID` to its `techniques.frameworkAgreement.value.currency`.
     eForms example: <cac:FrameworkAgreement><cbc:EstimatedMaximumValueAmount currencyID="EUR">200000</cbc:EstimatedMaximumValueAmount></cac:FrameworkAgreement>
     OCDS example: '{"tender":{"lotGroups":[{"techniques":{"frameworkAgreement":{"value":{"amount":800000,"currency":"EUR"}}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#frameworkAgreementSection
@@ -6518,7 +6518,7 @@
     type: amount
     repeatable: false
     mandatory: false
-    eForms guidance: \[UNREVIEWED\] Get the Lot in `tender.lots` whose `.id` is equal to the value of the XPath `sibling::cac:TenderLot/cac:ID`. If none exists yet, add a Lot to `tender.lots` and set its `.id` to the value of the XPath `sibling::cac:TenderLot/cac:ID.`, map to its `.techniques.frameworkAgreement.maximumValue.amount` and map `currencyID` to its `techniques.frameworkAgreement.maximumValue.currency`.
+    eForms guidance: \[UNREVIEWED\] Get the Lot in `tender.lots` whose `.id` is equal to the value of `sibling::cac:TenderLot/cac:ID`. If none exists yet, add a Lot to `tender.lots` and set its `.id` to the value of `sibling::cac:TenderLot/cac:ID.`, map to its `.techniques.frameworkAgreement.maximumValue.amount` and map `currencyID` to its `techniques.frameworkAgreement.maximumValue.currency`.
     eForms example: <efext:EformsExtension><efbc:FrameworkMaximumAmount currencyID="EUR">120000</efbc:FrameworkMaximumAmount></efext:EformsExtension>
     OCDS example: '{"tender":{"lots":[{"techniques":{"frameworkAgreement":{"maximumValue":{"amount":120000,"currency":"EUR"}}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#estimatedValueSection
@@ -6530,7 +6530,7 @@
     type: amount
     repeatable: false
     mandatory: false
-    eForms guidance: \[UNREVIEWED\] Get the LotGroup in `tender.lotGroups` whose `.id` is equal to the value of the XPath `sibling::cac:TenderLot/cac:ID`. If none exists yet, add a LotGroup to `tender.lotGroups` and set its `.id` to the value of the XPath `sibling::cac:TenderLot/cac:ID.`, map to its `.techniques.frameworkAgreement.maximumValue.amount` and map `currencyID` to its `techniques.frameworkAgreement.maximumValue.currency`.
+    eForms guidance: \[UNREVIEWED\] Get the LotGroup in `tender.lotGroups` whose `.id` is equal to the value of `sibling::cac:TenderLot/cac:ID`. If none exists yet, add a LotGroup to `tender.lotGroups` and set its `.id` to the value of `sibling::cac:TenderLot/cac:ID.`, map to its `.techniques.frameworkAgreement.maximumValue.amount` and map `currencyID` to its `techniques.frameworkAgreement.maximumValue.currency`.
     eForms example: <efext:EformsExtension><efbc:FrameworkMaximumAmount currencyID="EUR">120000</efbc:FrameworkMaximumAmount></efext:EformsExtension>
     OCDS example: '{"tender":{"lotGroups":[{"techniques":{"frameworkAgreement":{"maximumValue":{"amount":120000,"currency":"EUR"}}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#estimatedValueSection
