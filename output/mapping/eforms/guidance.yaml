@@ -9703,9 +9703,10 @@
     Description: The organisation is a natural person.
     Business groups:
         BG-703: Organisation
-    eForms guidance: (UNREVIEWED) Discard. There's an open issue ([#883](https://github.com/open-contracting/standard/issues/883)) to distinguish natural persons from organizations.
+    eForms guidance: |-
+      [Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and set it's `details.scale` to 'selfEmployed'.
     eForms example: <efac:Organization><efbc:NaturalPersonIndicator>false</efbc:NaturalPersonIndicator></efac:Organization>
-    OCDS example: ''
+    OCDS example: '{"parties": [{"details": {"scale": "selfEmployed"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-634-Lot
     parentNodeId: ND-LotTenderingProcessExtension
