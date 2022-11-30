@@ -9703,10 +9703,9 @@
     Description: The organisation is a natural person.
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-      [Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and set it's `details.scale` to 'selfEmployed'.
+    eForms guidance: '[Get the organization for the company](common-operations.md#get-the-organization-for-a-company) and set it''s `details.scale` to ''selfEmployed''.'
     eForms example: <efac:Organization><efbc:NaturalPersonIndicator>false</efbc:NaturalPersonIndicator></efac:Organization>
-    OCDS example: '{"parties": [{"details": {"scale": "selfEmployed"}}]}'
+    OCDS example: '{"parties":[{"details":{"scale":"selfEmployed"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_general_structure_of_an_organization_related_information
 -   id: BT-634-Lot
     parentNodeId: ND-LotTenderingProcessExtension
@@ -10371,7 +10370,7 @@
     repeatable: false
     mandatory: false
     codeList: vehicle-category
-    eForms guidance: ''
+    eForms guidance: /[Get the award for the LotResult](common-operations.md#get-award-for-a-lotresult)
     eForms example: <efac:ProcurementDetails><efbc:AssetCategoryCode listName="vehicle-category">n2-n3</efbc:AssetCategoryCode></efac:ProcurementDetails>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_lot_result
@@ -12199,7 +12198,7 @@
     repeatable: false
     mandatory: false
     pattern: ^[1-9](\d{0,7})-(19|20)\d\d$
-    eForms guidance: ''
+    eForms guidance: Discard.
     eForms example: <efac:Publication><efbc:NoticePublicationID schemeName="ojs-notice-id">12345678-2023</efbc:NoticePublicationID></efac:Publication>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#pubInfoSection
@@ -12212,7 +12211,7 @@
     repeatable: false
     mandatory: false
     pattern: ^[1-9]\d{0,2}/(19|20)\d\d$
-    eForms guidance: ''
+    eForms guidance: Discard.
     eForms example: <efac:Publication><efbc:GazetteID schemeName="ojs-id">123/2023</efbc:GazetteID></efac:Publication>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#pubInfoSection
@@ -12225,7 +12224,7 @@
     repeatable: false
     mandatory: false
     pattern: ^(?:(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:(?:0[13578]|1[02]))-31|(?:(?:0[13-9]|1[0-2])-(?:29|30))))|(?:(?:(?:(?:(?:1[6-9]|[2-9]\d)(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))-02-29))|(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:0[1-9])|(?:1[0-2]))-(?:0[1-9]|1\d|2[0-8])))(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
-    eForms guidance: ''
+    eForms guidance: Discard.
     eForms example: <efac:Publication><efbc:PublicationDate>2023-03-14+01:00</efbc:PublicationDate></efac:Publication>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#pubInfoSection
@@ -12424,7 +12423,7 @@
     pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|[1-9](\d{0,7})-(19|20)\d\d)$
     eForms guidance: (UNREVIEWED) [Reference a previous publication](../../operations/#reference-a-previous-publication) \[https://github.com/open-contracting/european-union-support/issues/54\]
     eForms example: <cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID></cac:NoticeDocumentReference>
-    OCDS example: '{"relatedProcesses":[{"id":1,"relationship":["planning"],"scheme":"eu-oj","identifier":"123e4567-e89b-12d3-a456-426614174000-06"}]}'
+    OCDS example: '{"relatedProcesses":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"123e4567-e89b-12d3-a456-426614174000-06"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#previousNoticeSection
 -   id: OPT-001-notice
     parentNodeId: ND-Root
@@ -12516,10 +12515,14 @@
     repeatable: false
     mandatory: true
     codeList: customer-service
-    eForms guidance: Not in SDK, either the id or the field with the @listName. /https://github.com/open-contracting/european-union-support/issues/137
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and add a `CustomerServices` object to its `contractTerms` array.
+
+        - Map the code to the objects `.type`
+        - Look up the code's label in the /[authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/customer-service) and map it to `.name`.
+    eForms example: <cac:ContractExecutionRequirement><cbc:ExecutionRequirementCode listName="customer-service">clean</cbc:ExecutionRequirementCode></cac:ContractExecutionRequirement>
+    OCDS example: '{"tender":{"lots":[{"contractTerms":{"customerServices":[{"type":"clean","name":"Cleanliness of rolling stock and station facilities"}]}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#tenderingTermsSection
 -   id: OPT-072-Lot
     parentNodeId: ND-QualityTarget
     name: Quality Target Description
@@ -12528,10 +12531,10 @@
     type: text-multilingual
     repeatable: false
     mandatory: true
-    eForms guidance: Not in SDK, either the id or the field with the @listName. /https://github.com/open-contracting/european-union-support/issues/137
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: These values map to the same `CustomerServices` objects as created for OPT-071-Lot. Update the corresponding `CustomerServices` object and map to its `.description`.
+    eForms example: <cac:ContractExecutionRequirement><cbc:ExecutionRequirementCode listName="customer-service">clean</cbc:ExecutionRequirementCode></cac:ContractExecutionRequirement>
+    OCDS example: '{"tender":{"lots":[{"contractTerms":{"customerServices":[{"description":"A description as given in OPT-072"}]}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#tenderingTermsSection
 -   id: OPT-090-Lot
     parentNodeId: ND-LotBuyerCategories
     name: Buyer Categories
@@ -12577,9 +12580,9 @@
     repeatable: false
     mandatory: false
     pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
-    eForms guidance: ''
+    eForms guidance: These values map to the same `Document` objects as created for OPT-111-Lot. Map to the document's `.url`.
     eForms example: <cac:ExternalReference><cbc:URI>https://fiscal-legislation.gov.stat</cbc:URI></cac:ExternalReference>
-    OCDS example: ''
+    OCDS example: '{"tender":{"documents":[{"id":"Fiscal1","url":"https://fiscal-legislation.gov.stat"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-110-Part-FiscalLegis
     parentNodeId: ND-PartFiscalLegislation
@@ -12590,9 +12593,9 @@
     repeatable: false
     mandatory: false
     pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
-    eForms guidance: ''
+    eForms guidance: These values map to the same `Document` objects as created for OPT-111-Part. Map to the document's `.url`.
     eForms example: <cac:ExternalReference><cbc:URI>https://fiscal-legislation.gov.stat</cbc:URI></cac:ExternalReference>
-    OCDS example: ''
+    OCDS example: '{"tender":{"documents":[{"id":"Fiscal1","url":"https://fiscal-legislation.gov.stat"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-111-Lot-FiscalLegis
     parentNodeId: ND-LotFiscalLegislation
@@ -12602,9 +12605,9 @@
     type: id
     repeatable: false
     mandatory: false
-    eForms guidance: ''
+    eForms guidance: Add a document to `tender.documents` and map to the document's `.id`. Set the document's `.documentType` to 'legislation', and add the value of `ancestor::cac:ProcurementProjectLot/cac:ID` to `.relatedLots`.
     eForms example: <cac:FiscalLegislationDocumentReference><cbc:ID>Fiscal1</cbc:ID></cac:FiscalLegislationDocumentReference>
-    OCDS example: ''
+    OCDS example: '{"tender":{"documents":[{"id":"Fiscal1","documentType":"legislation","relatedLots":["LOT-0002"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-111-Part-FiscalLegis
     parentNodeId: ND-PartFiscalLegislation
@@ -12615,8 +12618,8 @@
     repeatable: false
     mandatory: false
     eForms guidance: <cac:FiscalLegislationDocumentReference><cbc:ID>Fiscal1\</cbc:ID>\</cac:FiscalLegislationDocumentReference>
-    eForms example: ''
-    OCDS example: ''
+    eForms example: Add a document to `tender.documents` and map to the document's `.id`. Set the document's `.documentType` to 'legislation'.
+    OCDS example: '{"tender":{"documents":[{"id":"Fiscal1","documentType":"legislation"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-112-Lot-EnvironLegis
     parentNodeId: ND-LotEnvironmentalLegislation
@@ -12626,9 +12629,9 @@
     type: id
     repeatable: false
     mandatory: false
-    eForms guidance: ''
+    eForms guidance: Add a document to `tender.documents` and map to the document's `.id`. Set the document's `.documentType` to 'legislation', and add the value of `ancestor::cac:ProcurementProjectLot/cac:ID` to `.relatedLots`.
     eForms example: <cac:EnvironmentalLegislationDocumentReference><cbc:ID>Env1</cbc:ID></cac:EnvironmentalLegislationDocumentReference>
-    OCDS example: ''
+    OCDS example: '{"tender":{"documents":[{"id":"Env1","documentType":"legislation","relatedLots":["LOT-0002"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-112-Part-EnvironLegis
     parentNodeId: ND-PartEnvironmentalLegislation
@@ -12638,9 +12641,9 @@
     type: id
     repeatable: false
     mandatory: false
-    eForms guidance: ''
+    eForms guidance: Add a document to `tender.documents` and map to the document's `.id`. Set the document's `.documentType` to 'legislation'.
     eForms example: <cac:EnvironmentalLegislationDocumentReference><cbc:ID>Env1</cbc:ID></cac:EnvironmentalLegislationDocumentReference>
-    OCDS example: ''
+    OCDS example: '{"tender":{"documents":[{"id":"Env1","documentType":"legislation"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-113-Lot-EmployLegis
     parentNodeId: ND-LotEmploymentLegislation
@@ -12650,9 +12653,9 @@
     type: id
     repeatable: false
     mandatory: false
-    eForms guidance: ''
+    eForms guidance: Add a document to `tender.documents` and map to the document's `.id`. Set the document's `.documentType` to 'legislation', and add the value of `ancestor::cac:ProcurementProjectLot/cac:ID` to `.relatedLots`.
     eForms example: <cac:EmploymentLegislationDocumentReference><cbc:ID>Empl1</cbc:ID></cac:EmploymentLegislationDocumentReference>
-    OCDS example: ''
+    OCDS example: '{"tender":{"documents":[{"id":"Empl1","documentType":"legislation","relatedLots":["LOT-0002"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-113-Part-EmployLegis
     parentNodeId: ND-PartEmploymentLegislation
@@ -12662,9 +12665,9 @@
     type: id
     repeatable: false
     mandatory: false
-    eForms guidance: ''
+    eForms guidance: Add a document to `tender.documents` and map to the document's `.id`. Set the document's `.documentType` to 'legislation'.
     eForms example: <cac:EmploymentLegislationDocumentReference><cbc:ID>Empl1</cbc:ID></cac:EmploymentLegislationDocumentReference>
-    OCDS example: ''
+    OCDS example: '{"tender":{"documents":[{"id":"Empl1","documentType":"legislation"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-120-Lot-EnvironLegis
     parentNodeId: ND-LotEnvironmentalLegislation
@@ -12675,9 +12678,9 @@
     repeatable: false
     mandatory: false
     pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
-    eForms guidance: ''
+    eForms guidance: These values map to the same `Document` objects as created for OPT-112-Lot. Map to the document's `.url`.
     eForms example: <cac:ExternalReference><cbc:URI>https://environmental-legislation.gov.stat</cbc:URI></cac:ExternalReference>
-    OCDS example: ''
+    OCDS example: '{"tender":{"documents":[{"id":"Env1","url":"https://environmental-legislation.gov.stat"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-120-Part-EnvironLegis
     parentNodeId: ND-PartEnvironmentalLegislation
@@ -12688,9 +12691,9 @@
     repeatable: false
     mandatory: false
     pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
-    eForms guidance: ''
+    eForms guidance: These values map to the same `Document` objects as created for OPT-112-Part. Map to the document's `.url`.
     eForms example: <cac:ExternalReference><cbc:URI>https://environmental-legislation.gov.stat</cbc:URI></cac:ExternalReference>
-    OCDS example: ''
+    OCDS example: '{"tender":{"documents":[{"id":"Env1","url":"https://environmental-legislation.gov.stat"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-130-Lot-EmployLegis
     parentNodeId: ND-LotEmploymentLegislation
@@ -12701,9 +12704,9 @@
     repeatable: false
     mandatory: false
     pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
-    eForms guidance: ''
+    eForms guidance: These values map to the same `Document` objects as created for OPT-113-Lot. Map to the document's `.url`.
     eForms example: <cac:ExternalReference><cbc:URI>https://employment-legislation.gov.stat</cbc:URI></cac:ExternalReference>
-    OCDS example: ''
+    OCDS example: '{"tender":{"documents":[{"id":"Empl1","url":"https://employment-legislation.gov.stat"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-130-Part-EmployLegis
     parentNodeId: ND-PartEmploymentLegislation
@@ -12714,9 +12717,9 @@
     repeatable: false
     mandatory: false
     pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
-    eForms guidance: ''
+    eForms guidance: These values map to the same `Document` objects as created for OPT-113-Part. Map to the document's `.url`.
     eForms example: <cac:ExternalReference><cbc:URI>https://employment-legislation.gov.stat</cbc:URI></cac:ExternalReference>
-    OCDS example: ''
+    OCDS example: '{"tender":{"documents":[{"id":"Empl1","url":"https://employment-legislation.gov.stat"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-140-Lot
     parentNodeId: ND-LotProcurementDocument
@@ -12800,9 +12803,9 @@
     type: indicator
     repeatable: false
     mandatory: false
-    eForms guidance: /https://github.com/open-contracting/european-union-support/issues/139
+    eForms guidance: /[Get the organization for the tenderer](common-operations.md#get-the-organization-for-a-tenderer). If "true" add 'leadTenderer' to it's `.roles`.
     eForms example: <efac:Tenderer><efbc:GroupLeadIndicator>true</efbc:GroupLeadIndicator></efac:Tenderer>
-    OCDS example: ''
+    OCDS example: '{"parties":[{"id":"ORG-0001","roles":["leadTenderer","tenderer"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-200-Organization-Company
     parentNodeId: ND-Company
