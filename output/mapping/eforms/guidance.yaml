@@ -2029,7 +2029,7 @@
     eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.submissionMethodDetails`.'
     eForms example: <cac:TenderRecipientParty><cbc:EndpointID>https://www.acme.com/tender-submission/</cbc:EndpointID></cac:TenderRecipientParty>
     OCDS example: '{"tender":{"lots":[{"submissionMethodDetails":"https://www.acme.com/tender-submission/"}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#processingPartiesSection
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#partiesSection
 -   id: BT-19-Lot
     parentNodeId: ND-NonEsubmission
     name: Submission Nonelectronic Justification
@@ -6720,18 +6720,8 @@
     Business groups:
         BG-7: Notice Result
         BG-310: Contract
-    eForms guidance: |-
-      * [Get the contract for the SettledContract](common-operations.md#get-the-contract-for-a-settledcontract) and add the value of this field to its `.relatedBids` array.
-      * Get the `ancestor::efac:NoticeResult/efac:LotTender` whose `/cbc:ID` is equal to the value of this field.
-      * Get the `ancestor::efac:NoticeResult/efac:TenderingParty` whose `/cbc:ID` matches the `LotTender`'s `/efac:TenderingParty/cbc:ID` 
-      * For each `ancestor::efac:TenderingParty/efac:Tenderer​`, [get the organization for the tenderer](common-operations.md#get-the-organization-for-a-tenderer) and:
-        * Get the `ancestor::efext:EformsExtension/efac:Organizations/efac:Organization/efac:Company` whose `/cac:PartyIdentification/cbc:ID` is equal to the organization's `.id` and set the organization's `.name` to the value of `/cac:PartyName/cbc:Name`.        
-        * Add 'supplier' to the organization's `.roles` array.
-        * For each `ancestor::efac:NoticeResult/efac:LotResult` with an `/efac:SettledContract/cbc:ID` equal to the value of `ancestor::efac:SettledContract/cbc:ID`:
-          * [Get the award for the LotResult](common-operations.md#get-the-award-for-a-lotresult])
-          * Add an `OrganizationReference` to the award's `.suppliers` array and:
-            * Set the organization reference's `.id` to the organization's `.id`
-            * Set the organization reference's `.name` to the organization's `.name`
+    eForms guidance: "- [Get the contract for the SettledContract](common-operations.md#get-the-contract-for-a-settledcontract) and add the value of this field to its `.relatedBids` array.\n- Get the `ancestor::efac:NoticeResult/efac:LotTender` whose `/cbc:ID` is equal to the value of this field.\n- Get the `ancestor::efac:NoticeResult/efac:TenderingParty` whose `/cbc:ID` matches the `LotTender`'s `/efac:TenderingParty/cbc:ID`\n- For each `ancestor::efac:TenderingParty/efac:Tenderer\u200B`, [get the organization for the tenderer](common-operations.md#get-the-organization-for-a-tenderer) and:\n  - Get the `ancestor::efext:EformsExtension/efac:Organizations/efac:Organization/efac:Company` whose `/cac:PartyIdentification/cbc:ID` is equal to the organization's `.id` and set the organization's `.name` to the value of `/cac:PartyName/cbc:Name`.\n  - Add 'supplier' to the organization's `.roles` array.\n  - For each `ancestor::efac:NoticeResult/efac:LotResult` with an `/efac:SettledContract/cbc:ID`\
+        \ equal to the value of `ancestor::efac:SettledContract/cbc:ID`:\n    - [Get the award for the LotResult](common-operations.md#get-the-award-for-a-lotresult%5D)\n    - Add an `OrganizationReference` to the award's `.suppliers` array and:\n      - Set the organization reference's `.id` to the organization's `.id`\n      - Set the organization reference's `.name` to the organization's `.name`"
     eForms example: <efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID></efac:LotTender>
     OCDS example: '{"contracts":[{"relatedBids":["TEN-0001"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#settledContractSection
@@ -12886,17 +12876,17 @@
     mandatory: false
     pattern: ^ORG-\d{4}$
     eForms guidance: |-
-      1. Get the `Organization` in `parties` whose `.id` is equal to the value of this field. If none exists yet:
+        1. Get the `Organization` in `parties` whose `.id` is equal to the value of this field. If none exists yet:
         1. Add an `Organization` to `parties`.
         1. Set its `.id` to the value of this field.
         1. Add 'buyer' to its roles.
-      1. Get the `ancestor::efext:EformsExtension/efac:Organizations/efac:Organization/efac:Company` whose `/cac:PartyIdentification/cbc:ID` is equal to the value of this field and set the organization's `.name` to the value of `/cac:PartyName/cbc:Name`.
-      1. [Get the contract for the SettledContract](common-operations.md#get-the-contract-for-a-settledcontract). For each award referenced in the contract's `.awardID` field or `.awardIDs` array:
+        1. Get the `ancestor::efext:EformsExtension/efac:Organizations/efac:Organization/efac:Company` whose `/cac:PartyIdentification/cbc:ID` is equal to the value of this field and set the organization's `.name` to the value of `/cac:PartyName/cbc:Name`.
+        1. [Get the contract for the SettledContract](common-operations.md#get-the-contract-for-a-settledcontract). For each award referenced in the contract's `.awardID` field or `.awardIDs` array:
         1. Add an `OrganizationReference` object to the award's `.buyers` array
         1. Set its `.id` to the organization's `.id`
         1. Set its name to the organization's `.name`.
     eForms example: <efac:SettledContract><cac:SignatoryParty><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:SignatoryParty></efac:SettledContract>
-    OCDS example: '{"awards": [{"buyers": [{"id": "ORG-0001", "name": "Financial Adinistration for ..."}]}]}'
+    OCDS example: '{"awards":[{"buyers":[{"id":"ORG-0001","name":"Financial Adinistration for ..."}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_contract_signatory
 -   id: OPT-300-Procedure-Buyer
     parentNodeId: ND-ServiceProvider
@@ -12908,10 +12898,13 @@
     - ORG
     repeatable: false
     mandatory: true
-    eForms guidance: ''
+    eForms guidance: |-
+        1. Perform the mapping for `BT-500-Organization-Company` (Organisation Name).
+        1. Add 'buyer' to the `.roles` array of the organization.
+        1. Add an `OrganizationReference` object to `buyer`, set its `.id` to the organization's `.id` and its `.name` to the organization's `.name`.
     eForms example: <cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification>
-    OCDS example: ''
-    sdk: ''
+    OCDS example: '{"buyer":{"id":"ORG-0001","name":"Financial Adinistration for ..."}}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_referring_to_objects
 -   id: OPT-300-Procedure-SProvider
     parentNodeId: ND-ProviderParty
     name: Service Provider Technical Identifier Reference
@@ -12938,9 +12931,9 @@
     repeatable: false
     mandatory: false
     pattern: ^ORG-\d{4}$
-    eForms guidance: ''
+    eForms guidance: Discard. This field is mapped as part of `OPT-310-Tender`.
     eForms example: <efac:Tenderer><cbc:ID schemeName="organization">ORG-0005</cbc:ID></efac:Tenderer>
-    OCDS example: ''
+    OCDS example: N/A
     sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Lot-AddInfo
     parentNodeId: ND-LotTenderingTerms
@@ -13356,9 +13349,14 @@
     repeatable: false
     mandatory: false
     pattern: ^TPA-\d{4}$
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: |-
+        - Perform the mapping for `BT-500-Organization-Company` (Organisation Name).
+        - [Get the bid for the LotTender](common-operations.md#get-the-bid-for-a-lottender) and get the `ancestor::efac:NoticeResult/efac:TenderingParty` whose `/cbc:ID` is equal to the value of this field.
+        - For each `/efac:Tenderer` in the tendering party:
+          - [Get the organization for the tenderer](common-operations.md#get-the-organisation-for-a-tenderer).
+          - Add an `OrganizationReference` object to the bid's `.tenderers` array, set its `.id` to the organization's `.id` and set its `.name` to the organization's `.name`.
+    eForms example: <efac:NoticeResult><efac:LotTender><efac:TenderingParty><cbc:ID schemeName="tendering-party">TPA-0002</cbc:ID></efac:TenderingParty></efac:LotTender></efac:NoticeResult>
+    OCDS example: '{"bids": [{"tenderers": [{"id": "ORG-0011", "Competitor"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderSection
 -   id: OPT-315-LotResult
     parentNodeId: ND-LotResult
