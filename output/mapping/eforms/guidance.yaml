@@ -196,9 +196,9 @@
     Description: Use of a technical specification, selection criterion, award criterion, or contract performance condition aims to reduce the environmental impacts of the procurement, fulfil social objectives and/or buy an innovative work, supply or service.
     Business groups:
         BG-713: Strategic Procurement
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and add to its `.additionalProcurementCategories` array.'
+    eForms guidance: "[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot). If the code is \u201Cnone\u201D discard, otherwise set the lot's `.hasSustainability` to \u201Ctrue\u201D. For each `cac:ProcurementAdditionalType` add a corresponding `.sustainability` object to the lot's `.sustainability` array. - Map the code to the sustainability's `.goal` according to the /\\[strategic procurement mapping table\\]. - Add \"awardCriteria\", \"contractPerformanceConditions\", \"selectionCriteria\" and \"technicalSpecifications\" to the sustainability's `.strategies` array."
     eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="strategic-procurement">inn-pur</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
-    OCDS example: '{"tender":{"lots":[{"additionalProcurementCategories":["inn-pur"]}]}}'
+    OCDS example: '{"tender":{"lots":[{"hasSustainabilty":true,"sustainability":[{"goal":"economic.innovativePurchase","strategies":["awardCriteria","contractPerformanceConditions","selectionCriteria","technicalSpecifications"]}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#strategicProcurementSection
 -   id: BT-09(a)-Procedure
     parentNodeId: ND-CrossBorderLaw
@@ -1647,9 +1647,14 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/CONTRACTING_BODY/DOCUMENT_FULL
     TED guidance:
     - Discard. If no `ParticipationFee` object in the `tender.participationFees` array has a `.type` of 'document', then access is unrestricted.
-    eForms guidance: Add a document to `tender.documents` and map to the document's `.url`. Set the document's `.id` incrementally, set its `.documentType` to 'biddingDocuments', and add the value of `ancestor::cac:ProcurementProjectLot/cac:ID` to `.relatedLots`.
+    eForms guidance: |-
+        Get the `Document` in `documents` whose `id` is equal to the value of `ancestor::cac:CallForTendersDocumentReference/cbc:ID`. If none exists yet:
+        1\. Add a `Document` to `tender.documents`
+        2\. Set its `.id` to the value of `ancestor::cac:CallForTendersDocumentReference/cbc:ID`
+        3\. Add the value of `ancestor::cac:ProcurementProjectLot/cac:ID` to `.relatedLots`
+        Map to the document's `.url` and set its `.documentType` to 'biddingDocuments'.
     eForms example: <cac:CallForTendersDocumentReference><cac:Attachment><cac:ExternalReference><cbc:URI>https://mywebsite.com/proc/2019024/accessinfo</cbc:URI></cac:ExternalReference></cac:Attachment></cac:CallForTendersDocumentReference>
-    OCDS example: '{"tender":{"documents":[{"id":"1","documentType":"biddingDocuments","relatedLots":["1"],"url":"https://mywebsite.com/proc/2019024/accessinfo"}]}}'
+    OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","documentType":"biddingDocuments","relatedLots":["LOT-0001"],"url":"https://mywebsite.com/proc/2019024/accessinfo"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procurementDocsSection
 -   id: BT-15-Part
     parentNodeId: ND-PartDocumentsReference
@@ -1668,9 +1673,13 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/CONTRACTING_BODY/DOCUMENT_FULL
     TED guidance:
     - Discard. If no `ParticipationFee` object in the `tender.participationFees` array has a `.type` of 'document', then access is unrestricted.
-    eForms guidance: Add a document to `tender.documents` and map to the document's `.url`. Set the document's `.id` incrementally and set its `.documentType` to 'biddingDocuments'.
+    eForms guidance: |-
+        Get the `Document` in `documents` whose `id` is equal to the value of `ancestor::cac:CallForTendersDocumentReference/cbc:ID`. If none exists yet:
+        1\. Add a `Document` to `tender.documents`
+        2\. Set its `.id` to the value of `ancestor::cac:CallForTendersDocumentReference/cbc:ID`
+        Map to the document's `.url` and set its `.documentType` to 'biddingDocuments'
     eForms example: <cac:CallForTendersDocumentReference><cac:Attachment><cac:ExternalReference><cbc:URI>https://mywebsite.com/proc/2019024/accessinfo</cbc:URI></cac:ExternalReference></cac:Attachment></cac:CallForTendersDocumentReference>
-    OCDS example: '{"tender":{"documents":[{"id":"1","documentType":"biddingDocuments","url":"https://mywebsite.com/proc/2019024/accessinfo"}]}}'
+    OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","documentType":"biddingDocuments","url":"https://mywebsite.com/proc/2019024/accessinfo"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procurementDocsSection
 -   id: BT-150-Contract
     parentNodeId: ND-SettledContract
@@ -11732,9 +11741,9 @@
     Description: An approach to reducing the environmental impacts of the work, supply or service (e.g. requesting compliance with an environmental label).
     Business groups:
         BG-713: Strategic Procurement
-    eForms guidance: ''
-    eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="environmental-impact">emas-com</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
-    OCDS example: ''
+    eForms guidance: "[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and set the lot's `.hasSustainability` to \u201Ctrue\u201D. For each `cac:ProcurementAdditionalType` add a corresponding `.sustainability` object to the lot's `.sustainability` array. - Map the code to the sustainability's `.goal` according to the /\\[environmental procurement mapping table\\]."
+    eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="environmental-impact">circ-econ</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
+    OCDS example: '{"tender":{"lots":[{"hasSustainabilty":true,"sustainability":[{"goal":"environmental.circularEconomy"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#strategicProcurementSection
 -   id: BT-775-Lot
     parentNodeId: ND-LotProcurementScope
@@ -11748,9 +11757,9 @@
     Description: A social objective promoted by the works, supplies or services (e.g. fair working conditions).
     Business groups:
         BG-713: Strategic Procurement
-    eForms guidance: ''
+    eForms guidance: "[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and set the lot's `.hasSustainability` to \u201Ctrue\u201D. For each `cac:ProcurementAdditionalType` add a corresponding `.sustainability` object to the lot's `.sustainability` array. - Map the code to the sustainability's `.goal` according to the /\\[social procurement mapping table\\]. - Add \"awardCriteria\", \"contractPerformanceConditions\", \"selectionCriteria\" and \"technicalSpecifications\" to the sustainability's `.strategies` array."
     eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="social-objective">et-eq</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
-    OCDS example: ''
+    OCDS example: '{"tender":{"lots":[{"hasSustainabilty":true,"sustainability":[{"goal":"social.ethnicEquality","strategies":["awardCriteria","contractPerformanceConditions","selectionCriteria","technicalSpecifications"]}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#strategicProcurementSection
 -   id: BT-776-Lot
     parentNodeId: ND-LotProcurementScope
@@ -11764,9 +11773,9 @@
     Description: An indication that innovative works, supplies or services are being bought (e.g. the procured works, supplies or services being novel for the whole market).
     Business groups:
         BG-713: Strategic Procurement
-    eForms guidance: ''
+    eForms guidance: "[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and set the lot's `.hasSustainability` to \u201Ctrue\u201D. For each `cac:ProcurementAdditionalType` add a corresponding `.sustainability` object to the lot's `.sustainability` array. - Map the code to the sustainability's `.goal` according to the /\\[innovative procurement mapping table\\]."
     eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="innovative-acquisition">proc-innov</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
-    OCDS example: ''
+    OCDS example: '{"tender":{"lots":[{"hasSustainabilty":true,"sustainability":[{"goal":"economic.processInnovation"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#strategicProcurementSection
 -   id: BT-777-Lot
     parentNodeId: ND-StrategicProcurementType
@@ -11779,9 +11788,9 @@
     Description: Description of the use of a technical specification, selection criterion, award criterion, or contract performance condition aims to reduce the environmental impacts of the procurement, fulfil social objectives and/or buy an innovative work, supply or service.
     Business groups:
         BG-713: Strategic Procurement
-    eForms guidance: ''
+    eForms guidance: This business term is mapped to the same `Sustainability` objects as created for BT-06. [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and get the `Sustainability` object created for `sibling::cbc:ProcurementTypeCode`. Map to its `.description`.
     eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementType languageID="ENG">This is a strategic procurement involving the innovative use of ...</cbc:ProcurementType></cac:ProcurementAdditionalType>
-    OCDS example: ''
+    OCDS example: '{"tender":{"lots":[{"sustainability":[{"description":"This is a strategic procurement involving the innovative use of ..."}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#strategicProcurementSection
 -   id: BT-78-Lot
     parentNodeId: ND-LotTenderingTerms
@@ -11887,9 +11896,9 @@
     repeatable: false
     mandatory: false
     codeList: gpp-criteria
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: "[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot). If the code is \u201Cnone\u201D discard, otherwise set the lot's `.hasSustainability` to \u201Ctrue\u201D. For each `cac:ProcurementAdditionalType` add a corresponding `.sustainability` object to the lot's `.sustainability` array. - Map the code to the sustainability's `.strategies` array according to the /\\[GPP criteria mapping table\\]."
+    eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="gpp-criteria">eu</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
+    OCDS example: '{"tender":{"lots":[{"hasSustainabilty":true,"sustainability":[{"strategies":["euGPPCriteria"]}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#strategicProcurementSection
 -   id: BT-88-Procedure
     parentNodeId: ND-ProcedureTenderingProcess
@@ -12348,10 +12357,10 @@
     repeatable: true
     mandatory: true
     codeList: transport-service
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: (UNREVIEWED) Add to `tender.additionalProcurementCategories` array.
+    eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="transport-service">bus-s</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
+    OCDS example: '{"tender":{"additionalProcurementCategories":["bus-s"]}}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#natureSection
 -   id: OPP-050-Organization
     parentNodeId: ND-Organization
     name: Buyers Group Lead Indicator
@@ -12360,10 +12369,10 @@
     type: indicator
     repeatable: false
     mandatory: false
-    eForms guidance: ''
-    eForms example: ''
+    eForms guidance: /https://github.com/open-contracting/european-union-support/issues/143
+    eForms example: <efac:Organization><efbc:GroupLeadIndicator>false</efbc:GroupLeadIndicator></efac:Organization>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#buyerSection
 -   id: OPP-051-Organization
     parentNodeId: ND-Organization
     name: Awarding CPB Buyer Indicator
@@ -12372,10 +12381,10 @@
     type: indicator
     repeatable: false
     mandatory: false
-    eForms guidance: ''
-    eForms example: ''
+    eForms guidance: /https://github.com/open-contracting/european-union-support/issues/143
+    eForms example: <efac:Organization><efbc:AwardingCPBIndicator>false</efbc:AwardingCPBIndicator></efac:Organization>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#buyerSection
 -   id: OPP-052-Organization
     parentNodeId: ND-Organization
     name: Acquiring CPB Buyer Indicator
@@ -12384,10 +12393,10 @@
     type: indicator
     repeatable: false
     mandatory: false
-    eForms guidance: ''
-    eForms example: ''
+    eForms guidance: /https://github.com/open-contracting/european-union-support/issues/143
+    eForms example: <efac:Organization><efbc:AcquiringCPBIndicator>false</efbc:AcquiringCPBIndicator></efac:Organization>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#buyerSection
 -   id: OPP-070-notice
     parentNodeId: ND-RootExtension
     name: Notice Subtype
@@ -12523,7 +12532,7 @@
         - Look up the code's label in the /[authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/customer-service) and map it to `.name`.
     eForms example: <cac:ContractExecutionRequirement><cbc:ExecutionRequirementCode listName="customer-service">clean</cbc:ExecutionRequirementCode></cac:ContractExecutionRequirement>
     OCDS example: '{"tender":{"lots":[{"contractTerms":{"customerServices":[{"type":"clean","name":"Cleanliness of rolling stock and station facilities"}]}}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#tenderingTermsSection
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tenderingTermsSection
 -   id: OPT-072-Lot
     parentNodeId: ND-QualityTarget
     name: Quality Target Description
@@ -12535,7 +12544,7 @@
     eForms guidance: These values map to the same `CustomerServices` objects as created for OPT-071-Lot. Update the corresponding `CustomerServices` object and map to its `.description`.
     eForms example: <cac:ContractExecutionRequirement><cbc:ExecutionRequirementCode listName="customer-service">clean</cbc:ExecutionRequirementCode></cac:ContractExecutionRequirement>
     OCDS example: '{"tender":{"lots":[{"contractTerms":{"customerServices":[{"description":"A description as given in OPT-072"}]}}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#tenderingTermsSection
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tenderingTermsSection
 -   id: OPT-090-Lot
     parentNodeId: ND-LotBuyerCategories
     name: Buyer Categories
@@ -12584,7 +12593,7 @@
     eForms guidance: These values map to the same `Document` objects as created for OPT-111-Lot. Map to the document's `.url`.
     eForms example: <cac:ExternalReference><cbc:URI>https://fiscal-legislation.gov.stat</cbc:URI></cac:ExternalReference>
     OCDS example: '{"tender":{"documents":[{"id":"Fiscal1","url":"https://fiscal-legislation.gov.stat"}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-110-Part-FiscalLegis
     parentNodeId: ND-PartFiscalLegislation
     name: URL to Fiscal Legislation
@@ -12597,7 +12606,7 @@
     eForms guidance: These values map to the same `Document` objects as created for OPT-111-Part. Map to the document's `.url`.
     eForms example: <cac:ExternalReference><cbc:URI>https://fiscal-legislation.gov.stat</cbc:URI></cac:ExternalReference>
     OCDS example: '{"tender":{"documents":[{"id":"Fiscal1","url":"https://fiscal-legislation.gov.stat"}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-111-Lot-FiscalLegis
     parentNodeId: ND-LotFiscalLegislation
     name: Fiscal Legislation Document ID
@@ -12609,7 +12618,7 @@
     eForms guidance: Add a document to `tender.documents` and map to the document's `.id`. Set the document's `.documentType` to 'legislation', and add the value of `ancestor::cac:ProcurementProjectLot/cac:ID` to `.relatedLots`.
     eForms example: <cac:FiscalLegislationDocumentReference><cbc:ID>Fiscal1</cbc:ID></cac:FiscalLegislationDocumentReference>
     OCDS example: '{"tender":{"documents":[{"id":"Fiscal1","documentType":"legislation","relatedLots":["LOT-0002"]}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-111-Part-FiscalLegis
     parentNodeId: ND-PartFiscalLegislation
     name: Fiscal Legislation Document ID
@@ -12621,7 +12630,7 @@
     eForms guidance: <cac:FiscalLegislationDocumentReference><cbc:ID>Fiscal1\</cbc:ID>\</cac:FiscalLegislationDocumentReference>
     eForms example: Add a document to `tender.documents` and map to the document's `.id`. Set the document's `.documentType` to 'legislation'.
     OCDS example: '{"tender":{"documents":[{"id":"Fiscal1","documentType":"legislation"}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-112-Lot-EnvironLegis
     parentNodeId: ND-LotEnvironmentalLegislation
     name: Environmental Legislation Document ID
@@ -12633,7 +12642,7 @@
     eForms guidance: Add a document to `tender.documents` and map to the document's `.id`. Set the document's `.documentType` to 'legislation', and add the value of `ancestor::cac:ProcurementProjectLot/cac:ID` to `.relatedLots`.
     eForms example: <cac:EnvironmentalLegislationDocumentReference><cbc:ID>Env1</cbc:ID></cac:EnvironmentalLegislationDocumentReference>
     OCDS example: '{"tender":{"documents":[{"id":"Env1","documentType":"legislation","relatedLots":["LOT-0002"]}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-112-Part-EnvironLegis
     parentNodeId: ND-PartEnvironmentalLegislation
     name: Environmental Legislation Document ID
@@ -12645,7 +12654,7 @@
     eForms guidance: Add a document to `tender.documents` and map to the document's `.id`. Set the document's `.documentType` to 'legislation'.
     eForms example: <cac:EnvironmentalLegislationDocumentReference><cbc:ID>Env1</cbc:ID></cac:EnvironmentalLegislationDocumentReference>
     OCDS example: '{"tender":{"documents":[{"id":"Env1","documentType":"legislation"}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-113-Lot-EmployLegis
     parentNodeId: ND-LotEmploymentLegislation
     name: Employment Legislation Document ID
@@ -12657,7 +12666,7 @@
     eForms guidance: Add a document to `tender.documents` and map to the document's `.id`. Set the document's `.documentType` to 'legislation', and add the value of `ancestor::cac:ProcurementProjectLot/cac:ID` to `.relatedLots`.
     eForms example: <cac:EmploymentLegislationDocumentReference><cbc:ID>Empl1</cbc:ID></cac:EmploymentLegislationDocumentReference>
     OCDS example: '{"tender":{"documents":[{"id":"Empl1","documentType":"legislation","relatedLots":["LOT-0002"]}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-113-Part-EmployLegis
     parentNodeId: ND-PartEmploymentLegislation
     name: Employment Legislation Document ID
@@ -12669,7 +12678,7 @@
     eForms guidance: Add a document to `tender.documents` and map to the document's `.id`. Set the document's `.documentType` to 'legislation'.
     eForms example: <cac:EmploymentLegislationDocumentReference><cbc:ID>Empl1</cbc:ID></cac:EmploymentLegislationDocumentReference>
     OCDS example: '{"tender":{"documents":[{"id":"Empl1","documentType":"legislation"}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-120-Lot-EnvironLegis
     parentNodeId: ND-LotEnvironmentalLegislation
     name: URL to Environmental Legislation
@@ -12682,7 +12691,7 @@
     eForms guidance: These values map to the same `Document` objects as created for OPT-112-Lot. Map to the document's `.url`.
     eForms example: <cac:ExternalReference><cbc:URI>https://environmental-legislation.gov.stat</cbc:URI></cac:ExternalReference>
     OCDS example: '{"tender":{"documents":[{"id":"Env1","url":"https://environmental-legislation.gov.stat"}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-120-Part-EnvironLegis
     parentNodeId: ND-PartEnvironmentalLegislation
     name: URL to Environmental Legislation
@@ -12695,7 +12704,7 @@
     eForms guidance: These values map to the same `Document` objects as created for OPT-112-Part. Map to the document's `.url`.
     eForms example: <cac:ExternalReference><cbc:URI>https://environmental-legislation.gov.stat</cbc:URI></cac:ExternalReference>
     OCDS example: '{"tender":{"documents":[{"id":"Env1","url":"https://environmental-legislation.gov.stat"}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-130-Lot-EmployLegis
     parentNodeId: ND-LotEmploymentLegislation
     name: URL to Employment Legislation
@@ -12708,7 +12717,7 @@
     eForms guidance: These values map to the same `Document` objects as created for OPT-113-Lot. Map to the document's `.url`.
     eForms example: <cac:ExternalReference><cbc:URI>https://employment-legislation.gov.stat</cbc:URI></cac:ExternalReference>
     OCDS example: '{"tender":{"documents":[{"id":"Empl1","url":"https://employment-legislation.gov.stat"}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-130-Part-EmployLegis
     parentNodeId: ND-PartEmploymentLegislation
     name: URL to Employment Legislation
@@ -12721,7 +12730,7 @@
     eForms guidance: These values map to the same `Document` objects as created for OPT-113-Part. Map to the document's `.url`.
     eForms example: <cac:ExternalReference><cbc:URI>https://employment-legislation.gov.stat</cbc:URI></cac:ExternalReference>
     OCDS example: '{"tender":{"documents":[{"id":"Empl1","url":"https://employment-legislation.gov.stat"}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#_legislation_information_provider
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-140-Lot
     parentNodeId: ND-LotProcurementDocument
     name: Procurement Documents ID
@@ -12730,10 +12739,10 @@
     type: id
     repeatable: false
     mandatory: false
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: If there is a `document` in `tender.documents` whose `id` is equal to this field, discard. Otherwise add a `Document` to `tender.documents` and map to its `.id` and add the value of `ancestor::cac:ProcurementProjectLot/cac:ID` to `.relatedLots`.
+    eForms example: <cac:CallForTendersDocumentReference><cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID></cac:CallForTendersDocumentReference>
+    OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","relatedLots":["LOT-0001"]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procurementDocsSection
 -   id: OPT-140-Part
     parentNodeId: ND-PartProcurementDocument
     name: Procurement Documents ID
@@ -12742,10 +12751,10 @@
     type: id
     repeatable: false
     mandatory: false
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: If there is a `document` in `tender.documents` whose `id` is equal to this field, discard. Otherwise add a `Document` to `tender.documents` and map to its `.id`.
+    eForms example: <cac:CallForTendersDocumentReference><cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID></cac:CallForTendersDocumentReference>
+    OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02"}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procurementDocsSection
 -   id: OPT-150-Lot
     parentNodeId: ND-AllowedSubcontracting
     name: Subcontracting Allowed
@@ -12934,7 +12943,7 @@
     eForms guidance: Discard. This field is mapped as part of `OPT-310-Tender`.
     eForms example: <efac:Tenderer><cbc:ID schemeName="organization">ORG-0005</cbc:ID></efac:Tenderer>
     OCDS example: N/A
-    sdk: https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#tenderingPartySection
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Lot-AddInfo
     parentNodeId: ND-LotTenderingTerms
     name: Additional Info Provider Technical Identifier Reference
@@ -13356,7 +13365,7 @@
           - [Get the organization for the tenderer](common-operations.md#get-the-organisation-for-a-tenderer).
           - Add an `OrganizationReference` object to the bid's `.tenderers` array, set its `.id` to the organization's `.id` and set its `.name` to the organization's `.name`.
     eForms example: <efac:NoticeResult><efac:LotTender><efac:TenderingParty><cbc:ID schemeName="tendering-party">TPA-0002</cbc:ID></efac:TenderingParty></efac:LotTender></efac:NoticeResult>
-    OCDS example: '{"bids": [{"tenderers": [{"id": "ORG-0011", "Competitor"}]}]}'
+    OCDS example: '{"bids":{"details":[{"tenderers":[{"id":"ORG-0011","name":"Competitor"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderSection
 -   id: OPT-315-LotResult
     parentNodeId: ND-LotResult
