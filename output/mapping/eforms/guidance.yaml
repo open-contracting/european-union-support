@@ -11741,7 +11741,7 @@
     Description: An approach to reducing the environmental impacts of the work, supply or service (e.g. requesting compliance with an environmental label).
     Business groups:
         BG-713: Strategic Procurement
-    eForms guidance: "[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and set the lot's `.hasSustainability` to \u201Ctrue\u201D. For each `cac:ProcurementAdditionalType` add a corresponding `.sustainability` object to the lot's `.sustainability` array. - Map the code to the sustainability's `.goal` according to the /\\[environmental procurement mapping table\\]."
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and set the lot''s `.hasSustainability` to "true". For each `cac:ProcurementAdditionalType` add a corresponding `.sustainability` object to the lot''s `.sustainability` array. - Map the code to the sustainability''s `.goal` according to the /\\\[environmental procurement mapping table\\\].'
     eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="environmental-impact">circ-econ</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
     OCDS example: '{"tender":{"lots":[{"hasSustainabilty":true,"sustainability":[{"goal":"environmental.circularEconomy"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#strategicProcurementSection
@@ -12150,10 +12150,10 @@
     Description: The estimated maximum value of the procurement procedure or lot. Estimated refers to estimation at the time of launching the call for competition. Maximum value means a value covering all contracts to be awarded within a framework agreement or a dynamic purchasing system, over their whole duration, including options and renewals.
     Business groups:
         BG-2: Purpose
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Follow guidance for BT-27-Procedure.
+    eForms example: <cac:RequestedTenderTotal><cbc:EstimatedOverallContractAmount currencyID="EUR">250000</cbc:EstimatedOverallContractAmount></cac:RequestedTenderTotal>
+    OCDS example: '{"tender":{"value":{"amount":250000,"currency":"EUR"}}}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#estimatedValueSection
 -   id: OPA-36-Lot-Number
     parentNodeId: ND-LotDuration
     name: Numeric value of the duration period
@@ -12165,10 +12165,10 @@
     Description: The (estimated) period from the start to the end of the contract, framework agreement, dynamic purchasing system or qualification system. This must include any options and renewals.
     Business groups:
         BG-36: Duration
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Follow guidance for BT-36-Lot.
+    eForms example: <cac:PlannedPeriod><cbc:DurationMeasure unitCode="DAY">3</cbc:DurationMeasure></cac:PlannedPeriod>
+    OCDS example: '{"tender":{"lots":[{"contractPeriod":{"durationInDays":3}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#plannedPeriodSection
 -   id: OPA-36-Part-Number
     parentNodeId: ND-PartDuration
     name: Numeric value of the duration period
@@ -12180,10 +12180,10 @@
     Description: The (estimated) period from the start to the end of the contract, framework agreement, dynamic purchasing system or qualification system. This must include any options and renewals.
     Business groups:
         BG-36: Duration
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Follow guidance for BT-36-Part.
+    eForms example: <cac:PlannedPeriod><cbc:DurationMeasure unitCode="DAY">3</cbc:DurationMeasure></cac:PlannedPeriod>
+    OCDS example: '{"tender":{"contractPeriod":{"durationInDays":3}}}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#plannedPeriodSection
 -   id: OPA-98-Lot-Number
     parentNodeId: ND-LotTenderingTerms
     name: Numeric value of the tender validity deadline
@@ -12195,10 +12195,10 @@
     Description: The period, from the tender submission deadline, for which tenders must remain valid.
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Follow guidance for BT-98-Lot.
+    eForms example: <cac:TenderValidityPeriod><cbc:DurationMeasure unitCode="MONTH">4</cbc:DurationMeasure></cac:TenderValidityPeriod>
+    OCDS example: '{"tender":{"lots":[{"submissionTerms":{"bidValidityPeriod":{"durationInDays":120}}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tenderValiditySection
 -   id: OPP-010-notice
     parentNodeId: ND-Publication
     name: Notice Publication Number
@@ -12764,7 +12764,7 @@
     repeatable: false
     mandatory: true
     codeList: indicator
-    eForms guidance: ''
+    eForms guidance: This data element is underspecified in eForms. No mapping is available.
     eForms example: ''
     OCDS example: ''
     sdk: ''
@@ -13227,7 +13227,7 @@
     mandatory: true
     pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <cac:MediationParty><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0003</cbc:ID></cac:PartyIdentification></cac:MediationParty>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Part-ReviewInfo
