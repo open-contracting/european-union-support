@@ -13038,7 +13038,12 @@
     repeatable: false
     mandatory: false
     pattern: ^(ORG|TPO)-\d{4}$
-    eForms guidance: "If the value of the field follows the pattern \u201CORG-XXXX\u201D then [get the organization for the company](common-operations.md#get-the-organization-fot-the-company) whose `cbc:ID` is equal to the value of the field.\nOr\nIf the value of the field follows the pattern \u201CTPO-XXXX\u201D then [get the organization for the touchpoint](common-operations.md#get-the-organization-fot-the-touchpointy) whose `cbc:ID` is equal to the value of the field.\nAdd 'mediationBody, to the organization's `.roles` array.\neForms allows review bodies and mediation bodies to differ per lot. However, while this may be permitted by law, we have found no evidence in practice. Please contact data@open-contracting.org if you have a use case."
+    eForms guidance: |-
+        If the value of the field follows the pattern "ORG-XXXX" then [get the organization for the company](common-operations.md#get-the-organization-fot-the-company) whose `cbc:ID` is equal to the value of the field.
+        Or
+        If the value of the field follows the pattern "TPO-XXXX" then [get the organization for the touchpoint](common-operations.md#get-the-organization-fot-the-touchpointy) whose `cbc:ID` is equal to the value of the field.
+        Add 'mediationBody, to the organization's `.roles` array.
+        eForms allows review bodies and mediation bodies to differ per lot. However, while this may be permitted by law, we have found no evidence in practice. Please contact data@open-contracting.org if you have a use case.
     eForms example: <cac:MediationParty><cac:PartyIdentification><cbc:ID schemeName="touchpoint">TPO-0005</cbc:ID></cac:PartyIdentification></cac:MediationParty>
     OCDS example: '{"parties":[{"id":"TPO-0005","roles":["mediationBody"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tenderingPartySection
@@ -13070,7 +13075,12 @@
     repeatable: false
     mandatory: true
     pattern: ^(ORG|TPO)-\d{4}$
-    eForms guidance: "If the value of the field follows the pattern \u201CORG-XXXX\u201D then [get the organization for the company](common-operations.md#get-the-organization-fot-the-company) whose `cbc:ID` is equal to the value of the field.\nOr\nIf the value of the field follows the pattern \u201CTPO-XXXX\u201D then [get the organization for the touchpoint](common-operations.md#get-the-organization-fot-the-touchpointy) whose `cbc:ID` is equal to the value of the field.\nAdd 'reviewBody, to the organization's `.roles` array.\neForms allows review bodies and mediation bodies to differ per lot. However, while this may be permitted by law, we have found no evidence in practice. Please contact data@open-contracting.org if you have a use case."
+    eForms guidance: |-
+        If the value of the field follows the pattern "ORG-XXXX" then [get the organization for the company](common-operations.md#get-the-organization-fot-the-company) whose `cbc:ID` is equal to the value of the field.
+        Or
+        If the value of the field follows the pattern "TPO-XXXX" then [get the organization for the touchpoint](common-operations.md#get-the-organization-fot-the-touchpointy) whose `cbc:ID` is equal to the value of the field.
+        Add 'reviewBody, to the organization's `.roles` array.
+        eForms allows review bodies and mediation bodies to differ per lot. However, while this may be permitted by law, we have found no evidence in practice. Please contact data@open-contracting.org if you have a use case.
     eForms example: <cac:AppealReceiverParty><cac:PartyIdentification><cbc:ID schemeName="touchpoint">TPO-0003</cbc:ID></cac:PartyIdentification></cac:AppealReceiverParty>
     OCDS example: '{"parties":[{"id":"TPO-0003","roles":["reviewBody"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tenderingPartySection
@@ -13228,7 +13238,11 @@
     repeatable: false
     mandatory: true
     pattern: ^(ORG|TPO)-\d{4}$
-    eForms guidance: "If the value of the field follows the pattern \u201CORG-XXXX\u201D then [get the organization for the company](common-operations.md#get-the-organization-fot-the-company) whose `cbc:ID` is equal to the value of the field.\nOr\nIf the value of the field follows the pattern \u201CTPO-XXXX\u201D then [get the organization for the touchpoint](common-operations.md#get-the-organization-fot-the-touchpointy) whose `cbc:ID` is equal to the value of the field."
+    eForms guidance: |-
+        If the value of the field follows the pattern "ORG-XXXX" then [get the organization for the company](common-operations.md#get-the-organization-fot-the-company) whose `cbc:ID` is equal to the value of the field.
+        Or
+        If the value of the field follows the pattern "TPO-XXXX" then [get the organization for the touchpoint](common-operations.md#get-the-organization-fot-the-touchpointy) whose `cbc:ID` is equal to the value of the field.
+        Add 'mediationBody, to the organization's `.roles` array.
     eForms example: <cac:MediationParty><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0003</cbc:ID></cac:PartyIdentification></cac:MediationParty>
     OCDS example: '{"parties":[{"id":"ORG-0003","roles":["mediationBody"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tenderingPartySection
@@ -13260,7 +13274,11 @@
     repeatable: false
     mandatory: true
     pattern: ^(ORG|TPO)-\d{4}$
-    eForms guidance: "If the value of the field follows the pattern \u201CORG-XXXX\u201D then [get the organization for the company](common-operations.md#get-the-organization-fot-the-company) whose `cbc:ID` is equal to the value of the field.\nOr\nIf the value of the field follows the pattern \u201CTPO-XXXX\u201D then [get the organization for the touchpoint](common-operations.md#get-the-organization-fot-the-touchpointy) whose `cbc:ID` is equal to the value of the field.\nAdd 'reviewBody, to the organization's `.roles` array."
+    eForms guidance: |-
+        If the value of the field follows the pattern "ORG-XXXX" then [get the organization for the company](common-operations.md#get-the-organization-fot-the-company) whose `cbc:ID` is equal to the value of the field.
+        or
+        If the value of the field follows the pattern "TPO-XXXX" then [get the organization for the touchpoint](common-operations.md#get-the-organization-fot-the-touchpointy) whose `cbc:ID` is equal to the value of the field.
+        Add 'reviewBody, to the organization's `.roles` array.
     eForms example: <cac:AppealReceiverParty><cac:PartyIdentification><cbc:ID schemeName="touchpoint">TPO-0003</cbc:ID></cac:PartyIdentification></cac:AppealReceiverParty>
     OCDS example: '{"parties":[{"id":"TPO-0003","roles":["reviewBody"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tenderingPartySection
@@ -13307,9 +13325,12 @@
     repeatable: true
     mandatory: false
     pattern: ^ORG-\d{4}$
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: |-
+        - Perform the mapping for `BT-500-Organization-Company` (Organisation Name). Get the Organization in `parties` whose `.id` is equal to the value of this field and add 'tenderer' to its `.roles` array.
+        - [Get the bid for the LotTender](common-operations.md#get-the-bid-for-a-lottender), and get the `subcontracts` object whose `subcontractors.id` is equal to the value of `ancestor: efac:SubContractor/cbc:ID`.
+          - Add an `OrganizationReference` object to the subcontracts `tenderers` array, set its `.id` to the value of this field and set its `.name` to the organization's `.name`.
+    eForms example: <efac:NoticeResult> <efac:LotTender> <cbc:ID schemeName="tender">TEN-0001</cbc:ID> </efac:LotTender> <efac:TenderingParty> <efac:SubContractor> <cbc:ID schemeName="organization">ORG-0012</cbc:ID> <efac:MainContractor> <cbc:ID schemeName="organization">ORG-0005</cbc:ID> </efac:MainContractor> </efac:SubContractor> </efac:TenderingParty> </efac:NoticeResult> <efac:Organizations> <efac:Organization> <efac:Company> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0005</cbc:ID> </cac:PartyIdentification> </efac:Company> </efac:Organization> </efac:Organizations>
+    OCDS example: '{"parties":[{"id":"ORG-0005","roles":["tenderer"]}],"bids":{"details":[{"subcontracting":{"subcontracts":[{"id":"1","subcontractor":{"id":"ORG-0012"},"tenderers":[{"id":"ORG-0005","name":"Tendering Company Ltd"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Tenderer-SubCont
     parentNodeId: ND-SubContractor
@@ -13322,9 +13343,13 @@
     repeatable: false
     mandatory: false
     pattern: ^ORG-\d{4}$
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: |-
+        - Perform the mapping for `BT-500-Organization-Company` (Organisation Name). Get the Organization in `parties` whose `.id` is equal to the value of this field and add 'subcontractor' to its `.roles` array.
+        - [Get the bid for the LotTender](common-operations.md#get-the-bid-for-a-lottender), add a `subcontracts` object to the bid's `.details.subcontracting.subcontracts` array and:
+          - set its `.id` incrementally
+          - add a `subcontractors` object and set its `.id` to the value of this field and set its `.name` to the organization's `.name`.
+    eForms example: '<efac:NoticeResult> <efac:LotTender> <cbc:ID schemeName="tender">TEN-0001</cbc:ID> </efac:LotTender> <efac:TenderingParty> <efac:SubContractor> <cbc:ID schemeName="organization">ORG-0012</cbc:ID> </efac:SubContractor> </efac:TenderingParty> </efac:NoticeResult> <efac:Organizations> <efac:Organization> <efac:Company> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0012</cbc:ID> </cac:PartyIdentification> </efac:Company> </efac:Organization> </efac:Organizations> '
+    OCDS example: '{"parties":[{"id":"ORG-0012","roles":["subcontractor"]}],"bids":{"details":[{"subcontracting":{"subcontracts":[{"id":"1","subcontractor":{"id":"ORG-0012","name":"Company ABC"}}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-302-Organization
     parentNodeId: ND-Organization
