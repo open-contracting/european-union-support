@@ -715,7 +715,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/PROCEDURE/NOTICE_NUMBER_OJ
     TED guidance:
     - '[Reference a previous publication](../../operations/#reference-a-previous-publication)'
-    eForms guidance: (UNREVIEWED) [Reference a previous publication](../../operations/#reference-a-previous-publication) \[https://github.com/open-contracting/european-union-support/issues/54\]
+    eForms guidance: (UNREVIEWED) [Reference a previous publication](common-operations.md#reference-a-previous-publication) \[https://github.com/open-contracting/european-union-support/issues/54\]
     eForms example: <cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID></cac:NoticeDocumentReference>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#previousPlanningSection
@@ -731,7 +731,7 @@
     Description: The identifier of a prior information notice or another similar notice related to this notice.
     Business groups:
         BG-125: Previous Planning
-    eForms guidance: (UNREVIEWED) (REPEAT) [Reference a previous publication](../../operations/#reference-a-previous-publication) \[https://github.com/open-contracting/european-union-support/issues/54\]
+    eForms guidance: (UNREVIEWED) (REPEAT) [Reference a previous publication](common-operations.md#reference-a-previous-publication) \[https://github.com/open-contracting/european-union-support/issues/54\]
     eForms example: <cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID></cac:NoticeDocumentReference>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#previousPlanningSection
@@ -746,7 +746,7 @@
     Description: The identifier of a part of a prior information notice or another similar notice related to this notice.
     Business groups:
         BG-125: Previous Planning
-    eForms guidance: (UNREVIEWED) [Reference a previous publication](../../operations/#reference-a-previous-publication), and map to `.lotId`. \[https://github.com/open-contracting/european-union-support/issues/54\]
+    eForms guidance: (UNREVIEWED) [Reference a previous publication](common-operations.md#reference-a-previous-publication), and map to `.lotId`. \[https://github.com/open-contracting/european-union-support/issues/54\]
     eForms example: <cac:NoticeDocumentReference><cbc:ReferencedDocumentInternalAddress>PAR-0001</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#previousPlanningSection
@@ -761,7 +761,7 @@
     Description: The identifier of a part of a prior information notice or another similar notice related to this notice.
     Business groups:
         BG-125: Previous Planning
-    eForms guidance: (UNREVIEWED) (REPEAT) [Reference a previous publication](../../operations/#reference-a-previous-publication), and map to `.lotId`. \[https://github.com/open-contracting/european-union-support/issues/54\]
+    eForms guidance: (UNREVIEWED) (REPEAT) [Reference a previous publication](common-operations.md#reference-a-previous-publication), and map to `.lotId`. \[https://github.com/open-contracting/european-union-support/issues/54\]
     eForms example: <cac:NoticeDocumentReference><cbc:ReferencedDocumentInternalAddress>PAR-0001</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#previousPlanningSection
@@ -836,7 +836,7 @@
     Description: The time limit for requesting additional information about the procurement procedure.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot), [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to the date component of the lot''s `.enquiryPeriod.endDate`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot), combine with [BT-13(t)-Lot](<#BT-13(t)-lot>), [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to the lot''s `.enquiryPeriod.endDate`.'
     eForms example: <cac:AdditionalInformationRequestPeriod><cbc:EndDate>2019-11-08+01:00</cbc:EndDate></cac:AdditionalInformationRequestPeriod>
     OCDS example: '{"tender":{"lots":[{"enquiryPeriod":{"endDate":"2019-11-08T23:59:59+01:00"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#additionalInfoDeadlineSection
@@ -852,7 +852,7 @@
     Description: The time limit for requesting additional information about the procurement procedure.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to the date component of `tender.enquiryPeriod.endDate`.'
+    eForms guidance: Combine with [BT-13(t)-Part](<#BT-13(t)-part>), [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to `tender.enquiryPeriod.endDate`.
     eForms example: <cac:AdditionalInformationRequestPeriod><cbc:EndDate>2019-11-08+01:00</cbc:EndDate></cac:AdditionalInformationRequestPeriod>
     OCDS example: '{"tender":{"enquiryPeriod":{"endDate":"2019-11-08T23:59:59+01:00"}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#additionalInfoDeadlineSection
@@ -870,7 +870,7 @@
         BG-101: Procurement Documents
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/ADMINISTRATIVE_INFORMATION_CONTRACT_NOTICE_DEFENCE/CONDITIONS_OBTAINING_SPECIFICATIONS/TIME_LIMIT
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and map to the time component of its `.enquiryPeriod.endDate`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot), combine with [BT-13(d)-Lot](<#BT-13(d)-lot>), [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to the lot''s `.enquiryPeriod.endDate`.'
     eForms example: <cac:AdditionalInformationRequestPeriod><cbc:EndTime>18:00:00+01:00</cbc:EndTime></cac:AdditionalInformationRequestPeriod>
     OCDS example: '{"tender":{"lots":[{"enquiryPeriod":{"endDate":"2019-11-08T18:00:00+01:00"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#additionalInfoDeadlineSection
@@ -886,7 +886,7 @@
     Description: The time limit for requesting additional information about the procurement procedure.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: Map to the time component of `tender.enquiryPeriod.endDate`.
+    eForms guidance: Combine with [BT-13(d)-Part](<#BT-13(d)-part>), [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to `tender.enquiryPeriod.endDate`.
     eForms example: <cac:AdditionalInformationRequestPeriod><cbc:EndTime>18:00:00+01:00</cbc:EndTime></cac:AdditionalInformationRequestPeriod>
     OCDS example: '{"tender":{"enquiryPeriod":{"endDate":"2019-11-08T18:00:00+01:00"}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#additionalInfoDeadlineSection
@@ -928,7 +928,7 @@
     Description: The time limit for receipt of tenders.
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot), [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to the date component of the lot''s `.tenderPeriod.endDate`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot), combine with [BT-131(t)-Lot](<#BT-131(t)-lot>), [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to the lot''s `.tenderPeriod.endDate`.'
     eForms example: <cac:TenderSubmissionDeadlinePeriod><cbc:EndDate>2019-11-30+01:00</cbc:EndDate></cac:TenderSubmissionDeadlinePeriod>
     OCDS example: '{"tender":{"lots":[{"tenderPeriod":{"endDate":"2019-11-30T23:59:59+01:00"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tendersDeadlineSection
@@ -944,7 +944,7 @@
     Description: The time limit for receipt of tenders.
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and map to the time component of its `.tenderPeriod.endDate`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot), combine with [BT-131(d)-Lot](<#BT-131(d)-lot>), [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to the lot''s `.tenderPeriod.endDate`.'
     eForms example: <cac:TenderSubmissionDeadlinePeriod><cbc:EndTime>12:00:00+01:00</cbc:EndTime></cac:TenderSubmissionDeadlinePeriod>
     OCDS example: '{"tender":{"lots":[{"tenderPeriod":{"endDate":"2019-11-30T12:00:00+01:00"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tendersDeadlineSection
@@ -962,7 +962,7 @@
         BG-102: Submission Terms
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_CONCESSIONAIRE_DEFENCE/FD_CONTRACT_CONCESSIONAIRE_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_SUB_DEFENCE/ADMINISTRATIVE_INFORMATION_CONTRACT_SUB_NOTICE_DEFENCE/RECEIPT_LIMIT_DATE/fn:concat(YEAR,-", MONTH, "-", DAY)"
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot), [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to the date component of the lot''s `.tenderPeriod.endDate`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot), combine with [BT-1311(t)-Lot](<#BT-1311(t)-lot>), [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to the lot''s `.tenderPeriod.endDate`.'
     eForms example: <cac:ParticipationRequestReceptionPeriod><cbc:EndDate>2019-11-25+01:00</cbc:EndDate></cac:ParticipationRequestReceptionPeriod>
     OCDS example: '{"tender":{"lots":[{"tenderPeriod":{"endDate":"2019-11-25T23:59:59+01:00"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#requestDeadlineSection
@@ -981,7 +981,7 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/ADMINISTRATIVE_INFORMATION_CONTRACT_NOTICE_DEFENCE/RECEIPT_LIMIT_DATE
     - TED_EXPORT/FORM_SECTION/CONTRACT_CONCESSIONAIRE_DEFENCE/FD_CONTRACT_CONCESSIONAIRE_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_SUB_DEFENCE/ADMINISTRATIVE_INFORMATION_CONTRACT_SUB_NOTICE_DEFENCE/RECEIPT_LIMIT_DATE/TIME
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and map to the time component of its `.tenderPeriod.endDate`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot), combine with [BT-1311(d)-Lot](<#BT-1311(d)-lot>), [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to the lot''s `.tenderPeriod.endDate`.'
     eForms example: <cac:ParticipationRequestReceptionPeriod><cbc:EndTime>12:00:00+01:00</cbc:EndTime></cac:ParticipationRequestReceptionPeriod>
     OCDS example: '{"tender":{"lots":[{"tenderPeriod":{"endDate":"2019-11-25T12:00:00+01:00"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#requestDeadlineSection
@@ -1002,7 +1002,7 @@
     - TED_EXPORT/FORM_SECTION/F05_2014/PROCEDURE/OPENING_CONDITION/DATE_OPENING_TENDERS
     TED guidance:
     - Map to the date component of `tender.awardPeriod.startDate` and to the date component of `tender.bidOpening.date`
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot), [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to the date component of the lot''s `.awardPeriod.startDate` and to the date component of its `.bidOpening.date`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot), combine with [BT-132(t)-Lot](<#BT-132(t)-lot>), [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to the lot''s `.awardPeriod.startDate` and to its `.bidOpening.date`.'
     eForms example: <cac:OpenTenderEvent><cbc:OccurrenceDate>2019-11-05+01:00</cbc:OccurrenceDate></cac:OpenTenderEvent>
     OCDS example: '{"tender":{"lots":[{"awardPeriod":{"startDate":"2019-11-05T00:00:00+01:00"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#openingEventSection
@@ -1023,7 +1023,7 @@
     - TED_EXPORT/FORM_SECTION/F05_2014/PROCEDURE/OPENING_CONDITION/TIME_OPENING_TENDERS
     TED guidance:
     - Map to the time component of `tender.awardPeriod.startDate` and to the time component of `tender.bidOpening.date`
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and map to the time component of its `.awardPeriod.startDate` and to the time component of its `.bidOpening.date`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot), combine with [BT-132(d)-Lot](<#BT-132(d)-lot>), [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to the lot''s `.awardPeriod.startDate` and to its `.bidOpening.date`.'
     eForms example: <cac:OpenTenderEvent><cbc:OccurrenceTime>14:00:00+01:00</cbc:OccurrenceTime></cac:OpenTenderEvent>
     OCDS example: '{"tender":{"lots":[{"awardPeriod":{"startDate":"2019-11-05T14:00:00+01:00"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#openingEventSection
@@ -1470,8 +1470,8 @@
         For each `ancestor::efac:Changes/efac:Change`:
 
         - If the change's `/efbc:ChangedSectionIdentifier` (BT-13716) references a LotResult (`RES-XXXX`), [get the award for the LotResult](common-operations.md#get-the-award-for-the-lotresult) and add an `Amendment` object to the award's `.amendments` array. Otherwise, add an `Amendment` object to the `tender.amendments` array.
-        - If the change's `/efbc:ChangedSectionIdentifier` (BT-13716) references a Lot (`LOT-XXXX`), add the Lot's identifier to the amendment's `.relatedLots` array.
-        - If the change's `/efbc:ChangedSectionIdentifier` (BT-13716) references a LotsGroup (`GLO-XXXX`), add the LotGroup's identifier to the amendment's `.relatedLotGroups` array.
+        - If the change's `/efbc:ChangedSectionIdentifier` (BT-13716) references a Lot (`LOT-XXXX`), add an `Amendment` object to the `tender.amendments` array and add the Lot's identifier to the amendment's `.relatedLots` array.
+        - If the change's `/efbc:ChangedSectionIdentifier` (BT-13716) references a LotsGroup (`GLO-XXXX`), add an `Amendment` object to the `tender.amendments` array and add the LotGroup's identifier to the amendment's `.relatedLotGroups` array.
         - Set the amendment's `.id` sequentially across all notices for this procedure. For example, if the first change notice for a procedure has three changes, it uses `id`'s '1' through '3'. A second change notice for the same procedure then uses `id`'s '4' and up, etc.
         - Add a `Classification` object to the amendment's `rationaleClassifications` array and map to its `.id`.
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/change-corrig-justification) and map it to the classification's `.description`.
@@ -1612,11 +1612,8 @@
     eForms guidance: |-
         For each `ancestor::efac:NoticeResult/efac:LotResult` with an `/efac:SettledContract/cbc:ID` equal to the value of `ancestor::efac:SettledContract/cbc:ID`:
 
-        - Get the `Award` object in `awards` whose `.id` is equal to the LotResult's `/cbc:ID`. If none exists yet:
-          - Add an `Award` to `awards`
-          - Set its `.id` to the value of the LotResult's `/cbc:ID`
-          - Add the value of the LotResult's `/efac:TenderLot\u200B/cbc:ID` to the award's `.relatedLots`
-        - If the award's `.date` is not yet set or if the winner decision date is earlier than the award's `.date`, map to the award's `.date`. Otherwise, discard."
+        - [Get the award for the LotResult](common-operations.md#get-the-award-for-a-lotresult)
+        - If the award's `.date` is not yet set or if the winner decision date is earlier than the award's `.date`, [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to the award's `.date`. Otherwise, discard."
     eForms example: <efac:SettledContract><cbc:AwardDate>2021-02-19+01:00</cbc:AwardDate></efac:SettledContract>
     OCDS example: '{"awards":[{"date":"2021-02-19T23:59:59+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#settledContractSection
@@ -1648,12 +1645,10 @@
     TED guidance:
     - Discard. If no `ParticipationFee` object in the `tender.participationFees` array has a `.type` of 'document', then access is unrestricted.
     eForms guidance: |-
-        Get the `Document` in `documents` whose `id` is equal to the value of `ancestor::cac:CallForTendersDocumentReference/cbc:ID`. If none exists yet:
-        1\. Add a `Document` to `tender.documents`
-        2\. Set its `.id` to the value of `ancestor::cac:CallForTendersDocumentReference/cbc:ID`
-        3\. Add the value of `ancestor::cac:ProcurementProjectLot/cac:ID` to `.relatedLots`
+        [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).
         Map to the document's `.url` and set its `.documentType` to 'biddingDocuments'.
-    eForms example: <cac:CallForTendersDocumentReference><cac:Attachment><cac:ExternalReference><cbc:URI>https://mywebsite.com/proc/2019024/accessinfo</cbc:URI></cac:ExternalReference></cac:Attachment></cac:CallForTendersDocumentReference>
+        Add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to `.relatedLots`.
+    eForms example: <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:CallForTendersDocumentReference> <cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID> <cac:Attachment> <cac:ExternalReference> <cbc:URI>https://mywebsite.com/proc/2019024/accessinfo</cbc:URI> </cac:ExternalReference> </cac:Attachment> </cac:CallForTendersDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","documentType":"biddingDocuments","relatedLots":["LOT-0001"],"url":"https://mywebsite.com/proc/2019024/accessinfo"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procurementDocsSection
 -   id: BT-15-Part
@@ -1674,11 +1669,9 @@
     TED guidance:
     - Discard. If no `ParticipationFee` object in the `tender.participationFees` array has a `.type` of 'document', then access is unrestricted.
     eForms guidance: |-
-        Get the `Document` in `documents` whose `id` is equal to the value of `ancestor::cac:CallForTendersDocumentReference/cbc:ID`. If none exists yet:
-        1\. Add a `Document` to `tender.documents`
-        2\. Set its `.id` to the value of `ancestor::cac:CallForTendersDocumentReference/cbc:ID`
+        [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference)
         Map to the document's `.url` and set its `.documentType` to 'biddingDocuments'
-    eForms example: <cac:CallForTendersDocumentReference><cac:Attachment><cac:ExternalReference><cbc:URI>https://mywebsite.com/proc/2019024/accessinfo</cbc:URI></cac:ExternalReference></cac:Attachment></cac:CallForTendersDocumentReference>
+    eForms example: <cac:CallForTendersDocumentReference> <cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID> <cac:Attachment> <cac:ExternalReference> <cbc:URI>https://mywebsite.com/proc/2019024/accessinfo</cbc:URI> </cac:ExternalReference> </cac:Attachment> </cac:CallForTendersDocumentReference>
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","documentType":"biddingDocuments","url":"https://mywebsite.com/proc/2019024/accessinfo"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procurementDocsSection
 -   id: BT-150-Contract
@@ -1723,7 +1716,7 @@
     Business groups:
         BG-77: Modification
     eForms guidance: (UNREVIEWED) No guidance. Relationships are either implied by the XML structure or explicit via references from a section to the organization.
-    eForms example: ''
+    eForms example: <efac:ContractModification><efac:Change><efbc:ChangedSectionIdentifier>LOT-0002</efbc:ChangedSectionIdentifier></efac:Change></efac:ContractModification>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#contractModificationNoticeSection
 -   id: BT-1501(s)-Contract
@@ -1739,7 +1732,7 @@
     Business groups:
         BG-77: Modification
     eForms guidance: (UNREVIEWED) (REPEAT) No guidance. Relationships are either implied by the XML structure or explicit via references from a section to the organization.
-    eForms example: ''
+    eForms example: <efac:ContractModification><efac:Change><efbc:ChangedSectionIdentifier>LOT-0002</efbc:ChangedSectionIdentifier></efac:Change></efac:ContractModification>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#contractModificationNoticeSection
 -   id: BT-151-Contract
@@ -1759,7 +1752,7 @@
         - [Get the contract for the SettledContract](common-operations.md#get-the-contract-for-a-settledcontract)
         - Add a `Document` to its `.documents` array and
           - Set its `.id` incrementally
-          - Set its `.type` to 'contractSigned'
+          - Set its `.documentType` to 'contractSigned'
           - Map to its `.url`
     eForms example: <efac:SettledContract><cbc:URI>http://mycontract.acme.com/1234/</cbc:URI></efac:SettledContract>
     OCDS example: '{"contracts":[{"documents":[{"url":"http://mycontract.acme.com/1234/","type":"contractSigned"}]}]}'
@@ -9632,7 +9625,7 @@
     Description: The time limit for receipt of expressions of interest.
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot), [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to the date component of the lot''s `tenderPeriod.endDate\`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot), combine with [BT-630(t)-Lot](<#BT-630(t)-lot>), [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to the lot''s `tenderPeriod.endDate\`.'
     eForms example: <efac:InterestExpressionReceptionPeriod><cbc:EndDate>2019-10-28+01:00</cbc:EndDate></efac:InterestExpressionReceptionPeriod>
     OCDS example: '{"tender":{"lots":[{"tenderPeriod":{"endDate":"2019-10-28T23:59:59+01:00"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#expressionsDeadlineSection
@@ -9654,7 +9647,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/PROCEDURE/TIME_RECEIPT_TENDERS
     TED guidance:
     - Map to the time component of `tender.tenderPeriod.endDate`
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and map to the time component of the lot''s `tenderPeriod.endDate`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot), combine with [BT-630(d)-Lot](<#BT-630(d)-lot>), [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to the lot''s `tenderPeriod.endDate\`.'
     eForms example: <efac:InterestExpressionReceptionPeriod><cbc:EndTime>18:00:00+01:00</cbc:EndTime></efac:InterestExpressionReceptionPeriod>
     OCDS example: '{"tender":{"lots":[{"tenderPeriod":{"endDate":"2019-10-28T18:00:00+01:00"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#expressionsDeadlineSection
@@ -10081,9 +10074,12 @@
     Description: The language(s) in which the procurement documents are officially available. These linguistic versions are equally legally valid.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: Lowercase and convert the code into a two-letter [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes). Add it to the document's `.languages` array, and add the lot's identifier to `.relatedLots`.
-    eForms example: <cac:CallForTendersDocumentReference><cbc:LanguageID>ENG</cbc:LanguageID></cac:CallForTendersDocumentReference>
-    OCDS example: '{"tender":{"documents":[{"languages":["en"]}]}}'
+    eForms guidance: |-
+        [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).
+        Lowercase and convert the code into a two-letter [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) and add it to the document's `.languages` array.
+        Add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to `.relatedLots`.
+    eForms example: <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:CallForTendersDocumentReference> <cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID> <cbc:LanguageID>ENG</cbc:LanguageID> </cac:CallForTendersDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","languages":["en"],"relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procurementDocsSection
 -   id: BT-708-Part
     parentNodeId: ND-PartProcurementDocument
@@ -10097,9 +10093,12 @@
     Description: The language(s) in which the procurement documents are officially available. These linguistic versions are equally legally valid.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: Lowercase and convert the code into a two-letter [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes). Add it to the document's `.languages` array.
-    eForms example: <cac:CallForTendersDocumentReference><cbc:LanguageID>ENG</cbc:LanguageID></cac:CallForTendersDocumentReference>
-    OCDS example: '{"tender":{"documents":[{"languages":["en"]}]}}'
+    eForms guidance: |-
+        [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).
+        Lowercase and convert the code into a two-letter [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
+        Add it to the document's `.languages` array.
+    eForms example: <cac:CallForTendersDocumentReference> <cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID> <cbc:LanguageID>ENG</cbc:LanguageID> </cac:CallForTendersDocumentReference>
+    OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","languages":["en"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procurementDocsSection
 -   id: BT-709-LotResult
     parentNodeId: ND-LotResultFAValues
@@ -10187,7 +10186,10 @@
     TED guidance:
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''lowestValidBidValue'', and map to its `.value`.'
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''lowestValidBidValue'', set its `.relatedLot` to the award''s only `.relatedLots` entry, and map to its `.value`.'
-    eForms guidance: '[Add a bids statistic](common-operations.md#add-a-statistic), set its `.measure` to ''lowestValidBidValue'', map to its `.value`. Map `@currencyID` to its `.currency`. Set its `.relatedLot` to the lot''s id.'
+    eForms guidance: |-
+        [Add a bids statistic](common-operations.md#add-a-statistic), set its `.measure` to 'lowestValidBidValue', map to its `.value`.
+        Map `@currencyID` to its `.currency`.
+        [Get the lot for the LotResult](common-operations.md#get-the-lot-for-a-lotresult) and add the lot's `.id` to the statistic's `.relatedLots`.
     eForms example: <efac:LotResult><cbc:LowerTenderAmount currencyID="EUR">1230000</cbc:LowerTenderAmount></efac:LotResult>
     OCDS example: '{"bids":{"statistics":[{"measure":"lowestValidBidValue","value":1230000,"currency":"EUR","relatedLot":"Lot-00001"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_lot_result
@@ -10209,7 +10211,10 @@
     TED guidance:
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''highestValidBidValue'', and map to its `.value`.'
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''highestValidBidValue'', set its `.relatedLot` to the award''s only `.relatedLots` entry, and map to its `.value`.'
-    eForms guidance: '[Add a bids statistic](common-operations.md#add-a-statistic), set its `.measure` to ''highestValidBidValue'', and map to its `.value`. Map `@currencyID` to its `.currency`. Set its `.relatedLot` to the lot''s id.'
+    eForms guidance: |-
+        [Add a bids statistic](common-operations.md#add-a-statistic), set its `.measure` to 'highestValidBidValue', and map to its `.value`.
+        Map `@currencyID` to its `.currency`.
+        [Get the lot for the LotResult](common-operations.md#get-the-lot-for-a-lotresult) and add the lot's `.id` to the statistic's `.relatedLots`.
     eForms example: <efac:LotResult><cbc:HigherTenderAmount currencyID="EUR">456</cbc:HigherTenderAmount></efac:LotResult>
     OCDS example: '{"bids":{"statistics":[{"measure":"highestValidBidValue","value":456,"currency":"EUR","relatedLot":"Lot-0001"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_lot_result
@@ -10225,7 +10230,10 @@
     Description: The number of organisations that requested the buyer to review any of its decisions (e.g. the technical specifications, award decision).
     Business groups:
         BG-612: Buyer Review Summary
-    eForms guidance: These values are mapped to the same `Statistic` objects as created for BT-712(b). For each `ancestor::AppealRequestStatistics`, [add a statistic](common-operations.md#add-a-statistic) or update the corresponding `Statistic` object, and set its `.measure` to "complainants".
+    eForms guidance: |-
+        These values are mapped to the same `Statistic` objects as created for BT-712(b).
+        For each `ancestor::AppealRequestStatistics`, [add a complaints statistic](common-operations.md#add-a-statistic) or update the corresponding `Statistic` object, and set its `.measure` to "complainants".
+        [Get the lot for the LotResult](common-operations.md#get-the-lot-for-a-lotresult) and add the lot's `.id` to the statistic's `.relatedLots`.
     eForms example: <efac:AppealRequestsStatistics><efbc:StatisticsCode listName="review-type">complainants</efbc:StatisticsCode></efac:AppealRequestsStatistics>
     OCDS example: '{"statistics":[{"id":"1","value":"2","scope":"complaints"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_lot_result
@@ -10240,7 +10248,10 @@
     Description: The number of organisations that requested the buyer to review any of its decisions (e.g. the technical specifications, award decision).
     Business groups:
         BG-612: Buyer Review Summary
-    eForms guidance: These values are mapped to the same `Statistic` objects as created for BT-712(a). For each `ancestor::AppealRequestStatistics`, [add a statistic](common-operations.md#add-a-statistic) or update the corresponding `Statistic` object, map to its `.value`.
+    eForms guidance: |-
+        These values are mapped to the same `Statistic` objects as created for BT-712(a).
+        For each `ancestor::AppealRequestStatistics`, [add a complaints statistic](common-operations.md#add-a-statistic) or update the corresponding `Statistic` object, and map to its `.value`.
+        [Get the lot for the LotResult](common-operations.md#get-the-lot-for-a-lotresult) and add the lot's `.id` to the statistic's `.relatedLots`.
     eForms example: <efac:AppealRequestsStatistics><efbc:StatisticsNumeric>2</efbc:StatisticsNumeric></efac:AppealRequestsStatistics>
     OCDS example: '{"statistics":[{"id":"1","value":"2","measure":"complainants","scope":"complaints"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_lot_result
@@ -10761,9 +10772,12 @@
     Description: The language(s) in which the procurement documents (or their parts) are unofficially available. These linguistic versions are not an official translation, they are provided only for information.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: Set the document's `.unofficialTranslation` to `true`.
-    eForms example: <cac:CallForTendersDocumentReference><cbc:LanguageID>ENG</cbc:LanguageID><cbc:DocumentStatusCode listName="linguistic-status">non-official</cbc:DocumentStatusCode></cac:CallForTendersDocumentReference>
-    OCDS example: '{"tender":{"documents":[{"unofficialTranslation":true}]}}'
+    eForms guidance: |-
+        [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).
+        Set the document's `.unofficialTranslation` to `true`.
+        Add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to `.relatedLots`.
+    eForms example: <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:CallForTendersDocumentReference> <cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID> <cbc:DocumentStatusCode listName="document-status">non-official</cbc:DocumentStatusCode> </cac:CallForTendersDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","unofficialTranslation":true,"relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procurementDocsSection
 -   id: BT-737-Part
     parentNodeId: ND-PartProcurementDocument
@@ -10777,9 +10791,11 @@
     Description: The language(s) in which the procurement documents (or their parts) are unofficially available. These linguistic versions are not an official translation, they are provided only for information.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: Set the document's `.unofficialTranslation` to `true`.
-    eForms example: <cac:CallForTendersDocumentReference><cbc:LanguageID>ENG</cbc:LanguageID><cbc:DocumentStatusCode listName="linguistic-status">non-official</cbc:DocumentStatusCode></cac:CallForTendersDocumentReference>
-    OCDS example: '{"tender":{"documents":[{"unofficialTranslation":true}]}}'
+    eForms guidance: |-
+        [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).
+        Set the document's `.unofficialTranslation` to `true`.
+    eForms example: <cac:CallForTendersDocumentReference> <cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID> <cbc:DocumentStatusCode listName="document-status">non-official</cbc:DocumentStatusCode> </cac:CallForTendersDocumentReference>
+    OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","unofficialTranslation":true}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procurementDocsSection
 -   id: BT-738-notice
     parentNodeId: ND-Root
@@ -11326,7 +11342,7 @@
     Business groups:
         BG-9: Change
     eForms guidance: Discard.
-    eForms example: ''
+    eForms example: <efac:Changes><efbc:ChangedNoticeIdentifier schemeName="notice-id-ref">755db7f6-6aa1-453b-9087-1df5f7725112-02</efbc:ChangedNoticeIdentifier></efac:Changes>
     OCDS example: ''
     sdk: ''
 -   id: BT-759-LotResult
@@ -11356,6 +11372,7 @@
         These values are mapped to the same `Statistic` objects as created for BT-760.
 
         For each `ancestor::efac:ReceivedSubmissionsStatistics`, [add a bids statistic](common-operations.md#add-a-statistic) or update the corresponding `Statistic` object and map to its `.value`.
+        [Get the lot for the LotResult](common-operations.md#get-the-lot-for-a-lotresult) and add the lot's `.id` to the statistic's `.relatedLots`.
     eForms example: <efac:ReceivedSubmissionsStatistics><efbc:StatisticsNumeric>12</efbc:StatisticsNumeric></efac:ReceivedSubmissionsStatistics>
     OCDS example: '{"bids":{"statistics":[{"value":12}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_lot_result
@@ -11424,6 +11441,7 @@
         These values are mapped to the same `Statistic` objects as created for BT-759.
 
         For each `ancestor::efac:ReceivedSubmissionsStatistics`, [add a bids statistic](common-operations.md#add-a-statistic) or update the corresponding `Statistic` object and map to its `.measure` according to the \[submission count types mapping table\].
+        [Get the lot for the LotResult](common-operations.md#get-the-lot-for-a-lotresult) and add the lot's `.id` to the statistic's `.relatedLots`.
     eForms example: <efac:ReceivedSubmissionsStatistics><efbc:StatisticsCode listName="received-submission-type">t-sme</efbc:StatisticsCode></efac:ReceivedSubmissionsStatistics>
     OCDS example: '{"bids":{"statistics":[{"measure":"smeBids"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_lot_result
@@ -11808,9 +11826,9 @@
         BG-705: Other Requirements
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/LEFTI_CONTRACT_DEFENCE/CONTRACT_RELATING_CONDITIONS/CLEARING_LAST_DATE
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot), add a new Milestone object to the lot''s `.milestones` array. Set its `id`, set its `.type` to "securityClearanceDeadline", [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.dueDate`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot), add a new Milestone object to the lot''s `.milestones` array. Set its `id` incrementally, set its `.type` to "securityClearanceDeadline", [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.dueDate`.'
     eForms example: <cbc:LatestSecurityClearanceDate>2019-11-15+01:00</cbc:LatestSecurityClearanceDate>
-    OCDS example: '{"tender":{"lots":[{"milestones":[{"id":"001","type":"securityClearanceDeadline","dueDate":"2019-11-15T23:59:59+01:00"}]}]}}'
+    OCDS example: '{"tender":{"lots":[{"milestones":[{"id":"1","type":"securityClearanceDeadline","dueDate":"2019-11-15T23:59:59+01:00"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#clearanceDeadlineSection
 -   id: BT-79-Lot
     parentNodeId: ND-LotTenderingTerms
@@ -11873,7 +11891,7 @@
     type: date
     repeatable: false
     mandatory: false
-    eForms guidance: (UNREVIEWED) Discard.
+    eForms guidance: Discard.
     eForms example: <efbc:TransmissionDate>2022-11-17+01:00</efbc:TransmissionDate>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#dispatchDateEsender
@@ -12514,7 +12532,7 @@
     type: text-multilingual
     repeatable: false
     mandatory: false
-    eForms guidance: /https://github.com/open-contracting/european-union-support/issues/133
+    eForms guidance: This data element is underspecified in eForms. No mapping is available. /https://github.com/open-contracting/european-union-support/issues/133
     eForms example: ''
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#reservedExecutionSection
@@ -12592,9 +12610,12 @@
     repeatable: false
     mandatory: false
     pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
-    eForms guidance: These values map to the same `Document` objects as created for OPT-111-Lot. Map to the document's `.url`.
-    eForms example: <cac:ExternalReference><cbc:URI>https://fiscal-legislation.gov.stat</cbc:URI></cac:ExternalReference>
-    OCDS example: '{"tender":{"documents":[{"id":"Fiscal1","url":"https://fiscal-legislation.gov.stat"}]}}'
+    eForms guidance: |-
+        [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).
+        Map to the document's `.url`.
+        Add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
+    eForms example: <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:FiscalLegislationDocumentReference> <cbc:ID>Fiscal1</cbc:ID> <cac:Attachment> <cac:ExternalReference> <cbc:URI>https://fiscal-legislation.gov.stat</cbc:URI> </cac:ExternalReference> </cac:Attachment> </cac:FiscalLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"documents":[{"id":"Fiscal1","url":"https://fiscal-legislation.gov.stat","relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-110-Part-FiscalLegis
     parentNodeId: ND-PartFiscalLegislation
@@ -12605,8 +12626,10 @@
     repeatable: false
     mandatory: false
     pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
-    eForms guidance: These values map to the same `Document` objects as created for OPT-111-Part. Map to the document's `.url`.
-    eForms example: <cac:ExternalReference><cbc:URI>https://fiscal-legislation.gov.stat</cbc:URI></cac:ExternalReference>
+    eForms guidance: |-
+        [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).
+        Map to the document's `.url`.
+    eForms example: <cac:FiscalLegislationDocumentReference> <cbc:ID>Fiscal1</cbc:ID> <cac:Attachment> <cac:ExternalReference> <cbc:URI>https://fiscal-legislation.gov.stat</cbc:URI> </cac:ExternalReference> </cac:Attachment> </cac:FiscalLegislationDocumentReference>
     OCDS example: '{"tender":{"documents":[{"id":"Fiscal1","url":"https://fiscal-legislation.gov.stat"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-111-Lot-FiscalLegis
@@ -12617,9 +12640,12 @@
     type: id
     repeatable: false
     mandatory: false
-    eForms guidance: Add a document to `tender.documents` and map to the document's `.id`. Set the document's `.documentType` to 'legislation', and add the value of `ancestor::cac:ProcurementProjectLot/cac:ID` to `.relatedLots`.
-    eForms example: <cac:FiscalLegislationDocumentReference><cbc:ID>Fiscal1</cbc:ID></cac:FiscalLegislationDocumentReference>
-    OCDS example: '{"tender":{"documents":[{"id":"Fiscal1","documentType":"legislation","relatedLots":["LOT-0002"]}]}}'
+    eForms guidance: |-
+        [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).
+        Set the document's `.documentType` to 'legislation'.
+        Add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
+    eForms example: <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:FiscalLegislationDocumentReference> <cbc:ID>Fiscal1</cbc:ID> <cac:Attachment> <cac:ExternalReference> <cbc:URI>https://fiscal-legislation.gov.stat</cbc:URI> </cac:ExternalReference> </cac:Attachment> </cac:FiscalLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"documents":[{"id":"Fiscal1","documentType":"legislation","relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-111-Part-FiscalLegis
     parentNodeId: ND-PartFiscalLegislation
@@ -12629,8 +12655,10 @@
     type: id
     repeatable: false
     mandatory: false
-    eForms guidance: <cac:FiscalLegislationDocumentReference><cbc:ID>Fiscal1\</cbc:ID>\</cac:FiscalLegislationDocumentReference>
-    eForms example: Add a document to `tender.documents` and map to the document's `.id`. Set the document's `.documentType` to 'legislation'.
+    eForms guidance: |-
+        [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).
+        Set the document's `.documentType` to 'legislation'.
+    eForms example: <cac:FiscalLegislationDocumentReference> <cbc:ID>Fiscal1</cbc:ID> <cac:Attachment> <cac:ExternalReference> <cbc:URI>https://fiscal-legislation.gov.stat</cbc:URI> </cac:ExternalReference> </cac:Attachment> </cac:FiscalLegislationDocumentReference>
     OCDS example: '{"tender":{"documents":[{"id":"Fiscal1","documentType":"legislation"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-112-Lot-EnvironLegis
@@ -12641,9 +12669,12 @@
     type: id
     repeatable: false
     mandatory: false
-    eForms guidance: Add a document to `tender.documents` and map to the document's `.id`. Set the document's `.documentType` to 'legislation', and add the value of `ancestor::cac:ProcurementProjectLot/cac:ID` to `.relatedLots`.
-    eForms example: <cac:EnvironmentalLegislationDocumentReference><cbc:ID>Env1</cbc:ID></cac:EnvironmentalLegislationDocumentReference>
-    OCDS example: '{"tender":{"documents":[{"id":"Env1","documentType":"legislation","relatedLots":["LOT-0002"]}]}}'
+    eForms guidance: |-
+        [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).
+        Set the document's `.documentType` to 'legislation'.
+        Add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
+    eForms example: <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:EnvironmentalLegislationDocumentReference> <cbc:ID>Env1</cbc:ID> </cac:EnvironmentalLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"documents":[{"id":"Env1","documentType":"legislation","relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-112-Part-EnvironLegis
     parentNodeId: ND-PartEnvironmentalLegislation
@@ -12653,7 +12684,9 @@
     type: id
     repeatable: false
     mandatory: false
-    eForms guidance: Add a document to `tender.documents` and map to the document's `.id`. Set the document's `.documentType` to 'legislation'.
+    eForms guidance: |-
+        [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).
+        Set the document's `.documentType` to 'legislation'.
     eForms example: <cac:EnvironmentalLegislationDocumentReference><cbc:ID>Env1</cbc:ID></cac:EnvironmentalLegislationDocumentReference>
     OCDS example: '{"tender":{"documents":[{"id":"Env1","documentType":"legislation"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
@@ -12665,9 +12698,12 @@
     type: id
     repeatable: false
     mandatory: false
-    eForms guidance: Add a document to `tender.documents` and map to the document's `.id`. Set the document's `.documentType` to 'legislation', and add the value of `ancestor::cac:ProcurementProjectLot/cac:ID` to `.relatedLots`.
-    eForms example: <cac:EmploymentLegislationDocumentReference><cbc:ID>Empl1</cbc:ID></cac:EmploymentLegislationDocumentReference>
-    OCDS example: '{"tender":{"documents":[{"id":"Empl1","documentType":"legislation","relatedLots":["LOT-0002"]}]}}'
+    eForms guidance: |-
+        [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).
+        Set the document's `.documentType` to 'legislation'.
+        Add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
+    eForms example: <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:EmploymentLegislationDocumentReference> <cbc:ID>Empl1</cbc:ID> </cac:EmploymentLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"documents":[{"id":"Empl1","documentType":"legislation","relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-113-Part-EmployLegis
     parentNodeId: ND-PartEmploymentLegislation
@@ -12677,7 +12713,9 @@
     type: id
     repeatable: false
     mandatory: false
-    eForms guidance: Add a document to `tender.documents` and map to the document's `.id`. Set the document's `.documentType` to 'legislation'.
+    eForms guidance: |-
+        [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).
+        Set the document's `.documentType` to 'legislation'.
     eForms example: <cac:EmploymentLegislationDocumentReference><cbc:ID>Empl1</cbc:ID></cac:EmploymentLegislationDocumentReference>
     OCDS example: '{"tender":{"documents":[{"id":"Empl1","documentType":"legislation"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
@@ -12690,9 +12728,12 @@
     repeatable: false
     mandatory: false
     pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
-    eForms guidance: These values map to the same `Document` objects as created for OPT-112-Lot. Map to the document's `.url`.
-    eForms example: <cac:ExternalReference><cbc:URI>https://environmental-legislation.gov.stat</cbc:URI></cac:ExternalReference>
-    OCDS example: '{"tender":{"documents":[{"id":"Env1","url":"https://environmental-legislation.gov.stat"}]}}'
+    eForms guidance: |-
+        [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).
+        Map to the document's `.url`.
+        Add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
+    eForms example: <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:EnvironmentalLegislationDocumentReference> <cbc:ID>Env1</cbc:ID> <cac:Attachment> <cac:ExternalReference> <cbc:URI>http://environmental-legislation.gov.stat</cbc:URI> </cac:ExternalReference> </cac:Attachment> </cac:EnvironmentalLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"documents":[{"id":"Env1","url":"https://environmental-legislation.gov.stat","relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-120-Part-EnvironLegis
     parentNodeId: ND-PartEnvironmentalLegislation
@@ -12703,8 +12744,10 @@
     repeatable: false
     mandatory: false
     pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
-    eForms guidance: These values map to the same `Document` objects as created for OPT-112-Part. Map to the document's `.url`.
-    eForms example: <cac:ExternalReference><cbc:URI>https://environmental-legislation.gov.stat</cbc:URI></cac:ExternalReference>
+    eForms guidance: |-
+        [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).
+        Map to the document's `.url`.
+    eForms example: <cac:EnvironmentalLegislationDocumentReference> <cbc:ID>Env1</cbc:ID> <cac:Attachment> <cac:ExternalReference> <cbc:URI>http://environmental-legislation.gov.stat</cbc:URI> </cac:ExternalReference> </cac:Attachment> </cac:EnvironmentalLegislationDocumentReference>
     OCDS example: '{"tender":{"documents":[{"id":"Env1","url":"https://environmental-legislation.gov.stat"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-130-Lot-EmployLegis
@@ -12716,9 +12759,12 @@
     repeatable: false
     mandatory: false
     pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
-    eForms guidance: These values map to the same `Document` objects as created for OPT-113-Lot. Map to the document's `.url`.
-    eForms example: <cac:ExternalReference><cbc:URI>https://employment-legislation.gov.stat</cbc:URI></cac:ExternalReference>
-    OCDS example: '{"tender":{"documents":[{"id":"Empl1","url":"https://employment-legislation.gov.stat"}]}}'
+    eForms guidance: |-
+        [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).
+        Map to the document's `.url`.
+        Add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
+    eForms example: <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:EmploymentLegislationDocumentReference> <cbc:ID>Empl1</cbc:ID> <cac:Attachment> <cac:ExternalReference> <cbc:URI>http://employment-legislation.gov.stat</cbc:URI> </cac:ExternalReference> </cac:Attachment> </cac:EmploymentLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"documents":[{"id":"Empl1","url":"https://employment-legislation.gov.stat","relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-130-Part-EmployLegis
     parentNodeId: ND-PartEmploymentLegislation
@@ -12729,8 +12775,10 @@
     repeatable: false
     mandatory: false
     pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
-    eForms guidance: These values map to the same `Document` objects as created for OPT-113-Part. Map to the document's `.url`.
-    eForms example: <cac:ExternalReference><cbc:URI>https://employment-legislation.gov.stat</cbc:URI></cac:ExternalReference>
+    eForms guidance: |-
+        [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).
+        Map to the document's `.url`.
+    eForms example: <cac:EmploymentLegislationDocumentReference> <cbc:ID>Empl1</cbc:ID> <cac:Attachment> <cac:ExternalReference> <cbc:URI>http://employment-legislation.gov.stat</cbc:URI> </cac:ExternalReference> </cac:Attachment> </cac:EmploymentLegislationDocumentReference>
     OCDS example: '{"tender":{"documents":[{"id":"Empl1","url":"https://employment-legislation.gov.stat"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-140-Lot
@@ -12741,7 +12789,9 @@
     type: id
     repeatable: false
     mandatory: false
-    eForms guidance: If there is a `document` in `tender.documents` whose `id` is equal to this field, discard. Otherwise add a `Document` to `tender.documents` and map to its `.id` and add the value of `ancestor::cac:ProcurementProjectLot/cac:ID` to `.relatedLots`.
+    eForms guidance: |-
+        [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).
+        Add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
     eForms example: <cac:CallForTendersDocumentReference><cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID></cac:CallForTendersDocumentReference>
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procurementDocsSection
@@ -12753,7 +12803,7 @@
     type: id
     repeatable: false
     mandatory: false
-    eForms guidance: If there is a `document` in `tender.documents` whose `id` is equal to this field, discard. Otherwise add a `Document` to `tender.documents` and map to its `.id`.
+    eForms guidance: '[Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).'
     eForms example: <cac:CallForTendersDocumentReference><cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID></cac:CallForTendersDocumentReference>
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procurementDocsSection
@@ -12990,9 +13040,12 @@
     repeatable: false
     mandatory: true
     pattern: ^(ORG|TPO)-\d{4}$
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: |-
+        [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference) and map to its `publisher.id`.
+        Add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
+        [Get the organization for the organization technical identifier reference](common-operations.md#get-the-organization-for-a-organization-technical-identifier-reference) and add 'informationProvider' to is `roles` array.
+    eForms example: <ext:UBLExtensions> <ext:UBLExtension> <ext:ExtensionContent> <efext:EformsExtension> <efac:Organizations> <efac:Organization> <efac:Company> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </efac:Company> </efac:Organization> </efac:Organizations> </efext:EformsExtension> </ext:ExtensionContent> </ext:UBLExtension> </ext:UBLExtensions> <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:EmploymentLegislationDocumentReference> <cbc:ID>Empl1</cbc:ID> <cac:IssuerParty> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </cac:IssuerParty> </cac:EmploymentLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
+    OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationProvider"]}],"tender":{"documents":[{"id":"Empl1","publisher":{"id":"ORG-0001"},"relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Lot-EnvironLegis
     parentNodeId: ND-LotEnvironmentalLegislation
@@ -13006,9 +13059,12 @@
     repeatable: false
     mandatory: true
     pattern: ^(ORG|TPO)-\d{4}$
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: |-
+        [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference) and map to its `publisher.id`.
+        Add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
+        [Get the organization for the organization technical identifier reference](common-operations.md#get-the-organization-for-a-organization-technical-identifier-reference) and add 'informationProvider' to is `roles` array.
+    eForms example: <ext:UBLExtensions> <ext:UBLExtension> <ext:ExtensionContent> <efext:EformsExtension> <efac:Organizations> <efac:Organization> <efac:Company> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </efac:Company> </efac:Organization> </efac:Organizations> </efext:EformsExtension> </ext:ExtensionContent> </ext:UBLExtension> </ext:UBLExtensions> <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:EnvironmentalLegislationDocumentReference> <cbc:ID>Env1</cbc:ID> <cac:IssuerParty> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </cac:IssuerParty> </cac:EnvironmentalLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
+    OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationProvider"]}],"tender":{"documents":[{"id":"Env1","publisher":{"id":"ORG-0001"},"relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Lot-FiscalLegis
     parentNodeId: ND-LotFiscalLegislation
@@ -13022,9 +13078,12 @@
     repeatable: false
     mandatory: true
     pattern: ^(ORG|TPO)-\d{4}$
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: |-
+        [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference) and map to its `publisher.id`.
+        Add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
+        [Get the organization for the organization technical identifier reference](common-operations.md#get-the-organization-for-a-organization-technical-identifier-reference) and add 'informationProvider' to is `roles` array.
+    eForms example: <ext:UBLExtensions> <ext:UBLExtension> <ext:ExtensionContent> <efext:EformsExtension> <efac:Organizations> <efac:Organization> <efac:Company> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </efac:Company> </efac:Organization> </efac:Organizations> </efext:EformsExtension> </ext:ExtensionContent> </ext:UBLExtension> </ext:UBLExtensions> <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:FiscalLegislationDocumentReference> <cbc:ID>Fiscal1</cbc:ID> <cac:IssuerParty> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </cac:IssuerParty> </cac:FiscalLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
+    OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationProvider"]}],"tender":{"documents":[{"id":"Fiscal1","publisher":{"id":"ORG-0001"},"relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Lot-Mediator
     parentNodeId: ND-LotReviewTerms
@@ -13190,9 +13249,11 @@
     repeatable: false
     mandatory: true
     pattern: ^(ORG|TPO)-\d{4}$
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: |-
+        [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference) and map to its `publisher.id`.
+        [Get the organization for the organization technical identifier reference](common-operations.md#get-the-organization-for-a-organization-technical-identifier-reference) and add 'informationProvider' to is `roles` array.
+    eForms example: <ext:UBLExtensions> <ext:UBLExtension> <ext:ExtensionContent> <efext:EformsExtension> <efac:Organizations> <efac:Organization> <efac:Company> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </efac:Company> </efac:Organization> </efac:Organizations> </efext:EformsExtension> </ext:ExtensionContent> </ext:UBLExtension> </ext:UBLExtensions> <cac:ProcurementProjectLot> <cac:TenderingTerms> <cac:EmploymentLegislationDocumentReference> <cbc:ID>Empl1</cbc:ID> <cac:IssuerParty> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </cac:IssuerParty> </cac:EmploymentLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
+    OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationProvider"]}],"tender":{"documents":[{"id":"Empl1","publisher":{"id":"ORG-0001"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Part-EnvironLegis
     parentNodeId: ND-PartEnvironmentalLegislation
@@ -13206,9 +13267,11 @@
     repeatable: false
     mandatory: true
     pattern: ^(ORG|TPO)-\d{4}$
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: |-
+        [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference) and map to its `publisher.id`.
+        [Get the organization for the organization technical identifier reference](common-operations.md#get-the-organization-for-a-organization-technical-identifier-reference) and add 'informationProvider' to is `roles` array.
+    eForms example: <ext:UBLExtensions> <ext:UBLExtension> <ext:ExtensionContent> <efext:EformsExtension> <efac:Organizations> <efac:Organization> <efac:Company> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </efac:Company> </efac:Organization> </efac:Organizations> </efext:EformsExtension> </ext:ExtensionContent> </ext:UBLExtension> </ext:UBLExtensions> <cac:ProcurementProjectLot> <cac:TenderingTerms> <cac:EnvironmentalLegislationDocumentReference> <cbc:ID>Env1</cbc:ID> <cac:IssuerParty> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </cac:IssuerParty> </cac:EnvironmentalLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
+    OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationProvider"]}],"tender":{"documents":[{"id":"Env1","publisher":{"id":"ORG-0001"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Part-FiscalLegis
     parentNodeId: ND-PartFiscalLegislation
@@ -13222,9 +13285,11 @@
     repeatable: false
     mandatory: true
     pattern: ^(ORG|TPO)-\d{4}$
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: |-
+        [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference) and map to its `publisher.id`.
+        [Get the organization for the organization technical identifier reference](common-operations.md#get-the-organization-for-a-organization-technical-identifier-reference) and add 'informationProvider' to is `roles` array.
+    eForms example: <ext:UBLExtensions> <ext:UBLExtension> <ext:ExtensionContent> <efext:EformsExtension> <efac:Organizations> <efac:Organization> <efac:Company> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </efac:Company> </efac:Organization> </efac:Organizations> </efext:EformsExtension> </ext:ExtensionContent> </ext:UBLExtension> </ext:UBLExtensions> <cac:ProcurementProjectLot> <cac:TenderingTerms> <cac:FiscalLegislationDocumentReference> <cbc:ID>Fiscal1</cbc:ID> <cac:IssuerParty> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </cac:IssuerParty> </cac:FiscalLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
+    OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationProvider"]}],"tender":{"documents":[{"id":"Fiscal1","publisher":{"id":"ORG-0001"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tenderingPartySection
 -   id: OPT-301-Part-Mediator
     parentNodeId: ND-PartReviewTerms
