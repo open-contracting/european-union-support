@@ -164,7 +164,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/COMPLEMENTARY_INFO/DATE_DISPATCH_NOTICE
     TED guidance:
     - Map to `date`
-    eForms guidance: Combine with [BT-05(b)-notice](<#BT-05(b)-notice>), [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format), and map to `date`.
+    eForms guidance: Combine with [BT-05(b)-notice](<#BT-05(b)-notice>), [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to `date`.
     eForms example: <cbc:IssueDate>2019-11-26+01:00</cbc:IssueDate><cbc:IssueTime>13:38:54+01:00</cbc:IssueTime>
     OCDS example: '{"date":"2019-11-26T13:38:54+01:00"}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#dispatchDateSection
@@ -180,7 +180,7 @@
     Description: The date and time when the notice has been sent to TED.
     Business groups:
         BG-1: Notice
-    eForms guidance: Combine with [BT-05(a)-notice](<#BT-05(a)-notice>), [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format), and map to `date`.
+    eForms guidance: Combine with [BT-05(a)-notice](<#BT-05(a)-notice>), [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to `date`.
     eForms example: <cbc:IssueDate>2019-11-26+01:00</cbc:IssueDate><cbc:IssueTime>13:38:54+01:00</cbc:IssueTime>
     OCDS example: '{"date":"2019-11-26T13:38:54+01:00"}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#dispatchDateSection
@@ -283,10 +283,7 @@
     TED guidance:
     - Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification's `.scheme` to 'TED_CE_ACTIVITY', and set its `.id` and/or `.description` as follows:\n\n(The codes are drawn from [Directive 2014/25/EU](https://eur-lex.europa.eu/legal-content/en/TXT/?uri=CELEX%3A32014L0025#L_2014094EN.01033901))
     - 'Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification''s `.scheme` to [''COFOG''](https://unstats.un.org/unsd/publications/catalogue?selectID=145), and set its `.id` and/or `.description` as follows:'
-    eForms guidance: |-
-        The codes are drawn from the [Main activity](<>) authority table in EU Vocabularies.
-
-        [Get the organization for the buyer](common-operations.md#get-the-organization-for-the-buyer) and add a `Classification` object to its `.details.classifications` array. Map to the classification's `.id`, look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/main-activity) and map it to `.description`. If the code's definition in the authority table includes ["COFOG"](<https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Classification_of_the_functions_of_government_(COFOG)>), set the classification's `.scheme` to 'COFOG'. Otherwise, set it to 'Directive 2014/25/EU'.
+    eForms guidance: '[Get the organization for the buyer](common-operations.md#get-the-organization-for-the-buyer) and add a `Classification` object to its `.details.classifications` array. Map to the classification''s `.id`, look up the code''s label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/main-activity) and map it to `.description`. If the code''s definition in the authority table includes ["COFOG"](<https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Classification_of_the_functions_of_government_(COFOG)>), set the classification''s `.scheme` to ''COFOG''. Otherwise, set it to ''Directive 2014/25/EU''.'
     eForms example: <cac:ContractingParty><cac:Party><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></cac:Party><cac:ContractingActivity><cbc:ActivityTypeCode listName="authority-activity">gas-oil</cbc:ActivityTypeCode></cac:ContractingActivity></cac:ContractingParty>
     OCDS example: '{"parties":[{"id":"ORG-0001","details":{"classifications":[{"scheme":"Directive 2014/25/EU","id":"gas-oil","description":"Activities related to the exploitation of a geographical area for the purpose of extracting oil or gas."}]}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_buyer_information_2
@@ -353,9 +350,7 @@
     - Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodDetails` to 'Procedure involving negotiations'
     - Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodDetails` to 'Restricted procedure'
     eForms guidance: |-
-        The codes are drawn from the [Procurement procedure type](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/procurement-procedure-type) authority table in EU Vocabularies.
-
-        Set `tender.procurementMethodDetails` to the code's Label. If the code is:
+        Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/procurement-procedure-typ) and map it to `tender.procurementMethodDetails`. If the code is:
 
         - open: Set `tender.procurementMethod` to 'open'
         - comp-dial: Set `tender.procurementMethod` to 'selective'
@@ -1241,7 +1236,7 @@
         Add a `Classification` object to `tender.procurementMethodRationaleClassifications`:
 
         1. Map the code to its `.id`
-        1. Lood up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/direct-award-justification) and map it to `.description`
+        1. Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/direct-award-justification) and map it to `.description`
         1. Set `.scheme` to its 'eforms-direct-award-justification'
     eForms example: <cac:ProcessJustification><cbc:ProcessReasonCode listName="direct-award-justification">ecom-excl</cbc:ProcessReasonCode></cac:ProcessJustification>
     OCDS example: '{"tender":{"procurementMethodRationaleClassifications":[{"id":"ecom-excl","description":"Specific exclusion in the field of electronic communications","scheme":"eforms-direct-award-justification"}]}}'
@@ -3986,7 +3981,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-09)-Procedure. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-09)-Procedure. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procedureLevelSection
@@ -4002,7 +3997,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-105)-Procedure. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-105)-Procedure. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procedureLevelSection
@@ -4018,7 +4013,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-106)-Procedure. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-106)-Procedure. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procedureLevelSection
@@ -4066,7 +4061,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-1252)-Procedure. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-1252)-Procedure. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procedureLevelSection
@@ -4082,7 +4077,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-1252)-Procedure. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-1252)-Procedure. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procedureLevelSection
@@ -4098,7 +4093,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-1351)-Procedure. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-1351)-Procedure. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procedureLevelSection
@@ -4114,7 +4109,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-136)-Procedure. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-136)-Procedure. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procedureLevelSection
@@ -4130,7 +4125,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-142)-LotResult and `ancestor::efac:LotResult`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-142)-LotResult and `ancestor::efac:LotResult`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotResultLevelSection
@@ -4146,7 +4141,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-144)-LotResult and `ancestor::efac:LotResult`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-144)-LotResult and `ancestor::efac:LotResult`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotResultLevelSection
@@ -4194,7 +4189,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-160)-Tender and `ancestor::efac:LotTender`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-160)-Tender and `ancestor::efac:LotTender`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderLevelSection
@@ -4226,7 +4221,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-162)-Tender and `ancestor::efac:LotTender`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-162)-Tender and `ancestor::efac:LotTender`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderLevelSection
@@ -4242,7 +4237,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-163)-Tender and `ancestor::efac:LotTender`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-163)-Tender and `ancestor::efac:LotTender`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderLevelSection
@@ -4258,7 +4253,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-171)-Tender and `ancestor::efac:LotTender`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-171)-Tender and `ancestor::efac:LotTender`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderLevelSection
@@ -4274,7 +4269,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-191)-Tender and `ancestor::efac:LotTender`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-191)-Tender and `ancestor::efac:LotTender`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderLevelSection
@@ -4290,7 +4285,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-193)-Tender and `ancestor::efac:LotTender`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-193)-Tender and `ancestor::efac:LotTender`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderLevelSection
@@ -4306,7 +4301,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-539)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-539)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -4322,7 +4317,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-539)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-539)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -4338,7 +4333,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-540)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-540)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -4354,7 +4349,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-540)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-540)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -4370,7 +4365,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -4386,7 +4381,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -4402,7 +4397,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-5421)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-5421)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -4418,7 +4413,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-5421)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-5421)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -4434,7 +4429,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-5422)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-5422)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -4450,7 +4445,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-5422)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-5422)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -4466,7 +4461,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-5423)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-5423)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -4482,7 +4477,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-5423)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-5423)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -4498,7 +4493,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-543)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-543)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -4514,7 +4509,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-543)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-543)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -4530,7 +4525,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-553)-Tender and `ancestor::efac:LotTender`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-553)-Tender and `ancestor::efac:LotTender`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderLevelSection
@@ -4546,7 +4541,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-554)-Tender and `ancestor::efac:LotTender`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-554)-Tender and `ancestor::efac:LotTender`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderLevelSection
@@ -4562,7 +4557,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-555)-Tender and `ancestor::efac:LotTender`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-555)-Tender and `ancestor::efac:LotTender`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderLevelSection
@@ -4594,7 +4589,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-635)-LotResult and `ancestor::efac:LotResult`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-635)-LotResult and `ancestor::efac:LotResult`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotResultLevelSection
@@ -4610,7 +4605,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-636)-LotResult and `ancestor::efac:LotResult`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-636)-LotResult and `ancestor::efac:LotResult`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotResultLevelSection
@@ -4626,7 +4621,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-709)-LotResult and `ancestor::efac:LotResult`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-709)-LotResult and `ancestor::efac:LotResult`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotResultLevelSection
@@ -4642,7 +4637,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-710)-LotResult and `ancestor::efac:LotResult`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-710)-LotResult and `ancestor::efac:LotResult`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotResultLevelSection
@@ -4658,7 +4653,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-711)-LotResult and `ancestor::efac:LotResult`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-711)-LotResult and `ancestor::efac:LotResult`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotResultLevelSection
@@ -4674,7 +4669,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-712)-LotResult and `ancestor::efac:LotResult`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-712)-LotResult and `ancestor::efac:LotResult`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotResultLevelSection
@@ -4690,7 +4685,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-720)-Tender and `ancestor::efac:LotTender`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-720)-Tender and `ancestor::efac:LotTender`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderLevelSection
@@ -4738,7 +4733,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-733)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-733)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -4754,7 +4749,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-733)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-733)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -4770,7 +4765,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-734)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-734)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -4786,7 +4781,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-734)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-734)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -4802,7 +4797,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-759)-LotResult and `ancestor::efac:LotResult`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-759)-LotResult and `ancestor::efac:LotResult`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotResultLevelSection
@@ -4818,7 +4813,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-760)-LotResult and `ancestor::efac:LotResult`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-760)-LotResult and `ancestor::efac:LotResult`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotResultLevelSection
@@ -4834,7 +4829,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-773)-Tender and `ancestor::efac:LotTender`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-773)-Tender and `ancestor::efac:LotTender`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderLevelSection
@@ -4850,7 +4845,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-88)-Procedure. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification) and map its label to `.description` and its uri to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-88)-Procedure. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procedureLevelSection
@@ -4866,7 +4861,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-09)-Procedure. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-09)-Procedure. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procedureLevelSection
@@ -4882,7 +4877,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-105)-Procedure. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-105)-Procedure. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procedureLevelSection
@@ -4898,7 +4893,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-106)-Procedure. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-106)-Procedure. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procedureLevelSection
@@ -4945,7 +4940,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-1252)-Procedure. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-1252)-Procedure. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procedureLevelSection
@@ -4961,7 +4956,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-135)-Procedure. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-135)-Procedure. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procedureLevelSection
@@ -4977,7 +4972,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-1351)-Procedure. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-1351)-Procedure. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procedureLevelSection
@@ -4993,7 +4988,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-136)-Procedure. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-136)-Procedure. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procedureLevelSection
@@ -5009,7 +5004,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-142)-LotResult and `ancestor::efac:LotResult`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-142)-LotResult and `ancestor::efac:LotResult`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotResultLevelSection
@@ -5025,7 +5020,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-144)-LotResult and `ancestor::efac:LotResult`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-144)-LotResult and `ancestor::efac:LotResult`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotResultLevelSection
@@ -5073,7 +5068,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-160)-Tender and `ancestor::efac:LotTender`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-160)-Tender and `ancestor::efac:LotTender`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderLevelSection
@@ -5105,7 +5100,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-162)-Tender and `ancestor::efac:LotTender`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-162)-Tender and `ancestor::efac:LotTender`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderLevelSection
@@ -5121,7 +5116,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-163)-Tender and `ancestor::efac:LotTender`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-163)-Tender and `ancestor::efac:LotTender`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderLevelSection
@@ -5137,7 +5132,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-171)-Tender and `ancestor::efac:LotTender`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-171)-Tender and `ancestor::efac:LotTender`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderLevelSection
@@ -5153,7 +5148,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-191)-Tender and `ancestor::efac:LotTender`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-191)-Tender and `ancestor::efac:LotTender`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderLevelSection
@@ -5169,7 +5164,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-193)-Tender and `ancestor::efac:LotTender`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-193)-Tender and `ancestor::efac:LotTender`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderLevelSection
@@ -5185,7 +5180,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-539)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-539)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -5201,7 +5196,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-539)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-539)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -5217,7 +5212,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-540)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-540)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -5233,7 +5228,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-540)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-540)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -5249,7 +5244,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -5265,7 +5260,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -5281,7 +5276,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-5421)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-5421)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -5297,7 +5292,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-5421)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-5421)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -5313,7 +5308,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-5422)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-5422)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -5329,7 +5324,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-5422)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-5422)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -5345,7 +5340,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-5423)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-5423)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -5361,7 +5356,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-5423)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-5423)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -5377,7 +5372,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-543)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-543)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -5393,7 +5388,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-543)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-543)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -5409,7 +5404,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-553)-Tender and `ancestor::efac:LotTender`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-553)-Tender and `ancestor::efac:LotTender`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderLevelSection
@@ -5425,7 +5420,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-554)-Tender and `ancestor::efac:LotTender`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-554)-Tender and `ancestor::efac:LotTender`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderLevelSection
@@ -5441,7 +5436,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-555)-Tender and `ancestor::efac:LotTender`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-555)-Tender and `ancestor::efac:LotTender`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderLevelSection
@@ -5472,7 +5467,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-635)-LotResult and `ancestor::efac:LotResult`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-635)-LotResult and `ancestor::efac:LotResult`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotResultLevelSection
@@ -5487,7 +5482,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-636)-LotResult and `ancestor::efac:LotResult`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-636)-LotResult and `ancestor::efac:LotResult`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotResultLevelSection
@@ -5503,7 +5498,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-709)-LotResult and `ancestor::efac:LotResult`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-709)-LotResult and `ancestor::efac:LotResult`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotResultLevelSection
@@ -5519,7 +5514,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-710)-LotResult and `ancestor::efac:LotResult`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-710)-LotResult and `ancestor::efac:LotResult`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotResultLevelSection
@@ -5535,7 +5530,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-711)-LotResult and `ancestor::efac:LotResult`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-711)-LotResult and `ancestor::efac:LotResult`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotResultLevelSection
@@ -5551,7 +5546,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-712)-LotResult and `ancestor::efac:LotResult`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-712)-LotResult and `ancestor::efac:LotResult`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotResultLevelSection
@@ -5567,7 +5562,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-720)-Tender and `ancestor::efac:LotTender`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-720)-Tender and `ancestor::efac:LotTender`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderLevelSection
@@ -5615,7 +5610,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-733)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-733)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -5631,7 +5626,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-733)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-733)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -5647,7 +5642,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-734)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-734)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -5663,7 +5658,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-734)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-734)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotsGroupOfLotsLevelSection
@@ -5679,7 +5674,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-759)-LotResult and `ancestor::efac:LotResult`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-759)-LotResult and `ancestor::efac:LotResult`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`.
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotResultLevelSection
@@ -5695,7 +5690,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-760)-LotResult and `ancestor::efac:LotResult`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-760)-LotResult and `ancestor::efac:LotResult`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`.
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotResultLevelSection
@@ -5711,7 +5706,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-773)-Tender and `ancestor::efac:LotTender`. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-773)-Tender and `ancestor::efac:LotTender`. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderLevelSection
@@ -5727,7 +5722,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-88)-Procedure. '[Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format)' and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-88)-Procedure. [Convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procedureLevelSection
@@ -6254,7 +6249,7 @@
     Business groups:
         BG-2: Purpose
         BG-261: Classification
-    eForms guidance: Capitalize, and map to the item's `.classification.scheme`.
+    eForms guidance: Capitalize and map to the item's `.classification.scheme`.
     eForms example: <cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification>
     OCDS example: '{"tender":{"items":[{"classification":{"scheme":"CPV"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#classificationSection
@@ -6271,7 +6266,7 @@
     Business groups:
         BG-2: Purpose
         BG-261: Classification
-    eForms guidance: Capitalize, and map to the item's `.classification.scheme`.
+    eForms guidance: Capitalize and map to the item's `.classification.scheme`.
     eForms example: <cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification>
     OCDS example: '{"tender":{"items":[{"classification":{"scheme":"CPV"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#classificationSection
@@ -6724,8 +6719,17 @@
     Business groups:
         BG-7: Notice Result
         BG-310: Contract
-    eForms guidance: "- [Get the contract for the SettledContract](common-operations.md#get-the-contract-for-a-settledcontract) and add the value of this field to its `.relatedBids` array.\n- Get the `ancestor::efac:NoticeResult/efac:LotTender` whose `/cbc:ID` is equal to the value of this field.\n- Get the `ancestor::efac:NoticeResult/efac:TenderingParty` whose `/cbc:ID` matches the `LotTender`'s `/efac:TenderingParty/cbc:ID`\n- For each `ancestor::efac:TenderingParty/efac:Tenderer\u200B`, [get the organization for the tenderer](common-operations.md#get-the-organization-for-a-tenderer) and:\n  - Get the `ancestor::efext:EformsExtension/efac:Organizations/efac:Organization/efac:Company` whose `/cac:PartyIdentification/cbc:ID` is equal to the organization's `.id` and set the organization's `.name` to the value of `/cac:PartyName/cbc:Name`.\n  - Add 'supplier' to the organization's `.roles` array.\n  - For each `ancestor::efac:NoticeResult/efac:LotResult` with an `/efac:SettledContract/cbc:ID`\
-        \ equal to the value of `ancestor::efac:SettledContract/cbc:ID`:\n    - [Get the award for the LotResult](common-operations.md#get-the-award-for-a-lotresult%5D)\n    - Add an `OrganizationReference` to the award's `.suppliers` array and:\n      - Set the organization reference's `.id` to the organization's `.id`\n      - Set the organization reference's `.name` to the organization's `.name`"
+    eForms guidance: |-
+        - [Get the contract for the SettledContract](common-operations.md#get-the-contract-for-a-settledcontract) and add the value of this field to its `.relatedBids` array.
+        - Get the `ancestor::efac:NoticeResult/efac:LotTender` whose `/cbc:ID` is equal to the value of this field.
+        - Get the `ancestor::efac:NoticeResult/efac:TenderingParty` whose `/cbc:ID` matches the `LotTender`'s `/efac:TenderingParty/cbc:ID`
+        - For each `ancestor::efac:TenderingParty/efac:Tenderer`, [get the organization for the tenderer](common-operations.md#get-the-organization-for-a-tenderer) and:
+          - Get the `ancestor::efext:EformsExtension/efac:Organizations/efac:Organization/efac:Company` whose `/cac:PartyIdentification/cbc:ID` is equal to the organization's `.id` and
+            - Add 'supplier' to the organization's `.roles` array.
+          - For each `ancestor::efac:NoticeResult/efac:LotResult` with an `/efac:SettledContract/cbc:ID` equal to the value of `ancestor::efac:SettledContract/cbc:ID`:
+            - [Get the award for the LotResult](common-operations.md#get-the-award-for-a-lotresult%5D)
+            - Add an `OrganizationReference` to the award's `.suppliers` array and:
+            - Set the organization reference's `.id` to the organization's `.id`
     eForms example: <efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID></efac:LotTender>
     OCDS example: '{"contracts":[{"relatedBids":["TEN-0001"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#settledContractSection
@@ -6953,7 +6957,9 @@
     - TED_EXPORT/FORM_SECTION/F12_2014/PROCEDURE/PARTICIPANT_NAME
     TED guidance:
     - '[Add a party](../../operations/#add-a-party), add ''selectedParticipant'' to its `.roles`, and map to its `.name`. Add an `OrganizationReference` object to the `tender.designContest.selectedParticipants` array, set its `.id` to the party''s `.id`, and map to its `.name`.'
-    eForms guidance: '[Add a party](common-operations.md#add-a-party), add ''selectedParticipant'' to its `.roles`, and map to its `.name`. [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and add an `OrganizationReference` object to its `.designContest.selectedParticipants` array, set the organization reference''s `.id` to the party''s `.id`, and map to its `.name`.'''
+    eForms guidance: |-
+        - [Add a party](common-operations.md#add-a-party), add 'selectedParticipant' to its `.roles`, and map to its `.name`.
+        - [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot), add an `OrganizationReference` object to its `.designContest.selectedParticipants` array and set the organization reference's `.id` to the party's `.id`.
     eForms example: <cac:PartyName><cbc:Name>Mr P. Sanchez</cbc:Name></cac:PartyName>
     OCDS example: '{"parties":[{"name":"Mr P. Sanchez","roles":["selectedParticipant"],"id":"1"}],"tender":{"lots":[{"designContest":{"selectedParticipants":[{"id":"1","name":"Mr P. Sanchez"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#shortlistSection
@@ -9584,8 +9590,8 @@
         BG-2: Purpose
     eForms guidance: |-
         - [Get the item for the ProcurementProjectLot](common-operations.md#get-the-item-for-a-procurementprojectlot) and map to its `.unit.id`.
-        - Set the item''s `.unit.scheme` to ['EU Measurement unit'](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/measurement-unit).
-        - Look up the code''s label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/measurement-unit) and map it to `.unit.name`.
+        - Set the item's `.unit.scheme` to ['EU Measurement unit'](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/measurement-unit).
+        - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/measurement-unit) and map it to `.unit.name`.
     eForms example: <cbc:EstimatedOverallContractQuantity unitCode="TNE">45000</cbc:EstimatedOverallContractQuantity>
     OCDS example: '{"tender":{"items":[{"unit":{"scheme":"EU Measurement unit","name":"tonne"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#quantitySection
@@ -9771,7 +9777,7 @@
     Business groups:
         BG-612: Buyer Review Summary
         BG-613: Buyer Review Requests
-    eForms guidance: These values are mapped to the same `Statistic` objects as created for BT-635. For each `ancestor::AppealRequestStatistics`, [add a statistic](common-operations.md#add-a-statistic) or update the corresponding `Statistic` object and map to its `.measure`. Look-up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/irregularity-type) and map it to `.notes`
+    eForms guidance: These values are mapped to the same `Statistic` objects as created for BT-635. For each `ancestor::AppealRequestStatistics`, [add a statistic](common-operations.md#add-a-statistic) or update the corresponding `Statistic` object and map to its `.measure`. Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/irregularity-type) and map it to `.notes`
     eForms example: <efac:AppealRequestsStatistics><efbc:StatisticsCode listName="irregularity-type">unj-lim-subc</efbc:StatisticsCode></efac:AppealRequestsStatistics>
     OCDS example: '{"statistics":[{"id":"1","measure":"ab-low","scope":"complaints","notes":"Unjustified rejection of abnormally low tenders"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_lot_result
@@ -10473,7 +10479,7 @@
     Description: 'There are other restrictions on the place of performance (e.g. "anywhere in the European Economic Area", "anywhere in the given country"). '
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: Add a `Location` object to the `tender.deliveryLocations` array, look up the code's Label in the \[authority table\]\](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map to the location's `.description`.
+    eForms guidance: Add a `Location` object to the `tender.deliveryLocations` array, look up the code's label in the \[authority table\]\](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map to the location's `.description`.
     eForms example: <cac:Address><cbc:Region>anyw-eea</cbc:Region></cac:Address>
     OCDS example: '{"tender":{"deliveryLocations":[{"description":"Anywhere in the European Economic Area"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -10489,7 +10495,7 @@
     Description: 'There are other restrictions on the place of performance (e.g. "anywhere in the European Economic Area", "anywhere in the given country"). '
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: Add a `Location` object to the `tender.deliveryLocations` array, look up the code's Label in the \[authority table\]\](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map to the location's `.description`.
+    eForms guidance: Add a `Location` object to the `tender.deliveryLocations` array, look up the code's label in the \[authority table\]\](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map to the location's `.description`.
     eForms example: <cac:Address><cbc:Region>anyw-eea</cbc:Region></cac:Address>
     OCDS example: '{"tender":{"deliveryLocations":[{"description":"Anywhere in the European Economic Area"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -10946,7 +10952,7 @@
     Business groups:
         BG-703: Organisation
         BG-3: Buyer
-    eForms guidance: '[Get the organization for the buyer](common-operations.md#get-the-organization-for-the-buyer) and add a `Classification` object to its `.details.classifications` array. Map to the classification''s `.id`, look up the code''s label in the \[buyer contracting type mapping table\], map it to `.description`and set its `.scheme` to ''buyer-contracting-type''. \[https://github.com/open-contracting/european-union-support/issues/65\]'
+    eForms guidance: '[Get the organization for the buyer](common-operations.md#get-the-organization-for-the-buyer) and add a `Classification` object to its `.details.classifications` array. Map to the classification''s `.id`, set its `.description` according to the [buyer contracting type mapping table](<>) and set its `.scheme` to ''buyer-contracting-type''. \[https://github.com/open-contracting/european-union-support/issues/65\]'''
     eForms example: <cac:ContractingPartyType><cbc:PartyTypeCode listName="buyer-contracting-type">cont-ent</cbc:PartyTypeCode></cac:ContractingPartyType>
     OCDS example: '{"parties":[{"id":"ORG-0001","details":{"classifications":[{"scheme":"TED_BUYER_TYPE","id":"cont-ent","description":"Contracting Entity"}]}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_buyer_information_2
@@ -11705,7 +11711,7 @@
         BG-102: Submission Terms
     eForms guidance: |-
         - [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot).
-        - Look-up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/missing-info-submission) and map it to the lot's `.submissionMethodDetails`.
+        - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/missing-info-submission) and map it to the lot's `.submissionMethodDetails`.
     eForms example: <cac:SpecificTendererRequirement><cbc:TendererRequirementTypeCode listName="missing-info-submission">late-all</cbc:TendererRequirementTypeCode></cac:SpecificTendererRequirement>
     OCDS example: '{"tender":{"lots":[{"submissionMethodDetails":"All missing tenderer-related documents can be submitted later."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tendererReqsSection
@@ -12945,7 +12951,6 @@
         1. [Get the contract for the SettledContract](common-operations.md#get-the-contract-for-a-settledcontract). For each award referenced in the contract's `.awardID` field or `.awardIDs` array:
         1. Add an `OrganizationReference` object to the award's `.buyers` array
         1. Set its `.id` to the organization's `.id`
-        1. Set its name to the organization's `.name`.
     eForms example: <efac:SettledContract><cac:SignatoryParty><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:SignatoryParty></efac:SettledContract>
     OCDS example: '{"awards":[{"buyers":[{"id":"ORG-0001","name":"Financial Adinistration for ..."}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_contract_signatory
@@ -12960,9 +12965,9 @@
     repeatable: false
     mandatory: true
     eForms guidance: |-
-        1. Perform the mapping for `BT-500-Organization-Company` (Organisation Name).
-        1. Add 'buyer' to the `.roles` array of the organization.
-        1. Add an `OrganizationReference` object to `buyer`, set its `.id` to the organization's `.id` and its `.name` to the organization's `.name`.
+        1. \[Get the organization for the organization technical identifier reference\](common-operations.md#get-the-organization-for-an-organization technical-identifier-reference)
+        1. Add 'buyer' to its `.roles` array.
+        1. Add an `OrganizationReference` object to `buyer` and set its `.id` to the organization's `.id`.
     eForms example: <cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification>
     OCDS example: '{"buyer":{"id":"ORG-0001","name":"Financial Adinistration for ..."}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_referring_to_objects
@@ -13391,9 +13396,9 @@
     mandatory: false
     pattern: ^ORG-\d{4}$
     eForms guidance: |-
-        - Perform the mapping for `BT-500-Organization-Company` (Organisation Name). Get the Organization in `parties` whose `.id` is equal to the value of this field and add 'tenderer' to its `.roles` array.
+        - \[Get the organization for the organization technical identifier reference\](common-operations.md#get-the-organization-for-an-organization technical-identifier-reference) and add 'tenderer' to its `.roles` array.
         - [Get the bid for the LotTender](common-operations.md#get-the-bid-for-a-lottender), and get the `subcontracts` object whose `subcontractors.id` is equal to the value of `ancestor: efac:SubContractor/cbc:ID`.
-          - Add an `OrganizationReference` object to the subcontracts `tenderers` array, set its `.id` to the value of this field and set its `.name` to the organization's `.name`.
+        - Add an `OrganizationReference` object to the subcontract's `.tenderers` array and set its `.id` to the value of this field.
     eForms example: <efac:NoticeResult> <efac:LotTender> <cbc:ID schemeName="tender">TEN-0001</cbc:ID> </efac:LotTender> <efac:TenderingParty> <efac:SubContractor> <cbc:ID schemeName="organization">ORG-0012</cbc:ID> <efac:MainContractor> <cbc:ID schemeName="organization">ORG-0005</cbc:ID> </efac:MainContractor> </efac:SubContractor> </efac:TenderingParty> </efac:NoticeResult> <efac:Organizations> <efac:Organization> <efac:Company> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0005</cbc:ID> </cac:PartyIdentification> </efac:Company> </efac:Organization> </efac:Organizations>
     OCDS example: '{"parties":[{"id":"ORG-0005","roles":["tenderer"]}],"bids":{"details":[{"subcontracting":{"subcontracts":[{"id":"1","subcontractor":{"id":"ORG-0012"},"tenderers":[{"id":"ORG-0005","name":"Tendering Company Ltd"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tenderingPartySection
@@ -13451,11 +13456,10 @@
     mandatory: false
     pattern: ^TPA-\d{4}$
     eForms guidance: |-
-        - Perform the mapping for `BT-500-Organization-Company` (Organisation Name).
         - [Get the bid for the LotTender](common-operations.md#get-the-bid-for-a-lottender) and get the `ancestor::efac:NoticeResult/efac:TenderingParty` whose `/cbc:ID` is equal to the value of this field.
         - For each `/efac:Tenderer` in the tendering party:
           - [Get the organization for the tenderer](common-operations.md#get-the-organisation-for-a-tenderer).
-          - Add an `OrganizationReference` object to the bid's `.tenderers` array, set its `.id` to the organization's `.id` and set its `.name` to the organization's `.name`.
+          - Add an `OrganizationReference` object to the bid's `.tenderers` array and set its `.id` to the organization's `.id`.
     eForms example: <efac:NoticeResult><efac:LotTender><efac:TenderingParty><cbc:ID schemeName="tendering-party">TPA-0002</cbc:ID></efac:TenderingParty></efac:LotTender></efac:NoticeResult>
     OCDS example: '{"bids":{"details":[{"tenderers":[{"id":"ORG-0011","name":"Competitor"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderSection
