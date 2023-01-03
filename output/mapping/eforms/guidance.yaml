@@ -1821,7 +1821,7 @@
     Business groups:
         BG-2: Purpose
         BG-557: Group Framework Estimated Maximum Value
-    eForms guidance: \[UNREVIEWED\] Get the LotGroup in `tender.lotGroups` whose `.id` is equal to the value of `sibling::cac:TenderLot/cac:ID`. If none exists yet, add a LotGroup to `tender.lotGroups` and set its `.id` to the value of `sibling::cac:TenderLot/cac:ID.`, map to its `.techniques.frameworkAgreement.value.amount` and map `currencyID` to its `techniques.frameworkAgreement.value.currency`.
+    eForms guidance: '[Get the lot group for the ProcurementProjectLot](common-operations.md#get-the-lot-group-for-a-projectprocurementlot). Map to its `.techniques.frameworkAgreement.value.amount` and map `currencyID` to its `techniques.frameworkAgreement.value.currency`.'
     eForms example: <cac:FrameworkAgreement><cbc:EstimatedMaximumValueAmount currencyID="EUR">200000</cbc:EstimatedMaximumValueAmount></cac:FrameworkAgreement>
     OCDS example: '{"tender":{"lotGroups":[{"techniques":{"frameworkAgreement":{"value":{"amount":800000,"currency":"EUR"}}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#frameworkAgreementSection
@@ -6028,7 +6028,7 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/TYPE_CONTRACT_DEFENCE/TYPE_CONTRACT/@VALUE
     - TED_EXPORT/FORM_SECTION/F21_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot). If "works" or "services", map to the lot''s `.mainProcurementCategory`. If "supplies" map "goods" to the lot''s `.mainProcurementCategory`. If "combined" add to the lot''s `.additionalProcurementCategories` array.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot). If "works" or "services", map to the lot''s `.mainProcurementCategory`. If "supplies" set the lot''s `.mainProcurementCategory` to "goods". If "combined" add to the lot''s `.additionalProcurementCategories` array.'
     eForms example: <cbc:ProcurementTypeCode listName="contract-nature">works</cbc:ProcurementTypeCode>
     OCDS example: '{"tender":{"lots":[{"mainProcurementCategory":"works"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#natureSection
@@ -6222,7 +6222,7 @@
     eForms guidance: |-
         This business term is mapped to the same objects as created for BT-263-Lot.
 
-        [Get the item for the ProcurementProjectLot](common-operations.md#get-the-item-for-a-procurementprojectlot). For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update a corresponding `Classification` object in the item's `.additionalClassifications`, capitalize and map to the classification's `.scheme`.
+        [Get the item for the ProcurementProjectLot](common-operations.md#get-the-item-for-a-procurementprojectlot). For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update a corresponding `Classification` object in the item's `.additionalClassifications` array, capitalize and map to the classification's `.scheme`.
     eForms example: <cac:AdditionalCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311200</cbc:ItemClassificationCode></cac:AdditionalCommodityClassification>
     OCDS example: '{"tender":{"items":[{"additionalClassifications":[{"scheme":"CPV"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#classificationSection
@@ -6415,7 +6415,7 @@
     eForms guidance: |-
         This business term is mapped to the same `Classification` objects as created for BT-26-Lot.
 
-        [Get the item for the ProcurementProjectLot](common-operations.md#get-the-item-for-a-procurementprojectlot). For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update a corresponding `Classification` object in the item's `.additionalClassifications` and map to the classification's `.id`.
+        [Get the item for the ProcurementProjectLot](common-operations.md#get-the-item-for-a-procurementprojectlot). For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update a corresponding `Classification` object in the item's `.additionalClassifications` array and map to the classification's `.id`.
     eForms example: <cac:AdditionalCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311200</cbc:ItemClassificationCode></cac:AdditionalCommodityClassification>
     OCDS example: '{"tender":{"items":[{"additionalClassifications":[{"id":"15311200"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#classificationSection
@@ -6435,7 +6435,7 @@
     eForms guidance: |-
         This business term is mapped to the same objects as created for BT-26.
 
-        For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update a corresponding `Classification` object in the item's `.additionalClassifications` and map to the classification's `.id`.
+        For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update a corresponding `Classification` object in the item's `.additionalClassifications` array and map to the classification's `.id`.
     eForms example: <cac:AdditionalCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311200</cbc:ItemClassificationCode></cac:AdditionalCommodityClassification>
     OCDS example: '{"tender":{"items":[{"additionalClassifications":[{"id":"15311200"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#classificationSection
@@ -6562,7 +6562,7 @@
     type: amount
     repeatable: false
     mandatory: false
-    eForms guidance: \[UNREVIEWED\] Get the Lot in `tender.lots` whose `.id` is equal to the value of `sibling::cac:TenderLot/cac:ID`. If none exists yet, add a Lot to `tender.lots` and set its `.id` to the value of `sibling::cac:TenderLot/cac:ID.`, map to its `.techniques.frameworkAgreement.maximumValue.amount` and map `currencyID` to its `techniques.frameworkAgreement.maximumValue.currency`.
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot), map to its `.techniques.frameworkAgreement.maximumValue.amount` and map `currencyID` to its `techniques.frameworkAgreement.maximumValue.currency`.'
     eForms example: <efext:EformsExtension><efbc:FrameworkMaximumAmount currencyID="EUR">120000</efbc:FrameworkMaximumAmount></efext:EformsExtension>
     OCDS example: '{"tender":{"lots":[{"techniques":{"frameworkAgreement":{"maximumValue":{"amount":120000,"currency":"EUR"}}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#estimatedValueSection
@@ -6574,7 +6574,7 @@
     type: amount
     repeatable: false
     mandatory: false
-    eForms guidance: \[UNREVIEWED\] Get the LotGroup in `tender.lotGroups` whose `.id` is equal to the value of `sibling::cac:TenderLot/cac:ID`. If none exists yet, add a LotGroup to `tender.lotGroups` and set its `.id` to the value of `sibling::cac:TenderLot/cac:ID.`, map to its `.techniques.frameworkAgreement.maximumValue.amount` and map `currencyID` to its `techniques.frameworkAgreement.maximumValue.currency`.
+    eForms guidance: '[Get the lot group for the ProcurementProjectLot](common-operations.md#get-the-lot-group-for-a-procurementprojectlot), map to its `.techniques.frameworkAgreement.maximumValue.amount` and map `currencyID` to its `techniques.frameworkAgreement.maximumValue.currency`.'
     eForms example: <efext:EformsExtension><efbc:FrameworkMaximumAmount currencyID="EUR">120000</efbc:FrameworkMaximumAmount></efext:EformsExtension>
     OCDS example: '{"tender":{"lotGroups":[{"techniques":{"frameworkAgreement":{"maximumValue":{"amount":120000,"currency":"EUR"}}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#estimatedValueSection
@@ -7780,7 +7780,7 @@
     eForms guidance: |-
         These values are mapped to the same `Address` object as created for BT-728-Lot, BT-5131-Lot, BT-5121-Lot, BT-5071-Lot, BT-727-Lot, BT-5101-Lot and BT-5141-Lot.
 
-        [Get the item for the ProcurementProjectLot](common-operations.md#get-the-item-for-a-procurementprojectlot). For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array and map to its `.region`.
+        [Get the item for the ProcurementProjectLot](common-operations.md#get-the-item-for-a-procurementprojectlot). For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array and map to its `.region`.
     eForms example: <cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="nuts=lvl3">UKG23</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"region":"UKG23"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -8423,7 +8423,7 @@
     eForms guidance: |-
         These values are mapped to the same `Address` object as created for BT-728-Lot, BT-5131-Lot, BT-5121-Lot, BT-5071-Lot, BT-727-Lot, BT-5101-Lot and BT-5141-Lot.
 
-        [Get the item for the ProcurementProjectLot](common-operations.md#get-the-item-for-a-procurementprojectlot). For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array and map to its `.postalCode`.
+        [Get the item for the ProcurementProjectLot](common-operations.md#get-the-item-for-a-procurementprojectlot). For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array and map to its `.postalCode`.
     eForms example: <cac:RealizedLocation><cac:Address><cbc:PostalZone>XY14 2LG</cbc:PostalZone></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"postalCode":"XY14 2LG"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -8438,7 +8438,7 @@
     Description: The postcode of the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: These values are mapped to the same `Address` object as created for BT-728-Part, BT-5131-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, BT-5101-Part and BT-5141-Part. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to its `.postalCode`.
+    eForms guidance: These values are mapped to the same `Address` object as created for BT-728-Part, BT-5131-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, BT-5101-Part and BT-5141-Part. For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to its `.postalCode`.
     eForms example: <cac:RealizedLocation><cac:Address><cbc:PostalZone>XY14 2LG</cbc:PostalZone></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"deliveryAddresses":[{"postalCode":"XY14 2LG"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -8590,7 +8590,7 @@
     eForms guidance: |-
         These values are mapped to the same `Address` object as created for BT-728-Lot, BT-5131-Lot, BT-5121-Lot, BT-5071-Lot, BT-727-Lot, BT-5101-Lot and BT-5141-Lot.
 
-        [Get the item for the ProcurementProjectLot](common-operations.md#get-the-item-for-a-procurementprojectlot). For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array and map to its `.locality`.
+        [Get the item for the ProcurementProjectLot](common-operations.md#get-the-item-for-a-procurementprojectlot). For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array and map to its `.locality`.
     eForms example: <cac:RealizedLocation><cac:Address><cbc:CityName>BigCity</cbc:CityName></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"locality":"BigCity"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -9610,7 +9610,9 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/CONTRACTING_BODY/DOCUMENT_RESTRICTED
     TED guidance:
     - Add a `ParticipationFee` object to the `tender.participationFees` array, set its `.type` to 'document', and set its `.id` to '1'.
-    eForms guidance: These values are mapped to the same objects as created for BT-14. Map to the `ParticipationFee` object's `.description`. If the document type label has already been mapped to this field append to it with ' - ' (space, dash, space).
+    eForms guidance: |-
+        These values are mapped to the same objects as created for BT-14-Lot and BT-707-Lot.
+        [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and for each `ancestor::cac:CallForTendersDocumentReference`, add or update the corresponding `ParticipationFee` object in the lot's `participationFees` array and map to its `.description`. If the document type label has already been mapped to this field append to it with ' - ' (space, dash, space).
     eForms example: <cac:ExternalReference><cbc:URI>https://mywebsite.com/proc/2019024/accessinfo</cbc:URI></cac:ExternalReference>
     OCDS example: '{"tender":{"lots":[{"participationFees":[{"description":"https://mywebsite.com/proc/2019024/accessinfo"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procurementDocsSection
@@ -9631,7 +9633,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/CONTRACTING_BODY/DOCUMENT_RESTRICTED
     TED guidance:
     - Add a `ParticipationFee` object to the `tender.participationFees` array, set its `.type` to 'document', and set its `.id` to '1'.
-    eForms guidance: These values are mapped to the same objects as created for BT-14. Map to the `ParticipationFee` object's `.description`.
+    eForms guidance: These values are mapped to the same objects as created for BT-14. For each `ancestor::cac:CallForTendersDocumentReference`, add or update the corresponding `ParticipationFee` object in the `participationFees` array and map to its `.description`.
     eForms example: <cac:ExternalReference><cbc:URI>https://mywebsite.com/proc/2019024/accessinfo</cbc:URI></cac:ExternalReference>
     OCDS example: '{"tender":{"participationFees":[{"description":"https://mywebsite.com/proc/2019024/accessinfo"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procurementDocsSection
@@ -10100,7 +10102,7 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_CONCESSIONAIRE_DEFENCE/FD_CONTRACT_CONCESSIONAIRE_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_SUB_DEFENCE/AWARD_CRITERIA_CONTRACT_NOTICE_INFORMATION_DEFENCE
     eForms guidance: |-
-        These values are mapped to the same `ParticipationFee` objects as created for BT-14-Lot.
+        These values are mapped to the same `ParticipationFee` objects as created for BT-14-Lot and BT-615-Lot.
 
         - [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot)
         - For each `cac:CallForTendersDocumentReference`, add or update the correpsonding `ParticipationFee` object in the lot's `.participationFees` array
@@ -10121,7 +10123,7 @@
     Business groups:
         BG-101: Procurement Documents
     eForms guidance: |-
-        These values are mapped to the same `ParticipationFee` objects as created for BT-14-Part.
+        These values are mapped to the same `ParticipationFee` objects as created for BT-14-Part and BT-615-Part.
 
         - For each `cac:CallForTendersDocumentReference`, add or update the correpsonding `ParticipationFee` object in the `.participationFees` array
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/communication-justification) and map to the `ParticipationFee` object's `.description`.
@@ -10446,7 +10448,10 @@
     repeatable: false
     mandatory: false
     codeList: eu-programme
-    eForms guidance: These values are mapped to the same `finance` object as created for BT-5010 and BT-6140. If BT-5010 is not present follow the guidance for BT-5010, setting the `.id` of the `Finance` object incrementally based on its position in the `finance` array rather than the value of BT-5010. For each `ancestor::efac:Funding`, add or update the corresponding `Finance` object in the budget's `.finance` array and map to its `.title`.
+    eForms guidance: |-
+        These values are mapped to the same `finance` object as created for BT-5010-Lot and BT-6140-Lot.
+        If BT-5010-Lot is not present follow the guidance for BT-5010-Lot, setting the `.id` of the `Finance` object incrementally based on its position in the `finance` array rather than the value of BT-5010-Lot.
+        For each `ancestor::efac:Funding`, add or update the corresponding `Finance` object in the budget's `.finance` array and map to its `.title`.
     eForms example: <efac:Funding><cbc:FundingProgramCode listName="eu-proramme">ERDF_2021</cbc:FundingProgramCode></efac:Funding>
     OCDS example: '{"planning":{"budget":{"finance":[{"title":"ERDF_2021"}]}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#EUFundsSection
@@ -10843,7 +10848,7 @@
     eForms guidance: |-
         [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).
         Set the document's `.unofficialTranslation` to `true`.
-        Add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to `.relatedLots`.
+        [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and add its `id` to the document's `.relatedLots`.
     eForms example: <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:CallForTendersDocumentReference> <cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID> <cbc:DocumentStatusCode listName="document-status">non-official</cbc:DocumentStatusCode> </cac:CallForTendersDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","unofficialTranslation":true,"relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procurementDocsSection
@@ -11175,11 +11180,11 @@
     - Add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array, set its `.type` to 'technical', and map to its `.description`.
     - Add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array, set its `.type` to 'technical', and set its `.description` to "As stated in the procurement documents".
     eForms guidance: |-
-        If `cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, these values are mapped to the same `SelectionCriterion` objects as created for BT-40, BT-747, BT-749, BT-750, BT-752, BT-7531 and BT-7532.
+        If `cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, these values are mapped to the same `SelectionCriterion` objects as created for BT-40-Lot, BT-747-Lot, BT-749-Lot, BT-750-Lot, BT-752-Lot, BT-7531-Lot and BT-7532-Lot.
 
         - [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot)
-        - For each `<efac:SelectionCriteria>`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
-        - Map to the criterion's `.description`. \[Concatenate it with BT-750 Selection Criteria Description.\] \[https://github.com/open-contracting/european-union-support/issues/97\]
+        - For each `efac:SelectionCriteria`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
+        - Map to the criterion's `.description`. \[Concatenate it with BT-750-Lot Selection Criteria Description.\] \[https://github.com/open-contracting/european-union-support/issues/97\]
     eForms example: <efac:SelectionCriteria><cbc:Name languageID="ENG">Minimum Turnover</cbc:Name></efac:SelectionCriteria>
     OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"description":"Minimum Turnover"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#selectionCriteriaSection
@@ -11232,11 +11237,11 @@
     - Get the `SelectionCriterion` object whose `.type` is 'economic'; if none exists, add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array, and set its `.type` to 'economic'. Then, map to its `.minimum`.
     - Get the `SelectionCriterion` object whose `.type` is 'technical'. If none exists, add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array, and set its `.type` to 'technical'. Then, map to its `.minimum`.
     eForms guidance: |-
-        If `cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, these values are mapped to the same `SelectionCriterion` objects as created for BT-40, BT-747, BT-749, BT-752, BT-7531 and BT-7532.
+        If `cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, these values are mapped to the same `SelectionCriterion` objects as created for BT-40-Lot, BT-747-Lot, BT-749-Lot, BT-752-Lot, BT-7531-Lot and BT-7532-Lot.
 
         - [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot)
-        - For each `<efac:SelectionCriteria>`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
-        - Map to the criterion's `.description`. \[Concatenate it with BT-749 Selection Criteria Name.\] \[https://github.com/open-contracting/european-union-support/issues/97\]
+        - For each `efac:SelectionCriteria`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
+        - Map to the criterion's `.description`. \[Concatenate it with BT-749-Lot Selection Criteria Name.\] \[https://github.com/open-contracting/european-union-support/issues/97\]
     eForms example: <efac:SelectionCriteria><cbc:Description languageID="ENG">Turnover over contract value rate</cbc:Description></efac:SelectionCriteria>
     OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"description":"Turnover over contract value rate"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#selectionCriteriaSection
@@ -11273,10 +11278,10 @@
         BG-702: Selection Criteria
         BG-72: Selection Criteria Second Stage Invite Number
     eForms guidance: |-
-        If `ancestor::efac:SelectionCriteria/cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, these values are mapped to the same `SelectionCriterion` objects as created for BT-40, BT-747, BT-749, BT-750, BT-7531 and BT-7532, and the same `SelectionCriterionNumber` object as created for BT-7531 and BT-7532.
+        If `ancestor::efac:SelectionCriteria/cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, these values are mapped to the same `SelectionCriterion` objects as created for BT-40-Lot, BT-747-Lot, BT-749-Lot, BT-750-Lot, BT-7531-Lot and BT-7532-Lot, and the same `SelectionCriterionNumber` object as created for BT-7531-Lot and BT-7532-Lot.
 
         - [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot)
-        - For each `<efac:SelectionCriteria>`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`
+        - For each `efac:SelectionCriteria`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`
         - For each `efac:CriterionParameter`, add or update a corresponding `SelectionCriterionNumber` object in the criterion's `.numbers`.
         - Map to the number's `.number`. \[https://github.com/open-contracting/european-union-support/issues/73\], \[https://github.com/open-contracting/european-union-support/issues/97\]
     eForms example: <efac:CriterionParameter><efbc:ParameterNumeric>2</efbc:ParameterNumeric></efac:CriterionParameter>
@@ -11296,10 +11301,10 @@
         BG-702: Selection Criteria
         BG-72: Selection Criteria Second Stage Invite Number
     eForms guidance: |-
-        If `ancestor::efac:SelectionCriteria/cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, these values are mapped to the same `SelectionCriterion` objects as created for BT-40, BT-747, BT-749, BT-750, BT-752 and BT-7532, and the same `SelectionCriterionNumber` object as created for BT-752 and BT-7532.
+        If `ancestor::efac:SelectionCriteria/cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, these values are mapped to the same `SelectionCriterion` objects as created for BT-40-Lot, BT-747-Lot, BT-749-Lot, BT-750-Lot, BT-752-Lot and BT-7532-Lot, and the same `SelectionCriterionNumber` object as created for BT-752-Lot and BT-7532-Lot.
 
         - [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot)
-        - For each `<efac:SelectionCriteria>`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
+        - For each `efac:SelectionCriteria`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
         - For each `efac:CriterionParameter`, add or update a corresponding `SelectionCriterionNumber` object in the criterion's `.numbers`.
         - Identify the equivalent code in the [criterionWeight](https://extensions.open-contracting.org/en/extensions/awardCriteria/master/codelists/#criterionWeight.csv) codelist and map to the number's `.weight`. \[https://github.com/open-contracting/european-union-support/issues/73\], \[https://github.com/open-contracting/european-union-support/issues/97\]
     eForms example: <efac:CriterionParameter><efbc:ParameterCode listName="number-weight">per-exa</efbc:ParameterCode></efac:CriterionParameter>
@@ -11319,10 +11324,10 @@
         BG-702: Selection Criteria
         BG-72: Selection Criteria Second Stage Invite Number
     eForms guidance: |-
-        If `ancestor::efac:SelectionCriteria/cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, these values are mapped to the same `SelectionCriterion` objects as created for BT-40, BT-747, BT-749, BT-750, BT-752 and BT-7531, and the same `SelectionCriterionNumber` object as created for BT-752 and BT-7531.
+        If `ancestor::efac:SelectionCriteria/cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, these values are mapped to the same `SelectionCriterion` objects as created for BT-40-Lot, BT-747-Lot, BT-749-Lot, BT-750-Lot, BT-752-Lot and BT-7531-Lot, and the same `SelectionCriterionNumber` object as created for BT-752-Lot and BT-7531-Lot.
 
         - [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot)
-        - For each `<efac:SelectionCriteria>`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
+        - For each `efac:SelectionCriteria`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
         - For each `efac:CriterionParameter`, add or update a corresponding `SelectionCriterionNumber` object in the criterion's `.numbers`.
         - Identify the equivalent code in the [criterionThreshold](https://extensions.open-contracting.org/en/extensions/awardCriteria/master/codelists/#criterionThreshold.csv) codelist and map to the number's `.threshold`. \[https://github.com/open-contracting/european-union-support/issues/73\], \[https://github.com/open-contracting/european-union-support/issues/97\]
     eForms example: <efac:CriterionParameter><efbc:ParameterCode listName="number-threshold">min-score</efbc:ParameterCode></efac:CriterionParameter>
@@ -11888,7 +11893,7 @@
     Business groups:
         BG-713: Strategic Procurement
     eForms guidance: |-
-        These values are mapped to the same `Sustainability` objects as created for BT-06.
+        These values are mapped to the same `Sustainability` objects as created for BT-06-Lot.
 
         [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and for each `sibling::cbc:ProcurementTypeCode`, add or update the corresponding `Sustainability` object in the lot's `sustainability` array and map to its `.description`.
     eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementType languageID="ENG">This is a strategic procurement involving the innovative use of ...</cbc:ProcurementType></cac:ProcurementAdditionalType>
@@ -12599,7 +12604,7 @@
     repeatable: false
     mandatory: false
     codeList: document-status
-    eForms guidance: Discard. If field = "true" follow the guidance for [BT-708-Lot](guidance.yaml#bt-708-lot), if it = "false" follow the guidance for [BT-737-Lot](guidance.yaml#bt-737-lot)
+    eForms guidance: Discard. If "true" follow the guidance for [BT-708-Lot](guidance.yaml#bt-708-lot), if "false" follow the guidance for [BT-737-Lot](guidance.yaml#bt-737-lot)
     eForms example: <cac:CallForTendersDocumentReference><cbc:DocumentStatusCode listName="linguistic-status">official</cbc:DocumentStatusCode></cac:CallForTendersDocumentReference>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procurementDocsSection
@@ -12612,7 +12617,7 @@
     repeatable: false
     mandatory: false
     codeList: document-status
-    eForms guidance: Discard. If field = "true" follow the guidance for [BT-708-Part](guidance.yaml#bt-708-part), if it = "false" follow the guidance for [BT-737-Part](guidance.yaml#bt-737-part)
+    eForms guidance: Discard. If "true" follow the guidance for [BT-708-Part](guidance.yaml#bt-708-part), if "false" follow the guidance for [BT-737-Part](guidance.yaml#bt-737-part)
     eForms example: <cac:CallForTendersDocumentReference><cbc:DocumentStatusCode listName="linguistic-status">official</cbc:DocumentStatusCode></cac:CallForTendersDocumentReference>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procurementDocsSection
@@ -12653,7 +12658,10 @@
     type: text-multilingual
     repeatable: false
     mandatory: true
-    eForms guidance: These values map to the same `CustomerServices` objects as created for OPT-071-Lot. Update the corresponding `CustomerServices` object and map to its `.description`.
+    eForms guidance: |-
+        These values map to the same `CustomerServices` objects as created for OPT-071-Lot.
+        [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot).
+        For each `cac:ContractExecutionRequirement` add or update the corresponding `CustomerServices` object in the lot's `contractTerms` array and map to its `.description`.
     eForms example: <cac:ContractExecutionRequirement><cbc:ExecutionRequirementCode listName="customer-service">clean</cbc:ExecutionRequirementCode></cac:ContractExecutionRequirement>
     OCDS example: '{"tender":{"lots":[{"contractTerms":{"customerServices":[{"description":"A description as given in OPT-072"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tenderingTermsSection
@@ -12705,7 +12713,7 @@
     eForms guidance: |-
         [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).
         Map to the document's `.url`.
-        Add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
+        [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and add its `id` to the document's `.relatedLots`.
     eForms example: <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:FiscalLegislationDocumentReference> <cbc:ID>Fiscal1</cbc:ID> <cac:Attachment> <cac:ExternalReference> <cbc:URI>https://fiscal-legislation.gov.stat</cbc:URI> </cac:ExternalReference> </cac:Attachment> </cac:FiscalLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"documents":[{"id":"Fiscal1","url":"https://fiscal-legislation.gov.stat","relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
@@ -12735,7 +12743,7 @@
     eForms guidance: |-
         [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).
         Set the document's `.documentType` to 'legislation'.
-        Add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
+        [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and add its `id` to the document's `.relatedLots`.
     eForms example: <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:FiscalLegislationDocumentReference> <cbc:ID>Fiscal1</cbc:ID> <cac:Attachment> <cac:ExternalReference> <cbc:URI>https://fiscal-legislation.gov.stat</cbc:URI> </cac:ExternalReference> </cac:Attachment> </cac:FiscalLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"documents":[{"id":"Fiscal1","documentType":"legislation","relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
@@ -12764,7 +12772,7 @@
     eForms guidance: |-
         [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).
         Set the document's `.documentType` to 'legislation'.
-        Add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
+        [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and add its `id` to the document's `.relatedLots`.
     eForms example: <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:EnvironmentalLegislationDocumentReference> <cbc:ID>Env1</cbc:ID> </cac:EnvironmentalLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"documents":[{"id":"Env1","documentType":"legislation","relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
@@ -12793,7 +12801,7 @@
     eForms guidance: |-
         [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).
         Set the document's `.documentType` to 'legislation'.
-        Add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
+        [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and add its `id` to the document's `.relatedLots`.
     eForms example: <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:EmploymentLegislationDocumentReference> <cbc:ID>Empl1</cbc:ID> </cac:EmploymentLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"documents":[{"id":"Empl1","documentType":"legislation","relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
@@ -12823,7 +12831,7 @@
     eForms guidance: |-
         [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).
         Map to the document's `.url`.
-        Add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
+        [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and add its `id` to the document's `.relatedLots`.
     eForms example: <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:EnvironmentalLegislationDocumentReference> <cbc:ID>Env1</cbc:ID> <cac:Attachment> <cac:ExternalReference> <cbc:URI>http://environmental-legislation.gov.stat</cbc:URI> </cac:ExternalReference> </cac:Attachment> </cac:EnvironmentalLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"documents":[{"id":"Env1","url":"https://environmental-legislation.gov.stat","relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
@@ -12854,7 +12862,7 @@
     eForms guidance: |-
         [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).
         Map to the document's `.url`.
-        Add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
+        [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and add its `id` to the document's `.relatedLots`.
     eForms example: <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:EmploymentLegislationDocumentReference> <cbc:ID>Empl1</cbc:ID> <cac:Attachment> <cac:ExternalReference> <cbc:URI>http://employment-legislation.gov.stat</cbc:URI> </cac:ExternalReference> </cac:Attachment> </cac:EmploymentLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"documents":[{"id":"Empl1","url":"https://employment-legislation.gov.stat","relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
@@ -12883,7 +12891,7 @@
     mandatory: false
     eForms guidance: |-
         [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference).
-        Add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
+        [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and add its `id` to the document's `.relatedLots`.
     eForms example: <cac:CallForTendersDocumentReference><cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID></cac:CallForTendersDocumentReference>
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procurementDocsSection
@@ -13140,7 +13148,7 @@
     pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: |-
         [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference) and map to its `publisher.id`.
-        Add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
+        [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and add its `id` to the document's `.relatedLots`.
         [Get the organization for the organization technical identifier reference](common-operations.md#get-the-organization-for-an-organization-technical-identifier-reference) and add 'informationProvider' to is `roles` array.
     eForms example: <ext:UBLExtensions> <ext:UBLExtension> <ext:ExtensionContent> <efext:EformsExtension> <efac:Organizations> <efac:Organization> <efac:Company> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </efac:Company> </efac:Organization> </efac:Organizations> </efext:EformsExtension> </ext:ExtensionContent> </ext:UBLExtension> </ext:UBLExtensions> <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:EmploymentLegislationDocumentReference> <cbc:ID>Empl1</cbc:ID> <cac:IssuerParty> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </cac:IssuerParty> </cac:EmploymentLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
     OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationProvider"]}],"tender":{"documents":[{"id":"Empl1","publisher":{"id":"ORG-0001"},"relatedLots":["LOT-0001"]}]}}'
@@ -13159,7 +13167,7 @@
     pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: |-
         [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference) and map to its `publisher.id`.
-        Add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
+        [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and add its `id` to the document's `.relatedLots`.
         [Get the organization for the organization technical identifier reference](common-operations.md#get-the-organization-for-an-organization-technical-identifier-reference) and add 'informationProvider' to is `roles` array.
     eForms example: <ext:UBLExtensions> <ext:UBLExtension> <ext:ExtensionContent> <efext:EformsExtension> <efac:Organizations> <efac:Organization> <efac:Company> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </efac:Company> </efac:Organization> </efac:Organizations> </efext:EformsExtension> </ext:ExtensionContent> </ext:UBLExtension> </ext:UBLExtensions> <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:EnvironmentalLegislationDocumentReference> <cbc:ID>Env1</cbc:ID> <cac:IssuerParty> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </cac:IssuerParty> </cac:EnvironmentalLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
     OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationProvider"]}],"tender":{"documents":[{"id":"Env1","publisher":{"id":"ORG-0001"},"relatedLots":["LOT-0001"]}]}}'
@@ -13178,7 +13186,7 @@
     pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: |-
         [Get the document for the document reference](common-operations.md#get-the-document-for-a-document-reference) and map to its `publisher.id`.
-        Add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
+        [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and add its `id` to the document's `.relatedLots`.
         [Get the organization for the organization technical identifier reference](common-operations.md#get-the-organization-for-an-organization-technical-identifier-reference) and add 'informationProvider' to is `roles` array.
     eForms example: <ext:UBLExtensions> <ext:UBLExtension> <ext:ExtensionContent> <efext:EformsExtension> <efac:Organizations> <efac:Organization> <efac:Company> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </efac:Company> </efac:Organization> </efac:Organizations> </efext:EformsExtension> </ext:ExtensionContent> </ext:UBLExtension> </ext:UBLExtensions> <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:FiscalLegislationDocumentReference> <cbc:ID>Fiscal1</cbc:ID> <cac:IssuerParty> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </cac:IssuerParty> </cac:FiscalLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
     OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationProvider"]}],"tender":{"documents":[{"id":"Fiscal1","publisher":{"id":"ORG-0001"},"relatedLots":["LOT-0001"]}]}}'
