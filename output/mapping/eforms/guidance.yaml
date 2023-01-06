@@ -10105,7 +10105,7 @@
         These values are mapped to the same `ParticipationFee` objects as created for BT-14-Lot and BT-615-Lot.
 
         - [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot)
-        - For each `cac:CallForTendersDocumentReference`, add or update the correpsonding `ParticipationFee` object in the lot's `.participationFees` array
+        - For each `cac:CallForTendersDocumentReference`, add or update the corresponding `ParticipationFee` object in the lot's `.participationFees` array
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/communication-justification) and map it to the `ParticipationFee` object's `.description`.
     eForms example: <cac:CallForTendersDocumentReference><cbc:DocumentTypeCode listName="communication-justification">ipr-iss</cbc:DocumentTypeCode></cac:CallForTendersDocumentReference>
     OCDS example: '{"tender":{"lots":[{"participationFees":[{"description":"Intellectual property right issues"}]}]}}'
@@ -10125,7 +10125,7 @@
     eForms guidance: |-
         These values are mapped to the same `ParticipationFee` objects as created for BT-14-Part and BT-615-Part.
 
-        - For each `cac:CallForTendersDocumentReference`, add or update the correpsonding `ParticipationFee` object in the `.participationFees` array
+        - For each `cac:CallForTendersDocumentReference`, add or update the corresponding `ParticipationFee` object in the `.participationFees` array
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/communication-justification) and map to the `ParticipationFee` object's `.description`.
     eForms example: <cac:CallForTendersDocumentReference><cbc:DocumentTypeCode listName="communication-justification">ipr-iss</cbc:DocumentTypeCode></cac:CallForTendersDocumentReference>
     OCDS example: '{"tender":{"participationFees":[{"description":"Intellectual property right issues"}]}}'
