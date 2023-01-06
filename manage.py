@@ -84,7 +84,7 @@ def unique(series):
 
     # Lists of lists are not supported by `Series.unique()` ("TED guidance").
     if isinstance(series.iloc[0], np.ndarray):
-        return sorted(set(item for array in series for item in array))
+        return sorted({item for array in series for item in array})
 
     return series.unique()
 
@@ -275,7 +275,7 @@ def update_with_sdk(filename, verbose):
 
     if verbose:
         click.echo(f"{df.shape[0]} kept, {len(labels)} dropped")
-        click.echo("\n".join(sorted(map(lambda s: f"- {s}", labels.values()))))
+        click.echo("\n".join(sorted(f"- {label}" for label in labels.values())))
 
     # Remove or abbreviate columns that do not assist the mapping process and that lengthen the JSON file. See README.
     drop = ["xpathRelative", "legalType", "maxLength", "forbidden", "assert", "inChangeNotice", "privacy"]
@@ -973,13 +973,13 @@ def fields_without_extensions(file, contains):
                             paths.add(path.replace(".", "/"))
 
     seen = [row["path"] for row in csv.DictReader(file)]
-    for path in sorted(list(paths)):
+    for path in sorted(paths):
         if path not in seen:
             click.echo(path)
 
     if contains:
         click.echo(f"Contains '{contains}':")
-        for path in sorted(list(paths)):
+        for path in sorted(paths):
             if contains in path:
                 click.echo(path)
 
