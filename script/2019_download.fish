@@ -8,7 +8,7 @@ curl -sS -o TED-XML-to-eForms-mapping-OP-public-20220404.xlsx https://simap.ted.
 
 # https://ec.europa.eu/growth/single-market/public-procurement/digital-procurement/eforms_en
 
-curl -sS -o CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx https://ec.europa.eu/docsroom/documents/43488/attachments/1/translations/en/renditions/native
+curl -sS -o CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx https://ec.europa.eu/docsroom/documents/52697/attachments/2/translations/en/renditions/native
 
 # https://github.com/OP-TED/eForms-SDK/blob/main/fields/fields.json
 
