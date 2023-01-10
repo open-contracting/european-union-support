@@ -185,12 +185,12 @@
     OCDS example: '{"date":"2019-11-26T13:38:54+01:00"}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#dispatchDateSection
 -   id: BT-06-Lot
-    parentNodeId: ND-LotProcurementScope
+    parentNodeId: ND-StrategicProcurementType
     name: Strategic Procurement
     btId: BT-06
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType/cbc:ProcurementTypeCode[@listName='strategic-procurement']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='strategic-procurement']/cbc:ProcurementTypeCode[@listName='strategic-procurement']
     type: code
-    repeatable: true
+    repeatable: false
     mandatory: false
     codeList: strategic-procurement
     Description: Use of a technical specification, selection criterion, award criterion, or contract performance condition aims to reduce the environmental impacts of the procurement, fulfil social objectives and/or buy an innovative work, supply or service.
@@ -1751,7 +1751,6 @@
     type: id
     repeatable: true
     mandatory: true
-    pattern: ^RESULT$
     Description: An identifier of one or more sections within a previous notice within the procedure. The information in the modification section refers to this section or these sections.
     Business groups:
         BG-77: Modification
@@ -6555,7 +6554,7 @@
     OCDS example: '{"tender":{"value":{"amount":250000,"currency":"EUR"}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#estimatedValueSection
 -   id: BT-271-Lot
-    parentNodeId: ND-LotValueEstimate
+    parentNodeId: ND-LotValueEstimateExtension
     name: Framework Maximum Value
     btId: BT-271
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:RequestedTenderTotal/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efbc:FrameworkMaximumAmount
@@ -6567,7 +6566,7 @@
     OCDS example: '{"tender":{"lots":[{"techniques":{"frameworkAgreement":{"maximumValue":{"amount":120000,"currency":"EUR"}}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#estimatedValueSection
 -   id: BT-271-LotsGroup
-    parentNodeId: ND-LotsGroupValueEstimate
+    parentNodeId: ND-LotsGroupValueEstimateExtension
     name: Framework Maximum Value
     btId: BT-271
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:ProcurementProject/cac:RequestedTenderTotal/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efbc:FrameworkMaximumAmount
@@ -6579,7 +6578,7 @@
     OCDS example: '{"tender":{"lotGroups":[{"techniques":{"frameworkAgreement":{"maximumValue":{"amount":120000,"currency":"EUR"}}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#estimatedValueSection
 -   id: BT-271-Procedure
-    parentNodeId: ND-ProcedureValueEstimate
+    parentNodeId: ND-ProcedureValueEstimateExtension
     name: Framework Maximum Value
     btId: BT-271
     xpathAbsolute: /*/cac:ProcurementProject/cac:RequestedTenderTotal/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efbc:FrameworkMaximumAmount
@@ -7750,7 +7749,7 @@
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"region":"GBK62"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
 -   id: BT-5071-Lot
-    parentNodeId: ND-LotPlacePerformance
+    parentNodeId: ND-LotPerformanceAddress
     name: Place Performance Country Subdivision
     btId: BT-5071
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:RealizedLocation/cac:Address/cbc:CountrySubentityCode
@@ -8122,7 +8121,7 @@
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"streetAddress":"2 CheeseStreet, Nelson Building, 2nd floor"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
 -   id: BT-5101(a)-Lot
-    parentNodeId: ND-LotPlacePerformance
+    parentNodeId: ND-LotPerformanceAddress
     name: Place Performance Street
     btId: BT-5101
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:RealizedLocation/cac:Address/cbc:StreetName
@@ -8195,7 +8194,7 @@
     OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"streetAddress":"Main Street, 2, Building B1, 3rd floor"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
 -   id: BT-5101(b)-Lot
-    parentNodeId: ND-LotPlacePerformance
+    parentNodeId: ND-LotPerformanceAddress
     name: Place Performance Streetline 1
     btId: BT-5101
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:RealizedLocation/cac:Address/cbc:AdditionalStreetName
@@ -8243,7 +8242,7 @@
     OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"streetAddress":"Main Street, 2, Building B1, 3rd floor"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
 -   id: BT-5101(c)-Lot
-    parentNodeId: ND-LotPlacePerformance
+    parentNodeId: ND-LotPerformanceAddress
     name: Place Performance Streetline 2
     btId: BT-5101
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:RealizedLocation/cac:Address/cac:AddressLine/cbc:Line
@@ -8410,7 +8409,7 @@
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"postalCode":"C6HA78"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
 -   id: BT-5121-Lot
-    parentNodeId: ND-LotPlacePerformance
+    parentNodeId: ND-LotPerformanceAddress
     name: Place Performance Post Code
     btId: BT-5121
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:RealizedLocation/cac:Address/cbc:PostalZone
@@ -8577,7 +8576,7 @@
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"locality":"MouseTown"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
 -   id: BT-5131-Lot
-    parentNodeId: ND-LotPlacePerformance
+    parentNodeId: ND-LotPerformanceAddress
     name: Place Performance City
     btId: BT-5131
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:RealizedLocation/cac:Address/cbc:CityName
@@ -8747,7 +8746,7 @@
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"country":"GB"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
 -   id: BT-5141-Lot
-    parentNodeId: ND-LotPlacePerformance
+    parentNodeId: ND-LotPerformanceAddress
     name: Place Performance Country Code
     btId: BT-5141
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:RealizedLocation/cac:Address/cac:Country/cbc:IdentificationCode
@@ -9439,7 +9438,7 @@
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_notice_aggregated_amounts
 -   id: BT-57-Lot
-    parentNodeId: ND-OptionsAndRenewals
+    parentNodeId: ND-OptionsDescription
     name: Renewal Description
     btId: BT-57
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ContractExtension/cac:Renewal/cac:Period/cbc:Description
@@ -10514,7 +10513,7 @@
     OCDS example: '{"tender":{"suitability":{"sme":true}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#suitableSMESection
 -   id: BT-727-Lot
-    parentNodeId: ND-LotPlacePerformance
+    parentNodeId: ND-LotPerformanceAddress
     name: Place Performance Services Other
     btId: BT-727
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:RealizedLocation/cac:Address/cbc:Region
@@ -11334,12 +11333,12 @@
     OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"numbers":[{"threshold":"minimumScore"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#selectionCriteriaSection
 -   id: BT-754-Lot
-    parentNodeId: ND-LotProcurementScope
+    parentNodeId: ND-AccessibilityJustification
     name: Accessibility
     btId: BT-754
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType/cbc:ProcurementTypeCode[@listName='accessibility']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='accessibility']/cbc:ProcurementTypeCode[@listName='accessibility']
     type: code
-    repeatable: true
+    repeatable: false
     mandatory: false
     codeList: accessibility
     Description: The use of accessibility criteria for persons with disabilities in the technical specifications.
@@ -11951,10 +11950,10 @@
     OCDS example: '{"tender":{"lots":[{"otherRequirements":{"requiresStaffNamesAndQualifications":true}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#staffQualificationSection
 -   id: BT-801-Lot
-    parentNodeId: ND-LotTenderingTerms
+    parentNodeId: ND-NDA
     name: Non Disclosure Agreement
     btId: BT-801
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:ContractExecutionRequirement/cbc:ExecutionRequirementCode[@listName='nda']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:ContractExecutionRequirement[cbc:ExecutionRequirementCode/@listName='nda']/cbc:ExecutionRequirementCode[@listName='nda']
     type: code
     repeatable: false
     mandatory: false
@@ -12372,7 +12371,7 @@
     name: Used asset
     btId: OPP-021
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:SettledContract/efac:DurationJustification/efac:AssetsList/efac:Asset/efbc:AssetDescription
-    type: text
+    type: text-multilingual
     repeatable: false
     mandatory: false
     eForms guidance: ''
@@ -13331,7 +13330,7 @@
     - ORG
     - TPO
     repeatable: false
-    mandatory: true
+    mandatory: false
     pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: '[Get the organization for the organization technical identifier reference](get-the-organization-for-an-organization-technical-identifier-reference) and add ''processContactPoint'' to its `.roles` array.'
     eForms example: <cac:ProcurementProjectLot><cac:TenderingTerms><cac:AdditionalInformationParty><cac:PartyIdentification><cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID></cac:PartyIdentification></cac:AdditionalInformationParty></cac:TenderingTerms></cac:ProcurementProjectLot>
