@@ -313,6 +313,9 @@ def update_with_annex(filename):
     # Remove extra header rows.
     check(df["ID"].isna().sum(), 3, "extra header rows")
     df = df[df["ID"].notna()]
+    # BG-714 now identifies "CVD Information" in addition to "Review".
+    if df.at[295, "ID"] == "BG-714":
+        df.at[295, "ID"] = "BG-7140"
 
     # Ensure there are no duplicates.
     df.set_index("ID", verify_integrity=True)

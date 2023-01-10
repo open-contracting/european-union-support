@@ -6,7 +6,7 @@
     type: id
     repeatable: false
     mandatory: false
-    Description: The legal basis (e.g. a European Directive or Regulation, national law) under which the procurement procedure takes place.
+    Description: The legal basis (e.g. a Union or national legal act) under which the procurement procedure takes place or, in case of prior information notices, under which the procurement procedure(s) will take place.
     Business groups:
         BG-1: Notice
     eForms guidance: Set `tender.legalBasis.scheme` to ['ELI'](https://eur-lex.europa.eu/eli-register/about.html), and map to `tender.legalBasis.id`.
@@ -21,7 +21,7 @@
     type: text-multilingual
     repeatable: false
     mandatory: false
-    Description: The legal basis (e.g. a European Directive or Regulation, national law) under which the procurement procedure takes place.
+    Description: The legal basis (e.g. a Union or national legal act) under which the procurement procedure takes place or, in case of prior information notices, under which the procurement procedure(s) will take place.
     Business groups:
         BG-1: Notice
     eForms guidance: Map to `tender.legalBasis.description`.
@@ -36,7 +36,7 @@
     type: id
     repeatable: false
     mandatory: false
-    Description: The legal basis (e.g. a European Directive or Regulation, national law) under which the procurement procedure takes place.
+    Description: The legal basis (e.g. a Union or national legal act) under which the procurement procedure takes place or, in case of prior information notices, under which the procurement procedure(s) will take place.
     Business groups:
         BG-1: Notice
     eForms guidance: Map to `tender.legalBasis.id`.
@@ -51,7 +51,7 @@
     type: text-multilingual
     repeatable: false
     mandatory: false
-    Description: The legal basis (e.g. a European Directive or Regulation, national law) under which the procurement procedure takes place.
+    Description: The legal basis (e.g. a Union or national legal act) under which the procurement procedure takes place or, in case of prior information notices, under which the procurement procedure(s) will take place.
     Business groups:
         BG-1: Notice
     eForms guidance: Map to `tender.legalBasis.description`.
@@ -67,7 +67,7 @@
     repeatable: false
     mandatory: true
     codeList: eforms-legal-basis
-    Description: The legal basis (e.g. a European Directive or Regulation, national law) under which the procurement procedure takes place.
+    Description: The legal basis (e.g. a Union or national legal act) under which the procurement procedure takes place or, in case of prior information notices, under which the procurement procedure(s) will take place.
     Business groups:
         BG-1: Notice
     eForms guidance: Set `tender.legalBasis.scheme` to ['CELEX'](https://eur-lex.europa.eu/content/help/faq/intro.html#help8), and map to `tender.legalBasis.id`.
@@ -125,7 +125,7 @@
     repeatable: false
     mandatory: true
     pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$
-    Description: The European Public Procurement Procedure Identifier, a unique identifier of a procurement procedure. Including this identifier in all published versions of this notice (e.g. published on TED, national publication portals, regional publication portals) allows unique identification of procurement procedures around the EU.
+    Description: The European Public Procurement Procedure Identifier, a unique identifier of a procurement procedure. Including this identifier in all published versions of this notice (e.g. published on TED, national publication portals, regional publication portals) allows unique identification of procurement procedures around the Union.
     Business groups:
         BG-1: Notice
     eForms guidance: Map to `tender.id`.
@@ -141,7 +141,7 @@
     repeatable: false
     mandatory: true
     pattern: ^(?:(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:(?:0[13578]|1[02]))-31|(?:(?:0[13-9]|1[0-2])-(?:29|30))))|(?:(?:(?:(?:(?:1[6-9]|[2-9]\d)(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))-02-29))|(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:0[1-9])|(?:1[0-2]))-(?:0[1-9]|1\d|2[0-8])))(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
-    Description: The date and time when the notice has been sent to TED.
+    Description: The date and time when the notice has been sent for publication by the buyer.
     Business groups:
         BG-1: Notice
     TED Xpath:
@@ -177,7 +177,7 @@
     repeatable: false
     mandatory: true
     pattern: ^(([01]\d|2[0-3])((:[0-5]\d){1,2}(\.\d+)?)?)(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
-    Description: The date and time when the notice has been sent to TED.
+    Description: The date and time when the notice has been sent for publication by the buyer.
     Business groups:
         BG-1: Notice
     eForms guidance: Combine with [BT-05(a)-notice](<#BT-05(a)-notice>), [convert date to ISO format](common-operations.md#convert-a-date-to-iso-format) and map to `date`.
@@ -193,7 +193,7 @@
     repeatable: false
     mandatory: false
     codeList: strategic-procurement
-    Description: Use of a technical specification, selection criterion, award criterion, or contract performance condition aims to reduce the environmental impacts of the procurement, fulfil social objectives and/or buy an innovative work, supply or service.
+    Description: The procurement procedure aims at reducing the environmental impacts of the procurement, fulfilling social objectives and/or buying an innovative work, supply or service.
     Business groups:
         BG-713: Strategic Procurement
     eForms guidance: |-
@@ -306,7 +306,7 @@
     repeatable: false
     mandatory: true
     codeList: procurement-procedure-type
-    Description: The type of procurement procedure (e.g. according to the types given in the procurement Directives).
+    Description: The type of procurement procedure (e.g. according to the types given in the Public Procurement Directives mentioned in the recitals of this Act).
     Business groups:
         BG-6: Procedure
     TED Xpath:
@@ -385,7 +385,7 @@
     repeatable: false
     mandatory: false
     codeList: accelerated-procedure
-    Description: The time limit for receipt of requests to participate or tenders in this procedure can be reduced due to a state of urgency.
+    Description: The time limit for receipt of requests to participate or of tenders in this procedure can be reduced due to a state of urgency.
     Business groups:
         BG-6: Procedure
     TED Xpath:
@@ -410,7 +410,7 @@
     type: text-multilingual
     repeatable: false
     mandatory: false
-    Description: The justification for exceptional cases when the duration of framework agreements exceeds the legal limits. (Four years in the case of the general procurement Directive, seven years in the case of the defence Directive, and eight years in the case of the sectoral Directive.)
+    Description: 'The justification for exceptional cases when the duration of framework agreements exceeds the legal limits. '
     Business groups:
         BG-706: Techniques
     TED Xpath:
@@ -487,6 +487,9 @@
     type: amount
     repeatable: false
     mandatory: false
+    Description: "The approximate value to be spent within the framework agreement(s) announced in this notice over its/their whole duration, in all lots, including options and renewals, as calculated on the basis of the winner\u2019s tender or winners\u2019 tenders."
+    Business groups:
+        BG-7: Notice Result
     eForms guidance: Discard.
     eForms example: <efac:NoticeResult><cbc:OverallApproximateFrameworkContractsAmount currencyID="EUR">6000</cbc:OverallApproximateFrameworkContractsAmount></efac:NoticeResult>
     OCDS example: ''
@@ -567,7 +570,7 @@
     type: amount
     repeatable: false
     mandatory: false
-    Description: The maximum or estimated value which can be spent within the framework agreement(s) announced in this notice over its whole duration, in all lots, including options and renewals.
+    Description: "The maximum value which can be spent within the framework agreement(s) announced in this notice over its/their whole duration, in all lots, including options and renewals, as calculated on the basis of the winner\u2019s tender or winners\u2019 tenders."
     Business groups:
         BG-7: Notice Result
     eForms guidance: Discard.
@@ -1415,7 +1418,7 @@
     repeatable: true
     mandatory: false
     pattern: ^LOT-\d{4}$
-    Description: An identifier of several lots within this procedure. These lots form a group of lots for which one tender can be submitted and evaluated.
+    Description: An identifier of a lot within the procedure that is part of a group of lots for which one tender can be submitted and evaluated.
     Business groups:
         BG-6: Procedure
         BG-330: Group Lot Award
@@ -1598,7 +1601,7 @@
     repeatable: false
     mandatory: true
     pattern: ^(?:(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:(?:0[13578]|1[02]))-31|(?:(?:0[13-9]|1[0-2])-(?:29|30))))|(?:(?:(?:(?:(?:1[6-9]|[2-9]\d)(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))-02-29))|(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:0[1-9])|(?:1[0-2]))-(?:0[1-9]|1\d|2[0-8])))(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
-    Description: The date when the contract was concluded. Typically, this is the date when the last contractual party signed the contract. However, if no contract is signed, then the date of contract conclusion may correspond to other dates (e.g. the date when the buyer notified the winning tenderer). The date of contract conclusion is always later than the end of the standstill period and only once any evidence submitted by the winner has been verified.
+    Description: The date when the contract was concluded. Typically, this is the date when the last contractual party signed the contract. However, if no contract is signed, then the date of contract conclusion may correspond to other dates (e.g. the date when the buyer notified the winning tenderer). The date of contract conclusion is always later than the end of the standstill period and the moment when any evidence submitted by the winner has been verified.
     Business groups:
         BG-7: Notice Result
         BG-310: Contract
@@ -1650,7 +1653,7 @@
     repeatable: false
     mandatory: false
     pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
-    Description: The internet address for accessing (the non-restricted part of) the procurement documents. For all notices except prior information notices, the address must give access that is direct (i.e. the exact webpage with the documents, not a general website), unrestricted (e.g. no registration), full (i.e. the procurement documents must be complete) and free of charge and the documents must be available already at the time of the publication of the notice.
+    Description: The internet address for accessing (the non-restricted part of) the procurement documents. For all notices except prior information notices, the address shall give access that is direct (i.e. the exact webpage with the documents, not a general website), unrestricted (e.g. no registration), full (i.e. the procurement documents are complete) and free of charge and the documents shall be available already at the time of the publication of the notice.
     Business groups:
         BG-101: Procurement Documents
     TED Xpath:
@@ -1684,7 +1687,7 @@
     repeatable: false
     mandatory: false
     pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
-    Description: The internet address for accessing (the non-restricted part of) the procurement documents. For all notices except prior information notices, the address must give access that is direct (i.e. the exact webpage with the documents, not a general website), unrestricted (e.g. no registration), full (i.e. the procurement documents must be complete) and free of charge and the documents must be available already at the time of the publication of the notice.
+    Description: The internet address for accessing (the non-restricted part of) the procurement documents. For all notices except prior information notices, the address shall give access that is direct (i.e. the exact webpage with the documents, not a general website), unrestricted (e.g. no registration), full (i.e. the procurement documents are complete) and free of charge and the documents shall be available already at the time of the publication of the notice.
     Business groups:
         BG-101: Procurement Documents
     TED Xpath:
@@ -1788,10 +1791,10 @@
     type: amount
     repeatable: false
     mandatory: false
-    Description: The maximum or estimated value which can be spent in a framework agreement within a group of lots. This information can be provided when the maximum or estimated value of a group of lots is lower than the sum of values of individual lots (e.g. when the same budget is shared for several lots). The value covers all contracts to be awarded within a framework agreement over its whole duration, including options and renewals.
+    Description: "It is the\_re-calculated maximum value likely to\_be spent\_for a group of lots within the procedure.\_This information can be provided when the maximum value of a group of lots is lower than the sum of values of individual lots (e.g. when the same budget is shared for several lots). The value covers all contracts to be awarded within a framework agreement over its whole duration, including options and renewals.\_The value is re-calculated on the basis of the winner\u2019s tender or winners\u2019 tenders."
     Business groups:
         BG-7: Notice Result
-        BG-556: Group Framework Value
+        BG-556: Group Framework Maximum Value
     eForms guidance: Discard.
     eForms example: <efac:NoticeResult><efac:GroupFramework><efbc:GroupFrameworkMaximumValueAmount currencyID="EUR">800000</efbc:GroupFrameworkMaximumValueAmount></efac:GroupFramework></efac:NoticeResult>
     OCDS example: ''
@@ -1804,6 +1807,10 @@
     type: amount
     repeatable: false
     mandatory: false
+    Description: "The value likely to be spent, within a framework agreement, for a group of lots. This information can be provided when the value likely to be spent for a group of lots is lower than the sum of values likely to be spent for individual lots (e.g. when the same budget is shared for several lots). The value covers all contracts to be awarded within a framework agreement over its whole duration, including options and renewals. The re-estimated value is the value likely to be spent, as re-estimated on the basis of the winner\u2019s tender or winners\u2019 tenders."
+    Business groups:
+        BG-7: Notice Result
+        BG-5561: Group Framework Re-estimated Value
     eForms guidance: Discard.
     eForms example: <efac:NoticeResult><efac:GroupFramework><efbc:GroupFrameworkReestimatedValueAmount currencyID="EUR">800000</efbc:GroupFrameworkReestimatedValueAmount></efac:GroupFramework></efac:NoticeResult>
     OCDS example: ''
@@ -1816,10 +1823,10 @@
     type: amount
     repeatable: false
     mandatory: false
-    Description: The estimated maximum value which can be spent in a framework agreement within a group of lots. This information can be provided when the estimated maximum value of a group of lots is lower than the sum of estimated values of individual lots in this group (e.g. when the same budget is shared for several lots). Estimated refers to estimation at the time of launching the call for competition. Maximum value means a value covering all contracts to be awarded within a framework agreement over its whole duration, including options and renewals.
+    Description: The maximum value which may be spent in a framework agreement within a group of lots. This information can be provided when the maximum value of a group of lots is lower than the sum of maximum values of individual lots in this group (e.g. when the same budget is shared for several lots).  Maximum value means a value covering all contracts to be awarded within a framework agreement over its whole duration, including options and renewals.
     Business groups:
         BG-2: Purpose
-        BG-557: Group Framework Estimated Maximum Value
+        BG-557: Group Framework Maximum Value
     eForms guidance: '[Get the lot group for the ProcurementProjectLot](common-operations.md#get-the-lot-group-for-a-projectprocurementlot). Map to its `.techniques.frameworkAgreement.value.amount` and map `currencyID` to its `techniques.frameworkAgreement.value.currency`.'
     eForms example: <cac:FrameworkAgreement><cbc:EstimatedMaximumValueAmount currencyID="EUR">200000</cbc:EstimatedMaximumValueAmount></cac:FrameworkAgreement>
     OCDS example: '{"tender":{"lotGroups":[{"techniques":{"frameworkAgreement":{"value":{"amount":800000,"currency":"EUR"}}}}]}}'
@@ -1991,7 +1998,7 @@
     repeatable: false
     mandatory: true
     codeList: esubmission
-    Description: Whether economic operators are required, allowed or not allowed to submit tenders, requests to participate, or expressions of interest electronically.
+    Description: Whether economic operators are required, allowed, or not allowed to submit tenders, requests to participate, or expressions of interest electronically.
     Business groups:
         BG-102: Submission Terms
     TED Xpath:
@@ -2020,7 +2027,7 @@
     type: integer
     repeatable: false
     mandatory: false
-    Description: The position of the tender (i.e. whether the tender ended up first, second, third, etc.) in a design contest, some framework agreements with multiple winners (e.g. cascades) or an innovation partnership.
+    Description: The position of the tender (i.e. whether the tender ended up first, second, third, etc.) in a design contest, a framework agreement with multiple winners (e.g. cascades), an innovation partnership, a competitive dialogue, or another procedure.
     Business groups:
         BG-7: Notice Result
         BG-320: Tender
@@ -2037,6 +2044,10 @@
     repeatable: false
     mandatory: false
     codeList: indicator
+    Description: 'The tender was ranked. (This is not the rank itself, but only whether the ranking took place).  '
+    Business groups:
+        BG-7: Notice Result
+        BG-320: Tender
     eForms guidance: '[Get the bid for a LotTender](common-operations.md#get-the-bid-for-a-lottender) and map to the bid''s `.details.hasRank`.'
     eForms example: <efac:LotTender><efbc:TenderRankedIndicator>true</efbc:TenderRankedIndicator></efac:LotTender>
     OCDS example: '{"bids":{"details":[{"hasRank":"true"}]}}'
@@ -2050,7 +2061,7 @@
     repeatable: false
     mandatory: false
     pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
-    Description: The internet address for submission of tenders, requests to participate, or expressions of interest by electronic means. The address should be as direct as possible (ideally a dedicated address for the electronic submission, not just a general website).
+    Description: The internet address for submission of tenders, requests to participate, or expressions of interest by electronic means. The address shall be as direct as possible (ideally a dedicated address for the electronic submission, not just a general website).
     Business groups:
         BG-102: Submission Terms
     TED Xpath:
@@ -2131,7 +2142,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2151,7 +2162,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2171,7 +2182,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2191,7 +2202,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: Discard
@@ -2207,7 +2218,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: Discard.
@@ -2223,7 +2234,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2243,7 +2254,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2263,7 +2274,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2283,7 +2294,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2303,7 +2314,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2323,7 +2334,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2343,7 +2354,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: Discard.
@@ -2359,7 +2370,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: Discard.
@@ -2375,7 +2386,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2395,7 +2406,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: Discard.
@@ -2411,7 +2422,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2431,7 +2442,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2451,7 +2462,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2471,7 +2482,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2491,7 +2502,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2511,7 +2522,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2531,7 +2542,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2551,7 +2562,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2571,7 +2582,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2591,7 +2602,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2611,7 +2622,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2631,7 +2642,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2651,7 +2662,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2671,7 +2682,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2691,7 +2702,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2711,7 +2722,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2731,7 +2742,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2751,7 +2762,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2771,7 +2782,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2791,7 +2802,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2811,7 +2822,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2831,7 +2842,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2851,7 +2862,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: Discard.
@@ -2867,7 +2878,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2887,7 +2898,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2907,7 +2918,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2927,7 +2938,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2947,7 +2958,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2967,7 +2978,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -2987,7 +2998,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -3007,7 +3018,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: Discard. BT-730 is discarded as it is implied by BT-553.
@@ -3023,7 +3034,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: Discard. BT-731 is discarded as it is implied by BT-555.
@@ -3039,7 +3050,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -3059,7 +3070,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -3079,7 +3090,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -3099,7 +3110,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -3119,7 +3130,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -3139,7 +3150,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -3159,7 +3170,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -3179,7 +3190,7 @@
     repeatable: false
     mandatory: false
     codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the sectoral Directive, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
     eForms guidance: |-
@@ -5935,7 +5946,7 @@
     type: id
     repeatable: false
     mandatory: false
-    Description: The internal identifier used for files regarding the procurement procedure or lot before a procedure identifier is given (e.g. coming from the buyer's document management system or procurement planning system).
+    Description: 'The internal identifier used for files regarding the procurement procedure or lot before a procedure identifier is given (e.g. coming from the buyer''s document management system or procurement planning system). '
     Business groups:
         BG-2: Purpose
     TED Xpath:
@@ -5956,7 +5967,7 @@
     type: id
     repeatable: false
     mandatory: false
-    Description: The internal identifier used for files regarding the procurement procedure or lot before a procedure identifier is given (e.g. coming from the buyer's document management system or procurement planning system).
+    Description: 'The internal identifier used for files regarding the procurement procedure or lot before a procedure identifier is given (e.g. coming from the buyer''s document management system or procurement planning system). '
     Business groups:
         BG-2: Purpose
     eForms guidance: '[Get the lot group for the ProcurementProjectLot](common-operations.md#get-the-lot-group-for-a-procurementprojectlot) and map to its `.identifiers.id` and set `.identifiers.scheme` to "internal".'
@@ -5971,7 +5982,7 @@
     type: id
     repeatable: false
     mandatory: false
-    Description: The internal identifier used for files regarding the procurement procedure or lot before a procedure identifier is given (e.g. coming from the buyer's document management system or procurement planning system).
+    Description: 'The internal identifier used for files regarding the procurement procedure or lot before a procedure identifier is given (e.g. coming from the buyer''s document management system or procurement planning system). '
     Business groups:
         BG-2: Purpose
     eForms guidance: Map to `tender.identifiers.id` and set `identifiers.scheme` to "internal".
@@ -5986,7 +5997,7 @@
     type: id
     repeatable: false
     mandatory: false
-    Description: The internal identifier used for files regarding the procurement procedure or lot before a procedure identifier is given (e.g. coming from the buyer's document management system or procurement planning system).
+    Description: 'The internal identifier used for files regarding the procurement procedure or lot before a procedure identifier is given (e.g. coming from the buyer''s document management system or procurement planning system). '
     Business groups:
         BG-2: Purpose
     TED Xpath:
@@ -6021,7 +6032,7 @@
     repeatable: false
     mandatory: true
     codeList: eforms-contract-nature
-    Description: The main nature (e.g. works) of what is being bought. In case of mixed procurement (e.g. a procedure for both works and services), the main nature may be, for example, the one with the highest estimated value. This information must be given for the whole procedure.
+    Description: The main nature (e.g. works) of what is being bought. In case of mixed procurement (e.g. a procedure for both works and services), the main nature may be, for example, the one with the highest estimated value. This information shall be given for the whole procedure.
     Business groups:
         BG-2: Purpose
     TED Xpath:
@@ -6040,7 +6051,7 @@
     repeatable: false
     mandatory: true
     codeList: eforms-contract-nature
-    Description: The main nature (e.g. works) of what is being bought. In case of mixed procurement (e.g. a procedure for both works and services), the main nature may be, for example, the one with the highest estimated value. This information must be given for the whole procedure.
+    Description: The main nature (e.g. works) of what is being bought. In case of mixed procurement (e.g. a procedure for both works and services), the main nature may be, for example, the one with the highest estimated value. This information shall be given for the whole procedure.
     Business groups:
         BG-2: Purpose
     eForms guidance: If `works` or `services`, map to `tender.mainProcurementCategory`. If `supplies` map `goods` to `tender.mainProcurementCategory`. If `combined` add to `tender.additionalProcurementCategories` array.
@@ -6056,7 +6067,7 @@
     repeatable: false
     mandatory: true
     codeList: eforms-contract-nature
-    Description: The main nature (e.g. works) of what is being bought. In case of mixed procurement (e.g. a procedure for both works and services), the main nature may be, for example, the one with the highest estimated value. This information must be given for the whole procedure.
+    Description: The main nature (e.g. works) of what is being bought. In case of mixed procurement (e.g. a procedure for both works and services), the main nature may be, for example, the one with the highest estimated value. This information shall be given for the whole procedure.
     Business groups:
         BG-2: Purpose
     TED Xpath:
@@ -6088,7 +6099,7 @@
     type: text-multilingual
     repeatable: false
     mandatory: true
-    Description: The description of the nature and quantity of what is being bought or of the needs and requirements that should be met in this procedure or lot. In case of a modification notice, the description of the procurement before and after the modification.
+    Description: The description of the nature and quantity of what is being bought or of the needs and requirements that shall be met in this procedure or lot. In case of a modification notice, the description of the procurement before and after the modification.
     Business groups:
         BG-2: Purpose
     TED Xpath:
@@ -6127,7 +6138,7 @@
     type: text-multilingual
     repeatable: false
     mandatory: false
-    Description: The description of the nature and quantity of what is being bought or of the needs and requirements that should be met in this procedure or lot. In case of a modification notice, the description of the procurement before and after the modification.
+    Description: The description of the nature and quantity of what is being bought or of the needs and requirements that shall be met in this procedure or lot. In case of a modification notice, the description of the procurement before and after the modification.
     Business groups:
         BG-2: Purpose
     eForms guidance: '[Get the lot group for the ProcurementProjectLot](common-operations.md#get-the-lot-group-for-a-procurementprojectlot) and map to its `.description`.'
@@ -6142,7 +6153,7 @@
     type: text-multilingual
     repeatable: false
     mandatory: true
-    Description: The description of the nature and quantity of what is being bought or of the needs and requirements that should be met in this procedure or lot. In case of a modification notice, the description of the procurement before and after the modification.
+    Description: The description of the nature and quantity of what is being bought or of the needs and requirements that shall be met in this procedure or lot. In case of a modification notice, the description of the procurement before and after the modification.
     Business groups:
         BG-2: Purpose
     TED Xpath:
@@ -6165,7 +6176,7 @@
     type: text-multilingual
     repeatable: false
     mandatory: true
-    Description: The description of the nature and quantity of what is being bought or of the needs and requirements that should be met in this procedure or lot. In case of a modification notice, the description of the procurement before and after the modification.
+    Description: The description of the nature and quantity of what is being bought or of the needs and requirements that shall be met in this procedure or lot. In case of a modification notice, the description of the procurement before and after the modification.
     Business groups:
         BG-2: Purpose
     TED Xpath:
@@ -6214,7 +6225,7 @@
     repeatable: false
     mandatory: false
     codeList: classification-type
-    Description: The type of classification describing the purchase (e.g. the common procurement vocabulary).
+    Description: The type of classification describing the purchase (e.g. the CPV).
     Business groups:
         BG-2: Purpose
         BG-261: Classification
@@ -6234,7 +6245,7 @@
     repeatable: false
     mandatory: false
     codeList: classification-type
-    Description: The type of classification describing the purchase (e.g. the common procurement vocabulary).
+    Description: The type of classification describing the purchase (e.g. the CPV).
     Business groups:
         BG-2: Purpose
         BG-261: Classification
@@ -6254,7 +6265,7 @@
     repeatable: false
     mandatory: false
     codeList: classification-type
-    Description: The type of classification describing the purchase (e.g. the common procurement vocabulary).
+    Description: The type of classification describing the purchase (e.g. the CPV).
     Business groups:
         BG-2: Purpose
         BG-261: Classification
@@ -6274,7 +6285,7 @@
     repeatable: false
     mandatory: true
     codeList: classification-type
-    Description: The type of classification describing the purchase (e.g. the common procurement vocabulary).
+    Description: The type of classification describing the purchase (e.g. the CPV).
     Business groups:
         BG-2: Purpose
         BG-261: Classification
@@ -6291,7 +6302,7 @@
     repeatable: false
     mandatory: true
     codeList: classification-type
-    Description: The type of classification describing the purchase (e.g. the common procurement vocabulary).
+    Description: The type of classification describing the purchase (e.g. the CPV).
     Business groups:
         BG-2: Purpose
         BG-261: Classification
@@ -6308,7 +6319,7 @@
     repeatable: false
     mandatory: true
     codeList: classification-type
-    Description: The type of classification describing the purchase (e.g. the common procurement vocabulary).
+    Description: The type of classification describing the purchase (e.g. the CPV).
     Business groups:
         BG-2: Purpose
         BG-261: Classification
@@ -6325,7 +6336,7 @@
     repeatable: false
     mandatory: true
     codeList: cpv
-    Description: The code from the classification that best characterizes the purchase.
+    Description: The code from the classification that best characterises the purchase.
     Business groups:
         BG-2: Purpose
         BG-261: Classification
@@ -6349,7 +6360,7 @@
     repeatable: false
     mandatory: true
     codeList: cpv
-    Description: The code from the classification that best characterizes the purchase.
+    Description: The code from the classification that best characterises the purchase.
     Business groups:
         BG-2: Purpose
         BG-261: Classification
@@ -6366,7 +6377,7 @@
     repeatable: false
     mandatory: true
     codeList: cpv
-    Description: The code from the classification that best characterizes the purchase.
+    Description: The code from the classification that best characterises the purchase.
     Business groups:
         BG-2: Purpose
         BG-261: Classification
@@ -6407,7 +6418,7 @@
     repeatable: false
     mandatory: false
     codeList: cpv
-    Description: An additional code from the classification that also characterize the purchase.
+    Description: An additional code from the classification that also characterises the purchase.
     Business groups:
         BG-2: Purpose
         BG-261: Classification
@@ -6427,7 +6438,7 @@
     repeatable: false
     mandatory: false
     codeList: cpv
-    Description: An additional code from the classification that also characterize the purchase.
+    Description: An additional code from the classification that also characterises the purchase.
     Business groups:
         BG-2: Purpose
         BG-261: Classification
@@ -6447,7 +6458,7 @@
     repeatable: false
     mandatory: false
     codeList: cpv
-    Description: An additional code from the classification that also characterize the purchase.
+    Description: An additional code from the classification that also characterises the purchase.
     Business groups:
         BG-2: Purpose
         BG-261: Classification
@@ -6466,7 +6477,7 @@
     type: amount
     repeatable: false
     mandatory: false
-    Description: The estimated maximum value of the procurement procedure or lot. Estimated refers to estimation at the time of launching the call for competition. Maximum value means a value covering all contracts to be awarded within a framework agreement or a dynamic purchasing system, over their whole duration, including options and renewals.
+    Description: The estimated value of the procurement procedure or lot, over its whole duration, including options and renewals.
     Business groups:
         BG-2: Purpose
     TED Xpath:
@@ -6503,7 +6514,7 @@
     type: amount
     repeatable: false
     mandatory: false
-    Description: The estimated maximum value of the procurement procedure or lot. Estimated refers to estimation at the time of launching the call for competition. Maximum value means a value covering all contracts to be awarded within a framework agreement or a dynamic purchasing system, over their whole duration, including options and renewals.
+    Description: The estimated value of the procurement procedure or lot, over its whole duration, including options and renewals.
     Business groups:
         BG-2: Purpose
     eForms guidance: '[Get the lot group for the ProcurementProjectLot](common-operations.md#get-the-lot-group-for-a-procurementprojectlot), map to its `.maximumValue.amount` and map `currencyID` to its `maximumValue.currency`.'
@@ -6518,7 +6529,7 @@
     type: amount
     repeatable: false
     mandatory: false
-    Description: The estimated maximum value of the procurement procedure or lot. Estimated refers to estimation at the time of launching the call for competition. Maximum value means a value covering all contracts to be awarded within a framework agreement or a dynamic purchasing system, over their whole duration, including options and renewals.
+    Description: The estimated value of the procurement procedure or lot, over its whole duration, including options and renewals.
     Business groups:
         BG-2: Purpose
     eForms guidance: Map to `tender.value.amount` and map `currencyID` to `tender.value.currency`.
@@ -6533,7 +6544,7 @@
     type: amount
     repeatable: false
     mandatory: false
-    Description: The estimated maximum value of the procurement procedure or lot. Estimated refers to estimation at the time of launching the call for competition. Maximum value means a value covering all contracts to be awarded within a framework agreement or a dynamic purchasing system, over their whole duration, including options and renewals.
+    Description: The estimated value of the procurement procedure or lot, over its whole duration, including options and renewals.
     Business groups:
         BG-2: Purpose
     TED Xpath:
@@ -6561,6 +6572,9 @@
     type: amount
     repeatable: false
     mandatory: false
+    Description: The maximum value of the framework agreement for the procurement procedure or lot, over its whole duration, including options and renewals. This value covers all contracts to be awarded within the framework agreement.
+    Business groups:
+        BG-2: Purpose
     eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot), map to its `.techniques.frameworkAgreement.maximumValue.amount` and map `currencyID` to its `techniques.frameworkAgreement.maximumValue.currency`.'
     eForms example: <efext:EformsExtension><efbc:FrameworkMaximumAmount currencyID="EUR">120000</efbc:FrameworkMaximumAmount></efext:EformsExtension>
     OCDS example: '{"tender":{"lots":[{"techniques":{"frameworkAgreement":{"maximumValue":{"amount":120000,"currency":"EUR"}}}}]}}'
@@ -6573,6 +6587,9 @@
     type: amount
     repeatable: false
     mandatory: false
+    Description: The maximum value of the framework agreement for the procurement procedure or lot, over its whole duration, including options and renewals. This value covers all contracts to be awarded within the framework agreement.
+    Business groups:
+        BG-2: Purpose
     eForms guidance: '[Get the lot group for the ProcurementProjectLot](common-operations.md#get-the-lot-group-for-a-procurementprojectlot), map to its `.techniques.frameworkAgreement.maximumValue.amount` and map `currencyID` to its `techniques.frameworkAgreement.maximumValue.currency`.'
     eForms example: <efext:EformsExtension><efbc:FrameworkMaximumAmount currencyID="EUR">120000</efbc:FrameworkMaximumAmount></efext:EformsExtension>
     OCDS example: '{"tender":{"lotGroups":[{"techniques":{"frameworkAgreement":{"maximumValue":{"amount":120000,"currency":"EUR"}}}}]}}'
@@ -6585,6 +6602,9 @@
     type: amount
     repeatable: false
     mandatory: false
+    Description: The maximum value of the framework agreement for the procurement procedure or lot, over its whole duration, including options and renewals. This value covers all contracts to be awarded within the framework agreement.
+    Business groups:
+        BG-2: Purpose
     eForms guidance: Map to `tender.techniques.frameworkAgreement.maximumValue.amount`. Map `@currencyID` to `tender.techniques.frameworkAgreement.maximumValue.currency`.
     eForms example: <efext:EformsExtension><efbc:FrameworkMaximumAmount currencyID="EUR">120000</efbc:FrameworkMaximumAmount></efext:EformsExtension>
     OCDS example: '{"tender":{"techniques":{"frameworkAgreement":{"maximumValue":{"amount":120000,"currency":"EUR"}}}}}'
@@ -6597,7 +6617,7 @@
     type: text-multilingual
     repeatable: false
     mandatory: false
-    Description: Any information not mentioned elsewhere.
+    Description: Any further information not mentioned in other sections of the notice.
     Business groups:
         BG-710: Additional Information
     TED Xpath:
@@ -6647,7 +6667,7 @@
     type: text-multilingual
     repeatable: false
     mandatory: false
-    Description: Any information not mentioned elsewhere.
+    Description: Any further information not mentioned in other sections of the notice.
     Business groups:
         BG-710: Additional Information
     eForms guidance: |-
@@ -6665,7 +6685,7 @@
     type: text-multilingual
     repeatable: false
     mandatory: false
-    Description: Any information not mentioned elsewhere.
+    Description: Any further information not mentioned in other sections of the notice.
     Business groups:
         BG-710: Additional Information
     TED Xpath:
@@ -6689,7 +6709,7 @@
     type: text-multilingual
     repeatable: false
     mandatory: false
-    Description: Any information not mentioned elsewhere.
+    Description: Any further information not mentioned in other sections of the notice.
     Business groups:
         BG-710: Additional Information
     TED Xpath:
@@ -6834,7 +6854,7 @@
     type: measure
     repeatable: false
     mandatory: true
-    Description: The (estimated) period from the start to the end of the contract, framework agreement, dynamic purchasing system or qualification system. This must include any options and renewals.
+    Description: The (estimated) period from the start to the end of the contract, framework agreement, dynamic purchasing system or qualification system. This shall include any options and renewals.
     Business groups:
         BG-36: Duration
     TED Xpath:
@@ -6869,7 +6889,7 @@
     type: measure
     repeatable: false
     mandatory: false
-    Description: The (estimated) period from the start to the end of the contract, framework agreement, dynamic purchasing system or qualification system. This must include any options and renewals.
+    Description: The (estimated) period from the start to the end of the contract, framework agreement, dynamic purchasing system or qualification system. This shall include any options and renewals.
     Business groups:
         BG-36: Duration
     TED Xpath:
@@ -6947,7 +6967,7 @@
     type: integer
     repeatable: false
     mandatory: false
-    Description: The place (e.g. first place, second place) in a design contest that receives the prize.
+    Description: The place (e.g. first place, second place) in a design contest, innovation partnership or competitive dialogue that receives the prize.
     Business groups:
         BG-704: Reward and Jury
         BG-44: Prize
@@ -7002,7 +7022,7 @@
     type: text
     repeatable: true
     mandatory: false
-    Description: A name of an already selected participant. A participant could have been selected already at the time of the publication of the design contest notice because, for example, the information about the participation of a world renowned architect is intended to promote the contest amongst other potential participants.
+    Description: A name of an already selected participant. A participant could have been selected already at the time of the publication of the design contest notice because, for example, the information about the participation of a world-renowned architect is intended to promote the contest amongst other potential participants.
     Business groups:
         BG-704: Reward and Jury
     TED Xpath:
@@ -7224,6 +7244,10 @@
     type: id
     repeatable: false
     mandatory: false
+    Description: An identifier of the Union programme used to at least partially finance the contract. The most concrete information must be given (e.g. grant agreement number, national identifier, project acronym, contract number).
+    Business groups:
+        BG-61: EU Funds
+        BG-614: EU Funds Information
     eForms guidance: |-
         - Get the `Organization` object whose `.name` is 'European Union' and add 'funder' to its `.roles`.
         - If none exists yet:
@@ -7248,7 +7272,7 @@
     type: id
     repeatable: false
     mandatory: false
-    Description: An identifier of the European Union funds used to at least partially finance the contract. The most concrete information must be given (e.g. about concrete projects, not just operational programs.)
+    Description: 'An identifier of the Union programme used to at least partially finance the contract. The most concrete information must be given (e.g. grant agreement number, national identifier, project acronym, contract number) '
     Business groups:
         BG-7: Notice Result
         BG-310: Contract
@@ -7281,7 +7305,7 @@
     type: text
     repeatable: false
     mandatory: false
-    Description: The name of the department or other contact point for communicating with the organisation. To avoid unnecessary processing of personal data, the contact point may allow the identification of a physical person only when necessary (in the sense of Regulation (EU) 2016/679 and Regulation (EU) 2018/1725).
+    Description: The name of the department or other contact point for communicating with the organisation. To avoid unnecessary processing of personal data, the contact point shall allow the identification of a physical person only when necessary (in the sense of European Parliament and Council Regulation (EU) 2016/679 and European Parliament and Council Regulation (EU) 2018/1725).
     Business groups:
         BG-703: Organisation
     TED Xpath:
@@ -7336,7 +7360,7 @@
     type: text
     repeatable: false
     mandatory: false
-    Description: The name of the department or other contact point for communicating with the organisation. To avoid unnecessary processing of personal data, the contact point may allow the identification of a physical person only when necessary (in the sense of Regulation (EU) 2016/679 and Regulation (EU) 2018/1725).
+    Description: The name of the department or other contact point for communicating with the organisation. To avoid unnecessary processing of personal data, the contact point shall allow the identification of a physical person only when necessary (in the sense of European Parliament and Council Regulation (EU) 2016/679 and European Parliament and Council Regulation (EU) 2018/1725).
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the organization''s `.contactPoint.name`.'
@@ -7352,7 +7376,7 @@
     repeatable: false
     mandatory: true
     pattern: ^((\(\+?[0-9]+\))|\+?[0-9]+)( - |-| )?(((\(\d+\))|\d+)( - |-| )?)*(\d+)( )?$
-    Description: The telephone for contacting the organisation. To avoid unnecessary processing of personal data, the telephone may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
+    Description: The telephone number for contacting the organisation. To avoid unnecessary processing of personal data, the telephone number shall allow the identification of a physical person only when necessary (in the sense of the Regulation (EU) 2016/679 and Regulation (EU) 2018/1725).
     Business groups:
         BG-703: Organisation
     TED Xpath:
@@ -7440,7 +7464,7 @@
     repeatable: false
     mandatory: false
     pattern: ^((\(\+?[0-9]+\))|\+?[0-9]+)( - |-| )?(((\(\d+\))|\d+)( - |-| )?)*(\d+)( )?$
-    Description: The telephone for contacting the organisation. To avoid unnecessary processing of personal data, the telephone may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
+    Description: The telephone number for contacting the organisation. To avoid unnecessary processing of personal data, the telephone number shall allow the identification of a physical person only when necessary (in the sense of the Regulation (EU) 2016/679 and Regulation (EU) 2018/1725).
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the organization''s `.contactPoint.telephone`'
@@ -7456,7 +7480,7 @@
     repeatable: false
     mandatory: false
     pattern: ^((\(\+?[0-9]+\))|\+?[0-9]+)( - |-| )?(((\(\d+\))|\d+)( - |-| )?)*(\d+)( )?$
-    Description: The telephone for contacting the organisation. To avoid unnecessary processing of personal data, the telephone may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
+    Description: The telephone number for contacting the organisation. To avoid unnecessary processing of personal data, the telephone number shall allow the identification of a physical person only when necessary (in the sense of the Regulation (EU) 2016/679 and Regulation (EU) 2018/1725).
     Business groups:
         BG-703: Organisation
     eForms guidance: \[Get the person for the ultimate beneficial owner\](common-operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.telephone`.
@@ -7563,7 +7587,7 @@
     repeatable: false
     mandatory: true
     pattern: ^[a-zA-Z0-9][a-zA-Z0-9._%+-]*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,63}$
-    Description: The email for contacting the organisation. To avoid unnecessary processing of personal data, the email may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
+    Description: The email address for contacting the organisation. To avoid unnecessary processing of personal data, the email address shall allow the identification of a physical person only when necessary (in the sense of the Regulation (EU) 2016/679 and Regulation (EU) 2018/1725).
     Business groups:
         BG-703: Organisation
     TED Xpath:
@@ -7652,7 +7676,7 @@
     repeatable: false
     mandatory: false
     pattern: ^[a-zA-Z0-9][a-zA-Z0-9._%+-]*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,63}$
-    Description: The email for contacting the organisation. To avoid unnecessary processing of personal data, the email may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
+    Description: The email address for contacting the organisation. To avoid unnecessary processing of personal data, the email address shall allow the identification of a physical person only when necessary (in the sense of the Regulation (EU) 2016/679 and Regulation (EU) 2018/1725).
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the organization''s `.contactPoint.email`'
@@ -7668,7 +7692,7 @@
     repeatable: false
     mandatory: false
     pattern: ^[a-zA-Z0-9][a-zA-Z0-9._%+-]*@(?:[a-zA-Z0-9-]+\.)+[a-zA-Z]{2,63}$
-    Description: The email for contacting the organisation. To avoid unnecessary processing of personal data, the email may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
+    Description: The email address for contacting the organisation. To avoid unnecessary processing of personal data, the email address shall allow the identification of a physical person only when necessary (in the sense of the Regulation (EU) 2016/679 and Regulation (EU) 2018/1725).
     Business groups:
         BG-703: Organisation
     eForms guidance: \[Get the person for the ultimate beneficial owner\](common-operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.email`.
@@ -7684,7 +7708,7 @@
     repeatable: false
     mandatory: false
     codeList: nuts-lvl3
-    Description: The location according to the common classification of territorial units for statistics (NUTS) of the organisation's physical address. The NUTS3 classification code must be used.
+    Description: The location according to the common classification of territorial units for statistics (NUTS) of the organisation's physical address. The NUTS3 classification code shall be used.
     Business groups:
         BG-703: Organisation
     TED Xpath:
@@ -7725,7 +7749,7 @@
     repeatable: false
     mandatory: false
     codeList: nuts-lvl3
-    Description: The location according to the common classification of territorial units for statistics (NUTS) of the organisation's physical address. The NUTS3 classification code must be used.
+    Description: The location according to the common classification of territorial units for statistics (NUTS) of the organisation's physical address. The NUTS3 classification code shall be used.
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the organization''s `.address.region`.'
@@ -7741,7 +7765,7 @@
     repeatable: false
     mandatory: false
     codeList: nuts-lvl3
-    Description: The location according to the common classification of territorial units for statistics (NUTS) of the organisation's physical address. The NUTS3 classification code must be used.
+    Description: The location according to the common classification of territorial units for statistics (NUTS) of the organisation's physical address. The NUTS3 classification code shall be used.
     Business groups:
         BG-703: Organisation
     eForms guidance: \[Get the person for the ultimate beneficial owner\](common-operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.address.region`.
@@ -7757,7 +7781,7 @@
     repeatable: false
     mandatory: false
     codeList: nuts-lvl3
-    Description: The location according to the common classification of territorial units for statistics (NUTS). The NUTS3 classification code must be used.
+    Description: The location according to the common classification of territorial units for statistics (NUTS). The NUTS3 classification code shall be used.
     Business groups:
         BG-708: Place of Performance
     TED Xpath:
@@ -7792,7 +7816,7 @@
     repeatable: false
     mandatory: false
     codeList: nuts-lvl3
-    Description: The location according to the common classification of territorial units for statistics (NUTS). The NUTS3 classification code must be used.
+    Description: The location according to the common classification of territorial units for statistics (NUTS). The NUTS3 classification code shall be used.
     Business groups:
         BG-708: Place of Performance
     TED Xpath:
@@ -7815,7 +7839,7 @@
     repeatable: false
     mandatory: false
     codeList: nuts-lvl3
-    Description: The location according to the common classification of territorial units for statistics (NUTS). The NUTS3 classification code must be used.
+    Description: The location according to the common classification of territorial units for statistics (NUTS). The NUTS3 classification code shall be used.
     Business groups:
         BG-708: Place of Performance
     eForms guidance: These values are mapped to the same `Address` object as created for BT-728-Procedure, BT-5131-Procedure, BT-5121-Procedure, BT-5071-Procedure, BT-727-Procedure, BT-5101-Procedure and BT-5141-Procedure. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to its `.region`.
@@ -8464,7 +8488,7 @@
     type: text
     repeatable: false
     mandatory: true
-    Description: The name of the locality (city, town or village) of the organisation's physical address.
+    Description: The name of the locality (city, town, or village) of the organisation's physical address.
     Business groups:
         BG-703: Organisation
     TED Xpath:
@@ -8553,7 +8577,7 @@
     type: text
     repeatable: false
     mandatory: false
-    Description: The name of the locality (city, town or village) of the organisation's physical address.
+    Description: The name of the locality (city, town, or village) of the organisation's physical address.
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the organization''s `.address.locality`.'
@@ -8568,7 +8592,7 @@
     type: text
     repeatable: false
     mandatory: false
-    Description: The name of the locality (city, town or village) of the organisation's physical address.
+    Description: The name of the locality (city, town, or village) of the organisation's physical address.
     Business groups:
         BG-703: Organisation
     eForms guidance: \[Get the person for the ultimate beneficial owner\](common-operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.address.postalCode`.
@@ -8583,7 +8607,7 @@
     type: text
     repeatable: false
     mandatory: false
-    Description: The name of the locality (city, town or village) of the place of performance.
+    Description: The name of the locality (city, town, or village) of the place of performance.
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
@@ -8601,7 +8625,7 @@
     type: text
     repeatable: false
     mandatory: false
-    Description: The name of the locality (city, town or village) of the place of performance.
+    Description: The name of the locality (city, town, or village) of the place of performance.
     Business groups:
         BG-708: Place of Performance
     eForms guidance: These values are mapped to the same `Address` object as created for BT-728-Part, BT-5131-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, BT-5101-Part and BT-5141-Part. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to its `.locality`.
@@ -8616,7 +8640,7 @@
     type: text
     repeatable: false
     mandatory: false
-    Description: The name of the locality (city, town or village) of the place of performance.
+    Description: The name of the locality (city, town, or village) of the place of performance.
     Business groups:
         BG-708: Place of Performance
     eForms guidance: These values are mapped to the same `Address` object as created for BT-728-Procedure, BT-5131-Procedure, BT-5121-Procedure, BT-5071-Procedure, BT-727-Procedure, BT-5101-Procedure and BT-5141-Procedure. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to its `.locality`.
@@ -9429,10 +9453,10 @@
     repeatable: false
     mandatory: false
     pattern: ^GLO-\d{4}$
-    Description: An identifier of several lots within this procedure. These lots form a group whose maximum or estimated value is lower than the sum of individual maximum or estimated values of all the lots together (e.g. when the same budget is shared for several lots).
+    Description: "An identifier of a lot within the procedure that is part of a group of lots whose maximum value is lower than the sum of maximum values of individual lots (e.g. when the same budget is shared for several lots). These are maximum values as calculated on the basis of the winner\u2019s tender or winners\u2019 tenders."
     Business groups:
         BG-7: Notice Result
-        BG-556: Group Framework Value
+        BG-556: Group Framework Maximum Value
     eForms guidance: Discard.
     eForms example: <efac:TenderLot><cbc:ID schemeName="LotsGroup">GLO-0001</cbc:ID></efac:TenderLot>
     OCDS example: ''
@@ -9508,7 +9532,7 @@
     repeatable: false
     mandatory: true
     codeList: eu-funded
-    Description: The procurement is at least partially financed by European Union funds such as the European Structural and Investment Funds or grants awarded by the European Union.
+    Description: The procurement is at least partially financed by Union funds such as the European Structural and Investment Funds or grants awarded by the Union.
     Business groups:
         BG-61: EU Funds
     TED Xpath:
@@ -9570,6 +9594,11 @@
     type: text-multilingual
     repeatable: false
     mandatory: false
+    Description: Further information about the Union programme or project used at least partially finance the procurement.
+    Business groups:
+        BG-7: Notice Result
+        BG-310: Contract
+        BG-611: Contract EU Funds
     eForms guidance: These values are mapped to the same `finance` object as created for BT-5011 and BT-722. For each `ancestor::efac:Funding`, add or update the corresponding `Finance` object in the contract's `.finance` array and map to its `.description`.
     eForms example: <efac:Funding><cbc:FundingProgram>Program for the development ...</cbc:FundingProgram></efac:Funding>
     OCDS example: '{"contracts":[{"finance":[{"description":"Program for the development ..."}]}]}'
@@ -9582,6 +9611,10 @@
     type: text-multilingual
     repeatable: false
     mandatory: false
+    Description: Further information about the Union programme or project used at least partially finance the procurement.
+    Business groups:
+        BG-61: EU Funds
+        BG-614: EU Funds Information
     eForms guidance: These values are mapped to the same `finance` object as created for BT-5010 and BT-7220. For each `ancestor::efac:Funding`, add or update the corresponding `Finance` object in the budget's `.finance` array and map to its `.description`.
     eForms example: <efac:Funding><cbc:Description languageID="ENG">This project will be financed ...</cbc:Description></efac:Funding>
     OCDS example: '{"planning":{"budget":{"finance":[{"description":"This project will be financed ..."}]}}}'
@@ -9645,7 +9678,7 @@
     repeatable: false
     mandatory: false
     codeList: measurement-unit
-    Description: 'The unit which the good, service, or work comes in, for example hours or kilograms. Where CPV code is a supply which does not need a further unit (e.g. cars), then no unit needs to be given and quantity is taken to be a count, e.g. the "number of cars". '
+    Description: 'The unit which the good, service, or work comes in, for example hours or kilograms. Where the CPV code is a supply which does not need a further unit (e.g. cars), then no unit needs to be given and quantity is taken to be an amount, e.g. the "number of cars". '
     Business groups:
         BG-2: Purpose
     eForms guidance: |-
@@ -9664,7 +9697,7 @@
     repeatable: false
     mandatory: false
     codeList: permission
-    Description: Whether tenderers are required, allowed or not allowed to submit tenders which fulfil the buyer's needs differently than as proposed in the procurement documents. Further conditions for submitting variant tenders are in the procurement documents.
+    Description: Whether tenderers are required, allowed, or not allowed to submit tenders which fulfil the buyer's needs differently than as proposed in the procurement documents. Further conditions for submitting variant tenders are in the procurement documents.
     Business groups:
         BG-102: Submission Terms
     TED Xpath:
@@ -9849,7 +9882,7 @@
     type: number
     repeatable: false
     mandatory: false
-    Description: The minimum percentage of the contract value that the contractor must subcontract using the competitive procedure described in Title III of Directive 2009/81/EC.
+    Description: The minimum percentage of the contract value that the contractor must subcontract using the competitive procedure described in Title III of European Parliament and Council Directive 2009/81/EC.
     Business groups:
         BG-711: Contract Terms
     TED Xpath:
@@ -9866,7 +9899,7 @@
     type: amount
     repeatable: false
     mandatory: false
-    Description: The value of the prize, if any, for the winner of the design contest.
+    Description: The value of the prize, if any, for the winner of a design contest, innovation partnership or competitive dialogue
     Business groups:
         BG-704: Reward and Jury
         BG-44: Prize
@@ -9932,7 +9965,7 @@
     type: amount
     repeatable: false
     mandatory: false
-    Description: The estimated value which will be spent within a framework agreement over its whole duration, including options and renewals.
+    Description: "The value likely to be spent within a framework agreement over its whole duration, including options and renewals, as re-estimated on the basis of the winner\u2019s tender or winners\u2019 tenders."
     Business groups:
         BG-7: Notice Result
         BG-137: Procedure Lot Result
@@ -9965,7 +9998,7 @@
     repeatable: false
     mandatory: true
     codeList: exclusion-ground
-    Description: The brief description of criteria regarding the personal situation of tenderers that may lead to their exclusion. This must include a list of all such criteria and indicate required information (e.g. self-declaration, documentation). This can also include specific national exclusion grounds.
+    Description: 'The brief description of criteria regarding the personal situation of tenderers that may lead to their exclusion. This shall include a list of all such criteria and indicate required information (e.g. self-declaration, documentation). This may also include specific national exclusion grounds. '
     Business groups:
         BG-701: Exclusion Grounds
     TED Xpath:
@@ -9984,7 +10017,7 @@
     type: text-multilingual
     repeatable: false
     mandatory: true
-    Description: The brief description of criteria regarding the personal situation of tenderers that may lead to their exclusion. This must include a list of all such criteria and indicate required information (e.g. self-declaration, documentation). This can also include specific national exclusion grounds.
+    Description: 'The brief description of criteria regarding the personal situation of tenderers that may lead to their exclusion. This shall include a list of all such criteria and indicate required information (e.g. self-declaration, documentation). This may also include specific national exclusion grounds. '
     Business groups:
         BG-701: Exclusion Grounds
     eForms guidance: Map to the relevant `tender.exclusionGrounds` `SelectionCriterion` object's `.description`.
@@ -10027,7 +10060,7 @@
     repeatable: false
     mandatory: true
     pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$
-    Description: The European Public Procurement Notice Identifier of this notice. Including this identifier in all published version of this notice (e.g. TED, national publication portals, regional publication portals) allows unique identification of procurement notices around the EU.
+    Description: The European Public Procurement Notice Identifier of this notice. Including this identifier in all published version of this notice (e.g. TED, national publication portals, regional publication portals) allows unique identification of procurement notices around the Union.
     Business groups:
         BG-1: Notice
     eForms guidance: (UNREVIEWED) Refer to the **guidance for common operations (create a new release)**.
@@ -10078,7 +10111,7 @@
     repeatable: true
     mandatory: false
     codeList: eforms-country
-    Description: The nationality (or nationalities) of the beneficiary owner(s) of the winner, tenderer, or subcontractor; as published in the register(s) established by anti-money laundering legislation. If such a register does not exist (e.g. in case of non-EU contractors) then equivalent information from other sources.
+    Description: The nationality (or nationalities) of the beneficiary owner(s) of the winner, tenderer, or subcontractor as published in the register(s) established by European Parliament and Council Directive (EU) 2018/843. If such a register does not exist (e.g. in case of contractors established outside the Union) then equivalent information from other sources.
     Business groups:
         BG-703: Organisation
         BG-4: Winner
@@ -10175,7 +10208,7 @@
     type: amount
     repeatable: false
     mandatory: false
-    Description: The maximum value which can be spent within a framework agreement over its whole duration, including options and renewals.
+    Description: "The maximum value which can be spent within a framework agreement over its whole duration, including options and renewals, as calculated on the basis of the winner\u2019s tender or winners\u2019 tenders."
     Business groups:
         BG-7: Notice Result
         BG-137: Procedure Lot Result
@@ -10243,7 +10276,7 @@
     type: amount
     repeatable: false
     mandatory: false
-    Description: Value of the admissible tender with the lowest value. A tender shall be considered admissible where it has been submitted by a tenderer, who has not been excluded and who meets the selection criteria, and when it is in conformity with the technical specifications without being irregular (e.g. received late, having an abnormally low price or cost) or unacceptable or unsuitable. Only tenders for which it has been verified if they are admissible or inadmissible can be taken into account.
+    Description: Value of the admissible tender with the lowest value. A tender shall be considered admissible where it has been submitted by a tenderer, who has not been excluded and who meets the selection criteria, and when it is in conformity with the technical specifications without being irregular (e.g. received late, having an abnormally low price or cost) or unacceptable or unsuitable. Only tenders for which it has been verified if they are admissible or inadmissible may be taken into account.
     Business groups:
         BG-7: Notice Result
         BG-137: Procedure Lot Result
@@ -10268,7 +10301,7 @@
     type: amount
     repeatable: false
     mandatory: false
-    Description: Value of the admissible tender with the highest value. A tender shall be considered admissible where it has been submitted by a tenderer, who has not been excluded and who meets the selection criteria, and when it is in conformity with the technical specifications without being irregular (e.g. received late, having an abnormally low price or cost) or unacceptable or unsuitable. Only tenders for which it has been verified if they are admissible or inadmissible can be taken into account.
+    Description: Value of the admissible tender with the highest value. A tender shall be considered admissible where it has been submitted by a tenderer, who has not been excluded and who meets the selection criteria, and when it is in conformity with the technical specifications without being irregular (e.g. received late, having an abnormally low price or cost) or unacceptable or unsuitable. Only tenders for which it has been verified if they are admissible or inadmissible may be taken into account.
     Business groups:
         BG-7: Notice Result
         BG-137: Procedure Lot Result
@@ -10331,6 +10364,9 @@
     repeatable: false
     mandatory: false
     codeList: cvd-scope
+    Description: "The procurement falls within the scope of the European Parliament and Council 2009/33/EC (Clean Vehicles Directive \u2013 CVD)."
+    Business groups:
+        BG-713: Strategic Procurement
     eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot). If "true", add "CVD" to the lot''s `.coveredBy` array. If false, discard.'
     eForms example: <efac:StrategicProcurement><efbc:ApplicableLegalBasis listName="cvd-scope">true</efbc:ApplicableLegalBasis></efac:StrategicProcurement>
     OCDS example: '{"tender":{"lots":[{"coveredBy":["CVD"]}]}}'
@@ -10374,7 +10410,7 @@
     type: amount
     repeatable: false
     mandatory: true
-    Description: The value of the tender or another result; including options and renewals. In case of the modification notice, the value of the modification.
+    Description: The value of the tender or another result, including options and renewals. In case of the modification notice, the value of the modification.
     Business groups:
         BG-7: Notice Result
         BG-320: Tender
@@ -10429,7 +10465,7 @@
     repeatable: false
     mandatory: false
     codeList: eu-programme
-    Description: The name of the European Union funds used to at least partially finance the contract. The most concrete information must be given (e.g. about concrete projects, not just operational programs.)
+    Description: The programme of the Union funds used to at least partially finance the contract.
     Business groups:
         BG-7: Notice Result
         BG-310: Contract
@@ -10447,6 +10483,10 @@
     repeatable: false
     mandatory: false
     codeList: eu-programme
+    Description: The programme of the Union funds used to at least partially finance the contract.
+    Business groups:
+        BG-61: EU Funds
+        BG-614: EU Funds Information
     eForms guidance: |-
         These values are mapped to the same `finance` object as created for BT-5010-Lot and BT-6140-Lot.
         If BT-5010-Lot is not present follow the guidance for BT-5010-Lot, setting the `.id` of the `Finance` object incrementally based on its position in the `finance` array rather than the value of BT-5010-Lot.
@@ -10463,6 +10503,11 @@
     repeatable: false
     mandatory: false
     codeList: vehicle-category
+    Description: 'The category of vehicle falling within the scope of Directive 2009/33/EC, including: Light-duty vehicles (M1, M2, N1); Bus (M3); Truck (N2, N3); M1; M2; N1; N2; N3.'
+    Business groups:
+        BG-713: Strategic Procurement
+        BT-735: CVD Contract Type
+        BG-7141: CVD Vehicles
     eForms guidance: /\[https://github.com/open-contracting/european-union-support/issues/127#issuecomment-1357501308\]
     eForms example: <efac:ProcurementDetails><efbc:AssetCategoryCode listName="vehicle-category">n2-n3</efbc:AssetCategoryCode></efac:ProcurementDetails>
     OCDS example: ''
@@ -10759,6 +10804,9 @@
     repeatable: false
     mandatory: false
     codeList: cvd-contract-type
+    Description: The CVD legal basis to establish which category of contract types (purchase, lease, rent, hired-purchase, public service contracts and service contracts according to table 1 CVD) applies.
+    Business groups:
+        BG-713: Strategic Procurement
     eForms guidance: |-
         - [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and add a `Classification` object to the lot's `additionalClassifications` array.
         - Set the classification's `.scheme` to "cvd-contract-type".
@@ -10776,6 +10824,9 @@
     repeatable: false
     mandatory: false
     codeList: cvd-contract-type
+    Description: The CVD legal basis to establish which category of contract types (purchase, lease, rent, hired-purchase, public service contracts and service contracts according to table 1 CVD) applies.
+    Business groups:
+        BG-713: Strategic Procurement
     eForms guidance: |-
         - [Get the award for the LotResult](common-operations.md#get-the-award-for-a-lotresult) and add an `Item` object to its `items` array.
         - Set the item's `.id` incrementally.
@@ -10894,7 +10945,7 @@
     repeatable: false
     mandatory: false
     pattern: ^((\(\+?[0-9]+\))|\+?[0-9]+)( - |-| )?(((\(\d+\))|\d+)( - |-| )?)*(\d+)( )?$
-    Description: The fax for contacting the organisation. To avoid unnecessary processing of personal data, the fax may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
+    Description: The fax number for contacting the organisation. To avoid unnecessary processing of personal data, the fax number shall allow the identification of a physical person only when necessary (in the sense of the Regulation (EU) 2016/679 and Regulation (EU) 2018/1725).
     Business groups:
         BG-703: Organisation
     TED Xpath:
@@ -10982,7 +11033,7 @@
     repeatable: false
     mandatory: false
     pattern: ^((\(\+?[0-9]+\))|\+?[0-9]+)( - |-| )?(((\(\d+\))|\d+)( - |-| )?)*(\d+)( )?$
-    Description: The fax for contacting the organisation. To avoid unnecessary processing of personal data, the fax may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
+    Description: The fax number for contacting the organisation. To avoid unnecessary processing of personal data, the fax number shall allow the identification of a physical person only when necessary (in the sense of the Regulation (EU) 2016/679 and Regulation (EU) 2018/1725).
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the organization for the touchpoint](common-operations.md#get-the-organization-for-a-touchpoint) and map to the organization''s `.contactPoint.faxNumber`'
@@ -10998,7 +11049,7 @@
     repeatable: false
     mandatory: false
     pattern: ^((\(\+?[0-9]+\))|\+?[0-9]+)( - |-| )?(((\(\d+\))|\d+)( - |-| )?)*(\d+)( )?$
-    Description: The fax for contacting the organisation. To avoid unnecessary processing of personal data, the fax may allow the identification of a physical person only when necessary (in the sense of the General Data Protection Regulation).
+    Description: The fax number for contacting the organisation. To avoid unnecessary processing of personal data, the fax number shall allow the identification of a physical person only when necessary (in the sense of the Regulation (EU) 2016/679 and Regulation (EU) 2018/1725).
     Business groups:
         BG-703: Organisation
     eForms guidance: \[Get the person for the ultimate beneficial owner\](common-operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.faxNumber`.
@@ -11062,7 +11113,7 @@
     repeatable: false
     mandatory: false
     codeList: esignature-submission
-    Description: Advanced or qualified electronic signature or seal (as defined in Regulation (EU) No 910/2014) is required.
+    Description: Advanced or qualified electronic signature or seal (as defined in European Parliament and Council Regulation (EU) No 910/2014) is required.
     Business groups:
         BG-102: Submission Terms
     eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and set its `.submissionTerms.advancedElectronicSignaturePolicy` to "required" \[https://github.com/open-contracting/european-union-support/issues/68\]'
@@ -11092,7 +11143,7 @@
     type: indicator
     repeatable: false
     mandatory: false
-    Description: The nationality (or nationalities) of the beneficiary owner(s) of the winner, tenderer, or subcontractor is not published in the register(s) established by anti-money laundering legislation, because the winner is listed on a regulated market (e.g. a stock exchange) that ensures adequate transparency in line with anti-money laundering legislation.
+    Description: The nationality (or nationalities) of the beneficiary owner(s) of the winner, tenderer, or subcontractor is not published in the register(s) established by Directive (EU) 2018/843, because the winner is listed on a regulated market (e.g. a stock exchange) that ensures adequate transparency in line with anti-money laundering legislation.
     Business groups:
         BG-703: Organisation
         BG-4: Winner
@@ -11392,7 +11443,7 @@
     repeatable: false
     mandatory: true
     pattern: ^(0[1-9]|[1-9]\d)$
-    Description: The version of the notice. This helps, for example, to avoid errors caused by multiple change notices sent at a similar time.
+    Description: The version of the notice. This helps, for example, to keep track of versions of notices or changes to notices before publication.
     Business groups:
         BG-1: Notice
     eForms guidance: Discard.
@@ -11408,7 +11459,7 @@
     repeatable: false
     mandatory: false
     pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|[1-9](\d{0,7})-(19|20)\d\d)$
-    Description: The reference to the version of the previous notice that should be changed. This helps, for example, to avoid errors caused by multiple change notices sent at a similar time.
+    Description: The reference to the version of the previous notice that should be changed. This helps, for example, to keep track of versions of notices or changes to notices before publication.
     Business groups:
         BG-9: Change
     eForms guidance: Discard.
@@ -11472,7 +11523,7 @@
     repeatable: false
     mandatory: false
     codeList: received-submission-type
-    Description: 'The type of tenders or requests to participate received. The total number of tenders received must be given. When a notice does not fall under Directive 2009/81/EC and is not about social or other specific services, the number of tenders received from micro, small and medium enterprises; the number of tenders received from tenderers registered in other European Economic Area countries and the number of tenders received from tenderers registered in countries outside of the European Economic Area must also be given. All tenders must be counted, regardless of whether they are admissible or inadmissible. For tenders submitted by a group of tenderers (e.g. a consortium), the tender must be counted in the relevant category (e.g. SME) if the majority of the work is expected to be done by tenderers which fall within this category (e.g. they are SMEs). '
+    Description: The type of tenders or requests to participate received. The total number of tenders received shall be given. When a notice does not fall under Directive 2009/81/EC and is not about social or other specific services, the number of tenders received from micro, small and medium enterprises; the number of tenders received from tenderers registered in other European Economic Area countries and the number of tenders received from tenderers registered in countries outside of the European Economic Area shall also be given. All tenders shall be counted, regardless of whether they are admissible or inadmissible. For tenders submitted by a group of tenderers (e.g. a consortium), the tender shall be counted in the relevant category (e.g. SME) if the majority of the work is expected to be done by tenderers which fall within this category (e.g. they are SMEs).
     Business groups:
         BG-7: Notice Result
         BG-137: Procedure Lot Result
@@ -11653,7 +11704,7 @@
     repeatable: false
     mandatory: true
     codeList: dps-usage
-    Description: Whether a dynamic purchasing system is involved and, in case of central purchasing bodies, whether it can be used by buyers not listed in this notice.
+    Description: Whether a dynamic purchasing system is involved and, in case of central purchasing bodies, whether it may be used by buyers not listed in this notice.
     Business groups:
         BG-706: Techniques
     TED Xpath:
@@ -11678,7 +11729,7 @@
     repeatable: false
     mandatory: false
     codeList: dps-usage
-    Description: Whether a dynamic purchasing system is involved and, in case of central purchasing bodies, whether it can be used by buyers not listed in this notice.
+    Description: Whether a dynamic purchasing system is involved and, in case of central purchasing bodies, whether it may be used by buyers not listed in this notice.
     Business groups:
         BG-706: Techniques
     eForms guidance: If different from 'none', set `tender.techniques.hasDynamicPurchasingSystem` to `true`. Map the code according to the \[DPS type mapping table\] to `tender.techniques.dynamicPurchasingSystem.type`. Otherwise discard.
@@ -11828,7 +11879,7 @@
     repeatable: true
     mandatory: false
     codeList: environmental-impact
-    Description: An approach to reducing the environmental impacts of the work, supply or service (e.g. requesting compliance with an environmental label).
+    Description: A process to procure goods, services and works with reduced environmental impact throughout their life cycle.
     Business groups:
         BG-713: Strategic Procurement
     eForms guidance: |-
@@ -11869,7 +11920,7 @@
     repeatable: true
     mandatory: false
     codeList: innovative-acquisition
-    Description: An indication that innovative works, supplies or services are being bought (e.g. the procured works, supplies or services being novel for the whole market).
+    Description: 'An indication that innovative works, supplies or services are being bought. '
     Business groups:
         BG-713: Strategic Procurement
     eForms guidance: |-
@@ -11888,7 +11939,7 @@
     type: text-multilingual
     repeatable: false
     mandatory: false
-    Description: Description of the use of a technical specification, selection criterion, award criterion, or contract performance condition aims to reduce the environmental impacts of the procurement, fulfil social objectives and/or buy an innovative work, supply or service.
+    Description: Description of how the procurement procedure is aiming at reducing the environmental impacts of the procurement, fulfilling social objectives and/or buying an innovative work, supply or service.
     Business groups:
         BG-713: Strategic Procurement
     eForms guidance: |-
@@ -11958,6 +12009,9 @@
     repeatable: false
     mandatory: false
     codeList: nda
+    Description: A non-disclosure agreement is required.
+    Business groups:
+        BG-705: Other Requirements
     eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.contractTerms.hasNonDisclosureAgreement`.'
     eForms example: <cac:ContractExecutionRequirement><cbc:ExecutionRequirementCode listName="nda">true</cbc:ExecutionRequirementCode></cac:ContractExecutionRequirement>
     OCDS example: '{"tender":{"lots":[{"contractTerms":{"hasNonDisclosureAgreement":"true"}}]}}'
@@ -11970,6 +12024,9 @@
     type: text-multilingual
     repeatable: false
     mandatory: false
+    Description: Additional information about the non-disclosure agreement.
+    Business groups:
+        BG-705: Other Requirements
     eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.contractTerms.nonDisclosureAgreement`.'
     eForms example: <cac:ContractExecutionRequirement><cbc:Description languageID="ENG">A Non Disclosure Agreement will need to ...</cbc:Description></cac:ContractExecutionRequirement>
     OCDS example: '{"tender":{"lots":[{"contractTerms":{"nonDisclosureAgreement":"A Non Disclosure Agreement will need to ..."}}]}}'
@@ -11982,6 +12039,9 @@
     type: date
     repeatable: false
     mandatory: false
+    Description: The date and time the notice was transmitted electronically by the eSender to the Publications Office of the European Union
+    Business groups:
+        BG-1: Notice
     eForms guidance: Discard.
     eForms example: <efbc:TransmissionDate>2022-11-17+01:00</efbc:TransmissionDate>
     OCDS example: ''
@@ -11994,6 +12054,9 @@
     type: time
     repeatable: false
     mandatory: false
+    Description: The date and time the notice was transmitted electronically by the eSender to the Publications Office of the European Union
+    Business groups:
+        BG-1: Notice
     eForms guidance: (UNREVIEWED) Discard.
     eForms example: <efbc:TransmissionTime>08:30:03+01:00</efbc:TransmissionTime>
     OCDS example: ''
@@ -12007,6 +12070,9 @@
     repeatable: false
     mandatory: false
     codeList: gpp-criteria
+    Description: 'The procurement procedure includes the use of established green public procurement criteria (selection criteria, technical specifications, award criteria and contract performance clauses), at national, Union or other level, if applicable. '
+    Business groups:
+        BG-713: Strategic Procurement
     eForms guidance: |-
         [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot).
         If "none" discard, otherwise set the lot's `.hasSustainability` to "true".
@@ -12024,7 +12090,7 @@
     type: text-multilingual
     repeatable: false
     mandatory: true
-    Description: The main features of the procedure (e.g. description of the individual stage(s)) and information about where the full rules for the procedure can be found. This information must be given when the procedure is not one of those mentioned in the procurement Directives. This can be the case for example for concessions, for social and other specific services, and in case of voluntary publication of procurement procedures below the EU procurement thresholds.
+    Description: The main features of the procedure (e.g. description of the individual stage(s)) and information about where the full rules for the procedure can be found. This information shall be given when the procedure is not one of those mentioned in the procurement Directives. This can be the case for example for concessions, for social and other specific services, and in case of voluntary publication of procurement procedures below the EU procurement thresholds.
     Business groups:
         BG-6: Procedure
     TED Xpath:
@@ -12233,7 +12299,7 @@
     type: code
     repeatable: false
     mandatory: false
-    Description: The maximum or estimated value which can be spent within the framework agreement(s) announced in this notice over its whole duration, in all lots, including options and renewals.
+    Description: "The maximum value which can be spent within the framework agreement(s) announced in this notice over its/their whole duration, in all lots, including options and renewals, as calculated on the basis of the winner\u2019s tender or winners\u2019 tenders."
     Business groups:
         BG-7: Notice Result
     eForms guidance: Discard
@@ -12263,7 +12329,7 @@
     type: code
     repeatable: false
     mandatory: false
-    Description: The estimated maximum value of the procurement procedure or lot. Estimated refers to estimation at the time of launching the call for competition. Maximum value means a value covering all contracts to be awarded within a framework agreement or a dynamic purchasing system, over their whole duration, including options and renewals.
+    Description: The estimated value of the procurement procedure or lot, over its whole duration, including options and renewals.
     Business groups:
         BG-2: Purpose
     eForms guidance: Follow guidance for BT-27-Procedure.
@@ -12278,7 +12344,7 @@
     type: number
     repeatable: false
     mandatory: true
-    Description: The (estimated) period from the start to the end of the contract, framework agreement, dynamic purchasing system or qualification system. This must include any options and renewals.
+    Description: The (estimated) period from the start to the end of the contract, framework agreement, dynamic purchasing system or qualification system. This shall include any options and renewals.
     Business groups:
         BG-36: Duration
     eForms guidance: Follow guidance for BT-36-Lot.
@@ -12293,7 +12359,7 @@
     type: number
     repeatable: false
     mandatory: false
-    Description: The (estimated) period from the start to the end of the contract, framework agreement, dynamic purchasing system or qualification system. This must include any options and renewals.
+    Description: The (estimated) period from the start to the end of the contract, framework agreement, dynamic purchasing system or qualification system. This shall include any options and renewals.
     Business groups:
         BG-36: Duration
     eForms guidance: Follow guidance for BT-36-Part.
