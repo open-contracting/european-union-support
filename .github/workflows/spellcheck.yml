@@ -1,7 +1,5 @@
-name: Lint
+name: Spell-check
 on: [push, pull_request]
-env:
-  BASEDIR: https://raw.githubusercontent.com/open-contracting/standard-maintenance-scripts/main
 jobs:
   build:
     if: github.event_name == 'push' || github.event.pull_request.head.repo.full_name != github.repository
@@ -11,9 +9,5 @@ jobs:
       - uses: actions/setup-python@v4
         with:
           python-version: 3.8
-      - uses: actions/cache@v3
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip
       - run: pip install codespell
-      - run: codespell -S '.git,samples,source' -L nin,tne .
+      - run: codespell -S .git,samples,source -L nin,tne .
