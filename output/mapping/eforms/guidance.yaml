@@ -6919,9 +6919,9 @@
 
         - [Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `<efac:SelectionCriteria>`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
-        - Set the criterion's `.reductionCriterion` to `true`. \[https://github.com/open-contracting/european-union-support/issues/72\], \[https://github.com/open-contracting/european-union-support/issues/97\]
+        - Set the criterion's `.forReduction` to `true`. \[https://github.com/open-contracting/european-union-support/issues/72\], \[https://github.com/open-contracting/european-union-support/issues/97\]
     eForms example: <efac:SelectionCriteria><efbc:SecondStageIndicator>true</efbc:SecondStageIndicator></efac:SelectionCriteria>
-    OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"reductionCriterion":true}]}}]}}'
+    OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"forReduction":true}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#selectionCriteriaSection
 -   id: BT-41-Lot
     parentNodeId: ND-AwardingTerms
