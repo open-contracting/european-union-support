@@ -809,7 +809,7 @@
 
         For example, if a first notice for a given procedure has nine related processes, it uses id's '1' through '9'. A second notice for the same procedure then uses id's '10' and up, etc.
 
-        Map the value of the field to `.identifier`. Set `.scheme` to 'eu-oj'. If the value of `sibling::cbc:ProcessReasonCode` is 'irregular' or 'unsuitable' add 'unsuccessfulProcess' to the `.relationship` array. If it is 'additional', 'existing' or 'repetition' add 'prior' to the `.relationship` array.
+        Map the value of the field to `.identifier`. Set `.scheme` to 'eu-oj'. If the value of `sibling::cbc:ProcessReasonCode` is "irregular" or "unsuitable", add 'unsuccessfulProcess' to the `.relationship` array. If it is "additional", "existing" or "repetition", add 'prior' to the `.relationship` array.
     eForms example: <cac:ProcessJustification><cbc:Description>123e4567-e89b-12d3-a456-426614174000</cbc:Description></cac:ProcessJustification>
     OCDS example: '{"relatedProcesses":[{"id":"1","identifier":"123e4567-e89b-12d3-a456-426614174000","scheme":"eu-oj","relationship":["prior"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#directAwardSection
