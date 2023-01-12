@@ -9016,7 +9016,7 @@
     - TED_EXPORT/FORM_SECTION/F07_2014/OBJECT_CONTRACT/OBJECT_DESCR/INDEFINITE_DURATION
     TED guidance:
     - Discard. If the lot's `.contractPeriod` isn't set, then the duration is indefinite.
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.contractPeriod.other`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.contractPeriod.description`.'
     eForms example: <cac:PlannedPeriod><cbc:DescriptionCode listName="timeperiod">UNLIMITED</cbc:DescriptionCode></cac:PlannedPeriod>
     OCDS example: '{"tender":{"lots":[{"contractPeriod":{"other":"unknown"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#plannedPeriodSection
@@ -9032,7 +9032,7 @@
     Description: The duration is unknown, unlimited, etc.
     Business groups:
         BG-36: Duration
-    eForms guidance: Map to `tender.contractPeriod.other`
+    eForms guidance: Map to `tender.contractPeriod.description`
     eForms example: <cac:PlannedPeriod><cbc:DescriptionCode listName="timeperiod">UNLIMITED</cbc:DescriptionCode></cac:PlannedPeriod>
     OCDS example: '{"tender":{"contractPeriod":{"other":"unknown"}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#plannedPeriodSection
