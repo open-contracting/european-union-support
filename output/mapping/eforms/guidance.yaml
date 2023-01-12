@@ -540,7 +540,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/PROCEDURE/*[matches(name(),'CONTRACT_COVERED_GPA')]
     TED guidance:
     - Add 'GPA' to the `tender.coveredBy` array
-    eForms guidance: If `true`, [get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and add "GPA" to its `.coveredBy` array. Otherwise, discard.
+    eForms guidance: If "true", [get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot) and add "GPA" to its `.coveredBy` array. Otherwise, discard.
     eForms example: <cbc:GovernmentAgreementConstraintIndicator>true</cbc:GovernmentAgreementConstraintIndicator>
     OCDS example: '{"tender":{"lots":[{"coveredBy":["GPA"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#GPASection
@@ -558,7 +558,7 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/F01_2014/PROCEDURE/*[matches(name(),'CONTRACT_COVERED_GPA')]
     - TED_EXPORT/FORM_SECTION/F04_2014/PROCEDURE/*[matches(name(),'CONTRACT_COVERED_GPA')]
-    eForms guidance: If `true`, add "GPA" to the `tender.coveredBy` array. Otherwise, do nothing.
+    eForms guidance: If "true", add "GPA" to the `tender.coveredBy` array. Otherwise, do nothing.
     eForms example: <cbc:GovernmentAgreementConstraintIndicator>true</cbc:GovernmentAgreementConstraintIndicator>
     OCDS example: '{"tender":{"coveredBy":["GPA"]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#GPASection
@@ -592,7 +592,7 @@
     - TED_EXPORT/FORM_SECTION/F03_2014/PROCEDURE/TERMINATION_DPS
     TED guidance:
     - Set `tender.techniques.dynamicPurchasingSystem.status` to 'terminated'
-    eForms guidance: If `true`, [get the lot for the LotResult](common-operations.md#get-the-lot-for-lotresult) and set the lot's `.techniques.dynamicPurchasingSystem.status` to 'terminated'. Otherwise, discard.
+    eForms guidance: If "true", [get the lot for the LotResult](common-operations.md#get-the-lot-for-lotresult) and set the lot's `.techniques.dynamicPurchasingSystem.status` to 'terminated'. Otherwise, discard.
     eForms example: <efac:LotResult><efbc:DPSTerminationIndicator>true</efbc:DPSTerminationIndicator></efac:LotResult>
     OCDS example: '{"tender":{"lots":[{"techniques":{"dynamicPurchasingSystem":{"status":"terminated"}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_lot_result
@@ -6038,7 +6038,7 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/TYPE_CONTRACT_DEFENCE/TYPE_CONTRACT/@VALUE
     - TED_EXPORT/FORM_SECTION/F21_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot). If "works" or "services", map to the lot''s `.mainProcurementCategory`. If "supplies" set the lot''s `.mainProcurementCategory` to "goods". If "combined" add to the lot''s `.additionalProcurementCategories` array.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot). If "works" or "services", map to the lot''s `.mainProcurementCategory`. If "supplies", set the lot''s `.mainProcurementCategory` to "goods". If "combined", add to the lot''s `.additionalProcurementCategories` array.'
     eForms example: <cbc:ProcurementTypeCode listName="contract-nature">works</cbc:ProcurementTypeCode>
     OCDS example: '{"tender":{"lots":[{"mainProcurementCategory":"works"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#natureSection
@@ -6054,7 +6054,7 @@
     Description: The main nature (e.g. works) of what is being bought. In case of mixed procurement (e.g. a procedure for both works and services), the main nature may be, for example, the one with the highest estimated value. This information shall be given for the whole procedure.
     Business groups:
         BG-2: Purpose
-    eForms guidance: If `works` or `services`, map to `tender.mainProcurementCategory`. If `supplies` map `goods` to `tender.mainProcurementCategory`. If `combined` add to `tender.additionalProcurementCategories` array.
+    eForms guidance: If "works" or "services", map to `tender.mainProcurementCategory`. If "supplies", set `tender.mainProcurementCategory` to "goods". If "combined", add to the `tender.additionalProcurementCategories` array.
     eForms example: <cbc:ProcurementTypeCode listName="contract-nature">works</cbc:ProcurementTypeCode>
     OCDS example: '{"tender":{"mainProcurementCategory":"works"}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#natureSection
@@ -6087,7 +6087,7 @@
     - TED_EXPORT/FORM_SECTION/F23_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
     - TED_EXPORT/FORM_SECTION/F24_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
-    eForms guidance: If `works` or `services`, map to `tender.mainProcurementCategory`. If `supplies` map `goods` to `tender.mainProcurementCategory`. If `combined` add to `tender.additionalProcurementCategories` array.
+    eForms guidance: If "works" or "services", map to `tender.mainProcurementCategory`. If "supplies", set `tender.mainProcurementCategory` to "goods". If "combined", add to the `tender.additionalProcurementCategories` array.
     eForms example: <cbc:ProcurementTypeCode listName="contract-nature">works</cbc:ProcurementTypeCode>
     OCDS example: '{"tender":{"mainProcurementCategory":"works"}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#natureSection
@@ -11395,7 +11395,7 @@
     Description: The use of accessibility criteria for persons with disabilities in the technical specifications.
     Business groups:
         BG-713: Strategic Procurement
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot). If "inc" set the lot''s `.hasAccessibilityCriteria` to "true", otherwise set to "false". If "n-inc" set the lot''s `.noAccessibilityCriteriaRationale` to "Procurement is not intended for use by natural persons".'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](common-operations.md#get-the-lot-for-a-procurementprojectlot). If "inc", set the lot''s `.hasAccessibilityCriteria` to "true", otherwise set to "false". If "n-inc", set the lot''s `.noAccessibilityCriteriaRationale` to "Procurement is not intended for use by natural persons".'
     eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="accessibility">n-inc-just</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
     OCDS example: '{"tender":{"lots":[{"hasAccessibilityCriteria":"false"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#accessibilitySection
@@ -11430,7 +11430,7 @@
     - TED_EXPORT/FORM_SECTION/F21_2014/PROCEDURE/TERMINATION_PIN
     TED guidance:
     - Set `tender.status` to 'complete'
-    eForms guidance: If `true` set `tender.status` to `complete` otherwise discard.
+    eForms guidance: If "true", set `tender.status` to 'complete'. Otherwise, discard.
     eForms example: <cbc:TerminatedIndicator>true</cbc:TerminatedIndicator>
     OCDS example: '{"tender":{"status":"complete"}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#competitionTerminationSection
@@ -11866,7 +11866,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/AWARD_CONTRACT/AWARDED_CONTRACT/LIKELY_SUBCONTRACTED
     TED guidance:
     - Set the award's `.hasSubcontracting` to `true`
-    eForms guidance: /[Get the bid for the LotTender](common-operations.md#get-the-bid-for-a-lottender). If "yes" set the bid's `.hasSubcontracting` to `true`, if "no" set the bid's `.hasSubcontracting' to `false\`.
+    eForms guidance: [Get the bid for the LotTender](common-operations.md#get-the-bid-for-a-lottender). If "yes", set the bid's `.hasSubcontracting` to `true`. If "no", set the bid's `.hasSubcontracting' to `false`.
     eForms example: <efac:SubcontractingTerm><efbc:TermCode listName="applicability">yes</efbc:TermCode></efac:SubcontractingTerm>
     OCDS example: '{"bids":{"details":[{"hasSubContracting":true}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderSection
@@ -13030,7 +13030,7 @@
     type: indicator
     repeatable: false
     mandatory: false
-    eForms guidance: /[Get the organization for the tenderer](common-operations.md#get-the-organization-for-a-tenderer). If "true" add 'leadTenderer' to it's `.roles`.
+    eForms guidance: /[Get the organization for the tenderer](common-operations.md#get-the-organization-for-a-tenderer). If "true", add 'leadTenderer' to its `.roles`.
     eForms example: <efac:Tenderer><efbc:GroupLeadIndicator>true</efbc:GroupLeadIndicator></efac:Tenderer>
     OCDS example: '{"parties":[{"id":"ORG-0001","roles":["leadTenderer","tenderer"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tenderingPartySection
