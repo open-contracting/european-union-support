@@ -2031,7 +2031,7 @@
     Business groups:
         BG-7: Notice Result
         BG-320: Tender
-    eForms guidance: '[Get the bid for a LotTender](common-operations.md#get-the-bid-for-a-lottender) and map to the bid''s `.details.rank`.'
+    eForms guidance: '[Get the bid for a LotTender](common-operations.md#get-the-bid-for-a-lottender) and map to the bid''s `.rank`.'
     eForms example: <efac:LotTender><cbc:RankCode>1</cbc:RankCode></efac:LotTender>
     OCDS example: '{"bids":{"details":[{"rank":"1"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderSection
@@ -2048,7 +2048,7 @@
     Business groups:
         BG-7: Notice Result
         BG-320: Tender
-    eForms guidance: '[Get the bid for a LotTender](common-operations.md#get-the-bid-for-a-lottender) and map to the bid''s `.details.hasRank`.'
+    eForms guidance: '[Get the bid for a LotTender](common-operations.md#get-the-bid-for-a-lottender) and map to the bid''s `.hasRank`.'
     eForms example: <efac:LotTender><efbc:TenderRankedIndicator>true</efbc:TenderRankedIndicator></efac:LotTender>
     OCDS example: '{"bids":{"details":[{"hasRank":"true"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderSection
@@ -2113,7 +2113,7 @@
     Business groups:
         BG-7: Notice Result
         BG-320: Tender
-    eForms guidance: \[UNREVIEWED\] Look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and convert to lowercase. [Get the bid for a LotTender](common-operations.md#get-the-bid-for-a-lottender) and add to the bid's `.details.countryOfOrigin` array.
+    eForms guidance: \[UNREVIEWED\] Look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and convert to lowercase. [Get the bid for a LotTender](common-operations.md#get-the-bid-for-a-lottender) and add to the bid's `.countryOfOrigin` array.
     eForms example: <efac:Origin><efbc:AreaCode listName="eforms-country">ITA</efbc:AreaCode></efac:Origin>
     OCDS example: '{"bids":{"details":[{"countryOfOrigin":["it"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderSection
@@ -13591,7 +13591,7 @@
     pattern: ^ORG-\d{4}$
     eForms guidance: |-
         - Perform the mapping for `BT-500-Organization-Company` (Organisation Name). Get the Organization in `parties` whose `.id` is equal to the value of this field and add 'subcontractor' to its `.roles` array.
-        - [Get the bid for the LotTender](common-operations.md#get-the-bid-for-a-lottender), add a `subcontracts` object to the bid's `.details.subcontracting.subcontracts` array and:
+        - [Get the bid for the LotTender](common-operations.md#get-the-bid-for-a-lottender), add a `subcontracts` object to the bid's `.subcontracting.subcontracts` array and:
           - Set its `.id` incrementally
           - Add a `subcontractors` object and set its `.id` to the value of this field.
     eForms example: '<efac:NoticeResult> <efac:LotTender> <cbc:ID schemeName="tender">TEN-0001</cbc:ID> </efac:LotTender> <efac:TenderingParty> <efac:SubContractor> <cbc:ID schemeName="organization">ORG-0012</cbc:ID> </efac:SubContractor> </efac:TenderingParty> </efac:NoticeResult> <efac:Organizations> <efac:Organization> <efac:Company> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0012</cbc:ID> </cac:PartyIdentification> </efac:Company> </efac:Organization> </efac:Organizations> '
