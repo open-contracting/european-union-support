@@ -9955,7 +9955,7 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/SUBCONTRACTING/IDENTIFY_SUBCONTRACT
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and add to the lot''s `.submissionTerms.subcontractingClauses` array.'
     eForms example: <efac:TenderSubcontractingRequirements><efbc:TenderSubcontractingRequirementsCode listName="subcontracting-indication">subc-oblig</efbc:TenderSubcontractingRequirementsCode></efac:TenderSubcontractingRequirements>
-    OCDS example: '{"tender":{"lots":[{"subcontracting":{"subcontractingClauses":"subc-oblig"}}]}}'
+    OCDS example: '{"tender":{"lots":[{"submissionTerms":{"subcontractingClauses":"subc-oblig"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#subcontractingObligationSection
 -   id: BT-660-LotResult
     parentNodeId: ND-LotResultFAValues
