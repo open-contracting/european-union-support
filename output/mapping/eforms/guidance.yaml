@@ -2113,7 +2113,7 @@
     Business groups:
         BG-7: Notice Result
         BG-320: Tender
-    eForms guidance: \[UNREVIEWED\] Look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and convert to lowercase. [Get the bid for a LotTender](operations.md#get-the-bid-for-a-lottender) and add to the bid's `.countryOfOrigin` array.
+    eForms guidance: Look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and convert to lowercase. [Get the bid for a LotTender](operations.md#get-the-bid-for-a-lottender) and add to the bid's `.countryOfOrigin` array.
     eForms example: <efac:Origin><efbc:AreaCode listName="eforms-country">ITA</efbc:AreaCode></efac:Origin>
     OCDS example: '{"bids":{"details":[{"countryOfOrigin":["it"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderSection
@@ -9018,7 +9018,7 @@
     - Discard. If the lot's `.contractPeriod` isn't set, then the duration is indefinite.
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.contractPeriod.description`.'
     eForms example: <cac:PlannedPeriod><cbc:DescriptionCode listName="timeperiod">UNLIMITED</cbc:DescriptionCode></cac:PlannedPeriod>
-    OCDS example: '{"tender":{"lots":[{"contractPeriod":{"other":"unknown"}}]}}'
+    OCDS example: '{"tender":{"lots":[{"contractPeriod":{"description":"unknown"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#plannedPeriodSection
 -   id: BT-538-Part
     parentNodeId: ND-PartDuration
@@ -9034,7 +9034,7 @@
         BG-36: Duration
     eForms guidance: Map to `tender.contractPeriod.description`
     eForms example: <cac:PlannedPeriod><cbc:DescriptionCode listName="timeperiod">UNLIMITED</cbc:DescriptionCode></cac:PlannedPeriod>
-    OCDS example: '{"tender":{"contractPeriod":{"other":"unknown"}}}'
+    OCDS example: '{"tender":{"contractPeriod":{"description":"unknown"}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#plannedPeriodSection
 -   id: BT-539-Lot
     parentNodeId: ND-LotAwardCriterion
