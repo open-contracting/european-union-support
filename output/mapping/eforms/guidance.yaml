@@ -6919,7 +6919,7 @@
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `<efac:SelectionCriteria>`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
-        - Set the criterion's `.forReduction` to `true`. \[https://github.com/open-contracting/european-union-support/issues/72\], \[https://github.com/open-contracting/european-union-support/issues/97\]
+        - Set the criterion's `.forReduction` to `true`.  \[https://github.com/open-contracting/european-union-support/issues/97\]
     eForms example: <efac:SelectionCriteria><efbc:SecondStageIndicator>true</efbc:SecondStageIndicator></efac:SelectionCriteria>
     OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"forReduction":true}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#selectionCriteriaSection
@@ -6974,7 +6974,7 @@
     eForms guidance: |-
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and add a `Prize` object to its `.designContest.prizes.details` array.
 
-        - Set its `.id` incrementally. The position of the prize object in the `.details` array determines the rank of the prize. Example: `.details[0]` should return the highest ranking prize, `.details[1]` the second highest ranking prize, etc. \[https://github.com/open-contracting/european-union-support/issues/76\]
+        - Set its `.id` incrementally. The position of the prize object in the `.details` array determines the rank of the prize. Example: `.details[0]` should return the highest ranking prize, `.details[1]` the second highest ranking prize, etc.
     eForms example: <cac:Prize><cbc:RankCode>1</cbc:RankCode></cac:Prize>
     OCDS example: '{"tender":{"lots":[{"designContest":{"prizes":{"details":[{"id":"1"}]}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#prizeSection
@@ -7891,7 +7891,7 @@
     Description: The organisation's uniform resource locator for exchange of data and documents.
     Business groups:
         BG-703: Organisation
-    eForms guidance: '[Get the organization for the company](operations.md#get-the-organization-for-a-company) and map to the organization''s `.eDeliveryGateway` \[https://github.com/open-contracting/european-union-support/issues/62\]'
+    eForms guidance: '[Get the organization for the company](operations.md#get-the-organization-for-a-company) and map to the organization''s `.eDeliveryGateway`.'
     eForms example: <efac:Organization><efac:Company><cbc:EndpointID>https://drive.xpertpro.eu/</cbc:EndpointID></efac:Company></efac:Organization>
     OCDS example: '{"parties":[{"eDeliveryGateway":"https://drive.xpertpro.eu"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -7907,7 +7907,7 @@
     Description: The organisation's uniform resource locator for exchange of data and documents.
     Business groups:
         BG-703: Organisation
-    eForms guidance: '[Get the organization for the touchpoint](operations.md#get-the-organization-for-a-touchpoint) and map to the organization''s `.eDeliveryGateway` \[https://github.com/open-contracting/european-union-support/issues/62\]'
+    eForms guidance: '[Get the organization for the touchpoint](operations.md#get-the-organization-for-a-touchpoint) and map to the organization''s `.eDeliveryGateway`.'
     eForms example: <efac:Organization><efac:TouchPoint><cbc:EndpointID>https://drive.xpertpro.eu/</cbc:EndpointID></efac:TouchPoint></efac:Organization>
     OCDS example: '{"parties":[{"eDeliveryGateway":"https://drive.xpertpro.eu"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_general_structure_of_an_organization_related_information
@@ -9910,7 +9910,7 @@
     eForms guidance: |-
         These values are mapped to the same `Prize` objects as created for BT-44.
 
-        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and for each `cac:Prize` add or update the corresponding `Prize` object in the lot's `designContest.prize.details` array and map to its `value.amount`. Map `@currencyID` to the value's `.currency`. \[https://github.com/open-contracting/european-union-support/issues/76\]
+        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and for each `cac:Prize` add or update the corresponding `Prize` object in the lot's `designContest.prize.details` array and map to its `value.amount`. Map `@currencyID` to the value's `.currency`.
     eForms example: <cac:Prize><cbc:ValueAmount currencyID="EUR">5000</cbc:ValueAmount></cac:Prize>
     OCDS example: '{"tender":{"lots":[{"designContest":{"prizes":{"details":[{"value":{"amount":5000,"currency":"EUR"}}]}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#prizeSection
@@ -11073,7 +11073,7 @@
         [Get the organization for the buyer](operations.md#get-the-organization-for-the-buyer) and add a `Classification` object to its `.details.classifications` array.
 
         - Map the value of this field to the classification's `.id`.
-        - Set its `.description` according to the [buyer contracting type mapping table](<>) and set its `.scheme` to "buyer-contracting-type". \[https://github.com/open-contracting/european-union-support/issues/65\]
+        - Set its `.description` according to the [buyer contracting type mapping table](<>) and set its `.scheme` to "buyer-contracting-type".
     eForms example: <cac:ContractingPartyType><cbc:PartyTypeCode listName="buyer-contracting-type">cont-ent</cbc:PartyTypeCode></cac:ContractingPartyType>
     OCDS example: '{"parties":[{"id":"ORG-0001","details":{"classifications":[{"scheme":"TED_BUYER_TYPE","id":"cont-ent","description":"Contracting Entity"}]}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_buyer_information_2
@@ -11116,7 +11116,7 @@
     Description: Advanced or qualified electronic signature or seal (as defined in European Parliament and Council Regulation (EU) No 910/2014) is required.
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and set its `.submissionTerms.advancedElectronicSignaturePolicy` to "required" \[https://github.com/open-contracting/european-union-support/issues/68\]'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and set its `.submissionTerms.advancedElectronicSignaturePolicy` to "required".'
     eForms example: <cac:ContractExecutionRequirement><cbc:ExecutionRequirementCode listName="esignature-submission">false</cbc:ExecutionRequirementCode></cac:ContractExecutionRequirement>
     OCDS example: '{"tender":{"lots":[{"submissionTerms":{"advancedElectronicSignaturePolicy":"required"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#eSignatureSubmissionSection
@@ -11333,7 +11333,7 @@
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot)
         - For each `efac:SelectionCriteria`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`
         - For each `efac:CriterionParameter`, add or update a corresponding `SelectionCriterionNumber` object in the criterion's `.numbers`.
-        - Map to the number's `.number`. \[https://github.com/open-contracting/european-union-support/issues/73\], \[https://github.com/open-contracting/european-union-support/issues/97\]
+        - Map to the number's `.number`. \[https://github.com/open-contracting/european-union-support/issues/97\]
     eForms example: <efac:CriterionParameter><efbc:ParameterNumeric>2</efbc:ParameterNumeric></efac:CriterionParameter>
     OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"numbers":[{"number":2}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#selectionCriteriaSection
@@ -11356,7 +11356,7 @@
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot)
         - For each `efac:SelectionCriteria`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
         - For each `efac:CriterionParameter`, add or update a corresponding `SelectionCriterionNumber` object in the criterion's `.numbers`.
-        - Identify the equivalent code in the [criterionWeight](https://extensions.open-contracting.org/en/extensions/awardCriteria/master/codelists/#criterionWeight.csv) codelist and map to the number's `.weight`. \[https://github.com/open-contracting/european-union-support/issues/73\], \[https://github.com/open-contracting/european-union-support/issues/97\]
+        - Identify the equivalent code in the [criterionWeight](https://extensions.open-contracting.org/en/extensions/awardCriteria/master/codelists/#criterionWeight.csv) codelist and map to the number's `.weight`. \[https://github.com/open-contracting/european-union-support/issues/97\]
     eForms example: <efac:CriterionParameter><efbc:ParameterCode listName="number-weight">per-exa</efbc:ParameterCode></efac:CriterionParameter>
     OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"numbers":[{"weight":"percentageExact"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#selectionCriteriaSection
@@ -11379,7 +11379,7 @@
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot)
         - For each `efac:SelectionCriteria`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
         - For each `efac:CriterionParameter`, add or update a corresponding `SelectionCriterionNumber` object in the criterion's `.numbers`.
-        - Identify the equivalent code in the [criterionThreshold](https://extensions.open-contracting.org/en/extensions/awardCriteria/master/codelists/#criterionThreshold.csv) codelist and map to the number's `.threshold`. \[https://github.com/open-contracting/european-union-support/issues/73\], \[https://github.com/open-contracting/european-union-support/issues/97\]
+        - Identify the equivalent code in the [criterionThreshold](https://extensions.open-contracting.org/en/extensions/awardCriteria/master/codelists/#criterionThreshold.csv) codelist and map to the number's `.threshold`. \[https://github.com/open-contracting/european-union-support/issues/97\]
     eForms example: <efac:CriterionParameter><efbc:ParameterCode listName="number-threshold">min-score</efbc:ParameterCode></efac:CriterionParameter>
     OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"numbers":[{"threshold":"minimumScore"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#selectionCriteriaSection
@@ -11866,7 +11866,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/AWARD_CONTRACT/AWARDED_CONTRACT/LIKELY_SUBCONTRACTED
     TED guidance:
     - Set the award's `.hasSubcontracting` to `true`
-    eForms guidance: [Get the bid for the LotTender](operations.md#get-the-bid-for-a-lottender). If "yes", set the bid's `.hasSubcontracting` to `true`. If "no", set the bid's `.hasSubcontracting' to `false`.
+    eForms guidance: '[Get the bid for the LotTender](operations.md#get-the-bid-for-a-lottender). If "yes", set the bid''s `.hasSubcontracting` to `true`. If "no", set the bid''s `.hasSubcontracting'' to `false\`.'
     eForms example: <efac:SubcontractingTerm><efbc:TermCode listName="applicability">yes</efbc:TermCode></efac:SubcontractingTerm>
     OCDS example: '{"bids":{"details":[{"hasSubContracting":true}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderSection
