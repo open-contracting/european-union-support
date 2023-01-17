@@ -727,7 +727,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/PROCEDURE/NOTICE_NUMBER_OJ
     TED guidance:
     - '[Reference a previous publication](../../operations/#reference-a-previous-publication)'
-    eForms guidance: (UNREVIEWED) [Reference a previous publication](operations.md#reference-a-previous-publication) \[https://github.com/open-contracting/european-union-support/issues/54\]
+    eForms guidance: (UNREVIEWED) [Reference a previous publication](operations.md#reference-a-previous-publication)
     eForms example: <cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID></cac:NoticeDocumentReference>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#previousPlanningSection
@@ -743,7 +743,7 @@
     Description: The identifier of a prior information notice or another similar notice related to this notice.
     Business groups:
         BG-125: Previous Planning
-    eForms guidance: (UNREVIEWED) (REPEAT) [Reference a previous publication](operations.md#reference-a-previous-publication) \[https://github.com/open-contracting/european-union-support/issues/54\]
+    eForms guidance: (UNREVIEWED) (REPEAT) [Reference a previous publication](operations.md#reference-a-previous-publication)
     eForms example: <cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID></cac:NoticeDocumentReference>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#previousPlanningSection
@@ -758,7 +758,7 @@
     Description: The identifier of a part of a prior information notice or another similar notice related to this notice.
     Business groups:
         BG-125: Previous Planning
-    eForms guidance: (UNREVIEWED) [Reference a previous publication](operations.md#reference-a-previous-publication), and map to `.lotId`. \[https://github.com/open-contracting/european-union-support/issues/54\]
+    eForms guidance: (UNREVIEWED) [Reference a previous publication](operations.md#reference-a-previous-publication), and map to `.lotId`.
     eForms example: <cac:NoticeDocumentReference><cbc:ReferencedDocumentInternalAddress>PAR-0001</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#previousPlanningSection
@@ -773,7 +773,7 @@
     Description: The identifier of a part of a prior information notice or another similar notice related to this notice.
     Business groups:
         BG-125: Previous Planning
-    eForms guidance: (UNREVIEWED) (REPEAT) [Reference a previous publication](operations.md#reference-a-previous-publication), and map to `.lotId`. \[https://github.com/open-contracting/european-union-support/issues/54\]
+    eForms guidance: (UNREVIEWED) (REPEAT) [Reference a previous publication](operations.md#reference-a-previous-publication), and map to `.lotId`.
     eForms example: <cac:NoticeDocumentReference><cbc:ReferencedDocumentInternalAddress>PAR-0001</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#previousPlanningSection
@@ -6919,7 +6919,7 @@
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `<efac:SelectionCriteria>`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
-        - Set the criterion's `.forReduction` to `true`.  \[https://github.com/open-contracting/european-union-support/issues/97\]
+        - Set the criterion's `.forReduction` to `true`.
     eForms example: <efac:SelectionCriteria><efbc:SecondStageIndicator>true</efbc:SecondStageIndicator></efac:SelectionCriteria>
     OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"forReduction":true}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#selectionCriteriaSection
@@ -10511,7 +10511,7 @@
         BG-713: Strategic Procurement
         BT-735: CVD Contract Type
         BG-7141: CVD Vehicles
-    eForms guidance: /\[https://github.com/open-contracting/european-union-support/issues/127#issuecomment-1357501308\]
+    eForms guidance: ''
     eForms example: <efac:ProcurementDetails><efbc:AssetCategoryCode listName="vehicle-category">n2-n3</efbc:AssetCategoryCode></efac:ProcurementDetails>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_lot_result
@@ -11182,7 +11182,7 @@
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot)
         - For each `<efac:SelectionCriteria>`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
-        - Identify the equivalent code in the [selectionCriterionType](<>) codelist and map to the criterion's `.type`. \[https://github.com/open-contracting/european-union-support/issues/97\], \[https://github.com/open-contracting/european-union-support/issues/106\]
+        - Identify the equivalent code in the [selectionCriterionType](<>) codelist and map to the criterion's `.type`.
     eForms example: <efac:SelectionCriteria><cbc:CriterionTypeCode listName="selection-criterion">ef-stand</cbc:CriterionTypeCode></efac:SelectionCriteria>
     OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"type":"economic"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#selectionCriteriaSection
@@ -11235,7 +11235,7 @@
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot)
         - For each `efac:SelectionCriteria`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
-        - Map to the criterion's `.description`. \[Concatenate it with BT-750-Lot Selection Criteria Description.\] \[https://github.com/open-contracting/european-union-support/issues/97\]
+        - Map to the criterion's `.description`. \[Concatenate it with BT-750-Lot Selection Criteria Description.\]
     eForms example: <efac:SelectionCriteria><cbc:Name languageID="ENG">Minimum Turnover</cbc:Name></efac:SelectionCriteria>
     OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"description":"Minimum Turnover"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#selectionCriteriaSection
@@ -11292,7 +11292,7 @@
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot)
         - For each `efac:SelectionCriteria`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
-        - Map to the criterion's `.description`. \[Concatenate it with BT-749-Lot Selection Criteria Name.\] \[https://github.com/open-contracting/european-union-support/issues/97\]
+        - Map to the criterion's `.description`. \[Concatenate it with BT-749-Lot Selection Criteria Name.\]
     eForms example: <efac:SelectionCriteria><cbc:Description languageID="ENG">Turnover over contract value rate</cbc:Description></efac:SelectionCriteria>
     OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"description":"Turnover over contract value rate"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#selectionCriteriaSection
@@ -11334,7 +11334,7 @@
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot)
         - For each `efac:SelectionCriteria`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`
         - For each `efac:CriterionParameter`, add or update a corresponding `SelectionCriterionNumber` object in the criterion's `.numbers`.
-        - Map to the number's `.number`. \[https://github.com/open-contracting/european-union-support/issues/97\]
+        - Map to the number's `.number`.
     eForms example: <efac:CriterionParameter><efbc:ParameterNumeric>2</efbc:ParameterNumeric></efac:CriterionParameter>
     OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"numbers":[{"number":2}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#selectionCriteriaSection
@@ -11357,7 +11357,7 @@
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot)
         - For each `efac:SelectionCriteria`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
         - For each `efac:CriterionParameter`, add or update a corresponding `SelectionCriterionNumber` object in the criterion's `.numbers`.
-        - Identify the equivalent code in the [criterionWeight](https://extensions.open-contracting.org/en/extensions/awardCriteria/master/codelists/#criterionWeight.csv) codelist and map to the number's `.weight`. \[https://github.com/open-contracting/european-union-support/issues/97\]
+        - Identify the equivalent code in the [criterionWeight](https://extensions.open-contracting.org/en/extensions/awardCriteria/master/codelists/#criterionWeight.csv) codelist and map to the number's `.weight`.
     eForms example: <efac:CriterionParameter><efbc:ParameterCode listName="number-weight">per-exa</efbc:ParameterCode></efac:CriterionParameter>
     OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"numbers":[{"weight":"percentageExact"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#selectionCriteriaSection
@@ -11380,7 +11380,7 @@
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot)
         - For each `efac:SelectionCriteria`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
         - For each `efac:CriterionParameter`, add or update a corresponding `SelectionCriterionNumber` object in the criterion's `.numbers`.
-        - Identify the equivalent code in the [criterionThreshold](https://extensions.open-contracting.org/en/extensions/awardCriteria/master/codelists/#criterionThreshold.csv) codelist and map to the number's `.threshold`. \[https://github.com/open-contracting/european-union-support/issues/97\]
+        - Identify the equivalent code in the [criterionThreshold](https://extensions.open-contracting.org/en/extensions/awardCriteria/master/codelists/#criterionThreshold.csv) codelist and map to the number's `.threshold`.
     eForms example: <efac:CriterionParameter><efbc:ParameterCode listName="number-threshold">min-score</efbc:ParameterCode></efac:CriterionParameter>
     OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"numbers":[{"threshold":"minimumScore"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#selectionCriteriaSection
@@ -12614,7 +12614,7 @@
     repeatable: true
     mandatory: false
     pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|[1-9](\d{0,7})-(19|20)\d\d)$
-    eForms guidance: (UNREVIEWED) [Reference a previous publication](operations.md#reference-a-previous-publication) \[https://github.com/open-contracting/european-union-support/issues/54\]
+    eForms guidance: (UNREVIEWED) [Reference a previous publication](operations.md#reference-a-previous-publication)
     eForms example: <cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID></cac:NoticeDocumentReference>
     OCDS example: '{"relatedProcesses":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"123e4567-e89b-12d3-a456-426614174000-06"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#previousNoticeSection
@@ -12695,7 +12695,7 @@
     type: text-multilingual
     repeatable: false
     mandatory: false
-    eForms guidance: This data element is underspecified in eForms. No mapping is available. /https://github.com/open-contracting/european-union-support/issues/133
+    eForms guidance: This data element is underspecified in eForms. No mapping is available.
     eForms example: ''
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#reservedExecutionSection
@@ -12995,7 +12995,7 @@
     repeatable: false
     mandatory: false
     codeList: vehicles
-    eForms guidance: /\[https://github.com/open-contracting/european-union-support/issues/127#issuecomment-1357501308\]
+    eForms guidance: ''
     eForms example: <efac:StrategicProcurementStatistics><efbc:StatisticsCode listName="vehicles">vehicles-zero-emission</efbc:StatisticsCode></efac:StrategicProcurementStatistics>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_lot_result
@@ -13007,7 +13007,7 @@
     type: number
     repeatable: false
     mandatory: false
-    eForms guidance: /\[https://github.com/open-contracting/european-union-support/issues/127#issuecomment-1357501308\]
+    eForms guidance: ''
     eForms example: <efac:StrategicProcurementStatistics><efbc:StatisticsNumeric>0</efbc:StatisticsNumeric></efac:StrategicProcurementStatistics>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_lot_result
