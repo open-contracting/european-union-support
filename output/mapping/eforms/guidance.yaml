@@ -201,7 +201,7 @@
         If the code is "none" discard, otherwise set the lot's `.hasSustainability` to "true".
         For each `cac:ProcurementAdditionalType` add a corresponding `.sustainability` object to the lot's `.sustainability` array.
 
-        - Map the code to the sustainability's `.goal` according to the \[strategic procurement mapping table\].
+        - Map the code to the sustainability's `.goal` according to the [strategic procurement mapping table](codelists/strategic-procurement).
         - Add "awardCriteria", "contractPerformanceConditions", "selectionCriteria" and "technicalSpecifications" to the sustainability's `.strategies` array.
     eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="strategic-procurement">inn-pur</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
     OCDS example: '{"tender":{"lots":[{"hasSustainabilty":true,"sustainability":[{"goal":"economic.innovativePurchase","strategies":["awardCriteria","contractPerformanceConditions","selectionCriteria","technicalSpecifications"]}]}]}}'
@@ -7177,7 +7177,8 @@
     Description: The official name of the organisation.
     Business groups:
         BG-703: Organisation
-    eForms guidance: \[Get the person for the ultimate beneficial owner\](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.name`.
+    eForms guidance: |-
+        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.name`.
     eForms example: <efac:UltimateBeneficialOwner><cbc:FamilyName>Mouse</cbc:FamilyName></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"name":"Mouse"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -7486,7 +7487,8 @@
     Description: The telephone number for contacting the organisation. To avoid unnecessary processing of personal data, the telephone number shall allow the identification of a physical person only when necessary (in the sense of the Regulation (EU) 2016/679 and Regulation (EU) 2018/1725).
     Business groups:
         BG-703: Organisation
-    eForms guidance: \[Get the person for the ultimate beneficial owner\](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.telephone`.
+    eForms guidance: |-
+        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.telephone`.
     eForms example: <efac:UltimateBeneficialOwner><cac:Contact><cbc:Telephone>+123 4567890</cbc:Telephone></cac:Contact></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"telephone":"+123 456789"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -7698,7 +7700,8 @@
     Description: The email address for contacting the organisation. To avoid unnecessary processing of personal data, the email address shall allow the identification of a physical person only when necessary (in the sense of the Regulation (EU) 2016/679 and Regulation (EU) 2018/1725).
     Business groups:
         BG-703: Organisation
-    eForms guidance: \[Get the person for the ultimate beneficial owner\](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.email`.
+    eForms guidance: |-
+        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.email`.
     eForms example: <efac:UltimateBeneficialOwner><cac:Contact><cbc:ElectronicMail>mickey.mouse@cheese-universe.com</cbc:ElectronicMail></cac:Contact></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"email":"mickey.mouse@cheese-universe.com"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -7771,7 +7774,8 @@
     Description: The location according to the common classification of territorial units for statistics (NUTS) of the organisation's physical address. The NUTS3 classification code shall be used.
     Business groups:
         BG-703: Organisation
-    eForms guidance: \[Get the person for the ultimate beneficial owner\](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.address.region`.
+    eForms guidance: |-
+        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.address.region`.
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:CountrySubentityCode listName="nuts-lvl3">GBK62</cbc:CountrySubentityCode></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"region":"GBK62"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -8053,7 +8057,8 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: \[Get the person for the ultimate beneficial owner\](operations.md#get-the-person-for-an-ultimate-beneficial-owner), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the person's `address.streetAddress`.
+    eForms guidance: |-
+        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the person's `address.streetAddress`.
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:StreetName>2 CheeseStreet</cbc:StreetName></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"streetAddress":"2 CheeseStreet, Nelson Building, 2nd floor"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -8098,7 +8103,8 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: \[Get the person for the ultimate beneficial owner\](operations.md#get-the-person-for-an-ultimate-beneficial-owner), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the person's `address.streetAddress`.
+    eForms guidance: |-
+        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the person's `address.streetAddress`.
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:AdditionalStreetName>Nelson Building</cbc:AdditionalStreetName></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"streetAddress":"2 CheeseStreet, Nelson Building, 2nd floor"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -8143,7 +8149,8 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: \[Get the person for the ultimate beneficial owner\](operations.md#get-the-person-for-an-ultimate-beneficial-owner), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the person's `address.streetAddress`.
+    eForms guidance: |-
+        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the person's `address.streetAddress`.
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cac:AddressLine><cbc:Line>2nd floor</cbc:Line></cac:AddressLine></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"streetAddress":"2 CheeseStreet, Nelson Building, 2nd floor"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -8431,7 +8438,8 @@
     Description: The post code of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: \[Get the person for the ultimate beneficial owner\](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.address.postalCode`.
+    eForms guidance: |-
+        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.address.postalCode`.
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:PostalZone>C6HA782</cbc:PostalZone></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"postalCode":"C6HA78"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -8598,7 +8606,8 @@
     Description: The name of the locality (city, town, or village) of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: \[Get the person for the ultimate beneficial owner\](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.address.postalCode`.
+    eForms guidance: |-
+        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.address.postalCode`.
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:CityName>MouseTown</cbc:CityName></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"locality":"MouseTown"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -8768,7 +8777,8 @@
     Description: The country of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: \[Get the person for the ultimate beneficial owner\](operations.md#get-the-person-for-an-ultimate-beneficial-owner), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the person's `.address.country`.
+    eForms guidance: |-
+        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the person's `.address.country`.
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cac:Country><cbc:IdentificationCode listName="eforms-country">GBR</cbc:IdentificationCode></cac:Country></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"country":"GB"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -9220,7 +9230,7 @@
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
         - For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array.
-          - Map the code to the award criterion number's `.weight` according to the \[award criterion weight mapping table\].
+          - Map the code to the award criterion number's `.weight` according to the [award criterion weight mapping table](codelists/number-weight).
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-weight">per-exa</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"weight":"percentageExact"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#awardCriteriaSection
@@ -9244,7 +9254,7 @@
         - [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
         - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
         - For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array.
-          - Map the code to the award criterion number's `.weight` according to the \[award criterion weight mapping table\].
+          - Map the code to the award criterion number's `.weight` according to the [award criterion weight mapping table](codelists/number-weight).
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-weight">per-exa</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"numbers":[{"weight":"percentageExact"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#awardCriteriaSection
@@ -9268,7 +9278,7 @@
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
         - For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array.
-          - Map the code to the award criterion number's `.fixed` according to the \[award criterion fixed mapping table\].
+          - Map the code to the award criterion number's `.fixed` according to the [award criterion fixed mapping table](codelists/number-fixed).
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-fixed">fix-tot</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"fixed":"total"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#awardCriteriaSection
@@ -9292,7 +9302,7 @@
         - [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
         - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
         - For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array.
-          - Map the code to the award criterion number's `.fixed` according to the \[award criterion fixed mapping table\].
+          - Map the code to the award criterion number's `.fixed` according to the [award criterion fixed mapping table](codelists/number-fixed).
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-fixed">fix-tot</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"numbers":[{"fixed":"total"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#awardCriteriaSection
@@ -9316,7 +9326,7 @@
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
         - For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array.
-          - Map the code to the award criterion number's `.threshold` according to the \[award criterion threshold mapping table\].
+          - Map the code to the award criterion number's `.threshold` according to the [award criterion threshold mapping table]((codelists/number-threshold).
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-threshold">max-pass</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"threshold":"maximumBids"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#awardCriteriaSection
@@ -9340,7 +9350,7 @@
         - [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
         - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
         - For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array.
-          - Map the code to the award criterion number's `.threshold` according to the \[award criterion threshold mapping table\].
+          - Map the code to the award criterion number's `.threshold` according to the [award criterion threshold mapping table](codelists/number-threshold).
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-threshold">max-pass</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"numbers":[{"threshold":"maximumBids"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#awardCriteriaSection
@@ -9727,7 +9737,7 @@
     Description: The time limit for receipt of expressions of interest.
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), combine with [BT-630(t)-Lot](<#BT-630(t)-lot>), [convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to the lot''s `tenderPeriod.endDate\`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), combine with [BT-630(t)-Lot](<#BT-630(t)-lot>), [convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to the lot''s `tenderPeriod.endDate`.'
     eForms example: <efac:InterestExpressionReceptionPeriod><cbc:EndDate>2019-10-28+01:00</cbc:EndDate></efac:InterestExpressionReceptionPeriod>
     OCDS example: '{"tender":{"lots":[{"tenderPeriod":{"endDate":"2019-10-28T23:59:59+01:00"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#expressionsDeadlineSection
@@ -9749,7 +9759,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/PROCEDURE/TIME_RECEIPT_TENDERS
     TED guidance:
     - Map to the time component of `tender.tenderPeriod.endDate`
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), combine with [BT-630(d)-Lot](<#BT-630(d)-lot>), [convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to the lot''s `tenderPeriod.endDate\`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), combine with [BT-630(d)-Lot](<#BT-630(d)-lot>), [convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to the lot''s `tenderPeriod.endDate`.'
     eForms example: <efac:InterestExpressionReceptionPeriod><cbc:EndTime>18:00:00+01:00</cbc:EndTime></efac:InterestExpressionReceptionPeriod>
     OCDS example: '{"tender":{"lots":[{"tenderPeriod":{"endDate":"2019-10-28T18:00:00+01:00"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#expressionsDeadlineSection
@@ -10118,7 +10128,8 @@
     Business groups:
         BG-703: Organisation
         BG-4: Winner
-    eForms guidance: \[Get the person for the ultimate beneficial owner\](operations.md#get-the-person-for-an-ultimate-beneficial-owner), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the person's `.nationality`.
+    eForms guidance: |-
+        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the person's `.nationality`.
     eForms example: <efac:UltimateBeneficialOwner><efac:Nationality><cbc:NationalityID>DEU</cbc:NationalityID></efac:Nationality></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"nationality":"DE"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -10591,7 +10602,7 @@
     Description: 'There are other restrictions on the place of performance (e.g. "anywhere in the European Economic Area", "anywhere in the given country"). '
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: Add a `Location` object to the `tender.deliveryLocations` array, look up the code's label in the \[authority table\]\](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map to the location's `.description`.
+    eForms guidance: Add a `Location` object to the `tender.deliveryLocations` array, look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map to the location's `.description`.
     eForms example: <cac:Address><cbc:Region>anyw-eea</cbc:Region></cac:Address>
     OCDS example: '{"tender":{"deliveryLocations":[{"description":"Anywhere in the European Economic Area"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -10607,7 +10618,7 @@
     Description: 'There are other restrictions on the place of performance (e.g. "anywhere in the European Economic Area", "anywhere in the given country"). '
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: Add a `Location` object to the `tender.deliveryLocations` array, look up the code's label in the \[authority table\]\](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map to the location's `.description`.
+    eForms guidance: Add a `Location` object to the `tender.deliveryLocations` array, look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map to the location's `.description`.
     eForms example: <cac:Address><cbc:Region>anyw-eea</cbc:Region></cac:Address>
     OCDS example: '{"tender":{"deliveryLocations":[{"description":"Anywhere in the European Economic Area"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -11053,7 +11064,8 @@
     Description: The fax number for contacting the organisation. To avoid unnecessary processing of personal data, the fax number shall allow the identification of a physical person only when necessary (in the sense of the Regulation (EU) 2016/679 and Regulation (EU) 2018/1725).
     Business groups:
         BG-703: Organisation
-    eForms guidance: \[Get the person for the ultimate beneficial owner\](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.faxNumber`.
+    eForms guidance: |-
+        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.faxNumber`.
     eForms example: <efac:UltimateBeneficialOwner><cac:Contact><cbc:Telefax>+123 4567891</cbc:Telefax></cac:Contact></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"faxNumber":"+123 4567891"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -11074,7 +11086,7 @@
         [Get the organization for the buyer](operations.md#get-the-organization-for-the-buyer) and add a `Classification` object to its `.details.classifications` array.
 
         - Map the value of this field to the classification's `.id`.
-        - Set its `.description` according to the [buyer contracting type mapping table](<>) and set its `.scheme` to "buyer-contracting-type".
+        - Set its `.description` according to the [buyer contracting type mapping table](codelists/buyer-contracting-type) and set its `.scheme` to "buyer-contracting-type".
     eForms example: <cac:ContractingPartyType><cbc:PartyTypeCode listName="buyer-contracting-type">cont-ent</cbc:PartyTypeCode></cac:ContractingPartyType>
     OCDS example: '{"parties":[{"id":"ORG-0001","details":{"classifications":[{"scheme":"TED_BUYER_TYPE","id":"cont-ent","description":"Contracting Entity"}]}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_buyer_information_2
@@ -11182,7 +11194,7 @@
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot)
         - For each `<efac:SelectionCriteria>`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
-        - Identify the equivalent code in the [selectionCriterionType](<>) codelist and map to the criterion's `.type`.
+        - Identify the equivalent code in the [selectionCriterionType](codelists/selection-criterion) codelist and map to the criterion's `.type`.
     eForms example: <efac:SelectionCriteria><cbc:CriterionTypeCode listName="selection-criterion">ef-stand</cbc:CriterionTypeCode></efac:SelectionCriteria>
     OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"type":"economic"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#selectionCriteriaSection
@@ -11235,7 +11247,7 @@
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot)
         - For each `efac:SelectionCriteria`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
-        - Map to the criterion's `.description`. \[Concatenate it with BT-750-Lot Selection Criteria Description.\]
+        - Map to the criterion's `.description`. Concatenate it with [BT-750-Lot Selection Criteria Description](#BT-750-Lot).
     eForms example: <efac:SelectionCriteria><cbc:Name languageID="ENG">Minimum Turnover</cbc:Name></efac:SelectionCriteria>
     OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"description":"Minimum Turnover"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#selectionCriteriaSection
@@ -11292,7 +11304,7 @@
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot)
         - For each `efac:SelectionCriteria`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
-        - Map to the criterion's `.description`. \[Concatenate it with BT-749-Lot Selection Criteria Name.\]
+        - Map to the criterion's `.description`. Concatenate it with [BT-749-Lot Selection Criteria Name](#BT-749-Lot).
     eForms example: <efac:SelectionCriteria><cbc:Description languageID="ENG">Turnover over contract value rate</cbc:Description></efac:SelectionCriteria>
     OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"description":"Turnover over contract value rate"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#selectionCriteriaSection
@@ -11562,7 +11574,7 @@
     eForms guidance: |-
         This field maps to the same `Statistic` objects as created for BT-759-LotResult.
 
-        For each `ancestor::efac:ReceivedSubmissionsStatistics`, [add a bids statistic](operations.md#add-a-statistic) or update the corresponding `Statistic` object and map to its `.measure` according to the \[submission count types mapping table\].
+        For each `ancestor::efac:ReceivedSubmissionsStatistics`, [add a bids statistic](operations.md#add-a-statistic) or update the corresponding `Statistic` object and map to its `.measure` according to the [submission count types mapping table](codelists/received-submission-type).
         [Get the lot for the LotResult](operations.md#get-the-lot-for-a-lotresult) and add the lot's `.id` to the statistic's `.relatedLots`.
     eForms example: <efac:ReceivedSubmissionsStatistics><efbc:StatisticsCode listName="received-submission-type">t-sme</efbc:StatisticsCode></efac:ReceivedSubmissionsStatistics>
     OCDS example: '{"bids":{"statistics":[{"measure":"smeBids"}]}}'
@@ -11674,7 +11686,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/PROCEDURE/FRAMEWORK
     TED guidance:
     - Set `tender.techniques.hasFrameworkAgreement` to `true`
-    eForms guidance: If different from 'none', [get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and set its `.techniques.hasFrameworkAgreement` to `true`. Map the code according to the \[framework agreement method mapping table\] to the lot's `.techniques.method`. Otherwise discard.
+    eForms guidance: If different from 'none', [get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and set its `.techniques.hasFrameworkAgreement` to `true`. Map the code according to the [framework agreement method mapping table](codelists/framework-agreement) to the lot's `.techniques.method`. Otherwise discard.
     eForms example: <cac:ContractingSystem><cbc:ContractingSystemTypeCode listName="framework-agreement">fa-wo-rc</cbc:ContractingSystemTypeCode></cac:ContractingSystem>
     OCDS example: '{"tender":{"lots":[{"techniques":{"hasFrameworkAgreement":true,"method":"withoutReopeningCompetition"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#frameworkAgreementSection
@@ -11692,7 +11704,7 @@
         BG-706: Techniques
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/*[matches(name(),'FRAMEWORK_AGREEMENT')]
-    eForms guidance: If different from 'none', set `tender.techniques.hasFrameworkAgreement` to `true`. Map the code according to the \[framework agreement method mapping table\] to `tender.techniques.method`. Otherwise discard.
+    eForms guidance: If different from 'none', set `tender.techniques.hasFrameworkAgreement` to `true`. Map the code according to the [framework agreement method mapping table](codelists/framework-agreement) to `tender.techniques.method`. Otherwise discard.
     eForms example: <cac:ContractingSystem><cbc:ContractingSystemTypeCode listName="framework-agreement">fa-wo-rc</cbc:ContractingSystemTypeCode></cac:ContractingSystem>
     OCDS example: '{"tender":{"techniques":{"hasFrameworkAgreement":true,"method":"withoutReopeningCompetition"}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#frameworkAgreementSection
@@ -11717,7 +11729,7 @@
     TED guidance:
     - Set `tender.techniques.dynamicPurchasingSystem.type` to 'open'
     - Set `tender.techniques.hasDynamicPurchasingSystem` to `true`
-    eForms guidance: If different from 'none', [get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and set its `.techniques.hasDynamicPurchasingSystem` to `true`. Map the code according to the \[DPS type mapping table\] to the lot's `.techniques.dynamicPurchasingSystem.type`. Otherwise discard.
+    eForms guidance: If different from 'none', [get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and set its `.techniques.hasDynamicPurchasingSystem` to `true`. Map the code according to the [DPS type mapping table](codelists/dps-usage) to the lot's `.techniques.dynamicPurchasingSystem.type`. Otherwise discard.
     eForms example: <cac:ContractingSystem><cbc:ContractingSystemTypeCode listName="dps-usage">dps-nlist</cbc:ContractingSystemTypeCode></cac:ContractingSystem>
     OCDS example: '{"tender":{"lots":[{"techniques":{"hasDynamicPurchasingSystem":true,"dynamidPurchasingSystem":{"type":"closed"}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#DPSSection
@@ -11733,7 +11745,7 @@
     Description: Whether a dynamic purchasing system is involved and, in case of central purchasing bodies, whether it may be used by buyers not listed in this notice.
     Business groups:
         BG-706: Techniques
-    eForms guidance: If different from 'none', set `tender.techniques.hasDynamicPurchasingSystem` to `true`. Map the code according to the \[DPS type mapping table\] to `tender.techniques.dynamicPurchasingSystem.type`. Otherwise discard.
+    eForms guidance: If different from 'none', set `tender.techniques.hasDynamicPurchasingSystem` to `true`. Map the code according to the [DPS type mapping table](codelists/dps-usage) to `tender.techniques.dynamicPurchasingSystem.type`. Otherwise discard.
     eForms example: <cac:ContractingSystem><cbc:ContractingSystemTypeCode listName="dps-usage">dps-nlist</cbc:ContractingSystemTypeCode></cac:ContractingSystem>
     OCDS example: '{"tender":{"techniques":{"hasDynamicPurchasingSystem":true,"dynamidPurchasingSystem":{"type":"closed"}}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#DPSSection
@@ -11867,7 +11879,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/AWARD_CONTRACT/AWARDED_CONTRACT/LIKELY_SUBCONTRACTED
     TED guidance:
     - Set the award's `.hasSubcontracting` to `true`
-    eForms guidance: '[Get the bid for the LotTender](operations.md#get-the-bid-for-a-lottender). If "yes", set the bid''s `.hasSubcontracting` to `true`. If "no", set the bid''s `.hasSubcontracting'' to `false\`.'
+    eForms guidance: '[Get the bid for the LotTender](operations.md#get-the-bid-for-a-lottender). If "yes", set the bid''s `.hasSubcontracting` to `true`. If "no", set the bid''s `.hasSubcontracting` to `false`.'
     eForms example: <efac:SubcontractingTerm><efbc:TermCode listName="applicability">yes</efbc:TermCode></efac:SubcontractingTerm>
     OCDS example: '{"bids":{"details":[{"hasSubContracting":true}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderSection
@@ -11887,7 +11899,7 @@
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and set the lot''s `.hasSustainability` to "true".
         For each `cac:ProcurementAdditionalType` add a corresponding `.sustainability` object to the lot''s `.sustainability` array.
 
-        - Map the code to the sustainability''s `.goal` according to the \[environmental procurement mapping table\].
+        - Map the code to the sustainability''s `.goal` according to the [environmental procurement mapping table](codelists/environmental-impact).
     eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="environmental-impact">circ-econ</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
     OCDS example: '{"tender":{"lots":[{"hasSustainabilty":true,"sustainability":[{"goal":"environmental.circularEconomy"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#strategicProcurementSection
@@ -11907,7 +11919,7 @@
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and set the lot's `.hasSustainability` to "true".
         For each `cac:ProcurementAdditionalType` add a corresponding `.sustainability` object to the lot's `.sustainability` array.
 
-        - Map the code to the sustainability's `.goal` according to the /\[social procurement mapping table\].
+        - Map the code to the sustainability's `.goal` according to the [social procurement mapping table](codelists/social-objective).
         - Add "awardCriteria", "contractPerformanceConditions", "selectionCriteria" and "technicalSpecifications" to the sustainability's `.strategies` array.
     eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="social-objective">et-eq</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
     OCDS example: '{"tender":{"lots":[{"hasSustainabilty":true,"sustainability":[{"goal":"social.ethnicEquality","strategies":["awardCriteria","contractPerformanceConditions","selectionCriteria","technicalSpecifications"]}]}]}}'
@@ -11928,7 +11940,7 @@
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and set the lot's `.hasSustainability` to "true".
         For each `cac:ProcurementAdditionalType` add a corresponding `.sustainability` object to the lot's `.sustainability` array.
 
-        - Map the code to the sustainability's `.goal` according to the \[innovative procurement mapping table\].
+        - Map the code to the sustainability's `.goal` according to the [innovative procurement mapping table](codelists/innovative-acquisition).
     eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="innovative-acquisition">proc-innov</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
     OCDS example: '{"tender":{"lots":[{"hasSustainabilty":true,"sustainability":[{"goal":"economic.processInnovation"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#strategicProcurementSection
@@ -12079,7 +12091,7 @@
         If "none" discard, otherwise set the lot's `.hasSustainability` to "true".
         For each `cac:ProcurementAdditionalType` add a corresponding `.sustainability` object to the lot's `.sustainability` array.
 
-        - Map the code to the sustainability's `.strategies` array according to the \[GPP criteria mapping table\].
+        - Map the code to the sustainability's `.strategies` array according to the [GPP criteria mapping table](codelists/gpp-criteria).
     eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="gpp-criteria">eu</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
     OCDS example: '{"tender":{"lots":[{"hasSustainabilty":true,"sustainability":[{"strategies":["euGPPCriteria"]}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#strategicProcurementSection
@@ -12589,7 +12601,7 @@
     repeatable: false
     mandatory: true
     codeList: notice-subtype
-    eForms guidance: /https://opencontractingint.slack.com/archives/C03S8JL100P/p1669216510754849
+    eForms guidance: ''
     eForms example: <efac:NoticeSubType><cbc:SubTypeCode listName="notice-subtype">16</cbc:SubTypeCode></efac:NoticeSubType>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#subtypeSection
@@ -12712,7 +12724,7 @@
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and add a `CustomerServices` object to its `contractTerms` array.
 
         - Map to its `.type`
-        - Look up the code's label in the /[authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/customer-service) and map it to `.name`.
+        - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/customer-service) and map it to `.name`.
     eForms example: <cac:ContractExecutionRequirement><cbc:ExecutionRequirementCode listName="customer-service">clean</cbc:ExecutionRequirementCode></cac:ContractExecutionRequirement>
     OCDS example: '{"tender":{"lots":[{"contractTerms":{"customerServices":[{"type":"clean","name":"Cleanliness of rolling stock and station facilities"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tenderingTermsSection
@@ -13019,7 +13031,8 @@
     type: text
     repeatable: false
     mandatory: false
-    eForms guidance: \[Get the person for the ultimate beneficial owner\](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.name`.
+    eForms guidance: |-
+        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.name`.
     eForms example: <efac:UltimateBeneficialOwner><cbc:FirstName>Mickey</cbc:FirstName></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"name":"Mickey"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -13031,7 +13044,8 @@
     type: indicator
     repeatable: false
     mandatory: false
-    eForms guidance: /[Get the organization for the tenderer](operations.md#get-the-organization-for-a-tenderer). If "true", add 'leadTenderer' to its `.roles`.
+    eForms guidance: |-
+        [Get the organization for the tenderer](operations.md#get-the-organization-for-a-tenderer). If "true", add 'leadTenderer' to its `.roles`.
     eForms example: <efac:Tenderer><efbc:GroupLeadIndicator>true</efbc:GroupLeadIndicator></efac:Tenderer>
     OCDS example: '{"parties":[{"id":"ORG-0001","roles":["leadTenderer","tenderer"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tenderingPartySection
@@ -13073,7 +13087,8 @@
     repeatable: false
     mandatory: false
     pattern: ^UBO-\d{4}$
-    eForms guidance: \[Get the person for the ultimate beneficial owner\](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.id`.
+    eForms guidance: |-
+        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.id`.
     eForms example: <efac:UltimateBeneficialOwner><cbc:ID schemeName="ubo">UBO-0001</cbc:ID></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":{"id":"UBO-0001"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -13125,7 +13140,7 @@
     repeatable: false
     mandatory: true
     eForms guidance: |-
-        \[Get the organization for the organization technical identifier reference\](operations.md#get-the-organization-for-an-organization technical-identifier-reference)
+        [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization technical-identifier-reference)
 
         - Add 'buyer' to its `.roles` array.
         - Add an `OrganizationReference` object to `buyer` and set its `.id` to the organization's `.id`.
@@ -13144,7 +13159,7 @@
     mandatory: false
     pattern: ^ORG-\d{4}$
     eForms guidance: |-
-        \[Get the organization for the organization technical identifier reference\](operations.md#get-the-organization-for-an-organization technical-identifier-reference).
+        [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization technical-identifier-reference).
         Get the `ancestor::efext:EformsExtension/efac:Organizations/efac:Organization/efac:Company` whose `/cac:PartyIdentification/cbc:ID` is equal to the value of this field and set the organization's `.name` to the value of `/cac:PartyName/cbc:Name`.
     eForms example: <cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification>
     OCDS example: '{"parties":[{"id":"ORG-0001","name":"Service Provider Ltd"}]}'
@@ -13573,7 +13588,7 @@
     mandatory: false
     pattern: ^ORG-\d{4}$
     eForms guidance: |-
-        - \[Get the organization for the organization technical identifier reference\](operations.md#get-the-organization-for-an-organization technical-identifier-reference) and add 'tenderer' to its `.roles` array.
+        - [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization technical-identifier-reference) and add 'tenderer' to its `.roles` array.
         - [Get the bid for the LotTender](operations.md#get-the-bid-for-a-lottender), and get the `subcontracts` object whose `subcontractors.id` is equal to the value of `ancestor: efac:SubContractor/cbc:ID`.
         - Add an `OrganizationReference` object to the subcontract's `.tenderers` array and set its `.id` to the value of this field.
     eForms example: <efac:NoticeResult> <efac:LotTender> <cbc:ID schemeName="tender">TEN-0001</cbc:ID> </efac:LotTender> <efac:TenderingParty> <efac:SubContractor> <cbc:ID schemeName="organization">ORG-0012</cbc:ID> <efac:MainContractor> <cbc:ID schemeName="organization">ORG-0005</cbc:ID> </efac:MainContractor> </efac:SubContractor> </efac:TenderingParty> </efac:NoticeResult> <efac:Organizations> <efac:Organization> <efac:Company> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0005</cbc:ID> </cac:PartyIdentification> </efac:Company> </efac:Organization> </efac:Organizations>
@@ -13613,7 +13628,7 @@
         Get the `Organization` in `parties` whose `id` is equal to the value of `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`. If none exists yet:
 
         1. Add an `Organization` to `parties`
-        1. Set its `.id` to the value of `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`.\]
+        1. Set its `.id` to the value of `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`.
 
         If there is a `Person` in the organization's `.beneficialOwners` array whose `id` is equal to the value of this field, discard. Otherwise, add a `Person` to `.beneficialOwners` and map to its `.id`.
     eForms example: <efac:Organization><efac:UltimateBeneficialOwner><cbc:ID schemeName="ubo">UBO-0001</cbc:ID></efac:UltimateBeneficialOwner></efac:Organization>
@@ -13697,7 +13712,7 @@
     mandatory: true
     pattern: ^TEN-\d{4}$
     eForms guidance: |-
-        \[UNREVIEWED\] If there is a `Bid` in `bids` whose `.id` is equal to the value of the field discard. Otherwise:
+        (UNREVIEWED) If there is a `Bid` in `bids` whose `.id` is equal to the value of the field discard. Otherwise:
 
         - Add a `Bid` to `bids`
         - Map to its `.id`
