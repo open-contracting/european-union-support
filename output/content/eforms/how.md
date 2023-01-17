@@ -12,7 +12,7 @@ For each `OrganizationReference` object in your data, get the `Organization` in 
 
 Some information required by eForms may remain non-public ("unpublished") for a defined period, as described in [withheld publication of information](https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#withheldPublicationOfInformationSection). For fields with an associated `efac:FieldsPrivacy` element, wait until the date in `/efbc:PublicationDate` and then:
 
-* [Create a release](common-operations.md#create-a-release) and add 'previouslyWithheldInformation' to its `.tag` array.
+* [Create a release](operations.md#create-a-release) and add 'previouslyWithheldInformation' to its `.tag` array.
 * Perform the mapping for the fields and publish the release.
 
 ## What's not included
