@@ -197,9 +197,11 @@
     Business groups:
         BG-713: Strategic Procurement
     eForms guidance: |-
+        This field maps to the same `Sustainability` objects as created for BT-777-Lot.
+
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         If the code is "none" discard, otherwise set the lot's `.hasSustainability` to "true".
-        For each `cac:ProcurementAdditionalType` add a corresponding `.sustainability` object to the lot's `.sustainability` array.
+        For each `cac:ProcurementAdditionalType`, add or update the corresponding `Sustainability` object to the lot's `.sustainability` array.
 
         - Map the code to the sustainability's `.goal` according to the [strategic procurement mapping table](codelists/strategic-procurement).
         - Add "awardCriteria", "contractPerformanceConditions", "selectionCriteria" and "technicalSpecifications" to the sustainability's `.strategies` array.
@@ -727,9 +729,9 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/PROCEDURE/NOTICE_NUMBER_OJ
     TED guidance:
     - '[Reference a previous publication](../../operations/#reference-a-previous-publication)'
-    eForms guidance: (UNREVIEWED) [Reference a previous publication](operations.md#reference-a-previous-publication)
+    eForms guidance: '[Reference a previous publication](operations.md#reference-a-previous-publication)'
     eForms example: <cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID></cac:NoticeDocumentReference>
-    OCDS example: ''
+    OCDS example: '{"relatedProcess":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"123e4567-e89b-12d3-a456-426614174000-06"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#previousPlanningSection
 -   id: BT-125(i)-Part
     parentNodeId: ND-PartPreviousPlanning
@@ -743,9 +745,9 @@
     Description: The identifier of a prior information notice or another similar notice related to this notice.
     Business groups:
         BG-125: Previous Planning
-    eForms guidance: (UNREVIEWED) (REPEAT) [Reference a previous publication](operations.md#reference-a-previous-publication)
+    eForms guidance: '[Reference a previous publication](operations.md#reference-a-previous-publication).'
     eForms example: <cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID></cac:NoticeDocumentReference>
-    OCDS example: ''
+    OCDS example: '{"relatedProcess":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"123e4567-e89b-12d3-a456-426614174000-06"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#previousPlanningSection
 -   id: BT-1251-Lot
     parentNodeId: ND-LotPreviousPlanning
@@ -758,9 +760,9 @@
     Description: The identifier of a part of a prior information notice or another similar notice related to this notice.
     Business groups:
         BG-125: Previous Planning
-    eForms guidance: (UNREVIEWED) [Reference a previous publication](operations.md#reference-a-previous-publication), and map to `.lotId`.
-    eForms example: <cac:NoticeDocumentReference><cbc:ReferencedDocumentInternalAddress>PAR-0001</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference>
-    OCDS example: ''
+    eForms guidance: '[Reference a previous publication](operations.md#reference-a-previous-publication), and add to `.relatedLots`.'
+    eForms example: <cac:NoticeDocumentReference><cbc:ReferencedDocumentInternalAddress>LOT-0001</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference>
+    OCDS example: '{"relatedProcess":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"123e4567-e89b-12d3-a456-426614174000-06","relatedLots":["LOT-0001"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#previousPlanningSection
 -   id: BT-1251-Part
     parentNodeId: ND-PartPreviousPlanning
@@ -773,7 +775,7 @@
     Description: The identifier of a part of a prior information notice or another similar notice related to this notice.
     Business groups:
         BG-125: Previous Planning
-    eForms guidance: (UNREVIEWED) (REPEAT) [Reference a previous publication](operations.md#reference-a-previous-publication), and map to `.lotId`.
+    eForms guidance: (UNREVIEWED) (REPEAT) [Reference a previous publication](operations.md#reference-a-previous-publication), and add to `.relatedLots`.
     eForms example: <cac:NoticeDocumentReference><cbc:ReferencedDocumentInternalAddress>PAR-0001</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#previousPlanningSection
@@ -1449,8 +1451,9 @@
     TED guidance:
     - Add a `ParticipationFee` object to the `tender.participationFees` array, set its `.type` to 'document', and set its `.id` to '1'.
     eForms guidance: |-
+        This field maps to the same `ParticipationFee` objects as created for BT-615-Lot and BT-707-Lot.\
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
-        Add a `ParticipationFee` object to the lot's `.participationFees` array
+        For each `cac:CallForTendersDocumentReference`, add or update the corresponding `ParticipationFee` object in the lot's `participationFees` array and:
 
         - Set its `.type` to 'document'
         - Map `cac:CallForTendersDocumentReference/cdc:ID` to its `.id`.
@@ -1469,7 +1472,12 @@
     Description: The access to certain procurement documents is restricted.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: Add a `ParticipationFee` object to `tender.participationFees` array, set its `.type` to 'document', and map `cac:CallForTendersDocumentReference/cdc:ID` to its `.id`.
+    eForms guidance: |-
+        This field maps to the same `ParticipationFee` objects as created for BT-615-Lot and BT-707-Lot.
+        For each `cac:CallForTendersDocumentReference`, add or update the corresponding `ParticipationFee` object in the `tender.participationFees` array and:
+
+        - Set its `.type` to 'document'
+        - Map `cac:CallForTendersDocumentReference/cdc:ID` to its `.id`.
     eForms example: <cac:CallForTendersDocumentReference><cbc:DocumentType>restricted-document</cbc:DocumentType></cac:CallForTendersDocumentReference>
     OCDS example: '{"tender":{"participationFees":[{"id":"1","type":"document"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procurementDocsSection
@@ -5796,8 +5804,9 @@
     Business groups:
         BG-77: Modification
     eForms guidance: |-
-        Add an `Amendment` object to the contract's `.amendments` array, and set its `.id` (string). The `.id` can be any value guaranteed to be globally unique. For example, it can be set to a [version 4 UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier), or it can be assigned sequentially across all notices for this procedure (the first notice sets it to "1", the second to "2", etc.).
-        Map the code to the amendment's `.rationaleClassifications.id`. Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/modification-justification) and map it to `.rationaleClassifications.description` and set `.rationaleClassifications.scheme` to 'modification justification'.
+        This field maps to the same `Amendment` objects as created for BT-201-Contract and BT-202-Contract.
+        For each `efac:ChangeReason`, add or update a corresponding `Amendement` object to the contract's `.amendements` array ensuring its `.id` (string) is set. The `.id` can be any value guaranteed to be globally unique. For example, it can be set to a [version 4 UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier), or it can be assigned sequentially across all notices for this procedure (the first notice sets it to "1", the second to "2", etc.).
+        Map to the amendment's `.rationaleClassifications.id`. Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/modification-justification) and map it to `.rationaleClassifications.description` and set `.rationaleClassifications.scheme` to 'modification justification'.
     eForms example: <efac:ChangeReason><cbc:ReasonCode listName="modification-justification">add-wss</cbc:ReasonCode></efac:ChangeReason>
     OCDS example: '{"contracts":[{"amendments":[{"rationaleClassifications":[{"id":"add-wss","description":"Need for additional works, services or supplies by the original contractor.","scheme":"Modification justification"}]}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#contractModificationNoticeSection
@@ -5812,7 +5821,10 @@
     Description: The description of the main reason for modifying the contract.
     Business groups:
         BG-77: Modification
-    eForms guidance: This value is mapped to the same object as created for BT-200. Map to the amendment's `.rationale`
+    eForms guidance: |-
+        This field maps to the same `Amendment` objects as created for BT-200-Contract and BT-202-Contract.
+        For each `efac:ChangeReason`, add or update a corresponding `Amendement` object to the contract's `.amendements` array ensuring its `.id` (string) is set. The `.id` can be any value guaranteed to be globally unique. For example, it can be set to a [version 4 UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier), or it can be assigned sequentially across all notices for this procedure (the first notice sets it to "1", the second to "2", etc.).
+        Map to the amendment's `.rationale`
     eForms example: <efac:ChangeReason><efbc:ReasonDescription languageID="ENG">The original business case was scoped as a technology replacement programme for a single system. It was agreed that the organisation should consider people and process in addition to systems replacement, and work has been re-scoped to accommodate this.</efbc:ReasonDescription></efac:ChangeReason>
     OCDS example: '{"contracts":[{"amendments":[{"rationale":"The original business case was scoped as a technology replacement programme for a single system. It was agreed that the organisation should consider people and process in addition to systems replacement, and work has been re-scoped to accommodate this."}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#contractModificationNoticeSection
@@ -5827,7 +5839,10 @@
     Description: The summary of the contract modification(s).
     Business groups:
         BG-77: Modification
-    eForms guidance: This value is mapped to the same object as created for BT-200. Map to the amendment's `.description`
+    eForms guidance: |-
+        This field maps to the same `Amendment` objects as created for BT-200-Contract and BT-201-Contract.
+        For each `ancestor::efac:ContractModification/efac:ChangeReason`, add or update a corresponding `Amendement` object to the contract's `.amendements` array ensuring its `.id` (string) is set. The `.id` can be any value guaranteed to be globally unique. For example, it can be set to a [version 4 UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier), or it can be assigned sequentially across all notices for this procedure (the first notice sets it to "1", the second to "2", etc.).
+        Map to the amendment's `.description`.
     eForms example: <efac:Change><efbc:ChangeDescription languageID="ENG">Increase in framework value</efbc:ChangeDescription></efac:Change>
     OCDS example: '{"contracts":[{"amendments":[{"description":"Increase in framework value."}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#contractModificationNoticeSection
@@ -6915,10 +6930,10 @@
     Business groups:
         BG-702: Selection Criteria
     eForms guidance: |-
-        If `cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, this value is mapped to the same `SelectionCriterion` object as created for BT-747, BT-749, BT-750, BT-752, BT-7531 and BT-7532.
+        If `cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, this field is maps to the same `SelectionCriterion` objects as created for BT-747, BT-749, BT-750, BT-752, BT-7531 and BT-7532.
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
-        - For each `<efac:SelectionCriteria>`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
+        - For each `efac:SelectionCriteria`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
         - Set the criterion's `.forReduction` to `true`.
     eForms example: <efac:SelectionCriteria><efbc:SecondStageIndicator>true</efbc:SecondStageIndicator></efac:SelectionCriteria>
     OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"forReduction":true}]}}]}}'
@@ -6994,7 +7009,8 @@
     eForms guidance: |-
         This field maps to the same `Prize` objects as created for BT-44-Lot and BT-644-Lot.
 
-        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot). For each `cac:Prize`, add or update the corresponding `Prize` object in the lot's `.designContest.prizes.details` array and map to its `description`.
+        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
+        For each `cac:Prize`, add or update the corresponding `Prize` object in the lot's `.designContest.prizes.details` array and map to its `description`.
     eForms example: <cac:Prize><cbc:Description languageID="ENG">The first prize winner will be awarded ...</cbc:Description></cac:Prize>
     OCDS example: '{"tender":{"lots":[{"designContest":{"prizes":{"details":[{"description":"The first prize winner will be awarded ..."}]}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#prizeSection
@@ -7177,8 +7193,7 @@
     Description: The official name of the organisation.
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.name`.
+    eForms guidance: '[Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person''s `.name`.'
     eForms example: <efac:UltimateBeneficialOwner><cbc:FamilyName>Mouse</cbc:FamilyName></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"name":"Mouse"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -7258,10 +7273,9 @@
           - [Add a party](operations.md#add-a-party)
           - Set its `.name` to 'European Union'
           - Add 'funder' to its `.roles`
-        - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot)
-        - Get the `Finance` object in `planning.budget` with the matching `.id` add the lot's identifier to its `.relatedLots`. If none exists yet:
-          - Add a `Finance` object to the budget's `.finance` array
-          - Map to its `.id`
+        - This field maps to the same `finance` objects as created for BT-6140-Lot and BT-7220-Lot.
+        - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
+        - For each `efac:Funding`, add or update the corresponding `Finance` object in the budget's `.finance` array and map to its `.id`.
           - Add the lot's identifier to `.relatedLots`
           - Set its `.financingParty.name` to 'European Union'
           - Set its `.financingParty.id` to the party's `.id`
@@ -7293,9 +7307,9 @@
           - [Add a party](operations.md#add-a-party)
           - Set its `.name` to 'European Union'
           - Add 'funder' to its `.roles`
-        - [Get the contract for the SettledContract](operations.md#get-the-contract-for-a-settledcontract) and get the `Finance` object in the contract's `.finance` array with the matching `.id`. If none exists yet:
-          - Add a `Finance` object to the contract's `.finance` array
-          - Map to its `.id`
+        - This field maps to the same `finance` objects as created for BT-6110-Contract and BT-722-Contract.
+        - [Get the contract for the SettledContract](operations.md#get-the-contract-for-a-settledcontract).
+        - For each `efac:Funding`, add or update the corresponding `Finance` object in the contract's `.finance` array and map to its `.id`
           - Set its `.financingParty.name` to 'European Union'
           - Set its `.financingParty.id` to the party's `.id`
     eForms example: <efac:Funding><efbc:FinancingIdentifier>2021/1234</efbc:FinancingIdentifier></efac:Funding>
@@ -7487,8 +7501,7 @@
     Description: The telephone number for contacting the organisation. To avoid unnecessary processing of personal data, the telephone number shall allow the identification of a physical person only when necessary (in the sense of the Regulation (EU) 2016/679 and Regulation (EU) 2018/1725).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.telephone`.
+    eForms guidance: '[Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person''s `.telephone`.'
     eForms example: <efac:UltimateBeneficialOwner><cac:Contact><cbc:Telephone>+123 4567890</cbc:Telephone></cac:Contact></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"telephone":"+123 456789"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -7700,8 +7713,7 @@
     Description: The email address for contacting the organisation. To avoid unnecessary processing of personal data, the email address shall allow the identification of a physical person only when necessary (in the sense of the Regulation (EU) 2016/679 and Regulation (EU) 2018/1725).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.email`.
+    eForms guidance: '[Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person''s `.email`.'
     eForms example: <efac:UltimateBeneficialOwner><cac:Contact><cbc:ElectronicMail>mickey.mouse@cheese-universe.com</cbc:ElectronicMail></cac:Contact></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"email":"mickey.mouse@cheese-universe.com"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -7774,8 +7786,7 @@
     Description: The location according to the common classification of territorial units for statistics (NUTS) of the organisation's physical address. The NUTS3 classification code shall be used.
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.address.region`.
+    eForms guidance: '[Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person''s `.address.region`.'
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:CountrySubentityCode listName="nuts-lvl3">GBK62</cbc:CountrySubentityCode></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"region":"GBK62"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -7808,9 +7819,10 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/OBJECT_CONTRACT/OBJECT_DESCR/*:NUTS/@CODE
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/OBJECT_DESCR/*:NUTS/@CODE
     eForms guidance: |-
-        This field maps to the same `Address` object as created for BT-728-Lot, BT-5131-Lot, BT-5121-Lot, BT-5071-Lot, BT-727-Lot, BT-5101-Lot and BT-5141-Lot.
+        This field maps to the same `Address` objects as created for BT-728-Lot, BT-5131-Lot, BT-5121-Lot, BT-727-Lot, BT-5101-Lot and BT-5141-Lot.
 
-        [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot). For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array and map to its `.region`.
+        [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array and map to its `.region`.
     eForms example: <cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="nuts=lvl3">UKG23</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"region":"UKG23"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -7833,7 +7845,9 @@
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/TYPE_CONTRACT_PLACE_DELIVERY_DEFENCE/SITE_OR_LOCATION/*:NUTS/@CODE
     - TED_EXPORT/FORM_SECTION/F21_2014/OBJECT_CONTRACT/OBJECT_DESCR/*:NUTS/@CODE
     - TED_EXPORT/FORM_SECTION/F22_2014/OBJECT_CONTRACT/OBJECT_DESCR/*:NUTS/@CODE
-    eForms guidance: This field maps to the same `Address` object as created for BT-728-Part, BT-5131-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, BT-5101-Part and BT-5141-Part. For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to its `.region`.
+    eForms guidance: |-
+        This field maps to the same `Address` objects as created for BT-728-Part, BT-5131-Part, BT-5121-Part, BT-727-Part, BT-5101-Part and BT-5141-Part.
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to its `.region`.
     eForms example: <cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="-lvl3">UKG23</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"deliveryAddresses":[{"region":"UKG23"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -7849,7 +7863,9 @@
     Description: The location according to the common classification of territorial units for statistics (NUTS). The NUTS3 classification code shall be used.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: This field maps to the same `Address` object as created for BT-728-Procedure, BT-5131-Procedure, BT-5121-Procedure, BT-5071-Procedure, BT-727-Procedure, BT-5101-Procedure and BT-5141-Procedure. For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to its `.region`.
+    eForms guidance: |-
+        This field maps to the same `Address` objects as created for BT-728-Procedure, BT-5131-Procedure, BT-5121-Procedure, BT-727-Procedure, BT-5101-Procedure and BT-5141-Procedure.
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to its `.region`.
     eForms example: <cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="nuts-lvl3">UKG23</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"deliveryAddresses":[{"region":"UKG23"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -8057,8 +8073,7 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the person's `address.streetAddress`.
+    eForms guidance: '[Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with '', '' (comma and space) and map to the person''s `address.streetAddress`.'
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:StreetName>2 CheeseStreet</cbc:StreetName></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"streetAddress":"2 CheeseStreet, Nelson Building, 2nd floor"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -8103,8 +8118,7 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the person's `address.streetAddress`.
+    eForms guidance: '[Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with '', '' (comma and space) and map to the person''s `address.streetAddress`.'
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:AdditionalStreetName>Nelson Building</cbc:AdditionalStreetName></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"streetAddress":"2 CheeseStreet, Nelson Building, 2nd floor"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -8149,8 +8163,7 @@
     Description: The name of the street, road, avenue, etc., of the organisation's physical address and further identification (e.g. building number).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the person's `address.streetAddress`.
+    eForms guidance: '[Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with '', '' (comma and space) and map to the person''s `address.streetAddress`.'
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cac:AddressLine><cbc:Line>2nd floor</cbc:Line></cac:AddressLine></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"streetAddress":"2 CheeseStreet, Nelson Building, 2nd floor"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -8182,9 +8195,10 @@
     TED guidance:
     - Map to the item's `.deliveryLocation.description`
     eForms guidance: |-
-        This field maps to the same `Address` object as created for BT-728-Lot, BT-5131-Lot, BT-5121-Lot, BT-5071-Lot, BT-727-Lot, BT-5101-Lot and BT-5141-Lot.
+        This field maps to the same `Address` objects as created for BT-728-Lot, BT-5131-Lot, BT-5121-Lot, BT-5071-Lot, BT-727-Lot, and BT-5141-Lot.
 
-        [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot). For each `<cac:RealizedLocation>`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
+        [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
     eForms example: <cac:RealizedLocation><cac:Address><cbc:AdditionalStreetName>Building B1</cbc:AdditionalStreetName></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"streetAddress":"Main Street, 2, Building B1, 3rd floor"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -8208,7 +8222,9 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/OBJECT_CONTRACT/OBJECT_DESCR/MAIN_SITE
     TED guidance:
     - Map to the item's `.deliveryLocation.description`
-    eForms guidance: This field maps to the same `Address` object as created for BT-728-Part, BT-5131-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, BT-5101-Part and BT-5141-Part. For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
+    eForms guidance: |-
+        This field maps to the same `Address` objects as created for BT-728-Part, BT-5131-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, and BT-5141-Part.
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
     eForms example: <cac:RealizedLocation><cac:Address><cbc:AdditionalStreetName>Building B1</cbc:AdditionalStreetName></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"streetAddress":"Main Street, 2, Building B1, 3rd floor"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -8223,7 +8239,9 @@
     Description: The name of the street, road, avenue, etc., of the place of performance and further identification (e.g. building number).
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: This field maps to the same `Address` object as created for BT-728-Procedure, BT-5131-Procedure, BT-5121-Procedure, BT-5071-Procedure, BT-727-Procedure, BT-5101-Procedure and BT-5141-Procedure. For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
+    eForms guidance: |-
+        This field maps to the same `Address` objects as created for BT-728-Procedure, BT-5131-Procedure, BT-5121-Procedure, BT-5071-Procedure, BT-727-Procedure, and BT-5141-Procedure.
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
     eForms example: <cac:RealizedLocation><cac:Address><cbc:AdditionalStreetName>Building B1</cbc:AdditionalStreetName></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"streetAddress":"Main Street, 2, Building B1, 3rd floor"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -8239,9 +8257,10 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` object as created for BT-728-Lot, BT-5131-Lot, BT-5121-Lot, BT-5071-Lot, BT-727-Lot, BT-5101-Lot and BT-5141-Lot.
+        This field maps to the same `Address` objects as created for BT-728-Lot, BT-5131-Lot, BT-5121-Lot, BT-5071-Lot, BT-727-Lot, and BT-5141-Lot.
 
-        [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot). For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
+        [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
     eForms example: <cac:RealizedLocation><cac:Address><cbc:AdditionalStreetName>Building B1</cbc:AdditionalStreetName></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"streetAddress":"Main Street, 2, Building B1, 3rd floor"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -8256,7 +8275,9 @@
     Description: The name of the street, road, avenue, etc., of the place of performance and further identification (e.g. building number).
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: This field maps to the same `Address` object as created for BT-728-Part, BT-5131-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, BT-5101-Part and BT-5141-Part. For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
+    eForms guidance: |-
+        This field maps to the same `Address` objects as created for BT-728-Part, BT-5131-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, and BT-5141-Part.
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
     eForms example: <cac:RealizedLocation><cac:Address><cbc:AdditionalStreetName>Building B1</cbc:AdditionalStreetName></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"streetAddress":"Main Street, 2, Building B1, 3rd floor"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -8271,7 +8292,9 @@
     Description: The name of the street, road, avenue, etc., of the place of performance and further identification (e.g. building number).
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: This field maps to the same `Address` object as created for BT-728-Procedure, BT-5131-Procedure, BT-5121-Procedure, BT-5071-Procedure, BT-727-Procedure, BT-5101-Procedure and BT-5141-Procedure. For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
+    eForms guidance: |-
+        This field maps to the same `Address` objects as created for BT-728-Procedure, BT-5131-Procedure, BT-5121-Procedure, BT-5071-Procedure, BT-727-Procedure, and BT-5141-Procedure.
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
     eForms example: <cac:RealizedLocation><cac:Address><cbc:AdditionalStreetName>Building B1</cbc:AdditionalStreetName></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"streetAddress":"Main Street, 2, Building B1, 3rd floor"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -8287,9 +8310,10 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` object as created for BT-728-Lot, BT-5131-Lot, BT-5121-Lot, BT-5071-Lot, BT-727-Lot, BT-5101-Lot and BT-5141-Lot.
+        This field maps to the same `Address` objects as created for BT-728-Lot, BT-5131-Lot, BT-5121-Lot, BT-5071-Lot, BT-727-Lot, and BT-5141-Lot.
 
-        [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot). For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
+        [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
     eForms example: <cac:RealizedLocation><cac:Address><cbc:AdditionalStreetName>Building B1</cbc:AdditionalStreetName></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"streetAddress":"Main Street, 2, Building B1, 3rd floor"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -8304,7 +8328,9 @@
     Description: The name of the street, road, avenue, etc., of the place of performance and further identification (e.g. building number).
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: This field maps to the same `Address` object as created for BT-728-Part, BT-5131-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, BT-5101-Part and BT-5141-Part. For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
+    eForms guidance: |-
+        This field maps to the same `Address` objects as created for BT-728-Part, BT-5131-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, and BT-5141-Part.
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
     eForms example: <cac:RealizedLocation><cac:Address><cbc:AdditionalStreetName>Building B1</cbc:AdditionalStreetName></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"streetAddress":"Main Street, 2, Building B1, 3rd floor"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -8319,7 +8345,9 @@
     Description: The name of the street, road, avenue, etc., of the place of performance and further identification (e.g. building number).
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: This field maps to the same `Address` object as created for BT-728-Procedure, BT-5131-Procedure, BT-5121-Procedure, BT-5071-Procedure, BT-727-Procedure, BT-5101-Procedure and BT-5141-Procedure. For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
+    eForms guidance: |-
+        This field maps to the same `Address` objects as created for BT-728-Procedure, BT-5131-Procedure, BT-5121-Procedure, BT-5071-Procedure, BT-727-Procedure, and BT-5141-Procedure.
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with ', ' (comma and space) and map to the address's `.streetAddress`.
     eForms example: <cac:RealizedLocation><cac:Address><cbc:AdditionalStreetName>Building B1</cbc:AdditionalStreetName></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"streetAddress":"Main Street, 2, Building B1, 3rd floor"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -8438,8 +8466,7 @@
     Description: The post code of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.address.postalCode`.
+    eForms guidance: '[Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person''s `.address.postalCode`.'
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:PostalZone>C6HA782</cbc:PostalZone></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"postalCode":"C6HA78"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -8455,9 +8482,10 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` object as created for BT-728-Lot, BT-5131-Lot, BT-5121-Lot, BT-5071-Lot, BT-727-Lot, BT-5101-Lot and BT-5141-Lot.
+        This field maps to the same `Address` objects as created for BT-728-Lot, BT-5131-Lot, BT-5071-Lot, BT-727-Lot, BT-5101-Lot and BT-5141-Lot.
 
-        [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot). For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array and map to its `.postalCode`.
+        [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array and map to its `.postalCode`.
     eForms example: <cac:RealizedLocation><cac:Address><cbc:PostalZone>XY14 2LG</cbc:PostalZone></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"postalCode":"XY14 2LG"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -8472,7 +8500,9 @@
     Description: The postcode of the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: This field maps to the same `Address` object as created for BT-728-Part, BT-5131-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, BT-5101-Part and BT-5141-Part. For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to its `.postalCode`.
+    eForms guidance: |-
+        This field maps to the same `Address` objects as created for BT-728-Part, BT-5131-Part, BT-5071-Part, BT-727-Part, BT-5101-Part and BT-5141-Part.
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to its `.postalCode`.
     eForms example: <cac:RealizedLocation><cac:Address><cbc:PostalZone>XY14 2LG</cbc:PostalZone></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"deliveryAddresses":[{"postalCode":"XY14 2LG"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -8487,7 +8517,9 @@
     Description: The postcode of the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: This field maps to the same `Address` object as created for BT-728-Procedure, BT-5131-Procedure, BT-5121-Procedure, BT-5071-Procedure, BT-727-Procedure, BT-5101-Procedure and BT-5141-Procedure. For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to its `.postalCode`.
+    eForms guidance: |-
+        This field maps to the same `Address` objects as created for BT-728-Procedure, BT-5131-Procedure, BT-5071-Procedure, BT-727-Procedure, BT-5101-Procedure and BT-5141-Procedure.
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to its `.postalCode`.
     eForms example: <cac:RealizedLocation><cac:Address><cbc:PostalZone>XY14 2LG</cbc:PostalZone></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"deliveryAddresses":[{"postalCode":"XY14 2LG"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -8606,8 +8638,7 @@
     Description: The name of the locality (city, town, or village) of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.address.postalCode`.
+    eForms guidance: '[Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person''s `.address.postalCode`.'
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:CityName>MouseTown</cbc:CityName></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"locality":"MouseTown"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -8623,9 +8654,10 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` object as created for BT-728-Lot, BT-5131-Lot, BT-5121-Lot, BT-5071-Lot, BT-727-Lot, BT-5101-Lot and BT-5141-Lot.
+        This field maps to the same `Address` objects as created for BT-728-Lot, BT-5121-Lot, BT-5071-Lot, BT-727-Lot, BT-5101-Lot and BT-5141-Lot.
 
-        [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot). For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array and map to its `.locality`.
+        [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array and map to its `.locality`.
     eForms example: <cac:RealizedLocation><cac:Address><cbc:CityName>BigCity</cbc:CityName></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"locality":"BigCity"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -8640,7 +8672,9 @@
     Description: The name of the locality (city, town, or village) of the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: This field maps to the same `Address` object as created for BT-728-Part, BT-5131-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, BT-5101-Part and BT-5141-Part. For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to its `.locality`.
+    eForms guidance: |-
+        This field maps to the same `Address` objects as created for BT-728-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, BT-5101-Part and BT-5141-Part.
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to its `.locality`.
     eForms example: <cac:RealizedLocation><cac:Address><cbc:CityName>BigCity</cbc:CityName></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"deliveryAddresses":[{"locality":"BigCity"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -8655,7 +8689,9 @@
     Description: The name of the locality (city, town, or village) of the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: This field maps to the same `Address` object as created for BT-728-Procedure, BT-5131-Procedure, BT-5121-Procedure, BT-5071-Procedure, BT-727-Procedure, BT-5101-Procedure and BT-5141-Procedure. For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to its `.locality`.
+    eForms guidance: |-
+        This field maps to the same `Address` objects as created for BT-728-Procedure, BT-5121-Procedure, BT-5071-Procedure, BT-727-Procedure, BT-5101-Procedure and BT-5141-Procedure.
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to its `.locality`.
     eForms example: <cac:RealizedLocation><cac:Address><cbc:CityName>BigCity</cbc:CityName></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"deliveryAddresses":[{"locality":"BigCity"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -8777,8 +8813,7 @@
     Description: The country of the organisation's physical address.
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the person's `.address.country`.
+    eForms guidance: '[Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the person''s `.address.country`.'
     eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cac:Country><cbc:IdentificationCode listName="eforms-country">GBR</cbc:IdentificationCode></cac:Country></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"country":"GB"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -8795,9 +8830,10 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` object as created for BT-728-Lot, BT-5131-Lot, BT-5121-Lot, BT-5071-Lot, BT-727-Lot, BT-5101-Lot and BT-5141-Lot.
+        This field maps to the same `Address` objects as created for BT-728-Lot, BT-5131-Lot, BT-5121-Lot, BT-5071-Lot, BT-727-Lot, and BT-5101-Lot.
 
-        [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot). For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the address's `.country`.
+        [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the address's `.country`.
     eForms example: <cac:RealizedLocation><cac:Address><cac:Country><cbc:IdentificationCode listName="eforms-country">GBR</cbc:IdentificationCode></cac:Country></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"country":"GB"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -8813,7 +8849,9 @@
     Description: The country of the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: This field maps to the same `Address` object as created for BT-728-Part, BT-5131-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, BT-5101-Part and BT-5141-Part. For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the address's `.country`.
+    eForms guidance: |-
+        This field maps to the same `Address` objects as created for BT-728-Part, BT-5131-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, and BT-5101-Part.
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the address's `.country`.
     eForms example: <cac:RealizedLocation><cac:Address><cac:Country><cbc:IdentificationCode listName="eforms-country">GBR</cbc:IdentificationCode></cac:Country></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"deliveryAddresses":[{"country":"GB"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -8829,7 +8867,9 @@
     Description: The country of the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: This field maps to the same `Address` object as created for BT-728-Procedure, BT-5131-Procedure, BT-5121-Procedure, BT-5071-Procedure, BT-727-Procedure, BT-5101-Procedure and BT-5141-Procedure. For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the address's `.country`.
+    eForms guidance: |-
+        This field maps to the same `Address` objects as created for BT-728-Procedure, BT-5131-Procedure, BT-5121-Procedure, BT-5071-Procedure, BT-727-Procedure, and BT-5101-Procedure.
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the address's `.country`.
     eForms example: <cac:RealizedLocation><cac:Address><cac:Country><cbc:IdentificationCode listName="eforms-country">GBR</cbc:IdentificationCode></cac:Country></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"deliveryAddresses":[{"country":"GB"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -9066,11 +9106,10 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/AWARD_CRITERIA_CONTRACT_NOTICE_INFORMATION/AWARD_CRITERIA_DETAIL/LOWEST_PRICE
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/AWARD_CRITERIA_CONTRACT_NOTICE_INFORMATION/AWARD_CRITERIA_DETAIL/MOST_ECONOMICALLY_ADVANTAGEOUS_TENDER
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5421-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot.
+        This field maps to the same `AwardCriterion` objects as created for BT-540-Lot, BT-541-Lot, BT-5421-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot.
 
-        - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
-        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
-        - Map to the award critereon's `.type`.
+        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
+        For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array and map to the award critereon's `.type`.
     eForms example: <cac:SubordinateAwardingCriterion><cbc:AwardingCriterionTypeCode listName="award-criterion-type">quality</cbc:AwardingCriterionTypeCode></cac:SubordinateAwardingCriterion>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"type":"quality"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#awardCriteriaSection
@@ -9088,11 +9127,10 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup.
+        This field maps to the same `AwardCriterion` objects as created for BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup.
 
-        - [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
-        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
-        - Map to the award critereon's `.type`.
+        [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
+        For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array and map to the award critereon's `.type`.
     eForms example: <cac:SubordinateAwardingCriterion><cbc:AwardingCriterionTypeCode listName="award-criterion-type">quality</cbc:AwardingCriterionTypeCode></cac:SubordinateAwardingCriterion>
     OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"type":"quality"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#awardCriteriaSection
@@ -9135,11 +9173,10 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5421-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot.
+        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-541-Lot, BT-5421-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot.
 
-        - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
-        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
-        - Map to the award criterion's `.description`.
+        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
+        For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array and map to the award criterion's `.description`.
     eForms example: <cac:SubordinateAwardingCriterion><cbc:Description languageID="ENG">Tenders with a quality score less than 65...</cbc:Description></cac:SubordinateAwardingCriterion>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"description":"Tenders with a quality score less than 65..."}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#awardCriteriaSection
@@ -9156,11 +9193,10 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup.
+        This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup.
 
-        - [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
-        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
-        - Map to the award criterion's `.description`.
+        [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
+        For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array and map to the award criterion's `.description`.
     eForms example: <cac:SubordinateAwardingCriterion><cbc:Description languageID="ENG">Tenders with a quality score less than 65...</cbc:Description></cac:SubordinateAwardingCriterion>
     OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"description":"Tenders with a quality score less than 65..."}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#awardCriteriaSection
@@ -9178,12 +9214,11 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5421-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot and to the same `AwardCriterionNumber` objects as created for BT-5421-Lot, BT-5422-Lot and BT-5423-Lot.
+        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-5421-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot and to the same `AwardCriterionNumber` objects as created for BT-5421-Lot, BT-5422-Lot and BT-5423-Lot.
 
-        - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
-        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
-        - For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array.
-          - Map to the award criteron number's `.number`.
+        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
+        For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
+        For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array and map to the award criteron number's `.number`.
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterNumeric>50</efbc:ParameterNumeric></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#awardCriteriaSection
@@ -9203,10 +9238,9 @@
     eForms guidance: |-
         This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup and to the same `AwardCriterionNumber` objects as created for BT-5421-LotsGroup, BT-5422-LotsGroup and BT-5423-LotsGroup.
 
-        - [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
-        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
-        - For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array.
-          - Map to the award criteron number's `.number`.
+        [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
+        For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
+        For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array and map to the award criteron number's `.number`.
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterNumeric>50</efbc:ParameterNumeric></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#awardCriteriaSection
@@ -9225,12 +9259,11 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5421-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot and to the same `AwardCriterionNumber` objects as created for BT-5421-Lot, BT-5422-Lot and BT-5423-Lot.
+        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot and to the same `AwardCriterionNumber` objects as created for BT-541-Lot, BT-5422-Lot and BT-5423-Lot.
 
-        - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
-        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
-        - For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array.
-          - Map the code to the award criterion number's `.weight` according to the [award criterion weight mapping table](codelists/number-weight).
+        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
+        For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
+        For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array and map the code to the award criterion number's `.weight` according to the [award criterion weight mapping table](codelists/number-weight).
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-weight">per-exa</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"weight":"percentageExact"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#awardCriteriaSection
@@ -9249,12 +9282,11 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup and to the same `AwardCriterionNumber` objects as created for BT-5421-LotsGroup, BT-5422-LotsGroup and BT-5423-LotsGroup.
+        This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup and to the same `AwardCriterionNumber` objects as created for BT-541-LotsGroup, BT-5422-LotsGroup and BT-5423-LotsGroup.
 
-        - [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
-        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
-        - For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array.
-          - Map the code to the award criterion number's `.weight` according to the [award criterion weight mapping table](codelists/number-weight).
+        [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
+        For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
+        For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array and map the code to the award criterion number's `.weight` according to the [award criterion weight mapping table](codelists/number-weight).
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-weight">per-exa</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"numbers":[{"weight":"percentageExact"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#awardCriteriaSection
@@ -9273,12 +9305,11 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5421-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot and to the same `AwardCriterionNumber` objects as created for BT-5421-Lot, BT-5422-Lot and BT-5423-Lot.
+        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5421-Lot, BT-5423-Lot and BT-734-Lot and to the same `AwardCriterionNumber` objects as created for BT-541-Lot, BT-5421-Lot and BT-5423-Lot.
 
-        - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
-        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
-        - For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array.
-          - Map the code to the award criterion number's `.fixed` according to the [award criterion fixed mapping table](codelists/number-fixed).
+        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
+        For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
+        For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array and map the code to the award criterion number's `.fixed` according to the [award criterion fixed mapping table](codelists/number-fixed).
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-fixed">fix-tot</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"fixed":"total"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#awardCriteriaSection
@@ -9297,12 +9328,11 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup and to the same `AwardCriterionNumber` objects as created for BT-5421-LotsGroup, BT-5422-LotsGroup and BT-5423-LotsGroup.
+        This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup and to the same `AwardCriterionNumber` objects as created for BT-541-LotsGroup, BT-5421-LotsGroup and BT-5423-LotsGroup.
 
-        - [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
-        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
-        - For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array.
-          - Map the code to the award criterion number's `.fixed` according to the [award criterion fixed mapping table](codelists/number-fixed).
+        [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
+        For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
+        For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array and map the code to the award criterion number's `.fixed` according to the [award criterion fixed mapping table](codelists/number-fixed).
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-fixed">fix-tot</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"numbers":[{"fixed":"total"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#awardCriteriaSection
@@ -9321,12 +9351,11 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5421-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot and to the same `AwardCriterionNumber` objects as created for BT-5421-Lot, BT-5422-Lot and BT-5423-Lot.
+        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5421-Lot, BT-5422-Lotand BT-734-Lot and to the same `AwardCriterionNumber` objects as created for BT-541-Lot, BT-5421-Lot and BT-5422-Lot.
 
-        - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
-        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
-        - For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array.
-          - Map the code to the award criterion number's `.threshold` according to the [award criterion threshold mapping table]((codelists/number-threshold).
+        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
+        For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
+        For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array and map the code to the award criterion number's `.threshold` according to the \[award criterion threshold mapping table\]((codelists/number-threshold).
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-threshold">max-pass</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"threshold":"maximumBids"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#awardCriteriaSection
@@ -9345,12 +9374,11 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup and to the same `AwardCriterionNumber` objects as created for BT-5421-LotsGroup, BT-5422-LotsGroup and BT-5423-LotsGroup.
+        This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup and BT-734-LotsGroup and to the same `AwardCriterionNumber` objects as created for BT-541-LotsGroup, BT-5421-LotsGroup and BT-5422-LotsGroup.
 
-        - [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
-        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
-        - For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array.
-          - Map the code to the award criterion number's `.threshold` according to the [award criterion threshold mapping table](codelists/number-threshold).
+        [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
+        For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
+        For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array and map the code to the award criterion number's `.threshold` according to the [award criterion threshold mapping table](codelists/number-threshold).
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-threshold">max-pass</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"numbers":[{"threshold":"maximumBids"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#awardCriteriaSection
@@ -9612,7 +9640,9 @@
         BG-7: Notice Result
         BG-310: Contract
         BG-611: Contract EU Funds
-    eForms guidance: This field maps to the same `finance` object as created for BT-5011-Contract and BT-722-Contract. For each `efac:Funding`, add or update the corresponding `Finance` object in the contract's `.finance` array and map to its `.description`.
+    eForms guidance: |-
+        This field maps to the same `finance` objects as created for BT-5011-Contract and BT-722-Contract.
+        For each `efac:Funding`, add or update the corresponding `Finance` object in the contract's `.finance` array and map to its `.description`.
     eForms example: <efac:Funding><cbc:FundingProgram>Program for the development ...</cbc:FundingProgram></efac:Funding>
     OCDS example: '{"contracts":[{"finance":[{"description":"Program for the development ..."}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#settledContractSection
@@ -9628,7 +9658,10 @@
     Business groups:
         BG-61: EU Funds
         BG-614: EU Funds Information
-    eForms guidance: This field maps to the same `finance` object as created for BT-5010-Lot and BT-7220-Lot. For each `efac:Funding`, add or update the corresponding `Finance` object in the budget's `.finance` array and map to its `.description`.
+    eForms guidance: |-
+        This field maps to the same `finance` objects as created for BT-5010-Lot and BT-7220-Lot.
+        If BT-5010-Lot is not present follow the guidance for BT-5010-Lot, setting the `.id` of the `Finance` object incrementally based on its position in the `finance` array rather than the value of BT-5010-Lot.
+        For each `efac:Funding`, add or update the corresponding `Finance` object in the budget's `.finance` array and map to its `.description`.
     eForms example: <efac:Funding><cbc:Description languageID="ENG">This project will be financed ...</cbc:Description></efac:Funding>
     OCDS example: '{"planning":{"budget":{"finance":[{"description":"This project will be financed ..."}]}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#EUFundsSection
@@ -9656,8 +9689,9 @@
     TED guidance:
     - Add a `ParticipationFee` object to the `tender.participationFees` array, set its `.type` to 'document', and set its `.id` to '1'.
     eForms guidance: |-
-        This field maps to the same objects as created for BT-14-Lot and BT-707-Lot.
-        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and for each `cac:CallForTendersDocumentReference`, add or update the corresponding `ParticipationFee` object in the lot's `participationFees` array and map to its `.description`. If the document type label has already been mapped to this field append to it with ' - ' (space, dash, space).
+        This field maps to the same `ParticipationFee` objects as created for BT-14-Lot and BT-707-Lot.
+        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
+        For each `cac:CallForTendersDocumentReference`, add or update the corresponding `ParticipationFee` object in the lot's `participationFees` array and map to its `.description`. If the document type label has already been mapped to this field append to it with ' - ' (space, dash, space).
     eForms example: <cac:ExternalReference><cbc:URI>https://mywebsite.com/proc/2019024/accessinfo</cbc:URI></cac:ExternalReference>
     OCDS example: '{"tender":{"lots":[{"participationFees":[{"description":"https://mywebsite.com/proc/2019024/accessinfo"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procurementDocsSection
@@ -9678,7 +9712,9 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/CONTRACTING_BODY/DOCUMENT_RESTRICTED
     TED guidance:
     - Add a `ParticipationFee` object to the `tender.participationFees` array, set its `.type` to 'document', and set its `.id` to '1'.
-    eForms guidance: This field maps to the same objects as created for BT-14. For each `cac:CallForTendersDocumentReference`, add or update the corresponding `ParticipationFee` object in the `participationFees` array and map to its `.description`.
+    eForms guidance: |-
+        This field maps to the same objects as created for BT-14-Part and BT-707-Part.
+        For each `cac:CallForTendersDocumentReference`, add or update the corresponding `ParticipationFee` object in the `participationFees` array and map to its `.description`.
     eForms example: <cac:ExternalReference><cbc:URI>https://mywebsite.com/proc/2019024/accessinfo</cbc:URI></cac:ExternalReference>
     OCDS example: '{"tender":{"participationFees":[{"description":"https://mywebsite.com/proc/2019024/accessinfo"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#procurementDocsSection
@@ -9923,7 +9959,8 @@
     eForms guidance: |-
         This field maps to the same `Prize` objects as created for BT-44-Lot and BT-45-Lot.
 
-        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and for each `cac:Prize` add or update the corresponding `Prize` object in the lot's `designContest.prize.details` array and map to its `value.amount`. Map `@currencyID` to the value's `.currency`.
+        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
+        For each `cac:Prize` add or update the corresponding `Prize` object in the lot's `designContest.prize.details` array and map to its `value.amount`. Map `@currencyID` to the value's `.currency`.
     eForms example: <cac:Prize><cbc:ValueAmount currencyID="EUR">5000</cbc:ValueAmount></cac:Prize>
     OCDS example: '{"tender":{"lots":[{"designContest":{"prizes":{"details":[{"value":{"amount":5000,"currency":"EUR"}}]}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#prizeSection
@@ -10076,7 +10113,7 @@
     Description: The European Public Procurement Notice Identifier of this notice. Including this identifier in all published version of this notice (e.g. TED, national publication portals, regional publication portals) allows unique identification of procurement notices around the Union.
     Business groups:
         BG-1: Notice
-    eForms guidance: (UNREVIEWED) Refer to the **guidance for common operations (create a new release)**.
+    eForms guidance: '[Create a new release](operations.md#create-a-release)'
     eForms example: <cbc:ID schemeName="notice-id">0f56d80f-8a5f-4876-8e24-feaa766c456d</cbc:ID>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#noticeIDSection
@@ -10128,8 +10165,7 @@
     Business groups:
         BG-703: Organisation
         BG-4: Winner
-    eForms guidance: |-
-        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the person's `.nationality`.
+    eForms guidance: '[Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the person''s `.nationality`.'
     eForms example: <efac:UltimateBeneficialOwner><efac:Nationality><cbc:NationalityID>DEU</cbc:NationalityID></efac:Nationality></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"nationality":"DE"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -10484,7 +10520,9 @@
         BG-7: Notice Result
         BG-310: Contract
         BG-611: Contract EU Funds
-    eForms guidance: This field maps to the same `finance` object as created for BT-5011 and BT-6110. For each `efac:Funding`, add or update the corresponding `Finance` object in the contract's `.finance` array and map to its `.title`.
+    eForms guidance: |-
+        This field maps to the same `finance` objects as created for BT-5011 and BT-6110.
+        For each `efac:Funding`, add or update the corresponding `Finance` object in the contract's `.finance` array and map to its `.title`.
     eForms example: <efac:Funding><cbc:FundingProgramCode listName="eu-programme">ABC123</cbc:FundingProgramCode></efac:Funding>
     OCDS example: '{"contracts":[{"finance":[{"title":"ABC123"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#settledContractSection
@@ -10502,7 +10540,7 @@
         BG-61: EU Funds
         BG-614: EU Funds Information
     eForms guidance: |-
-        This field maps to the same `finance` object as created for BT-5010-Lot and BT-6140-Lot.
+        This field maps to the same `finance` objects as created for BT-5010-Lot and BT-6140-Lot.
         If BT-5010-Lot is not present follow the guidance for BT-5010-Lot, setting the `.id` of the `Finance` object incrementally based on its position in the `finance` array rather than the value of BT-5010-Lot.
         For each `ancestor::efac:Funding`, add or update the corresponding `Finance` object in the budget's `.finance` array and map to its `.title`.
     eForms example: <efac:Funding><cbc:FundingProgramCode listName="eu-proramme">ERDF_2021</cbc:FundingProgramCode></efac:Funding>
@@ -10780,10 +10818,10 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/AWARD_CRITERIA_CONTRACT_NOTICE_INFORMATION/AWARD_CRITERIA_DETAIL/MOST_ECONOMICALLY_ADVANTAGEOUS_TENDER/CRITERIA_STATED_BELOW
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5421-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot.
+        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5421-Lot, BT-5422-Lot and BT-5423-Lot.
 
-        - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
-        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array and map to the the award criterion's `.name`.
+        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
+        For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array and map to the the award criterion's `.name`.
     eForms example: <cac:SubordinateAwardingCriterion><cbc:Name languageID="ENG">Technical merit</cbc:Name></cac:SubordinateAwardingCriterion>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"name":"Technical merit"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#awardCriteriaSection
@@ -10800,10 +10838,10 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup.
+        This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup and BT-5423-LotsGroup.
 
-        - [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
-        - For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array and map to the the award criterion's `.name`.
+        [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
+        For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array and map to the the award criterion's `.name`.
     eForms example: <cac:SubordinateAwardingCriterion><cbc:Name languageID="ENG">Technical merit</cbc:Name></cac:SubordinateAwardingCriterion>
     OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"name":"Technical merit"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#awardCriteriaSection
@@ -11064,8 +11102,7 @@
     Description: The fax number for contacting the organisation. To avoid unnecessary processing of personal data, the fax number shall allow the identification of a physical person only when necessary (in the sense of the Regulation (EU) 2016/679 and Regulation (EU) 2018/1725).
     Business groups:
         BG-703: Organisation
-    eForms guidance: |-
-        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.faxNumber`.
+    eForms guidance: '[Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person''s `.faxNumber`.'
     eForms example: <efac:UltimateBeneficialOwner><cac:Contact><cbc:Telefax>+123 4567891</cbc:Telefax></cac:Contact></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"faxNumber":"+123 4567891"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -11341,7 +11378,7 @@
         BG-702: Selection Criteria
         BG-72: Selection Criteria Second Stage Invite Number
     eForms guidance: |-
-        If `ancestor::efac:SelectionCriteria/cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, these values are mapped to the same `SelectionCriterion` objects as created for BT-40-Lot, BT-747-Lot, BT-749-Lot, BT-750-Lot, BT-7531-Lot and BT-7532-Lot, and the same `SelectionCriterionNumber` object as created for BT-7531-Lot and BT-7532-Lot.
+        If `ancestor::efac:SelectionCriteria/cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, these values are mapped to the same `SelectionCriterion` objects as created for BT-40-Lot, BT-747-Lot, BT-749-Lot, BT-750-Lot, BT-7531-Lot and BT-7532-Lot, and the same `SelectionCriterionNumber` objects as created for BT-7531-Lot and BT-7532-Lot.
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot)
         - For each `efac:SelectionCriteria`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`
@@ -11364,7 +11401,7 @@
         BG-702: Selection Criteria
         BG-72: Selection Criteria Second Stage Invite Number
     eForms guidance: |-
-        If `ancestor::efac:SelectionCriteria/cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, these values are mapped to the same `SelectionCriterion` objects as created for BT-40-Lot, BT-747-Lot, BT-749-Lot, BT-750-Lot, BT-752-Lot and BT-7532-Lot, and the same `SelectionCriterionNumber` object as created for BT-752-Lot and BT-7532-Lot.
+        If `ancestor::efac:SelectionCriteria/cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, these values are mapped to the same `SelectionCriterion` objects as created for BT-40-Lot, BT-747-Lot, BT-749-Lot, BT-750-Lot, BT-752-Lot and BT-7532-Lot, and the same `SelectionCriterionNumber` objects as created for BT-752-Lot and BT-7532-Lot.
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot)
         - For each `efac:SelectionCriteria`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
@@ -11387,7 +11424,7 @@
         BG-702: Selection Criteria
         BG-72: Selection Criteria Second Stage Invite Number
     eForms guidance: |-
-        If `ancestor::efac:SelectionCriteria/cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, these values are mapped to the same `SelectionCriterion` objects as created for BT-40-Lot, BT-747-Lot, BT-749-Lot, BT-750-Lot, BT-752-Lot and BT-7531-Lot, and the same `SelectionCriterionNumber` object as created for BT-752-Lot and BT-7531-Lot.
+        If `ancestor::efac:SelectionCriteria/cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, these values are mapped to the same `SelectionCriterion` objects as created for BT-40-Lot, BT-747-Lot, BT-749-Lot, BT-750-Lot, BT-752-Lot and BT-7531-Lot, and the same `SelectionCriterionNumber` objects as created for BT-752-Lot and BT-7531-Lot.
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot)
         - For each `efac:SelectionCriteria`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
@@ -11505,7 +11542,7 @@
     eForms guidance: |-
         This field maps to the same `Statistic` objects as created for BT-760-LotResult.
 
-        For each `ancestor::efac:ReceivedSubmissionsStatistics`, [add a bids statistic](operations.md#add-a-statistic) or update the corresponding `Statistic` object and map to its `.value`.
+        For each `efac:ReceivedSubmissionsStatistics`, [add a bids statistic](operations.md#add-a-statistic) or update the corresponding `Statistic` object and map to its `.value`.
         [Get the lot for the LotResult](operations.md#get-the-lot-for-a-lotresult) and add the lot's `.id` to the statistic's `.relatedLots`.
     eForms example: <efac:ReceivedSubmissionsStatistics><efbc:StatisticsNumeric>12</efbc:StatisticsNumeric></efac:ReceivedSubmissionsStatistics>
     OCDS example: '{"bids":{"statistics":[{"value":12}]}}'
@@ -11574,7 +11611,7 @@
     eForms guidance: |-
         This field maps to the same `Statistic` objects as created for BT-759-LotResult.
 
-        For each `ancestor::efac:ReceivedSubmissionsStatistics`, [add a bids statistic](operations.md#add-a-statistic) or update the corresponding `Statistic` object and map to its `.measure` according to the [submission count types mapping table](codelists/received-submission-type).
+        For each `efac:ReceivedSubmissionsStatistics`, [add a bids statistic](operations.md#add-a-statistic) or update the corresponding `Statistic` object and map to its `.measure` according to the [submission count types mapping table](codelists/received-submission-type).
         [Get the lot for the LotResult](operations.md#get-the-lot-for-a-lotresult) and add the lot's `.id` to the statistic's `.relatedLots`.
     eForms example: <efac:ReceivedSubmissionsStatistics><efbc:StatisticsCode listName="received-submission-type">t-sme</efbc:StatisticsCode></efac:ReceivedSubmissionsStatistics>
     OCDS example: '{"bids":{"statistics":[{"measure":"smeBids"}]}}'
@@ -11958,7 +11995,7 @@
     eForms guidance: |-
         This field maps to the same `Sustainability` objects as created for BT-06-Lot.
 
-        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and for each `sibling::cbc:ProcurementTypeCode`, add or update the corresponding `Sustainability` object in the lot's `sustainability` array and map to its `.description`.
+        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and for each `cbc:ProcurementTypeCode`, add or update the corresponding `Sustainability` object in the lot's `sustainability` array and map to its `.description`.
     eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementType languageID="ENG">This is a strategic procurement involving the innovative use of ...</cbc:ProcurementType></cac:ProcurementAdditionalType>
     OCDS example: '{"tender":{"lots":[{"sustainability":[{"description":"This is a strategic procurement involving the innovative use of ..."}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#strategicProcurementSection
@@ -12070,7 +12107,7 @@
     Description: The date and time the notice was transmitted electronically by the eSender to the Publications Office of the European Union
     Business groups:
         BG-1: Notice
-    eForms guidance: (UNREVIEWED) Discard.
+    eForms guidance: Discard.
     eForms example: <efbc:TransmissionTime>08:30:03+01:00</efbc:TransmissionTime>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#dispatchDateEsender
@@ -12552,7 +12589,7 @@
     repeatable: true
     mandatory: true
     codeList: transport-service
-    eForms guidance: (UNREVIEWED) Add to `tender.additionalProcurementCategories` array.
+    eForms guidance: Add to `tender.additionalProcurementCategories` array.
     eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="transport-service">bus-s</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
     OCDS example: '{"tender":{"additionalProcurementCategories":["bus-s"]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#natureSection
@@ -12626,7 +12663,7 @@
     repeatable: true
     mandatory: false
     pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|[1-9](\d{0,7})-(19|20)\d\d)$
-    eForms guidance: (UNREVIEWED) [Reference a previous publication](operations.md#reference-a-previous-publication)
+    eForms guidance: '[Reference a previous publication](operations.md#reference-a-previous-publication). If OPP-090-Procedure is repeated set the relatedProcess''s `id` incrementally.'
     eForms example: <cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID></cac:NoticeDocumentReference>
     OCDS example: '{"relatedProcesses":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"123e4567-e89b-12d3-a456-426614174000-06"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#previousNoticeSection
@@ -13031,8 +13068,7 @@
     type: text
     repeatable: false
     mandatory: false
-    eForms guidance: |-
-        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.name`.
+    eForms guidance: '[Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person''s `.name`.'
     eForms example: <efac:UltimateBeneficialOwner><cbc:FirstName>Mickey</cbc:FirstName></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":[{"name":"Mickey"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -13044,8 +13080,7 @@
     type: indicator
     repeatable: false
     mandatory: false
-    eForms guidance: |-
-        [Get the organization for the tenderer](operations.md#get-the-organization-for-a-tenderer). If "true", add 'leadTenderer' to its `.roles`.
+    eForms guidance: '[Get the organization for the tenderer](operations.md#get-the-organization-for-a-tenderer). If "true", add ''leadTenderer'' to its `.roles`.'
     eForms example: <efac:Tenderer><efbc:GroupLeadIndicator>true</efbc:GroupLeadIndicator></efac:Tenderer>
     OCDS example: '{"parties":[{"id":"ORG-0001","roles":["leadTenderer","tenderer"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tenderingPartySection
@@ -13087,8 +13122,7 @@
     repeatable: false
     mandatory: false
     pattern: ^UBO-\d{4}$
-    eForms guidance: |-
-        [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person's `.id`.
+    eForms guidance: '[Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person''s `.id`.'
     eForms example: <efac:UltimateBeneficialOwner><cbc:ID schemeName="ubo">UBO-0001</cbc:ID></efac:UltimateBeneficialOwner>
     OCDS example: '{"parties":[{"beneficialOwners":{"id":"UBO-0001"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#ultimateBeneficialOwnerSection
@@ -13102,7 +13136,7 @@
     repeatable: false
     mandatory: false
     pattern: ^TPA-\d{4}$
-    eForms guidance: (UNREVIEWED) Discard. Each tenderer in the tendering party is covered by OPT-300
+    eForms guidance: Discard. Each tenderer in the tendering party is covered by OPT-310-Tenderer.
     eForms example: <efac:TenderingParty><cbc:ID schemeName="tendering-party">TPA-0003</cbc:ID></efac:TenderingParty>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tenderingPartySection
@@ -13140,7 +13174,7 @@
     repeatable: false
     mandatory: true
     eForms guidance: |-
-        [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization technical-identifier-reference)
+        \[Get the organization for the organization technical identifier reference\](operations.md#get-the-organization-for-an-organization technical-identifier-reference)
 
         - Add 'buyer' to its `.roles` array.
         - Add an `OrganizationReference` object to `buyer` and set its `.id` to the organization's `.id`.
@@ -13159,7 +13193,7 @@
     mandatory: false
     pattern: ^ORG-\d{4}$
     eForms guidance: |-
-        [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization technical-identifier-reference).
+        \[Get the organization for the organization technical identifier reference\](operations.md#get-the-organization-for-an-organization technical-identifier-reference).
         Get the `ancestor::efext:EformsExtension/efac:Organizations/efac:Organization/efac:Company` whose `/cac:PartyIdentification/cbc:ID` is equal to the value of this field and set the organization's `.name` to the value of `/cac:PartyName/cbc:Name`.
     eForms example: <cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification>
     OCDS example: '{"parties":[{"id":"ORG-0001","name":"Service Provider Ltd"}]}'
@@ -13175,7 +13209,7 @@
     repeatable: false
     mandatory: false
     pattern: ^ORG-\d{4}$
-    eForms guidance: Discard. This field is mapped as part of `OPT-310-Tender`.
+    eForms guidance: Discard. This field is mapped as part of OPT-310-Tender.
     eForms example: <efac:Tenderer><cbc:ID schemeName="organization">ORG-0005</cbc:ID></efac:Tenderer>
     OCDS example: N/A
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#tenderingPartySection
@@ -13588,7 +13622,7 @@
     mandatory: false
     pattern: ^ORG-\d{4}$
     eForms guidance: |-
-        - [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization technical-identifier-reference) and add 'tenderer' to its `.roles` array.
+        - \[Get the organization for the organization technical identifier reference\](operations.md#get-the-organization-for-an-organization technical-identifier-reference) and add 'tenderer' to its `.roles` array.
         - [Get the bid for the LotTender](operations.md#get-the-bid-for-a-lottender), and get the `subcontracts` object whose `subcontractors.id` is equal to the value of `ancestor: efac:SubContractor/cbc:ID`.
         - Add an `OrganizationReference` object to the subcontract's `.tenderers` array and set its `.id` to the value of this field.
     eForms example: <efac:NoticeResult> <efac:LotTender> <cbc:ID schemeName="tender">TEN-0001</cbc:ID> </efac:LotTender> <efac:TenderingParty> <efac:SubContractor> <cbc:ID schemeName="organization">ORG-0012</cbc:ID> <efac:MainContractor> <cbc:ID schemeName="organization">ORG-0005</cbc:ID> </efac:MainContractor> </efac:SubContractor> </efac:TenderingParty> </efac:NoticeResult> <efac:Organizations> <efac:Organization> <efac:Company> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0005</cbc:ID> </cac:PartyIdentification> </efac:Company> </efac:Organization> </efac:Organizations>
@@ -13712,7 +13746,7 @@
     mandatory: true
     pattern: ^TEN-\d{4}$
     eForms guidance: |-
-        (UNREVIEWED) If there is a `Bid` in `bids` whose `.id` is equal to the value of the field discard. Otherwise:
+        If there is a `Bid` in `bids` whose `.id` is equal to the value of the field discard. Otherwise:
 
         - Add a `Bid` to `bids`
         - Map to its `.id`
