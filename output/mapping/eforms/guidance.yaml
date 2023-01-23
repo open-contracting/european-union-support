@@ -1483,7 +1483,7 @@
         This field maps to the same `ParticipationFee` objects as created for BT-615-Lot and BT-707-Lot.
         For each `cac:CallForTendersDocumentReference`, add or update the corresponding `ParticipationFee` object in the `tender.participationFees` array and:
 
-        - Set its `.type` to 'document'
+        - Set its `.type` to 'document'.
         - Map `cac:CallForTendersDocumentReference/cdc:ID` to its `.id`.
     eForms example: <cac:CallForTendersDocumentReference><cbc:DocumentType>restricted-document</cbc:DocumentType></cac:CallForTendersDocumentReference>
     OCDS example: '{"tender":{"participationFees":[{"id":"1","type":"document"}]}}'
@@ -9380,7 +9380,7 @@
 
         For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
 
-        For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array and map the code to the award criterion number's `.threshold` according to the \[award criterion threshold mapping table\]((codelists/number-threshold).
+        For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array and map the code to the award criterion number's `.threshold` according to the [award criterion threshold mapping table](codelists/number-threshold).
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-threshold">max-pass</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"threshold":"maximumBids"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#awardCriteriaSection
