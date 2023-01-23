@@ -206,7 +206,7 @@
         For each `cac:ProcurementAdditionalType`, add or update the corresponding `Sustainability` object to the lot's `.sustainability` array.
 
         - Map the code to the sustainability's `.goal` according to the [strategic procurement mapping table](codelists/strategic-procurement).
-        - Add "awardCriteria", "contractPerformanceConditions", "selectionCriteria" and "technicalSpecifications" to the sustainability's `.strategies` array.
+        - Add 'awardCriteria', 'contractPerformanceConditions', 'selectionCriteria' and 'technicalSpecifications' to the sustainability's `.strategies` array.
     eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="strategic-procurement">inn-pur</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
     OCDS example: '{"tender":{"lots":[{"hasSustainabilty":true,"sustainability":[{"goal":"economic.innovativePurchase","strategies":["awardCriteria","contractPerformanceConditions","selectionCriteria","technicalSpecifications"]}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#strategicProcurementSection
@@ -811,9 +811,9 @@
     eForms guidance: |-
         Add a `RelatedProcess` object to the `relatedProcesses` array and set its .id (string) sequentially across all notices for this procedure.
 
-        For example, if a first notice for a given procedure has nine related processes, it uses id's '1' through '9'. A second notice for the same procedure then uses id's '10' and up, etc.
+        For example, if a first notice for a given procedure has nine related processes, it uses id's "1" through "9". A second notice for the same procedure then uses id's "10" and up, etc.
 
-        Map the value of the field to `.identifier`. Set `.scheme` to 'eu-oj'. If the value of `sibling::cbc:ProcessReasonCode` is "irregular" or "unsuitable", add 'unsuccessfulProcess' to the `.relationship` array. If it is "additional", "existing" or "repetition, add 'prior' to the `.relationship` array.
+        Map the value of the field to `.identifier`. Set `.scheme` to "eu-oj". If the value of `sibling::cbc:ProcessReasonCode` is "irregular" or "unsuitable", add 'unsuccessfulProcess' to the `.relationship` array. If it is "additional", "existing" or "repetition, add 'prior' to the `.relationship` array.
     eForms example: <cac:ProcessJustification><cbc:Description>123e4567-e89b-12d3-a456-426614174000</cbc:Description></cac:ProcessJustification>
     OCDS example: '{"relatedProcesses":[{"id":"1","identifier":"123e4567-e89b-12d3-a456-426614174000","scheme":"eu-oj","relationship":["prior"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#directAwardSection
@@ -1506,7 +1506,7 @@
         - If the change's `/efbc:ChangedSectionIdentifier` (BT-13716) references a LotResult (`RES-XXXX`), [get the award for the LotResult](operations.md#get-the-award-for-a-lotresult) and add an `Amendment` object to the award's `.amendments` array. Otherwise, add an `Amendment` object to the `tender.amendments` array.
         - If the change's `/efbc:ChangedSectionIdentifier` (BT-13716) references a Lot (`LOT-XXXX`), add an `Amendment` object to the `tender.amendments` array and add the Lot's identifier to the amendment's `.relatedLots` array.
         - If the change's `/efbc:ChangedSectionIdentifier` (BT-13716) references a LotsGroup (`GLO-XXXX`), add an `Amendment` object to the `tender.amendments` array and add the LotGroup's identifier to the amendment's `.relatedLotGroups` array.
-        - Set the amendment's `.id` sequentially across all notices for this procedure. For example, if the first change notice for a procedure has three changes, it uses `id`'s '1' through '3'. A second change notice for the same procedure then uses `id`'s '4' and up, etc.
+        - Set the amendment's `.id` sequentially across all notices for this procedure. For example, if the first change notice for a procedure has three changes, it uses `id`'s "1" through "3". A second change notice for the same procedure then uses `id`'s "4" and up, etc.
         - Add a `Classification` object to the amendment's `rationaleClassifications` array and map the value of this field to its `.id`.
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/change-corrig-justification) and map it to the classification's `.description`.
         - Set the classification's `.scheme` to 'change-corrig-justification'.
@@ -2042,7 +2042,7 @@
     eForms guidance: |-
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.submissionTerms.electronicSubmissionPolicy`.
 
-        If "allowed" or "required" add "electronicSubmission" to the lot's `.submissionMethod` array.
+        If "allowed" or "required", add 'electronicSubmission' to the lot's `.submissionMethod` array.
     eForms example: <cbc:SubmissionMethodCode listName="esubmission">allowed</cbc:SubmissionMethodCode>
     OCDS example: '{"tender":{"lots":[{"submissionMethod":"electronicSubmission","submissionTerms":{"electronicSubmissionPolicy":"allowed"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#eSubmissionSection
@@ -6074,7 +6074,7 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/TYPE_CONTRACT_DEFENCE/TYPE_CONTRACT/@VALUE
     - TED_EXPORT/FORM_SECTION/F21_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot). If "works" or "services", map to the lot''s `.mainProcurementCategory`. If "supplies", set the lot''s `.mainProcurementCategory` to "goods". If "combined", add to the lot''s `.additionalProcurementCategories` array.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot). If "works" or "services", map to the lot''s `.mainProcurementCategory`. If "supplies", set the lot''s `.mainProcurementCategory` to ''goods''. If "combined", add to the lot''s `.additionalProcurementCategories` array.'
     eForms example: <cbc:ProcurementTypeCode listName="contract-nature">works</cbc:ProcurementTypeCode>
     OCDS example: '{"tender":{"lots":[{"mainProcurementCategory":"works"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#natureSection
@@ -6090,7 +6090,7 @@
     Description: The main nature (e.g. works) of what is being bought. In case of mixed procurement (e.g. a procedure for both works and services), the main nature may be, for example, the one with the highest estimated value. This information shall be given for the whole procedure.
     Business groups:
         BG-2: Purpose
-    eForms guidance: If "works" or "services", map to `tender.mainProcurementCategory`. If "supplies", set `tender.mainProcurementCategory` to "goods". If "combined", add to the `tender.additionalProcurementCategories` array.
+    eForms guidance: If "works" or "services", map to `tender.mainProcurementCategory`. If "supplies", set `tender.mainProcurementCategory` to 'goods'. If "combined", add to the `tender.additionalProcurementCategories` array.
     eForms example: <cbc:ProcurementTypeCode listName="contract-nature">works</cbc:ProcurementTypeCode>
     OCDS example: '{"tender":{"mainProcurementCategory":"works"}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#natureSection
@@ -6123,7 +6123,7 @@
     - TED_EXPORT/FORM_SECTION/F23_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
     - TED_EXPORT/FORM_SECTION/F24_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
-    eForms guidance: If "works" or "services", map to `tender.mainProcurementCategory`. If "supplies", set `tender.mainProcurementCategory` to "goods". If "combined", add to the `tender.additionalProcurementCategories` array.
+    eForms guidance: If "works" or "services", map to `tender.mainProcurementCategory`. If "supplies", set `tender.mainProcurementCategory` to 'goods'. If "combined", add to the `tender.additionalProcurementCategories` array.
     eForms example: <cbc:ProcurementTypeCode listName="contract-nature">works</cbc:ProcurementTypeCode>
     OCDS example: '{"tender":{"mainProcurementCategory":"works"}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#natureSection
@@ -9648,7 +9648,7 @@
 
         - Map to the classification's `.id`.
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/main-activity) and map it to `.description`.
-        - If the code's definition in the authority table includes ["COFOG"](<https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Classification_of_the_functions_of_government_(COFOG)>), set the classification's `.scheme` to "COFOG". Otherwise, set it to "Directive 2014/25/EU".
+        - If the code's definition in the authority table includes ["COFOG"](<https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Classification_of_the_functions_of_government_(COFOG)>), set the classification's `.scheme` to 'COFOG'. Otherwise, set it to "Directive 2014/25/EU".
     eForms example: <cac:ContractingActivity><cbc:ActivityTypeCode listName="entity-activity">gas-oil</cbc:ActivityTypeCode></cac:ContractingActivity>
     OCDS example: '{"parties":[{"id":"ORG-0001","details":{"classifications":[{"scheme":"Directive 2014/25/EU","id":"gas-oil","description":"Activities related to the exploitation of a geographical area for the purpose of extracting oil or gas."}]}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_buyer_information_2
@@ -10456,7 +10456,7 @@
     Description: "The procurement falls within the scope of the European Parliament and Council 2009/33/EC (Clean Vehicles Directive \u2013 CVD)."
     Business groups:
         BG-713: Strategic Procurement
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot). If "true", add "CVD" to the lot''s `.coveredBy` array. If false, discard.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot). If "true", add ''CVD'' to the lot''s `.coveredBy` array. If "false", discard.'
     eForms example: <efac:StrategicProcurement><efbc:ApplicableLegalBasis listName="cvd-scope">true</efbc:ApplicableLegalBasis></efac:StrategicProcurement>
     OCDS example: '{"tender":{"lots":[{"coveredBy":["CVD"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#CVDDirectiveLotSection
@@ -10900,7 +10900,7 @@
         BG-713: Strategic Procurement
     eForms guidance: |-
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and add a `Classification` object to the lot's `additionalClassifications` array.
-        - Set the classification's `.scheme` to "cvd-contract-type".
+        - Set the classification's `.scheme` to 'cvd-contract-type'.
         - Map the value of the field to the classification's `.id`.
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/cvd-contract-type) and map it to the classification's `.description`.
     eForms example: <efac:StrategicProcurementInformation><efbc:ProcurementCategoryCode listName="cvd-contract-type">oth-serv-contr</efbc:ProcurementCategoryCode></efac:StrategicProcurementInformation>
@@ -10922,7 +10922,7 @@
         - [Get the award for the LotResult](operations.md#get-the-award-for-a-lotresult) and add an `Item` object to its `items` array.
         - Set the item's `.id` incrementally.
         - Add a `Classification` object to the item's `additionalClassifications` array.
-        - Set the classification's `.scheme` to "cvd-contract-type".
+        - Set the classification's `.scheme` to 'cvd-contract-type'.
         - Map the value of the field to the classification's `.id`.
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/cvd-contract-type) and map it to the classification's `.description`.
     eForms example: <efac:StrategicProcurementInformation><efbc:ProcurementCategoryCode listName="cvd-contract-type">oth-serv-contr</efbc:ProcurementCategoryCode></efac:StrategicProcurementInformation>
@@ -11167,7 +11167,7 @@
         [Get the organization for the buyer](operations.md#get-the-organization-for-the-buyer) and add a `Classification` object to its `.details.classifications` array.
 
         - Map the value of this field to the classification's `.id`.
-        - Set its `.description` according to the [buyer contracting type mapping table](codelists/buyer-contracting-type) and set its `.scheme` to "buyer-contracting-type".
+        - Set its `.description` according to the [buyer contracting type mapping table](codelists/buyer-contracting-type) and set its `.scheme` to 'buyer-contracting-type'.
     eForms example: <cac:ContractingPartyType><cbc:PartyTypeCode listName="buyer-contracting-type">cont-ent</cbc:PartyTypeCode></cac:ContractingPartyType>
     OCDS example: '{"parties":[{"id":"ORG-0001","details":{"classifications":[{"scheme":"TED_BUYER_TYPE","id":"cont-ent","description":"Contracting Entity"}]}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_buyer_information_2
@@ -11852,7 +11852,7 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/AWARD_CRITERIA_CONTRACT_NOTICE_INFORMATION/IS_ELECTRONIC_AUCTION_USABLE/*[matches(name(),'USE_ELECTRONIC_AUCTION')]
     TED guidance:
     - Set `tender.techniques.hasElectronicAuction` to `true`
-    eForms guidance: If 'true', [get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and set the lot's `.techniques.hasElectronicAuction` to `true`. Otherwise, discard.
+    eForms guidance: If "true", [get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and set the lot's `.techniques.hasElectronicAuction` to `true`. Otherwise, discard.
     eForms example: <cac:AuctionTerms><cbc:AuctionConstraintIndicator>true</cbc:AuctionConstraintIndicator></cac:AuctionTerms>
     OCDS example: '{"tender":{"lots":[{"techniques":{"hasElectronicAuction":true}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#auctionTermsSection
@@ -12005,7 +12005,7 @@
         For each `cac:ProcurementAdditionalType` add a corresponding `.sustainability` object to the lot's `.sustainability` array.
 
         - Map the code to the sustainability's `.goal` according to the [social procurement mapping table](codelists/social-objective).
-        - Add "awardCriteria", "contractPerformanceConditions", "selectionCriteria" and "technicalSpecifications" to the sustainability's `.strategies` array.
+        - Add 'awardCriteria', 'contractPerformanceConditions', 'selectionCriteria' and 'technicalSpecifications' to the sustainability's `.strategies` array.
     eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="social-objective">et-eq</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
     OCDS example: '{"tender":{"lots":[{"hasSustainabilty":true,"sustainability":[{"goal":"social.ethnicEquality","strategies":["awardCriteria","contractPerformanceConditions","selectionCriteria","technicalSpecifications"]}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#strategicProcurementSection
@@ -12066,7 +12066,7 @@
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), add a new `Milestone` object to the lot's `.milestones` array.
 
         - Set its `id` incrementally.
-        - Set its `.type` to "securityClearanceDeadline".
+        - Set its `.type` to 'securityClearanceDeadline'.
         - [Convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to its `.dueDate`.
     eForms example: <cbc:LatestSecurityClearanceDate>2019-11-15+01:00</cbc:LatestSecurityClearanceDate>
     OCDS example: '{"tender":{"lots":[{"milestones":[{"id":"1","type":"securityClearanceDeadline","dueDate":"2019-11-15T23:59:59+01:00"}]}]}}'

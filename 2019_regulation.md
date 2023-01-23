@@ -161,6 +161,7 @@ These can be automated if persistent:
         ./manage.py update-with-sdk --verbose output/mapping/eForms/guidance.yaml
         ./manage.py update-with-annex output/mapping/eforms/guidance.yaml
         ./manage.py update-with-ted-guidance output/mapping/eforms/guidance.yaml
+        ./manage.py codelists > codes-eforms.csv
 
 1. Run and check the output of:
 

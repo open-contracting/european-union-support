@@ -4,6 +4,7 @@ import json
 import os
 import re
 import shutil
+import sys
 from copy import deepcopy
 from io import StringIO
 from pathlib import Path
@@ -12,6 +13,7 @@ from urllib.parse import urlsplit
 
 import click
 import json_merge_patch
+import lxml.etree
 import lxml.html
 import mdformat
 import numpy as np
@@ -555,13 +557,20 @@ def lint(filename, additional_properties):
         with open("codes.txt", "w") as f:
             f.write("\n".join(sorted(known_codes)))
 
+    if os.path.isfile("codes-eforms.csv"):
+        with open("codes-eforms.csv") as f:
+            known_eforms_codes = {row["code"] for row in csv.DictReader(f)}
+    else:
+        known_eforms_codes = set()
+
     sdk_regex = re.compile(r"/\d+\.\d+\.\d+/")
     sdk_documents = {}
 
     unreviewed = 0
 
     http_errors = set()
-    codes = set()
+    single_quoted = set()
+    double_quoted = set()
     for field in fields:
         identifier = field["id"]
 
@@ -587,7 +596,10 @@ def lint(filename, additional_properties):
         unreviewed += field["eForms guidance"].startswith("(UNREVIEWED)")
 
         for match in re.finditer(r"'(\S+)'", field["eForms guidance"]):
-            codes.add(match.group(1))
+            single_quoted.add(match.group(1))
+
+        for match in re.finditer(r'"(\S+)"', re.sub(r"`[^`]+`", "", field["eForms guidance"])):
+            double_quoted.add(match.group(1))
 
         # Format XML.
         eforms_example = field["eForms example"]
@@ -627,10 +639,15 @@ def lint(filename, additional_properties):
             except json.decoder.JSONDecodeError as e:
                 click.echo(f"{identifier}: JSON is invalid: {e}: {ocds_example}")
 
-    unknown_codes = codes - known_codes
+    unknown_codes = single_quoted - known_codes
     if unknown_codes:
         click.echo("\nCodes (tokens in single quotes) that do not appear in any codelist:")
         click.echo("\n".join(sorted(unknown_codes)))
+
+    unknown_eforms_codes = double_quoted - known_eforms_codes
+    if unknown_eforms_codes:
+        click.echo("\nDouble quoted strings:")
+        click.echo("\n".join(sorted(unknown_eforms_codes)))
 
     if unreviewed:
         click.echo(f"\n{unreviewed} unreviewed eForms guidance")
@@ -714,6 +731,28 @@ def business_groups():
     df = df[df["ID"].str.startswith("BG-")]
 
     df[["Level", "ID", "Name", "Repeatable", "Description"]].to_csv(eformsdir / "business-groups.csv", index=False)
+
+
+@cli.command()
+def codelists():
+    """
+    Print information about eForms codelists.
+    """
+    response = requests.get("https://api.github.com/repos/OP-TED/eForms-SDK/contents/codelists")
+    response.raise_for_status()
+
+    writer = csv.writer(sys.stdout, lineterminator="\n")
+    writer.writerow(["codelist", "code"])
+
+    for file in response.json():
+        if not file["name"].endswith(".gc"):
+            continue
+
+        response = requests.get(file["download_url"])
+        response.raise_for_status()
+
+        xml = lxml.etree.fromstring(response.content)
+        writer.writerows([file["name"], code] for code in xml.xpath('//Value[@ColumnRef="code"]/SimpleValue/text()'))
 
 
 @cli.command()
