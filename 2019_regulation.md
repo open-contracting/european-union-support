@@ -117,6 +117,42 @@ To update the progress of the guidance for the 2019 regulation, run:
 
     ./manage.py statistics
 
+### Manual checks
+
+These can be automated if persistent:
+
+* Check for backslashes outside regular expressions and `\n` and `\u####`:
+
+        \\[^Wdnu().+-]
+
+* Check for numbered list items:
+
+        [0-9]\.
+
+* Check for bullet list items without a space after the bullet:
+
+        (        )-\S
+
+* Check for bullet list items that do not end in a period or colon:
+
+        (        )-.+[^\n.:]\n
+
+* Check for bullet list items that do not start with expected tokens:
+
+        (        )- (?!\[?(Add|Convert|Get|Identify|Look up|Map|Perform|Set|For each|If|Otherwise|[a-z-]+|\d+)\b)
+
+* Check for bullet list items with an indented following line that is not a bullet list item:
+
+        ^(         *)-.+\n\1 (?! -)
+
+* Check for a terminal colon that is not preceded by expected tokens:
+
+        (?!For each).+(?<!If none exists yet)(?<!If the code is)(?<!Otherwise)(?<!, and):\n
+
+* Check for consecutive periods in a sentence context:
+
+        \.\.\s
+
 ### Upgrade SDK version
 
 1. Run:
