@@ -127,7 +127,7 @@ These can be automated if persistent:
 
 * Check for numbered list items:
 
-        [0-9]\.
+        (        )[0-9]\.
 
 * Check for bullet list items without a space after the bullet:
 
@@ -147,7 +147,7 @@ These can be automated if persistent:
 
 * Check for a terminal colon that is not preceded by expected tokens:
 
-        (?!For each).+(?<!If none exists yet)(?<!If the code is)(?<!Otherwise)(?<!, and):\n
+        (        )(?!For each).+(?<!If none exists yet)(?<!If the code is)(?<!Otherwise)(?<!, and):\n
 
 * Check for consecutive periods in a sentence context:
 
