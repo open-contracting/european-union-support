@@ -762,7 +762,7 @@
     Description: The identifier of a part of a prior information notice or another similar notice related to this notice.
     Business groups:
         BG-125: Previous Planning
-    eForms guidance: '[Reference a previous publication](operations.md#reference-a-previous-publication), and add to `.relatedLots`.'
+    eForms guidance: '[Reference a previous publication](operations.md#reference-a-previous-publication), and add to the relatedProcess''s `.relatedLots`.'
     eForms example: <cac:NoticeDocumentReference><cbc:ReferencedDocumentInternalAddress>LOT-0001</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference>
     OCDS example: '{"relatedProcess":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"123e4567-e89b-12d3-a456-426614174000-06","relatedLots":["LOT-0001"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#previousPlanningSection
@@ -1763,7 +1763,7 @@
     Description: An identifier of one or more sections within a previous notice within the procedure. The information in the modification section refers to this section or these sections.
     Business groups:
         BG-77: Modification
-    eForms guidance: (UNREVIEWED) No guidance. Relationships are either implied by the XML structure or explicit via references from a section to the organization.
+    eForms guidance: Discard. The notice and sections that were modified can be determined by comparing previous releases with the current release.
     eForms example: <efac:ContractModification><efac:Change><efbc:ChangedSectionIdentifier>LOT-0002</efbc:ChangedSectionIdentifier></efac:Change></efac:ContractModification>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#contractModificationNoticeSection
@@ -1778,7 +1778,7 @@
     Description: An identifier of one or more sections within a previous notice within the procedure. The information in the modification section refers to this section or these sections.
     Business groups:
         BG-77: Modification
-    eForms guidance: (UNREVIEWED) (REPEAT) No guidance. Relationships are either implied by the XML structure or explicit via references from a section to the organization.
+    eForms guidance: Discard. The notice and sections that were modified can be determined by comparing previous releases with the current release.
     eForms example: <efac:ContractModification><efac:Change><efbc:ChangedSectionIdentifier>LOT-0002</efbc:ChangedSectionIdentifier></efac:Change></efac:ContractModification>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#contractModificationNoticeSection
@@ -10663,9 +10663,11 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        - [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
-        - Add a `Location` object to the item's `.deliveryLocations` array.
-        - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service) and map it to the location's `.description`.
+        This field maps to the same `Address` objects as created for BT-728-Lot, BT-5121-Lot, BT-5071-Lot, BT-5131-Lot, BT-5101-Lot and BT-5141-Lot.
+
+        [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array.
+        Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service) and map it to the address's `.description`, concatenating to the existing entry in this field if necessary.
     eForms example: <cac:Address><cbc:Region>anyw-eea</cbc:Region></cac:Address>
     OCDS example: '{"tender":{"items":[{"deliveryLocations":[{"description":"Anywhere in the European Economic Area"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -10681,7 +10683,10 @@
     Description: 'There are other restrictions on the place of performance (e.g. "anywhere in the European Economic Area", "anywhere in the given country"). '
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: Add a `Location` object to the `tender.deliveryLocations` array, look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map to the location's `.description`.
+    eForms guidance: |-
+        This field maps to the same `Address` objects as created for BT-728-Part, BT-5121-Part, BT-5131-Part, BT-5071-Part, BT-5101-Part and BT-5141-Part.
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array
+        Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map to the address's `.description`, concatenating to the existing entry in this field if necessary.
     eForms example: <cac:Address><cbc:Region>anyw-eea</cbc:Region></cac:Address>
     OCDS example: '{"tender":{"deliveryLocations":[{"description":"Anywhere in the European Economic Area"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -10697,7 +10702,10 @@
     Description: 'There are other restrictions on the place of performance (e.g. "anywhere in the European Economic Area", "anywhere in the given country"). '
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: Add a `Location` object to the `tender.deliveryLocations` array, look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map to the location's `.description`.
+    eForms guidance: |-
+        This field maps to the same `Address` objects as created for BT-728-Procedure, BT-5121-Procedure, BT-5131-Procedure, BT-5071-Procedure, BT-5101-Procedure and BT-5141-Procedure.
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array
+        Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/other-place-service), and map to the address's `.description`, concatenating to the existing entry in this field if necessary.
     eForms example: <cac:Address><cbc:Region>anyw-eea</cbc:Region></cac:Address>
     OCDS example: '{"tender":{"deliveryLocations":[{"description":"Anywhere in the European Economic Area"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -10714,7 +10722,11 @@
         BG-708: Place of Performance
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/LOCATION_NUTS/LOCATION
-    eForms guidance: '[Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot), add a `Location` object to the item''s `.deliveryLocations` array and map to the location''s `.description`.'
+    eForms guidance: |-
+        This field maps to the same `Address` objects as created for BT-727-Lot, BT-5121-Lot, BT-5071-Lot, BT-5131-Lot, BT-5101-Lot and BT-5141-Lot.
+
+        [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array and map it to the address's `.description`, concatenating to the existing entry in this field if necessary.
     eForms example: <cac:RealizedLocation><cbc:Description languageID="ENG">Further realizations ...</cbc:Description></cac:RealizedLocation>
     OCDS example: '{"tender":{"items":[{"deliveryLocation":{"description":"Further realizations..."}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -10729,7 +10741,9 @@
     Description: Additional information about the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: Add a `Location` object to the `tender.deliveryLocations` array and map to the location's `.description`.
+    eForms guidance: |-
+        This field maps to the same `Address` objects as created for BT-727-Part, BT-5121-Part, BT-5131-Part, BT-5071-Part, BT-5101-Part and BT-5141-Part.
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to the address's `.description`, concatenating to the existing entry in this field if necessary.
     eForms example: <cac:RealizedLocation><cbc:Description languageID="ENG">Further realizations ...</cbc:Description></cac:RealizedLocation>
     OCDS example: '{"tender":{"deliveryLocations":[{"description":"Further realizations ..."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -10744,7 +10758,9 @@
     Description: Additional information about the place of performance.
     Business groups:
         BG-708: Place of Performance
-    eForms guidance: Add a `Location` object to the `tender.deliveryLocations` array and map to the location's `.description`.
+    eForms guidance: |-
+        This field maps to the same `Address` objects as created for BT-727-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, BT-5101-Part and BT-5141-Part.
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to the address's `.description`, concatenating to the existing entry in this field if necessary.
     eForms example: <cac:RealizedLocation><cbc:Description languageID="ENG">Further realizations ...</cbc:Description></cac:RealizedLocation>
     OCDS example: '{"tender":{"deliveryLocations":[{"description":"Further realizations ..."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#performancePlaceSection
@@ -12689,7 +12705,7 @@
     repeatable: false
     mandatory: true
     codeList: notice-subtype
-    eForms guidance: ''
+    eForms guidance: Discard.
     eForms example: <efac:NoticeSubType><cbc:SubTypeCode listName="notice-subtype">16</cbc:SubTypeCode></efac:NoticeSubType>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#subtypeSection
@@ -12701,7 +12717,7 @@
     type: integer
     repeatable: false
     mandatory: false
-    eForms guidance: (UNREVIEWED) (TED guidance) Map to the contract's .publicPassengerTransportServicesKilometers
+    eForms guidance: (TED guidance) (UNREVIEWED) Map to the contract's .publicPassengerTransportServicesKilometers
     eForms example: ''
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderSection
@@ -12797,7 +12813,7 @@
     type: text-multilingual
     repeatable: false
     mandatory: false
-    eForms guidance: This data element is underspecified in eForms. No mapping is available.
+    eForms guidance: Discard. OPT-070 may only be used in some circumstances for a Call for Expression of Interest, which is not covered by the eForms regulation.
     eForms example: ''
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#reservedExecutionSection
