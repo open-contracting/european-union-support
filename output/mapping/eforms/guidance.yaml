@@ -747,9 +747,9 @@
     Description: The identifier of a prior information notice or another similar notice related to this notice.
     Business groups:
         BG-125: Previous Planning
-    eForms guidance: '[Reference a previous publication](operations.md#reference-a-previous-publication).'
-    eForms example: <cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID></cac:NoticeDocumentReference>
-    OCDS example: '{"relatedProcess":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"123e4567-e89b-12d3-a456-426614174000-06"}]}'
+    eForms guidance: Concatenate with [BT-1251-Part Previous Planning Part Identifier](#BT-1251-Part) and [reference a previous publication](operations.md#reference-a-previous-publication).
+    eForms example: <cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID><cbc:ReferencedDocumentInternalAddress>PAR-0001</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference>
+    OCDS example: '{"relatedProcess":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"123e4567-e89b-12d3-a456-426614174000-06-PAR-0001"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#previousPlanningSection
 -   id: BT-1251-Lot
     parentNodeId: ND-LotPreviousPlanning
@@ -777,9 +777,9 @@
     Description: The identifier of a part of a prior information notice or another similar notice related to this notice.
     Business groups:
         BG-125: Previous Planning
-    eForms guidance: (UNREVIEWED) (REPEAT) [Reference a previous publication](operations.md#reference-a-previous-publication), and add to `.relatedLots`.
-    eForms example: <cac:NoticeDocumentReference><cbc:ReferencedDocumentInternalAddress>PAR-0001</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference>
-    OCDS example: ''
+    eForms guidance: Concatenate with [BT-125(i)-Part Previous Planning Identifier](<#BT-125(i)-Part>) and [reference a previous publication](operations.md#reference-a-previous-publication).
+    eForms example: <cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID><cbc:ReferencedDocumentInternalAddress>PAR-0001</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference>
+    OCDS example: '{"relatedProcess":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"123e4567-e89b-12d3-a456-426614174000-06-PAR-0001"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#previousPlanningSection
 -   id: BT-1252-Procedure
     parentNodeId: ND-DirectAward
@@ -10601,9 +10601,19 @@
         BG-713: Strategic Procurement
         BT-735: CVD Contract Type
         BG-7141: CVD Vehicles
-    eForms guidance: ''
+    eForms guidance: |-
+        This field maps to the same `Item` objects as created for OPT-155-LotResult, OPT-156-LotResult and BT-735-LotResult. If no `Item` objects were created for `ancestor::efac:ProcurementDetails`:
+        \* [Get the award for the LotResult](common-operations.md#get-the-award-for-the-lot-result)
+        \* Add an `Item` object to its `items` array.
+        \* Set the item's `.id` incrementally.
+
+        For each `ancestor::efac:ProcurementDetails/efac:StrategicProcurementStatistics/efbc:StatisticsCode` add a `Classification` object to the corresponding item's `additionalClassifications` array.
+
+        - Set the classification's `.scheme` to "vehicle-category".
+        - Map the value of the field to the classification's `.id`.
+        - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/vehicle-category) and map it to the classification's `.description`.
     eForms example: <efac:ProcurementDetails><efbc:AssetCategoryCode listName="vehicle-category">n2-n3</efbc:AssetCategoryCode></efac:ProcurementDetails>
-    OCDS example: ''
+    OCDS example: '{"awards":[{"items":[{"id":"1","additionalClassifications":[{"scheme":"vehicle-category","id":"n2-n3","description":"Truck (N2-N3)"}]}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_lot_result
 -   id: BT-726-Lot
     parentNodeId: ND-LotProcurementScope
@@ -10935,11 +10945,16 @@
     Business groups:
         BG-713: Strategic Procurement
     eForms guidance: |-
-        - [Get the award for the LotResult](operations.md#get-the-award-for-a-lotresult) and add an `Item` object to its `items` array.
+        This field maps to the same `Item` objects as created for OPT-155-LotResult and BT-723-LotResult. If no `Item` objects were created for `ancestor::efac:StrategicProcurementInformation/efbc:ProcurementDetails`:
+
+        - [Get the award for the LotResult](common-operations.md#get-the-award-for-the-lot-result)
+        - Add an `Item` object to its `items` array.
         - Set the item's `.id` incrementally.
-        - Add a `Classification` object to the item's `additionalClassifications` array.
-        - Set the classification's `.scheme` to 'cvd-contract-type'.
-        - Map the value of the field to the classification's `.id`.
+
+        For each `ancestor::efac:ProcurementDetails/efac:StrategicProcurementStatistics/efbc:StatisticsCode` add a `Classification` object to the corresponding item's `additionalClassifications` array.
+
+        - Set the classification's `.scheme` to "cvd-contract-type".
+        - Map to the classification's `.id`.
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/cvd-contract-type) and map it to the classification's `.description`.
     eForms example: <efac:StrategicProcurementInformation><efbc:ProcurementCategoryCode listName="cvd-contract-type">oth-serv-contr</efbc:ProcurementCategoryCode></efac:StrategicProcurementInformation>
     OCDS example: '{"awards":[{"items":[{"id":"1","additionalClassifications":[{"id":"oth-serv-contr","scheme":"cvd-contract-type","descriptions":"other service contract"}]}]}]}'
@@ -13134,9 +13149,20 @@
     repeatable: false
     mandatory: false
     codeList: vehicles
-    eForms guidance: ''
+    eForms guidance: |-
+        This field maps to the same `Item` objects as created for BT-723-LotResult, BT-735-LotResult and OPT-156-LotResult.
+
+        If the value of `ancestor::efac:StrategicProcurementStatistics/efbc:StatisticsNumeric` is 0 discard. Otherwise:
+        \- [Get the award for the LotResult](common-operations.md#get-the-award-for-the-lot-result)
+        \- Add an `Item` object to its `items` array.
+        \- Set the item's `.id` incrementally.
+
+        For each `efbc:StatisticsCode` add a `Classification` object to the item's `additionalClassifications` array.
+        \- Set the classification's `.scheme` to "vehicles".
+        \- Map the value of the field to the classification's `.id`.
+        \- Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/vehicles) and map it to the classification's `.description`.
     eForms example: <efac:StrategicProcurementStatistics><efbc:StatisticsCode listName="vehicles">vehicles-zero-emission</efbc:StatisticsCode></efac:StrategicProcurementStatistics>
-    OCDS example: ''
+    OCDS example: '{"awards":[{"items":[{"id":"1","additionalClassifications":[{"scheme":"vehicles","id":"vehicles-zero-emission","description":"vehicles zero emission"}]}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_lot_result
 -   id: OPT-156-LotResult
     parentNodeId: ND-ProcurementStatistics
@@ -13146,9 +13172,9 @@
     type: number
     repeatable: false
     mandatory: false
-    eForms guidance: ''
+    eForms guidance: "This field maps to the same `Item` objects as created for BT-723-LotResult, BT-735-LotResult and OPT-155-LotResult.\n\nIf the value of this field is 0 then discard. Otherwise:\n\\- If the value of the `ancestor::efbc:StrategicProcurementStatistics/efbc:StatisticsCode` is \u201Cvehicles-zero-emissions\u201D or \u201Cvehicles-clean\u201D, get the corresponding item and map to it's `.quantity`.\n\\- If the value of `ancestor::efbc:StrategicProcurementStatistics/efbc:StatisticsCode` is \u201Cvehicles\u201D, get the value of `efbc:StatisticsNumeric` for each `ancestor::efbc:StrategicProcurementStatistics` with `efbc:StatisticsCode` equal to \u201Cvehicles-zero-emissions\u201D or \u201Cvehicles-clean\u201D and subtract the sum of the values from the value of this field.\n\\- If the value is 0 discard the item entirely. Otherwise map the the result to the item's `.quantity`."
     eForms example: <efac:StrategicProcurementStatistics><efbc:StatisticsNumeric>0</efbc:StatisticsNumeric></efac:StrategicProcurementStatistics>
-    OCDS example: ''
+    OCDS example: '{"awards":[{"items":[{"id":"1","quantity":3}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_lot_result
 -   id: OPT-160-UBO
     parentNodeId: ND-UBO
