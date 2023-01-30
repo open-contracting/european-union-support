@@ -94,6 +94,8 @@ Get the `Person` in the organization's `.beneficialOwners` array whose `id` is e
 1. Add a `Person` to `.beneficialOwners`
 1. Set its `.id` to the value of `ancestor::efac:UltimateBeneficialOwner/cbc:ID`.
 
+**Note:** `ancestor::efac:UltimateBeneficialOwner/cbc:ID` is assumed to be a unique within the scope of the contracting process.
+
 ## Get the lot for a ProcurementProjectLot
 
 Get the `Lot` in `tender.lots` whose `.id` is equal to the value of `ancestor::cac:ProcurementProjectLot/cac:ID`. If none exists yet, add a `Lot` to `tender.lots` and set its `id` to the value of `ancestor::cac:ProcurementProjectLot/cac:ID`.
