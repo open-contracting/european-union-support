@@ -6,7 +6,15 @@
 
 For each `OrganizationReference` object in your data, get the `Organization` in `parties` whose `.id` is equal to the `.id` of the organization reference and set the organization reference's `.name` to the `.name` of the organization. The following fields are `OrganizationReference` objects:
 
-* `<list of fields>`
+* `buyer`
+* `planning/budget/finance/financingParty`
+* `tender/documents/publisher`
+* `tender/lots/designContest/selectedParticipants`
+* `bids/details/tenderers`
+* `bids/details/subcontracting/subcontracts/subcontractor`
+* `bids/details/subcontracting/subcontracts/tenderers`
+* `awards/suppliers`
+* `awards/buyers`
 
 ### Withhold the publication of information
 
