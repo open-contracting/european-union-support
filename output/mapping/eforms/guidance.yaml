@@ -1908,6 +1908,16 @@
     TED guidance:
     - Add a `Charge` object to the contract's `.implementation.charges` array, set its `.id` to 'government', set its `.paidBy` to 'government', set its `.title` to the [translation](../../operations/#get-a-translation) of 'Prizes, payments or other financial advantages provided by the contracting authority/entity', and map to its `.estimatedValue.amount`.
     eForms guidance: |-
+        Get the value of `ancestor::efac:SettledContract/cbc:ID` whose `efac:LotTender/cbc:ID` is equal to the value of `ancestor::efac:LotTender/cbc:ID`.
+
+        Get the `Contract` in `contracts` whose `id` is equal to the value of this `efac:SettledContract/cbc:ID`. If none exists yet:
+
+        - Add a `Contract` to `contracts`.
+        - Set its `id` to the value of this `efac:SettledContract/cbc:ID`.
+        - Get all LotResults (`ancestor::efac:NoticeResult/efac:LotResult`) with an `/efac:SettledContract/cbc:ID` equal to `ancestor::efac:SettledContract/cbc:ID`
+          - If there is exactly one, add its `/cbc:ID` to the contract's `.awardID`
+          - If there is more than one, add each LotResult's `/cbc:ID` to the contract's `.awardIDs`
+
         Add a `Charge` object to the contract's `.implementation.charges` array.
 
         - Set its `.id` to 'government'.
@@ -1955,7 +1965,23 @@
     - TED_EXPORT/FORM_SECTION/F23_2014/AWARD_CONTRACT/AWARDED_CONTRACT/VAL_REVENUE
     TED guidance:
     - Add a `Charge` object to the contract's `.implementation.charges` array, set its `.id` to 'user', set its `.paidBy` to 'user', set its `.title` to the [translation](../../operations/#get-a-translation) of 'Revenue from the payment of fees and fines by the users', and map to its `.estimatedValue.amount`.
-    eForms guidance: Add a `Charge` object to the contract's `.implementation.charges` array, set its `.id` to 'user', set its `.paidBy` to 'user', set its `.title` to the [translation](operations.md#get-a-translation) of 'Revenue from the payment of fees and fines by the users', and map to its `.estimatedValue.amount` and `@currencyID` to the estimatedValue's `.currency`.
+    eForms guidance: |-
+        Get the value of `ancestor::efac:SettledContract/cbc:ID` whose `efac:LotTender/cbc:ID` is equal to the value of `ancestor::efac:LotTender/cbc:ID`.
+
+        Get the `Contract` in `contracts` whose `id` is equal to the value of this `efac:SettledContract/cbc:ID`. If none exists yet:
+
+        - Add a `Contract` to `contracts`.
+        - Set its `id` to the value of this `efac:SettledContract/cbc:ID`.
+        - Get all LotResults (`ancestor::efac:NoticeResult/efac:LotResult`) with an `/efac:SettledContract/cbc:ID` equal to `ancestor::efac:SettledContract/cbc:ID`
+          - If there is exactly one, add its `/cbc:ID` to the contract's `.awardID`
+          - If there is more than one, add each LotResult's `/cbc:ID` to the contract's `.awardIDs`
+
+        Add a `Charge` object to the contract's `.implementation.charges` array.
+
+        - Set its `.id` to 'user'.
+        - Set its `.paidBy` to 'user'.
+        - Set its `.title` to the [translation](operations.md#get-a-translation) of 'Revenue from the payment of fees and fines by the users'.
+        - Map to its `.estimatedValue.amount` and `@currencyID` to the estimatedValue's `.currency`.
     eForms example: <efac:ConcessionRevenue><efbc:RevenueUserAmount currencyID="EUR">350</efbc:RevenueUserAmount></efac:ConcessionRevenue>
     OCDS example: '{"contracts":[{"implementation":{"charges":[{"id":"user","title":"Revenue from the payment of fees and fines by the users","estimatedValue":{"amount":350,"currency":"EUR"},"paidBy":"user"}]}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderSection
