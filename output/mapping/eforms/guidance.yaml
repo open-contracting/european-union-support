@@ -762,9 +762,12 @@
     Description: The identifier of a part of a prior information notice or another similar notice related to this notice.
     Business groups:
         BG-125: Previous Planning
-    eForms guidance: '[Reference a previous publication](operations.md#reference-a-previous-publication), and add to the relatedProcess''s `.relatedLots`.'
-    eForms example: <cac:NoticeDocumentReference><cbc:ReferencedDocumentInternalAddress>LOT-0001</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference>
-    OCDS example: '{"relatedProcess":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"123e4567-e89b-12d3-a456-426614174000-06","relatedLots":["LOT-0001"]}]}'
+    eForms guidance: |-
+        This field maps to the same `Related Process` objects as created for BT-125(i)-Lot.
+
+        For each `cac:NoticeDocumentReference`, add or update the corresponding `Related Process` object in the `relatedProcesses` array and map to its `relatedLots`.
+    eForms example: <cac:NoticeDocumentReference><cbc:ID>9c0fd704-64d3-4294-a3b6-6df45911ab9f-01</cbc:ID><cbc:ReferencedDocumentInternalAddress>123</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference>
+    OCDS example: '{"relatedProcess":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"9c0fd704-64d3-4294-a3b6-6df45911ab9f-01","relatedLots":["123"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#previousPlanningSection
 -   id: BT-1251-Part
     parentNodeId: ND-PartPreviousPlanning
@@ -12733,7 +12736,7 @@
     repeatable: false
     mandatory: false
     eForms guidance: (TED guidance) (UNREVIEWED) Map to the contract's .publicPassengerTransportServicesKilometers
-    eForms example: ''
+    eForms example: <efac:LotTender><efbc:PublicTransportationCumulatedDistance unitCode="km">988754432110987</efbc:PublicTransportationCumulatedDistance></efac:LotTender>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#lotTenderSection
 -   id: OPP-090-Procedure
