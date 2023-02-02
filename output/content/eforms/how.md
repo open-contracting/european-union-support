@@ -100,3 +100,15 @@ For E5:
 - OPT-092-ReviewReq
 - OPT-301-ReviewBody
 - OPT-301-ReviewReq
+
+## Data use
+
+### Framework agreements with multiple winners (cascades)
+
+Suppliers are in a cascade if:
+
+* The tender or lot uses a framework agreement (`.techniques.hasFrameworkAgreement` is `true`); and
+* The award has multiple suppliers (`.suppliers` contains more than one `OrganizationReference`); and
+* Bids have ranks (`bids.details.hasRank` is `true`).
+
+The rank of each bid might be available in `bids.details.rank`.
