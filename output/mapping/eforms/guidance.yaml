@@ -105,14 +105,7 @@
     eForms guidance: |-
         The codes are drawn from the [Form type](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/form-type) authority table in EU Vocabularies.
 
-        If the code is:
-
-        - planning: Add 'tender' to `tag`, and set `tender.status` to 'planned'.
-        - competition: Add 'tender' to `tag`, and set `tender.status` to 'active'.
-        - change: Add 'tenderUpdate' to `tag`.
-        - result: Add 'award' and 'contract' to `tag`, and set `tender.status` to 'complete'.
-        - dir-awa-pre: Add 'award' and 'contract' to `tag`, and set `tender.status` to 'complete'.
-        - cont-modif: Add 'awardUpdate' and 'contractUpdate' to `tag`.
+        Look-up the code in the [form type mapping table](codelists/form-type), add the values of the release tag column to `tag` and set `tender.status` to the value of the tender status column.
     eForms example: <cbc:NoticeTypeCode listName="competition">cn-standard</cbc:NoticeTypeCode>
     OCDS example: '{"tag":["tender"],"tender":{"status":"active"}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#subtypeSection
@@ -364,15 +357,9 @@
     - Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodDetails` to 'Procedure involving negotiations'
     - Set `tender.procurementMethod` to 'selective', and set `tender.procurementMethodDetails` to 'Restricted procedure'
     eForms guidance: |-
-        Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/procurement-procedure-typ) and map it to `tender.procurementMethodDetails`. If the code is:
+        The codes are drawn from the [procurement procedure type](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/procurement-procedure-type)) authority table in EU Vocabularies.
 
-        - open: Set `tender.procurementMethod` to 'open'.
-        - comp-dial: Set `tender.procurementMethod` to 'selective'.
-        - comp-tend: Set `tender.procurementMethod` to 'selective'.
-        - innovation: Set `tender.procurementMethod` to 'selective'.
-        - neg-w-call: Set `tender.procurementMethod` to 'selective'.
-        - restricted: Set `tender.procurementMethod` to 'selective'.
-        - neg-wo-call: Set `tender.procurementMethod` to 'limited'.
+        Map to `tender.procurementMethod` according to the [procurement procedure type mapping table](codelists/procurement-procedure-type).
 
         ```{note}
         `tender.procurementMethod` is not set for "oth-mult" or "oth-single".
