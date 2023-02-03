@@ -8,11 +8,11 @@ The Publications Office of the European Union created the [eForms SDK](https://d
 
 The eForms SDK introduces the concept of a [field](https://docs.ted.europa.eu/eforms/latest/fields/index.html). Each field corresponds to a business term defined in the [annex to the eForms regulation](https://single-market-economy.ec.europa.eu/single-market/public-procurement/digital-procurement/eforms_en). A same business term can have many corresponding fields, for each context in which the term is used: for example, the term *Title* (BT-21) can be used in the context of a lot, lot group, or part of a Prior Information Notice.
 
-**The [eForms Mapping](mapping) describes how to map each eForms SDK field to OCDS.**
+**The [Field mappings](mapping) describe how to map each eForms SDK field to OCDS.**
 
 ## Post-processing steps
 
-These steps must be completed after using the [eForms Mapping](mapping) to construct an OCDS file.
+These steps must be completed after using the [Field mappings](mapping) to construct an OCDS file.
 
 ### Populate `.name` in organization references
 

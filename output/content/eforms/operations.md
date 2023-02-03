@@ -1,7 +1,7 @@
 # Common operations
 
 ```{admonition} Summary
-To avoid repetition in the [eForms mapping](mapping), we refer and link to the following common operations.
+To avoid repetition in the [Field mappings](mapping), we refer and link to the following common operations.
 ```
 
 ## Create a release
