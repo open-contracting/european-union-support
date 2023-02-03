@@ -1299,7 +1299,7 @@
     eForms guidance: If there is a `LotGroup` in `tender.lotGroups` whose `.id` is equal to the value of this field, discard. Otherwise, add a `LotGroup` to `tender.lotGroups` and map to its `.id`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="LotsGroup">GLO-0001</cbc:ID></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lotGroups":[{"id":"GLO-0001"}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/identifiers.html#identifiersSection
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#_introduction
 -   id: BT-137-Part
     parentNodeId: ND-Part
     name: Purpose Lot Identifier
@@ -1599,7 +1599,7 @@
         Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-award-justification) and map it to the award's `.statusDetails`.
     eForms example: <efac:DecisionReason><efbc:DecisionReasonCode listName="non-award-justification">no-rece</efbc:DecisionReasonCode></efac:DecisionReason>
     OCDS example: '{"awards":[{"status":"unsuccessful","statusDetails":"No tenders, requests to participate or projects were received"}]}'
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotResultLevelSection
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
 -   id: BT-145-Contract
     parentNodeId: ND-SettledContract
     name: Contract Conclusion Date

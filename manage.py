@@ -572,7 +572,6 @@ def lint(filename, additional_properties):
     else:
         known_eforms_codes = set()
 
-    sdk_regex = re.compile(r"/\d+\.\d+\.\d+/")
     sdk_documents = {}
 
     unreviewed = 0
@@ -586,9 +585,6 @@ def lint(filename, additional_properties):
 
         # Update and check SDK URLs.
         if field["sdk"]:
-            # Change this value to the new SDK version.
-            field["sdk"] = sdk_regex.sub("/1.3.2/", field["sdk"])
-
             parts = urlsplit(field["sdk"])
             fragment = parts.fragment
             base_url = parts._replace(fragment="").geturl()
