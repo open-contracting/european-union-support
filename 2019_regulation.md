@@ -115,7 +115,7 @@ Then, run:
 
 To update the progress of the guidance for the 2019 regulation, run:
 
-    ./manage.py statistics
+    ./manage.py statistics output/mapping/eforms/guidance.yaml > output/mapping/eforms/README.md
 
 ### Manual checks
 
