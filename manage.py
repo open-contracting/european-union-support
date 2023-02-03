@@ -9,7 +9,7 @@ import sys
 from copy import deepcopy
 from io import StringIO
 from pathlib import Path
-from textwrap import dedent
+from textwrap import dedent, indent
 from urllib.parse import urlsplit
 
 import click
@@ -30,6 +30,20 @@ outputdir = basedir / "output"
 mappingdir = outputdir / "mapping"
 eformsdir = mappingdir / "eforms"
 contentdir = outputdir / "content" / "eforms"
+
+# From https://github.com/OP-TED/eForms-SDK/tree/main/examples
+# See https://docs.ted.europa.eu/eforms/latest/schema/schemas.html
+xmlhead = (
+    '<ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" '
+    'xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" '
+    'xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2" '
+    'xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" '
+    'xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1" '
+    'xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1" '
+    'xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1" '
+    'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
+)
+xmltail = "</ContractNotice>"
 
 
 class Dumper(yaml.SafeDumper):
@@ -329,6 +343,9 @@ def update_with_annex(filename):
     # Normalize whitespace (used in "Business groups").
     df["Name"] = df["Name"].str.strip()
 
+    # Normalize whitespace.
+    df["Description"] = df["Description"].str.replace(" ", " ", regex=False)  # non-breaking space
+
     # Add "Business groups" column, to assist mapping by providing context.
     df["Business groups"] = pd.Series(dtype="object")
 
@@ -485,8 +502,7 @@ def update_with_ted_guidance(filename):
     url = "https://raw.githubusercontent.com/OP-TED/ted-xml-data-converter/main/ted-elements-not-convertible.md"
     elements = []
     for line in requests.get(url).text.splitlines():
-        match = re.search(r"^\| ([A-Z_]+) \|", line)
-        if match:
+        if match := re.search(r"^\| ([A-Z_]+) \|", line):
             elements.append(match.group(1))
 
     report_unmerged_rows(df, ["form", "xpath"], ~df["xpath"].str.endswith(tuple(elements)), unformatted=["form"])
@@ -499,19 +515,6 @@ def lint(filename, additional_properties):
     """
     Lint FILE (validate and format XML, JSON and Markdown, report unrecognized OCDS fields, update eForms SDK URLs).
     """
-    # From https://github.com/OP-TED/eForms-SDK/tree/main/examples
-    # See https://docs.ted.europa.eu/eforms/latest/schema/schemas.html
-    head = (
-        '<ContractNotice xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" '
-        'xmlns:ext="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" '
-        'xmlns="urn:oasis:names:specification:ubl:schema:xsd:ContractNotice-2" '
-        'xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" '
-        'xmlns:efac="http://data.europa.eu/p27/eforms-ubl-extension-aggregate-components/1" '
-        'xmlns:efext="http://data.europa.eu/p27/eforms-ubl-extensions/1" '
-        'xmlns:efbc="http://data.europa.eu/p27/eforms-ubl-extension-basic-components/1" '
-        'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
-    )
-    tail = "</ContractNotice>"
 
     # Similar to tests/fixtures/release_minimal.json in ocdskit.
     minimal_release = {
@@ -606,8 +609,8 @@ def lint(filename, additional_properties):
         eforms_example = field["eForms example"]
         if eforms_example and eforms_example != "N/A":
             try:
-                element = lxml.etree.fromstring(f"{head}{eforms_example}{tail}")
-                field["eForms example"] = lxml.etree.tostring(element).decode()[len(head) : -len(tail)]
+                element = lxml.etree.fromstring(f"{xmlhead}{eforms_example}{xmltail}")
+                field["eForms example"] = lxml.etree.tostring(element).decode()[len(xmlhead) : -len(xmltail)]
 
                 # Note: The XML snippets are too short to validate against the eForms schema.
             except lxml.etree.XMLSyntaxError as e:
@@ -663,17 +666,30 @@ def lint(filename, additional_properties):
 @cli.command()
 @click.argument("directory", type=click.Path(exists=True, file_okay=False))
 def build(directory):
+    def copy_if_changed(src, dst):
+        if not (dst / src.name).exists() or not filecmp.cmp(src, dst / src.name):
+            shutil.copy(src, dst)
+
     def write_if_changed(path, new):
+        old = ""
         new = dedent(new)
-        with path.open() as f:
-            old = f.read()
+        if path.exists():
+            with path.open() as f:
+                old = f.read()
         if old != new:
             with path.open("w") as f:
                 f.write(new)
 
-    def copy_if_changed(src, dst):
-        if not filecmp.cmp(src, dst / src.name):
-            shutil.copy(src, dst)
+    def replace_if_changed(path, replacement):
+        if path.exists():
+            with path.open() as f:
+                content = f.read()
+            if match := re.search(r"<!-- [^\n]*-->\n\n(.+)", content, re.DOTALL):
+                write_if_changed(path, content.replace(match.group(1), dedent(replacement)))
+            else:
+                click.echo(f"{path} does not contain <!-- ... -->")
+        else:
+            click.echo(f"{path} does not exist")
 
     docsdir = Path(directory) / "docs"
     codelistsdir = docsdir / "codelists"
@@ -702,15 +718,91 @@ def build(directory):
             """,
         )
 
-    with (codelistsdir / "index.md").open() as f:
-        content = f.read()
-
-    write_if_changed(
+    stems = "\n".join(sorted(stems))
+    replace_if_changed(
         codelistsdir / "index.md",
-        re.sub(r"```{toctree}.+```", dedent("\n".join(sorted(stems))), content, re.MULTILINE),
+        f"```{{toctree}}\n:maxdepth: 1\n\n{stems}\n```",
     )
 
     # Create the main mapping page.
+    with open(eformsdir / "guidance.yaml") as f:
+        fields = yaml.safe_load(f)
+
+    rows = []
+    for field in fields:
+        description = field.get("Description", "")
+        if description:
+            description = f"<p><i>{field['btId']}:</i> {description}</p>"
+
+        sdk = field["sdk"]
+        if sdk:
+            sdk = f'<a class="reference external" href="{sdk}"></a>'
+
+        eforms_example = field["eForms example"]
+        if eforms_example and eforms_example != "N/A":
+            element = lxml.etree.fromstring(f"{xmlhead}{eforms_example}{xmltail}")
+            lxml.etree.indent(element, space="  ")
+            data = dedent(lxml.etree.tostring(element).decode()[len(xmlhead) + 1 : -len(xmltail) - 1])
+            eforms_example = f"```xml\n{data}\n```"
+        else:
+            eforms_example = ""
+
+        ocds_example = field["OCDS example"]
+        if ocds_example and ocds_example != "N/A":
+            data = json.dumps(json.loads(ocds_example), ensure_ascii=False, indent=2).replace("Infinity", "1e9999")
+            ocds_example = f"```json\n{data}\n```"
+        else:
+            ocds_example = ""
+
+        # Replace within-page anchors with HTML anchors, to avoid "reference target not found".
+        guidance = re.sub(
+            r"\[([^\]]+)\]\(([^)]+)\)",
+            lambda match: f'<a href="{match.group(2)}">{match.group(1)}</a>',
+            field["eForms guidance"],
+        )
+
+        rows.append(
+            f"""\
+              <tr id="{field["id"]}">
+                <td class="break-all">
+                    <p><b>{field["id"]}</b> {sdk}<br>{field["name"]}</p>{description}
+                    <code class="docutils literal notranslate"><span class="pre">{field["xpathAbsolute"]}</span></code>
+                </td>
+                <td>
+
+{indent(guidance, '        ')}
+
+{indent(eforms_example, '        ')}
+
+{indent(ocds_example, '        ')}
+
+        </td>
+              </tr>"""
+        )
+
+    rows = "\n".join(rows)
+    replace_if_changed(
+        docsdir / "mapping.md",
+        f"""\
+        <div class="wy-table-responsive">
+          <table class="docutils">
+            <colgroup>
+              <col width="30%">
+              <col width="70%">
+            </colgroup>
+            <thead>
+              <tr>
+                <th>eForms field</th>
+                <th>OCDS mapping</th>
+              </tr>
+            </thead>
+            <tbody>
+{rows}
+            </tbody>
+          </table>
+        </div>
+        """,
+    )
 
 
 @cli.command()
@@ -726,6 +818,7 @@ def business_groups():
 
     # Normalize whitespace.
     df["Name"] = df["Name"].str.strip()
+    df["Description"] = df["Description"].str.strip()
 
     # Keep only rows for business groups.
     df = df[df["ID"].str.startswith("BG-")]
