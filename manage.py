@@ -21,6 +21,7 @@ import numpy as np
 import pandas as pd
 import requests
 import yaml
+from jsonpointer import set_pointer
 from jsonschema import FormatChecker
 from jsonschema.validators import Draft4Validator as validator
 
@@ -380,11 +381,11 @@ def update_with_annex(filename):
         ~df["ID"].isin(
             {
                 # Removed indicators in favor of corresponding scalars.
-                # https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#extensionsSection
+                # https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#extensionsSection
                 "BT-53",  # Options (BT-54 Options Description)
-                # https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#toolNameSection
+                # https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#toolNameSection
                 "BT-724",  # Tool Atypical (BT-124 Tool Atypical URL)
-                # https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_footnotedef_21
+                # https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#_footnotedef_9
                 "BT-778",  # Framework Maximum Participants (BT-113 Framework Maximum Participants Number)
                 # See OPT-155 and OPT-156.
                 # https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotResultComponentsTable
@@ -543,6 +544,10 @@ def lint(filename, additional_properties):
 
     # Remove `patternProperties` to clarify output.
     set_additional_properties_and_remove_pattern_properties(schema, additional_properties)
+    # Remove required fields.
+    for definition in ("Bid", "BidsStatistic", "Document", "Finance", "ParticipationFee"):
+        set_pointer(schema, f"/definitions/{definition}/required", [])
+
     format_checker = FormatChecker()
 
     if os.path.isfile("codes.txt"):
