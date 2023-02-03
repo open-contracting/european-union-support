@@ -772,11 +772,11 @@ def build(directory):
         rows.append(
             f"""\
               <tr id="{field["id"]}">
-                <td class="break-all">
+                <td class="field break-all">
                     <p><b>{field["id"]}</b> {sdk}<br>{field["name"]}</p>{description}
                     <code class="docutils literal notranslate"><span class="pre">{field["xpathAbsolute"]}</span></code>
                 </td>
-                <td>
+                <td class="mapping">
 
 {indent(guidance, '        ')}
 
@@ -792,7 +792,13 @@ def build(directory):
     replace_if_changed(
         docsdir / "mapping.md",
         f"""\
-        <div class="wy-table-responsive">
+        <div id="mappings" class="wy-table-responsive">
+          <p>
+            <label for="mappings-search">
+              Search the table by eForms field, business term, XML element, OCDS field, etc.:
+            </label>
+            <input id="mappings-search" class="search" placeholder="Search">
+          </p>
           <table class="docutils">
             <colgroup>
               <col width="30%">
@@ -804,11 +810,14 @@ def build(directory):
                 <th>OCDS mapping</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody class="list">
 {rows}
             </tbody>
           </table>
         </div>
+
+        <script src="//cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+        <script>new List('mappings', {{valueNames: ['field', 'mapping']}})</script>
         """,
     )
 
