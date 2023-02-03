@@ -1,6 +1,8 @@
 # Common operations
 
-To avoid repetition in the guidance, we refer and link to the following common operations.
+```{admonition} Summary
+To avoid repetition in the [eForms mapping](mapping), we refer and link to the following common operations.
+```
 
 ## Create a release
 
@@ -34,55 +36,53 @@ If a timezone component is present in the date (e.g. '+02:00'), preserve it. Oth
 
 The final value would be '2020-10-21T23:59:59Z' or '2020-10-21T00:00:00Z'.
 
-## Add a party
-
-Add an `Organization` object to the `parties` array, and set its `.id` (string). **A party's `.id` needs to be consistent across all notices.** It is recommended to implement a register of organization identifiers to assign consistent identifiers. For more information, [see the OCDS documentation](https://standard.open-contracting.org/latest/en/schema/identifiers/#organization-ids).
-
 ## Add a statistic
 
-Add a `Statistic` object to the `statistics` array, set its `.relatedLot` to the value of `ancestor::efac:LotResult/efac:TenderLot​/cbc:ID`, set its `scope` to 'bids' if the statistic relates to a bid, or to 'complaints' if it relates to a review request, and set its `.id` (string) sequentially across all notices for this procedure. For example, if a first notice for a given procedure has nine statistics, it uses `id`'s '1' through '9'. A second notice for the same procedure then uses `id`'s '10' and up, etc. 
+Add a `Statistic` object to the `statistics` array, set its `.relatedLot` to the value of `ancestor::efac:LotResult/efac:TenderLot/cbc:ID`, set its `scope` to 'bids' if the statistic relates to a bid, or to 'complaints' if it relates to a review request, and set its `.id` (string) sequentially across all notices for this procedure. For example, if a first notice for a given procedure has nine statistics, it uses `id`'s '1' through '9'. A second notice for the same procedure then uses `id`'s '10' and up, etc. 
 
 ## Get the document for a document reference
 
 Get the `Document` object in `tender.documents` whose `.id` is equal to the document reference's `/cbc:ID`. If none exists yet, add a `Document` object to `tender.documents` and set its `.id` to the document reference's `/cbc:ID`.
 
-## Get the organization for a company
+## Parties
 
-Get the `Organization` in `parties` whose `id` is equal to the value of `ancestor::efac:Organization/efac:Company​/cac:PartyIdentification​/cbc:ID`. If none exists yet:
+### Add a party
+
+Add an `Organization` object to the `parties` array, and set its `.id` (string). **A party's `.id` needs to be consistent across all notices.** It is recommended to implement a register of organization identifiers to assign consistent identifiers. For more information, [see the OCDS documentation](https://standard.open-contracting.org/latest/en/schema/identifiers/#organization-ids).
+
+### Get the organization for a company
+
+Get the `Organization` in `parties` whose `id` is equal to the value of `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`. If none exists yet:
 
 1. Add an `Organization` to `parties`
-1. Set its `.id` to the value of the `ancestor::efac:Organization/efac:Company​/cac:PartyIdentification​/cbc:ID`.
+1. Set its `.id` to the value of the `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`.
 
-## Get the organization for a touchpoint
+### Get the organization for a touchpoint
 
-Get the `Organization` in `parties` whose `id` is equal to the value of `ancestor::efac:TouchPoint​/cac:PartyIdentification​/cbc:ID`. If none exists yet:
+Get the `Organization` in `parties` whose `id` is equal to the value of `ancestor::efac:TouchPoint/cac:PartyIdentification/cbc:ID`. If none exists yet:
 
 1. Add an `Organization` to `parties`
-1. Set its `.id` to the value of `ancestor::efac:TouchPoint/cac:PartyIdentification​/cbc:ID`
+1. Set its `.id` to the value of `ancestor::efac:TouchPoint/cac:PartyIdentification/cbc:ID`
 1. Set its `.identifier.id` to the value of `ancestor::efac:Organization/efac:Company/cac:PartyLegalEntity/cbc:CompanyID`
 1. [Set its `.identifier.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids).
 
-## Get the organization for the buyer
+### Get the organization for the buyer
 
-Get the Organization in `parties` whose `.id` is equal to the value of `ancestor::cac:ContractingParty/cac:Party/cac:PartyIdentification​/cbc:ID`. If none exists yet:
+Get the Organization in `parties` whose `.id` is equal to the value of `ancestor::cac:ContractingParty/cac:Party/cac:PartyIdentification/cbc:ID`. If none exists yet:
 
 1. Add an `Organization` to `parties` 
-1. Set its `.id` to the value of `ancestor::cac:ContractingParty/cac:Party/cac:PartyIdentification​/cbc:ID`
+1. Set its `.id` to the value of `ancestor::cac:ContractingParty/cac:Party/cac:PartyIdentification/cbc:ID`
 1. Add 'buyer' to it's `.roles`
 
-## Get the organization for a tenderer
+### Get the organization for a tenderer
 
-Get the Organization in `parties` whose `.id` is equal to the value of `ancestor::efac:TenderingParty/efac:Tenderer​/cbc:ID`. If none exists yet:
+Get the Organization in `parties` whose `.id` is equal to the value of `ancestor::efac:TenderingParty/efac:Tenderer/cbc:ID`. If none exists yet:
 
 1. Add an `Organization` to `parties` 
-1. Set its `.id` to the value of `ancestor::efac:TenderingParty/efac:Tenderer​/cbc:ID`
+1. Set its `.id` to the value of `ancestor::efac:TenderingParty/efac:Tenderer/cbc:ID`
 1. Add 'tenderer' to it's `.roles`
 
-## Get the organization for an organization technical identifier reference
-
-Get the `Organization` object in `parties` whose `.id` is equal to the organization technical identifier reference's `/cbc:ID`. If none exists yet, add an `Organization` object to `parties` and set its `.id` to the organization technical identifier reference's `/cbc:ID`.
-
-## Get the person for an ultimate beneficial owner
+### Get the person for an ultimate beneficial owner
 
 Get the `Organization` in `parties` whose `id` is equal to the value of `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`. If none exists yet:
 
@@ -94,41 +94,51 @@ Get the `Person` in the organization's `.beneficialOwners` array whose `id` is e
 1. Add a `Person` to `.beneficialOwners`
 1. Set its `.id` to the value of `ancestor::efac:UltimateBeneficialOwner/cbc:ID`.
 
-**Note:** `ancestor::efac:UltimateBeneficialOwner/cbc:ID` is assumed to be a unique within the scope of the contracting process.
+```{note}
+`ancestor::efac:UltimateBeneficialOwner/cbc:ID` is assumed to be a unique within the scope of the contracting process.
+```
 
-## Get the lot for a ProcurementProjectLot
+### Get the organization for an organization technical identifier reference
+
+Get the `Organization` object in `parties` whose `.id` is equal to the organization technical identifier reference's `/cbc:ID`. If none exists yet, add an `Organization` object to `parties` and set its `.id` to the organization technical identifier reference's `/cbc:ID`.
+
+## Lots and items
+
+### Get the lot for a ProcurementProjectLot
 
 Get the `Lot` in `tender.lots` whose `.id` is equal to the value of `ancestor::cac:ProcurementProjectLot/cac:ID`. If none exists yet, add a `Lot` to `tender.lots` and set its `id` to the value of `ancestor::cac:ProcurementProjectLot/cac:ID`.
 
-## Get the lot group for a ProcurementProjectLot
+### Get the lot group for a ProcurementProjectLot
 
 Get the `LotGroup` in `tender.lotGroups` whose `.id` is equal to the value of the XPath `ancestor::cac:ProcurementProjectLot/cac:ID`. If none exists yet, add a `LotGroup` to `tender.lotGroups` and set its `id` to the value of the XPath `ancestor::cac:ProcurementProjectLot/cac:ID`.
 
-## Get the item for a ProcurementProjectLot
+### Get the item for a ProcurementProjectLot
 
 Get the `Item` in `tender.items` whose `.relatedLot` is equal to the value of `ancestor::cac:ProcurementProjectLot/cac:ID`. If none exists yet, add an `Item` to `tender.items`, set its `.id` incrementally and set its `.relatedLot` to the value of `ancestor::cac:ProcurementProjectLot/cac:ID`.
 
-## Get the bid for a LotTender
+### Get the lot for a LotResult
+
+Get the `Lot` in `tender.lots` whose `id` is equal to the value of `ancestor::efac:LotResult/efac:TenderLot/cbc:ID`. If none exists yet, add a `Lot` to `tender.lots` and set its `id` to the value of `ancestor::efac:LotResult/efac:TenderLot/cbc:ID`.
+
+## Bids, awards and contracts
+
+### Get the bid for a LotTender
 
 Get the `Bid` in `bids` whose `id` is equal to the value of `ancestor::efac:LotTender/cbc:ID`. If none exists yet:
 
 1. Add a `Bid` to `bids`
 1. Set its `.id` to the value of `ancestor::efac:LotTender/cbc:ID`
-1. Add the value of `ancestor::efac:LotTender/efac:TenderLot​/cbc:ID` to its `.relatedLots`
+1. Add the value of `ancestor::efac:LotTender/efac:TenderLot/cbc:ID` to its `.relatedLots`
 
-## Get the lot for a LotResult
-
-Get the `Lot` in `tender.lots` whose `id` is equal to the value of `ancestor::efac:LotResult/efac:TenderLot​/cbc:ID`. If none exists yet, add a `Lot` to `tender.lots` and set its `id` to the value of `ancestor::efac:LotResult/efac:TenderLot​/cbc:ID`.
-
-## Get the award for a LotResult
+### Get the award for a LotResult
 
 Get the `Award` in `awards` whose `id` is equal to the value of `ancestor::efac:LotResult/cbc:ID`. If none exists yet:
 
 1. Add an `Award` to `awards`
 1. Set its `.id` to the value of `ancestor::efac:LotResult/cbc:ID`
-1. Add the value of `ancestor::efac:LotResult/efac:TenderLot​/cbc:ID` to its `.relatedLots`
+1. Add the value of `ancestor::efac:LotResult/efac:TenderLot/cbc:ID` to its `.relatedLots`
 
-## Get the contract for a SettledContract
+### Get the contract for a SettledContract
 
 Get the `Contract` in `contracts` whose `.id` is equal to `ancestor::efac:SettledContract/cbc:ID`. If none exists yet:
 

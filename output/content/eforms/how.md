@@ -1,6 +1,18 @@
-# How it works
+# How to use this profile
 
-## Mapping steps
+```{attention}
+If you are not yet familiar with the eForms SDK, we recommend that you start with the [eForms Developer Guide](https://docs.ted.europa.eu/eforms/latest/guide/index.html).
+```
+
+The Publications Office of the European Union created the [eForms SDK](https://docs.ted.europa.eu/eforms/latest/) to facilitate eForms implementation. While it is possible to [implement eForms without the SDK](https://docs.ted.europa.eu/eforms/latest/guide/implementing-eforms-without-the-sdk.html), the Publications Office politely describes this as requiring ["several times the effort to create and maintain."](https://docs.ted.europa.eu/eforms/latest/guide/understanding-the-sdk.html#_the_purpose_of_the_eforms_sdk) We therefore map to OCDS from the metadata-driven SDK, not directly from the UBL/XML.
+
+The eForms SDK introduces the concept of a [field](https://docs.ted.europa.eu/eforms/latest/fields/index.html). Each field corresponds to a business term defined in the [annex to the eForms regulation](https://single-market-economy.ec.europa.eu/single-market/public-procurement/digital-procurement/eforms_en). A same business term can have many corresponding fields, for each context in which the term is used: for example, the term *Title* (BT-21) can be used in the context of a lot, lot group, or part of a Prior Information Notice.
+
+The [eForms Mapping](mapping) describes how to map each eForms SDK field to OCDS.
+
+## Post-processing steps
+
+These steps must be completed after using the [eForms Mapping](mapping) to construct an OCDS file.
 
 ### Populate `.name` in organization references
 
@@ -16,9 +28,15 @@ For each `OrganizationReference` object in your data, get the `Organization` in 
 * `awards/suppliers`
 * `awards/buyers`
 
-### Withhold the publication of information
+## Post-publication steps
 
-Some information required by eForms may remain non-public ("unpublished") for a defined period, as described in [withheld publication of information](https://docs.ted.europa.eu/eforms/1.3.2/schema/all-in-one.html#withheldPublicationOfInformationSection). For fields with an associated `efac:FieldsPrivacy` element, wait until the date in `/efbc:PublicationDate` and then:
+These steps must be completed at the described time after publishing an OCDS file.
+
+### Release withheld information
+
+Some information required by eForms may remain non-public ("unpublished") for a defined period, as described in [withheld publication of information](https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html). Whereas, with eForms, Tenders Electronic Daily can take responsibility for publishing the withheld information on the desired date, with OCDS, you must take responsibility.
+
+For fields with an associated `efac:FieldsPrivacy` element, wait until the date in `/efbc:PublicationDate` and then:
 
 * [Create a release](operations.md#create-a-release) and add 'previouslyWithheldInformation' to its `.tag` array.
 * Perform the mapping for the fields and publish the release.
@@ -35,8 +53,9 @@ Furthermore, thee following notice types are listed in the regulation's annex bu
 - E1 - Prior market consultation notice
 - E5 - Contract completion notice type
 
-Therefore, fields that are only used in these notice types are omitted from the guidance. They are:
+Therefore, fields that are only used in these notice types are omitted from the guidance.
 
+```{dropdown} Omitted fields
 For X01 and/or X02:
 
 - BT-500-Business
@@ -100,8 +119,13 @@ For E5:
 - OPT-092-ReviewReq
 - OPT-301-ReviewBody
 - OPT-301-ReviewReq
+```
 
 ## Data use
+
+```{admonition} Summary
+This section describes how to interpret OCDS data that conforms to this profile.
+```
 
 ### Framework agreements with multiple winners (cascades)
 
