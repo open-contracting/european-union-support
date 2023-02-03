@@ -721,7 +721,7 @@ def build(directory):
     stems = "\n".join(sorted(stems))
     replace_if_changed(
         codelistsdir / "index.md",
-        f"```{{toctree}}\n:maxdepth: 1\n\n{stems}\n```",
+        f"```{{toctree}}\n:maxdepth: 1\n\n{stems}\n```\n",
     )
 
     # Create the main mapping page.
