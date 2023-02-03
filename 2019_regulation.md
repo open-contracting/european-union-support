@@ -79,7 +79,7 @@ The correspondence between `legalType` and `type` is:
 
 Manually fill in in `eForms guidance`, `eForms example`, `OCDS example` and `sdk`.
 
-1. Look up the business term in the [eForms SDK](https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html)
+1. Look up the business term in the [eForms Specification(https://docs.ted.europa.eu/eforms/latest/schema/index.html)
 1. Paste the link to the relevant documentation in `sdk`
 1. Copy an abbreviated XML sample to `eForms example`
 1. Write the `eForms guidance` and `OCDS example`
@@ -176,7 +176,7 @@ These can be automated if persistent:
 
 ### eForms
 
-* [SDK](https://docs.ted.europa.eu/eforms/latest/) ([all-in-one](https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html))
+* [SDK](https://docs.ted.europa.eu/eforms/latest/)
 * [FAQ](https://docs.ted.europa.eu/home/eforms/FAQ/index.html)
 * [Examples](https://github.com/OP-TED/eForms-SDK/tree/main/examples)
 

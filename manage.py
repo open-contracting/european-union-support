@@ -578,6 +578,7 @@ def lint(filename, additional_properties):
     unreviewed = 0
 
     http_errors = set()
+    anchor_errors = set()
     single_quoted = set()
     double_quoted = set()
     for field in fields:
@@ -594,9 +595,11 @@ def lint(filename, additional_properties):
             try:
                 if base_url not in sdk_documents:
                     sdk_documents[base_url] = get_html(base_url)
-                assert sdk_documents[base_url].xpath(
-                    f'//@id="{fragment}"'
-                ), f"{identifier}: anchor not found: {fragment}"
+                if not fragment:
+                    if not field["id"].endswith("-Contract"):
+                        anchor_errors.add(f"{identifier}: no anchor")
+                elif not sdk_documents[base_url].xpath(f'//@id="{fragment}"'):
+                    anchor_errors.add(f"{identifier}: anchor not found: {fragment}")
             except requests.exceptions.HTTPError:
                 http_errors.add(base_url)
 
@@ -662,8 +665,12 @@ def lint(filename, additional_properties):
         click.echo(f"\n{unreviewed} unreviewed eForms guidance")
 
     if http_errors:
-        click.echo("\nHTTP errors:")
+        click.echo(f"\nHTTP errors ({len(http_errors)}):")
         click.echo("\n".join(sorted(http_errors)))
+
+    if anchor_errors:
+        click.echo(f"\nAnchor errors({len(anchor_errors)}):")
+        click.echo("\n".join(sorted(anchor_errors)))
 
     write_yaml_file(filename, fields)
 
