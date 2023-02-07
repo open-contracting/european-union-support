@@ -12627,7 +12627,7 @@
     mandatory: true
     codeList: contract-detail
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:ContractTerm><efbc:TermCode listName="contract-detail">soc-stand</efbc:TermCode></efac:ContractTerm>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: OPP-031-Tender
@@ -12639,7 +12639,7 @@
     repeatable: false
     mandatory: true
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:ContractTerm><efbc:TermDescription languageID="ENG">Description of the social-standards blablabla ...</efbc:TermDescription></efac:ContractTerm>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: OPP-032-Tender
@@ -12651,7 +12651,7 @@
     repeatable: false
     mandatory: true
     eForms guidance: ''
-    eForms example: ''
+    eForms example: <efac:ContractTerm><efbc:TermCode>all-rev-ic</efbc:TermCode><efbc:TermPercent>100</efbc:TermPercent></efac:ContractTerm>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: OPP-033-Tender
@@ -12676,7 +12676,7 @@
     repeatable: false
     mandatory: true
     eForms guidance: ''
-    eForms example: <efac:ContractTerm><efbc:TermDescription languageID="ENG">Information on Rewards and Penalties ....</efbc:TermDescription></efac:ContractTerm>
+    eForms example: <efac:ContractTerm><efbc:TermCode listName="rewards-penalties">rew-pen</efbc:TermCode><efbc:TermDescription languageID="ENG">Information on Rewards and Penalties ....</efbc:TermDescription></efac:ContractTerm>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: OPP-040-Procedure
@@ -12749,9 +12749,9 @@
     type: integer
     repeatable: false
     mandatory: false
-    eForms guidance: (TED guidance) (UNREVIEWED) Map to the contract's .publicPassengerTransportServicesKilometers
+    eForms guidance: Map to the contract's .publicPassengerTransportServicesKilometers
     eForms example: <efac:LotTender><efbc:PublicTransportationCumulatedDistance unitCode="km">988754432110987</efbc:PublicTransportationCumulatedDistance></efac:LotTender>
-    OCDS example: ''
+    OCDS example: '{"awards":[{"publicPassengerTransportServicesKilometers":"988754432110987"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: OPP-090-Procedure
     parentNodeId: ND-ProcedureTenderingProcess
@@ -12807,7 +12807,7 @@
         - Add an `Organization` to `parties`.
         - Set its `.id` to the value of `ancestor::cac:ServiceProviderParty/cac:Party/cac:PartyIdentification/cbc:ID`.
 
-        If the value of the field is "serv-prov" add `procurementServiceProvider` to the organization's `.roles` array. If the value of the field is "ted-esen" add `esender` to the organization's `.roles` array.
+        Add the code to the organization's `.roles` array according to the [organization role mapping table](codelists/organization-role).
     eForms example: <cac:ServiceProviderParty><cbc:ServiceTypeCode listName="organisation-role">ted-esen</cbc:ServiceTypeCode></cac:ServiceProviderParty>
     OCDS example: '{"parties":[{"roles":["esender"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_buyer_and_service_providers
