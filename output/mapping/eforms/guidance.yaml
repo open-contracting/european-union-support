@@ -12807,7 +12807,7 @@
         - Add an `Organization` to `parties`.
         - Set its `.id` to the value of `ancestor::cac:ServiceProviderParty/cac:Party/cac:PartyIdentification/cbc:ID`.
 
-        Add the code to the organization's `.roles` array according to the [organization role mapping table](codelists/organization-role).
+        If the value of the field is "serv-prov" add `procurementServiceProvider` to the organization's `.roles` array. If the value of the field is "ted-esen" add `esender` to the organization's `.roles` array.
     eForms example: <cac:ServiceProviderParty><cbc:ServiceTypeCode listName="organisation-role">ted-esen</cbc:ServiceTypeCode></cac:ServiceProviderParty>
     OCDS example: '{"parties":[{"roles":["esender"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_buyer_and_service_providers
