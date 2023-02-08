@@ -201,7 +201,7 @@
         - Map the code to the sustainability's `.goal` according to the [strategic procurement mapping table](codelists/strategic-procurement).
         - Add 'awardCriteria', 'contractPerformanceConditions', 'selectionCriteria' and 'technicalSpecifications' to the sustainability's `.strategies` array.
     eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="strategic-procurement">inn-pur</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
-    OCDS example: '{"tender":{"lots":[{"hasSustainabilty":true,"sustainability":[{"goal":"economic.innovativePurchase","strategies":["awardCriteria","contractPerformanceConditions","selectionCriteria","technicalSpecifications"]}]}]}}'
+    OCDS example: '{"tender":{"lots":[{"hasSustainability":true,"sustainability":[{"goal":"economic.innovativePurchase","strategies":["awardCriteria","contractPerformanceConditions","selectionCriteria","technicalSpecifications"]}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#strategicProcurementSection
 -   id: BT-09(a)-Procedure
     parentNodeId: ND-CrossBorderLaw
@@ -9474,7 +9474,7 @@
     - Map to the award's `.subcontracting.value.amount`
     eForms guidance: '[Get the bid for the LotTender](operations.md#get-the-bid-for-a-lottender) and map to its `.subcontracting.value.amount`.  Map `@currencyID` to the value''s `.currency`.'
     eForms example: <efac:SubcontractingTerm><efbc:TermAmount currencyID="EUR">9999999.99</efbc:TermAmount></efac:SubcontractingTerm>
-    OCDS example: '{"bids":{"details":[{"subContracting":{"value":{"amount":9999999.99,"currency":"EUR"}}}]}}'
+    OCDS example: '{"bids":{"details":[{"subcontracting":{"value":{"amount":9999999.99,"currency":"EUR"}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: BT-554-Tender
     parentNodeId: ND-SubcontractedActivity
@@ -9498,7 +9498,7 @@
     - Map to the award's `.subcontracting.description`
     eForms guidance: '[Get the bid for the LotTender](operations.md#get-the-bid-for-a-lottender) and map to its `.subcontracting.description`.'
     eForms example: <efac:SubcontractingTerm><efbc:TermDescription languageID="ENG">The subcontracting will be...</efbc:TermDescription></efac:SubcontractingTerm>
-    OCDS example: '{"bids":{"details":[{"subContracting":{"description":"The subcontracting will be..."}}]}}'
+    OCDS example: '{"bids":{"details":[{"subcontracting":{"description":"The subcontracting will be..."}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: BT-555-Tender
     parentNodeId: ND-SubcontractedActivity
@@ -9522,7 +9522,7 @@
     - Map to the award's `.subcontracting.minimumPercentage` and `.subcontracting.maximumPercentage`
     eForms guidance: '[Get the bid for the LotTender](operations.md#get-the-bid-for-a-lottender), divide number by 100 and map to the bid''s `.subcontracting.minimumPercentage` and `.subcontracting.maximumPercentage`.'
     eForms example: <efac:SubcontractingTerm><efbc:TermPercent>30</efbc:TermPercent></efac:SubcontractingTerm>
-    OCDS example: '{"bids":{"details":[{"subContracting":{"minimumPercentage":0.3,"maximumPercentage":0.3}}]}}'
+    OCDS example: '{"bids":{"details":[{"subcontracting":{"minimumPercentage":0.3,"maximumPercentage":0.3}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: BT-556-NoticeResult
     parentNodeId: ND-NoticeResultGroupFA
@@ -10947,7 +10947,7 @@
         - Map the value of the field to the classification's `.id`.
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/cvd-contract-type) and map it to the classification's `.description`.
     eForms example: <efac:StrategicProcurementInformation><efbc:ProcurementCategoryCode listName="cvd-contract-type">oth-serv-contr</efbc:ProcurementCategoryCode></efac:StrategicProcurementInformation>
-    OCDS example: '{"tender":{"lots":[{"additionalClassifications":[{"id":"oth-serv-contr","scheme":"cvd-contract-type","descriptions":"other service contract"}]}]}}'
+    OCDS example: '{"tender":{"lots":[{"additionalClassifications":[{"id":"oth-serv-contr","scheme":"cvd-contract-type","description":"other service contract"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#CVDDirectiveLotSection
 -   id: BT-735-LotResult
     parentNodeId: ND-StrategicProcurementInformationLotResult
@@ -10974,7 +10974,7 @@
         - Map to the classification's `.id`.
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/cvd-contract-type) and map it to the classification's `.description`.
     eForms example: <efac:StrategicProcurementInformation><efbc:ProcurementCategoryCode listName="cvd-contract-type">oth-serv-contr</efbc:ProcurementCategoryCode></efac:StrategicProcurementInformation>
-    OCDS example: '{"awards":[{"items":[{"id":"1","additionalClassifications":[{"id":"oth-serv-contr","scheme":"cvd-contract-type","descriptions":"other service contract"}]}]}]}'
+    OCDS example: '{"awards":[{"items":[{"id":"1","additionalClassifications":[{"id":"oth-serv-contr","scheme":"cvd-contract-type","description":"other service contract"}]}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#CVDDirectiveLotSection
 -   id: BT-736-Lot
     parentNodeId: ND-LotTenderingTerms
@@ -11862,7 +11862,7 @@
     - Set `tender.techniques.hasDynamicPurchasingSystem` to `true`
     eForms guidance: If different from 'none', [get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and set its `.techniques.hasDynamicPurchasingSystem` to `true`. Map the code according to the [DPS usage mapping table](codelists/dps-usage) to the lot's `.techniques.dynamicPurchasingSystem.type`. Otherwise discard.
     eForms example: <cac:ContractingSystem><cbc:ContractingSystemTypeCode listName="dps-usage">dps-nlist</cbc:ContractingSystemTypeCode></cac:ContractingSystem>
-    OCDS example: '{"tender":{"lots":[{"techniques":{"hasDynamicPurchasingSystem":true,"dynamidPurchasingSystem":{"type":"closed"}}}]}}'
+    OCDS example: '{"tender":{"lots":[{"techniques":{"hasDynamicPurchasingSystem":true,"dynamicPurchasingSystem":{"type":"closed"}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#DPSSection
 -   id: BT-766-Part
     parentNodeId: ND-PartTenderingProcess
@@ -11878,7 +11878,7 @@
         BG-706: Techniques
     eForms guidance: If different from 'none', set `tender.techniques.hasDynamicPurchasingSystem` to `true`. Map the code according to the [DPS usage mapping table](codelists/dps-usage) to `tender.techniques.dynamicPurchasingSystem.type`. Otherwise discard.
     eForms example: <cac:ContractingSystem><cbc:ContractingSystemTypeCode listName="dps-usage">dps-nlist</cbc:ContractingSystemTypeCode></cac:ContractingSystem>
-    OCDS example: '{"tender":{"techniques":{"hasDynamicPurchasingSystem":true,"dynamidPurchasingSystem":{"type":"closed"}}}}'
+    OCDS example: '{"tender":{"techniques":{"hasDynamicPurchasingSystem":true,"dynamicPurchasingSystem":{"type":"closed"}}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#DPSSection
 -   id: BT-767-Lot
     parentNodeId: ND-AuctionTerms
@@ -12012,7 +12012,7 @@
     - Set the award's `.hasSubcontracting` to `true`
     eForms guidance: '[Get the bid for the LotTender](operations.md#get-the-bid-for-a-lottender). If "yes", set the bid''s `.hasSubcontracting` to `true`. If "no", set the bid''s `.hasSubcontracting` to `false`.'
     eForms example: <efac:SubcontractingTerm><efbc:TermCode listName="applicability">yes</efbc:TermCode></efac:SubcontractingTerm>
-    OCDS example: '{"bids":{"details":[{"hasSubContracting":true}]}}'
+    OCDS example: '{"bids":{"details":[{"hasSubcontracting":true}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: BT-774-Lot
     parentNodeId: ND-LotProcurementScope
@@ -12033,7 +12033,7 @@
 
         - Map the code to the sustainability''s `.goal` according to the [environmental impact mapping table](codelists/environmental-impact).
     eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="environmental-impact">circ-econ</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
-    OCDS example: '{"tender":{"lots":[{"hasSustainabilty":true,"sustainability":[{"goal":"environmental.circularEconomy"}]}]}}'
+    OCDS example: '{"tender":{"lots":[{"hasSustainability":true,"sustainability":[{"goal":"environmental.circularEconomy"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#strategicProcurementSection
 -   id: BT-775-Lot
     parentNodeId: ND-LotProcurementScope
@@ -12055,7 +12055,7 @@
         - Map the code to the sustainability's `.goal` according to the [social objective mapping table](codelists/social-objective).
         - Add 'awardCriteria', 'contractPerformanceConditions', 'selectionCriteria' and 'technicalSpecifications' to the sustainability's `.strategies` array.
     eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="social-objective">et-eq</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
-    OCDS example: '{"tender":{"lots":[{"hasSustainabilty":true,"sustainability":[{"goal":"social.ethnicEquality","strategies":["awardCriteria","contractPerformanceConditions","selectionCriteria","technicalSpecifications"]}]}]}}'
+    OCDS example: '{"tender":{"lots":[{"hasSustainability":true,"sustainability":[{"goal":"social.ethnicEquality","strategies":["awardCriteria","contractPerformanceConditions","selectionCriteria","technicalSpecifications"]}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#strategicProcurementSection
 -   id: BT-776-Lot
     parentNodeId: ND-LotProcurementScope
@@ -12076,7 +12076,7 @@
 
         - Map the code to the sustainability's `.goal` according to the [innovative acquisition mapping table](codelists/innovative-acquisition).
     eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="innovative-acquisition">proc-innov</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
-    OCDS example: '{"tender":{"lots":[{"hasSustainabilty":true,"sustainability":[{"goal":"economic.processInnovation"}]}]}}'
+    OCDS example: '{"tender":{"lots":[{"hasSustainability":true,"sustainability":[{"goal":"economic.processInnovation"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#strategicProcurementSection
 -   id: BT-777-Lot
     parentNodeId: ND-StrategicProcurementType
@@ -12229,7 +12229,7 @@
 
         - Map the code to the sustainability's `.strategies` array according to the [GPP criteria mapping table](codelists/gpp-criteria).
     eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="gpp-criteria">eu</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
-    OCDS example: '{"tender":{"lots":[{"hasSustainabilty":true,"sustainability":[{"strategies":["euGPPCriteria"]}]}]}}'
+    OCDS example: '{"tender":{"lots":[{"hasSustainability":true,"sustainability":[{"strategies":["euGPPCriteria"]}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#strategicProcurementSection
 -   id: BT-88-Procedure
     parentNodeId: ND-ProcedureTenderingProcess
