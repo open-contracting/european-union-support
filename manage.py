@@ -24,6 +24,9 @@ import yaml
 from jsonpointer import set_pointer
 from jsonschema import FormatChecker
 from jsonschema.validators import Draft4Validator as validator
+from ocdsextensionregistry import ProfileBuilder
+
+# from ocdskit.mapping_sheet import mapping_sheet
 
 basedir = Path(__file__).resolve().parent
 sourcedir = basedir / "source"
@@ -502,7 +505,7 @@ def update_with_ted_guidance(filename):
     # https://github.com/OP-TED/ted-xml-data-converter/blob/main/ted-elements-not-convertible.md
     url = "https://raw.githubusercontent.com/OP-TED/ted-xml-data-converter/main/ted-elements-not-convertible.md"
     elements = []
-    for line in requests.get(url).text.splitlines():
+    for line in get(url).text.splitlines():
         if match := re.search(r"^\| ([A-Z_]+) \|", line):
             elements.append(match.group(1))
 
@@ -539,13 +542,18 @@ def lint(filename, additional_properties):
     with open(filename) as f:
         fields = yaml.safe_load(f)
 
-    with open("release-schema.json") as f:
-        schema = json.load(f)
+    url = "https://raw.githubusercontent.com/open-contracting-extensions/eforms/latest/docs/extension_versions.json"
+    schema = ProfileBuilder("1__1__5", get(url).json()).patched_release_schema(extension_field="extension")
+
+    # The idea was to compare the additional fields to known prefixes, but this mostly results in the lots extension.
+    # I am leaving this code here for now, in case we need to do something smarter.
+    # fieldnames, rows = mapping_sheet(schema, extension_field="extension", inherit_extension=False)
+    # prefixes = {row["path"]: row.get("extension") for row in rows}
 
     # Remove `patternProperties` to clarify output.
     set_additional_properties_and_remove_pattern_properties(schema, additional_properties)
     # Remove required fields.
-    for definition in ("Bid", "BidsStatistic", "Document", "Finance", "ParticipationFee"):
+    for definition in ("Bid", "Statistic", "Document", "Finance", "ParticipationFee", "Person"):
         set_pointer(schema, f"/definitions/{definition}/required", [])
 
     format_checker = FormatChecker()
@@ -555,7 +563,7 @@ def lint(filename, additional_properties):
             known_codes = set(f.read().splitlines())
     else:
         known_codes = set()
-        url = "https://standard.open-contracting.org/profiles/eu/latest/en/_static/patched/codelists/"
+        url = "https://standard.open-contracting.org/profiles/eforms/latest/en/_static/patched/codelists/"
         document = get_html(url)
         document.make_links_absolute(url)
         for url in document.xpath('//@href[contains(., ".csv")]'):
@@ -580,6 +588,7 @@ def lint(filename, additional_properties):
     anchor_errors = set()
     single_quoted = set()
     double_quoted = set()
+    additional_properties = set()
     for field in fields:
         identifier = field["id"]
 
@@ -643,7 +652,14 @@ def lint(filename, additional_properties):
                                 obj[0][key] = "1"
 
                 for e in validator(schema, format_checker=format_checker).iter_errors(release):
-                    click.echo(f"{identifier}: OCDS is invalid: {e.message} ({'/'.join(e.absolute_schema_path)})")
+                    if e.validator == "additionalProperties":
+                        e.absolute_schema_path[-1] = "properties"
+                        e.absolute_schema_path.append("")
+                        for match in re.findall(r"'(\S+)'", e.message):
+                            e.absolute_schema_path[-1] = match
+                            additional_properties.add("/".join(e.absolute_schema_path))
+                    else:
+                        click.echo(f"{identifier}: OCDS is invalid: {e.message} ({'/'.join(e.absolute_schema_path)})")
             except json.decoder.JSONDecodeError as e:
                 click.echo(f"{identifier}: JSON is invalid: {e}: {ocds_example}")
 
@@ -660,13 +676,18 @@ def lint(filename, additional_properties):
     if unreviewed:
         click.echo(f"\n{unreviewed} unreviewed eForms guidance")
 
-    if http_errors:
-        click.echo(f"\nHTTP errors ({len(http_errors)}):")
-        click.echo("\n".join(sorted(http_errors)))
+    for title, errors in (
+        ("HTTP errors", http_errors),
+        ("Anchor errors", anchor_errors),
+    ):
+        if errors:
+            click.echo(f"\n{title} ({len(errors)}):")
+            click.echo("\n".join(sorted(errors)))
 
-    if anchor_errors:
-        click.echo(f"\nAnchor errors({len(anchor_errors)}):")
-        click.echo("\n".join(sorted(anchor_errors)))
+    if additional_properties:
+        click.echo(f"\nAdditional fields ({len(additional_properties)}):")
+        for prop in sorted(additional_properties):
+            click.echo(prop.replace("items/properties/", "").replace("properties/", ""))
 
     write_yaml_file(filename, fields)
 
@@ -848,20 +869,14 @@ def codelists():
     """
     Print information about eForms codelists.
     """
-    response = requests.get("https://api.github.com/repos/OP-TED/eForms-SDK/contents/codelists")
-    response.raise_for_status()
-
     writer = csv.writer(sys.stdout, lineterminator="\n")
     writer.writerow(["codelist", "code"])
 
-    for file in response.json():
+    for file in get("https://api.github.com/repos/OP-TED/eForms-SDK/contents/codelists").json():
         if not file["name"].endswith(".gc"):
             continue
 
-        response = requests.get(file["download_url"])
-        response.raise_for_status()
-
-        xml = lxml.etree.fromstring(response.content)
+        xml = lxml.etree.fromstring(get(file["download_url"]).content)
         writer.writerows([file["name"], code] for code in xml.xpath('//Value[@ColumnRef="code"]/SimpleValue/text()'))
 
 

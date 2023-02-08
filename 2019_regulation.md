@@ -105,9 +105,9 @@ When writing the eForms guidance:
 
 ## Maintenance
 
-To lint the file, get the EU profile's patched release schema:
+To lint the file, get the eForms profile's patched release schema:
 
-    curl -O https://standard.open-contracting.org/profiles/eu/latest/en/_static/patched/release-schema.json
+    curl -O https://standard.open-contracting.org/profiles/eforms/latest/en/_static/patched/release-schema.json
 
 Then, run:
 
