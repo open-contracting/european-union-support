@@ -11791,7 +11791,7 @@
     - Set the lot's `.submissionTerms.electronicCataloguePolicy` to 'required'.
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and set its `.submissionTerms.electronicCataloguePolicy` according to [the allowed values](https://extensions.open-contracting.org/en/extensions/submissionTerms/master/codelists/).'
     eForms example: <cac:ContractExecutionRequirement><cbc:ExecutionRequirementCode listName="ecatalog-submission">allowed</cbc:ExecutionRequirementCode></cac:ContractExecutionRequirement>
-    OCDS example: '{"tender":{"lots":[{"submissionTerms":{"electronicCateloguePolicy":"allowed"}}]}}'
+    OCDS example: '{"tender":{"lots":[{"submissionTerms":{"electronicCataloguePolicy":"allowed"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#eCatalogueSubmissionSection
 -   id: BT-765-Lot
     parentNodeId: ND-LotTenderingProcess
@@ -13264,7 +13264,7 @@
     pattern: ^UBO-\d{4}$
     eForms guidance: '[Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person''s `.id`.'
     eForms example: <efac:UltimateBeneficialOwner><cbc:ID schemeName="ubo">UBO-0001</cbc:ID></efac:UltimateBeneficialOwner>
-    OCDS example: '{"parties":[{"beneficialOwners":{"id":"UBO-0001"}}]}'
+    OCDS example: '{"parties":[{"beneficialOwners":[{"id":"UBO-0001"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#ultimateBeneficialOwnerSection
 -   id: OPT-210-Tenderer
     parentNodeId: ND-TenderingParty
