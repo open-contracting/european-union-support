@@ -1901,10 +1901,10 @@
 
         - Set its `.id` to 'government'.
         - Set its `.paidBy` to 'government'.
-        - Set its `.title` to the [translation](operations.md#get-a-translation) of 'Revenue from the payment of prizes and payments by the buyer'.
+        - Set its `.title` to the [translation](operations.md#get-a-translation) of 'The estimated revenue coming from the buyer who granted the concession (e.g. prizes and payments).'.
         - Map the value of this field to its `.estimatedValue.amount` and `@currencyID` to the estimatedValue's `.currency`.
     eForms example: <efac:ConcessionRevenue><efbc:RevenueBuyerAmount currencyID="EUR">350</efbc:RevenueBuyerAmount></efac:ConcessionRevenue>
-    OCDS example: '{"contracts":[{"implementation":{"charges":[{"id":"government","title":"Revenue from the payment of prizes and payments by the buyer","estimatedValue":{"amount":350,"currency":"EUR"},"paidBy":"government"}]}}]}'
+    OCDS example: '{"contracts":[{"implementation":{"charges":[{"id":"government","title":"The estimated revenue coming from the buyer who granted the concession (e.g. prizes and payments).","estimatedValue":{"amount":350,"currency":"EUR"},"paidBy":"government"}]}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: BT-161-NoticeResult
     parentNodeId: ND-NoticeResult
@@ -1951,10 +1951,10 @@
 
         - Set its `.id` to 'user'.
         - Set its `.paidBy` to 'user'.
-        - Set its `.title` to the [translation](operations.md#get-a-translation) of 'Revenue from the payment of fees and fines by the users'.
+        - Set its `.title` to the [translation](operations.md#get-a-translation) of 'he estimated revenue coming from the users of the concession (e.g. fees and fines).'.
         - Map to its `.estimatedValue.amount` and `@currencyID` to the estimatedValue's `.currency`.
     eForms example: <efac:ConcessionRevenue><efbc:RevenueUserAmount currencyID="EUR">350</efbc:RevenueUserAmount></efac:ConcessionRevenue>
-    OCDS example: '{"contracts":[{"implementation":{"charges":[{"id":"user","title":"Revenue from the payment of fees and fines by the users","estimatedValue":{"amount":350,"currency":"EUR"},"paidBy":"user"}]}}]}'
+    OCDS example: '{"contracts":[{"implementation":{"charges":[{"id":"user","title":"he estimated revenue coming from the users of the concession (e.g. fees and fines).","estimatedValue":{"amount":350,"currency":"EUR"},"paidBy":"user"}]}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: BT-163-Tender
     parentNodeId: ND-ConcessionRevenue
