@@ -6,6 +6,7 @@ import os
 import re
 import shutil
 import sys
+from collections import defaultdict
 from copy import deepcopy
 from io import StringIO
 from pathlib import Path
@@ -588,7 +589,7 @@ def lint(filename, additional_properties):
     anchor_errors = set()
     single_quoted = set()
     double_quoted = set()
-    additional_properties = set()
+    additional_fields = defaultdict(list)
     for field in fields:
         identifier = field["id"]
 
@@ -657,7 +658,11 @@ def lint(filename, additional_properties):
                         e.absolute_schema_path.append("")
                         for match in re.findall(r"'(\S+)'", e.message):
                             e.absolute_schema_path[-1] = match
-                            additional_properties.add("/".join(e.absolute_schema_path))
+                            additional_fields[
+                                "/".join(e.absolute_schema_path)
+                                .replace("items/properties/", "")
+                                .replace("properties/", "")
+                            ].append([field["id"], field["name"]])
                     else:
                         click.echo(f"{identifier}: OCDS is invalid: {e.message} ({'/'.join(e.absolute_schema_path)})")
             except json.decoder.JSONDecodeError as e:
@@ -684,10 +689,11 @@ def lint(filename, additional_properties):
             click.echo(f"\n{title} ({len(errors)}):")
             click.echo("\n".join(sorted(errors)))
 
-    if additional_properties:
-        click.echo(f"\nAdditional fields ({len(additional_properties)}):")
-        for prop in sorted(additional_properties):
-            click.echo(prop.replace("items/properties/", "").replace("properties/", ""))
+    if additional_fields:
+        click.echo(f"\nAdditional fields ({len(additional_fields)}):")
+        click.echo("field,id,title")
+        for field, occurrences in sorted(additional_fields.items(), key=lambda item: item[1]):
+            click.echo(f"{field}{''.join(f',{identifier},{title}' for identifier, title in occurrences)}")
 
     write_yaml_file(filename, fields)
 
