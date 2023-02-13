@@ -10,6 +10,10 @@ The eForms SDK introduces the concept of a [field](https://docs.ted.europa.eu/ef
 
 **The [Field mappings](mapping) describe how to map each eForms SDK field to OCDS.**
 
+## Convert a notice to OCDS format
+
+[Create a release](operations.md#create-a-release) and map each field on the notice according to the [field mappings](mapping).
+
 ## Post-processing steps
 
 These steps must be completed after using the [Field mappings](mapping) to construct an OCDS file.
