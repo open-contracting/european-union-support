@@ -587,8 +587,8 @@ def lint(filename, additional_properties):
 
     http_errors = set()
     anchor_errors = set()
-    single_quoted = set()
-    double_quoted = set()
+    single_quoted = defaultdict(list)
+    double_quoted = defaultdict(list)
     additional_fields = defaultdict(list)
     for field in fields:
         identifier = field["id"]
@@ -614,10 +614,10 @@ def lint(filename, additional_properties):
         unreviewed += field["eForms guidance"].startswith("(UNREVIEWED)")
 
         for match in re.finditer(r"'(\S+)'", field["eForms guidance"]):
-            single_quoted.add(match.group(1))
+            single_quoted[match.group(1)].append([field["id"], field["name"]])
 
         for match in re.finditer(r'"(\S+)"', re.sub(r"`[^`]+`", "", field["eForms guidance"])):
-            double_quoted.add(match.group(1))
+            double_quoted[match.group(1)].append([field["id"], field["name"]])
 
         # Format XML.
         eforms_example = field["eForms example"]
@@ -668,15 +668,19 @@ def lint(filename, additional_properties):
             except json.decoder.JSONDecodeError as e:
                 click.echo(f"{identifier}: JSON is invalid: {e}: {ocds_example}")
 
-    unknown_codes = single_quoted - known_codes
+    unknown_codes = {code: v for code, v in single_quoted.items() if code not in known_codes}
     if unknown_codes:
-        click.echo("\nCodes (tokens in single quotes) that do not appear in any codelist:")
-        click.echo("\n".join(sorted(unknown_codes)))
+        click.echo("\nOCDS codes (tokens in single quotes) that do not appear in any OCDS codelist:")
+        click.echo("code,id,title")
+        for code, occurrences in sorted(unknown_codes.items(), key=lambda item: item[1]):
+            click.echo(f"{code}{''.join(f',{identifier},{title}' for identifier, title in occurrences)}")
 
-    unknown_eforms_codes = double_quoted - known_eforms_codes
+    unknown_eforms_codes = {code: v for code, v in double_quoted.items() if code not in known_eforms_codes}
     if unknown_eforms_codes:
-        click.echo("\nDouble quoted strings:")
-        click.echo("\n".join(sorted(unknown_eforms_codes)))
+        click.echo("\neForms codes (tokens in double quotes) that do not appear in any eForms codelist:")
+        click.echo("code,id,title")
+        for code, occurrences in sorted(unknown_eforms_codes.items(), key=lambda item: item[1]):
+            click.echo(f"{code}{''.join(f',{identifier},{title}' for identifier, title in occurrences)}")
 
     if unreviewed:
         click.echo(f"\n{unreviewed} unreviewed eForms guidance")
