@@ -720,7 +720,7 @@
     - '[Reference a previous publication](../../operations/#reference-a-previous-publication)'
     eForms guidance: '[Reference a previous publication](operations.md#reference-a-previous-publication)'
     eForms example: <cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID></cac:NoticeDocumentReference>
-    OCDS example: '{"relatedProcess":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"123e4567-e89b-12d3-a456-426614174000-06"}]}'
+    OCDS example: '{"relatedProcesses":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"123e4567-e89b-12d3-a456-426614174000-06"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#previousPlanningSection
 -   id: BT-125(i)-Part
     parentNodeId: ND-PartPreviousPlanning
@@ -736,7 +736,7 @@
         BG-125: Previous Planning
     eForms guidance: Concatenate with [BT-1251-Part Previous Planning Part Identifier](#BT-1251-Part) and [reference a previous publication](operations.md#reference-a-previous-publication).
     eForms example: <cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID><cbc:ReferencedDocumentInternalAddress>PAR-0001</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference>
-    OCDS example: '{"relatedProcess":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"123e4567-e89b-12d3-a456-426614174000-06-PAR-0001"}]}'
+    OCDS example: '{"relatedProcesses":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"123e4567-e89b-12d3-a456-426614174000-06-PAR-0001"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#previousPlanningSection
 -   id: BT-1251-Lot
     parentNodeId: ND-LotPreviousPlanning
@@ -754,7 +754,7 @@
 
         For each `cac:NoticeDocumentReference`, add or update the corresponding `Related Process` object in the `relatedProcesses` array and map to its `relatedLots`.
     eForms example: <cac:NoticeDocumentReference><cbc:ID>9c0fd704-64d3-4294-a3b6-6df45911ab9f-01</cbc:ID><cbc:ReferencedDocumentInternalAddress>123</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference>
-    OCDS example: '{"relatedProcess":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"9c0fd704-64d3-4294-a3b6-6df45911ab9f-01","relatedLots":["123"]}]}'
+    OCDS example: '{"relatedProcesses":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"9c0fd704-64d3-4294-a3b6-6df45911ab9f-01","relatedLots":["123"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#previousPlanningSection
 -   id: BT-1251-Part
     parentNodeId: ND-PartPreviousPlanning
@@ -769,7 +769,7 @@
         BG-125: Previous Planning
     eForms guidance: Concatenate with [BT-125(i)-Part Previous Planning Identifier](<#BT-125(i)-Part>) and [reference a previous publication](operations.md#reference-a-previous-publication).
     eForms example: <cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID><cbc:ReferencedDocumentInternalAddress>PAR-0001</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference>
-    OCDS example: '{"relatedProcess":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"123e4567-e89b-12d3-a456-426614174000-06-PAR-0001"}]}'
+    OCDS example: '{"relatedProcesses":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"123e4567-e89b-12d3-a456-426614174000-06-PAR-0001"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#previousPlanningSection
 -   id: BT-1252-Procedure
     parentNodeId: ND-DirectAward
@@ -1792,7 +1792,7 @@
           - Set its `.documentType` to 'contractSigned'.
           - Map to its `.url`.
     eForms example: <efac:SettledContract><cbc:URI>http://mycontract.acme.com/1234/</cbc:URI></efac:SettledContract>
-    OCDS example: '{"contracts":[{"documents":[{"url":"http://mycontract.acme.com/1234/","type":"contractSigned"}]}]}'
+    OCDS example: '{"contracts":[{"documents":[{"url":"http://mycontract.acme.com/1234/","documentType":"contractSigned"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#settledContractSection
 -   id: BT-156-NoticeResult
     parentNodeId: ND-NoticeResultGroupFA
@@ -12565,9 +12565,9 @@
     type: indicator
     repeatable: false
     mandatory: false
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: '[Get the lots for the SettledContract](common-operations.md#get-the-lots-for-settledcontract) and map to each lot''s `.hasEssentialAssets`.'
+    eForms example: <efac:SettledContract><efac:DurationJustification><efbc:ExtendedDurationIndicator>true</efbc:ExtendedDurationIndicator></efac:DurationJustification></efac:SettledContract>
+    OCDS example: '{"tender":{"lots":[{"hasEssentialAssets":true}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#settledContractSection
 -   id: OPP-021-Contract
     parentNodeId: ND-Asset
@@ -12577,9 +12577,12 @@
     type: text-multilingual
     repeatable: false
     mandatory: false
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: |-
+        This field maps to the same `EssentialAssets` objects created for OPP-022-Contract and OPP-023-Contract.
+
+        [Get the lots for the SettledContract](common-operations.md#get-the-lots-for-settledcontract). For each lot, add or update the corresponding `EssentialAssets` object in the lot's `.essentialAssets` array and map to its `.description`.
+    eForms example: <efac:SettledContract><efac:DurationJustification><efac:AssetsList><efac:Asset><efbc:AssetDescription languageID="SPA">Asset 1 blabla</efbc:AssetDescription></efac:Asset></efac:AssetsList></efac:DurationJustification></efac:SettledContract>
+    OCDS example: '{"tender":{"lots":[{"essentialAssets":[{"description":"Asset 1 blabla"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#settledContractSection
 -   id: OPP-022-Contract
     parentNodeId: ND-Asset
@@ -12589,9 +12592,12 @@
     type: text
     repeatable: false
     mandatory: false
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: |-
+        This field maps to the same `EssentialAssets` objects created for OPP-021-Contract and OPP-023-Contract.
+
+        [Get the lots for the SettledContract](common-operations.md#get-the-lots-for-settledcontract). For each lot, add or update the corresponding `EssentialAssets` object in the lot's `.essentialAssets` array and map to its `.significance`.
+    eForms example: <efac:SettledContract><efac:DurationJustification><efac:AssetsList><efac:Asset><efbc:AssetSignificance languageID="SPA">30</efbc:AssetSignificance></efac:Asset></efac:AssetsList></efac:DurationJustification></efac:SettledContract>
+    OCDS example: '{"tender":{"lots":[{"essentialAssets":[{"significance":"30"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#settledContractSection
 -   id: OPP-023-Contract
     parentNodeId: ND-Asset
@@ -12601,9 +12607,12 @@
     type: text
     repeatable: false
     mandatory: false
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
+    eForms guidance: |-
+        This field maps to the same `EssentialAssets` objects created for OPP-021-Contract and OPP-022-Contract.
+
+        [Get the lots for the SettledContract](common-operations.md#get-the-lots-for-settledcontract). For each lot, add or update the corresponding `EssentialAssets` object in the lot's `.essentialAssets` array and map to its `.predominance`.
+    eForms example: <efac:SettledContract><efac:DurationJustification><efac:AssetsList><efac:Asset><efbc:AssetPredominance languageID="SPA">40</efbc:AssetPredominance></efac:Asset></efac:AssetsList></efac:DurationJustification></efac:SettledContract>
+    OCDS example: '{"tender":{"lots":[{"essentialAssets":[{"predominance":"40"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#settledContractSection
 -   id: OPP-030-Tender
     parentNodeId: ND-OtherContractExecutionConditions
