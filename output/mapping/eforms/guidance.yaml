@@ -10491,9 +10491,9 @@
     Description: "The procurement falls within the scope of the European Parliament and Council 2009/33/EC (Clean Vehicles Directive \u2013 CVD)."
     Business groups:
         BG-713: Strategic Procurement
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot). If "true", add ''CVD'' to the lot''s `.coveredBy` array. If "false", discard.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot). If "true", add ''EU-CVD'' to the lot''s `.coveredBy` array. If "false", discard.'
     eForms example: <efac:StrategicProcurement><efbc:ApplicableLegalBasis listName="cvd-scope">true</efbc:ApplicableLegalBasis></efac:StrategicProcurement>
-    OCDS example: '{"tender":{"lots":[{"coveredBy":["CVD"]}]}}'
+    OCDS example: '{"tender":{"lots":[{"coveredBy":["EU-CVD"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#CVDDirectiveLotSection
 -   id: BT-718-notice
     parentNodeId: ND-Change
@@ -10646,11 +10646,11 @@
 
         For each `ancestor::efac:ProcurementDetails/efac:StrategicProcurementStatistics/efbc:StatisticsCode` add a `Classification` object to the corresponding item's `additionalClassifications` array.
 
-        - Set the classification's `.scheme` to "vehicle-category".
+        - Set the classification's `.scheme` to "vehicleCategory".
         - Map the value of the field to the classification's `.id`.
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/vehicle-category) and map it to the classification's `.description`.
     eForms example: <efac:ProcurementDetails><efbc:AssetCategoryCode listName="vehicle-category">n2-n3</efbc:AssetCategoryCode></efac:ProcurementDetails>
-    OCDS example: '{"awards":[{"items":[{"id":"1","additionalClassifications":[{"scheme":"vehicle-category","id":"n2-n3","description":"Truck (N2-N3)"}]}]}]}'
+    OCDS example: '{"awards":[{"items":[{"id":"1","additionalClassifications":[{"scheme":"vehicleCategory","id":"n2-n3","description":"Truck (N2-N3)"}]}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
 -   id: BT-726-Lot
     parentNodeId: ND-LotProcurementScope
@@ -10963,11 +10963,11 @@
         BG-713: Strategic Procurement
     eForms guidance: |-
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and add a `Classification` object to the lot's `additionalClassifications` array.
-        - Set the classification's `.scheme` to 'cvd-contract-type'.
+        - Set the classification's `.scheme` to 'CVDContractType'.
         - Map the value of the field to the classification's `.id`.
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/cvd-contract-type) and map it to the classification's `.description`.
     eForms example: <efac:StrategicProcurementInformation><efbc:ProcurementCategoryCode listName="cvd-contract-type">oth-serv-contr</efbc:ProcurementCategoryCode></efac:StrategicProcurementInformation>
-    OCDS example: '{"tender":{"lots":[{"additionalClassifications":[{"id":"oth-serv-contr","scheme":"cvd-contract-type","description":"other service contract"}]}]}}'
+    OCDS example: '{"tender":{"lots":[{"additionalClassifications":[{"id":"oth-serv-contr","scheme":"CVDContractType","description":"other service contract"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#CVDDirectiveLotSection
 -   id: BT-735-LotResult
     parentNodeId: ND-StrategicProcurementInformationLotResult
@@ -10990,11 +10990,11 @@
 
         For each `ancestor::efac:ProcurementDetails/efac:StrategicProcurementStatistics/efbc:StatisticsCode` add a `Classification` object to the corresponding item's `additionalClassifications` array.
 
-        - Set the classification's `.scheme` to "cvd-contract-type".
+        - Set the classification's `.scheme` to "CVDContractType".
         - Map to the classification's `.id`.
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/cvd-contract-type) and map it to the classification's `.description`.
     eForms example: <efac:StrategicProcurementInformation><efbc:ProcurementCategoryCode listName="cvd-contract-type">oth-serv-contr</efbc:ProcurementCategoryCode></efac:StrategicProcurementInformation>
-    OCDS example: '{"awards":[{"items":[{"id":"1","additionalClassifications":[{"id":"oth-serv-contr","scheme":"cvd-contract-type","description":"other service contract"}]}]}]}'
+    OCDS example: '{"awards":[{"items":[{"id":"1","additionalClassifications":[{"id":"oth-serv-contr","scheme":"CVDContractType","description":"other service contract"}]}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#CVDDirectiveLotSection
 -   id: BT-736-Lot
     parentNodeId: ND-LotTenderingTerms
@@ -12655,7 +12655,7 @@
     repeatable: false
     mandatory: true
     codeList: contract-detail
-    eForms guidance: ''
+    eForms guidance: Discard.
     eForms example: <efac:ContractTerm><efbc:TermCode listName="contract-detail">soc-stand</efbc:TermCode></efac:ContractTerm>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
@@ -12667,9 +12667,21 @@
     type: text-multilingual
     repeatable: false
     mandatory: true
-    eForms guidance: ''
-    eForms example: <efac:ContractTerm><efbc:TermDescription languageID="ENG">Description of the social-standards blablabla ...</efbc:TermDescription></efac:ContractTerm>
-    OCDS example: ''
+    eForms guidance: |-
+        Get the `Lot` object in `tender.lots` whose `.id` matches `ancestor::efac:LotTender/efac:TenderLot:cbc:ID`.
+
+        Map to the lot's `.contractTerms` according to the value of `ancestor::ContractTerm/efbc:TermCode`:
+
+        ```
+        * `all-rev-tic`: Discard
+        * `cost-comp`: Map to the lot's `contractTerms.financialTerms`
+        * `exc-right`: Set the lot's `contractTerms.hasExclusiveRights` to `true`
+        * `other`:  Map to the lot's `contractTerms.otherTerms`
+        * `publ-ser-obl`: Map to the lot's `contractTerms.performanceTerms`
+        * `soc-stand`: Map to the lot's `contractTerms.socialStandards`
+        ```
+    eForms example: <efac:ContractTerm><efbc:TermCode listName="contract-detail">soc-stand</efbc:TermCode><efbc:TermDescription languageID="ENG">Description of the social-standards blablabla ...</efbc:TermDescription></efac:ContractTerm>
+    OCDS example: '{"tender":{"lots":[{"contractTerms":{"socialStandards":"Description of the social-standards blablabla ..."}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: OPP-032-Tender
     parentNodeId: ND-RevenueAllocation
@@ -12679,9 +12691,11 @@
     type: number
     repeatable: false
     mandatory: true
-    eForms guidance: ''
+    eForms guidance: |-
+        Get the `Lot` object in `tender.lots` whose `.id` matches `ancestor::efac:LotTender/efac:TenderLot:cbc:ID`.
+        Map to the lot's `.contractTerms.operatorRevenueShare`
     eForms example: <efac:ContractTerm><efbc:TermCode>all-rev-ic</efbc:TermCode><efbc:TermPercent>100</efbc:TermPercent></efac:ContractTerm>
-    OCDS example: ''
+    OCDS example: '{"tender":{"lots":[{"contractTerms":{"operatorRevenueShare":"100"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: OPP-033-Tender
     parentNodeId: ND-RewardsPenalties
@@ -12692,7 +12706,7 @@
     repeatable: false
     mandatory: true
     codeList: rewards-penalties
-    eForms guidance: ''
+    eForms guidance: Discard.
     eForms example: <efac:ContractTerm><efbc:TermCode listName="rewards-penalties">rew-pen</efbc:TermCode></efac:ContractTerm>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
@@ -12704,9 +12718,11 @@
     type: text-multilingual
     repeatable: false
     mandatory: true
-    eForms guidance: ''
+    eForms guidance: |-
+        Get the `Lot` object in `tender.lots` whose `.id` matches `ancestor::efac:LotTender/efac:TenderLot:cbc:ID`.
+        Map to the lot's `.contractTerms.rewardsAndPenalties`
     eForms example: <efac:ContractTerm><efbc:TermCode listName="rewards-penalties">rew-pen</efbc:TermCode><efbc:TermDescription languageID="ENG">Information on Rewards and Penalties ....</efbc:TermDescription></efac:ContractTerm>
-    OCDS example: ''
+    OCDS example: '{"tender":{"lots":[{"contractTerms":{"rewardsAndPenalties":"Information on Rewards and Penalties ...."}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: OPP-040-Procedure
     parentNodeId: ND-ProcedureProcurementScope
@@ -12836,9 +12852,9 @@
         - Add an `Organization` to `parties`.
         - Set its `.id` to the value of `ancestor::cac:ServiceProviderParty/cac:Party/cac:PartyIdentification/cbc:ID`.
 
-        If the value of the field is "serv-prov" add `procurementServiceProvider` to the organization's `.roles` array. If the value of the field is "ted-esen" add `esender` to the organization's `.roles` array.
+        If the value of the field is "serv-prov" add `procurementServiceProvider` to the organization's `.roles` array. If the value of the field is "ted-esen" add `eSender` to the organization's `.roles` array.
     eForms example: <cac:ServiceProviderParty><cbc:ServiceTypeCode listName="organisation-role">ted-esen</cbc:ServiceTypeCode></cac:ServiceProviderParty>
-    OCDS example: '{"parties":[{"roles":["esender"]}]}'
+    OCDS example: '{"parties":[{"roles":["eSender"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_buyer_and_service_providers
 -   id: OPT-050-Lot
     parentNodeId: ND-LotProcurementDocument
