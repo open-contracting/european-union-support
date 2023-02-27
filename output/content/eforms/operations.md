@@ -124,6 +124,10 @@ Get the `Lot` in `tender.lots` whose `id` is equal to the value of `ancestor::ef
 
 For each `ancestor::efac:NoticeResult/efac:LotResult` with a `/SettledContract` equal to the value of `ancestor::efac:SettledContract/cbc:ID`, get the `Lot` in `tender/lots` whose `.id` is equal to the value of the `LotResult`'s `/efac:TenderLot/cbc:ID`.
 
+### Get the lot for a LotTender
+
+Get the `Lot` object in `tender.lots` whose `.id` matches `ancestor::efac:LotTender/efac:TenderLot:cbc:ID`. If none exists yet, add a `Lot` to `tender.lots` and set its `id` to the value of `ancestor::efac:LotTender/efac:TenderLot:cbc:ID`.
+
 ## Bids, awards and contracts
 
 ### Get the bid for a LotTender
