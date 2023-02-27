@@ -12668,7 +12668,7 @@
     repeatable: false
     mandatory: true
     eForms guidance: |-
-        Get the `Lot` object in `tender.lots` whose `.id` matches `ancestor::efac:LotTender/efac:TenderLot:cbc:ID`.
+        Get the `Lot` object in `tender.lots` whose `.id` matches `ancestor::efac:LotTender/efac:TenderLot:cbc:ID`. If none exists yet, add a `Lot` to `tender.lots` and set its `id` to the value of `ancestor::efac:LotTender/efac:TenderLot:cbc:ID`.
 
         Map to the lot's `.contractTerms` according to the value of `ancestor::ContractTerm/efbc:TermCode`:
 
