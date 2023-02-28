@@ -12669,7 +12669,7 @@
     mandatory: true
     eForms guidance: |-
         If the value of `ancestor::ContractTerm/efbc:TermCode` is `all-rev-tic`, discard. Otherwise, [get the lot for the lot tender](common-operations.md#get-the-lot-for-a-lottender).
-        
+
         If the value of `ancestor::ContractTerm/efbc:TermCode` is `exc-right`, set the lot's `contractTerms.hasExclusiveRights` to `true`. Otherwise,  map to the lot's `.contractTerms` according to the value of `ancestor::ContractTerm/efbc:TermCode`:
 
         ```
@@ -12689,10 +12689,9 @@
     type: number
     repeatable: false
     mandatory: true
-    eForms guidance: |-
-        [Get the lot for the lot tender](common-operations.md#get-the-lot-for-a-lottender) and map to its `.contractTerms.operatorRevenueShare`.
+    eForms guidance: '[Get the lot for the lot tender](common-operations.md#get-the-lot-for-a-lottender) and map to its `.contractTerms.operatorRevenueShare`.'
     eForms example: <efac:ContractTerm><efbc:TermCode>all-rev-ic</efbc:TermCode><efbc:TermPercent>100</efbc:TermPercent></efac:ContractTerm>
-    OCDS example: '{"tender":{"lots":[{"contractTerms":{"operatorRevenueShare":"100"}}]}}'
+    OCDS example: '{"tender":{"lots":[{"contractTerms":{"operatorRevenueShare":100}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: OPP-033-Tender
     parentNodeId: ND-RewardsPenalties
@@ -12715,8 +12714,7 @@
     type: text-multilingual
     repeatable: false
     mandatory: true
-    eForms guidance: |-
-        [Get the lot for the lot tender](common-operations.md#get-the-lot-for-a-lottender) and map to its `.contractTerms.rewardsAndPenalties`.
+    eForms guidance: '[Get the lot for the lot tender](common-operations.md#get-the-lot-for-a-lottender) and map to its `.contractTerms.rewardsAndPenalties`.'
     eForms example: <efac:ContractTerm><efbc:TermCode listName="rewards-penalties">rew-pen</efbc:TermCode><efbc:TermDescription languageID="ENG">Information on Rewards and Penalties ....</efbc:TermDescription></efac:ContractTerm>
     OCDS example: '{"tender":{"lots":[{"contractTerms":{"rewardsAndPenalties":"Information on Rewards and Penalties ...."}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
