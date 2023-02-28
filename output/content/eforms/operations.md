@@ -44,6 +44,16 @@ Add a `Statistic` object to the `statistics` array, set its `.relatedLot` to the
 
 Get the `Document` object in `tender.documents` whose `.id` is equal to the document reference's `/cbc:ID`. If none exists yet, add a `Document` object to `tender.documents` and set its `.id` to the document reference's `/cbc:ID`.
 
+## Get the participation fee for a document
+
+If the value of `ancestor::cac:ProcurementProjectLot[cbc:ID/@schemeName]` is `'Part'`, get the `ParticipationFee` object in `tender.participationFees` whose `.id` is equal to `cac:CallForTendersDocumentReference/cbc:ID`. If none exists yet, add a `ParticipationFee` object to `tender.participationFees` and set its `.id` to the value of `ancestor::cac:CallForTendersDocumentReference/cbc:ID`.
+
+If the value of `ancestor::cac:ProcurementProjectLot[cbc:ID/@schemeName]` is `'Lot'`, [get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and get the `ParticipationFee` object in the lot's `.participationFees` whose `.id` is equal to `cac:CallForTendersDocumentReference/cbc:ID`. If none exists yet, add a `ParticipationFee` object to the lot's `.participationFees` and set its `.id` to the value of `ancestor::cac:CallForTendersDocumentReference/cbc:ID`.
+
+## Get a translation
+
+Download 'business-term_XX.xml' from [eForms SDK translations](https://github.com/OP-TED/eForms-SDK/tree/develop/translations) for the language required, where XX is the 2 letter language code. Find the row with the key 'business-term|description|BT-##' for the business term required (for example 'business-term|description|BT-160') and take the value from the entry.
+
 ## Parties
 
 ### Add a party
