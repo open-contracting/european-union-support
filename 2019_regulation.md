@@ -34,7 +34,7 @@ name | eForms SDK | Short name of the field. |
 btId | eForms SDK | Identifier of the business term to which the field corresponds. |
 xpathAbsolute | eForms SDK | Location of the field in an XML notice, as an absolute XPath. | Should appear in the `eForms example`.
 type | eForms SDK | Technical data type of the field. | Should match the OCDS field's type.
-idScheme | eForms SDK | Indicates the identifier scheme for this `id` field.
+schemeName | eForms SDK | Indicates the value that should be indicated for this field in the `schemeName` attribute in the XML.
 idSchemes | eForms SDK | Indicates the identifier schemes for this `id-ref` field.
 [repeatable](https://docs.ted.europa.eu/eforms/latest/fields/index.html#_dynamic_properties) | eForms SDK | Indicates if the field can appear more than once inside its container. | Simplified to the boolean (removed `severity`).
 mandatory | eForms SDK | Indicates whether or not a field is required to have a value. | Simplified to the boolean (`true` if required on one or more forms).
@@ -57,8 +57,10 @@ The following keys from the fields metadata are removed.
 Key | Description | Reason
 -- | -- | --
 xpathRelative | Location of the field in an XML notice, relative to its parent node. | Substring of `xpathAbsolute`.
+presetValue | The value used to pre-fill a field. | Unnecessary view-level metadata.
 legalType | Data type of the business term, as indicated in the eForms Regulation. | Redundant with `type`.
 maxLength | Maximum number of characters allowed in the value of the field, optional. | The only fields with a maxLength less than 400 are identifiers, phone numbers and percentages.
+idScheme | eForms SDK | Indicates the identifier scheme for this `id` field. | Redundant with `schemeName` and `pattern`.
 forbidden | Indicates whether or not the field can be used in specific notice types. | It isn't informative to know which forms a field can't appear on.
 
 The correspondence between `legalType` and `type` is:

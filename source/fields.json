@@ -1,9 +1,9 @@
 {
   "ublVersion" : "2.3",
-  "sdkVersion" : "eforms-sdk-1.5.1",
+  "sdkVersion" : "eforms-sdk-1.6.0",
   "metadataDatabase" : {
-    "version" : "1.5.0",
-    "createdOn" : "2022-12-14T11:00:00"
+    "version" : "1.5.63",
+    "createdOn" : "2023-02-15T12:17:18"
   },
   "xmlStructure" : [ {
     "id" : "ND-Root",
@@ -130,7 +130,8 @@
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
     "xpathRelative" : "cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']",
     "repeatable" : true,
-    "identifierFieldId" : "BT-137-Lot"
+    "identifierFieldId" : "BT-137-Lot",
+    "captionFieldId" : "BT-21-Lot"
   }, {
     "id" : "ND-LotProcurementScope",
     "parentId" : "ND-Lot",
@@ -245,12 +246,6 @@
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:FrameworkAgreement",
     "xpathRelative" : "cac:FrameworkAgreement",
     "repeatable" : false
-  }, {
-    "id" : "ND-LotBuyerCategories",
-    "parentId" : "ND-FA",
-    "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:FrameworkAgreement/cac:SubsequentProcessTenderRequirement",
-    "xpathRelative" : "cac:SubsequentProcessTenderRequirement",
-    "repeatable" : true
   }, {
     "id" : "ND-FABuyerCategories",
     "parentId" : "ND-FA",
@@ -496,19 +491,19 @@
     "parentId" : "ND-LotTenderingTerms",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:EmploymentLegislationDocumentReference",
     "xpathRelative" : "cac:EmploymentLegislationDocumentReference",
-    "repeatable" : true
+    "repeatable" : false
   }, {
     "id" : "ND-LotEnvironmentalLegislation",
     "parentId" : "ND-LotTenderingTerms",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:EnvironmentalLegislationDocumentReference",
     "xpathRelative" : "cac:EnvironmentalLegislationDocumentReference",
-    "repeatable" : true
+    "repeatable" : false
   }, {
     "id" : "ND-LotFiscalLegislation",
     "parentId" : "ND-LotTenderingTerms",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:FiscalLegislationDocumentReference",
     "xpathRelative" : "cac:FiscalLegislationDocumentReference",
-    "repeatable" : true
+    "repeatable" : false
   }, {
     "id" : "ND-PaymentTerms",
     "parentId" : "ND-LotTenderingTerms",
@@ -556,7 +551,7 @@
     "parentId" : "ND-LotTenderingTerms",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)]/cac:SpecificTendererRequirement[not(cbc:TendererRequirementTypeCode[@listName='reserved-procurement'])]",
     "xpathRelative" : "cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)]/cac:SpecificTendererRequirement[not(cbc:TendererRequirementTypeCode[@listName='reserved-procurement'])]",
-    "repeatable" : true
+    "repeatable" : false
   }, {
     "id" : "ND-TenderRecipient",
     "parentId" : "ND-LotTenderingTerms",
@@ -605,7 +600,8 @@
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']",
     "xpathRelative" : "cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']",
     "repeatable" : true,
-    "identifierFieldId" : "BT-137-LotsGroup"
+    "identifierFieldId" : "BT-137-LotsGroup",
+    "captionFieldId" : "BT-21-LotsGroup"
   }, {
     "id" : "ND-LotsGroupProcurementScope",
     "parentId" : "ND-LotsGroup",
@@ -720,7 +716,8 @@
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']",
     "xpathRelative" : "cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']",
     "repeatable" : true,
-    "identifierFieldId" : "BT-137-Part"
+    "identifierFieldId" : "BT-137-Part",
+    "captionFieldId" : "BT-21-Part"
   }, {
     "id" : "ND-PartProcurementScope",
     "parentId" : "ND-Part",
@@ -834,19 +831,19 @@
     "parentId" : "ND-PartTenderingTerms",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:EmploymentLegislationDocumentReference",
     "xpathRelative" : "cac:EmploymentLegislationDocumentReference",
-    "repeatable" : true
+    "repeatable" : false
   }, {
     "id" : "ND-PartEnvironmentalLegislation",
     "parentId" : "ND-PartTenderingTerms",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:EnvironmentalLegislationDocumentReference",
     "xpathRelative" : "cac:EnvironmentalLegislationDocumentReference",
-    "repeatable" : true
+    "repeatable" : false
   }, {
     "id" : "ND-PartFiscalLegislation",
     "parentId" : "ND-PartTenderingTerms",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:FiscalLegislationDocumentReference",
     "xpathRelative" : "cac:FiscalLegislationDocumentReference",
-    "repeatable" : true
+    "repeatable" : false
   }, {
     "id" : "ND-PartReservedParticipation",
     "parentId" : "ND-PartTenderingTerms",
@@ -871,12 +868,6 @@
     "xpathAbsolute" : "/*/cac:TenderingProcess",
     "xpathRelative" : "cac:TenderingProcess",
     "repeatable" : false
-  }, {
-    "id" : "ND-AcceleratedProcedureJustification",
-    "parentId" : "ND-ProcedureTenderingProcess",
-    "xpathAbsolute" : "/*/cac:TenderingProcess/cac:ProcessJustification",
-    "xpathRelative" : "cac:ProcessJustification",
-    "repeatable" : true
   }, {
     "id" : "ND-AcceleratedProcedure",
     "parentId" : "ND-ProcedureTenderingProcess",
@@ -1129,7 +1120,8 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult",
     "xpathRelative" : "efac:LotResult",
     "repeatable" : true,
-    "identifierFieldId" : "OPT-322-LotResult"
+    "identifierFieldId" : "OPT-322-LotResult",
+    "captionFieldId" : "BT-13713-LotResult"
   }, {
     "id" : "ND-ReviewRequestsStatistics",
     "parentId" : "ND-LotResult",
@@ -1153,7 +1145,7 @@
     "parentId" : "ND-LotResult",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='review-type']",
     "xpathRelative" : "efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='review-type']",
-    "repeatable" : true
+    "repeatable" : false
   }, {
     "id" : "ND-RevewRequestsUnpublish",
     "parentId" : "ND-BuyerReviewComplainants",
@@ -1244,7 +1236,8 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender",
     "xpathRelative" : "efac:LotTender",
     "repeatable" : true,
-    "identifierFieldId" : "OPT-321-Tender"
+    "identifierFieldId" : "OPT-321-Tender",
+    "captionFieldId" : "BT-3201-Tender"
   }, {
     "id" : "ND-LotTenderPaidAmounts",
     "parentId" : "ND-LotTender",
@@ -1377,7 +1370,8 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:SettledContract",
     "xpathRelative" : "efac:SettledContract",
     "repeatable" : true,
-    "identifierFieldId" : "OPT-316-Contract"
+    "identifierFieldId" : "OPT-316-Contract",
+    "captionFieldId" : "BT-150-Contract"
   }, {
     "id" : "ND-ExtendedDurationJustification",
     "parentId" : "ND-SettledContract",
@@ -1433,7 +1427,8 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:Organization",
     "xpathRelative" : "efac:Organization",
     "repeatable" : true,
-    "identifierFieldId" : "OPT-200-Organization-Company"
+    "identifierFieldId" : "OPT-200-Organization-Company",
+    "captionFieldId" : "BT-500-Organization-Company"
   }, {
     "id" : "ND-Company",
     "parentId" : "ND-Organization",
@@ -1464,7 +1459,8 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:Organization/efac:TouchPoint",
     "xpathRelative" : "efac:TouchPoint",
     "repeatable" : true,
-    "identifierFieldId" : "OPT-201-Organization-TouchPoint"
+    "identifierFieldId" : "OPT-201-Organization-TouchPoint",
+    "captionFieldId" : "BT-500-Organization-TouchPoint"
   }, {
     "id" : "ND-TouchpointContact",
     "parentId" : "ND-Touchpoint",
@@ -1483,7 +1479,8 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:UltimateBeneficialOwner",
     "xpathRelative" : "efac:UltimateBeneficialOwner",
     "repeatable" : true,
-    "identifierFieldId" : "OPT-202-UBO"
+    "identifierFieldId" : "OPT-202-UBO",
+    "captionFieldId" : "BT-500-UBO"
   }, {
     "id" : "ND-UBOContact",
     "parentId" : "ND-UBO",
@@ -1556,6 +1553,7 @@
     "xpathAbsolute" : "/*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[cbc:ID/text()='LocalLegalBasis']/cbc:ID[text()='LocalLegalBasis']",
     "xpathRelative" : "cbc:ID[text()='LocalLegalBasis']",
     "type" : "id",
+    "presetValue" : "LocalLegalBasis",
     "legalType" : "CODE",
     "repeatable" : {
       "value" : false,
@@ -1671,10 +1669,6 @@
         "severity" : "ERROR",
         "message" : "rule|text|BR-BT-00002-0103"
       }, {
-        "value" : "{ND-Root} ${((BT-03-notice == 'change') and (BT-02-notice in (change))) or not(BT-03-notice == 'change')}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00002-0104"
-      }, {
         "value" : "{ND-Root} ${((BT-03-notice == 'competition') and (BT-02-notice in (competition))) or not(BT-03-notice == 'competition')}",
         "severity" : "ERROR",
         "message" : "rule|text|BR-BT-00002-0105"
@@ -1768,6 +1762,7 @@
     "xpathAbsolute" : "/*/cbc:IssueDate",
     "xpathRelative" : "cbc:IssueDate",
     "type" : "date",
+    "presetValue" : "{NOW}",
     "legalType" : "DATE",
     "repeatable" : {
       "value" : false,
@@ -1793,10 +1788,6 @@
         "value" : "{ND-Root} ${(BT-05(a)-notice < BT-738-notice) or not(BT-738-notice is present)}",
         "severity" : "ERROR",
         "message" : "rule|text|BR-BT-00005-0150"
-      }, {
-        "value" : "{ND-Root} ${((BT-03-notice == 'change') and ((BT-05(a)-notice > BT-630(d)-Lot) or (BT-05(a)-notice > BT-131(d)-Lot) or (BT-05(a)-notice > BT-1311(d)-Lot)) and not(BT-140-notice in ('cancel','cancel-intent'))) or not((BT-03-notice == 'change') and ((BT-05(a)-notice > BT-630(d)-Lot) or (BT-05(a)-notice > BT-131(d)-Lot) or (BT-05(a)-notice > BT-1311(d)-Lot)))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00005-0151"
       } ]
     }
   }, {
@@ -1807,6 +1798,7 @@
     "xpathAbsolute" : "/*/cbc:IssueTime",
     "xpathRelative" : "cbc:IssueTime",
     "type" : "time",
+    "presetValue" : "{NOW}",
     "legalType" : "DATE",
     "repeatable" : {
       "value" : false,
@@ -1862,6 +1854,7 @@
     "xpathAbsolute" : "/*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[cbc:ID/text()='CrossBorderLaw']/cbc:ID[text()='CrossBorderLaw']",
     "xpathRelative" : "cbc:ID[text()='CrossBorderLaw']",
     "type" : "id",
+    "presetValue" : "CrossBorderLaw",
     "legalType" : "TEXT",
     "privacy" : {
       "code" : "cro-bor-law",
@@ -2058,10 +2051,10 @@
     }
   }, {
     "id" : "BT-106-Procedure",
-    "parentNodeId" : "ND-AcceleratedProcedureJustification",
+    "parentNodeId" : "ND-AcceleratedProcedure",
     "name" : "Procedure Accelerated",
     "btId" : "BT-106",
-    "xpathAbsolute" : "/*/cac:TenderingProcess/cac:ProcessJustification/cbc:ProcessReasonCode[@listName='accelerated-procedure']",
+    "xpathAbsolute" : "/*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='accelerated-procedure']/cbc:ProcessReasonCode[@listName='accelerated-procedure']",
     "xpathRelative" : "cbc:ProcessReasonCode[@listName='accelerated-procedure']",
     "type" : "code",
     "legalType" : "INDICATOR",
@@ -2304,7 +2297,7 @@
   }, {
     "id" : "BT-118-NoticeResult",
     "parentNodeId" : "ND-NoticeResult",
-    "name" : "Notice Framework Value",
+    "name" : "Notice Framework Maximum Value",
     "btId" : "BT-118",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efbc:OverallMaximumFrameworkContractsAmount",
     "xpathRelative" : "efbc:OverallMaximumFrameworkContractsAmount",
@@ -2923,7 +2916,7 @@
         "message" : "rule|text|BR-BT-01311-0150"
       }, {
         "condition" : "{ND-LotTenderingProcess} ${(BT-1311(d)-Lot is present) and (BT-130-Lot is present)}",
-        "value" : "{ND-LotTenderingProcess} ${(BT-1311(d)-Lot > BT-130-Lot)}",
+        "value" : "{ND-LotTenderingProcess} ${(BT-1311(d)-Lot < BT-130-Lot)}",
         "severity" : "ERROR",
         "message" : "rule|text|BR-BT-01311-0152"
       }, {
@@ -3177,6 +3170,7 @@
     "xpathRelative" : "cbc:ID",
     "type" : "id",
     "idScheme" : "LOT",
+    "schemeName" : "Lot",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -3236,6 +3230,7 @@
     "xpathRelative" : "cbc:ID",
     "type" : "id",
     "idScheme" : "GLO",
+    "schemeName" : "LotsGroup",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -3280,6 +3275,7 @@
     "xpathRelative" : "cbc:ID",
     "type" : "id",
     "idScheme" : "PAR",
+    "schemeName" : "Part",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -3397,7 +3393,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:TenderLot/cbc:ID",
     "xpathRelative" : "efac:TenderLot/cbc:ID",
     "type" : "id-ref",
-    "idSchemes" : [ "LOT", "GLO" ],
+    "idSchemes" : [ "GLO", "LOT" ],
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -4025,7 +4021,7 @@
   }, {
     "id" : "BT-156-NoticeResult",
     "parentNodeId" : "ND-NoticeResultGroupFA",
-    "name" : "Group Framework Value",
+    "name" : "Group Framework Maximum Value",
     "btId" : "BT-156",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:GroupFramework/efbc:GroupFrameworkMaximumValueAmount",
     "xpathRelative" : "efbc:GroupFrameworkMaximumValueAmount",
@@ -4083,7 +4079,7 @@
   }, {
     "id" : "BT-157-LotsGroup",
     "parentNodeId" : "ND-LotsGroupFA",
-    "name" : "Group Framework Estimated Maximum Value",
+    "name" : "Group Framework Maximum Value",
     "btId" : "BT-157",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingProcess/cac:FrameworkAgreement/cbc:EstimatedMaximumValueAmount",
     "xpathRelative" : "cbc:EstimatedMaximumValueAmount",
@@ -4520,6 +4516,7 @@
     "xpathAbsolute" : "/*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[cbc:ID/text()='CrossBorderLaw']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='cro-bor-law']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "cro-bor-law",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -4549,6 +4546,7 @@
     "xpathAbsolute" : "/*/cac:TenderingProcess/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-typ']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "pro-typ",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -4578,6 +4576,7 @@
     "xpathAbsolute" : "/*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='accelerated-procedure']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-acc']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "pro-acc",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -4607,6 +4606,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='not-app-val']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "not-app-val",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -4636,6 +4636,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='not-max-val']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "not-max-val",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -4665,6 +4666,7 @@
     "xpathAbsolute" : "/*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='direct-award-justification']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='dir-awa-pre']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "dir-awa-pre",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -4694,6 +4696,7 @@
     "xpathAbsolute" : "/*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='direct-award-justification']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='dir-awa-tex']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "dir-awa-tex",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -4723,6 +4726,7 @@
     "xpathAbsolute" : "/*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='accelerated-procedure']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-acc-jus']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "pro-acc-jus",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -4752,6 +4756,7 @@
     "xpathAbsolute" : "/*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='direct-award-justification']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='dir-awa-jus']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "dir-awa-jus",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -4781,6 +4786,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='win-cho']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "win-cho",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -4810,6 +4816,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:DecisionReason/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='no-awa-rea']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "no-awa-rea",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -4839,6 +4846,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:GroupFramework/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='gro-max-val']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "gro-max-val",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -4868,6 +4876,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:GroupFramework/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='not-ree-val']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "not-ree-val",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -4897,6 +4906,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:ConcessionRevenue/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='con-rev-buy']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "con-rev-buy",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -4926,6 +4936,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='not-val']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "not-val",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -4955,6 +4966,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:ConcessionRevenue/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='con-rev-use']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "con-rev-use",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -4984,6 +4996,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:ConcessionRevenue/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='val-con-des']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "val-con-des",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5013,6 +5026,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='ten-ran']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "ten-ran",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5042,6 +5056,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:Origin/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='cou-ori']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "cou-ori",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5071,6 +5086,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='win-ten-var']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "win-ten-var",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5100,6 +5116,7 @@
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-typ']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "awa-cri-typ",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5129,6 +5146,7 @@
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-typ']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "awa-cri-typ",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5158,6 +5176,7 @@
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-des']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "awa-cri-des",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5187,6 +5206,7 @@
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-des']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "awa-cri-des",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5216,6 +5236,7 @@
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "awa-cri-num",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5245,6 +5266,7 @@
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "awa-cri-num",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5274,6 +5296,7 @@
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-weight']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-wei']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "awa-cri-wei",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5303,6 +5326,7 @@
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-weight']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-wei']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "awa-cri-wei",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5332,6 +5356,7 @@
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-fixed']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-fix']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "awa-cri-fix",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5361,6 +5386,7 @@
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-fixed']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-fix']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "awa-cri-fix",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5390,6 +5416,7 @@
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-threshold']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-thr']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "awa-cri-thr",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5419,6 +5446,7 @@
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-threshold']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-thr']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "awa-cri-thr",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5448,6 +5476,7 @@
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-com']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "awa-cri-com",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5477,6 +5506,7 @@
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-com']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "awa-cri-com",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5506,6 +5536,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-val']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "sub-val",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5535,6 +5566,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-des']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "sub-des",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5564,6 +5596,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-per']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "sub-per",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5593,6 +5626,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:GroupFramework/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='gro-max-ide']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "gro-max-ide",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5622,6 +5656,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-cou']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "buy-rev-cou",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5651,6 +5686,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-typ']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "buy-rev-typ",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5680,6 +5716,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FrameworkAgreementValues/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='max-val']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "max-val",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5709,6 +5746,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='ten-val-low']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "ten-val-low",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5738,6 +5776,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='ten-val-hig']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "ten-val-hig",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5767,6 +5806,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='review-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='rev-req']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "rev-req",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5796,6 +5836,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='win-ten-val']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "win-ten-val",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5825,6 +5866,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-val-kno']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "sub-val-kno",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5854,6 +5896,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-per-kno']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "sub-per-kno",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5883,6 +5926,7 @@
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-ord']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "awa-cri-ord",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5912,6 +5956,7 @@
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-ord']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "awa-cri-ord",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5941,6 +5986,7 @@
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-nam']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "awa-cri-nam",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5970,6 +6016,7 @@
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-nam']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "awa-cri-nam",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -5999,6 +6046,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:ReceivedSubmissionsStatistics/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='rec-sub-cou']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "rec-sub-cou",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -6028,6 +6076,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:ReceivedSubmissionsStatistics/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='rec-sub-typ']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "rec-sub-typ",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -6057,6 +6106,7 @@
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-con']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "sub-con",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -6086,6 +6136,7 @@
     "xpathAbsolute" : "/*/cac:TenderingProcess/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-fea']/efbc:FieldIdentifierCode",
     "xpathRelative" : "efbc:FieldIdentifierCode",
     "type" : "code",
+    "presetValue" : "pro-fea",
     "legalType" : "IDENTIFIER",
     "repeatable" : {
       "value" : false,
@@ -8970,7 +9021,7 @@
   }, {
     "id" : "BT-198(BT-09)-Procedure",
     "parentNodeId" : "ND-CrossBorderLawUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[cbc:ID/text()='CrossBorderLaw']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='cro-bor-law']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -8997,19 +9048,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-CrossBorderLawUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-09)-Procedure - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-CrossBorderLawUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))  and ((BT-198(BT-09)-Procedure - BT-05(a)-notice) < P10Y) and ((BT-198(BT-09)-Procedure - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
         "message" : "rule|text|BR-BT-00198-4000"
-      }, {
-        "value" : "{ND-CrossBorderLawUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-09)-Procedure - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4051"
       } ]
     }
   }, {
     "id" : "BT-198(BT-105)-Procedure",
     "parentNodeId" : "ND-ProcedureTypeUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/cac:TenderingProcess/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-typ']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -9036,19 +9083,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-ProcedureTypeUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-105)-Procedure - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-ProcedureTypeUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-105)-Procedure - BT-05(a)-notice) < P10Y) and ((BT-198(BT-105)-Procedure - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1301"
-      }, {
-        "value" : "{ND-ProcedureTypeUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-105)-Procedure - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4052"
+        "message" : "rule|text|BR-BT-00198-4001"
       } ]
     }
   }, {
     "id" : "BT-198(BT-106)-Procedure",
     "parentNodeId" : "ND-ProcedureAcceleratedUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='accelerated-procedure']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-acc']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -9075,19 +9118,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-ProcedureAcceleratedUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-106)-Procedure - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-ProcedureAcceleratedUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-106)-Procedure - BT-05(a)-notice) < P10Y) and ((BT-198(BT-106)-Procedure - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1302"
-      }, {
-        "value" : "{ND-ProcedureAcceleratedUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-106)-Procedure - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4053"
+        "message" : "rule|text|BR-BT-00198-4002"
       } ]
     }
   }, {
     "id" : "BT-198(BT-1118)-NoticeResult",
     "parentNodeId" : "ND-NoticeApproximateValueUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='not-app-val']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -9110,19 +9149,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-NoticeApproximateValueUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-1118)-NoticeResult - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-NoticeApproximateValueUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-1118)-NoticeResult - BT-05(a)-notice) < P10Y) and ((BT-198(BT-1118)-NoticeResult - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
         "message" : "rule|text|BR-BT-00198-4292"
-      }, {
-        "value" : "{ND-NoticeApproximateValueUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-1118)-NoticeResult - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4293"
       } ]
     }
   }, {
     "id" : "BT-198(BT-118)-NoticeResult",
     "parentNodeId" : "ND-NoticeMaximumValueUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='not-max-val']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -9149,19 +9184,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-NoticeMaximumValueUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-118)-NoticeResult - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-NoticeMaximumValueUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-118)-NoticeResult - BT-05(a)-notice) < P10Y) and ((BT-198(BT-118)-NoticeResult - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
         "message" : "rule|text|BR-BT-00198-4003"
-      }, {
-        "value" : "{ND-NoticeMaximumValueUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-118)-NoticeResult - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4054"
       } ]
     }
   }, {
     "id" : "BT-198(BT-1252)-Procedure",
     "parentNodeId" : "ND-DirectAwardJustificationPreviousUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='direct-award-justification']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='dir-awa-pre']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -9188,19 +9219,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-DirectAwardJustificationPreviousUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-1252)-Procedure - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-DirectAwardJustificationPreviousUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-1252)-Procedure - BT-05(a)-notice) < P10Y) and ((BT-198(BT-1252)-Procedure - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1304"
-      }, {
-        "value" : "{ND-DirectAwardJustificationPreviousUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-1252)-Procedure - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4055"
+        "message" : "rule|text|BR-BT-00198-4004"
       } ]
     }
   }, {
     "id" : "BT-198(BT-135)-Procedure",
     "parentNodeId" : "ND-DirectAwardJustificationTextUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='direct-award-justification']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='dir-awa-tex']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -9227,19 +9254,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-DirectAwardJustificationTextUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-135)-Procedure - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-DirectAwardJustificationTextUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-135)-Procedure - BT-05(a)-notice) < P10Y) and ((BT-198(BT-135)-Procedure - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1305"
-      }, {
-        "value" : "{ND-DirectAwardJustificationTextUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-135)-Procedure - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4056"
+        "message" : "rule|text|BR-BT-00198-4005"
       } ]
     }
   }, {
     "id" : "BT-198(BT-1351)-Procedure",
     "parentNodeId" : "ND-ProcedureAcceleratedJustificationUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='accelerated-procedure']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-acc-jus']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -9266,19 +9289,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-ProcedureAcceleratedJustificationUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-1351)-Procedure - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-ProcedureAcceleratedJustificationUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-1351)-Procedure - BT-05(a)-notice) < P10Y) and ((BT-198(BT-1351)-Procedure - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1306"
-      }, {
-        "value" : "{ND-ProcedureAcceleratedJustificationUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-1351)-Procedure - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4057"
+        "message" : "rule|text|BR-BT-00198-4006"
       } ]
     }
   }, {
     "id" : "BT-198(BT-136)-Procedure",
     "parentNodeId" : "ND-DirectAwardJustificationCodeUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='direct-award-justification']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='dir-awa-jus']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -9305,19 +9324,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-DirectAwardJustificationCodeUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-136)-Procedure - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-DirectAwardJustificationCodeUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-136)-Procedure - BT-05(a)-notice) < P10Y) and ((BT-198(BT-136)-Procedure - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1307"
-      }, {
-        "value" : "{ND-DirectAwardJustificationCodeUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-136)-Procedure - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4058"
+        "message" : "rule|text|BR-BT-00198-4007"
       } ]
     }
   }, {
     "id" : "BT-198(BT-142)-LotResult",
     "parentNodeId" : "ND-WinnerChosenUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='win-cho']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -9344,19 +9359,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-WinnerChosenUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-142)-LotResult - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-WinnerChosenUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-142)-LotResult - BT-05(a)-notice) < P10Y) and ((BT-198(BT-142)-LotResult - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1308"
-      }, {
-        "value" : "{ND-WinnerChosenUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-142)-LotResult - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4059"
+        "message" : "rule|text|BR-BT-00198-4008"
       } ]
     }
   }, {
     "id" : "BT-198(BT-144)-LotResult",
     "parentNodeId" : "ND-NotAwardedReasonUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:DecisionReason/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='no-awa-rea']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -9383,19 +9394,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-NotAwardedReasonUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-144)-LotResult - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-NotAwardedReasonUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-144)-LotResult - BT-05(a)-notice) < P10Y) and ((BT-198(BT-144)-LotResult - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1309"
-      }, {
-        "value" : "{ND-NotAwardedReasonUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-144)-LotResult - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4060"
+        "message" : "rule|text|BR-BT-00198-4009"
       } ]
     }
   }, {
     "id" : "BT-198(BT-156)-NoticeResult",
     "parentNodeId" : "ND-GroupMaximumValueUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:GroupFramework/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='gro-max-val']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -9422,19 +9429,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-GroupMaximumValueUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-156)-NoticeResult - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-GroupMaximumValueUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-156)-NoticeResult - BT-05(a)-notice) < P10Y) and ((BT-198(BT-156)-NoticeResult - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1310"
-      }, {
-        "value" : "{ND-GroupMaximumValueUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-156)-NoticeResult - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4061"
+        "message" : "rule|text|BR-BT-00198-4010"
       } ]
     }
   }, {
     "id" : "BT-198(BT-1561)-NoticeResult",
     "parentNodeId" : "ND-GroupReestimatedValueUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:GroupFramework/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='not-ree-val']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -9461,19 +9464,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-GroupReestimatedValueUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-1561)-NoticeResult - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-GroupReestimatedValueUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-1561)-NoticeResult - BT-05(a)-notice) < P10Y) and ((BT-198(BT-1561)-NoticeResult - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4335"
-      }, {
-        "value" : "{ND-GroupReestimatedValueUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-1561)-NoticeResult - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4357"
+        "message" : "rule|text|BR-BT-00198-4356"
       } ]
     }
   }, {
     "id" : "BT-198(BT-160)-Tender",
     "parentNodeId" : "ND-ConcessionRevenueBuyerUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:ConcessionRevenue/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='con-rev-buy']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -9500,19 +9499,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-ConcessionRevenueBuyerUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-160)-Tender - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-ConcessionRevenueBuyerUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-160)-Tender - BT-05(a)-notice) < P10Y) and ((BT-198(BT-160)-Tender - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1311"
-      }, {
-        "value" : "{ND-ConcessionRevenueBuyerUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-160)-Tender - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4062"
+        "message" : "rule|text|BR-BT-00198-4011"
       } ]
     }
   }, {
     "id" : "BT-198(BT-161)-NoticeResult",
     "parentNodeId" : "ND-NoticeValueUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='not-val']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -9539,19 +9534,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-NoticeValueUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-161)-NoticeResult - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-NoticeValueUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-161)-NoticeResult - BT-05(a)-notice) < P10Y) and ((BT-198(BT-161)-NoticeResult - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1312"
-      }, {
-        "value" : "{ND-NoticeValueUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-161)-NoticeResult - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4063"
+        "message" : "rule|text|BR-BT-00198-4012"
       } ]
     }
   }, {
     "id" : "BT-198(BT-162)-Tender",
     "parentNodeId" : "ND-ConcessionRevenueUserUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:ConcessionRevenue/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='con-rev-use']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -9578,19 +9569,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-ConcessionRevenueUserUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-162)-Tender - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-ConcessionRevenueUserUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-162)-Tender - BT-05(a)-notice) < P10Y) and ((BT-198(BT-162)-Tender - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1313"
-      }, {
-        "value" : "{ND-ConcessionRevenueUserUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-162)-Tender - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4064"
+        "message" : "rule|text|BR-BT-00198-4013"
       } ]
     }
   }, {
     "id" : "BT-198(BT-163)-Tender",
     "parentNodeId" : "ND-ValueConcessionDescriptionUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:ConcessionRevenue/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='val-con-des']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -9617,19 +9604,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-ValueConcessionDescriptionUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-163)-Tender - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-ValueConcessionDescriptionUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-163)-Tender - BT-05(a)-notice) < P10Y) and ((BT-198(BT-163)-Tender - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1314"
-      }, {
-        "value" : "{ND-ValueConcessionDescriptionUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-163)-Tender - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4065"
+        "message" : "rule|text|BR-BT-00198-4014"
       } ]
     }
   }, {
     "id" : "BT-198(BT-171)-Tender",
     "parentNodeId" : "ND-TenderRankUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='ten-ran']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -9656,19 +9639,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-TenderRankUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-171)-Tender - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-TenderRankUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-171)-Tender - BT-05(a)-notice) < P10Y) and ((BT-198(BT-171)-Tender - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1315"
-      }, {
-        "value" : "{ND-TenderRankUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-171)-Tender - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4066"
+        "message" : "rule|text|BR-BT-00198-4015"
       } ]
     }
   }, {
     "id" : "BT-198(BT-191)-Tender",
     "parentNodeId" : "ND-CountryOriginUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:Origin/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='cou-ori']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -9695,19 +9674,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-CountryOriginUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-191)-Tender - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-CountryOriginUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-191)-Tender - BT-05(a)-notice) < P10Y) and ((BT-198(BT-191)-Tender - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1316"
-      }, {
-        "value" : "{ND-CountryOriginUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-191)-Tender - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4067"
+        "message" : "rule|text|BR-BT-00198-4016"
       } ]
     }
   }, {
     "id" : "BT-198(BT-193)-Tender",
     "parentNodeId" : "ND-WinningTenderVariantUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='win-ten-var']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -9734,19 +9709,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-WinningTenderVariantUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-193)-Tender - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-WinningTenderVariantUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-193)-Tender - BT-05(a)-notice) < P10Y) and ((BT-198(BT-193)-Tender - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1317"
-      }, {
-        "value" : "{ND-WinningTenderVariantUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-193)-Tender - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4068"
+        "message" : "rule|text|BR-BT-00198-4017"
       } ]
     }
   }, {
     "id" : "BT-198(BT-539)-Lot",
     "parentNodeId" : "ND-LotAwardCriterionTypeUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-typ']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -9773,19 +9744,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-LotAwardCriterionTypeUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-539)-Lot - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-LotAwardCriterionTypeUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-539)-Lot - BT-05(a)-notice) < P10Y) and ((BT-198(BT-539)-Lot - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1318"
-      }, {
-        "value" : "{ND-LotAwardCriterionTypeUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-539)-Lot - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4069"
+        "message" : "rule|text|BR-BT-00198-4018"
       } ]
     }
   }, {
     "id" : "BT-198(BT-539)-LotsGroup",
     "parentNodeId" : "ND-LotsGroupAwardCriterionTypeUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-typ']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -9812,19 +9779,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-LotsGroupAwardCriterionTypeUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-539)-LotsGroup - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-LotsGroupAwardCriterionTypeUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-539)-LotsGroup - BT-05(a)-notice) < P10Y) and ((BT-198(BT-539)-LotsGroup - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1319"
-      }, {
-        "value" : "{ND-LotsGroupAwardCriterionTypeUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-539)-LotsGroup - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4070"
+        "message" : "rule|text|BR-BT-00198-4019"
       } ]
     }
   }, {
     "id" : "BT-198(BT-540)-Lot",
     "parentNodeId" : "ND-LotAwardCriterionDescriptionUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-des']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -9851,19 +9814,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-LotAwardCriterionDescriptionUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-540)-Lot - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-LotAwardCriterionDescriptionUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-540)-Lot - BT-05(a)-notice) < P10Y) and ((BT-198(BT-540)-Lot - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1320"
-      }, {
-        "value" : "{ND-LotAwardCriterionDescriptionUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-540)-Lot - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4071"
+        "message" : "rule|text|BR-BT-00198-4020"
       } ]
     }
   }, {
     "id" : "BT-198(BT-540)-LotsGroup",
     "parentNodeId" : "ND-LotsGroupAwardCriterionDescriptionUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-des']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -9890,19 +9849,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-LotsGroupAwardCriterionDescriptionUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-540)-LotsGroup - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-LotsGroupAwardCriterionDescriptionUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-540)-LotsGroup - BT-05(a)-notice) < P10Y) and ((BT-198(BT-540)-LotsGroup - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1321"
-      }, {
-        "value" : "{ND-LotsGroupAwardCriterionDescriptionUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-540)-LotsGroup - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4072"
+        "message" : "rule|text|BR-BT-00198-4021"
       } ]
     }
   }, {
     "id" : "BT-198(BT-541)-Lot",
     "parentNodeId" : "ND-LotAwardCriterionNumberUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -9929,19 +9884,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-LotAwardCriterionNumberUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-541)-Lot - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-LotAwardCriterionNumberUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-541)-Lot - BT-05(a)-notice) < P10Y) and ((BT-198(BT-541)-Lot - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1322"
-      }, {
-        "value" : "{ND-LotAwardCriterionNumberUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-541)-Lot - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4073"
+        "message" : "rule|text|BR-BT-00198-4022"
       } ]
     }
   }, {
     "id" : "BT-198(BT-541)-LotsGroup",
     "parentNodeId" : "ND-LotsGroupAwardCriterionNumberUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -9968,19 +9919,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-LotsGroupAwardCriterionNumberUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-541)-LotsGroup - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-LotsGroupAwardCriterionNumberUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-541)-LotsGroup - BT-05(a)-notice) < P10Y) and ((BT-198(BT-541)-LotsGroup - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1323"
-      }, {
-        "value" : "{ND-LotsGroupAwardCriterionNumberUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-541)-LotsGroup - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4074"
+        "message" : "rule|text|BR-BT-00198-4023"
       } ]
     }
   }, {
     "id" : "BT-198(BT-5421)-Lot",
     "parentNodeId" : "ND-LotAwardCriterionNumberWeightUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-weight']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-wei']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10007,19 +9954,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-LotAwardCriterionNumberWeightUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-5421)-Lot - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-LotAwardCriterionNumberWeightUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-5421)-Lot - BT-05(a)-notice) < P10Y) and ((BT-198(BT-5421)-Lot - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1324"
-      }, {
-        "value" : "{ND-LotAwardCriterionNumberWeightUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-5421)-Lot - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4075"
+        "message" : "rule|text|BR-BT-00198-4024"
       } ]
     }
   }, {
     "id" : "BT-198(BT-5421)-LotsGroup",
     "parentNodeId" : "ND-LotsGroupAwardCriterionNumberWeightUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-weight']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-wei']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10046,19 +9989,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-LotsGroupAwardCriterionNumberWeightUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-5421)-LotsGroup - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-LotsGroupAwardCriterionNumberWeightUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-5421)-LotsGroup - BT-05(a)-notice) < P10Y) and ((BT-198(BT-5421)-LotsGroup - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1325"
-      }, {
-        "value" : "{ND-LotsGroupAwardCriterionNumberWeightUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-5421)-LotsGroup - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4076"
+        "message" : "rule|text|BR-BT-00198-4025"
       } ]
     }
   }, {
     "id" : "BT-198(BT-5422)-Lot",
     "parentNodeId" : "ND-LotAwardCriterionNumberFixUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-fixed']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-fix']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10085,19 +10024,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-LotAwardCriterionNumberFixUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-5422)-Lot - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-LotAwardCriterionNumberFixUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-5422)-Lot - BT-05(a)-notice) < P10Y) and ((BT-198(BT-5422)-Lot - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1326"
-      }, {
-        "value" : "{ND-LotAwardCriterionNumberFixUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-5422)-Lot - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4077"
+        "message" : "rule|text|BR-BT-00198-4026"
       } ]
     }
   }, {
     "id" : "BT-198(BT-5422)-LotsGroup",
     "parentNodeId" : "ND-LotsGroupAwardCriterionNumberFixUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-fixed']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-fix']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10124,19 +10059,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-LotsGroupAwardCriterionNumberFixUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-5422)-LotsGroup - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-LotsGroupAwardCriterionNumberFixUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-5422)-LotsGroup - BT-05(a)-notice) < P10Y) and ((BT-198(BT-5422)-LotsGroup - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1327"
-      }, {
-        "value" : "{ND-LotsGroupAwardCriterionNumberFixUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-5422)-LotsGroup - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4078"
+        "message" : "rule|text|BR-BT-00198-4027"
       } ]
     }
   }, {
     "id" : "BT-198(BT-5423)-Lot",
     "parentNodeId" : "ND-LotAwardCriterionNumberThresholdUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-threshold']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-thr']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10163,19 +10094,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-LotAwardCriterionNumberThresholdUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-5423)-Lot - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-LotAwardCriterionNumberThresholdUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-5423)-Lot - BT-05(a)-notice) < P10Y) and ((BT-198(BT-5423)-Lot - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1328"
-      }, {
-        "value" : "{ND-LotAwardCriterionNumberThresholdUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-5423)-Lot - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4079"
+        "message" : "rule|text|BR-BT-00198-4028"
       } ]
     }
   }, {
     "id" : "BT-198(BT-5423)-LotsGroup",
     "parentNodeId" : "ND-LotsGroupAwardCriterionNumberThresholdUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-threshold']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-thr']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10202,19 +10129,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-LotsGroupAwardCriterionNumberThresholdUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-5423)-LotsGroup - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-LotsGroupAwardCriterionNumberThresholdUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-5423)-LotsGroup - BT-05(a)-notice) < P10Y) and ((BT-198(BT-5423)-LotsGroup - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1329"
-      }, {
-        "value" : "{ND-LotsGroupAwardCriterionNumberThresholdUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-5423)-LotsGroup - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4080"
+        "message" : "rule|text|BR-BT-00198-4029"
       } ]
     }
   }, {
     "id" : "BT-198(BT-543)-Lot",
     "parentNodeId" : "ND-LotAwardCriterionNumberComplicatedUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-com']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10241,19 +10164,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-LotAwardCriterionNumberComplicatedUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-543)-Lot - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-LotAwardCriterionNumberComplicatedUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-543)-Lot - BT-05(a)-notice) < P10Y) and ((BT-198(BT-543)-Lot - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1330"
-      }, {
-        "value" : "{ND-LotAwardCriterionNumberComplicatedUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-543)-Lot - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4081"
+        "message" : "rule|text|BR-BT-00198-4030"
       } ]
     }
   }, {
     "id" : "BT-198(BT-543)-LotsGroup",
     "parentNodeId" : "ND-LotsGroupAwardCriterionNumberComplicatedUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-com']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10280,19 +10199,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-LotsGroupAwardCriterionNumberComplicatedUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-543)-LotsGroup - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-LotsGroupAwardCriterionNumberComplicatedUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-543)-LotsGroup - BT-05(a)-notice) < P10Y) and ((BT-198(BT-543)-LotsGroup - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1331"
-      }, {
-        "value" : "{ND-LotsGroupAwardCriterionNumberComplicatedUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-543)-LotsGroup - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4082"
+        "message" : "rule|text|BR-BT-00198-4031"
       } ]
     }
   }, {
     "id" : "BT-198(BT-553)-Tender",
     "parentNodeId" : "ND-SubcontractingValueUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-val']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10319,19 +10234,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-SubcontractingValueUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-553)-Tender - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-SubcontractingValueUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-553)-Tender - BT-05(a)-notice) < P10Y) and ((BT-198(BT-553)-Tender - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1332"
-      }, {
-        "value" : "{ND-SubcontractingValueUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-553)-Tender - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4083"
+        "message" : "rule|text|BR-BT-00198-4032"
       } ]
     }
   }, {
     "id" : "BT-198(BT-554)-Tender",
     "parentNodeId" : "ND-SubcontractingDescriptionUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-des']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10358,19 +10269,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-SubcontractingDescriptionUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-554)-Tender - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-SubcontractingDescriptionUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-554)-Tender - BT-05(a)-notice) < P10Y) and ((BT-198(BT-554)-Tender - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1333"
-      }, {
-        "value" : "{ND-SubcontractingDescriptionUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-554)-Tender - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4084"
+        "message" : "rule|text|BR-BT-00198-4033"
       } ]
     }
   }, {
     "id" : "BT-198(BT-555)-Tender",
     "parentNodeId" : "ND-SubcontractingPercentageUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-per']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10397,19 +10304,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-SubcontractingPercentageUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-555)-Tender - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-SubcontractingPercentageUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-555)-Tender - BT-05(a)-notice) < P10Y) and ((BT-198(BT-555)-Tender - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1334"
-      }, {
-        "value" : "{ND-SubcontractingPercentageUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-555)-Tender - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4085"
+        "message" : "rule|text|BR-BT-00198-4034"
       } ]
     }
   }, {
     "id" : "BT-198(BT-556)-NoticeResult",
     "parentNodeId" : "ND-GroupMaximalValueIdentifierUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:GroupFramework/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='gro-max-ide']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10436,19 +10339,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-GroupMaximalValueIdentifierUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-556)-NoticeResult - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-GroupMaximalValueIdentifierUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-556)-NoticeResult - BT-05(a)-notice) < P10Y) and ((BT-198(BT-556)-NoticeResult - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1335"
-      }, {
-        "value" : "{ND-GroupMaximalValueIdentifierUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-556)-NoticeResult - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4086"
+        "message" : "rule|text|BR-BT-00198-4035"
       } ]
     }
   }, {
     "id" : "BT-198(BT-635)-LotResult",
     "parentNodeId" : "ND-ReviewRequestsStatisticsCountUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-cou']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10470,7 +10369,7 @@
   }, {
     "id" : "BT-198(BT-636)-LotResult",
     "parentNodeId" : "ND-ReviewRequestsStatisticsTypeUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-typ']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10492,7 +10391,7 @@
   }, {
     "id" : "BT-198(BT-709)-LotResult",
     "parentNodeId" : "ND-MaximalValueUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FrameworkAgreementValues/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='max-val']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10519,19 +10418,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-MaximalValueUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-709)-LotResult - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-MaximalValueUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-709)-LotResult - BT-05(a)-notice) < P10Y) and ((BT-198(BT-709)-LotResult - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1336"
-      }, {
-        "value" : "{ND-MaximalValueUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-709)-LotResult - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4087"
+        "message" : "rule|text|BR-BT-00198-4036"
       } ]
     }
   }, {
     "id" : "BT-198(BT-710)-LotResult",
     "parentNodeId" : "ND-TenderValueLowestUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='ten-val-low']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10558,19 +10453,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-TenderValueLowestUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-710)-LotResult - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-TenderValueLowestUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-710)-LotResult - BT-05(a)-notice) < P10Y) and ((BT-198(BT-710)-LotResult - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1337"
-      }, {
-        "value" : "{ND-TenderValueLowestUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-710)-LotResult - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4088"
+        "message" : "rule|text|BR-BT-00198-4037"
       } ]
     }
   }, {
     "id" : "BT-198(BT-711)-LotResult",
     "parentNodeId" : "ND-TenderValueHighestUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='ten-val-hig']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10597,19 +10488,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-TenderValueHighestUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-711)-LotResult - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-TenderValueHighestUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-711)-LotResult - BT-05(a)-notice) < P10Y) and ((BT-198(BT-711)-LotResult - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1338"
-      }, {
-        "value" : "{ND-TenderValueHighestUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-711)-LotResult - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4089"
+        "message" : "rule|text|BR-BT-00198-4038"
       } ]
     }
   }, {
     "id" : "BT-198(BT-712)-LotResult",
     "parentNodeId" : "ND-RevewRequestsUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='review-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='rev-req']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10636,19 +10523,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-RevewRequestsUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-712)-LotResult - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-RevewRequestsUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-712)-LotResult - BT-05(a)-notice) < P10Y) and ((BT-198(BT-712)-LotResult - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1339"
-      }, {
-        "value" : "{ND-RevewRequestsUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-712)-LotResult - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4090"
+        "message" : "rule|text|BR-BT-00198-4039"
       } ]
     }
   }, {
     "id" : "BT-198(BT-720)-Tender",
     "parentNodeId" : "ND-WinningTenderValueUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='win-ten-val']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10675,19 +10558,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-WinningTenderValueUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-720)-Tender - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-WinningTenderValueUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-720)-Tender - BT-05(a)-notice) < P10Y) and ((BT-198(BT-720)-Tender - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1340"
-      }, {
-        "value" : "{ND-WinningTenderValueUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-720)-Tender - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4091"
+        "message" : "rule|text|BR-BT-00198-4040"
       } ]
     }
   }, {
     "id" : "BT-198(BT-730)-Tender",
     "parentNodeId" : "ND-SubcontractingValueKnownUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-val-kno']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10714,19 +10593,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-SubcontractingValueKnownUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-730)-Tender - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-SubcontractingValueKnownUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-730)-Tender - BT-05(a)-notice) < P10Y) and ((BT-198(BT-730)-Tender - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1341"
-      }, {
-        "value" : "{ND-SubcontractingValueKnownUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-730)-Tender - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4092"
+        "message" : "rule|text|BR-BT-00198-4041"
       } ]
     }
   }, {
     "id" : "BT-198(BT-731)-Tender",
     "parentNodeId" : "ND-SubcontractingPercentageKnownUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-per-kno']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10753,19 +10628,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-SubcontractingPercentageKnownUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-731)-Tender - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-SubcontractingPercentageKnownUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-731)-Tender - BT-05(a)-notice) < P10Y) and ((BT-198(BT-731)-Tender - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1342"
-      }, {
-        "value" : "{ND-SubcontractingPercentageKnownUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-731)-Tender - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4093"
+        "message" : "rule|text|BR-BT-00198-4042"
       } ]
     }
   }, {
     "id" : "BT-198(BT-733)-Lot",
     "parentNodeId" : "ND-LotAwardCriteriaOrderJustificationUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-ord']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10792,19 +10663,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-LotAwardCriteriaOrderJustificationUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-733)-Lot - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-LotAwardCriteriaOrderJustificationUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-733)-Lot - BT-05(a)-notice) < P10Y) and ((BT-198(BT-733)-Lot - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1343"
-      }, {
-        "value" : "{ND-LotAwardCriteriaOrderJustificationUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-733)-Lot - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4094"
+        "message" : "rule|text|BR-BT-00198-4043"
       } ]
     }
   }, {
     "id" : "BT-198(BT-733)-LotsGroup",
     "parentNodeId" : "ND-LotsGroupAwardCriteriaOrderJustificationUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-ord']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10831,19 +10698,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-LotsGroupAwardCriteriaOrderJustificationUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-733)-LotsGroup - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-LotsGroupAwardCriteriaOrderJustificationUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-733)-LotsGroup - BT-05(a)-notice) < P10Y) and ((BT-198(BT-733)-LotsGroup - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1344"
-      }, {
-        "value" : "{ND-LotsGroupAwardCriteriaOrderJustificationUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-733)-LotsGroup - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4095"
+        "message" : "rule|text|BR-BT-00198-4044"
       } ]
     }
   }, {
     "id" : "BT-198(BT-734)-Lot",
     "parentNodeId" : "ND-LotAwardCriteriaNameUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-nam']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10870,19 +10733,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-LotAwardCriteriaNameUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-734)-Lot - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-LotAwardCriteriaNameUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-734)-Lot - BT-05(a)-notice) < P10Y) and ((BT-198(BT-734)-Lot - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1345"
-      }, {
-        "value" : "{ND-LotAwardCriteriaNameUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-734)-Lot - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4096"
+        "message" : "rule|text|BR-BT-00198-4045"
       } ]
     }
   }, {
     "id" : "BT-198(BT-734)-LotsGroup",
     "parentNodeId" : "ND-LotsGroupAwardCriteriaNameUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-nam']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10909,19 +10768,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-LotsGroupAwardCriteriaNameUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-734)-LotsGroup - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-LotsGroupAwardCriteriaNameUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-734)-LotsGroup - BT-05(a)-notice) < P10Y) and ((BT-198(BT-734)-LotsGroup - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1346"
-      }, {
-        "value" : "{ND-LotsGroupAwardCriteriaNameUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-734)-LotsGroup - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4097"
+        "message" : "rule|text|BR-BT-00198-4046"
       } ]
     }
   }, {
     "id" : "BT-198(BT-759)-LotResult",
     "parentNodeId" : "ND-ReceivedSubmissionCountUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:ReceivedSubmissionsStatistics/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='rec-sub-cou']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10948,19 +10803,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-ReceivedSubmissionCountUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-759)-LotResult - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-ReceivedSubmissionCountUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-759)-LotResult - BT-05(a)-notice) < P10Y) and ((BT-198(BT-759)-LotResult - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1347"
-      }, {
-        "value" : "{ND-ReceivedSubmissionCountUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-759)-LotResult - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4098"
+        "message" : "rule|text|BR-BT-00198-4047"
       } ]
     }
   }, {
     "id" : "BT-198(BT-760)-LotResult",
     "parentNodeId" : "ND-ReceivedSubmissionTypeUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:ReceivedSubmissionsStatistics/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='rec-sub-typ']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -10987,19 +10838,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-ReceivedSubmissionTypeUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-760)-LotResult - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-ReceivedSubmissionTypeUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-760)-LotResult - BT-05(a)-notice) < P10Y) and ((BT-198(BT-760)-LotResult - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1348"
-      }, {
-        "value" : "{ND-ReceivedSubmissionTypeUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-760)-LotResult - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4099"
+        "message" : "rule|text|BR-BT-00198-4048"
       } ]
     }
   }, {
     "id" : "BT-198(BT-773)-Tender",
     "parentNodeId" : "ND-SubcontractingUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-con']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -11026,19 +10873,15 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-SubcontractingUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-773)-Tender - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-SubcontractingUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-773)-Tender - BT-05(a)-notice) < P10Y) and ((BT-198(BT-773)-Tender - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1349"
-      }, {
-        "value" : "{ND-SubcontractingUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-773)-Tender - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4100"
+        "message" : "rule|text|BR-BT-00198-4049"
       } ]
     }
   }, {
     "id" : "BT-198(BT-88)-Procedure",
     "parentNodeId" : "ND-ProcedureFeaturesUnpublish",
-    "name" : "Unpublished Accessibility Date",
+    "name" : "Unpublished Access Date",
     "btId" : "BT-198",
     "xpathAbsolute" : "/*/cac:TenderingProcess/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-fea']/efbc:PublicationDate",
     "xpathRelative" : "efbc:PublicationDate",
@@ -11065,13 +10908,9 @@
       "value" : "{ND-Root} ${TRUE}",
       "severity" : "ERROR",
       "constraints" : [ {
-        "value" : "{ND-ProcedureFeaturesUnpublish} ${(((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081'))) and ((BT-198(BT-88)-Procedure - BT-05(a)-notice) < P5Y)) or not((OPP-070-notice in ('25','26','28','29','30','32','E4','33','34','35')) or ((OPP-070-notice == 'E5') and (BT-01-notice != '32009L0081')))}",
+        "value" : "{ND-ProcedureFeaturesUnpublish} ${((OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5')) and ((BT-198(BT-88)-Procedure - BT-05(a)-notice) < P10Y) and ((BT-198(BT-88)-Procedure - BT-05(a)-notice) >= P2D)) or not(OPP-070-notice in ('25','26','27','28','29','30','31','32','E4','33','34','35','E5'))}",
         "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-1350"
-      }, {
-        "value" : "{ND-ProcedureFeaturesUnpublish} ${(((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081'))) and ((BT-198(BT-88)-Procedure - BT-05(a)-notice) < P30Y)) or not((OPP-070-notice in ('27','31')) or ((OPP-070-notice == 'E5') and (BT-01-notice == '32009L0081')))}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00198-4101"
+        "message" : "rule|text|BR-BT-00198-4050"
       } ]
     }
   }, {
@@ -13112,7 +12951,7 @@
   }, {
     "id" : "BT-5011-Contract",
     "parentNodeId" : "ND-ContractEUFunds",
-    "name" : "Contract EU Funds Identifier",
+    "name" : "Contract EU Funds Financing Identifier",
     "btId" : "BT-5011",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:SettledContract/efac:Funding/efbc:FinancingIdentifier",
     "xpathRelative" : "efbc:FinancingIdentifier",
@@ -14957,7 +14796,7 @@
       "value" : false,
       "severity" : "ERROR",
       "constraints" : [ {
-        "noticeTypes" : [ "X01", "X02" ],
+        "noticeTypes" : [ "1", "2", "3", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "CEI", "T01", "T02", "X01", "X02" ],
         "value" : true,
         "severity" : "ERROR"
       } ]
@@ -15263,11 +15102,6 @@
         "value" : "{ND-LotAwardCriteria} ${every number:$ordImp in BT-541-Lot[BT-5421-Lot == 'ord-imp'] satisfies($ordImp <= count(BT-541-Lot[BT-5421-Lot == 'ord-imp']))}",
         "severity" : "ERROR",
         "message" : "rule|text|BR-BT-00539-0197"
-      }, {
-        "condition" : "{BT-539-Lot} ${BT-541-Lot[BT-5421-Lot == 'ord-imp'] is present}",
-        "value" : "{BT-539-Lot} ${BT-541-Lot[BT-5421-Lot == 'ord-imp'] is unique in /BT-541-Lot[BT-5421-Lot == 'ord-imp']}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00539-0198"
       } ]
     }
   }, {
@@ -16062,20 +15896,6 @@
         "type" : "flat"
       },
       "severity" : "ERROR"
-    },
-    "assert" : {
-      "value" : "{ND-Root} ${TRUE}",
-      "severity" : "ERROR",
-      "constraints" : [ {
-        "condition" : "{ND-LotTenderingTerms} ${BT-01-notice == '32018R1046'}",
-        "value" : "{ND-LotTenderingTerms} ${BT-60-Lot == 'eu-funds'}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00060-0070"
-      }, {
-        "value" : "{ND-LotTenderingTerms} ${(BT-01-notice == '32016D0002' and BT-60-Lot == 'eu-funds') or not(BT-01-notice == '32016D0002')}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-BT-00060-0071"
-      } ]
     }
   }, {
     "id" : "BT-610-Procedure-Buyer",
@@ -16704,7 +16524,7 @@
   }, {
     "id" : "BT-660-LotResult",
     "parentNodeId" : "ND-LotResultFAValues",
-    "name" : "Framework Estimated Value",
+    "name" : "Framework Re-estimated Value",
     "btId" : "BT-660",
     "xpathAbsolute" : "/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FrameworkAgreementValues/efbc:ReestimatedValueAmount",
     "xpathRelative" : "efbc:ReestimatedValueAmount",
@@ -18191,7 +18011,7 @@
   }, {
     "id" : "BT-738-notice",
     "parentNodeId" : "ND-Root",
-    "name" : "Notice Publication Date Preferred",
+    "name" : "Notice Preferred Publication Date",
     "btId" : "BT-738",
     "xpathAbsolute" : "/*/cbc:RequestedPublicationDate",
     "xpathRelative" : "cbc:RequestedPublicationDate",
@@ -18210,7 +18030,7 @@
       "severity" : "ERROR",
       "constraints" : [ {
         "condition" : "{ND-Root} ${BT-738-notice is present}",
-        "value" : "{ND-Root} ${((BT-738-notice - BT-05(a)-notice) < P92D) and (BT-738-notice > BT-05(a)-notice)}",
+        "value" : "{ND-Root} ${((BT-738-notice - BT-05(a)-notice) < P60D) and ((BT-738-notice - BT-05(a)-notice) >= P2D)}",
         "severity" : "ERROR",
         "message" : "rule|text|BR-BT-00738-0053"
       } ]
@@ -19494,7 +19314,7 @@
   }, {
     "id" : "BT-776-Lot",
     "parentNodeId" : "ND-LotProcurementScope",
-    "name" : "Innovative Procurement",
+    "name" : "Procurement of Innovation",
     "btId" : "BT-776",
     "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType/cbc:ProcurementTypeCode[@listName='innovative-acquisition']",
     "xpathRelative" : "cac:ProcurementAdditionalType/cbc:ProcurementTypeCode[@listName='innovative-acquisition']",
@@ -21148,10 +20968,6 @@
         "severity" : "ERROR",
         "message" : "rule|text|BR-OPP-00070-0109"
       }, {
-        "value" : "{ND-RootExtension} ${((BT-02-notice == 'corr') and (OPP-070-notice in (corr))) or not(BT-02-notice == 'corr')}",
-        "severity" : "ERROR",
-        "message" : "rule|text|BR-OPP-00070-0110"
-      }, {
         "value" : "{ND-RootExtension} ${((BT-02-notice == 'pin-buyer') and (OPP-070-notice in (pin-buyer))) or not(BT-02-notice == 'pin-buyer')}",
         "severity" : "ERROR",
         "message" : "rule|text|BR-OPP-00070-0111"
@@ -21809,12 +21625,13 @@
     }
   }, {
     "id" : "OPT-090-Lot",
-    "parentNodeId" : "ND-LotBuyerCategories",
+    "parentNodeId" : "ND-FABuyerCategories",
     "name" : "Buyer Categories",
     "btId" : "OPT-090",
-    "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:FrameworkAgreement/cac:SubsequentProcessTenderRequirement/cbc:Name",
+    "xpathAbsolute" : "/*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:FrameworkAgreement/cac:SubsequentProcessTenderRequirement[cbc:Name/text()='buyer-categories']/cbc:Name",
     "xpathRelative" : "cbc:Name",
     "type" : "code",
+    "presetValue" : "buyer-categories",
     "repeatable" : {
       "value" : false,
       "severity" : "ERROR"
@@ -22393,6 +22210,7 @@
     "xpathRelative" : "cac:PartyIdentification/cbc:ID",
     "type" : "id",
     "idScheme" : "ORG",
+    "schemeName" : "organization",
     "repeatable" : {
       "value" : false,
       "severity" : "ERROR"
@@ -22451,6 +22269,7 @@
     "xpathRelative" : "cac:PartyIdentification/cbc:ID",
     "type" : "id",
     "idScheme" : "TPO",
+    "schemeName" : "touchpoint",
     "repeatable" : {
       "value" : false,
       "severity" : "ERROR"
@@ -22492,6 +22311,7 @@
     "xpathRelative" : "cbc:ID",
     "type" : "id",
     "idScheme" : "UBO",
+    "schemeName" : "ubo",
     "repeatable" : {
       "value" : false,
       "severity" : "ERROR"
@@ -22533,6 +22353,7 @@
     "xpathRelative" : "cbc:ID",
     "type" : "id",
     "idScheme" : "TPA",
+    "schemeName" : "tendering-party",
     "repeatable" : {
       "value" : false,
       "severity" : "ERROR"
@@ -23486,15 +23307,6 @@
         "severity" : "ERROR"
       } ]
     },
-    "mandatory" : {
-      "value" : false,
-      "severity" : "ERROR",
-      "constraints" : [ {
-        "noticeTypes" : [ "4", "5" ],
-        "value" : true,
-        "severity" : "ERROR"
-      } ]
-    },
     "pattern" : {
       "value" : "^(ORG|TPO)-\\d{4}$",
       "severity" : "ERROR"
@@ -23975,6 +23787,7 @@
     "xpathRelative" : "cbc:ID",
     "type" : "id",
     "idScheme" : "CON",
+    "schemeName" : "contract",
     "repeatable" : {
       "value" : false,
       "severity" : "ERROR"
@@ -24060,6 +23873,7 @@
     "xpathRelative" : "cbc:ID",
     "type" : "id",
     "idScheme" : "TEN",
+    "schemeName" : "tender",
     "repeatable" : {
       "value" : false,
       "severity" : "ERROR"
@@ -24109,6 +23923,7 @@
     "xpathRelative" : "cbc:ID",
     "type" : "id",
     "idScheme" : "RES",
+    "schemeName" : "result",
     "repeatable" : {
       "value" : false,
       "severity" : "ERROR"
@@ -24153,6 +23968,7 @@
     "xpathAbsolute" : "/*/cac:TenderResult/cbc:AwardDate",
     "xpathRelative" : "cac:TenderResult/cbc:AwardDate",
     "type" : "date",
+    "presetValue" : "2000-01-01Z",
     "repeatable" : {
       "value" : false,
       "severity" : "ERROR"

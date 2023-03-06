@@ -132,7 +132,7 @@ def get_column_order(df, drop=()):
         "btId",
         "xpathAbsolute",
         "type",
-        "idScheme",
+        "schemeName",
         "idSchemes",
         "repeatable",
         "mandatory",
@@ -303,7 +303,17 @@ def update_with_sdk(filename, verbose):
         click.echo("\n".join(sorted(f"- {label}" for label in labels.values())))
 
     # Remove or abbreviate columns that do not assist the mapping process and that lengthen the JSON file. See README.
-    drop = ["xpathRelative", "legalType", "maxLength", "forbidden", "assert", "inChangeNotice", "privacy"]
+    drop = [
+        "xpathRelative",
+        "presetValue",
+        "legalType",
+        "maxLength",
+        "idScheme",
+        "forbidden",
+        "assert",
+        "inChangeNotice",
+        "privacy",
+    ]
     df["mandatory"] = df["mandatory"].notna()
     # Simplify these columns if `severity` is the only other top-level key.
     for column in ("repeatable", "pattern"):
