@@ -2141,10 +2141,10 @@
         BG-7: Notice Result
         BG-320: Tender
     eForms guidance: |-
-        Look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and convert to lowercase.
-        [Get the bid for a LotTender](operations.md#get-the-bid-for-a-lottender) and add to the bid's `.countriesOfOrigin` array.
+      1. [Get the bid for a LotTender](operations.md#get-the-bid-for-a-lottender).
+      2. If the value of the field is `1A0` (Kosovo), add 'XK' to the bid's `.countriesOfOrigin` array. Otherwise, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the bid's `.countriesOfOrigin` array.
     eForms example: <efac:Origin><efbc:AreaCode listName="eforms-country">ITA</efbc:AreaCode></efac:Origin>
-    OCDS example: '{"bids":{"details":[{"countriesOfOrigin":["it"]}]}}'
+    OCDS example: '{"bids":{"details":[{"countriesOfOrigin":["IT"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: BT-193-Tender
     parentNodeId: ND-LotTender
