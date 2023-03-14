@@ -2142,9 +2142,9 @@
         BG-320: Tender
     eForms guidance: |-
         Look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and convert to lowercase.
-        [Get the bid for a LotTender](operations.md#get-the-bid-for-a-lottender) and add to the bid's `.countryOfOrigin` array.
+        [Get the bid for a LotTender](operations.md#get-the-bid-for-a-lottender) and add to the bid's `.countriesOfOrigin` array.
     eForms example: <efac:Origin><efbc:AreaCode listName="eforms-country">ITA</efbc:AreaCode></efac:Origin>
-    OCDS example: '{"bids":{"details":[{"countryOfOrigin":["it"]}]}}'
+    OCDS example: '{"bids":{"details":[{"countriesOfOrigin":["it"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: BT-193-Tender
     parentNodeId: ND-LotTender
