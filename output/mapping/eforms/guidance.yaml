@@ -6250,9 +6250,9 @@
         BG-2: Purpose
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/F17_DIVISION_INTO_LOTS/F17_DIV_INTO_LOT_YES/F17_ANNEX_B/NATURE_QUANTITY_SCOPE/TOTAL_QUANTITY_OR_SCOPE
-    eForms guidance: '[Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot), map to its `.quantity`, and add the value of `ancestor::cac:ProcurementProjectLot/cac:ID` to its `.relatedLots`.'
+    eForms guidance: '[Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot) and map to its `.quantity`.'
     eForms example: <cbc:EstimatedOverallContractQuantity unitCode="TNE">45000</cbc:EstimatedOverallContractQuantity>
-    OCDS example: '{"tender":{"items":[{"quantity":45000,"relatedLots":["LOT-0001"]}]}}'
+    OCDS example: '{"tender":{"items":[{"quantity":45000,"relatedLot":"LOT-0001"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#quantitySection
 -   id: BT-26(a)-Lot
     parentNodeId: ND-LotAdditionalClassification
@@ -6272,7 +6272,7 @@
 
         [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot). For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update a corresponding `Classification` object in the item's `.additionalClassifications` array, capitalize and map to the classification's `.scheme`.
     eForms example: <cac:AdditionalCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311200</cbc:ItemClassificationCode></cac:AdditionalCommodityClassification>
-    OCDS example: '{"tender":{"items":[{"additionalClassifications":[{"scheme":"CPV"}],"relatedLots":["LOT-0001"]}]}}'
+    OCDS example: '{"tender":{"items":[{"additionalClassifications":[{"scheme":"CPV"}],"relatedLot":"LOT-0001"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#classificationSection
 -   id: BT-26(a)-Part
     parentNodeId: ND-PartAdditionalClassification
@@ -6335,7 +6335,7 @@
         This field maps to the same object as created for BT-262-Lot.
         [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot) and map to the item's `.classification.scheme`.
     eForms example: <cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification>
-    OCDS example: '{"tender":{"items":[{"classification":{"scheme":"CPV"},"relatedLots":["LOT-0001"]}]}}'
+    OCDS example: '{"tender":{"items":[{"classification":{"scheme":"CPV"},"relatedLot":"LOT-0001"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#classificationSection
 -   id: BT-26(m)-Part
     parentNodeId: ND-PartMainClassificationCode
