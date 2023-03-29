@@ -1446,16 +1446,11 @@
     TED guidance:
     - Add a `ParticipationFee` object to the `tender.participationFees` array, set its `.type` to 'document', and set its `.id` to '1'.
     eForms guidance: |-
-        This field maps to the same `ParticipationFee` objects as created for BT-615-Lot and BT-707-Lot.
-
-        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
-
-        For each `cac:CallForTendersDocumentReference`, add or update the corresponding `ParticipationFee` object in the lot's `participationFees` array, and:
-
-        - Set its `.type` to 'document'.
-        - Map `cac:CallForTendersDocumentReference/cdc:ID` to its `.id`.
+        [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
+        Set its `.documentType` to 'biddingDocuments' and set it's `.accessDetails` to 'Restricted.'.
+        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and add its `id` to the document's `.relatedLots`.
     eForms example: <cac:CallForTendersDocumentReference><cbc:DocumentType>restricted-document</cbc:DocumentType></cac:CallForTendersDocumentReference>
-    OCDS example: '{"tender":{"lots":[{"participationFees":[{"id":"1","type":"document"}]}]}}'
+    OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","documentType":"biddingDocuments","accessDetails":"Restricted.","relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
 -   id: BT-14-Part
     parentNodeId: ND-PartProcurementDocument
@@ -1470,13 +1465,10 @@
     Business groups:
         BG-101: Procurement Documents
     eForms guidance: |-
-        This field maps to the same `ParticipationFee` objects as created for BT-615-Lot and BT-707-Lot.
-        For each `cac:CallForTendersDocumentReference`, add or update the corresponding `ParticipationFee` object in the `tender.participationFees` array and:
-
-        - Set its `.type` to 'document'.
-        - Map `cac:CallForTendersDocumentReference/cdc:ID` to its `.id`.
+        [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
+        Set its `.documentType` to 'biddingDocuments' and set it's `.accessDetails` to 'Restricted.'.
     eForms example: <cac:CallForTendersDocumentReference><cbc:DocumentType>restricted-document</cbc:DocumentType></cac:CallForTendersDocumentReference>
-    OCDS example: '{"tender":{"participationFees":[{"id":"1","type":["document"]}]}}'
+    OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","documentType":"biddingDocuments","accessDetails":"Restricted."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
 -   id: BT-140-notice
     parentNodeId: ND-ChangeReason
@@ -1684,7 +1676,7 @@
 
         Map to the document's `.url` and set its `.documentType` to 'biddingDocuments'.
 
-        Add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to `.relatedLots`.
+        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and add its `id` to the document's `.relatedLots`.
     eForms example: <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:CallForTendersDocumentReference> <cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID> <cac:Attachment> <cac:ExternalReference> <cbc:URI>https://mywebsite.com/proc/2019024/accessinfo</cbc:URI> </cac:ExternalReference> </cac:Attachment> </cac:CallForTendersDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","documentType":"biddingDocuments","relatedLots":["LOT-0001"],"url":"https://mywebsite.com/proc/2019024/accessinfo"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
@@ -2039,8 +2031,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/CONTRACTING_BODY/URL_PARTICIPATION
     TED guidance:
     - 'Add ''electronicSubmission'' to `tender.submissionMethod`, and map to `tender.submissionMethodDetails`\n\nIf *to the following address* is selected, this results in a loss of structure. (WARNING #27)'
-    eForms guidance: |-
-        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.submissionTerms.electronicSubmissionPolicy`.
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.submissionTerms.electronicSubmissionPolicy`.'
     eForms example: <cbc:SubmissionMethodCode listName="esubmission">allowed</cbc:SubmissionMethodCode>
     OCDS example: '{"tender":{"lots":[{"submissionMethod":"electronicSubmission","submissionTerms":{"electronicSubmissionPolicy":"allowed"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#eSubmissionSection
@@ -2058,7 +2049,7 @@
         BG-320: Tender
     eForms guidance: '[Get the bid for a LotTender](operations.md#get-the-bid-for-a-lottender) and map to the bid''s `.rank`.'
     eForms example: <efac:LotTender><cbc:RankCode>1</cbc:RankCode></efac:LotTender>
-    OCDS example: '{"bids":{"details":[{"rank": 1}]}}'
+    OCDS example: '{"bids":{"details":[{"rank":1}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: BT-1711-Tender
     parentNodeId: ND-LotTender
@@ -2075,7 +2066,7 @@
         BG-320: Tender
     eForms guidance: '[Get the bid for a LotTender](operations.md#get-the-bid-for-a-lottender) and map to the bid''s `.hasRank`.'
     eForms example: <efac:LotTender><efbc:TenderRankedIndicator>true</efbc:TenderRankedIndicator></efac:LotTender>
-    OCDS example: '{"bids":{"details":[{"hasRank": true}]}}'
+    OCDS example: '{"bids":{"details":[{"hasRank":true}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: BT-18-Lot
     parentNodeId: ND-TenderRecipient
@@ -2139,8 +2130,8 @@
         BG-7: Notice Result
         BG-320: Tender
     eForms guidance: |-
-      1. [Get the bid for a LotTender](operations.md#get-the-bid-for-a-lottender).
-      2. If the value of the field is `1A0` (Kosovo), add 'XK' to the bid's `.countriesOfOrigin` array. Otherwise, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and add to the bid's `.countriesOfOrigin` array.
+        1. [Get the bid for a LotTender](operations.md#get-the-bid-for-a-lottender).
+        1. If the value of the field is `1A0` (Kosovo), add 'XK' to the bid's `.countriesOfOrigin` array. Otherwise, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and add to the bid's `.countriesOfOrigin` array.
     eForms example: <efac:Origin><efbc:AreaCode listName="eforms-country">ITA</efbc:AreaCode></efac:Origin>
     OCDS example: '{"bids":{"details":[{"countriesOfOrigin":["IT"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
@@ -2158,7 +2149,7 @@
         BG-320: Tender
     eForms guidance: '[Get the bid for a LotTender](operations.md#get-the-bid-for-a-lottender) and set the bid''s `.variant` to `true`.'
     eForms example: <efac:LotTender><efbc:TenderVariantIndicator>true</efbc:TenderVariantIndicator></efac:LotTender>
-    OCDS example: '{"bids":{"details":[{"variant": true}]}}'
+    OCDS example: '{"bids":{"details":[{"variant":true}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: BT-195(BT-09)-Procedure
     parentNodeId: ND-CrossBorderLawUnpublish
@@ -9747,13 +9738,11 @@
     TED guidance:
     - Add a `ParticipationFee` object to the `tender.participationFees` array, set its `.type` to 'document', and set its `.id` to '1'.
     eForms guidance: |-
-        This field maps to the same `ParticipationFee` objects as created for BT-14-Lot and BT-707-Lot.
-
-        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
-
-        For each `cac:CallForTendersDocumentReference`, add or update the corresponding `ParticipationFee` object in the lot's `participationFees` array and map to its `.description`. If the document type label has already been mapped to this field append to it with ' - ' (space, dash, space).
+        [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
+        Map to its `.accessDetailsURL`.
+        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and add its `id` to the document's `.relatedLots`.
     eForms example: <cac:ExternalReference><cbc:URI>https://mywebsite.com/proc/2019024/accessinfo</cbc:URI></cac:ExternalReference>
-    OCDS example: '{"tender":{"lots":[{"participationFees":[{"description":"https://mywebsite.com/proc/2019024/accessinfo"}]}]}}'
+    OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","accessDetailsURL":"https://mywebsite.com/proc/2019024/accessinfo","relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
 -   id: BT-615-Part
     parentNodeId: ND-PartRestrictedDocuments
@@ -9773,10 +9762,10 @@
     TED guidance:
     - Add a `ParticipationFee` object to the `tender.participationFees` array, set its `.type` to 'document', and set its `.id` to '1'.
     eForms guidance: |-
-        This field maps to the same objects as created for BT-14-Part and BT-707-Part.
-        For each `cac:CallForTendersDocumentReference`, add or update the corresponding `ParticipationFee` object in the `participationFees` array and map to its `.description`.
+        [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
+        Map to its `.accessDetailsURL`.
     eForms example: <cac:ExternalReference><cbc:URI>https://mywebsite.com/proc/2019024/accessinfo</cbc:URI></cac:ExternalReference>
-    OCDS example: '{"tender":{"participationFees":[{"description":"https://mywebsite.com/proc/2019024/accessinfo"}]}}'
+    OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","accessDetailsURL":"https://mywebsite.com/proc/2019024/accessinfo"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
 -   id: BT-625-Lot
     parentNodeId: ND-LotProcurementScope
@@ -10244,13 +10233,11 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_CONCESSIONAIRE_DEFENCE/FD_CONTRACT_CONCESSIONAIRE_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_SUB_DEFENCE/AWARD_CRITERIA_CONTRACT_NOTICE_INFORMATION_DEFENCE
     eForms guidance: |-
-        This field maps to the same `ParticipationFee` objects as created for BT-14-Lot and BT-615-Lot.
-
-        - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
-        - For each `cac:CallForTendersDocumentReference`, add or update the corresponding `ParticipationFee` object in the lot's `.participationFees` array.
-        - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/communication-justification) and map it to the `ParticipationFee` object's `.description`.
+        [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
+        Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/communication-justification) and map to the document's `.accessDetails`.
+        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and add its `id` to the document's `.relatedLots`.
     eForms example: <cac:CallForTendersDocumentReference><cbc:DocumentTypeCode listName="communication-justification">ipr-iss</cbc:DocumentTypeCode></cac:CallForTendersDocumentReference>
-    OCDS example: '{"tender":{"lots":[{"participationFees":[{"description":"Intellectual property right issues"}]}]}}'
+    OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","accessDetails":"Restricted. Intellectual property rights issues","relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
 -   id: BT-707-Part
     parentNodeId: ND-PartRestrictedDocuments
@@ -10265,12 +10252,10 @@
     Business groups:
         BG-101: Procurement Documents
     eForms guidance: |-
-        This field maps to the same `ParticipationFee` objects as created for BT-14-Part and BT-615-Part.
-
-        - For each `cac:CallForTendersDocumentReference`, add or update the corresponding `ParticipationFee` object in the `.participationFees` array.
-        - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/communication-justification) and map to the `ParticipationFee` object's `.description`.
+        [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
+        Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/communication-justification) and map to the document's `.accessDetails`.
     eForms example: <cac:CallForTendersDocumentReference><cbc:DocumentTypeCode listName="communication-justification">ipr-iss</cbc:DocumentTypeCode></cac:CallForTendersDocumentReference>
-    OCDS example: '{"tender":{"participationFees":[{"description":"Intellectual property right issues"}]}}'
+    OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","accessDetails":"Restricted. Intellectual property rights issues"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
 -   id: BT-708-Lot
     parentNodeId: ND-LotProcurementDocument
@@ -11309,7 +11294,7 @@
         BG-4: Winner
     eForms guidance: '[Get the organization for the company](operations.md#get-the-organization-for-a-company) and map to the organization''s `.details.listedOnRegulatedMarket`.'
     eForms example: <efac:Organization><efbc:ListedOnRegulatedMarketIndicator>false</efbc:ListedOnRegulatedMarketIndicator></efac:Organization>
-    OCDS example: '{"parties":[{"details":{"listedOnRegulatedMarket":"false"}}]}'
+    OCDS example: '{"parties":[{"details":{"listedOnRegulatedMarket":false}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: BT-747-Lot
     parentNodeId: ND-SelectionCriteria
