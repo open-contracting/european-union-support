@@ -9795,7 +9795,7 @@
         - Set the item's `.unit.scheme` to ['EU Measurement unit'](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/measurement-unit).
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/measurement-unit) and map it to `.unit.name`.
     eForms example: <cbc:EstimatedOverallContractQuantity unitCode="TNE">45000</cbc:EstimatedOverallContractQuantity>
-    OCDS example: '{"tender":{"items":[{"unit":{"scheme":"EU Measurement unit","name":"tonne"}}]}}'
+    OCDS example: '{"tender":{"items":[{"unit":{"id":"TNE","scheme":"EU Measurement unit","name":"tonne"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#quantitySection
 -   id: BT-63-Lot
     parentNodeId: ND-LotTenderingTerms
