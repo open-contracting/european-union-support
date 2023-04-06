@@ -805,8 +805,8 @@ def build(directory):
 
         # Replace within-page anchors with HTML anchors, to avoid "reference target not found".
         guidance = re.sub(
-            r"\[([^\]]+)\]\((?:<([^>]+)>|([^)]+))\)",
-            lambda match: f'<a href="{match.group(2) or match.group(3)}">{match.group(1)}</a>',
+            r"\[([^\]]+)\]\(#(?:<([^>]+)>|([^)]+))\)",
+            lambda match: f'<a href="#{match.group(2) or match.group(3)}">{match.group(1)}</a>',
             field["eForms guidance"],
         )
 
