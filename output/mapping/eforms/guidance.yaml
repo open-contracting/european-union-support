@@ -12580,7 +12580,7 @@
     type: indicator
     repeatable: false
     mandatory: false
-    eForms guidance: '[Get the lots for the SettledContract](operations.md#get-the-lots-for-settledcontract) and map to each lot''s `.hasEssentialAssets`.'
+    eForms guidance: '[Get the lots for the SettledContract](operations.md#get-the-lots-for-a-settledcontract) and map to each lot''s `.hasEssentialAssets`.'
     eForms example: <efac:SettledContract><efac:DurationJustification><efbc:ExtendedDurationIndicator>true</efbc:ExtendedDurationIndicator></efac:DurationJustification></efac:SettledContract>
     OCDS example: '{"tender":{"lots":[{"hasEssentialAssets":true}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#settledContractSection
@@ -12595,7 +12595,7 @@
     eForms guidance: |-
         This field maps to the same `EssentialAssets` objects created for OPP-022-Contract and OPP-023-Contract.
 
-        [Get the lots for the SettledContract](operations.md#get-the-lots-for-settledcontract). For each lot, add or update the corresponding `EssentialAssets` object in the lot's `.essentialAssets` array and map to its `.description`.
+        [Get the lots for the SettledContract](operations.md#get-the-lots-for-a-settledcontract). For each lot, add or update the corresponding `EssentialAssets` object in the lot's `.essentialAssets` array and map to its `.description`.
     eForms example: <efac:SettledContract><efac:DurationJustification><efac:AssetsList><efac:Asset><efbc:AssetDescription languageID="SPA">Asset 1 blabla</efbc:AssetDescription></efac:Asset></efac:AssetsList></efac:DurationJustification></efac:SettledContract>
     OCDS example: '{"tender":{"lots":[{"essentialAssets":[{"description":"Asset 1 blabla"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#settledContractSection
@@ -12610,7 +12610,7 @@
     eForms guidance: |-
         This field maps to the same `EssentialAssets` objects created for OPP-021-Contract and OPP-023-Contract.
 
-        [Get the lots for the SettledContract](operations.md#get-the-lots-for-settledcontract). For each lot, add or update the corresponding `EssentialAssets` object in the lot's `.essentialAssets` array and map to its `.significance`.
+        [Get the lots for the SettledContract](operations.md#get-the-lots-for-a-settledcontract). For each lot, add or update the corresponding `EssentialAssets` object in the lot's `.essentialAssets` array and map to its `.significance`.
     eForms example: <efac:SettledContract><efac:DurationJustification><efac:AssetsList><efac:Asset><efbc:AssetSignificance languageID="SPA">30</efbc:AssetSignificance></efac:Asset></efac:AssetsList></efac:DurationJustification></efac:SettledContract>
     OCDS example: '{"tender":{"lots":[{"essentialAssets":[{"significance":"30"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#settledContractSection
@@ -12625,7 +12625,7 @@
     eForms guidance: |-
         This field maps to the same `EssentialAssets` objects created for OPP-021-Contract and OPP-022-Contract.
 
-        [Get the lots for the SettledContract](operations.md#get-the-lots-for-settledcontract). For each lot, add or update the corresponding `EssentialAssets` object in the lot's `.essentialAssets` array and map to its `.predominance`.
+        [Get the lots for the SettledContract](operations.md#get-the-lots-for-a-settledcontract). For each lot, add or update the corresponding `EssentialAssets` object in the lot's `.essentialAssets` array and map to its `.predominance`.
     eForms example: <efac:SettledContract><efac:DurationJustification><efac:AssetsList><efac:Asset><efbc:AssetPredominance languageID="SPA">40</efbc:AssetPredominance></efac:Asset></efac:AssetsList></efac:DurationJustification></efac:SettledContract>
     OCDS example: '{"tender":{"lots":[{"essentialAssets":[{"predominance":"40"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#settledContractSection
