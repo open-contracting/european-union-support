@@ -10104,10 +10104,10 @@
     - TED_EXPORT/FORM_SECTION/F07_2014/LEFTI/QUALIFICATION/CONDITIONS
     TED guidance:
     - Add to the `tender.otherRequirements.qualificationSystemConditions` array
-    eForms guidance: Add an `SelectionCriterion` object to the `tender.exclusionGrounds` array and map to its `.type`.
-    eForms example: <cac:SpecificTendererRequirement><cbc:TendererRequirementTypeCode listName="exclusion-ground">CRITERION.EXCLUSION.NATIONAL.OTHER</cbc:TendererRequirementTypeCode></cac:SpecificTendererRequirement>
-    OCDS example: '{"tender":{"exclusionGrounds":[{"type":"CRITERION.EXCLUSION.NATIONAL.OTHER"}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#reservedParticipationSection
+    eForms guidance: Add an `ExclusionCriterion` object to the `tender.exclusionGrounds.criteria` array and map to its `.type`.
+    eForms example: <cac:SpecificTendererRequirement><cbc:TendererRequirementTypeCode listName="exclusion-ground">crime-org</cbc:TendererRequirementTypeCode></cac:SpecificTendererRequirement>
+    OCDS example: '{"tender":{"exclusionGrounds":{"criteria":[{"type":"crime-org"}]}}}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#exclusionGrounds
 -   id: BT-67(b)-Procedure
     parentNodeId: ND-ExclusionGrounds
     name: Exclusion Grounds
@@ -10119,10 +10119,10 @@
     Description: 'The brief description of criteria regarding the personal situation of tenderers that may lead to their exclusion. This shall include a list of all such criteria and indicate required information (e.g. self-declaration, documentation). This may also include specific national exclusion grounds. '
     Business groups:
         BG-701: Exclusion Grounds
-    eForms guidance: Map to the relevant `tender.exclusionGrounds` `SelectionCriterion` object's `.description`.
+    eForms guidance: Map to the relevant `tender.exclusionGrounds.criteria` `SelectionCriterion` object's `.description`.
     eForms example: <cac:SpecificTendererRequirement><cbc:Description languageID="ENG">Applicants not satisfying ...</cbc:Description></cac:SpecificTendererRequirement>
-    OCDS example: '{"tender":{"exclusionGrounds":[{"description":"Applicants not satisfying..."}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#reservedParticipationSection
+    OCDS example: '{"tender":{"exclusionGrounds":{"criteria":[{"description":"Applicants not satisfying..."}]}}}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#exclusionGrounds
 -   id: BT-70-Lot
     parentNodeId: ND-ExecutionRequirements
     name: Terms Performance
