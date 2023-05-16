@@ -313,6 +313,7 @@ def update_with_sdk(filename, verbose):
         "assert",
         "inChangeNotice",
         "privacy",
+        "xsdSequenceOrder",
     ]
     df["mandatory"] = df["mandatory"].notna()
     # Simplify these columns if `severity` is the only other top-level key.

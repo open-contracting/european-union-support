@@ -33,6 +33,7 @@ parentNodeId | eForms SDK | Identifier of the node (XML element) that contains t
 name | eForms SDK | Short name of the field. |
 btId | eForms SDK | Identifier of the business term to which the field corresponds. |
 xpathAbsolute | eForms SDK | Location of the field in an XML notice, as an absolute XPath. | Should appear in the `eForms example`.
+xsdSequenceOrder | eForms SDK | Position of each XML element relative to its siblings. |
 type | eForms SDK | Technical data type of the field. | Should match the OCDS field's type.
 schemeName | eForms SDK | Indicates the value that should be indicated for this field in the `schemeName` attribute in the XML.
 idSchemes | eForms SDK | Indicates the identifier schemes for this `id-ref` field.
