@@ -706,7 +706,7 @@
     type: id
     repeatable: false
     mandatory: false
-    pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|[1-9](\d{0,7})-(19|20)\d\d)$
+    pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|(\d{1,8})-(19|20)\d\d)$
     Description: The identifier of a prior information notice or another similar notice related to this notice.
     Business groups:
         BG-125: Previous Planning
@@ -730,7 +730,7 @@
     type: id
     repeatable: false
     mandatory: false
-    pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|[1-9](\d{0,7})-(19|20)\d\d)$
+    pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|(\d{1,8})-(19|20)\d\d)$
     Description: The identifier of a prior information notice or another similar notice related to this notice.
     Business groups:
         BG-125: Previous Planning
@@ -961,7 +961,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:ParticipationRequestReceptionPeriod/cbc:EndDate
     type: date
     repeatable: false
-    mandatory: false
+    mandatory: true
     pattern: ^(?:(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:(?:0[13578]|1[02]))-31|(?:(?:0[13-9]|1[0-2])-(?:29|30))))|(?:(?:(?:(?:(?:1[6-9]|[2-9]\d)(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))-02-29))|(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:0[1-9])|(?:1[0-2]))-(?:0[1-9]|1\d|2[0-8])))(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
     Description: The time limit for receipt of requests to participate.
     Business groups:
@@ -979,7 +979,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:ParticipationRequestReceptionPeriod/cbc:EndTime
     type: time
     repeatable: false
-    mandatory: false
+    mandatory: true
     pattern: ^(([01]\d|2[0-3])((:[0-5]\d){1,2}(\.\d+)?)?)(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
     Description: The time limit for receipt of requests to participate.
     Business groups:
@@ -998,7 +998,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:OpenTenderEvent/cbc:OccurrenceDate
     type: date
     repeatable: false
-    mandatory: false
+    mandatory: true
     pattern: ^(?:(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:(?:0[13578]|1[02]))-31|(?:(?:0[13-9]|1[0-2])-(?:29|30))))|(?:(?:(?:(?:(?:1[6-9]|[2-9]\d)(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))-02-29))|(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:0[1-9])|(?:1[0-2]))-(?:0[1-9]|1\d|2[0-8])))(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
     Description: The date and time for the public opening of tenders.
     Business groups:
@@ -1019,7 +1019,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:OpenTenderEvent/cbc:OccurrenceTime
     type: time
     repeatable: false
-    mandatory: false
+    mandatory: true
     pattern: ^(([01]\d|2[0-3])((:[0-5]\d){1,2}(\.\d+)?)?)(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
     Description: The date and time for the public opening of tenders.
     Business groups:
@@ -1388,12 +1388,12 @@
     OCDS example: '{"bids":{"details":[{"id":"TEN-0001","relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: BT-13716-notice
-    parentNodeId: ND-Change
+    parentNodeId: ND-ChangedSection
     name: Change Previous Section Identifier
     btId: BT-13716
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Changes/efac:Change/efbc:ChangedSectionIdentifier
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Changes/efac:Change/efac:ChangedSection/efbc:ChangedSectionIdentifier
     type: id
-    repeatable: true
+    repeatable: false
     mandatory: false
     pattern: ^(PROCEDURE|BUYER|RESULT|((PAR|LOT|GLO|RES|ORG)-\d{4}))$
     Description: An identifier of one or more sections within the changed notice. The information in the change section refers to this section or these sections.
@@ -1645,13 +1645,13 @@
     OCDS example: '{"awards":[{"date":"2021-02-19T23:59:59+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#settledContractSection
 -   id: BT-15-Lot
-    parentNodeId: ND-LotDocumentsReference
+    parentNodeId: ND-LotProcurementDocument
     name: Documents URL
     btId: BT-15
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:CallForTendersDocumentReference[not(cbc:DocumentType/text()='restricted-document')]/cac:Attachment/cac:ExternalReference/cbc:URI
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:CallForTendersDocumentReference/cac:Attachment[not(../cbc:DocumentType/text()='restricted-document')]/cac:ExternalReference/cbc:URI
     type: url
     repeatable: false
-    mandatory: false
+    mandatory: true
     pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
     Description: The internet address for accessing (the non-restricted part of) the procurement documents. For all notices except prior information notices, the address shall give access that is direct (i.e. the exact webpage with the documents, not a general website), unrestricted (e.g. no registration), full (i.e. the procurement documents are complete) and free of charge and the documents shall be available already at the time of the publication of the notice.
     Business groups:
@@ -1681,13 +1681,13 @@
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","documentType":"biddingDocuments","relatedLots":["LOT-0001"],"url":"https://mywebsite.com/proc/2019024/accessinfo"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
 -   id: BT-15-Part
-    parentNodeId: ND-PartDocumentsReference
+    parentNodeId: ND-PartProcurementDocument
     name: Documents URL
     btId: BT-15
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:CallForTendersDocumentReference[not(cbc:DocumentType/text()='restricted-document')]/cac:Attachment/cac:ExternalReference/cbc:URI
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:CallForTendersDocumentReference/cac:Attachment[not(../cbc:DocumentType/text()='restricted-document')]/cac:ExternalReference/cbc:URI
     type: url
     repeatable: false
-    mandatory: false
+    mandatory: true
     pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
     Description: The internet address for accessing (the non-restricted part of) the procurement documents. For all notices except prior information notices, the address shall give access that is direct (i.e. the exact webpage with the documents, not a general website), unrestricted (e.g. no registration), full (i.e. the procurement documents are complete) and free of charge and the documents shall be available already at the time of the publication of the notice.
     Business groups:
@@ -1741,7 +1741,7 @@
     type: id
     repeatable: false
     mandatory: true
-    pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|[1-9](\d{0,7})-(19|20)\d\d)$
+    pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|(\d{1,8})-(19|20)\d\d)$
     Description: An identifier of one or more sections within a previous notice within the procedure. The information in the modification section refers to this section or these sections.
     Business groups:
         BG-77: Modification
@@ -1750,12 +1750,12 @@
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/contract-modification-notice.html
 -   id: BT-1501(s)-Contract
-    parentNodeId: ND-Modification
+    parentNodeId: ND-ModifiedSection
     name: Modification Previous Notice Section Identifier
     btId: BT-1501
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:ContractModification/efac:Change/efbc:ChangedSectionIdentifier
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:ContractModification/efac:Change/efac:ChangedSection/efbc:ChangedSectionIdentifier
     type: id
-    repeatable: true
+    repeatable: false
     mandatory: true
     Description: An identifier of one or more sections within a previous notice within the procedure. The information in the modification section refers to this section or these sections.
     Business groups:
@@ -2383,7 +2383,7 @@
     parentNodeId: ND-GroupReestimatedValueUnpublish
     name: Unpublished Identifier
     btId: BT-195
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:GroupFramework/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='not-ree-val']/efbc:FieldIdentifierCode
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:GroupFramework/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='gro-ree-val']/efbc:FieldIdentifierCode
     type: code
     repeatable: false
     mandatory: false
@@ -2927,6 +2927,22 @@
     eForms example: <efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">buy-rev-typ</efbc:FieldIdentifierCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"field":"buy-rev-typ","id":"buy-rev-typ-RES-0001","name":"Buyer Review Request Irregularity Type"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotResultLevelSection
+-   id: BT-195(BT-660)-LotResult
+    parentNodeId: ND-ReestimatedValueUnpublish
+    name: Unpublished Identifier
+    btId: BT-195
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FrameworkAgreementValues/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='ree-val']/efbc:FieldIdentifierCode
+    type: code
+    repeatable: false
+    mandatory: false
+    codeList: non-publication-identifier
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: BT-195(BT-709)-LotResult
     parentNodeId: ND-MaximalValueUnpublish
     name: Unpublished Identifier
@@ -3403,7 +3419,7 @@
     parentNodeId: ND-GroupReestimatedValueUnpublish
     name: Unpublished Justification Description
     btId: BT-196
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:GroupFramework/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='not-ree-val']/efbc:ReasonDescription
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:GroupFramework/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='gro-ree-val']/efbc:ReasonDescription
     type: text-multilingual
     repeatable: false
     mandatory: false
@@ -3819,6 +3835,21 @@
     eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationale":"Information delayed publication because of ..."}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotResultLevelSection
+-   id: BT-196(BT-660)-LotResult
+    parentNodeId: ND-ReestimatedValueUnpublish
+    name: Unpublished Justification Description
+    btId: BT-196
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FrameworkAgreementValues/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='ree-val']/efbc:ReasonDescription
+    type: text-multilingual
+    repeatable: false
+    mandatory: false
+    Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: BT-196(BT-709)-LotResult
     parentNodeId: ND-MaximalValueUnpublish
     name: Unpublished Justification Description
@@ -4240,7 +4271,7 @@
     parentNodeId: ND-GroupReestimatedValueUnpublish
     name: Unpublished Justification Code
     btId: BT-197
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:GroupFramework/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='not-ree-val']/cbc:ReasonCode
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:GroupFramework/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='gro-ree-val']/cbc:ReasonCode
     type: code
     repeatable: false
     mandatory: false
@@ -4684,6 +4715,22 @@
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotResultLevelSection
+-   id: BT-197(BT-660)-LotResult
+    parentNodeId: ND-ReestimatedValueUnpublish
+    name: Unpublished Justification Code
+    btId: BT-197
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FrameworkAgreementValues/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='ree-val']/cbc:ReasonCode
+    type: code
+    repeatable: false
+    mandatory: false
+    codeList: non-publication-justification
+    Description: The justification for not immediately publishing a field.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: BT-197(BT-709)-LotResult
     parentNodeId: ND-MaximalValueUnpublish
     name: Unpublished Justification Code
@@ -5119,7 +5166,7 @@
     parentNodeId: ND-GroupReestimatedValueUnpublish
     name: Unpublished Access Date
     btId: BT-198
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:GroupFramework/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='not-ree-val']/efbc:PublicationDate
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:GroupFramework/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='gro-ree-val']/efbc:PublicationDate
     type: date
     repeatable: false
     mandatory: false
@@ -5561,6 +5608,22 @@
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotResultLevelSection
+-   id: BT-198(BT-660)-LotResult
+    parentNodeId: ND-ReestimatedValueUnpublish
+    name: Unpublished Access Date
+    btId: BT-198
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FrameworkAgreementValues/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='ree-val']/efbc:PublicationDate
+    type: date
+    repeatable: false
+    mandatory: false
+    pattern: ^(?:(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:(?:0[13578]|1[02]))-31|(?:(?:0[13-9]|1[0-2])-(?:29|30))))|(?:(?:(?:(?:(?:1[6-9]|[2-9]\d)(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))-02-29))|(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:0[1-9])|(?:1[0-2]))-(?:0[1-9]|1\d|2[0-8])))(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
+    Description: The later date at which the originally unpublished field shall be published.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: BT-198(BT-709)-LotResult
     parentNodeId: ND-MaximalValueUnpublish
     name: Unpublished Access Date
@@ -5972,7 +6035,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cbc:ID
     type: id
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: 'The internal identifier used for files regarding the procurement procedure or lot before a procedure identifier is given (e.g. coming from the buyer''s document management system or procurement planning system). '
     Business groups:
         BG-2: Purpose
@@ -6787,7 +6850,7 @@
     name: Lots Max Allowed
     btId: BT-31
     xpathAbsolute: /*/cac:TenderingTerms/cac:LotDistribution/cbc:MaximumLotsSubmittedNumeric
-    type: number
+    type: integer
     repeatable: false
     mandatory: false
     Description: The maximum number of lots for which one tenderer can submit tenders.
@@ -6866,7 +6929,7 @@
     name: Lots Max Awarded
     btId: BT-33
     xpathAbsolute: /*/cac:TenderingTerms/cac:LotDistribution/cbc:MaximumLotsAwardedNumeric
-    type: number
+    type: integer
     repeatable: false
     mandatory: false
     Description: The maximum number of lots for which contract(s) can be awarded to one tenderer.
@@ -9715,13 +9778,13 @@
     OCDS example: '{"planning":{"budget":{"finance":[{"description":"This project will be financed ..."}]}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#EUFundsSection
 -   id: BT-615-Lot
-    parentNodeId: ND-LotRestrictedDocuments
+    parentNodeId: ND-LotProcurementDocument
     name: Documents Restricted URL
     btId: BT-615
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:CallForTendersDocumentReference[cbc:DocumentType/text()='restricted-document']/cac:Attachment/cac:ExternalReference/cbc:URI
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:CallForTendersDocumentReference/cac:Attachment[../cbc:DocumentType/text()='restricted-document']/cac:ExternalReference/cbc:URI
     type: url
     repeatable: false
-    mandatory: false
+    mandatory: true
     pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
     Description: The internet address with information on accessing the restricted (part of the) procurement documents.
     Business groups:
@@ -9745,13 +9808,13 @@
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","accessDetailsURL":"https://mywebsite.com/proc/2019024/accessinfo","relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
 -   id: BT-615-Part
-    parentNodeId: ND-PartRestrictedDocuments
+    parentNodeId: ND-PartProcurementDocument
     name: Documents Restricted URL
     btId: BT-615
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:CallForTendersDocumentReference[cbc:DocumentType/text()='restricted-document']/cac:Attachment/cac:ExternalReference/cbc:URI
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:CallForTendersDocumentReference/cac:Attachment[../cbc:DocumentType/text()='restricted-document']/cac:ExternalReference/cbc:URI
     type: url
     repeatable: false
-    mandatory: false
+    mandatory: true
     pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
     Description: The internet address with information on accessing the restricted (part of the) procurement documents.
     Business groups:
@@ -10219,13 +10282,13 @@
     OCDS example: '{"parties":[{"beneficialOwners":[{"nationality":"DE"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#ultimateBeneficialOwnerSection
 -   id: BT-707-Lot
-    parentNodeId: ND-LotRestrictedDocuments
+    parentNodeId: ND-LotProcurementDocument
     name: Documents Restricted Justification
     btId: BT-707
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:CallForTendersDocumentReference[cbc:DocumentType/text()='restricted-document']/cbc:DocumentTypeCode
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:CallForTendersDocumentReference/cbc:DocumentTypeCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: communication-justification
     Description: The justification for restricting access to certain procurement documents.
     Business groups:
@@ -10240,10 +10303,10 @@
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","accessDetails":"Restricted. Intellectual property rights issues","relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
 -   id: BT-707-Part
-    parentNodeId: ND-PartRestrictedDocuments
+    parentNodeId: ND-PartProcurementDocument
     name: Documents Restricted Justification
     btId: BT-707
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:CallForTendersDocumentReference[cbc:DocumentType/text()='restricted-document']/cbc:DocumentTypeCode
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:CallForTendersDocumentReference/cbc:DocumentTypeCode
     type: code
     repeatable: false
     mandatory: false
@@ -11603,7 +11666,7 @@
     type: id
     repeatable: false
     mandatory: false
-    pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|[1-9](\d{0,7})-(19|20)\d\d)$
+    pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|(\d{1,8})-(19|20)\d\d)$
     Description: The reference to the version of the previous notice that should be changed. This helps, for example, to keep track of versions of notices or changes to notices before publication.
     Business groups:
         BG-9: Change
@@ -12541,7 +12604,7 @@
     type: id
     repeatable: false
     mandatory: false
-    pattern: ^[1-9](\d{0,7})-(19|20)\d\d$
+    pattern: ^(\d{1,8})-(19|20)\d\d$
     eForms guidance: Discard.
     eForms example: <efac:Publication><efbc:NoticePublicationID schemeName="ojs-notice-id">12345678-2023</efbc:NoticePublicationID></efac:Publication>
     OCDS example: ''
@@ -12791,7 +12854,7 @@
     type: id
     repeatable: true
     mandatory: false
-    pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|[1-9](\d{0,7})-(19|20)\d\d)$
+    pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|(\d{1,8})-(19|20)\d\d)$
     eForms guidance: '[Reference a previous publication](operations.md#reference-a-previous-publication). If OPP-090-Procedure is repeated set the relatedProcess''s `id` incrementally.'
     eForms example: <cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID></cac:NoticeDocumentReference>
     OCDS example: '{"relatedProcesses":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"123e4567-e89b-12d3-a456-426614174000-06"}]}'
@@ -12867,6 +12930,19 @@
     eForms example: <cac:CallForTendersDocumentReference><cbc:DocumentStatusCode listName="linguistic-status">official</cbc:DocumentStatusCode></cac:CallForTendersDocumentReference>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
+-   id: OPT-060-Lot
+    parentNodeId: ND-LotTenderingTerms
+    name: Execution Requirements Factor
+    btId: OPT-060
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:ContractExecutionRequirement/cbc:ExecutionRequirementCode[@listName='conditions']
+    type: code
+    repeatable: false
+    mandatory: true
+    codeList: conditions
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: OPT-070-Lot
     parentNodeId: ND-ReservedExecution
     name: Reserved Execution justification
@@ -12934,7 +13010,7 @@
     type: id
     repeatable: false
     mandatory: false
-    pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|[1-9](\d{0,7})-(19|20)\d\d)$
+    pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|(\d{1,8})-(19|20)\d\d)$
     eForms guidance: |-
         Add a `RelatedProcess` to the contract's `.relatedProcesses` array, and:
 
