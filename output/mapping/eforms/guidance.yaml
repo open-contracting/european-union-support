@@ -10048,9 +10048,9 @@
         BG-711: Contract Terms
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/SUBCONTRACTING/SUBCONTRACT_SHARE/MIN_PERCENTAGE
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.subcontracting.competitiveMinimumPercentage`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.subcontractingTerms.competitiveMinimumPercentage`.'
     eForms example: <cac:AllowedSubcontractTerms><cbc:MinimumPercent>25.5</cbc:MinimumPercent></cac:AllowedSubcontractTerms>
-    OCDS example: '{"tender":{"lots":[{"subcontracting":{"competitiveMinimumPercentage":25.5}}]}}'
+    OCDS example: '{"tender":{"lots":[{"subcontractingTerms":{"competitiveMinimumPercentage":25.5}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#subcontractingObligationSection
 -   id: BT-644-Lot
     parentNodeId: ND-Prize
@@ -10870,9 +10870,9 @@
         BG-711: Contract Terms
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/SUBCONTRACTING/SUBCONTRACT_SHARE/MAX_PERCENTAGE
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.subcontracting.competitiveMaximumPercentage`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.subcontractingTerms.competitiveMaximumPercentage`.'
     eForms example: <cac:AllowedSubcontractTerms><cbc:MaximumPercent>45.5</cbc:MaximumPercent></cac:AllowedSubcontractTerms>
-    OCDS example: '{"tender":{"lots":[{"subcontracting":{"competitiveMaximumPercentage":45.5}}]}}'
+    OCDS example: '{"tender":{"lots":[{"subcontractingTerms":{"competitiveMaximumPercentage":45.5}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#subcontractingObligationSection
 -   id: BT-730-Tender
     parentNodeId: ND-SubcontractedActivity
