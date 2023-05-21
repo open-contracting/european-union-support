@@ -10096,9 +10096,9 @@
         If different from 'none':
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
-        - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/subcontracting-obligation) and map it to the lot's `.subcontracting.description`.
+        - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/subcontracting-obligation) and map it to the lot's `.subcontractingTerms.description`.
     eForms example: <cac:AllowedSubcontractTerms><cbc:SubcontractingConditionsCode listName="subcontracting-obligation">subc-min</cbc:SubcontractingConditionsCode></cac:AllowedSubcontractTerms>
-    OCDS example: '{"tender":{"lots":[{"subcontracting":{"description":"The contractor must subcontract a minimum percentage of the contract using the procedure set out in Title III of Directive 2009/81/EC."}}]}}'
+    OCDS example: '{"tender":{"lots":[{"subcontractingTerms":{"description":"The contractor must subcontract a minimum percentage of the contract using the procedure set out in Title III of Directive 2009/81/EC."}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#subcontractingObligationSection
 -   id: BT-651-Lot
     parentNodeId: ND-NonUBLTenderingTerms
