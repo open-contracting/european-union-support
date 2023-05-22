@@ -2031,7 +2031,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/CONTRACTING_BODY/URL_PARTICIPATION
     TED guidance:
     - 'Add ''electronicSubmission'' to `tender.submissionMethod`, and map to `tender.submissionMethodDetails`\n\nIf *to the following address* is selected, this results in a loss of structure. (WARNING #27)'
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.submissionTerms.electronicSubmissionPolicy`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and set its `.submissionTerms.electronicSubmissionPolicy` according to [the allowed values](https://extensions.open-contracting.org/en/extensions/submissionTerms/master/codelists/).'
     eForms example: <cbc:SubmissionMethodCode listName="esubmission">allowed</cbc:SubmissionMethodCode>
     OCDS example: '{"tender":{"lots":[{"submissionMethod":"electronicSubmission","submissionTerms":{"electronicSubmissionPolicy":"allowed"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#eSubmissionSection
