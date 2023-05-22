@@ -11324,9 +11324,9 @@
     Description: Advanced or qualified electronic signature or seal (as defined in European Parliament and Council Regulation (EU) No 910/2014) is required.
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and set its `.submissionTerms.advancedElectronicSignaturePolicy` to "required".'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and set its `.submissionTerms.advancedElectronicSignatureRequired` to true.'
     eForms example: <cac:ContractExecutionRequirement><cbc:ExecutionRequirementCode listName="esignature-submission">false</cbc:ExecutionRequirementCode></cac:ContractExecutionRequirement>
-    OCDS example: '{"tender":{"lots":[{"submissionTerms":{"advancedElectronicSignaturePolicy":"required"}}]}}'
+    OCDS example: '{"tender":{"lots":[{"submissionTerms":{"advancedElectronicSignatureRequired":true}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#eSignatureSubmissionSection
 -   id: BT-745-Lot
     parentNodeId: ND-NoESubmission
@@ -11998,9 +11998,9 @@
     Description: Tenderers may submit more than one tender (for a given lot).
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and set the lot''s `.submissionTerms.multipleTendersPolicy` according to [the allowed values](https://extensions.open-contracting.org/en/extensions/submissionTerms/master/codelists/).'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot). If the field's value is 'allowed', set the lot''s `.submissionTerms.multipleBidsAllowed` to true. Otherwise, set it to false.'
     eForms example: <cbc:MultipleTendersCode listName="permission">allowed</cbc:MultipleTendersCode>
-    OCDS example: '{"tender":{"lots":[{"submissionTerms":{"multipleTendersPolicy":"allowed"}}]}}'
+    OCDS example: '{"tender":{"lots":[{"submissionTerms":{"multipleBidsAllowed":true}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#multipleTendersSection
 -   id: BT-77-Lot
     parentNodeId: ND-PaymentTerms
