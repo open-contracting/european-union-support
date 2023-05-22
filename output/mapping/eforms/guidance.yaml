@@ -10870,7 +10870,7 @@
         BG-711: Contract Terms
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/SUBCONTRACTING/SUBCONTRACT_SHARE/MAX_PERCENTAGE
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), divide the number by 100 and map to the lot's `.subcontractingTerms.competitiveMaximumPercentage`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), divide the number by 100 and map to the lot''s `.subcontractingTerms.competitiveMaximumPercentage`.'
     eForms example: <cac:AllowedSubcontractTerms><cbc:MaximumPercent>45.5</cbc:MaximumPercent></cac:AllowedSubcontractTerms>
     OCDS example: '{"tender":{"lots":[{"subcontractingTerms":{"competitiveMaximumPercentage":0.455}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#subcontractingObligationSection
@@ -11998,7 +11998,7 @@
     Description: Tenderers may submit more than one tender (for a given lot).
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot). If the field's value is 'allowed', set the lot''s `.submissionTerms.multipleBidsAllowed` to true. Otherwise, set it to false.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot). If the field''s value is ''allowed'', set the lot''s `.submissionTerms.multipleBidsAllowed` to true. Otherwise, set it to false.'
     eForms example: <cbc:MultipleTendersCode listName="permission">allowed</cbc:MultipleTendersCode>
     OCDS example: '{"tender":{"lots":[{"submissionTerms":{"multipleBidsAllowed":true}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#multipleTendersSection
