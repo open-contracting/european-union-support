@@ -10048,7 +10048,7 @@
         BG-711: Contract Terms
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/SUBCONTRACTING/SUBCONTRACT_SHARE/MIN_PERCENTAGE
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), divide the number by 100 and map to the lot's `.subcontractingTerms.competitiveMinimumPercentage`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), divide the number by 100 and map to the lot''s `.subcontractingTerms.competitiveMinimumPercentage`.'
     eForms example: <cac:AllowedSubcontractTerms><cbc:MinimumPercent>25.5</cbc:MinimumPercent></cac:AllowedSubcontractTerms>
     OCDS example: '{"tender":{"lots":[{"subcontractingTerms":{"competitiveMinimumPercentage":0.255}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#subcontractingObligationSection
@@ -10167,9 +10167,9 @@
     - TED_EXPORT/FORM_SECTION/F07_2014/LEFTI/QUALIFICATION/CONDITIONS
     TED guidance:
     - Add to the `tender.otherRequirements.qualificationSystemConditions` array
-    eForms guidance: Add an `ExclusionCriterion` object to the `tender.exclusionGrounds.criteria` array and map to its `.type`.
+    eForms guidance: Add an `ExclusionCriterion` object to the `tender.exclusionGrounds.criteria` array and map to its `.type`. Look up the code's description in the [codelist](https://docs.ted.europa.eu/eforms/latest/reference/code-lists/exclusion-ground.html#_codes) and map to the `ExclusionCriterion` object's `.description`.
     eForms example: <cac:SpecificTendererRequirement><cbc:TendererRequirementTypeCode listName="exclusion-ground">crime-org</cbc:TendererRequirementTypeCode></cac:SpecificTendererRequirement>
-    OCDS example: '{"tender":{"exclusionGrounds":{"criteria":[{"type":"crime-org"}]}}}'
+    OCDS example: '{"tender":{"exclusionGrounds":{"criteria":[{"type":"crime-org","description":"Participation in a criminal organisation"}]}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#exclusionGrounds
 -   id: BT-67(b)-Procedure
     parentNodeId: ND-ExclusionGrounds
@@ -10182,9 +10182,12 @@
     Description: 'The brief description of criteria regarding the personal situation of tenderers that may lead to their exclusion. This shall include a list of all such criteria and indicate required information (e.g. self-declaration, documentation). This may also include specific national exclusion grounds. '
     Business groups:
         BG-701: Exclusion Grounds
-    eForms guidance: Map to the relevant `tender.exclusionGrounds.criteria` `SelectionCriterion` object's `.description`.
+    eForms guidance: |-
+        This field maps to the same `ExclusionCriteria` objects as created for BT-67(a)-Procedure.
+
+        Concatenate to the `ExclusionCriteria` object's `.description` using a colon and a space (": ") as a separator.
     eForms example: <cac:SpecificTendererRequirement><cbc:Description languageID="ENG">Applicants not satisfying ...</cbc:Description></cac:SpecificTendererRequirement>
-    OCDS example: '{"tender":{"exclusionGrounds":{"criteria":[{"description":"Applicants not satisfying..."}]}}}'
+    OCDS example: '{"tender":{"exclusionGrounds":{"criteria":[{"description":"Participation in a criminal organisation: Applicants not satisfying..."}]}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#exclusionGrounds
 -   id: BT-70-Lot
     parentNodeId: ND-ExecutionRequirements
