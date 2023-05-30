@@ -11886,9 +11886,9 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/PROCEDURE/FRAMEWORK
     TED guidance:
     - Set `tender.techniques.hasFrameworkAgreement` to `true`
-    eForms guidance: If different from 'none', [get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and set its `.techniques.hasFrameworkAgreement` to `true`. Map the code according to the [framework agreement method mapping table](codelists/framework-agreement-method) to the lot's `.techniques.method`. Otherwise discard.
+    eForms guidance: If different from 'none', [get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and set its `.techniques.hasFrameworkAgreement` to `true`. Map the code according to the [framework agreement method mapping table](codelists/framework-agreement-method) to the lot's `.techniques.frameworkAgreement.method`. Otherwise discard.
     eForms example: <cac:ContractingSystem><cbc:ContractingSystemTypeCode listName="framework-agreement">fa-wo-rc</cbc:ContractingSystemTypeCode></cac:ContractingSystem>
-    OCDS example: '{"tender":{"lots":[{"techniques":{"hasFrameworkAgreement":true,"method":"withoutReopeningCompetition"}}]}}'
+    OCDS example: '{"tender":{"lots":[{"techniques":{"hasFrameworkAgreement":true,"frameworkAgreement":{"method":"withoutReopeningCompetition"}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#frameworkAgreementSection
 -   id: BT-765-Part
     parentNodeId: ND-PartTenderingProcess
@@ -11904,9 +11904,9 @@
         BG-706: Techniques
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/*[matches(name(),'FRAMEWORK_AGREEMENT')]
-    eForms guidance: If different from 'none', set `tender.techniques.hasFrameworkAgreement` to `true`. Map the code according to the [framework agreement method mapping table](codelists/framework-agreement-method) to `tender.techniques.method`. Otherwise discard.
+    eForms guidance: If different from 'none', set `tender.techniques.hasFrameworkAgreement` to `true`. Map the code according to the [framework agreement method mapping table](codelists/framework-agreement-method) to `tender.techniques.frameworkAgreement.method`. Otherwise discard.
     eForms example: <cac:ContractingSystem><cbc:ContractingSystemTypeCode listName="framework-agreement">fa-wo-rc</cbc:ContractingSystemTypeCode></cac:ContractingSystem>
-    OCDS example: '{"tender":{"techniques":{"hasFrameworkAgreement":true,"method":"withoutReopeningCompetition"}}}'
+    OCDS example: '{"tender":{"techniques":{"hasFrameworkAgreement":true,"frameworkAgreement":{"method":"withoutReopeningCompetition"}}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#frameworkAgreementSection
 -   id: BT-766-Lot
     parentNodeId: ND-LotTenderingProcess
