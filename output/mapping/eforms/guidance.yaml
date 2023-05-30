@@ -9180,7 +9180,7 @@
     - Discard. If the lot's `.contractPeriod` isn't set, then the duration is indefinite.
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.contractPeriod.description`.'
     eForms example: <cac:PlannedPeriod><cbc:DescriptionCode listName="timeperiod">UNLIMITED</cbc:DescriptionCode></cac:PlannedPeriod>
-    OCDS example: '{"tender":{"lots":[{"contractPeriod":{"description":"unknown"}}]}}'
+    OCDS example: '{"tender":{"lots":[{"contractPeriod":{"description":"UNLIMITED"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#plannedPeriodSection
 -   id: BT-538-Part
     parentNodeId: ND-PartDuration
@@ -9196,7 +9196,7 @@
         BG-36: Duration
     eForms guidance: Map to `tender.contractPeriod.description`
     eForms example: <cac:PlannedPeriod><cbc:DescriptionCode listName="timeperiod">UNLIMITED</cbc:DescriptionCode></cac:PlannedPeriod>
-    OCDS example: '{"tender":{"contractPeriod":{"description":"unknown"}}}'
+    OCDS example: '{"tender":{"contractPeriod":{"description":"UNLIMITED"}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#plannedPeriodSection
 -   id: BT-539-Lot
     parentNodeId: ND-LotAwardCriterion
