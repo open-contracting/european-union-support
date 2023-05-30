@@ -13518,9 +13518,9 @@
 
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and add its `id` to the document's `.relatedLots`.
 
-        [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization-technical-identifier-reference) and add 'informationProvider' to is `roles` array.
+        [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization-technical-identifier-reference) and add 'informationService' to is `roles` array.
     eForms example: <ext:UBLExtensions> <ext:UBLExtension> <ext:ExtensionContent> <efext:EformsExtension> <efac:Organizations> <efac:Organization> <efac:Company> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </efac:Company> </efac:Organization> </efac:Organizations> </efext:EformsExtension> </ext:ExtensionContent> </ext:UBLExtension> </ext:UBLExtensions> <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:EmploymentLegislationDocumentReference> <cbc:ID>Empl1</cbc:ID> <cac:IssuerParty> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </cac:IssuerParty> </cac:EmploymentLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
-    OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationProvider"]}],"tender":{"documents":[{"id":"Empl1","publisher":{"id":"ORG-0001"},"relatedLots":["LOT-0001"]}]}}'
+    OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationService"]}],"tender":{"documents":[{"id":"Empl1","publisher":{"id":"ORG-0001"},"relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#tenderingPartySection
 -   id: OPT-301-Lot-EnvironLegis
     parentNodeId: ND-LotEnvironmentalLegislation
@@ -13539,9 +13539,9 @@
 
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and add its `id` to the document's `.relatedLots`.
 
-        [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization-technical-identifier-reference) and add 'informationProvider' to is `roles` array.
+        [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization-technical-identifier-reference) and add 'informationService' to is `roles` array.
     eForms example: <ext:UBLExtensions> <ext:UBLExtension> <ext:ExtensionContent> <efext:EformsExtension> <efac:Organizations> <efac:Organization> <efac:Company> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </efac:Company> </efac:Organization> </efac:Organizations> </efext:EformsExtension> </ext:ExtensionContent> </ext:UBLExtension> </ext:UBLExtensions> <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:EnvironmentalLegislationDocumentReference> <cbc:ID>Env1</cbc:ID> <cac:IssuerParty> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </cac:IssuerParty> </cac:EnvironmentalLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
-    OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationProvider"]}],"tender":{"documents":[{"id":"Env1","publisher":{"id":"ORG-0001"},"relatedLots":["LOT-0001"]}]}}'
+    OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationService"]}],"tender":{"documents":[{"id":"Env1","publisher":{"id":"ORG-0001"},"relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#tenderingPartySection
 -   id: OPT-301-Lot-FiscalLegis
     parentNodeId: ND-LotFiscalLegislation
@@ -13560,9 +13560,9 @@
 
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and add its `id` to the document's `.relatedLots`.
 
-        [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization-technical-identifier-reference) and add 'informationProvider' to is `roles` array.
+        [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization-technical-identifier-reference) and add 'informationService' to is `roles` array.
     eForms example: <ext:UBLExtensions> <ext:UBLExtension> <ext:ExtensionContent> <efext:EformsExtension> <efac:Organizations> <efac:Organization> <efac:Company> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </efac:Company> </efac:Organization> </efac:Organizations> </efext:EformsExtension> </ext:ExtensionContent> </ext:UBLExtension> </ext:UBLExtensions> <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:FiscalLegislationDocumentReference> <cbc:ID>Fiscal1</cbc:ID> <cac:IssuerParty> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </cac:IssuerParty> </cac:FiscalLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
-    OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationProvider"]}],"tender":{"documents":[{"id":"Fiscal1","publisher":{"id":"ORG-0001"},"relatedLots":["LOT-0001"]}]}}'
+    OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationService"]}],"tender":{"documents":[{"id":"Fiscal1","publisher":{"id":"ORG-0001"},"relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#tenderingPartySection
 -   id: OPT-301-Lot-Mediator
     parentNodeId: ND-LotReviewTerms
@@ -13742,9 +13742,9 @@
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference) and map to its `publisher.id`.
 
-        [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization-technical-identifier-reference) and add 'informationProvider' to is `roles` array.
+        [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization-technical-identifier-reference) and add 'informationService' to is `roles` array.
     eForms example: <ext:UBLExtensions> <ext:UBLExtension> <ext:ExtensionContent> <efext:EformsExtension> <efac:Organizations> <efac:Organization> <efac:Company> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </efac:Company> </efac:Organization> </efac:Organizations> </efext:EformsExtension> </ext:ExtensionContent> </ext:UBLExtension> </ext:UBLExtensions> <cac:ProcurementProjectLot> <cac:TenderingTerms> <cac:EmploymentLegislationDocumentReference> <cbc:ID>Empl1</cbc:ID> <cac:IssuerParty> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </cac:IssuerParty> </cac:EmploymentLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
-    OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationProvider"]}],"tender":{"documents":[{"id":"Empl1","publisher":{"id":"ORG-0001"}}]}}'
+    OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationService"]}],"tender":{"documents":[{"id":"Empl1","publisher":{"id":"ORG-0001"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#tenderingPartySection
 -   id: OPT-301-Part-EnvironLegis
     parentNodeId: ND-PartEnvironmentalLegislation
@@ -13761,9 +13761,9 @@
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference) and map to its `publisher.id`.
 
-        [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization-technical-identifier-reference) and add 'informationProvider' to is `roles` array.
+        [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization-technical-identifier-reference) and add 'informationService' to is `roles` array.
     eForms example: <ext:UBLExtensions> <ext:UBLExtension> <ext:ExtensionContent> <efext:EformsExtension> <efac:Organizations> <efac:Organization> <efac:Company> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </efac:Company> </efac:Organization> </efac:Organizations> </efext:EformsExtension> </ext:ExtensionContent> </ext:UBLExtension> </ext:UBLExtensions> <cac:ProcurementProjectLot> <cac:TenderingTerms> <cac:EnvironmentalLegislationDocumentReference> <cbc:ID>Env1</cbc:ID> <cac:IssuerParty> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </cac:IssuerParty> </cac:EnvironmentalLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
-    OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationProvider"]}],"tender":{"documents":[{"id":"Env1","publisher":{"id":"ORG-0001"}}]}}'
+    OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationService"]}],"tender":{"documents":[{"id":"Env1","publisher":{"id":"ORG-0001"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#tenderingPartySection
 -   id: OPT-301-Part-FiscalLegis
     parentNodeId: ND-PartFiscalLegislation
@@ -13780,9 +13780,9 @@
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference) and map to its `publisher.id`.
 
-        [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization-technical-identifier-reference) and add 'informationProvider' to is `roles` array.
+        [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization-technical-identifier-reference) and add 'informationService' to is `roles` array.
     eForms example: <ext:UBLExtensions> <ext:UBLExtension> <ext:ExtensionContent> <efext:EformsExtension> <efac:Organizations> <efac:Organization> <efac:Company> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </efac:Company> </efac:Organization> </efac:Organizations> </efext:EformsExtension> </ext:ExtensionContent> </ext:UBLExtension> </ext:UBLExtensions> <cac:ProcurementProjectLot> <cac:TenderingTerms> <cac:FiscalLegislationDocumentReference> <cbc:ID>Fiscal1</cbc:ID> <cac:IssuerParty> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0001</cbc:ID> </cac:PartyIdentification> </cac:IssuerParty> </cac:FiscalLegislationDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
-    OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationProvider"]}],"tender":{"documents":[{"id":"Fiscal1","publisher":{"id":"ORG-0001"}}]}}'
+    OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationService"]}],"tender":{"documents":[{"id":"Fiscal1","publisher":{"id":"ORG-0001"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#tenderingPartySection
 -   id: OPT-301-Part-Mediator
     parentNodeId: ND-PartReviewTerms
