@@ -2939,10 +2939,14 @@
     Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        - Add a `withheldInformationItem` to the `withheldInformation` array, and:
+          - Set its `.id` to `[efbc:FieldIdentifierCode]-[ancestor::efac:LotResult/cbc:ID]`.
+          - Set its `.field` to "ree-val".
+          - Set its `.name` to "Framework Re-estimated Value".
+    eForms example: <efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">ree-val</efbc:FieldIdentifierCode></efac:FieldsPrivacy>
+    OCDS example: '{"withheldInformation":[{"field":"ree-val","id":"ree-val-RES-0001","name":"Framework Re-estimated Value"}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotResultLevelSection
 -   id: BT-195(BT-709)-LotResult
     parentNodeId: ND-MaximalValueUnpublish
     name: Unpublished Identifier
@@ -3846,10 +3850,10 @@
     Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-660)-LotResult and `ancestor::efac:LotResult` and map to its `.rationale`.
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
+    OCDS example: '{"withheldInformation":[{"rationale":"Information delayed publication because of ..."}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotResultLevelSection
 -   id: BT-196(BT-709)-LotResult
     parentNodeId: ND-MaximalValueUnpublish
     name: Unpublished Justification Description
@@ -4727,10 +4731,10 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-660)-LotResult and `ancestor::efac:LotResult`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id` and the `cbc:ReasonCode[@listName]` to `.scheme`. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
+    OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotResultLevelSection
 -   id: BT-197(BT-709)-LotResult
     parentNodeId: ND-MaximalValueUnpublish
     name: Unpublished Justification Code
@@ -5620,10 +5624,10 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-660)-LotResult and `ancestor::efac:LotResult`. [Convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotResultLevelSection
 -   id: BT-198(BT-709)-LotResult
     parentNodeId: ND-MaximalValueUnpublish
     name: Unpublished Access Date
