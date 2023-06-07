@@ -1728,7 +1728,7 @@
     eForms guidance: |-
         - [Get the contract for the SettledContract](operations.md#get-the-contract-for-a-settledcontract).
         - Add a `SimpleIdentifier` to the contract's `.identifiers` array.
-        - If the scope of the list, register or scheme from which the contract identifier is drawn is subnational, set the simple identifier's `.scheme` to `{ISO 3166-1 alpha-2}-{system}`. Otherwise, set it to `{ISO 3166-2}-{system}`.
+        - If the scope of the list, register or system from which the contract identifier is drawn is subnational, set the simple identifier's `.scheme` to `{ISO 3166-2}-{system}`. Otherwise, set it to `{ISO 3166-1 alpha-2}-{system}`.
         - Map to the simple identifier's `.id`.
     eForms example: <efac:SettledContract><efac:ContractReference><cbc:ID>CRN ABC:EFG/2020-01</cbc:ID></efac:ContractReference></efac:SettledContract>
     OCDS example: '{"contracts":[{"identifiers":[{"id":"CRN ABC:EFG/2020-01","scheme":"NL-TENDERNED"}]}]}'
