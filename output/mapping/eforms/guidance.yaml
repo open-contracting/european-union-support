@@ -288,11 +288,16 @@
     - 'Get the `Organization` object for the buyer, and add a `Classification` object to its `.details.classifications` array. Set the classification''s `.scheme` to [''COFOG''](https://unstats.un.org/unsd/publications/catalogue?selectID=145), and set its `.id` and/or `.description` as follows:'
     eForms guidance: |-
         - [Get the organization for the buyer](operations.md#get-the-organization-for-the-buyer) and add a `Classification` object to its `.details.classifications` array.
-        - Map the value of this field to the classification's `.id`.
-        - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/main-activity) and map it to the classification's `.description`.
-        - If the code's definition in the authority table includes ["COFOG"](<https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Classification_of_the_functions_of_government_(COFOG)>), set the classification's `.scheme` to 'COFOG'. Otherwise, set it to 'Directive 2014/25/EU'.
+        - If the code's definition in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/main-activity) includes ["COFOG"](<https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Classification_of_the_functions_of_government_(COFOG)>):
+            - Set the classification's `.scheme` to 'COFOG'.
+            - Map the value of this field to the classification's `.description`.
+            - Look up the code's number in the [UN Classifications on Economic Statistics](https://unstats.un.org/unsd/classifications/Econ/Structure) and map to the classification's `.id`. 
+        - Otherwise:
+            - Set the classification's `.scheme` to 'eu-main-activity'.
+            - Map the value of this field to the classification's `.id`.
+            - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/main-activity) and map it to the classification's `.description`.
     eForms example: <cac:ContractingParty><cac:Party><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></cac:Party><cac:ContractingActivity><cbc:ActivityTypeCode listName="authority-activity">gas-oil</cbc:ActivityTypeCode></cac:ContractingActivity></cac:ContractingParty>
-    OCDS example: '{"parties":[{"id":"ORG-0001","details":{"classifications":[{"scheme":"Directive 2014/25/EU","id":"gas-oil","description":"Activities related to the exploitation of a geographical area for the purpose of extracting oil or gas."}]}}]}'
+    OCDS example: '{"parties":[{"id":"ORG-0001","details":{"classifications":[{"scheme":"eu-main-activity","id":"gas-oil","description":"Activities related to the exploitation of a geographical area for the purpose of extracting oil or gas."}]}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_buyer_information
 -   id: BT-105-Procedure
     parentNodeId: ND-ProcedureTenderingProcess
@@ -1728,7 +1733,7 @@
     eForms guidance: |-
         - [Get the contract for the SettledContract](operations.md#get-the-contract-for-a-settledcontract).
         - Add a `SimpleIdentifier` to the contract's `.identifiers` array.
-        - If the scope of the list, register or system from which the contract identifier is drawn is subnational, set the simple identifier's `.scheme` to `{ISO 3166-2}-{system}`. Otherwise, set it to `{ISO 3166-1 alpha-2}-{system}`.
+        - If the scope of the list, register or scheme from which the contract identifier is drawn is subnational, set the simple identifier's `.scheme` to `{ISO 3166-1 alpha-2}-{system}`. Otherwise, set it to `{ISO 3166-2}-{system}`.
         - Map to the simple identifier's `.id`.
     eForms example: <efac:SettledContract><efac:ContractReference><cbc:ID>CRN ABC:EFG/2020-01</cbc:ID></efac:ContractReference></efac:SettledContract>
     OCDS example: '{"contracts":[{"identifiers":[{"id":"CRN ABC:EFG/2020-01","scheme":"NL-TENDERNED"}]}]}'
@@ -9735,10 +9740,14 @@
         BG-3: Buyer
     eForms guidance: |-
         [Get the organization for the buyer](operations.md#get-the-organization-for-the-buyer) and add a `Classification` object to its `.details.classifications` array.
-
-        - Map to the classification's `.id`.
-        - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/main-activity) and map it to `.description`.
-        - If the code's definition in the authority table includes ["COFOG"](<https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Classification_of_the_functions_of_government_(COFOG)>), set the classification's `.scheme` to 'COFOG'. Otherwise, set it to "eu-main-activity".
+        - If the code's definition in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/main-activity) includes ["COFOG"](<https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Classification_of_the_functions_of_government_(COFOG)>):
+            - Set the classification's `.scheme` to 'COFOG'.
+            - Map the value of this field to the classification's `.description`.
+            - Look up the code's number in the [UN Classifications on Economic Statistics](https://unstats.un.org/unsd/classifications/Econ/Structure) and map to the classification's `.id`. 
+        - Otherwise:
+            - Set the classification's `.scheme` to 'eu-main-activity'.
+            - Map the value of this field to the classification's `.id`.
+            - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/main-activity) and map it to the classification's `.description`.
     eForms example: <cac:ContractingActivity><cbc:ActivityTypeCode listName="entity-activity">gas-oil</cbc:ActivityTypeCode></cac:ContractingActivity>
     OCDS example: '{"parties":[{"id":"ORG-0001","details":{"classifications":[{"scheme":"eu-main-activity","id":"gas-oil","description":"Activities related to the exploitation of a geographical area for the purpose of extracting oil or gas."}]}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_buyer_information
