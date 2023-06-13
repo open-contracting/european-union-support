@@ -788,6 +788,10 @@ def build(directory):
         if sdk:
             sdk = f'<a class="reference external" href="{sdk}"></a>'
 
+        required = ""
+        if field["mandatory"]:
+            required = "<b>*</b>"
+
         eforms_example = field["eForms example"]
         if eforms_example and eforms_example != "N/A":
             element = lxml.etree.fromstring(f"{xmlhead}{eforms_example}{xmltail}")
@@ -815,7 +819,7 @@ def build(directory):
             f"""\
               <tr id="{field["id"]}">
                 <td class="field break-all">
-                    <p><b>{field["id"]}</b> {sdk}<br>{field["name"]}</p>{description}
+                    <p><b>{field["id"]}</b> {required} {sdk}<br>{field["name"]}</p>{description}
                     <code class="docutils literal notranslate"><span class="pre">{field["xpathAbsolute"]}</span></code>
                 </td>
                 <td class="mapping">
