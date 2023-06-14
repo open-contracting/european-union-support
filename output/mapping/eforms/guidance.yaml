@@ -1496,7 +1496,7 @@
         - Set the amendment's `.id` sequentially across all notices for this procedure. For example, if the first change notice for a procedure has three changes, it uses `id`'s "1" through "3". A second change notice for the same procedure then uses `id`'s "4" and up, etc.
         - Add a `Classification` object to the amendment's `rationaleClassifications` array and map the value of this field to its `.id`.
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/change-corrig-justification) and map it to the classification's `.description`.
-        - Set the classification's `.scheme` to 'change-corrig-justification'.
+        - Set the classification's `.scheme` to 'eu-change-corrig-justification'.
     eForms example: |-
         <efac:Changes>
             <efac:Change>
@@ -1509,7 +1509,7 @@
                 <cbc:ReasonCode listName="change-corrig-justification">update-add</cbc:ReasonCode>
             </efac:ChangeReason>
         </efac:Changes>
-    OCDS example: '{"tender":{"amendments":[{"relatedLots":["LOT-0001"],"id":"1","rationaleClassifications":[{"id":"update-add","description":"Information updated","scheme":"change-corrig-justification"}]},{"relatedLots":["LOT-0002"],"id":"2","rationaleClassifications":[{"id":"update-add","description":"Information updated","scheme":"change-corrig-justification"}]}]}}'
+    OCDS example: '{"tender":{"amendments":[{"relatedLots":["LOT-0001"],"id":"1","rationaleClassifications":[{"id":"update-add","description":"Information updated","scheme":"eu-change-corrig-justification"}]},{"relatedLots":["LOT-0002"],"id":"2","rationaleClassifications":[{"id":"update-add","description":"Information updated","scheme":"eu-change-corrig-justification"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/change-notice.html#changeSection
 -   id: BT-141(a)-notice
     parentNodeId: ND-Change
