@@ -10580,9 +10580,9 @@
     Description: The procurement documents have changed.
     Business groups:
         BG-9: Change
-    eForms guidance: These values map to the same `Amendment` objects as created for BT-140. Update the corresponding `Amendment` object and map to its `.documentsChanged`.
+    eForms guidance: Discard. Changed documents can be identified using `tender.documents.dateModified`.
     eForms example: <efac:Change><efbc:ProcurementDocumentsChangeIndicator>true</efbc:ProcurementDocumentsChangeIndicator></efac:Change>
-    OCDS example: '{"tender":{"amendments":[{"documentsChanged":true}]}}'
+    OCDS example: 
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/change-notice.html#changeSection
 -   id: BT-719-notice
     parentNodeId: ND-Change
@@ -10596,9 +10596,10 @@
     Description: The date and time when the procurement documents have changed.
     Business groups:
         BG-9: Change
-    eForms guidance: These values map to the same `Amendment` objects as created for BT-140. Update the corresponding `Amendment` object, [convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to its `.documentsChangeDate`.
+    eForms guidance: |-
+      If there is at least one `efbc:ChangedSectionIdentifier` in `ancestor::efac:Change/efac:ChangedSection` which is a lot identifier (LOT-XXXX), then for each lot identifier, get the `Document` in `tender.documents` with the lot identifier in `.relatedLots` and 'biddingDocuments' in `.documentType`, [convert the date to ISO format](operations.md#convert-a-date-to-iso-format) and map to the document's `.dateModified`. Otherwise, get the `Document` in `tender.documents` with 'biddingDocuments` in `.documentType`, [convert the date to ISO format](operations.md#convert-a-date-to-iso-format) and map to the document's `.dateModified`.
     eForms example: <efac:Change><efbc:ProcurementDocumentsChangeDate>2019-10-24+01:00</efbc:ProcurementDocumentsChangeDate></efac:Change>
-    OCDS example: '{"tender":{"amendments":[{"documentsChangeDate":"2019-10-24T00:00:00+01:00"}]}}'
+    OCDS example: '{"tender":{"documents":[{"dateModified":"2019-10-24T00:00:00+01:00"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/change-notice.html#changeSection
 -   id: BT-720-Tender
     parentNodeId: ND-LotTender
