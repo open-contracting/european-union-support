@@ -104,7 +104,7 @@
         BG-1: Notice
     eForms guidance: |-
         The values of `cbc:NoticeTypeCode[@listName]` are drawn from the [form type authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/form-type) in the EU Vocabularies.
-        
+
         Look up `cbc:NoticeTypeCode[@listName]` in the [form type mapping table](codelists/form-type), add the values of the release tag column to `tag` and set `tender.status` to the value of the tender status column.
     eForms example: <cbc:NoticeTypeCode listName="competition">cn-standard</cbc:NoticeTypeCode>
     OCDS example: '{"tag":["tender"],"tender":{"status":"active"}}'
@@ -9391,8 +9391,10 @@
         This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot and to the same `AwardCriterionNumber` objects as created for BT-541-Lot, BT-5422-Lot and BT-5423-Lot.
 
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
+
         For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
-        For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array and map the code to the award criterion number's `.weight` according to the [number weight mapping table](codelists/number-weight).
+
+        For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array and map value of the code to the award criterion number's `.weight` according to the [number weight mapping table](codelists/number-weight).
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-weight">per-exa</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"weight":"percentageExact"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
@@ -9414,7 +9416,9 @@
         This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup and to the same `AwardCriterionNumber` objects as created for BT-541-LotsGroup, BT-5422-LotsGroup and BT-5423-LotsGroup.
 
         [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
+
         For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
+
         For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array and map the code to the award criterion number's `.weight` according to the [number weight mapping table](codelists/number-weight).
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-weight">per-exa</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"numbers":[{"weight":"percentageExact"}]}]}}]}}'
@@ -9437,7 +9441,9 @@
         This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5421-Lot, BT-5423-Lot and BT-734-Lot and to the same `AwardCriterionNumber` objects as created for BT-541-Lot, BT-5421-Lot and BT-5423-Lot.
 
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
+
         For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
+
         For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array and map the code to the award criterion number's `.fixed` according to the [number fixed mapping table](codelists/number-fixed).
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-fixed">fix-tot</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"fixed":"total"}]}]}}]}}'
@@ -9460,7 +9466,9 @@
         This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup and to the same `AwardCriterionNumber` objects as created for BT-541-LotsGroup, BT-5421-LotsGroup and BT-5423-LotsGroup.
 
         [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
+
         For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
+
         For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array and map the code to the award criterion number's `.fixed` according to the [number fixed mapping table](codelists/number-fixed).
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-fixed">fix-tot</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"numbers":[{"fixed":"total"}]}]}}]}}'
@@ -9480,7 +9488,7 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5421-Lot, BT-5422-Lotand BT-734-Lot and to the same `AwardCriterionNumber` objects as created for BT-541-Lot, BT-5421-Lot and BT-5422-Lot.
+        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5421-Lot, BT-5422-Lot and BT-734-Lot and to the same `AwardCriterionNumber` objects as created for BT-541-Lot, BT-5421-Lot and BT-5422-Lot.
 
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
 
@@ -9508,7 +9516,9 @@
         This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup and BT-734-LotsGroup and to the same `AwardCriterionNumber` objects as created for BT-541-LotsGroup, BT-5421-LotsGroup and BT-5422-LotsGroup.
 
         [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
+
         For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
+
         For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array and map the code to the award criterion number's `.threshold` according to the [number threshold mapping table](codelists/number-threshold).
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-threshold">max-pass</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"numbers":[{"threshold":"maximumBids"}]}]}}]}}'
@@ -9610,7 +9620,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/AWARD_CONTRACT/AWARDED_CONTRACT/PCT_SUBCONTRACTING
     TED guidance:
     - Map to the award's `.subcontracting.minimumPercentage` and `.subcontracting.maximumPercentage`
-    eForms guidance: '[Get the bid for the LotTender](operations.md#get-the-bid-for-a-lottender), divide number by 100 and map to the bid''s `.subcontracting.minimumPercentage` and `.subcontracting.maximumPercentage`.'
+    eForms guidance: '[Get the bid for the LotTender](operations.md#get-the-bid-for-a-lottender), divide the value of this field by 100 and map to the bid''s `.subcontracting.minimumPercentage` and `.subcontracting.maximumPercentage`.'
     eForms example: <efac:SubcontractingTerm><efbc:TermPercent>30</efbc:TermPercent></efac:SubcontractingTerm>
     OCDS example: '{"bids":{"details":[{"subcontracting":{"minimumPercentage":0.3,"maximumPercentage":0.3}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
@@ -9732,7 +9742,8 @@
 
         - [Add a party](operations.md#add-a-party).
         - Set its `.name` to 'European Union'.
-        - Add 'funder' to its `.roles`.
+
+        Add 'funder' to its `.roles`.
     eForms example: <efac:Funding><cbc:FundingProgramCode listName="eu-funded">eu-funds</cbc:FundingProgramCode></efac:Funding>
     OCDS example: '{"parties":[{"name":"European Union","roles":["funder"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#EUFundsSection
@@ -9753,12 +9764,12 @@
         [Get the organization for the buyer](operations.md#get-the-organization-for-the-buyer) and add a `Classification` object to its `.details.classifications` array.
 
         - If the code's definition in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/main-activity) includes ["COFOG"](<https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Classification_of_the_functions_of_government_(COFOG)>):
-          - Set the classification's `.scheme` to 'COFOG'.
           - Map the value of this field to the classification's `.description`.
+          - Set the classification's `.scheme` to 'COFOG'.
           - Look up the code's number in the [UN Classifications on Economic Statistics](https://unstats.un.org/unsd/classifications/Econ/Structure) and map to the classification's `.id`.
         - Otherwise:
-          - Set the classification's `.scheme` to 'eu-main-activity'.
           - Map the value of this field to the classification's `.id`.
+          - Set the classification's `.scheme` to 'eu-main-activity'.
           - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/main-activity) and map it to the classification's `.description`.
     eForms example: <cac:ContractingActivity><cbc:ActivityTypeCode listName="entity-activity">gas-oil</cbc:ActivityTypeCode></cac:ContractingActivity>
     OCDS example: '{"parties":[{"id":"ORG-0001","details":{"classifications":[{"scheme":"eu-main-activity","id":"gas-oil","description":"Activities related to the exploitation of a geographical area for the purpose of extracting oil or gas."}]}}]}'
@@ -9778,8 +9789,9 @@
         BG-611: Contract EU Funds
     eForms guidance: |-
         This field maps to the same `finance` objects as created for BT-5011-Contract and BT-722-Contract.
+
         [Get the contract for the SettledContract](operations.md#get-the-contract-for-a-settledcontract).
-        For each `efac:Funding`, add or update the corresponding `Finance` object in the contract's `.finance` array and map to its `.description`.
+        For each `efac:Funding`, add or update the corresponding `Finance` object in the contract's `.finance` array and map the value of this field to its `.description`.
     eForms example: <efac:Funding><cbc:FundingProgram>Program for the development ...</cbc:FundingProgram></efac:Funding>
     OCDS example: '{"contracts":[{"finance":[{"description":"Program for the development ..."}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#settledContractSection
@@ -9797,8 +9809,9 @@
         BG-614: EU Funds Information
     eForms guidance: |-
         This field maps to the same `finance` objects as created for BT-5010-Lot and BT-7220-Lot.
+
         If BT-5010-Lot is not present follow the guidance for BT-5010-Lot, setting the `.id` of the `Finance` object incrementally based on its position in the `finance` array rather than the value of BT-5010-Lot.
-        For each `efac:Funding`, add or update the corresponding `Finance` object in the budget's `.finance` array and map to its `.description`.
+        For each `efac:Funding`, add or update the corresponding `Finance` object in the budget's `.finance` array and map the value of this field to its `.description`.
     eForms example: <efac:Funding><cbc:Description languageID="ENG">This project will be financed ...</cbc:Description></efac:Funding>
     OCDS example: '{"planning":{"budget":{"finance":[{"description":"This project will be financed ..."}]}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#EUFundsSection
@@ -9826,8 +9839,7 @@
     TED guidance:
     - Add a `ParticipationFee` object to the `tender.participationFees` array, set its `.type` to 'document', and set its `.id` to '1'.
     eForms guidance: |-
-        [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
-        Map to its `.accessDetailsURL`.
+        [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference) and map to its `.accessDetailsURL`.
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and add its `id` to the document's `.relatedLots`.
     eForms example: <cac:ExternalReference><cbc:URI>https://mywebsite.com/proc/2019024/accessinfo</cbc:URI></cac:ExternalReference>
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","accessDetailsURL":"https://mywebsite.com/proc/2019024/accessinfo","relatedLots":["LOT-0001"]}]}}'
@@ -9849,9 +9861,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/CONTRACTING_BODY/DOCUMENT_RESTRICTED
     TED guidance:
     - Add a `ParticipationFee` object to the `tender.participationFees` array, set its `.type` to 'document', and set its `.id` to '1'.
-    eForms guidance: |-
-        [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
-        Map to its `.accessDetailsURL`.
+    eForms guidance: '[Get the document for the document reference](operations.md#get-the-document-for-a-document-reference) and map to its `.accessDetailsURL`.'
     eForms example: <cac:ExternalReference><cbc:URI>https://mywebsite.com/proc/2019024/accessinfo</cbc:URI></cac:ExternalReference>
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","accessDetailsURL":"https://mywebsite.com/proc/2019024/accessinfo"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
@@ -9993,7 +10003,7 @@
     Description: The organisation is a natural person.
     Business groups:
         BG-703: Organisation
-    eForms guidance: '[Get the organization for the company](operations.md#get-the-organization-for-a-company) and set it''s `details.scale` to ''selfEmployed''.'
+    eForms guidance: '[Get the organization for the company](operations.md#get-the-organization-for-a-company), and set it''s `details.scale` to ''selfEmployed''.'
     eForms example: <efac:Organization><efbc:NaturalPersonIndicator>false</efbc:NaturalPersonIndicator></efac:Organization>
     OCDS example: '{"parties":[{"details":{"scale":"selfEmployed"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
@@ -10039,7 +10049,9 @@
     Business groups:
         BG-612: Buyer Review Summary
         BG-613: Buyer Review Requests
-    eForms guidance: This field maps to the same `Statistic` objects as created for BT-636-LotResult. For each `AppealRequestStatistics`, [add a statistic](operations.md#add-a-statistic) or update the corresponding `Statistic` object and map to its `.value`.
+    eForms guidance: |-
+        This field maps to the same `Statistic` objects as created for BT-636-LotResult.
+        For each `AppealRequestStatistics`, [add a statistic](operations.md#add-a-statistic) or update the corresponding `Statistic` object and map to its `.value`.
     eForms example: <efac:AppealRequestsStatistics><efbc:StatisticsNumeric>2</efbc:StatisticsNumeric></efac:AppealRequestsStatistics>
     OCDS example: '{"statistics":[{"id":"1","value":"2","scope":"complaints"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
@@ -10056,7 +10068,9 @@
     Business groups:
         BG-612: Buyer Review Summary
         BG-613: Buyer Review Requests
-    eForms guidance: This field maps to the same `Statistic` objects as created for BT-635-LotResult. For each `AppealRequestStatistics`, [add a statistic](operations.md#add-a-statistic) or update the corresponding `Statistic` object and map to its `.measure`. Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/irregularity-type) and map it to `.notes`
+    eForms guidance: |-
+        This field maps to the same `Statistic` objects as created for BT-635-LotResult.
+        For each `AppealRequestStatistics`, [add a statistic](operations.md#add-a-statistic) or update the corresponding `Statistic` object and map to its `.measure`. Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/irregularity-type) and map it to `.notes`
     eForms example: <efac:AppealRequestsStatistics><efbc:StatisticsCode listName="irregularity-type">unj-lim-subc</efbc:StatisticsCode></efac:AppealRequestsStatistics>
     OCDS example: '{"statistics":[{"id":"1","measure":"ab-low","scope":"complaints","notes":"Unjustified rejection of abnormally low tenders"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
@@ -10073,7 +10087,7 @@
         BG-711: Contract Terms
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/SUBCONTRACTING/SUBCONTRACT_SHARE/MIN_PERCENTAGE
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), divide the number by 100 and map to the lot''s `.subcontractingTerms.competitiveMinimumPercentage`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), divide the value of this field by 100 and map to the lot''s `.subcontractingTerms.competitiveMinimumPercentage`.'
     eForms example: <cac:AllowedSubcontractTerms><cbc:MinimumPercent>25.5</cbc:MinimumPercent></cac:AllowedSubcontractTerms>
     OCDS example: '{"tender":{"lots":[{"subcontractingTerms":{"competitiveMinimumPercentage":0.255}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#subcontractingObligationSection
@@ -10140,7 +10154,7 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/SUBCONTRACTING/INDICATE_ANY_SHARE
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/SUBCONTRACTING/IDENTIFY_SUBCONTRACT
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and add to the lot''s `.submissionTerms.subcontractingClauses` array.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and add to the lot''s `.submissionTerms.subcontractingClauses` array.'
     eForms example: <efac:TenderSubcontractingRequirements><efbc:TenderSubcontractingRequirementsCode listName="subcontracting-indication">subc-oblig</efbc:TenderSubcontractingRequirementsCode></efac:TenderSubcontractingRequirements>
     OCDS example: '{"tender":{"lots":[{"submissionTerms":{"subcontractingClauses":["subc-oblig"]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#subcontractingObligationSection
@@ -10326,7 +10340,7 @@
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
         Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/communication-justification) and map to the document's `.accessDetails`.
-        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and add its `id` to the document's `.relatedLots`.
+        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and add its `id` to the document's `.relatedLots`.
     eForms example: <cac:CallForTendersDocumentReference><cbc:DocumentTypeCode listName="communication-justification">ipr-iss</cbc:DocumentTypeCode></cac:CallForTendersDocumentReference>
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","accessDetails":"Restricted. Intellectual property rights issues","relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
@@ -10363,7 +10377,7 @@
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
 
-        Lowercase and convert the code into a two-letter [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) and add it to the document's `.languages` array.
+        Lowercase and convert the code into a two-letter [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes), and add it to the document's `.languages` array.
 
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and add it to the document's `.relatedLots`.
     eForms example: <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:CallForTendersDocumentReference> <cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID> <cbc:LanguageID>ENG</cbc:LanguageID> </cac:CallForTendersDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
@@ -10454,7 +10468,7 @@
         BG-705: Other Requirements
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/LEFTI_PRIOR_INFORMATION/RESERVED_CONTRACTS/RESTRICTED_TO_SHELTERED_WORKSHOPS
-    eForms guidance: If `@TendererRequirementTypeCode` is "res-pub-ser", add 'publicServiceMissionOrganization' to `tender.otherRequirements.reservedParticipation` array. If `@TendererRequirementTypeCode` is "res-ws", add 'shelteredWorkshop' to `tender.otherRequirements.reservedParticipation` array. If `@TendererRequirementTypeCode` is "none", discard.
+    eForms guidance: If "res-pub-ser", add 'publicServiceMissionOrganization' to `tender.otherRequirements.reservedParticipation` array. If "res-ws", add 'shelteredWorkshop' to `tender.otherRequirements.reservedParticipation` array. If "none", discard.
     eForms example: <cac:SpecificTendererRequirement><cbc:TendererRequirementTypeCode listName="reserved-procurement">res-ws</cbc:TendererRequirementTypeCode></cac:SpecificTendererRequirement>
     OCDS example: '{"tender":{"otherRequirements":{"reservedParticipation":["shelteredWorkshop"]}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#reservedParticipationSection
@@ -10477,11 +10491,11 @@
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''lowestValidBidValue'', and map to its `.value`.'
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''lowestValidBidValue'', set its `.relatedLot` to the award''s only `.relatedLots` entry, and map to its `.value`.'
     eForms guidance: |-
-        [Add a bids statistic](operations.md#add-a-statistic), set its `.measure` to 'lowestValidBidValue', map to its `.value`.
+        [Add a bids statistic](operations.md#add-a-statistic) and map to its `.value`, and set its `.measure` to 'lowestValidBidValue'.
 
         Map `@currencyID` to its `.currency`.
 
-        [Get the lot for the LotResult](operations.md#get-the-lot-for-a-lotresult) and add the lot's `.id` to the statistic's `.relatedLots`.
+        [Get the lot for the LotResult](operations.md#get-the-lot-for-a-lotresult), and add the lot's `.id` to the statistic's `.relatedLots`.
     eForms example: <efac:LotResult><cbc:LowerTenderAmount currencyID="EUR">1230000</cbc:LowerTenderAmount></efac:LotResult>
     OCDS example: '{"bids":{"statistics":[{"measure":"lowestValidBidValue","value":1230000,"currency":"EUR","relatedLot":"LOT-0001"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
@@ -10504,11 +10518,11 @@
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''highestValidBidValue'', and map to its `.value`.'
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''highestValidBidValue'', set its `.relatedLot` to the award''s only `.relatedLots` entry, and map to its `.value`.'
     eForms guidance: |-
-        [Add a bids statistic](operations.md#add-a-statistic), set its `.measure` to 'highestValidBidValue', and map to its `.value`.
+        [Add a bids statistic](operations.md#add-a-statistic), and map to its `.value`, and set its `.measure` to 'highestValidBidValue'.
 
         Map `@currencyID` to its `.currency`.
 
-        [Get the lot for the LotResult](operations.md#get-the-lot-for-a-lotresult) and add the lot's `.id` to the statistic's `.relatedLots`.
+        [Get the lot for the LotResult](operations.md#get-the-lot-for-a-lotresult), and add the lot's `.id` to the statistic's `.relatedLots`.
     eForms example: <efac:LotResult><cbc:HigherTenderAmount currencyID="EUR">456</cbc:HigherTenderAmount></efac:LotResult>
     OCDS example: '{"bids":{"statistics":[{"measure":"highestValidBidValue","value":456,"currency":"EUR","relatedLot":"LOT-0001"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
@@ -10529,7 +10543,7 @@
 
         For each `ancestor::AppealRequestStatistics`, [add a complaints statistic](operations.md#add-a-statistic) or update the corresponding `Statistic` object, and set its `.measure` to "complainants".
 
-        [Get the lot for the LotResult](operations.md#get-the-lot-for-a-lotresult) and add the lot's `.id` to the statistic's `.relatedLots`.
+        [Get the lot for the LotResult](operations.md#get-the-lot-for-a-lotresult), and add the lot's `.id` to the statistic's `.relatedLots`.
     eForms example: <efac:AppealRequestsStatistics><efbc:StatisticsCode listName="review-type">complainants</efbc:StatisticsCode></efac:AppealRequestsStatistics>
     OCDS example: '{"statistics":[{"id":"1","value":"2","scope":"complaints"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
@@ -10549,7 +10563,7 @@
 
         For each `ancestor::AppealRequestStatistics`, [add a complaints statistic](operations.md#add-a-statistic) or update the corresponding `Statistic` object, and map to its `.value`.
 
-        [Get the lot for the LotResult](operations.md#get-the-lot-for-a-lotresult) and add the lot's `.id` to the statistic's `.relatedLots`.
+        [Get the lot for the LotResult](operations.md#get-the-lot-for-a-lotresult), and add the lot's `.id` to the statistic's `.relatedLots`.
     eForms example: <efac:AppealRequestsStatistics><efbc:StatisticsNumeric>2</efbc:StatisticsNumeric></efac:AppealRequestsStatistics>
     OCDS example: '{"statistics":[{"id":"1","value":"2","measure":"complainants","scope":"complaints"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
@@ -10582,7 +10596,7 @@
         BG-9: Change
     eForms guidance: Discard. Changed documents can be identified using `tender.documents.dateModified`.
     eForms example: <efac:Change><efbc:ProcurementDocumentsChangeIndicator>true</efbc:ProcurementDocumentsChangeIndicator></efac:Change>
-    OCDS example: 
+    OCDS example: null
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/change-notice.html#changeSection
 -   id: BT-719-notice
     parentNodeId: ND-Change
@@ -10596,8 +10610,7 @@
     Description: The date and time when the procurement documents have changed.
     Business groups:
         BG-9: Change
-    eForms guidance: |-
-      If there is at least one `efbc:ChangedSectionIdentifier` in `ancestor::efac:Change/efac:ChangedSection` which is a lot identifier (LOT-XXXX), then for each lot identifier, get the `Document` in `tender.documents` with the lot identifier in `.relatedLots` and 'biddingDocuments' in `.documentType`, [convert the date to ISO format](operations.md#convert-a-date-to-iso-format) and map to the document's `.dateModified`. Otherwise, get the `Document` in `tender.documents` with 'biddingDocuments` in `.documentType`, [convert the date to ISO format](operations.md#convert-a-date-to-iso-format) and map to the document's `.dateModified`.
+    eForms guidance: If there is at least one `efbc:ChangedSectionIdentifier` in `ancestor::efac:Change/efac:ChangedSection` which is a lot identifier (LOT-XXXX), then for each lot identifier, get the `Document` in `tender.documents` with the lot identifier in `.relatedLots` and 'biddingDocuments' in `.documentType`, [convert the date to ISO format](operations.md#convert-a-date-to-iso-format) and map to the document's `.dateModified`. Otherwise, get the `Document` in `tender.documents` with 'biddingDocuments`in`.documentType`, [convert the date to ISO format](operations.md#convert-a-date-to-iso-format) and map to the document's `.dateModified\`.
     eForms example: <efac:Change><efbc:ProcurementDocumentsChangeDate>2019-10-24+01:00</efbc:ProcurementDocumentsChangeDate></efac:Change>
     OCDS example: '{"tender":{"documents":[{"dateModified":"2019-10-24T00:00:00+01:00"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/change-notice.html#changeSection
@@ -10721,8 +10734,8 @@
 
         For each `ancestor::efac:ProcurementDetails/efac:StrategicProcurementStatistics/efbc:StatisticsCode` add a `Classification` object to the corresponding item's `additionalClassifications` array.
 
+        - Map the value of this field to the classification's `.id`.
         - Set the classification's `.scheme` to "vehicleCategory".
-        - Map the value of the field to the classification's `.id`.
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/vehicle-category) and map it to the classification's `.description`.
     eForms example: <efac:ProcurementDetails><efbc:AssetCategoryCode listName="vehicle-category">n2-n3</efbc:AssetCategoryCode></efac:ProcurementDetails>
     OCDS example: '{"awards":[{"items":[{"id":"1","additionalClassifications":[{"scheme":"vehicleCategory","id":"n2-n3","description":"Truck (N2-N3)"}]}]}]}'
@@ -10848,7 +10861,7 @@
         This field maps to the same `Address` objects as created for BT-727-Lot, BT-5121-Lot, BT-5071-Lot, BT-5131-Lot, BT-5101-Lot and BT-5141-Lot.
 
         [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
-        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array and map it to the address's `.description`, concatenating to the existing entry in this field if necessary.
+        For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array and map to the address's `.description`, concatenating to the existing entry in this field if necessary.
     eForms example: <cac:RealizedLocation><cbc:Description languageID="ENG">Further realizations ...</cbc:Description></cac:RealizedLocation>
     OCDS example: '{"tender":{"items":[{"deliveryLocation":{"description":"Further realizations..."}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#performancePlaceSection
@@ -10899,7 +10912,7 @@
         BG-711: Contract Terms
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/SUBCONTRACTING/SUBCONTRACT_SHARE/MAX_PERCENTAGE
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), divide the number by 100 and map to the lot''s `.subcontractingTerms.competitiveMaximumPercentage`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), divide the value of this field by 100 and map to the lot''s `.subcontractingTerms.competitiveMaximumPercentage`.'
     eForms example: <cac:AllowedSubcontractTerms><cbc:MaximumPercent>45.5</cbc:MaximumPercent></cac:AllowedSubcontractTerms>
     OCDS example: '{"tender":{"lots":[{"subcontractingTerms":{"competitiveMaximumPercentage":0.455}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#subcontractingObligationSection
@@ -11038,8 +11051,8 @@
         BG-713: Strategic Procurement
     eForms guidance: |-
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and add a `Classification` object to the lot's `additionalClassifications` array.
+        - Map the value of this field to the classification's `.id`.
         - Set the classification's `.scheme` to 'CVDContractType'.
-        - Map the value of the field to the classification's `.id`.
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/cvd-contract-type) and map it to the classification's `.description`.
     eForms example: <efac:StrategicProcurementInformation><efbc:ProcurementCategoryCode listName="cvd-contract-type">oth-serv-contr</efbc:ProcurementCategoryCode></efac:StrategicProcurementInformation>
     OCDS example: '{"tender":{"lots":[{"additionalClassifications":[{"id":"oth-serv-contr","scheme":"CVDContractType","description":"other service contract"}]}]}}'
@@ -11065,8 +11078,8 @@
 
         For each `ancestor::efac:ProcurementDetails/efac:StrategicProcurementStatistics/efbc:StatisticsCode` add a `Classification` object to the corresponding item's `additionalClassifications` array.
 
+        - Map the value of this field to the classification's `.id`.
         - Set the classification's `.scheme` to "CVDContractType".
-        - Map to the classification's `.id`.
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/cvd-contract-type) and map it to the classification's `.description`.
     eForms example: <efac:StrategicProcurementInformation><efbc:ProcurementCategoryCode listName="cvd-contract-type">oth-serv-contr</efbc:ProcurementCategoryCode></efac:StrategicProcurementInformation>
     OCDS example: '{"awards":[{"items":[{"id":"1","additionalClassifications":[{"id":"oth-serv-contr","scheme":"CVDContractType","description":"other service contract"}]}]}]}'
@@ -11095,7 +11108,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/LEFTI/RESTRICTED_SHELTERED_PROGRAM
     TED guidance:
     - Set `tender.contractTerms.reservedExecution` to `true`
-    eForms guidance: If "yes", [get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and set the lot's `.contractTerms.reservedExecution` to `true`. Otherwise, discard.
+    eForms guidance: If "yes", [get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and set the lot's `.contractTerms.reservedExecution` to `true`. Otherwise, discard.
     eForms example: <cac:ContractExecutionRequirement><cbc:ExecutionRequirementCode listName="reserved-execution">yes</cbc:ExecutionRequirementCode></cac:ContractExecutionRequirement>
     OCDS example: '{"tender":{"lots":[{"contractTerms":{"reservedExecution":true}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#reservedExecutionSection
@@ -11134,7 +11147,7 @@
 
         Set the document's `.unofficialTranslation` to `true`.
 
-        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and add its `id` to the document's `.relatedLots`.
+        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and add its `id` to the document's `.relatedLots`.
     eForms example: <cac:ProcurementProjectLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> <cac:TenderingTerms> <cac:CallForTendersDocumentReference> <cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID> <cbc:DocumentStatusCode listName="document-status">non-official</cbc:DocumentStatusCode> </cac:CallForTendersDocumentReference> </cac:TenderingTerms> </cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","unofficialTranslation":true,"relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
