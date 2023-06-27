@@ -10051,7 +10051,7 @@
         BG-613: Buyer Review Requests
     eForms guidance: |-
         This field maps to the same `Statistic` objects as created for BT-636-LotResult.
-        For each `AppealRequestStatistics`, [add a statistic](operations.md#add-a-statistic) or update the corresponding `Statistic` object and map to its `.value`.
+        For each `AppealRequestStatistics`, [add a complaints statistic](operations.md#add-a-complaints-statistic) or update the corresponding `Statistic` object and map to its `.value`.
     eForms example: <efac:AppealRequestsStatistics><efbc:StatisticsNumeric>2</efbc:StatisticsNumeric></efac:AppealRequestsStatistics>
     OCDS example: '{"statistics":[{"id":"1","value":"2","scope":"complaints"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
@@ -10070,7 +10070,7 @@
         BG-613: Buyer Review Requests
     eForms guidance: |-
         This field maps to the same `Statistic` objects as created for BT-635-LotResult.
-        For each `AppealRequestStatistics`, [add a statistic](operations.md#add-a-statistic) or update the corresponding `Statistic` object and map to its `.measure`. Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/irregularity-type) and map it to `.notes`
+        For each `AppealRequestStatistics`, [add a complaints statistic](operations.md#add-a-complaints-statistic) or update the corresponding `Statistic` object and map to its `.measure`. Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/irregularity-type) and map it to `.notes`
     eForms example: <efac:AppealRequestsStatistics><efbc:StatisticsCode listName="irregularity-type">unj-lim-subc</efbc:StatisticsCode></efac:AppealRequestsStatistics>
     OCDS example: '{"statistics":[{"id":"1","measure":"ab-low","scope":"complaints","notes":"Unjustified rejection of abnormally low tenders"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
@@ -10491,7 +10491,7 @@
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''lowestValidBidValue'', and map to its `.value`.'
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''lowestValidBidValue'', set its `.relatedLot` to the award''s only `.relatedLots` entry, and map to its `.value`.'
     eForms guidance: |-
-        [Add a bids statistic](operations.md#add-a-statistic) and map to its `.value`, and set its `.measure` to 'lowestValidBidValue'.
+        [Add a bids statistic](operations.md#add-a-bids-statistic) and map to its `.value`, and set its `.measure` to 'lowestValidBidValue'.
 
         Map `@currencyID` to its `.currency`.
 
@@ -10518,7 +10518,7 @@
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''highestValidBidValue'', and map to its `.value`.'
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''highestValidBidValue'', set its `.relatedLot` to the award''s only `.relatedLots` entry, and map to its `.value`.'
     eForms guidance: |-
-        [Add a bids statistic](operations.md#add-a-statistic), and map to its `.value`, and set its `.measure` to 'highestValidBidValue'.
+        [Add a bids statistic](operations.md#add-a-bids-statistic), and map to its `.value`, and set its `.measure` to 'highestValidBidValue'.
 
         Map `@currencyID` to its `.currency`.
 
@@ -10541,7 +10541,7 @@
     eForms guidance: |-
         This field maps to the same `Statistic` objects as created for BT-712(b)-LotResult.
 
-        For each `ancestor::AppealRequestStatistics`, [add a complaints statistic](operations.md#add-a-statistic) or update the corresponding `Statistic` object, and set its `.measure` to "complainants".
+        For each `ancestor::AppealRequestStatistics`, [add a complaints statistic](operations.md#add-a-complaints-statistic) or update the corresponding `Statistic` object, and set its `.measure` to "complainants".
 
         [Get the lot for the LotResult](operations.md#get-the-lot-for-a-lotresult), and add the lot's `.id` to the statistic's `.relatedLots`.
     eForms example: <efac:AppealRequestsStatistics><efbc:StatisticsCode listName="review-type">complainants</efbc:StatisticsCode></efac:AppealRequestsStatistics>
@@ -10561,7 +10561,7 @@
     eForms guidance: |-
         This field maps to the same `Statistic` objects as created for BT-712(a)-LotResult.
 
-        For each `ancestor::AppealRequestStatistics`, [add a complaints statistic](operations.md#add-a-statistic) or update the corresponding `Statistic` object, and map to its `.value`.
+        For each `ancestor::AppealRequestStatistics`, [add a complaints statistic](operations.md#add-a-complaints-statistic) or update the corresponding `Statistic` object, and map to its `.value`.
 
         [Get the lot for the LotResult](operations.md#get-the-lot-for-a-lotresult), and add the lot's `.id` to the statistic's `.relatedLots`.
     eForms example: <efac:AppealRequestsStatistics><efbc:StatisticsNumeric>2</efbc:StatisticsNumeric></efac:AppealRequestsStatistics>
@@ -11749,7 +11749,7 @@
     eForms guidance: |-
         This field maps to the same `Statistic` objects as created for BT-760-LotResult.
 
-        For each `efac:ReceivedSubmissionsStatistics`, [add a bids statistic](operations.md#add-a-statistic) or update the corresponding `Statistic` object and map to its `.value`.
+        For each `efac:ReceivedSubmissionsStatistics`, [add a bids statistic](operations.md#add-a-bids-statistic) or update the corresponding `Statistic` object and map to its `.value`.
 
         [Get the lot for the LotResult](operations.md#get-the-lot-for-a-lotresult) and add the lot's `.id` to the statistic's `.relatedLots`.
     eForms example: <efac:ReceivedSubmissionsStatistics><efbc:StatisticsNumeric>12</efbc:StatisticsNumeric></efac:ReceivedSubmissionsStatistics>
@@ -11819,7 +11819,7 @@
     eForms guidance: |-
         This field maps to the same `Statistic` objects as created for BT-759-LotResult.
 
-        For each `efac:ReceivedSubmissionsStatistics`, [add a bids statistic](operations.md#add-a-statistic) or update the corresponding `Statistic` object and map to its `.measure` according to the [received submission type mapping table](codelists/received-submission-type).
+        For each `efac:ReceivedSubmissionsStatistics`, [add a bids statistic](operations.md#add-a-bids-statistic) or update the corresponding `Statistic` object and map to its `.measure` according to the [received submission type mapping table](codelists/received-submission-type).
 
         [Get the lot for the LotResult](operations.md#get-the-lot-for-a-lotresult) and add the lot's `.id` to the statistic's `.relatedLots`.
     eForms example: <efac:ReceivedSubmissionsStatistics><efbc:StatisticsCode listName="received-submission-type">t-sme</efbc:StatisticsCode></efac:ReceivedSubmissionsStatistics>

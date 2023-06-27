@@ -36,9 +36,13 @@ If a timezone component is present in the date (e.g. '+02:00'), preserve it. Oth
 
 The final value would be '2020-10-21T23:59:59Z' or '2020-10-21T00:00:00Z'.
 
-## Add a statistic
+## Add a complaints statistic
 
-Add a `Statistic` object to the `statistics` array, set its `.relatedLot` to the value of `ancestor::efac:LotResult/efac:TenderLot/cbc:ID`, set its `scope` to 'bids' if the statistic relates to a bid, or to 'complaints' if it relates to a review request, and set its `.id` (string) sequentially across all notices for this procedure. For example, if a first notice for a given procedure has nine statistics, it uses `id`'s '1' through '9'. A second notice for the same procedure then uses `id`'s '10' and up, etc. 
+Add a `Statistic` object to the `statistics` array, set its `.relatedLot` to the value of `ancestor::efac:LotResult/efac:TenderLot/cbc:ID`, set its `scope` to 'complaints', and set its `.id` (string) sequentially across all notices for this procedure. For example, if a first notice for a given procedure has nine statistics, it uses `id`'s '1' through '9'. A second notice for the same procedure then uses `id`'s '10' and up, etc.
+
+## Add a bids statistic
+
+Add a `Statistic` object to the `bids.statistics` array, set its `.relatedLot` to the value of `ancestor::efac:LotResult/efac:TenderLot/cbc:ID`, and set its `.id` (string) sequentially across all notices for this procedure. For example, if a first notice for a given procedure has nine bid statistics, it uses `id`'s '1' through '9'. A second notice for the same procedure then uses `id`'s '10' and up, etc.
 
 ## Get the document for a document reference
 
