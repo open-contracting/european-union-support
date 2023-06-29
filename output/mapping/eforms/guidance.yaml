@@ -10645,7 +10645,7 @@
         2\. Set its `.id` to the value of this `efac:LotResult/cbc:ID`
 
         Add the value of `ancestor::efac:TenderLot/cbc:ID` to the award's `.relatedLots`
-        Map the value of this field to the awards `.value.amount` and map `@currencyID` to the value's \`.currency
+        Map the value of this field to the awards `.value.amount` and map `@currencyID` to the value's `.currency`.
     eForms example: <efac:LotResult> <cbc:ID schemeName="result">RES-0002</cbc:ID> <efac:LotTender> <cbc:ID schemeName="tender">TEN-0001</cbc:ID> </efac:LotTender> <efac:TenderLot> <cbc:ID schemeName="Lot">LOT-0002</cbc:ID> </efac:TenderLot> </efac:LotResult> <efac:LotTender> <cbc:ID schemeName="tender">TEN-0001</cbc:ID> <cac:LegalMonetaryTotal> <cbc:PayableAmount currencyID="EUR">500</cbc:PayableAmount> </cac:LegalMonetaryTotal> <efac:TenderLot> <cbc:ID schemeName="Lot">LOT-0002</cbc:ID> </efac:TenderLot> </efac:LotTender>
     OCDS example: '{"bids":{"details":[{"id":"TEN-0001","value":{"amount":500,"currency":"EUR"}}]},"awards":[{"id":"RES-0002","value":{"amount":500,"currency":"EUR"},"relatedLots":["LOT-0002"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
