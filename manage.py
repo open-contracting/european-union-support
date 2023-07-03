@@ -606,9 +606,9 @@ def lint(filename, additional_properties):
 
         # Update and check SDK URLs.
         if field["sdk"]:
-            parts = urlsplit(field["sdk"])
-            fragment = parts.fragment
-            base_url = parts._replace(fragment="").geturl()
+            parsed = urlsplit(field["sdk"])
+            fragment = parsed.fragment
+            base_url = parsed._replace(fragment="").geturl()
             try:
                 if base_url not in sdk_documents:
                     sdk_documents[base_url] = get_html(base_url)
