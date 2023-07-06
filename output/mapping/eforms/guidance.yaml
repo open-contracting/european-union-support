@@ -10742,10 +10742,10 @@
         For each `ancestor::efac:ProcurementDetails/efac:StrategicProcurementStatistics/efbc:StatisticsCode` add a `Classification` object to the corresponding item's `additionalClassifications` array.
 
         - Map the value of this field to the classification's `.id`.
-        - Set the classification's `.scheme` to "vehicleCategory".
+        - Set the classification's `.scheme` to "eu-vehicle-category".
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/vehicle-category) and map it to the classification's `.description`.
     eForms example: <efac:ProcurementDetails><efbc:AssetCategoryCode listName="vehicle-category">n2-n3</efbc:AssetCategoryCode></efac:ProcurementDetails>
-    OCDS example: '{"awards":[{"items":[{"id":"1","additionalClassifications":[{"scheme":"vehicleCategory","id":"n2-n3","description":"Truck (N2-N3)"}]}]}]}'
+    OCDS example: '{"awards":[{"items":[{"id":"1","additionalClassifications":[{"scheme":"eu-vehicle-category","id":"n2-n3","description":"Truck (N2-N3)"}]}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
 -   id: BT-726-Lot
     parentNodeId: ND-LotProcurementScope
@@ -11059,10 +11059,10 @@
     eForms guidance: |-
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and add a `Classification` object to the lot's `additionalClassifications` array.
         - Map the value of this field to the classification's `.id`.
-        - Set the classification's `.scheme` to 'CVDContractType'.
+        - Set the classification's `.scheme` to 'eu-cvd-contract-type'.
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/cvd-contract-type) and map it to the classification's `.description`.
     eForms example: <efac:StrategicProcurementInformation><efbc:ProcurementCategoryCode listName="cvd-contract-type">oth-serv-contr</efbc:ProcurementCategoryCode></efac:StrategicProcurementInformation>
-    OCDS example: '{"tender":{"lots":[{"additionalClassifications":[{"id":"oth-serv-contr","scheme":"CVDContractType","description":"other service contract"}]}]}}'
+    OCDS example: '{"tender":{"lots":[{"additionalClassifications":[{"id":"oth-serv-contr","scheme":"eu-cvd-contract-type","description":"other service contract"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#CVDDirectiveLotSection
 -   id: BT-735-LotResult
     parentNodeId: ND-StrategicProcurementInformationLotResult
@@ -11086,10 +11086,10 @@
         For each `ancestor::efac:ProcurementDetails/efac:StrategicProcurementStatistics/efbc:StatisticsCode` add a `Classification` object to the corresponding item's `additionalClassifications` array.
 
         - Map the value of this field to the classification's `.id`.
-        - Set the classification's `.scheme` to "CVDContractType".
+        - Set the classification's `.scheme` to "eu-cvd-contract-type".
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/cvd-contract-type) and map it to the classification's `.description`.
     eForms example: <efac:StrategicProcurementInformation><efbc:ProcurementCategoryCode listName="cvd-contract-type">oth-serv-contr</efbc:ProcurementCategoryCode></efac:StrategicProcurementInformation>
-    OCDS example: '{"awards":[{"items":[{"id":"1","additionalClassifications":[{"id":"oth-serv-contr","scheme":"CVDContractType","description":"other service contract"}]}]}]}'
+    OCDS example: '{"awards":[{"items":[{"id":"1","additionalClassifications":[{"id":"oth-serv-contr","scheme":"eu-cvd-contract-type","description":"other service contract"}]}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#CVDDirectiveLotSection
 -   id: BT-736-Lot
     parentNodeId: ND-LotTenderingTerms
