@@ -1792,7 +1792,7 @@
           - Set its `.id` incrementally.
           - Set its `.documentType` to 'contractSigned'.
     eForms example: <efac:SettledContract><cbc:URI>http://mycontract.acme.com/1234/</cbc:URI></efac:SettledContract>
-    OCDS example: '{"contracts":[{"documents":[{"url":"http://mycontract.acme.com/1234/","documentType":"contractSigned"}]}]}'
+    OCDS example: '{"contracts":[{"documents":[{"id":"1","url":"http://mycontract.acme.com/1234/","documentType":"contractSigned"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#settledContractSection
 -   id: BT-156-NoticeResult
     parentNodeId: ND-NoticeResultGroupFA
@@ -1839,7 +1839,7 @@
         BG-2: Purpose
         BG-557: Group Framework Maximum Value
     eForms guidance: |-
-        The authors of the eForms SDK decomposed the BT-271 business term into fields for the [procedure](#BT-271-Procedure), [lot](#BT-271-Lot) and \[lot group\]((#BT-271-LotsGroup). However, the authors of the eForms regulation had already anticipated the need to specialize the BT-271 business term for lot groups, creating this business term (BT-157).
+        The authors of the eForms SDK decomposed the BT-271 business term into fields for the [procedure](#BT-271-Procedure), [lot](#BT-271-Lot) and \[lot group\](\<#BT-271-LotsGroup>). However, the authors of the eForms regulation had already anticipated the need to specialize the BT-271 business term for lot groups, creating this business term (BT-157).
         As such, this data element is duplicated in the eForms SDK. The OCDS mapping therefore discards BT-157-LotsGroup. If your data has different values for BT-271-LotsGroup and BT-157-LotsGroup, please contact the [OCDS Data Support Team](mailto:data@open-contracting.org).
     eForms example: <cac:FrameworkAgreement><cbc:EstimatedMaximumValueAmount currencyID="EUR">200000</cbc:EstimatedMaximumValueAmount></cac:FrameworkAgreement>
     OCDS example: N/A
@@ -5897,7 +5897,7 @@
 
         Map the value of this field to the amendment's `.rationaleClassifications.id`. Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/modification-justification) and map it to `.rationaleClassifications.description`, and set `.rationaleClassifications.scheme` to 'modification justification'.
     eForms example: <efac:ChangeReason><cbc:ReasonCode listName="modification-justification">add-wss</cbc:ReasonCode></efac:ChangeReason>
-    OCDS example: '{"contracts":[{"amendments":[{"rationaleClassifications":[{"id":"add-wss","description":"Need for additional works, services or supplies by the original contractor.","scheme":"Modification justification"}]}]}]}'
+    OCDS example: '{"contracts":[{"amendments":[{"id":"1","rationaleClassifications":[{"id":"add-wss","description":"Need for additional works, services or supplies by the original contractor.","scheme":"Modification justification"}]}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/contract-modification-notice.html
 -   id: BT-201-Contract
     parentNodeId: ND-ModificationReason
@@ -5915,7 +5915,7 @@
         For each `efac:ChangeReason`, add or update a corresponding `Amendment` object to the contract's `.amendments` array ensuring its `.id` (string) is set. The `.id` can be any value guaranteed to be globally unique. For example, it can be set to a [version 4 UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier), or it can be assigned sequentially across all notices for this procedure (the first notice sets it to "1", the second to "2", etc.).
         Map the value of this field to the amendment's `.rationale`
     eForms example: <efac:ChangeReason><efbc:ReasonDescription languageID="ENG">The original business case was scoped as a technology replacement programme for a single system. It was agreed that the organisation should consider people and process in addition to systems replacement, and work has been re-scoped to accommodate this.</efbc:ReasonDescription></efac:ChangeReason>
-    OCDS example: '{"contracts":[{"amendments":[{"rationale":"The original business case was scoped as a technology replacement programme for a single system. It was agreed that the organisation should consider people and process in addition to systems replacement, and work has been re-scoped to accommodate this."}]}]}'
+    OCDS example: '{"contracts":[{"amendments":[{"id":"1","rationale":"The original business case was scoped as a technology replacement programme for a single system. It was agreed that the organisation should consider people and process in addition to systems replacement, and work has been re-scoped to accommodate this."}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/contract-modification-notice.html
 -   id: BT-202-Contract
     parentNodeId: ND-Modification
@@ -5933,7 +5933,7 @@
         For each `ancestor::efac:ContractModification/efac:ChangeReason`, add or update a corresponding `Amendment` object to the contract's `.amendments` array ensuring its `.id` (string) is set. The `.id` can be any value guaranteed to be globally unique. For example, it can be set to a [version 4 UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier), or it can be assigned sequentially across all notices for this procedure (the first notice sets it to "1", the second to "2", etc.).
         Map the value of this field to the amendment's `.description`.
     eForms example: <efac:Change><efbc:ChangeDescription languageID="ENG">Increase in framework value</efbc:ChangeDescription></efac:Change>
-    OCDS example: '{"contracts":[{"amendments":[{"description":"Increase in framework value."}]}]}'
+    OCDS example: '{"contracts":[{"amendments":[{"id":"1","description":"Increase in framework value."}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/contract-modification-notice.html
 -   id: BT-21-Lot
     parentNodeId: ND-LotProcurementScope
@@ -6470,10 +6470,15 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_CONCESSIONAIRE_DEFENCE/FD_CONTRACT_CONCESSIONAIRE_DEFENCE/OBJECT_CONTRACT_SUB_DEFENCE/DESCRIPTION_CONTRACT_SUB_DEFENCE/CPV/CPV_ADDITIONAL/CPV_CODE/@CODE
     - TED_EXPORT/FORM_SECTION/F21_2014/OBJECT_CONTRACT/CPV_MAIN/CPV_CODE/@CODE
     eForms guidance: |-
-        This field maps to the same object as created for BT-26(m)-Lot.
-        [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot) and map to its `.classification.id`.'
+        This field maps to the same object as created for BT-26(m)-Lot. If no `Item` objects were created for `ancestor::MainCommodityClassification`:
+
+        - [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
+        - Add an `Item` object to the lot's `.items` array.
+        - Set the item's `id` incrementally.
+
+        Map to the item's `.classification.id`.'
     eForms example: <cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification>
-    OCDS example: '{"tender":{"items":[{"classification":{"id":"15311100"}}]}}'
+    OCDS example: '{"tender":{"items":[{"id":"1","classification":{"id":"15311100"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#classificationSection
 -   id: BT-262-Part
     parentNodeId: ND-PartMainClassification
@@ -6496,7 +6501,7 @@
 
         Map to the item's `.classification.id`.
     eForms example: <cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification>
-    OCDS example: '{"tender":{"items":[{"classification":{"id":"15311100"}}]}}'
+    OCDS example: '{"tender":{"items":[{"id":"1","classification":{"id":"15311100"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#classificationSection
 -   id: BT-262-Procedure
     parentNodeId: ND-ProcedureMainClassification
@@ -6543,7 +6548,7 @@
 
         Map to the item's `.classification.id`.
     eForms example: <cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification>
-    OCDS example: '{"tender":{"items":[{"classification":{"id":"15311100"}}]}}'
+    OCDS example: '{"tender":{"items":[{"id":"1","classification":{"id":"15311100"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#classificationSection
 -   id: BT-263-Lot
     parentNodeId: ND-LotAdditionalClassification
@@ -6559,11 +6564,15 @@
         BG-2: Purpose
         BG-261: Classification
     eForms guidance: |-
-        This field maps to the same `Classification` objects as created for BT-26(a)-Lot.
+        This field maps to the same `Classification` objects as created for BT-26(a)-Lot. If no `Item` objects were created for `ancestor::AdditionalCommodityClassification`:
 
-        [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot). For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update a corresponding `Classification` object in the item's `.additionalClassifications` array and map the value of this field to the classification's `.id`.
+        - [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
+        - Add an `Item` object to the lot's `.items` array.
+        - Set the item's `id` incrementally.
+
+        For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update a corresponding `Classification` object in the item's `.additionalClassifications` array and map the value of this field to the classification's `.id`.
     eForms example: <cac:AdditionalCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311200</cbc:ItemClassificationCode></cac:AdditionalCommodityClassification>
-    OCDS example: '{"tender":{"items":[{"additionalClassifications":[{"id":"15311200"}]}]}}'
+    OCDS example: '{"tender":{"items":[{"id":"1","additionalClassifications":[{"id":"15311200"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#classificationSection
 -   id: BT-263-Part
     parentNodeId: ND-PartAdditionalClassification
@@ -6586,7 +6595,7 @@
 
         For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update a corresponding `Classification` object in the item's `.additionalClassifications` array and map the value of this field to the classification's `.id`.
     eForms example: <cac:AdditionalCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311200</cbc:ItemClassificationCode></cac:AdditionalCommodityClassification>
-    OCDS example: '{"tender":{"items":[{"additionalClassifications":[{"id":"15311200"}]}]}}'
+    OCDS example: '{"tender":{"items":[{"id":"1","additionalClassifications":[{"id":"15311200"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#classificationSection
 -   id: BT-263-Procedure
     parentNodeId: ND-ProcedureAdditionalCommodityClassification
@@ -6609,7 +6618,7 @@
 
         For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update a corresponding `Classification` object in the item's `.additionalClassifications` and map the value of this field to the classification's `.id`.
     eForms example: <cac:AdditionalCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311200</cbc:ItemClassificationCode></cac:AdditionalCommodityClassification>
-    OCDS example: '{"tender":{"items":[{"additionalClassifications":[{"id":"15311200"}]}]}}'
+    OCDS example: '{"tender":{"items":[{"id":"1","additionalClassifications":[{"id":"15311200"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#classificationSection
 -   id: BT-27-Lot
     parentNodeId: ND-LotValueEstimate
@@ -7124,7 +7133,7 @@
 
         For each `cac:Prize`, add or update the corresponding `Prize` object in the lot's `.designContest.prizes.details` array, and set its `.id` incrementally. The position of the prize object in the `.details` array determines the rank of the prize. Example: `.details[0]` should return the highest ranking prize, `.details[1]` the second highest ranking prize, etc.
     eForms example: <cac:Prize><cbc:RankCode>1</cbc:RankCode></cac:Prize>
-    OCDS example: '{"tender":{"lots":[{"designContest":{"prizes":{"details":[{"id":"1"}]}}}]}}'
+    OCDS example: '{"tender":{"lots":[{"designContest":{"prizes":{"details":[{"id":"0"}]}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#prizeSection
 -   id: BT-45-Lot
     parentNodeId: ND-Prize
@@ -7385,8 +7394,8 @@
     - Map to the party's `.identifier.id`, and [set `.identifier.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids)
     - Map to the party's `.identifier.id`, and set the party's `.identifier.scheme`
     eForms guidance: '[Get the organization for the company](operations.md#get-the-organization-for-a-company), map to the organization''s `.identifier.id`, and [set `.identifier.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids).'
-    eForms example: <efac:Organization><efac:Company><cac:PartyLegalEntity><cbc:CompanyID>XYZ</cbc:CompanyID></cac:PartyLegalEntity></efac:Company></efac:Organization>
-    OCDS example: '{"parties":[{"identifier":{"id":"XYZ","scheme":"XI-EXP"}}]}'
+    eForms example: <efac:Organization><efac:Company><cac:PartyLegalEntity><cbc:CompanyID>09506232</cbc:CompanyID></cac:PartyLegalEntity></efac:Company></efac:Organization>
+    OCDS example: '{"parties":[{"identifier":{"id":"09506232","scheme":"GB-COH"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: BT-5010-Lot
     parentNodeId: ND-Funding
@@ -10720,7 +10729,7 @@
 
         For each `ancestor::efac:Funding`, add or update the corresponding `Finance` object in the budget's `.finance` array and map to its `.title`.
     eForms example: <efac:Funding><cbc:FundingProgramCode listName="eu-proramme">ERDF_2021</cbc:FundingProgramCode></efac:Funding>
-    OCDS example: '{"planning":{"budget":{"finance":[{"title":"ERDF_2021"}]}}}'
+    OCDS example: '{"planning":{"budget":{"finance":[{"id":"1","title":"ERDF_2021"}]}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#EUFundsSection
 -   id: BT-723-LotResult
     parentNodeId: ND-ProcurementDetailsLotResult
@@ -13076,7 +13085,7 @@
           - Set `.scheme` to the value of `cbc:ID[@schemeName]`.
           - Map `cbc:ID` to `.identifier`.
     eForms example: <efac:NoticeResult><efac:SettledContract><cac:NoticeDocumentReference><cbc:ID schemeName="ojs-notice-id">62783-2020</cbc:ID></cac:NoticeDocumentReference></efac:SettledContract></efac:NoticeResult>
-    OCDS example: '{"relatedProcesses":[{"id":"1","scheme":"ojs-notice-id","identifier":"62783-2020"}]}'
+    OCDS example: '{"relatedProcesses":[{"id":"1","scheme":"ojs-notice-id","identifier":"62783-2020","relationship":["framework"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#settledContractSection
 -   id: OPT-110-Lot-FiscalLegis
     parentNodeId: ND-LotFiscalLegislation
@@ -13356,7 +13365,7 @@
         - If the value of the `ancestor::efbc:StrategicProcurementStatistics/efbc:StatisticsCode` is "vehicles-zero-emissions" or "vehicles-clean", get the corresponding item and map to it's `.quantity`.
         - If the value of `ancestor::efbc:StrategicProcurementStatistics/efbc:StatisticsCode` is "vehicles", get the value of `efbc:StatisticsNumeric` for each `ancestor::efbc:StrategicProcurementStatistics` with `efbc:StatisticsCode` equal to "vehicles-zero-emissions" or "vehicles-clean" and subtract the sum of the values from the value of this field. Get the corresponding item and map the resulting value to it's `.quantity`.
         - If the value is 0 discard the item entirely. Otherwise map the the result to the item's `.quantity`.
-    eForms example: <efac:StrategicProcurementStatistics><efbc:StatisticsNumeric>0</efbc:StatisticsNumeric></efac:StrategicProcurementStatistics>
+    eForms example: <efac:StrategicProcurementStatistics><efbc:StatisticsNumeric>3</efbc:StatisticsNumeric></efac:StrategicProcurementStatistics>
     OCDS example: '{"awards":[{"items":[{"id":"1","quantity":3}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
 -   id: OPT-160-UBO
@@ -13970,7 +13979,7 @@
 
         If there is a `Person` in the organization's `.beneficialOwners` array whose `id` is equal to the value of this field, discard. Otherwise, add a `Person` to `.beneficialOwners` and map to its `.id`.
     eForms example: <efac:Organization><efac:UltimateBeneficialOwner><cbc:ID schemeName="ubo">UBO-0001</cbc:ID></efac:UltimateBeneficialOwner></efac:Organization>
-    OCDS example: '{"parties":[{"beneficialOwners":[{"id":"UBO-0001"}]}]}'
+    OCDS example: '{"parties":[{"id":"ORG-0001","beneficialOwners":[{"id":"UBO-0001"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: OPT-310-Tender
     parentNodeId: ND-LotTender
