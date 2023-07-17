@@ -86,7 +86,7 @@
     Description: The type of notice according to procurement legislation.
     Business groups:
         BG-1: Notice
-    eForms guidance: Discard. Note that the `@listName` attribute of the XML element is mapped in [BT-03-notice](<#BT-03-notice>).
+    eForms guidance: Discard. Note that the `@listName` attribute of the XML element is mapped in [BT-03-notice](#BT-03-notice).
     eForms example: <cbc:NoticeTypeCode>veat</cbc:NoticeTypeCode>
     OCDS example: N/A
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/notice-information.html#subtypeSection
@@ -6911,9 +6911,14 @@
     Business groups:
         BG-7: Notice Result
         BG-320: Tender
-    eForms guidance: '[Get the bid for the LotTender](operations.md#get-the-bid-for-a-lottender), and map to its `.id`.'
-    eForms example: <efac:TenderReference><cbc:ID>BID ABD/GHI-SN/2020-002</cbc:ID></efac:TenderReference>
-    OCDS example: '{"bids":{"details":[{"id":"BID ABD/GHI-SN/2020-002"}]}}'
+    eForms guidance: |-
+        [Get the bid for the LotTender](operations.md#get-the-bid-for-a-lottender).
+
+        - Add a `SimpleIdentifier` to the bid's `.identifiers` array.
+        - Map the value of this field to the simple identifier's `.id`.
+        - If the scope of the list, register or scheme from which the contract identifier is drawn is subnational, set the simple identifier's `.scheme` to `{ISO 3166-1 alpha-2}-{system}`. Otherwise, set it to `{ISO 3166-2}-{system}`.
+    eForms example: <efac:TenderReference><cbc:ID>BID ABD/GHI-NL/2020-002</cbc:ID></efac:TenderReference>
+    OCDS example: '{"bids":{"details":[{"id":"TEN-0001","identifiers":[{"id":"BID ABD/GHI-NL/2020-002","scheme":"NL-TENDERNL"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: BT-3202-Contract
     parentNodeId: ND-SettledContract
@@ -6935,8 +6940,7 @@
         - Get the `ancestor::efac:NoticeResult/efac:LotTender` whose `/cbc:ID` is equal to the value of this field.
         - Get the `ancestor::efac:NoticeResult/efac:TenderingParty` whose `/cbc:ID` matches the `LotTender`'s `/efac:TenderingParty/cbc:ID`.
         - For each `ancestor::efac:TenderingParty/efac:Tenderer`, [get the organization for the tenderer](operations.md#get-the-organization-for-a-tenderer), and:
-          - Get the `ancestor::efext:EformsExtension/efac:Organizations/efac:Organization/efac:Company` whose `/cac:PartyIdentification/cbc:ID` is equal to the organization's `.id`, and:
-            - Add 'supplier' to the organization's `.roles` array.
+          - Add 'supplier' to the organization's `.roles` array.
           - For each `ancestor::efac:NoticeResult/efac:LotResult` with an `/efac:SettledContract/cbc:ID` equal to the value of `ancestor::efac:SettledContract/cbc:ID`:
             - [Get the award for the LotResult](operations.md#get-the-award-for-a-lotresult).
             - Add an `OrganizationReference` to the award's `.suppliers` array, and:
