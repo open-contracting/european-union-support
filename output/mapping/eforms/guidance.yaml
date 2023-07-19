@@ -9356,11 +9356,11 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-5421-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot and to the same `AwardCriterionNumber` objects as created for BT-5421-Lot, BT-5422-Lot and BT-5423-Lot.
+        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-5421-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot and to the same `CriterionNumber` objects as created for BT-5421-Lot, BT-5422-Lot and BT-5423-Lot.
 
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
-        For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array and map the value of this field to the award criteron number's `.number`.
+        For each `efac:AwardCriterionParameter`, add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the value of this field to the award criteron number's `.number`.
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterNumeric>50</efbc:ParameterNumeric></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
@@ -9378,11 +9378,11 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup and to the same `AwardCriterionNumber` objects as created for BT-5421-LotsGroup, BT-5422-LotsGroup and BT-5423-LotsGroup.
+        This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup and to the same `CriterionNumber` objects as created for BT-5421-LotsGroup, BT-5422-LotsGroup and BT-5423-LotsGroup.
 
         [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
         For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
-        For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array and map the value of this field to the award criteron number's `.number`.
+        For each `efac:AwardCriterionParameter`, add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the value of this field to the award criteron number's `.number`.
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterNumeric>50</efbc:ParameterNumeric></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
@@ -9401,13 +9401,13 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot and to the same `AwardCriterionNumber` objects as created for BT-541-Lot, BT-5422-Lot and BT-5423-Lot.
+        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot and to the same `CriterionNumber` objects as created for BT-541-Lot, BT-5422-Lot and BT-5423-Lot.
 
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
 
         For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
 
-        For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array and map value of the code to the award criterion number's `.weight` according to the [number weight mapping table](codelists/number-weight).
+        For each `efac:AwardCriterionParameter`, add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map value of the code to the award criterion number's `.weight` according to the [number weight mapping table](codelists/number-weight).
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-weight">per-exa</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"weight":"percentageExact"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
@@ -9426,13 +9426,13 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup and to the same `AwardCriterionNumber` objects as created for BT-541-LotsGroup, BT-5422-LotsGroup and BT-5423-LotsGroup.
+        This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup and to the same `CriterionNumber` objects as created for BT-541-LotsGroup, BT-5422-LotsGroup and BT-5423-LotsGroup.
 
         [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
 
         For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
 
-        For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array and map the code to the award criterion number's `.weight` according to the [number weight mapping table](codelists/number-weight).
+        For each `efac:AwardCriterionParameter`, add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the code to the award criterion number's `.weight` according to the [number weight mapping table](codelists/number-weight).
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-weight">per-exa</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"numbers":[{"weight":"percentageExact"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
@@ -9451,13 +9451,13 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5421-Lot, BT-5423-Lot and BT-734-Lot and to the same `AwardCriterionNumber` objects as created for BT-541-Lot, BT-5421-Lot and BT-5423-Lot.
+        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5421-Lot, BT-5423-Lot and BT-734-Lot and to the same `CriterionNumber` objects as created for BT-541-Lot, BT-5421-Lot and BT-5423-Lot.
 
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
 
         For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
 
-        For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array and map the code to the award criterion number's `.fixed` according to the [number fixed mapping table](codelists/number-fixed).
+        For each `efac:AwardCriterionParameter`, add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the code to the award criterion number's `.fixed` according to the [number fixed mapping table](codelists/number-fixed).
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-fixed">fix-tot</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"fixed":"total"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
@@ -9476,13 +9476,13 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup and to the same `AwardCriterionNumber` objects as created for BT-541-LotsGroup, BT-5421-LotsGroup and BT-5423-LotsGroup.
+        This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup and to the same `CriterionNumber` objects as created for BT-541-LotsGroup, BT-5421-LotsGroup and BT-5423-LotsGroup.
 
         [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
 
         For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
 
-        For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array and map the code to the award criterion number's `.fixed` according to the [number fixed mapping table](codelists/number-fixed).
+        For each `efac:AwardCriterionParameter`, add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the code to the award criterion number's `.fixed` according to the [number fixed mapping table](codelists/number-fixed).
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-fixed">fix-tot</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"numbers":[{"fixed":"total"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
@@ -9501,13 +9501,13 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5421-Lot, BT-5422-Lot and BT-734-Lot and to the same `AwardCriterionNumber` objects as created for BT-541-Lot, BT-5421-Lot and BT-5422-Lot.
+        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-541-Lot, BT-5421-Lot, BT-5422-Lot and BT-734-Lot and to the same `CriterionNumber` objects as created for BT-541-Lot, BT-5421-Lot and BT-5422-Lot.
 
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
 
         For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
 
-        For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array and map the code to the award criterion number's `.threshold` according to the [number threshold mapping table](codelists/number-threshold).
+        For each `efac:AwardCriterionParameter`, add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the code to the award criterion number's `.threshold` according to the [number threshold mapping table](codelists/number-threshold).
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-threshold">max-pass</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"threshold":"maximumBids"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
@@ -9526,13 +9526,13 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup and BT-734-LotsGroup and to the same `AwardCriterionNumber` objects as created for BT-541-LotsGroup, BT-5421-LotsGroup and BT-5422-LotsGroup.
+        This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup and BT-734-LotsGroup and to the same `CriterionNumber` objects as created for BT-541-LotsGroup, BT-5421-LotsGroup and BT-5422-LotsGroup.
 
         [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
 
         For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
 
-        For each `efac:AwardCriterionParameter`, add or update a corresponding `AwardCriterionNumber` in the award criterion's `.numbers` array and map the code to the award criterion number's `.threshold` according to the [number threshold mapping table](codelists/number-threshold).
+        For each `efac:AwardCriterionParameter`, add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the code to the award criterion number's `.threshold` according to the [number threshold mapping table](codelists/number-threshold).
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterCode listName="number-threshold">max-pass</efbc:ParameterCode></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"numbers":[{"threshold":"maximumBids"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
