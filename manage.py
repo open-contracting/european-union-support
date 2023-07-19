@@ -646,7 +646,7 @@ def lint(filename, additional_properties):
         if ocds_example and ocds_example != "N/A":
             try:
                 data = json.loads(ocds_example)
-                field["OCDS example"] = json.dumps(data, separators=(",", ":"))
+                field["OCDS example"] = json.dumps(data, separators=(",", ":")).replace("Infinity", "1e9999")
 
                 release = deepcopy(minimal_release)
                 json_merge_patch.merge(release, data)
