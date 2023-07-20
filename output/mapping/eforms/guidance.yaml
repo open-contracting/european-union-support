@@ -200,8 +200,8 @@
 
         - Map the code to the sustainability's `.goal` according to the [strategic procurement mapping table](codelists/strategic-procurement).
         - Add 'awardCriteria', 'contractPerformanceConditions', 'selectionCriteria' and 'technicalSpecifications' to the sustainability's `.strategies` array.
-    eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="strategic-procurement">inn-pur</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
-    OCDS example: '{"tender":{"lots":[{"hasSustainability":true,"sustainability":[{"goal":"economic.innovativePurchase","strategies":["awardCriteria","contractPerformanceConditions","selectionCriteria","technicalSpecifications"]}]}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="strategic-procurement">inn-pur</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType></cac:ProcurementProject></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","hasSustainability":true,"sustainability":[{"goal":"economic.innovativePurchase","strategies":["awardCriteria","contractPerformanceConditions","selectionCriteria","technicalSpecifications"]}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#strategicProcurementSection
 -   id: BT-09(a)-Procedure
     parentNodeId: ND-CrossBorderLaw
@@ -472,8 +472,8 @@
     Business groups:
         BG-706: Techniques
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and map to the its `.techniques.frameworkAgreement.buyerCategories`.'
-    eForms example: <cac:FrameworkAgreement><cac:SubsequentProcessTenderRequirement><cbc:Name>buyer-categories</cbc:Name><cbc:Description languageID="ENG">Offices of the "greater region" ...</cbc:Description></cac:SubsequentProcessTenderRequirement></cac:FrameworkAgreement>
-    OCDS example: '{"tender":{"lots":[{"techniques":{"frameworkAgreement":{"buyerCategories":"Offices of the \"greater region\" ..."}}}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cac:FrameworkAgreement><cac:SubsequentProcessTenderRequirement><cbc:Name>buyer-categories</cbc:Name><cbc:Description languageID="ENG">Offices of the "greater region" ...</cbc:Description></cac:SubsequentProcessTenderRequirement></cac:FrameworkAgreement></cac:TenderingProcess></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","techniques":{"frameworkAgreement":{"buyerCategories":"Offices of the \"greater region\" ..."}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#frameworkAgreementSection
 -   id: BT-1118-NoticeResult
     parentNodeId: ND-NoticeResult
@@ -511,8 +511,8 @@
     TED guidance:
     - Map to `tender.techniques.frameworkAgreement.maximumParticipants`
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and map to the its  `.techniques.frameworkAgreement.maximumParticipants`.'
-    eForms example: <cac:FrameworkAgreement><cbc:MaximumOperatorQuantity>50</cbc:MaximumOperatorQuantity></cac:FrameworkAgreement>
-    OCDS example: '{"tender":{"lots":[{"techniques":{"frameworkAgreement":{"maximumParticipants":50}}}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cac:FrameworkAgreement><cbc:MaximumOperatorQuantity>50</cbc:MaximumOperatorQuantity></cac:FrameworkAgreement></cac:TenderingProcess></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","techniques":{"frameworkAgreement":{"maximumParticipants":50}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#frameworkAgreementSection
 -   id: BT-115-Lot
     parentNodeId: ND-LotTenderingProcess
@@ -537,8 +537,8 @@
     TED guidance:
     - Add 'GPA' to the `tender.coveredBy` array
     eForms guidance: If "true", [get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and add "GPA" to its `.coveredBy` array. Otherwise, discard.
-    eForms example: <cbc:GovernmentAgreementConstraintIndicator>true</cbc:GovernmentAgreementConstraintIndicator>
-    OCDS example: '{"tender":{"lots":[{"coveredBy":["GPA"]}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cbc:GovernmentAgreementConstraintIndicator>true</cbc:GovernmentAgreementConstraintIndicator></cac:TenderingProcess></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","coveredBy":["GPA"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#GPASection
 -   id: BT-115-Part
     parentNodeId: ND-PartTenderingProcess
@@ -589,8 +589,8 @@
     TED guidance:
     - Set `tender.techniques.dynamicPurchasingSystem.status` to 'terminated'
     eForms guidance: If "true", [get the lot for the LotResult](operations.md#get-the-lot-for-a-lotresult), and set the lot's `.techniques.dynamicPurchasingSystem.status` to 'terminated'. Otherwise, discard.
-    eForms example: <efac:LotResult><efbc:DPSTerminationIndicator>true</efbc:DPSTerminationIndicator></efac:LotResult>
-    OCDS example: '{"tender":{"lots":[{"techniques":{"dynamicPurchasingSystem":{"status":"terminated"}}}]}}'
+    eForms example: <efac:NoticeResult><efac:LotResult><efbc:DPSTerminationIndicator>true</efbc:DPSTerminationIndicator></efac:LotResult><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:NoticeResult>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","techniques":{"dynamicPurchasingSystem":{"status":"terminated"}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
 -   id: BT-120-Lot
     parentNodeId: ND-AwardingTerms
@@ -609,8 +609,8 @@
     TED guidance:
     - Set `tender.secondStage.noNegotiationNecessary` to `true`
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and set its `.secondStage.noNegotiationNecessary` to `true`.'
-    eForms example: <cbc:NoFurtherNegotiationIndicator>true</cbc:NoFurtherNegotiationIndicator>
-    OCDS example: '{"tender":{"lots":[{"secondStage":{"noNegotiationNecessary":true}}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cbc:NoFurtherNegotiationIndicator>true</cbc:NoFurtherNegotiationIndicator></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","secondStage":{"noNegotiationNecessary":true}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardConsequencesSection
 -   id: BT-122-Lot
     parentNodeId: ND-AuctionTerms
@@ -632,8 +632,8 @@
     TED guidance:
     - Map to `tender.techniques.electronicAuction.description`
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.techniques.electronicAuction.description`.'
-    eForms example: <cac:AuctionTerms><cbc:Description languageID="ENG">The online auction solution ...</cbc:Description></cac:AuctionTerms>
-    OCDS example: '{"tender":{"lots":[{"techniques":{"electronicAuction":{"description":"The online auction solution ..."}}}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cac:AuctionTerms><cbc:Description languageID="ENG">The online auction solution ...</cbc:Description></cac:AuctionTerms></cac:TenderingProcess></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","techniques":{"electronicAuction":{"description":"The online auction solution ..."}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#auctionTermsSection
 -   id: BT-123-Lot
     parentNodeId: ND-AuctionTerms
@@ -648,8 +648,8 @@
     Business groups:
         BG-706: Techniques
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.techniques.electronicAuction.url`.'
-    eForms example: <cac:AuctionTerms><cbc:AuctionURI>https://my-online-eauction.eu/</cbc:AuctionURI></cac:AuctionTerms>
-    OCDS example: '{"tender":{"lots":[{"techniques":{"electronicAuction":{"url":"https://my-online-eauction.eu/"}}}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cac:AuctionTerms><cbc:AuctionURI>https://my-online-eauction.eu/</cbc:AuctionURI></cac:AuctionTerms></cac:TenderingProcess></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","techniques":{"electronicAuction":{"url":"https://my-online-eauction.eu/"}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#auctionTermsSection
 -   id: BT-124-Lot
     parentNodeId: ND-LotTenderingProcess
@@ -677,8 +677,8 @@
     TED guidance:
     - Map to `tender.communication.atypicalToolUrl`
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.communication.atypicalToolUrl`.'
-    eForms example: <cbc:AccessToolsURI>https://my-atypical-tool.com/</cbc:AccessToolsURI>
-    OCDS example: '{"tender":{"lots":[{"communication":{"atypicalToolUrl":"https://my-atypical-tool.com/"}}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cbc:AccessToolsURI>https://my-atypical-tool.com/</cbc:AccessToolsURI></cac:TenderingProcess></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","communication":{"atypicalToolUrl":"https://my-atypical-tool.com/"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#atypicalToolSection
 -   id: BT-124-Part
     parentNodeId: ND-PartTenderingProcess
@@ -848,8 +848,8 @@
     Business groups:
         BG-101: Procurement Documents
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), combine with [BT-13(t)-Lot](<#BT-13(t)-lot>), [convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to the lot''s `.enquiryPeriod.endDate`.'
-    eForms example: <cac:AdditionalInformationRequestPeriod><cbc:EndDate>2019-11-08+01:00</cbc:EndDate></cac:AdditionalInformationRequestPeriod>
-    OCDS example: '{"tender":{"lots":[{"enquiryPeriod":{"endDate":"2019-11-08T23:59:59+01:00"}}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cac:AdditionalInformationRequestPeriod><cbc:EndDate>2019-11-08+01:00</cbc:EndDate><cbc:EndTime>18:00:00+01:00</cbc:EndTime></cac:AdditionalInformationRequestPeriod></cac:TenderingProcess></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","enquiryPeriod":{"endDate":"2019-11-08T23:59:59+01:00"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#additionalInfoDeadlineSection
 -   id: BT-13(d)-Part
     parentNodeId: ND-PartInfoRequestPeriod
@@ -864,7 +864,7 @@
     Business groups:
         BG-101: Procurement Documents
     eForms guidance: Combine with [BT-13(t)-Part](<#BT-13(t)-part>), [convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to `tender.enquiryPeriod.endDate`.
-    eForms example: <cac:AdditionalInformationRequestPeriod><cbc:EndDate>2019-11-08+01:00</cbc:EndDate></cac:AdditionalInformationRequestPeriod>
+    eForms example: <cac:AdditionalInformationRequestPeriod><cbc:EndDate>2019-11-08+01:00</cbc:EndDate><cbc:EndTime>18:00:00+01:00</cbc:EndTime></cac:AdditionalInformationRequestPeriod>
     OCDS example: '{"tender":{"enquiryPeriod":{"endDate":"2019-11-08T23:59:59+01:00"}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#additionalInfoDeadlineSection
 -   id: BT-13(t)-Lot
@@ -882,8 +882,8 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/ADMINISTRATIVE_INFORMATION_CONTRACT_NOTICE_DEFENCE/CONDITIONS_OBTAINING_SPECIFICATIONS/TIME_LIMIT
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), combine with [BT-13(d)-Lot](<#BT-13(d)-lot>), [convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to the lot''s `.enquiryPeriod.endDate`.'
-    eForms example: <cac:AdditionalInformationRequestPeriod><cbc:EndTime>18:00:00+01:00</cbc:EndTime></cac:AdditionalInformationRequestPeriod>
-    OCDS example: '{"tender":{"lots":[{"enquiryPeriod":{"endDate":"2019-11-08T18:00:00+01:00"}}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cac:AdditionalInformationRequestPeriod><cbc:EndDate>2019-11-08+01:00</cbc:EndDate><cbc:EndTime>18:00:00+01:00</cbc:EndTime></cac:AdditionalInformationRequestPeriod></cac:TenderingProcess></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","enquiryPeriod":{"endDate":"2019-11-08T18:00:00+01:00"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#additionalInfoDeadlineSection
 -   id: BT-13(t)-Part
     parentNodeId: ND-PartInfoRequestPeriod
@@ -898,7 +898,7 @@
     Business groups:
         BG-101: Procurement Documents
     eForms guidance: Combine with [BT-13(d)-Part](<#BT-13(d)-part>), [convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to `tender.enquiryPeriod.endDate`.
-    eForms example: <cac:AdditionalInformationRequestPeriod><cbc:EndTime>18:00:00+01:00</cbc:EndTime></cac:AdditionalInformationRequestPeriod>
+    eForms example: <cac:AdditionalInformationRequestPeriod><cbc:EndDate>2019-11-08+01:00</cbc:EndDate><cbc:EndTime>18:00:00+01:00</cbc:EndTime></cac:AdditionalInformationRequestPeriod>
     OCDS example: '{"tender":{"enquiryPeriod":{"endDate":"2019-11-08T18:00:00+01:00"}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#additionalInfoDeadlineSection
 -   id: BT-130-Lot
@@ -924,8 +924,8 @@
     - Map to the date component of `tender.secondStage.invitationDate`.
     - Map to the date component of `tender.tenderPeriod.endDate`
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), [convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to the lot''s `.secondStage.invitationDate`.'
-    eForms example: <cac:InvitationSubmissionPeriod><cbc:StartDate>2019-11-15+01:00</cbc:StartDate></cac:InvitationSubmissionPeriod>
-    OCDS example: '{"tender":{"lots":[{"secondStage":{"invitationDate":"2019-11-15T00:00:00+01:00"}}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cac:InvitationSubmissionPeriod><cbc:StartDate>2019-11-15+01:00</cbc:StartDate></cac:InvitationSubmissionPeriod></cac:TenderingProcess></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","secondStage":{"invitationDate":"2019-11-15T00:00:00+01:00"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#tenderInvitationSection
 -   id: BT-131(d)-Lot
     parentNodeId: ND-SubmissionDeadline
@@ -940,8 +940,8 @@
     Business groups:
         BG-102: Submission Terms
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), combine with [BT-131(t)-Lot](<#BT-131(t)-lot>), [convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to the lot''s `.tenderPeriod.endDate`.'
-    eForms example: <cac:TenderSubmissionDeadlinePeriod><cbc:EndDate>2019-11-30+01:00</cbc:EndDate></cac:TenderSubmissionDeadlinePeriod>
-    OCDS example: '{"tender":{"lots":[{"tenderPeriod":{"endDate":"2019-11-30T23:59:59+01:00"}}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cac:TenderSubmissionDeadlinePeriod><cbc:EndDate>2019-11-30+01:00</cbc:EndDate><cbc:EndTime>12:00:00+01:00</cbc:EndTime></cac:TenderSubmissionDeadlinePeriod></cac:TenderingProcess></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","tenderPeriod":{"endDate":"2019-11-30T23:59:59+01:00"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#tendersDeadlineSection
 -   id: BT-131(t)-Lot
     parentNodeId: ND-SubmissionDeadline
@@ -956,8 +956,8 @@
     Business groups:
         BG-102: Submission Terms
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), combine with [BT-131(d)-Lot](<#BT-131(d)-lot>), [convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to the lot''s `.tenderPeriod.endDate`.'
-    eForms example: <cac:TenderSubmissionDeadlinePeriod><cbc:EndTime>12:00:00+01:00</cbc:EndTime></cac:TenderSubmissionDeadlinePeriod>
-    OCDS example: '{"tender":{"lots":[{"tenderPeriod":{"endDate":"2019-11-30T12:00:00+01:00"}}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cac:TenderSubmissionDeadlinePeriod><cbc:EndDate>2019-11-30+01:00</cbc:EndDate><cbc:EndTime>12:00:00+01:00</cbc:EndTime></cac:TenderSubmissionDeadlinePeriod></cac:TenderingProcess></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","tenderPeriod":{"endDate":"2019-11-30T12:00:00+01:00"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#tendersDeadlineSection
 -   id: BT-1311(d)-Lot
     parentNodeId: ND-ParticipationRequestPeriod
@@ -974,8 +974,8 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_CONCESSIONAIRE_DEFENCE/FD_CONTRACT_CONCESSIONAIRE_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_SUB_DEFENCE/ADMINISTRATIVE_INFORMATION_CONTRACT_SUB_NOTICE_DEFENCE/RECEIPT_LIMIT_DATE/fn:concat(YEAR,-", MONTH, "-", DAY)"
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), combine with [BT-1311(t)-Lot](<#BT-1311(t)-lot>), [convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to the lot''s `.tenderPeriod.endDate`.'
-    eForms example: <cac:ParticipationRequestReceptionPeriod><cbc:EndDate>2019-11-25+01:00</cbc:EndDate></cac:ParticipationRequestReceptionPeriod>
-    OCDS example: '{"tender":{"lots":[{"tenderPeriod":{"endDate":"2019-11-25T23:59:59+01:00"}}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cac:ParticipationRequestReceptionPeriod><cbc:EndDate>2019-11-25+01:00</cbc:EndDate><cbc:EndTime>12:00:00+01:00</cbc:EndTime></cac:ParticipationRequestReceptionPeriod></cac:TenderingProcess></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","tenderPeriod":{"endDate":"2019-11-25T23:59:59+01:00"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#requestDeadlineSection
 -   id: BT-1311(t)-Lot
     parentNodeId: ND-ParticipationRequestPeriod
@@ -993,8 +993,8 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/ADMINISTRATIVE_INFORMATION_CONTRACT_NOTICE_DEFENCE/RECEIPT_LIMIT_DATE
     - TED_EXPORT/FORM_SECTION/CONTRACT_CONCESSIONAIRE_DEFENCE/FD_CONTRACT_CONCESSIONAIRE_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_SUB_DEFENCE/ADMINISTRATIVE_INFORMATION_CONTRACT_SUB_NOTICE_DEFENCE/RECEIPT_LIMIT_DATE/TIME
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), combine with [BT-1311(d)-Lot](<#BT-1311(d)-lot>), [convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to the lot''s `.tenderPeriod.endDate`.'
-    eForms example: <cac:ParticipationRequestReceptionPeriod><cbc:EndTime>12:00:00+01:00</cbc:EndTime></cac:ParticipationRequestReceptionPeriod>
-    OCDS example: '{"tender":{"lots":[{"tenderPeriod":{"endDate":"2019-11-25T12:00:00+01:00"}}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cac:ParticipationRequestReceptionPeriod><cbc:EndDate>2019-11-25+01:00</cbc:EndDate><cbc:EndTime>12:00:00+01:00</cbc:EndTime></cac:ParticipationRequestReceptionPeriod></cac:TenderingProcess></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","tenderPeriod":{"endDate":"2019-11-25T12:00:00+01:00"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#requestDeadlineSection
 -   id: BT-132(d)-Lot
     parentNodeId: ND-PublicOpening
@@ -1014,8 +1014,8 @@
     TED guidance:
     - Map to the date component of `tender.awardPeriod.startDate` and to the date component of `tender.bidOpening.date`
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), combine with [BT-132(t)-Lot](<#BT-132(t)-lot>), [convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to the lot''s `.awardPeriod.startDate` and to its `.bidOpening.date`.'
-    eForms example: <cac:OpenTenderEvent><cbc:OccurrenceDate>2019-11-05+01:00</cbc:OccurrenceDate></cac:OpenTenderEvent>
-    OCDS example: '{"tender":{"lots":[{"awardPeriod":{"startDate":"2019-11-05T00:00:00+01:00"}}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cac:OpenTenderEvent><cbc:OccurrenceDate>2019-11-05+01:00</cbc:OccurrenceDate><cbc:OccurrenceTime>14:00:00+01:00</cbc:OccurrenceTime></cac:OpenTenderEvent></cac:TenderingProcess></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","awardPeriod":{"startDate":"2019-11-05T00:00:00+01:00"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#openingEventSection
 -   id: BT-132(t)-Lot
     parentNodeId: ND-PublicOpening
@@ -1035,8 +1035,8 @@
     TED guidance:
     - Map to the time component of `tender.awardPeriod.startDate` and to the time component of `tender.bidOpening.date`
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), combine with [BT-132(d)-Lot](<#BT-132(d)-lot>), [convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to the lot''s `.awardPeriod.startDate` and to its `.bidOpening.date`.'
-    eForms example: <cac:OpenTenderEvent><cbc:OccurrenceTime>14:00:00+01:00</cbc:OccurrenceTime></cac:OpenTenderEvent>
-    OCDS example: '{"tender":{"lots":[{"awardPeriod":{"startDate":"2019-11-05T14:00:00+01:00"}}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cac:OpenTenderEvent><cbc:OccurrenceDate>2019-11-05+01:00</cbc:OccurrenceDate><cbc:OccurrenceTime>14:00:00+01:00</cbc:OccurrenceTime></cac:OpenTenderEvent></cac:TenderingProcess></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","awardPeriod":{"startDate":"2019-11-05T14:00:00+01:00"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#openingEventSection
 -   id: BT-133-Lot
     parentNodeId: ND-PublicOpeningPlace
@@ -1055,8 +1055,8 @@
     TED guidance:
     - Map to `tender.bidOpening.address.streetAddress`
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.bidOpening.location.description`.'
-    eForms example: <cac:OpenTenderEvent><cac:OccurenceLocation><cbc:Description languageID="ENG">online at URL https://event-on-line.org/d22f65 ...</cbc:Description></cac:OccurenceLocation></cac:OpenTenderEvent>
-    OCDS example: '{"tender":{"lots":[{"bidOpening":{"location":{"description":"online at URL https://event-on-line.org/d22f65 ..."}}}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cac:OpenTenderEvent><cac:OccurenceLocation><cbc:Description languageID="ENG">online at URL https://event-on-line.org/d22f65 ...</cbc:Description></cac:OccurenceLocation></cac:OpenTenderEvent></cac:TenderingProcess></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","bidOpening":{"location":{"description":"online at URL https://event-on-line.org/d22f65 ..."}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#openingEventSection
 -   id: BT-134-Lot
     parentNodeId: ND-PublicOpening
@@ -1075,8 +1075,8 @@
     TED guidance:
     - Map to `tender.bidOpening.description`
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `bidOpening.description`.'
-    eForms example: <cac:OpenTenderEvent><cbc:Description languageID="ENG">Any tenderer may attend ...</cbc:Description></cac:OpenTenderEvent>
-    OCDS example: '{"tender":{"lots":[{"bidOpening":{"description":"Any tenderer may attend ..."}}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cac:OpenTenderEvent><cbc:Description languageID="ENG">Any tenderer may attend ...</cbc:Description></cac:OpenTenderEvent></cac:TenderingProcess></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","bidOpening":{"description":"Any tenderer may attend ..."}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#openingEventSection
 -   id: BT-135-Procedure
     parentNodeId: ND-DirectAward
@@ -1454,7 +1454,7 @@
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
         Set its `.documentType` to 'biddingDocuments' and set it's `.accessDetails` to "Restricted.".
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and add its `id` to the document's `.relatedLots`.
-    eForms example: <cac:CallForTendersDocumentReference><cbc:DocumentType>restricted-document</cbc:DocumentType></cac:CallForTendersDocumentReference>
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:CallForTendersDocumentReference><cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID><cbc:DocumentType>restricted-document</cbc:DocumentType></cac:CallForTendersDocumentReference></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","documentType":"biddingDocuments","accessDetails":"Restricted.","relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
 -   id: BT-14-Part
@@ -1472,7 +1472,7 @@
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
         Set its `.documentType` to 'biddingDocuments', and set it's `.accessDetails` to "Restricted.".
-    eForms example: <cac:CallForTendersDocumentReference><cbc:DocumentType>restricted-document</cbc:DocumentType></cac:CallForTendersDocumentReference>
+    eForms example: <cac:CallForTendersDocumentReference><cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID><cbc:DocumentType>restricted-document</cbc:DocumentType></cac:CallForTendersDocumentReference>
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","documentType":"biddingDocuments","accessDetails":"Restricted."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
 -   id: BT-140-notice
@@ -12221,8 +12221,16 @@
         This field maps to the same `Sustainability` objects as created for BT-06-Lot.
 
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and for each `cbc:ProcurementTypeCode`, add or update the corresponding `Sustainability` object in the lot's `sustainability` array and map to its `.description`.
-    eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementType languageID="ENG">This is a strategic procurement involving the innovative use of ...</cbc:ProcurementType></cac:ProcurementAdditionalType>
-    OCDS example: '{"tender":{"lots":[{"sustainability":[{"description":"This is a strategic procurement involving the innovative use of ..."}]}]}}'
+    eForms example: |
+        <cac:ProcurementProjectLot>
+            <cbc:ID schemeName="Lot">LOT-0001</cbc:ID>
+            <cac:ProcurementProject>
+                <cac:ProcurementAdditionalType>
+                <cbc:ProcurementType languageID="ENG">This is a strategic procurement involving the innovative use of ...</cbc:ProcurementType>
+                </cac:ProcurementAdditionalType>
+            </cac:ProcurementProject>
+        </cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","sustainability":[{"description":"This is a strategic procurement involving the innovative use of ..."}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#strategicProcurementSection
 -   id: BT-78-Lot
     parentNodeId: ND-LotTenderingTerms
