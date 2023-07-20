@@ -808,7 +808,7 @@
 
         For example, if a first notice for a given procedure has nine related processes, it uses id's "1" through "9". A second notice for the same procedure then uses id's "10" and up, etc.
 
-        Map the value of the field to `.identifier`. Set `.scheme` to "eu-oj". If the value of `sibling::cbc:ProcessReasonCode` is "irregular" or "unsuitable", add 'unsuccessfulProcess' to the `.relationship` array. If it is "additional", "existing" or "repetition, add 'prior' to the `.relationship` array.
+        Map the value of the field to `.identifier`. Set `.scheme` to 'eu-oj'. If the value of `sibling::cbc:ProcessReasonCode` is "irregular" or "unsuitable", add 'unsuccessfulProcess' to the `.relationship` array. If it is "additional", "existing" or "repetition, add 'prior' to the `.relationship` array.
     eForms example: <cac:ProcessJustification><cbc:Description>123e4567-e89b-12d3-a456-426614174000</cbc:Description></cac:ProcessJustification>
     OCDS example: '{"relatedProcesses":[{"id":"1","identifier":"123e4567-e89b-12d3-a456-426614174000","scheme":"eu-oj","relationship":["prior"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#directAwardSection
@@ -1452,7 +1452,7 @@
     - Add a `ParticipationFee` object to the `tender.participationFees` array, set its `.type` to 'document', and set its `.id` to '1'.
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
-        Set its `.documentType` to 'biddingDocuments' and set it's `.accessDetails` to 'Restricted.'.
+        Set its `.documentType` to 'biddingDocuments' and set it's `.accessDetails` to "Restricted.".
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and add its `id` to the document's `.relatedLots`.
     eForms example: <cac:CallForTendersDocumentReference><cbc:DocumentType>restricted-document</cbc:DocumentType></cac:CallForTendersDocumentReference>
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","documentType":"biddingDocuments","accessDetails":"Restricted.","relatedLots":["LOT-0001"]}]}}'
@@ -1471,7 +1471,7 @@
         BG-101: Procurement Documents
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
-        Set its `.documentType` to 'biddingDocuments', and set it's `.accessDetails` to 'Restricted.'.
+        Set its `.documentType` to 'biddingDocuments', and set it's `.accessDetails` to "Restricted.".
     eForms example: <cac:CallForTendersDocumentReference><cbc:DocumentType>restricted-document</cbc:DocumentType></cac:CallForTendersDocumentReference>
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","documentType":"biddingDocuments","accessDetails":"Restricted."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
@@ -6059,7 +6059,7 @@
     - TED_EXPORT/FORM_SECTION/F21_2014/OBJECT_CONTRACT/REFERENCE_NUMBER
     TED guidance:
     - If not set, let *Reference number* be equal to the `ocid` value. Map to `tender.id` (string).
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.identifiers.id`, and set `.identifiers.scheme` to "internal".'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.identifiers.id`, and set `.identifiers.scheme` to ''internal''.'
     eForms example: <cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID>
     OCDS example: '{"tender":{"lots":[{"identifiers":[{"id":"PROC/2020/0024-ABC-FGHI","scheme":"internal"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#objectSection
@@ -6074,7 +6074,7 @@
     Description: 'The internal identifier used for files regarding the procurement procedure or lot before a procedure identifier is given (e.g. coming from the buyer''s document management system or procurement planning system). '
     Business groups:
         BG-2: Purpose
-    eForms guidance: '[Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot) and map to its `.identifiers.id`, and set `.identifiers.scheme` to "internal".'
+    eForms guidance: '[Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot) and map to its `.identifiers.id`, and set `.identifiers.scheme` to ''internal''.'
     eForms example: <cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID>
     OCDS example: '{"tender":{"lotGroups":[{"identifiers":[{"id":"PROC/2020/0024-ABC-FGHI","scheme":"internal"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#objectSection
@@ -6089,7 +6089,7 @@
     Description: 'The internal identifier used for files regarding the procurement procedure or lot before a procedure identifier is given (e.g. coming from the buyer''s document management system or procurement planning system). '
     Business groups:
         BG-2: Purpose
-    eForms guidance: Map to `tender.identifiers.id`, and set `identifiers.scheme` to "internal".
+    eForms guidance: Map to `tender.identifiers.id`, and set `identifiers.scheme` to 'internal'.
     eForms example: <cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID>
     OCDS example: '{"tender":{"identifiers":[{"id":"PROC/2020/0024-ABC-FGHI","scheme":"internal"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#objectSection
@@ -6123,7 +6123,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/REFERENCE_NUMBER
     TED guidance:
     - If not set, let *Reference number* be equal to the `ocid` value. Map to `tender.id` (string).
-    eForms guidance: Map to `tender.identifiers.id`, and set `identifiers.scheme` to "internal".
+    eForms guidance: Map to `tender.identifiers.id`, and set `identifiers.scheme` to 'internal'.
     eForms example: <cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID>
     OCDS example: '{"tender":{"identifiers":[{"id":"PROC/2020/0024-ABC-FGHI","scheme":"internal"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#objectSection
@@ -9971,9 +9971,9 @@
     Description: The estimated date of dispatch of the invitations to confirm interest.
     Business groups:
         BG-100: Communication
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), [convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to the lot''s `.communication.invitationToConfirmInterest`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), [convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to the lot''s `.communication.invitationToConfirmInterestDispatchDate`.'
     eForms example: <cac:ParticipationInvitationPeriod><cbc:StartDate>2019-11-15+01:00</cbc:StartDate></cac:ParticipationInvitationPeriod>
-    OCDS example: '{"tender":{"lots":[{"communication":{"invitationToConfirmInterest":"2019-11-15T09:00:00+01:00"}}]}}'
+    OCDS example: '{"tender":{"lots":[{"communication":{"invitationToConfirmInterestDispatchDate":"2019-11-15T09:00:00+01:00"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#interestInvitationSection
 -   id: BT-632-Lot
     parentNodeId: ND-LotTenderingProcessExtension
@@ -10066,7 +10066,7 @@
         This field maps to the same `Statistic` objects as created for BT-636-LotResult.
         For each `AppealRequestStatistics`, [add a complaints statistic](operations.md#add-a-complaints-statistic) or update the corresponding `Statistic` object and map to its `.value`.
     eForms example: <efac:AppealRequestsStatistics><efbc:StatisticsNumeric>2</efbc:StatisticsNumeric></efac:AppealRequestsStatistics>
-    OCDS example: '{"statistics":[{"id":"1","value":"2","scope":"complaints"}]}'
+    OCDS example: '{"statistics":[{"id":"1","value":2,"scope":"complaints"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
 -   id: BT-636-LotResult
     parentNodeId: ND-ReviewRequestsStatistics
@@ -10558,7 +10558,7 @@
 
         [Get the lot for the LotResult](operations.md#get-the-lot-for-a-lotresult), and add the lot's `.id` to the statistic's `.relatedLots`.
     eForms example: <efac:AppealRequestsStatistics><efbc:StatisticsCode listName="review-type">complainants</efbc:StatisticsCode></efac:AppealRequestsStatistics>
-    OCDS example: '{"statistics":[{"id":"1","value":"2","scope":"complaints"}]}'
+    OCDS example: '{"statistics":[{"id":"1","value":2,"scope":"complaints"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
 -   id: BT-712(b)-LotResult
     parentNodeId: ND-BuyerReviewComplainants
@@ -10578,7 +10578,7 @@
 
         [Get the lot for the LotResult](operations.md#get-the-lot-for-a-lotresult), and add the lot's `.id` to the statistic's `.relatedLots`.
     eForms example: <efac:AppealRequestsStatistics><efbc:StatisticsNumeric>2</efbc:StatisticsNumeric></efac:AppealRequestsStatistics>
-    OCDS example: '{"statistics":[{"id":"1","value":"2","measure":"complainants","scope":"complaints"}]}'
+    OCDS example: '{"statistics":[{"id":"1","value":2,"measure":"complainants","scope":"complaints"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
 -   id: BT-717-Lot
     parentNodeId: ND-StrategicProcurementLot
@@ -10755,7 +10755,7 @@
         For each `ancestor::efac:ProcurementDetails/efac:StrategicProcurementStatistics/efbc:StatisticsCode` add a `Classification` object to the corresponding item's `additionalClassifications` array.
 
         - Map the value of this field to the classification's `.id`.
-        - Set the classification's `.scheme` to "eu-vehicle-category".
+        - Set the classification's `.scheme` to 'eu-vehicle-category'.
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/vehicle-category) and map it to the classification's `.description`.
     eForms example: <efac:ProcurementDetails><efbc:AssetCategoryCode listName="vehicle-category">n2-n3</efbc:AssetCategoryCode></efac:ProcurementDetails>
     OCDS example: '{"awards":[{"items":[{"id":"1","additionalClassifications":[{"scheme":"eu-vehicle-category","id":"n2-n3","description":"Truck (N2-N3)"}]}]}]}'
@@ -11099,7 +11099,7 @@
         For each `ancestor::efac:ProcurementDetails/efac:StrategicProcurementStatistics/efbc:StatisticsCode` add a `Classification` object to the corresponding item's `additionalClassifications` array.
 
         - Map the value of this field to the classification's `.id`.
-        - Set the classification's `.scheme` to "eu-cvd-contract-type".
+        - Set the classification's `.scheme` to 'eu-cvd-contract-type'.
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/cvd-contract-type) and map it to the classification's `.description`.
     eForms example: <efac:StrategicProcurementInformation><efbc:ProcurementCategoryCode listName="cvd-contract-type">oth-serv-contr</efbc:ProcurementCategoryCode></efac:StrategicProcurementInformation>
     OCDS example: '{"awards":[{"items":[{"id":"1","additionalClassifications":[{"id":"oth-serv-contr","scheme":"eu-cvd-contract-type","description":"other service contract"}]}]}]}'
@@ -13362,8 +13362,8 @@
 
         If the value of this field is 0 then discard. Otherwise:
 
-        - If the value of the `ancestor::efbc:StrategicProcurementStatistics/efbc:StatisticsCode` is "vehicles-zero-emissions" or "vehicles-clean", get the corresponding item and map to it's `.quantity`.
-        - If the value of `ancestor::efbc:StrategicProcurementStatistics/efbc:StatisticsCode` is "vehicles", get the value of `efbc:StatisticsNumeric` for each `ancestor::efbc:StrategicProcurementStatistics` with `efbc:StatisticsCode` equal to "vehicles-zero-emissions" or "vehicles-clean" and subtract the sum of the values from the value of this field. Get the corresponding item and map the resulting value to it's `.quantity`.
+        - If the value of the `ancestor::efbc:StrategicProcurementStatistics/efbc:StatisticsCode` is "vehicles-zero-emission" or "vehicles-clean", get the corresponding item and map to it's `.quantity`.
+        - If the value of `ancestor::efbc:StrategicProcurementStatistics/efbc:StatisticsCode` is "vehicles", get the value of `efbc:StatisticsNumeric` for each `ancestor::efbc:StrategicProcurementStatistics` with `efbc:StatisticsCode` equal to "vehicles-zero-emission" or "vehicles-clean" and subtract the sum of the values from the value of this field. Get the corresponding item and map the resulting value to it's `.quantity`.
         - If the value is 0 discard the item entirely. Otherwise map the the result to the item's `.quantity`.
     eForms example: <efac:StrategicProcurementStatistics><efbc:StatisticsNumeric>3</efbc:StatisticsNumeric></efac:StrategicProcurementStatistics>
     OCDS example: '{"awards":[{"items":[{"id":"1","quantity":3}]}]}'
