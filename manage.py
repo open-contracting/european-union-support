@@ -532,6 +532,12 @@ def lint(filename, additional_properties):
     Lint FILE (validate and format XML, JSON and Markdown, report unrecognized OCDS fields, update eForms SDK URLs).
     """
 
+    literal_strings = {
+        "COFOG",  # BT-10, BT-610
+        "Restricted.",  # BT-14
+        "Subcontracting",  # BT-195
+    }
+
     # Similar to tests/fixtures/release_minimal.json in ocdskit.
     minimal_release = {
         "ocid": "ocds-213czf-1",
@@ -565,7 +571,15 @@ def lint(filename, additional_properties):
     # Remove `patternProperties` to clarify output.
     set_additional_properties_and_remove_pattern_properties(schema, additional_properties)
     # Remove required fields.
-    for definition in ("Bid", "Statistic", "Document", "Finance", "ParticipationFee", "Person"):
+    for definition in (
+        "Bid",
+        "Document",
+        "Finance",
+        "ParticipationFee",
+        "Person",
+        "Statistic",
+        "WithheldInformationItem",
+    ):
         set_pointer(schema, f"/definitions/{definition}/required", [])
 
     format_checker = FormatChecker()
@@ -588,7 +602,7 @@ def lint(filename, additional_properties):
 
     if os.path.isfile("codes-eforms.csv"):
         with open("codes-eforms.csv") as f:
-            known_eforms_codes = {row["code"] for row in csv.DictReader(f)}
+            known_eforms_codes = {row["code"] for row in csv.DictReader(f)} | literal_strings
     else:
         known_eforms_codes = set()
 
