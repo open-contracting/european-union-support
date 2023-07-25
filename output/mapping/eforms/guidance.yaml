@@ -5980,8 +5980,8 @@
     TED guidance:
     - Map to the lot's `.title`
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.title`.'
-    eForms example: <cbc:Name languageID="ENG">Computer Network extension</cbc:Name>
-    OCDS example: '{"tender":{"lots":[{"title":"Computer Network extension"}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cbc:Name languageID="ENG">Computer Network extension</cbc:Name></cac:ProcurementProject></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","title":"Computer Network extension"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#objectSection
 -   id: BT-21-LotsGroup
     parentNodeId: ND-LotsGroupProcurementScope
@@ -5995,8 +5995,8 @@
     Business groups:
         BG-2: Purpose
     eForms guidance: '[Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot) and map to its `.title`.'
-    eForms example: <cbc:Name languageID="ENG">Computer Network extension</cbc:Name>
-    OCDS example: '{"tender":{"lotGroups":[{"title":"Computer Network extension"}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">GLO-0001</cbc:ID><cac:ProcurementProject><cbc:Name languageID="ENG">Computer Network extension</cbc:Name></cac:ProcurementProject></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lotGroups":[{"id":"GLO-0001","title":"Computer Network extension"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#objectSection
 -   id: BT-21-Part
     parentNodeId: ND-PartProcurementScope
@@ -6079,8 +6079,8 @@
     TED guidance:
     - If not set, let *Reference number* be equal to the `ocid` value. Map to `tender.id` (string).
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.identifiers.id`, and set `.identifiers.scheme` to ''internal''.'
-    eForms example: <cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID>
-    OCDS example: '{"tender":{"lots":[{"identifiers":[{"id":"PROC/2020/0024-ABC-FGHI","scheme":"internal"}]}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID></cac:ProcurementProject></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","identifiers":[{"id":"PROC/2020/0024-ABC-FGHI","scheme":"internal"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#objectSection
 -   id: BT-22-LotsGroup
     parentNodeId: ND-LotsGroupProcurementScope
@@ -6094,8 +6094,8 @@
     Business groups:
         BG-2: Purpose
     eForms guidance: '[Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot) and map to its `.identifiers.id`, and set `.identifiers.scheme` to ''internal''.'
-    eForms example: <cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID>
-    OCDS example: '{"tender":{"lotGroups":[{"identifiers":[{"id":"PROC/2020/0024-ABC-FGHI","scheme":"internal"}]}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">GLO-0001</cbc:ID><cac:ProcurementProject><cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID></cac:ProcurementProject></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lotGroups":[{"id":"GLO-0001","identifiers":[{"id":"PROC/2020/0024-ABC-FGHI","scheme":"internal"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#objectSection
 -   id: BT-22-Part
     parentNodeId: ND-PartProcurementScope
@@ -6162,8 +6162,8 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/TYPE_CONTRACT_DEFENCE/TYPE_CONTRACT/@VALUE
     - TED_EXPORT/FORM_SECTION/F21_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot). If the vaLue of this field equals "works" or "services", map it to the lot''s `.mainProcurementCategory`. If it equals "supplies", set the lot''s `.mainProcurementCategory` to ''goods''. If it equals "combined", add to the lot''s `.additionalProcurementCategories` array.'
-    eForms example: <cbc:ProcurementTypeCode listName="contract-nature">works</cbc:ProcurementTypeCode>
-    OCDS example: '{"tender":{"lots":[{"mainProcurementCategory":"works"}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cbc:ProcurementTypeCode listName="contract-nature">works</cbc:ProcurementTypeCode></cac:ProcurementProject></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":LOT-0001","mainProcurementCategory":"works"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#natureSection
 -   id: BT-23-Part
     parentNodeId: ND-PartProcurementScope
@@ -6250,8 +6250,8 @@
     - 'Map to the lot''s `.description`\n\n**F12, F13**: Instead, map to `tender.description`'
     - 'Map to the lot''s `.description`\n\n**F12, F13**: Instead, map to `tender.description`\n\n If present, this takes precedence over the [Description of the procurement at the time of conclusion of the contract](#/OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR).'
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.description`.'
-    eForms example: <cbc:Description languageID="ENG">Procedure for the procurement of ...</cbc:Description>
-    OCDS example: '{"tender":{"lots":[{"description":"Procedure for the procurement of ..."}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cbc:Description languageID="ENG">Procedure for the procurement of ...</cbc:Description></cac:ProcurementProject></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","description":"Procedure for the procurement of ..."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#objectSection
 -   id: BT-24-LotsGroup
     parentNodeId: ND-LotsGroupProcurementScope
@@ -6265,8 +6265,8 @@
     Business groups:
         BG-2: Purpose
     eForms guidance: '[Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot) and map to its `.description`.'
-    eForms example: <cbc:Description languageID="ENG">Procedure for the procurement of ...</cbc:Description>
-    OCDS example: '{"tender":{"lotGroups":[{"description":"Procedure for the procurement of ..."}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">GLO-0001</cbc:ID><cac:ProcurementProject><cbc:Description languageID="ENG">Procedure for the procurement of ...</cbc:Description></cac:ProcurementProject></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lotGroups":[{"id":"GLO-0001","description":"Procedure for the procurement of ..."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#objectSection
 -   id: BT-24-Part
     parentNodeId: ND-PartProcurementScope
@@ -6336,8 +6336,8 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/F17_DIVISION_INTO_LOTS/F17_DIV_INTO_LOT_YES/F17_ANNEX_B/NATURE_QUANTITY_SCOPE/TOTAL_QUANTITY_OR_SCOPE
     eForms guidance: '[Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot) and map to its `.quantity`.'
-    eForms example: <cbc:EstimatedOverallContractQuantity unitCode="TNE">45000</cbc:EstimatedOverallContractQuantity>
-    OCDS example: '{"tender":{"items":[{"quantity":45000,"relatedLot":"LOT-0001"}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cbc:EstimatedOverallContractQuantity unitCode="TNE">45000</cbc:EstimatedOverallContractQuantity></cac:ProcurementProject></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"items":[{"id":"1","quantity":45000,"relatedLot":"LOT-0001"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#quantitySection
 -   id: BT-26(a)-Lot
     parentNodeId: ND-LotAdditionalClassification
@@ -6358,8 +6358,8 @@
         [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot). For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update a corresponding `Classification` object in the item's `.additionalClassifications` array.
 
         Capitalize the value of `cbc:ItemClassificationCode[@listName]` and map to the classification's `.scheme`.
-    eForms example: <cac:AdditionalCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311200</cbc:ItemClassificationCode></cac:AdditionalCommodityClassification>
-    OCDS example: '{"tender":{"items":[{"additionalClassifications":[{"scheme":"CPV"}],"relatedLot":"LOT-0001"}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cac:AdditionalCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311200</cbc:ItemClassificationCode></cac:AdditionalCommodityClassification></cac:ProcurementProject></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"items":[{"id":"1","additionalClassifications":[{"scheme":"CPV"}],"relatedLot":"LOT-0001"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#classificationSection
 -   id: BT-26(a)-Part
     parentNodeId: ND-PartAdditionalClassification
@@ -6381,7 +6381,7 @@
         - Set the item's `id` incrementally.
           For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update a corresponding `Classification` object in the item's `.additionalClassifications`. Capitalize the value of `cbc:ItemClassificationCode[@listName]` and map to the classification's `.scheme`..
     eForms example: <cac:AdditionalCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311200</cbc:ItemClassificationCode></cac:AdditionalCommodityClassification>
-    OCDS example: '{"tender":{"items":[{"additionalClassifications":[{"scheme":"CPV"}]}]}}'
+    OCDS example: '{"tender":{"items":[{"id":"1","additionalClassifications":[{"scheme":"CPV"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#classificationSection
 -   id: BT-26(a)-Procedure
     parentNodeId: ND-ProcedureAdditionalCommodityClassification
@@ -6403,7 +6403,7 @@
         - Set the item's `id` incrementally.
           For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update a corresponding `Classification` object in the item's `.additionalClassifications`.Capitalize the value of `cbc:ItemClassificationCode[@listName]` and map to the classification's `.scheme`..
     eForms example: <cac:AdditionalCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311200</cbc:ItemClassificationCode></cac:AdditionalCommodityClassification>
-    OCDS example: '{"tender":{"items":[{"additionalClassifications":[{"scheme":"CPV"}]}]}}'
+    OCDS example: '{"tender":{"items":[{"id":"1","additionalClassifications":[{"scheme":"CPV"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#classificationSection
 -   id: BT-26(m)-Lot
     parentNodeId: ND-LotMainClassificationCode
@@ -6421,8 +6421,8 @@
     eForms guidance: |-
         This field maps to the same object as created for BT-262-Lot.
         [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot). Capitalize the value of `cbc:ItemClassificationCode[@listName]` and map to the item's `.classification.scheme`.
-    eForms example: <cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification>
-    OCDS example: '{"tender":{"items":[{"classification":{"scheme":"CPV"},"relatedLot":"LOT-0001"}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification></cac:ProcurementProject></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"items":[{"id":"1","classification":{"scheme":"CPV"},"relatedLot":"LOT-0001"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#classificationSection
 -   id: BT-26(m)-Part
     parentNodeId: ND-PartMainClassificationCode
@@ -6444,7 +6444,7 @@
         - Set the item's `id` incrementally.
         - Capitalize the value of `cbc:ItemClassificationCode[@listName]` and map to the item's `.classification.scheme`.
     eForms example: <cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification>
-    OCDS example: '{"tender":{"items":[{"classification":{"scheme":"CPV"}}]}}'
+    OCDS example: '{"tender":{"items":[{"id":"1","classification":{"scheme":"CPV"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#classificationSection
 -   id: BT-26(m)-Procedure
     parentNodeId: ND-ProcedureMainClassificationCode
@@ -6466,7 +6466,7 @@
         - Set the item's `id` incrementally.
         - Capitalize the value of `cbc:ItemClassificationCode[@listName]` and map to the item's `.classification.scheme`.
     eForms example: <cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification>
-    OCDS example: '{"tender":{"items":[{"classification":{"scheme":"CPV"}}]}}'
+    OCDS example: '{"tender":{"items":[{"id":"1","classification":{"scheme":"CPV"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#classificationSection
 -   id: BT-262-Lot
     parentNodeId: ND-LotMainClassification
@@ -6496,7 +6496,7 @@
         - Set the item's `id` incrementally.
 
         Map to the item's `.classification.id`.'
-    eForms example: <cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification>
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification></cac:ProcurementProject></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"items":[{"id":"1","classification":{"id":"15311100"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#classificationSection
 -   id: BT-262-Part
@@ -6590,8 +6590,8 @@
         - Set the item's `id` incrementally.
 
         For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update a corresponding `Classification` object in the item's `.additionalClassifications` array and map the value of this field to the classification's `.id`.
-    eForms example: <cac:AdditionalCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311200</cbc:ItemClassificationCode></cac:AdditionalCommodityClassification>
-    OCDS example: '{"tender":{"items":[{"id":"1","additionalClassifications":[{"id":"15311200"}]}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cac:AdditionalCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311200</cbc:ItemClassificationCode></cac:AdditionalCommodityClassification></cac:ProcurementProject></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"items":[{"id":"1","additionalClassifications":[{"id":"15311200"}],"relatedLot":"LOT-0001"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#classificationSection
 -   id: BT-263-Part
     parentNodeId: ND-PartAdditionalClassification
@@ -6673,8 +6673,8 @@
     - Map to `tender.value.amount`
     - Map to the lot's `.value.amount`
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), map to its `.value.amount` and map `@currencyID` to its `value.currency`.'
-    eForms example: <cac:RequestedTenderTotal><cbc:EstimatedOverallContractAmount currencyID="EUR">250000</cbc:EstimatedOverallContractAmount></cac:RequestedTenderTotal>
-    OCDS example: '{"tender":{"lots":[{"value":{"amount":250000,"currency":"EUR"}}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cac:RequestedTenderTotal><cbc:EstimatedOverallContractAmount currencyID="EUR">250000</cbc:EstimatedOverallContractAmount></cac:RequestedTenderTotal></cac:ProcurementProject></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","value":{"amount":250000,"currency":"EUR"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#estimatedValueSection
 -   id: BT-27-LotsGroup
     parentNodeId: ND-LotsGroupValueEstimate
@@ -6688,8 +6688,8 @@
     Business groups:
         BG-2: Purpose
     eForms guidance: '[Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot), map to its `.maximumValue.amount` and map `@currencyID` to its `maximumValue.currency`.'
-    eForms example: <cac:RequestedTenderTotal><cbc:EstimatedOverallContractAmount currencyID="EUR">250000</cbc:EstimatedOverallContractAmount></cac:RequestedTenderTotal>
-    OCDS example: '{"tender":{"lotGroups":[{"maximumValue":{"amount":250000,"currency":"EUR"}}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">GLO-0001</cbc:ID><cac:ProcurementProject><cac:RequestedTenderTotal><cbc:EstimatedOverallContractAmount currencyID="EUR">250000</cbc:EstimatedOverallContractAmount></cac:RequestedTenderTotal></cac:ProcurementProject></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lotGroups":[{"id":"GLO-0001","maximumValue":{"amount":250000,"currency":"EUR"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#estimatedValueSection
 -   id: BT-27-Part
     parentNodeId: ND-PartValueEstimate
@@ -6746,8 +6746,8 @@
     Business groups:
         BG-2: Purpose
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), map to its `.techniques.frameworkAgreement.value.amount` and map `@currencyID` to its `techniques.frameworkAgreement.value.currency`.'
-    eForms example: <efext:EformsExtension><efbc:FrameworkMaximumAmount currencyID="EUR">120000</efbc:FrameworkMaximumAmount></efext:EformsExtension>
-    OCDS example: '{"tender":{"lots":[{"techniques":{"frameworkAgreement":{"value":{"amount":120000,"currency":"EUR"}}}}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cac:RequestedTenderTotal><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efbc:FrameworkMaximumAmount currencyID="EUR">120000</efbc:FrameworkMaximumAmount></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:RequestedTenderTotal></cac:ProcurementProject></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id:"LOT-0001","techniques":{"frameworkAgreement":{"value":{"amount":120000,"currency":"EUR"}}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#estimatedValueSection
 -   id: BT-271-LotsGroup
     parentNodeId: ND-LotsGroupValueEstimateExtension
@@ -6761,8 +6761,8 @@
     Business groups:
         BG-2: Purpose
     eForms guidance: '[Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot), map to its `.techniques.frameworkAgreement.value.amount` and map `@currencyID` to its `techniques.frameworkAgreement.value.currency`.'
-    eForms example: <efext:EformsExtension><efbc:FrameworkMaximumAmount currencyID="EUR">120000</efbc:FrameworkMaximumAmount></efext:EformsExtension>
-    OCDS example: '{"tender":{"lotGroups":[{"techniques":{"frameworkAgreement":{"value":{"amount":120000,"currency":"EUR"}}}}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">GLO-0001</cbc:ID><cac:ProcurementProject><cac:RequestedTenderTotal><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efbc:FrameworkMaximumAmount currencyID="EUR">120000</efbc:FrameworkMaximumAmount></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:RequestedTenderTotal></cac:ProcurementProject></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lotGroups":[{"id":"GLO-0001","techniques":{"frameworkAgreement":{"value":{"amount":120000,"currency":"EUR"}}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#estimatedValueSection
 -   id: BT-271-Procedure
     parentNodeId: ND-ProcedureValueEstimateExtension
