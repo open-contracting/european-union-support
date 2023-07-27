@@ -282,6 +282,11 @@ def update_with_sdk(filename, verbose):
     supported_notice_types = {str(i) for i in range(1, 41)} | {"CEI", "T01", "T02"}
     expected = {"value": False, "severity": "ERROR", "constraints": [{"value": True, "severity": "ERROR"}]}
     for label, row in df.iterrows():
+        # Remove attribute fields.
+        if row["attributeOf"] is not np.nan and row["attributeOf"] in row["id"]:
+            labels[label] = row["id"]
+
+        # Remove fields that are forbidden on all supported notice types.
         forbidden = row["forbidden"]
         if forbidden is np.nan:
             continue
@@ -314,6 +319,9 @@ def update_with_sdk(filename, verbose):
         "inChangeNotice",
         "privacy",
         "xsdSequenceOrder",
+        "attributes",
+        "attributeName",
+        "attributeOf",
     ]
     df["mandatory"] = df["mandatory"].notna()
     # Simplify these columns if `severity` is the only other top-level key.

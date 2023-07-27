@@ -2,7 +2,7 @@
     parentNodeId: ND-LocalLegalBasisWithID
     name: Procedure Legal Basis (ID)
     btId: BT-01
-    xpathAbsolute: /*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[not(cbc:ID/text()=('CrossBorderLaw','LocalLegalBasis'))]/cbc:ID[not(text()=('CrossBorderLaw','LocalLegalBasis'))]
+    xpathAbsolute: /*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[not(cbc:ID/text()=('CrossBorderLaw','LocalLegalBasis'))]/cbc:ID
     type: id
     repeatable: false
     mandatory: false
@@ -32,7 +32,7 @@
     parentNodeId: ND-LocalLegalBasisNoID
     name: Procedure Legal Basis (NoID)
     btId: BT-01
-    xpathAbsolute: /*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[cbc:ID/text()='LocalLegalBasis']/cbc:ID[text()='LocalLegalBasis']
+    xpathAbsolute: /*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[cbc:ID/text()='LocalLegalBasis']/cbc:ID
     type: id
     repeatable: false
     mandatory: false
@@ -181,7 +181,7 @@
     parentNodeId: ND-StrategicProcurementType
     name: Strategic Procurement
     btId: BT-06
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='strategic-procurement']/cbc:ProcurementTypeCode[@listName='strategic-procurement']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='strategic-procurement']/cbc:ProcurementTypeCode
     type: code
     repeatable: false
     mandatory: false
@@ -207,7 +207,7 @@
     parentNodeId: ND-CrossBorderLaw
     name: Cross Border Law
     btId: BT-09
-    xpathAbsolute: /*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[cbc:ID/text()='CrossBorderLaw']/cbc:ID[text()='CrossBorderLaw']
+    xpathAbsolute: /*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[cbc:ID/text()='CrossBorderLaw']/cbc:ID
     type: id
     repeatable: false
     mandatory: false
@@ -376,10 +376,10 @@
     parentNodeId: ND-AcceleratedProcedure
     name: Procedure Accelerated
     btId: BT-106
-    xpathAbsolute: /*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='accelerated-procedure']/cbc:ProcessReasonCode[@listName='accelerated-procedure']
+    xpathAbsolute: /*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='accelerated-procedure']/cbc:ProcessReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: accelerated-procedure
     Description: The time limit for receipt of requests to participate or of tenders in this procedure can be reduced due to a state of urgency.
     Business groups:
@@ -565,7 +565,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efbc:OverallMaximumFrameworkContractsAmount
     type: amount
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: "The maximum value which can be spent within the framework agreement(s) announced in this notice over its/their whole duration, in all lots, including options and renewals, as calculated on the basis of the winner\u2019s tender or winners\u2019 tenders."
     Business groups:
         BG-7: Notice Result
@@ -643,7 +643,7 @@
     type: url
     repeatable: false
     mandatory: false
-    pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
+    pattern: ((^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS|sftp|SFTP)://)|(^(w|W){3}(\d)?\.))[\w\?!\./:;,\-_=#+*%@&quot;\(\)&amp;]+
     Description: The internet address of the electronic auction.
     Business groups:
         BG-706: Techniques
@@ -659,7 +659,7 @@
     type: url
     repeatable: false
     mandatory: false
-    pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
+    pattern: ((^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS|sftp|SFTP)://)|(^(w|W){3}(\d)?\.))[\w\?!\./:;,\-_=#+*%@&quot;\(\)&amp;]+
     Description: Electronic communication requires the use of tools and devices that are not generally available. The uniform resource locator (e.g. the web address) which gives unrestricted and full direct access to these tools and devices.
     Business groups:
         BG-100: Communication
@@ -688,7 +688,7 @@
     type: url
     repeatable: false
     mandatory: false
-    pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
+    pattern: ((^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS|sftp|SFTP)://)|(^(w|W){3}(\d)?\.))[\w\?!\./:;,\-_=#+*%@&quot;\(\)&amp;]+
     Description: Electronic communication requires the use of tools and devices that are not generally available. The uniform resource locator (e.g. the web address) which gives unrestricted and full direct access to these tools and devices.
     Business groups:
         BG-100: Communication
@@ -1045,7 +1045,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:OpenTenderEvent/cac:OccurenceLocation/cbc:Description
     type: text-multilingual
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The place (e.g. physical address, URL) where the tenders will be publicly opened.
     Business groups:
         BG-102: Submission Terms
@@ -1085,7 +1085,7 @@
     xpathAbsolute: /*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='direct-award-justification']/cbc:ProcessReason
     type: text-multilingual
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The justification for using a procedure which allows directly awarding contracts, i.e. a procedure that does not require publishing a call for competition in the Official Journal of the European Union.
     Business groups:
         BG-6: Procedure
@@ -1110,7 +1110,7 @@
     xpathAbsolute: /*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='accelerated-procedure']/cbc:ProcessReason
     type: text-multilingual
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The justification for using an accelerated procedure.
     Business groups:
         BG-6: Procedure
@@ -1135,7 +1135,7 @@
     xpathAbsolute: /*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='direct-award-justification']/cbc:ProcessReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: direct-award-justification
     Description: A justification for using a procedure which allows directly awarding contracts, i.e. a procedure that does not require publishing a call for competition in the Official Journal of the European Union.
     Business groups:
@@ -1340,7 +1340,7 @@
     idSchemes:
     - LOT
     repeatable: false
-    mandatory: false
+    mandatory: true
     pattern: ^LOT-\d{4}$
     Description: An identifier of a lot. The information in the procedure lot result section refers to this lot.
     Business groups:
@@ -1376,7 +1376,7 @@
     - GLO
     - LOT
     repeatable: false
-    mandatory: false
+    mandatory: true
     pattern: ^(LOT|GLO)-\d{4}$
     Description: An identifier of a lot or a group of lots for which the tender was submitted. The information in the tender section refers to this lot.
     Business groups:
@@ -1409,14 +1409,14 @@
     OCDS example: ''
     sdk: ''
 -   id: BT-1375-Procedure
-    parentNodeId: ND-GroupComposition
+    parentNodeId: ND-GroupCompositionLotReference
     name: Group Lot Identifier
     btId: BT-1375
     xpathAbsolute: /*/cac:TenderingTerms/cac:LotDistribution/cac:LotsGroup/cac:ProcurementProjectLotReference/cbc:ID[@schemeName='Lot']
     type: id-ref
     idSchemes:
     - LOT
-    repeatable: true
+    repeatable: false
     mandatory: false
     pattern: ^LOT-\d{4}$
     Description: An identifier of a lot within the procedure that is part of a group of lots for which one tender can be submitted and evaluated.
@@ -1482,7 +1482,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Changes/efac:ChangeReason/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: change-corrig-justification
     Description: The main reason for the change in the notice compared to the original notice.
     Business groups:
@@ -1571,7 +1571,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:DecisionReason/efbc:DecisionReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-award-justification
     Description: The reason for not choosing a winner.
     Business groups:
@@ -1632,7 +1632,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:SettledContract/cbc:AwardDate
     type: date
     repeatable: false
-    mandatory: false
+    mandatory: true
     pattern: ^(?:(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:(?:0[13578]|1[02]))-31|(?:(?:0[13-9]|1[0-2])-(?:29|30))))|(?:(?:(?:(?:(?:1[6-9]|[2-9]\d)(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))-02-29))|(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:0[1-9])|(?:1[0-2]))-(?:0[1-9]|1\d|2[0-8])))(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
     Description: The date of the official decision choosing the winning tender.
     Business groups:
@@ -1656,11 +1656,11 @@
     parentNodeId: ND-LotProcurementDocument
     name: Documents URL
     btId: BT-15
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:CallForTendersDocumentReference/cac:Attachment[not(../cbc:DocumentType/text()='restricted-document')]/cac:ExternalReference/cbc:URI
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:CallForTendersDocumentReference/cac:Attachment[../cbc:DocumentType/text()='non-restricted-document']/cac:ExternalReference/cbc:URI
     type: url
     repeatable: false
     mandatory: true
-    pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
+    pattern: ((^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS|sftp|SFTP)://)|(^(w|W){3}(\d)?\.))[\w\?!\./:;,\-_=#+*%@&quot;\(\)&amp;]+
     Description: The internet address for accessing (the non-restricted part of) the procurement documents. For all notices except prior information notices, the address shall give access that is direct (i.e. the exact webpage with the documents, not a general website), unrestricted (e.g. no registration), full (i.e. the procurement documents are complete) and free of charge and the documents shall be available already at the time of the publication of the notice.
     Business groups:
         BG-101: Procurement Documents
@@ -1692,11 +1692,11 @@
     parentNodeId: ND-PartProcurementDocument
     name: Documents URL
     btId: BT-15
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:CallForTendersDocumentReference/cac:Attachment[not(../cbc:DocumentType/text()='restricted-document')]/cac:ExternalReference/cbc:URI
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:CallForTendersDocumentReference/cac:Attachment[../cbc:DocumentType/text()='non-restricted-document']/cac:ExternalReference/cbc:URI
     type: url
     repeatable: false
     mandatory: true
-    pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
+    pattern: ((^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS|sftp|SFTP)://)|(^(w|W){3}(\d)?\.))[\w\?!\./:;,\-_=#+*%@&quot;\(\)&amp;]+
     Description: The internet address for accessing (the non-restricted part of) the procurement documents. For all notices except prior information notices, the address shall give access that is direct (i.e. the exact webpage with the documents, not a general website), unrestricted (e.g. no registration), full (i.e. the procurement documents are complete) and free of charge and the documents shall be available already at the time of the publication of the notice.
     Business groups:
         BG-101: Procurement Documents
@@ -1719,7 +1719,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:SettledContract/efac:ContractReference/cbc:ID
     type: id
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: An identifier of the contract or, in case of voluntary-ex ante transparency notices and design contest result notices, of the decision. The information in the contract section refers to this contract or decision.
     Business groups:
         BG-7: Notice Result
@@ -1780,7 +1780,7 @@
     type: url
     repeatable: false
     mandatory: false
-    pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
+    pattern: ((^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS|sftp|SFTP)://)|(^(w|W){3}(\d)?\.))[\w\?!\./:;,\-_=#+*%@&quot;\(\)&amp;]+
     Description: The uniform resource locator (e.g. the web address) of the contract.
     Business groups:
         BG-7: Notice Result
@@ -1887,7 +1887,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:ConcessionRevenue/efbc:RevenueBuyerAmount
     type: amount
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The estimated revenue coming from the buyer who granted the concession (e.g. prizes and payments).
     Business groups:
         BG-7: Notice Result
@@ -1915,7 +1915,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/cbc:TotalAmount
     type: amount
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The value of all contracts awarded in this notice, including options and renewals.
     Business groups:
         BG-7: Notice Result
@@ -1937,7 +1937,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:ConcessionRevenue/efbc:RevenueUserAmount
     type: amount
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The estimated revenue coming from the users of the concession (e.g. fees and fines).
     Business groups:
         BG-7: Notice Result
@@ -1965,7 +1965,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:ConcessionRevenue/efbc:ValueDescription
     type: text-multilingual
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The description of the method used for calculating the estimated value of the concession and any other relevant information concerning the value of the concession.
     Business groups:
         BG-7: Notice Result
@@ -1991,10 +1991,10 @@
     OCDS example: '{"awards":[{"id":"RES-0001","relatedLots":["LOT-0001"],"valueCalculationMethod":"The awarded value takes into account the growing revenue expected from fees."}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: BT-165-Organization-Company
-    parentNodeId: ND-WinningParty
+    parentNodeId: ND-Company
     name: Winner Size
     btId: BT-165
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:Organization/efac:Company[(cac:PartyIdentification/cbc:ID/text() = //efac:TenderingParty/efac:Tenderer/cbc:ID/text()) or (cac:PartyIdentification/cbc:ID/text() = //efac:TenderingParty/efac:Subcontractor/cbc:ID/text())]/efbc:CompanySizeCode
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:Organization/efac:Company/efbc:CompanySizeCode
     type: code
     repeatable: false
     mandatory: false
@@ -2085,8 +2085,8 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TenderRecipientParty/cbc:EndpointID
     type: url
     repeatable: false
-    mandatory: false
-    pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
+    mandatory: true
+    pattern: ((^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS|sftp|SFTP)://)|(^(w|W){3}(\d)?\.))[\w\?!\./:;,\-_=#+*%@&quot;\(\)&amp;]+
     Description: The internet address for submission of tenders, requests to participate, or expressions of interest by electronic means. The address shall be as direct as possible (ideally a dedicated address for the electronic submission, not just a general website).
     Business groups:
         BG-102: Submission Terms
@@ -2114,10 +2114,10 @@
     parentNodeId: ND-NonEsubmission
     name: Submission Nonelectronic Justification
     btId: BT-19
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:ProcessJustification/cbc:ProcessReasonCode[@listName='no-esubmission-justification']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='no-esubmission-justification']/cbc:ProcessReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: no-esubmission-justification
     Description: The justification for electronic submission of tenders, requests to participate, or expressions of interest not being possible.
     Business groups:
@@ -2127,12 +2127,12 @@
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","submissionTerms":{"nonElectronicRationale":"Inclusion of a physical model"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#nonelectronicSection
 -   id: BT-191-Tender
-    parentNodeId: ND-LotTender
+    parentNodeId: ND-LotTenderOriginCountry
     name: Country Origin
     btId: BT-191
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:Origin/efbc:AreaCode
     type: code
-    repeatable: true
+    repeatable: false
     mandatory: false
     codeList: eforms-country
     Description: A country of origin of the product or the service.
@@ -2622,17 +2622,6 @@
     OCDS example: '{"withheldInformation":[{"field":"awa-cri-des","id":"awa-cri-des-GLO-0001","name":"Award Criterion Description"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-195(BT-541)-Lot
-    parentNodeId: ND-LotAwardCriterionNumberUnpublish
-    name: Unpublished Identifier
-    btId: BT-195
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:FieldIdentifierCode
-    type: code
-    repeatable: false
-    mandatory: false
-    codeList: non-publication-identifier
-    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
-    Business groups:
-        BG-8: Not Immediately Published
     eForms guidance: |-
         - Add a `withheldInformationItem` to the `withheldInformation` array, and:
           - Set its `.id` to `[efbc:FieldIdentifierCode]-[ancestor::cac:ProcurementProjectLot/cbc:ID schemeName="Lot"]`.
@@ -2641,11 +2630,11 @@
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">awa-cri-num</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"withheldInformation":[{"field":"awa-cri-num","id":"awa-cri-num-LOT-0001","name":"Award Criterion Number"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
--   id: BT-195(BT-541)-LotsGroup
-    parentNodeId: ND-LotsGroupAwardCriterionNumberUnpublish
+-   id: BT-195(BT-541)-Lot-Fixed
+    parentNodeId: ND-LotAwardCriterionFixNumberUnpublish
     name: Unpublished Identifier
     btId: BT-195
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:FieldIdentifierCode
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-fixed']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:FieldIdentifierCode
     type: code
     repeatable: false
     mandatory: false
@@ -2653,6 +2642,43 @@
     Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-195(BT-541)-Lot-Threshold
+    parentNodeId: ND-LotAwardCriterionThresholdNumberUnpublish
+    name: Unpublished Identifier
+    btId: BT-195
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-threshold']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:FieldIdentifierCode
+    type: code
+    repeatable: false
+    mandatory: false
+    codeList: non-publication-identifier
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-195(BT-541)-Lot-Weight
+    parentNodeId: ND-LotAwardCriterionWeightNumberUnpublish
+    name: Unpublished Identifier
+    btId: BT-195
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-weight']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:FieldIdentifierCode
+    type: code
+    repeatable: false
+    mandatory: false
+    codeList: non-publication-identifier
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-195(BT-541)-LotsGroup
     eForms guidance: |-
         - Add a `withheldInformationItem` to the `withheldInformation` array, and:
           - Set its `.id` to `[efbc:FieldIdentifierCode]-[ancestor::cac:ProcurementProjectLot/cbc:ID schemeName="LotsGroup"]`.
@@ -2661,6 +2687,54 @@
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="LotsGroup">GLO-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">awa-cri-num</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"withheldInformation":[{"field":"awa-cri-num","id":"awa-cri-num-GLO-0001","name":"Award Criterion Number"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
+-   id: BT-195(BT-541)-LotsGroup-Fixed
+    parentNodeId: ND-LotsGroupAwardCriterionFixNumberUnpublish
+    name: Unpublished Identifier
+    btId: BT-195
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-fixed']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:FieldIdentifierCode
+    type: code
+    repeatable: false
+    mandatory: false
+    codeList: non-publication-identifier
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-195(BT-541)-LotsGroup-Threshold
+    parentNodeId: ND-LotsGroupAwardCriterionThresholdNumberUnpublish
+    name: Unpublished Identifier
+    btId: BT-195
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-threshold']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:FieldIdentifierCode
+    type: code
+    repeatable: false
+    mandatory: false
+    codeList: non-publication-identifier
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-195(BT-541)-LotsGroup-Weight
+    parentNodeId: ND-LotsGroupAwardCriterionWeightNumberUnpublish
+    name: Unpublished Identifier
+    btId: BT-195
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-weight']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:FieldIdentifierCode
+    type: code
+    repeatable: false
+    mandatory: false
+    codeList: non-publication-identifier
+    Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: BT-195(BT-5421)-Lot
     parentNodeId: ND-LotAwardCriterionNumberWeightUnpublish
     name: Unpublished Identifier
@@ -2825,7 +2899,7 @@
     parentNodeId: ND-SubcontractingValueUnpublish
     name: Unpublished Identifier
     btId: BT-195
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-val']/efbc:FieldIdentifierCode
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-val']/efbc:FieldIdentifierCode
     type: code
     repeatable: false
     mandatory: false
@@ -2845,7 +2919,7 @@
     parentNodeId: ND-SubcontractingDescriptionUnpublish
     name: Unpublished Identifier
     btId: BT-195
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-des']/efbc:FieldIdentifierCode
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-des']/efbc:FieldIdentifierCode
     type: code
     repeatable: false
     mandatory: false
@@ -2865,7 +2939,7 @@
     parentNodeId: ND-SubcontractingPercentageUnpublish
     name: Unpublished Identifier
     btId: BT-195
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-per']/efbc:FieldIdentifierCode
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-per']/efbc:FieldIdentifierCode
     type: code
     repeatable: false
     mandatory: false
@@ -3061,7 +3135,7 @@
     parentNodeId: ND-SubcontractingValueKnownUnpublish
     name: Unpublished Identifier
     btId: BT-195
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-val-kno']/efbc:FieldIdentifierCode
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-val-kno']/efbc:FieldIdentifierCode
     type: code
     repeatable: false
     mandatory: false
@@ -3077,7 +3151,7 @@
     parentNodeId: ND-SubcontractingPercentageKnownUnpublish
     name: Unpublished Identifier
     btId: BT-195
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-per-kno']/efbc:FieldIdentifierCode
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-per-kno']/efbc:FieldIdentifierCode
     type: code
     repeatable: false
     mandatory: false
@@ -3213,7 +3287,7 @@
     parentNodeId: ND-SubcontractingUnpublish
     name: Unpublished Identifier
     btId: BT-195
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-con']/efbc:FieldIdentifierCode
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-con']/efbc:FieldIdentifierCode
     type: code
     repeatable: false
     mandatory: false
@@ -3610,35 +3684,105 @@
     OCDS example: '{"withheldInformation":[{"rationale":"Information delayed publication because of ..."}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-196(BT-541)-Lot
-    parentNodeId: ND-LotAwardCriterionNumberUnpublish
-    name: Unpublished Justification Description
-    btId: BT-196
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:ReasonDescription
-    type: text-multilingual
-    repeatable: false
-    mandatory: false
-    Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
-    Business groups:
-        BG-8: Not Immediately Published
     eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]` and map to its `.rationale`.
     eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationale":"Information delayed publication because of ..."}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
--   id: BT-196(BT-541)-LotsGroup
-    parentNodeId: ND-LotsGroupAwardCriterionNumberUnpublish
+-   id: BT-196(BT-541)-Lot-Fixed
+    parentNodeId: ND-LotAwardCriterionFixNumberUnpublish
     name: Unpublished Justification Description
     btId: BT-196
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:ReasonDescription
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-fixed']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:ReasonDescription
     type: text-multilingual
     repeatable: false
     mandatory: false
     Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
     Business groups:
         BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-196(BT-541)-Lot-Threshold
+    parentNodeId: ND-LotAwardCriterionThresholdNumberUnpublish
+    name: Unpublished Justification Description
+    btId: BT-196
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-threshold']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:ReasonDescription
+    type: text-multilingual
+    repeatable: false
+    mandatory: false
+    Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-196(BT-541)-Lot-Weight
+    parentNodeId: ND-LotAwardCriterionWeightNumberUnpublish
+    name: Unpublished Justification Description
+    btId: BT-196
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-weight']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:ReasonDescription
+    type: text-multilingual
+    repeatable: false
+    mandatory: false
+    Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-196(BT-541)-LotsGroup
     eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]` and map to its `.rationale`.
     eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationale":"Information delayed publication because of ..."}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
+-   id: BT-196(BT-541)-LotsGroup-Fixed
+    parentNodeId: ND-LotsGroupAwardCriterionFixNumberUnpublish
+    name: Unpublished Justification Description
+    btId: BT-196
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-fixed']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:ReasonDescription
+    type: text-multilingual
+    repeatable: false
+    mandatory: false
+    Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-196(BT-541)-LotsGroup-Threshold
+    parentNodeId: ND-LotsGroupAwardCriterionThresholdNumberUnpublish
+    name: Unpublished Justification Description
+    btId: BT-196
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-threshold']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:ReasonDescription
+    type: text-multilingual
+    repeatable: false
+    mandatory: false
+    Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-196(BT-541)-LotsGroup-Weight
+    parentNodeId: ND-LotsGroupAwardCriterionWeightNumberUnpublish
+    name: Unpublished Justification Description
+    btId: BT-196
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-weight']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:ReasonDescription
+    type: text-multilingual
+    repeatable: false
+    mandatory: false
+    Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: BT-196(BT-5421)-Lot
     parentNodeId: ND-LotAwardCriterionNumberWeightUnpublish
     name: Unpublished Justification Description
@@ -3763,7 +3907,7 @@
     parentNodeId: ND-SubcontractingValueUnpublish
     name: Unpublished Justification Description
     btId: BT-196
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-val']/efbc:ReasonDescription
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-val']/efbc:ReasonDescription
     type: text-multilingual
     repeatable: false
     mandatory: false
@@ -3778,7 +3922,7 @@
     parentNodeId: ND-SubcontractingDescriptionUnpublish
     name: Unpublished Justification Description
     btId: BT-196
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-des']/efbc:ReasonDescription
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-des']/efbc:ReasonDescription
     type: text-multilingual
     repeatable: false
     mandatory: false
@@ -3793,7 +3937,7 @@
     parentNodeId: ND-SubcontractingPercentageUnpublish
     name: Unpublished Justification Description
     btId: BT-196
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-per']/efbc:ReasonDescription
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-per']/efbc:ReasonDescription
     type: text-multilingual
     repeatable: false
     mandatory: false
@@ -3943,7 +4087,7 @@
     parentNodeId: ND-SubcontractingValueKnownUnpublish
     name: Unpublished Justification Description
     btId: BT-196
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-val-kno']/efbc:ReasonDescription
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-val-kno']/efbc:ReasonDescription
     type: text-multilingual
     repeatable: false
     mandatory: false
@@ -3958,7 +4102,7 @@
     parentNodeId: ND-SubcontractingPercentageKnownUnpublish
     name: Unpublished Justification Description
     btId: BT-196
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-per-kno']/efbc:ReasonDescription
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-per-kno']/efbc:ReasonDescription
     type: text-multilingual
     repeatable: false
     mandatory: false
@@ -4063,7 +4207,7 @@
     parentNodeId: ND-SubcontractingUnpublish
     name: Unpublished Justification Description
     btId: BT-196
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-con']/efbc:ReasonDescription
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-con']/efbc:ReasonDescription
     type: text-multilingual
     repeatable: false
     mandatory: false
@@ -4096,7 +4240,7 @@
     xpathAbsolute: /*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[cbc:ID/text()='CrossBorderLaw']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='cro-bor-law']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4112,7 +4256,7 @@
     xpathAbsolute: /*/cac:TenderingProcess/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-typ']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4128,7 +4272,7 @@
     xpathAbsolute: /*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='accelerated-procedure']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-acc']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4144,7 +4288,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='not-app-val']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4160,7 +4304,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='not-max-val']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4176,7 +4320,7 @@
     xpathAbsolute: /*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='direct-award-justification']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='dir-awa-pre']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4192,7 +4336,7 @@
     xpathAbsolute: /*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='direct-award-justification']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='dir-awa-tex']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4208,7 +4352,7 @@
     xpathAbsolute: /*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='accelerated-procedure']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-acc-jus']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4224,7 +4368,7 @@
     xpathAbsolute: /*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='direct-award-justification']/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='dir-awa-jus']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4240,7 +4384,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='win-cho']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4256,7 +4400,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:DecisionReason/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='no-awa-rea']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4272,7 +4416,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:GroupFramework/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='gro-max-val']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4288,7 +4432,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:GroupFramework/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='gro-ree-val']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4304,7 +4448,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:ConcessionRevenue/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='con-rev-buy']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4320,7 +4464,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='not-val']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4336,7 +4480,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:ConcessionRevenue/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='con-rev-use']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4352,7 +4496,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:ConcessionRevenue/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='val-con-des']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4368,7 +4512,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='ten-ran']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4384,7 +4528,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:Origin/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='cou-ori']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4400,7 +4544,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='win-ten-var']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4416,7 +4560,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-typ']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4432,7 +4576,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-typ']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4448,7 +4592,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-des']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4464,7 +4608,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-des']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4474,37 +4618,111 @@
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-197(BT-541)-Lot
-    parentNodeId: ND-LotAwardCriterionNumberUnpublish
-    name: Unpublished Justification Code
-    btId: BT-197
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/cbc:ReasonCode
-    type: code
-    repeatable: false
-    mandatory: false
-    codeList: non-publication-justification
-    Description: The justification for not immediately publishing a field.
-    Business groups:
-        BG-8: Not Immediately Published
     eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id`, and set `.scheme` to 'eu-non-publication-justification'. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
--   id: BT-197(BT-541)-LotsGroup
-    parentNodeId: ND-LotsGroupAwardCriterionNumberUnpublish
+-   id: BT-197(BT-541)-Lot-Fixed
+    parentNodeId: ND-LotAwardCriterionFixNumberUnpublish
     name: Unpublished Justification Code
     btId: BT-197
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/cbc:ReasonCode
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-fixed']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-197(BT-541)-Lot-Threshold
+    parentNodeId: ND-LotAwardCriterionThresholdNumberUnpublish
+    name: Unpublished Justification Code
+    btId: BT-197
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-threshold']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/cbc:ReasonCode
+    type: code
+    repeatable: false
+    mandatory: true
+    codeList: non-publication-justification
+    Description: The justification for not immediately publishing a field.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-197(BT-541)-Lot-Weight
+    parentNodeId: ND-LotAwardCriterionWeightNumberUnpublish
+    name: Unpublished Justification Code
+    btId: BT-197
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-weight']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/cbc:ReasonCode
+    type: code
+    repeatable: false
+    mandatory: true
+    codeList: non-publication-justification
+    Description: The justification for not immediately publishing a field.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-197(BT-541)-LotsGroup
     eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id`, and set `.scheme` to 'eu-non-publication-justification'. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
+-   id: BT-197(BT-541)-LotsGroup-Fixed
+    parentNodeId: ND-LotsGroupAwardCriterionFixNumberUnpublish
+    name: Unpublished Justification Code
+    btId: BT-197
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-fixed']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/cbc:ReasonCode
+    type: code
+    repeatable: false
+    mandatory: true
+    codeList: non-publication-justification
+    Description: The justification for not immediately publishing a field.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-197(BT-541)-LotsGroup-Threshold
+    parentNodeId: ND-LotsGroupAwardCriterionThresholdNumberUnpublish
+    name: Unpublished Justification Code
+    btId: BT-197
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-threshold']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/cbc:ReasonCode
+    type: code
+    repeatable: false
+    mandatory: true
+    codeList: non-publication-justification
+    Description: The justification for not immediately publishing a field.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-197(BT-541)-LotsGroup-Weight
+    parentNodeId: ND-LotsGroupAwardCriterionWeightNumberUnpublish
+    name: Unpublished Justification Code
+    btId: BT-197
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-weight']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/cbc:ReasonCode
+    type: code
+    repeatable: false
+    mandatory: true
+    codeList: non-publication-justification
+    Description: The justification for not immediately publishing a field.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: BT-197(BT-5421)-Lot
     parentNodeId: ND-LotAwardCriterionNumberWeightUnpublish
     name: Unpublished Justification Code
@@ -4512,7 +4730,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-weight']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-wei']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4528,7 +4746,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-weight']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-wei']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4544,7 +4762,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-fixed']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-fix']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4560,7 +4778,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-fixed']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-fix']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4576,7 +4794,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-threshold']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-thr']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4592,7 +4810,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-threshold']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-thr']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4608,7 +4826,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-com']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4624,7 +4842,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-com']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4637,10 +4855,10 @@
     parentNodeId: ND-SubcontractingValueUnpublish
     name: Unpublished Justification Code
     btId: BT-197
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-val']/cbc:ReasonCode
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-val']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4653,10 +4871,10 @@
     parentNodeId: ND-SubcontractingDescriptionUnpublish
     name: Unpublished Justification Code
     btId: BT-197
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-des']/cbc:ReasonCode
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-des']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4669,10 +4887,10 @@
     parentNodeId: ND-SubcontractingPercentageUnpublish
     name: Unpublished Justification Code
     btId: BT-197
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-per']/cbc:ReasonCode
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-per']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4688,7 +4906,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:GroupFramework/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='gro-max-ide']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4704,7 +4922,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-cou']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4720,7 +4938,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='buy-rev-typ']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4736,7 +4954,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FrameworkAgreementValues/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='ree-val']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4752,7 +4970,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FrameworkAgreementValues/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='max-val']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4768,7 +4986,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='ten-val-low']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4784,7 +5002,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='ten-val-hig']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4800,7 +5018,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='review-type']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='rev-req']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4816,7 +5034,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='win-ten-val']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4829,10 +5047,10 @@
     parentNodeId: ND-SubcontractingValueKnownUnpublish
     name: Unpublished Justification Code
     btId: BT-197
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-val-kno']/cbc:ReasonCode
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-val-kno']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4845,10 +5063,10 @@
     parentNodeId: ND-SubcontractingPercentageKnownUnpublish
     name: Unpublished Justification Code
     btId: BT-197
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-per-kno']/cbc:ReasonCode
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-per-kno']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4864,7 +5082,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-ord']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4880,7 +5098,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-ord']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4896,7 +5114,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-nam']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4912,7 +5130,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-nam']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4928,7 +5146,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:ReceivedSubmissionsStatistics/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='rec-sub-cou']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4944,7 +5162,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:ReceivedSubmissionsStatistics/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='rec-sub-typ']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4957,10 +5175,10 @@
     parentNodeId: ND-SubcontractingUnpublish
     name: Unpublished Justification Code
     btId: BT-197
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-con']/cbc:ReasonCode
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-con']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -4976,7 +5194,7 @@
     xpathAbsolute: /*/cac:TenderingProcess/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='pro-fea']/cbc:ReasonCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: non-publication-justification
     Description: The justification for not immediately publishing a field.
     Business groups:
@@ -5369,26 +5587,15 @@
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-541)-Lot
-    parentNodeId: ND-LotAwardCriterionNumberUnpublish
-    name: Unpublished Access Date
-    btId: BT-198
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:PublicationDate
-    type: date
-    repeatable: false
-    mandatory: false
-    pattern: ^(?:(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:(?:0[13578]|1[02]))-31|(?:(?:0[13-9]|1[0-2])-(?:29|30))))|(?:(?:(?:(?:(?:1[6-9]|[2-9]\d)(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))-02-29))|(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:0[1-9])|(?:1[0-2]))-(?:0[1-9]|1\d|2[0-8])))(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
-    Description: The later date at which the originally unpublished field shall be published.
-    Business groups:
-        BG-8: Not Immediately Published
     eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. [Convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
--   id: BT-198(BT-541)-LotsGroup
-    parentNodeId: ND-LotsGroupAwardCriterionNumberUnpublish
+-   id: BT-198(BT-541)-Lot-Fixed
+    parentNodeId: ND-LotAwardCriterionFixNumberUnpublish
     name: Unpublished Access Date
     btId: BT-198
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:PublicationDate
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-fixed']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:PublicationDate
     type: date
     repeatable: false
     mandatory: false
@@ -5396,10 +5603,95 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-198(BT-541)-Lot-Threshold
+    parentNodeId: ND-LotAwardCriterionThresholdNumberUnpublish
+    name: Unpublished Access Date
+    btId: BT-198
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-threshold']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:PublicationDate
+    type: date
+    repeatable: false
+    mandatory: false
+    pattern: ^(?:(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:(?:0[13578]|1[02]))-31|(?:(?:0[13-9]|1[0-2])-(?:29|30))))|(?:(?:(?:(?:(?:1[6-9]|[2-9]\d)(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))-02-29))|(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:0[1-9])|(?:1[0-2]))-(?:0[1-9]|1\d|2[0-8])))(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
+    Description: The later date at which the originally unpublished field shall be published.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-198(BT-541)-Lot-Weight
+    parentNodeId: ND-LotAwardCriterionWeightNumberUnpublish
+    name: Unpublished Access Date
+    btId: BT-198
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-weight']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:PublicationDate
+    type: date
+    repeatable: false
+    mandatory: false
+    pattern: ^(?:(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:(?:0[13578]|1[02]))-31|(?:(?:0[13-9]|1[0-2])-(?:29|30))))|(?:(?:(?:(?:(?:1[6-9]|[2-9]\d)(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))-02-29))|(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:0[1-9])|(?:1[0-2]))-(?:0[1-9]|1\d|2[0-8])))(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
+    Description: The later date at which the originally unpublished field shall be published.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-198(BT-541)-LotsGroup
     eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. [Convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
+-   id: BT-198(BT-541)-LotsGroup-Fixed
+    parentNodeId: ND-LotsGroupAwardCriterionFixNumberUnpublish
+    name: Unpublished Access Date
+    btId: BT-198
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-fixed']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:PublicationDate
+    type: date
+    repeatable: false
+    mandatory: false
+    pattern: ^(?:(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:(?:0[13578]|1[02]))-31|(?:(?:0[13-9]|1[0-2])-(?:29|30))))|(?:(?:(?:(?:(?:1[6-9]|[2-9]\d)(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))-02-29))|(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:0[1-9])|(?:1[0-2]))-(?:0[1-9]|1\d|2[0-8])))(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
+    Description: The later date at which the originally unpublished field shall be published.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-198(BT-541)-LotsGroup-Threshold
+    parentNodeId: ND-LotsGroupAwardCriterionThresholdNumberUnpublish
+    name: Unpublished Access Date
+    btId: BT-198
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-threshold']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:PublicationDate
+    type: date
+    repeatable: false
+    mandatory: false
+    pattern: ^(?:(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:(?:0[13578]|1[02]))-31|(?:(?:0[13-9]|1[0-2])-(?:29|30))))|(?:(?:(?:(?:(?:1[6-9]|[2-9]\d)(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))-02-29))|(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:0[1-9])|(?:1[0-2]))-(?:0[1-9]|1\d|2[0-8])))(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
+    Description: The later date at which the originally unpublished field shall be published.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-198(BT-541)-LotsGroup-Weight
+    parentNodeId: ND-LotsGroupAwardCriterionWeightNumberUnpublish
+    name: Unpublished Access Date
+    btId: BT-198
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-weight']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='awa-cri-num']/efbc:PublicationDate
+    type: date
+    repeatable: false
+    mandatory: false
+    pattern: ^(?:(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:(?:0[13578]|1[02]))-31|(?:(?:0[13-9]|1[0-2])-(?:29|30))))|(?:(?:(?:(?:(?:1[6-9]|[2-9]\d)(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))-02-29))|(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:0[1-9])|(?:1[0-2]))-(?:0[1-9]|1\d|2[0-8])))(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
+    Description: The later date at which the originally unpublished field shall be published.
+    Business groups:
+        BG-8: Not Immediately Published
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: BT-198(BT-5421)-Lot
     parentNodeId: ND-LotAwardCriterionNumberWeightUnpublish
     name: Unpublished Access Date
@@ -5532,7 +5824,7 @@
     parentNodeId: ND-SubcontractingValueUnpublish
     name: Unpublished Access Date
     btId: BT-198
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-val']/efbc:PublicationDate
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-val']/efbc:PublicationDate
     type: date
     repeatable: false
     mandatory: false
@@ -5548,7 +5840,7 @@
     parentNodeId: ND-SubcontractingDescriptionUnpublish
     name: Unpublished Access Date
     btId: BT-198
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-des']/efbc:PublicationDate
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-des']/efbc:PublicationDate
     type: date
     repeatable: false
     mandatory: false
@@ -5564,7 +5856,7 @@
     parentNodeId: ND-SubcontractingPercentageUnpublish
     name: Unpublished Access Date
     btId: BT-198
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-per']/efbc:PublicationDate
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-per']/efbc:PublicationDate
     type: date
     repeatable: false
     mandatory: false
@@ -5722,7 +6014,7 @@
     parentNodeId: ND-SubcontractingValueKnownUnpublish
     name: Unpublished Access Date
     btId: BT-198
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-val-kno']/efbc:PublicationDate
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-val-kno']/efbc:PublicationDate
     type: date
     repeatable: false
     mandatory: false
@@ -5738,7 +6030,7 @@
     parentNodeId: ND-SubcontractingPercentageKnownUnpublish
     name: Unpublished Access Date
     btId: BT-198
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-per-kno']/efbc:PublicationDate
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-per-kno']/efbc:PublicationDate
     type: date
     repeatable: false
     mandatory: false
@@ -5850,7 +6142,7 @@
     parentNodeId: ND-SubcontractingUnpublish
     name: Unpublished Access Date
     btId: BT-198
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-con']/efbc:PublicationDate
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efac:FieldsPrivacy[efbc:FieldIdentifierCode/text()='sub-con']/efbc:PublicationDate
     type: date
     repeatable: false
     mandatory: false
@@ -6406,7 +6698,7 @@
     OCDS example: '{"tender":{"items":[{"id":"1","additionalClassifications":[{"scheme":"CPV"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#classificationSection
 -   id: BT-26(m)-Lot
-    parentNodeId: ND-LotMainClassificationCode
+    parentNodeId: ND-LotMainClassification
     name: Classification Type (e.g. CPV)
     btId: BT-26
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:MainCommodityClassification/cbc:ItemClassificationCode/@listName
@@ -6425,7 +6717,7 @@
     OCDS example: '{"tender":{"items":[{"id":"1","classification":{"scheme":"CPV"},"relatedLot":"LOT-0001"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#classificationSection
 -   id: BT-26(m)-Part
-    parentNodeId: ND-PartMainClassificationCode
+    parentNodeId: ND-PartMainClassification
     name: Classification Type (e.g. CPV)
     btId: BT-26
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cac:MainCommodityClassification/cbc:ItemClassificationCode/@listName
@@ -6447,7 +6739,7 @@
     OCDS example: '{"tender":{"items":[{"id":"1","classification":{"scheme":"CPV"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#classificationSection
 -   id: BT-26(m)-Procedure
-    parentNodeId: ND-ProcedureMainClassificationCode
+    parentNodeId: ND-ProcedureMainClassification
     name: Classification Type (e.g. CPV)
     btId: BT-26
     xpathAbsolute: /*/cac:ProcurementProject/cac:MainCommodityClassification/cbc:ItemClassificationCode/@listName
@@ -6949,15 +7241,15 @@
     OCDS example: '{"bids":{"details":[{"id":"TEN-0001","identifiers":[{"id":"BID ABD/GHI-NL/2020-002","scheme":"NL-TENDERNL"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: BT-3202-Contract
-    parentNodeId: ND-SettledContract
+    parentNodeId: ND-SettledContractTenderReference
     name: Contract Tender ID (Reference)
     btId: BT-3202
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:SettledContract/efac:LotTender/cbc:ID
     type: id-ref
     idSchemes:
     - TEN
-    repeatable: true
-    mandatory: false
+    repeatable: false
+    mandatory: true
     pattern: ^TEN-\d{4}$
     Description: An identifier of the tender or another result that led to this contract.
     Business groups:
@@ -7176,12 +7468,12 @@
     OCDS example: '{"tender":{"lots":[{"designContest":{"prizes":{"details":[{"id":"0","description":"The first prize winner will be awarded ..."}]}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#prizeSection
 -   id: BT-46-Lot
-    parentNodeId: ND-AwardingTerms
+    parentNodeId: ND-AwardingTermsJuryMember
     name: Jury Member Name
     btId: BT-46
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:TechnicalCommitteePerson/cbc:FamilyName
     type: text
-    repeatable: true
+    repeatable: false
     mandatory: false
     Description: A name of the jury member.
     Business groups:
@@ -7195,12 +7487,12 @@
     OCDS example: '{"tender":{"lots":[{"designContest":{"juryMembers":[{"name":"Mrs Pamela Smith"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#jurySection
 -   id: BT-47-Lot
-    parentNodeId: ND-Participants
+    parentNodeId: ND-PreselectedParticipant
     name: Participant Name
     btId: BT-47
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:EconomicOperatorShortList/cac:PreSelectedParty/cac:PartyName/cbc:Name
     type: text
-    repeatable: true
+    repeatable: false
     mandatory: false
     Description: A name of an already selected participant. A participant could have been selected already at the time of the publication of the design contest notice because, for example, the information about the participation of a world-renowned architect is intended to promote the contest amongst other potential participants.
     Business groups:
@@ -7359,12 +7651,12 @@
     OCDS example: '{"parties":[{"beneficialOwners":[{"name":"Mouse"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#ultimateBeneficialOwnerSection
 -   id: BT-501-Organization-Company
-    parentNodeId: ND-Company
+    parentNodeId: ND-CompanyLegalEntity
     name: Organisation Identifier
     btId: BT-501
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:Organization/efac:Company/cac:PartyLegalEntity/cbc:CompanyID
     type: id
-    repeatable: true
+    repeatable: false
     mandatory: true
     Description: An identifier of the organisation. All of the organisation's identifiers shall be given.
     Business groups:
@@ -7674,7 +7966,7 @@
     type: url
     repeatable: false
     mandatory: false
-    pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
+    pattern: ((^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS|sftp|SFTP)://)|(^(w|W){3}(\d)?\.))[\w\?!\./:;,\-_=#+*%@&quot;\(\)&amp;]+
     Description: The website of the organisation.
     Business groups:
         BG-703: Organisation
@@ -7749,7 +8041,7 @@
     type: url
     repeatable: false
     mandatory: false
-    pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
+    pattern: ((^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS|sftp|SFTP)://)|(^(w|W){3}(\d)?\.))[\w\?!\./:;,\-_=#+*%@&quot;\(\)&amp;]+
     Description: The website of the organisation.
     Business groups:
         BG-703: Organisation
@@ -7958,7 +8250,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:RealizedLocation/cac:Address/cbc:CountrySubentityCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: nuts-lvl3
     Description: The location according to the common classification of territorial units for statistics (NUTS). The NUTS3 classification code shall be used.
     Business groups:
@@ -7994,7 +8286,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cac:RealizedLocation/cac:Address/cbc:CountrySubentityCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: nuts-lvl3
     Description: The location according to the common classification of territorial units for statistics (NUTS). The NUTS3 classification code shall be used.
     Business groups:
@@ -8019,7 +8311,7 @@
     xpathAbsolute: /*/cac:ProcurementProject/cac:RealizedLocation/cac:Address/cbc:CountrySubentityCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: nuts-lvl3
     Description: The location according to the common classification of territorial units for statistics (NUTS). The NUTS3 classification code shall be used.
     Business groups:
@@ -8038,7 +8330,7 @@
     type: url
     repeatable: false
     mandatory: true
-    pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
+    pattern: ((^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS|sftp|SFTP)://)|(^(w|W){3}(\d)?\.))[\w\?!\./:;,\-_=#+*%@&quot;\(\)&amp;]+
     Description: The website where the buyer publishes information regarding procurement procedures (e.g. notices, procurement documents).
     Business groups:
         BG-703: Organisation
@@ -8071,7 +8363,7 @@
     type: url
     repeatable: false
     mandatory: false
-    pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
+    pattern: ((^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS|sftp|SFTP)://)|(^(w|W){3}(\d)?\.))[\w\?!\./:;,\-_=#+*%@&quot;\(\)&amp;]+
     Description: The organisation's uniform resource locator for exchange of data and documents.
     Business groups:
         BG-703: Organisation
@@ -8087,7 +8379,7 @@
     type: url
     repeatable: false
     mandatory: false
-    pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
+    pattern: ((^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS|sftp|SFTP)://)|(^(w|W){3}(\d)?\.))[\w\?!\./:;,\-_=#+*%@&quot;\(\)&amp;]+
     Description: The organisation's uniform resource locator for exchange of data and documents.
     Business groups:
         BG-703: Organisation
@@ -8638,7 +8930,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:RealizedLocation/cac:Address/cbc:PostalZone
     type: text
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The postcode of the place of performance.
     Business groups:
         BG-708: Place of Performance
@@ -8657,7 +8949,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cac:RealizedLocation/cac:Address/cbc:PostalZone
     type: text
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The postcode of the place of performance.
     Business groups:
         BG-708: Place of Performance
@@ -8674,7 +8966,7 @@
     xpathAbsolute: /*/cac:ProcurementProject/cac:RealizedLocation/cac:Address/cbc:PostalZone
     type: text
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The postcode of the place of performance.
     Business groups:
         BG-708: Place of Performance
@@ -8985,7 +9277,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:RealizedLocation/cac:Address/cac:Country/cbc:IdentificationCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: eforms-country
     Description: The country of the place of performance.
     Business groups:
@@ -9005,7 +9297,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cac:RealizedLocation/cac:Address/cac:Country/cbc:IdentificationCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: eforms-country
     Description: The country of the place of performance.
     Business groups:
@@ -9023,7 +9315,7 @@
     xpathAbsolute: /*/cac:ProcurementProject/cac:RealizedLocation/cac:Address/cac:Country/cbc:IdentificationCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: eforms-country
     Description: The country of the place of performance.
     Business groups:
@@ -9057,12 +9349,12 @@
     OCDS example: '{"tender":{"lots":[{"secondStage":{"successiveReduction":true}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#successiveReductionSection
 -   id: BT-531-Lot
-    parentNodeId: ND-LotProcurementScope
+    parentNodeId: ND-LotContractAdditionalNature
     name: Additional Nature (different from Main)
     btId: BT-531
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType/cbc:ProcurementTypeCode[@listName='contract-nature']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='contract-nature']/cbc:ProcurementTypeCode
     type: code
-    repeatable: true
+    repeatable: false
     mandatory: false
     codeList: eforms-contract-nature
     Description: The nature (e.g. services) of what is being bought, additional to Main Nature.
@@ -9075,12 +9367,12 @@
     OCDS example: '{"tender":{"lots":[{"additionalProcurementCategories":["works"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#natureSection
 -   id: BT-531-Part
-    parentNodeId: ND-PartProcurementScope
+    parentNodeId: ND-PartContractAdditionalNature
     name: Additional Nature (different from Main)
     btId: BT-531
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cac:ProcurementAdditionalType/cbc:ProcurementTypeCode[@listName='contract-nature']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='contract-nature']/cbc:ProcurementTypeCode
     type: code
-    repeatable: true
+    repeatable: false
     mandatory: false
     codeList: eforms-contract-nature
     Description: The nature (e.g. services) of what is being bought, additional to Main Nature.
@@ -9091,12 +9383,12 @@
     OCDS example: '{"tender":{"additionalProcurementCategories":["works"]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#natureSection
 -   id: BT-531-Procedure
-    parentNodeId: ND-ProcedureProcurementScope
+    parentNodeId: ND-ProcedureContractAdditionalNature
     name: Additional Nature (different from Main)
     btId: BT-531
-    xpathAbsolute: /*/cac:ProcurementProject/cac:ProcurementAdditionalType/cbc:ProcurementTypeCode[not(@listName='transport-service')]
+    xpathAbsolute: /*/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='contract-nature']/cbc:ProcurementTypeCode
     type: code
-    repeatable: true
+    repeatable: false
     mandatory: false
     codeList: eforms-contract-nature
     Description: The nature (e.g. services) of what is being bought, additional to Main Nature.
@@ -9115,7 +9407,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:PlannedPeriod/cbc:StartDate
     type: date
     repeatable: false
-    mandatory: false
+    mandatory: true
     pattern: ^(?:(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:(?:0[13578]|1[02]))-31|(?:(?:0[13-9]|1[0-2])-(?:29|30))))|(?:(?:(?:(?:(?:1[6-9]|[2-9]\d)(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))-02-29))|(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:0[1-9])|(?:1[0-2]))-(?:0[1-9]|1\d|2[0-8])))(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
     Description: The (estimated) date when the contract, framework agreement, dynamic purchasing system or qualification system will start.
     Business groups:
@@ -9168,7 +9460,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:PlannedPeriod/cbc:EndDate
     type: date
     repeatable: false
-    mandatory: false
+    mandatory: true
     pattern: ^(?:(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:(?:0[13578]|1[02]))-31|(?:(?:0[13-9]|1[0-2])-(?:29|30))))|(?:(?:(?:(?:(?:1[6-9]|[2-9]\d)(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00)))-02-29))|(?:(?:(?:1[6-9]|[2-9]\d)\d{2})-(?:(?:0[1-9])|(?:1[0-2]))-(?:0[1-9]|1\d|2[0-8])))(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
     Description: The (estimated) date when the contract, framework agreement, dynamic purchasing system or qualification system will finish.
     Business groups:
@@ -9221,7 +9513,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:PlannedPeriod/cbc:DescriptionCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: duration
     Description: The duration is unknown, unlimited, etc.
     Business groups:
@@ -9281,7 +9573,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/cbc:AwardingCriterionTypeCode[@listName='award-criterion-type']
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: award-criterion-type
     Description: Whether the criterion concerns the price, the cost, or a non-price non-cost attribute of the tender. (Price is the acquisition price; cost is any other non-price monetary criterion.)
     Business groups:
@@ -9328,7 +9620,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/cbc:Description
     type: text-multilingual
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The description of the award criterion.
     Business groups:
         BG-707: Award Criteria
@@ -9362,18 +9654,6 @@
     OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"description":"Tenders with a quality score less than 65..."}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
 -   id: BT-541-Lot
-    parentNodeId: ND-LotAwardCriterionParameter
-    name: Award Criterion Number
-    btId: BT-541
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter/efbc:ParameterNumeric
-    type: number
-    repeatable: false
-    mandatory: false
-    Description: A number linked to an award criterion.
-    Business groups:
-        BG-707: Award Criteria
-        BG-38: Award Criterion
-        BG-541: Award Criterion Number
     eForms guidance: |-
         This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-5421-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot and to the same `CriterionNumber` objects as created for BT-5421-Lot, BT-5422-Lot and BT-5423-Lot.
 
@@ -9383,19 +9663,58 @@
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterNumeric>50</efbc:ParameterNumeric></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
--   id: BT-541-LotsGroup
-    parentNodeId: ND-LotsGroupAwardCriterionParameter
-    name: Award Criterion Number
+-   id: BT-541-Lot-FixedNumber
+    parentNodeId: ND-LotAwardFixedCriterionParameter
+    name: Award Criterion Fixed Number
     btId: BT-541
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter/efbc:ParameterNumeric
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-fixed']/efbc:ParameterNumeric
     type: number
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: A number linked to an award criterion.
     Business groups:
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-541-Lot-ThresholdNumber
+    parentNodeId: ND-LotAwardThresholdCriterionParameter
+    name: Award Criterion Threshold Number
+    btId: BT-541
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-threshold']/efbc:ParameterNumeric
+    type: number
+    repeatable: false
+    mandatory: true
+    Description: A number linked to an award criterion.
+    Business groups:
+        BG-707: Award Criteria
+        BG-38: Award Criterion
+        BG-541: Award Criterion Number
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-541-Lot-WeightNumber
+    parentNodeId: ND-LotAwardWeightCriterionParameter
+    name: Award Criterion Weight Number
+    btId: BT-541
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-weight']/efbc:ParameterNumeric
+    type: number
+    repeatable: false
+    mandatory: true
+    Description: A number linked to an award criterion.
+    Business groups:
+        BG-707: Award Criteria
+        BG-38: Award Criterion
+        BG-541: Award Criterion Number
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-541-LotsGroup
     eForms guidance: |-
         This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup and to the same `CriterionNumber` objects as created for BT-5421-LotsGroup, BT-5422-LotsGroup and BT-5423-LotsGroup.
 
@@ -9405,14 +9724,65 @@
     eForms example: <efac:AwardCriterionParameter><efbc:ParameterNumeric>50</efbc:ParameterNumeric></efac:AwardCriterionParameter>
     OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
+-   id: BT-541-LotsGroup-FixedNumber
+    parentNodeId: ND-LotsGroupAwardFixedCriterionParameter
+    name: Award Criterion Fixed Number
+    btId: BT-541
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-fixed']/efbc:ParameterNumeric
+    type: number
+    repeatable: false
+    mandatory: true
+    Description: A number linked to an award criterion.
+    Business groups:
+        BG-707: Award Criteria
+        BG-38: Award Criterion
+        BG-541: Award Criterion Number
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-541-LotsGroup-ThresholdNumber
+    parentNodeId: ND-LotsGroupAwardThresholdCriterionParameter
+    name: Award Criterion Threshold Number
+    btId: BT-541
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-threshold']/efbc:ParameterNumeric
+    type: number
+    repeatable: false
+    mandatory: true
+    Description: A number linked to an award criterion.
+    Business groups:
+        BG-707: Award Criteria
+        BG-38: Award Criterion
+        BG-541: Award Criterion Number
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-541-LotsGroup-WeightNumber
+    parentNodeId: ND-LotsGroupAwardWeightCriterionParameter
+    name: Award Criterion Weight Number
+    btId: BT-541
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-weight']/efbc:ParameterNumeric
+    type: number
+    repeatable: false
+    mandatory: true
+    Description: A number linked to an award criterion.
+    Business groups:
+        BG-707: Award Criteria
+        BG-38: Award Criterion
+        BG-541: Award Criterion Number
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: BT-5421-Lot
-    parentNodeId: ND-LotAwardCriterionParameter
+    parentNodeId: ND-LotAwardWeightCriterionParameter
     name: Award Criterion Number Weight
     btId: BT-5421
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter/efbc:ParameterCode[@listName='number-weight']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-weight']/efbc:ParameterCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: number-weight
     Description: Whether the number linked to an award criterion is a type of weight (e.g. a percentage).
     Business groups:
@@ -9431,13 +9801,13 @@
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"weight":"percentageExact"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
 -   id: BT-5421-LotsGroup
-    parentNodeId: ND-LotsGroupAwardCriterionParameter
+    parentNodeId: ND-LotsGroupAwardWeightCriterionParameter
     name: Award Criterion Number Weight
     btId: BT-5421
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter/efbc:ParameterCode[@listName='number-weight']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-weight']/efbc:ParameterCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: number-weight
     Description: Whether the number linked to an award criterion is a type of weight (e.g. a percentage).
     Business groups:
@@ -9456,13 +9826,13 @@
     OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"numbers":[{"weight":"percentageExact"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
 -   id: BT-5422-Lot
-    parentNodeId: ND-LotAwardCriterionParameter
+    parentNodeId: ND-LotAwardFixedCriterionParameter
     name: Award Criterion Number Fixed
     btId: BT-5422
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter/efbc:ParameterCode[@listName='number-fixed']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-fixed']/efbc:ParameterCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: number-fixed
     Description: Whether the number linked to an award criterion is a fixed value (e.g. a fixed price, a fixed cost).
     Business groups:
@@ -9481,13 +9851,13 @@
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"fixed":"total"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
 -   id: BT-5422-LotsGroup
-    parentNodeId: ND-LotsGroupAwardCriterionParameter
+    parentNodeId: ND-LotsGroupAwardFixedCriterionParameter
     name: Award Criterion Number Fixed
     btId: BT-5422
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter/efbc:ParameterCode[@listName='number-fixed']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-fixed']/efbc:ParameterCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: number-fixed
     Description: Whether the number linked to an award criterion is a fixed value (e.g. a fixed price, a fixed cost).
     Business groups:
@@ -9506,13 +9876,13 @@
     OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"numbers":[{"fixed":"total"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
 -   id: BT-5423-Lot
-    parentNodeId: ND-LotAwardCriterionParameter
+    parentNodeId: ND-LotAwardThresholdCriterionParameter
     name: Award Criterion Number Threshold
     btId: BT-5423
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter/efbc:ParameterCode[@listName='number-threshold']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-threshold']/efbc:ParameterCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: number-threshold
     Description: Whether the number linked to an award criterion is a type of threshold (e.g. a minimum score, a maximum number of tenders with the highest score passing).
     Business groups:
@@ -9531,13 +9901,13 @@
     OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"threshold":"maximumBids"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
 -   id: BT-5423-LotsGroup
-    parentNodeId: ND-LotsGroupAwardCriterionParameter
+    parentNodeId: ND-LotsGroupAwardThresholdCriterionParameter
     name: Award Criterion Number Threshold
     btId: BT-5423
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter/efbc:ParameterCode[@listName='number-threshold']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AwardCriterionParameter[efbc:ParameterCode/@listName='number-threshold']/efbc:ParameterCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: number-threshold
     Description: Whether the number linked to an award criterion is a type of threshold (e.g. a minimum score, a maximum number of tenders with the highest score passing).
     Business groups:
@@ -9562,7 +9932,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cbc:CalculationExpression
     type: text-multilingual
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: 'The mathematical equation or any other description used for complicated weighing of criteria (e.g. non-linear weighing, the analytic hierarchy process) when a weighing cannot be expressed per criterion. '
     Business groups:
         BG-707: Award Criteria
@@ -9577,7 +9947,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cbc:CalculationExpression
     type: text-multilingual
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: 'The mathematical equation or any other description used for complicated weighing of criteria (e.g. non-linear weighing, the analytic hierarchy process) when a weighing cannot be expressed per criterion. '
     Business groups:
         BG-707: Award Criteria
@@ -9586,10 +9956,10 @@
     OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"weightingDescription":"Price-quality score calculation is based on \u2026"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
 -   id: BT-553-Tender
-    parentNodeId: ND-SubcontractedActivity
+    parentNodeId: ND-SubcontractedContract
     name: Subcontracting Value
     btId: BT-553
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efbc:TermAmount
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efbc:TermAmount
     type: amount
     repeatable: false
     mandatory: false
@@ -9609,10 +9979,10 @@
     OCDS example: '{"bids":{"details":[{"subcontracting":{"value":{"amount":9999999.99,"currency":"EUR"}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: BT-554-Tender
-    parentNodeId: ND-SubcontractedActivity
+    parentNodeId: ND-SubcontractedContract
     name: Subcontracting Description
     btId: BT-554
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efbc:TermDescription
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efbc:TermDescription
     type: text-multilingual
     repeatable: false
     mandatory: false
@@ -9633,10 +10003,10 @@
     OCDS example: '{"bids":{"details":[{"subcontracting":{"description":"The subcontracting will be..."}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: BT-555-Tender
-    parentNodeId: ND-SubcontractedActivity
+    parentNodeId: ND-SubcontractedContract
     name: Subcontracting Percentage
     btId: BT-555
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efbc:TermPercent
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efbc:TermPercent
     type: number
     repeatable: false
     mandatory: false
@@ -9855,7 +10225,7 @@
     type: url
     repeatable: false
     mandatory: true
-    pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
+    pattern: ((^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS|sftp|SFTP)://)|(^(w|W){3}(\d)?\.))[\w\?!\./:;,\-_=#+*%@&quot;\(\)&amp;]+
     Description: The internet address with information on accessing the restricted (part of the) procurement documents.
     Business groups:
         BG-101: Procurement Documents
@@ -9884,7 +10254,7 @@
     type: url
     repeatable: false
     mandatory: true
-    pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
+    pattern: ((^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS|sftp|SFTP)://)|(^(w|W){3}(\d)?\.))[\w\?!\./:;,\-_=#+*%@&quot;\(\)&amp;]+
     Description: The internet address with information on accessing the restricted (part of the) procurement documents.
     Business groups:
         BG-101: Procurement Documents
@@ -10107,10 +10477,10 @@
     OCDS example: '{"statistics":[{"id":"1","measure":"ab-low","scope":"complaints","notes":"Unjustified rejection of abnormally low tenders"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
 -   id: BT-64-Lot
-    parentNodeId: ND-SubcontractTerms
+    parentNodeId: ND-SubcontractingObligation
     name: Subcontracting Obligation Minimum
     btId: BT-64
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AllowedSubcontractTerms/cbc:MinimumPercent
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AllowedSubcontractTerms[cbc:SubcontractingConditionsCode/@listName='subcontracting-obligation']/cbc:MinimumPercent
     type: number
     repeatable: false
     mandatory: false
@@ -10172,12 +10542,12 @@
     OCDS example: '{"tender":{"lots":[{"subcontractingTerms":{"description":"The contractor must subcontract a minimum percentage of the contract using the procedure set out in Title III of Directive 2009/81/EC."}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#subcontractingObligationSection
 -   id: BT-651-Lot
-    parentNodeId: ND-NonUBLTenderingTerms
+    parentNodeId: ND-SubcontractingIndication
     name: Subcontracting Tender Indication
     btId: BT-651
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:TenderSubcontractingRequirements/efbc:TenderSubcontractingRequirementsCode
     type: code
-    repeatable: true
+    repeatable: false
     mandatory: true
     codeList: subcontracting-indication
     Description: The information about subcontracting that must be indicated in the tender.
@@ -10249,7 +10619,7 @@
     xpathAbsolute: /*/cac:TenderingTerms/cac:TendererQualificationRequest/cac:SpecificTendererRequirement/cbc:Description
     type: text-multilingual
     repeatable: false
-    mandatory: true
+    mandatory: false
     Description: 'The brief description of criteria regarding the personal situation of tenderers that may lead to their exclusion. This shall include a list of all such criteria and indicate required information (e.g. self-declaration, documentation). This may also include specific national exclusion grounds. '
     Business groups:
         BG-701: Exclusion Grounds
@@ -10339,12 +10709,12 @@
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/notice-information.html#noticeLanguageSection
 -   id: BT-706-UBO
-    parentNodeId: ND-UBO
+    parentNodeId: ND-UBONationality
     name: Winner Owner Nationality
     btId: BT-706
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:UltimateBeneficialOwner/efac:Nationality/cbc:NationalityID
     type: code
-    repeatable: true
+    repeatable: false
     mandatory: false
     codeList: eforms-country
     Description: The nationality (or nationalities) of the beneficiary owner(s) of the winner, tenderer, or subcontractor as published in the register(s) established by European Parliament and Council Directive (EU) 2018/843. If such a register does not exist (e.g. in case of contractors established outside the Union) then equivalent information from other sources.
@@ -10395,10 +10765,10 @@
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","accessDetails":"Restricted. Intellectual property rights issues"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
 -   id: BT-708-Lot
-    parentNodeId: ND-LotProcurementDocument
+    parentNodeId: ND-LotDocOfficialLanguage
     name: Documents Official Language
     btId: BT-708
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:CallForTendersDocumentReference/cbc:LanguageID[not(../cbc:DocumentStatusCode/text()='non-official')]
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:CallForTendersDocumentReference/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:OfficialLanguages/cac:Language/cbc:ID
     type: code
     repeatable: false
     mandatory: false
@@ -10416,10 +10786,10 @@
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","languages":["en"],"relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
 -   id: BT-708-Part
-    parentNodeId: ND-PartProcurementDocument
+    parentNodeId: ND-PartDocOfficialLanguage
     name: Documents Official Language
     btId: BT-708
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:CallForTendersDocumentReference/cbc:LanguageID[not(../cbc:DocumentStatusCode/text()='non-official')]
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:CallForTendersDocumentReference/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:OfficialLanguages/cac:Language/cbc:ID
     type: code
     repeatable: false
     mandatory: false
@@ -10456,7 +10826,7 @@
     parentNodeId: ND-LotReservedProcurement
     name: Reserved Participation
     btId: BT-71
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='missing-info-submission'])]/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='reserved-procurement']/cbc:TendererRequirementTypeCode[@listName='reserved-procurement']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='missing-info-submission'])]/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='reserved-procurement']/cbc:TendererRequirementTypeCode
     type: code
     repeatable: false
     mandatory: true
@@ -10490,7 +10860,7 @@
     parentNodeId: ND-PartReservedProcurement
     name: Reserved Participation
     btId: BT-71
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='missing-info-submission'])]/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='reserved-procurement']/cbc:TendererRequirementTypeCode[@listName='reserved-procurement']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='missing-info-submission'])]/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='reserved-procurement']/cbc:TendererRequirementTypeCode
     type: code
     repeatable: false
     mandatory: false
@@ -10628,7 +10998,7 @@
         BG-9: Change
     eForms guidance: Discard. Changed documents can be identified using `tender.documents.dateModified`.
     eForms example: <efac:Change><efbc:ProcurementDocumentsChangeIndicator>true</efbc:ProcurementDocumentsChangeIndicator></efac:Change>
-    OCDS example: null
+    OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/change-notice.html#changeSection
 -   id: BT-719-notice
     parentNodeId: ND-Change
@@ -10890,7 +11260,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:RealizedLocation/cbc:Description
     type: text-multilingual
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: Additional information about the place of performance.
     Business groups:
         BG-708: Place of Performance
@@ -10911,7 +11281,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cac:RealizedLocation/cbc:Description
     type: text-multilingual
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: Additional information about the place of performance.
     Business groups:
         BG-708: Place of Performance
@@ -10928,7 +11298,7 @@
     xpathAbsolute: /*/cac:ProcurementProject/cac:RealizedLocation/cbc:Description
     type: text-multilingual
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: Additional information about the place of performance.
     Business groups:
         BG-708: Place of Performance
@@ -10939,10 +11309,10 @@
     OCDS example: '{"tender":{"deliveryLocations":[{"description":"Further realizations ..."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#performancePlaceSection
 -   id: BT-729-Lot
-    parentNodeId: ND-SubcontractTerms
+    parentNodeId: ND-SubcontractingObligation
     name: Subcontracting Obligation Maximum
     btId: BT-729
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AllowedSubcontractTerms/cbc:MaximumPercent
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AllowedSubcontractTerms[cbc:SubcontractingConditionsCode/@listName='subcontracting-obligation']/cbc:MaximumPercent
     type: number
     repeatable: false
     mandatory: false
@@ -10956,10 +11326,10 @@
     OCDS example: '{"tender":{"lots":[{"subcontractingTerms":{"competitiveMaximumPercentage":0.455}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#subcontractingObligationSection
 -   id: BT-730-Tender
-    parentNodeId: ND-SubcontractedActivity
+    parentNodeId: ND-SubcontractedContract
     name: Subcontracting Value Known
     btId: BT-730
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efbc:ValueKnownIndicator
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efbc:ValueKnownIndicator
     type: indicator
     repeatable: false
     mandatory: false
@@ -10973,10 +11343,10 @@
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: BT-731-Tender
-    parentNodeId: ND-SubcontractedActivity
+    parentNodeId: ND-SubcontractedContract
     name: Subcontracting Percentage Known
     btId: BT-731
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm/efbc:PercentageKnownIndicator
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efbc:PercentageKnownIndicator
     type: indicator
     repeatable: false
     mandatory: false
@@ -11124,10 +11494,10 @@
     OCDS example: '{"awards":[{"items":[{"id":"1","additionalClassifications":[{"id":"oth-serv-contr","scheme":"eu-cvd-contract-type","description":"other service contract"}]}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#CVDDirectiveLotSection
 -   id: BT-736-Lot
-    parentNodeId: ND-LotTenderingTerms
+    parentNodeId: ND-LotReservedExecution
     name: Reserved Execution
     btId: BT-736
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:ContractExecutionRequirement/cbc:ExecutionRequirementCode[@listName='reserved-execution']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:ContractExecutionRequirement[cbc:ExecutionRequirementCode/@listName='reserved-execution']/cbc:ExecutionRequirementCode
     type: code
     repeatable: false
     mandatory: true
@@ -11152,10 +11522,10 @@
     OCDS example: '{"tender":{"lots":[{"contractTerms":{"reservedExecution":true}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#reservedExecutionSection
 -   id: BT-736-Part
-    parentNodeId: ND-PartTenderingTerms
+    parentNodeId: ND-PartReservedExecution
     name: Reserved Execution
     btId: BT-736
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:ContractExecutionRequirement/cbc:ExecutionRequirementCode[@listName='reserved-execution']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:ContractExecutionRequirement[cbc:ExecutionRequirementCode/@listName='reserved-execution']/cbc:ExecutionRequirementCode
     type: code
     repeatable: false
     mandatory: false
@@ -11170,10 +11540,10 @@
     OCDS example: '{"tender":{"contractTerms":{"reservedExecution":true}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#reservedExecutionSection
 -   id: BT-737-Lot
-    parentNodeId: ND-LotProcurementDocument
+    parentNodeId: ND-LotDocNonOfficialLanguage
     name: Documents Unofficial Language
     btId: BT-737
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:CallForTendersDocumentReference/cbc:LanguageID[../cbc:DocumentStatusCode/text()='non-official']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:CallForTendersDocumentReference/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NonOfficialLanguages/cac:Language/cbc:ID
     type: code
     repeatable: false
     mandatory: false
@@ -11191,10 +11561,10 @@
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","unofficialTranslation":true,"relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
 -   id: BT-737-Part
-    parentNodeId: ND-PartProcurementDocument
+    parentNodeId: ND-PartDocNonOfficialLanguage
     name: Documents Unofficial Language
     btId: BT-737
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:CallForTendersDocumentReference/cbc:LanguageID[../cbc:DocumentStatusCode/text()='non-official']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:CallForTendersDocumentReference/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NonOfficialLanguages/cac:Language/cbc:ID
     type: code
     repeatable: false
     mandatory: false
@@ -11367,10 +11737,10 @@
     OCDS example: '{"parties":[{"id":"ORG-0001","details":{"classifications":[{"scheme":"buyer-contracting-type","id":"cont-ent","description":"Contracting Entity"}]}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_buyer_information
 -   id: BT-743-Lot
-    parentNodeId: ND-LotTenderingTerms
+    parentNodeId: ND-LotEInvoicing
     name: Electronic Invoicing
     btId: BT-743
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:ContractExecutionRequirement/cbc:ExecutionRequirementCode[@listName='einvoicing']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:ContractExecutionRequirement[cbc:ExecutionRequirementCode/@listName='einvoicing']/cbc:ExecutionRequirementCode
     type: code
     repeatable: false
     mandatory: true
@@ -11394,10 +11764,10 @@
     OCDS example: '{"tender":{"lots":[{"contractTerms":{"electronicInvoicingPolicy":"required"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#eInvoicingSection
 -   id: BT-744-Lot
-    parentNodeId: ND-LotTenderingTerms
+    parentNodeId: ND-LotESignature
     name: Submission Electronic Signature
     btId: BT-744
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:ContractExecutionRequirement/cbc:ExecutionRequirementCode[@listName='esignature-submission']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:ContractExecutionRequirement[cbc:ExecutionRequirementCode/@listName='esignature-submission']/cbc:ExecutionRequirementCode
     type: code
     repeatable: false
     mandatory: false
@@ -11410,13 +11780,13 @@
     OCDS example: '{"tender":{"lots":[{"submissionTerms":{"advancedElectronicSignatureRequired":true}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#eSignatureSubmissionSection
 -   id: BT-745-Lot
-    parentNodeId: ND-NoESubmission
+    parentNodeId: ND-NonEsubmission
     name: Submission Nonelectronic Description
     btId: BT-745
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='no-esubmission-justification']/cbc:Description
     type: text-multilingual
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The description of how to submit tenders, requests to participate, or expressions of interest non-electronically.
     Business groups:
         BG-102: Submission Terms
@@ -11431,7 +11801,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:Organization/efbc:ListedOnRegulatedMarketIndicator
     type: indicator
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The nationality (or nationalities) of the beneficiary owner(s) of the winner, tenderer, or subcontractor is not published in the register(s) established by Directive (EU) 2018/843, because the winner is listed on a regulated market (e.g. a stock exchange) that ensures adequate transparency in line with anti-money laundering legislation.
     Business groups:
         BG-703: Organisation
@@ -11605,17 +11975,6 @@
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#financialGuaranteeSection
 -   id: BT-752-Lot
-    parentNodeId: ND-SecondStageCriterionParameter
-    name: Selection Criteria Second Stage Invite Number
-    btId: BT-752
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:SelectionCriteria/efac:CriterionParameter/efbc:ParameterNumeric
-    type: number
-    repeatable: false
-    mandatory: false
-    Description: A number linked to the selection criteria (or criterion).
-    Business groups:
-        BG-702: Selection Criteria
-        BG-72: Selection Criteria Second Stage Invite Number
     eForms guidance: |-
         If `ancestor::efac:SelectionCriteria/cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, these values are mapped to the same `SelectionCriterion` objects as created for BT-40-Lot, BT-747-Lot, BT-749-Lot, BT-750-Lot, BT-7531-Lot and BT-7532-Lot, and the same `SelectionCriterionNumber` objects as created for BT-7531-Lot and BT-7532-Lot.
 
@@ -11626,11 +11985,43 @@
     eForms example: <efac:CriterionParameter><efbc:ParameterNumeric>2</efbc:ParameterNumeric></efac:CriterionParameter>
     OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"numbers":[{"number":2}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#selectionCriteriaSection
+-   id: BT-752-Lot-ThresholdNumber
+    parentNodeId: ND-SecondStageThresholdCriterionParameter
+    name: Selection Criteria Second Stage Invite Threshold Number
+    btId: BT-752
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:SelectionCriteria/efac:CriterionParameter[efbc:ParameterCode/@listName='number-threshold']/efbc:ParameterNumeric
+    type: number
+    repeatable: false
+    mandatory: false
+    Description: A number linked to the selection criteria (or criterion).
+    Business groups:
+        BG-702: Selection Criteria
+        BG-72: Selection Criteria Second Stage Invite Number
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-752-Lot-WeightNumber
+    parentNodeId: ND-SecondStageWeightCriterionParameter
+    name: Selection Criteria Second Stage Invite Weight Number
+    btId: BT-752
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:SelectionCriteria/efac:CriterionParameter[efbc:ParameterCode/@listName='number-weight']/efbc:ParameterNumeric
+    type: number
+    repeatable: false
+    mandatory: false
+    Description: A number linked to the selection criteria (or criterion).
+    Business groups:
+        BG-702: Selection Criteria
+        BG-72: Selection Criteria Second Stage Invite Number
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: BT-7531-Lot
-    parentNodeId: ND-SecondStageCriterionParameter
+    parentNodeId: ND-SecondStageWeightCriterionParameter
     name: Selection Criteria Second Stage Invite Number Weight
     btId: BT-7531
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:SelectionCriteria/efac:CriterionParameter/efbc:ParameterCode[@listName='number-weight']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:SelectionCriteria/efac:CriterionParameter[efbc:ParameterCode/@listName='number-weight']/efbc:ParameterCode
     type: code
     repeatable: false
     mandatory: false
@@ -11650,10 +12041,10 @@
     OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"numbers":[{"weight":"percentageExact"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#selectionCriteriaSection
 -   id: BT-7532-Lot
-    parentNodeId: ND-SecondStageCriterionParameter
+    parentNodeId: ND-SecondStageThresholdCriterionParameter
     name: Selection Criteria Second Stage Invite Number Threshold
     btId: BT-7532
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:SelectionCriteria/efac:CriterionParameter/efbc:ParameterCode[@listName='number-threshold']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:SelectionCriteria/efac:CriterionParameter[efbc:ParameterCode/@listName='number-threshold']/efbc:ParameterCode
     type: code
     repeatable: false
     mandatory: false
@@ -11676,7 +12067,7 @@
     parentNodeId: ND-AccessibilityJustification
     name: Accessibility
     btId: BT-754
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='accessibility']/cbc:ProcurementTypeCode[@listName='accessibility']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='accessibility']/cbc:ProcurementTypeCode
     type: code
     repeatable: false
     mandatory: false
@@ -11920,10 +12311,10 @@
     OCDS example: '{"tender":{"lotDetails":{"maximumLotsBidPerSupplier":1e9999}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#allLotsSection
 -   id: BT-764-Lot
-    parentNodeId: ND-LotTenderingTerms
+    parentNodeId: ND-LotECatalog
     name: Submission Electronic Catalogue
     btId: BT-764
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:ContractExecutionRequirement/cbc:ExecutionRequirementCode[@listName='ecatalog-submission']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:ContractExecutionRequirement[cbc:ExecutionRequirementCode/@listName='ecatalog-submission']/cbc:ExecutionRequirementCode
     type: code
     repeatable: false
     mandatory: true
@@ -11941,10 +12332,10 @@
     OCDS example: '{"tender":{"lots":[{"submissionTerms":{"electronicCataloguePolicy":"allowed"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#eCatalogueSubmissionSection
 -   id: BT-765-Lot
-    parentNodeId: ND-LotTenderingProcess
+    parentNodeId: ND-LotFAContractingSystem
     name: Framework Agreement
     btId: BT-765
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:ContractingSystem/cbc:ContractingSystemTypeCode[@listName='framework-agreement']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:ContractingSystem[cbc:ContractingSystemTypeCode/@listName='framework-agreement']/cbc:ContractingSystemTypeCode
     type: code
     repeatable: false
     mandatory: true
@@ -11969,10 +12360,10 @@
     OCDS example: '{"tender":{"lots":[{"techniques":{"hasFrameworkAgreement":true,"frameworkAgreement":{"method":"withoutReopeningCompetition"}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#frameworkAgreementSection
 -   id: BT-765-Part
-    parentNodeId: ND-PartTenderingProcess
+    parentNodeId: ND-PartFAContractingSystem
     name: Framework Agreement
     btId: BT-765
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingProcess/cac:ContractingSystem/cbc:ContractingSystemTypeCode[@listName='framework-agreement']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingProcess/cac:ContractingSystem[cbc:ContractingSystemTypeCode/@listName='framework-agreement']/cbc:ContractingSystemTypeCode
     type: code
     repeatable: false
     mandatory: false
@@ -11987,10 +12378,10 @@
     OCDS example: '{"tender":{"techniques":{"hasFrameworkAgreement":true,"frameworkAgreement":{"method":"withoutReopeningCompetition"}}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#frameworkAgreementSection
 -   id: BT-766-Lot
-    parentNodeId: ND-LotTenderingProcess
+    parentNodeId: ND-LotDPSContractingSystem
     name: Dynamic Purchasing System
     btId: BT-766
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:ContractingSystem/cbc:ContractingSystemTypeCode[@listName='dps-usage']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:ContractingSystem[cbc:ContractingSystemTypeCode/@listName='dps-usage']/cbc:ContractingSystemTypeCode
     type: code
     repeatable: false
     mandatory: true
@@ -12012,10 +12403,10 @@
     OCDS example: '{"tender":{"lots":[{"techniques":{"hasDynamicPurchasingSystem":true,"dynamicPurchasingSystem":{"type":"closed"}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#DPSSection
 -   id: BT-766-Part
-    parentNodeId: ND-PartTenderingProcess
+    parentNodeId: ND-PartDPSContractingSystem
     name: Dynamic Purchasing System
     btId: BT-766
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingProcess/cac:ContractingSystem/cbc:ContractingSystemTypeCode[@listName='dps-usage']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingProcess/cac:ContractingSystem[cbc:ContractingSystemTypeCode/@listName='dps-usage']/cbc:ContractingSystemTypeCode
     type: code
     repeatable: false
     mandatory: false
@@ -12107,7 +12498,7 @@
     parentNodeId: ND-LateTendererInformation
     name: Late Tenderer Information
     btId: BT-771
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)]/cac:SpecificTendererRequirement[not(cbc:TendererRequirementTypeCode[@listName='reserved-procurement'])]/cbc:TendererRequirementTypeCode[@listName='missing-info-submission']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)]/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='missing-info-submission']/cbc:TendererRequirementTypeCode
     type: code
     repeatable: false
     mandatory: false
@@ -12125,7 +12516,7 @@
     parentNodeId: ND-LateTendererInformation
     name: Late Tenderer Information Description
     btId: BT-772
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)]/cac:SpecificTendererRequirement[not(cbc:TendererRequirementTypeCode[@listName='reserved-procurement'])]/cbc:Description
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)]/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='missing-info-submission']/cbc:Description
     type: text-multilingual
     repeatable: false
     mandatory: false
@@ -12143,7 +12534,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efbc:TermCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: applicability
     Description: Whether at least a part of the contract will be subcontracted.
     Business groups:
@@ -12162,12 +12553,12 @@
     OCDS example: '{"bids":{"details":[{"hasSubcontracting":true}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: BT-774-Lot
-    parentNodeId: ND-LotProcurementScope
+    parentNodeId: ND-LotEnvironmentalImpactType
     name: Green Procurement
     btId: BT-774
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType/cbc:ProcurementTypeCode[@listName='environmental-impact']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='environmental-impact']/cbc:ProcurementTypeCode
     type: code
-    repeatable: true
+    repeatable: false
     mandatory: false
     codeList: environmental-impact
     Description: A process to procure goods, services and works with reduced environmental impact throughout their life cycle.
@@ -12183,12 +12574,12 @@
     OCDS example: '{"tender":{"lots":[{"hasSustainability":true,"sustainability":[{"goal":"environmental.circularEconomy"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#strategicProcurementSection
 -   id: BT-775-Lot
-    parentNodeId: ND-LotProcurementScope
+    parentNodeId: ND-LotSocialObjectiveType
     name: Social Procurement
     btId: BT-775
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType/cbc:ProcurementTypeCode[@listName='social-objective']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='social-objective']/cbc:ProcurementTypeCode
     type: code
-    repeatable: true
+    repeatable: false
     mandatory: false
     codeList: social-objective
     Description: A social objective promoted by the works, supplies or services (e.g. fair working conditions).
@@ -12205,12 +12596,12 @@
     OCDS example: '{"tender":{"lots":[{"hasSustainability":true,"sustainability":[{"goal":"social.ethnicEquality","strategies":["awardCriteria","contractPerformanceConditions","selectionCriteria","technicalSpecifications"]}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#strategicProcurementSection
 -   id: BT-776-Lot
-    parentNodeId: ND-LotProcurementScope
+    parentNodeId: ND-LotInnovativeAcquisitionType
     name: Procurement of Innovation
     btId: BT-776
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType/cbc:ProcurementTypeCode[@listName='innovative-acquisition']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='innovative-acquisition']/cbc:ProcurementTypeCode
     type: code
-    repeatable: true
+    repeatable: false
     mandatory: false
     codeList: innovative-acquisition
     Description: 'An indication that innovative works, supplies or services are being bought. '
@@ -12306,7 +12697,7 @@
     parentNodeId: ND-NDA
     name: Non Disclosure Agreement
     btId: BT-801
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:ContractExecutionRequirement[cbc:ExecutionRequirementCode/@listName='nda']/cbc:ExecutionRequirementCode[@listName='nda']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:ContractExecutionRequirement[cbc:ExecutionRequirementCode/@listName='nda']/cbc:ExecutionRequirementCode
     type: code
     repeatable: false
     mandatory: false
@@ -12355,7 +12746,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efbc:TransmissionTime
     type: time
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The date and time the notice was transmitted electronically by the eSender to the Publications Office of the European Union
     Business groups:
         BG-1: Notice
@@ -12367,7 +12758,7 @@
     parentNodeId: ND-LotGreenCriteria
     name: Green Procurement Criteria
     btId: BT-805
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='gpp-criteria']/cbc:ProcurementTypeCode[@listName='gpp-criteria']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='gpp-criteria']/cbc:ProcurementTypeCode
     type: code
     repeatable: false
     mandatory: false
@@ -12503,12 +12894,12 @@
     OCDS example: '{"tender":{"lots":[{"recurrence":{"description":"The current procurement..."}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#recurrenceSection
 -   id: BT-97-Lot
-    parentNodeId: ND-LotTenderingTerms
+    parentNodeId: ND-LotSubmissionLanguage
     name: Submission Language
     btId: BT-97
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:Language/cbc:ID
     type: code
-    repeatable: true
+    repeatable: false
     mandatory: true
     codeList: eforms-language
     Description: A language in which tenders, requests to participate, or expressions of interest may be submitted.
@@ -12595,51 +12986,6 @@
     eForms example: <cac:PresentationPeriod><cbc:Description languageID="ENG">Any review request shall be submitted ...</cbc:Description></cac:PresentationPeriod>
     OCDS example: '{"tender":{"lots":[{"reviewDetails":"Any review request shall be submitted ..."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#appealTermsSection
--   id: OPA-118-NoticeResult-Currency
-    parentNodeId: ND-NoticeResult
-    name: Currency of the notice framework value
-    btId: BT-118
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efbc:OverallMaximumFrameworkContractsAmount/@currencyID
-    type: code
-    repeatable: false
-    mandatory: false
-    Description: "The maximum value which can be spent within the framework agreement(s) announced in this notice over its/their whole duration, in all lots, including options and renewals, as calculated on the basis of the winner\u2019s tender or winners\u2019 tenders."
-    Business groups:
-        BG-7: Notice Result
-    eForms guidance: Discard
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: OPA-161-NoticeResult-Currency
-    parentNodeId: ND-NoticeResult
-    name: Currency of the notice value
-    btId: BT-161
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/cbc:TotalAmount/@currencyID
-    type: code
-    repeatable: false
-    mandatory: false
-    Description: The value of all contracts awarded in this notice, including options and renewals.
-    Business groups:
-        BG-7: Notice Result
-    eForms guidance: Discard
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: OPA-27-Procedure-Currency
-    parentNodeId: ND-ProcedureProcurementScope
-    name: Currency of the estimated value of the procedure
-    btId: BT-27
-    xpathAbsolute: /*/cac:ProcurementProject/cac:RequestedTenderTotal/cbc:EstimatedOverallContractAmount/@currencyID
-    type: code
-    repeatable: false
-    mandatory: false
-    Description: The estimated value of the procurement procedure or lot, over its whole duration, including options and renewals.
-    Business groups:
-        BG-2: Purpose
-    eForms guidance: Follow guidance for BT-27-Procedure.
-    eForms example: <cac:RequestedTenderTotal><cbc:EstimatedOverallContractAmount currencyID="EUR">250000</cbc:EstimatedOverallContractAmount></cac:RequestedTenderTotal>
-    OCDS example: '{"tender":{"value":{"amount":250000,"currency":"EUR"}}}'
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#estimatedValueSection
 -   id: OPA-36-Lot-Number
     parentNodeId: ND-LotDuration
     name: Numeric value of the duration period
@@ -12647,7 +12993,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:PlannedPeriod/cbc:DurationMeasure
     type: number
     repeatable: false
-    mandatory: true
+    mandatory: false
     Description: The (estimated) period from the start to the end of the contract, framework agreement, dynamic purchasing system or qualification system. This shall include any options and renewals.
     Business groups:
         BG-36: Duration
@@ -12731,7 +13077,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:SettledContract/efac:DurationJustification/efbc:ExtendedDurationIndicator
     type: indicator
     repeatable: false
-    mandatory: false
+    mandatory: true
     eForms guidance: '[Get the lots for the SettledContract](operations.md#get-the-lots-for-a-settledcontract) and map to each lot''s `.hasEssentialAssets`.'
     eForms example: <efac:SettledContract><efac:DurationJustification><efbc:ExtendedDurationIndicator>true</efbc:ExtendedDurationIndicator></efac:DurationJustification></efac:SettledContract>
     OCDS example: '{"tender":{"lots":[{"hasEssentialAssets":true}]}}'
@@ -12862,12 +13208,12 @@
     OCDS example: '{"tender":{"lots":[{"contractTerms":{"rewardsAndPenalties":"Information on Rewards and Penalties ...."}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: OPP-040-Procedure
-    parentNodeId: ND-ProcedureProcurementScope
+    parentNodeId: ND-ProcedureTransportServiceType
     name: Main Nature - Sub Type
     btId: OPP-040
-    xpathAbsolute: /*/cac:ProcurementProject/cac:ProcurementAdditionalType/cbc:ProcurementTypeCode[@listName='transport-service']
+    xpathAbsolute: /*/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='transport-service']/cbc:ProcurementTypeCode
     type: code
-    repeatable: true
+    repeatable: false
     mandatory: true
     codeList: transport-service
     eForms guidance: Add to `tender.additionalProcurementCategories` array.
@@ -12893,7 +13239,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:Organization/efbc:AwardingCPBIndicator
     type: indicator
     repeatable: false
-    mandatory: false
+    mandatory: true
     eForms guidance: If the value is "false" then discard. Otherwise [get the organization for the company](operations.md#get-the-organization-for-a-company), and add 'procuringEntity' to the organization's `.roles` array.
     eForms example: <efac:Organization><efbc:AwardingCPBIndicator>true</efbc:AwardingCPBIndicator></efac:Organization>
     OCDS example: '{"parties":[{"id":"ORG-0001","roles":["procuringEntity"]}]}'
@@ -12936,12 +13282,12 @@
     OCDS example: '{"contracts":[{"publicPassengerTransportServicesKilometers":988754432110987}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: OPP-090-Procedure
-    parentNodeId: ND-ProcedureTenderingProcess
+    parentNodeId: ND-PreviousNoticeReference
     name: Previous Notice Identifier
     btId: OPP-090
     xpathAbsolute: /*/cac:TenderingProcess/cac:NoticeDocumentReference/cbc:ID
     type: id
-    repeatable: true
+    repeatable: false
     mandatory: false
     pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|(\d{1,8})-(19|20)\d\d)$
     eForms guidance: '[Reference a previous publication](operations.md#reference-a-previous-publication). If OPP-090-Procedure is repeated, set the relatedProcess''s `id` incrementally.'
@@ -12993,37 +13339,11 @@
     eForms example: <cac:ServiceProviderParty><cbc:ServiceTypeCode listName="organisation-role">ted-esen</cbc:ServiceTypeCode></cac:ServiceProviderParty>
     OCDS example: '{"parties":[{"roles":["eSender"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_buyer_and_service_providers
--   id: OPT-050-Lot
-    parentNodeId: ND-LotProcurementDocument
-    name: Document Status
-    btId: OPT-050
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:CallForTendersDocumentReference/cbc:DocumentStatusCode
-    type: code
-    repeatable: false
-    mandatory: false
-    codeList: document-status
-    eForms guidance: Discard. If "true" follow the guidance for [BT-708-Lot](#BT-708-Lot), if "false" follow the guidance for [BT-737-Lot](#BT-737-Lot)
-    eForms example: <cac:CallForTendersDocumentReference><cbc:DocumentStatusCode listName="linguistic-status">official</cbc:DocumentStatusCode></cac:CallForTendersDocumentReference>
-    OCDS example: ''
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
--   id: OPT-050-Part
-    parentNodeId: ND-PartProcurementDocument
-    name: Document Status
-    btId: OPT-050
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:CallForTendersDocumentReference/cbc:DocumentStatusCode
-    type: code
-    repeatable: false
-    mandatory: false
-    codeList: document-status
-    eForms guidance: Discard. If "true" follow the guidance for [BT-708-Part](#BT-708-Part), if "false" follow the guidance for [BT-737-Part](#BT-737-Part)
-    eForms example: <cac:CallForTendersDocumentReference><cbc:DocumentStatusCode listName="linguistic-status">official</cbc:DocumentStatusCode></cac:CallForTendersDocumentReference>
-    OCDS example: ''
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
 -   id: OPT-060-Lot
-    parentNodeId: ND-LotTenderingTerms
+    parentNodeId: ND-ExecutionRequirements
     name: Execution Requirements Factor
     btId: OPT-060
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:ContractExecutionRequirement/cbc:ExecutionRequirementCode[@listName='conditions']
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:ContractExecutionRequirement[cbc:ExecutionRequirementCode/@listName='conditions']/cbc:ExecutionRequirementCode
     type: code
     repeatable: false
     mandatory: true
@@ -13033,7 +13353,7 @@
     OCDS example: ''
     sdk: ''
 -   id: OPT-070-Lot
-    parentNodeId: ND-ReservedExecution
+    parentNodeId: ND-LotReservedExecution
     name: Reserved Execution justification
     btId: OPT-070
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:ContractExecutionRequirement[cbc:ExecutionRequirementCode/@listName='reserved-execution']/cbc:Description
@@ -13122,7 +13442,7 @@
     type: url
     repeatable: false
     mandatory: false
-    pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
+    pattern: ((^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS|sftp|SFTP)://)|(^(w|W){3}(\d)?\.))[\w\?!\./:;,\-_=#+*%@&quot;\(\)&amp;]+
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
 
@@ -13140,7 +13460,7 @@
     type: url
     repeatable: false
     mandatory: false
-    pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
+    pattern: ((^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS|sftp|SFTP)://)|(^(w|W){3}(\d)?\.))[\w\?!\./:;,\-_=#+*%@&quot;\(\)&amp;]+
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
 
@@ -13252,7 +13572,7 @@
     type: url
     repeatable: false
     mandatory: false
-    pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
+    pattern: ((^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS|sftp|SFTP)://)|(^(w|W){3}(\d)?\.))[\w\?!\./:;,\-_=#+*%@&quot;\(\)&amp;]+
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
 
@@ -13270,7 +13590,7 @@
     type: url
     repeatable: false
     mandatory: false
-    pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
+    pattern: ((^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS|sftp|SFTP)://)|(^(w|W){3}(\d)?\.))[\w\?!\./:;,\-_=#+*%@&quot;\(\)&amp;]+
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
 
@@ -13286,7 +13606,7 @@
     type: url
     repeatable: false
     mandatory: false
-    pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
+    pattern: ((^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS|sftp|SFTP)://)|(^(w|W){3}(\d)?\.))[\w\?!\./:;,\-_=#+*%@&quot;\(\)&amp;]+
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
 
@@ -13304,7 +13624,7 @@
     type: url
     repeatable: false
     mandatory: false
-    pattern: ^((((H|h)(T|t)|(F|f))(T|t)(P|p)((S|s)?)):(/){2})(www\.)?([a-zA-Z0-9\-]+\.)+[a-zA-Z]{2,6}(\W(.)*$|$)
+    pattern: ((^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS|sftp|SFTP)://)|(^(w|W){3}(\d)?\.))[\w\?!\./:;,\-_=#+*%@&quot;\(\)&amp;]+
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
 
@@ -13319,7 +13639,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:CallForTendersDocumentReference/cbc:ID
     type: id
     repeatable: false
-    mandatory: false
+    mandatory: true
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
 
@@ -13334,7 +13654,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:CallForTendersDocumentReference/cbc:ID
     type: id
     repeatable: false
-    mandatory: false
+    mandatory: true
     eForms guidance: '[Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).'
     eForms example: <cac:CallForTendersDocumentReference><cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID></cac:CallForTendersDocumentReference>
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02"}]}}'
@@ -13475,15 +13795,27 @@
     eForms example: <efac:TenderingParty><cbc:ID schemeName="tendering-party">TPA-0003</cbc:ID></efac:TenderingParty>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#tenderingPartySection
+-   id: OPT-211-Tenderer
+    parentNodeId: ND-TenderingParty
+    name: Tendering Party Name
+    btId: OPT-211
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:TenderingParty/cbc:Name
+    type: text
+    repeatable: false
+    mandatory: false
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: OPT-300-Contract-Signatory
-    parentNodeId: ND-SettledContract
+    parentNodeId: ND-ContractSignatory
     name: Signatory Identifier Reference
     btId: OPT-300
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:SettledContract/cac:SignatoryParty/cac:PartyIdentification/cbc:ID
     type: id-ref
     idSchemes:
     - ORG
-    repeatable: true
+    repeatable: false
     mandatory: false
     pattern: ^ORG-\d{4}$
     eForms guidance: |-
@@ -13746,14 +14078,14 @@
     OCDS example: '{"parties":[{"id":"TPO-0001","roles":["submissionReceiptBody"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#partiesSection
 -   id: OPT-301-LotResult-Financing
-    parentNodeId: ND-LotResult
+    parentNodeId: ND-FinancingParty
     name: Financing Party (ID reference)
     btId: OPT-301
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/cac:FinancingParty/cac:PartyIdentification/cbc:ID
     type: id-ref
     idSchemes:
     - ORG
-    repeatable: true
+    repeatable: false
     mandatory: false
     pattern: ^ORG-\d{4}$
     eForms guidance: |-
@@ -13764,14 +14096,14 @@
     OCDS example: '{"parties":[{"id":"ORG-0003","roles":["funder"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#tenderingPartySection
 -   id: OPT-301-LotResult-Paying
-    parentNodeId: ND-LotResult
+    parentNodeId: ND-PayerParty
     name: Payer Party (ID reference)
     btId: OPT-301
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/cac:PayerParty/cac:PartyIdentification/cbc:ID
     type: id-ref
     idSchemes:
     - ORG
-    repeatable: true
+    repeatable: false
     mandatory: false
     pattern: ^ORG-\d{4}$
     eForms guidance: |-
@@ -13951,15 +14283,15 @@
     OCDS example: '{"parties":[{"id":"TPO-0001","roles":["submissionReceiptBody"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#partiesSection
 -   id: OPT-301-Tenderer-MainCont
-    parentNodeId: ND-SubContractor
+    parentNodeId: ND-SubContractorTakerReference
     name: Main Contractor ID Reference
     btId: OPT-301
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:TenderingParty/efac:SubContractor/efac:MainContractor/cbc:ID
     type: id-ref
     idSchemes:
     - ORG
-    repeatable: true
-    mandatory: false
+    repeatable: false
+    mandatory: true
     pattern: ^ORG-\d{4}$
     eForms guidance: |-
         - [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization-technical-identifier-reference), and add 'tenderer' to its `.roles` array.
@@ -13988,15 +14320,15 @@
     OCDS example: '{"parties":[{"id":"ORG-0012","roles":["subcontractor"]}],"bids":{"details":[{"subcontracting":{"subcontracts":[{"id":"1","subcontractor":{"id":"ORG-0012","name":"Company ABC"}}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#tenderingPartySection
 -   id: OPT-302-Organization
-    parentNodeId: ND-Organization
+    parentNodeId: ND-OrganizationUboReference
     name: Beneficial Owner Reference
     btId: OPT-302
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:Organization/efac:UltimateBeneficialOwner/cbc:ID
     type: id-ref
     idSchemes:
     - UBO
-    repeatable: true
-    mandatory: false
+    repeatable: false
+    mandatory: true
     pattern: ^UBO-\d{4}$
     eForms guidance: |-
         Get the `Organization` in `parties` whose `id` is equal to the value of `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`. If none exists yet:
@@ -14017,7 +14349,7 @@
     idSchemes:
     - TPA
     repeatable: false
-    mandatory: false
+    mandatory: true
     pattern: ^TPA-\d{4}$
     eForms guidance: |-
         - [Get the bid for the LotTender](operations.md#get-the-bid-for-a-lottender) and get the `ancestor::efac:NoticeResult/efac:TenderingParty` whose `/cbc:ID` is equal to the value of this field.
@@ -14028,15 +14360,15 @@
     OCDS example: '{"bids":{"details":[{"tenderers":[{"id":"ORG-0011","name":"Competitor"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: OPT-315-LotResult
-    parentNodeId: ND-LotResult
+    parentNodeId: ND-LotResultContractReference
     name: Contract Identifier Reference
     btId: OPT-315
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:SettledContract/cbc:ID
     type: id-ref
     idSchemes:
     - CON
-    repeatable: true
-    mandatory: false
+    repeatable: false
+    mandatory: true
     pattern: ^CON-\d{4}$
     eForms guidance: '[Get the contract for the SettledContract](operations.md#get-the-contract-for-a-settledcontract) and map to its `.id`.'
     eForms example: <efac:LotResult><efac:SettledContract><cbc:ID schemeName="contract">CON-0001</cbc:ID></efac:SettledContract></efac:LotResult>
@@ -14061,15 +14393,15 @@
     OCDS example: '{"contracts":[{"id":"CON-0001"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#settledContractSection
 -   id: OPT-320-LotResult
-    parentNodeId: ND-LotResult
+    parentNodeId: ND-LotResultTenderReference
     name: Tender Identifier Reference
     btId: OPT-320
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:LotTender/cbc:ID
     type: id-ref
     idSchemes:
     - TEN
-    repeatable: true
-    mandatory: false
+    repeatable: false
+    mandatory: true
     pattern: ^TEN-\d{4}$
     eForms guidance: '[Get the award for the LotResult](operations.md#get-the-award-for-a-lotresult), and add to its `.relatedBids` array.'
     eForms example: <efac:NoticeResult><efac:LotResult><efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID></efac:LotTender><efac:LotTender><cbc:ID schemeName="tender">TEN-0002</cbc:ID></efac:LotTender><efac:LotTender><cbc:ID schemeName="tender">TEN-0003</cbc:ID></efac:LotTender></efac:LotResult></efac:NoticeResult>
