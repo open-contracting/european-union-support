@@ -1956,7 +1956,7 @@
         - Set its `.paidBy` to 'user'.
         - Set its `.title` to the [translation](operations.md#get-a-translation) of 'he estimated revenue coming from the users of the concession (e.g. fees and fines).'.
     eForms example: <efac:NoticeResult><efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID><efac:ConcessionRevenue><efbc:RevenueUserAmount currencyID="EUR">350</efbc:RevenueUserAmount></efac:ConcessionRevenue></efac:LotTender><efac:SettledContract><cbc:ID schemeName="contract">CON-0001</cbc:ID><efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID></efac:LotTender></efac:SettledContract><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:SettledContract><cbc:ID schemeName="contract">CON-0001</cbc:ID></efac:SettledContract></efac:LotResult></efac:NoticeResult>
-    OCDS example: '{"contracts":[{"id":"CON-0001","implementation":{"charges":[{"id":"user","title":"he estimated revenue coming from the users of the concession (e.g. fees and fines).","estimatedValue":{"amount":350,"currency":"EUR"},"paidBy":"user"}]}},"awardID":"RES-0001"]}'
+    OCDS example: '{"contracts":[{"id":"CON-0001","implementation":{"charges":[{"id":"user","title":"he estimated revenue coming from the users of the concession (e.g. fees and fines).","estimatedValue":{"amount":350,"currency":"EUR"},"paidBy":"user"}]},"awardID":"RES-0001"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: BT-163-Tender
     parentNodeId: ND-ConcessionRevenue
@@ -2198,7 +2198,7 @@
           - Set its `.id` to `[efbc:FieldIdentifierCode]-[/*/cbc:ContractFolderID]`.
           - Set its `.field` to "pro-typ".
           - Set its `.name` to "Procedure Type".
-    eForms example: <cbc:ContractFolderID>18d27a53-0109-4f93-9231-6659d931bce0</cbc:ContractFolderID><cac:cac:TenderingProcess><cac:ProcessJustification><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">pro-typ</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:ProcessJustification></cac:cac:TenderingProcess>
+    eForms example: <cbc:ContractFolderID>18d27a53-0109-4f93-9231-6659d931bce0</cbc:ContractFolderID><cac:TenderingProcess><cac:ProcessJustification><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">pro-typ</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:ProcessJustification></cac:TenderingProcess>
     OCDS example: '{"withheldInformation":[{"field":"pro-typ","id":"pro-typ-18d27a53-0109-4f93-9231-6659d931bce0","name":"Procedure Type"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#procedureLevelSection
 -   id: BT-195(BT-106)-Procedure
@@ -2218,7 +2218,7 @@
           - Set its `.id` to `[efbc:FieldIdentifierCode]-[/*/cbc:ContractFolderID]`.
           - Set its `.field` to "pro-acc".
           - Set its `.name` to "Procedure Accelerated".
-    eForms example: <cbc:ContractFolderID>18d27a53-0109-4f93-9231-6659d931bce0</cbc:ContractFolderID><cac:cac:TenderingProcess><cac:ProcessJustification><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">pro-acc</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:ProcessJustification></cac:cac:TenderingProcess>
+    eForms example: <cbc:ContractFolderID>18d27a53-0109-4f93-9231-6659d931bce0</cbc:ContractFolderID><cac:TenderingProcess><cac:ProcessJustification><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">pro-acc</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:ProcessJustification></cac:TenderingProcess>
     OCDS example: '{"withheldInformation":[{"field":"pro-acc","id":"pro-acc-18d27a53-0109-4f93-9231-6659d931bce0","name":"Procedure Accelerated"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#procedureLevelSection
 -   id: BT-195(BT-1118)-NoticeResult
@@ -2270,7 +2270,7 @@
           - Set its `.id` to `[efbc:FieldIdentifierCode]-[/*/cbc:ContractFolderID]`.
           - Set its `.field` to "dir-awa-pre".
           - Set its `.name` to "Direct Award Justification Previous Procedure Identifier".
-    eForms example: <cbc:ContractFolderID>18d27a53-0109-4f93-9231-6659d931bce0</cbc:ContractFolderID><cac:cac:TenderingProcess><cac:ProcessJustification><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">dir-awa-pre</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:ProcessJustification></cac:cac:TenderingProcess>
+    eForms example: <cbc:ContractFolderID>18d27a53-0109-4f93-9231-6659d931bce0</cbc:ContractFolderID><cac:TenderingProcess><cac:ProcessJustification><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">dir-awa-pre</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:ProcessJustification></cac:TenderingProcess>
     OCDS example: '{"withheldInformation":[{"field":"dir-awa-pre","id":"dir-awa-pre-18d27a53-0109-4f93-9231-6659d931bce0","name":"Direct Award Justification Previous Procedure Identifier"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#procedureLevelSection
 -   id: BT-195(BT-135)-Procedure
@@ -2290,7 +2290,7 @@
           - Set its `.id` to `[efbc:FieldIdentifierCode]-[/*/cbc:ContractFolderID]`.
           - Set its `.field` to "dir-awa-tex".
           - Set its `.name` to "Direct Award Justification".
-    eForms example: <cbc:ContractFolderID>18d27a53-0109-4f93-9231-6659d931bce0</cbc:ContractFolderID><cac:cac:TenderingProcess><cac:ProcessJustification><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">dir-awa-tex</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:ProcessJustification></cac:cac:TenderingProcess>
+    eForms example: <cbc:ContractFolderID>18d27a53-0109-4f93-9231-6659d931bce0</cbc:ContractFolderID><cac:TenderingProcess><cac:ProcessJustification><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">dir-awa-tex</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:ProcessJustification></cac:TenderingProcess>
     OCDS example: '{"withheldInformation":[{"field":"dir-awa-tex","id":"dir-awa-tex-18d27a53-0109-4f93-9231-6659d931bce0","name":"Direct Award Justification"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#procedureLevelSection
 -   id: BT-195(BT-1351)-Procedure
@@ -2310,7 +2310,7 @@
           - Set its `.id` to `[efbc:FieldIdentifierCode]-[/*/cbc:ContractFolderID]`.
           - Set its `.field` to "pro-acc-jus".
           - Set its `.name` to "Procedure Accelerated Justification".
-    eForms example: <cbc:ContractFolderID>18d27a53-0109-4f93-9231-6659d931bce0</cbc:ContractFolderID><cac:cac:TenderingProcess><cac:ProcessJustification><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">pro-acc-jus</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:ProcessJustification></cac:cac:TenderingProcess>
+    eForms example: <cbc:ContractFolderID>18d27a53-0109-4f93-9231-6659d931bce0</cbc:ContractFolderID><cac:TenderingProcess><cac:ProcessJustification><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">pro-acc-jus</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:ProcessJustification></cac:TenderingProcess>
     OCDS example: '{"withheldInformation":[{"field":"pro-acc-jus","id":"pro-acc-jus-18d27a53-0109-4f93-9231-6659d931bce0","name":"Procedure Accelerated Justification"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#procedureLevelSection
 -   id: BT-195(BT-136)-Procedure
@@ -2330,7 +2330,7 @@
           - Set its `.id` to `[efbc:FieldIdentifierCode]-[/*/cbc:ContractFolderID]`.
           - Set its `.field` to "dir-awa-jus".
           - Set its `.name` to "Direct Award Justification".
-    eForms example: <cbc:ContractFolderID>18d27a53-0109-4f93-9231-6659d931bce0</cbc:ContractFolderID><cac:cac:TenderingProcess><cac:ProcessJustification><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">dir-awa-jus</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:ProcessJustification></cac:cac:TenderingProcess>
+    eForms example: <cbc:ContractFolderID>18d27a53-0109-4f93-9231-6659d931bce0</cbc:ContractFolderID><cac:TenderingProcess><cac:ProcessJustification><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">dir-awa-jus</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:ProcessJustification></cac:TenderingProcess>
     OCDS example: '{"withheldInformation":[{"field":"dir-awa-jus","id":"dir-awa-jus-18d27a53-0109-4f93-9231-6659d931bce0","name":"Direct Award Justification"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#procedureLevelSection
 -   id: BT-195(BT-142)-LotResult
@@ -3246,7 +3246,7 @@
           - Set its `.id` to `[efbc:FieldIdentifierCode]-[/*/cbc:ContractFolderID]`.
           - Set its `.field` to "pro-fea".
           - Set its `.name` to "Procedure Features".
-    eForms example: <cbc:ContractFolderID>18d27a53-0109-4f93-9231-6659d931bce0</cbc:ContractFolderID><cac:cac:TenderingProcess><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">pro-fea</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:cac:TenderingProcess>
+    eForms example: <cbc:ContractFolderID>18d27a53-0109-4f93-9231-6659d931bce0</cbc:ContractFolderID><cac:TenderingProcess><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">pro-fea</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:TenderingProcess>
     OCDS example: '{"withheldInformation":[{"field":"pro-fea","id":"pro-fea-18d27a53-0109-4f93-9231-6659d931bce0","name":"Procedure Features"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#procedureLevelSection
 -   id: BT-196(BT-09)-Procedure
@@ -5893,12 +5893,12 @@
     eForms guidance: |-
         This field maps to the same `Amendment` objects as created for BT-201-Contract and BT-202-Contract.
 
-        Get the `contract` whose `id` is equal to `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`. 
+        Get the `contract` whose `id` is equal to `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`.
         If none exists yet:
-            - Add a `Contract` to `contracts` and set its `.id` to the value of `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`
-            - Get all LotResults (`ancestor::efac:NoticeResult/efac:LotResult`) with an `/efac:SettledContract/cbc:ID` equal to `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`
-              - If there is exactly one, add its `/cbc:ID` to the contract's `.awardID`
-              - If there is more than one, add each LotResult's `/cbc:ID` to the contract's `.awardIDs`
+        \- Add a `Contract` to `contracts` and set its `.id` to the value of `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`
+        \- Get all LotResults (`ancestor::efac:NoticeResult/efac:LotResult`) with an `/efac:SettledContract/cbc:ID` equal to `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`
+        \- If there is exactly one, add its `/cbc:ID` to the contract's `.awardID`
+        \- If there is more than one, add each LotResult's `/cbc:ID` to the contract's `.awardIDs`
 
         For each `efac:ChangeReason`, add or update a corresponding `Amendment` object to the contract's `.amendments` array ensuring its `.id` (string) is set. The .id can be any value guaranteed to be unique within the scope of the procedure.
 
@@ -5919,12 +5919,12 @@
         BG-77: Modification
     eForms guidance: |-
         This field maps to the same `Amendment` objects as created for BT-200-Contract and BT-202-Contract.
-        Get the `contract` whose `id` is equal to `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`. 
+        Get the `contract` whose `id` is equal to `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`.
         If none exists yet:
-            - Add a `Contract` to `contracts` and set its `.id` to the value of `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`
-            - Get all LotResults (`ancestor::efac:NoticeResult/efac:LotResult`) with an `/efac:SettledContract/cbc:ID` equal to `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`
-              - If there is exactly one, add its `/cbc:ID` to the contract's `.awardID`
-              - If there is more than one, add each LotResult's `/cbc:ID` to the contract's `.awardIDs`
+        \- Add a `Contract` to `contracts` and set its `.id` to the value of `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`
+        \- Get all LotResults (`ancestor::efac:NoticeResult/efac:LotResult`) with an `/efac:SettledContract/cbc:ID` equal to `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`
+        \- If there is exactly one, add its `/cbc:ID` to the contract's `.awardID`
+        \- If there is more than one, add each LotResult's `/cbc:ID` to the contract's `.awardIDs`
         For each `efac:ChangeReason`, add or update a corresponding `Amendment` object to the contract's `.amendments` array ensuring its `.id` (string) is set. The .id can be any value guaranteed to be unique within the scope of the procedure.
         Map the value of this field to the amendment's `.rationale`
     eForms example: <efac:ContractModification><efac:Change><efac:ChangedSection><efbc:ChangedSectionIdentifier>CON-0001</efbc:ChangedSectionIdentifier></efac:ChangedSection></efac:Change><efac:ChangeReason><efbc:ReasonDescription languageID="ENG">The original business case was scoped as a technology replacement programme for a single system. Analysis in the early stages of the programme indicated that two core enterprise systems should be replaced. In order to maximise benefit for these systems replacement activities, it was agreed that the organisation should consider people and process in addition to systems replacement, and work has been re-scoped to accommodate this.</efbc:ReasonDescription></efac:ChangeReason></efac:ContractModification><efac:NoticeResult><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:SettledContract><cbc:ID schemeName="contract">CON-0001</cbc:ID></efac:SettledContract></efac:LotResult></efac:NoticeResult>
@@ -5943,12 +5943,12 @@
         BG-77: Modification
     eForms guidance: |-
         This field maps to the same `Amendment` objects as created for BT-200-Contract and BT-201-Contract.
-        Get the `contract` whose `id` is equal to `ancestor::efac:ChangedSection/efbc:ChangeSectionIdentifier`. 
+        Get the `contract` whose `id` is equal to `ancestor::efac:ChangedSection/efbc:ChangeSectionIdentifier`.
         If none exists yet:
-            - Add a `Contract` to `contracts` and set its `.id` to the value of `ancestor::efac:ChangedSection/efbc:ChangeSectionIdentifier`
-            - Get all LotResults (`ancestor::efac:NoticeResult/efac:LotResult`) with an `/efac:SettledContract/cbc:ID` equal to `ancestor::efac:ChangedSection/efbc:ChangeSectionIdentifier`
-              - If there is exactly one, add its `/cbc:ID` to the contract's `.awardID`
-              - If there is more than one, add each LotResult's `/cbc:ID` to the contract's `.awardIDs`
+        \- Add a `Contract` to `contracts` and set its `.id` to the value of `ancestor::efac:ChangedSection/efbc:ChangeSectionIdentifier`
+        \- Get all LotResults (`ancestor::efac:NoticeResult/efac:LotResult`) with an `/efac:SettledContract/cbc:ID` equal to `ancestor::efac:ChangedSection/efbc:ChangeSectionIdentifier`
+        \- If there is exactly one, add its `/cbc:ID` to the contract's `.awardID`
+        \- If there is more than one, add each LotResult's `/cbc:ID` to the contract's `.awardIDs`
         For each `ancestor::efac:ContractModification/efac:ChangeReason`, add or update a corresponding `Amendment` object to the contract's `.amendments` array ensuring its `.id` (string) is set. The .id can be any value guaranteed to be unique within the scope of the procedure.
         Map the value of this field to the amendment's `.description`.
     eForms example: <efac:ContractModification><efac:Change><efbc:ChangeDescription languageID="ENG">Increase in framework value</efbc:ChangeDescription><efac:ChangedSection><efbc:ChangedSectionIdentifier>CON-0001</efbc:ChangedSectionIdentifier></efac:ChangedSection></efac:Change></efac:ContractModification><efac:NoticeResult><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:SettledContract><cbc:ID schemeName="contract">CON-0001</cbc:ID></efac:SettledContract></efac:LotResult></efac:NoticeResult>
@@ -6163,7 +6163,7 @@
     - TED_EXPORT/FORM_SECTION/F21_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot). If the vaLue of this field equals "works" or "services", map it to the lot''s `.mainProcurementCategory`. If it equals "supplies", set the lot''s `.mainProcurementCategory` to ''goods''. If it equals "combined", add to the lot''s `.additionalProcurementCategories` array.'
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cbc:ProcurementTypeCode listName="contract-nature">works</cbc:ProcurementTypeCode></cac:ProcurementProject></cac:ProcurementProjectLot>
-    OCDS example: '{"tender":{"lots":[{"id":LOT-0001","mainProcurementCategory":"works"}]}}'
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","mainProcurementCategory":"works"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#natureSection
 -   id: BT-23-Part
     parentNodeId: ND-PartProcurementScope
@@ -6747,7 +6747,7 @@
         BG-2: Purpose
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), map to its `.techniques.frameworkAgreement.value.amount` and map `@currencyID` to its `techniques.frameworkAgreement.value.currency`.'
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cac:RequestedTenderTotal><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efbc:FrameworkMaximumAmount currencyID="EUR">120000</efbc:FrameworkMaximumAmount></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:RequestedTenderTotal></cac:ProcurementProject></cac:ProcurementProjectLot>
-    OCDS example: '{"tender":{"lots":[{"id:"LOT-0001","techniques":{"frameworkAgreement":{"value":{"amount":120000,"currency":"EUR"}}}}]}}'
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","techniques":{"frameworkAgreement":{"value":{"amount":120000,"currency":"EUR"}}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#estimatedValueSection
 -   id: BT-271-LotsGroup
     parentNodeId: ND-LotsGroupValueEstimateExtension
