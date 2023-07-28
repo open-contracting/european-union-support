@@ -9678,8 +9678,8 @@
         BG-541: Award Criterion Number
     eForms guidance: ''
     eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
 -   id: BT-541-Lot-ThresholdNumber
     parentNodeId: ND-LotAwardThresholdCriterionParameter
     name: Award Criterion Threshold Number
@@ -9695,8 +9695,8 @@
         BG-541: Award Criterion Number
     eForms guidance: ''
     eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
 -   id: BT-541-Lot-WeightNumber
     parentNodeId: ND-LotAwardWeightCriterionParameter
     name: Award Criterion Weight Number
@@ -9712,8 +9712,8 @@
         BG-541: Award Criterion Number
     eForms guidance: ''
     eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
 -   id: BT-541-LotsGroup
     eForms guidance: |-
         This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup and to the same `CriterionNumber` objects as created for BT-5421-LotsGroup, BT-5422-LotsGroup and BT-5423-LotsGroup.
@@ -9739,8 +9739,8 @@
         BG-541: Award Criterion Number
     eForms guidance: ''
     eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    OCDS example: '{"tender":{"lotGroups":[{"id":"GLO-0001","awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
 -   id: BT-541-LotsGroup-ThresholdNumber
     parentNodeId: ND-LotsGroupAwardThresholdCriterionParameter
     name: Award Criterion Threshold Number
@@ -9756,8 +9756,8 @@
         BG-541: Award Criterion Number
     eForms guidance: ''
     eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    OCDS example: '{"tender":{"lotGroups":[{"id":"GLO-0001","awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
 -   id: BT-541-LotsGroup-WeightNumber
     parentNodeId: ND-LotsGroupAwardWeightCriterionParameter
     name: Award Criterion Weight Number
@@ -9773,8 +9773,8 @@
         BG-541: Award Criterion Number
     eForms guidance: ''
     eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    OCDS example: '{"tender":{"lotGroups":[{"id":"GLO-0001","awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
 -   id: BT-5421-Lot
     parentNodeId: ND-LotAwardWeightCriterionParameter
     name: Award Criterion Number Weight
@@ -11974,17 +11974,6 @@
     eForms example: <cac:RequiredFinancialGuarantee><cbc:GuaranteeTypeCode listName="tender-guarantee-required">true</cbc:GuaranteeTypeCode></cac:RequiredFinancialGuarantee>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#financialGuaranteeSection
--   id: BT-752-Lot
-    eForms guidance: |-
-        If `ancestor::efac:SelectionCriteria/cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, these values are mapped to the same `SelectionCriterion` objects as created for BT-40-Lot, BT-747-Lot, BT-749-Lot, BT-750-Lot, BT-7531-Lot and BT-7532-Lot, and the same `SelectionCriterionNumber` objects as created for BT-7531-Lot and BT-7532-Lot.
-
-        - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
-        - For each `efac:SelectionCriteria`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
-        - For each `efac:CriterionParameter`, add or update a corresponding `SelectionCriterionNumber` object in the criterion's `.numbers`.
-        - Map to the number's `.number`.
-    eForms example: <efac:CriterionParameter><efbc:ParameterNumeric>2</efbc:ParameterNumeric></efac:CriterionParameter>
-    OCDS example: '{"tender":{"lots":[{"selectionCriteria":{"criteria":[{"numbers":[{"number":2}]}]}}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#selectionCriteriaSection
 -   id: BT-752-Lot-ThresholdNumber
     parentNodeId: ND-SecondStageThresholdCriterionParameter
     name: Selection Criteria Second Stage Invite Threshold Number
@@ -11997,10 +11986,15 @@
     Business groups:
         BG-702: Selection Criteria
         BG-72: Selection Criteria Second Stage Invite Number
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: | 
+        If `ancestor::efac:SelectionCriteria/cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, these values are mapped to the same `SelectionCriterion` objects as created for BT-40-Lot, BT-747-Lot, BT-749-Lot, BT-750-Lot, BT-7531-Lot and BT-7532-Lot, and the same `SelectionCriterionNumber` objects as created for BT-7532-Lot.
+
+        - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
+        - For each `efac:SelectionCriteria`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
+        - Add or update a corresponding `SelectionCriterionNumber` object in the criterion's `.numbers`
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:SelectionCriteria><efac:CriterionParameter[efbc:ParameterCode/@listName='number-threshold']><efbc:ParameterNumeric>3</efbc:ParameterNumeric></efac:CriterionParameter></efac:SelectionCriteria></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:TenderingTerms></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","selectionCriteria":{"criteria":[{"numbers":[{"number": 3}]}]}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#selectionCriteriaSection
 -   id: BT-752-Lot-WeightNumber
     parentNodeId: ND-SecondStageWeightCriterionParameter
     name: Selection Criteria Second Stage Invite Weight Number
@@ -12013,10 +12007,15 @@
     Business groups:
         BG-702: Selection Criteria
         BG-72: Selection Criteria Second Stage Invite Number
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: | 
+        If `ancestor::efac:SelectionCriteria/cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, these values are mapped to the same `SelectionCriterion` objects as created for BT-40-Lot, BT-747-Lot, BT-749-Lot, BT-750-Lot, BT-7531-Lot and BT-7532-Lot, and the same `SelectionCriterionNumber` objects as created for BT-7531-Lot.
+
+        - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
+        - For each `efac:SelectionCriteria`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
+        - Add or update a corresponding `SelectionCriterionNumber` object in the criterion's `.numbers`
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:SelectionCriteria><efac:CriterionParameter[efbc:ParameterCode/@listName='number-weight']><efbc:ParameterNumeric>3</efbc:ParameterNumeric></efac:CriterionParameter></efac:SelectionCriteria></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:TenderingTerms></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","selectionCriteria":{"criteria":[{"numbers":[{"number": 3}]}]}}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#selectionCriteriaSection
 -   id: BT-7531-Lot
     parentNodeId: ND-SecondStageWeightCriterionParameter
     name: Selection Criteria Second Stage Invite Number Weight
@@ -13803,10 +13802,10 @@
     type: text
     repeatable: false
     mandatory: false
-    eForms guidance: ''
-    eForms example: ''
+    eForms guidance: Discard. Each tenderer in the tendering party is covered by OPT-310-Tenderer.
+    eForms example: <efac:TenderingParty><cbc:Name>Party of Tenderers</cbc:ID></efac:TenderingParty>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#tenderingPartySection
 -   id: OPT-300-Contract-Signatory
     parentNodeId: ND-ContractSignatory
     name: Signatory Identifier Reference
