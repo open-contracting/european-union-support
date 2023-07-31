@@ -276,15 +276,19 @@ def update_with_sdk(filename, verbose):
     Create or update FILE with fields metadata from the eForms SDK.
     """
     with (sourcedir / "fields.json").open() as f:
-        df = pd.DataFrame.from_dict(json.load(f)["fields"])
+        data = json.load(f)
+        df = pd.DataFrame.from_dict(data["fields"])
+        df.set_index("id", inplace=True)
+        xml = pd.DataFrame.from_dict(data["xmlStructure"])
+        xml.set_index("id", inplace=True)
 
-    labels = {}
+    labels = set()
     supported_notice_types = {str(i) for i in range(1, 41)} | {"CEI", "T01", "T02"}
     expected = {"value": False, "severity": "ERROR", "constraints": [{"value": True, "severity": "ERROR"}]}
     for label, row in df.iterrows():
         # Remove attribute fields.
-        if row["attributeOf"] is not np.nan and row["attributeOf"] in row["id"]:
-            labels[label] = row["id"]
+        if row["attributeOf"] is not np.nan and row["attributeOf"] in label:
+            labels.add(label)
 
         # Remove fields that are forbidden on all supported notice types.
         forbidden = row["forbidden"]
@@ -298,14 +302,26 @@ def update_with_sdk(filename, verbose):
             and "condition" not in forbidden["constraints"][0]
         ):
             # Ensure the forbidden property's structure is as expected.
-            assert forbidden == expected, f"{row['id']} {forbidden} !=\n{expected}"
-            labels[label] = row["id"]
+            assert forbidden == expected, f"{label} {forbidden} !=\n{expected}"
+            labels.add(label)
 
     df.drop(index=labels, inplace=True)
 
+    # If a repeatable business term is implemented as a field that is the only child of a parent, then the SDK marks
+    # the parent as repeatable, rather than the child.
+    for label, row in df.iterrows():
+        if row["parentNodeId"].startswith("ND-"):
+            cell = row["repeatable"]
+            if (
+                not (cell["value"] if isinstance(cell, dict) and len(cell) == 2 else cell)  # as below
+                and xml.loc[row["parentNodeId"], "repeatable"]
+                and len(df[df["parentNodeId"] == row["parentNodeId"]]) == 1  # run after drop()
+            ):
+                df.at[label, "repeatable"] = True
+
     if verbose:
         click.echo(f"{df.shape[0]} kept, {len(labels)} dropped")
-        click.echo("\n".join(sorted(f"- {label}" for label in labels.values())))
+        click.echo("\n".join(sorted(f"- {label}" for label in labels)))
 
     # Remove or abbreviate columns that do not assist the mapping process and that lengthen the JSON file. See README.
     drop = [

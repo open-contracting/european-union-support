@@ -1264,7 +1264,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cbc:ID
     type: id
     schemeName: Lot
-    repeatable: false
+    repeatable: true
     mandatory: true
     pattern: ^LOT-\d{4}$
     Description: The identifier of a lot. In case of PINs used only for information, the identifier of a part of the notice that may later become a lot or a self-standing procedure. The information in the purpose section refers to this lot or part.
@@ -1295,7 +1295,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cbc:ID
     type: id
     schemeName: LotsGroup
-    repeatable: false
+    repeatable: true
     mandatory: false
     pattern: ^GLO-\d{4}$
     Description: The identifier of a lot. In case of PINs used only for information, the identifier of a part of the notice that may later become a lot or a self-standing procedure. The information in the purpose section refers to this lot or part.
@@ -1312,7 +1312,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cbc:ID
     type: id
     schemeName: Part
-    repeatable: false
+    repeatable: true
     mandatory: true
     pattern: ^PAR-\d{4}$
     Description: The identifier of a lot. In case of PINs used only for information, the identifier of a part of the notice that may later become a lot or a self-standing procedure. The information in the purpose section refers to this lot or part.
@@ -1398,7 +1398,7 @@
     btId: BT-13716
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Changes/efac:Change/efac:ChangedSection/efbc:ChangedSectionIdentifier
     type: id
-    repeatable: false
+    repeatable: true
     mandatory: false
     pattern: ^(PROCEDURE|BUYER|RESULT|((PAR|LOT|GLO|RES|ORG)-\d{4}))$
     Description: An identifier of one or more sections within the changed notice. The information in the change section refers to this section or these sections.
@@ -1416,7 +1416,7 @@
     type: id-ref
     idSchemes:
     - LOT
-    repeatable: false
+    repeatable: true
     mandatory: false
     pattern: ^LOT-\d{4}$
     Description: An identifier of a lot within the procedure that is part of a group of lots for which one tender can be submitted and evaluated.
@@ -1747,7 +1747,7 @@
     btId: BT-1501
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:ContractModification/efbc:ChangedNoticeIdentifier
     type: id
-    repeatable: false
+    repeatable: true
     mandatory: true
     pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|(\d{1,8})-(19|20)\d\d)$
     Description: An identifier of one or more sections within a previous notice within the procedure. The information in the modification section refers to this section or these sections.
@@ -1763,7 +1763,7 @@
     btId: BT-1501
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:ContractModification/efac:Change/efac:ChangedSection/efbc:ChangedSectionIdentifier
     type: id
-    repeatable: false
+    repeatable: true
     mandatory: true
     Description: An identifier of one or more sections within a previous notice within the procedure. The information in the modification section refers to this section or these sections.
     Business groups:
@@ -2132,7 +2132,7 @@
     btId: BT-191
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:Origin/efbc:AreaCode
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: false
     codeList: eforms-country
     Description: A country of origin of the product or the service.
@@ -6207,7 +6207,7 @@
     btId: BT-202
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:ContractModification/efac:Change/efbc:ChangeDescription
     type: text-multilingual
-    repeatable: false
+    repeatable: true
     mandatory: true
     Description: The summary of the contract modification(s).
     Business groups:
@@ -7230,7 +7230,7 @@
     type: id-ref
     idSchemes:
     - TEN
-    repeatable: false
+    repeatable: true
     mandatory: true
     pattern: ^TEN-\d{4}$
     Description: An identifier of the tender or another result that led to this contract.
@@ -7283,7 +7283,7 @@
     type: id-ref
     idSchemes:
     - GLO
-    repeatable: false
+    repeatable: true
     mandatory: false
     pattern: ^GLO-\d{4}$
     Description: The identifier of a group of lots in the procedure.
@@ -7455,7 +7455,7 @@
     btId: BT-46
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:TechnicalCommitteePerson/cbc:FamilyName
     type: text
-    repeatable: false
+    repeatable: true
     mandatory: false
     Description: A name of the jury member.
     Business groups:
@@ -7474,7 +7474,7 @@
     btId: BT-47
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:EconomicOperatorShortList/cac:PreSelectedParty/cac:PartyName/cbc:Name
     type: text
-    repeatable: false
+    repeatable: true
     mandatory: false
     Description: A name of an already selected participant. A participant could have been selected already at the time of the publication of the design contest notice because, for example, the information about the participation of a world-renowned architect is intended to promote the contest amongst other potential participants.
     Business groups:
@@ -7638,7 +7638,7 @@
     btId: BT-501
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:Organization/efac:Company/cac:PartyLegalEntity/cbc:CompanyID
     type: id
-    repeatable: false
+    repeatable: true
     mandatory: true
     Description: An identifier of the organisation. All of the organisation's identifiers shall be given.
     Business groups:
@@ -9336,7 +9336,7 @@
     btId: BT-531
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='contract-nature']/cbc:ProcurementTypeCode
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: false
     codeList: eforms-contract-nature
     Description: The nature (e.g. services) of what is being bought, additional to Main Nature.
@@ -9354,7 +9354,7 @@
     btId: BT-531
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='contract-nature']/cbc:ProcurementTypeCode
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: false
     codeList: eforms-contract-nature
     Description: The nature (e.g. services) of what is being bought, additional to Main Nature.
@@ -9370,7 +9370,7 @@
     btId: BT-531
     xpathAbsolute: /*/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='contract-nature']/cbc:ProcurementTypeCode
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: false
     codeList: eforms-contract-nature
     Description: The nature (e.g. services) of what is being bought, additional to Main Nature.
@@ -10539,7 +10539,7 @@
     btId: BT-651
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:TenderSubcontractingRequirements/efbc:TenderSubcontractingRequirementsCode
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: true
     codeList: subcontracting-indication
     Description: The information about subcontracting that must be indicated in the tender.
@@ -10706,7 +10706,7 @@
     btId: BT-706
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:UltimateBeneficialOwner/efac:Nationality/cbc:NationalityID
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: false
     codeList: eforms-country
     Description: The nationality (or nationalities) of the beneficiary owner(s) of the winner, tenderer, or subcontractor as published in the register(s) established by European Parliament and Council Directive (EU) 2018/843. If such a register does not exist (e.g. in case of contractors established outside the Union) then equivalent information from other sources.
@@ -10762,7 +10762,7 @@
     btId: BT-708
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:CallForTendersDocumentReference/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:OfficialLanguages/cac:Language/cbc:ID
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: false
     codeList: eforms-language
     Description: The language(s) in which the procurement documents are officially available. These linguistic versions are equally legally valid.
@@ -10783,7 +10783,7 @@
     btId: BT-708
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:CallForTendersDocumentReference/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:OfficialLanguages/cac:Language/cbc:ID
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: false
     codeList: eforms-language
     Description: The language(s) in which the procurement documents are officially available. These linguistic versions are equally legally valid.
@@ -10820,7 +10820,7 @@
     btId: BT-71
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='missing-info-submission'])]/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='reserved-procurement']/cbc:TendererRequirementTypeCode
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: true
     codeList: reserved-procurement
     Description: Whether participation is reserved for specific organisations (e.g. sheltered workshops, organisations pursuing a public service mission).
@@ -10854,7 +10854,7 @@
     btId: BT-71
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='missing-info-submission'])]/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='reserved-procurement']/cbc:TendererRequirementTypeCode
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: false
     codeList: reserved-procurement
     Description: Whether participation is reserved for specific organisations (e.g. sheltered workshops, organisations pursuing a public service mission).
@@ -11118,7 +11118,7 @@
     btId: BT-723
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement/efac:StrategicProcurementInformation/efac:ProcurementDetails/efbc:AssetCategoryCode
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: false
     codeList: vehicle-category
     Description: 'The category of vehicle falling within the scope of Directive 2009/33/EC, including: Light-duty vehicles (M1, M2, N1); Bus (M3); Truck (N2, N3); M1; M2; N1; N2; N3.'
@@ -11251,7 +11251,7 @@
     btId: BT-728
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:RealizedLocation/cbc:Description
     type: text-multilingual
-    repeatable: false
+    repeatable: true
     mandatory: true
     Description: Additional information about the place of performance.
     Business groups:
@@ -11272,7 +11272,7 @@
     btId: BT-728
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cac:RealizedLocation/cbc:Description
     type: text-multilingual
-    repeatable: false
+    repeatable: true
     mandatory: true
     Description: Additional information about the place of performance.
     Business groups:
@@ -11289,7 +11289,7 @@
     btId: BT-728
     xpathAbsolute: /*/cac:ProcurementProject/cac:RealizedLocation/cbc:Description
     type: text-multilingual
-    repeatable: false
+    repeatable: true
     mandatory: true
     Description: Additional information about the place of performance.
     Business groups:
@@ -11444,7 +11444,7 @@
     btId: BT-735
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:StrategicProcurement/efac:StrategicProcurementInformation/efbc:ProcurementCategoryCode
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: false
     codeList: cvd-contract-type
     Description: The CVD legal basis to establish which category of contract types (purchase, lease, rent, hired-purchase, public service contracts and service contracts according to table 1 CVD) applies.
@@ -11464,7 +11464,7 @@
     btId: BT-735
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement/efac:StrategicProcurementInformation/efbc:ProcurementCategoryCode
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: false
     codeList: cvd-contract-type
     Description: The CVD legal basis to establish which category of contract types (purchase, lease, rent, hired-purchase, public service contracts and service contracts according to table 1 CVD) applies.
@@ -11537,7 +11537,7 @@
     btId: BT-737
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:CallForTendersDocumentReference/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NonOfficialLanguages/cac:Language/cbc:ID
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: false
     codeList: eforms-language
     Description: The language(s) in which the procurement documents (or their parts) are unofficially available. These linguistic versions are not an official translation, they are provided only for information.
@@ -11558,7 +11558,7 @@
     btId: BT-737
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:CallForTendersDocumentReference/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NonOfficialLanguages/cac:Language/cbc:ID
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: false
     codeList: eforms-language
     Description: The language(s) in which the procurement documents (or their parts) are unofficially available. These linguistic versions are not an official translation, they are provided only for information.
@@ -12549,7 +12549,7 @@
     btId: BT-774
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='environmental-impact']/cbc:ProcurementTypeCode
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: false
     codeList: environmental-impact
     Description: A process to procure goods, services and works with reduced environmental impact throughout their life cycle.
@@ -12570,7 +12570,7 @@
     btId: BT-775
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='social-objective']/cbc:ProcurementTypeCode
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: false
     codeList: social-objective
     Description: A social objective promoted by the works, supplies or services (e.g. fair working conditions).
@@ -12592,7 +12592,7 @@
     btId: BT-776
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='innovative-acquisition']/cbc:ProcurementTypeCode
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: false
     codeList: innovative-acquisition
     Description: 'An indication that innovative works, supplies or services are being bought. '
@@ -12751,7 +12751,7 @@
     btId: BT-805
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='gpp-criteria']/cbc:ProcurementTypeCode
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: false
     codeList: gpp-criteria
     Description: 'The procurement procedure includes the use of established green public procurement criteria (selection criteria, technical specifications, award criteria and contract performance clauses), at national, Union or other level, if applicable. '
@@ -12890,7 +12890,7 @@
     btId: BT-97
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:Language/cbc:ID
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: true
     codeList: eforms-language
     Description: A language in which tenders, requests to participate, or expressions of interest may be submitted.
@@ -13204,7 +13204,7 @@
     btId: OPP-040
     xpathAbsolute: /*/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='transport-service']/cbc:ProcurementTypeCode
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: true
     codeList: transport-service
     eForms guidance: Add to `tender.additionalProcurementCategories` array.
@@ -13278,7 +13278,7 @@
     btId: OPP-090
     xpathAbsolute: /*/cac:TenderingProcess/cac:NoticeDocumentReference/cbc:ID
     type: id
-    repeatable: false
+    repeatable: true
     mandatory: false
     pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|(\d{1,8})-(19|20)\d\d)$
     eForms guidance: '[Reference a previous publication](operations.md#reference-a-previous-publication).'
@@ -13317,7 +13317,7 @@
     btId: OPT-030
     xpathAbsolute: /*/cac:ContractingParty/cac:Party/cac:ServiceProviderParty/cbc:ServiceTypeCode
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: false
     codeList: organisation-role-service
     eForms guidance: |-
@@ -13808,7 +13808,7 @@
     type: id-ref
     idSchemes:
     - ORG
-    repeatable: false
+    repeatable: true
     mandatory: false
     pattern: ^ORG-\d{4}$
     eForms guidance: |-
@@ -14078,7 +14078,7 @@
     type: id-ref
     idSchemes:
     - ORG
-    repeatable: false
+    repeatable: true
     mandatory: false
     pattern: ^ORG-\d{4}$
     eForms guidance: |-
@@ -14096,7 +14096,7 @@
     type: id-ref
     idSchemes:
     - ORG
-    repeatable: false
+    repeatable: true
     mandatory: false
     pattern: ^ORG-\d{4}$
     eForms guidance: |-
@@ -14283,7 +14283,7 @@
     type: id-ref
     idSchemes:
     - ORG
-    repeatable: false
+    repeatable: true
     mandatory: true
     pattern: ^ORG-\d{4}$
     eForms guidance: |-
@@ -14301,7 +14301,7 @@
     type: id-ref
     idSchemes:
     - ORG
-    repeatable: false
+    repeatable: true
     mandatory: false
     pattern: ^ORG-\d{4}$
     eForms guidance: |-
@@ -14320,7 +14320,7 @@
     type: id-ref
     idSchemes:
     - UBO
-    repeatable: false
+    repeatable: true
     mandatory: true
     pattern: ^UBO-\d{4}$
     eForms guidance: |-
@@ -14360,7 +14360,7 @@
     type: id-ref
     idSchemes:
     - CON
-    repeatable: false
+    repeatable: true
     mandatory: true
     pattern: ^CON-\d{4}$
     eForms guidance: '[Get the contract for the SettledContract](operations.md#get-the-contract-for-a-settledcontract) and map to its `.id`.'
@@ -14393,7 +14393,7 @@
     type: id-ref
     idSchemes:
     - TEN
-    repeatable: false
+    repeatable: true
     mandatory: true
     pattern: ^TEN-\d{4}$
     eForms guidance: '[Get the award for the LotResult](operations.md#get-the-award-for-a-lotresult), and add to its `.relatedBids` array.'
