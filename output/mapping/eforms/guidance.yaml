@@ -6161,12 +6161,12 @@
     eForms guidance: |-
         This field maps to the same `Amendment` objects as created for BT-201-Contract and BT-202-Contract.
 
-        Get the `contract` whose `id` is equal to `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`.
-        If none exists yet:
-        \- Add a `Contract` to `contracts` and set its `.id` to the value of `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`
-        \- Get all LotResults (`ancestor::efac:NoticeResult/efac:LotResult`) with an `/efac:SettledContract/cbc:ID` equal to `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`
-        \- If there is exactly one, add its `/cbc:ID` to the contract's `.awardID`
-        \- If there is more than one, add each LotResult's `/cbc:ID` to the contract's `.awardIDs`
+        Get the `contract` whose `id` is equal to `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`. If none exists yet:
+
+        - Add a `Contract` to `contracts` and set its `.id` to the value of `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`
+        - Get all LotResults (`ancestor::efac:NoticeResult/efac:LotResult`) with an `/efac:SettledContract/cbc:ID` equal to `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`
+        - If there is exactly one, add its `/cbc:ID` to the contract's `.awardID`
+        - If there is more than one, add each LotResult's `/cbc:ID` to the contract's `.awardIDs`
 
         For each `efac:ChangeReason`, add or update a corresponding `Amendment` object to the contract's `.amendments` array ensuring its `.id` (string) is set. The .id can be any value guaranteed to be unique within the scope of the procedure.
 
@@ -6187,13 +6187,16 @@
         BG-77: Modification
     eForms guidance: |-
         This field maps to the same `Amendment` objects as created for BT-200-Contract and BT-202-Contract.
-        Get the `contract` whose `id` is equal to `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`.
-        If none exists yet:
-        \- Add a `Contract` to `contracts` and set its `.id` to the value of `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`
-        \- Get all LotResults (`ancestor::efac:NoticeResult/efac:LotResult`) with an `/efac:SettledContract/cbc:ID` equal to `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`
-        \- If there is exactly one, add its `/cbc:ID` to the contract's `.awardID`
-        \- If there is more than one, add each LotResult's `/cbc:ID` to the contract's `.awardIDs`
+
+        Get the `contract` whose `id` is equal to `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`. If none exists yet:
+
+        - Add a `Contract` to `contracts` and set its `.id` to the value of `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`
+        - Get all LotResults (`ancestor::efac:NoticeResult/efac:LotResult`) with an `/efac:SettledContract/cbc:ID` equal to `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`
+        - If there is exactly one, add its `/cbc:ID` to the contract's `.awardID`
+        - If there is more than one, add each LotResult's `/cbc:ID` to the contract's `.awardIDs`
+
         For each `efac:ChangeReason`, add or update a corresponding `Amendment` object to the contract's `.amendments` array ensuring its `.id` (string) is set. The .id can be any value guaranteed to be unique within the scope of the procedure.
+
         Map the value of this field to the amendment's `.rationale`
     eForms example: <efac:ContractModification><efac:Change><efac:ChangedSection><efbc:ChangedSectionIdentifier>CON-0001</efbc:ChangedSectionIdentifier></efac:ChangedSection></efac:Change><efac:ChangeReason><efbc:ReasonDescription languageID="ENG">The original business case was scoped as a technology replacement programme for a single system. Analysis in the early stages of the programme indicated that two core enterprise systems should be replaced. In order to maximise benefit for these systems replacement activities, it was agreed that the organisation should consider people and process in addition to systems replacement, and work has been re-scoped to accommodate this.</efbc:ReasonDescription></efac:ChangeReason></efac:ContractModification><efac:NoticeResult><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:SettledContract><cbc:ID schemeName="contract">CON-0001</cbc:ID></efac:SettledContract></efac:LotResult></efac:NoticeResult>
     OCDS example: '{"contracts":[{"id":"CON-0001","amendments":[{"id":"1","rationale":"The original business case was scoped as a technology replacement programme for a single system. It was agreed that the organisation should consider people and process in addition to systems replacement, and work has been re-scoped to accommodate this."}],"awardID":"RES-0001"}]}'
@@ -6211,13 +6214,16 @@
         BG-77: Modification
     eForms guidance: |-
         This field maps to the same `Amendment` objects as created for BT-200-Contract and BT-201-Contract.
-        Get the `contract` whose `id` is equal to `ancestor::efac:ChangedSection/efbc:ChangeSectionIdentifier`.
-        If none exists yet:
-        \- Add a `Contract` to `contracts` and set its `.id` to the value of `ancestor::efac:ChangedSection/efbc:ChangeSectionIdentifier`
-        \- Get all LotResults (`ancestor::efac:NoticeResult/efac:LotResult`) with an `/efac:SettledContract/cbc:ID` equal to `ancestor::efac:ChangedSection/efbc:ChangeSectionIdentifier`
-        \- If there is exactly one, add its `/cbc:ID` to the contract's `.awardID`
-        \- If there is more than one, add each LotResult's `/cbc:ID` to the contract's `.awardIDs`
+
+        Get the `contract` whose `id` is equal to `ancestor::efac:ChangedSection/efbc:ChangeSectionIdentifier`. If none exists yet:
+
+        - Add a `Contract` to `contracts` and set its `.id` to the value of `ancestor::efac:ChangedSection/efbc:ChangeSectionIdentifier`
+        - Get all LotResults (`ancestor::efac:NoticeResult/efac:LotResult`) with an `/efac:SettledContract/cbc:ID` equal to `ancestor::efac:ChangedSection/efbc:ChangeSectionIdentifier`
+        - If there is exactly one, add its `/cbc:ID` to the contract's `.awardID`
+        - If there is more than one, add each LotResult's `/cbc:ID` to the contract's `.awardIDs`
+
         For each `ancestor::efac:ContractModification/efac:ChangeReason`, add or update a corresponding `Amendment` object to the contract's `.amendments` array ensuring its `.id` (string) is set. The .id can be any value guaranteed to be unique within the scope of the procedure.
+
         Map the value of this field to the amendment's `.description`.
     eForms example: <efac:ContractModification><efac:Change><efbc:ChangeDescription languageID="ENG">Increase in framework value</efbc:ChangeDescription><efac:ChangedSection><efbc:ChangedSectionIdentifier>CON-0001</efbc:ChangedSectionIdentifier></efac:ChangedSection></efac:Change></efac:ContractModification><efac:NoticeResult><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:SettledContract><cbc:ID schemeName="contract">CON-0001</cbc:ID></efac:SettledContract></efac:LotResult></efac:NoticeResult>
     OCDS example: '{"contracts":[{"id":"CON-0001","amendments":[{"id":"1","description":"Increase in framework value."}],"awardID":"RES-0001"}]}'
@@ -13670,14 +13676,16 @@
         This field maps to the same `Item` objects as created for BT-723-LotResult, BT-735-LotResult and OPT-156-LotResult.
 
         If the value of `ancestor::efac:StrategicProcurementStatistics/efbc:StatisticsNumeric` is 0 discard. Otherwise:
-        \- [Get the award for the LotResult](operations.md#get-the-award-for-a-lotresult)
-        \- Add an `Item` object to its `items` array.
-        \- Set the item's `.id` incrementally.
 
-        For each `efbc:StatisticsCode`, add a `Classification` object to the item's `additionalClassifications` array.
-        \- Set the classification's `.scheme` to "vehicles".
-        \- Map the value of the field to the classification's `.id`.
-        \- Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/vehicles) and map it to the classification's `.description`.
+        - [Get the award for the LotResult.](operations.md#get-the-award-for-a-lotresult)
+        - Add an `Item` object to its `items` array.
+        - Set the item's `.id` incrementally.
+
+        For each `efbc:StatisticsCode`, add a `Classification` object to the item's `additionalClassifications` array, and:
+
+        - Set the classification's `.scheme` to "vehicles".
+        - Map the value of the field to the classification's `.id`.
+        - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/vehicles) and map it to the classification's `.description`.
     eForms example: <efac:StrategicProcurementStatistics><efbc:StatisticsCode listName="vehicles">vehicles-zero-emission</efbc:StatisticsCode></efac:StrategicProcurementStatistics>
     OCDS example: '{"awards":[{"items":[{"id":"1","additionalClassifications":[{"scheme":"vehicles","id":"vehicles-zero-emission","description":"vehicles zero emission"}]}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
