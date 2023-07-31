@@ -2621,15 +2621,6 @@
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="LotsGroup">GLO-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">awa-cri-des</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"withheldInformation":[{"field":"awa-cri-des","id":"awa-cri-des-GLO-0001","name":"Award Criterion Description"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
--   id: BT-195(BT-541)-Lot
-    eForms guidance: |-
-        - Add a `withheldInformationItem` to the `withheldInformation` array, and:
-          - Set its `.id` to `[efbc:FieldIdentifierCode]-[ancestor::cac:ProcurementProjectLot/cbc:ID schemeName="Lot"]`.
-          - Set its `.field` to "awa-cri-num".
-          - Set its `.name` to "Award Criterion Number".
-    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">awa-cri-num</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
-    OCDS example: '{"withheldInformation":[{"field":"awa-cri-num","id":"awa-cri-num-LOT-0001","name":"Award Criterion Number"}]}'
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-195(BT-541)-Lot-Fixed
     parentNodeId: ND-LotAwardCriterionFixNumberUnpublish
     name: Unpublished Identifier
@@ -2642,10 +2633,14 @@
     Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        - Add a `withheldInformationItem` to the `withheldInformation` array, and:
+          - Set its `.id` to `[efbc:FieldIdentifierCode]-'fixed'-[ancestor::cac:ProcurementProjectLot/cbc:ID schemeName="Lot"]`.
+          - Set its `.field` to "awa-cri-num".
+          - Set its `.name` to "Award Criterion Number Fixed".
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efbc:ParameterCode listName="number-fixed"/><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">awa-cri-num</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
+    OCDS example: '{"withheldInformation":[{"field":"awa-cri-num","id":"awa-cri-num-fixed-LOT-0001","name":"Award Criterion Number Fixed"}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-195(BT-541)-Lot-Threshold
     parentNodeId: ND-LotAwardCriterionThresholdNumberUnpublish
     name: Unpublished Identifier
@@ -2658,10 +2653,14 @@
     Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        - Add a `withheldInformationItem` to the `withheldInformation` array, and:
+          - Set its `.id` to `[efbc:FieldIdentifierCode]-'threshold'-[ancestor::cac:ProcurementProjectLot/cbc:ID schemeName="Lot"]`.
+          - Set its `.field` to "awa-cri-num".
+          - Set its `.name` to "Award Criterion Number Threshold".
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efbc:ParameterCode listName="number-threshold"/><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">awa-cri-num</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
+    OCDS example: '{"withheldInformation":[{"field":"awa-cri-num","id":"awa-cri-num-threshold-LOT-0001","name":"Award Criterion Number Threshold"}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-195(BT-541)-Lot-Weight
     parentNodeId: ND-LotAwardCriterionWeightNumberUnpublish
     name: Unpublished Identifier
@@ -2674,18 +2673,13 @@
     Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-195(BT-541)-LotsGroup
     eForms guidance: |-
         - Add a `withheldInformationItem` to the `withheldInformation` array, and:
-          - Set its `.id` to `[efbc:FieldIdentifierCode]-[ancestor::cac:ProcurementProjectLot/cbc:ID schemeName="LotsGroup"]`.
+          - Set its `.id` to `[efbc:FieldIdentifierCode]-'weight'-[ancestor::cac:ProcurementProjectLot/cbc:ID schemeName="Lot"]`.
           - Set its `.field` to "awa-cri-num".
-          - Set its `.name` to "Award Criterion Number".
-    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="LotsGroup">GLO-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">awa-cri-num</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
-    OCDS example: '{"withheldInformation":[{"field":"awa-cri-num","id":"awa-cri-num-GLO-0001","name":"Award Criterion Number"}]}'
+          - Set its `.name` to "Award Criterion Number Weight".
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efbc:ParameterCode listName="number-weight"/><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">awa-cri-num</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
+    OCDS example: '{"withheldInformation":[{"field":"awa-cri-num","id":"awa-cri-num-weight-LOT-0001","name":"Award Criterion Number Weight"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-195(BT-541)-LotsGroup-Fixed
     parentNodeId: ND-LotsGroupAwardCriterionFixNumberUnpublish
@@ -2699,10 +2693,14 @@
     Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        - Add a `withheldInformationItem` to the `withheldInformation` array, and:
+          - Set its `.id` to `[efbc:FieldIdentifierCode]-'fixed'-[ancestor::cac:ProcurementProjectLot/cbc:ID schemeName="LotsGroup"]`.
+          - Set its `.field` to "awa-cri-num".
+          - Set its `.name` to "Award Criterion Number Fixed".
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="LotsGroup">GLO-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efbc:ParameterCode listName="number-fixed"/><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">awa-cri-num</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
+    OCDS example: '{"withheldInformation":[{"field":"awa-cri-num","id":"awa-cri-num-fixed-GLO-0001","name":"Award Criterion Number Fixed"}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-195(BT-541)-LotsGroup-Threshold
     parentNodeId: ND-LotsGroupAwardCriterionThresholdNumberUnpublish
     name: Unpublished Identifier
@@ -2715,10 +2713,14 @@
     Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        - Add a `withheldInformationItem` to the `withheldInformation` array, and:
+          - Set its `.id` to `[efbc:FieldIdentifierCode]-'threshold'-[ancestor::cac:ProcurementProjectLot/cbc:ID schemeName="LotsGroup"]`.
+          - Set its `.field` to "awa-cri-num".
+          - Set its `.name` to "Award Criterion Number Threshold".
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="LotsGroup">GLO-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efbc:ParameterCode listName="number-threshold"/><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">awa-cri-num</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
+    OCDS example: '{"withheldInformation":[{"field":"awa-cri-num","id":"awa-cri-num-threshold-GLO-0001","name":"Award Criterion Number Threshold"}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-195(BT-541)-LotsGroup-Weight
     parentNodeId: ND-LotsGroupAwardCriterionWeightNumberUnpublish
     name: Unpublished Identifier
@@ -2731,10 +2733,14 @@
     Description: Identifier of the field that shall not be immediately published. Only fields concerning the Result value and groups of fields concerning the Tender and Procedure Lot Result can be unpublished. In the case of the European Parliament and Council Directive 2014/25/EU, the award criteria, the procurement procedure, certain dates and in certain cases information about the nature and quantity of a service can be unpublished as well.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        - Add a `withheldInformationItem` to the `withheldInformation` array, and:
+          - Set its `.id` to `[efbc:FieldIdentifierCode]-'weight'-[ancestor::cac:ProcurementProjectLot/cbc:ID schemeName="LotsGroup"]`.
+          - Set its `.field` to "awa-cri-num".
+          - Set its `.name` to "Award Criterion Number Weight".
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="LotsGroup">GLO-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efbc:ParameterCode listName="number-weight"/><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">awa-cri-num</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
+    OCDS example: '{"withheldInformation":[{"field":"awa-cri-num","id":"awa-cri-num-weight-GLO-0001","name":"Award Criterion Number Weight"}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-195(BT-5421)-Lot
     parentNodeId: ND-LotAwardCriterionNumberWeightUnpublish
     name: Unpublished Identifier
@@ -3683,11 +3689,6 @@
     eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationale":"Information delayed publication because of ..."}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
--   id: BT-196(BT-541)-Lot
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]` and map to its `.rationale`.
-    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
-    OCDS example: '{"withheldInformation":[{"rationale":"Information delayed publication because of ..."}]}'
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-196(BT-541)-Lot-Fixed
     parentNodeId: ND-LotAwardCriterionFixNumberUnpublish
     name: Unpublished Justification Description
@@ -3699,10 +3700,10 @@
     Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-Lot-Fixed and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]` and map to its `.rationale`.
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
+    OCDS example: '{"withheldInformation":[{"rationale":"Information delayed publication because of ..."}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-196(BT-541)-Lot-Threshold
     parentNodeId: ND-LotAwardCriterionThresholdNumberUnpublish
     name: Unpublished Justification Description
@@ -3714,10 +3715,10 @@
     Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-Lot-Threshold and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]` and map to its `.rationale`.
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
+    OCDS example: '{"withheldInformation":[{"rationale":"Information delayed publication because of ..."}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-196(BT-541)-Lot-Weight
     parentNodeId: ND-LotAwardCriterionWeightNumberUnpublish
     name: Unpublished Justification Description
@@ -3729,12 +3730,7 @@
     Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-196(BT-541)-LotsGroup
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]` and map to its `.rationale`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-Lot-Weight and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]` and map to its `.rationale`.
     eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationale":"Information delayed publication because of ..."}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
@@ -3749,10 +3745,10 @@
     Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-LotsGroup-Fixed and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]` and map to its `.rationale`.
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
+    OCDS example: '{"withheldInformation":[{"rationale":"Information delayed publication because of ..."}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-196(BT-541)-LotsGroup-Threshold
     parentNodeId: ND-LotsGroupAwardCriterionThresholdNumberUnpublish
     name: Unpublished Justification Description
@@ -3764,10 +3760,10 @@
     Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-LotsGroup-Threshold and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]` and map to its `.rationale`.
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
+    OCDS example: '{"withheldInformation":[{"rationale":"Information delayed publication because of ..."}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-196(BT-541)-LotsGroup-Weight
     parentNodeId: ND-LotsGroupAwardCriterionWeightNumberUnpublish
     name: Unpublished Justification Description
@@ -3779,10 +3775,10 @@
     Description: The justification for not immediately publishing a field and for the choice of a later date at which it can be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-LotsGroup-Weight and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]` and map to its `.rationale`.
+    eForms example: <efac:FieldsPrivacy><efbc:ReasonDescription languageID="ENG">Information delayed publication because of ...</efbc:ReasonDescription></efac:FieldsPrivacy>
+    OCDS example: '{"withheldInformation":[{"rationale":"Information delayed publication because of ..."}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-196(BT-5421)-Lot
     parentNodeId: ND-LotAwardCriterionNumberWeightUnpublish
     name: Unpublished Justification Description
@@ -4617,11 +4613,6 @@
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
--   id: BT-197(BT-541)-Lot
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id`, and set `.scheme` to 'eu-non-publication-justification'. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
-    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
-    OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-197(BT-541)-Lot-Fixed
     parentNodeId: ND-LotAwardCriterionFixNumberUnpublish
     name: Unpublished Justification Code
@@ -4634,10 +4625,10 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-Lot-Fixed and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id`, and set `.scheme` to 'eu-non-publication-justification'. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
+    OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-197(BT-541)-Lot-Threshold
     parentNodeId: ND-LotAwardCriterionThresholdNumberUnpublish
     name: Unpublished Justification Code
@@ -4650,10 +4641,10 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-Lot-Threshold and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id`, and set `.scheme` to 'eu-non-publication-justification'. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
+    OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-197(BT-541)-Lot-Weight
     parentNodeId: ND-LotAwardCriterionWeightNumberUnpublish
     name: Unpublished Justification Code
@@ -4666,12 +4657,7 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-197(BT-541)-LotsGroup
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id`, and set `.scheme` to 'eu-non-publication-justification'. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-Lot-Weight and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id`, and set `.scheme` to 'eu-non-publication-justification'. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
     eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
@@ -4687,10 +4673,10 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-LotsGroup-Fixed and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id`, and set `.scheme` to 'eu-non-publication-justification'. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
+    OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-197(BT-541)-LotsGroup-Threshold
     parentNodeId: ND-LotsGroupAwardCriterionThresholdNumberUnpublish
     name: Unpublished Justification Code
@@ -4703,10 +4689,10 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-LotsGroup-Threshold and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id`, and set `.scheme` to 'eu-non-publication-justification'. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
+    OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-197(BT-541)-LotsGroup-Weight
     parentNodeId: ND-LotsGroupAwardCriterionWeightNumberUnpublish
     name: Unpublished Justification Code
@@ -4719,10 +4705,10 @@
     Description: The justification for not immediately publishing a field.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-LotsGroup-Weight and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. Add a `.rationaleClassification` object to it and map the value of the `cbc:ReasonCode` to `.id`, and set `.scheme` to 'eu-non-publication-justification'. Look up the code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/non-publication-justification), map its label to `.description` and its URI to `.uri`.
+    eForms example: <efac:FieldsPrivacy><cbc:ReasonCode listName="non-publication-justification">oth-int</cbc:ReasonCode></efac:FieldsPrivacy>
+    OCDS example: '{"withheldInformation":[{"rationaleClassification":{"scheme":"non-publication-justification","id":"oth-int","description":"Other public interest","uri":"http://publications.europa.eu/resource/authority/non-publication-justification/oth-int"}}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-197(BT-5421)-Lot
     parentNodeId: ND-LotAwardCriterionNumberWeightUnpublish
     name: Unpublished Justification Code
@@ -5586,11 +5572,6 @@
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
--   id: BT-198(BT-541)-Lot
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-Lot and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. [Convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
-    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
-    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-541)-Lot-Fixed
     parentNodeId: ND-LotAwardCriterionFixNumberUnpublish
     name: Unpublished Access Date
@@ -5603,10 +5584,10 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-Lot-Fixed and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. [Convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-541)-Lot-Threshold
     parentNodeId: ND-LotAwardCriterionThresholdNumberUnpublish
     name: Unpublished Access Date
@@ -5619,10 +5600,10 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-Lot-Threshold and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. [Convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-541)-Lot-Weight
     parentNodeId: ND-LotAwardCriterionWeightNumberUnpublish
     name: Unpublished Access Date
@@ -5635,12 +5616,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
--   id: BT-198(BT-541)-LotsGroup
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-LotsGroup and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. [Convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-Lot-Weight and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="Lot"]`. [Convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
@@ -5656,10 +5632,10 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-LotsGroup-Fixed and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. [Convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-541)-LotsGroup-Threshold
     parentNodeId: ND-LotsGroupAwardCriterionThresholdNumberUnpublish
     name: Unpublished Access Date
@@ -5672,10 +5648,10 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-LotsGroup-Threshold and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. [Convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-541)-LotsGroup-Weight
     parentNodeId: ND-LotsGroupAwardCriterionWeightNumberUnpublish
     name: Unpublished Access Date
@@ -5688,10 +5664,10 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-LotsGroup-Threshold and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. [Convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
+    OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-5421)-Lot
     parentNodeId: ND-LotAwardCriterionNumberWeightUnpublish
     name: Unpublished Access Date
@@ -9653,16 +9629,6 @@
     eForms example: <cac:SubordinateAwardingCriterion><cbc:Description languageID="ENG">Tenders with a quality score less than 65...</cbc:Description></cac:SubordinateAwardingCriterion>
     OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"description":"Tenders with a quality score less than 65..."}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
--   id: BT-541-Lot
-    eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-5421-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot and to the same `CriterionNumber` objects as created for BT-5421-Lot, BT-5422-Lot and BT-5423-Lot.
-
-        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
-        For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
-        For each `efac:AwardCriterionParameter`, add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the value of this field to the award criteron number's `.number`.
-    eForms example: <efac:AwardCriterionParameter><efbc:ParameterNumeric>50</efbc:ParameterNumeric></efac:AwardCriterionParameter>
-    OCDS example: '{"tender":{"lots":[{"awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
 -   id: BT-541-Lot-FixedNumber
     parentNodeId: ND-LotAwardFixedCriterionParameter
     name: Award Criterion Fixed Number
@@ -9676,8 +9642,13 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: ''
-    eForms example: ''
+    eForms guidance: |-
+        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-5421-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot and to the same `CriterionNumber` objects as created for BT-5422-Lot.
+
+        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
+        For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
+        Add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the value of this field to the award criteron number's `.number`.
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efbc:ParameterCode listName="number-fixed"/><efbc:ParameterNumeric>50</efbc:ParameterNumeric></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
 -   id: BT-541-Lot-ThresholdNumber
@@ -9693,8 +9664,13 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: ''
-    eForms example: ''
+    eForms guidance: |-
+        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-5421-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot and to the same `CriterionNumber` objects as created for BT-5423-Lot.
+
+        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
+        For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
+        Add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the value of this field to the award criteron number's `.number`.
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efbc:ParameterCode listName="number-threshold"/><efbc:ParameterNumeric>50</efbc:ParameterNumeric></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
 -   id: BT-541-Lot-WeightNumber
@@ -9710,19 +9686,14 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
--   id: BT-541-LotsGroup
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-541-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup and to the same `CriterionNumber` objects as created for BT-5421-LotsGroup, BT-5422-LotsGroup and BT-5423-LotsGroup.
+        This field maps to the same `AwardCriterion` objects as created for BT-539-Lot, BT-540-Lot, BT-5421-Lot, BT-5422-Lot, BT-5423-Lot and BT-734-Lot and to the same `CriterionNumber` objects as created for BT-5421-Lot.
 
-        [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
-        For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot group's `.awardCriteria.criteria` array.
-        For each `efac:AwardCriterionParameter`, add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the value of this field to the award criteron number's `.number`.
-    eForms example: <efac:AwardCriterionParameter><efbc:ParameterNumeric>50</efbc:ParameterNumeric></efac:AwardCriterionParameter>
-    OCDS example: '{"tender":{"lotGroups":[{"awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
+        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
+        For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
+        Add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the value of this field to the award criteron number's `.number`.
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efbc:ParameterCode listName="number-weight"/><efbc:ParameterNumeric>50</efbc:ParameterNumeric></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
 -   id: BT-541-LotsGroup-FixedNumber
     parentNodeId: ND-LotsGroupAwardFixedCriterionParameter
@@ -9737,8 +9708,13 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: ''
-    eForms example: ''
+    eForms guidance: |-
+        This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup and to the same `CriterionNumber` objects as created for BT-5422-LotsGroup.
+
+        [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
+        For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot gorup's `.awardCriteria.criteria` array.
+        Add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the value of this field to the award criteron number's `.number`.
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="LotsGroup">GLO-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efbc:ParameterCode listName="number-fixed"/><efbc:ParameterNumeric>50</efbc:ParameterNumeric></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lotGroups":[{"id":"GLO-0001","awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
 -   id: BT-541-LotsGroup-ThresholdNumber
@@ -9754,8 +9730,13 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: ''
-    eForms example: ''
+    eForms guidance: |-
+        This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup and to the same `CriterionNumber` objects as created for BT-5423-LotsGroup.
+
+        [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
+        For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot gorup's `.awardCriteria.criteria` array.
+        Add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the value of this field to the award criteron number's `.number`.
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="LotsGroup">GLO-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efbc:ParameterCode listName="number-threshold"/><efbc:ParameterNumeric>50</efbc:ParameterNumeric></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lotGroups":[{"id":"GLO-0001","awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
 -   id: BT-541-LotsGroup-WeightNumber
@@ -9771,8 +9752,13 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
         BG-541: Award Criterion Number
-    eForms guidance: ''
-    eForms example: ''
+    eForms guidance: |-
+        This field maps to the same `AwardCriterion` objects as created for BT-539-LotsGroup, BT-540-LotsGroup, BT-5421-LotsGroup, BT-5422-LotsGroup, BT-5423-LotsGroup and BT-734-LotsGroup and to the same `CriterionNumber` objects as created for BT-5421-LotsGroup.
+
+        [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
+        For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot gorup's `.awardCriteria.criteria` array.
+        Add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the value of this field to the award criteron number's `.number`.
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="LotsGroup">GLO-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efbc:ParameterCode listName="number-weight"/><efbc:ParameterNumeric>50</efbc:ParameterNumeric></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lotGroups":[{"id":"GLO-0001","awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
 -   id: BT-5421-Lot
@@ -11986,14 +11972,14 @@
     Business groups:
         BG-702: Selection Criteria
         BG-72: Selection Criteria Second Stage Invite Number
-    eForms guidance: | 
+    eForms guidance: |-
         If `ancestor::efac:SelectionCriteria/cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, these values are mapped to the same `SelectionCriterion` objects as created for BT-40-Lot, BT-747-Lot, BT-749-Lot, BT-750-Lot, BT-7531-Lot and BT-7532-Lot, and the same `SelectionCriterionNumber` objects as created for BT-7532-Lot.
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `efac:SelectionCriteria`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
         - Add or update a corresponding `SelectionCriterionNumber` object in the criterion's `.numbers`
-    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:SelectionCriteria><efac:CriterionParameter[efbc:ParameterCode/@listName='number-threshold']><efbc:ParameterNumeric>3</efbc:ParameterNumeric></efac:CriterionParameter></efac:SelectionCriteria></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:TenderingTerms></cac:ProcurementProjectLot>
-    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","selectionCriteria":{"criteria":[{"numbers":[{"number": 3}]}]}}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:SelectionCriteria><efac:CriterionParameter><efbc:ParameterCode listName="number-threshold"/><efbc:ParameterNumeric>3</efbc:ParameterNumeric></efac:CriterionParameter></efac:SelectionCriteria></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:TenderingTerms></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","selectionCriteria":{"criteria":[{"numbers":[{"number":3}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#selectionCriteriaSection
 -   id: BT-752-Lot-WeightNumber
     parentNodeId: ND-SecondStageWeightCriterionParameter
@@ -12007,14 +11993,14 @@
     Business groups:
         BG-702: Selection Criteria
         BG-72: Selection Criteria Second Stage Invite Number
-    eForms guidance: | 
+    eForms guidance: |-
         If `ancestor::efac:SelectionCriteria/cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, these values are mapped to the same `SelectionCriterion` objects as created for BT-40-Lot, BT-747-Lot, BT-749-Lot, BT-750-Lot, BT-7531-Lot and BT-7532-Lot, and the same `SelectionCriterionNumber` objects as created for BT-7531-Lot.
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `efac:SelectionCriteria`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
         - Add or update a corresponding `SelectionCriterionNumber` object in the criterion's `.numbers`
-    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:SelectionCriteria><efac:CriterionParameter[efbc:ParameterCode/@listName='number-weight']><efbc:ParameterNumeric>3</efbc:ParameterNumeric></efac:CriterionParameter></efac:SelectionCriteria></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:TenderingTerms></cac:ProcurementProjectLot>
-    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","selectionCriteria":{"criteria":[{"numbers":[{"number": 3}]}]}}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:SelectionCriteria><efac:CriterionParameter><efbc:ParameterCode listName="number-weight"/><efbc:ParameterNumeric>3</efbc:ParameterNumeric></efac:CriterionParameter></efac:SelectionCriteria></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:TenderingTerms></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","selectionCriteria":{"criteria":[{"numbers":[{"number":3}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#selectionCriteriaSection
 -   id: BT-7531-Lot
     parentNodeId: ND-SecondStageWeightCriterionParameter
@@ -13289,7 +13275,7 @@
     repeatable: false
     mandatory: false
     pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|(\d{1,8})-(19|20)\d\d)$
-    eForms guidance: '[Reference a previous publication](operations.md#reference-a-previous-publication). If OPP-090-Procedure is repeated, set the relatedProcess''s `id` incrementally.'
+    eForms guidance: '[Reference a previous publication](operations.md#reference-a-previous-publication).'
     eForms example: <cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID></cac:NoticeDocumentReference>
     OCDS example: '{"relatedProcesses":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"123e4567-e89b-12d3-a456-426614174000-06"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#previousNoticeSection
@@ -13803,7 +13789,7 @@
     repeatable: false
     mandatory: false
     eForms guidance: Discard. Each tenderer in the tendering party is covered by OPT-310-Tenderer.
-    eForms example: <efac:TenderingParty><cbc:Name>Party of Tenderers</cbc:ID></efac:TenderingParty>
+    eForms example: <efac:TenderingParty><cbc:Name>Party of Tenderers</cbc:Name></efac:TenderingParty>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#tenderingPartySection
 -   id: OPT-300-Contract-Signatory
