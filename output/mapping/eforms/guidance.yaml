@@ -11724,9 +11724,9 @@
         [Get the organization for the buyer](operations.md#get-the-organization-for-the-buyer), and add a `Classification` object to its `.details.classifications` array.
 
         - Map the value of this field to the classification's `.id`.
-        - Set its `.description` according to the [buyer contracting type mapping table](codelists/buyer-contracting-type) and set its `.scheme` to 'buyer-contracting-type'.
+        - Set its `.description` according to the [buyer contracting type mapping table](codelists/buyer-contracting-type) and set its `.scheme` to 'eu-buyer-contracting-type'.
     eForms example: <cac:ContractingPartyType><cbc:PartyTypeCode listName="buyer-contracting-type">cont-ent</cbc:PartyTypeCode></cac:ContractingPartyType>
-    OCDS example: '{"parties":[{"id":"ORG-0001","details":{"classifications":[{"scheme":"buyer-contracting-type","id":"cont-ent","description":"Contracting Entity"}]}}]}'
+    OCDS example: '{"parties":[{"id":"ORG-0001","details":{"classifications":[{"scheme":"eu-buyer-contracting-type","id":"cont-ent","description":"Contracting Entity"}]}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_buyer_information
 -   id: BT-743-Lot
     parentNodeId: ND-LotEInvoicing
