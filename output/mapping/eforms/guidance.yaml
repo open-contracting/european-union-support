@@ -194,7 +194,7 @@
 
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
 
-        If the code is "none" discard. Otherwise, set the lot's `.hasSustainability` to "true".
+        If the code is "none" discard. Otherwise, set the lot's `.hasSustainability` to `true`.
 
         For each `cac:ProcurementAdditionalType`, add or update the corresponding `Sustainability` object to the lot's `.sustainability` array.
 
@@ -12066,9 +12066,9 @@
     Description: The use of accessibility criteria for persons with disabilities in the technical specifications.
     Business groups:
         BG-713: Strategic Procurement
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot). If "inc", set the lot''s `.hasAccessibilityCriteria` to "true", otherwise, set to "false". If "n-inc", set the lot''s `.noAccessibilityCriteriaRationale` to "Procurement is not intended for use by natural persons".'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot). If "inc", set the lot''s `.hasAccessibilityCriteria` to `true`, otherwise, set to `false`. If "n-inc", set the lot''s `.noAccessibilityCriteriaRationale` to "Procurement is not intended for use by natural persons".'
     eForms example: <cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="accessibility">n-inc-just</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType>
-    OCDS example: '{"tender":{"lots":[{"hasAccessibilityCriteria":"false"}]}}'
+    OCDS example: '{"tender":{"lots":[{"hasAccessibilityCriteria":false}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#accessibilitySection
 -   id: BT-755-Lot
     parentNodeId: ND-AccessibilityJustification
@@ -12556,7 +12556,7 @@
     Business groups:
         BG-713: Strategic Procurement
     eForms guidance: |-
-        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and set the lot''s `.hasSustainability` to "true".
+        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and set the lot''s `.hasSustainability` to `true`.
 
         For each `cac:ProcurementAdditionalType` add a corresponding `.sustainability` object to the lot''s `.sustainability` array.
 
@@ -12577,7 +12577,7 @@
     Business groups:
         BG-713: Strategic Procurement
     eForms guidance: |-
-        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and set the lot's `.hasSustainability` to "true".
+        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and set the lot's `.hasSustainability` to `true`.
 
         For each `cac:ProcurementAdditionalType` add a corresponding `.sustainability` object to the lot's `.sustainability` array.
 
@@ -12599,7 +12599,7 @@
     Business groups:
         BG-713: Strategic Procurement
     eForms guidance: |-
-        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and set the lot's `.hasSustainability` to "true".
+        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and set the lot's `.hasSustainability` to `true`.
 
         For each `cac:ProcurementAdditionalType` add a corresponding `.sustainability` object to the lot's `.sustainability` array.
 
@@ -12760,7 +12760,7 @@
     eForms guidance: |-
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
 
-        If "none" discard, otherwise, set the lot's `.hasSustainability` to "true".
+        If "none" discard, otherwise, set the lot's `.hasSustainability` to `true`.
 
         For each `cac:ProcurementAdditionalType` add a corresponding `.sustainability` object to the lot's `.sustainability` array.
 
