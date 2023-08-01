@@ -2122,9 +2122,9 @@
     Description: The justification for electronic submission of tenders, requests to participate, or expressions of interest not being possible.
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot). Look up the code''s label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/communication-justification) and map it to the lot''s `.submissionTerms.nonElectronicRationale`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot). Look up the code''s label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/communication-justification) and map it to the lot''s `.submissionTerms.nonElectronicSubmissionRationale`.'
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cac:ProcessJustification><cbc:ProcessReasonCode listName="no-esubmission-justification">phy-mod</cbc:ProcessReasonCode></cac:ProcessJustification></cac:TenderingProcess></cac:ProcurementProjectLot>
-    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","submissionTerms":{"nonElectronicRationale":"Inclusion of a physical model"}}]}}'
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","submissionTerms":{"nonElectronicSubmissionRationale":"Inclusion of a physical model"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#nonelectronicSection
 -   id: BT-191-Tender
     parentNodeId: ND-LotTenderOriginCountry
