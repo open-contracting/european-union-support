@@ -14289,9 +14289,9 @@
     eForms guidance: |-
         - [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization-technical-identifier-reference), and add 'tenderer' to its `.roles` array.
         - [Get the bid for the LotTender](operations.md#get-the-bid-for-a-lottender), and get the `subcontracts` object whose `subcontractors.id` is equal to the value of `ancestor: efac:SubContractor/cbc:ID`.
-        - Add an `OrganizationReference` object to the subcontract's `.tenderers` array, and set its `.id` to the value of this field.
+        - Add an `OrganizationReference` object to the subcontract's `.mainContractors` array, and set its `.id` to the value of this field.
     eForms example: <efac:NoticeResult> <efac:LotTender> <cbc:ID schemeName="tender">TEN-0001</cbc:ID> </efac:LotTender> <efac:TenderingParty> <efac:SubContractor> <cbc:ID schemeName="organization">ORG-0012</cbc:ID> <efac:MainContractor> <cbc:ID schemeName="organization">ORG-0005</cbc:ID> </efac:MainContractor> </efac:SubContractor> </efac:TenderingParty> </efac:NoticeResult> <efac:Organizations> <efac:Organization> <efac:Company> <cac:PartyIdentification> <cbc:ID schemeName="organization">ORG-0005</cbc:ID> </cac:PartyIdentification> </efac:Company> </efac:Organization> </efac:Organizations>
-    OCDS example: '{"parties":[{"id":"ORG-0005","roles":["tenderer"]}],"bids":{"details":[{"subcontracting":{"subcontracts":[{"id":"1","subcontractor":{"id":"ORG-0012"},"tenderers":[{"id":"ORG-0005","name":"Tendering Company Ltd"}]}]}}]}}'
+    OCDS example: '{"parties":[{"id":"ORG-0005","roles":["tenderer"]}],"bids":{"details":[{"subcontracting":{"subcontracts":[{"id":"1","subcontractor":{"id":"ORG-0012"},"mainContractors":[{"id":"ORG-0005","name":"Tendering Company Ltd"}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#tenderingPartySection
 -   id: OPT-301-Tenderer-SubCont
     parentNodeId: ND-SubContractor
