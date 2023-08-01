@@ -1906,7 +1906,7 @@
         - Set its `.paidBy` to 'government'.
         - Set its `.title` to the [translation](operations.md#get-a-translation) of 'The estimated revenue coming from the buyer who granted the concession (e.g. prizes and payments).'.
     eForms example: <efac:NoticeResult><efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID><efac:ConcessionRevenue><efbc:RevenueBuyerAmount currencyID="EUR">350</efbc:RevenueBuyerAmount></efac:ConcessionRevenue></efac:LotTender><efac:SettledContract><cbc:ID schemeName="contract">CON-0001</cbc:ID><efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID></efac:LotTender></efac:SettledContract><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:SettledContract><cbc:ID schemeName="contract">CON-0001</cbc:ID></efac:SettledContract></efac:LotResult></efac:NoticeResult>
-    OCDS example: '{"contracts":[{"id":"CON-0001","implementation":{"charges":[{"id":"government","title":"The estimated revenue coming from the buyer who granted the concession (e.g. prizes and payments).","estimatedValue":{"amount":350,"currency":"EUR"},"paidBy":"government"}],"awardID":"RES-0001"}}]}'
+    OCDS example: '{"contracts":[{"id":"CON-0001","awardID":"RES-0001","implementation":{"charges":[{"id":"government","title":"The estimated revenue coming from the buyer who granted the concession (e.g. prizes and payments).","estimatedValue":{"amount":350,"currency":"EUR"},"paidBy":"government"}]}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: BT-161-NoticeResult
     parentNodeId: ND-NoticeResult
