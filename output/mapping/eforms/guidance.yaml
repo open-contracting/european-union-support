@@ -13243,9 +13243,9 @@
     type: indicator
     repeatable: false
     mandatory: false
-    eForms guidance: If the value is "false" then discard. Otherwise [get the organization for the company](operations.md#get-the-organization-for-a-company), and add 'acquiringCentralPurchasingBody' to the organization's `.roles` array.
+    eForms guidance: If the value is "false" then discard. Otherwise [get the organization for the company](operations.md#get-the-organization-for-a-company), and add 'wholesaleBuyer' to the organization's `.roles` array.
     eForms example: <efac:Organization><efbc:AcquiringCPBIndicator>true</efbc:AcquiringCPBIndicator></efac:Organization>
-    OCDS example: '{"parties":[{"id":"ORG-0001","roles":["acquiringCentralPurchasingBody"]}]}'
+    OCDS example: '{"parties":[{"id":"ORG-0001","roles":["wholesaleBuyer"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#buyerSection
 -   id: OPP-070-notice
     parentNodeId: ND-RootExtension
