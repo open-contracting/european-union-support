@@ -536,7 +536,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/PROCEDURE/*[matches(name(),'CONTRACT_COVERED_GPA')]
     TED guidance:
     - Add 'GPA' to the `tender.coveredBy` array
-    eForms guidance: If "true", [get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and add "GPA" to its `.coveredBy` array. Otherwise, discard.
+    eForms guidance: If "true", [get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and add 'GPA' to its `.coveredBy` array. Otherwise, discard.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cbc:GovernmentAgreementConstraintIndicator>true</cbc:GovernmentAgreementConstraintIndicator></cac:TenderingProcess></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","coveredBy":["GPA"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#GPASection
@@ -554,7 +554,7 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/F01_2014/PROCEDURE/*[matches(name(),'CONTRACT_COVERED_GPA')]
     - TED_EXPORT/FORM_SECTION/F04_2014/PROCEDURE/*[matches(name(),'CONTRACT_COVERED_GPA')]
-    eForms guidance: If "true", add "GPA" to the `tender.coveredBy` array. Otherwise, do nothing.
+    eForms guidance: If "true", add 'GPA' to the `tender.coveredBy` array. Otherwise, do nothing.
     eForms example: <cbc:GovernmentAgreementConstraintIndicator>true</cbc:GovernmentAgreementConstraintIndicator>
     OCDS example: '{"tender":{"coveredBy":["GPA"]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#GPASection
@@ -2635,7 +2635,7 @@
         BG-8: Not Immediately Published
     eForms guidance: |-
         - Add a `withheldInformationItem` to the `withheldInformation` array, and:
-          - Set its `.id` to `[efbc:FieldIdentifierCode]-'fixed'-[ancestor::cac:ProcurementProjectLot/cbc:ID schemeName="Lot"]`.
+          - Set its `.id` to `[efbc:FieldIdentifierCode]-fixed-[ancestor::cac:ProcurementProjectLot/cbc:ID schemeName="Lot"]`.
           - Set its `.field` to "awa-cri-num".
           - Set its `.name` to "Award Criterion Number Fixed".
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efbc:ParameterCode listName="number-fixed"/><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">awa-cri-num</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
@@ -2655,7 +2655,7 @@
         BG-8: Not Immediately Published
     eForms guidance: |-
         - Add a `withheldInformationItem` to the `withheldInformation` array, and:
-          - Set its `.id` to `[efbc:FieldIdentifierCode]-'threshold'-[ancestor::cac:ProcurementProjectLot/cbc:ID schemeName="Lot"]`.
+          - Set its `.id` to `[efbc:FieldIdentifierCode]-threshold-[ancestor::cac:ProcurementProjectLot/cbc:ID schemeName="Lot"]`.
           - Set its `.field` to "awa-cri-num".
           - Set its `.name` to "Award Criterion Number Threshold".
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efbc:ParameterCode listName="number-threshold"/><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">awa-cri-num</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
@@ -2675,7 +2675,7 @@
         BG-8: Not Immediately Published
     eForms guidance: |-
         - Add a `withheldInformationItem` to the `withheldInformation` array, and:
-          - Set its `.id` to `[efbc:FieldIdentifierCode]-'weight'-[ancestor::cac:ProcurementProjectLot/cbc:ID schemeName="Lot"]`.
+          - Set its `.id` to `[efbc:FieldIdentifierCode]-weight-[ancestor::cac:ProcurementProjectLot/cbc:ID schemeName="Lot"]`.
           - Set its `.field` to "awa-cri-num".
           - Set its `.name` to "Award Criterion Number Weight".
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efbc:ParameterCode listName="number-weight"/><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">awa-cri-num</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
@@ -2695,7 +2695,7 @@
         BG-8: Not Immediately Published
     eForms guidance: |-
         - Add a `withheldInformationItem` to the `withheldInformation` array, and:
-          - Set its `.id` to `[efbc:FieldIdentifierCode]-'fixed'-[ancestor::cac:ProcurementProjectLot/cbc:ID schemeName="LotsGroup"]`.
+          - Set its `.id` to `[efbc:FieldIdentifierCode]-fixed-[ancestor::cac:ProcurementProjectLot/cbc:ID schemeName="LotsGroup"]`.
           - Set its `.field` to "awa-cri-num".
           - Set its `.name` to "Award Criterion Number Fixed".
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="LotsGroup">GLO-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efbc:ParameterCode listName="number-fixed"/><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">awa-cri-num</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
@@ -2715,7 +2715,7 @@
         BG-8: Not Immediately Published
     eForms guidance: |-
         - Add a `withheldInformationItem` to the `withheldInformation` array, and:
-          - Set its `.id` to `[efbc:FieldIdentifierCode]-'threshold'-[ancestor::cac:ProcurementProjectLot/cbc:ID schemeName="LotsGroup"]`.
+          - Set its `.id` to `[efbc:FieldIdentifierCode]-threshold-[ancestor::cac:ProcurementProjectLot/cbc:ID schemeName="LotsGroup"]`.
           - Set its `.field` to "awa-cri-num".
           - Set its `.name` to "Award Criterion Number Threshold".
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="LotsGroup">GLO-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efbc:ParameterCode listName="number-threshold"/><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">awa-cri-num</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
@@ -2735,7 +2735,7 @@
         BG-8: Not Immediately Published
     eForms guidance: |-
         - Add a `withheldInformationItem` to the `withheldInformation` array, and:
-          - Set its `.id` to `[efbc:FieldIdentifierCode]-'weight'-[ancestor::cac:ProcurementProjectLot/cbc:ID schemeName="LotsGroup"]`.
+          - Set its `.id` to `[efbc:FieldIdentifierCode]-weight-[ancestor::cac:ProcurementProjectLot/cbc:ID schemeName="LotsGroup"]`.
           - Set its `.field` to "awa-cri-num".
           - Set its `.name` to "Award Criterion Number Weight".
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="LotsGroup">GLO-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efbc:ParameterCode listName="number-weight"/><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">awa-cri-num</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
@@ -10526,7 +10526,7 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/SUBCONTRACTING/SUBCONTRACT_AWARD_PART
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/SUBCONTRACTING/SUBCONTRACT_SHARE
     eForms guidance: |-
-        If different from 'none':
+        If different from "none":
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/subcontracting-obligation) and map it to the lot's `.subcontractingTerms.description`.
@@ -12346,7 +12346,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/PROCEDURE/FRAMEWORK
     TED guidance:
     - Set `tender.techniques.hasFrameworkAgreement` to `true`
-    eForms guidance: If different from 'none', [get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and set its `.techniques.hasFrameworkAgreement` to `true`. Map the code according to the [framework agreement method mapping table](codelists/framework-agreement-method) to the lot's `.techniques.frameworkAgreement.method`. Otherwise discard.
+    eForms guidance: If different from "none", [get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and set its `.techniques.hasFrameworkAgreement` to `true`. Map the code according to the [framework agreement method mapping table](codelists/framework-agreement-method) to the lot's `.techniques.frameworkAgreement.method`. Otherwise discard.
     eForms example: <cac:ContractingSystem><cbc:ContractingSystemTypeCode listName="framework-agreement">fa-wo-rc</cbc:ContractingSystemTypeCode></cac:ContractingSystem>
     OCDS example: '{"tender":{"lots":[{"techniques":{"hasFrameworkAgreement":true,"frameworkAgreement":{"method":"withoutReopeningCompetition"}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#frameworkAgreementSection
@@ -12364,7 +12364,7 @@
         BG-706: Techniques
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/*[matches(name(),'FRAMEWORK_AGREEMENT')]
-    eForms guidance: If different from 'none', set `tender.techniques.hasFrameworkAgreement` to `true`. Map the code according to the [framework agreement method mapping table](codelists/framework-agreement-method) to `tender.techniques.frameworkAgreement.method`. Otherwise discard.
+    eForms guidance: If different from "none", set `tender.techniques.hasFrameworkAgreement` to `true`. Map the code according to the [framework agreement method mapping table](codelists/framework-agreement-method) to `tender.techniques.frameworkAgreement.method`. Otherwise discard.
     eForms example: <cac:ContractingSystem><cbc:ContractingSystemTypeCode listName="framework-agreement">fa-wo-rc</cbc:ContractingSystemTypeCode></cac:ContractingSystem>
     OCDS example: '{"tender":{"techniques":{"hasFrameworkAgreement":true,"frameworkAgreement":{"method":"withoutReopeningCompetition"}}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#frameworkAgreementSection
@@ -12389,7 +12389,7 @@
     TED guidance:
     - Set `tender.techniques.dynamicPurchasingSystem.type` to 'open'
     - Set `tender.techniques.hasDynamicPurchasingSystem` to `true`
-    eForms guidance: If different from 'none', [get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and set its `.techniques.hasDynamicPurchasingSystem` to `true`. Map the code according to the [DPS usage mapping table](codelists/dps-usage) to the lot's `.techniques.dynamicPurchasingSystem.type`. Otherwise discard.
+    eForms guidance: If different from "none", [get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and set its `.techniques.hasDynamicPurchasingSystem` to `true`. Map the code according to the [DPS usage mapping table](codelists/dps-usage) to the lot's `.techniques.dynamicPurchasingSystem.type`. Otherwise discard.
     eForms example: <cac:ContractingSystem><cbc:ContractingSystemTypeCode listName="dps-usage">dps-nlist</cbc:ContractingSystemTypeCode></cac:ContractingSystem>
     OCDS example: '{"tender":{"lots":[{"techniques":{"hasDynamicPurchasingSystem":true,"dynamicPurchasingSystem":{"type":"closed"}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#DPSSection
@@ -12405,7 +12405,7 @@
     Description: Whether a dynamic purchasing system is involved and, in case of central purchasing bodies, whether it may be used by buyers not listed in this notice.
     Business groups:
         BG-706: Techniques
-    eForms guidance: If different from 'none', set `tender.techniques.hasDynamicPurchasingSystem` to `true`. Map the code according to the [DPS usage mapping table](codelists/dps-usage) to `tender.techniques.dynamicPurchasingSystem.type`. Otherwise discard.
+    eForms guidance: If different from "none", set `tender.techniques.hasDynamicPurchasingSystem` to `true`. Map the code according to the [DPS usage mapping table](codelists/dps-usage) to `tender.techniques.dynamicPurchasingSystem.type`. Otherwise discard.
     eForms example: <cac:ContractingSystem><cbc:ContractingSystemTypeCode listName="dps-usage">dps-nlist</cbc:ContractingSystemTypeCode></cac:ContractingSystem>
     OCDS example: '{"tender":{"techniques":{"hasDynamicPurchasingSystem":true,"dynamicPurchasingSystem":{"type":"closed"}}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#DPSSection
