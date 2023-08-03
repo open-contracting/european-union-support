@@ -7686,9 +7686,9 @@
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/NATIONALID
     - Map to the party's `.identifier.id`, and [set `.identifier.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids)
     - Map to the party's `.identifier.id`, and set the party's `.identifier.scheme`
-    eForms guidance: '[Get the organization for the company](operations.md#get-the-organization-for-a-company), map to the organization''s `.identifier.id`, and [set `.identifier.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids).'
+    eForms guidance: '[Get the organization for the company](operations.md#get-the-organization-for-a-company). Add an `Identifier` object to the organization''s `.additionalIdentifiers` array, map to the identifier''s `.id`, and [set `.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids).'
     eForms example: <efac:Organization><efac:Company><cac:PartyLegalEntity><cbc:CompanyID>09506232</cbc:CompanyID></cac:PartyLegalEntity></efac:Company></efac:Organization>
-    OCDS example: '{"parties":[{"identifier":{"id":"09506232","scheme":"GB-COH"}}]}'
+    OCDS example: '{"parties":[{"additionalIdentifiers":[{"id":"09506232","scheme":"GB-COH"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: BT-5010-Lot
     parentNodeId: ND-Funding
@@ -10713,9 +10713,9 @@
     Business groups:
         BG-703: Organisation
         BG-4: Winner
-    eForms guidance: '[Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map to the person''s `.nationality`.'
+    eForms guidance: '[Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and add to the person''s `.nationalities` array.'
     eForms example: <efac:UltimateBeneficialOwner><efac:Nationality><cbc:NationalityID>DEU</cbc:NationalityID></efac:Nationality></efac:UltimateBeneficialOwner>
-    OCDS example: '{"parties":[{"beneficialOwners":[{"nationality":"DE"}]}]}'
+    OCDS example: '{"parties":[{"beneficialOwners":[{"nationalities":["DE"]}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#ultimateBeneficialOwnerSection
 -   id: BT-707-Lot
     parentNodeId: ND-LotProcurementDocument
