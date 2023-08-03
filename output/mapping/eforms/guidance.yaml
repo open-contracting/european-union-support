@@ -6435,7 +6435,7 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/TYPE_CONTRACT_DEFENCE/TYPE_CONTRACT/@VALUE
     - TED_EXPORT/FORM_SECTION/F21_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot). If the vaLue of this field equals "works" or "services", map it to the lot''s `.mainProcurementCategory`. If it equals "supplies", set the lot''s `.mainProcurementCategory` to ''goods''. If it equals "combined", add to the lot''s `.additionalProcurementCategories` array.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot). If the value of this field equals "works" or "services", map it to the lot''s `.mainProcurementCategory`. If it equals "supplies", set the lot''s `.mainProcurementCategory` to ''goods''.'
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cbc:ProcurementTypeCode listName="contract-nature">works</cbc:ProcurementTypeCode></cac:ProcurementProject></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","mainProcurementCategory":"works"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#natureSection
@@ -6451,7 +6451,7 @@
     Description: The main nature (e.g. works) of what is being bought. In case of mixed procurement (e.g. a procedure for both works and services), the main nature may be, for example, the one with the highest estimated value. This information shall be given for the whole procedure.
     Business groups:
         BG-2: Purpose
-    eForms guidance: If the value of this field equals "works" or "services", map to `tender.mainProcurementCategory`. If it equals "supplies", set `tender.mainProcurementCategory` to 'goods'. If it equals "combined", add to the `tender.additionalProcurementCategories` array.
+    eForms guidance: If the value of this field equals "works" or "services", map to `tender.mainProcurementCategory`. If it equals "supplies", set `tender.mainProcurementCategory` to 'goods'.
     eForms example: <cbc:ProcurementTypeCode listName="contract-nature">works</cbc:ProcurementTypeCode>
     OCDS example: '{"tender":{"mainProcurementCategory":"works"}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#natureSection
@@ -6484,7 +6484,7 @@
     - TED_EXPORT/FORM_SECTION/F23_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
     - TED_EXPORT/FORM_SECTION/F24_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/TYPE_CONTRACT/@CTYPE
-    eForms guidance: If the value of this field equals "works" or "services", map to `tender.mainProcurementCategory`. If it equals "supplies", set `tender.mainProcurementCategory` to 'goods'. If it equals "combined", add to the `tender.additionalProcurementCategories` array.
+    eForms guidance: If the value of this field equals "works" or "services", map to `tender.mainProcurementCategory`. If it equals "supplies", set `tender.mainProcurementCategory` to 'goods'.
     eForms example: <cbc:ProcurementTypeCode listName="contract-nature">works</cbc:ProcurementTypeCode>
     OCDS example: '{"tender":{"mainProcurementCategory":"works"}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#natureSection
