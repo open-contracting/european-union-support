@@ -11264,7 +11264,7 @@
         [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array and map to the address's `.description`, concatenating to the existing entry in this field if necessary.
     eForms example: <cac:RealizedLocation><cbc:Description languageID="ENG">Further realizations ...</cbc:Description></cac:RealizedLocation>
-    OCDS example: '{"tender":{"items":[{"deliveryLocation":{"description":"Further realizations..."}}]}}'
+    OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"description":"Further realizations..."}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#performancePlaceSection
 -   id: BT-728-Part
     parentNodeId: ND-PartPlacePerformance
@@ -11281,7 +11281,7 @@
         This field maps to the same `Address` objects as created for BT-727-Part, BT-5121-Part, BT-5131-Part, BT-5071-Part, BT-5101-Part and BT-5141-Part.
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to the address's `.description`, concatenating to the existing entry in this field if necessary.
     eForms example: <cac:RealizedLocation><cbc:Description languageID="ENG">Further realizations ...</cbc:Description></cac:RealizedLocation>
-    OCDS example: '{"tender":{"deliveryLocations":[{"description":"Further realizations ..."}]}}'
+    OCDS example: '{"tender":{"deliveryAddresses":[{"description":"Further realizations ..."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#performancePlaceSection
 -   id: BT-728-Procedure
     parentNodeId: ND-ProcedurePlacePerformanceAdditionalInformation
@@ -11298,7 +11298,7 @@
         This field maps to the same `Address` objects as created for BT-727-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, BT-5101-Part and BT-5141-Part.
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array and map to the address's `.description`, concatenating to the existing entry in this field if necessary.
     eForms example: <cac:RealizedLocation><cbc:Description languageID="ENG">Further realizations ...</cbc:Description></cac:RealizedLocation>
-    OCDS example: '{"tender":{"deliveryLocations":[{"description":"Further realizations ..."}]}}'
+    OCDS example: '{"tender":{"deliveryAddresses":[{"description":"Further realizations ..."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#performancePlaceSection
 -   id: BT-729-Lot
     parentNodeId: ND-SubcontractingObligation
