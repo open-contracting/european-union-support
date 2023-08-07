@@ -7687,8 +7687,8 @@
     - Map to the party's `.identifier.id`, and [set `.identifier.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids)
     - Map to the party's `.identifier.id`, and set the party's `.identifier.scheme`
     eForms guidance: '[Get the organization for the company](operations.md#get-the-organization-for-a-company). Add an `Identifier` object to the organization''s `.additionalIdentifiers` array, map to the identifier''s `.id`, and [set `.scheme`](https://standard.open-contracting.org/1.1/en/schema/identifiers/#organization-ids).'
-    eForms example: <efac:Organization><efac:Company><cac:PartyLegalEntity><cbc:CompanyID>09506232</cbc:CompanyID></cac:PartyLegalEntity></efac:Company></efac:Organization>
-    OCDS example: '{"parties":[{"additionalIdentifiers":[{"id":"09506232","scheme":"GB-COH"}]}]}'
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification><cac:PartyLegalEntity><cbc:CompanyID>09506232</cbc:CompanyID></cac:PartyLegalEntity></efac:Company></efac:Organization></efac:Organizations>
+    OCDS example: '{"parties":[{"id":"ORG-0001","additionalIdentifiers":[{"id":"09506232","scheme":"GB-COH"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: BT-5010-Lot
     parentNodeId: ND-Funding
@@ -7714,8 +7714,8 @@
           - Add the lot's identifier to `.relatedLots`.
           - Set its `.financingParty.name` to 'European Union'.
           - Set its `.financingParty.id` to the party's `.id`.
-    eForms example: <efac:Funding><efbc:FinancingIdentifier>CON_PRO-123/ABC</efbc:FinancingIdentifier></efac:Funding>
-    OCDS example: '{"parties":[{"id":"1","name":"European Union","roles":["funder"]}],"planning":{"budget":{"finance":[{"id":"CON_PRO-123/ABC","financingParty":{"id":"1","name":"European Union"}}]}}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:Funding><efbc:FinancingIdentifier>CON_PRO-123/ABC</efbc:FinancingIdentifier></efac:Funding></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:TenderingTerms></cac:ProcurementProjectLot>
+    OCDS example: '{"parties":[{"id":"1","name":"European Union","roles":["funder"]}],"planning":{"budget":{"finance":[{"id":"CON_PRO-123/ABC","financingParty":{"id":"1","name":"European Union"},"relatedLots":["LOT-0001"]}]}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#EUFundsSection
 -   id: BT-5011-Contract
     parentNodeId: ND-ContractEUFunds
@@ -7747,8 +7747,8 @@
         - For each `efac:Funding`, add or update the corresponding `Finance` object in the contract's `.finance` array and map the value of this field to its `.id`.
           - Set its `.financingParty.name` to 'European Union'.
           - Set its `.financingParty.id` to the party's `.id`.
-    eForms example: <efac:Funding><efbc:FinancingIdentifier>2021/1234</efbc:FinancingIdentifier></efac:Funding>
-    OCDS example: '{"parties":[{"id":"1","name":"European Union","roles":["funder"]}],"contracts":[{"finance":[{"id":"2021/1234","financingParty":{"id":"1","name":"European Union"}}]}]}'
+    eForms example: <efac:NoticeResult><efac:SettledContract><cbc:ID schemeName="contract">CON-0001</cbc:ID><efac:Funding><efbc:FinancingIdentifier>2021/1234</efbc:FinancingIdentifier></efac:Funding></efac:SettledContract><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:SettledContract><cbc:ID schemeName="contract">CON-0001</cbc:ID></efac:SettledContract></efac:LotResult></efac:NoticeResult>
+    OCDS example: '{"parties":[{"id":"1","name":"European Union","roles":["funder"]}],"contracts":[{"id":"CON-0001","finance":[{"id":"2021/1234","financingParty":{"id":"1","name":"European Union"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#settledContractSection
 -   id: BT-502-Organization-Company
     parentNodeId: ND-CompanyContact
@@ -7802,8 +7802,8 @@
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/E_MAIL
     - Map to the party's `.contactPoint.name`
     eForms guidance: '[Get the organization for the company](operations.md#get-the-organization-for-a-company) and map to the organization''s `.contactPoint.name`'
-    eForms example: <cac:Contact><cbc:Name>Press Department</cbc:Name></cac:Contact>
-    OCDS example: '{"parties":[{"contactPoint":{"name":"Press Department"}}]}'
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification><cac:Contact><cbc:Name>Press Department</cbc:Name></cac:Contact></efac:Company></efac:Organization></efac:Organizations>
+    OCDS example: '{"parties":[{"id":"ORG-0001","contactPoint":{"name":"Press Department"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: BT-502-Organization-TouchPoint
     parentNodeId: ND-TouchpointContact
@@ -7817,8 +7817,8 @@
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the organization for the touchpoint](operations.md#get-the-organization-for-a-touchpoint) and map to the organization''s `.contactPoint.name`.'
-    eForms example: <cac:Contact><cbc:Name>Head of Legal Department</cbc:Name></cac:Contact>
-    OCDS example: '{"parties":[{"contactPoint":{"name":"Head of Legal Department"}}]}'
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyLegalEntity><cbc:CompanyID>998298</cbc:CompanyID></cac:PartyLegalEntity></efac:Company><efac:TouchPoint><cac:PartyIdentification><cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID></cac:PartyIdentification><cac:Contact><cbc:Name>Head of Legal Department</cbc:Name></cac:Contact></efac:TouchPoint></efac:Organization></efac:Organizations>
+    OCDS example: '{"parties":[{"id":"TPO-0001","contactPoint":{"name":"Head of Legal Department"},"identifier":{"id":"998298","scheme":"internal"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: BT-503-Organization-Company
     parentNodeId: ND-CompanyContact
@@ -7905,8 +7905,8 @@
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/PHONE
     - Map to the party's `.contactPoint.telephone`
     eForms guidance: '[Get the organization for the company](operations.md#get-the-organization-for-a-company) and map to the organization''s `.contactPoint.telephone`'
-    eForms example: <cac:Contact><cbc:Telephone>+123 45678</cbc:Telephone></cac:Contact>
-    OCDS example: '{"parties":[{"contactPoint":{"telephone":"+123 45678"}}]}'
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification><cac:Contact><cbc:Telephone>+123 45678</cbc:Telephone></cac:Contact></efac:Company></efac:Organization></efac:Organizations>
+    OCDS example: '{"parties":[{"id":"ORG-0001","contactPoint":{"telephone":"+123 45678"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: BT-503-Organization-TouchPoint
     parentNodeId: ND-TouchpointContact
@@ -7921,8 +7921,8 @@
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the organization for the touchpoint](operations.md#get-the-organization-for-a-touchpoint) and map to the organization''s `.contactPoint.telephone`'
-    eForms example: <cac:Contact><cbc:Telephone>+123 45678</cbc:Telephone></cac:Contact>
-    OCDS example: '{"parties":[{"contactPoint":{"telephone":"+123 45678"}}]}'
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyLegalEntity><cbc:CompanyID>998298</cbc:CompanyID></cac:PartyLegalEntity></efac:Company><efac:TouchPoint><cac:PartyIdentification><cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID></cac:PartyIdentification><cac:Contact><cbc:Telephone>+123 45678</cbc:Telephone></cac:Contact></efac:TouchPoint></efac:Organization></efac:Organizations>
+    OCDS example: '{"parties":[{"id":"TPO-0001","contactPoint":{"telephone":"+123 45678"},"identifier":{"id":"998298","scheme":"internal"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: BT-503-UBO
     parentNodeId: ND-UBOContact
@@ -7937,8 +7937,8 @@
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person''s `.telephone`.'
-    eForms example: <efac:UltimateBeneficialOwner><cac:Contact><cbc:Telephone>+123 4567890</cbc:Telephone></cac:Contact></efac:UltimateBeneficialOwner>
-    OCDS example: '{"parties":[{"beneficialOwners":[{"telephone":"+123 456789"}]}]}'
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></efac:Company></efac:Organization><efac:UltimateBeneficialOwner><cbc:ID schemeName="ubo">UBO-0001</cbc:ID><cbc:Telephone>+123 4567890</cbc:Telephone></efac:UltimateBeneficialOwner></efac:Organizations>
+    OCDS example: '{"parties":[{"id":"ORG-0001","beneficialOwners":[{"id":"UBO-0001","telephone":"+123 456789"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#ultimateBeneficialOwnerSection
 -   id: BT-505-Organization-Company
     parentNodeId: ND-Company
@@ -8012,8 +8012,8 @@
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL
     - Map to the party's `.details.url`
     eForms guidance: '[Get the organization for the company](operations.md#get-the-organization-for-a-company) and map to the organization''s `.details.url`.'
-    eForms example: <efac:Company><cbc:WebsiteURI>http://xyz.europa.eu/</cbc:WebsiteURI></efac:Company>
-    OCDS example: '{"parties":[{"details":{"url":"http://xyz.europa.eu/"}}]}'
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification><cbc:WebsiteURI>http://xyz.europa.eu/</cbc:WebsiteURI></efac:Company></efac:Organization></efac:Organizations>
+    OCDS example: '{"parties":[{"id":"ORG-0001","details":{"url":"http://xyz.europa.eu/"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: BT-505-Organization-TouchPoint
     parentNodeId: ND-Touchpoint
@@ -8028,8 +8028,8 @@
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the organization for the touchpoint](operations.md#get-the-organization-for-a-touchpoint) and map to the organization''s `.details.url`.'
-    eForms example: <efac:TouchPoint><cbc:WebsiteURI>http://abc.europa.eu/</cbc:WebsiteURI></efac:TouchPoint>
-    OCDS example: '{"parties":[{"details":{"url":"http://abc.europa.eu/"}}]}'
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyLegalEntity><cbc:CompanyID>998298</cbc:CompanyID></cac:PartyLegalEntity></efac:Company><efac:TouchPoint><cac:PartyIdentification><cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID></cac:PartyIdentification><cbc:WebsiteURI>http://abc.europa.eu/</cbc:WebsiteURI></efac:TouchPoint></efac:Organization></efac:Organizations>
+    OCDS example: '{"parties":[{"id":"TPO-0001","details":{"url":"http://abc.europa.eu/"},"identifier":{"id":"998298","scheme":"internal"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: BT-506-Organization-Company
     parentNodeId: ND-CompanyContact
@@ -8117,8 +8117,8 @@
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/URL_GENERAL
     - Map to the party's `.contactPoint.email`
     eForms guidance: '[Get the organization for the company](operations.md#get-the-organization-for-a-company) and map to the organization''s `.contactPoint.email`'
-    eForms example: <efac:Organization><efac:Company><cac:Contact><cbc:ElectronicMail>press@xyz.europa.eu</cbc:ElectronicMail></cac:Contact></efac:Company></efac:Organization>
-    OCDS example: '{"parties":[{"contactPoint":{"email":"press@xyz.europa.eu"}}]}'
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification><cac:Contact><cbc:ElectronicMail>press@xyz.europa.eu</cbc:ElectronicMail></cac:Contact></efac:Company></efac:Organization></efac:Organizations>
+    OCDS example: '{"parties":[{"id":"ORG-0001","contactPoint":{"email":"press@xyz.europa.eu"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: BT-506-Organization-TouchPoint
     parentNodeId: ND-TouchpointContact
@@ -8133,8 +8133,8 @@
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the organization for the touchpoint](operations.md#get-the-organization-for-a-touchpoint) and map to the organization''s `.contactPoint.email`'
-    eForms example: <efac:Organization><efac:TouchPoint><cac:Contact><cbc:ElectronicMail>abc@xyz.europa.eu</cbc:ElectronicMail></cac:Contact></efac:TouchPoint>a</efac:Organization>
-    OCDS example: '{"parties":[{"contactPoint":{"email":"press@xyz.europa.eu"}}]}'
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyLegalEntity><cbc:CompanyID>998298</cbc:CompanyID></cac:PartyLegalEntity></efac:Company><efac:TouchPoint><cac:PartyIdentification><cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID></cac:PartyIdentification><cac:Contact><cbc:ElectronicMail>abc@xyz.europa.eu</cbc:ElectronicMail></cac:Contact></efac:TouchPoint></efac:Organization></efac:Organizations>
+    OCDS example: '{"parties":[{"id":"TPO-0001","contactPoint":{"email":"press@xyz.europa.eu"},"identifier":{"id":"998298","scheme":"internal"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: BT-506-UBO
     parentNodeId: ND-UBOContact
@@ -8149,8 +8149,8 @@
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person''s `.email`.'
-    eForms example: <efac:UltimateBeneficialOwner><cac:Contact><cbc:ElectronicMail>mickey.mouse@cheese-universe.com</cbc:ElectronicMail></cac:Contact></efac:UltimateBeneficialOwner>
-    OCDS example: '{"parties":[{"beneficialOwners":[{"email":"mickey.mouse@cheese-universe.com"}]}]}'
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></efac:Company></efac:Organization><efac:UltimateBeneficialOwner><cbc:ID schemeName="ubo">UBO-0001</cbc:ID><cbc:ElectronicMail>mickey.mouse@cheese-universe.com</cbc:ElectronicMail></efac:UltimateBeneficialOwner></efac:Organizations>
+    OCDS example: '{"parties":[{"id":"ORG-0001","beneficialOwners":[{"id":"UBO-0001","email":"mickey.mouse@cheese-universe.com"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#ultimateBeneficialOwnerSection
 -   id: BT-507-Organization-Company
     parentNodeId: ND-CompanyAddress
@@ -8190,8 +8190,8 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/*:NUTS/@CODE
     - TED_EXPORT/FORM_SECTION/F25_2014/AWARD_CONTRACT/AWARDED_CONTRACT/CONTRACTORS/CONTRACTOR/ADDRESS_CONTRACTOR/*:NUTS/@CODE
     eForms guidance: '[Get the organization for the company](operations.md#get-the-organization-for-a-company) and map to the organization''s `.address.region`.'
-    eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cbc:CountrySubentityCode listName="nuts-lvl3">XY374</cbc:CountrySubentityCode></cac:PostalAddress></efac:Company></efac:Organization>
-    OCDS example: '{"parties":[{"address":{"region":"XY374"}}]}'
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification><cac:PostalAddress><cbc:CountrySubentityCode listName="nuts-lvl3">XY374</cbc:CountrySubentityCode></cac:PostalAddress></efac:Company></efac:Organization></efac:Organizations>
+    OCDS example: '{"parties":[{"id":"ORG-0001","address":{"region":"XY374"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: BT-507-Organization-TouchPoint
     parentNodeId: ND-TouchpointAddress
@@ -8206,8 +8206,8 @@
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the organization for the touchpoint](operations.md#get-the-organization-for-a-touchpoint) and map to the organization''s `.address.region`.'
-    eForms example: <efac:Organization><efac:TouchPoint><cac:PostalAddress><cbc:CountrySubentityCode listName="nuts-lvl3">XY374</cbc:CountrySubentityCode></cac:PostalAddress></efac:TouchPoint></efac:Organization>
-    OCDS example: '{"parties":[{"address":{"region":"XY374"}}]}'
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyLegalEntity><cbc:CompanyID>998298</cbc:CompanyID></cac:PartyLegalEntity></efac:Company><efac:TouchPoint><cac:PartyIdentification><cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID></cac:PartyIdentification><cac:PostalAddress><cbc:CountrySubentityCode listName="nuts-lvl3">XY374</cbc:CountrySubentityCode></cac:PostalAddress></efac:TouchPoint></efac:Organization></efac:Organizations>
+    OCDS example: '{"parties":[{"id":"TPO-0001","address":{"region":"XY374"},"identifier":{"id":"998298","scheme":"internal"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: BT-507-UBO
     parentNodeId: ND-UBOAddress
@@ -8222,8 +8222,8 @@
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner) and map to the person''s `.address.region`.'
-    eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:CountrySubentityCode listName="nuts-lvl3">GBK62</cbc:CountrySubentityCode></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
-    OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"region":"GBK62"}}]}]}'
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></efac:Company></efac:Organization><efac:UltimateBeneficialOwner><cbc:ID schemeName="ubo">UBO-0001</cbc:ID><cac:ResidenceAddress><cbc:CountrySubentityCode listName="nuts-lvl3">GBK62</cbc:CountrySubentityCode></cac:ResidenceAddress></efac:UltimateBeneficialOwner></efac:Organizations>
+    OCDS example: '{"parties":[{"id":"ORG-0001","beneficialOwners":[{"id":"UBO-0001","address":{"region":"GBK62"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#ultimateBeneficialOwnerSection
 -   id: BT-5071-Lot
     parentNodeId: ND-LotPerformanceAddress
@@ -8258,8 +8258,8 @@
 
         [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array and map the value of this field to its `.region`.
-    eForms example: <cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="nuts=lvl3">UKG23</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation>
-    OCDS example: '{"tender":{"items":[{"deliveryAddresses":[{"region":"UKG23"}]}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="nuts=lvl3">UKG23</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation></cac:ProcurementProject></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"items":[{"id":"1","deliveryAddresses":[{"region":"UKG23"}],"relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#performancePlaceSection
 -   id: BT-5071-Part
     parentNodeId: ND-PartPerformanceAddress
@@ -8334,8 +8334,8 @@
     TED guidance:
     - Map to the party's `.details.buyerProfile`
     eForms guidance: '[Get the organization for the buyer](operations.md#get-the-organization-for-the-buyer). Map to the organization''s `.details.buyerProfile`.'
-    eForms example: <cac:ContractingParty><cbc:BuyerProfileURI>https://admin-abc.com/public-procurements/</cbc:BuyerProfileURI></cac:ContractingParty>
-    OCDS example: '{"parties":[{"details":{"buyerProfile":"https://admin-abc.com/public-procurements/"}}]}'
+    eForms example: <cac:ContractingParty><cbc:BuyerProfileURI>https://admin-abc.com/public-procurements/</cbc:BuyerProfileURI><cac:Party><cac:PartyIdentification><cbc:ID>ORG-0001</cbc:ID></cac:PartyIdentification></cac:Party></cac:ContractingParty>
+    OCDS example: '{"parties":[{"id":"ORG-0001","details":{"buyerProfile":"https://admin-abc.com/public-procurements/"},"roles":["buyer"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_buyer_information
 -   id: BT-509-Organization-Company
     parentNodeId: ND-Company
@@ -8350,8 +8350,8 @@
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the organization for the company](operations.md#get-the-organization-for-a-company) and map to the organization''s `.eDeliveryGateway`.'
-    eForms example: <efac:Organization><efac:Company><cbc:EndpointID>https://drive.xpertpro.eu/</cbc:EndpointID></efac:Company></efac:Organization>
-    OCDS example: '{"parties":[{"eDeliveryGateway":"https://drive.xpertpro.eu"}]}'
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification><cbc:EndpointID>https://drive.xpertpro.eu/</cbc:EndpointID></efac:Company></efac:Organization></efac:Organizations>
+    OCDS example: '{"parties":[{"id":"ORG-0001","eDeliveryGateway":"https://drive.xpertpro.eu"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: BT-509-Organization-TouchPoint
     parentNodeId: ND-Touchpoint
@@ -8366,8 +8366,8 @@
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the organization for the touchpoint](operations.md#get-the-organization-for-a-touchpoint) and map to the organization''s `.eDeliveryGateway`.'
-    eForms example: <efac:Organization><efac:TouchPoint><cbc:EndpointID>https://drive.xpertpro.eu/</cbc:EndpointID></efac:TouchPoint></efac:Organization>
-    OCDS example: '{"parties":[{"eDeliveryGateway":"https://drive.xpertpro.eu"}]}'
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyLegalEntity><cbc:CompanyID>998298</cbc:CompanyID></cac:PartyLegalEntity></efac:Company><efac:TouchPoint><cac:PartyIdentification><cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID></cac:PartyIdentification><cbc:EndpointID>https://drive.xpertpro.eu/</cbc:EndpointID></efac:TouchPoint></efac:Organization></efac:Organizations>
+    OCDS example: '{"parties":[{"id":"TPO-0001","eDeliveryGateway":"https://drive.xpertpro.eu","identifier":{"id":"998298","scheme":"internal"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: BT-51-Lot
     parentNodeId: ND-SecondStage
@@ -8390,8 +8390,8 @@
     - Map to `tender.secondStage.maximumCandidates`
     - Map to the lot's `.secondStage.maximumCandidates`
     eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.secondStage.maximumCandidates`.'
-    eForms example: <cac:EconomicOperatorShortList><cbc:MaximumQuantity>10</cbc:MaximumQuantity></cac:EconomicOperatorShortList>
-    OCDS example: '{"tender":{"lots":[{"secondStage":{"maximumCandidates":10}}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cac:EconomicOperatorShortList><cbc:MaximumQuantity>10</cbc:MaximumQuantity></cac:EconomicOperatorShortList></cac:TenderingProcess></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","secondStage":{"maximumCandidates":10}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#maxCandidatesSection
 -   id: BT-510(a)-Organization-Company
     parentNodeId: ND-CompanyAddress
@@ -8479,8 +8479,8 @@
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/ADDRESS
     - Map to the party's `.address.streetAddress`
     eForms guidance: '[Get the organization for the company](operations.md#get-the-organization-for-a-company), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with '', '' (comma and space) and map the result to the organization''s `address.streetAddress`.'
-    eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cbc:StreetName>2, rue de Europe</cbc:StreetName></cac:PostalAddress></efac:Company></efac:Organization>
-    OCDS example: '{"parties":[{"address":{"streetAddress":"2, rue de Europe, Building A, 3rd Floor"}}]}'
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification><cac:PostalAddress><cbc:StreetName>2, rue de Europe</cbc:StreetName><cbc:AdditionalStreetName>Building A</cbc:AdditionalStreetName><cac:AddressLine><cbc:Line>3rd Floor</cbc:Line></cac:AddressLine></cac:PostalAddress></efac:Company></efac:Organization></efac:Organizations>
+    OCDS example: '{"parties":[{"id":"ORG-0001","address":{"streetAddress":"2, rue de Europe, Building A, 3rd Floor"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: BT-510(a)-Organization-TouchPoint
     parentNodeId: ND-TouchpointAddress
@@ -8494,8 +8494,8 @@
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the organization for the touchpoint](operations.md#get-the-organization-for-a-touchpoint), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with '', '' (comma and space) and map the result to the organization''s `address.streetAddress`.'
-    eForms example: <efac:Organization><efac:TouchPoint><cac:PostalAddress><cbc:StreetName>2, rue de Europe</cbc:StreetName></cac:PostalAddress></efac:TouchPoint></efac:Organization>
-    OCDS example: '{"parties":[{"address":{"streetAddress":"2, rue de Europe, Building A, 3rd Floor"}}]}'
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyLegalEntity><cbc:CompanyID>998298</cbc:CompanyID></cac:PartyLegalEntity></efac:Company><efac:TouchPoint><cac:PartyIdentification><cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID></cac:PartyIdentification><cac:PostalAddress><cbc:StreetName>2, rue de Europe</cbc:StreetName><cbc:AdditionalStreetName>Building A</cbc:AdditionalStreetName><cac:AddressLine><cbc:Line>3rd Floor</cbc:Line></cac:AddressLine></cac:PostalAddress></efac:TouchPoint></efac:Organization></efac:Organizations>
+    OCDS example: '{"parties":[{"id":"TPO-0001","address":{"streetAddress":"2, rue de Europe, Building A, 3rd Floor"},"identifier":{"id":"998298","scheme":"internal"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: BT-510(a)-UBO
     parentNodeId: ND-UBOAddress
@@ -8509,8 +8509,8 @@
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with '', '' (comma and space) and map the result to the person''s `address.streetAddress`.'
-    eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:StreetName>2 CheeseStreet</cbc:StreetName></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
-    OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"streetAddress":"2 CheeseStreet, Nelson Building, 2nd floor"}}]}]}'
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></efac:Company></efac:Organization><efac:UltimateBeneficialOwner><cbc:ID schemeName="ubo">UBO-0001</cbc:ID><cac:ResidenceAddress><cbc:StreetName>2 CheeseStreet</cbc:StreetName><cbc:AdditionalStreetName>Nelson Building</cbc:AdditionalStreetName><cac:AddressLine><cbc:Line>2nd floor</cbc:Line></cac:AddressLine></cac:ResidenceAddress></efac:UltimateBeneficialOwner></efac:Organizations>
+    OCDS example: '{"parties":[{"id":"ORG-0001","beneficialOwners":[{"id":"UBO-0001","address":{"streetAddress":"2 CheeseStreet, Nelson Building, 2nd floor"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#ultimateBeneficialOwnerSection
 -   id: BT-510(b)-Organization-Company
     parentNodeId: ND-CompanyAddress
@@ -8524,8 +8524,8 @@
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the organization for the company](operations.md#get-the-organization-for-a-company), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with '', '' (comma and space) and map the result to the organization''s `address.streetAddress`.'
-    eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cbc:AdditionalStreetName>Building A</cbc:AdditionalStreetName></cac:PostalAddress></efac:Company></efac:Organization>
-    OCDS example: '{"parties":[{"address":{"streetAddress":"2, rue de Europe, Building A, 3rd Floor"}}]}'
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification><cac:PostalAddress><cbc:StreetName>2, rue de Europe</cbc:StreetName><cbc:AdditionalStreetName>Building A</cbc:AdditionalStreetName><cac:AddressLine><cbc:Line>3rd Floor</cbc:Line></cac:AddressLine></cac:PostalAddress></efac:Company></efac:Organization></efac:Organizations>
+    OCDS example: '{"parties":[{"id":"ORG-0001","address":{"streetAddress":"2, rue de Europe, Building A, 3rd Floor"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: BT-510(b)-Organization-TouchPoint
     parentNodeId: ND-TouchpointAddress
@@ -8539,8 +8539,8 @@
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the organization for the touchpoint](operations.md#get-the-organization-for-a-touchpoint), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with '', '' (comma and space) and map the result to the organization''s `address.streetAddress`.'
-    eForms example: <efac:Organization><efac:TouchPoint><cac:PostalAddress><cbc:AdditionalStreetName>Building A</cbc:AdditionalStreetName></cac:PostalAddress></efac:TouchPoint></efac:Organization>
-    OCDS example: '{"parties":[{"address":{"streetAddress":"2, rue de Europe, Building A, 3rd Floor"}}]}'
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyLegalEntity><cbc:CompanyID>998298</cbc:CompanyID></cac:PartyLegalEntity></efac:Company><efac:TouchPoint><cac:PartyIdentification><cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID></cac:PartyIdentification><cac:PostalAddress><cbc:StreetName>2, rue de Europe</cbc:StreetName><cbc:AdditionalStreetName>Building A</cbc:AdditionalStreetName><cac:AddressLine><cbc:Line>3rd Floor</cbc:Line></cac:AddressLine></cac:PostalAddress></efac:TouchPoint></efac:Organization></efac:Organizations>
+    OCDS example: '{"parties":[{"id":"TPO-0001","address":{"streetAddress":"2, rue de Europe, Building A, 3rd Floor"},"identifier":{"id":"998298","scheme":"internal"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: BT-510(b)-UBO
     parentNodeId: ND-UBOAddress
@@ -8554,8 +8554,8 @@
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with '', '' (comma and space) and map the result to the person''s `address.streetAddress`.'
-    eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cbc:AdditionalStreetName>Nelson Building</cbc:AdditionalStreetName></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
-    OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"streetAddress":"2 CheeseStreet, Nelson Building, 2nd floor"}}]}]}'
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></efac:Company></efac:Organization><efac:UltimateBeneficialOwner><cbc:ID schemeName="ubo">UBO-0001</cbc:ID><cac:ResidenceAddress><cbc:StreetName>2 CheeseStreet</cbc:StreetName><cbc:AdditionalStreetName>Nelson Building</cbc:AdditionalStreetName><cac:AddressLine><cbc:Line>2nd floor</cbc:Line></cac:AddressLine></cac:ResidenceAddress></efac:UltimateBeneficialOwner></efac:Organizations>
+    OCDS example: '{"parties":[{"id":"ORG-0001","beneficialOwners":[{"id":"UBO-0001","address":{"streetAddress":"2 CheeseStreet, Nelson Building, 2nd floor"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#ultimateBeneficialOwnerSection
 -   id: BT-510(c)-Organization-Company
     parentNodeId: ND-CompanyAddress
@@ -8569,8 +8569,8 @@
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the organization for the company](operations.md#get-the-organization-for-a-company), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with '', '' (comma and space) and map the result to the organization''s `address.streetAddress`.'
-    eForms example: <efac:Organization><efac:Company><cac:PostalAddress><cac:AddressLine><cbc:Line>3rd Floor</cbc:Line></cac:AddressLine></cac:PostalAddress></efac:Company></efac:Organization>
-    OCDS example: '{"parties":[{"address":{"streetAddress":"2, rue de Europe, Building A, 3rd Floor"}}]}'
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification><cac:PostalAddress><cbc:StreetName>2, rue de Europe</cbc:StreetName><cbc:AdditionalStreetName>Building A</cbc:AdditionalStreetName><cac:AddressLine><cbc:Line>3rd Floor</cbc:Line></cac:AddressLine></cac:PostalAddress></efac:Company></efac:Organization></efac:Organizations>
+    OCDS example: '{"parties":[{"id":"ORG-0001","address":{"streetAddress":"2, rue de Europe, Building A, 3rd Floor"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: BT-510(c)-Organization-TouchPoint
     parentNodeId: ND-TouchpointAddress
@@ -8584,8 +8584,8 @@
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the organization for the touchpoint](operations.md#get-the-organization-for-a-touchpoint), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with '', '' (comma and space) and map the result to the organization''s `address.streetAddress`.'
-    eForms example: <efac:Organization><efac:TouchPoint><cac:PostalAddress><cac:AddressLine><cbc:Line>3rd Floor</cbc:Line></cac:AddressLine></cac:PostalAddress></efac:TouchPoint></efac:Organization>
-    OCDS example: '{"parties":[{"address":{"streetAddress":"2, rue de Europe, Building A, 3rd Floor"}}]}'
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyLegalEntity><cbc:CompanyID>998298</cbc:CompanyID></cac:PartyLegalEntity></efac:Company><efac:TouchPoint><cac:PartyIdentification><cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID></cac:PartyIdentification><cac:PostalAddress><cbc:StreetName>2, rue de Europe</cbc:StreetName><cbc:AdditionalStreetName>Building A</cbc:AdditionalStreetName><cac:AddressLine><cbc:Line>3rd Floor</cbc:Line></cac:AddressLine></cac:PostalAddress></efac:TouchPoint></efac:Organization></efac:Organizations>
+    OCDS example: '{"parties":[{"id":"TPO-0001","address":{"streetAddress":"2, rue de Europe, Building A, 3rd Floor"},"identifier":{"id":"998298","scheme":"internal"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: BT-510(c)-UBO
     parentNodeId: ND-UBOAddress
@@ -8599,8 +8599,8 @@
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner), combine the values of `cbc:StreetName`, `cbc:AdditionalStreetName` and each `cac:AddressLine/cbc:Line` in that order, separating each string with '', '' (comma and space) and map the result to the person''s `address.streetAddress`.'
-    eForms example: <efac:UltimateBeneficialOwner><cac:ResidenceAddress><cac:AddressLine><cbc:Line>2nd floor</cbc:Line></cac:AddressLine></cac:ResidenceAddress></efac:UltimateBeneficialOwner>
-    OCDS example: '{"parties":[{"beneficialOwners":[{"address":{"streetAddress":"2 CheeseStreet, Nelson Building, 2nd floor"}}]}]}'
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></efac:Company></efac:Organization><efac:UltimateBeneficialOwner><cbc:ID schemeName="ubo">UBO-0001</cbc:ID><cac:ResidenceAddress><cbc:StreetName>2 CheeseStreet</cbc:StreetName><cbc:AdditionalStreetName>Nelson Building</cbc:AdditionalStreetName><cac:AddressLine><cbc:Line>2nd floor</cbc:Line></cac:AddressLine></cac:ResidenceAddress></efac:UltimateBeneficialOwner></efac:Organizations>
+    OCDS example: '{"parties":[{"id":"ORG-0001","beneficialOwners":[{"id":"UBO-0001","address":{"streetAddress":"2 CheeseStreet, Nelson Building, 2nd floor"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#ultimateBeneficialOwnerSection
 -   id: BT-5101(a)-Lot
     parentNodeId: ND-LotPerformanceAddress
