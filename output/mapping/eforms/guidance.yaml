@@ -183,7 +183,7 @@
     btId: BT-06
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='strategic-procurement']/cbc:ProcurementTypeCode
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: false
     codeList: strategic-procurement
     Description: The procurement procedure aims at reducing the environmental impacts of the procurement, fulfilling social objectives and/or buying an innovative work, supply or service.
@@ -1264,7 +1264,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cbc:ID
     type: id
     schemeName: Lot
-    repeatable: true
+    repeatable: false
     mandatory: true
     pattern: ^LOT-\d{4}$
     Description: The identifier of a lot. In case of PINs used only for information, the identifier of a part of the notice that may later become a lot or a self-standing procedure. The information in the purpose section refers to this lot or part.
@@ -1295,7 +1295,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cbc:ID
     type: id
     schemeName: LotsGroup
-    repeatable: true
+    repeatable: false
     mandatory: false
     pattern: ^GLO-\d{4}$
     Description: The identifier of a lot. In case of PINs used only for information, the identifier of a part of the notice that may later become a lot or a self-standing procedure. The information in the purpose section refers to this lot or part.
@@ -1312,7 +1312,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cbc:ID
     type: id
     schemeName: Part
-    repeatable: true
+    repeatable: false
     mandatory: true
     pattern: ^PAR-\d{4}$
     Description: The identifier of a lot. In case of PINs used only for information, the identifier of a part of the notice that may later become a lot or a self-standing procedure. The information in the purpose section refers to this lot or part.
@@ -1747,7 +1747,7 @@
     btId: BT-1501
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:ContractModification/efbc:ChangedNoticeIdentifier
     type: id
-    repeatable: true
+    repeatable: false
     mandatory: true
     pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|(\d{1,8})-(19|20)\d\d)$
     Description: An identifier of one or more sections within a previous notice within the procedure. The information in the modification section refers to this section or these sections.
@@ -6207,7 +6207,7 @@
     btId: BT-202
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:ContractModification/efac:Change/efbc:ChangeDescription
     type: text-multilingual
-    repeatable: true
+    repeatable: false
     mandatory: true
     Description: The summary of the contract modification(s).
     Business groups:
@@ -6619,7 +6619,7 @@
     btId: BT-26
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:AdditionalCommodityClassification/cbc:ItemClassificationCode/@listName
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: false
     codeList: classification-type
     Description: The type of classification describing the purchase (e.g. the CPV).
@@ -6641,7 +6641,7 @@
     btId: BT-26
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cac:AdditionalCommodityClassification/cbc:ItemClassificationCode/@listName
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: false
     codeList: classification-type
     Description: The type of classification describing the purchase (e.g. the CPV).
@@ -6663,7 +6663,7 @@
     btId: BT-26
     xpathAbsolute: /*/cac:ProcurementProject/cac:AdditionalCommodityClassification/cbc:ItemClassificationCode/@listName
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: false
     codeList: classification-type
     Description: The type of classification describing the purchase (e.g. the CPV).
@@ -6849,7 +6849,7 @@
     btId: BT-263
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:AdditionalCommodityClassification/cbc:ItemClassificationCode
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: false
     codeList: cpv
     Description: An additional code from the classification that also characterises the purchase.
@@ -6873,7 +6873,7 @@
     btId: BT-263
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cac:AdditionalCommodityClassification/cbc:ItemClassificationCode
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: false
     codeList: cpv
     Description: An additional code from the classification that also characterises the purchase.
@@ -6896,7 +6896,7 @@
     btId: BT-263
     xpathAbsolute: /*/cac:ProcurementProject/cac:AdditionalCommodityClassification/cbc:ItemClassificationCode
     type: code
-    repeatable: false
+    repeatable: true
     mandatory: false
     codeList: cpv
     Description: An additional code from the classification that also characterises the purchase.
@@ -7283,7 +7283,7 @@
     type: id-ref
     idSchemes:
     - GLO
-    repeatable: true
+    repeatable: false
     mandatory: false
     pattern: ^GLO-\d{4}$
     Description: The identifier of a group of lots in the procedure.
@@ -11121,13 +11121,13 @@
     btId: BT-723
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement/efac:StrategicProcurementInformation/efac:ProcurementDetails/efbc:AssetCategoryCode
     type: code
-    repeatable: true
+    repeatable: false
     mandatory: false
     codeList: vehicle-category
     Description: 'The category of vehicle falling within the scope of Directive 2009/33/EC, including: Light-duty vehicles (M1, M2, N1); Bus (M3); Truck (N2, N3); M1; M2; N1; N2; N3.'
     Business groups:
         BG-713: Strategic Procurement
-        BT-735: CVD Contract Type
+        BG-7140: CVD Information
         BG-7141: CVD Vehicles
     eForms guidance: |-
         This field maps to the same `Item` objects as created for OPT-155-LotResult, OPT-156-LotResult and BT-735-LotResult. If no `Item` objects were created for `ancestor::efac:ProcurementDetails`:
@@ -11254,7 +11254,7 @@
     btId: BT-728
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:RealizedLocation/cbc:Description
     type: text-multilingual
-    repeatable: true
+    repeatable: false
     mandatory: true
     Description: Additional information about the place of performance.
     Business groups:
@@ -11275,7 +11275,7 @@
     btId: BT-728
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cac:RealizedLocation/cbc:Description
     type: text-multilingual
-    repeatable: true
+    repeatable: false
     mandatory: true
     Description: Additional information about the place of performance.
     Business groups:
@@ -11292,7 +11292,7 @@
     btId: BT-728
     xpathAbsolute: /*/cac:ProcurementProject/cac:RealizedLocation/cbc:Description
     type: text-multilingual
-    repeatable: true
+    repeatable: false
     mandatory: true
     Description: Additional information about the place of performance.
     Business groups:
@@ -11453,6 +11453,7 @@
     Description: The CVD legal basis to establish which category of contract types (purchase, lease, rent, hired-purchase, public service contracts and service contracts according to table 1 CVD) applies.
     Business groups:
         BG-713: Strategic Procurement
+        BG-7140: CVD Information
     eForms guidance: |-
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and add a `Classification` object to the lot's `additionalClassifications` array.
         - Map the value of this field to the classification's `.id`.
@@ -11467,12 +11468,13 @@
     btId: BT-735
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement/efac:StrategicProcurementInformation/efbc:ProcurementCategoryCode
     type: code
-    repeatable: true
+    repeatable: false
     mandatory: false
     codeList: cvd-contract-type
     Description: The CVD legal basis to establish which category of contract types (purchase, lease, rent, hired-purchase, public service contracts and service contracts according to table 1 CVD) applies.
     Business groups:
         BG-713: Strategic Procurement
+        BG-7140: CVD Information
     eForms guidance: |-
         This field maps to the same `Item` objects as created for OPT-155-LotResult and BT-723-LotResult. If no `Item` objects were created for `ancestor::efac:StrategicProcurementInformation/efbc:ProcurementDetails`:
 
@@ -12616,7 +12618,7 @@
     btId: BT-777
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='strategic-procurement']/cbc:ProcurementType
     type: text-multilingual
-    repeatable: false
+    repeatable: true
     mandatory: false
     Description: Description of how the procurement procedure is aiming at reducing the environmental impacts of the procurement, fulfilling social objectives and/or buying an innovative work, supply or service.
     Business groups:
@@ -13320,7 +13322,7 @@
     btId: OPT-030
     xpathAbsolute: /*/cac:ContractingParty/cac:Party/cac:ServiceProviderParty/cbc:ServiceTypeCode
     type: code
-    repeatable: true
+    repeatable: false
     mandatory: false
     codeList: organisation-role-service
     eForms guidance: |-
@@ -14304,7 +14306,7 @@
     type: id-ref
     idSchemes:
     - ORG
-    repeatable: true
+    repeatable: false
     mandatory: false
     pattern: ^ORG-\d{4}$
     eForms guidance: |-

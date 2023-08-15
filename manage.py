@@ -188,7 +188,9 @@ def set_additional_properties_and_remove_pattern_properties(data, additional_pro
             set_additional_properties_and_remove_pattern_properties(value, additional_properties)
 
 
-def write(filename, df, overwrite=None, explode=None, compare=None, how="left", drop=(), **kwargs):
+def write(
+    filename, df, overwrite=None, explode=None, compare=None, compare_override=None, how="left", drop=(), **kwargs
+):
     """
     Read the data frame from the file (if it exists) and merge it with ``df`` according to ``how`` and ``kwargs``,
     overwriting only the ``overwrite`` columns.
@@ -198,6 +200,9 @@ def write(filename, df, overwrite=None, explode=None, compare=None, how="left", 
 
     If ``compare`` is a dict, print any rows in which the cells that match the dict's key and value don't match.
     """
+    if not compare_override:
+        compare_override = {}
+
     df_unmerged = pd.DataFrame()
 
     # Default to the data frame's columns.
@@ -224,11 +229,15 @@ def write(filename, df, overwrite=None, explode=None, compare=None, how="left", 
         df_unmerged = df_outer[df_outer["_merge"] == "right_only"]
 
         if compare:
+            compared = 0
             for label, row in df_outer[df_outer["_merge"] == "both"].iterrows():
                 for a, b in compare.items():
-                    actual, expected = row[a], row[b]
-                    if actual != expected:
-                        click.echo(f'{row["id"].ljust(35)}: {b} : {a} / {expected.ljust(50)} : {actual}')
+                    if row[a] != row[b] and compare_override[a].get(row["id"]) != row[b]:
+                        compared += 1
+                        field = f'{row["id"]}: {row["name"]}'
+                        click.echo(f"{field.ljust(75)} | {a} : {b} | {str(row[a]).ljust(50)} : {row[b]}")
+            if compared:
+                click.echo(f"{compared} value differences")
 
         untouched = [column for column in df.columns if column not in overwrite]
         # Merge all the columns, then drop the non-overwritten columns.
@@ -309,13 +318,27 @@ def update_with_sdk(filename, verbose):
 
     # If a repeatable business term is implemented as a field that is the only child of a parent, then the SDK marks
     # the parent as repeatable, rather than the child.
+    non_privacy_xml = xml[~xml["xpathRelative"].str.startswith("efac:FieldsPrivacy")]
     for label, row in df.iterrows():
-        if row["parentNodeId"].startswith("ND-"):
+        # eForms creates a XML structure to repeat terms together.
+        if row["parentNodeId"] in (
+            # BT-06-Lot (Strategic Procurement) with BT-777-Lot (Strategic Procurement Description).
+            "ND-StrategicProcurementType",
+            # BT-26(a)-* (Classification Type (e.g. CPV)) with BT-263-* (Additional Classification Code).
+            "ND-LotAdditionalClassification",
+            "ND-PartAdditionalClassification",
+            "ND-ProcedureAdditionalCommodityClassification",
+        ):
+            df.at[label, "repeatable"] = xml.loc[row["parentNodeId"], "repeatable"]
+        # eForms moves repeatable to the parent node, if its single child is a field.
+        elif row["parentNodeId"].startswith("ND-"):
             cell = row["repeatable"]
             if (
-                not (cell["value"] if isinstance(cell, dict) and len(cell) == 2 else cell)  # as below
+                # `severity` is not the only other top-level key.
+                not (cell["value"] if isinstance(cell, dict) and len(cell) == 2 else cell)
                 and xml.loc[row["parentNodeId"], "repeatable"]
                 and len(df[df["parentNodeId"] == row["parentNodeId"]]) == 1  # run after drop()
+                and len(non_privacy_xml[non_privacy_xml["parentId"] == row["parentNodeId"]]) == 0
             ):
                 df.at[label, "repeatable"] = True
 
@@ -343,7 +366,8 @@ def update_with_sdk(filename, verbose):
     # Simplify these columns if `severity` is the only other top-level key.
     for column in ("repeatable", "pattern"):
         df[column] = [cell["value"] if isinstance(cell, dict) and len(cell) == 2 else cell for cell in df[column]]
-    # Simplify `codelist` as above, and if `type` and `parentId` (optional) are the only other second-level keys.
+    # Simplify `codelist` if `severity` is the only other top-level key, and if `type` and `parentId` (optional) are
+    # the only other second-level keys.
     df["codeList"] = [
         cell["value"]["id"] if isinstance(cell, dict) and len(cell) == 2 and 2 <= len(cell["value"]) <= 3 else cell
         for cell in df["codeList"]
@@ -364,6 +388,17 @@ def update_with_annex(filename):
     - Description
     - Business groups
     """
+    nonrepeatable = {
+        # https://github.com/open-contracting/european-union-support/issues/188
+        "BT-124",
+        "BT-1252",
+        "BT-136",
+        "BT-556",
+        "BT-65",
+        # https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#accessibilitySection
+        "BT-754",
+    }
+
     # A warning is issued, because the Excel file has an unsupported extension.
     df = pd.read_excel(sourcedir / "CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx", "Annex")
 
@@ -373,7 +408,7 @@ def update_with_annex(filename):
     # Remove extra header rows.
     check(df["ID"].isna().sum(), 3, "extra header rows")
     df = df[df["ID"].notna()]
-    # BG-714 now identifies "CVD Information" in addition to "Review".
+    # XXX: BG-714 now identifies "CVD Information" in addition to "Review".
     if df.at[295, "ID"] == "BG-714":
         df.at[295, "ID"] = "BG-7140"
 
@@ -392,6 +427,10 @@ def update_with_annex(filename):
     line = []
     previous_level = 0
     for label, row in df.iterrows():
+        # XXX: Fix typo, to not be at same level as immediately preceding BG-714 (deduplicated to BG-7140, above).
+        if row["ID"] == "BT-735" and row["Level"] == "++":
+            row["Level"] = "+++"
+
         current_level = len(row["Level"])
 
         # Adjust the size of this line of the "tree", then update the head.
@@ -401,6 +440,9 @@ def update_with_annex(filename):
             line = line[:current_level]
         line[-1] = [row["ID"], row["Name"]]
 
+        if row["ID"] in nonrepeatable:
+            df.at[label, "Repeatable"] = "No"
+
         df.at[label, "Business groups"] = dict(line[:-1]) if len(line) > 1 else None
 
         previous_level = current_level
@@ -408,11 +450,34 @@ def update_with_annex(filename):
     # We can now remove all rows for business groups.
     df = df[~df["ID"].str.startswith("BG-")]
 
+    # Make the repeatable properties comparable.
+    df["Repeatable"] = df["Repeatable"].map({"Yes": True, "No": False})
+
     # The fields metadata covers "Name", "Data type", "Repeatable" and "Legal Status" ("forbidden" and "mandatory").
     # "Business groups" replaces "Level". "Fields not included in the legal text" isn't informative.
     #
     # Adding `compare={'name': 'Name'}` shows that the names agree, and differ mainly due to field:bt being m:1.
-    df = write(filename, df, ["Description", "Business groups"], left_on="btId", right_on="ID", validate="m:1")
+    df = write(
+        filename,
+        df,
+        ["Description", "Business groups"],
+        compare={"repeatable": "Repeatable"},
+        compare_override={
+            # For comparison, force the eForms value to the Annex value, if the eForms value is correct.
+            "repeatable": {
+                # https://github.com/open-contracting/european-union-support/issues/188
+                "BT-1501(n)-Contract": True,
+                # https://github.com/open-contracting/european-union-support/issues/188#issuecomment-1664720396
+                "BT-702(a)-notice": True,
+                "BT-26(a)-Lot": False,
+                "BT-26(a)-Part": False,
+                "BT-26(a)-Procedure": False,
+            }
+        },
+        left_on="btId",
+        right_on="ID",
+        validate="m:1",
+    )
 
     report_unmerged_rows(
         df,
@@ -458,6 +523,7 @@ def update_with_annex(filename):
                 "BT-13722",
             }
         ),
+        ["Repeatable"],
     )
 
 
