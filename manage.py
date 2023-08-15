@@ -468,10 +468,11 @@ def update_with_annex(filename):
                 # https://github.com/open-contracting/european-union-support/issues/188
                 "BT-1501(n)-Contract": True,
                 # https://github.com/open-contracting/european-union-support/issues/188#issuecomment-1664720396
-                "BT-702(a)-notice": True,
                 "BT-26(a)-Lot": False,
                 "BT-26(a)-Part": False,
                 "BT-26(a)-Procedure": False,
+                "BT-702(a)-notice": True,
+                "BT-735-Lot": False,
             }
         },
         left_on="btId",
