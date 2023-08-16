@@ -147,9 +147,9 @@ Get the `Lot` object in `tender.lots` whose `.id` matches `ancestor::efac:LotTen
 
 ### Get the bid for a LotTender
 
-Get the `Bid` in `bids` whose `id` is equal to the value of `ancestor::efac:LotTender/cbc:ID`. If none exists yet:
+Get the `Bid` in `bids.details` whose `id` is equal to the value of `ancestor::efac:LotTender/cbc:ID`. If none exists yet:
 
-1. Add a `Bid` to `bids`
+1. Add a `Bid` object to the `bids.details` array
 1. Set its `.id` to the value of `ancestor::efac:LotTender/cbc:ID`
 1. Add the value of `ancestor::efac:LotTender/efac:TenderLot/cbc:ID` to its `.relatedLots`
 
