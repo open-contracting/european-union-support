@@ -121,7 +121,7 @@ Get the `Organization` object in `parties` whose `.id` is equal to the organizat
 
 ### Get the lot for a ProcurementProjectLot
 
-Get the `Lot` in `tender.lots` whose `.id` is equal to the value of `ancestor::cac:ProcurementProjectLot/cac:ID`. If none exists yet, add a `Lot` to `tender.lots` and set its `id` to the value of `ancestor::cac:ProcurementProjectLot/cac:ID`.
+Get the `Lot` in `tender.lots` whose `.id` is equal to the value of `ancestor::cac:ProcurementProjectLot/cbc:ID`. If none exists yet, add a `Lot` to `tender.lots` and set its `id` to the value of `ancestor::cac:ProcurementProjectLot/cbc:ID`.
 
 ### Get the lot group for a ProcurementProjectLot
 
