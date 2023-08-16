@@ -1383,9 +1383,9 @@
         BG-7: Notice Result
         BG-320: Tender
     eForms guidance: |-
-        Get the `Bid` in `bids` whose `.id` is equal to the value of `ancestor::efac:LotTender/cbcID`. If none exists yet:
+        Get the `Bid` in `bids.details` whose `.id` is equal to the value of `ancestor::efac:LotTender/cbcID`. If none exists yet:
 
-        - Add a `Bid` to `bids`.
+        - Add a `Bid` object to the `bids.details` array.
         - Set its `.id` to the value of `ancestor::efac:LotTender/cbc:ID`.
 
         If not already present, add the value of this field to the bid's `.relatedLots`.
@@ -14416,9 +14416,9 @@
     mandatory: true
     pattern: ^TEN-\d{4}$
     eForms guidance: |-
-        If there is a `Bid` in `bids` whose `.id` is equal to the value of the field discard. Otherwise:
+        If there is a `Bid` in `bids.details` whose `.id` is equal to the value of the field discard. Otherwise:
 
-        - Add a `Bid` to `bids`.
+        - Add a `Bid` object to the `bids.details` array.
         - Map to its `.id`.
     eForms example: <efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID></efac:LotTender>
     OCDS example: '{"bids":{"details":[{"id":"TEN-0001"}]}}'
