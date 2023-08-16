@@ -391,6 +391,7 @@ def update_with_annex(filename):
     nonrepeatable = {
         # https://github.com/open-contracting/european-union-support/issues/188
         "BT-124",
+        "BT-1251",
         "BT-1252",
         "BT-136",
         "BT-556",
