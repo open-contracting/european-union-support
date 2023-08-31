@@ -13268,9 +13268,7 @@
     repeatable: false
     mandatory: false
     eForms guidance: |-
-        Get the `ancestor::efac:SettledContract` whose `efac:LotTender:cbc:ID` is equal to the value of `ancestor::efac:LotTender:cbc:ID`.
-        [Get the contract for the SettledContract](operations.md#get-the-contract-for-a-settledcontract) for this `ancestor::efac:SettledContract:cbc:ID`.
-        Map to the contract's .publicPassengerTransportServicesKilometers.
+        Get the `ancestor::efac:NoticeResult/efac:SettledContract` whose `/efac:LotTender:cbc:ID` is equal to the value of `ancestor::efac:LotTender:cbc:ID`, [get its contract](operations.md#get-the-contract-for-a-settledcontract) and map to the contract's `.publicPassengerTransportServicesKilometers`.
     eForms example: <efac:NoticeResult><efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID><efbc:PublicTransportationCumulatedDistance unitCode="km">988754432110987</efbc:PublicTransportationCumulatedDistance></efac:LotTender><efac:SettledContract><cbc:ID schemeName="contract">CON-0001</cbc:ID><efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID></efac:LotTender></efac:SettledContract><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:SettledContract><cbc:ID schemeName="contract">CON-0001</cbc:ID></efac:SettledContract></efac:LotResult></efac:NoticeResult>
     OCDS example: '{"contracts":[{"id":"CON-0001","publicPassengerTransportServicesKilometers":988754432110987,"awardID":"RES-0001"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
