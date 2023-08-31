@@ -118,7 +118,7 @@ In OCDS, an UltimateBeneficialOwner is modeled as a `Person` object in the `bene
 * X01 - Notice containing information relevant to Formation or Completion of the liquidation of a [EEIG](https://en.wikipedia.org/wiki/European_economic_interest_grouping)
 * X02 - Notice containing information about Registration, Deletion, Transfer-registration or Transfer-deletion of a European Company or European Cooperative Society
 
-Furthermore, thee following notice types are listed in the regulation's annex but are not described by the eForms SDK.
+Furthermore, the following notice types are listed in the regulation's annex but are not described by the eForms SDK.
 
 - E1 - Prior market consultation notice
 - E5 - Contract completion notice type
