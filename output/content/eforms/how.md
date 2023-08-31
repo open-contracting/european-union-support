@@ -1,5 +1,9 @@
 # How to use this profile
 
+```{attention}
+If you are not yet familiar with OCDS for eForms, we recommend that you start with the [primer](primer.md).
+```
+
 ## Convert a notice to OCDS format
 
 [Create a release](operations.md#create-a-release) and map each field on the notice according to the [field mappings](mapping).
