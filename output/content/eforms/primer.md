@@ -34,7 +34,7 @@ The following diagram illustrates the relationship between:
 * Procedures in eForms and planning and contracting processes in OCDS
 * [Form types](https://docs.ted.europa.eu/eforms/latest/schema/documents-forms-and-notices.html#formAndFormTypesSection) in eForms and planning and contracting process stages in OCDS
 
-![Procedures and form types diagram](img/procedure_form_types.svg)
+![Procedures and form types diagram](_static/svg/procedure_form_types.svg)
 
 ### Notice (one or more releases)
 
@@ -63,7 +63,7 @@ In eForms, a PIN-only notice can be divided into parts. When a call for competit
 
 In OCDS, each part is modeled as an individual planning release, belonging to a separate planning process.
 
-![Parts diagram](img/parts.svg)
+![Parts diagram](_static/svg/parts.svg)
 
 ### ProcurementProjectLot (lot or group of lots)
 
@@ -95,13 +95,13 @@ In eForms, the [Organization](https://docs.ted.europa.eu/eforms/latest/schema/pa
 
 In OCDS, a Company and each of its TouchPoints are modeled as separate `Organization` objects in the `parties` array.
 
-![Organizations and Touchpoints diagram](img/organizations_touchpoints.svg)
+![Organizations and Touchpoints diagram](_static/svg/organizations_touchpoints.svg)
 
 In eForms, the CompanyID element (nested under the PartyLegalEntity element, under the Company element) represents the legal entity’s identifier.
 
 In OCDS, a CompanyID is modeled as an `identifier` field on an `Organization` object. As such, the `Organization` objects in OCDS that represent the Company and TouchPoints of one Organization in eForms share the same identifier.
 
-![Organization identifiers diagram](img/organization_identifiers.svg)
+![Organization identifiers diagram](_static/svg/organization_identifiers.svg)
 
 ### Ultimate Beneficial Owner (person)
 
@@ -109,7 +109,7 @@ In eForms, the UltimateBeneficialOwner (UBO) element represents a beneficial own
 
 In OCDS, an UltimateBeneficialOwner is modeled as a `Person` object in the `beneficialOwners` array of the `Organization` object that the UBO beneficially owns.
 
-![Ultimate beneficial owner diagram](img/ultimate_beneficial_owners.svg)
+![Ultimate beneficial owner diagram](_static/svg/ultimate_beneficial_owners.svg)
 
 ## What's not included
 

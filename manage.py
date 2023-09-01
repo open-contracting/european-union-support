@@ -34,7 +34,8 @@ sourcedir = basedir / "source"
 outputdir = basedir / "output"
 mappingdir = outputdir / "mapping"
 eformsdir = mappingdir / "eforms"
-contentdir = outputdir / "content" / "eforms"
+docsdir = outputdir / "content" / "eforms"
+staticdir = docsdir / "_static" / "svg"
 
 # From https://github.com/OP-TED/eForms-SDK/tree/main/examples
 # See https://docs.ted.europa.eu/eforms/latest/schema/schemas.html
@@ -847,12 +848,17 @@ def build(directory):
         else:
             click.echo(f"{path} does not exist")
 
-    docsdir = Path(directory) / "docs"
-    codelistsdir = docsdir / "codelists"
+    dstdocsdir = Path(directory) / "docs"
+    codelistsdir = dstdocsdir / "codelists"
+    dststaticdir = dstdocsdir / "_static" / "svg"
 
     # Copy the content pages.
-    for file in contentdir.iterdir():
-        copy_if_changed(file, docsdir)
+    for file in docsdir.iterdir():
+        if file.is_file():
+            copy_if_changed(file, dstdocsdir)
+
+    for file in staticdir.iterdir():
+        copy_if_changed(file, dststaticdir)
 
     # Create the codelist mapping pages.
     stems = []
@@ -942,7 +948,7 @@ def build(directory):
 
     rows = "\n".join(rows)
     replace_if_changed(
-        docsdir / "mapping.md",
+        dstdocsdir / "mapping.md",
         f"""\
         <div id="mappings" class="wy-table-responsive">
           <p>
