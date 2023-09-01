@@ -89,7 +89,7 @@ In eForms, the [SettledContract](https://docs.ted.europa.eu/eforms/latest/schema
 
 In OCDS, a SettledContract is modeled as a [`Contract` object](https://standard.open-contracting.org/latest/en/schema/reference/#contract).
 
-### Company and Touchpoint (organization)
+### Company and TouchPoint (organization)
 
 In eForms, the [Organization](https://docs.ted.europa.eu/eforms/latest/schema/parties.html#organizationSection) element represents a juridical person, like a buyer or winner – or a natural person, like when the winner is a self-employed individual. An Organization is composed of a Company, representing the legal entity, and one or more TouchPoints, each representing a function of the legal entity. Organization elements are nested under the Organizations (plural) element.
 
@@ -103,7 +103,7 @@ In OCDS, a CompanyID is modeled as an `identifier` field on an `Organization` ob
 
 ![Organization identifiers diagram](_static/svg/organization_identifiers.svg)
 
-### Ultimate Beneficial Owner (person)
+### UltimateBeneficialOwner (person)
 
 In eForms, the UltimateBeneficialOwner (UBO) element represents a beneficial owner of a winner, tenderer or subcontractor. Like Organizations, UBOs are nested under the Organizations element. A UBO is related to a Company by its technical identifier. 
 
