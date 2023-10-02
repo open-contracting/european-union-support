@@ -3227,7 +3227,7 @@
           - Set its `.field` to "awa-cri-nam".
           - Set its `.name` to "Award Criterion Name".
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">awa-cri-ord</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
-    OCDS example: '{"withheldInformation":[{"field":"awa-cri-nam","id":"awa-cri-nam-LOT-0001","name":"Award Criteron Name"}]}'
+    OCDS example: '{"withheldInformation":[{"field":"awa-cri-nam","id":"awa-cri-nam-LOT-0001","name":"Award Criterion Name"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-195(BT-734)-LotsGroup
     parentNodeId: ND-LotsGroupAwardCriteriaNameUnpublish
@@ -3247,7 +3247,7 @@
           - Set its `.field` to "awa-cri-nam".
           - Set its `.name` to "Award Criterion Name".
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="LotsGroup">GLO-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:FieldsPrivacy><efbc:FieldIdentifierCode listName="non-publication-identifier">awa-cri-ord</efbc:FieldIdentifierCode></efac:FieldsPrivacy></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
-    OCDS example: '{"withheldInformation":[{"field":"awa-cri-nam","id":"awa-cri-nam-GLO-0001","name":"Award Criteron Name"}]}'
+    OCDS example: '{"withheldInformation":[{"field":"awa-cri-nam","id":"awa-cri-nam-GLO-0001","name":"Award Criterion Name"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-195(BT-759)-LotResult
     parentNodeId: ND-ReceivedSubmissionCountUnpublish
@@ -9653,7 +9653,7 @@
 
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
-        Add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the value of this field to the award criteron number's `.number`.
+        Add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the value of this field to the award criterion number's `.number`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efbc:ParameterCode listName="number-fixed"/><efbc:ParameterNumeric>50</efbc:ParameterNumeric></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
@@ -9675,7 +9675,7 @@
 
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
-        Add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the value of this field to the award criteron number's `.number`.
+        Add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the value of this field to the award criterion number's `.number`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efbc:ParameterCode listName="number-threshold"/><efbc:ParameterNumeric>50</efbc:ParameterNumeric></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
@@ -9697,7 +9697,7 @@
 
         [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot's `.awardCriteria.criteria` array.
-        Add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the value of this field to the award criteron number's `.number`.
+        Add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the value of this field to the award criterion number's `.number`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efbc:ParameterCode listName="number-weight"/><efbc:ParameterNumeric>50</efbc:ParameterNumeric></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
@@ -9719,7 +9719,7 @@
 
         [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
         For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot gorup's `.awardCriteria.criteria` array.
-        Add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the value of this field to the award criteron number's `.number`.
+        Add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the value of this field to the award criterion number's `.number`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="LotsGroup">GLO-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efbc:ParameterCode listName="number-fixed"/><efbc:ParameterNumeric>50</efbc:ParameterNumeric></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lotGroups":[{"id":"GLO-0001","awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
@@ -9741,7 +9741,7 @@
 
         [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
         For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot gorup's `.awardCriteria.criteria` array.
-        Add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the value of this field to the award criteron number's `.number`.
+        Add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the value of this field to the award criterion number's `.number`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="LotsGroup">GLO-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efbc:ParameterCode listName="number-threshold"/><efbc:ParameterNumeric>50</efbc:ParameterNumeric></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lotGroups":[{"id":"GLO-0001","awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
@@ -9763,7 +9763,7 @@
 
         [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
         For each `cac:SubordinateAwardingCriterion`, add or update a corresponding `AwardCriterion` in the lot gorup's `.awardCriteria.criteria` array.
-        Add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the value of this field to the award criteron number's `.number`.
+        Add or update a corresponding `CriterionNumber` in the award criterion's `.numbers` array and map the value of this field to the award criterion number's `.number`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="LotsGroup">GLO-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cac:SubordinateAwardingCriterion><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:AwardCriterionParameter><efbc:ParameterCode listName="number-weight"/><efbc:ParameterNumeric>50</efbc:ParameterNumeric></efac:AwardCriterionParameter></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:SubordinateAwardingCriterion></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lotGroups":[{"id":"GLO-0001","awardCriteria":{"criteria":[{"numbers":[{"number":50}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
