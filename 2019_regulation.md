@@ -40,7 +40,7 @@ idSchemes | eForms SDK | Indicates the identifier schemes for this `id-ref` fiel
 [repeatable](https://docs.ted.europa.eu/eforms/latest/fields/index.html#_dynamic_properties) | eForms SDK | Indicates if the field can appear more than once inside its container. | Simplified to the boolean (removed `severity`).
 mandatory | eForms SDK | Indicates whether or not a field is required to have a value. | Simplified to the boolean (`true` if required on one or more forms).
 codeList | eForms SDK | Identifier of the code list from which the field value must belong. Applicable only for fields of type "code" or "internal-code" | Simplified to the codelist (removed `severity`, `value.type`, `value.parentId`).
-pattern | eForms SDK | Indicates that the value of the field must match a specific regular expression pattern. | Simplied to the pattern (removed `severity`).
+pattern | eForms SDK | Indicates that the value of the field must match a specific regular expression pattern. | Simplified to the pattern (removed `severity`).
 assert | eForms SDK | Gives an assertion, as a boolean EFX expression, that is expected to evaluate to "true". |
 inChangeNotice | eForms SDK | Indicates whether the values of the field can be modified in a change notice, compared to the notice being changed (the original notice). |
 privacy | eForms SDK | The information necessary for the mechanism by which the field can be withheld from publication for a defined period. |
