@@ -298,7 +298,7 @@ def update_with_sdk(filename, verbose):
     for label, row in df.iterrows():
         # Remove OPA- fields. "Those fields can be ignored when generating the XML notice"
         # https://docs.ted.europa.eu/eforms/latest/fields/index.html#_fields_other_than_bt
-        if row["id"].startswith("OPA-"):
+        if label.startswith("OPA-"):
             labels.add(label)
 
         # Remove attribute fields.
