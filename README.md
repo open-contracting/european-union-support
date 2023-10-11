@@ -8,6 +8,6 @@ This is for internal use only. You are probably looking for [OCDS for eForms](ht
 Install requirements:
 
     bundle
-    pip install -r requirements.txt
+    pip install -r requirements_dev.txt
 
 Use `--help` for any `manage.py` command to learn about its function.
