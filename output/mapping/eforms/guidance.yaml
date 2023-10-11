@@ -12980,51 +12980,6 @@
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:AppealTerms><cac:PresentationPeriod><cbc:Description languageID="ENG">Any review request shall be submitted ...</cbc:Description></cac:PresentationPeriod></cac:AppealTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","reviewDetails":"Any review request shall be submitted ..."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#appealTermsSection
--   id: OPA-36-Lot-Number
-    parentNodeId: ND-LotDuration
-    name: Numeric value of the duration period
-    btId: BT-36
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:PlannedPeriod/cbc:DurationMeasure
-    type: number
-    repeatable: false
-    mandatory: false
-    Description: The (estimated) period from the start to the end of the contract, framework agreement, dynamic purchasing system or qualification system. This shall include any options and renewals.
-    Business groups:
-        BG-36: Duration
-    eForms guidance: Follow guidance for BT-36-Lot.
-    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot"/><cac:ProcurementProject><cac:PlannedPeriod><cbc:DurationMeasure unitCode="DAY">3</cbc:DurationMeasure></cac:PlannedPeriod></cac:ProcurementProject></cac:ProcurementProjectLot>
-    OCDS example: '{"tender":{"lots":[{"contractPeriod":{"durationInDays":3}}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#plannedPeriodSection
--   id: OPA-36-Part-Number
-    parentNodeId: ND-PartDuration
-    name: Numeric value of the duration period
-    btId: BT-36
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cac:PlannedPeriod/cbc:DurationMeasure
-    type: number
-    repeatable: false
-    mandatory: false
-    Description: The (estimated) period from the start to the end of the contract, framework agreement, dynamic purchasing system or qualification system. This shall include any options and renewals.
-    Business groups:
-        BG-36: Duration
-    eForms guidance: Follow guidance for BT-36-Part.
-    eForms example: <cac:PlannedPeriod><cbc:DurationMeasure unitCode="DAY">3</cbc:DurationMeasure></cac:PlannedPeriod>
-    OCDS example: '{"tender":{"contractPeriod":{"durationInDays":3}}}'
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#plannedPeriodSection
--   id: OPA-98-Lot-Number
-    parentNodeId: ND-LotTenderingTerms
-    name: Numeric value of the tender validity deadline
-    btId: BT-98
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TenderValidityPeriod/cbc:DurationMeasure
-    type: number
-    repeatable: false
-    mandatory: false
-    Description: The period, from the tender submission deadline, for which tenders must remain valid.
-    Business groups:
-        BG-102: Submission Terms
-    eForms guidance: Follow guidance for BT-98-Lot.
-    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:TenderValidityPeriod><cbc:DurationMeasure unitCode="MONTH">4</cbc:DurationMeasure></cac:TenderValidityPeriod></cac:TenderingTerms></cac:ProcurementProjectLot>
-    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","submissionTerms":{"bidValidityPeriod":{"durationInDays":120}}}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#tenderValiditySection
 -   id: OPP-010-notice
     parentNodeId: ND-Publication
     name: Notice Publication Number

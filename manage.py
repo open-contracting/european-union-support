@@ -296,6 +296,11 @@ def update_with_sdk(filename, verbose):
     supported_notice_types = {str(i) for i in range(1, 41)} | {"CEI", "T01", "T02"}
     expected = {"value": False, "severity": "ERROR", "constraints": [{"value": True, "severity": "ERROR"}]}
     for label, row in df.iterrows():
+        # Remove OPA- fields. "Those fields can be ignored when generating the XML notice"
+        # https://docs.ted.europa.eu/eforms/latest/fields/index.html#_fields_other_than_bt
+        if row["id"].startswith("OPA-"):
+            labels.add(label)
+
         # Remove attribute fields.
         if row["attributeOf"] is not np.nan and row["attributeOf"] in label:
             labels.add(label)
