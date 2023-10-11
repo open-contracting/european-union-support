@@ -21,4 +21,6 @@ jobs:
       - env:
           # ocdskit is run as a command. openpyxl is an optional dependency of Pandas.
           STANDARD_MAINTENANCE_SCRIPTS_IGNORE: ocdskit,openpyxl
+          # fields.json is a cached upstream file.
+          OCDS_NOINDENT: 1
         run: pytest /tmp/test_requirements.py
