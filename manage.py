@@ -349,19 +349,22 @@ def update_with_sdk(filename, verbose):
 
     # Remove or abbreviate columns that do not assist the mapping process and that lengthen the JSON file. See README.
     drop = [
+        # https://docs.ted.europa.eu/eforms/latest/fields/index.html#_static_properties
         "xpathRelative",
+        "xsdSequenceOrder",
+        "attributeOf",
+        "attributeName",
+        "attributes",
         "presetValue",
         "legalType",
         "maxLength",
         "idScheme",
+        # https://docs.ted.europa.eu/eforms/latest/fields/index.html#_withheld_publication_mechanism
+        "privacy",
+        # https://docs.ted.europa.eu/eforms/latest/fields/index.html#_dynamic_properties
         "forbidden",
         "assert",
         "inChangeNotice",
-        "privacy",
-        "xsdSequenceOrder",
-        "attributes",
-        "attributeName",
-        "attributeOf",
     ]
     df["mandatory"] = df["mandatory"].notna()
     # Simplify these columns if `severity` is the only other top-level key.

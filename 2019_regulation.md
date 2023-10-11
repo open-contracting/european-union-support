@@ -33,7 +33,6 @@ parentNodeId | eForms SDK | Identifier of the node (XML element) that contains t
 name | eForms SDK | Short name of the field. |
 btId | eForms SDK | Identifier of the business term to which the field corresponds. |
 xpathAbsolute | eForms SDK | Location of the field in an XML notice, as an absolute XPath. | Should appear in the `eForms example`.
-xsdSequenceOrder | eForms SDK | Position of each XML element relative to its siblings. |
 type | eForms SDK | Technical data type of the field. | Should match the OCDS field's type.
 schemeName | eForms SDK | Indicates the value that should be indicated for this field in the `schemeName` attribute in the XML.
 idSchemes | eForms SDK | Indicates the identifier schemes for this `id-ref` field.
@@ -41,9 +40,6 @@ idSchemes | eForms SDK | Indicates the identifier schemes for this `id-ref` fiel
 mandatory | eForms SDK | Indicates whether or not a field is required to have a value. | Simplified to the boolean (`true` if required on one or more forms).
 codeList | eForms SDK | Identifier of the code list from which the field value must belong. Applicable only for fields of type "code" or "internal-code" | Simplified to the codelist (removed `severity`, `value.type`, `value.parentId`).
 pattern | eForms SDK | Indicates that the value of the field must match a specific regular expression pattern. | Simplified to the pattern (removed `severity`).
-assert | eForms SDK | Gives an assertion, as a boolean EFX expression, that is expected to evaluate to "true". |
-inChangeNotice | eForms SDK | Indicates whether the values of the field can be modified in a change notice, compared to the notice being changed (the original notice). |
-privacy | eForms SDK | The information necessary for the mechanism by which the field can be withheld from publication for a defined period. |
 Description | [Regulation annex](https://ec.europa.eu/growth/single-market/public-procurement/digital-procurement/eforms_en) | The description of the business term. |
 Business groups | Regulation annex | The business groups to which the business term belongs, from top down. | eForms has a hierarchy of BGs. Use [business-groups.csv](https://github.com/open-contracting/european-union-support/blob/main/output/mapping/eforms/business-groups.csv) to look up the hierarchy and descriptions for each group.
 TED Xpath | [SIMAP](https://simap.ted.europa.eu/en_GB/web/simap/eforms) (13/04/2022) | The TED XPaths matching the eForms field. |
@@ -58,11 +54,18 @@ The following keys from the fields metadata are removed.
 Key | Description | Reason
 -- | -- | --
 xpathRelative | Location of the field in an XML notice, relative to its parent node. | Substring of `xpathAbsolute`.
+xsdSequenceOrder | Position of each XML element relative to its siblings. | Relevant to XML serialization only.
+attributeOf | Identifier of the field representing the XML element which has the attribute. | Relevant to XML serialization only.
+attributeName | Name of the XML attribute represented by the field. | Relevant to XML serialization only.
+attributes | Identifiers of the fields representing the XML attributes the XML element represented by the field can have. | Relevant to XML serialization only.
 presetValue | The value used to pre-fill a field. | Unnecessary view-level metadata.
 legalType | Data type of the business term, as indicated in the eForms Regulation. | Redundant with `type`.
 maxLength | Maximum number of characters allowed in the value of the field, optional. | The only fields with a maxLength less than 400 are identifiers, phone numbers and percentages.
 idScheme | eForms SDK | Indicates the identifier scheme for this `id` field. | Redundant with `schemeName` and `pattern`.
+privacy | The information necessary for the mechanism by which the field can be withheld from publication for a defined period. |
 forbidden | Indicates whether or not the field can be used in specific notice types. | It isn't informative to know which forms a field can't appear on.
+assert | Gives an assertion, as a boolean EFX expression, that is expected to evaluate to "true". |
+inChangeNotice | Indicates whether the values of the field can be modified in a change notice, compared to the notice being changed (the original notice). |
 
 The correspondence between `legalType` and `type` is:
 
