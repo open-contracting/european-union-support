@@ -2127,9 +2127,9 @@
     Description: The justification for electronic submission of tenders, requests to participate, or expressions of interest not being possible.
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot). Look up the code''s label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/communication-justification) and map it to the lot''s `.submissionTerms.nonElectronicSubmissionRationale`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot). Look up the code''s label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/communication-justification) and map it to the lot''s `.submissionTerms.nonElectronicSubmission.rationale`.'
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cac:ProcessJustification><cbc:ProcessReasonCode listName="no-esubmission-justification">phy-mod</cbc:ProcessReasonCode></cac:ProcessJustification></cac:TenderingProcess></cac:ProcurementProjectLot>
-    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","submissionTerms":{"nonElectronicSubmissionRationale":"Inclusion of a physical model"}}]}}'
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","submissionTerms":{"nonElectronicSubmission":{"rationale":"Inclusion of a physical model"}}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#nonelectronicSection
 -   id: BT-191-Tender
     parentNodeId: ND-LotTenderOriginCountry
@@ -13153,7 +13153,7 @@
         This mapping assumes that the value of this field is consistent across all the LotTenders for a given lot. If the values in your data source vary, contact the [OCDS Data Support Team](mailto:data@open-contracting.org).
 
         [Get the lot for the lot tender](operations.md#get-the-lot-for-a-lottender), divide by 100 and map the result to the lot's `.contractTerms.operatorRevenueShare`.
-    eForms example: <efac:NoticeResult><efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID><efac:ContractTerm><efbc:TermCode>all-rev-ic</efbc:TermCode><efbc:TermPercent>100</efbc:TermPercent></efac:ContractTerm><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotTender></efac:NoticeResult>
+    eForms example: <efac:NoticeResult><efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID><efac:ContractTerm><efbc:TermCode>all-rev-tic</efbc:TermCode><efbc:TermPercent>100</efbc:TermPercent></efac:ContractTerm><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotTender></efac:NoticeResult>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","contractTerms":{"operatorRevenueShare":1}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: OPP-033-Tender
@@ -13193,10 +13193,10 @@
     repeatable: false
     mandatory: true
     codeList: revenue-allocation
-    eForms guidance: ''
-    eForms example: ''
+    eForms guidance: Discard.
+    eForms example: <efac:ContractTerm><efbc:TermCode>all-rev-tic</efbc:TermCode></efac:ContractTerm>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: OPP-040-Procedure
     parentNodeId: ND-ProcedureTransportServiceType
     name: Main Nature - Sub Type
