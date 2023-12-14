@@ -24,7 +24,7 @@ import requests
 import yaml
 from jsonpointer import set_pointer
 from jsonschema import FormatChecker
-from jsonschema.validators import Draft4Validator as validator
+from jsonschema.validators import Draft4Validator
 from ocdsextensionregistry import ProfileBuilder
 
 # from ocdskit.mapping_sheet import mapping_sheet
@@ -683,7 +683,7 @@ def lint(filename, additional_properties):
     ):
         set_pointer(schema, f"/definitions/{definition}/required", [])
 
-    format_checker = FormatChecker()
+    validator = Draft4Validator(schema, format_checker=FormatChecker())
 
     if os.path.isfile("codes.txt"):
         with open("codes.txt") as f:
@@ -778,7 +778,7 @@ def lint(filename, additional_properties):
                             if key not in obj[0]:
                                 obj[0][key] = "1"
 
-                for e in validator(schema, format_checker=format_checker).iter_errors(release):
+                for e in validator.iter_errors(release):
                     if e.validator == "additionalProperties":
                         e.absolute_schema_path[-1] = "properties"
                         e.absolute_schema_path.append("")
