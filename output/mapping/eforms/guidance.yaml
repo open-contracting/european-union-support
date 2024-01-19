@@ -12342,10 +12342,10 @@
     - TED_EXPORT/FORM_SECTION/F02_2014/OBJECT_CONTRACT/OBJECT_DESCR/ECATALOGUE_REQUIRED
     - TED_EXPORT/FORM_SECTION/F05_2014/OBJECT_CONTRACT/OBJECT_DESCR/ECATALOGUE_REQUIRED
     TED guidance:
-    - Set the lot's `.submissionTerms.electronicCataloguePolicy` to 'required'.
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and set its `.submissionTerms.electronicCataloguePolicy` according to [the allowed values](https://extensions.open-contracting.org/en/extensions/submissionTerms/master/codelists/).'
+    - Set the lot's `.submissionTerms.electronicCatalogPolicy` to 'required'.
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and set its `.submissionTerms.electronicCatalogPolicy` according to [the allowed values](https://extensions.open-contracting.org/en/extensions/submissionTerms/master/codelists/).'
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:ContractExecutionRequirement><cbc:ExecutionRequirementCode listName="ecatalog-submission">allowed</cbc:ExecutionRequirementCode></cac:ContractExecutionRequirement></cac:TenderingTerms></cac:ProcurementProjectLot>
-    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","submissionTerms":{"electronicCataloguePolicy":"allowed"}}]}}'
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","submissionTerms":{"electronicCatalogPolicy":"allowed"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#eCatalogueSubmissionSection
 -   id: BT-765-Lot
     parentNodeId: ND-LotFAContractingSystem
