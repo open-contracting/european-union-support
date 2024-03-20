@@ -11,7 +11,7 @@ attrs==23.1.0
     #   jsonschema
     #   referencing
     #   requests-cache
-black==23.9.1
+black==24.3.0
     # via -r requirements_dev.in
 cattrs==23.1.2
     # via
@@ -37,6 +37,8 @@ et-xmlfile==1.1.0
     # via
     #   -r requirements.txt
     #   openpyxl
+exceptiongroup==1.2.0
+    # via cattrs
 filelock==3.12.4
     # via virtualenv
 flake8==6.1.0
@@ -160,6 +162,14 @@ six==1.16.0
     #   -r requirements.txt
     #   python-dateutil
     #   url-normalize
+tomli==2.0.1
+    # via
+    #   black
+    #   mdformat
+typing-extensions==4.10.0
+    # via
+    #   black
+    #   cattrs
 tzdata==2023.3
     # via
     #   -r requirements.txt
