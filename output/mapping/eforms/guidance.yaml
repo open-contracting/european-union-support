@@ -548,7 +548,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingProcess/cbc:GovernmentAgreementConstraintIndicator
     type: indicator
     repeatable: false
-    mandatory: true
+    mandatory: false
     codeList: indicator
     Description: The procurement is covered by the Government Procurement Agreement (GPA).
     Business groups:
@@ -582,7 +582,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efbc:DPSTerminationIndicator
     type: indicator
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: indicator
     Description: The dynamic purchasing system is terminated. No further contracts, besides those published in this notice, will be awarded in the dynamic purchasing system. This field can be used even if no contracts are awarded in the contract award notice.
     Business groups:
@@ -602,7 +602,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cbc:NoFurtherNegotiationIndicator
     type: indicator
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: indicator
     Description: The buyer reserves the right to award the contract on the basis of the initial tenders without any further negotiations.
     Business groups:
@@ -788,7 +788,7 @@
     type: text
     repeatable: false
     mandatory: false
-    pattern: ^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$
+    pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}|(\d{1,8})-(19|20)\d\d)$
     Description: An identifier of a previous procedure that justifies the use of a procedure which allows directly awarding contracts, i.e. justifying a procedure that does not require publishing a call for competition in the Official Journal of the European Union.
     Business groups:
         BG-6: Procedure
@@ -1404,7 +1404,7 @@
     type: id
     repeatable: true
     mandatory: false
-    pattern: ^(PROCEDURE|BUYER|RESULT|((PAR|LOT|GLO|RES|ORG)-\d{4}))$
+    pattern: ^(PROCEDURE|BUYER|RESULT|((PAR|LOT|GLO|RES|ORG|TPA|TPO|TEN|CON|UBO)-\d{4}))$
     Description: An identifier of one or more sections within the changed notice. The information in the change section refers to this section or these sections.
     Business groups:
         BG-9: Change
@@ -1745,6 +1745,24 @@
     eForms example: <efac:NoticeResult><efac:SettledContract><cbc:ID schemeName="contract">CON-0001</cbc:ID><efac:ContractReference><cbc:ID>CRN ABC:EFG/2020-01</cbc:ID></efac:ContractReference></efac:SettledContract><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:SettledContract><cbc:ID schemeName="contract">CON-0001</cbc:ID></efac:SettledContract></efac:LotResult></efac:NoticeResult>
     OCDS example: '{"contracts":[{"id":"CON-0001","identifiers":[{"id":"CRN ABC:EFG/2020-01","scheme":"NL-TENDERNED"}],"awardID":"RES-0001"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#settledContractSection
+-   id: BT-1501(c)-Contract
+    parentNodeId: ND-ContractModification
+    name: Modified Contract Reference
+    btId: BT-1501
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:ContractModification/efbc:ModifiedContractIdentifier
+    type: id-ref
+    idSchemes:
+    - CON
+    repeatable: false
+    mandatory: true
+    pattern: ^CON-\d{4}$
+    Description: An identifier of one or more sections within a previous notice within the procedure. The information in the modification section refers to this section or these sections.
+    Business groups:
+        BG-77: Modification
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: BT-1501(n)-Contract
     parentNodeId: ND-ContractModification
     name: Modification Previous Notice Identifier
@@ -1761,22 +1779,22 @@
     eForms example: <efac:ContractModification><efac:Change><efbc:ChangedSectionIdentifier>LOT-0002</efbc:ChangedSectionIdentifier></efac:Change></efac:ContractModification>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/contract-modification-notice.html
--   id: BT-1501(s)-Contract
+-   id: BT-1501(p)-Contract
     parentNodeId: ND-ModifiedSection
-    name: Modification Previous Notice Section Identifier
+    name: Modified Notice Part Reference
     btId: BT-1501
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:ContractModification/efac:Change/efac:ChangedSection/efbc:ChangedSectionIdentifier
     type: id
     repeatable: true
-    mandatory: true
-    pattern: ^(RESULT|((CON|RES|TEN|TPA|TPO|ORG)-\d{4}))$
+    mandatory: false
+    pattern: ^( BUYER|RESULT|((RES|TEN|TPA|TPO|ORG|UBO)-\d{4}))$
     Description: An identifier of one or more sections within a previous notice within the procedure. The information in the modification section refers to this section or these sections.
     Business groups:
         BG-77: Modification
-    eForms guidance: Discard. The notice and sections that were modified can be determined by comparing previous releases with the current release.
-    eForms example: <efac:ContractModification><efac:Change><efbc:ChangedSectionIdentifier>CON-0001</efbc:ChangedSectionIdentifier></efac:Change></efac:ContractModification>
+    eForms guidance: ''
+    eForms example: ''
     OCDS example: ''
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/contract-modification-notice.html
+    sdk: ''
 -   id: BT-151-Contract
     parentNodeId: ND-SettledContract
     name: Contract URL
@@ -2139,7 +2157,7 @@
     type: code
     repeatable: true
     mandatory: false
-    codeList: eforms-country
+    codeList: country
     Description: A country of origin of the product or the service.
     Business groups:
         BG-7: Notice Result
@@ -2157,7 +2175,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efbc:TenderVariantIndicator
     type: indicator
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: indicator
     Description: The tender is a variant.
     Business groups:
@@ -6348,7 +6366,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cbc:ID
     type: id
     repeatable: false
-    mandatory: true
+    mandatory: false
     Description: 'The internal identifier used for files regarding the procurement procedure or lot before a procedure identifier is given (e.g. coming from the buyer''s document management system or procurement planning system). '
     Business groups:
         BG-2: Purpose
@@ -6369,7 +6387,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:ProcurementProject/cbc:ID
     type: id
     repeatable: false
-    mandatory: true
+    mandatory: false
     Description: 'The internal identifier used for files regarding the procurement procedure or lot before a procedure identifier is given (e.g. coming from the buyer''s document management system or procurement planning system). '
     Business groups:
         BG-2: Purpose
@@ -7180,7 +7198,7 @@
     xpathAbsolute: /*/cac:TenderingTerms/cac:LotDistribution/cbc:MaximumLotsSubmittedNumeric
     type: integer
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The maximum number of lots for which one tenderer can submit tenders.
     Business groups:
         BG-6: Procedure
@@ -7263,7 +7281,7 @@
     xpathAbsolute: /*/cac:TenderingTerms/cac:LotDistribution/cbc:MaximumLotsAwardedNumeric
     type: integer
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The maximum number of lots for which contract(s) can be awarded to one tenderer.
     Business groups:
         BG-6: Procedure
@@ -7364,7 +7382,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:SelectionCriteria/efbc:SecondStageIndicator
     type: indicator
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: indicator
     Description: The criteria (or criterion) will (only) be used to select the candidates to be invited for the second stage of the procedure (if a maximum number of candidates was set).
     Business groups:
@@ -7505,7 +7523,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:EconomicOperatorShortList/cbc:MinimumQuantity
     type: integer
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The minimum number of candidates to be invited for the second stage of the procedure.
     Business groups:
         BG-6: Procedure
@@ -8385,7 +8403,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:EconomicOperatorShortList/cbc:MaximumQuantity
     type: integer
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The maximum number of candidates to be invited for the second stage of the procedure.
     Business groups:
         BG-6: Procedure
@@ -9147,7 +9165,7 @@
     type: code
     repeatable: false
     mandatory: true
-    codeList: eforms-country
+    codeList: country
     Description: The country of the organisation's physical address.
     Business groups:
         BG-703: Organisation
@@ -9237,7 +9255,7 @@
     type: code
     repeatable: false
     mandatory: false
-    codeList: eforms-country
+    codeList: country
     Description: The country of the organisation's physical address.
     Business groups:
         BG-703: Organisation
@@ -9253,7 +9271,7 @@
     type: code
     repeatable: false
     mandatory: false
-    codeList: eforms-country
+    codeList: country
     Description: The country of the organisation's physical address.
     Business groups:
         BG-703: Organisation
@@ -9269,7 +9287,7 @@
     type: code
     repeatable: false
     mandatory: true
-    codeList: eforms-country
+    codeList: country
     Description: The country of the place of performance.
     Business groups:
         BG-708: Place of Performance
@@ -9289,7 +9307,7 @@
     type: code
     repeatable: false
     mandatory: true
-    codeList: eforms-country
+    codeList: country
     Description: The country of the place of performance.
     Business groups:
         BG-708: Place of Performance
@@ -9307,7 +9325,7 @@
     type: code
     repeatable: false
     mandatory: true
-    codeList: eforms-country
+    codeList: country
     Description: The country of the place of performance.
     Business groups:
         BG-708: Place of Performance
@@ -9324,7 +9342,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cbc:CandidateReductionConstraintIndicator
     type: indicator
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: indicator
     Description: The procedure will take place in successive stages. In each stage, some participants may be eliminated.
     Business groups:
@@ -9964,7 +9982,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efbc:TermAmount
     type: amount
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The estimated value of the part of the contract that the contractor will subcontract to third parties.
     Business groups:
         BG-7: Notice Result
@@ -10011,7 +10029,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efbc:TermPercent
     type: number
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The estimated percentage of the contract that the contractor will subcontract to third parties compared to the whole contract.
     Business groups:
         BG-7: Notice Result
@@ -10054,7 +10072,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ContractExtension/cac:Renewal/cac:Period/cbc:Description
     type: text-multilingual
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: Any other information about the renewal(s).
     Business groups:
         BG-36: Duration
@@ -10451,7 +10469,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='irregularity-type']/efbc:StatisticsNumeric
     type: number
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The number of requests the buyer received to review any of its decisions.
     Business groups:
         BG-612: Buyer Review Summary
@@ -10488,7 +10506,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AllowedSubcontractTerms[cbc:SubcontractingConditionsCode/@listName='subcontracting-obligation']/cbc:MinimumPercent
     type: number
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The minimum percentage of the contract value that the contractor must subcontract using the competitive procedure described in Title III of European Parliament and Council Directive 2009/81/EC.
     Business groups:
         BG-711: Contract Terms
@@ -10572,7 +10590,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FrameworkAgreementValues/efbc:ReestimatedValueAmount
     type: amount
     repeatable: false
-    mandatory: true
+    mandatory: false
     Description: "The value likely to be spent within a framework agreement over its whole duration, including options and renewals, as re-estimated on the basis of the winner\u2019s tender or winners\u2019 tenders."
     Business groups:
         BG-7: Notice Result
@@ -10588,7 +10606,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:EconomicOperatorShortList/cbc:LimitationDescription
     type: indicator
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: indicator
     Description: There is a maximum number of candidates to be invited for the second stage of the procedure.
     Business groups:
@@ -10722,7 +10740,7 @@
     type: code
     repeatable: true
     mandatory: false
-    codeList: eforms-country
+    codeList: country
     Description: The nationality (or nationalities) of the beneficiary owner(s) of the winner, tenderer, or subcontractor as published in the register(s) established by European Parliament and Council Directive (EU) 2018/843. If such a register does not exist (e.g. in case of contractors established outside the Union) then equivalent information from other sources.
     Business groups:
         BG-703: Organisation
@@ -10819,7 +10837,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FrameworkAgreementValues/cbc:MaximumValueAmount
     type: amount
     repeatable: false
-    mandatory: true
+    mandatory: false
     Description: "The maximum value which can be spent within a framework agreement over its whole duration, including options and renewals, as calculated on the basis of the winner\u2019s tender or winners\u2019 tenders."
     Business groups:
         BG-7: Notice Result
@@ -10887,7 +10905,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/cbc:LowerTenderAmount
     type: amount
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: Value of the admissible tender with the lowest value. A tender shall be considered admissible where it has been submitted by a tenderer, who has not been excluded and who meets the selection criteria, and when it is in conformity with the technical specifications without being irregular (e.g. received late, having an abnormally low price or cost) or unacceptable or unsuitable. Only tenders for which it has been verified if they are admissible or inadmissible may be taken into account.
     Business groups:
         BG-7: Notice Result
@@ -10962,7 +10980,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:AppealRequestsStatistics[efbc:StatisticsCode/@listName='review-type']/efbc:StatisticsNumeric
     type: number
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The number of organisations that requested the buyer to review any of its decisions (e.g. the technical specifications, award decision).
     Business groups:
         BG-612: Buyer Review Summary
@@ -11328,7 +11346,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AllowedSubcontractTerms[cbc:SubcontractingConditionsCode/@listName='subcontracting-obligation']/cbc:MaximumPercent
     type: number
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The maximum percentage of the contract value that the contractor must subcontract using the competitive procedure described in Title III of Directive 2009/81/EC.
     Business groups:
         BG-711: Contract Terms
@@ -11345,7 +11363,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efbc:ValueKnownIndicator
     type: indicator
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: indicator
     Description: The buyer knows at least the estimated value of the part of the contract that the contractor will subcontract to third parties.
     Business groups:
@@ -11363,7 +11381,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efac:SubcontractingTerm[efbc:TermCode/@listName='applicability']/efbc:PercentageKnownIndicator
     type: indicator
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: indicator
     Description: The buyer knows at least the estimated percentage of the contract that the contractor will subcontract to third parties compared to the whole contract.
     Business groups:
@@ -11381,7 +11399,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:SecurityClearanceTerm/cbc:Description
     type: text-multilingual
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: Additional information about the security clearance (e.g. which level of security clearance is required, which team members must have it, whether it is necessary already for accessing the procurement documents or only for contract execution).
     Business groups:
         BG-705: Other Requirements
@@ -11922,7 +11940,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:RequiredFinancialGuarantee/cbc:Description
     type: text-multilingual
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The description of the financial guarantee required from the tenderer when submitting a tender. The guarantee can take the form of, for example, a payment to the buyer or a document from a bank. Typically, the guarantee would be forfeit when a tenderer has won the contract but then refused to sign it.
     Business groups:
         BG-102: Submission Terms
@@ -12041,7 +12059,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:SelectionCriteria/efac:CriterionParameter[efbc:ParameterCode/@listName='number-weight']/efbc:ParameterCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: number-weight
     Description: Whether the number linked to a selection criterion (or selection criteria) is a type of weight (e.g. a percentage).
     Business groups:
@@ -12064,7 +12082,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:SelectionCriteria/efac:CriterionParameter[efbc:ParameterCode/@listName='number-threshold']/efbc:ParameterCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: number-threshold
     Description: Whether the number linked to a selection criterion (or selection criteria) is a type of threshold (e.g. a minimum score, a maximum number of tenders with the highest score passing).
     Business groups:
@@ -12103,7 +12121,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='accessibility']/cbc:ProcurementType
     type: text-multilingual
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The justification for not including accessibility criteria even though the procurement is intended for use by natural persons.
     Business groups:
         BG-713: Strategic Procurement
@@ -12171,7 +12189,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:ReceivedSubmissionsStatistics/efbc:StatisticsNumeric
     type: number
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: Number of tenders or requests to participate received. Tenders including variants or multiple tenders submitted (for one lot) by the same tenderer should be counted as one tender.
     Business groups:
         BG-7: Notice Result
@@ -12201,7 +12219,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cac:SpecificTendererRequirement)]/cbc:CompanyLegalForm
     type: text-multilingual
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The legal form that must be taken by a group of tenderers that is awarded a contract.
     Business groups:
         BG-711: Contract Terms
@@ -12218,7 +12236,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:ReceivedSubmissionsStatistics/efbc:StatisticsCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: received-submission-type
     Description: The type of tenders or requests to participate received. The total number of tenders received shall be given. When a notice does not fall under Directive 2009/81/EC and is not about social or other specific services, the number of tenders received from micro, small and medium enterprises; the number of tenders received from tenderers registered in other European Economic Area countries and the number of tenders received from tenderers registered in countries outside of the European Economic Area shall also be given. All tenders shall be counted, regardless of whether they are admissible or inadmissible. For tenders submitted by a group of tenderers (e.g. a consortium), the tender shall be counted in the relevant category (e.g. SME) if the majority of the work is expected to be done by tenderers which fall within this category (e.g. they are SMEs).
     Business groups:
@@ -12537,7 +12555,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)]/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='missing-info-submission']/cbc:Description
     type: text-multilingual
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: Description of the tenderer-related information that can be supplemented even after the submission deadline.
     Business groups:
         BG-102: Submission Terms
@@ -12641,7 +12659,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='strategic-procurement']/cbc:ProcurementType
     type: text-multilingual
     repeatable: true
-    mandatory: false
+    mandatory: true
     Description: Description of how the procurement procedure is aiming at reducing the environmental impacts of the procurement, fulfilling social objectives and/or buying an innovative work, supply or service.
     Business groups:
         BG-713: Strategic Procurement
@@ -12949,7 +12967,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TenderValidityPeriod/cbc:DurationMeasure
     type: measure
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The period, from the tender submission deadline, for which tenders must remain valid.
     Business groups:
         BG-102: Submission Terms
@@ -12980,7 +12998,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AppealTerms/cac:PresentationPeriod/cbc:Description
     type: text-multilingual
     repeatable: false
-    mandatory: false
+    mandatory: true
     Description: The description of the time limits for review procedures.
     Business groups:
         BG-100: Communication
@@ -13320,7 +13338,7 @@
     xpathAbsolute: /*/cac:ContractingParty/cac:Party/cac:ServiceProviderParty/cbc:ServiceTypeCode
     type: code
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: organisation-role-service
     eForms guidance: |-
         Get the `Organization` in `parties` whose `id` is equal to the value of `ancestor::cac:ServiceProviderParty/cac:Party/cac:PartyIdentification/cbc:ID`. If none exists yet:
@@ -13352,7 +13370,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:ContractExecutionRequirement[cbc:ExecutionRequirementCode/@listName='reserved-execution']/cbc:Description
     type: text-multilingual
     repeatable: false
-    mandatory: false
+    mandatory: true
     eForms guidance: Discard. OPT-070 may only be used in some circumstances for a Call for Expression of Interest, which is not covered by the eForms regulation.
     eForms example: ''
     OCDS example: ''
@@ -13404,6 +13422,19 @@
     eForms example: <cac:SubsequentProcessTenderRequirement><cbc:Name>buyer-categories</cbc:Name></cac:SubsequentProcessTenderRequirement>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#frameworkAgreementSection
+-   id: OPT-093-Review
+    parentNodeId: ND-ReviewStatus
+    name: Review Technical Identifier
+    btId: OPT-093
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AppealsInformation/efac:AppealStatus/cbc:ID
+    type: id
+    schemeName: review
+    repeatable: false
+    mandatory: false
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: OPT-100-Contract
     parentNodeId: ND-SettledContract
     name: Framework Notice Identifier
@@ -13469,7 +13500,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:FiscalLegislationDocumentReference/cbc:ID
     type: id
     repeatable: false
-    mandatory: false
+    mandatory: true
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
 
@@ -13486,7 +13517,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:FiscalLegislationDocumentReference/cbc:ID
     type: id
     repeatable: false
-    mandatory: false
+    mandatory: true
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
 
@@ -13501,7 +13532,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:EnvironmentalLegislationDocumentReference/cbc:ID
     type: id
     repeatable: false
-    mandatory: false
+    mandatory: true
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
 
@@ -13518,7 +13549,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:EnvironmentalLegislationDocumentReference/cbc:ID
     type: id
     repeatable: false
-    mandatory: false
+    mandatory: true
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
 
@@ -13533,7 +13564,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:EmploymentLegislationDocumentReference/cbc:ID
     type: id
     repeatable: false
-    mandatory: false
+    mandatory: true
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
 
@@ -13550,7 +13581,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:EmploymentLegislationDocumentReference/cbc:ID
     type: id
     repeatable: false
-    mandatory: false
+    mandatory: true
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
 
@@ -13717,7 +13748,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:TenderingParty/efac:Tenderer/efbc:GroupLeadIndicator
     type: indicator
     repeatable: false
-    mandatory: false
+    mandatory: true
     codeList: indicator
     eForms guidance: '[Get the organization for the tenderer](operations.md#get-the-organization-for-a-tenderer). If "true", add ''leadTenderer'' to its `.roles`.'
     eForms example: <efac:TenderingParty><efac:Tenderer><cbc:ID schemeName="organization">ORG-0001</cbc:ID><efbc:GroupLeadIndicator>true</efbc:GroupLeadIndicator></efac:Tenderer></efac:TenderingParty>
@@ -13773,7 +13804,7 @@
     type: id
     schemeName: tendering-party
     repeatable: false
-    mandatory: false
+    mandatory: true
     pattern: ^TPA-\d{4}$
     eForms guidance: Discard. Each tenderer in the tendering party is covered by OPT-310-Tenderer.
     eForms example: <efac:TenderingParty><cbc:ID schemeName="tendering-party">TPA-0003</cbc:ID></efac:TenderingParty>
@@ -13860,7 +13891,7 @@
     idSchemes:
     - ORG
     repeatable: false
-    mandatory: false
+    mandatory: true
     pattern: ^ORG-\d{4}$
     eForms guidance: Discard. This field is mapped as part of OPT-310-Tender.
     eForms example: <efac:Tenderer><cbc:ID schemeName="organization">ORG-0005</cbc:ID></efac:Tenderer>
@@ -13914,7 +13945,7 @@
     - ORG
     - TPO
     repeatable: false
-    mandatory: true
+    mandatory: false
     pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference) and map to its `publisher.id`.
@@ -13935,7 +13966,7 @@
     - ORG
     - TPO
     repeatable: false
-    mandatory: true
+    mandatory: false
     pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference) and map to its `publisher.id`.
@@ -13956,7 +13987,7 @@
     - ORG
     - TPO
     repeatable: false
-    mandatory: true
+    mandatory: false
     pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference) and map to its `publisher.id`.
@@ -13996,7 +14027,7 @@
     - ORG
     - TPO
     repeatable: false
-    mandatory: false
+    mandatory: true
     pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: |-
         [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization-technical-identifier-reference), and add 'reviewContactPoint' to its `.roles` array.
@@ -14140,7 +14171,7 @@
     - ORG
     - TPO
     repeatable: false
-    mandatory: true
+    mandatory: false
     pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference) and map to its `publisher.id`.
@@ -14159,7 +14190,7 @@
     - ORG
     - TPO
     repeatable: false
-    mandatory: true
+    mandatory: false
     pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference) and map to its `publisher.id`.
@@ -14178,7 +14209,7 @@
     - ORG
     - TPO
     repeatable: false
-    mandatory: true
+    mandatory: false
     pattern: ^(ORG|TPO)-\d{4}$
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference) and map to its `publisher.id`.

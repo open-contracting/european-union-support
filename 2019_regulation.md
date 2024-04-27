@@ -2,7 +2,7 @@
 
 ## Download source files
 
-    fish script/2019_download.fish
+    fish script/2019_download.fish VERSION
 
 ## Create the mapping file
 
@@ -173,6 +173,15 @@ These can be automated if persistent:
 1. Run and check the output of:
 
         ./manage.py lint -a output/mapping/eforms/guidance.yaml
+
+1. Run `git diff output/mapping/eforms/guidance.yaml`, and open a GitHub issue to document changes.
+1. Fields removed from `source/fields.json` remain in `output/mapping/eforms/guidance.yaml` with only eForms guidance, eForms example, OCDS example and sdk fields. Remove such fields manually.
+1. To get all fields with a given change, you can run, for example:
+
+        git diff -U10 | grep '\+    mandatory: true' | wc
+        git diff -U10 | grep -B11 '\+    mandatory: true' | grep '^ -'
+
+   The count and values can differ, if the count also matched added/removed fields.
 
 ## Design
 
