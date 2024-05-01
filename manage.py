@@ -292,24 +292,27 @@ def update_with_sdk(filename, verbose):
         xml = pd.DataFrame.from_dict(data["xmlStructure"])
         xml.set_index("id", inplace=True)
 
-    labels = set()
+    labels_to_drop = set()
     supported_notice_types = {str(i) for i in range(1, 41)} | {"CEI", "T01", "T02"}
     expected = {"value": False, "severity": "ERROR", "constraints": [{"value": True, "severity": "ERROR"}]}
     for label, row in df.iterrows():
         # Remove OPA- fields. "Those fields can be ignored when generating the XML notice"
         # https://docs.ted.europa.eu/eforms/latest/fields/index.html#_fields_other_than_bt
         if label.startswith("OPA-"):
-            labels.add(label)
+            labels_to_drop.add(label)
 
-        # Remove attribute fields.
+        # Remove a field's own attribute fields, as we documented these together.
         if row["attributeOf"] is not np.nan and row["attributeOf"] in label:
-            labels.add(label)
+            labels_to_drop.add(label)
 
         # Remove fields that are forbidden on all supported notice types.
         forbidden = row["forbidden"]
+        # Short-circuit the logic that follows.
         if forbidden is np.nan:
             continue
         # Abbreviate the constraints (there is sometimes another constraint on X02, etc.).
+        for constraint in forbidden["constraints"][1:]:
+            assert constraint["condition"].startswith("{ND-")
         forbidden["constraints"] = forbidden["constraints"][:1]
         # If a field's forbidden types are a superset of all supported types, drop it.
         if (
@@ -318,9 +321,9 @@ def update_with_sdk(filename, verbose):
         ):
             # Ensure the forbidden property's structure is as expected.
             assert forbidden == expected, f"{label} {forbidden} !=\n{expected}"
-            labels.add(label)
+            labels_to_drop.add(label)
 
-    df.drop(index=labels, inplace=True)
+    df.drop(index=labels_to_drop, inplace=True)
 
     # If a repeatable business term is implemented as a field that is the only child of a parent, then the SDK marks
     # the parent as repeatable, rather than the child.
@@ -349,8 +352,8 @@ def update_with_sdk(filename, verbose):
                 df.at[label, "repeatable"] = True
 
     if verbose:
-        click.echo(f"{df.shape[0]} kept, {len(labels)} dropped")
-        click.echo("\n".join(sorted(f"- {label}" for label in labels)))
+        click.echo(f"{df.shape[0]} kept, {len(labels_to_drop)} dropped")
+        click.echo("\n".join(sorted(f"- {label}" for label in labels_to_drop)))
 
     # Remove or abbreviate columns that do not assist the mapping process and that lengthen the JSON file. See README.
     drop = [
