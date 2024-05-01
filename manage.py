@@ -292,6 +292,26 @@ def update_with_sdk(filename, verbose):
         xml = pd.DataFrame.from_dict(data["xmlStructure"])
         xml.set_index("id", inplace=True)
 
+    subtypes = {}
+    with (sourcedir / "notice-types.json").open() as f:
+        data = json.load(f)
+        for subtype in data["noticeSubTypes"]:
+            sub_type_id = subtype["subTypeId"]
+            if sub_type_id.isdigit():
+                document_type = subtype["documentType"]
+                match (document_type, subtype["formType"]):
+                    case ("PIN", "competition"):
+                        name = "PIN(CN)"
+                    case ("CAN", "dir-awa-pre"):
+                        name = "CAN(VEAT)"
+                    case ("CAN", "cont-modif"):
+                        name = "CAN(MOD)"
+                    case ("PIN", "planning") | ("CN", "competition") | ("CAN", "result"):
+                        name = document_type
+                    case _:
+                        raise NotImplementedError
+                subtypes[sub_type_id] = name
+
     labels_to_drop = set()
     supported_notice_types = {str(i) for i in range(1, 41)} | {"CEI", "T01", "T02"}
     expected = {"value": False, "severity": "ERROR", "constraints": [{"value": True, "severity": "ERROR"}]}
@@ -310,10 +330,11 @@ def update_with_sdk(filename, verbose):
         # Short-circuit the logic that follows.
         if forbidden is np.nan:
             continue
-        # Abbreviate the constraints (there is sometimes another constraint on X02, etc.).
+        # Abbreviate the constraints (there is sometimes a conditional constraint.).
         for constraint in forbidden["constraints"][1:]:
             assert constraint["condition"].startswith("{ND-")
         forbidden["constraints"] = forbidden["constraints"][:1]
+
         # If a field's forbidden types are a superset of all supported types, drop it.
         if (
             set(forbidden["constraints"][0].pop("noticeTypes")) >= supported_notice_types
@@ -325,10 +346,11 @@ def update_with_sdk(filename, verbose):
 
     df.drop(index=labels_to_drop, inplace=True)
 
-    # If a repeatable business term is implemented as a field that is the only child of a parent, then the SDK marks
-    # the parent as repeatable, rather than the child.
     non_privacy_xml = xml[~xml["xpathRelative"].str.startswith("efac:FieldsPrivacy")]
     for label, row in df.iterrows():
+        # If a repeatable business term is implemented as a field that is the only child of a parent,
+        # then the SDK marks the parent as repeatable, rather than the child.
+
         # eForms creates a XML structure to repeat terms together.
         if row["parentNodeId"] in (
             # BT-06-Lot (Strategic Procurement) with BT-777-Lot (Strategic Procurement Description).
@@ -350,6 +372,19 @@ def update_with_sdk(filename, verbose):
                 and len(non_privacy_xml[non_privacy_xml["parentId"] == row["parentNodeId"]]) == 0
             ):
                 df.at[label, "repeatable"] = True
+
+        mandatory = row["mandatory"]
+        if mandatory is not np.nan:
+            values = []
+            for constraint in mandatory["constraints"]:
+                value = " ".join({subtypes.get(t, t): None for t in constraint.pop("noticeTypes")})
+                if constraint.pop("condition", None):
+                    value += " (conditional)"
+                values.append(value)
+            # Ensure the mandatory property's structure is as expected.
+            assert all(c == {"value": True, "severity": "ERROR"} for c in mandatory.pop("constraints"))
+            assert mandatory == {"value": False, "severity": "ERROR"}
+            df.at[label, "mandatory"] = " & ".join(values)
 
     if verbose:
         click.echo(f"{df.shape[0]} kept, {len(labels_to_drop)} dropped")
@@ -374,7 +409,6 @@ def update_with_sdk(filename, verbose):
         "assert",
         "inChangeNotice",
     ]
-    df["mandatory"] = df["mandatory"].notna()
     # Simplify these columns if `severity` is the only other top-level key.
     for column in ("repeatable", "pattern"):
         df[column] = [cell["value"] if isinstance(cell, dict) and len(cell) == 2 else cell for cell in df[column]]
@@ -1042,7 +1076,7 @@ def statistics(file):
     reviewed = done - df[df[key].str.startswith("(UNREVIEWED)")].shape[0]
     no_ted_guidance = df[df["TED guidance"].isna()].shape[0]
 
-    condition = df["mandatory"]
+    condition = df["mandatory"].notna()
     df_m = df[condition]
     total_m = df_m.shape[0]
     done_m = df_m[df_m[key] != ""].shape[0]

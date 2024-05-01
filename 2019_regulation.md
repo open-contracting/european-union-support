@@ -37,7 +37,7 @@ type | eForms SDK | Technical data type of the field. | Should match the OCDS fi
 schemeName | eForms SDK | Indicates the value that should be indicated for this field in the `schemeName` attribute in the XML.
 idSchemes | eForms SDK | Indicates the identifier schemes for this `id-ref` field.
 [repeatable](https://docs.ted.europa.eu/eforms/latest/fields/index.html#_dynamic_properties) | eForms SDK | Indicates if the field can appear more than once inside its container. | Simplified to the boolean (removed `severity`).
-mandatory | eForms SDK | Indicates whether or not a field is required to have a value. | Simplified to the boolean (`true` if required on one or more forms).
+mandatory | eForms SDK | Indicates whether or not a field is required to have a value. | Simplified to the forms on which it is required.
 codeList | eForms SDK | Identifier of the code list from which the field value must belong. Applicable only for fields of type "code" or "internal-code" | Simplified to the codelist (removed `severity`, `value.type`, `value.parentId`).
 pattern | eForms SDK | Indicates that the value of the field must match a specific regular expression pattern. | Simplified to the pattern (removed `severity`).
 Description | [Regulation annex](https://ec.europa.eu/growth/single-market/public-procurement/digital-procurement/eforms_en) | The description of the business term. |
