@@ -1729,10 +1729,10 @@
     Description: An identifier of one or more sections within a previous notice within the procedure. The information in the modification section refers to this section or these sections.
     Business groups:
         BG-77: Modification
-    eForms guidance: ''
-    eForms example: ''
+    eForms guidance: Discard. The notice and sections that were modified can be determined by comparing previous releases with the current release.
+    eForms example: <efac:ContractModification><efbc:ModifiedContractIdentifier schemeName="contract">CON-0001</efbc:ModifiedContractIdentifier></efac:ContractModification>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#contractModificationNoticeSection
 -   id: BT-1501(n)-Contract
     parentNodeId: ND-ContractModification
     name: Modification Previous Notice Identifier
@@ -1746,9 +1746,9 @@
     Business groups:
         BG-77: Modification
     eForms guidance: Discard. The notice and sections that were modified can be determined by comparing previous releases with the current release.
-    eForms example: <efac:ContractModification><efac:Change><efbc:ChangedSectionIdentifier>LOT-0002</efbc:ChangedSectionIdentifier></efac:Change></efac:ContractModification>
+    eForms example: <efac:ContractModification><efbc:ChangedNoticeIdentifier schemeName="notice-id-ref">755db7f6-6aa1-453b-9087-1df5f7725112-02</efbc:ChangedNoticeIdentifier></efac:ContractModification>
     OCDS example: ''
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/contract-modification-notice.html
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#contractModificationNoticeSection
 -   id: BT-1501(p)-Contract
     parentNodeId: ND-ModifiedSection
     name: Modified Notice Part Reference
@@ -1760,10 +1760,10 @@
     Description: An identifier of one or more sections within a previous notice within the procedure. The information in the modification section refers to this section or these sections.
     Business groups:
         BG-77: Modification
-    eForms guidance: ''
-    eForms example: ''
+    eForms guidance: Discard. The notice and sections that were modified can be determined by comparing previous releases with the current release.
+    eForms example: <efac:ContractModification><efac:Change><efac:ChangedSection><efbc:ChangedSectionIdentifier>TEN-0002</efbc:ChangedSectionIdentifier></efac:ChangedSection></efac:Change></efac:ContractModification>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#contractModificationNoticeSection
 -   id: BT-151-Contract
     parentNodeId: ND-SettledContract
     name: Contract URL
@@ -2124,9 +2124,8 @@
         BG-7: Notice Result
         BG-320: Tender
     eForms guidance: |-
-        [Get the bid for a LotTender](operations.md#get-the-bid-for-a-lottender).
-        If the value of the field is `1A0` (Kosovo), add 'XK' to the bid's `.countriesOfOrigin` array. Otherwise, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country), and add it to the bid's `.countriesOfOrigin` array.
-    eForms example: <efac:NoticeResult><efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID><efac:Origin><efbc:AreaCode listName="eforms-country">ITA</efbc:AreaCode></efac:Origin><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotTender></efac:NoticeResult>
+        [Get the bid for a LotTender](operations.md#get-the-bid-for-a-lottender), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country), and add it to the bid's `.countriesOfOrigin` array.
+    eForms example: <efac:NoticeResult><efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID><efac:Origin><efbc:AreaCode listName="country">ITA</efbc:AreaCode></efac:Origin><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotTender></efac:NoticeResult>
     OCDS example: '{"bids":{"details":[{"id":"TEN-0001","countriesOfOrigin":["IT"],"relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
 -   id: BT-193-Tender
@@ -8959,7 +8958,7 @@
     - /CONTRACTING_BODY/ADDRESS_CONTRACTING_BODY/COUNTRY
     - Take the country code in the `VALUE` attribute, translate to a country name, and map to the party's `.address.countryName`\n\nThere's an open issue ([#524](https://github.com/open-contracting/standard/issues/524)) to add a `.country` field to the `Address` object, to avoid translation. (ISSUE)
     eForms guidance: '[Get the organization for the company](operations.md#get-the-organization-for-a-company), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map it to the organization''s `.address.country`.'
-    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification><cac:PostalAddress><cac:Country><cbc:IdentificationCode listName="eforms-country">GBR</cbc:IdentificationCode></cac:Country></cac:PostalAddress></efac:Company></efac:Organization></efac:Organizations>
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification><cac:PostalAddress><cac:Country><cbc:IdentificationCode listName="country">GBR</cbc:IdentificationCode></cac:Country></cac:PostalAddress></efac:Company></efac:Organization></efac:Organizations>
     OCDS example: '{"parties":[{"id":"ORG-0001","address":{"country":"GB"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: BT-514-Organization-TouchPoint
@@ -8974,7 +8973,7 @@
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the organization for the touchpoint](operations.md#get-the-organization-for-a-touchpoint), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map it to the organization''s `.address.country`.'
-    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyLegalEntity><cbc:CompanyID>998298</cbc:CompanyID></cac:PartyLegalEntity></efac:Company><efac:TouchPoint><cac:PartyIdentification><cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID></cac:PartyIdentification><cac:PostalAddress><cac:Country><cbc:IdentificationCode listName="eforms-country">GBR</cbc:IdentificationCode></cac:Country></cac:PostalAddress></efac:TouchPoint></efac:Organization></efac:Organizations>
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyLegalEntity><cbc:CompanyID>998298</cbc:CompanyID></cac:PartyLegalEntity></efac:Company><efac:TouchPoint><cac:PartyIdentification><cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID></cac:PartyIdentification><cac:PostalAddress><cac:Country><cbc:IdentificationCode listName="country">GBR</cbc:IdentificationCode></cac:Country></cac:PostalAddress></efac:TouchPoint></efac:Organization></efac:Organizations>
     OCDS example: '{"parties":[{"id":"TPO-0001","address":{"country":"GB"},"identifier":{"id":"998298","scheme":"internal"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: BT-514-UBO
@@ -8989,7 +8988,7 @@
     Business groups:
         BG-703: Organisation
     eForms guidance: '[Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map it to the person''s `.address.country`.'
-    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></efac:Company></efac:Organization><efac:UltimateBeneficialOwner><cbc:ID schemeName="ubo">UBO-0001</cbc:ID><cac:ResidenceAddress><cac:Country><cbc:IdentificationCode listName="eforms-country">GBR</cbc:IdentificationCode></cac:Country></cac:ResidenceAddress></efac:UltimateBeneficialOwner></efac:Organizations>
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></efac:Company></efac:Organization><efac:UltimateBeneficialOwner><cbc:ID schemeName="ubo">UBO-0001</cbc:ID><cac:ResidenceAddress><cac:Country><cbc:IdentificationCode listName="country">GBR</cbc:IdentificationCode></cac:Country></cac:ResidenceAddress></efac:UltimateBeneficialOwner></efac:Organizations>
     OCDS example: '{"parties":[{"id":"ORG-0001","beneficialOwners":[{"id":"UBO-0001","address":{"country":"GB"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#ultimateBeneficialOwnerSection
 -   id: BT-5141-Lot
@@ -9009,7 +9008,7 @@
 
         [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map it to the address's `.country`.
-    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cac:RealizedLocation><cac:Address><cac:Country><cbc:IdentificationCode listName="eforms-country">GBR</cbc:IdentificationCode></cac:Country></cac:Address></cac:RealizedLocation></cac:ProcurementProject></cac:ProcurementProjectLot>
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cac:RealizedLocation><cac:Address><cac:Country><cbc:IdentificationCode listName="country">GBR</cbc:IdentificationCode></cac:Country></cac:Address></cac:RealizedLocation></cac:ProcurementProject></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"items":[{"id":"1","deliveryAddresses":[{"country":"GB"}],"relatedLot":"LOT-0001"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#performancePlaceSection
 -   id: BT-5141-Part
@@ -9027,7 +9026,7 @@
     eForms guidance: |-
         This field maps to the same `Address` objects as created for BT-728-Part, BT-5131-Part, BT-5121-Part, BT-5071-Part, BT-727-Part, and BT-5101-Part.
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map it to the address's `.country`.
-    eForms example: <cac:RealizedLocation><cac:Address><cac:Country><cbc:IdentificationCode listName="eforms-country">GBR</cbc:IdentificationCode></cac:Country></cac:Address></cac:RealizedLocation>
+    eForms example: <cac:RealizedLocation><cac:Address><cac:Country><cbc:IdentificationCode listName="country">GBR</cbc:IdentificationCode></cac:Country></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"deliveryAddresses":[{"country":"GB"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#performancePlaceSection
 -   id: BT-5141-Procedure
@@ -9045,7 +9044,7 @@
     eForms guidance: |-
         This field maps to the same `Address` objects as created for BT-728-Procedure, BT-5131-Procedure, BT-5121-Procedure, BT-5071-Procedure, BT-727-Procedure, and BT-5101-Procedure.
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array, look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country) and map it to the address's `.country`.
-    eForms example: <cac:RealizedLocation><cac:Address><cac:Country><cbc:IdentificationCode listName="eforms-country">GBR</cbc:IdentificationCode></cac:Country></cac:Address></cac:RealizedLocation>
+    eForms example: <cac:RealizedLocation><cac:Address><cac:Country><cbc:IdentificationCode listName="country">GBR</cbc:IdentificationCode></cac:Country></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"deliveryAddresses":[{"country":"GB"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#performancePlaceSection
 -   id: BT-52-Lot
@@ -13042,10 +13041,10 @@
     type: id
     schemeName: review
     repeatable: false
-    eForms guidance: ''
-    eForms example: ''
+    eForms guidance: This field is currently not used, and is intended for the new "Contract completion" notices that will be added in a future version.
+    eForms example: <efac:AppealStatus><cbc:ID>REV-0001</cbc:ID></efac:AppealStatus>
     OCDS example: ''
-    sdk: ''
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#identifiersSection
 -   id: OPT-100-Contract
     parentNodeId: ND-SettledContract
     name: Framework Notice Identifier
