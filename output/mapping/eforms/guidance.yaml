@@ -605,7 +605,7 @@
     - TED_EXPORT/FORM_SECTION/F02_2014/PROCEDURE/RIGHT_CONTRACT_INITIAL_TENDERS
     TED guidance:
     - Set `tender.secondStage.noNegotiationNecessary` to `true`
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and set its `.secondStage.noNegotiationNecessary` to `true`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and map to its `.secondStage.noNegotiationNecessary`.'
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cbc:NoFurtherNegotiationIndicator>true</cbc:NoFurtherNegotiationIndicator></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","secondStage":{"noNegotiationNecessary":true}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardConsequencesSection
@@ -2141,7 +2141,7 @@
     Business groups:
         BG-7: Notice Result
         BG-320: Tender
-    eForms guidance: '[Get the bid for a LotTender](operations.md#get-the-bid-for-a-lottender), and set the bid''s `.variant` to `true`.'
+    eForms guidance: '[Get the bid for a LotTender](operations.md#get-the-bid-for-a-lottender), and map to the bid''s `.variant`.'
     eForms example: <efac:NoticeResult><efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID><efbc:TenderVariantIndicator>true</efbc:TenderVariantIndicator><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotTender></efac:NoticeResult>
     OCDS example: '{"bids":{"details":[{"id":"TEN-0001","variant":true,"relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
@@ -7148,7 +7148,7 @@
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `efac:SelectionCriteria`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
-        - Set the criterion's `.forReduction` to `true`.
+        - Map to the criterion's `.forReduction`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:SelectionCriteria><efbc:SecondStageIndicator>true</efbc:SecondStageIndicator></efac:SelectionCriteria></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","selectionCriteria":{"criteria":[{"forReduction":true}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#selectionCriteriaSection
@@ -9066,7 +9066,7 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/TYPE_OF_PROCEDURE_DEFENCE/REDUCTION_OF_THE_NUMBER/@VALUE
     TED guidance:
     - Set `tender.secondStage.successiveReduction` to `true`
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and set its `secondStage.successiveReduction` to `true`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and map to its `secondStage.successiveReduction`.'
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cbc:CandidateReductionConstraintIndicator>true</cbc:CandidateReductionConstraintIndicator></cac:TenderingProcess></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","secondStage":{"successiveReduction":true}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#successiveReductionSection
@@ -10297,7 +10297,7 @@
     Business groups:
         BG-6: Procedure
         BG-709: Second Stage
-    eForms guidance: Discard.
+    eForms guidance: Discard. If the lot's `.secondStage.maximumCandidates` is not empty there is a maximum number of candidates to be invited for the second stage of the procedure.
     eForms example: <cac:EconomicOperatorShortList><cbc:LimitationDescription>true</cbc:LimitationDescription></cac:EconomicOperatorShortList>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#maxCandidatesSection
@@ -13549,7 +13549,7 @@
         [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization-technical-identifier-reference), and add 'informationService' to is `roles` array.
     eForms example: <ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></efac:Company></efac:Organization></efac:Organizations></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions><cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:EmploymentLegislationDocumentReference><cbc:ID>Empl1</cbc:ID><cac:IssuerParty><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></cac:IssuerParty></cac:EmploymentLegislationDocumentReference></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationService"]}],"tender":{"documents":[{"id":"Empl1","publisher":{"id":"ORG-0001"},"relatedLots":["LOT-0001"]}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#tenderingPartySection
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-301-Lot-EnvironLegis
     parentNodeId: ND-LotEnvironmentalLegislation
     name: Environmental Legislation Organization Technical Identifier Reference
@@ -13569,7 +13569,7 @@
         [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization-technical-identifier-reference), and add 'informationService' to is `roles` array.
     eForms example: <ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></efac:Company></efac:Organization></efac:Organizations></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions><cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:EnvironmentalLegislationDocumentReference><cbc:ID>Env1</cbc:ID><cac:IssuerParty><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></cac:IssuerParty></cac:EnvironmentalLegislationDocumentReference></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationService"]}],"tender":{"documents":[{"id":"Env1","publisher":{"id":"ORG-0001"},"relatedLots":["LOT-0001"]}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#tenderingPartySection
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-301-Lot-FiscalLegis
     parentNodeId: ND-LotFiscalLegislation
     name: Fiscal Legislation Organization Technical Identifier Reference
@@ -13589,7 +13589,7 @@
         [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization-technical-identifier-reference), and add 'informationService' to is `roles` array.
     eForms example: <ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></efac:Company></efac:Organization></efac:Organizations></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions><cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:FiscalLegislationDocumentReference><cbc:ID>Fiscal1</cbc:ID><cac:IssuerParty><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></cac:IssuerParty></cac:FiscalLegislationDocumentReference></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationService"]}],"tender":{"documents":[{"id":"Fiscal1","publisher":{"id":"ORG-0001"},"relatedLots":["LOT-0001"]}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#tenderingPartySection
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-301-Lot-Mediator
     parentNodeId: ND-LotReviewTerms
     name: Mediator Technical Identifier Reference
@@ -13763,7 +13763,7 @@
         [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization-technical-identifier-reference), and add 'informationService' to is `roles` array.
     eForms example: <ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></efac:Company></efac:Organization></efac:Organizations></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions><cac:ProcurementProjectLot><cac:TenderingTerms><cac:EmploymentLegislationDocumentReference><cbc:ID>Empl1</cbc:ID><cac:IssuerParty><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></cac:IssuerParty></cac:EmploymentLegislationDocumentReference></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationService"]}],"tender":{"documents":[{"id":"Empl1","publisher":{"id":"ORG-0001"}}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#tenderingPartySection
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-301-Part-EnvironLegis
     parentNodeId: ND-PartEnvironmentalLegislation
     name: Environmental Legislation Organization Technical Identifier Reference
@@ -13781,7 +13781,7 @@
         [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization-technical-identifier-reference), and add 'informationService' to is `roles` array.
     eForms example: <ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></efac:Company></efac:Organization></efac:Organizations></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions><cac:ProcurementProjectLot><cac:TenderingTerms><cac:EnvironmentalLegislationDocumentReference><cbc:ID>Env1</cbc:ID><cac:IssuerParty><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></cac:IssuerParty></cac:EnvironmentalLegislationDocumentReference></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationService"]}],"tender":{"documents":[{"id":"Env1","publisher":{"id":"ORG-0001"}}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#tenderingPartySection
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-301-Part-FiscalLegis
     parentNodeId: ND-PartFiscalLegislation
     name: Fiscal Legislation Organization Technical Identifier Reference
@@ -13799,7 +13799,7 @@
         [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization-technical-identifier-reference), and add 'informationService' to is `roles` array.
     eForms example: <ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></efac:Company></efac:Organization></efac:Organizations></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions><cac:ProcurementProjectLot><cac:TenderingTerms><cac:FiscalLegislationDocumentReference><cbc:ID>Fiscal1</cbc:ID><cac:IssuerParty><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></cac:IssuerParty></cac:FiscalLegislationDocumentReference></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"parties":[{"id":"ORG-0001","roles":["informationService"]}],"tender":{"documents":[{"id":"Fiscal1","publisher":{"id":"ORG-0001"}}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#tenderingPartySection
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/all-in-one.html#_legislation_information_provider
 -   id: OPT-301-Part-Mediator
     parentNodeId: ND-PartReviewTerms
     name: Mediator Technical Identifier Reference
