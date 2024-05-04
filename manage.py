@@ -946,7 +946,7 @@ def build(directory):
             sdk = f'<a class="reference external" href="{sdk}"></a>'
 
         required = ""
-        if field["mandatory"]:
+        if "mandatory" in field:
             required = "<b>*</b>"
 
         eforms_example = field["eForms example"]
