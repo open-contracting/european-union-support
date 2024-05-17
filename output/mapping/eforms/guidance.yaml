@@ -1232,9 +1232,9 @@
 
         - Map the code to its `.id`.
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/direct-award-justification) and map it to `.description`.
-        - Set `.scheme` to 'eforms-direct-award-justification'.
+        - Set `.scheme` to 'eu-direct-award-justification'.
     eForms example: <cac:ProcessJustification><cbc:ProcessReasonCode listName="direct-award-justification">ecom-excl</cbc:ProcessReasonCode></cac:ProcessJustification>
-    OCDS example: '{"tender":{"procurementMethodRationaleClassifications":[{"id":"ecom-excl","description":"Specific exclusion in the field of electronic communications","scheme":"eforms-direct-award-justification"}]}}'
+    OCDS example: '{"tender":{"procurementMethodRationaleClassifications":[{"id":"ecom-excl","description":"Specific exclusion in the field of electronic communications","scheme":"eu-direct-award-justification"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#directAwardSection
 -   id: BT-137-Lot
     parentNodeId: ND-Lot
