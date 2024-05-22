@@ -451,9 +451,9 @@
         - [Get the organization for the buyer](operations.md#get-the-organization-for-the-buyer), and add a `Classification` object to its `.details.classifications` array.
         - Map the value of this field to the classification's `.id`.
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/buyer-legal-type) and map it to the classification's `.description`.
-        - Set the classification's `.scheme` to 'TED_CA_TYPE'.
+        - Set the classification's `.scheme` to 'eu-buyer-legal-type'.
     eForms example: <cac:ContractingParty><cac:Party><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></cac:Party><cac:ContractingPartyType><cbc:PartyTypeCode listName="buyer-legal-type">body-pl</cbc:PartyTypeCode></cac:ContractingPartyType></cac:ContractingParty>
-    OCDS example: '{"parties":[{"id":"ORG-0001","details":{"classifications":[{"scheme":"TED_CA_TYPE","id":"body-pl","description":"Body governed by public law."}]}}]}'
+    OCDS example: '{"parties":[{"id":"ORG-0001","details":{"classifications":[{"scheme":"eu-buyer-legal-type","id":"body-pl","description":"Body governed by public law."}]}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_buyer_information
 -   id: BT-111-Lot
     parentNodeId: ND-FABuyerCategories
