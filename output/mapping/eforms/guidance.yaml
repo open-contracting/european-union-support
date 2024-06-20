@@ -10744,8 +10744,9 @@
     eForms guidance: |-
         [Get the bid for the LotTender](operations.md#get-the-bid-for-a-lottender) and map to the bid''s `.value`. Map `@currencyID` to the value''s `.currency`.
         Get the `ancestor::efac:NoticeResult/efac:LotResult` with an `/efac:LotTender/cbc:ID` equal to the value of `ancestor::efac:LotTender/cbc:ID`. Get the `Award` in `awards` whose `id` is equal to the value of this `efac:LotResult`'s `/cbc:ID`. If none exists yet:
-        1\. Add an `Award` to `awards`
-        2\. Set its `.id` to the value of this `efac:LotResult/cbc:ID`
+
+        1. Add an `Award` to `awards`
+        2. Set its `.id` to the value of this `efac:LotResult/cbc:ID`
 
         Add the value of `ancestor::efac:TenderLot/cbc:ID` to the award's `.relatedLots`
         Map the value of this field to the awards `.value.amount` and map `@currencyID` to the value's `.currency`.
