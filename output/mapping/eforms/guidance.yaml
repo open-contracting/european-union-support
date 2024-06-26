@@ -10742,7 +10742,7 @@
     - Map to the contract's `.value.amount`
     - Map to the contract's `.value.amount`. If present, this takes precedence over the [total value of the contract/lot/concession](#/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/VALUES/VAL_TOTAL).
     eForms guidance: |-
-        [Get the bid for the LotTender](operations.md#get-the-bid-for-a-lottender) and map to the bid''s `.value`. Map `@currencyID` to the value''s `.currency`.
+        [Get the bid for the LotTender](operations.md#get-the-bid-for-a-lottender) and map to the bid's `.value`. Map `@currencyID` to the value's `.currency`.
         Get the `ancestor::efac:NoticeResult/efac:LotResult` with an `/efac:LotTender/cbc:ID` equal to the value of `ancestor::efac:LotTender/cbc:ID`. Get the `Award` in `awards` whose `id` is equal to the value of this `efac:LotResult`'s `/cbc:ID`. If none exists yet:
 
         1. Add an `Award` to `awards`
