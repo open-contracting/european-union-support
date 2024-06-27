@@ -34,7 +34,7 @@ rm -f TED_forms_templates_R2.08.pdf
 # Get the English PDFs.
 mkdir -p English
 for i in 01 02 03 04 05 06 07 08 12 13 14 15 20 21 22 23 24 25
-    curl -sS -o English/EN_F$i.pdf https://simap.ted.europa.eu/documents/10184/99173/EN_F{$i}.pdf
+    curl -sS -o English/EN_F$i.pdf https://ted.europa.eu/documents/d/ted/en_f{$i}
 end
 for i in 16 17 18
     curl -sS -o English/EN_F$i.pdf https://simap.ted.europa.eu/documents/10184/49059/sf_0{$i}_en.pdf
