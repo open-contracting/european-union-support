@@ -36,12 +36,11 @@ mkdir -p English
 for i in 01 02 03 04 05 06 07 08 12 13 14 15 20 21 22 23 24 25
     curl -sS -o English/EN_F$i.pdf https://ted.europa.eu/documents/d/ted/en_f{$i}
 end
-for i in 16 17 18
-    curl -sS -o English/EN_F$i.pdf https://simap.ted.europa.eu/documents/10184/49059/sf_0{$i}_en.pdf
+for i in 16 17 18 19
+    curl -sS -o English/EN_F$i.pdf https://ted.europa.eu/documents/d/ted/sf_0{$i}_en
 end
-curl -sS -o English/EN_F19.pdf https://simap.ted.europa.eu/documents/10184/49059/sf_019_en.pdf/179d1c44-05d3-4f35-b25e-bb8d619d9733
 for i in 01 02
-    curl -sS -o English/EN_T$i.pdf https://simap.ted.europa.eu/documents/10184/49059/t{$i}_en.pdf
+    curl -sS -o English/EN_T$i.pdf https://ted.europa.eu/documents/d/ted/t{$i}_en
 end
 
 # Get the XML schema for R2.0.9.
