@@ -234,6 +234,11 @@ def write(
             for label, row in df_outer[df_outer["_merge"] == "both"].iterrows():
                 for a, b in compare.items():
                     if row[a] != row[b] and compare_override[a].get(row["id"]) != row[b]:
+                        if not compared:
+                            click.echo(
+                                f"{'id: name'.ljust(75)} | SDK field  : Annex col  | "
+                                f"{'SDK value'.ljust(50)} : Annex value"
+                            )
                         compared += 1
                         field = f'{row["id"]}: {row["name"]}'
                         click.echo(f"{field.ljust(75)} | {a} : {b} | {str(row[a]).ljust(50)} : {row[b]}")
@@ -313,6 +318,7 @@ def update_with_sdk(filename, verbose):
                 subtypes[sub_type_id] = name
 
     labels_to_drop = set()
+    no_supported_types = {}
     supported_notice_types = {str(i) for i in range(1, 41)} | {"CEI", "T01", "T02"}
     expected = {"value": False, "severity": "ERROR", "constraints": [{"value": True, "severity": "ERROR"}]}
     for label, row in df.iterrows():
@@ -343,6 +349,7 @@ def update_with_sdk(filename, verbose):
             # Ensure the forbidden property's structure is as expected.
             assert forbidden == expected, f"{label} {forbidden} !=\n{expected}"
             labels_to_drop.add(label)
+            no_supported_types[label] = row["name"]
 
     df.drop(index=labels_to_drop, inplace=True)
 
@@ -387,8 +394,13 @@ def update_with_sdk(filename, verbose):
             df.at[label, "mandatory"] = " & ".join(values)
 
     if verbose:
-        click.echo(f"{df.shape[0]} kept, {len(labels_to_drop)} dropped")
-        click.echo("\n".join(sorted(f"- {label}" for label in labels_to_drop)))
+        click.echo(
+            f"{df.shape[0]} kept, {len(labels_to_drop)} dropped "
+            "(OPA- fields and BT- attributes in white, fields with no supported types in yellow)"
+        )
+        for label in sorted(labels_to_drop):
+            click.echo(f"- {label.ljust(45)}", nl=False)
+            click.secho(no_supported_types.get(label, ""), fg="yellow")
 
     # Remove or abbreviate columns that do not assist the mapping process and that lengthen the JSON file. See README.
     drop = [
@@ -523,7 +535,8 @@ def update_with_annex(filename):
         compare_override={
             # For comparison, force the eForms value to the Annex value, if the eForms value is correct.
             "repeatable": {
-                # https://github.com/open-contracting/european-union-support/issues/188
+                # https://github.com/open-contracting/european-union-support/issues/188#issuecomment-1664643319
+                "BT-1501(c)-Contract": True,
                 "BT-1501(n)-Contract": True,
                 # https://github.com/open-contracting/european-union-support/issues/188#issuecomment-1664720396
                 "BT-26(a)-Lot": False,
@@ -543,43 +556,70 @@ def update_with_annex(filename):
         ["ID", "Name"],
         ~df["ID"].isin(
             {
-                # Removed indicators in favor of corresponding scalars.
-                # https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#extensionsSection
-                "BT-53",  # Options (BT-54 Options Description)
-                # https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#toolNameSection
-                "BT-724",  # Tool Atypical (BT-124 Tool Atypical URL)
-                # https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#_footnotedef_9
-                "BT-778",  # Framework Maximum Participants (BT-113 Framework Maximum Participants Number)
                 # See OPT-155 and OPT-156.
                 # https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotResultComponentsTable
                 "BT-715",
                 "BT-725",
                 "BT-716",
-                # See Table 3.
+                # See Table 3: "Roles and subroles are conveyed by their dedicated element in a specific context from
+                # where a reference to the Company or TouchPoint exist, linking role/subrole to the appropriate contact
+                # information of the organization"
                 # https://docs.ted.europa.eu/eforms/latest/schema/parties.html#mappingOrganizationBTsSchemaComponentsTable
                 "BT-08",
                 "BT-770",
-                # See Table 4 (also includes BT-330 and BT-1375).
+                # See Table 4: "Pointless Business Terms due to design"
                 # https://docs.ted.europa.eu/eforms/latest/schema/identifiers.html#pointlessDueToDesignSection
-                "BT-557",
-                "BT-1371",
-                "BT-1372",
-                "BT-1373",
-                "BT-1374",
-                "BT-1376",
-                "BT-1377",
-                "BT-1378",
-                "BT-1379",
-                "BT-13710",
-                "BT-13711",
-                "BT-13712",
-                "BT-13715",
-                "BT-13717",
-                "BT-13718",
-                "BT-13719",
+                "BT-557",  # BT-137
+                "BT-1371",  # BT-137
+                "BT-1372",  # BT-137
+                "BT-1373",  # BT-137
+                "BT-1374",  # BT-137
+                "BT-1376",  # BT-137
+                "BT-1377",  # BT-137
+                "BT-1378",  # BT-137
+                "BT-1379",  # BT-137
+                "BT-13717",  # BT-137
+                "BT-13710",  # BT-137
+                "BT-13711",  # BT-137
+                "BT-13712",  # BT-137
+                "BT-13718",  # BT-137
+                "BT-13719",  # BT-137
                 "BT-13720",
-                "BT-13721",
-                "BT-13722",
+                "BT-13721",  # BT-137
+                "BT-13722",  # BT-137
+                "BT-13715",  # BT-137
+                "BT-53",  # BT-54
+                "BT-724",  # BT-124
+                "BT-778",  # BT-113
+                "BT-5561",  # BT-556
+                # "deletion of fields for BT-747, BT-748, BT-749"
+                # https://github.com/OP-TED/eForms-SDK/releases/tag/1.12.0
+                "BT-747",
+                "BT-748",
+                "BT-749",
+                # Forbidden on all supported types in update-with-sdk.
+                "BT-779",
+                "BT-780",
+                "BT-781",
+                "BT-782",
+                "BT-783",
+                "BT-784",
+                "BT-785",
+                "BT-786",
+                "BT-787",
+                "BT-788",
+                "BT-789",
+                "BT-790",
+                "BT-791",
+                "BT-792",
+                "BT-793",
+                "BT-794",
+                "BT-795",
+                "BT-796",
+                "BT-797",
+                "BT-798",
+                "BT-799",
+                "BT-800",
             }
         ),
         ["Repeatable"],

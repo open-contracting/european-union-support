@@ -164,9 +164,16 @@ These can be automated if persistent:
 1. Run, replacing the tag (`1.9.0` here):
 
         fish script/2019_download.fish 1.9.0
+
+        # This could list over 500 dropped fields.
         ./manage.py update-with-sdk --verbose output/mapping/eforms/guidance.yaml
+
+        # This should have no output, other than the number of rows written.
         ./manage.py update-with-annex output/mapping/eforms/guidance.yaml
+
+        # This could list over 300 unmerged rows.
         ./manage.py update-with-ted-guidance output/mapping/eforms/guidance.yaml
+
         # This step is slow.
         ./manage.py codelists > codes-eforms.csv
 
