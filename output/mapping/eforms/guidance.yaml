@@ -63,7 +63,7 @@
     type: code
     repeatable: false
     mandatory: PIN PIN(CN) CN CAN(VEAT) CAN CAN(MOD) CEI T01 T02 X01 X02
-    codeList: eforms-legal-basis
+    codeList: legal-basis
     Description: The legal basis (e.g. a Union or national legal act) under which the procurement procedure takes place or, in case of prior information notices, under which the procurement procedure(s) will take place.
     Business groups:
         BG-1: Notice
@@ -233,7 +233,7 @@
     xpathAbsolute: /*/cac:TenderingTerms/cac:ProcurementLegislationDocumentReference[cbc:ID/text()='CrossBorderLaw']/cbc:DocumentDescription
     type: text-multilingual
     repeatable: false
-    mandatory: PIN PIN(CN) CN CAN(VEAT) CAN CEI T01 T02
+    mandatory: PIN PIN(CN) CN CAN(VEAT) CAN CEI
     Description: The applicable law when buyers from different countries procure together within one procurement procedure.
     Business groups:
         BG-6: Procedure
@@ -427,7 +427,7 @@
     type: code
     repeatable: false
     mandatory: PIN PIN(CN) CN CAN CEI T01 T02
-    codeList: eforms-buyer-legal-type
+    codeList: buyer-legal-type
     Description: The type of buyer according to procurement legislation (e.g. central government authority, body governed by public law, public undertaking).
     Business groups:
         BG-703: Organisation
@@ -1375,7 +1375,18 @@
     name: Change Previous Section Identifier
     btId: BT-13716
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Changes/efac:Change/efac:ChangedSection/efbc:ChangedSectionIdentifier
-    type: id
+    type: id-ref
+    idSchemes:
+    - CON
+    - GLO
+    - LOT
+    - ORG
+    - PAR
+    - RES
+    - TEN
+    - TPA
+    - TPO
+    - UBO
     repeatable: true
     pattern: ^(PROCEDURE|BUYER|RESULT|((PAR|LOT|GLO|RES|ORG|TPA|TPO|TEN|CON|UBO)-\d{4}))$
     Description: An identifier of one or more sections within the changed notice. The information in the change section refers to this section or these sections.
@@ -1754,7 +1765,14 @@
     name: Modified Notice Part Reference
     btId: BT-1501
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:ContractModification/efac:Change/efac:ChangedSection/efbc:ChangedSectionIdentifier
-    type: id
+    type: id-ref
+    idSchemes:
+    - ORG
+    - RES
+    - TEN
+    - TPA
+    - TPO
+    - UBO
     repeatable: true
     pattern: ^( BUYER|RESULT|((RES|TEN|TPA|TPO|ORG|UBO)-\d{4}))$
     Description: An identifier of one or more sections within a previous notice within the procedure. The information in the modification section refers to this section or these sections.
@@ -2099,7 +2117,7 @@
     parentNodeId: ND-NonEsubmission
     name: Submission Nonelectronic Justification
     btId: BT-19
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='no-esubmission-justification']/cbc:ProcessReasonCode
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:ProcessJustification/cbc:ProcessReasonCode[@listName='no-esubmission-justification']
     type: code
     repeatable: false
     mandatory: PIN PIN(CN) CN
@@ -6227,7 +6245,7 @@
     type: code
     repeatable: false
     mandatory: PIN PIN(CN) CN CAN(VEAT) CAN CEI T01 T02
-    codeList: eforms-contract-nature
+    codeList: contract-nature
     Description: The main nature (e.g. works) of what is being bought. In case of mixed procurement (e.g. a procedure for both works and services), the main nature may be, for example, the one with the highest estimated value. This information shall be given for the whole procedure.
     Business groups:
         BG-2: Purpose
@@ -6246,7 +6264,7 @@
     type: code
     repeatable: false
     mandatory: PIN
-    codeList: eforms-contract-nature
+    codeList: contract-nature
     Description: The main nature (e.g. works) of what is being bought. In case of mixed procurement (e.g. a procedure for both works and services), the main nature may be, for example, the one with the highest estimated value. This information shall be given for the whole procedure.
     Business groups:
         BG-2: Purpose
@@ -6262,7 +6280,7 @@
     type: code
     repeatable: false
     mandatory: PIN PIN(CN) CN CAN(VEAT) CAN CEI T01 T02
-    codeList: eforms-contract-nature
+    codeList: contract-nature
     Description: The main nature (e.g. works) of what is being bought. In case of mixed procurement (e.g. a procedure for both works and services), the main nature may be, for example, the one with the highest estimated value. This information shall be given for the whole procedure.
     Business groups:
         BG-2: Purpose
@@ -8539,7 +8557,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:Organization/efac:Company/cac:PostalAddress/cbc:PostalZone
     type: text
     repeatable: false
-    mandatory: PIN PIN(CN) CN CAN(VEAT) CAN CAN(MOD) CEI T01 T02
+    mandatory: PIN PIN(CN) CN CAN(VEAT) CAN CAN(MOD) CEI T01 T02 (conditional)
     Description: The post code of the organisation's physical address.
     Business groups:
         BG-703: Organisation
@@ -8628,7 +8646,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:Organization/efac:TouchPoint/cac:PostalAddress/cbc:PostalZone
     type: text
     repeatable: false
-    mandatory: PIN PIN(CN) CN CAN(VEAT) CAN CAN(MOD) CEI T01 T02
+    mandatory: PIN PIN(CN) CN CAN(VEAT) CAN CAN(MOD) CEI T01 T02 (conditional)
     Description: The post code of the organisation's physical address.
     Business groups:
         BG-703: Organisation
@@ -9077,7 +9095,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='contract-nature']/cbc:ProcurementTypeCode
     type: code
     repeatable: true
-    codeList: eforms-contract-nature
+    codeList: contract-nature
     Description: The nature (e.g. services) of what is being bought, additional to Main Nature.
     Business groups:
         BG-2: Purpose
@@ -9094,7 +9112,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='contract-nature']/cbc:ProcurementTypeCode
     type: code
     repeatable: true
-    codeList: eforms-contract-nature
+    codeList: contract-nature
     Description: The nature (e.g. services) of what is being bought, additional to Main Nature.
     Business groups:
         BG-2: Purpose
@@ -9109,7 +9127,7 @@
     xpathAbsolute: /*/cac:ProcurementProject/cac:ProcurementAdditionalType[cbc:ProcurementTypeCode/@listName='contract-nature']/cbc:ProcurementTypeCode
     type: code
     repeatable: true
-    codeList: eforms-contract-nature
+    codeList: contract-nature
     Description: The nature (e.g. services) of what is being bought, additional to Main Nature.
     Business groups:
         BG-2: Purpose
@@ -9286,7 +9304,6 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/cbc:AwardingCriterionTypeCode[@listName='award-criterion-type']
     type: code
     repeatable: false
-    mandatory: CAN
     codeList: award-criterion-type
     Description: Whether the criterion concerns the price, the cost, or a non-price non-cost attribute of the tender. (Price is the acquisition price; cost is any other non-price monetary criterion.)
     Business groups:
@@ -9668,7 +9685,6 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cbc:CalculationExpression
     type: text-multilingual
     repeatable: false
-    mandatory: CAN
     Description: 'The mathematical equation or any other description used for complicated weighing of criteria (e.g. non-linear weighing, the analytic hierarchy process) when a weighing cannot be expressed per criterion. '
     Business groups:
         BG-707: Award Criteria
@@ -10303,12 +10319,12 @@
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#maxCandidatesSection
 -   id: BT-67(a)-Procedure
     parentNodeId: ND-ExclusionGrounds
-    name: Exclusion Grounds
+    name: Exclusion Ground
     btId: BT-67
-    xpathAbsolute: /*/cac:TenderingTerms/cac:TendererQualificationRequest/cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='exclusion-ground']
+    xpathAbsolute: /*/cac:TenderingTerms/cac:TendererQualificationRequest[cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode/@listName='exclusion-ground']/cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode
     type: code
     repeatable: false
-    mandatory: CN
+    mandatory: PIN PIN(CN) CN CEI
     codeList: exclusion-ground
     Description: 'The brief description of criteria regarding the personal situation of tenderers that may lead to their exclusion. This shall include a list of all such criteria and indicate required information (e.g. self-declaration, documentation). This may also include specific national exclusion grounds. '
     Business groups:
@@ -10323,9 +10339,9 @@
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#exclusionGrounds
 -   id: BT-67(b)-Procedure
     parentNodeId: ND-ExclusionGrounds
-    name: Exclusion Grounds
+    name: Exclusion Ground Description
     btId: BT-67
-    xpathAbsolute: /*/cac:TenderingTerms/cac:TendererQualificationRequest/cac:SpecificTendererRequirement/cbc:Description
+    xpathAbsolute: /*/cac:TenderingTerms/cac:TendererQualificationRequest[cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode/@listName='exclusion-ground']/cac:SpecificTendererRequirement/cbc:Description
     type: text-multilingual
     repeatable: false
     Description: 'The brief description of criteria regarding the personal situation of tenderers that may lead to their exclusion. This shall include a list of all such criteria and indicate required information (e.g. self-declaration, documentation). This may also include specific national exclusion grounds. '
@@ -10338,6 +10354,31 @@
     eForms example: <cac:SpecificTendererRequirement><cbc:Description languageID="ENG">Applicants not satisfying ...</cbc:Description></cac:SpecificTendererRequirement>
     OCDS example: '{"tender":{"exclusionGrounds":{"criteria":[{"description":"Participation in a criminal organisation: Applicants not satisfying..."}]}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#exclusionGrounds
+-   id: BT-681-Lot
+    parentNodeId: ND-FSR
+    name: Foreign Subsidies Regulation
+    btId: BT-681
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:ContractExecutionRequirement[cbc:ExecutionRequirementCode/@listName='fsr']/cbc:ExecutionRequirementCode
+    type: code
+    repeatable: false
+    codeList: fsr
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-682-Tender
+    parentNodeId: ND-LotTender
+    name: Foreign Subsidies Measures
+    btId: BT-682
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efbc:ForeignSubsidiesMeasuresCode
+    type: code
+    repeatable: false
+    mandatory: CAN
+    codeList: foreign-subsidy-measure-conclusion
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: BT-70-Lot
     parentNodeId: ND-ExecutionRequirements
     name: Terms Performance
@@ -10476,7 +10517,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:CallForTendersDocumentReference/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:OfficialLanguages/cac:Language/cbc:ID
     type: code
     repeatable: true
-    codeList: eforms-language
+    codeList: language
     Description: The language(s) in which the procurement documents are officially available. These linguistic versions are equally legally valid.
     Business groups:
         BG-101: Procurement Documents
@@ -10496,7 +10537,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:CallForTendersDocumentReference/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:OfficialLanguages/cac:Language/cbc:ID
     type: code
     repeatable: true
-    codeList: eforms-language
+    codeList: language
     Description: The language(s) in which the procurement documents are officially available. These linguistic versions are equally legally valid.
     Business groups:
         BG-101: Procurement Documents
@@ -10528,7 +10569,7 @@
     parentNodeId: ND-LotReservedProcurement
     name: Reserved Participation
     btId: BT-71
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='missing-info-submission'])]/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='reserved-procurement']/cbc:TendererRequirementTypeCode
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='missing-info-submission'])][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='selection-criteria-source'])]/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='reserved-procurement']/cbc:TendererRequirementTypeCode
     type: code
     repeatable: true
     mandatory: PIN PIN(CN) CN
@@ -10562,7 +10603,7 @@
     parentNodeId: ND-PartReservedProcurement
     name: Reserved Participation
     btId: BT-71
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='missing-info-submission'])]/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='reserved-procurement']/cbc:TendererRequirementTypeCode
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='missing-info-submission'])][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='selection-criteria-source'])]/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='reserved-procurement']/cbc:TendererRequirementTypeCode
     type: code
     repeatable: true
     codeList: reserved-procurement
@@ -11238,7 +11279,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:CallForTendersDocumentReference/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NonOfficialLanguages/cac:Language/cbc:ID
     type: code
     repeatable: true
-    codeList: eforms-language
+    codeList: language
     Description: The language(s) in which the procurement documents (or their parts) are unofficially available. These linguistic versions are not an official translation, they are provided only for information.
     Business groups:
         BG-101: Procurement Documents
@@ -11258,7 +11299,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:CallForTendersDocumentReference/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NonOfficialLanguages/cac:Language/cbc:ID
     type: code
     repeatable: true
-    codeList: eforms-language
+    codeList: language
     Description: The language(s) in which the procurement documents (or their parts) are unofficially available. These linguistic versions are not an official translation, they are provided only for information.
     Business groups:
         BG-101: Procurement Documents
@@ -11468,7 +11509,7 @@
     parentNodeId: ND-NonEsubmission
     name: Submission Nonelectronic Description
     btId: BT-745
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='no-esubmission-justification']/cbc:Description
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:ProcessJustification/cbc:Description
     type: text-multilingual
     repeatable: false
     mandatory: PIN PIN(CN) CN (conditional)
@@ -11495,91 +11536,6 @@
     eForms example: <efac:Organizations><efac:Organization><efbc:ListedOnRegulatedMarketIndicator>false</efbc:ListedOnRegulatedMarketIndicator><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></efac:Company></efac:Organization></efac:Organizations>
     OCDS example: '{"parties":[{"id":"ORG-0001","details":{"listedOnRegulatedMarket":false}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
--   id: BT-747-Lot
-    parentNodeId: ND-SelectionCriteria
-    name: Selection Criteria Type
-    btId: BT-747
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:SelectionCriteria/cbc:CriterionTypeCode[@listName='selection-criterion']
-    type: code
-    repeatable: false
-    mandatory: PIN PIN(CN) CN CEI
-    codeList: selection-criterion
-    Description: 'The criteria (or criterion) concern(s), for example, economic and financial standing or technical and professional ability. '
-    Business groups:
-        BG-702: Selection Criteria
-    TED Xpath:
-    - TED_EXPORT/FORM_SECTION/F01_2014/LEFTI/PARTICULAR_PROFESSION
-    - TED_EXPORT/FORM_SECTION/F02_2014/LEFTI/PARTICULAR_PROFESSION
-    - TED_EXPORT/FORM_SECTION/F04_2014/LEFTI/PARTICULAR_PROFESSION
-    - TED_EXPORT/FORM_SECTION/F05_2014/LEFTI/PARTICULAR_PROFESSION
-    - TED_EXPORT/FORM_SECTION/F07_2014/LEFTI/PARTICULAR_PROFESSION
-    - TED_EXPORT/FORM_SECTION/F12_2014/LEFTI/*[matches(name(),'PARTICULAR_PROFESSION')]
-    - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/LEFTI_CONTRACT_DEFENCE/SERVICES_CONTRACTS_SPECIFIC_CONDITIONS/*[matches(name(),'SERVICE_RESERVED_PARTICULAR_PROFESSION')]
-    - TED_EXPORT/FORM_SECTION/F21_2014/LEFTI/PARTICULAR_PROFESSION
-    - TED_EXPORT/FORM_SECTION/F22_2014/LEFTI/PARTICULAR_PROFESSION
-    - TED_EXPORT/FORM_SECTION/F24_2014/LEFTI/PARTICULAR_PROFESSION
-    TED guidance:
-    - Add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array and set its `.type` to 'technical'. If *Reference to the relevant law, regulation or administrative provision* is set, map it to the criterion's `.description`. Otherwise, set the criterion's `.description` to 'Execution of the service is reserved to a particular profession'.
-    eForms guidance: |-
-        If `cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, these values are mapped to the same `SelectionCriterion` objects as created for BT-40, BT-749, BT-750, BT-752, BT-7531 and BT-7532.
-
-        - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
-        - For each `<efac:SelectionCriteria>`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
-        - Identify the equivalent code in the [selection criterion mapping table](codelists/selection-criterion), and set it as the criterion's `.type`.
-    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:SelectionCriteria><cbc:CriterionTypeCode listName="selection-criterion">ef-stand</cbc:CriterionTypeCode></efac:SelectionCriteria></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:TenderingTerms></cac:ProcurementProjectLot>
-    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","selectionCriteria":{"criteria":[{"type":"economic"}]}}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#selectionCriteriaSection
--   id: BT-748-Lot
-    parentNodeId: ND-SelectionCriteria
-    name: Selection Criteria Used
-    btId: BT-748
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:SelectionCriteria/cbc:CalculationExpressionCode[@listName='usage']
-    type: code
-    repeatable: false
-    codeList: usage
-    Description: The criteria (or criterion) of the given type are (is) used, unused, or (in case of prior information notice used as a call for competition or to reduce time limits) the use is not yet known.
-    Business groups:
-        BG-702: Selection Criteria
-    eForms guidance: Discard.
-    eForms example: <efac:SelectionCriteria><cbc:CalculationExpressionCode listName="usage">used</cbc:CalculationExpressionCode></efac:SelectionCriteria>
-    OCDS example: ''
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#selectionCriteriaSection
--   id: BT-749-Lot
-    parentNodeId: ND-SelectionCriteria
-    name: Selection Criteria Name
-    btId: BT-749
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:SelectionCriteria/cbc:Name
-    type: text-multilingual
-    repeatable: false
-    Description: The name of the selection criteria (or criterion).
-    Business groups:
-        BG-702: Selection Criteria
-    TED Xpath:
-    - TED_EXPORT/FORM_SECTION/F01_2014/LEFTI/ECONOMIC_FINANCIAL_INFO
-    - TED_EXPORT/FORM_SECTION/F01_2014/LEFTI/TECHNICAL_PROFESSIONAL_INFO
-    - TED_EXPORT/FORM_SECTION/F02_2014/LEFTI/TECHNICAL_PROFESSIONAL_INFO
-    - TED_EXPORT/FORM_SECTION/F02_2014/LEFTI/ECONOMIC_FINANCIAL_INFO
-    - TED_EXPORT/FORM_SECTION/F04_2014/LEFTI/ECONOMIC_FINANCIAL_INFO
-    - TED_EXPORT/FORM_SECTION/F04_2014/LEFTI/TECHNICAL_PROFESSIONAL_INFO
-    - TED_EXPORT/FORM_SECTION/F05_2014/LEFTI/TECHNICAL_CRITERIA_DOC
-    - TED_EXPORT/FORM_SECTION/F05_2014/LEFTI/ECONOMIC_CRITERIA_DOC
-    - TED_EXPORT/FORM_SECTION/F12_2014/LEFTI/PARTICULAR_PROFESSION/P
-    - TED_EXPORT/FORM_SECTION/F24_2014/LEFTI/ECONOMIC_FINANCIAL_INFO
-    - TED_EXPORT/FORM_SECTION/F24_2014/LEFTI/TECHNICAL_PROFESSIONAL_INFO
-    TED guidance:
-    - Add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array, set its `.type` to 'economic', and map to its `.description`.
-    - Add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array, set its `.type` to 'economic', and set its `.description` to "As stated in the procurement documents".
-    - Add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array, set its `.type` to 'technical', and map to its `.description`.
-    - Add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array, set its `.type` to 'technical', and set its `.description` to "As stated in the procurement documents".
-    eForms guidance: |-
-        If `cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, these values are mapped to the same `SelectionCriterion` objects as created for BT-40-Lot, BT-747-Lot, BT-749-Lot, BT-750-Lot, BT-752-Lot-ThresholdNumber, BT-752-Lot-WeightNumber, BT-7531-Lot and BT-7532-Lot.
-
-        - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
-        - For each `efac:SelectionCriteria`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
-        - Map to the criterion's `.description`. Concatenate it with [BT-750-Lot Selection Criteria Description](#BT-750-Lot).
-    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:SelectionCriteria><cbc:Name languageID="ENG">Minimum Turnover</cbc:Name></efac:SelectionCriteria></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:TenderingTerms></cac:ProcurementProjectLot>
-    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","selectionCriteria":{"criteria":[{"description":"Minimum Turnover"}]}}]}}'
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#selectionCriteriaSection
 -   id: BT-75-Lot
     parentNodeId: ND-FinancialGuarantee
     name: Guarantee Required Description
@@ -11605,6 +11561,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:SelectionCriteria/cbc:Description
     type: text-multilingual
     repeatable: false
+    mandatory: PIN PIN(CN) CN CEI
     Description: The brief description of the selection criteria (or criterion), including minimum requirements, required information (e.g. self-declaration, documentation) and how the criteria or criterion will be used to select candidates to be invited for the second stage of the procedure (if a maximum number of candidates was set).
     Business groups:
         BG-702: Selection Criteria
@@ -12169,7 +12126,7 @@
     parentNodeId: ND-LateTendererInformation
     name: Late Tenderer Information
     btId: BT-771
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)]/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='missing-info-submission']/cbc:TendererRequirementTypeCode
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='reserved-procurement'])][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='selection-criteria-source'])]/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='missing-info-submission']/cbc:TendererRequirementTypeCode
     type: code
     repeatable: false
     codeList: missing-info-submission
@@ -12186,7 +12143,7 @@
     parentNodeId: ND-LateTendererInformation
     name: Late Tenderer Information Description
     btId: BT-772
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)]/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='missing-info-submission']/cbc:Description
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='reserved-procurement'])][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='selection-criteria-source'])]/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='missing-info-submission']/cbc:Description
     type: text-multilingual
     repeatable: false
     mandatory: PIN PIN(CN) CN (conditional)
@@ -12438,6 +12395,45 @@
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cac:ProcurementAdditionalType><cbc:ProcurementTypeCode listName="gpp-criteria">eu</cbc:ProcurementTypeCode></cac:ProcurementAdditionalType></cac:ProcurementProject></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","hasSustainability":true,"sustainability":[{"strategies":["euGPPCriteria"]}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#strategicProcurementSection
+-   id: BT-806-Procedure
+    parentNodeId: ND-ExclusionGroundsSource
+    name: Exclusion Grounds Source
+    btId: BT-806
+    xpathAbsolute: /*/cac:TenderingTerms/cac:TendererQualificationRequest[cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode/@listName='exclusion-grounds-source']/cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode
+    type: code
+    repeatable: true
+    mandatory: PIN PIN(CN) CN CEI
+    codeList: exclusion-grounds-source
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-809-Lot
+    parentNodeId: ND-SelectionCriteria
+    name: Selection Criteria
+    btId: BT-809
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:SelectionCriteria/cbc:TendererRequirementTypeCode
+    type: code
+    repeatable: false
+    mandatory: PIN PIN(CN) CN CEI
+    codeList: selection-criterion
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-821-Lot
+    parentNodeId: ND-SelectionCriteriaSource
+    name: Selection Criteria Source
+    btId: BT-821
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:TendererQualificationRequest[not(cbc:CompanyLegalFormCode)][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='missing-info-submission'])][not(cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode[@listName='reserved-procurement'])]/cac:SpecificTendererRequirement[cbc:TendererRequirementTypeCode/@listName='selection-criteria-source']/cbc:TendererRequirementTypeCode
+    type: code
+    repeatable: true
+    mandatory: PIN PIN(CN) CN CEI
+    codeList: selection-criteria-source
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: BT-88-Procedure
     parentNodeId: ND-ProcedureTenderingProcess
     name: Procedure Features
@@ -12563,7 +12559,7 @@
     type: code
     repeatable: true
     mandatory: PIN PIN(CN) CN
-    codeList: eforms-language
+    codeList: language
     Description: A language in which tenders, requests to participate, or expressions of interest may be submitted.
     Business groups:
         BG-102: Submission Terms
