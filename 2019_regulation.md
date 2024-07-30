@@ -175,6 +175,7 @@ These can be automated if persistent:
         ./manage.py lint -a output/mapping/eforms/guidance.yaml
 
 1. Run `git diff output/mapping/eforms/guidance.yaml`, and open a GitHub issue to document changes.
+1. Update the ``drop`` list in the ``update_with_sdk`` command to ignore any new irrelevant properties. Make other code changes as needed, to keep `guidance.yaml` concise. If so, repeat from step 1.
 1. Fields removed from `source/fields.json` remain in `output/mapping/eforms/guidance.yaml` with only eForms guidance, eForms example, OCDS example and sdk fields. Remove such fields manually.
 1. To get all fields with a given change, you can run, for example:
 

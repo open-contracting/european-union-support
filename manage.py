@@ -408,14 +408,25 @@ def update_with_sdk(filename, verbose):
         "forbidden",
         "assert",
         "inChangeNotice",
+        # 1.12.0
+        "businessEntityId",
+        "referencedBusinessEntityIds",
     ]
     # Simplify these columns if `severity` is the only other top-level key.
     for column in ("repeatable", "pattern"):
         df[column] = [cell["value"] if isinstance(cell, dict) and len(cell) == 2 else cell for cell in df[column]]
-    # Simplify `codelist` if `severity` is the only other top-level key, and if `type` and `parentId` (optional) are
-    # the only other second-level keys.
+    # Simplify `codelist` if `severity` and `constraints` are the only other top-level keys, and if `type` and
+    # `parentId` (optional) are the only other second-level keys.
     df["codeList"] = [
-        cell["value"]["id"] if isinstance(cell, dict) and len(cell) == 2 and 2 <= len(cell["value"]) <= 3 else cell
+        (
+            cell["value"]["id"]
+            if (
+                isinstance(cell, dict)
+                and not (set(cell) - {"value", "severity", "constraints"})
+                and not (set(cell["value"]) - {"id", "type", "parentId"})
+            )
+            else cell
+        )
         for cell in df["codeList"]
     ]
 
