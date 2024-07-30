@@ -164,7 +164,7 @@ These can be automated if persistent:
 1. Run, replacing the tag (`1.9.0` here):
 
         fish script/2019_download.fish 1.9.0
-        ./manage.py update-with-sdk --verbose output/mapping/eForms/guidance.yaml
+        ./manage.py update-with-sdk --verbose output/mapping/eforms/guidance.yaml
         ./manage.py update-with-annex output/mapping/eforms/guidance.yaml
         ./manage.py update-with-ted-guidance output/mapping/eforms/guidance.yaml
         # This step is slow.
