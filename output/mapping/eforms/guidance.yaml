@@ -7160,6 +7160,7 @@
     codeList: indicator
     Description: The criteria (or criterion) will (only) be used to select the candidates to be invited for the second stage of the procedure (if a maximum number of candidates was set).
     Business groups:
+        BG-700: Exclusion Grounds and Selection Criteria
         BG-702: Selection Criteria
     eForms guidance: |-
         If `cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, this field is maps to the same `SelectionCriterion` objects as created for BT-747, BT-749, BT-750, BT-752, BT-7531 and BT-7532.
@@ -10328,6 +10329,7 @@
     codeList: exclusion-ground
     Description: 'The brief description of criteria regarding the personal situation of tenderers that may lead to their exclusion. This shall include a list of all such criteria and indicate required information (e.g. self-declaration, documentation). This may also include specific national exclusion grounds. '
     Business groups:
+        BG-700: Exclusion Grounds and Selection Criteria
         BG-701: Exclusion Grounds
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/F07_2014/LEFTI/QUALIFICATION/CONDITIONS
@@ -10346,6 +10348,7 @@
     repeatable: false
     Description: 'The brief description of criteria regarding the personal situation of tenderers that may lead to their exclusion. This shall include a list of all such criteria and indicate required information (e.g. self-declaration, documentation). This may also include specific national exclusion grounds. '
     Business groups:
+        BG-700: Exclusion Grounds and Selection Criteria
         BG-701: Exclusion Grounds
     eForms guidance: |-
         This field maps to the same `ExclusionCriteria` objects as created for BT-67(a)-Procedure.
@@ -10362,6 +10365,9 @@
     type: code
     repeatable: false
     codeList: fsr
+    Description: The Foreign Subsidies Regulation (FSR) (EU) 2022/2560, in line with Article 28 thereof, is applicable to this procurement procedure.
+    Business groups:
+        BG-705: Other Requirements
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -10375,6 +10381,10 @@
     repeatable: false
     mandatory: CAN
     codeList: foreign-subsidy-measure-conclusion
+    Description: Measures applied under the Foreign Subsidies Regulation (EU) 2022/2560.
+    Business groups:
+        BG-7: Notice Result
+        BG-320: Tender
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -10787,7 +10797,7 @@
         Get the `ancestor::efac:NoticeResult/efac:LotResult` with an `/efac:LotTender/cbc:ID` equal to the value of `ancestor::efac:LotTender/cbc:ID`. Get the `Award` in `awards` whose `id` is equal to the value of this `efac:LotResult`'s `/cbc:ID`. If none exists yet:
 
         1. Add an `Award` to `awards`
-        2. Set its `.id` to the value of this `efac:LotResult/cbc:ID`
+        1. Set its `.id` to the value of this `efac:LotResult/cbc:ID`
 
         Add the value of `ancestor::efac:TenderLot/cbc:ID` to the award's `.relatedLots`
         Map the value of this field to the awards `.value.amount` and map `@currencyID` to the value's `.currency`.
@@ -11564,6 +11574,7 @@
     mandatory: PIN PIN(CN) CN CEI
     Description: The brief description of the selection criteria (or criterion), including minimum requirements, required information (e.g. self-declaration, documentation) and how the criteria or criterion will be used to select candidates to be invited for the second stage of the procedure (if a maximum number of candidates was set).
     Business groups:
+        BG-700: Exclusion Grounds and Selection Criteria
         BG-702: Selection Criteria
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/F01_2014/LEFTI/ECONOMIC_FINANCIAL_MIN_LEVEL
@@ -11622,6 +11633,7 @@
     repeatable: false
     Description: A number linked to the selection criteria (or criterion).
     Business groups:
+        BG-700: Exclusion Grounds and Selection Criteria
         BG-702: Selection Criteria
         BG-72: Selection Criteria Second Stage Invite Number
     eForms guidance: |-
@@ -11642,6 +11654,7 @@
     repeatable: false
     Description: A number linked to the selection criteria (or criterion).
     Business groups:
+        BG-700: Exclusion Grounds and Selection Criteria
         BG-702: Selection Criteria
         BG-72: Selection Criteria Second Stage Invite Number
     eForms guidance: |-
@@ -11664,6 +11677,7 @@
     codeList: number-weight
     Description: Whether the number linked to a selection criterion (or selection criteria) is a type of weight (e.g. a percentage).
     Business groups:
+        BG-700: Exclusion Grounds and Selection Criteria
         BG-702: Selection Criteria
         BG-72: Selection Criteria Second Stage Invite Number
     eForms guidance: |-
@@ -11687,6 +11701,7 @@
     codeList: number-threshold
     Description: Whether the number linked to a selection criterion (or selection criteria) is a type of threshold (e.g. a minimum score, a maximum number of tenders with the highest score passing).
     Business groups:
+        BG-700: Exclusion Grounds and Selection Criteria
         BG-702: Selection Criteria
         BG-72: Selection Criteria Second Stage Invite Number
     eForms guidance: |-
@@ -12404,6 +12419,9 @@
     repeatable: true
     mandatory: PIN PIN(CN) CN CEI
     codeList: exclusion-grounds-source
+    Description: Where the exclusions grounds are defined, for example, the procurement documents or in ESPD.
+    Business groups:
+        BG-700: Exclusion Grounds and Selection Criteria
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12417,6 +12435,10 @@
     repeatable: false
     mandatory: PIN PIN(CN) CN CEI
     codeList: selection-criterion
+    Description: The criteria (or criterion).
+    Business groups:
+        BG-700: Exclusion Grounds and Selection Criteria
+        BG-702: Selection Criteria
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -12430,6 +12452,9 @@
     repeatable: true
     mandatory: PIN PIN(CN) CN CEI
     codeList: selection-criteria-source
+    Description: Where the selection criteria are defined, for example, the procurement documents or in ESPD
+    Business groups:
+        BG-700: Exclusion Grounds and Selection Criteria
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''

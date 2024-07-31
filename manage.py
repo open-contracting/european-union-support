@@ -727,6 +727,35 @@ def lint(filename, additional_properties):
         "Subcontracting",  # BT-195
     }
 
+    required_properties_base = {
+        "id",
+        "parentNodeId",
+        "name",
+        "btId",
+        "xpathAbsolute",
+        "type",
+        "repeatable",
+        "eForms guidance",
+        "eForms example",
+        "OCDS example",
+        "sdk",
+    }
+    required_properties_bt = {
+        "Description",
+        "Business groups",
+    }
+    optional_properties = {
+        "schemeName",
+        "idSchemes",
+        "codeList",
+        "mandatory",
+        "pattern",
+        # Only if update-with-xpath matches.
+        "TED Xpath",
+        # Only if update-with-ted-guidance matches.
+        "TED guidance",
+    }
+
     # Similar to tests/fixtures/release_minimal.json in ocdskit.
     minimal_release = {
         "ocid": "ocds-213czf-1",
@@ -806,6 +835,14 @@ def lint(filename, additional_properties):
     additional_fields = defaultdict(list)
     for field in fields:
         identifier = field["id"]
+
+        required_properties = required_properties_base.copy()
+        if identifier.startswith("BT-"):
+            required_properties |= required_properties_bt
+        if missing_properties := required_properties - set(field):
+            click.echo(f"{identifier}: missing properties: {missing_properties}")
+        if extra_properties := set(field) - required_properties_base - required_properties_bt - optional_properties:
+            click.echo(f"{identifier}: extra properties: {extra_properties}")
 
         # Update and check SDK URLs.
         if field["sdk"]:
