@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
+
 gem 'activesupport'
+gem 'csv'
 gem 'hashdiff'
 gem 'kramdown'
 gem 'nokogiri'
