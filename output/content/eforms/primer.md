@@ -26,7 +26,7 @@ In OCDS, planning information is modeled as a planning process, which is defined
 
 There are differences between a procedure in eForms and a contracting process in OCDS:
 
-* In OCDS, a contracting process includes an implementation stage, covering payments, progress updates and completion information. eForms does not currently cover the implementation stage; a Contract Completion form is [planned](https://docs.ted.europa.eu/home/eforms/FAQ/index.html#_forms_and_procedures).
+* In OCDS, a contracting process includes an implementation stage, covering payments, progress updates and completion information. eForms does not currently cover the implementation stage; a Contract Completion form is [planned](https://docs.ted.europa.eu/eforms-common/FAQ/index.html#_forms_and_procedures).
 * In multi-stage procedures (e.g. framework agreements with reopening of competition), OCDS treats each round of competition as a separate contracting process; for more information, see [Framework agreements](https://standard.open-contracting.org/latest/en/guidance/map/framework_agreements/). eForms treats each round of competition as  occurring within the same procedure.
 
 The following diagram illustrates the relationship between:
@@ -67,7 +67,7 @@ In OCDS, each part is modeled as an individual planning release, belonging to a 
 
 ### ProcurementProjectLot (lot or group of lots)
 
-In addition to representing a [part](#part-release), the [`ProcurementProjectLot`](https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#_introduction) element in eForms can also represent a lot (with a `schemeName` of ‘Lot’), sometimes known as a `TenderLot`, or a group of lots (with a `schemeName` of ‘LotsGroup’).
+In addition to representing a [part](#part-release), the [`ProcurementProjectLot`](https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#_introduction) element in eForms can also represent a lot (with a `schemeName` of ‘Lot’), sometimes known as a TenderLot, or a group of lots (with a `schemeName` of ‘LotsGroup’).
 
 In OCDS, a lot is modeled as a [`Lot` object](https://extensions.open-contracting.org/en/extensions/lots/master/schema/#lot), and a group of lots is modeled as a [`LotGroup` object](https://extensions.open-contracting.org/en/extensions/lots/master/schema/#lotgroup).
 
@@ -81,7 +81,17 @@ In OCDS, a LotTender is modeled as a [`Bid` object](https://extensions.open-cont
 
 In eForms, the [LotResult](https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result) element contains information about the competition results for a single lot.
 
-In OCDS, a LotResult is modeled as an [`Award` object](https://standard.open-contracting.org/latest/en/schema/reference/#award). There are exceptions: notably, a LotResult that represents the termination of a dynamic purchasing system is modeled as a `Lot` object that has a dynamic purchasing system with a status of ‘terminated’.
+In OCDS, a LotResult is modeled as either:
+
+- An [`Award` object](https://standard.open-contracting.org/latest/en/schema/reference/#award), in most cases
+- A [`Contract` object](https://standard.open-contracting.org/latest/en/schema/reference/#contract), for contract-specific information, including contract ID, contract title, contract URL, date signed, modifications, financing and concession revenues
+
+At the same time, some fields under a LotResult are modelled in [`Bid` objects](https://extensions.open-contracting.org/en/extensions/bids/master/schema/#bid) (for the value of the winning bid) or `Statistic` objects.
+
+Notable exceptions:
+
+- A LotResult that represents the termination of a dynamic purchasing system is modeled as a `Lot` object that has a dynamic purchasing system with a status of ‘terminated’.
+- Essential assets are described only in [T02: Information notice for award of public service contract](https://ted.europa.eu/documents/d/ted/t02_en) under *Section II: Object*. Although the notice is used only for awards, this information is about the tender stage.
 
 ### SettledContract (contract)
 
