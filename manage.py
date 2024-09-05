@@ -27,8 +27,6 @@ from jsonschema import FormatChecker
 from jsonschema.validators import Draft4Validator
 from ocdsextensionregistry import ProfileBuilder
 
-# from ocdskit.mapping_sheet import mapping_sheet
-
 basedir = Path(__file__).resolve().parent
 sourcedir = basedir / "source"
 outputdir = basedir / "output"
@@ -86,7 +84,7 @@ def get(url):
     """
     GET a URL and return the response.
     """
-    response = requests.get(url)
+    response = requests.get(url, timeout=10)
     response.raise_for_status()
     return response
 
@@ -102,7 +100,7 @@ def unique(series):
     """
     Return the unique values of a series.
     """
-    series.dropna(inplace=True)
+    series = series.dropna()
 
     # Write "null" not "[]".
     if series.empty:
@@ -220,7 +218,7 @@ def write(
                 column_order.append(column)
 
         # Pandas has no option to overwrite cells, so we drop first. Protect "id" from being overwritten.
-        df_old.drop(columns=[column for column in overwrite if column != "id"], errors="ignore", inplace=True)
+        df_old = df_old.drop(columns=[column for column in overwrite if column != "id"], errors="ignore")
 
         if explode:
             df_old = df_old.explode(explode)
@@ -231,7 +229,7 @@ def write(
 
         if compare:
             compared = 0
-            for label, row in df_outer[df_outer["_merge"] == "both"].iterrows():
+            for _, row in df_outer[df_outer["_merge"] == "both"].iterrows():
                 for a, b in compare.items():
                     if row[a] != row[b] and compare_override[a].get(row["id"]) != row[b]:
                         if not compared:
@@ -250,7 +248,7 @@ def write(
         df = df_old.merge(df, how=how, **kwargs).drop(columns=untouched)
 
         if drop:
-            df.drop(columns=drop, errors="ignore", inplace=True)
+            df = df.drop(columns=drop, errors="ignore")
 
         if explode:
             df = df.groupby("id").agg(
@@ -268,7 +266,7 @@ def write(
             df[column] = pd.Series(dtype="object")
         else:
             column_order.remove(column)
-        df[column].fillna("", inplace=True)
+        df[column] = df[column].fillna("")
         column_order.append(column)
 
     write_yaml_file(filename, [row.dropna().to_dict() for label, row in df[column_order].iterrows()])
@@ -292,10 +290,8 @@ def update_with_sdk(filename, verbose):
     """
     with (sourcedir / "fields.json").open() as f:
         data = json.load(f)
-        df = pd.DataFrame.from_dict(data["fields"])
-        df.set_index("id", inplace=True)
-        xml = pd.DataFrame.from_dict(data["xmlStructure"])
-        xml.set_index("id", inplace=True)
+        df = pd.DataFrame.from_dict(data["fields"]).set_index("id")
+        xml = pd.DataFrame.from_dict(data["xmlStructure"]).set_index("id")
 
     subtypes = {}
     with (sourcedir / "notice-types.json").open() as f:
@@ -351,7 +347,7 @@ def update_with_sdk(filename, verbose):
             labels_to_drop.add(label)
             no_supported_types[label] = row["name"]
 
-    df.drop(index=labels_to_drop, inplace=True)
+    df = df.drop(index=labels_to_drop)
 
     non_privacy_xml = xml[~xml["xpathRelative"].str.startswith("efac:FieldsPrivacy")]
     for label, row in df.iterrows():
@@ -450,8 +446,8 @@ def update_with_sdk(filename, verbose):
 def update_with_annex(filename):
     """
     Update FILE with details from the 2019 regulation's annex.
-    \f
 
+    \f
     Add the columns:
 
     - Description
@@ -478,7 +474,7 @@ def update_with_annex(filename):
     # Remove extra header rows.
     check(df["ID"].isna().sum(), 3, "extra header rows")
     df = df[df["ID"].notna()]
-    # XXX: BG-714 now identifies "CVD Information" in addition to "Review".
+    # !!! BG-714 now identifies "CVD Information" in addition to "Review".
     if df.at[295, "ID"] == "BG-714":
         df.at[295, "ID"] = "BG-7140"
 
@@ -497,7 +493,7 @@ def update_with_annex(filename):
     line = []
     previous_level = 0
     for label, row in df.iterrows():
-        # XXX: Fix typo, to not be at same level as immediately preceding BG-714 (deduplicated to BG-7140, above).
+        # !!! Fix typo, to not be at same level as immediately preceding BG-714 (deduplicated to BG-7140, above).
         if row["ID"] == "BT-735" and row["Level"] == "++":
             row["Level"] = "+++"
 
@@ -631,13 +627,12 @@ def update_with_annex(filename):
 def update_with_xpath(filename):
     """
     Update FILE with XPaths from TED XML.
-    \f
 
+    \f
     Add the columns:
 
     - TED Xpath
     """
-
     # See the "Legend" sheet for the data dictionary.
     with pd.ExcelFile(sourcedir / "TED-XML-to-eForms-mapping-OP-public-20220404.xlsx") as xlsx:
         df = pd.read_excel(xlsx, "tedxml_to_eforms_mapping.v0.4", na_values=["---", "no match", "no direct match"])
@@ -667,13 +662,12 @@ def update_with_xpath(filename):
 def update_with_ted_guidance(filename):
     """
     Update FILE with guidance for TED XML.
-    \f
 
+    \f
     Add the columns:
 
     - TED guidance
     """
-
     # Collect the guidance.
     dfs = []
     for path in sorted(mappingdir.glob("*.csv")):
@@ -705,10 +699,9 @@ def update_with_ted_guidance(filename):
     # Some TED elements cannot be converted to eForms.
     # https://github.com/OP-TED/ted-xml-data-converter/blob/main/ted-elements-not-convertible.md
     url = "https://raw.githubusercontent.com/OP-TED/ted-xml-data-converter/main/ted-elements-not-convertible.md"
-    elements = []
-    for line in get(url).text.splitlines():
-        if match := re.search(r"^\| ([A-Z_]+) \|", line):
-            elements.append(match.group(1))
+    elements = [
+        match.group(1) for line in get(url).text.splitlines() if (match := re.search(r"^\| ([A-Z_]+) \|", line))
+    ]
 
     report_unmerged_rows(df, ["form", "xpath"], ~df["xpath"].str.endswith(tuple(elements)), unformatted=["form"])
 
@@ -720,7 +713,6 @@ def lint(filename, additional_properties):
     """
     Lint FILE (validate and format XML, JSON and Markdown, report unrecognized OCDS fields, update eForms SDK URLs).
     """
-
     literal_strings = {
         "COFOG",  # BT-10, BT-610
         "Restricted.",  # BT-14
@@ -783,8 +775,10 @@ def lint(filename, additional_properties):
 
     # The idea was to compare the additional fields to known prefixes, but this mostly results in the lots extension.
     # I am leaving this code here for now, in case we need to do something smarter.
-    # fieldnames, rows = mapping_sheet(schema, extension_field="extension", inherit_extension=False)
-    # prefixes = {row["path"]: row.get("extension") for row in rows}
+    #
+    # > from ocdskit.mapping_sheet import mapping_sheet
+    # > fieldnames, rows = mapping_sheet(schema, extension_field="extension", inherit_extension=False)
+    # > prefixes = {row["path"]: row.get("extension") for row in rows}
 
     # Remove `patternProperties` to clarify output.
     set_additional_properties_and_remove_pattern_properties(schema, additional_properties)
@@ -1453,10 +1447,7 @@ def fields_without_extensions(file, contains):
                             if isinstance(prefix, dict):
                                 xpath = row.get("xpath", "/")
                                 root = xpath.split("/", 2)[1]
-                                if root in prefix:
-                                    key = root
-                                else:
-                                    key = xpath
+                                key = root if root in prefix else xpath
                                 try:
                                     prefix = prefix[key]
                                 except KeyError:
