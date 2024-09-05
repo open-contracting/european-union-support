@@ -477,6 +477,8 @@ def update_with_annex(filename):
     # !!! BG-714 now identifies "CVD Information" in addition to "Review".
     if df.at[295, "ID"] == "BG-714":
         df.at[295, "ID"] = "BG-7140"
+    else:
+        click.echo("BG-714 has moved, or isn't repeated?")
 
     # Ensure there are no duplicates.
     df.set_index("ID", verify_integrity=True)
@@ -490,6 +492,46 @@ def update_with_annex(filename):
     # Add "Business groups" column, to assist mapping by providing context.
     df["Business groups"] = pd.Series(dtype="object")
 
+    # !!! The 2024 Annex adds business terms.
+    annex_2024 = {
+        "BT-681": (  # Lot
+            "Foreign Subsidies Regulation",
+            "The Foreign Subsidies Regulation (FSR) (EU) 2022/2560, in line with Article 28 thereof, "
+            "is applicable to this procurement procedure.",
+            "No",
+            ("BG-705", "Other Requirements"),
+        ),
+        "BT-682": (  # Tender
+            "Foreign Subsidies Measures",
+            "Measures applied under the Foreign Subsidies Regulation (EU) 2022/2560.",
+            "No",
+            ("BG-7", "Notice Result"),
+            ("BG-320", "Tender"),
+        ),
+        "BT-806": (  # Procedure
+            "Exclusion Grounds Source",
+            "Where the exclusions grounds are defined, for example, the procurement documents or in ESPD.",
+            "Yes",
+            ("BG-700", "Exclusion Grounds and Selection Criteria"),
+        ),
+        "BT-809": (  # Lot
+            "Selection Criteria",
+            "The criteria (or criterion).",
+            "No",
+            ("BG-700", "Exclusion Grounds and Selection Criteria"),
+            ("BG-702", "Selection Criteria"),
+        ),
+        "BT-821": (  # Lot
+            "Selection Criteria Source",
+            "Where the selection criteria are defined, for example, the procurement documents or in ESPD.",
+            "Yes",
+            ("BG-700", "Exclusion Grounds and Selection Criteria"),
+        ),
+    }
+    for identifier, (name, description, repeatable, *business_groups) in annex_2024.items():
+        df.loc[-1] = ["", identifier, name, repeatable, None, description] + [None] * 46 + [dict(business_groups)]
+        df.index = df.index + 1
+
     line = []
     previous_level = 0
     for label, row in df.iterrows():
@@ -498,20 +540,28 @@ def update_with_annex(filename):
             row["Level"] = "+++"
 
         current_level = len(row["Level"])
+        if current_level:
+            # Adjust the size of this line of the "tree", then update the head.
+            if current_level > previous_level:
+                line.append((None, None))
+            elif current_level < previous_level:
+                line = line[:current_level]
+            previous_level = current_level
 
-        # Adjust the size of this line of the "tree", then update the head.
-        if current_level > previous_level:
-            line.append((None, None))
-        elif current_level < previous_level:
-            line = line[:current_level]
         line[-1] = [row["ID"], row["Name"]]
 
         if row["ID"] in nonrepeatable:
             df.at[label, "Repeatable"] = "No"
 
-        df.at[label, "Business groups"] = dict(line[:-1]) if len(line) > 1 else None
-
-        previous_level = current_level
+        if row["ID"] not in annex_2024:
+            if len(line) > 1:
+                business_groups = dict(line[:-1])
+                # !!! The 2024 Annex adds a business group.
+                if line[0][0] in ("BG-701", "BG-702"):
+                    business_groups = {"BG-700": "Exclusion Grounds and Selection Criteria", **business_groups}
+            else:
+                business_groups = None
+            df.at[label, "Business groups"] = business_groups
 
     # We can now remove all rows for business groups.
     df = df[~df["ID"].str.startswith("BG-")]
