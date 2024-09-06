@@ -32,7 +32,7 @@ jobs:
         run: curl -s -S --retry 3 $BASEDIR/tests/install.sh | bash -
       - shell: bash
         run: curl -s -S --retry 3 $BASEDIR/tests/script.sh | bash -
-      - run: pip install -r requirements.txt
+      - run: pip install -r requirements_dev.txt
       - env:
           # ocdskit is run as a command. openpyxl is an optional dependency of Pandas.
           STANDARD_MAINTENANCE_SCRIPTS_IGNORE: ocdskit,openpyxl
