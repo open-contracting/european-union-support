@@ -5516,7 +5516,7 @@
     Description: The later date at which the originally unpublished field shall be published.
     Business groups:
         BG-8: Not Immediately Published
-    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-LotsGroup-Threshold and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. [Convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
+    eForms guidance: Get the `withheldInformationItem` object created for BT-195(BT-541)-LotsGroup-Weight and `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`. [Convert date to ISO format](operations.md#convert-a-date-to-iso-format) and map to its `.availabilityDate`
     eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
