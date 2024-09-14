@@ -51,7 +51,7 @@ xmltail = "</ContractNotice>"
 
 
 class Dumper(yaml.SafeDumper):
-    def ignore_aliases(self, data):
+    def ignore_aliases(self, data):  # noqa: ARG002
         return True
 
 
@@ -74,7 +74,7 @@ def str_representer(dumper, data):
     return dumper.represent_scalar("tag:yaml.org,2002:str", data, style="|" if "\n" in data else None)
 
 
-Dumper.add_representer(pd._libs.missing.NAType, na_representer)
+Dumper.add_representer(pd._libs.missing.NAType, na_representer)  # noqa: SLF001
 Dumper.add_representer(np.ndarray, ndarray_representer)
 Dumper.add_representer(float, float_representer)
 Dumper.add_representer(str, str_representer)
@@ -117,7 +117,8 @@ def check(actual, expected, noun):
     """
     Assert that ``actual`` equals ``expected``, with a templated error message.
     """
-    assert actual == expected, f"expected {expected} {noun}, got {actual}"
+    if actual != expected:
+        raise AssertionError(f"expected {expected} {noun}, got {actual}")
 
 
 def get_column_order(df, drop=()):
@@ -334,7 +335,8 @@ def update_with_sdk(filename, verbose):
             continue
         # Abbreviate the constraints (there is sometimes a conditional constraint.).
         for constraint in forbidden["constraints"][1:]:
-            assert constraint["condition"].startswith("{ND-")
+            if not constraint["condition"].startswith("{ND-"):
+                raise AssertionError
         forbidden["constraints"] = forbidden["constraints"][:1]
 
         # If a field's forbidden types are a superset of all supported types, drop it.
@@ -343,7 +345,8 @@ def update_with_sdk(filename, verbose):
             and "condition" not in forbidden["constraints"][0]
         ):
             # Ensure the forbidden property's structure is as expected.
-            assert forbidden == expected, f"{label} {forbidden} !=\n{expected}"
+            if forbidden != expected:
+                raise AssertionError(f"{label} {forbidden} !=\n{expected}")
             labels_to_drop.add(label)
             no_supported_types[label] = row["name"]
 
@@ -385,8 +388,10 @@ def update_with_sdk(filename, verbose):
                     value += " (conditional)"
                 values.append(value)
             # Ensure the mandatory property's structure is as expected.
-            assert all(c == {"value": True, "severity": "ERROR"} for c in mandatory.pop("constraints"))
-            assert mandatory == {"value": False, "severity": "ERROR"}
+            if any(c != {"value": True, "severity": "ERROR"} for c in mandatory.pop("constraints")):
+                raise AssertionError
+            if mandatory != {"value": False, "severity": "ERROR"}:
+                raise AssertionError
             df.at[label, "mandatory"] = " & ".join(values)
 
     if verbose:
@@ -487,7 +492,7 @@ def update_with_annex(filename):
     df["Name"] = df["Name"].str.strip()
 
     # Normalize whitespace.
-    df["Description"] = df["Description"].str.replace(" ", " ", regex=False)  # non-breaking space
+    df["Description"] = df["Description"].str.replace("\xa0", " ", regex=False)  # non-breaking space
 
     # Add "Business groups" column, to assist mapping by providing context.
     df["Business groups"] = pd.Series(dtype="object")
@@ -918,7 +923,7 @@ def lint(filename, additional_properties):
         eforms_example = field["eForms example"]
         if eforms_example and eforms_example != "N/A":
             try:
-                element = lxml.etree.fromstring(f"{xmlhead}{eforms_example}{xmltail}")
+                element = lxml.etree.fromstring(f"{xmlhead}{eforms_example}{xmltail}")  # noqa: S320
                 field["eForms example"] = lxml.etree.tostring(element).decode()[len(xmlhead) : -len(xmltail)]
 
                 # Note: The XML snippets are too short to validate against the eForms schema.
@@ -1083,7 +1088,7 @@ def build(directory):
 
         eforms_example = field["eForms example"]
         if eforms_example and eforms_example != "N/A":
-            element = lxml.etree.fromstring(f"{xmlhead}{eforms_example}{xmltail}")
+            element = lxml.etree.fromstring(f"{xmlhead}{eforms_example}{xmltail}")  # noqa: S320
             lxml.etree.indent(element, space="  ")
             data = dedent(lxml.etree.tostring(element).decode()[len(xmlhead) + 1 : -len(xmltail) - 1])
             eforms_example = f"```xml\n{data}\n```"
@@ -1190,7 +1195,7 @@ def codelists():
         if not file["name"].endswith(".gc"):
             continue
 
-        xml = lxml.etree.fromstring(get(file["download_url"]).content)
+        xml = lxml.etree.fromstring(get(file["download_url"]).content)  # noqa: S320
         writer.writerows([file["name"], code] for code in xml.xpath('//Value[@ColumnRef="code"]/SimpleValue/text()'))
 
 
