@@ -51,7 +51,7 @@ xmltail = "</ContractNotice>"
 
 
 class Dumper(yaml.SafeDumper):
-    def ignore_aliases(self, data):  # noqa: ARG002
+    def ignore_aliases(self, data):
         return True
 
 
