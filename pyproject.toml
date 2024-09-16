@@ -9,34 +9,17 @@ target-version = "py310"
 [tool.ruff.lint]
 select = ["ALL"]
 ignore = [
-  "ANN", "COM", "EM",
-  # https://docs.astral.sh/ruff/formatter/#conflicting-lint-rules
-  "W191", "D206", "Q000", "Q001", "Q002", "Q003", "ISC001",
-  "D203", "D212",  # ignore incompatible rules
-  "D200",  # documentation preferences
-  "C901", "PLR091",  # complexity preferences
-  "D1",  # docstrings
-  "PTH",  # pathlib
-  "ARG001",
-  "ARG002",
-  "D205",  # long summary
-  "D301",  # click escapes
-  "PD008",  # at
-  "PD901",  # df
-  "PLR2004",  # magic values
-  "PLW2901",  # for-loop variable
-  "TRY003",
+    "ANN", "C901", "COM812", "D203", "D212", "D415", "EM", "ISC001", "PERF203", "PLR091", "Q000",
+    "D1", "D205",
+    "D301",  # click escapes
+    "PD008",
+    "PD901",
+    "PLR2004",  # magic
+    "PLW2901",
+    "TRY003",  # errors
+    "D200",  # https://github.com/astral-sh/ruff/issues/6269
 ]
 allowed-confusables = [" "]
 
-[tool.ruff.lint.flake8-builtins]
-builtins-ignorelist = ["copyright"]
-
-[tool.ruff.lint.per-file-ignores]
-"docs/conf.py" = ["INP001"]  # no __init__.py file
-"tests/*" = [
-  "D",  # docstring
-  "PLR0913",  # Too many arguments to function call
-  "PLR2004",  # Magic value used
-  "S101",  # assert
-]
+[tool.ruff.lint.flake8-unused-arguments]
+ignore-variadic-names = true

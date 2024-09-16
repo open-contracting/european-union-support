@@ -2,7 +2,6 @@
 import csv
 import filecmp
 import json
-import os
 import re
 import shutil
 import sys
@@ -51,11 +50,11 @@ xmltail = "</ContractNotice>"
 
 
 class Dumper(yaml.SafeDumper):
-    def ignore_aliases(self, data):
+    def ignore_aliases(self, data):  # noqa: ARG002
         return True
 
 
-def na_representer(dumper, data):
+def na_representer(dumper, data):  # noqa: ARG001
     return dumper.represent_data(None)
 
 
@@ -81,25 +80,19 @@ Dumper.add_representer(str, str_representer)
 
 
 def get(url):
-    """
-    GET a URL and return the response.
-    """
+    """GET a URL and return the response."""
     response = requests.get(url, timeout=10)
     response.raise_for_status()
     return response
 
 
 def get_html(url):
-    """
-    GET a URL and return the parsed HTML content.
-    """
+    """GET a URL and return the parsed HTML content."""
     return lxml.html.fromstring(get(url).content)
 
 
 def unique(series):
-    """
-    Return the unique values of a series.
-    """
+    """Return the unique values of a series."""
     series = series.dropna()
 
     # Write "null" not "[]".
@@ -114,9 +107,7 @@ def unique(series):
 
 
 def check(actual, expected, noun):
-    """
-    Assert that ``actual`` equals ``expected``, with a templated error message.
-    """
+    """Assert that ``actual`` equals ``expected``, with a templated error message."""
     if actual != expected:
         raise AssertionError(f"expected {expected} {noun}, got {actual}")
 
@@ -152,15 +143,13 @@ def get_column_order(df, drop=()):
 
 
 def write_yaml_file(filename, data):
-    with open(filename, "w") as f:
+    with filename.open("w") as f:
         # Make it easier to see indentation. Avoid line wrapping. sort_keys is True by default.
         yaml.dump(data, f, Dumper=Dumper, indent=4, width=1000, sort_keys=False)
 
 
 def report_unmerged_rows(df, columns, series=None, unformatted=()):
-    """
-    If the data frame (or the ``series`` within it) is non-empty, print the data frame's ``columns``.
-    """
+    """If the data frame (or the ``series`` within it) is non-empty, print the data frame's ``columns``."""
     if series is not None:
         df = df[series]
     if not df.empty:
@@ -208,8 +197,8 @@ def write(
     # Default to the data frame's columns.
     column_order = get_column_order(df, drop)
 
-    if os.path.exists(filename):
-        with open(filename) as f:
+    if filename.exists():
+        with filename.open() as f:
             df_old = pd.DataFrame.from_records(yaml.safe_load(f))
 
         # Maintain the column order.
@@ -283,12 +272,10 @@ def cli():
 
 
 @cli.command()
-@click.argument("filename", type=click.Path(dir_okay=False))
+@click.argument("filename", type=click.Path(dir_okay=False, path_type=Path))
 @click.option("-v", "--verbose", is_flag=True, help="Print verbose output")
 def update_with_sdk(filename, verbose):
-    """
-    Create or update FILE with fields metadata from the eForms SDK.
-    """
+    """Create or update FILE with fields metadata from the eForms SDK."""
     with (sourcedir / "fields.json").open() as f:
         data = json.load(f)
         df = pd.DataFrame.from_dict(data["fields"]).set_index("id")
@@ -447,7 +434,7 @@ def update_with_sdk(filename, verbose):
 
 
 @cli.command()
-@click.argument("filename", type=click.Path(exists=True, dir_okay=False))
+@click.argument("filename", type=click.Path(exists=True, dir_okay=False, path_type=Path))
 def update_with_annex(filename):
     """
     Update FILE with details from the 2019 regulation's annex.
@@ -678,7 +665,7 @@ def update_with_annex(filename):
 
 
 @cli.command()
-@click.argument("filename", type=click.Path(exists=True, dir_okay=False))
+@click.argument("filename", type=click.Path(exists=True, dir_okay=False, path_type=Path))
 def update_with_xpath(filename):
     """
     Update FILE with XPaths from TED XML.
@@ -713,7 +700,7 @@ def update_with_xpath(filename):
 
 
 @cli.command()
-@click.argument("filename", type=click.Path(exists=True, dir_okay=False))
+@click.argument("filename", type=click.Path(exists=True, dir_okay=False, path_type=Path))
 def update_with_ted_guidance(filename):
     """
     Update FILE with guidance for TED XML.
@@ -762,7 +749,7 @@ def update_with_ted_guidance(filename):
 
 
 @cli.command()
-@click.argument("filename", type=click.Path(exists=True, dir_okay=False))
+@click.argument("filename", type=click.Path(exists=True, dir_okay=False, path_type=Path))
 @click.option("-a", "--additional-properties", is_flag=True, help="Allow additional properties")
 def lint(filename, additional_properties):
     """
@@ -822,7 +809,7 @@ def lint(filename, additional_properties):
         ("contracts",): ("id", "awardID"),
     }
 
-    with open(filename) as f:
+    with filename.open() as f:
         fields = yaml.safe_load(f)
 
     url = "https://raw.githubusercontent.com/open-contracting-extensions/eforms/latest/docs/extension_versions.json"
@@ -851,8 +838,9 @@ def lint(filename, additional_properties):
 
     validator = Draft4Validator(schema, format_checker=FormatChecker())
 
-    if os.path.isfile("codes.txt"):
-        with open("codes.txt") as f:
+    codes_txt = Path("codes.txt")
+    if codes_txt.is_file():
+        with codes_txt.open() as f:
             known_codes = set(f.read().splitlines())
     else:
         known_codes = set()
@@ -864,11 +852,12 @@ def lint(filename, additional_properties):
             for row in reader:
                 known_codes.add(row["Code"])
 
-        with open("codes.txt", "w") as f:
+        with codes_txt.open("w") as f:
             f.write("\n".join(sorted(known_codes)))
 
-    if os.path.isfile("codes-eforms.csv"):
-        with open("codes-eforms.csv") as f:
+    codes_eforms_csv = Path("codes-eforms.csv")
+    if codes_eforms_csv.is_file():
+        with codes_eforms_csv.open() as f:
             known_eforms_codes = {row["code"] for row in csv.DictReader(f)} | literal_strings
     else:
         known_eforms_codes = set()
@@ -1069,7 +1058,7 @@ def build(directory):
     )
 
     # Create the main mapping page.
-    with open(eformsdir / "guidance.yaml") as f:
+    with (eformsdir / "guidance.yaml").open() as f:
         fields = yaml.safe_load(f)
 
     rows = []
@@ -1164,9 +1153,7 @@ def build(directory):
 
 @cli.command()
 def business_groups():
-    """
-    Print information about eForms Business Groups (BGs).
-    """
+    """Print information about eForms Business Groups (BGs)."""
     # A warning is issued, because the Excel file has an unsupported extension.
     df = pd.read_excel(sourcedir / "CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx", "Annex")
 
@@ -1185,9 +1172,7 @@ def business_groups():
 
 @cli.command()
 def codelists():
-    """
-    Print information about eForms codelists.
-    """
+    """Print information about eForms codelists."""
     writer = csv.writer(sys.stdout, lineterminator="\n")
     writer.writerow(["codelist", "code"])
 
@@ -1202,9 +1187,7 @@ def codelists():
 @cli.command()
 @click.argument("file", type=click.File())
 def statistics(file):
-    """
-    Print statistics on the progress of the guidance for the 2019 regulation.
-    """
+    """Print statistics on the progress of the guidance for the 2019 regulation."""
     df = pd.DataFrame.from_records(yaml.safe_load(file))
     key = "eForms guidance"
 
@@ -1240,9 +1223,7 @@ def statistics(file):
 @click.argument("file", type=click.File())
 @click.option("--contains", help="Print fields containing this text")
 def fields_without_extensions(file, contains):
-    """
-    Print fields that appear in the TED XML guidance but not in the FILE mapping sheet.
-    """
+    """Print fields that appear in the TED XML guidance but not in the FILE mapping sheet."""
     subjects = {
         # Unambiguous
         "award": "awards",
