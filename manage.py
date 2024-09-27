@@ -345,14 +345,14 @@ def update_with_sdk(filename, verbose):
         # then the SDK marks the parent as repeatable, rather than the child.
 
         # eForms creates a XML structure to repeat terms together.
-        if row["parentNodeId"] in (
+        if row["parentNodeId"] in {
             # BT-06-Lot (Strategic Procurement) with BT-777-Lot (Strategic Procurement Description).
             "ND-StrategicProcurementType",
             # BT-26(a)-* (Classification Type (e.g. CPV)) with BT-263-* (Additional Classification Code).
             "ND-LotAdditionalClassification",
             "ND-PartAdditionalClassification",
             "ND-ProcedureAdditionalCommodityClassification",
-        ):
+        }:
             df.at[label, "repeatable"] = xml.loc[row["parentNodeId"], "repeatable"]
         # eForms moves repeatable to the parent node, if its single child is a field.
         elif row["parentNodeId"].startswith("ND-"):
@@ -549,7 +549,7 @@ def update_with_annex(filename):
             if len(line) > 1:
                 business_groups = dict(line[:-1])
                 # !!! The 2024 Annex adds a business group.
-                if line[0][0] in ("BG-701", "BG-702"):
+                if line[0][0] in {"BG-701", "BG-702"}:
                     business_groups = {"BG-700": "Exclusion Grounds and Selection Criteria", **business_groups}
             else:
                 business_groups = None
@@ -1454,7 +1454,7 @@ def fields_without_extensions(file, contains):
                     if row.get("guidance"):
                         for match in re.finditer(r"(?:([a-z]+)'s )?\[?`([^`]+)`", row["guidance"]):
                             path = match.group(2)
-                            if path in ("true", "false", "value"):  # JSON boolean, exceptional case
+                            if path in {"true", "false", "value"}:  # JSON boolean, exceptional case
                                 continue
                             if re.search(r"^[A-Z][a-z][A-Za-z]+$", path):  # JSON Schema definition
                                 continue
