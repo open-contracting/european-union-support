@@ -848,8 +848,7 @@ def lint(filename, additional_properties):
         document = get_html(url)
         document.make_links_absolute(url)
         for url in document.xpath('//@href[contains(., ".csv")]'):
-            reader = csv.DictReader(StringIO(get(url).text))
-            for row in reader:
+            for row in csv.DictReader(StringIO(get(url).text)):
                 known_codes.add(row["Code"])
 
         with codes_txt.open("w") as f:
@@ -1449,8 +1448,7 @@ def fields_without_extensions(file, contains):
     for path in (mappingdir, mappingdir / "shared"):
         for filename in path.glob("*.csv"):
             with filename.open() as f:
-                reader = csv.DictReader(f)
-                for row in reader:
+                for row in csv.DictReader(f):
                     if row.get("guidance"):
                         for match in re.finditer(r"(?:([a-z]+)'s )?\[?`([^`]+)`", row["guidance"]):
                             path = match.group(2)
