@@ -2141,8 +2141,7 @@
     Business groups:
         BG-7: Notice Result
         BG-320: Tender
-    eForms guidance: |-
-        [Get the bid for a LotTender](operations.md#get-the-bid-for-a-lottender), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country), and add it to the bid's `.countriesOfOrigin` array.
+    eForms guidance: '[Get the bid for a LotTender](operations.md#get-the-bid-for-a-lottender), look up the equivalent ISO 3166-1 alpha-2 code in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/country), and add it to the bid''s `.countriesOfOrigin` array.'
     eForms example: <efac:NoticeResult><efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID><efac:Origin><efbc:AreaCode listName="country">ITA</efbc:AreaCode></efac:Origin><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotTender></efac:NoticeResult>
     OCDS example: '{"bids":{"details":[{"id":"TEN-0001","countriesOfOrigin":["IT"],"relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection
@@ -10368,9 +10367,9 @@
     Description: The Foreign Subsidies Regulation (FSR) (EU) 2022/2560, in line with Article 28 thereof, is applicable to this procurement procedure.
     Business groups:
         BG-705: Other Requirements
-    eForms guidance: ''
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot). If "true", add ''EU-FSR'' to the lot''s `.coveredBy` array. If "false", discard.'
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:ContractExecutionRequirement><cbc:ExecutionRequirementCode listName="fsr">true</cbc:ExecutionRequirementCode></cac:ContractExecutionRequirement></cac:TenderingTerms></cac:ProcurementProjectLot>
-    OCDS example: ''
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","coveredBy":["EU-FSR"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#foreignSubsidiesRegulationSection
 -   id: BT-682-Tender
     parentNodeId: ND-LotTender
@@ -10386,7 +10385,7 @@
         BG-7: Notice Result
         BG-320: Tender
     eForms guidance: ''
-    eForms example: <efac:LotResult><cbc:ID schemeName="result">RES-0002</cbc:ID><efac:LotTender><efbc:ForeignSubsidiesMeasuresCode listName="foreign-subsidy-measure-conclusion">fsr-adm-clos</efbc:ForeignSubsidiesMeasuresCode></efac:LotTender></efac:LotResult>    
+    eForms example: <efac:LotResult><cbc:ID schemeName="result">RES-0002</cbc:ID><efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID><efbc:ForeignSubsidiesMeasuresCode listName="foreign-subsidy-measure-conclusion">fsr-adm-clos</efbc:ForeignSubsidiesMeasuresCode></efac:LotTender></efac:LotResult>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#foreignSubsidiesRegulationSection
 -   id: BT-70-Lot
@@ -12422,7 +12421,7 @@
     Description: Where the exclusions grounds are defined, for example, the procurement documents or in ESPD.
     Business groups:
         BG-700: Exclusion Grounds and Selection Criteria
-    eForms guidance: 'Map to the `tender.exclusionGrounds.sources` array.'
+    eForms guidance: Map to the `tender.exclusionGrounds.sources` array.
     eForms example: <cac:TendererQualificationRequest><cac:SpecificTendererRequirement><cbc:TendererRequirementTypeCode listName="exclusion-grounds-source">epo-procurement-document</cbc:TendererRequirementTypeCode></cac:SpecificTendererRequirement></cac:TendererQualificationRequest>
     OCDS example: '{"tender":{"exclusionGrounds":{"criteria":[{"sources":["epo-procurement-document"]}]}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#exclusionGrounds
@@ -12441,7 +12440,7 @@
         BG-702: Selection Criteria
     eForms guidance: |-
         If `cbc:CalculationExpressionCode[@listName="usage"]` is not set to "used", discard. Otherwise, these values are mapped to the same `SelectionCriterion` objects as created for BT-40, BT-750, BT-752, BT-7531 and BT-7532.
-        
+
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `<efac:SelectionCriteria>`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
         - Identify the equivalent code in the [selection criterion mapping table](codelists/selection-criterion), and set it as the criterion's `.type`.
