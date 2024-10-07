@@ -815,13 +815,6 @@ def lint(filename, additional_properties):
     url = "https://raw.githubusercontent.com/open-contracting-extensions/eforms/latest/docs/extension_versions.json"
     schema = ProfileBuilder("1__1__5", get(url).json()).patched_release_schema(extension_field="extension")
 
-    # The idea was to compare the additional fields to known prefixes, but this mostly results in the lots extension.
-    # I am leaving this code here for now, in case we need to do something smarter.
-    #
-    # > from ocdskit.mapping_sheet import mapping_sheet
-    # > fieldnames, rows = mapping_sheet(schema, extension_field="extension", inherit_extension=False)
-    # > prefixes = {row["path"]: row.get("extension") for row in rows}
-
     # Remove `patternProperties` to clarify output.
     set_additional_properties_and_remove_pattern_properties(schema, additional_properties)
     # Remove required fields.
