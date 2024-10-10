@@ -10384,9 +10384,9 @@
     Business groups:
         BG-7: Notice Result
         BG-320: Tender
-    eForms guidance: ''
-    eForms example: <efac:LotResult><cbc:ID schemeName="result">RES-0002</cbc:ID><efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID><efbc:ForeignSubsidiesMeasuresCode listName="foreign-subsidy-measure-conclusion">fsr-adm-clos</efbc:ForeignSubsidiesMeasuresCode></efac:LotTender></efac:LotResult>
-    OCDS example: ''
+    eForms guidance: '[Get the bid for the LotTender](operations.md#get-the-bid-for-a-lottender) and map to its `.foreignSubsidyMeasureConclusion`.'
+    eForms example: <efac:LotResult><cbc:ID schemeName="result">RES-0002</cbc:ID><efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID><efbc:ForeignSubsidiesMeasuresCode listName="foreign-subsidy-measure-conclusion">fsr-adm-clos</efbc:ForeignSubsidiesMeasuresCode><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotTender></efac:LotResult>
+    OCDS example: '{"bids":{"details":[{"id":"TEN-0001","foreignSubsidyMeasureConclusion":"fsr-adm-clos","relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#foreignSubsidiesRegulationSection
 -   id: BT-70-Lot
     parentNodeId: ND-ExecutionRequirements
