@@ -887,7 +887,7 @@ def lint(filename, additional_properties):
                         anchor_errors.add(f"{identifier}: no anchor")
                 elif not sdk_documents[base_url].xpath(f'//@id="{fragment}"'):
                     anchor_errors.add(f"{identifier}: anchor not found: {fragment}")
-            except requests.exceptions.HTTPError:
+            except requests.HTTPError:
                 http_errors.add(base_url)
 
         # Format Markdown.
