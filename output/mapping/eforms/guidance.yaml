@@ -10384,9 +10384,9 @@
     Business groups:
         BG-7: Notice Result
         BG-320: Tender
-    eForms guidance: '[Get the bid for the LotTender](operations.md#get-the-bid-for-a-lottender) and map to its `.foreignSubsidyMeasureConclusion`.'
+    eForms guidance: '[Get the bid for the LotTender](operations.md#get-the-bid-for-a-lottender) and map to its `.foreignSubsidyMeasures`.'
     eForms example: <efac:LotResult><cbc:ID schemeName="result">RES-0002</cbc:ID><efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID><efbc:ForeignSubsidiesMeasuresCode listName="foreign-subsidy-measure-conclusion">fsr-adm-clos</efbc:ForeignSubsidiesMeasuresCode><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotTender></efac:LotResult>
-    OCDS example: '{"bids":{"details":[{"id":"TEN-0001","foreignSubsidyMeasureConclusion":"fsr-adm-clos","relatedLots":["LOT-0001"]}]}}'
+    OCDS example: '{"bids":{"details":[{"id":"TEN-0001","foreignSubsidyMeasures":"fsr-adm-clos","relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#foreignSubsidiesRegulationSection
 -   id: BT-70-Lot
     parentNodeId: ND-ExecutionRequirements
@@ -12164,7 +12164,7 @@
     Description: Description of the tenderer-related information that can be supplemented even after the submission deadline.
     Business groups:
         BG-102: Submission Terms
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.submissionMethodDetails`.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.submissionMethodDetails`. Append if other information is already mapped to this field.'
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:TendererQualificationRequest><cac:SpecificTendererRequirement><cbc:Description languageID="ENG">Economic operators who ...</cbc:Description></cac:SpecificTendererRequirement></cac:TendererQualificationRequest></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","submissionMethodDetails":"Economic operators who ..."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#tendererReqsSection
@@ -12421,9 +12421,9 @@
     Description: Where the exclusions grounds are defined, for example, the procurement documents or in ESPD.
     Business groups:
         BG-700: Exclusion Grounds and Selection Criteria
-    eForms guidance: Map to the `tender.exclusionGrounds.sources` array.
+    eForms guidance: Add to the `tender.exclusionGrounds.sources` array.
     eForms example: <cac:TendererQualificationRequest><cac:SpecificTendererRequirement><cbc:TendererRequirementTypeCode listName="exclusion-grounds-source">epo-procurement-document</cbc:TendererRequirementTypeCode></cac:SpecificTendererRequirement></cac:TendererQualificationRequest>
-    OCDS example: '{"tender":{"exclusionGrounds":{"criteria":[{"sources":["epo-procurement-document"]}]}}}'
+    OCDS example: '{"tender":{"exclusionGrounds":{"sources":["epo-procurement-document"]}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#exclusionGrounds
 -   id: BT-809-Lot
     parentNodeId: ND-SelectionCriteria
@@ -12443,8 +12443,7 @@
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `<efac:SelectionCriteria>`, add or update a corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`.
-        - Identify the equivalent code in the [selection criterion mapping table](codelists/selection-criterion), and set it as the criterion's `.type`.
-        - Map the value to the criterion's `.subType`.
+        - Map to the criterion's `.subType` and set `.type` according to the [selection criterion mapping table](codelists/selection-criterion).
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:SelectionCriteria><cbc:TendererRequirementTypeCode listName="selection-criterion">slc-suit-reg-prof</cbc:TendererRequirementTypeCode></efac:SelectionCriteria></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","selectionCriteria":{"criteria":[{"type":"suitability","subType":"slc-suit-reg-prof"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#selectionCriteriaSection
@@ -12460,7 +12459,7 @@
     Description: Where the selection criteria are defined, for example, the procurement documents or in ESPD.
     Business groups:
         BG-700: Exclusion Grounds and Selection Criteria
-    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and map to its `.selectionCriteria.sources` array.'
+    eForms guidance: '[Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and add to its `.selectionCriteria.sources` array.'
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:TendererQualificationRequest><cac:SpecificTendererRequirement><cbc:TendererRequirementTypeCode listName="selection-criteria-source">epo-procurement-document</cbc:TendererRequirementTypeCode></cac:SpecificTendererRequirement></cac:TendererQualificationRequest></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","selectionCriteria":{"sources":["epo-procurement-document"]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#selectionCriteriaSection
