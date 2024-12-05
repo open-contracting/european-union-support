@@ -10590,9 +10590,9 @@
         BG-101: Procurement Documents
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
-        Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/communication-justification) and map to the document's `.accessDetails`.
+        Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/communication-justification) and map to the document's `.accessDetails`. Append if other information is already mapped to this field.
     eForms example: <cac:CallForTendersDocumentReference><cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID><cbc:DocumentTypeCode listName="communication-justification">ipr-iss</cbc:DocumentTypeCode></cac:CallForTendersDocumentReference>
-    OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","accessDetails":"Restricted. Intellectual property rights issues"}]}}'
+    OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","accessDetails":"Intellectual property rights issues"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
 -   id: BT-708-Lot
     parentNodeId: ND-LotDocOfficialLanguage
