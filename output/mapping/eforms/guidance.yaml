@@ -11970,7 +11970,7 @@
 
         [Get the lot for the LotResult](operations.md#get-the-lot-for-a-lotresult), and add the lot's `.id` to the statistic's `.relatedLots`.
     eForms example: <efac:NoticeResult><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:ReceivedSubmissionsStatistics><efbc:StatisticsCode listName="received-submission-type">t-sme</efbc:StatisticsCode></efac:ReceivedSubmissionsStatistics><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotResult></efac:NoticeResult>
-    OCDS example: '{"bids":{"statistics":[{"id":"1","measure":"smeBids","relatedLot":"LOT-0001"}]}}'
+    OCDS example: '{"bids":{"statistics":[{"id":"1","measure":"smeBids","relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
 -   id: BT-761-Lot
     parentNodeId: ND-TendererLegalForm
