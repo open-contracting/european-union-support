@@ -102,7 +102,9 @@
     eForms guidance: |-
         The values of `cbc:NoticeTypeCode[@listName]` are drawn from the [form type authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/form-type) in the EU Vocabularies.
 
-        Look up `cbc:NoticeTypeCode[@listName]` in the [form type mapping table](codelists/form-type), add the values of the release tag column to `tag` and set `tender.status` to the value of the tender status column.
+        If the code is "bri" discard this notice, it details information not modelled by OCDS.
+
+        Otherwise look up `cbc:NoticeTypeCode[@listName]` in the [form type mapping table](codelists/form-type), add the values of the release tag column to `tag` and set `tender.status` to the value of the tender status column.
     eForms example: <cbc:NoticeTypeCode listName="competition">cn-standard</cbc:NoticeTypeCode>
     OCDS example: '{"tag":["tender"],"tender":{"status":"active"}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/notice-information.html#subtypeSection
@@ -12418,7 +12420,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Appeals/efac:AppealInformation/efbc:PreviousAppealID
     type: id
     repeatable: false
-    Description: An identifier of the review request(s) that led to this decision or a review decision that is being appealed by this review request. Review decision which were initiated by the review body ("ex officio") are not preceeded by a review request.
+    Description: An identifier of the review request(s) that led to this decision or a review decision that is being appealed by this review request. Review decision which were initiated by the review body ("ex officio") are not preceded by a review request.
     Business groups:
         BG-714: Review
     eForms guidance: ''
