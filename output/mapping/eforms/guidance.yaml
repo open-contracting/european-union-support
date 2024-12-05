@@ -10735,7 +10735,7 @@
     parentNodeId: ND-StrategicProcurementLot
     name: Clean Vehicles Directive
     btId: BT-717
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:StrategicProcurement/efbc:ApplicableLegalBasis
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:StrategicProcurement[efbc:ApplicableLegalBasis/@listName='cvd-scope']/efbc:ApplicableLegalBasis
     type: code
     repeatable: false
     codeList: cvd-scope
@@ -10886,7 +10886,7 @@
     parentNodeId: ND-ProcurementDetailsLotResult
     name: Vehicle Category
     btId: BT-723
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement/efac:StrategicProcurementInformation/efac:ProcurementDetails/efbc:AssetCategoryCode
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement[efac:StrategicProcurementInformation/efbc:ProcurementCategoryCode/@listName='cvd-contract-type']/efac:StrategicProcurementInformation/efac:ProcurementDetails/efbc:AssetCategoryCode
     type: code
     repeatable: false
     codeList: vehicle-category
@@ -11208,7 +11208,7 @@
     parentNodeId: ND-StrategicProcurementInformationLot
     name: CVD Contract Type
     btId: BT-735
-    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:StrategicProcurement/efac:StrategicProcurementInformation/efbc:ProcurementCategoryCode
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:StrategicProcurement[efbc:ApplicableLegalBasis/@listName='cvd-scope']/efac:StrategicProcurementInformation/efbc:ProcurementCategoryCode
     type: code
     repeatable: true
     codeList: cvd-contract-type
@@ -11228,7 +11228,7 @@
     parentNodeId: ND-StrategicProcurementInformationLotResult
     name: CVD Contract Type
     btId: BT-735
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement/efac:StrategicProcurementInformation/efbc:ProcurementCategoryCode
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement[efac:StrategicProcurementInformation/efbc:ProcurementCategoryCode/@listName='cvd-contract-type']/efac:StrategicProcurementInformation/efbc:ProcurementCategoryCode
     type: code
     repeatable: false
     codeList: cvd-contract-type
@@ -13335,7 +13335,7 @@
     parentNodeId: ND-ProcurementStatistics
     name: Vehicle Type
     btId: OPT-155
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement/efac:StrategicProcurementInformation/efac:ProcurementDetails/efac:StrategicProcurementStatistics/efbc:StatisticsCode
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement[efac:StrategicProcurementInformation/efbc:ProcurementCategoryCode/@listName='cvd-contract-type']/efac:StrategicProcurementInformation/efac:ProcurementDetails/efac:StrategicProcurementStatistics/efbc:StatisticsCode
     type: code
     repeatable: false
     codeList: vehicles
@@ -13360,7 +13360,7 @@
     parentNodeId: ND-ProcurementStatistics
     name: Vehicle Numeric
     btId: OPT-156
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement/efac:StrategicProcurementInformation/efac:ProcurementDetails/efac:StrategicProcurementStatistics/efbc:StatisticsNumeric
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement[efac:StrategicProcurementInformation/efbc:ProcurementCategoryCode/@listName='cvd-contract-type']/efac:StrategicProcurementInformation/efac:ProcurementDetails/efac:StrategicProcurementStatistics/efbc:StatisticsNumeric
     type: number
     repeatable: false
     eForms guidance: |-
