@@ -10400,6 +10400,68 @@
     eForms example: <efac:LotResult><cbc:ID schemeName="result">RES-0002</cbc:ID><efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID><efbc:ForeignSubsidiesMeasuresCode listName="foreign-subsidy-measure-conclusion">fsr-adm-clos</efbc:ForeignSubsidiesMeasuresCode><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotTender></efac:LotResult>
     OCDS example: '{"bids":{"details":[{"id":"TEN-0001","foreignSubsidyMeasures":"fsr-adm-clos","relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#foreignSubsidiesRegulationSection
+-   id: BT-684-Lot
+    parentNodeId: ND-IPILot
+    name: IPI Measures are Applicable
+    btId: BT-684
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:StrategicProcurement[efbc:ApplicableLegalBasis/@listName='ipi-scope']/efbc:ApplicableLegalBasis
+    type: code
+    repeatable: false
+    codeList: ipi-scope
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-685-LotResult
+    parentNodeId: ND-IPIAppliedMeasure
+    name: Specific IPI Measure
+    btId: BT-685
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement[efac:StrategicProcurementInformation/efac:AppliedMeasure/efbc:MeasureCode/@listName='international-procurement-instrument-measure']/efac:StrategicProcurementInformation/efac:AppliedMeasure/efbc:MeasureCode
+    type: code
+    repeatable: false
+    mandatory: CAN
+    codeList: international-procurement-instrument-measure
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-686-LotResult
+    parentNodeId: ND-IPIMeasureStatistics
+    name: Number of tender applications that fall under this IPI Measure
+    btId: BT-686
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement[efac:StrategicProcurementInformation/efac:AppliedMeasure/efbc:MeasureCode/@listName='international-procurement-instrument-measure']/efac:StrategicProcurementInformation/efac:AppliedMeasure/efac:MeasureStatistics/efbc:StatisticsNumeric
+    type: integer
+    repeatable: false
+    mandatory: CAN
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-687-LotResult
+    parentNodeId: ND-IPIMeasureException
+    name: Exception to the application of the IPI Measure
+    btId: BT-687
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement[efac:StrategicProcurementInformation/efac:AppliedMeasure/efbc:MeasureCode/@listName='international-procurement-instrument-measure']/efac:StrategicProcurementInformation/efac:AppliedMeasure/efac:MeasureException/efbc:ExceptionCode
+    type: code
+    repeatable: false
+    mandatory: CAN
+    codeList: international-procurement-instrument-application
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-688-LotResult
+    parentNodeId: ND-IPIMeasureException
+    name: Overriding reasons relating to the public interest
+    btId: BT-688
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement[efac:StrategicProcurementInformation/efac:AppliedMeasure/efbc:MeasureCode/@listName='international-procurement-instrument-measure']/efac:StrategicProcurementInformation/efac:AppliedMeasure/efac:MeasureException/efbc:ExceptionDescription
+    type: text-multilingual
+    repeatable: false
+    mandatory: CAN
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: BT-70-Lot
     parentNodeId: ND-ExecutionRequirements
     name: Terms Performance
@@ -12319,6 +12381,122 @@
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cbc:LatestSecurityClearanceDate>2019-11-15+01:00</cbc:LatestSecurityClearanceDate></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","milestones":[{"id":"1","type":"securityClearanceDeadline","dueDate":"2019-11-15T23:59:59+01:00"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#clearanceDeadlineSection
+-   id: BT-783-Review
+    parentNodeId: ND-ReviewStatus
+    name: Review Request or Decision
+    btId: BT-783
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Appeals/efac:AppealInformation/efbc:AppealStageCode
+    type: code
+    repeatable: false
+    codeList: review-information-type
+    Description: Whether the information concerns a review request or a review decision.
+    Business groups:
+        BG-714: Review
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-784-Review
+    parentNodeId: ND-ReviewStatus
+    name: Review Identifier
+    btId: BT-784
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Appeals/efac:AppealInformation/efbc:AppealID
+    type: id
+    repeatable: false
+    mandatory: CAN E4 E5
+    Description: An identifier of a review request or a review decision. When appealed to a higher review body instance, a review requests must receive a new identifier.
+    Business groups:
+        BG-714: Review
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-785-Review
+    parentNodeId: ND-ReviewStatus
+    name: Review Previous Identifier
+    btId: BT-785
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Appeals/efac:AppealInformation/efbc:PreviousAppealID
+    type: id
+    repeatable: false
+    Description: An identifier of the review request(s) that led to this decision or a review decision that is being appealed by this review request. Review decision which were initiated by the review body ("ex officio") are not preceeded by a review request.
+    Business groups:
+        BG-714: Review
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-786-Review
+    parentNodeId: ND-AppealedItemReference
+    name: Review Notice Section Identifier
+    btId: BT-786
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Appeals/efac:AppealInformation/efac:AppealedItem/cbc:ID
+    type: id-ref
+    idSchemes:
+    - CON
+    - GLO
+    - LOT
+    - ORG
+    - PAR
+    - RES
+    - TEN
+    - TPA
+    - TPO
+    - UBO
+    repeatable: true
+    pattern: ^(PROCEDURE|BUYER|RESULT|((PAR|LOT|GLO|RES|ORG|TPA|TPO|TEN|CON|UBO)-\d{4}))$
+    Description: An identifier of one or more sections within this notice. The information in the review section refers to this section or these sections.
+    Business groups:
+        BG-714: Review
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-787-Review
+    parentNodeId: ND-ReviewStatus
+    name: Review Date
+    btId: BT-787
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Appeals/efac:AppealInformation/cbc:Date
+    type: date
+    repeatable: false
+    mandatory: CAN E4 E5
+    pattern: ^((((1[6-9]|[2-9]\d)\d{2})-(((0[13578]|1[02]))-31|((0[13-9]|1[0-2])-(29|30))))|(((((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))-02-29))|(((1[6-9]|[2-9]\d)\d{2})-((0[1-9])|(1[0-2]))-(0[1-9]|1\d|2[0-8])))(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
+    Description: The date and time when the review request was submitted or the review decision was taken.
+    Business groups:
+        BG-714: Review
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-788-Review
+    parentNodeId: ND-ReviewStatus
+    name: Review Title
+    btId: BT-788
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Appeals/efac:AppealInformation/cbc:Title
+    type: text-multilingual
+    repeatable: false
+    mandatory: CAN E4 E5
+    Description: The name of the review request or review decision.
+    Business groups:
+        BG-714: Review
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-789-Review
+    parentNodeId: ND-ReviewStatus
+    name: Review Description
+    btId: BT-789
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Appeals/efac:AppealInformation/cbc:Description
+    type: text-multilingual
+    repeatable: false
+    mandatory: CAN E4 E5
+    Description: The description of the review request or review decision or any other additional information.
+    Business groups:
+        BG-714: Review
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: BT-79-Lot
     parentNodeId: ND-LotTenderingTerms
     name: Performing Staff Qualification
@@ -12346,6 +12524,160 @@
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cbc:RequiredCurriculaCode listName="requirement-stage">t-requ</cbc:RequiredCurriculaCode></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","otherRequirements":{"requiresStaffNamesAndQualifications":true}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#staffQualificationSection
+-   id: BT-790-Review
+    parentNodeId: ND-AppealDecision
+    name: Review Decision Type
+    btId: BT-790
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Appeals/efac:AppealInformation/efac:AppealDecision/efbc:DecisionTypeCode
+    type: code
+    repeatable: true
+    mandatory: CAN E4 E5
+    codeList: review-decision-type
+    Description: The decision type (e.g. accepted, rejected because the complainant did not have legal standing).
+    Business groups:
+        BG-714: Review
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-791-Review
+    parentNodeId: ND-AppealIrregularity
+    name: Review Irregularity Type
+    btId: BT-791
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Appeals/efac:AppealInformation/efac:AppealIrregularity/efbc:IrregularityTypeCode
+    type: code
+    repeatable: true
+    mandatory: CAN E4 E5
+    codeList: irregularity-type
+    Description: The type of irregularity alleged in the review request or confirmed in the review decision.
+    Business groups:
+        BG-714: Review
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-792-Review
+    parentNodeId: ND-AppealRemedy
+    name: Review Remedy Type
+    btId: BT-792
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Appeals/efac:AppealInformation/efac:AppealRemedy/efbc:RemedyTypeCode
+    type: code
+    repeatable: true
+    mandatory: CAN E4 E5 (conditional)
+    codeList: remedy-type
+    Description: The remedy (e.g. interim measure, damages) requested in the review request or applied by the review decision.
+    Business groups:
+        BG-714: Review
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-793-Review
+    parentNodeId: ND-ReviewStatus
+    name: Review Remedy Value
+    btId: BT-793
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Appeals/efac:AppealInformation/efbc:AppealRemedyValue
+    type: amount
+    repeatable: false
+    Description: The value of the remedy (e.g. damages, fines).
+    Business groups:
+        BG-714: Review
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-794-Review
+    parentNodeId: ND-ReviewStatus
+    name: Review URL
+    btId: BT-794
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Appeals/efac:AppealInformation/cbc:URI
+    type: url
+    repeatable: false
+    pattern: ((^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS|sftp|SFTP)://)|(^(w|W){3}(\d)?\.))[\w\?!\./:;,\-_=#+*%@"\(\)&]+
+    Description: The uniform resource locator (e.g. the web address) of the documents concerning the review request or a review decision.
+    Business groups:
+        BG-714: Review
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-795-Review
+    parentNodeId: ND-ReviewStatus
+    name: Review Request Fee
+    btId: BT-795
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Appeals/efac:AppealInformation/cbc:FeeAmount
+    type: amount
+    repeatable: false
+    Description: The fee paid for lodging the review request.
+    Business groups:
+        BG-714: Review
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-796-Review
+    parentNodeId: ND-ReviewStatus
+    name: Review Request Withdrawn
+    btId: BT-796
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Appeals/efac:AppealInformation/efbc:WithdrawnAppealIndicator
+    type: indicator
+    repeatable: false
+    mandatory: CAN E4 E5 (conditional)
+    codeList: indicator
+    Description: The review request was withdrawn.
+    Business groups:
+        BG-714: Review
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-797-Review
+    parentNodeId: ND-ReviewStatus
+    name: Review Request Withdrawn Date
+    btId: BT-797
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Appeals/efac:AppealInformation/efbc:WithdrawnAppealDate
+    type: date
+    repeatable: false
+    mandatory: CAN E4 E5
+    pattern: ^((((1[6-9]|[2-9]\d)\d{2})-(((0[13578]|1[02]))-31|((0[13-9]|1[0-2])-(29|30))))|(((((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))-02-29))|(((1[6-9]|[2-9]\d)\d{2})-((0[1-9])|(1[0-2]))-(0[1-9]|1\d|2[0-8])))(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
+    Description: The date and time when the request for review was withdrawn.
+    Business groups:
+        BG-714: Review
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-798-Review
+    parentNodeId: ND-ReviewStatus
+    name: Review Request Withdrawn Reasons
+    btId: BT-798
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Appeals/efac:AppealInformation/efbc:WithdrawnAppealReasons
+    type: text-multilingual
+    repeatable: false
+    Description: The reasons for withdrawing the request for review.
+    Business groups:
+        BG-714: Review
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-799-ReviewBody
+    parentNodeId: ND-AppealProcessingParty
+    name: Review Body Type
+    btId: BT-799
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Appeals/efac:AppealInformation/efac:AppealProcessingParty/efbc:AppealProcessingPartyTypeCode
+    type: code
+    repeatable: false
+    mandatory: CAN E4 E5
+    codeList: review-body-type
+    Description: The type of review body (e.g. buyer; first instance review body; second instance review body; other, e.g. a civil court setting damages).
+    Business groups:
+        BG-703: Organisation
+        BG-715: Review Body
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: BT-801-Lot
     parentNodeId: ND-NDA
     name: Non Disclosure Agreement
@@ -12404,6 +12736,19 @@
     eForms example: <efbc:TransmissionTime>08:30:03+01:00</efbc:TransmissionTime>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/notice-information.html#dispatchDateEsender
+-   id: BT-804-Review
+    parentNodeId: ND-ReviewStatus
+    name: Review Technical Identifier
+    btId: BT-804
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Appeals/efac:AppealInformation/cbc:ID
+    type: id
+    schemeName: review
+    repeatable: false
+    mandatory: CAN E4 E5
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: BT-805-Lot
     parentNodeId: ND-LotGreenCriteria
     name: Green Procurement Criteria
@@ -12442,6 +12787,34 @@
     eForms example: <cac:TendererQualificationRequest><cac:SpecificTendererRequirement><cbc:TendererRequirementTypeCode listName="exclusion-grounds-source">epo-procurement-document</cbc:TendererRequirementTypeCode></cac:SpecificTendererRequirement></cac:TendererQualificationRequest>
     OCDS example: '{"tender":{"exclusionGrounds":{"sources":["epo-procurement-document"]}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#exclusionGrounds
+-   id: BT-807-Review
+    parentNodeId: ND-AppealProcessingParty
+    name: Review Body Identifier
+    btId: BT-807
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Appeals/efac:AppealInformation/efac:AppealProcessingParty/cac:Party/cac:PartyIdentification/cbc:ID
+    type: id-ref
+    idSchemes:
+    - ORG
+    repeatable: false
+    pattern: ^ORG-\d{4}$
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-808-Review
+    parentNodeId: ND-AppealingParty
+    name: Review Applicant Identifier
+    btId: BT-808
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Appeals/efac:AppealInformation/efac:AppealingParty/cac:Party/cac:PartyIdentification/cbc:ID
+    type: id-ref
+    idSchemes:
+    - ORG
+    repeatable: true
+    pattern: ^ORG-\d{4}$
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: BT-809-Lot
     parentNodeId: ND-SelectionCriteria
     name: Selection Criteria
@@ -12464,6 +12837,118 @@
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:SelectionCriteria><cbc:TendererRequirementTypeCode listName="selection-criterion">slc-suit-reg-prof</cbc:TendererRequirementTypeCode></efac:SelectionCriteria></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","selectionCriteria":{"criteria":[{"type":"suitability","subType":"slc-suit-reg-prof"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#selectionCriteriaSection
+-   id: BT-810-Lot
+    parentNodeId: ND-EEDLot
+    name: EED Applicable
+    btId: BT-810
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:StrategicProcurement[efbc:ApplicableLegalBasis/@listName='eed-scope']/efbc:ApplicableLegalBasis
+    type: code
+    repeatable: false
+    codeList: eed-scope
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-811(a)-Lot
+    parentNodeId: ND-EEDProcurementDetailsLot
+    name: EED List (Basis)
+    btId: BT-811
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:StrategicProcurement[efbc:ApplicableLegalBasis/@listName='eed-scope']/efac:StrategicProcurementInformation/efac:ProcurementDetails/efbc:LegalFrameworkCode
+    type: code
+    repeatable: false
+    codeList: energy-efficiency-basis
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-811(a)-LotResult
+    parentNodeId: ND-EEDProcurementDetailsLotResult
+    name: EED List (Basis)
+    btId: BT-811
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement[efac:StrategicProcurementInformation/efac:ProcurementDetails/efbc:AssetCategoryCode/@listName='energy-efficiency-item']/efac:StrategicProcurementInformation/efac:ProcurementDetails/efbc:LegalFrameworkCode
+    type: code
+    repeatable: false
+    mandatory: CAN CAN(MOD) E4 E5 E6
+    codeList: energy-efficiency-basis
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-811(b)-Lot
+    parentNodeId: ND-EEDProcurementDetailsLot
+    name: EED List (Item)
+    btId: BT-811
+    xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:StrategicProcurement[efbc:ApplicableLegalBasis/@listName='eed-scope']/efac:StrategicProcurementInformation/efac:ProcurementDetails/efbc:AssetCategoryCode
+    type: code
+    repeatable: false
+    mandatory: PIN PIN(CN) CN CAN CAN(MOD) CEI E3 E4 E5 E6
+    codeList: energy-efficiency-item
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-811(b)-LotResult
+    parentNodeId: ND-EEDProcurementDetailsLotResult
+    name: EED List (Item)
+    btId: BT-811
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement[efac:StrategicProcurementInformation/efac:ProcurementDetails/efbc:AssetCategoryCode/@listName='energy-efficiency-item']/efac:StrategicProcurementInformation/efac:ProcurementDetails/efbc:AssetCategoryCode
+    type: code
+    repeatable: false
+    mandatory: CAN CAN(MOD) E4 E5 E6
+    codeList: energy-efficiency-item
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-812-LotResult
+    parentNodeId: ND-EEDAssetLabel
+    name: Energy Efficiency Label
+    btId: BT-812
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement[efac:StrategicProcurementInformation/efac:ProcurementDetails/efbc:AssetCategoryCode/@listName='energy-efficiency-item']/efac:StrategicProcurementInformation/efac:ProcurementDetails/efac:AssetLabel/efbc:LabelCode
+    type: code
+    repeatable: false
+    mandatory: CAN CAN(MOD) E4 E5 E6
+    codeList: energy-efficiency-label
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-813-LotResult
+    parentNodeId: ND-EEDConsumption
+    name: Energy Consumption in kWh/year
+    btId: BT-813
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement[efac:StrategicProcurementInformation/efac:ProcurementDetails/efbc:AssetCategoryCode/@listName='energy-efficiency-item']/efac:StrategicProcurementInformation/efac:ProcurementDetails/efac:AssetMetric[efbc:AssetMetricCode/text()='nrg-con-yr']/efbc:AssetMetricNumeric
+    type: number
+    repeatable: false
+    mandatory: CAN CAN(MOD) E4 E5 E6
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-814-LotResult
+    parentNodeId: ND-EEDSavings
+    name: Energy Savings in kWh/year
+    btId: BT-814
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement[efac:StrategicProcurementInformation/efac:ProcurementDetails/efbc:AssetCategoryCode/@listName='energy-efficiency-item']/efac:StrategicProcurementInformation/efac:ProcurementDetails/efac:AssetMetric[efbc:AssetMetricCode/text()='nrg-sav-yr']/efbc:AssetMetricNumeric
+    type: number
+    repeatable: false
+    mandatory: CAN CAN(MOD) E4 E5 E6 (conditional)
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: BT-815-LotResult
+    parentNodeId: ND-EEDAssetQuantity
+    name: Energy Efficiency Quantity
+    btId: BT-815
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement[efac:StrategicProcurementInformation/efac:ProcurementDetails/efbc:AssetCategoryCode/@listName='energy-efficiency-item']/efac:StrategicProcurementInformation/efac:ProcurementDetails/efac:StrategicProcurementStatistics/efbc:StatisticsNumeric
+    type: number
+    repeatable: false
+    mandatory: CAN CAN(MOD) E4 E5 E6
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: BT-821-Lot
     parentNodeId: ND-SelectionCriteriaSource
     name: Selection Criteria Source
@@ -13064,6 +13549,32 @@
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:ContractExecutionRequirement><cbc:Description languageID="ENG">A description as given in OPT-072</cbc:Description></cac:ContractExecutionRequirement></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","contractTerms":{"customerServices":[{"description":"A description as given in OPT-072"}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#tenderingTermsSection
+-   id: OPT-080-LotResult
+    parentNodeId: ND-EEDConsumption
+    name: Consumption Metric
+    btId: OPT-080
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement[efac:StrategicProcurementInformation/efac:ProcurementDetails/efbc:AssetCategoryCode/@listName='energy-efficiency-item']/efac:StrategicProcurementInformation/efac:ProcurementDetails/efac:AssetMetric[efbc:AssetMetricCode/text()='nrg-con-yr']/efbc:AssetMetricCode
+    type: code
+    repeatable: false
+    mandatory: CAN CAN(MOD) E4 E5 E6 T02
+    codeList: metric-type
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
+-   id: OPT-081-LotResult
+    parentNodeId: ND-EEDSavings
+    name: Savings Metric
+    btId: OPT-081
+    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:StrategicProcurement[efac:StrategicProcurementInformation/efac:ProcurementDetails/efbc:AssetCategoryCode/@listName='energy-efficiency-item']/efac:StrategicProcurementInformation/efac:ProcurementDetails/efac:AssetMetric[efbc:AssetMetricCode/text()='nrg-sav-yr']/efbc:AssetMetricCode
+    type: code
+    repeatable: false
+    mandatory: CAN CAN(MOD) E4 E5 E6 T02
+    codeList: metric-type
+    eForms guidance: ''
+    eForms example: ''
+    OCDS example: ''
+    sdk: ''
 -   id: OPT-090-Lot
     parentNodeId: ND-FABuyerCategories
     name: Buyer Categories
@@ -13076,18 +13587,6 @@
     eForms example: <cac:SubsequentProcessTenderRequirement><cbc:Name>buyer-categories</cbc:Name></cac:SubsequentProcessTenderRequirement>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#frameworkAgreementSection
--   id: OPT-093-Review
-    parentNodeId: ND-ReviewStatus
-    name: Review Technical Identifier
-    btId: OPT-093
-    xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:AppealsInformation/efac:AppealStatus/cbc:ID
-    type: id
-    schemeName: review
-    repeatable: false
-    eForms guidance: '["This field is currently not used, and is intended for the new "Contract completion" notices that will be added in a future version."](https://github.com/OP-TED/eForms-SDK/releases/tag/1.11.0)'
-    eForms example: <efac:AppealStatus><cbc:ID>REV-0001</cbc:ID></efac:AppealStatus>
-    OCDS example: ''
-    sdk: https://docs.ted.europa.eu/eforms/latest/schema/identifiers.html#identifiersSection
 -   id: OPT-100-Contract
     parentNodeId: ND-SettledContract
     name: Framework Notice Identifier
