@@ -8,9 +8,9 @@
     Description: The legal basis (e.g. a Union or national legal act) under which the procurement procedure takes place or, in case of prior information notices, under which the procurement procedure(s) will take place.
     Business groups:
         BG-1: Notice
-    eForms guidance: Map to `tender.legalBasis.id`, and set `tender.legalBasis.scheme` to ['ELI'](https://eur-lex.europa.eu/eli-register/about.html).
-    eForms example: <cac:ProcurementLegislationDocumentReference><cbc:ID schemeName="ELI">http://data.europa.eu/eli/dir/2014/24/oj</cbc:ID></cac:ProcurementLegislationDocumentReference>
-    OCDS example: '{"tender":{"legalBasis":{"scheme":"ELI","id":"http://data.europa.eu/eli/dir/2014/24/oj"}}}'
+    eForms guidance: If the value of this field starts with "http://data.europa.eu/eli/dir", discard. Otherwise, map to `tender.legalBasis.id`, and set `tender.legalBasis.scheme` to the value of `cbc:ID[@schemeName]`.
+    eForms example: <cac:ProcurementLegislationDocumentReference><cbc:ID schemeName="ELI">https://www.legislation.gov.uk/id/uksi/2015/102</cbc:ID></cac:ProcurementLegislationDocumentReference>
+    OCDS example: '{"tender":{"legalBasis":{"scheme":"ELI","id":"https://www.legislation.gov.uk/id/uksi/2015/102"}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#otherLegalBasisSection
 -   id: BT-01(d)-Procedure
     parentNodeId: ND-LocalLegalBasisWithID
@@ -67,9 +67,9 @@
     Description: The legal basis (e.g. a Union or national legal act) under which the procurement procedure takes place or, in case of prior information notices, under which the procurement procedure(s) will take place.
     Business groups:
         BG-1: Notice
-    eForms guidance: Map to `tender.legalBasis.id`, and set `tender.legalBasis.scheme` to ['CELEX'](https://eur-lex.europa.eu/content/help/eurlex-content/celex-number.html).
+    eForms guidance: If "other", discard. Otherwise, map to `tender.legalBasis.wasDerivedFrom.id`, and set `tender.legalBasis.wasDerivedFrom.scheme` to ['CELEX'](https://eur-lex.europa.eu/content/help/eurlex-content/celex-number.html).
     eForms example: <cbc:RegulatoryDomain>32014L0024</cbc:RegulatoryDomain>
-    OCDS example: '{"tender":{"legalBasis":{"scheme":"CELEX","id":"32014L0024"}}}'
+    OCDS example: '{"tender":{"legalBasis":{"wasDerivedFrom":{"scheme":"CELEX","id":"32014L0024"}}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/notice-information.html#legalBasisSection
 -   id: BT-02-notice
     parentNodeId: ND-Root
