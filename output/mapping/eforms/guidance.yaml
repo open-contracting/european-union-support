@@ -10211,7 +10211,7 @@
     eForms guidance: |-
         This field maps to the same `Statistic` objects as created for BT-635-LotResult.
         For each `AppealRequestStatistics`, [add a complaints statistic](operations.md#add-a-complaints-statistic) or update the corresponding `Statistic` object and map to its `.measure`. Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/irregularity-type) and map it to `.notes`
-    eForms example: <efac:NoticeResult><efac:LotResult><efac:AppealRequestsStatistics><efbc:StatisticsCode listName="irregularity-type">unj-lim-subc</efbc:StatisticsCode></efac:AppealRequestsStatistics><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotResult></efac:NoticeResult>
+    eForms example: <efac:NoticeResult><efac:LotResult><efac:AppealRequestsStatistics><efbc:StatisticsCode listName="irregularity-type">ab-low</efbc:StatisticsCode></efac:AppealRequestsStatistics><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotResult></efac:NoticeResult>
     OCDS example: '{"statistics":[{"id":"1","measure":"ab-low","scope":"complaints","notes":"Unjustified rejection of abnormally low tenders","relatedLot":"LOT-0001"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
 -   id: BT-64-Lot
