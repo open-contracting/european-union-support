@@ -102,7 +102,9 @@
     eForms guidance: |-
         The values of `cbc:NoticeTypeCode[@listName]` are drawn from the [form type authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/form-type) in the EU Vocabularies.
 
-        Look up `cbc:NoticeTypeCode[@listName]` in the [form type mapping table](codelists/form-type), add the values of the release tag column to `tag` and set `tender.status` to the value of the tender status column.
+        If the code is "bri", discard the notice. It relates to events outside the lifecycle of a contracting process.
+
+        Otherwise, look up `cbc:NoticeTypeCode[@listName]` in the [form type mapping table](codelists/form-type), add the values of the release tag column to `tag` and set `tender.status` to the value of the tender status column.
     eForms example: <cbc:NoticeTypeCode listName="competition">cn-standard</cbc:NoticeTypeCode>
     OCDS example: '{"tag":["tender"],"tender":{"status":"active"}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/notice-information.html#subtypeSection
