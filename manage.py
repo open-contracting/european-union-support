@@ -8,6 +8,7 @@ import sys
 from collections import defaultdict
 from copy import deepcopy
 from io import StringIO
+from operator import itemgetter
 from pathlib import Path
 from textwrap import dedent, indent
 from urllib.parse import urlsplit
@@ -953,14 +954,14 @@ def lint(filename, additional_properties):
     if unknown_codes:
         click.echo("\nOCDS codes (tokens in single quotes) that do not appear in any OCDS codelist:")
         click.echo("code,id,title")
-        for code, occurrences in sorted(unknown_codes.items(), key=lambda item: item[1]):
+        for code, occurrences in sorted(unknown_codes.items(), key=itemgetter(1)):
             click.echo(f"{code}{''.join(f',{identifier},{title}' for identifier, title in occurrences)}")
 
     unknown_eforms_codes = {code: v for code, v in double_quoted.items() if code not in known_eforms_codes}
     if unknown_eforms_codes:
         click.echo("\neForms codes (tokens in double quotes) that do not appear in any eForms codelist:")
         click.echo("code,id,title")
-        for code, occurrences in sorted(unknown_eforms_codes.items(), key=lambda item: item[1]):
+        for code, occurrences in sorted(unknown_eforms_codes.items(), key=itemgetter(1)):
             click.echo(f"{code}{''.join(f',{identifier},{title}' for identifier, title in occurrences)}")
 
     if unreviewed:
@@ -977,7 +978,7 @@ def lint(filename, additional_properties):
     if additional_fields:
         click.echo(f"\nAdditional fields ({len(additional_fields)}):")
         click.echo("field,id,title")
-        for field, occurrences in sorted(additional_fields.items(), key=lambda item: item[1]):
+        for field, occurrences in sorted(additional_fields.items(), key=itemgetter(1)):
             click.echo(f"{field}{''.join(f',{identifier},{title}' for identifier, title in occurrences)}")
 
     write_yaml_file(filename, fields)
