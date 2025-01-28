@@ -717,9 +717,11 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/PROCEDURE/NOTICE_NUMBER_OJ
     TED guidance:
     - '[Reference a previous publication](../../operations/#reference-a-previous-publication)'
-    eForms guidance: '[Reference a previous publication](operations.md#reference-a-previous-publication)'
-    eForms example: <cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID></cac:NoticeDocumentReference>
-    OCDS example: '{"relatedProcesses":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"123e4567-e89b-12d3-a456-426614174000-06"}]}'
+    eForms guidance: |-
+        1. Concatenate with [BT-1251-Lot Previous Planning Part Identifier ](#BT-1251-Lot) and [reference a previous publication](operations.md#reference-a-previous-publication).
+        1. Get the `RelatedProcess` created in the previous step and add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID><cbc:ReferencedDocumentInternalAddress>PAR-0001</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference></cac:TenderingProcess></cac:ProcurementProjectLot>
+    OCDS example: '{"relatedProcesses":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"9c0fd704-64d3-4294-a3b6-6df45911ab9f-01-PAR-0001","relatedLots":["LOT-0001"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#previousPlanningSection
 -   id: BT-125(i)-Part
     parentNodeId: ND-PartPreviousPlanning
@@ -746,12 +748,9 @@
     Description: The identifier of a part of a prior information notice or another similar notice related to this notice.
     Business groups:
         BG-125: Previous Planning
-    eForms guidance: |-
-        This field maps to the same `RelatedProcess` objects as created for [BT-125(i)-Lot Previous Planning Identifier](<#BT-125(i)-Lot>).
-
-        For each `cac:NoticeDocumentReference`, add or update the corresponding `RelatedProcess` object in the `relatedProcesses` array and map to its `relatedLots`.
-    eForms example: <cac:NoticeDocumentReference><cbc:ID>9c0fd704-64d3-4294-a3b6-6df45911ab9f-01</cbc:ID><cbc:ReferencedDocumentInternalAddress>123</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference>
-    OCDS example: '{"relatedProcesses":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"9c0fd704-64d3-4294-a3b6-6df45911ab9f-01","relatedLots":["123"]}]}'
+    eForms guidance: Concatenate with [BT-125(i)-Lot Previous Planning Identifier](<#BT-125(i)-Lot>) and [reference a previous publication](operations.md#reference-a-previous-publication).
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID><cbc:ReferencedDocumentInternalAddress>PAR-0001</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference></cac:TenderingProcess></cac:ProcurementProjectLot>
+    OCDS example: '{"relatedProcesses":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"9c0fd704-64d3-4294-a3b6-6df45911ab9f-01-PAR-0001","relatedLots":["LOT-0001"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#previousPlanningSection
 -   id: BT-1251-Part
     parentNodeId: ND-PartPreviousPlanning
