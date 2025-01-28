@@ -747,9 +747,9 @@
     Business groups:
         BG-125: Previous Planning
     eForms guidance: |-
-        This field maps to the same `Related Process` objects as created for BT-125(i)-Lot.
+        This field maps to the same `RelatedProcess` objects as created for [BT-125(i)-Lot Previous Planning Identifier](<#BT-125(i)-Lot>).
 
-        For each `cac:NoticeDocumentReference`, add or update the corresponding `Related Process` object in the `relatedProcesses` array and map to its `relatedLots`.
+        For each `cac:NoticeDocumentReference`, add or update the corresponding `RelatedProcess` object in the `relatedProcesses` array and map to its `relatedLots`.
     eForms example: <cac:NoticeDocumentReference><cbc:ID>9c0fd704-64d3-4294-a3b6-6df45911ab9f-01</cbc:ID><cbc:ReferencedDocumentInternalAddress>123</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference>
     OCDS example: '{"relatedProcesses":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"9c0fd704-64d3-4294-a3b6-6df45911ab9f-01","relatedLots":["123"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#previousPlanningSection
