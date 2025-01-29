@@ -7053,8 +7053,7 @@
     eForms guidance: |-
         This field maps to the same object as created for [BT-262-Lot Main Classification Code](<#BT-262-Lot>).
 
-        - [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
-        - Capitalize the value of `cbc:ItemClassificationCode[@listName]`, and map to the item's `.classification.scheme`.
+        [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot), capitalize the value of `cbc:ItemClassificationCode[@listName]`, and map to the item's `.classification.scheme`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification></cac:ProcurementProject></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"items":[{"id":"1","classification":{"scheme":"CPV"},"relatedLot":"LOT-0001"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#classificationSection
@@ -7124,10 +7123,8 @@
     - TED_EXPORT/FORM_SECTION/F21_2014/OBJECT_CONTRACT/CPV_MAIN/CPV_CODE/@CODE
     eForms guidance: |-
         This field maps to the same object as created for [BT-26(m)-Lot Classification Type (e.g. CPV)](<#BT-26(m)-Lot>).
-
-        If no `Item` object was created for `ancestor::MainCommodityClassification`, [get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot), add an `Item` object to the lot's `.items` array, and set the item's `.id` incrementally.
-
-        Map to the item's `.classification.id`.'
+        
+        [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot) and map to its `.classification.id`.'
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification></cac:ProcurementProject></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"items":[{"id":"1","classification":{"id":"15311100"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#classificationSection
@@ -7214,9 +7211,7 @@
     eForms guidance: |-
         This field maps to the same `Classification` objects as created for [BT-26(a)-Lot Classification Type (e.g. CPV)](<#BT-26(a)-Lot>).
 
-        If no `Item` object was created for `ancestor::AdditionalCommodityClassification`, [get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot), add an `Item` object to the lot's `.items` array, and set the item's `.id` incrementally.
-
-        For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update the corresponding `Classification` object in the item's `.additionalClassifications` array:
+        [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot) and for each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update the corresponding `Classification` object in the item's `.additionalClassifications` array:
         
         - Map to its `.id`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cac:AdditionalCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311200</cbc:ItemClassificationCode></cac:AdditionalCommodityClassification></cac:ProcurementProject></cac:ProcurementProjectLot>
