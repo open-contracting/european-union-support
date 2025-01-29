@@ -7053,7 +7053,8 @@
     eForms guidance: |-
         This field maps to the same object as created for [BT-262-Lot Main Classification Code](<#BT-262-Lot>).
 
-        [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot), capitalize the value of `cbc:ItemClassificationCode[@listName]`, and map to the item's `.classification.scheme`.
+        - [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
+        - Capitalize the value of `cbc:ItemClassificationCode[@listName]`, and map to the item's `.classification.scheme`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification></cac:ProcurementProject></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"items":[{"id":"1","classification":{"scheme":"CPV"},"relatedLot":"LOT-0001"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#classificationSection
