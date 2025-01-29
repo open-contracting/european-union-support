@@ -12441,7 +12441,7 @@
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `efac:SelectionCriteria`, add or update the corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria` array:
-          - Add or update the corresponding `SelectionCriterionNumber` object in the criterion's `.numbers` array:
+          - Add or update the corresponding `SelectionCriterionNumber` object in the criterion's `.numbers` array: Map to the selection criterion number's `.number`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:SelectionCriteria><efac:CriterionParameter><efbc:ParameterCode listName="number-threshold"/><efbc:ParameterNumeric>3</efbc:ParameterNumeric></efac:CriterionParameter></efac:SelectionCriteria></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","selectionCriteria":{"criteria":[{"numbers":[{"number":3}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#selectionCriteriaSection
@@ -12462,7 +12462,7 @@
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `efac:SelectionCriteria`, add or update the corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria` array:
-          - Add or update the corresponding `SelectionCriterionNumber` object in the criterion's `.numbers` array:
+          - Add or update the corresponding `SelectionCriterionNumber` object in the criterion's `.numbers` array: Map to the selection criterion number's `.number`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:SelectionCriteria><efac:CriterionParameter><efbc:ParameterCode listName="number-weight"/><efbc:ParameterNumeric>3</efbc:ParameterNumeric></efac:CriterionParameter></efac:SelectionCriteria></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","selectionCriteria":{"criteria":[{"numbers":[{"number":3}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#selectionCriteriaSection
