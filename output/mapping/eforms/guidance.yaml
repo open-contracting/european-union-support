@@ -1588,7 +1588,7 @@
           - [Get the award for the LotResult](operations.md#get-the-award-for-a-lotresult):
             - If "selec-w", set its `.status` to 'active'.
             - If "clos-nw", set its `.status` to 'unsuccessful'.
-        - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/winner-selection-status), and map it to `.statusDetails`.
+            - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/winner-selection-status), and map it to `.statusDetails`.
     eForms example: <efac:NoticeResult> <efac:LotResult> <cbc:ID schemeName="result">RES-0001</cbc:ID> <cbc:TenderResultCode listName="winner-selection-status">selec-w</cbc:TenderResultCode> <efac:TenderLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> </efac:TenderLot> </efac:LotResult> </efac:NoticeResult>
     OCDS example: '{"awards":[{"id":"RES-0001","status":"active","statusDetails":"At least one winner was chosen.","relatedLots":["LOT-0001"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
