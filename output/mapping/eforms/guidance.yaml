@@ -6674,9 +6674,9 @@
     TED guidance:
     - Map to `tender.title`
     - Map to the lot's `.title`
-    eForms guidance: Map to `tender.title`
+    eForms guidance: Map to `.title`
     eForms example: <cbc:Name languageID="ENG">Computer Network extension</cbc:Name>
-    OCDS example: '{"tender":{"title":"Computer Network extension"}}'
+    OCDS example: '{"title":"Computer Network extension"}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#objectSection
 -   id: BT-22-Lot
     parentNodeId: ND-LotProcurementScope
@@ -6914,7 +6914,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR
     TED guidance:
     - 'Map to the lot''s `.description`\n\n**F12, F13**: Instead, map to `tender.description`'
-    eForms guidance: Map to `tender.description`.
+    eForms guidance: Append to BT-24-Procedure using "-" as the separator and map to `tender.description`.
     eForms example: <cbc:Description languageID="ENG">Procedure for the procurement of ...</cbc:Description>
     OCDS example: '{"tender":{"description":"Procedure for the procurement of ..."}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#objectSection
@@ -6945,7 +6945,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/SHORT_DESCR
     TED guidance:
     - Map to `tender.description`
-    eForms guidance: Map to `tender.description`.
+    eForms guidance: Prepend to BT-24-Part using "-" as the separator and map to `tender.description`.
     eForms example: <cbc:Description languageID="ENG">Procedure for the procurement of ...</cbc:Description>
     OCDS example: '{"tender":{"description":"Procedure for the procurement of ..."}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#objectSection
