@@ -43,6 +43,22 @@ Look up the code in the [ISO 639-3 code tables](https://iso639-3.sil.org/code_ta
 
 If the code has no correspondence in ISO 639-1, contact the [OCDS Data Support Team](mailto:data@open-contracting.org).
 
+## Convert a duration to a number of days
+
+If `@unitCode` is 'DAY' or 'CALENDAR_DAY', do nothing.
+
+Otherwise, multiply the duration according to the value of `@unitCode`:
+
+| `@unitCode` | Multiplier |
+| --- | --- |
+| WEEK | 7 |
+| MONTH | 30 |
+| QUARTER | 91 |
+| YEAR_HALF | 182 |
+| YEAR | 365 |
+
+If the value of `@unitCode` does not appear in the above table, contact the [OCDS Data Support Team](mailto:data@open-contracting.org).
+
 ## Add a complaints statistic
 
 Add a `Statistic` object to the `statistics` array, set its `.relatedLot` to the value of `ancestor::efac:LotResult/efac:TenderLot/cbc:ID`, set its `scope` to 'complaints', and set its `.id` (string) sequentially across all notices for this procedure. For example, if a first notice for a given procedure has nine statistics, it uses `id`'s '1' through '9'. A second notice for the same procedure then uses `id`'s '10' and up, etc.
