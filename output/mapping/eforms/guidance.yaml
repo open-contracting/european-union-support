@@ -1588,7 +1588,7 @@
           - [Get the award for the LotResult](operations.md#get-the-award-for-a-lotresult):
             - If "selec-w", set its `.status` to 'active'.
             - If "clos-nw", set its `.status` to 'unsuccessful'.
-        - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/winner-selection-status), and map it to `.statusDetails`.
+            - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/winner-selection-status), and map it to `.statusDetails`.
     eForms example: <efac:NoticeResult> <efac:LotResult> <cbc:ID schemeName="result">RES-0001</cbc:ID> <cbc:TenderResultCode listName="winner-selection-status">selec-w</cbc:TenderResultCode> <efac:TenderLot> <cbc:ID schemeName="Lot">LOT-0001</cbc:ID> </efac:TenderLot> </efac:LotResult> </efac:NoticeResult>
     OCDS example: '{"awards":[{"id":"RES-0001","status":"active","statusDetails":"At least one winner was chosen.","relatedLots":["LOT-0001"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
@@ -11195,9 +11195,7 @@
     Business groups:
         BG-1: Notice
     eForms guidance: |-
-        Lowercase `/*/cbc:NoticeLanguageCode` and convert the code into a two-letter [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes), and map to `language`.
-
-        Discard `/*/cac:AdditionalNoticeLanguage/cbc:ID`.
+        [Convert the language code to ISO 639-1](operations.md#convert-a-language-code-to-iso-639-1), and map it to `language`.
     eForms example: <cbc:NoticeLanguageCode>ENG</cbc:NoticeLanguageCode>
     OCDS example: '{"language":"en"}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/notice-information.html#noticeLanguageSection
@@ -11283,11 +11281,9 @@
     Business groups:
         BG-101: Procurement Documents
     eForms guidance: |-
-        [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
-
-        Lowercase and convert the code into a two-letter [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes), and add it to the document's `.languages` array.
-
-        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and add it to the document's `.relatedLots`.
+        - [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
+        - [Convert the language code to ISO 639-1](operations.md#convert-a-language-code-to-iso-639-1), and add it to the document's `.languages` array.
+        - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and add it to the document's `.relatedLots` array.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:CallForTendersDocumentReference><cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:OfficialLanguages><cac:Language><cbc:ID>ENG</cbc:ID></cac:Language></efac:OfficialLanguages></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:CallForTendersDocumentReference></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","languages":["en"],"relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
@@ -11303,11 +11299,8 @@
     Business groups:
         BG-101: Procurement Documents
     eForms guidance: |-
-        [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
-
-        Lowercase and convert the code into a two-letter [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes).
-
-        Add it to the document's `.languages` array.
+        - [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
+        - [Convert the language code to ISO 639-1](operations.md#convert-a-language-code-to-iso-639-1), and add it to the document's `.languages` array.
     eForms example: <cac:TenderingTerms><cac:CallForTendersDocumentReference><cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:OfficialLanguages><cac:Language><cbc:ID>ENG</cbc:ID></cac:Language></efac:OfficialLanguages></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:CallForTendersDocumentReference></cac:TenderingTerms>
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","languages":["en"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
@@ -11558,8 +11551,8 @@
 
         - Get the `ancestor::efac:NoticeResult/efac:LotResult` with an `/efac:LotTender/cbc:ID` equal to `ancestor::efac:LotTender/cbc:ID`.
         - If no `Award` object in the `awards` array has an `id` equal to this `efac:LotResult//cbc:ID`:
-          - Add an `Award` object to the `awards` array.
-          - Set its `.id` to this `efac:LotResult/cbc:ID`.
+          - Add an `Award` object to the `awards` array:
+            - Set its `.id` to this `efac:LotResult/cbc:ID`.
         - Add the value of `ancestor::efac:TenderLot/cbc:ID` to the award's `.relatedLots`.
         - Map this field to the award's `.value.amount`.
         - Map `@currencyID` to the award's `.value.currency`.
@@ -12085,11 +12078,9 @@
     Business groups:
         BG-101: Procurement Documents
     eForms guidance: |-
-        [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
-
-        Lowercase and convert the code into a two-letter [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes), and add it to the document's `.unofficialTranslations` array.
-
-        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and add it to the document's `.relatedLots`.
+        - [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
+        - [Convert the language code to ISO 639-1](operations.md#convert-a-language-code-to-iso-639-1), and add it to the document's `.unofficialTranslations` array.
+        - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and add it to the document's `.relatedLots` array.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:CallForTendersDocumentReference><cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:NonOfficialLanguages><cac:Language><cbc:ID>ENG</cbc:ID></cac:Language></efac:NonOfficialLanguages></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:CallForTendersDocumentReference></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","unofficialTranslations":["en"],"relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
@@ -12105,9 +12096,8 @@
     Business groups:
         BG-101: Procurement Documents
     eForms guidance: |-
-        [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
-
-        Lowercase and convert the code into a two-letter [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes), and add it to the document's `.unofficialTranslations` array.
+        - [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
+        - [Convert the language code to ISO 639-1](operations.md#convert-a-language-code-to-iso-639-1), and add it to the document's `.unofficialTranslations` array.
     eForms example: <cac:TenderingTerms><cac:CallForTendersDocumentReference><cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:NonOfficialLanguages><cac:Language><cbc:ID>ENG</cbc:ID></cac:Language></efac:NonOfficialLanguages></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:CallForTendersDocumentReference></cac:TenderingTerms>
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","unofficialTranslations":["en"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
@@ -13882,8 +13872,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/PROCEDURE/LANGUAGES
     eForms guidance: |-
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
-        - Map to ISO 639-1 in the [language authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/language).
-        - Add to its `.submissionTerms.languages` array.
+        - [Convert the language code to ISO 639-1](operations.md#convert-a-language-code-to-iso-639-1), and add it to the lot's `.submissionTerms.languages` array.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:Language><cbc:ID>FRA</cbc:ID></cac:Language></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","submissionTerms":{"languages":["fr"]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#tenderingLanguageSection
@@ -14625,7 +14614,7 @@
         If the value of `ancestor::efac:StrategicProcurementStatistics/efbc:StatisticsNumeric` is not 0:
 
         - [Get the award for the LotResult](operations.md#get-the-award-for-a-lotresult).
-        - Add an `Item` object to its `items` array.
+        - Add an `Item` object to the award's `items` array:
           - Set the item's `.id` incrementally.
           - For each `efbc:StatisticsCode`, add a `Classification` object to the item's `additionalClassifications` array:
             - Map this field to its `.id`.
@@ -14646,8 +14635,8 @@
 
         If this field's value is not 0:
 
-        - If the value of `ancestor::efbc:StrategicProcurementStatistics/efbc:StatisticsCode` is "vehicles-zero-emission" or "vehicles-clean", get the corresponding item, and map to its `.quantity`.
-        - If the value of `ancestor::efbc:StrategicProcurementStatistics/efbc:StatisticsCode` is "vehicles", get the value of `efbc:StatisticsNumeric` for each `ancestor::efbc:StrategicProcurementStatistics` with `efbc:StatisticsCode` equal to "vehicles-zero-emission" or "vehicles-clean", and subtract the sum of the values from this field's value. Get the corresponding item, and map the resulting value to its `.quantity`.
+        - If the value of `ancestor::efbc:StrategicProcurementStatistics/efbc:StatisticsCode` is "vehicles-zero-emission" or "vehicles-clean", map to the item's `.quantity`.
+        - If the value of `ancestor::efbc:StrategicProcurementStatistics/efbc:StatisticsCode` is "vehicles", subtract the value of `efbc:StatisticsNumeric` for each `ancestor::efbc:StrategicProcurementStatistics` with `efbc:StatisticsCode` equal to "vehicles-zero-emission" or "vehicles-clean", and map the difference to the item's `.quantity`.
     eForms example: <efac:NoticeResult><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:StrategicProcurement><efac:StrategicProcurementInformation><efac:ProcurementDetails><efac:StrategicProcurementStatistics><efbc:StatisticsNumeric>3</efbc:StatisticsNumeric></efac:StrategicProcurementStatistics></efac:ProcurementDetails></efac:StrategicProcurementInformation></efac:StrategicProcurement><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotResult></efac:NoticeResult>
     OCDS example: '{"awards":[{"id":"RES-0001","items":[{"id":"1","quantity":3}],"relatedLots":["LOT-0001"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
