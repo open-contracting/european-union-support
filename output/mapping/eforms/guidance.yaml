@@ -7675,7 +7675,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/OBJECT_DESCR/DURATION
     eForms guidance: |-
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
-        - [Convert the duration to a number of days](operations.md#convert-a-duration-to-a-number-of-days)
+        - [Convert the duration to a number of days](operations.md#convert-a-duration-to-a-number-of-days).
         - Map to the lot's `.contractPeriod.durationInDays`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cac:PlannedPeriod><cbc:DurationMeasure unitCode="DAY">3</cbc:DurationMeasure></cac:PlannedPeriod></cac:ProcurementProject></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","contractPeriod":{"durationInDays":3}}]}}'
@@ -7695,7 +7695,7 @@
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/SCHEDULED_DATE_PERIOD/PERIOD_WORK_DATE_STARTING/MONTHS
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/PERIOD_WORK_DATE_STARTING/(MONTHS|DAYS)
     eForms guidance: |-
-        - [Convert the duration to a number of days](operations.md#convert-a-duration-to-a-number-of-days)
+        - [Convert the duration to a number of days](operations.md#convert-a-duration-to-a-number-of-days).
         - Map to `tender.contractPeriod.durationInDays`.
     eForms example: <cac:PlannedPeriod><cbc:DurationMeasure unitCode="DAY">3</cbc:DurationMeasure></cac:PlannedPeriod>
     OCDS example: '{"tender":{"contractPeriod":{"durationInDays":3}}}'
