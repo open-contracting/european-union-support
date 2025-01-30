@@ -6914,7 +6914,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/OBJECT_CONTRACT/OBJECT_DESCR/SHORT_DESCR
     TED guidance:
     - 'Map to the lot''s `.description`\n\n**F12, F13**: Instead, map to `tender.description`'
-    eForms guidance: Append to BT-24-Procedure using "-" as the separator and map to `tender.description`.
+    eForms guidance: Append to BT-24-Procedure using "-" as the separator, and map to `tender.description`.
     eForms example: <cbc:Description languageID="ENG">Procedure for the procurement of ...</cbc:Description>
     OCDS example: '{"tender":{"description":"Procedure for the procurement of ..."}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#objectSection
@@ -6945,7 +6945,7 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/SHORT_DESCR
     TED guidance:
     - Map to `tender.description`
-    eForms guidance: Prepend to BT-24-Part using "-" as the separator and map to `tender.description`.
+    eForms guidance: Prepend to BT-24-Part using "-" as the separator, and map to `tender.description`.
     eForms example: <cbc:Description languageID="ENG">Procedure for the procurement of ...</cbc:Description>
     OCDS example: '{"tender":{"description":"Procedure for the procurement of ..."}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#objectSection
@@ -7125,7 +7125,8 @@
     eForms guidance: |-
         This field maps to the same object as created for [BT-26(m)-Lot Classification Type (e.g. CPV)](<#BT-26(m)-Lot>).
         
-        [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot) and map to its `.classification.id`.'
+        - [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
+        - Map to its `.classification.id`.'
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification></cac:ProcurementProject></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"items":[{"id":"1","classification":{"id":"15311100"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#classificationSection
@@ -7212,9 +7213,9 @@
     eForms guidance: |-
         This field maps to the same `Classification` objects as created for [BT-26(a)-Lot Classification Type (e.g. CPV)](<#BT-26(a)-Lot>).
 
-        [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot) and for each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update the corresponding `Classification` object in the item's `.additionalClassifications` array:
-        
-        - Map to its `.id`.
+        - [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
+        - For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update the corresponding `Classification` object in the item's `.additionalClassifications` array:
+          - Map to its `.id`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cac:AdditionalCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311200</cbc:ItemClassificationCode></cac:AdditionalCommodityClassification></cac:ProcurementProject></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"items":[{"id":"1","additionalClassifications":[{"id":"15311200"}],"relatedLot":"LOT-0001"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#classificationSection
@@ -7717,7 +7718,7 @@
         This field maps to the same `SelectionCriterion` objects as created for [BT-750-Lot](<#BT-750-Lot>), BT-752, [BT-7531-Lot](<#BT-7531-Lot>), [BT-7532-Lot](<#BT-7532-Lot>) and [BT-809-Lot](<#BT-809-Lot>).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
-        - For each `efac:SelectionCriteria`, add or update the corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`:
+        - For each `efac:SelectionCriteria`, add or update the corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria` array:
           - Map to its `.forReduction`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:SelectionCriteria><efbc:SecondStageIndicator>true</efbc:SecondStageIndicator></efac:SelectionCriteria></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","selectionCriteria":{"criteria":[{"forReduction":true}]}}]}}'
@@ -12390,7 +12391,7 @@
         These values are mapped to the same `SelectionCriterion` objects as created for [BT-40-Lot](<#BT-40-Lot>), [BT-752-Lot-ThresholdNumber](<#BT-752-Lot-ThresholdNumber>), [BT-752-Lot-WeightNumber](<#BT-752-Lot-WeightNumber>), [BT-7531-Lot](<#BT-7531-Lot>), [BT-7532-Lot](<#BT-7532-Lot>) and [BT-809-Lot](<#BT-809-Lot>).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
-        - For each `efac:SelectionCriteria`, add or update the corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`:
+        - For each `efac:SelectionCriteria`, add or update the corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria` array:
           - Map to its `.description`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:SelectionCriteria><cbc:Description languageID="ENG">Turnover over contract value rate</cbc:Description></efac:SelectionCriteria></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","selectionCriteria":{"criteria":[{"description":"Turnover over contract value rate"}]}}]}}'
@@ -12432,7 +12433,8 @@
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `efac:SelectionCriteria`, add or update the corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria` array:
-          - Add or update the corresponding `SelectionCriterionNumber` object in the criterion's `.numbers` array: Map to the selection criterion number's `.number`.
+          - Add or update the corresponding `SelectionCriterionNumber` object in the criterion's `.numbers` array:
+            - Map to its `.number`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:SelectionCriteria><efac:CriterionParameter><efbc:ParameterCode listName="number-threshold"/><efbc:ParameterNumeric>3</efbc:ParameterNumeric></efac:CriterionParameter></efac:SelectionCriteria></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","selectionCriteria":{"criteria":[{"numbers":[{"number":3}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#selectionCriteriaSection
@@ -12453,7 +12455,8 @@
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `efac:SelectionCriteria`, add or update the corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria` array:
-          - Add or update the corresponding `SelectionCriterionNumber` object in the criterion's `.numbers` array: Map to the selection criterion number's `.number`.
+          - Add or update the corresponding `SelectionCriterionNumber` object in the criterion's `.numbers` array:
+            - Map to its `.number`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:SelectionCriteria><efac:CriterionParameter><efbc:ParameterCode listName="number-weight"/><efbc:ParameterNumeric>3</efbc:ParameterNumeric></efac:CriterionParameter></efac:SelectionCriteria></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","selectionCriteria":{"criteria":[{"numbers":[{"number":3}]}]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#selectionCriteriaSection
@@ -12475,8 +12478,8 @@
         These values are mapped to the same `SelectionCriterion` objects as created for [BT-40-Lot](<#BT-40-Lot>), [BT-750-Lot](<#BT-750-Lot>), [BT-752-Lot-ThresholdNumber](<#BT-752-Lot-ThresholdNumber>), [BT-752-Lot-WeightNumber](<#BT-752-Lot-WeightNumber>), [BT-7532-Lot](<#BT-7532-Lot>) and [BT-809-Lot](<#BT-809-Lot>), and the same `SelectionCriterionNumber` objects as created for [BT-752-Lot-ThresholdNumber](<#BT-752-Lot-ThresholdNumber>), [BT-752-Lot-WeightNumber](<#BT-752-Lot-WeightNumber>) and [BT-7532-Lot](<#BT-7532-Lot>).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
-        - For each `efac:SelectionCriteria`, add or update the corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`:
-          - For each `efac:CriterionParameter`, add or update the corresponding `SelectionCriterionNumber` object in the criterion's `.numbers`:
+        - For each `efac:SelectionCriteria`, add or update the corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria` array:
+          - For each `efac:CriterionParameter`, add or update the corresponding `SelectionCriterionNumber` object in the criterion's `.numbers` array:
             - Identify the equivalent code in the [criterionWeight](https://extensions.open-contracting.org/en/extensions/awardCriteria/master/codelists/#criterionWeight.csv) codelist, and map it to the number's `.weight`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:SelectionCriteria><efac:CriterionParameter><efbc:ParameterCode listName="number-weight">per-exa</efbc:ParameterCode></efac:CriterionParameter></efac:SelectionCriteria></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","selectionCriteria":{"criteria":[{"numbers":[{"weight":"percentageExact"}]}]}}]}}'
@@ -12499,8 +12502,8 @@
         These values are mapped to the same `SelectionCriterion` objects as created for [BT-40-Lot](<#BT-40-Lot>), [BT-750-Lot](<#BT-750-Lot>), [BT-752-Lot-ThresholdNumber](<#BT-752-Lot-ThresholdNumber>), [BT-752-Lot-WeightNumber](<#BT-752-Lot-WeightNumber>), [BT-7531-Lot](<#BT-7531-Lot>) and [BT-809-Lot](<#BT-809-Lot>), and the same `SelectionCriterionNumber` objects as created for [BT-752-Lot-ThresholdNumber](<#BT-752-Lot-ThresholdNumber>), [BT-752-Lot-WeightNumber](<#BT-752-Lot-WeightNumber>) and [BT-7531-Lot](<#BT-7531-Lot>).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
-        - For each `efac:SelectionCriteria`, add or update the corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`:
-          - For each `efac:CriterionParameter`, add or update the corresponding `SelectionCriterionNumber` object in the criterion's `.numbers`:
+        - For each `efac:SelectionCriteria`, add or update the corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria` array:
+          - For each `efac:CriterionParameter`, add or update the corresponding `SelectionCriterionNumber` object in the criterion's `.numbers` array:
             - Identify the equivalent code in the [criterionThreshold](https://extensions.open-contracting.org/en/extensions/awardCriteria/master/codelists/#criterionThreshold.csv) codelist, and map it to the number's `.threshold`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:SelectionCriteria><efac:CriterionParameter><efbc:ParameterCode listName="number-threshold">min-score</efbc:ParameterCode></efac:CriterionParameter></efac:SelectionCriteria></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","selectionCriteria":{"criteria":[{"numbers":[{"threshold":"minimumScore"}]}]}}]}}'
@@ -13585,7 +13588,7 @@
         These values are mapped to the same `SelectionCriterion` objects as created for [BT-40-Lot](<#BT-40-Lot>), [BT-750-Lot](<#BT-750-Lot>), BT-752, [BT-7531-Lot](<#BT-7531-Lot>) and [BT-7532-Lot](<#BT-7532-Lot>).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
-        - For each `<efac:SelectionCriteria>`, add or update the corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria`:
+        - For each `<efac:SelectionCriteria>`, add or update the corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria` array:
           - Map this field to its `.subType`.
           - Set its `.type` according to the [selection criterion mapping table](codelists/selection-criterion).
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:SelectionCriteria><cbc:TendererRequirementTypeCode listName="selection-criterion">slc-suit-reg-prof</cbc:TendererRequirementTypeCode></efac:SelectionCriteria></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:TenderingTerms></cac:ProcurementProjectLot>
