@@ -14648,7 +14648,6 @@
 
         - If the value of `ancestor::efbc:StrategicProcurementStatistics/efbc:StatisticsCode` is "vehicles-zero-emission" or "vehicles-clean", get the corresponding item, and map to its `.quantity`.
         - If the value of `ancestor::efbc:StrategicProcurementStatistics/efbc:StatisticsCode` is "vehicles", get the value of `efbc:StatisticsNumeric` for each `ancestor::efbc:StrategicProcurementStatistics` with `efbc:StatisticsCode` equal to "vehicles-zero-emission" or "vehicles-clean", and subtract the sum of the values from this field's value. Get the corresponding item, and map the resulting value to its `.quantity`.
-        - If the value is 0, discard the item entirely. Otherwise, map the result to the item's `.quantity`.
     eForms example: <efac:NoticeResult><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:StrategicProcurement><efac:StrategicProcurementInformation><efac:ProcurementDetails><efac:StrategicProcurementStatistics><efbc:StatisticsNumeric>3</efbc:StatisticsNumeric></efac:StrategicProcurementStatistics></efac:ProcurementDetails></efac:StrategicProcurementInformation></efac:StrategicProcurement><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotResult></efac:NoticeResult>
     OCDS example: '{"awards":[{"id":"RES-0001","items":[{"id":"1","quantity":3}],"relatedLots":["LOT-0001"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
