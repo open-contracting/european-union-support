@@ -37,11 +37,11 @@ If a timezone component is present in the date (e.g. '+02:00'), preserve it. Oth
 
 The final value would be '2020-10-21T23:59:59Z' or '2020-10-21T00:00:00Z'.
 
-## Convert a language code to ISO 639-1 format
+## Convert a language code to ISO 639-1
 
-Look up the code in the [ISO 639-3 code tables](https://iso639-3.sil.org/code_tables/639/data) ([TSV version](https://iso639-3.sil.org/code_tables/download_tables#639-3%20Code%20Set)) and get the value in the `639-1` column (TSV column: `Part1`).
+Look up the code in the [ISO 639-3 code tables](https://iso639-3.sil.org/code_tables/639/data) ([TSV file](https://iso639-3.sil.org/code_tables/download_tables#639-3%20Code%20Set)) and get the value in the `639-1` column (`Part1` column in the TSV file).
 
-If the code has no equivalent in ISO 639-1, contact the [OCDS Data Support Team](mailto:data@open-contracting.org).
+If the code has no correspondance in ISO 639-1, contact the [OCDS Data Support Team](mailto:data@open-contracting.org).
 
 ## Add a complaints statistic
 

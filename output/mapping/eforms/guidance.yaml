@@ -11199,9 +11199,7 @@
     Business groups:
         BG-1: Notice
     eForms guidance: |-
-        [Convert the language code to ISO 639-1 format](operations.md#convert-a-language-code-to-iso-639-1-format) and map to `language`.
-
-        Discard `/*/cac:AdditionalNoticeLanguage/cbc:ID`.
+        [Convert the language code to ISO 639-1](operations.md#convert-a-language-code-to-iso-639-1), and map it to `language`.
     eForms example: <cbc:NoticeLanguageCode>ENG</cbc:NoticeLanguageCode>
     OCDS example: '{"language":"en"}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/notice-information.html#noticeLanguageSection
@@ -11287,11 +11285,9 @@
     Business groups:
         BG-101: Procurement Documents
     eForms guidance: |-
-        [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
-
-        [Convert the language code to ISO 639-1 format](operations.md#convert-a-language-code-to-iso-639-1-format) and add it to the document's `.languages` array.
-
-        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and add it to the document's `.relatedLots`.
+        - [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
+        - [Convert the language code to ISO 639-1](operations.md#convert-a-language-code-to-iso-639-1), and add it to the document's `.languages` array.
+        - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and add it to the document's `.relatedLots` array.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:CallForTendersDocumentReference><cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:OfficialLanguages><cac:Language><cbc:ID>ENG</cbc:ID></cac:Language></efac:OfficialLanguages></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:CallForTendersDocumentReference></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","languages":["en"],"relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
@@ -11307,11 +11303,8 @@
     Business groups:
         BG-101: Procurement Documents
     eForms guidance: |-
-        [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
-
-        [Convert the language code to ISO 639-1 format](operations.md#convert-a-language-code-to-iso-639-1-format).
-
-        Add it to the document's `.languages` array.
+        - [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
+        - [Convert the language code to ISO 639-1](operations.md#convert-a-language-code-to-iso-639-1), and add it to the document's `.languages` array.
     eForms example: <cac:TenderingTerms><cac:CallForTendersDocumentReference><cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:OfficialLanguages><cac:Language><cbc:ID>ENG</cbc:ID></cac:Language></efac:OfficialLanguages></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:CallForTendersDocumentReference></cac:TenderingTerms>
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","languages":["en"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
@@ -12089,11 +12082,9 @@
     Business groups:
         BG-101: Procurement Documents
     eForms guidance: |-
-        [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
-
-        [Convert the language code to ISO 639-1 format](operations.md#convert-a-language-code-to-iso-639-1-format) and add it to the document's `.unofficialTranslations` array.
-
-        [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and add it to the document's `.relatedLots`.
+        - [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
+        - [Convert the language code to ISO 639-1](operations.md#convert-a-language-code-to-iso-639-1), and add it to the document's `.unofficialTranslations` array.
+        - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and add it to the document's `.relatedLots` array.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:CallForTendersDocumentReference><cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:NonOfficialLanguages><cac:Language><cbc:ID>ENG</cbc:ID></cac:Language></efac:NonOfficialLanguages></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:CallForTendersDocumentReference></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","unofficialTranslations":["en"],"relatedLots":["LOT-0001"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
@@ -12109,9 +12100,8 @@
     Business groups:
         BG-101: Procurement Documents
     eForms guidance: |-
-        [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
-
-        [Convert the language code to ISO 639-1 format](operations.md#convert-a-language-code-to-iso-639-1-format) and add it to the document's `.unofficialTranslations` array.
+        - [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
+        - [Convert the language code to ISO 639-1](operations.md#convert-a-language-code-to-iso-639-1), and add it to the document's `.unofficialTranslations` array.
     eForms example: <cac:TenderingTerms><cac:CallForTendersDocumentReference><cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:NonOfficialLanguages><cac:Language><cbc:ID>ENG</cbc:ID></cac:Language></efac:NonOfficialLanguages></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:CallForTendersDocumentReference></cac:TenderingTerms>
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","unofficialTranslations":["en"]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
@@ -13886,8 +13876,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/PROCEDURE/LANGUAGES
     eForms guidance: |-
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
-        - [Convert the language code to ISO 639-1 format](operations.md#convert-a-language-code-to-iso-639-1-format).
-        - Add to its `.submissionTerms.languages` array.
+        - [Convert the language code to ISO 639-1](operations.md#convert-a-language-code-to-iso-639-1), and add it to the lot's `.submissionTerms.languages` array.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:Language><cbc:ID>FRA</cbc:ID></cac:Language></cac:TenderingTerms></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","submissionTerms":{"languages":["fr"]}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#tenderingLanguageSection
