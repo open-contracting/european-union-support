@@ -7675,8 +7675,8 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/OBJECT_DESCR/DURATION
     eForms guidance: |-
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
-        - If `@unitCode` is "DAY", map to the lot's `.contractPeriod.durationInDays`.
-        - If `@unitCode` is "MONTH", multiply by 30. If `@unitCode` is "YEAR", multiply by 365. In either case, map the result to the lot's `.contractPeriod.durationInDays`.
+        - [Convert the duration to a number of days](operations.md#convert-a-duration-to-a-number-of-days)
+        - Map to the lot's `.contractPeriod.durationInDays`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cac:PlannedPeriod><cbc:DurationMeasure unitCode="DAY">3</cbc:DurationMeasure></cac:PlannedPeriod></cac:ProcurementProject></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","contractPeriod":{"durationInDays":3}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#plannedPeriodSection
@@ -7695,9 +7695,8 @@
     - TED_EXPORT/FORM_SECTION/PRIOR_INFORMATION_DEFENCE/FD_PRIOR_INFORMATION_DEFENCE/OBJECT_WORKS_SUPPLIES_SERVICES_PRIOR_INFORMATION/SCHEDULED_DATE_PERIOD/PERIOD_WORK_DATE_STARTING/MONTHS
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/PERIOD_WORK_DATE_STARTING/(MONTHS|DAYS)
     eForms guidance: |-
-        - If `@unitCode` is "DAY", map to `tender.contractPeriod.durationInDays`.
-        - If `@unitCode` is "MONTH", multiply by 30. If `@unitCode` is "YEAR", multiply by 365. In either case, map the result to `tender.contractPeriod.durationInDays`.
-        - If `@unitCode` is a specific day of the week or month, map an equivalent number of days to `tender.contractPeriod.durationInDays`.
+        - [Convert the duration to a number of days](operations.md#convert-a-duration-to-a-number-of-days)
+        - Map to `tender.contractPeriod.durationInDays`.
     eForms example: <cac:PlannedPeriod><cbc:DurationMeasure unitCode="DAY">3</cbc:DurationMeasure></cac:PlannedPeriod>
     OCDS example: '{"tender":{"contractPeriod":{"durationInDays":3}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#plannedPeriodSection
