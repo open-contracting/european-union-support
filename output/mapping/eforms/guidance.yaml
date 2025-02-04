@@ -192,7 +192,7 @@
     Business groups:
         BG-713: Strategic Procurement
     eForms guidance: |-
-        This field maps to the same `Sustainability` objects as created for [BT-777-Lot Strategic Procurement Description](<#BT-777-Lot>).
+        This field maps to the same `Sustainability` objects as created for [BT-777-Lot Strategic Procurement Description](#BT-777-Lot).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - If this field's value is not "none", set the lot's `.hasSustainability` to `true`.
@@ -734,11 +734,9 @@
     - TED_EXPORT/FORM_SECTION/F25_2014/PROCEDURE/NOTICE_NUMBER_OJ
     TED guidance:
     - '[Reference a previous publication](../../operations/#reference-a-previous-publication)'
-    eForms guidance: |-
-        1. Concatenate with [BT-1251-Lot Previous Planning Part Identifier ](#BT-1251-Lot) and [reference a previous publication](operations.md#reference-a-previous-publication).
-        1. Get the `RelatedProcess` created in the previous step and add the value of `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
-    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID><cbc:ReferencedDocumentInternalAddress>PAR-0001</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference></cac:TenderingProcess></cac:ProcurementProjectLot>
-    OCDS example: '{"relatedProcesses":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"9c0fd704-64d3-4294-a3b6-6df45911ab9f-01-PAR-0001","relatedLots":["LOT-0001"]}]}'
+    eForms guidance: '[Reference a previous planning notice](operations.md#reference-a-previous-planning-notice).'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID>&gt;</cac:NoticeDocumentReference></cac:TenderingProcess></cac:ProcurementProjectLot>
+    OCDS example: '{"relatedProcesses":[{"id":"1","relationship":["planning"],"scheme":"eu-notice-id-ref","identifier":"123e4567-e89b-12d3-a456-426614174000-06","relatedLots":["LOT-0001"]},{"id":"2","relationship":["planning"],"scheme":"ocid","identifier":"ocds-123-czf-e292d3e5-2ae9-4aa9-af0d-aec44e15fd4d","relatedLots":["LOT-0001"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#previousPlanningSection
 -   id: BT-125(i)-Part
     parentNodeId: ND-PartPreviousPlanning
@@ -751,9 +749,9 @@
     Description: The identifier of a prior information notice or another similar notice related to this notice.
     Business groups:
         BG-125: Previous Planning
-    eForms guidance: Concatenate with [BT-1251-Part Previous Planning Part Identifier](#BT-1251-Part) and [reference a previous publication](operations.md#reference-a-previous-publication).
-    eForms example: <cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID><cbc:ReferencedDocumentInternalAddress>PAR-0001</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference>
-    OCDS example: '{"relatedProcesses":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"123e4567-e89b-12d3-a456-426614174000-06-PAR-0001"}]}'
+    eForms guidance: '[Reference a previous planning notice](operations.md#reference-a-previous-planning-notice).'
+    eForms example: <cac:TenderingProcess><cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID>&gt;</cac:NoticeDocumentReference></cac:TenderingProcess>
+    OCDS example: '{"relatedProcesses":[{"id":"1","relationship":["planning"],"scheme":"eu-notice-id-ref","identifier":"123e4567-e89b-12d3-a456-426614174000-06"},{"id":"2","relationship":["planning"],"scheme":"ocid","identifier":"ocds-123-czf-e292d3e5-2ae9-4aa9-af0d-aec44e15fd4d"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#previousPlanningSection
 -   id: BT-1251-Lot
     parentNodeId: ND-LotPreviousPlanning
@@ -765,9 +763,12 @@
     Description: The identifier of a part of a prior information notice or another similar notice related to this notice.
     Business groups:
         BG-125: Previous Planning
-    eForms guidance: Concatenate with [BT-125(i)-Lot Previous Planning Identifier](<#BT-125(i)-Lot>) and [reference a previous publication](operations.md#reference-a-previous-publication).
+    eForms guidance: |-
+        This field maps to the same `RelatedProcess` objects as created for [BT-125(i)-Lot Previous Planning Identifier](<#BT-125(i)-Lot>).
+
+        Get the `RelatedProcess` object with `.scheme` set to 'eu-notice-id-ref' or 'eu-ojs-notice-id' and map to its `.part`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingProcess><cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID><cbc:ReferencedDocumentInternalAddress>PAR-0001</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference></cac:TenderingProcess></cac:ProcurementProjectLot>
-    OCDS example: '{"relatedProcesses":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"9c0fd704-64d3-4294-a3b6-6df45911ab9f-01-PAR-0001","relatedLots":["LOT-0001"]}]}'
+    OCDS example: '{"relatedProcesses":[{"id":"1","relationship":["planning"],"scheme":"eu-notice-id-ref","identifier":"123e4567-e89b-12d3-a456-426614174000-06","part":"PAR-0001","relatedLots":["LOT-0001"]},{"id":"2","relationship":["planning"],"scheme":"ocid","identifier":"ocds-123-czf-e292d3e5-2ae9-4aa9-af0d-aec44e15fd4d","relatedLots":["LOT-0001"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#previousPlanningSection
 -   id: BT-1251-Part
     parentNodeId: ND-PartPreviousPlanning
@@ -779,9 +780,12 @@
     Description: The identifier of a part of a prior information notice or another similar notice related to this notice.
     Business groups:
         BG-125: Previous Planning
-    eForms guidance: Concatenate with [BT-125(i)-Part Previous Planning Identifier](<#BT-125(i)-Part>) and [reference a previous publication](operations.md#reference-a-previous-publication).
-    eForms example: <cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID><cbc:ReferencedDocumentInternalAddress>PAR-0001</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference>
-    OCDS example: '{"relatedProcesses":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"123e4567-e89b-12d3-a456-426614174000-06-PAR-0001"}]}'
+    eForms guidance: |-
+        This field maps to the same `RelatedProcess` objects as created for [BT-125(i)-Part Previous Planning Identifier](<#BT-125(i)-Part>).
+
+        Get the `RelatedProcess` object with `.scheme` set to 'eu-notice-id-ref' or 'eu-ojs-notice-id' and map to its `.part`.
+    eForms example: <cac:TenderingProcess><cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID><cbc:ReferencedDocumentInternalAddress>PAR-0001</cbc:ReferencedDocumentInternalAddress></cac:NoticeDocumentReference></cac:TenderingProcess>
+    OCDS example: '{"relatedProcesses":[{"id":"1","relationship":["planning"],"scheme":"eu-notice-id-ref","identifier":"123e4567-e89b-12d3-a456-426614174000-06","part":"PAR-0001"},{"id":"2","relationship":["planning"],"scheme":"ocid","identifier":"ocds-123-czf-e292d3e5-2ae9-4aa9-af0d-aec44e15fd4d"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#previousPlanningSection
 -   id: BT-1252-Procedure
     parentNodeId: ND-DirectAward
@@ -1494,8 +1498,7 @@
     Description: The access to certain procurement documents is restricted.
     Business groups:
         BG-101: Procurement Documents
-    eForms guidance: |-
-        - [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference). Set its `.documentType` to 'biddingDocuments'. Prepend "Restricted." to its `.accessDetails`.
+    eForms guidance: '- [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference). Set its `.documentType` to ''biddingDocuments''. Prepend "Restricted." to its `.accessDetails`.'
     eForms example: <cac:CallForTendersDocumentReference><cbc:ID>20210521/CTFD/ENG/7654-02</cbc:ID><cbc:DocumentType>restricted-document</cbc:DocumentType></cac:CallForTendersDocumentReference>
     OCDS example: '{"tender":{"documents":[{"id":"20210521/CTFD/ENG/7654-02","documentType":"biddingDocuments","accessDetails":"Restricted."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#procurementDocsSection
@@ -1514,7 +1517,7 @@
     eForms guidance: |-
         For each `ancestor::efac:Changes/efac:Change`:
 
-        - If the change's `/efbc:ChangedSectionIdentifier` ([BT-13716-notice Change Previous Section Identifier](<#BT-13716-notice)) references a:
+        - If the change's `/efbc:ChangedSectionIdentifier` (\[BT-13716-notice Change Previous Section Identifier\](\<#BT-13716-notice)) references a:
           - LotResult (`RES-XXXX`), [get the award for the LotResult](operations.md#get-the-award-for-a-lotresult), and add an `Amendment` object to the award's `.amendments` array.
           - Lot (`LOT-XXXX`), add an `Amendment` object to the `tender.amendments` array, and add the Lot's identifier to the amendment's `.relatedLots` array.
           - LotsGroup (`GLO-XXXX`), add an `Amendment` object to the `tender.amendments` array, and add the LotGroup's identifier to the amendment's `.relatedLotGroups` array.
@@ -1552,7 +1555,7 @@
     TED guidance:
     - Map to the amendment's `.description`
     eForms guidance: |-
-        These values map to the same `Amendment` objects as created for [BT-140-notice Change Reason Code](<#BT-140-notice>).
+        These values map to the same `Amendment` objects as created for [BT-140-notice Change Reason Code](#BT-140-notice).
 
         Update the corresponding `Amendment` object, and map to its `.description`.
     eForms example: <efac:Change><efbc:ChangeDescription languageID="ENG">The changes have been applied to ...</efbc:ChangeDescription></efac:Change>
@@ -6491,7 +6494,7 @@
     Business groups:
         BG-77: Modification
     eForms guidance: |-
-        This field maps to the same `Amendment` objects as created for [BT-201-Contract Modification Reason Description](<#BT-201-Contract>) and [BT-202-Contract Modification Description](<#BT-202-Contract>).
+        This field maps to the same `Amendment` objects as created for [BT-201-Contract Modification Reason Description](#BT-201-Contract) and [BT-202-Contract Modification Description](#BT-202-Contract).
 
         If no `Contract` object in the `contracts` array has an `.id` equal to `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`:
 
@@ -6521,7 +6524,7 @@
     Business groups:
         BG-77: Modification
     eForms guidance: |-
-        This field maps to the same `Amendment` objects as created for [BT-200-Contract Modification Reason Code](<#BT-200-Contract>) and [BT-202-Contract Modification Description](<#BT-202-Contract>).
+        This field maps to the same `Amendment` objects as created for [BT-200-Contract Modification Reason Code](#BT-200-Contract) and [BT-202-Contract Modification Description](#BT-202-Contract).
 
         If no `Contract` object in the `contracts` array has an `.id` equal to `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`:
 
@@ -6549,7 +6552,7 @@
     Business groups:
         BG-77: Modification
     eForms guidance: |-
-        This field maps to the same `Amendment` objects as created for [BT-200-Contract Modification Reason Code](<#BT-200-Contract>) and [BT-201-Contract Modification Reason Description](<#BT-201-Contract>).
+        This field maps to the same `Amendment` objects as created for [BT-200-Contract Modification Reason Code](#BT-200-Contract) and [BT-201-Contract Modification Reason Description](#BT-201-Contract).
 
         If no `Contract` object in the `contracts` array has an `.id` equal to `ancestor::efac:ChangedSection/efbc:ChangeSectionIdentifier`:
 
@@ -6978,7 +6981,7 @@
         BG-2: Purpose
         BG-261: Classification
     eForms guidance: |-
-        This field maps to the same objects as created for [BT-263-Lot Additional Classification Code](<#BT-263-Lot>).
+        This field maps to the same objects as created for [BT-263-Lot Additional Classification Code](#BT-263-Lot).
 
         - [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
         - For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update the corresponding `Classification` object in the item's `.additionalClassifications` array:
@@ -7000,7 +7003,7 @@
         BG-2: Purpose
         BG-261: Classification
     eForms guidance: |-
-        This field maps to the same objects as created for [BT-263-Part Additional Classification Code](<#BT-263-Part>).
+        This field maps to the same objects as created for [BT-263-Part Additional Classification Code](#BT-263-Part).
 
         If no `Item` object was created for `ancestor::AdditionalCommodityClassification`, add an `Item` object to the `tender.items` array, and set the item's `.id` incrementally.
 
@@ -7024,7 +7027,7 @@
         BG-2: Purpose
         BG-261: Classification
     eForms guidance: |-
-        This field maps to the same objects as created for [BT-263-Procedure Additional Classification Code](<#BT-263-Procedure>).
+        This field maps to the same objects as created for [BT-263-Procedure Additional Classification Code](#BT-263-Procedure).
 
         If no `Item` object was created for `ancestor::AdditionalCommodityClassification`, add an `Item` object to the `tender.items` array, and set the item's `.id` incrementally.
 
@@ -7048,7 +7051,7 @@
         BG-2: Purpose
         BG-261: Classification
     eForms guidance: |-
-        This field maps to the same object as created for [BT-262-Lot Main Classification Code](<#BT-262-Lot>).
+        This field maps to the same object as created for [BT-262-Lot Main Classification Code](#BT-262-Lot).
 
         - [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
         - Capitalize the value of `cbc:ItemClassificationCode[@listName]`, and map to the item's `.classification.scheme`.
@@ -7069,7 +7072,7 @@
         BG-2: Purpose
         BG-261: Classification
     eForms guidance: |-
-        This field maps to the same object as created for [BT-262-Part Main Classification Code](<#BT-262-Part>).
+        This field maps to the same object as created for [BT-262-Part Main Classification Code](#BT-262-Part).
 
         If no `Item` object was created for `ancestor::MainCommodityClassification`, add an `Item` object to the `tender.items` array, and set the item's `.id` incrementally.
 
@@ -7091,7 +7094,7 @@
         BG-2: Purpose
         BG-261: Classification
     eForms guidance: |-
-        This field maps to the same object as created for [BT-262-Procedure Main Classification Code](<#BT-262-Procedure>).
+        This field maps to the same object as created for [BT-262-Procedure Main Classification Code](#BT-262-Procedure).
 
         If no `Item` object was created for `ancestor::MainCommodityClassification`, add an `Item` object to the `tender.items` array, and set the item's `.id` incrementally.
 
@@ -7121,7 +7124,7 @@
     - TED_EXPORT/FORM_SECTION/F21_2014/OBJECT_CONTRACT/CPV_MAIN/CPV_CODE/@CODE
     eForms guidance: |-
         This field maps to the same object as created for [BT-26(m)-Lot Classification Type (e.g. CPV)](<#BT-26(m)-Lot>).
-        
+
         - [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
         - Map to its `.classification.id`.'
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification></cac:ProcurementProject></cac:ProcurementProjectLot>
@@ -7711,7 +7714,7 @@
         BG-700: Exclusion Grounds and Selection Criteria
         BG-702: Selection Criteria
     eForms guidance: |-
-        This field maps to the same `SelectionCriterion` objects as created for [BT-750-Lot](<#BT-750-Lot>), [BT-752-Lot-ThresholdNumber](<#BT-752-Lot-ThresholdNumber>), [BT-752-Lot-WeightNumber](<#BT-752-Lot-WeightNumber>), [BT-7531-Lot](<#BT-7531-Lot>), [BT-7532-Lot](<#BT-7532-Lot>) and [BT-809-Lot](<#BT-809-Lot>).
+        This field maps to the same `SelectionCriterion` objects as created for [BT-750-Lot](#BT-750-Lot), [BT-752-Lot-ThresholdNumber](#BT-752-Lot-ThresholdNumber), [BT-752-Lot-WeightNumber](#BT-752-Lot-WeightNumber), [BT-7531-Lot](#BT-7531-Lot), [BT-7532-Lot](#BT-7532-Lot) and [BT-809-Lot](#BT-809-Lot).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `efac:SelectionCriteria`, add or update the corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria` array:
@@ -7773,7 +7776,7 @@
         BG-704: Reward and Jury
         BG-44: Prize
     eForms guidance: |-
-        This field maps to the same `Prize` objects as created for [BT-45-Lot Rewards Other](<#BT-45-Lot>) and [BT-644-Lot Prize Value](<#BT-644-Lot>).
+        This field maps to the same `Prize` objects as created for [BT-45-Lot Rewards Other](#BT-45-Lot) and [BT-644-Lot Prize Value](#BT-644-Lot).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `cac:Prize`, add or update the corresponding `Prize` object in the lot's `.designContest.prizes.details` array:
@@ -7795,7 +7798,7 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/F12_2014/PROCEDURE/*[matches(name(),'FOLLOW_UP_CONTRACTS')]
     eForms guidance: |-
-        This field maps to the same `Prize` objects as created for [BT-44-Lot Prize Rank](<#BT-44-Lot>) and [BT-644-Lot Prize Value](<#BT-644-Lot>).
+        This field maps to the same `Prize` objects as created for [BT-44-Lot Prize Rank](#BT-44-Lot) and [BT-644-Lot Prize Value](#BT-644-Lot).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `cac:Prize`, add or update the corresponding `Prize` object in the lot's `.designContest.prizes.details` array:
@@ -8058,7 +8061,7 @@
         BG-61: EU Funds
         BG-614: EU Funds Information
     eForms guidance: |-
-        This field maps to the same `Finance` objects as created for [BT-6140-Lot EU Funds Details](<#BT-6140-Lot>) and [BT-7220-Lot EU Funds Programme](<#BT-7220-Lot>).
+        This field maps to the same `Finance` objects as created for [BT-6140-Lot EU Funds Details](#BT-6140-Lot) and [BT-7220-Lot EU Funds Programme](#BT-7220-Lot).
 
         - If no `Organization` object in the `parties` array has a `.name` of "European Union":
           - [Add a party](operations.md#add-a-party).
@@ -8092,7 +8095,7 @@
     - TED_EXPORT/FORM_SECTION/F22_2014/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED/P/FT/@TYPE
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/OBJECT_DESCR/EU_PROGR_RELATED/P/FT/@TYPE
     eForms guidance: |-
-        This field maps to the same `finance` objects as created for [BT-6110-Contract Contract EU Funds Details](<#BT-6110-Contract>) and [BT-722-Contract Contract EU Funds Programme](<#BT-722-Contract>).
+        This field maps to the same `finance` objects as created for [BT-6110-Contract Contract EU Funds Details](#BT-6110-Contract) and [BT-722-Contract Contract EU Funds Programme](#BT-722-Contract).
 
         - If no `Organization` object in the `parties` array has a `.name` of "European Union":
           - [Add a party](operations.md#add-a-party).
@@ -8604,7 +8607,7 @@
     - TED_EXPORT/FORM_SECTION/F24_2014/OBJECT_CONTRACT/OBJECT_DESCR/*:NUTS/@CODE
     - TED_EXPORT/FORM_SECTION/F25_2014/OBJECT_CONTRACT/OBJECT_DESCR/*:NUTS/@CODE
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-728-Lot](<#BT-728-Lot>), [BT-5131-Lot](<#BT-5131-Lot>), [BT-5121-Lot](<#BT-5121-Lot>), [BT-727-Lot](<#BT-727-Lot>), [BT-5101-Lot](<#BT-5101-Lot>) and [BT-5141-Lot](<#BT-5141-Lot>).
+        This field maps to the same `Address` objects as created for [BT-728-Lot](#BT-728-Lot), [BT-5131-Lot](#BT-5131-Lot), [BT-5121-Lot](#BT-5121-Lot), [BT-727-Lot](#BT-727-Lot), [BT-5101-Lot](#BT-5101-Lot) and [BT-5141-Lot](#BT-5141-Lot).
 
         - [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
         - For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array:
@@ -8632,7 +8635,7 @@
     - TED_EXPORT/FORM_SECTION/F21_2014/OBJECT_CONTRACT/OBJECT_DESCR/*:NUTS/@CODE
     - TED_EXPORT/FORM_SECTION/F22_2014/OBJECT_CONTRACT/OBJECT_DESCR/*:NUTS/@CODE
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-728-Part](<#BT-728-Part>), [BT-5131-Part](<#BT-5131-Part>), [BT-5121-Part](<#BT-5121-Part>), [BT-727-Part](<#BT-727-Part>), [BT-5101-Part](<#BT-5101-Part>) and [BT-5141-Part](<#BT-5141-Part>).
+        This field maps to the same `Address` objects as created for [BT-728-Part](#BT-728-Part), [BT-5131-Part](#BT-5131-Part), [BT-5121-Part](#BT-5121-Part), [BT-727-Part](#BT-727-Part), [BT-5101-Part](#BT-5101-Part) and [BT-5141-Part](#BT-5141-Part).
 
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array:
 
@@ -8653,7 +8656,7 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-728-Procedure](<#BT-728-Procedure>), [BT-5131-Procedure](<#BT-5131-Procedure>), [BT-5121-Procedure](<#BT-5121-Procedure>), [BT-727-Procedure](<#BT-727-Procedure>), [BT-5101-Procedure](<#BT-5101-Procedure>) and [BT-5141-Procedure](<#BT-5141-Procedure>).
+        This field maps to the same `Address` objects as created for [BT-728-Procedure](#BT-728-Procedure), [BT-5131-Procedure](#BT-5131-Procedure), [BT-5121-Procedure](#BT-5121-Procedure), [BT-727-Procedure](#BT-727-Procedure), [BT-5101-Procedure](#BT-5101-Procedure) and [BT-5141-Procedure](#BT-5141-Procedure).
 
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array:
 
@@ -8978,7 +8981,7 @@
     TED guidance:
     - Map to the item's `.deliveryLocation.description`
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-728-Lot](<#BT-728-Lot>), [BT-5131-Lot](<#BT-5131-Lot>), [BT-5121-Lot](<#BT-5121-Lot>), [BT-5071-Lot](<#BT-5071-Lot>), [BT-727-Lot](<#BT-727-Lot>) and [BT-5141-Lot](<#BT-5141-Lot>).
+        This field maps to the same `Address` objects as created for [BT-728-Lot](#BT-728-Lot), [BT-5131-Lot](#BT-5131-Lot), [BT-5121-Lot](#BT-5121-Lot), [BT-5071-Lot](#BT-5071-Lot), [BT-727-Lot](#BT-727-Lot) and [BT-5141-Lot](#BT-5141-Lot).
 
         - [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
         - For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array:
@@ -9006,7 +9009,7 @@
     TED guidance:
     - Map to the item's `.deliveryLocation.description`
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-728-Part](<#BT-728-Part>), [BT-5131-Part](<#BT-5131-Part>), [BT-5121-Part](<#BT-5121-Part>), [BT-5071-Part](<#BT-5071-Part>), [BT-727-Part](<#BT-727-Part>) and [BT-5141-Part](<#BT-5141-Part>).
+        This field maps to the same `Address` objects as created for [BT-728-Part](#BT-728-Part), [BT-5131-Part](#BT-5131-Part), [BT-5121-Part](#BT-5121-Part), [BT-5071-Part](#BT-5071-Part), [BT-727-Part](#BT-727-Part) and [BT-5141-Part](#BT-5141-Part).
 
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array:
 
@@ -9025,7 +9028,7 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-728-Procedure](<#BT-728-Procedure>), [BT-5131-Procedure](<#BT-5131-Procedure>), [BT-5121-Procedure](<#BT-5121-Procedure>), [BT-5071-Procedure](<#BT-5071-Procedure>), [BT-727-Procedure](<#BT-727-Procedure>) and [BT-5141-Procedure](<#BT-5141-Procedure>).
+        This field maps to the same `Address` objects as created for [BT-728-Procedure](#BT-728-Procedure), [BT-5131-Procedure](#BT-5131-Procedure), [BT-5121-Procedure](#BT-5121-Procedure), [BT-5071-Procedure](#BT-5071-Procedure), [BT-727-Procedure](#BT-727-Procedure) and [BT-5141-Procedure](#BT-5141-Procedure).
 
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array:
 
@@ -9044,7 +9047,7 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-728-Lot](<#BT-728-Lot>), [BT-5131-Lot](<#BT-5131-Lot>), [BT-5121-Lot](<#BT-5121-Lot>), [BT-5071-Lot](<#BT-5071-Lot>), [BT-727-Lot](<#BT-727-Lot>) and [BT-5141-Lot](<#BT-5141-Lot>).
+        This field maps to the same `Address` objects as created for [BT-728-Lot](#BT-728-Lot), [BT-5131-Lot](#BT-5131-Lot), [BT-5121-Lot](#BT-5121-Lot), [BT-5071-Lot](#BT-5071-Lot), [BT-727-Lot](#BT-727-Lot) and [BT-5141-Lot](#BT-5141-Lot).
 
         - [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
         - For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array:
@@ -9063,7 +9066,7 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-728-Part](<#BT-728-Part>), [BT-5131-Part](<#BT-5131-Part>), [BT-5121-Part](<#BT-5121-Part>), [BT-5071-Part](<#BT-5071-Part>), [BT-727-Part](<#BT-727-Part>) and [BT-5141-Part](<#BT-5141-Part>).
+        This field maps to the same `Address` objects as created for [BT-728-Part](#BT-728-Part), [BT-5131-Part](#BT-5131-Part), [BT-5121-Part](#BT-5121-Part), [BT-5071-Part](#BT-5071-Part), [BT-727-Part](#BT-727-Part) and [BT-5141-Part](#BT-5141-Part).
 
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array:
 
@@ -9082,7 +9085,7 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-728-Procedure](<#BT-728-Procedure>), [BT-5131-Procedure](<#BT-5131-Procedure>), [BT-5121-Procedure](<#BT-5121-Procedure>), [BT-5071-Procedure](<#BT-5071-Procedure>), [BT-727-Procedure](<#BT-727-Procedure>) and [BT-5141-Procedure](<#BT-5141-Procedure>).
+        This field maps to the same `Address` objects as created for [BT-728-Procedure](#BT-728-Procedure), [BT-5131-Procedure](#BT-5131-Procedure), [BT-5121-Procedure](#BT-5121-Procedure), [BT-5071-Procedure](#BT-5071-Procedure), [BT-727-Procedure](#BT-727-Procedure) and [BT-5141-Procedure](#BT-5141-Procedure).
 
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array:
 
@@ -9101,7 +9104,7 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-728-Lot](<#BT-728-Lot>), [BT-5131-Lot](<#BT-5131-Lot>), [BT-5121-Lot](<#BT-5121-Lot>), [BT-5071-Lot](<#BT-5071-Lot>), [BT-727-Lot](<#BT-727-Lot>) and [BT-5141-Lot](<#BT-5141-Lot>).
+        This field maps to the same `Address` objects as created for [BT-728-Lot](#BT-728-Lot), [BT-5131-Lot](#BT-5131-Lot), [BT-5121-Lot](#BT-5121-Lot), [BT-5071-Lot](#BT-5071-Lot), [BT-727-Lot](#BT-727-Lot) and [BT-5141-Lot](#BT-5141-Lot).
 
         - [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
         - For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array:
@@ -9120,7 +9123,7 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-728-Part](<#BT-728-Part>), [BT-5131-Part](<#BT-5131-Part>), [BT-5121-Part](<#BT-5121-Part>), [BT-5071-Part](<#BT-5071-Part>), [BT-727-Part](<#BT-727-Part>) and [BT-5141-Part](<#BT-5141-Part>).
+        This field maps to the same `Address` objects as created for [BT-728-Part](#BT-728-Part), [BT-5131-Part](#BT-5131-Part), [BT-5121-Part](#BT-5121-Part), [BT-5071-Part](#BT-5071-Part), [BT-727-Part](#BT-727-Part) and [BT-5141-Part](#BT-5141-Part).
 
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array:
 
@@ -9139,7 +9142,7 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-728-Procedure](<#BT-728-Procedure>), [BT-5131-Procedure](<#BT-5131-Procedure>), [BT-5121-Procedure](<#BT-5121-Procedure>), [BT-5071-Procedure](<#BT-5071-Procedure>), [BT-727-Procedure](<#BT-727-Procedure>) and [BT-5141-Procedure](<#BT-5141-Procedure>).
+        This field maps to the same `Address` objects as created for [BT-728-Procedure](#BT-728-Procedure), [BT-5131-Procedure](#BT-5131-Procedure), [BT-5121-Procedure](#BT-5121-Procedure), [BT-5071-Procedure](#BT-5071-Procedure), [BT-727-Procedure](#BT-727-Procedure) and [BT-5141-Procedure](#BT-5141-Procedure).
 
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array:
 
@@ -9278,7 +9281,7 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-728-Lot](<#BT-728-Lot>), [BT-5131-Lot](<#BT-5131-Lot>), [BT-5071-Lot](<#BT-5071-Lot>), [BT-727-Lot](<#BT-727-Lot>), [BT-5101-Lot](<#BT-5101-Lot>) and [BT-5141-Lot](<#BT-5141-Lot>).
+        This field maps to the same `Address` objects as created for [BT-728-Lot](#BT-728-Lot), [BT-5131-Lot](#BT-5131-Lot), [BT-5071-Lot](#BT-5071-Lot), [BT-727-Lot](#BT-727-Lot), [BT-5101-Lot](#BT-5101-Lot) and [BT-5141-Lot](#BT-5141-Lot).
 
         - [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
         - For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array:
@@ -9298,7 +9301,7 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-728-Part](<#BT-728-Part>), [BT-5131-Part](<#BT-5131-Part>), [BT-5071-Part](<#BT-5071-Part>), [BT-727-Part](<#BT-727-Part>), [BT-5101-Part](<#BT-5101-Part>) and [BT-5141-Part](<#BT-5141-Part>).
+        This field maps to the same `Address` objects as created for [BT-728-Part](#BT-728-Part), [BT-5131-Part](#BT-5131-Part), [BT-5071-Part](#BT-5071-Part), [BT-727-Part](#BT-727-Part), [BT-5101-Part](#BT-5101-Part) and [BT-5141-Part](#BT-5141-Part).
 
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array:
 
@@ -9318,7 +9321,7 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-728-Procedure](<#BT-728-Procedure>), [BT-5131-Procedure](<#BT-5131-Procedure>), [BT-5071-Procedure](<#BT-5071-Procedure>), [BT-727-Procedure](<#BT-727-Procedure>), [BT-5101-Procedure](<#BT-5101-Procedure>) and [BT-5141-Procedure](<#BT-5141-Procedure>).
+        This field maps to the same `Address` objects as created for [BT-728-Procedure](#BT-728-Procedure), [BT-5131-Procedure](#BT-5131-Procedure), [BT-5071-Procedure](#BT-5071-Procedure), [BT-727-Procedure](#BT-727-Procedure), [BT-5101-Procedure](#BT-5101-Procedure) and [BT-5141-Procedure](#BT-5141-Procedure).
 
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array:
 
@@ -9456,7 +9459,7 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-728-Lot](<#BT-728-Lot>), [BT-5121-Lot](<#BT-5121-Lot>), [BT-5071-Lot](<#BT-5071-Lot>), [BT-727-Lot](<#BT-727-Lot>), [BT-5101-Lot](<#BT-5101-Lot>) and [BT-5141-Lot](<#BT-5141-Lot>).
+        This field maps to the same `Address` objects as created for [BT-728-Lot](#BT-728-Lot), [BT-5121-Lot](#BT-5121-Lot), [BT-5071-Lot](#BT-5071-Lot), [BT-727-Lot](#BT-727-Lot), [BT-5101-Lot](#BT-5101-Lot) and [BT-5141-Lot](#BT-5141-Lot).
 
         - [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
         - For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array:
@@ -9475,7 +9478,7 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-728-Part](<#BT-728-Part>), [BT-5121-Part](<#BT-5121-Part>), [BT-5071-Part](<#BT-5071-Part>), [BT-727-Part](<#BT-727-Part>), [BT-5101-Part](<#BT-5101-Part>) and [BT-5141-Part](<#BT-5141-Part>).
+        This field maps to the same `Address` objects as created for [BT-728-Part](#BT-728-Part), [BT-5121-Part](#BT-5121-Part), [BT-5071-Part](#BT-5071-Part), [BT-727-Part](#BT-727-Part), [BT-5101-Part](#BT-5101-Part) and [BT-5141-Part](#BT-5141-Part).
 
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array:
 
@@ -9494,7 +9497,7 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-728-Procedure](<#BT-728-Procedure>), [BT-5121-Procedure](<#BT-5121-Procedure>), [BT-5071-Procedure](<#BT-5071-Procedure>), [BT-727-Procedure](<#BT-727-Procedure>), [BT-5101-Procedure](<#BT-5101-Procedure>) and [BT-5141-Procedure](<#BT-5141-Procedure>).
+        This field maps to the same `Address` objects as created for [BT-728-Procedure](#BT-728-Procedure), [BT-5121-Procedure](#BT-5121-Procedure), [BT-5071-Procedure](#BT-5071-Procedure), [BT-727-Procedure](#BT-727-Procedure), [BT-5101-Procedure](#BT-5101-Procedure) and [BT-5141-Procedure](#BT-5141-Procedure).
 
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array:
 
@@ -9637,7 +9640,7 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-728-Lot](<#BT-728-Lot>), [BT-5131-Lot](<#BT-5131-Lot>), [BT-5121-Lot](<#BT-5121-Lot>), [BT-5071-Lot](<#BT-5071-Lot>), [BT-727-Lot](<#BT-727-Lot>) and [BT-5101-Lot](<#BT-5101-Lot>).
+        This field maps to the same `Address` objects as created for [BT-728-Lot](#BT-728-Lot), [BT-5131-Lot](#BT-5131-Lot), [BT-5121-Lot](#BT-5121-Lot), [BT-5071-Lot](#BT-5071-Lot), [BT-727-Lot](#BT-727-Lot) and [BT-5101-Lot](#BT-5101-Lot).
 
         - [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
         - For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array:
@@ -9658,7 +9661,7 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-728-Part](<#BT-728-Part>), [BT-5131-Part](<#BT-5131-Part>), [BT-5121-Part](<#BT-5121-Part>), [BT-5071-Part](<#BT-5071-Part>), [BT-727-Part](<#BT-727-Part>) and [BT-5101-Part](<#BT-5101-Part>).
+        This field maps to the same `Address` objects as created for [BT-728-Part](#BT-728-Part), [BT-5131-Part](#BT-5131-Part), [BT-5121-Part](#BT-5121-Part), [BT-5071-Part](#BT-5071-Part), [BT-727-Part](#BT-727-Part) and [BT-5101-Part](#BT-5101-Part).
 
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array:
 
@@ -9679,7 +9682,7 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-728-Procedure](<#BT-728-Procedure>), [BT-5131-Procedure](<#BT-5131-Procedure>), [BT-5121-Procedure](<#BT-5121-Procedure>), [BT-5071-Procedure](<#BT-5071-Procedure>), [BT-727-Procedure](<#BT-727-Procedure>) and [BT-5101-Procedure](<#BT-5101-Procedure>).
+        This field maps to the same `Address` objects as created for [BT-728-Procedure](#BT-728-Procedure), [BT-5131-Procedure](#BT-5131-Procedure), [BT-5121-Procedure](#BT-5121-Procedure), [BT-5071-Procedure](#BT-5071-Procedure), [BT-727-Procedure](#BT-727-Procedure) and [BT-5101-Procedure](#BT-5101-Procedure).
 
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array:
 
@@ -9922,7 +9925,7 @@
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/AWARD_CRITERIA_CONTRACT_NOTICE_INFORMATION/AWARD_CRITERIA_DETAIL/LOWEST_PRICE
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/AWARD_CRITERIA_CONTRACT_NOTICE_INFORMATION/AWARD_CRITERIA_DETAIL/MOST_ECONOMICALLY_ADVANTAGEOUS_TENDER
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for [BT-540-Lot](<#BT-540-Lot>), [BT-541-Lot-FixedNumber](<#BT-541-Lot-FixedNumber>), [BT-541-Lot-ThresholdNumber](<#BT-541-Lot-ThresholdNumber>), [BT-541-Lot-WeightNumber](<#BT-541-Lot-WeightNumber>), [BT-5421-Lot](<#BT-5421-Lot>), [BT-5422-Lot](<#BT-5422-Lot>), [BT-5423-Lot](<#BT-5423-Lot>) and [BT-734-Lot](<#BT-734-Lot>).
+        This field maps to the same `AwardCriterion` objects as created for [BT-540-Lot](#BT-540-Lot), [BT-541-Lot-FixedNumber](#BT-541-Lot-FixedNumber), [BT-541-Lot-ThresholdNumber](#BT-541-Lot-ThresholdNumber), [BT-541-Lot-WeightNumber](#BT-541-Lot-WeightNumber), [BT-5421-Lot](#BT-5421-Lot), [BT-5422-Lot](#BT-5422-Lot), [BT-5423-Lot](#BT-5423-Lot) and [BT-734-Lot](#BT-734-Lot).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `cac:SubordinateAwardingCriterion`, add or update the corresponding `AwardCriterion` object in the lot's `.awardCriteria.criteria` array:
@@ -9943,7 +9946,7 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for [BT-540-LotsGroup](<#BT-540-LotsGroup>), [BT-541-LotsGroup-FixedNumber](<#BT-541-LotsGroup-FixedNumber>), [BT-541-LotsGroup-ThresholdNumber](<#BT-541-LotsGroup-ThresholdNumber>), [BT-541-LotsGroup-WeightNumber](<#BT-541-LotsGroup-WeightNumber>), [BT-5421-LotsGroup](<#BT-5421-LotsGroup>), [BT-5422-LotsGroup](<#BT-5422-LotsGroup>), [BT-5423-LotsGroup](<#BT-5423-LotsGroup>) and [BT-734-LotsGroup](<#BT-734-LotsGroup>).
+        This field maps to the same `AwardCriterion` objects as created for [BT-540-LotsGroup](#BT-540-LotsGroup), [BT-541-LotsGroup-FixedNumber](#BT-541-LotsGroup-FixedNumber), [BT-541-LotsGroup-ThresholdNumber](#BT-541-LotsGroup-ThresholdNumber), [BT-541-LotsGroup-WeightNumber](#BT-541-LotsGroup-WeightNumber), [BT-5421-LotsGroup](#BT-5421-LotsGroup), [BT-5422-LotsGroup](#BT-5422-LotsGroup), [BT-5423-LotsGroup](#BT-5423-LotsGroup) and [BT-734-LotsGroup](#BT-734-LotsGroup).
 
         - [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
         - For each `cac:SubordinateAwardingCriterion`, add or update the corresponding `AwardCriterion` object in the lot group's `.awardCriteria.criteria` array:
@@ -9991,7 +9994,7 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for [BT-539-Lot](<#BT-539-Lot>), [BT-541-Lot-FixedNumber](<#BT-541-Lot-FixedNumber>), [BT-541-Lot-ThresholdNumber](<#BT-541-Lot-ThresholdNumber>), [BT-541-Lot-WeightNumber](<#BT-541-Lot-WeightNumber>), [BT-5421-Lot](<#BT-5421-Lot>), [BT-5422-Lot](<#BT-5422-Lot>), [BT-5423-Lot](<#BT-5423-Lot>) and [BT-734-Lot](<#BT-734-Lot>).
+        This field maps to the same `AwardCriterion` objects as created for [BT-539-Lot](#BT-539-Lot), [BT-541-Lot-FixedNumber](#BT-541-Lot-FixedNumber), [BT-541-Lot-ThresholdNumber](#BT-541-Lot-ThresholdNumber), [BT-541-Lot-WeightNumber](#BT-541-Lot-WeightNumber), [BT-5421-Lot](#BT-5421-Lot), [BT-5422-Lot](#BT-5422-Lot), [BT-5423-Lot](#BT-5423-Lot) and [BT-734-Lot](#BT-734-Lot).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `cac:SubordinateAwardingCriterion`, add or update the corresponding `AwardCriterion` object in the lot's `.awardCriteria.criteria` array:
@@ -10012,7 +10015,7 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for [BT-539-LotsGroup](<#BT-539-LotsGroup>), [BT-541-LotsGroup-FixedNumber](<#BT-541-LotsGroup-FixedNumber>), [BT-541-LotsGroup-ThresholdNumber](<#BT-541-LotsGroup-ThresholdNumber>), [BT-541-LotsGroup-WeightNumber](<#BT-541-LotsGroup-WeightNumber>), [BT-5421-LotsGroup](<#BT-5421-LotsGroup>), [BT-5422-LotsGroup](<#BT-5422-LotsGroup>), [BT-5423-LotsGroup](<#BT-5423-LotsGroup>) and [BT-734-LotsGroup](<#BT-734-LotsGroup>).
+        This field maps to the same `AwardCriterion` objects as created for [BT-539-LotsGroup](#BT-539-LotsGroup), [BT-541-LotsGroup-FixedNumber](#BT-541-LotsGroup-FixedNumber), [BT-541-LotsGroup-ThresholdNumber](#BT-541-LotsGroup-ThresholdNumber), [BT-541-LotsGroup-WeightNumber](#BT-541-LotsGroup-WeightNumber), [BT-5421-LotsGroup](#BT-5421-LotsGroup), [BT-5422-LotsGroup](#BT-5422-LotsGroup), [BT-5423-LotsGroup](#BT-5423-LotsGroup) and [BT-734-LotsGroup](#BT-734-LotsGroup).
 
         - [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
         - For each `cac:SubordinateAwardingCriterion`, add or update the corresponding `AwardCriterion` object in the lot group's `.awardCriteria.criteria` array:
@@ -10034,7 +10037,7 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for [BT-539-Lot](<#BT-539-Lot>), [BT-540-Lot](<#BT-540-Lot>), [BT-5421-Lot](<#BT-5421-Lot>), [BT-5422-Lot](<#BT-5422-Lot>), [BT-5423-Lot](<#BT-5423-Lot>) and [BT-734-Lot](<#BT-734-Lot>) and to the same `CriterionNumber` objects as created for [BT-5422-Lot](<#BT-5422-Lot>).
+        This field maps to the same `AwardCriterion` objects as created for [BT-539-Lot](#BT-539-Lot), [BT-540-Lot](#BT-540-Lot), [BT-5421-Lot](#BT-5421-Lot), [BT-5422-Lot](#BT-5422-Lot), [BT-5423-Lot](#BT-5423-Lot) and [BT-734-Lot](#BT-734-Lot) and to the same `CriterionNumber` objects as created for [BT-5422-Lot](#BT-5422-Lot).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `cac:SubordinateAwardingCriterion`, add or update the corresponding `AwardCriterion` object in the lot's `.awardCriteria.criteria` array:
@@ -10057,7 +10060,7 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for [BT-539-Lot](<#BT-539-Lot>), [BT-540-Lot](<#BT-540-Lot>), [BT-5421-Lot](<#BT-5421-Lot>), [BT-5422-Lot](<#BT-5422-Lot>), [BT-5423-Lot](<#BT-5423-Lot>) and [BT-734-Lot](<#BT-734-Lot>) and to the same `CriterionNumber` objects as created for [BT-5423-Lot](<#BT-5423-Lot>).
+        This field maps to the same `AwardCriterion` objects as created for [BT-539-Lot](#BT-539-Lot), [BT-540-Lot](#BT-540-Lot), [BT-5421-Lot](#BT-5421-Lot), [BT-5422-Lot](#BT-5422-Lot), [BT-5423-Lot](#BT-5423-Lot) and [BT-734-Lot](#BT-734-Lot) and to the same `CriterionNumber` objects as created for [BT-5423-Lot](#BT-5423-Lot).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `cac:SubordinateAwardingCriterion`, add or update the corresponding `AwardCriterion` object in the lot's `.awardCriteria.criteria` array:
@@ -10080,7 +10083,7 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for [BT-539-Lot](<#BT-539-Lot>), [BT-540-Lot](<#BT-540-Lot>), [BT-5421-Lot](<#BT-5421-Lot>), [BT-5422-Lot](<#BT-5422-Lot>), [BT-5423-Lot](<#BT-5423-Lot>) and [BT-734-Lot](<#BT-734-Lot>) and to the same `CriterionNumber` objects as created for [BT-5421-Lot](<#BT-5421-Lot>).
+        This field maps to the same `AwardCriterion` objects as created for [BT-539-Lot](#BT-539-Lot), [BT-540-Lot](#BT-540-Lot), [BT-5421-Lot](#BT-5421-Lot), [BT-5422-Lot](#BT-5422-Lot), [BT-5423-Lot](#BT-5423-Lot) and [BT-734-Lot](#BT-734-Lot) and to the same `CriterionNumber` objects as created for [BT-5421-Lot](#BT-5421-Lot).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `cac:SubordinateAwardingCriterion`, add or update the corresponding `AwardCriterion` object in the lot's `.awardCriteria.criteria` array:
@@ -10103,7 +10106,7 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for [BT-539-LotsGroup](<#BT-539-LotsGroup>), [BT-540-LotsGroup](<#BT-540-LotsGroup>), [BT-5421-LotsGroup](<#BT-5421-LotsGroup>), [BT-5422-LotsGroup](<#BT-5422-LotsGroup>), [BT-5423-LotsGroup](<#BT-5423-LotsGroup>) and [BT-734-LotsGroup](<#BT-734-LotsGroup>) and to the same `CriterionNumber` objects as created for [BT-5422-LotsGroup](<#BT-5422-LotsGroup>).
+        This field maps to the same `AwardCriterion` objects as created for [BT-539-LotsGroup](#BT-539-LotsGroup), [BT-540-LotsGroup](#BT-540-LotsGroup), [BT-5421-LotsGroup](#BT-5421-LotsGroup), [BT-5422-LotsGroup](#BT-5422-LotsGroup), [BT-5423-LotsGroup](#BT-5423-LotsGroup) and [BT-734-LotsGroup](#BT-734-LotsGroup) and to the same `CriterionNumber` objects as created for [BT-5422-LotsGroup](#BT-5422-LotsGroup).
 
         - [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
         - For each `cac:SubordinateAwardingCriterion`, add or update the corresponding `AwardCriterion` object in the lot gorup's `.awardCriteria.criteria` array:
@@ -10126,7 +10129,7 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for [BT-539-LotsGroup](<#BT-539-LotsGroup>), [BT-540-LotsGroup](<#BT-540-LotsGroup>), [BT-5421-LotsGroup](<#BT-5421-LotsGroup>), [BT-5422-LotsGroup](<#BT-5422-LotsGroup>), [BT-5423-LotsGroup](<#BT-5423-LotsGroup>) and [BT-734-LotsGroup](<#BT-734-LotsGroup>) and to the same `CriterionNumber` objects as created for [BT-5423-LotsGroup](<#BT-5423-LotsGroup>).
+        This field maps to the same `AwardCriterion` objects as created for [BT-539-LotsGroup](#BT-539-LotsGroup), [BT-540-LotsGroup](#BT-540-LotsGroup), [BT-5421-LotsGroup](#BT-5421-LotsGroup), [BT-5422-LotsGroup](#BT-5422-LotsGroup), [BT-5423-LotsGroup](#BT-5423-LotsGroup) and [BT-734-LotsGroup](#BT-734-LotsGroup) and to the same `CriterionNumber` objects as created for [BT-5423-LotsGroup](#BT-5423-LotsGroup).
 
         - [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
         - For each `cac:SubordinateAwardingCriterion`, add or update the corresponding `AwardCriterion` object in the lot gorup's `.awardCriteria.criteria` array:
@@ -10149,7 +10152,7 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for [BT-539-LotsGroup](<#BT-539-LotsGroup>), [BT-540-LotsGroup](<#BT-540-LotsGroup>), [BT-5421-LotsGroup](<#BT-5421-LotsGroup>), [BT-5422-LotsGroup](<#BT-5422-LotsGroup>), [BT-5423-LotsGroup](<#BT-5423-LotsGroup>) and [BT-734-LotsGroup](<#BT-734-LotsGroup>) and to the same `CriterionNumber` objects as created for [BT-5421-LotsGroup](<#BT-5421-LotsGroup>).
+        This field maps to the same `AwardCriterion` objects as created for [BT-539-LotsGroup](#BT-539-LotsGroup), [BT-540-LotsGroup](#BT-540-LotsGroup), [BT-5421-LotsGroup](#BT-5421-LotsGroup), [BT-5422-LotsGroup](#BT-5422-LotsGroup), [BT-5423-LotsGroup](#BT-5423-LotsGroup) and [BT-734-LotsGroup](#BT-734-LotsGroup) and to the same `CriterionNumber` objects as created for [BT-5421-LotsGroup](#BT-5421-LotsGroup).
 
         - [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
         - For each `cac:SubordinateAwardingCriterion`, add or update the corresponding `AwardCriterion` object in the lot gorup's `.awardCriteria.criteria` array:
@@ -10173,7 +10176,7 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for [BT-539-Lot](<#BT-539-Lot>), [BT-540-Lot](<#BT-540-Lot>), [BT-541-Lot-FixedNumber](<#BT-541-Lot-FixedNumber>), [BT-541-Lot-ThresholdNumber](<#BT-541-Lot-ThresholdNumber>), [BT-541-Lot-WeightNumber](<#BT-541-Lot-WeightNumber>), [BT-5422-Lot](<#BT-5422-Lot>), [BT-5423-Lot](<#BT-5423-Lot>) and [BT-734-Lot](<#BT-734-Lot>) and to the same `CriterionNumber` objects as created for [BT-541-Lot-FixedNumber](<#BT-541-Lot-FixedNumber>), [BT-541-Lot-ThresholdNumber](<#BT-541-Lot-ThresholdNumber>), [BT-541-Lot-WeightNumber](<#BT-541-Lot-WeightNumber>), [BT-5422-Lot](<#BT-5422-Lot>) and [BT-5423-Lot](<#BT-5423-Lot>).
+        This field maps to the same `AwardCriterion` objects as created for [BT-539-Lot](#BT-539-Lot), [BT-540-Lot](#BT-540-Lot), [BT-541-Lot-FixedNumber](#BT-541-Lot-FixedNumber), [BT-541-Lot-ThresholdNumber](#BT-541-Lot-ThresholdNumber), [BT-541-Lot-WeightNumber](#BT-541-Lot-WeightNumber), [BT-5422-Lot](#BT-5422-Lot), [BT-5423-Lot](#BT-5423-Lot) and [BT-734-Lot](#BT-734-Lot) and to the same `CriterionNumber` objects as created for [BT-541-Lot-FixedNumber](#BT-541-Lot-FixedNumber), [BT-541-Lot-ThresholdNumber](#BT-541-Lot-ThresholdNumber), [BT-541-Lot-WeightNumber](#BT-541-Lot-WeightNumber), [BT-5422-Lot](#BT-5422-Lot) and [BT-5423-Lot](#BT-5423-Lot).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `cac:SubordinateAwardingCriterion`, add or update the corresponding `AwardCriterion` object in the lot's `.awardCriteria.criteria` array:
@@ -10197,7 +10200,7 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for [BT-539-LotsGroup](<#BT-539-LotsGroup>), [BT-540-LotsGroup](<#BT-540-LotsGroup>), [BT-541-LotsGroup-FixedNumber](<#BT-541-LotsGroup-FixedNumber>), [BT-541-LotsGroup-ThresholdNumber](<#BT-541-LotsGroup-ThresholdNumber>), [BT-541-LotsGroup-WeightNumber](<#BT-541-LotsGroup-WeightNumber>), [BT-5422-LotsGroup](<#BT-5422-LotsGroup>), [BT-5423-LotsGroup](<#BT-5423-LotsGroup>) and [BT-734-LotsGroup](<#BT-734-LotsGroup>) and to the same `CriterionNumber` objects as created for [BT-541-LotsGroup-FixedNumber](<#BT-541-LotsGroup-FixedNumber>), [BT-541-LotsGroup-ThresholdNumber](<#BT-541-LotsGroup-ThresholdNumber>), [BT-541-LotsGroup-WeightNumber](<#BT-541-LotsGroup-WeightNumber>), [BT-5422-LotsGroup](<#BT-5422-LotsGroup>) and [BT-5423-LotsGroup](<#BT-5423-LotsGroup>).
+        This field maps to the same `AwardCriterion` objects as created for [BT-539-LotsGroup](#BT-539-LotsGroup), [BT-540-LotsGroup](#BT-540-LotsGroup), [BT-541-LotsGroup-FixedNumber](#BT-541-LotsGroup-FixedNumber), [BT-541-LotsGroup-ThresholdNumber](#BT-541-LotsGroup-ThresholdNumber), [BT-541-LotsGroup-WeightNumber](#BT-541-LotsGroup-WeightNumber), [BT-5422-LotsGroup](#BT-5422-LotsGroup), [BT-5423-LotsGroup](#BT-5423-LotsGroup) and [BT-734-LotsGroup](#BT-734-LotsGroup) and to the same `CriterionNumber` objects as created for [BT-541-LotsGroup-FixedNumber](#BT-541-LotsGroup-FixedNumber), [BT-541-LotsGroup-ThresholdNumber](#BT-541-LotsGroup-ThresholdNumber), [BT-541-LotsGroup-WeightNumber](#BT-541-LotsGroup-WeightNumber), [BT-5422-LotsGroup](#BT-5422-LotsGroup) and [BT-5423-LotsGroup](#BT-5423-LotsGroup).
 
         - [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
         - For each `cac:SubordinateAwardingCriterion`, add or update the corresponding `AwardCriterion` object in the lot group's `.awardCriteria.criteria` array:
@@ -10221,7 +10224,7 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for [BT-539-Lot](<#BT-539-Lot>), [BT-540-Lot](<#BT-540-Lot>), [BT-541-Lot-FixedNumber](<#BT-541-Lot-FixedNumber>), [BT-541-Lot-ThresholdNumber](<#BT-541-Lot-ThresholdNumber>), [BT-541-Lot-WeightNumber](<#BT-541-Lot-WeightNumber>), [BT-5421-Lot](<#BT-5421-Lot>), [BT-5423-Lot](<#BT-5423-Lot>) and [BT-734-Lot](<#BT-734-Lot>) and to the same `CriterionNumber` objects as created for [BT-541-Lot-FixedNumber](<#BT-541-Lot-FixedNumber>), [BT-541-Lot-ThresholdNumber](<#BT-541-Lot-ThresholdNumber>), [BT-541-Lot-WeightNumber](<#BT-541-Lot-WeightNumber>), [BT-5421-Lot](<#BT-5421-Lot>) and [BT-5423-Lot](<#BT-5423-Lot>).
+        This field maps to the same `AwardCriterion` objects as created for [BT-539-Lot](#BT-539-Lot), [BT-540-Lot](#BT-540-Lot), [BT-541-Lot-FixedNumber](#BT-541-Lot-FixedNumber), [BT-541-Lot-ThresholdNumber](#BT-541-Lot-ThresholdNumber), [BT-541-Lot-WeightNumber](#BT-541-Lot-WeightNumber), [BT-5421-Lot](#BT-5421-Lot), [BT-5423-Lot](#BT-5423-Lot) and [BT-734-Lot](#BT-734-Lot) and to the same `CriterionNumber` objects as created for [BT-541-Lot-FixedNumber](#BT-541-Lot-FixedNumber), [BT-541-Lot-ThresholdNumber](#BT-541-Lot-ThresholdNumber), [BT-541-Lot-WeightNumber](#BT-541-Lot-WeightNumber), [BT-5421-Lot](#BT-5421-Lot) and [BT-5423-Lot](#BT-5423-Lot).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `cac:SubordinateAwardingCriterion`, add or update the corresponding `AwardCriterion` object in the lot's `.awardCriteria.criteria` array:
@@ -10245,7 +10248,7 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for [BT-539-LotsGroup](<#BT-539-LotsGroup>), [BT-540-LotsGroup](<#BT-540-LotsGroup>), [BT-541-LotsGroup-FixedNumber](<#BT-541-LotsGroup-FixedNumber>), [BT-541-LotsGroup-ThresholdNumber](<#BT-541-LotsGroup-ThresholdNumber>), [BT-541-LotsGroup-WeightNumber](<#BT-541-LotsGroup-WeightNumber>), [BT-5421-LotsGroup](<#BT-5421-LotsGroup>), [BT-5423-LotsGroup](<#BT-5423-LotsGroup>) and [BT-734-LotsGroup](<#BT-734-LotsGroup>) and to the same `CriterionNumber` objects as created for [BT-541-LotsGroup-FixedNumber](<#BT-541-LotsGroup-FixedNumber>), [BT-541-LotsGroup-ThresholdNumber](<#BT-541-LotsGroup-ThresholdNumber>), [BT-541-LotsGroup-WeightNumber](<#BT-541-LotsGroup-WeightNumber>), [BT-5421-LotsGroup](<#BT-5421-LotsGroup>) and [BT-5423-LotsGroup](<#BT-5423-LotsGroup>).
+        This field maps to the same `AwardCriterion` objects as created for [BT-539-LotsGroup](#BT-539-LotsGroup), [BT-540-LotsGroup](#BT-540-LotsGroup), [BT-541-LotsGroup-FixedNumber](#BT-541-LotsGroup-FixedNumber), [BT-541-LotsGroup-ThresholdNumber](#BT-541-LotsGroup-ThresholdNumber), [BT-541-LotsGroup-WeightNumber](#BT-541-LotsGroup-WeightNumber), [BT-5421-LotsGroup](#BT-5421-LotsGroup), [BT-5423-LotsGroup](#BT-5423-LotsGroup) and [BT-734-LotsGroup](#BT-734-LotsGroup) and to the same `CriterionNumber` objects as created for [BT-541-LotsGroup-FixedNumber](#BT-541-LotsGroup-FixedNumber), [BT-541-LotsGroup-ThresholdNumber](#BT-541-LotsGroup-ThresholdNumber), [BT-541-LotsGroup-WeightNumber](#BT-541-LotsGroup-WeightNumber), [BT-5421-LotsGroup](#BT-5421-LotsGroup) and [BT-5423-LotsGroup](#BT-5423-LotsGroup).
 
         - [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
         - For each `cac:SubordinateAwardingCriterion`, add or update the corresponding `AwardCriterion` object in the lot group's `.awardCriteria.criteria` array:
@@ -10269,7 +10272,7 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for [BT-539-Lot](<#BT-539-Lot>), [BT-540-Lot](<#BT-540-Lot>), [BT-541-Lot-FixedNumber](<#BT-541-Lot-FixedNumber>), [BT-541-Lot-ThresholdNumber](<#BT-541-Lot-ThresholdNumber>), [BT-541-Lot-WeightNumber](<#BT-541-Lot-WeightNumber>), [BT-5421-Lot](<#BT-5421-Lot>), [BT-5422-Lot](<#BT-5422-Lot>) and [BT-734-Lot](<#BT-734-Lot>) and to the same `CriterionNumber` objects as created for [BT-541-Lot-FixedNumber](<#BT-541-Lot-FixedNumber>), [BT-541-Lot-ThresholdNumber](<#BT-541-Lot-ThresholdNumber>), [BT-541-Lot-WeightNumber](<#BT-541-Lot-WeightNumber>), [BT-5421-Lot](<#BT-5421-Lot>) and [BT-5422-Lot](<#BT-5422-Lot>).
+        This field maps to the same `AwardCriterion` objects as created for [BT-539-Lot](#BT-539-Lot), [BT-540-Lot](#BT-540-Lot), [BT-541-Lot-FixedNumber](#BT-541-Lot-FixedNumber), [BT-541-Lot-ThresholdNumber](#BT-541-Lot-ThresholdNumber), [BT-541-Lot-WeightNumber](#BT-541-Lot-WeightNumber), [BT-5421-Lot](#BT-5421-Lot), [BT-5422-Lot](#BT-5422-Lot) and [BT-734-Lot](#BT-734-Lot) and to the same `CriterionNumber` objects as created for [BT-541-Lot-FixedNumber](#BT-541-Lot-FixedNumber), [BT-541-Lot-ThresholdNumber](#BT-541-Lot-ThresholdNumber), [BT-541-Lot-WeightNumber](#BT-541-Lot-WeightNumber), [BT-5421-Lot](#BT-5421-Lot) and [BT-5422-Lot](#BT-5422-Lot).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `cac:SubordinateAwardingCriterion`, add or update the corresponding `AwardCriterion` object in the lot's `.awardCriteria.criteria` array:
@@ -10293,7 +10296,7 @@
         BG-38: Award Criterion
         BG-541: Award Criterion Number
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for [BT-539-LotsGroup](<#BT-539-LotsGroup>), [BT-540-LotsGroup](<#BT-540-LotsGroup>), [BT-541-LotsGroup-FixedNumber](<#BT-541-LotsGroup-FixedNumber>), [BT-541-LotsGroup-ThresholdNumber](<#BT-541-LotsGroup-ThresholdNumber>), [BT-541-LotsGroup-WeightNumber](<#BT-541-LotsGroup-WeightNumber>), [BT-5421-LotsGroup](<#BT-5421-LotsGroup>), [BT-5422-LotsGroup](<#BT-5422-LotsGroup>) and [BT-734-LotsGroup](<#BT-734-LotsGroup>) and to the same `CriterionNumber` objects as created for [BT-541-LotsGroup-FixedNumber](<#BT-541-LotsGroup-FixedNumber>), [BT-541-LotsGroup-ThresholdNumber](<#BT-541-LotsGroup-ThresholdNumber>), [BT-541-LotsGroup-WeightNumber](<#BT-541-LotsGroup-WeightNumber>), [BT-5421-LotsGroup](<#BT-5421-LotsGroup>) and [BT-5422-LotsGroup](<#BT-5422-LotsGroup>).
+        This field maps to the same `AwardCriterion` objects as created for [BT-539-LotsGroup](#BT-539-LotsGroup), [BT-540-LotsGroup](#BT-540-LotsGroup), [BT-541-LotsGroup-FixedNumber](#BT-541-LotsGroup-FixedNumber), [BT-541-LotsGroup-ThresholdNumber](#BT-541-LotsGroup-ThresholdNumber), [BT-541-LotsGroup-WeightNumber](#BT-541-LotsGroup-WeightNumber), [BT-5421-LotsGroup](#BT-5421-LotsGroup), [BT-5422-LotsGroup](#BT-5422-LotsGroup) and [BT-734-LotsGroup](#BT-734-LotsGroup) and to the same `CriterionNumber` objects as created for [BT-541-LotsGroup-FixedNumber](#BT-541-LotsGroup-FixedNumber), [BT-541-LotsGroup-ThresholdNumber](#BT-541-LotsGroup-ThresholdNumber), [BT-541-LotsGroup-WeightNumber](#BT-541-LotsGroup-WeightNumber), [BT-5421-LotsGroup](#BT-5421-LotsGroup) and [BT-5422-LotsGroup](#BT-5422-LotsGroup).
 
         - [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
         - For each `cac:SubordinateAwardingCriterion`, add or update the corresponding `AwardCriterion` object in the lot group's `.awardCriteria.criteria` array:
@@ -10573,7 +10576,7 @@
         BG-310: Contract
         BG-611: Contract EU Funds
     eForms guidance: |-
-        This field maps to the same `finance` objects as created for [BT-5011-Contract Contract EU Funds Financing Identifier](<#BT-5011-Contract>) and [BT-722-Contract Contract EU Funds Programme](<#BT-722-Contract>).
+        This field maps to the same `finance` objects as created for [BT-5011-Contract Contract EU Funds Financing Identifier](#BT-5011-Contract) and [BT-722-Contract Contract EU Funds Programme](#BT-722-Contract).
 
         - [Get the contract for the SettledContract](operations.md#get-the-contract-for-a-settledcontract).
         - For each `efac:Funding`, add or update the corresponding `Finance` object in the contract's `.finance` array:
@@ -10593,7 +10596,7 @@
         BG-61: EU Funds
         BG-614: EU Funds Information
     eForms guidance: |-
-        This field maps to the same `finance` objects as created for [BT-5010-Lot EU Funds Financing Identifier](<#BT-5010-Lot>) and [BT-7220-Lot EU Funds Programme](<#BT-7220-Lot>).
+        This field maps to the same `finance` objects as created for [BT-5010-Lot EU Funds Financing Identifier](#BT-5010-Lot) and [BT-7220-Lot EU Funds Programme](#BT-7220-Lot).
 
         If BT-5010-Lot is not present, follow the guidance for BT-5010-Lot, setting the `.id` of the `Finance` object incrementally based on its position in the `finance` array, rather than the value of BT-5010-Lot.
 
@@ -10844,7 +10847,7 @@
         BG-612: Buyer Review Summary
         BG-613: Buyer Review Requests
     eForms guidance: |-
-        This field maps to the same `Statistic` objects as created for [BT-636-LotResult Buyer Review Requests Irregularity Type](<#BT-636-LotResult>).
+        This field maps to the same `Statistic` objects as created for [BT-636-LotResult Buyer Review Requests Irregularity Type](#BT-636-LotResult).
 
         For each `AppealRequestStatistics`, [add a complaints statistic](operations.md#add-a-complaints-statistic) or update the corresponding `Statistic` object:
 
@@ -10865,7 +10868,7 @@
         BG-612: Buyer Review Summary
         BG-613: Buyer Review Requests
     eForms guidance: |-
-        This field maps to the same `Statistic` objects as created for [BT-635-LotResult Buyer Review Requests Count](<#BT-635-LotResult>).
+        This field maps to the same `Statistic` objects as created for [BT-635-LotResult Buyer Review Requests Count](#BT-635-LotResult).
 
         For each `AppealRequestStatistics`, [add a complaints statistic](operations.md#add-a-complaints-statistic) or update the corresponding `Statistic` object:
 
@@ -10909,7 +10912,7 @@
     TED guidance:
     - Map to `tender.designContest.prizes.description`
     eForms guidance: |-
-        This field maps to the same `Prize` objects as created for [BT-44-Lot Prize Rank](<#BT-44-Lot>) and [BT-45-Lot Rewards Other](<#BT-45-Lot>).
+        This field maps to the same `Prize` objects as created for [BT-44-Lot Prize Rank](#BT-44-Lot) and [BT-45-Lot Rewards Other](#BT-45-Lot).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `cac:Prize`:
@@ -11191,8 +11194,7 @@
     Description: The language(s) in which this notice is officially available. These linguistic versions are equally legally valid.
     Business groups:
         BG-1: Notice
-    eForms guidance: |-
-        [Convert the language code to ISO 639-1](operations.md#convert-a-language-code-to-iso-639-1), and map it to `language`.
+    eForms guidance: '[Convert the language code to ISO 639-1](operations.md#convert-a-language-code-to-iso-639-1), and map it to `language`.'
     eForms example: <cbc:NoticeLanguageCode>ENG</cbc:NoticeLanguageCode>
     OCDS example: '{"language":"en"}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/notice-information.html#noticeLanguageSection
@@ -11543,15 +11545,21 @@
     - Map to the contract's `.value.amount`. If present, this takes precedence over the [total value of the contract/lot/concession](#/MODIFICATIONS_CONTRACT/DESCRIPTION_PROCUREMENT/VALUES/VAL_TOTAL).
     eForms guidance: |-
         - [Get the bid for the LotTender](operations.md#get-the-bid-for-a-lottender).
+
           - Map this field to its `.value.amount`.
           - Map `@currencyID` to its `.value.currency`.
 
         - Get the `ancestor::efac:NoticeResult/efac:LotResult` with an `/efac:LotTender/cbc:ID` equal to `ancestor::efac:LotTender/cbc:ID`.
+
         - If no `Award` object in the `awards` array has an `id` equal to this `efac:LotResult//cbc:ID`:
+
           - Add an `Award` object to the `awards` array:
             - Set its `.id` to this `efac:LotResult/cbc:ID`.
+
         - Add the value of `ancestor::efac:TenderLot/cbc:ID` to the award's `.relatedLots`.
+
         - Map this field to the award's `.value.amount`.
+
         - Map `@currencyID` to the award's `.value.currency`.
     eForms example: <efac:LotResult><cbc:ID schemeName="result">RES-0002</cbc:ID><efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID></efac:LotTender><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0002</cbc:ID></efac:TenderLot></efac:LotResult><efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID><cac:LegalMonetaryTotal><cbc:PayableAmount currencyID="EUR">500</cbc:PayableAmount></cac:LegalMonetaryTotal><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0002</cbc:ID></efac:TenderLot></efac:LotTender>
     OCDS example: '{"bids":{"details":[{"id":"TEN-0001","value":{"amount":500,"currency":"EUR"}}]},"awards":[{"id":"RES-0002","value":{"amount":500,"currency":"EUR"},"relatedLots":["LOT-0002"]}]}'
@@ -11595,7 +11603,7 @@
         BG-310: Contract
         BG-611: Contract EU Funds
     eForms guidance: |-
-        This field maps to the same `finance` objects as created for [BT-5011-Contract Contract EU Funds Financing Identifier](<#BT-5011-Contract>) and [BT-6110-Contract Contract EU Funds Details](<#BT-6110-Contract>).
+        This field maps to the same `finance` objects as created for [BT-5011-Contract Contract EU Funds Financing Identifier](#BT-5011-Contract) and [BT-6110-Contract Contract EU Funds Details](#BT-6110-Contract).
 
         - [Get the contract for the SettledContract](operations.md#get-the-contract-for-a-settledcontract).
         - For each `efac:Funding`, add or update the corresponding `Finance` object in the contract's `.finance` array:
@@ -11616,7 +11624,7 @@
         BG-61: EU Funds
         BG-614: EU Funds Information
     eForms guidance: |-
-        This field maps to the same `finance` objects as created for [BT-5010-Lot EU Funds Financing Identifier](<#BT-5010-Lot>) and [BT-6140-Lot EU Funds Details](<#BT-6140-Lot>).
+        This field maps to the same `finance` objects as created for [BT-5010-Lot EU Funds Financing Identifier](#BT-5010-Lot) and [BT-6140-Lot EU Funds Details](#BT-6140-Lot).
 
         If BT-5010-Lot is not present, follow the guidance for BT-5010-Lot, setting the `.id` of the `Finance` object incrementally based on its position in the `finance` array, rather than the value of BT-5010-Lot.
 
@@ -11640,7 +11648,7 @@
         BG-7140: CVD Information
         BG-7141: CVD Vehicles
     eForms guidance: |-
-        This field maps to the same `Item` objects as created for [OPT-155-LotResult Vehicle Type](<#OPT-155-LotResult>), [OPT-156-LotResult Vehicle Numeric](<#OPT-156-LotResult>) and [BT-735-LotResult CVD Contract Type](<#BT-735-LotResult>).
+        This field maps to the same `Item` objects as created for [OPT-155-LotResult Vehicle Type](#OPT-155-LotResult), [OPT-156-LotResult Vehicle Numeric](#OPT-156-LotResult) and [BT-735-LotResult CVD Contract Type](#BT-735-LotResult).
 
         If no `Item` object was created for `ancestor::efac:ProcurementDetails`, [get the award for the LotResult](operations.md#get-the-award-for-a-lotresult), add an `Item` object to the award's `.items` array, and set the item's `.id` incrementally.
 
@@ -11713,7 +11721,7 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-728-Lot](<#BT-728-Lot>), [BT-5121-Lot](<#BT-5121-Lot>), [BT-5071-Lot](<#BT-5071-Lot>), [BT-5131-Lot](<#BT-5131-Lot>), [BT-5101-Lot](<#BT-5101-Lot>) and [BT-5141-Lot](<#BT-5141-Lot>).
+        This field maps to the same `Address` objects as created for [BT-728-Lot](#BT-728-Lot), [BT-5121-Lot](#BT-5121-Lot), [BT-5071-Lot](#BT-5071-Lot), [BT-5131-Lot](#BT-5131-Lot), [BT-5101-Lot](#BT-5101-Lot) and [BT-5141-Lot](#BT-5141-Lot).
 
         - [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
         - For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array:
@@ -11733,7 +11741,7 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-728-Part](<#BT-728-Part>), [BT-5121-Part](<#BT-5121-Part>), [BT-5131-Part](<#BT-5131-Part>), [BT-5071-Part](<#BT-5071-Part>), [BT-5101-Part](<#BT-5101-Part>) and [BT-5141-Part](<#BT-5141-Part>).
+        This field maps to the same `Address` objects as created for [BT-728-Part](#BT-728-Part), [BT-5121-Part](#BT-5121-Part), [BT-5131-Part](#BT-5131-Part), [BT-5071-Part](#BT-5071-Part), [BT-5101-Part](#BT-5101-Part) and [BT-5141-Part](#BT-5141-Part).
 
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array:
 
@@ -11753,7 +11761,7 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-728-Procedure](<#BT-728-Procedure>), [BT-5121-Procedure](<#BT-5121-Procedure>), [BT-5131-Procedure](<#BT-5131-Procedure>), [BT-5071-Procedure](<#BT-5071-Procedure>), [BT-5101-Procedure](<#BT-5101-Procedure>) and [BT-5141-Procedure](<#BT-5141-Procedure>).
+        This field maps to the same `Address` objects as created for [BT-728-Procedure](#BT-728-Procedure), [BT-5121-Procedure](#BT-5121-Procedure), [BT-5131-Procedure](#BT-5131-Procedure), [BT-5071-Procedure](#BT-5071-Procedure), [BT-5101-Procedure](#BT-5101-Procedure) and [BT-5141-Procedure](#BT-5141-Procedure).
 
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array:
 
@@ -11775,7 +11783,7 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/OBJECT_CONTRACT_INFORMATION_DEFENCE/DESCRIPTION_CONTRACT_INFORMATION_DEFENCE/LOCATION_NUTS/LOCATION
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-727-Lot](<#BT-727-Lot>), [BT-5121-Lot](<#BT-5121-Lot>), [BT-5071-Lot](<#BT-5071-Lot>), [BT-5131-Lot](<#BT-5131-Lot>), [BT-5101-Lot](<#BT-5101-Lot>) and [BT-5141-Lot](<#BT-5141-Lot>).
+        This field maps to the same `Address` objects as created for [BT-727-Lot](#BT-727-Lot), [BT-5121-Lot](#BT-5121-Lot), [BT-5071-Lot](#BT-5071-Lot), [BT-5131-Lot](#BT-5131-Lot), [BT-5101-Lot](#BT-5101-Lot) and [BT-5141-Lot](#BT-5141-Lot).
 
         - [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
         - For each `cac:RealizedLocation`:
@@ -11796,7 +11804,7 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-727-Part](<#BT-727-Part>), [BT-5121-Part](<#BT-5121-Part>), [BT-5131-Part](<#BT-5131-Part>), [BT-5071-Part](<#BT-5071-Part>), [BT-5101-Part](<#BT-5101-Part>) and [BT-5141-Part](<#BT-5141-Part>).
+        This field maps to the same `Address` objects as created for [BT-727-Part](#BT-727-Part), [BT-5121-Part](#BT-5121-Part), [BT-5131-Part](#BT-5131-Part), [BT-5071-Part](#BT-5071-Part), [BT-5101-Part](#BT-5101-Part) and [BT-5141-Part](#BT-5141-Part).
 
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array:
 
@@ -11816,7 +11824,7 @@
     Business groups:
         BG-708: Place of Performance
     eForms guidance: |-
-        This field maps to the same `Address` objects as created for [BT-727-Part](<#BT-727-Part>), [BT-5121-Part](<#BT-5121-Part>), [BT-5071-Part](<#BT-5071-Part>), [BT-727-Part](<#BT-727-Part>), [BT-5101-Part](<#BT-5101-Part>) and [BT-5141-Part](<#BT-5141-Part>).
+        This field maps to the same `Address` objects as created for [BT-727-Part](#BT-727-Part), [BT-5121-Part](#BT-5121-Part), [BT-5071-Part](#BT-5071-Part), [BT-727-Part](#BT-727-Part), [BT-5101-Part](#BT-5101-Part) and [BT-5141-Part](#BT-5141-Part).
 
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array:
 
@@ -11944,7 +11952,7 @@
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/CONTRACT_DEFENCE/FD_CONTRACT_DEFENCE/PROCEDURE_DEFINITION_CONTRACT_NOTICE_DEFENCE/AWARD_CRITERIA_CONTRACT_NOTICE_INFORMATION/AWARD_CRITERIA_DETAIL/MOST_ECONOMICALLY_ADVANTAGEOUS_TENDER/CRITERIA_STATED_BELOW
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for [BT-539-Lot](<#BT-539-Lot>), [BT-540-Lot](<#BT-540-Lot>), [BT-541-Lot-FixedNumber](<#BT-541-Lot-FixedNumber>), [BT-541-Lot-ThresholdNumber](<#BT-541-Lot-ThresholdNumber>), [BT-541-Lot-WeightNumber](<#BT-541-Lot-WeightNumber>), [BT-5421-Lot](<#BT-5421-Lot>), [BT-5422-Lot](<#BT-5422-Lot>) and [BT-5423-Lot](<#BT-5423-Lot>).
+        This field maps to the same `AwardCriterion` objects as created for [BT-539-Lot](#BT-539-Lot), [BT-540-Lot](#BT-540-Lot), [BT-541-Lot-FixedNumber](#BT-541-Lot-FixedNumber), [BT-541-Lot-ThresholdNumber](#BT-541-Lot-ThresholdNumber), [BT-541-Lot-WeightNumber](#BT-541-Lot-WeightNumber), [BT-5421-Lot](#BT-5421-Lot), [BT-5422-Lot](#BT-5422-Lot) and [BT-5423-Lot](#BT-5423-Lot).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `cac:SubordinateAwardingCriterion`, add or update the corresponding `AwardCriterion` object in the lot's `.awardCriteria.criteria` array:
@@ -11964,7 +11972,7 @@
         BG-707: Award Criteria
         BG-38: Award Criterion
     eForms guidance: |-
-        This field maps to the same `AwardCriterion` objects as created for [BT-539-LotsGroup](<#BT-539-LotsGroup>), [BT-540-LotsGroup](<#BT-540-LotsGroup>), [BT-541-LotsGroup-FixedNumber](<#BT-541-LotsGroup-FixedNumber>), [BT-541-LotsGroup-ThresholdNumber](<#BT-541-LotsGroup-ThresholdNumber>), [BT-541-LotsGroup-WeightNumber](<#BT-541-LotsGroup-WeightNumber>), [BT-5421-LotsGroup](<#BT-5421-LotsGroup>), [BT-5422-LotsGroup](<#BT-5422-LotsGroup>) and [BT-5423-LotsGroup](<#BT-5423-LotsGroup>).
+        This field maps to the same `AwardCriterion` objects as created for [BT-539-LotsGroup](#BT-539-LotsGroup), [BT-540-LotsGroup](#BT-540-LotsGroup), [BT-541-LotsGroup-FixedNumber](#BT-541-LotsGroup-FixedNumber), [BT-541-LotsGroup-ThresholdNumber](#BT-541-LotsGroup-ThresholdNumber), [BT-541-LotsGroup-WeightNumber](#BT-541-LotsGroup-WeightNumber), [BT-5421-LotsGroup](#BT-5421-LotsGroup), [BT-5422-LotsGroup](#BT-5422-LotsGroup) and [BT-5423-LotsGroup](#BT-5423-LotsGroup).
 
         - [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
         - For each `cac:SubordinateAwardingCriterion`, add or update the corresponding `AwardCriterion` object in the lot group's `.awardCriteria.criteria` array:
@@ -12006,7 +12014,7 @@
         BG-713: Strategic Procurement
         BG-7140: CVD Information
     eForms guidance: |-
-        This field maps to the same `Item` objects as created for [OPT-155-LotResult Vehicle Type](<#OPT-155-LotResult>), [OPT-156-LotResult Vehicle Numeric](<#OPT-156-LotResult>) and [BT-723-LotResult Vehicle Category](<#BT-723-LotResult>).
+        This field maps to the same `Item` objects as created for [OPT-155-LotResult Vehicle Type](#OPT-155-LotResult), [OPT-156-LotResult Vehicle Numeric](#OPT-156-LotResult) and [BT-723-LotResult Vehicle Category](#BT-723-LotResult).
 
         If no `Item` object was created for `ancestor::efac:StrategicProcurementInformation/efbc:ProcurementDetails`, [get the award for the LotResult](operations.md#get-the-award-for-a-lotresult), add an `Item` object to the award's `.items` array, and set the item's `.id` incrementally.
 
@@ -12384,7 +12392,7 @@
     - Get the `SelectionCriterion` object whose `.type` is 'economic'; if none exists, add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array, and set its `.type` to 'economic'. Then, map to its `.minimum`.
     - Get the `SelectionCriterion` object whose `.type` is 'technical'. If none exists, add a `SelectionCriterion` object to the `tender.selectionCriteria.criteria` array, and set its `.type` to 'technical'. Then, map to its `.minimum`.
     eForms guidance: |-
-        These values are mapped to the same `SelectionCriterion` objects as created for [BT-40-Lot](<#BT-40-Lot>), [BT-752-Lot-ThresholdNumber](<#BT-752-Lot-ThresholdNumber>), [BT-752-Lot-WeightNumber](<#BT-752-Lot-WeightNumber>), [BT-7531-Lot](<#BT-7531-Lot>), [BT-7532-Lot](<#BT-7532-Lot>) and [BT-809-Lot](<#BT-809-Lot>).
+        These values are mapped to the same `SelectionCriterion` objects as created for [BT-40-Lot](#BT-40-Lot), [BT-752-Lot-ThresholdNumber](#BT-752-Lot-ThresholdNumber), [BT-752-Lot-WeightNumber](#BT-752-Lot-WeightNumber), [BT-7531-Lot](#BT-7531-Lot), [BT-7532-Lot](#BT-7532-Lot) and [BT-809-Lot](#BT-809-Lot).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `efac:SelectionCriteria`, add or update the corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria` array:
@@ -12425,7 +12433,7 @@
         BG-702: Selection Criteria
         BG-72: Selection Criteria Second Stage Invite Number
     eForms guidance: |-
-        These values are mapped to the same `SelectionCriterion` objects as created for [BT-40-Lot](<#BT-40-Lot>), [BT-750-Lot](<#BT-750-Lot>), [BT-7531-Lot](<#BT-7531-Lot>), [BT-7532-Lot](<#BT-7532-Lot>) and [BT-809-Lot](<#BT-809-Lot>), and the same `SelectionCriterionNumber` objects as created for [BT-7532-Lot](<#BT-7532-Lot>).
+        These values are mapped to the same `SelectionCriterion` objects as created for [BT-40-Lot](#BT-40-Lot), [BT-750-Lot](#BT-750-Lot), [BT-7531-Lot](#BT-7531-Lot), [BT-7532-Lot](#BT-7532-Lot) and [BT-809-Lot](#BT-809-Lot), and the same `SelectionCriterionNumber` objects as created for [BT-7532-Lot](#BT-7532-Lot).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `efac:SelectionCriteria`, add or update the corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria` array:
@@ -12447,7 +12455,7 @@
         BG-702: Selection Criteria
         BG-72: Selection Criteria Second Stage Invite Number
     eForms guidance: |-
-        These values are mapped to the same `SelectionCriterion` objects as created for [BT-40-Lot](<#BT-40-Lot>), [BT-750-Lot](<#BT-750-Lot>), [BT-7531-Lot](<#BT-7531-Lot>), [BT-7532-Lot](<#BT-7532-Lot>) and [BT-809-Lot](<#BT-809-Lot>), and the same `SelectionCriterionNumber` objects as created for [BT-7531-Lot](<#BT-7531-Lot>).
+        These values are mapped to the same `SelectionCriterion` objects as created for [BT-40-Lot](#BT-40-Lot), [BT-750-Lot](#BT-750-Lot), [BT-7531-Lot](#BT-7531-Lot), [BT-7532-Lot](#BT-7532-Lot) and [BT-809-Lot](#BT-809-Lot), and the same `SelectionCriterionNumber` objects as created for [BT-7531-Lot](#BT-7531-Lot).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `efac:SelectionCriteria`, add or update the corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria` array:
@@ -12471,7 +12479,7 @@
         BG-702: Selection Criteria
         BG-72: Selection Criteria Second Stage Invite Number
     eForms guidance: |-
-        These values are mapped to the same `SelectionCriterion` objects as created for [BT-40-Lot](<#BT-40-Lot>), [BT-750-Lot](<#BT-750-Lot>), [BT-752-Lot-ThresholdNumber](<#BT-752-Lot-ThresholdNumber>), [BT-752-Lot-WeightNumber](<#BT-752-Lot-WeightNumber>), [BT-7532-Lot](<#BT-7532-Lot>) and [BT-809-Lot](<#BT-809-Lot>), and the same `SelectionCriterionNumber` objects as created for [BT-752-Lot-ThresholdNumber](<#BT-752-Lot-ThresholdNumber>), [BT-752-Lot-WeightNumber](<#BT-752-Lot-WeightNumber>) and [BT-7532-Lot](<#BT-7532-Lot>).
+        These values are mapped to the same `SelectionCriterion` objects as created for [BT-40-Lot](#BT-40-Lot), [BT-750-Lot](#BT-750-Lot), [BT-752-Lot-ThresholdNumber](#BT-752-Lot-ThresholdNumber), [BT-752-Lot-WeightNumber](#BT-752-Lot-WeightNumber), [BT-7532-Lot](#BT-7532-Lot) and [BT-809-Lot](#BT-809-Lot), and the same `SelectionCriterionNumber` objects as created for [BT-752-Lot-ThresholdNumber](#BT-752-Lot-ThresholdNumber), [BT-752-Lot-WeightNumber](#BT-752-Lot-WeightNumber) and [BT-7532-Lot](#BT-7532-Lot).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `efac:SelectionCriteria`, add or update the corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria` array:
@@ -12495,7 +12503,7 @@
         BG-702: Selection Criteria
         BG-72: Selection Criteria Second Stage Invite Number
     eForms guidance: |-
-        These values are mapped to the same `SelectionCriterion` objects as created for [BT-40-Lot](<#BT-40-Lot>), [BT-750-Lot](<#BT-750-Lot>), [BT-752-Lot-ThresholdNumber](<#BT-752-Lot-ThresholdNumber>), [BT-752-Lot-WeightNumber](<#BT-752-Lot-WeightNumber>), [BT-7531-Lot](<#BT-7531-Lot>) and [BT-809-Lot](<#BT-809-Lot>), and the same `SelectionCriterionNumber` objects as created for [BT-752-Lot-ThresholdNumber](<#BT-752-Lot-ThresholdNumber>), [BT-752-Lot-WeightNumber](<#BT-752-Lot-WeightNumber>) and [BT-7531-Lot](<#BT-7531-Lot>).
+        These values are mapped to the same `SelectionCriterion` objects as created for [BT-40-Lot](#BT-40-Lot), [BT-750-Lot](#BT-750-Lot), [BT-752-Lot-ThresholdNumber](#BT-752-Lot-ThresholdNumber), [BT-752-Lot-WeightNumber](#BT-752-Lot-WeightNumber), [BT-7531-Lot](#BT-7531-Lot) and [BT-809-Lot](#BT-809-Lot), and the same `SelectionCriterionNumber` objects as created for [BT-752-Lot-ThresholdNumber](#BT-752-Lot-ThresholdNumber), [BT-752-Lot-WeightNumber](#BT-752-Lot-WeightNumber) and [BT-7531-Lot](#BT-7531-Lot).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `efac:SelectionCriteria`, add or update the corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria` array:
@@ -12614,7 +12622,7 @@
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''bids'', and map to its `.value`.'
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''bids'', set its `.relatedLot` to the award''s only `.relatedLots` entry, and map to its `.value`.'
     eForms guidance: |-
-        This field maps to the same `Statistic` objects as created for [BT-760-LotResult Received Submissions Type](<#BT-760-LotResult>).
+        This field maps to the same `Statistic` objects as created for [BT-760-LotResult Received Submissions Type](#BT-760-LotResult).
 
         For each `efac:ReceivedSubmissionsStatistics`, [add a bids statistic](operations.md#add-a-bids-statistic) or update the corresponding `Statistic` object:
 
@@ -12686,7 +12694,7 @@
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''smeBids'', and map to its `.value`.'
     - '[Add a bids statistic](../../operations/#add-a-bids-statistic), set its `.measure` to ''smeBids'', set its `.relatedLot` to the award''s only `.relatedLots` entry, and map to its `.value`.'
     eForms guidance: |-
-        This field maps to the same `Statistic` objects as created for [BT-759-LotResult Received Submissions Count](<#BT-759-LotResult>).
+        This field maps to the same `Statistic` objects as created for [BT-759-LotResult Received Submissions Count](#BT-759-LotResult).
 
         For each `efac:ReceivedSubmissionsStatistics`, [add a bids statistic](operations.md#add-a-bids-statistic) or update the corresponding `Statistic` object, and map to its `.measure` according to the [received submission type mapping table](codelists/received-submission-type).
 
@@ -12724,7 +12732,7 @@
     Description: The description of the main reason for the change in the notice compared to the original notice.
     Business groups:
         BG-9: Change
-    eForms guidance: These values map to the same `Amendment` objects as created for [BT-140-notice Change Reason Code](<#BT-140-notice>). Update the corresponding `Amendment` objects, and map to their `.rationale`.
+    eForms guidance: These values map to the same `Amendment` objects as created for [BT-140-notice Change Reason Code](#BT-140-notice). Update the corresponding `Amendment` objects, and map to their `.rationale`.
     eForms example: <efac:ChangeReason><efbc:ReasonDescription languageID="ENG">Clerical corrections of ...</efbc:ReasonDescription></efac:ChangeReason>
     OCDS example: '{"tender":{"amendments":[{"rationale":"Clerical corrections of ..."}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/change-notice.html#changeReasonSection
@@ -13090,7 +13098,7 @@
     Business groups:
         BG-713: Strategic Procurement
     eForms guidance: |-
-        This field maps to the same `Sustainability` objects as created for [BT-06-Lot Strategic Procurement](<#BT-06-Lot>).
+        This field maps to the same `Sustainability` objects as created for [BT-06-Lot Strategic Procurement](#BT-06-Lot).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `cbc:ProcurementTypeCode`, add or update the corresponding `Sustainability` object in the lot's `sustainability` array:
@@ -13581,7 +13589,7 @@
         BG-700: Exclusion Grounds and Selection Criteria
         BG-702: Selection Criteria
     eForms guidance: |-
-        These values are mapped to the same `SelectionCriterion` objects as created for [BT-40-Lot](<#BT-40-Lot>), [BT-750-Lot](<#BT-750-Lot>), [BT-752-Lot-ThresholdNumber](<#BT-752-Lot-ThresholdNumber>), [BT-752-Lot-WeightNumber](<#BT-752-Lot-WeightNumber>), [BT-7531-Lot](<#BT-7531-Lot>) and [BT-7532-Lot](<#BT-7532-Lot>).
+        These values are mapped to the same `SelectionCriterion` objects as created for [BT-40-Lot](#BT-40-Lot), [BT-750-Lot](#BT-750-Lot), [BT-752-Lot-ThresholdNumber](#BT-752-Lot-ThresholdNumber), [BT-752-Lot-WeightNumber](#BT-752-Lot-WeightNumber), [BT-7531-Lot](#BT-7531-Lot) and [BT-7532-Lot](#BT-7532-Lot).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `<efac:SelectionCriteria>`, add or update the corresponding `SelectionCriterion` object in the lot's `.selectionCriteria.criteria` array:
@@ -14212,9 +14220,16 @@
     type: id
     repeatable: true
     pattern: ^([a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}-(0[1-9]|[1-9]\d)|(\d{1,8})-(19|20)\d\d)$
-    eForms guidance: '[Reference a previous publication](operations.md#reference-a-previous-publication). If OPP-090-Procedure is repeated, set the relatedProcess''s `id` incrementally.'
-    eForms example: <cac:NoticeDocumentReference><cbc:ID schemeName="notice-id-ref">123e4567-e89b-12d3-a456-426614174000-06</cbc:ID></cac:NoticeDocumentReference>
-    OCDS example: '{"relatedProcesses":[{"id":"1","relationship":["planning"],"scheme":"eu-oj","identifier":"123e4567-e89b-12d3-a456-426614174000-06"}]}'
+    eForms guidance: |-
+        For each `<cac:NoticeDocumentReference>`, if the referenced notice is a PIN-only notice, [reference a previous planning notice](operations.md#reference-a-previous-planning-notice). Otherwise:
+
+        - If the referenced notice is available in OCDS, discard. The referenced notice is the OCDS release with the same `ocid` as this release and with the nearest earlier `date` to this release.
+        - If the referenced notice is not available in OCDS, add a `Link` object to `links` and:
+          - Set `.rel` to 'prev'
+          - [Convert `/*/cbc:NoticeLanguageCode` to ISO 639-1](operations.md#convert-a-language-code-to-iso-639-1)
+          - Set `.href` to `https://ted.europa.eu/{lang}/notice/{publication-number}/` where {lang} is the result of the previous step and {publication-number} is the value of `<cbc:ID>`.
+    eForms example: <cbc:NoticeLanguageCode>FRA</cbc:NoticeLanguageCode><cac:TenderingProcess><cac:NoticeDocumentReference><cbc:ID schemeName="eu-ojs-notice-id">735065-2022</cbc:ID></cac:NoticeDocumentReference></cac:TenderingProcess>
+    OCDS example: '{"links":[{"rel":"prev","href":"https://ted.europa.eu/fr/notice/-/detail/735065-2022"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#previousNoticeSection
 -   id: OPT-001-notice
     parentNodeId: ND-Root
@@ -14311,7 +14326,7 @@
     repeatable: false
     mandatory: T02
     eForms guidance: |-
-        These values map to the same `CustomerServices` objects as created for [OPT-071-Lot Quality Target Code](<#OPT-071-Lot>).
+        These values map to the same `CustomerServices` objects as created for [OPT-071-Lot Quality Target Code](#OPT-071-Lot).
 
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - For each `cac:ContractExecutionRequirement`, add or update the corresponding `CustomerServices` object in the lot's `contractTerms` array:
@@ -14608,7 +14623,7 @@
     repeatable: false
     codeList: vehicles
     eForms guidance: |-
-        This field maps to the same `Item` objects as created for [OPT-156-LotResult Vehicle Numeric](<#OPT-156-LotResult>), [BT-723-LotResult Vehicle Category](<#BT-723-LotResult>) and [BT-735-LotResult CVD Contract Type](<#BT-735-LotResult>).
+        This field maps to the same `Item` objects as created for [OPT-156-LotResult Vehicle Numeric](#OPT-156-LotResult), [BT-723-LotResult Vehicle Category](#BT-723-LotResult) and [BT-735-LotResult CVD Contract Type](#BT-735-LotResult).
 
         If the value of `ancestor::efac:StrategicProcurementStatistics/efbc:StatisticsNumeric` is not 0:
 
@@ -14630,7 +14645,7 @@
     type: number
     repeatable: false
     eForms guidance: |-
-        This field maps to the same `Item` objects as created for [OPT-155-LotResult Vehicle Type](<#OPT-155-LotResult>), [BT-723-LotResult Vehicle Category](<#BT-723-LotResult>) and [BT-735-LotResult CVD Contract Type](<#BT-735-LotResult>).
+        This field maps to the same `Item` objects as created for [OPT-155-LotResult Vehicle Type](#OPT-155-LotResult), [BT-723-LotResult Vehicle Category](#BT-723-LotResult) and [BT-735-LotResult CVD Contract Type](#BT-735-LotResult).
 
         If this field's value is not 0:
 
@@ -14723,7 +14738,7 @@
     repeatable: false
     mandatory: CAN(VEAT) CAN CAN(MOD) E4 E5 E6 T02
     pattern: ^TPA-\d{4}$
-    eForms guidance: This field is mapped as part of [OPT-310-Tender Tendering Party ID Reference](<#OPT-310-Tender>).
+    eForms guidance: This field is mapped as part of [OPT-310-Tender Tendering Party ID Reference](#OPT-310-Tender).
     eForms example: <efac:TenderingParty><cbc:ID schemeName="tendering-party">TPA-0003</cbc:ID></efac:TenderingParty>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#tenderingPartySection
@@ -14734,7 +14749,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:TenderingParty/cbc:Name
     type: text
     repeatable: false
-    eForms guidance: This field is mapped as part of [OPT-310-Tender Tendering Party ID Reference](<#OPT-310-Tender>).
+    eForms guidance: This field is mapped as part of [OPT-310-Tender Tendering Party ID Reference](#OPT-310-Tender).
     eForms example: <efac:TenderingParty><cbc:Name>Party of Tenderers</cbc:Name></efac:TenderingParty>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#tenderingPartySection
@@ -14808,7 +14823,7 @@
     repeatable: false
     mandatory: CAN(VEAT) CAN CAN(MOD) E4 E5 E6 T02
     pattern: ^ORG-\d{4}$
-    eForms guidance: This field is mapped as part of [OPT-310-Tender Tendering Party ID Reference](<#OPT-310-Tender>).
+    eForms guidance: This field is mapped as part of [OPT-310-Tender Tendering Party ID Reference](#OPT-310-Tender).
     eForms example: <efac:Tenderer><cbc:ID schemeName="organization">ORG-0005</cbc:ID></efac:Tenderer>
     OCDS example: N/A
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#tenderingPartySection
