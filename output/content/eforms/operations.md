@@ -25,13 +25,13 @@ Otherwise, set `ocid` to the same value as the previous publication's `ocid`.
 
 * Add a `RelatedProcess` object to the `relatedProcesses` array:
   * Set its `id` incrementally.
-  * Add ‘planning’ to its `.relationship` array.
-  * Prepend “eu-” to the value of `@schemeName`, and map to its `.scheme`.
+  * Add 'planning' to its `.relationship` array.
+  * Prepend "eu-" to the value of `@schemeName`, and map to its `.scheme`.
   * Map `cbc:ID` to its `.identifier`.
   * If there is an `ancestor::cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']`, add `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
 * If the referenced notice is available in OCDS, add another `RelatedProcess` object to the `relatedProcesses` array:
   * Set its `id` incrementally.
-  * Add ‘planning’ to its `.relationship` array.
+  * Add 'planning' to its `.relationship` array.
   * Set its `.scheme` to 'ocid'.
   * Set its `.identifier` to the `.ocid` of the referenced notice.
   * If there is an `ancestor::cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']`, add `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
