@@ -33,7 +33,7 @@ Otherwise, set `ocid` to the same value as the previous publication's `ocid`.
   * Set its `id` incrementally.
   * Add 'planning' to its `.relationship` array.
   * Set its `.scheme` to 'ocid'.
-  * Set its `.identifier` to the `.ocid` of the referenced notice.
+  * Set its `.identifier` to the `ocid` of the referenced notice.
   * If there is an `ancestor::cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']`, add `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
 
 ## Convert a date to ISO format
