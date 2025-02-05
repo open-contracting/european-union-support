@@ -16,13 +16,13 @@ This section explains the relationships between key concepts in eForms and OCDS,
 
 ### Procedure (one or more contracting processes)
 
-In eForms, a procedure is a “[series of actions conducted in a given sequence that leads to the conclusion of a public contract](https://docs.ted.europa.eu/eforms/latest/schema/terms-and-definitions.html).”
+In eForms, a procedure is a "[series of actions conducted in a given sequence that leads to the conclusion of a public contract](https://docs.ted.europa.eu/eforms/latest/schema/terms-and-definitions.html)."
 
-In OCDS, a procedure is modeled as a contracting process, which is defined as “all the actions aimed at implementing one or more contracts.” A contracting process is divided into four stages: tender, award, contract and implementation. For an introduction to contracting processes in OCDS, see [How does the OCDS work?](https://standard.open-contracting.org/latest/en/primer/how/#how-does-the-ocds-work)
+In OCDS, a procedure is modeled as a contracting process, which is defined as "all the actions aimed at implementing one or more contracts." A contracting process is divided into four stages: tender, award, contract and implementation. For an introduction to contracting processes in OCDS, see [How does the OCDS work?](https://standard.open-contracting.org/latest/en/primer/how/#how-does-the-ocds-work)
 
-In eForms, planning information is “[not associated to any Procedure](https://docs.ted.europa.eu/eforms/latest/schema/documents-forms-and-notices.html#_planning_forms),” though the buyer can define and use an internal Procedure identifier.
+In eForms, planning information is "[not associated to any Procedure](https://docs.ted.europa.eu/eforms/latest/schema/documents-forms-and-notices.html#_planning_forms)," though the buyer can define and use an internal Procedure identifier.
 
-In OCDS, planning information is modeled as a planning process, which is defined as “all the actions aimed at planning one or more contracting processes.”
+In OCDS, planning information is modeled as a planning process, which is defined as "all the actions aimed at planning one or more contracting processes."
 
 There are differences between a procedure in eForms and a contracting process in OCDS:
 
@@ -59,7 +59,7 @@ Contract Award Notice | DAP, Result, Contract Modification | award, contract
 
 #### Part (release)
 
-In eForms, a PIN-only notice can be divided into parts. When a call for competition is launched, each part can “[become a Lot or a self-standing Procedure](https://docs.ted.europa.eu/eforms/latest/schema/terms-and-definitions.html).” Each part is represented as a [ProcurementProjectLot](https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#_introduction) element whose `schemeName` attribute is ‘Part’.
+In eForms, a PIN-only notice can be divided into parts. When a call for competition is launched, each part can "[become a Lot or a self-standing Procedure](https://docs.ted.europa.eu/eforms/latest/schema/terms-and-definitions.html)." Each part is represented as a [ProcurementProjectLot](https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#_introduction) element whose `schemeName` attribute is "Part".
 
 In OCDS, each part is modeled as an individual planning release, belonging to a separate planning process.
 
@@ -67,13 +67,13 @@ In OCDS, each part is modeled as an individual planning release, belonging to a 
 
 ### ProcurementProjectLot (lot or group of lots)
 
-In addition to representing a [part](#part-release), the [`ProcurementProjectLot`](https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#_introduction) element in eForms can also represent a lot (with a `schemeName` of ‘Lot’), sometimes known as a TenderLot, or a group of lots (with a `schemeName` of ‘LotsGroup’).
+In addition to representing a [part](#part-release), the [`ProcurementProjectLot`](https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#_introduction) element in eForms can also represent a lot (with a `schemeName` of "Lot"), sometimes known as a TenderLot, or a group of lots (with a `schemeName` of "LotsGroup").
 
 In OCDS, a lot is modeled as a [`Lot` object](https://extensions.open-contracting.org/en/extensions/lots/master/schema/#lot), and a group of lots is modeled as a [`LotGroup` object](https://extensions.open-contracting.org/en/extensions/lots/master/schema/#lotgroup).
 
 ### LotTender (bid)
 
-In eForms, [LotTenders](https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection) are “the results of the decomposition of a received tender into fragments, each corresponding to a lot or group of lots.”
+In eForms, [LotTenders](https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#lotTenderSection) are "the results of the decomposition of a received tender into fragments, each corresponding to a lot or group of lots."
 
 In OCDS, a LotTender is modeled as a [`Bid` object](https://extensions.open-contracting.org/en/extensions/bids/master/schema/#bid).
 
@@ -90,7 +90,7 @@ At the same time, some fields under a LotResult are modelled in [`Bid` objects](
 
 Notable exceptions:
 
-- A LotResult that represents the termination of a dynamic purchasing system is modeled as a `Lot` object that has a dynamic purchasing system with a status of ‘terminated’.
+- A LotResult that represents the termination of a dynamic purchasing system is modeled as a `Lot` object that has a dynamic purchasing system with a status of 'terminated'.
 - Essential assets are described only in [T02: Information notice for award of public service contract](https://ted.europa.eu/documents/d/ted/t02_en) under *Section II: Object*. Although the notice is used only for awards, this information is about the tender stage.
 
 ### SettledContract (contract)
@@ -107,7 +107,7 @@ In OCDS, a Company and each of its TouchPoints are modeled as separate `Organiza
 
 ![Organizations and Touchpoints diagram](_static/svg/organizations_touchpoints.svg)
 
-In eForms, the CompanyID element (nested under the PartyLegalEntity element, under the Company element) represents the legal entity’s identifier.
+In eForms, the CompanyID element (nested under the PartyLegalEntity element, under the Company element) represents the legal entity's identifier.
 
 In OCDS, a CompanyID is modeled as an `identifier` field on an `Organization` object. As such, the `Organization` objects in OCDS that represent the Company and TouchPoints of one Organization in eForms share the same identifier.
 

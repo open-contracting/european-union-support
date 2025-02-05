@@ -21,11 +21,20 @@ If any of the following are true, assign a new `ocid` by prepending your [OCID p
 
 Otherwise, set `ocid` to the same value as the previous publication's `ocid`.
 
-## Reference a previous publication
+## Reference a previous planning notice
 
-If the *Previous publication concerning this procedure* is neither a prior information notice nor a periodic indicative notice (PIN), or if the PIN has a single `/*/cac:ProcurementProjectLot` (*Object*) element, then discard `/*/cbc:ID`. In this case, the *previous publication concerning this procedure* is the OCDS release with the same `ocid` as this release and with the nearest earlier `date` to this release.
-
-Otherwise, if the *Previous publication concerning this procedure* is a prior information notice or periodic indicative notice that has multiple `/*/cac:ProcurementProjectLot` (*Object*) elements, add a `RelatedProcess` object to the `relatedProcesses` array, set its `.id` to '1', add 'planning' to its `.relationship` array, set its `.scheme` to 'eu-oj' (or to a scheme of your choice if outside the EU), and map `/*/cbc:ID` to `.identifier`.
+* Add a `RelatedProcess` object to the `relatedProcesses` array:
+  * Set its `id` incrementally.
+  * Add 'planning' to its `.relationship` array.
+  * Prepend "eu-" to the value of `@schemeName`, and map to its `.scheme`.
+  * Map `cbc:ID` to its `.identifier`.
+  * If there is an `ancestor::cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']`, add `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
+* If the referenced notice is available in OCDS, add another `RelatedProcess` object to the `relatedProcesses` array:
+  * Set its `id` incrementally.
+  * Add 'planning' to its `.relationship` array.
+  * Set its `.scheme` to 'ocid'.
+  * Set its `.identifier` to the `ocid` of the referenced notice.
+  * If there is an `ancestor::cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']`, add `ancestor::cac:ProcurementProjectLot/cbc:ID` to its `.relatedLots`.
 
 ## Convert a date to ISO format
 
