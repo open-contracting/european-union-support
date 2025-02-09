@@ -6548,7 +6548,7 @@
 
         - Ensure its `.id` is set. The `.id` can be any value guaranteed to be unique within the scope of the procedure. For example, it can be set to a [version 4 UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier), or it can be assigned sequentially across all notices for this procedure (the first notice sets it to "1", the second to "2", etc.).
         - Map this field to its `.rationaleClassifications.id`.
-        - Set its `.rationaleClassifications.scheme` to 'modification justification'.
+        - Set its `.rationaleClassifications.scheme` to 'eu-change-corrig-justification'.
         - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/modification-justification), and map it to its `.rationaleClassifications.description`.
     eForms example: <efac:ContractModification><efac:Change><efac:ChangedSection><efbc:ChangedSectionIdentifier>CON-0001</efbc:ChangedSectionIdentifier></efac:ChangedSection></efac:Change><efac:ChangeReason><cbc:ReasonCode listName="modification-justification">add-wss</cbc:ReasonCode></efac:ChangeReason></efac:ContractModification><efac:NoticeResult><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:SettledContract><cbc:ID schemeName="contract">CON-0001</cbc:ID></efac:SettledContract></efac:LotResult></efac:NoticeResult>
     OCDS example: '{"contracts":[{"id":"CON-0001","amendments":[{"id":"1","rationaleClassifications":[{"id":"add-wss","description":"Need for additional works, services or supplies by the original contractor.","scheme":"Modification justification"}]}],"awardID":"RES-0001"}]}'
@@ -10803,7 +10803,7 @@
     eForms guidance: |-
         - [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot):
           - Map this field to its `.unit.id`.
-          - Set its `.unit.scheme` to ['EU Measurement unit'](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/measurement-unit).
+          - Set its `.unit.scheme` to 'UNCEFACT'.
           - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/measurement-unit), and map it to its `.unit.name`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cbc:EstimatedOverallContractQuantity unitCode="TNE">45000</cbc:EstimatedOverallContractQuantity></cac:ProcurementProject></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"items":[{"id":"1","unit":{"id":"TNE","scheme":"EU Measurement unit","name":"tonne"},"relatedLot":"LOT-0001"}]}}'
@@ -14801,7 +14801,7 @@
           - Set the item's `.id` incrementally.
           - For each `efbc:StatisticsCode`, add a `Classification` object to the item's `additionalClassifications` array:
             - Map this field to its `.id`.
-            - Set its `.scheme` to 'vehicles'.
+            - Set its `.scheme` to 'eu-vehicle-category'.
             - Look up the code's label in the [eForms codelist](https://docs.ted.europa.eu/eforms/latest/reference/code-lists/vehicles.html), and map it to its `.description`.
     eForms example: <efac:NoticeResult><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:StrategicProcurement><efac:StrategicProcurementInformation><efac:ProcurementDetails><efac:StrategicProcurementStatistics><efbc:StatisticsCode listName="vehicles">vehicles-zero-emission</efbc:StatisticsCode></efac:StrategicProcurementStatistics></efac:ProcurementDetails></efac:StrategicProcurementInformation></efac:StrategicProcurement><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotResult></efac:NoticeResult>
     OCDS example: '{"awards":[{"id":"RES-0001","items":[{"id":"1","additionalClassifications":[{"scheme":"vehicles","id":"vehicles-zero-emission","description":"vehicles zero emission"}]}],"relatedLots":["LOT-0001"]}]}'
