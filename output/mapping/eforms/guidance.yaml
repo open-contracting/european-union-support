@@ -6772,8 +6772,9 @@
     Business groups:
         BG-2: Purpose
     eForms guidance: |-
-        - Map to `tender.identifiers.id`.
-        - Set `tender.identifiers.scheme` to 'internal'.
+        - Add a `SimpleIdentifier` object to `tender.identifiers`.
+        - Set `.scheme` to 'internal'.
+        - Map `.id`. 
     eForms example: <cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID>
     OCDS example: '{"tender":{"identifiers":[{"id":"PROC/2020/0024-ABC-FGHI","scheme":"internal"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#objectSection
@@ -6807,8 +6808,9 @@
     TED guidance:
     - If not set, let *Reference number* be equal to the `ocid` value. Map to `tender.id` (string).
     eForms guidance: |-
-        - Map to `tender.identifiers.id`.
-        - Set `tender.identifiers.scheme` to 'internal'.
+        - Add a `SimpleIdentifier` object to `tender.identifiers`.
+        - Set `.scheme` to 'internal'.
+        - Map to `.id`.
     eForms example: <cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID>
     OCDS example: '{"tender":{"identifiers":[{"id":"PROC/2020/0024-ABC-FGHI","scheme":"internal"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#objectSection
