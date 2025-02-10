@@ -78,11 +78,11 @@ Add a `Statistic` object to the `bids.statistics` array, set its `.relatedLot` t
 
 ## Get the document for a document reference
 
-Get the `Document` object in `tender.documents` whose `.id` is equal to the document reference's `/cbc:ID`. If none exists yet, add a `Document` object to `tender.documents` and set its `.id` to the document reference's `/cbc:ID`.
+Get the `Document` object in the `tender.documents` array whose `.id` is equal to the document reference's `/cbc:ID`. If none exists yet, add a `Document` object to `tender.documents` and set its `.id` to the document reference's `/cbc:ID`.
 
 ## Get the participation fee for a document
 
-If the value of `ancestor::cac:ProcurementProjectLot[cbc:ID/@schemeName]` is `'Part'`, get the `ParticipationFee` object in `tender.participationFees` whose `.id` is equal to `cac:CallForTendersDocumentReference/cbc:ID`. If none exists yet, add a `ParticipationFee` object to `tender.participationFees` and set its `.id` to the value of `ancestor::cac:CallForTendersDocumentReference/cbc:ID`.
+If the value of `ancestor::cac:ProcurementProjectLot[cbc:ID/@schemeName]` is `'Part'`, get the `ParticipationFee` object in the `tender.participationFees` array whose `.id` is equal to `cac:CallForTendersDocumentReference/cbc:ID`. If none exists yet, add a `ParticipationFee` object to `tender.participationFees` and set its `.id` to the value of `ancestor::cac:CallForTendersDocumentReference/cbc:ID`.
 
 If the value of `ancestor::cac:ProcurementProjectLot[cbc:ID/@schemeName]` is `'Lot'`, [get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot) and get the `ParticipationFee` object in the lot's `.participationFees` whose `.id` is equal to `cac:CallForTendersDocumentReference/cbc:ID`. If none exists yet, add a `ParticipationFee` object to the lot's `.participationFees` and set its `.id` to the value of `ancestor::cac:CallForTendersDocumentReference/cbc:ID`.
 
@@ -98,14 +98,14 @@ Add an `Organization` object to the `parties` array, and set its `.id` (string).
 
 ### Get the organization for a company
 
-Get the `Organization` in `parties` whose `id` is equal to the value of `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`. If none exists yet:
+Get the `Organization` object in the `parties` array whose `id` is equal to the value of `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`. If none exists yet:
 
 1. Add an `Organization` to `parties`
 1. Set its `.id` to the value of the `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`.
 
 ### Get the organization for a touchpoint
 
-Get the `Organization` in `parties` whose `id` is equal to the value of `ancestor::efac:TouchPoint/cac:PartyIdentification/cbc:ID`. If none exists yet:
+Get the `Organization` object in the `parties` array whose `id` is equal to the value of `ancestor::efac:TouchPoint/cac:PartyIdentification/cbc:ID`. If none exists yet:
 
 1. Add an `Organization` to `parties`
 1. Set its `.id` to the value of `ancestor::efac:TouchPoint/cac:PartyIdentification/cbc:ID`
@@ -114,7 +114,7 @@ Get the `Organization` in `parties` whose `id` is equal to the value of `ancesto
 
 ### Get the organization for the buyer
 
-Get the Organization in `parties` whose `.id` is equal to the value of `ancestor::cac:ContractingParty/cac:Party/cac:PartyIdentification/cbc:ID`. If none exists yet:
+Get the `Organization` object in the `parties` array whose `.id` is equal to the value of `ancestor::cac:ContractingParty/cac:Party/cac:PartyIdentification/cbc:ID`. If none exists yet:
 
 1. Add an `Organization` to `parties` 
 1. Set its `.id` to the value of `ancestor::cac:ContractingParty/cac:Party/cac:PartyIdentification/cbc:ID`
@@ -122,7 +122,7 @@ Get the Organization in `parties` whose `.id` is equal to the value of `ancestor
 
 ### Get the organization for a tenderer
 
-Get the Organization in `parties` whose `.id` is equal to the value of `ancestor::efac:TenderingParty/efac:Tenderer/cbc:ID`. If none exists yet:
+Get the `Organization` object in the `parties` array whose `.id` is equal to the value of `ancestor::efac:TenderingParty/efac:Tenderer/cbc:ID`. If none exists yet:
 
 1. Add an `Organization` to `parties` 
 1. Set its `.id` to the value of `ancestor::efac:TenderingParty/efac:Tenderer/cbc:ID`
@@ -130,12 +130,12 @@ Get the Organization in `parties` whose `.id` is equal to the value of `ancestor
 
 ### Get the person for an ultimate beneficial owner
 
-Get the `Organization` in `parties` whose `id` is equal to the value of `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`. If none exists yet:
+Get the `Organization` object in the `parties` array whose `id` is equal to the value of `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`. If none exists yet:
 
 1. Add an `Organization` to `parties`
 1. Set its `.id` to the value of `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`.
 
-Get the `Person` in the organization's `.beneficialOwners` array whose `id` is equal to the value of `ancestor::efac:UltimateBeneficialOwner/cbc:ID`. If none exists yet:
+Get the `Person` object in the organization's `.beneficialOwners` array whose `id` is equal to the value of `ancestor::efac:UltimateBeneficialOwner/cbc:ID`. If none exists yet:
 
 1. Add a `Person` to `.beneficialOwners`
 1. Set its `.id` to the value of `ancestor::efac:UltimateBeneficialOwner/cbc:ID`.
@@ -146,39 +146,39 @@ Get the `Person` in the organization's `.beneficialOwners` array whose `id` is e
 
 ### Get the organization for an organization technical identifier reference
 
-Get the `Organization` object in `parties` whose `.id` is equal to the organization technical identifier reference's `/cbc:ID`. If none exists yet, add an `Organization` object to `parties` and set its `.id` to the organization technical identifier reference's `/cbc:ID`.
+Get the `Organization` object in the `parties` array whose `.id` is equal to the organization technical identifier reference's `/cbc:ID`. If none exists yet, add an `Organization` object to `parties` and set its `.id` to the organization technical identifier reference's `/cbc:ID`.
 
 ## Lots and items
 
 ### Get the lot for a ProcurementProjectLot
 
-Get the `Lot` in `tender.lots` whose `.id` is equal to the value of `ancestor::cac:ProcurementProjectLot/cbc:ID`. If none exists yet, add a `Lot` to `tender.lots` and set its `id` to the value of `ancestor::cac:ProcurementProjectLot/cbc:ID`.
+Get the `Lot` object in the `tender.lots` array whose `.id` is equal to the value of `ancestor::cac:ProcurementProjectLot/cbc:ID`. If none exists yet, add a `Lot` to `tender.lots` and set its `id` to the value of `ancestor::cac:ProcurementProjectLot/cbc:ID`.
 
 ### Get the lot group for a ProcurementProjectLot
 
-Get the `LotGroup` in `tender.lotGroups` whose `.id` is equal to the value of the XPath `ancestor::cac:ProcurementProjectLot/cbc:ID`. If none exists yet, add a `LotGroup` to `tender.lotGroups` and set its `id` to the value of the XPath `ancestor::cac:ProcurementProjectLot/cbc:ID`.
+Get the `LotGroup` object in the `tender.lotGroups` array whose `.id` is equal to the value of the XPath `ancestor::cac:ProcurementProjectLot/cbc:ID`. If none exists yet, add a `LotGroup` to `tender.lotGroups` and set its `id` to the value of the XPath `ancestor::cac:ProcurementProjectLot/cbc:ID`.
 
 ### Get the item for a ProcurementProjectLot
 
-Get the `Item` in `tender.items` whose `.relatedLot` is equal to the value of `ancestor::cac:ProcurementProjectLot/cbc:ID`. If none exists yet, add an `Item` to `tender.items`, set its `.id` incrementally and set its `.relatedLot` to the value of `ancestor::cac:ProcurementProjectLot/cbc:ID`.
+Get the `Item` object in the `tender.items` array whose `.relatedLot` is equal to the value of `ancestor::cac:ProcurementProjectLot/cbc:ID`. If none exists yet, add an `Item` to `tender.items`, set its `.id` incrementally and set its `.relatedLot` to the value of `ancestor::cac:ProcurementProjectLot/cbc:ID`.
 
 ### Get the lot for a LotResult
 
-Get the `Lot` in `tender.lots` whose `id` is equal to the value of `ancestor::efac:LotResult/efac:TenderLot/cbc:ID`. If none exists yet, add a `Lot` to `tender.lots` and set its `id` to the value of `ancestor::efac:LotResult/efac:TenderLot/cbc:ID`.
+Get the `Lot` object in the `tender.lots` array whose `id` is equal to the value of `ancestor::efac:LotResult/efac:TenderLot/cbc:ID`. If none exists yet, add a `Lot` to `tender.lots` and set its `id` to the value of `ancestor::efac:LotResult/efac:TenderLot/cbc:ID`.
 
 ### Get the lots for a SettledContract
 
-For each `ancestor::efac:NoticeResult/efac:LotResult` with a `/efac:SettledContract/cbc:ID` equal to the value of `ancestor::efac:SettledContract/cbc:ID`, get the `Lot` in `tender/lots` whose `.id` is equal to the value of the `LotResult`'s `/efac:TenderLot/cbc:ID`.
+For each `ancestor::efac:NoticeResult/efac:LotResult` with a `/efac:SettledContract/cbc:ID` equal to the value of `ancestor::efac:SettledContract/cbc:ID`, get the `Lot` in the `tender.lots` array whose `.id` is equal to the value of the `LotResult`'s `/efac:TenderLot/cbc:ID`.
 
 ### Get the lot for a LotTender
 
-Get the `Lot` object in `tender.lots` whose `.id` matches `ancestor::efac:LotTender/efac:TenderLot:cbc:ID`. If none exists yet, add a `Lot` to `tender.lots` and set its `id` to the value of `ancestor::efac:LotTender/efac:TenderLot:cbc:ID`.
+Get the `Lot` object in the `tender.lots` array whose `.id` matches `ancestor::efac:LotTender/efac:TenderLot:cbc:ID`. If none exists yet, add a `Lot` to `tender.lots` and set its `id` to the value of `ancestor::efac:LotTender/efac:TenderLot:cbc:ID`.
 
 ## Bids, awards and contracts
 
 ### Get the bid for a LotTender
 
-Get the `Bid` in `bids.details` whose `id` is equal to the value of `ancestor::efac:LotTender/cbc:ID`. If none exists yet:
+Get the `Bid` object in the `bids.details` array whose `id` is equal to the value of `ancestor::efac:LotTender/cbc:ID`. If none exists yet:
 
 1. Add a `Bid` object to the `bids.details` array
 1. Set its `.id` to the value of `ancestor::efac:LotTender/cbc:ID`
@@ -186,7 +186,7 @@ Get the `Bid` in `bids.details` whose `id` is equal to the value of `ancestor::e
 
 ### Get the award for a LotResult
 
-Get the `Award` in `awards` whose `id` is equal to the value of `ancestor::efac:LotResult/cbc:ID`. If none exists yet:
+Get the `Award` object in the `awards` array whose `id` is equal to the value of `ancestor::efac:LotResult/cbc:ID`. If none exists yet:
 
 1. Add an `Award` to `awards`
 1. Set its `.id` to the value of `ancestor::efac:LotResult/cbc:ID`
@@ -194,7 +194,7 @@ Get the `Award` in `awards` whose `id` is equal to the value of `ancestor::efac:
 
 ### Get the contract for a SettledContract
 
-Get the `Contract` in `contracts` whose `.id` is equal to `ancestor::efac:SettledContract/cbc:ID`. If none exists yet:
+Get the `Contract` object in the `contracts` array whose `.id` is equal to `ancestor::efac:SettledContract/cbc:ID`. If none exists yet:
 
 1. Add a `Contract` to `contracts`
 1. Set its `.id` to the value of `ancestor::efac:SettledContract/cbc:ID`
