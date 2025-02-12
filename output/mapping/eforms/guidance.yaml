@@ -6547,10 +6547,10 @@
         For each `efac:ChangeReason`, add or update the corresponding `Amendment` object in the contract's `.amendments` array:
 
         - Ensure its `.id` is set. The `.id` can be any value guaranteed to be unique within the scope of the procedure. For example, it can be set to a [version 4 UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier), or it can be assigned sequentially across all notices for this procedure (the first notice sets it to "1", the second to "2", etc.).
-        - Add a `Classification` object to its `.rationaleClassifications` and
-            - Map this field to its `.id`.
-            - Set its `.scheme` to 'eu-modification-justification'.
-            - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/modification-justification), and map it to its `.description`.
+        - Add a `Classification` object to its `.rationaleClassifications` array:
+          - Map this field to its `.id`.
+          - Set its `.scheme` to 'eu-modification-justification'.
+          - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/dataset/-/resource?uri=http://publications.europa.eu/resource/dataset/modification-justification), and map it to its `.description`.
     eForms example: <efac:ContractModification><efac:Change><efac:ChangedSection><efbc:ChangedSectionIdentifier>CON-0001</efbc:ChangedSectionIdentifier></efac:ChangedSection></efac:Change><efac:ChangeReason><cbc:ReasonCode listName="modification-justification">add-wss</cbc:ReasonCode></efac:ChangeReason></efac:ContractModification><efac:NoticeResult><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:SettledContract><cbc:ID schemeName="contract">CON-0001</cbc:ID></efac:SettledContract></efac:LotResult></efac:NoticeResult>
     OCDS example: '{"contracts":[{"id":"CON-0001","amendments":[{"id":"1","rationaleClassifications":[{"id":"add-wss","description":"Need for additional works, services or supplies by the original contractor.","scheme":"eu-modification-justification"}]}],"awardID":"RES-0001"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/contract-modification-notice.html
@@ -6740,8 +6740,9 @@
     - If not set, let *Reference number* be equal to the `ocid` value. Map to `tender.id` (string).
     eForms guidance: |-
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot):
-          - Map to its `.identifiers.id`.
-          - Set its `.identifiers.scheme` to 'internal'.
+          - Add a `SimpleIdentifier` object to the lot's `.identifiers` array:
+            - Map to its `.id`.
+            - Set its `.scheme` to 'internal'.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID></cac:ProcurementProject></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","identifiers":[{"id":"PROC/2020/0024-ABC-FGHI","scheme":"internal"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#objectSection
@@ -6757,8 +6758,9 @@
         BG-2: Purpose
     eForms guidance: |-
         - [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot):
-          - Map to its `.identifiers.id`.
-          - Set its `.identifiers.scheme` to 'internal'.
+          - Add a `SimpleIdentifier` object to the lot group's `.identifiers` array:
+            - Map to its `.id`.
+            - Set its `.scheme` to 'internal'.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">GLO-0001</cbc:ID><cac:ProcurementProject><cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID></cac:ProcurementProject></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"lotGroups":[{"id":"GLO-0001","identifiers":[{"id":"PROC/2020/0024-ABC-FGHI","scheme":"internal"}]}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#objectSection
@@ -6773,9 +6775,9 @@
     Business groups:
         BG-2: Purpose
     eForms guidance: |-
-        - Add a `SimpleIdentifier` object to `tender.identifiers`.
-        - Set `.scheme` to 'internal'.
-        - Map `.id`. 
+        - Add a `SimpleIdentifier` object to the `tender.identifiers` array:
+          - Map to its `.id`.
+          - Set its `.scheme` to 'internal'.
     eForms example: <cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID>
     OCDS example: '{"tender":{"identifiers":[{"id":"PROC/2020/0024-ABC-FGHI","scheme":"internal"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#objectSection
@@ -6809,9 +6811,9 @@
     TED guidance:
     - If not set, let *Reference number* be equal to the `ocid` value. Map to `tender.id` (string).
     eForms guidance: |-
-        - Add a `SimpleIdentifier` object to `tender.identifiers`.
-        - Set `.scheme` to 'internal'.
-        - Map to `.id`.
+        - Add a `SimpleIdentifier` object to the `tender.identifiers` array:
+          - Map to its `.id`.
+          - Set its `.scheme` to 'internal'.
     eForms example: <cbc:ID schemeName="InternalID">PROC/2020/0024-ABC-FGHI</cbc:ID>
     OCDS example: '{"tender":{"identifiers":[{"id":"PROC/2020/0024-ABC-FGHI","scheme":"internal"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#objectSection
@@ -10809,7 +10811,7 @@
           - Set its `.unit.scheme` to 'UNCEFACT'.
           - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/measurement-unit), and map it to its `.unit.name`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cbc:EstimatedOverallContractQuantity unitCode="TNE">45000</cbc:EstimatedOverallContractQuantity></cac:ProcurementProject></cac:ProcurementProjectLot>
-    OCDS example: '{"tender":{"items":[{"id":"1","unit":{"id":"TNE","scheme":"EU Measurement unit","name":"tonne"},"relatedLot":"LOT-0001"}]}}'
+    OCDS example: '{"tender":{"items":[{"id":"1","unit":{"id":"TNE","scheme":"UNCEFACT","name":"tonne"},"relatedLot":"LOT-0001"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#quantitySection
 -   id: BT-63-Lot
     parentNodeId: ND-LotTenderingTerms
