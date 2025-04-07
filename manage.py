@@ -229,7 +229,7 @@ def write(
                                 f"{'SDK value'.ljust(50)} : Annex value"
                             )
                         compared += 1
-                        field = f'{row["id"]}: {row["name"]}'
+                        field = f"{row['id']}: {row['name']}"
                         click.echo(f"{field.ljust(75)} | {a} : {b} | {str(row[a]).ljust(50)} : {row[b]}")
             if compared:
                 click.echo(f"{compared} value differences")
@@ -1100,11 +1100,11 @@ def build(directory):
                 </td>
                 <td class="mapping">
 
-{indent(guidance, '        ')}
+{indent(guidance, "        ")}
 
-{indent(eforms_example, '        ')}
+{indent(eforms_example, "        ")}
 
-{indent(ocds_example, '        ')}
+{indent(ocds_example, "        ")}
 
         </td>
               </tr>"""
