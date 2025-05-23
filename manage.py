@@ -947,7 +947,7 @@ def lint(filename, additional_properties):
                             ].append([field["id"], field["name"]])
                     else:
                         click.echo(f"{identifier}: OCDS is invalid: {e.message} ({'/'.join(e.absolute_schema_path)})")
-            except json.decoder.JSONDecodeError as e:
+            except json.JSONDecodeError as e:
                 click.echo(f"{identifier}: JSON is invalid: {e}: {ocds_example}")
 
     unknown_codes = {code: v for code, v in single_quoted.items() if code not in known_codes}
