@@ -313,13 +313,13 @@ def update_with_sdk(filename, verbose):
             labels_to_drop.add(label)
 
         # Remove a field's own attribute fields, as we documented these together.
-        if row["attributeOf"] is not np.nan and row["attributeOf"] in label:
+        if not np.isnan(row["attributeOf"]) and row["attributeOf"] in label:
             labels_to_drop.add(label)
 
         # Remove fields that are forbidden on all supported notice types.
         forbidden = row["forbidden"]
         # Short-circuit the logic that follows.
-        if forbidden is np.nan:
+        if np.isnan(forbidden):
             continue
         # Abbreviate the constraints (there is sometimes a conditional constraint.).
         for constraint in forbidden["constraints"][1:]:
@@ -368,7 +368,7 @@ def update_with_sdk(filename, verbose):
                 df.at[label, "repeatable"] = True
 
         mandatory = row["mandatory"]
-        if mandatory is not np.nan:
+        if not np.isnan(mandatory):
             values = []
             for constraint in mandatory["constraints"]:
                 value = " ".join({subtypes.get(t, t): None for t in constraint.pop("noticeTypes")})
@@ -905,7 +905,7 @@ def lint(filename, additional_properties):
         eforms_example = field["eForms example"]
         if eforms_example and eforms_example != "N/A":
             try:
-                element = lxml.etree.fromstring(f"{xmlhead}{eforms_example}{xmltail}")  # noqa: S320 # our data
+                element = lxml.etree.fromstring(f"{xmlhead}{eforms_example}{xmltail}")  # our data
                 field["eForms example"] = lxml.etree.tostring(element).decode()[len(xmlhead) : -len(xmltail)]
 
                 # Note: The XML snippets are too short to validate against the eForms schema.
@@ -1070,7 +1070,7 @@ def build(directory):
 
         eforms_example = field["eForms example"]
         if eforms_example and eforms_example != "N/A":
-            element = lxml.etree.fromstring(f"{xmlhead}{eforms_example}{xmltail}")  # noqa: S320 # our data
+            element = lxml.etree.fromstring(f"{xmlhead}{eforms_example}{xmltail}")  # our data
             lxml.etree.indent(element, space="  ")
             data = dedent(lxml.etree.tostring(element).decode()[len(xmlhead) + 1 : -len(xmltail) - 1])
             eforms_example = f"```xml\n{data}\n```"
@@ -1173,7 +1173,7 @@ def codelists():
         if not file["name"].endswith(".gc"):
             continue
 
-        xml = lxml.etree.fromstring(get(file["download_url"]).content)  # noqa: S320 # trusted external
+        xml = lxml.etree.fromstring(get(file["download_url"]).content)  # trusted external
         writer.writerows([file["name"], code] for code in xml.xpath('//Value[@ColumnRef="code"]/SimpleValue/text()'))
 
 
