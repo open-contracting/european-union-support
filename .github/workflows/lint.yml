@@ -8,7 +8,6 @@ jobs:
     secrets:
       personal-access-token: ${{ secrets.PAT }}
     with:
-      python-version: '3.10'
       # ocdskit is run as a command. openpyxl is an optional dependency of Pandas.
       standard-maintenance-scripts-ignore: ocdskit,openpyxl
       # fields.json is a cached upstream file.
