@@ -489,8 +489,10 @@ def update_with_annex(filename):
     annex_2024 = {
         "BT-681": (  # Lot
             "Foreign Subsidies Regulation",
-            "The Foreign Subsidies Regulation (FSR) (EU) 2022/2560, in line with Article 28 thereof, "
-            "is applicable to this procurement procedure.",
+            (
+                "The Foreign Subsidies Regulation (FSR) (EU) 2022/2560, in line with Article 28 thereof, "
+                "is applicable to this procurement procedure."
+            ),
             "No",
             ("BG-705", "Other Requirements"),
         ),
