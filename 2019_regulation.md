@@ -18,12 +18,6 @@ Add the XPath from TED XML:
 
     ./manage.py update-with-xpath output/mapping/eforms/guidance.yaml
 
-Add the guidance for TED XML:
-
-    ./manage.py update-with-ted-guidance output/mapping/eforms/guidance.yaml
-
-Note: This last command reports unmerged rows. As such, it's possible that some [TED guidance](https://standard.open-contracting.org/profiles/eu/latest/en/forms/) is missing from the YAML file.
-
 ### Data dictionary
 
 Key | Source | Description | Notes
@@ -170,9 +164,6 @@ These can be automated if persistent:
 
         # This should have no output, other than the number of rows written.
         ./manage.py update-with-annex output/mapping/eforms/guidance.yaml
-
-        # This could list over 300 unmerged rows.
-        ./manage.py update-with-ted-guidance output/mapping/eforms/guidance.yaml
 
         # This step is slow.
         ./manage.py codelists > codes-eforms.csv
