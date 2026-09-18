@@ -6,7 +6,8 @@ jobs:
     permissions:
       contents: write
     secrets:
-      personal-access-token: ${{ secrets.PAT }}
+      client-id: ${{ secrets.APP_CLIENT_ID }}
+      private-key: ${{ secrets.APP_PRIVATE_KEY }}
     with:
       # ocdskit is run as a command. openpyxl is an optional dependency of Pandas.
       standard-maintenance-scripts-ignore: ocdskit,openpyxl
