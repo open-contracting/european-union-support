@@ -1,3 +1,4 @@
+# ruff: noqa: INP001
 """Summarize the changes to guidance.yaml, fields.json and (optionally) codelists between two git refs, as Markdown."""
 
 import csv
