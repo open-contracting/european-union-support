@@ -566,6 +566,7 @@ def update_with_annex(filename):
 
     # The SDK splits some BTs into BTs with suffixed IDs, like BT-67(a). Copy the annex row for each suffix.
     with filename.open() as f:
+        # Fields removed from the SDK have no btId, until removed manually.
         bt_ids = {row["btId"] for row in yaml.safe_load(f) if "btId" in row}
     split = set()
     for bt_id in sorted(bt_ids - set(df["ID"])):
@@ -573,7 +574,8 @@ def update_with_annex(filename):
         if base != bt_id and base in set(df["ID"]):
             df = pd.concat([df, df[df["ID"] == base].assign(ID=bt_id)], ignore_index=True)
             split.add(base)
-    df = df[~df["ID"].isin(split)]
+    # Keep the unsuffixed row if any field still uses it.
+    df = df[~df["ID"].isin(split - bt_ids)]
 
     # The fields metadata covers "Name", "Data type", "Repeatable" and "Legal Status" ("forbidden" and "mandatory").
     # "Business groups" replaces "Level". "Fields not included in the legal text" isn't informative.
