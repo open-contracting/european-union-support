@@ -8706,8 +8706,8 @@
         - [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
         - For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array:
           - Map to its `.region`.
-    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="nuts">UKG23</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation></cac:ProcurementProject></cac:ProcurementProjectLot>
-    OCDS example: '{"tender":{"items":[{"id":"1","deliveryAddresses":[{"region":"UKG23"}],"relatedLot":"LOT-0001"}]}}'
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="nuts">FR101</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation></cac:ProcurementProject></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"items":[{"id":"1","deliveryAddresses":[{"region":"FR101"}],"relatedLot":"LOT-0001"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#performancePlaceSection
 -   id: BT-5071-Part
     parentNodeId: ND-PartPerformanceAddress
@@ -8734,8 +8734,8 @@
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array:
 
         - Map to its `.region`.
-    eForms example: <cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="nuts">UKG23</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation>
-    OCDS example: '{"tender":{"deliveryAddresses":[{"region":"UKG23"}]}}'
+    eForms example: <cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="nuts">FR101</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation>
+    OCDS example: '{"tender":{"deliveryAddresses":[{"region":"FR101"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#performancePlaceSection
 -   id: BT-5071-Procedure
     parentNodeId: ND-ProcedurePlacePerformance
@@ -8755,8 +8755,8 @@
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array:
 
         - Map to its `.region`.
-    eForms example: <cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="nuts">UKG23</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation>
-    OCDS example: '{"tender":{"deliveryAddresses":[{"region":"UKG23"}]}}'
+    eForms example: <cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="nuts">FR101</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation>
+    OCDS example: '{"tender":{"deliveryAddresses":[{"region":"FR101"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#performancePlaceSection
 -   id: BT-508-Procedure-Buyer
     parentNodeId: ND-ContractingParty
