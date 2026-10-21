@@ -412,6 +412,8 @@ def update_with_sdk(filename, verbose):
         # 1.12.0
         "businessEntityId",
         "referencedBusinessEntityIds",
+        # 1.14.0 https://docs.ted.europa.eu/eforms/latest/fields/index.html#_dynamic_properties
+        "numericRange",
     ]
     # Simplify these columns if `severity` is the only other top-level key.
     for column in ("repeatable", "pattern"):
