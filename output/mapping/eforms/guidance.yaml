@@ -1171,8 +1171,8 @@
         ```{seealso}
         [BT-106-Procedure](#BT-106-Procedure)
         ```
-    eForms example: <cac:ProcessJustification><cbc:ProcessReasonCode listName="accelerated-procedure">true</cbc:ProcessReasonCode><cbc:ProcessReason languageID="ENG">Direct award is justified ...</cbc:ProcessReason></cac:ProcessJustification>
-    OCDS example: '{"tender":{"procedure":{"acceleratedRationale":"Direct award is justified ..."}}}'
+    eForms example: <cac:ProcessJustification><cbc:ProcessReasonCode listName="accelerated-procedure">true</cbc:ProcessReasonCode><cbc:ProcessReason languageID="ENG">The procedure is accelerated because ...</cbc:ProcessReason></cac:ProcessJustification>
+    OCDS example: '{"tender":{"procedure":{"acceleratedRationale":"The procedure is accelerated because ..."}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#acceleratedProcedureSection
 -   id: BT-136-Procedure
     parentNodeId: ND-DirectAward
@@ -8384,7 +8384,7 @@
         - [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner).
         - Map to its `.telephone`.
     eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></efac:Company></efac:Organization><efac:UltimateBeneficialOwner><cbc:ID schemeName="ubo">UBO-0001</cbc:ID><cac:Contact><cbc:Telephone>+123 4567890</cbc:Telephone></cac:Contact></efac:UltimateBeneficialOwner></efac:Organizations>
-    OCDS example: '{"parties":[{"id":"ORG-0001","beneficialOwners":[{"id":"UBO-0001","telephone":"+123 456789"}]}]}'
+    OCDS example: '{"parties":[{"id":"ORG-0001","beneficialOwners":[{"id":"UBO-0001","telephone":"+123 4567890"}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#ultimateBeneficialOwnerSection
 -   id: BT-505-Organization-Company
     parentNodeId: ND-Company
@@ -10712,7 +10712,7 @@
           - Map this field to the classification's `.id`.
           - Set the classification's `.scheme` to 'eu-main-activity'.
           - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/main-activity), and map it to the classification's `.description`.
-    eForms example: <cac:ContractingParty><cac:ContractingActivity><cbc:ActivityTypeCode listName="entity-activity">gas-oil</cbc:ActivityTypeCode></cac:ContractingActivity><cac:Party><cac:PartyIdentification><cbc:ID>ORG-0001</cbc:ID></cac:PartyIdentification></cac:Party></cac:ContractingParty>
+    eForms example: <cac:ContractingParty><cac:ContractingActivity><cbc:ActivityTypeCode listName="entity-activity">gas-oil</cbc:ActivityTypeCode></cac:ContractingActivity><cac:Party><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></cac:Party></cac:ContractingParty>
     OCDS example: '{"parties":[{"id":"ORG-0001","roles":["buyer"],"details":{"classifications":[{"scheme":"eu-main-activity","id":"gas-oil","description":"Activities related to the exploitation of a geographical area for the purpose of extracting oil or gas."}]}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_buyer_information
 -   id: BT-6110-Contract
@@ -15065,7 +15065,7 @@
         - [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization-technical-identifier-reference).
         - Get the `ancestor::ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:Organization/efac:Company` whose `/cac:PartyIdentification/cbc:ID` is equal to this field's value.
         - Map `/cac:PartyName/cbc:Name` to the organization's `.name`.
-    eForms example: <cac:ContractingParty><cac:Party><cac:ServiceProviderParty><cac:Party><cac:PartyIdentification><cbc:ID>ORG-0001</cbc:ID></cac:PartyIdentification></cac:Party></cac:ServiceProviderParty></cac:Party></cac:ContractingParty><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification><cac:PartyName><cbc:Name languageID="ENG">Service Provider Ltd</cbc:Name></cac:PartyName></efac:Company></efac:Organization></efac:Organizations></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions>
+    eForms example: <cac:ContractingParty><cac:Party><cac:ServiceProviderParty><cac:Party><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></cac:Party></cac:ServiceProviderParty></cac:Party></cac:ContractingParty><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification><cac:PartyName><cbc:Name languageID="ENG">Service Provider Ltd</cbc:Name></cac:PartyName></efac:Company></efac:Organization></efac:Organizations></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions>
     OCDS example: '{"parties":[{"id":"ORG-0001","name":"Service Provider Ltd"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/identifiers.html#_referring_to_objects
 -   id: OPT-300-Tenderer
