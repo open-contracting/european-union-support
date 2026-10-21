@@ -14,6 +14,7 @@ from textwrap import dedent, indent
 from urllib.parse import urlsplit
 
 import click
+import elementpath
 import json_merge_patch
 import lxml.etree
 import lxml.html
@@ -22,6 +23,7 @@ import numpy as np
 import pandas as pd
 import requests
 import yaml
+from elementpath import XPath2Parser
 from jsonpointer import set_pointer
 from jsonschema import FormatChecker
 from jsonschema.validators import Draft4Validator
@@ -810,8 +812,6 @@ def lint(filename, additional_properties):
     http_errors = set()
     anchor_errors = set()
     example_errors = set()
-    # XPath 2.0 expressions, which lxml can't evaluate.
-    unsupported_xpaths = set()
     untested_predicates = set()
     single_quoted = defaultdict(list)
     double_quoted = defaultdict(list)
@@ -887,17 +887,22 @@ def lint(filename, additional_properties):
                     tops = {f"{child.prefix}:{lxml.etree.QName(child).localname}" for child in element}
                     namespaces = {prefix: uri for prefix, uri in element.nsmap.items() if prefix}
                     starts = [i for i, name in enumerate(names) if name in tops]
-                    try:
-                        if not starts:
-                            example_errors.add(f"{identifier}: no top element on the XPath: {', '.join(sorted(tops))}")
-                        elif not any(element.xpath("./" + "/".join(steps[i:]), namespaces=namespaces) for i in starts):
-                            # If the path matches without predicates, the example omits the elements they test.
-                            if any(element.xpath("./" + "/".join(names[i:]), namespaces=namespaces) for i in starts):
-                                untested_predicates.add(identifier)
-                            else:
-                                example_errors.add(f"{identifier}: no match for {'/'.join(names[starts[0] :])}")
-                    except lxml.etree.XPathEvalError:
-                        unsupported_xpaths.add(identifier)
+
+                    def matches(path, element=element, namespaces=namespaces, starts=starts):
+                        # The SDK uses XPath 2.0, like `cbc:ID/text()=('CrossBorderLaw','LocalLegalBasis')`.
+                        return any(
+                            elementpath.select(element, "./" + "/".join(path[i:]), namespaces, parser=XPath2Parser)
+                            for i in starts
+                        )
+
+                    if not starts:
+                        example_errors.add(f"{identifier}: no top element on the XPath: {', '.join(sorted(tops))}")
+                    elif not matches(steps):
+                        # If the path matches without predicates, the example omits the elements they test.
+                        if matches(names):
+                            untested_predicates.add(identifier)
+                        else:
+                            example_errors.add(f"{identifier}: no match for {'/'.join(names[starts[0] :])}")
 
         # Format and validate JSON.
         ocds_example = field["OCDS example"]
@@ -970,7 +975,6 @@ def lint(filename, additional_properties):
         ("Anchor errors", anchor_errors),
         ("eForms example errors", example_errors),
         ("eForms examples without the elements that XPath predicates test", untested_predicates),
-        ("XPaths not checked (XPath 2.0)", unsupported_xpaths),
     ):
         if errors:
             click.echo(f"\n{title} ({len(errors)}):")
