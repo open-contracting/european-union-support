@@ -98,7 +98,9 @@ The summarizer is mechanical. **You** decide the relevance of each change, by re
 
 First, check that the step's commit is sound: the summarizer flags "annex data lost" if `update-with-annex` failed to merge a field. Report that as a tooling item, not a mapping change.
 
-The summarizer sees only `fields.json`. Business rules, notice types and codelist contents appear only in the release notes, so scan them for changes that make guidance moot or newly needed: fields **hidden** or filled by a **preset** value, fields newly **forbidden** or **allowed** on a notice type, and codes added to or removed from a codelist that has a mapping table or that the guidance names. The summarizer's "Codelists" section lists the exact codes (flag: "used in mapping"); without `--codes`, check them by hand.
+The summarizer sees only `fields.json` (and codelists, with `--codes`). Business rules and view templates appear only in the release notes, so scan them for changes that make guidance moot or newly needed: fields **hidden** or filled by a **preset** value, and codes added to or removed from a codelist that has a mapping table or that the guidance names. The summarizer's "Codelists" section lists the exact codes (flag: "used in mapping"); without `--codes`, check them by hand.
+
+The release notes' "Addition of" items under notice types are usually existing fields allowed on more notice types, not new fields. The summarizer's "Notice types" section lists them, and the fields newly forbidden. They're relevant only if a field's guidance depends on the notice type, or if the notice type is unsupported (E1–E6, X01, X02). Otherwise, list them under "Not relevant", so readers of the release notes don't think we missed new fields. "Addition of" items under view templates only change how notices are displayed.
 
 Past decisions (see #188, #196, #204 and #215 for the discussions):
 

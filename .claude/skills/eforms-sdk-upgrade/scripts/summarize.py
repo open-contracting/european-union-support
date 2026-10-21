@@ -57,6 +57,18 @@ def field_keys(ref):
     return keys
 
 
+def forbidden(ref):
+    """Return each field's unconditionally forbidden notice types. update-with-sdk drops this property."""
+    out = {}
+    for field in json.loads(show(ref, FIELDS))["fields"]:
+        types = set()
+        for constraint in (field.get("forbidden") or {}).get("constraints", []):
+            if "condition" not in constraint:
+                types |= set(constraint["noticeTypes"])
+        out[field["id"]] = types
+    return out
+
+
 def codes(path):
     with path.open() as f:
         return {(row["codelist"], row["code"]) for row in csv.DictReader(f)}
@@ -270,6 +282,22 @@ def echo_codes(head, old_path, new_path):
             click.echo(f"- {label} in {names}: {', '.join(values[:15])}{more}{note}")
 
 
+def echo_notice_types(base, head, new):
+    """Report fields allowed on, or forbidden from, more notice types (in release notes, "Addition of" fields)."""
+    old_forbidden, new_forbidden = forbidden(base), forbidden(head)
+    groups = {"Newly allowed on": defaultdict(list), "Newly forbidden on": defaultdict(list)}
+    for i in sorted(set(new) & set(old_forbidden) & set(new_forbidden)):
+        if allowed := old_forbidden[i] - new_forbidden[i]:
+            groups["Newly allowed on"][" ".join(sorted(allowed))].append(i)
+        if forbade := new_forbidden[i] - old_forbidden[i]:
+            groups["Newly forbidden on"][" ".join(sorted(forbade))].append(i)
+    click.echo("## Notice types\n")
+    for label, by_types in groups.items():
+        for types, ids in sorted(by_types.items(), key=lambda item: -len(item[1])):
+            click.echo(f"- {label} {types}: {', '.join(f'{i} ({describe(new[i])})' for i in ids)}")
+    click.echo()
+
+
 @click.command(help=__doc__)
 @click.argument("base")
 @click.argument("head", default="")
@@ -285,6 +313,7 @@ def main(base, head, codes):
     echo_new(old, new)
     echo_removed(old, new)
     echo_changed(old, new)
+    echo_notice_types(base, head, new)
     echo_properties(base, head, old, new)
     echo_codes(head, *(codes or (None, None)))
 
