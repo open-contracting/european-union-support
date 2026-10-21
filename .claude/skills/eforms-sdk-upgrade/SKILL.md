@@ -138,7 +138,9 @@ Past decisions (see #188, #196, #204 and #215 for the discussions):
 - Deleted fields with substantive guidance. Quote it, and say where it should go if a field replaces it.
 - `xpathAbsolute` changes where the `eForms example` no longer matches (summarizer flag: "eForms example lacks").
   Changes that only add or move a predicate, like `[cbc:ID/text()='CrossBorderLaw']`, usually need nothing; say so.
-- Codelist renames that appear in an `eForms example`'s `listName` or in the guidance (flag: "mentions").
+- Codelist renames that appear in an `eForms example`'s `listName` or in the guidance (flag: "mentions"). Note:
+  `listName` is the codelist's `parentId` in `source/fields.json`, if it has one, else its `id`. A tailored codelist
+  (e.g. `nuts-lvl3`, parent `nuts`) can be renamed without changing `listName`. #120 missed this.
 - Removed codes that a mapping table or the guidance uses (flag: "used in mapping"). Added codes in a codelist that
   has a mapping table in `output/mapping/eforms/mapping-tables/` (the table needs a row).
 - `type` changes, when the OCDS field's type differs (e.g. `number` → `integer` is fine if OCDS is already integer).
