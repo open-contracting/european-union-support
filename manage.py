@@ -819,12 +819,16 @@ def lint(filename, additional_properties):
     else:
         known_eforms_codes = set()
 
+    with (sourcedir / "fields.json").open() as f:
+        sdk_fields = {field["id"]: field for field in json.load(f)["fields"]}
+
     sdk_documents = {}
 
     unreviewed = 0
 
     http_errors = set()
     anchor_errors = set()
+    example_errors = set()
     single_quoted = defaultdict(list)
     double_quoted = defaultdict(list)
     additional_fields = defaultdict(list)
@@ -875,6 +879,21 @@ def lint(filename, additional_properties):
                 # Note: The XML snippets are too short to validate against the eForms schema.
             except lxml.etree.XMLSyntaxError as e:
                 click.echo(f"{identifier}: XML is invalid: {e}: {eforms_example}")
+
+            if sdk_field := sdk_fields.get(identifier):
+                # The last step of the XPath, without predicates, like "cbc:ID" or "@listName".
+                step = re.sub(r"\[[^\]]*\]", "", sdk_field["xpathAbsolute"]).rsplit("/", 1)[-1]
+                if step.startswith("@"):
+                    if f"{step[1:]}=" not in eforms_example:
+                        example_errors.add(f"{identifier}: no {step} attribute")
+                elif f"<{step}" not in eforms_example:
+                    example_errors.add(f"{identifier}: no {step} element")
+                # The listName attribute is the codelist's parent's ID, if any, else the codelist's ID.
+                elif codelist := sdk_field.get("codeList", {}).get("value"):
+                    expected = codelist.get("parentId", codelist["id"])
+                    for actual in re.findall(rf'<{step}\b[^>]*\blistName="([^"]*)"', eforms_example):
+                        if actual != expected:
+                            example_errors.add(f'{identifier}: listName="{actual}", expected "{expected}"')
 
         # Format and validate JSON.
         ocds_example = field["OCDS example"]
@@ -928,12 +947,24 @@ def lint(filename, additional_properties):
         for code, occurrences in sorted(unknown_eforms_codes.items(), key=itemgetter(1)):
             click.echo(f"{code}{''.join(f',{identifier},{title}' for identifier, title in occurrences)}")
 
+    if known_eforms_codes:
+        # Broader concepts in the EU Vocabularies authority table, used to group codes (#218).
+        broader_codes = {"slc-abil", "slc-sche", "slc-sec", "slc-stand", "slc-suit"}
+        for path in sorted(Path("output/mapping/eforms/mapping-tables").glob("*.csv")):
+            with path.open() as f:
+                codes = [row[0] for row in csv.reader(f)][1:]
+            if unknown := [code for code in codes if code not in known_eforms_codes | broader_codes]:
+                click.echo(
+                    f"\n{path.name}: eForms codes that do not appear in any eForms codelist: {', '.join(unknown)}"
+                )
+
     if unreviewed:
         click.echo(f"\n{unreviewed} unreviewed eForms guidance")
 
     for title, errors in (
         ("HTTP errors", http_errors),
         ("Anchor errors", anchor_errors),
+        ("eForms example errors", example_errors),
     ):
         if errors:
             click.echo(f"\n{title} ({len(errors)}):")

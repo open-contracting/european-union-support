@@ -494,7 +494,7 @@
     Business groups:
         BG-7: Notice Result
     eForms guidance: Discard. If a notice announces the results for multiple framework agreements, please express your interest in this field by commenting on [this issue](https://github.com/open-contracting/european-union-support/issues/198) or by contacting the [Data Support Team](mailto:data@open-contracting.org).
-    eForms example: <efac:NoticeResult><cbc:OverallApproximateFrameworkContractsAmount currencyID="EUR">6000</cbc:OverallApproximateFrameworkContractsAmount></efac:NoticeResult>
+    eForms example: <efac:NoticeResult><efbc:OverallApproximateFrameworkContractsAmount currencyID="EUR">6000</efbc:OverallApproximateFrameworkContractsAmount></efac:NoticeResult>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_notice_aggregated_amounts
 -   id: BT-113-Lot
@@ -587,7 +587,7 @@
     Business groups:
         BG-7: Notice Result
     eForms guidance: Discard.
-    eForms example: <efac:NoticeResult><cbc:OverallMaximumFrameworkContractsAmount currencyID="EUR">6000</cbc:OverallMaximumFrameworkContractsAmount></efac:NoticeResult>
+    eForms example: <efac:NoticeResult><efbc:OverallMaximumFrameworkContractsAmount currencyID="EUR">6000</efbc:OverallMaximumFrameworkContractsAmount></efac:NoticeResult>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_notice_aggregated_amounts
 -   id: BT-119-LotResult
@@ -11122,7 +11122,7 @@
         - [Get the award for the LotResult](operations.md#get-the-award-for-a-lotresult):
           - Map this field to its `.estimatedValue.amount`.
           - Map `@currencyID` to its `.estimated.currency`.
-    eForms example: <efac:NoticeResult><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:FrameworkAgreementValues><cbc:ReestimatedValueAmount currencyID="EUR">123</cbc:ReestimatedValueAmount></efac:FrameworkAgreementValues><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotResult></efac:NoticeResult>
+    eForms example: <efac:NoticeResult><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:FrameworkAgreementValues><efbc:ReestimatedValueAmount currencyID="EUR">123</efbc:ReestimatedValueAmount></efac:FrameworkAgreementValues><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotResult></efac:NoticeResult>
     OCDS example: '{"awards":[{"id":"RES-0001","estimatedValue":{"amount":123,"currency":"EUR"},"relatedLots":["LOT-0001"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
 -   id: BT-661-Lot
