@@ -12206,9 +12206,9 @@
     eForms guidance: |-
         This field maps to the same `Item` objects as created for [OPT-155-LotResult Vehicle Type](#OPT-155-LotResult), [OPT-156-LotResult Vehicle Numeric](#OPT-156-LotResult) and [BT-723-LotResult Vehicle Category](#BT-723-LotResult).
 
-        If no `Item` object was created for `ancestor::efac:StrategicProcurementInformation/efbc:ProcurementDetails`, [get the award for the LotResult](operations.md#get-the-award-for-a-lotresult), add an `Item` object to the award's `.items` array, and set the item's `.id` incrementally.
+        If no `Item` object was created for `ancestor::efac:StrategicProcurementInformation/efac:ProcurementDetails`, [get the award for the LotResult](operations.md#get-the-award-for-a-lotresult), add an `Item` object to the award's `.items` array, and set the item's `.id` incrementally.
 
-        For each `ancestor::efac:ProcurementDetails/efac:StrategicProcurementStatistics/efbc:StatisticsCode`, add a `Classification` object to the item's `additionalClassifications` array:
+        For each `ancestor::efac:StrategicProcurementInformation/efac:ProcurementDetails/efac:StrategicProcurementStatistics/efbc:StatisticsCode`, add a `Classification` object to the item's `additionalClassifications` array:
 
         - Map this field to its `.id`.
         - Set its `.scheme` to 'eu-cvd-contract-type'.
@@ -14897,8 +14897,8 @@
 
         If this field's value is not 0:
 
-        - If the value of `ancestor::efbc:StrategicProcurementStatistics/efbc:StatisticsCode` is "vehicles-zero-emission" or "vehicles-clean", map to the item's `.quantity`.
-        - If the value of `ancestor::efbc:StrategicProcurementStatistics/efbc:StatisticsCode` is "vehicles", subtract the value of `efbc:StatisticsNumeric` for each `ancestor::efbc:StrategicProcurementStatistics` with `efbc:StatisticsCode` equal to "vehicles-zero-emission" or "vehicles-clean", and map the difference to the item's `.quantity`.
+        - If the value of `ancestor::efac:StrategicProcurementStatistics/efbc:StatisticsCode` is "vehicles-zero-emission" or "vehicles-clean", map to the item's `.quantity`.
+        - If the value of `ancestor::efac:StrategicProcurementStatistics/efbc:StatisticsCode` is "vehicles", subtract the value of `efbc:StatisticsNumeric` for each `ancestor::efac:ProcurementDetails/efac:StrategicProcurementStatistics` with `efbc:StatisticsCode` equal to "vehicles-zero-emission" or "vehicles-clean", and map the difference to the item's `.quantity`.
     eForms example: <efac:NoticeResult><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:StrategicProcurement><efac:StrategicProcurementInformation><efbc:ProcurementCategoryCode listName="cvd-contract-type">oth-serv-contr</efbc:ProcurementCategoryCode><efac:ProcurementDetails><efac:StrategicProcurementStatistics><efbc:StatisticsNumeric>3</efbc:StatisticsNumeric></efac:StrategicProcurementStatistics></efac:ProcurementDetails></efac:StrategicProcurementInformation></efac:StrategicProcurement><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotResult></efac:NoticeResult>
     OCDS example: '{"awards":[{"id":"RES-0001","items":[{"id":"1","quantity":3}],"relatedLots":["LOT-0001"]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
