@@ -799,7 +799,16 @@ def lint(filename, additional_properties):
         known_eforms_codes = set()
 
     with (sourcedir / "fields.json").open() as f:
-        sdk_fields = {field["id"]: field for field in json.load(f)["fields"]}
+        data = json.load(f)
+        sdk_fields = {field["id"]: field for field in data["fields"]}
+
+    # The paths (and their prefixes) and the element names in the SDK's fields and nodes, without predicates.
+    sdk_paths = set()
+    sdk_names = set()
+    for item in data["fields"] + data["xmlStructure"]:
+        names = tuple(step.split("[", 1)[0] for step in xpath_steps(item["xpathAbsolute"]))
+        sdk_paths.update(names[:i] for i in range(1, len(names) + 1))
+        sdk_names.update(names)
 
     sdk_documents = {}
 
@@ -809,6 +818,7 @@ def lint(filename, additional_properties):
     anchor_errors = set()
     example_errors = set()
     untested_predicates = set()
+    guidance_xpath_errors = set()
     single_quoted = defaultdict(list)
     double_quoted = defaultdict(list)
     additional_fields = defaultdict(list)
@@ -842,6 +852,23 @@ def lint(filename, additional_properties):
         # Format Markdown.
         field["eForms guidance"] = mdformat.text(field["eForms guidance"]).rstrip()
         unreviewed += field["eForms guidance"].startswith("(UNREVIEWED)")
+
+        # Check that the guidance's element names and ancestor:: paths exist in the SDK.
+        for code in re.findall(r"`([^`]+)`", field["eForms guidance"]):
+            for name in re.findall(r"\b(?:cac|cbc|efac|efbc|efext|ext):[A-Za-z]+\b", code):
+                if name not in sdk_names:
+                    guidance_xpath_errors.add(f"{identifier}: unknown element {name} in {code}")
+            if sdk_field := sdk_fields.get(identifier):
+                field_names = [step.split("[", 1)[0] for step in xpath_steps(sdk_field["xpathAbsolute"])]
+                for path in re.findall(r"ancestor::[\w:.@*-]+(?:\[[^\]]*\][\w:./@*-]*|/[\w:.@*-]+)*", code):
+                    names = [step.split("[", 1)[0] for step in xpath_steps(path.removeprefix("ancestor::"))]
+                    names = [name for name in names if name != "text()"]
+                    # The nearest ancestor of the field with the given name.
+                    indices = [i for i, name in enumerate(field_names[:-1]) if name == names[0]]
+                    if not indices:
+                        guidance_xpath_errors.add(f"{identifier}: {names[0]} isn't an ancestor in {code}")
+                    elif tuple(field_names[: indices[-1] + 1] + names[1:]) not in sdk_paths:
+                        guidance_xpath_errors.add(f"{identifier}: no such path {'/'.join(names)} in {code}")
 
         for match in re.finditer(r"'(\S+)'", field["eForms guidance"]):
             single_quoted[match.group(1)].append([field["id"], field["name"]])
@@ -970,6 +997,7 @@ def lint(filename, additional_properties):
         ("HTTP errors", http_errors),
         ("Anchor errors", anchor_errors),
         ("eForms example errors", example_errors),
+        ("eForms guidance XPath errors", guidance_xpath_errors),
         ("eForms examples without the elements that XPath predicates test", untested_predicates),
     ):
         if errors:
