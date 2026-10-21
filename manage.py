@@ -50,6 +50,23 @@ xmlhead = (
 xmltail = "</ContractNotice>"
 
 
+def xpath_steps(xpath):
+    """Split an XPath into its steps, ignoring slashes in predicates."""
+    steps = []
+    depth = 0
+    start = 0
+    for i, char in enumerate(xpath):
+        if char == "[":
+            depth += 1
+        elif char == "]":
+            depth -= 1
+        elif char == "/" and not depth:
+            steps.append(xpath[start:i])
+            start = i + 1
+    steps.append(xpath[start:])
+    return [step for step in steps if step]
+
+
 class Dumper(yaml.SafeDumper):
     def ignore_aliases(self, data):  # noqa: ARG002
         return True
@@ -793,6 +810,9 @@ def lint(filename, additional_properties):
     http_errors = set()
     anchor_errors = set()
     example_errors = set()
+    # XPath 2.0 expressions, which lxml can't evaluate.
+    unsupported_xpaths = set()
+    untested_predicates = set()
     single_quoted = defaultdict(list)
     double_quoted = defaultdict(list)
     additional_fields = defaultdict(list)
@@ -836,6 +856,7 @@ def lint(filename, additional_properties):
         # Format XML.
         eforms_example = field["eForms example"]
         if eforms_example and eforms_example != "N/A":
+            element = None
             try:
                 element = lxml.etree.fromstring(f"{xmlhead}{eforms_example}{xmltail}")  # our data
                 field["eForms example"] = lxml.etree.tostring(element).decode()[len(xmlhead) : -len(xmltail)]
@@ -845,8 +866,9 @@ def lint(filename, additional_properties):
                 click.echo(f"{identifier}: XML is invalid: {e}: {eforms_example}")
 
             if sdk_field := sdk_fields.get(identifier):
+                steps = xpath_steps(sdk_field["xpathAbsolute"])
                 # The last step of the XPath, without predicates, like "cbc:ID" or "@listName".
-                step = re.sub(r"\[[^\]]*\]", "", sdk_field["xpathAbsolute"]).rsplit("/", 1)[-1]
+                step = steps[-1].split("[", 1)[0]
                 if step.startswith("@"):
                     if f"{step[1:]}=" not in eforms_example:
                         example_errors.add(f"{identifier}: no {step} attribute")
@@ -858,6 +880,24 @@ def lint(filename, additional_properties):
                     for actual in re.findall(rf'<{step}\b[^>]*\blistName="([^"]*)"', eforms_example):
                         if actual != expected:
                             example_errors.add(f'{identifier}: listName="{actual}", expected "{expected}"')
+
+                # Evaluate the XPath, predicates included, from the step that matches the example's top element.
+                if element is not None:
+                    names = [s.split("[", 1)[0] for s in steps]
+                    tops = {f"{child.prefix}:{lxml.etree.QName(child).localname}" for child in element}
+                    namespaces = {prefix: uri for prefix, uri in element.nsmap.items() if prefix}
+                    starts = [i for i, name in enumerate(names) if name in tops]
+                    try:
+                        if not starts:
+                            example_errors.add(f"{identifier}: no top element on the XPath: {', '.join(sorted(tops))}")
+                        elif not any(element.xpath("./" + "/".join(steps[i:]), namespaces=namespaces) for i in starts):
+                            # If the path matches without predicates, the example omits the elements they test.
+                            if any(element.xpath("./" + "/".join(names[i:]), namespaces=namespaces) for i in starts):
+                                untested_predicates.add(identifier)
+                            else:
+                                example_errors.add(f"{identifier}: no match for {'/'.join(names[starts[0] :])}")
+                    except lxml.etree.XPathEvalError:
+                        unsupported_xpaths.add(identifier)
 
         # Format and validate JSON.
         ocds_example = field["OCDS example"]
@@ -929,6 +969,8 @@ def lint(filename, additional_properties):
         ("HTTP errors", http_errors),
         ("Anchor errors", anchor_errors),
         ("eForms example errors", example_errors),
+        ("eForms examples without the elements that XPath predicates test", untested_predicates),
+        ("XPaths not checked (XPath 2.0)", unsupported_xpaths),
     ):
         if errors:
             click.echo(f"\n{title} ({len(errors)}):")
