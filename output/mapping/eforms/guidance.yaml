@@ -1977,7 +1977,7 @@
     TED guidance:
     - Add a `Charge` object to the contract's `.implementation.charges` array, set its `.id` to 'government', set its `.paidBy` to 'government', set its `.title` to the [translation](../../operations/#get-a-translation) of 'Prizes, payments or other financial advantages provided by the contracting authority/entity', and map to its `.estimatedValue.amount`.
     eForms guidance: |-
-        Get the value of `ancestor::efac:SettledContract/cbc:ID` whose `efac:LotTender/cbc:ID` is equal to the value of `ancestor::efac:LotTender/cbc:ID` and [get the contract for this SettledContract](operations.md#get-the-contract-for-a-settledcontract).
+        Get the `ancestor::efac:NoticeResult/efac:SettledContract` whose `efac:LotTender/cbc:ID` is equal to the value of `ancestor::efac:LotTender/cbc:ID`, and [get the contract for this SettledContract](operations.md#get-the-contract-for-a-settledcontract).
 
         Add a `Charge` object to the contract's `.implementation.charges` array:
 
@@ -6541,11 +6541,11 @@
     eForms guidance: |-
         This field maps to the same `Amendment` objects as created for [BT-201-Contract Modification Reason Description](#BT-201-Contract) and [BT-202-Contract Modification Description](#BT-202-Contract).
 
-        If no `Contract` object in the `contracts` array has an `.id` equal to `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`:
+        If no `Contract` object in the `contracts` array has an `.id` equal to `ancestor::efac:ContractModification/efac:Change/efac:ChangedSection/efbc:ChangedSectionIdentifier`:
 
         - Add a `Contract` object to the `contracts` array:
-          - Set its `.id` to the value of `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`.
-        - Get all `ancestor::efac:NoticeResult/efac:LotResult` with an `efac:SettledContract/cbc:ID` equal to `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`:
+          - Set its `.id` to the value of `ancestor::efac:ContractModification/efac:Change/efac:ChangedSection/efbc:ChangedSectionIdentifier`.
+        - Get all `ancestor::efext:EformsExtension/efac:NoticeResult/efac:LotResult` with an `efac:SettledContract/cbc:ID` equal to `ancestor::efac:ContractModification/efac:Change/efac:ChangedSection/efbc:ChangedSectionIdentifier`:
           - If there is exactly one, add its `cbc:ID` to the contract's `.awardID`.
           - If there is more than one, add each `cbc:ID` to the contract's `.awardIDs`.
 
@@ -6573,11 +6573,11 @@
     eForms guidance: |-
         This field maps to the same `Amendment` objects as created for [BT-200-Contract Modification Reason Code](#BT-200-Contract) and [BT-202-Contract Modification Description](#BT-202-Contract).
 
-        If no `Contract` object in the `contracts` array has an `.id` equal to `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`:
+        If no `Contract` object in the `contracts` array has an `.id` equal to `ancestor::efac:ContractModification/efac:Change/efac:ChangedSection/efbc:ChangedSectionIdentifier`:
 
         - Add a `Contract` object to the `contracts` array:
-          - Set its `.id` to the value of `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`.
-        - Get all `ancestor::efac:NoticeResult/efac:LotResult` with an `efac:SettledContract/cbc:ID` equal to `ancestor::efac:Change/efac:ChangedSection/efbc:ChangeSectionIdentifier`:
+          - Set its `.id` to the value of `ancestor::efac:ContractModification/efac:Change/efac:ChangedSection/efbc:ChangedSectionIdentifier`.
+        - Get all `ancestor::efext:EformsExtension/efac:NoticeResult/efac:LotResult` with an `efac:SettledContract/cbc:ID` equal to `ancestor::efac:ContractModification/efac:Change/efac:ChangedSection/efbc:ChangedSectionIdentifier`:
           - If there is exactly one, add its `cbc:ID` to the contract's `.awardID`.
           - If there is more than one, add each `cbc:ID` to the contract's `.awardIDs`.
 
@@ -6602,11 +6602,11 @@
     eForms guidance: |-
         This field maps to the same `Amendment` objects as created for [BT-200-Contract Modification Reason Code](#BT-200-Contract) and [BT-201-Contract Modification Reason Description](#BT-201-Contract).
 
-        If no `Contract` object in the `contracts` array has an `.id` equal to `ancestor::efac:ChangedSection/efbc:ChangeSectionIdentifier`:
+        If no `Contract` object in the `contracts` array has an `.id` equal to `ancestor::efac:ContractModification/efac:Change/efac:ChangedSection/efbc:ChangedSectionIdentifier`:
 
         - Add a `Contract` object to the `contracts` array:
-          - Set its `.id` to the value of `ancestor::efac:ChangedSection/efbc:ChangeSectionIdentifier`.
-        - Get all `ancestor::efac:NoticeResult/efac:LotResult` with an `efac:SettledContract/cbc:ID` equal to `ancestor::efac:ChangedSection/efbc:ChangeSectionIdentifier`:
+          - Set its `.id` to the value of `ancestor::efac:ContractModification/efac:Change/efac:ChangedSection/efbc:ChangedSectionIdentifier`.
+        - Get all `ancestor::efext:EformsExtension/efac:NoticeResult/efac:LotResult` with an `efac:SettledContract/cbc:ID` equal to `ancestor::efac:ContractModification/efac:Change/efac:ChangedSection/efbc:ChangedSectionIdentifier`:
           - If there is exactly one, add its `cbc:ID` to the contract's `.awardID`.
           - If there is more than one, add each `cbc:ID` to the contract's `.awardIDs`.
 
@@ -7064,7 +7064,7 @@
     eForms guidance: |-
         This field maps to the same objects as created for [BT-263-Part Additional Classification Code](#BT-263-Part).
 
-        If no `Item` object was created for `ancestor::AdditionalCommodityClassification`, add an `Item` object to the `tender.items` array, and set the item's `.id` incrementally.
+        If no `Item` object was created for `ancestor::cac:AdditionalCommodityClassification`, add an `Item` object to the `tender.items` array, and set the item's `.id` incrementally.
 
         For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update the corresponding `Classification` object in the item's `.additionalClassifications` array:
 
@@ -7088,7 +7088,7 @@
     eForms guidance: |-
         This field maps to the same objects as created for [BT-263-Procedure Additional Classification Code](#BT-263-Procedure).
 
-        If no `Item` object was created for `ancestor::AdditionalCommodityClassification`, add an `Item` object to the `tender.items` array, and set the item's `.id` incrementally.
+        If no `Item` object was created for `ancestor::cac:AdditionalCommodityClassification`, add an `Item` object to the `tender.items` array, and set the item's `.id` incrementally.
 
         For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update the corresponding `Classification` object in the item's `.additionalClassifications` array:
 
@@ -7133,7 +7133,7 @@
     eForms guidance: |-
         This field maps to the same object as created for [BT-262-Part Main Classification Code](#BT-262-Part).
 
-        If no `Item` object was created for `ancestor::MainCommodityClassification`, add an `Item` object to the `tender.items` array, and set the item's `.id` incrementally.
+        If no `Item` object was created for `ancestor::cac:MainCommodityClassification`, add an `Item` object to the `tender.items` array, and set the item's `.id` incrementally.
 
         Capitalize the value of `cbc:ItemClassificationCode[@listName]`, and map to the item's `.classification.scheme`.
     eForms example: <cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification>
@@ -7155,7 +7155,7 @@
     eForms guidance: |-
         This field maps to the same object as created for [BT-262-Procedure Main Classification Code](#BT-262-Procedure).
 
-        If no `Item` object was created for `ancestor::MainCommodityClassification`, add an `Item` object to the `tender.items` array, and set the item's `.id` incrementally.
+        If no `Item` object was created for `ancestor::cac:MainCommodityClassification`, add an `Item` object to the `tender.items` array, and set the item's `.id` incrementally.
 
         Capitalize the value of `cbc:ItemClassificationCode[@listName]`, and map to the item's `.classification.scheme`.
     eForms example: <cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification>
@@ -7205,7 +7205,7 @@
     eForms guidance: |-
         This field maps to the same object as created for [BT-26(m)-Part Classification Type (e.g. CPV)](<#BT-26(m)-Part>).
 
-        If no `Item` object was created for `ancestor::MainCommodityClassification`, add an `Item` object to the `tender.items` array, and set the item's `.id` incrementally.
+        If no `Item` object was created for `ancestor::cac:MainCommodityClassification`, add an `Item` object to the `tender.items` array, and set the item's `.id` incrementally.
 
         Map to the item's `.classification.id`.
     eForms example: <cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification>
@@ -7251,7 +7251,7 @@
     eForms guidance: |-
         This field maps to the same object as created for [BT-26(m)-Procedure Classification Type (e.g. CPV)](<#BT-26(m)-Procedure>).
 
-        If no `Item` object was created for `ancestor::MainCommodityClassification`, add an `Item` object to the `tender.items` array, and set the item's `.id` incrementally.
+        If no `Item` object was created for `ancestor::cac:MainCommodityClassification`, add an `Item` object to the `tender.items` array, and set the item's `.id` incrementally.
 
         Map to the item's `.classification.id`.
     eForms example: <cac:MainCommodityClassification><cbc:ItemClassificationCode listName="cpv">15311100</cbc:ItemClassificationCode></cac:MainCommodityClassification>
@@ -7293,7 +7293,7 @@
     eForms guidance: |-
         This field maps to the same objects as created for [BT-26(a)-Part Classification Type (e.g. CPV)](<#BT-26(a)-Part>).
 
-        If no `Item` object was created for `ancestor::AdditionalCommodityClassification`, add an `Item` object to the `tender.items` array, and set the item's `.id` incrementally.
+        If no `Item` object was created for `ancestor::cac:AdditionalCommodityClassification`, add an `Item` object to the `tender.items` array, and set the item's `.id` incrementally.
 
         For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update the corresponding `Classification` object in the item's `.additionalClassifications` array:
 
@@ -7316,7 +7316,7 @@
     eForms guidance: |-
         This field maps to the same objects as created for [BT-26(a)-Procedure Classification Type (e.g. CPV)](<#BT-26(a)-Procedure>).
 
-        If no `Item` object was created for `ancestor::AdditionalCommodityClassification`, add an `Item` object to the `tender.items` array, and set the item's `.id` incrementally.
+        If no `Item` object was created for `ancestor::cac:AdditionalCommodityClassification`, add an `Item` object to the `tender.items` array, and set the item's `.id` incrementally.
 
         For each `cac:AdditionalCommodityClassification/cbc:ItemClassificationCode`, add or update the corresponding `Classification` object in the item's `.additionalClassifications` array:
 
@@ -7653,7 +7653,7 @@
         - [Get the contract for the SettledContract](operations.md#get-the-contract-for-a-settledcontract), and add this field to its `.relatedBids` array.
         - Get the `ancestor::efac:NoticeResult/efac:LotTender` whose `/cbc:ID` is equal to this field.
         - Get the `ancestor::efac:NoticeResult/efac:TenderingParty` whose `/cbc:ID` matches the LotTender's `/efac:TenderingParty/cbc:ID`.
-        - For each `ancestor::efac:TenderingParty/efac:Tenderer`, [get the organization for the tenderer](operations.md#get-the-organization-for-a-tenderer):
+        - For each of the TenderingParty's `efac:Tenderer`, [get the organization for the tenderer](operations.md#get-the-organization-for-a-tenderer):
           - Add 'supplier' to the organization's `.roles` array.
           - For each `ancestor::efac:NoticeResult/efac:LotResult` with an `/efac:SettledContract/cbc:ID` equal to the value of `ancestor::efac:SettledContract/cbc:ID`:
             - [Get the award for the LotResult](operations.md#get-the-award-for-a-lotresult).
@@ -11626,7 +11626,7 @@
     eForms guidance: |-
         This field maps to the same `Statistic` objects as created for [BT-712(b)-LotResult Buyer Review Complainants (Number)](<#BT-712(b)-LotResult>).
 
-        For each `ancestor::AppealRequestStatistics`, [add a complaints statistic](operations.md#add-a-complaints-statistic) or update the corresponding `Statistic` object, and set its `.measure` to "complainants".
+        For each `ancestor::efac:AppealRequestsStatistics`, [add a complaints statistic](operations.md#add-a-complaints-statistic) or update the corresponding `Statistic` object, and set its `.measure` to "complainants".
 
         [Get the lot for the LotResult](operations.md#get-the-lot-for-a-lotresult), and map the lot's `.id` to the statistic's `.relatedLot`.
     eForms example: <efac:NoticeResult><efac:LotResult><efac:AppealRequestsStatistics><efbc:StatisticsCode listName="review-type">complainants</efbc:StatisticsCode></efac:AppealRequestsStatistics><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotResult></efac:NoticeResult>
@@ -11647,7 +11647,7 @@
     eForms guidance: |-
         This field maps to the same `Statistic` objects as created for [BT-712(a)-LotResult Buyer Review Complainants (Code)](<#BT-712(a)-LotResult>).
 
-        For each `ancestor::AppealRequestStatistics`, [add a complaints statistic](operations.md#add-a-complaints-statistic) or update the corresponding `Statistic` object, and map to its `.value`.
+        For each `ancestor::efac:AppealRequestsStatistics`, [add a complaints statistic](operations.md#add-a-complaints-statistic) or update the corresponding `Statistic` object, and map to its `.value`.
 
         [Get the lot for the LotResult](operations.md#get-the-lot-for-a-lotresult), and map the lot's `.id` to the statistic's `.relatedLot`.
     eForms example: <efac:NoticeResult><efac:LotResult><efac:AppealRequestsStatistics><efbc:StatisticsCode listName="review-type">complainants</efbc:StatisticsCode><efbc:StatisticsNumeric>2</efbc:StatisticsNumeric></efac:AppealRequestsStatistics><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotResult></efac:NoticeResult>
@@ -11741,12 +11741,12 @@
 
         - Get the `ancestor::efac:NoticeResult/efac:LotResult` with an `/efac:LotTender/cbc:ID` equal to `ancestor::efac:LotTender/cbc:ID`.
 
-        - If no `Award` object in the `awards` array has an `.id` equal to this `efac:LotResult//cbc:ID`:
+        - If no `Award` object in the `awards` array has an `.id` equal to this `efac:LotResult/cbc:ID`:
 
           - Add an `Award` object to the `awards` array:
             - Set its `.id` to this `efac:LotResult/cbc:ID`.
 
-        - Add the value of `ancestor::efac:TenderLot/cbc:ID` to the award's `.relatedLots`.
+        - Add the value of `ancestor::efac:LotTender/efac:TenderLot/cbc:ID` to the award's `.relatedLots`.
 
         - Map this field to the award's `.value.amount`.
 
@@ -14420,9 +14420,9 @@
     eForms guidance: |-
         This mapping assumes that this field's value is consistent across all the LotTenders for a given lot. If the values in your data source vary, contact the [OCDS Data Support Team](mailto:data@open-contracting.org).
 
-        If the value of `ancestor::ContractTerm/efbc:TermCode` is `all-rev-tic`, discard. Otherwise, [get the lot for the LotTender](operations.md#get-the-lot-for-a-lottender).
+        If the value of `ancestor::efac:ContractTerm/efbc:TermCode` is `all-rev-tic`, discard. Otherwise, [get the lot for the LotTender](operations.md#get-the-lot-for-a-lottender).
 
-        If the value of `ancestor::ContractTerm/efbc:TermCode` is `exc-right`, set the lot's `contractTerms.hasExclusiveRights` to `true`. Otherwise,  map to the lot's `.contractTerms` according to the value of `ancestor::ContractTerm/efbc:TermCode`:
+        If the value of `ancestor::efac:ContractTerm/efbc:TermCode` is `exc-right`, set the lot's `contractTerms.hasExclusiveRights` to `true`. Otherwise,  map to the lot's `.contractTerms` according to the value of `ancestor::efac:ContractTerm/efbc:TermCode`:
 
         - `cost-comp`: Map to `contractTerms.financialTerms`
         - `other`:  Map to `contractTerms.otherTerms`
@@ -15158,7 +15158,7 @@
     pattern: ^ORG-[0-9]{4}$
     eForms guidance: |-
         - [Get the organization for the organization technical identifier reference](operations.md#get-the-organization-for-an-organization-technical-identifier-reference).
-        - Get the `ancestor::ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:Organization/efac:Company` whose `/cac:PartyIdentification/cbc:ID` is equal to this field's value.
+        - Get the `/*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:Organization/efac:Company` whose `/cac:PartyIdentification/cbc:ID` is equal to this field's value.
         - Map `/cac:PartyName/cbc:Name` to the organization's `.name`.
     eForms example: <cac:ContractingParty><cac:Party><cac:ServiceProviderParty><cac:Party><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></cac:Party></cac:ServiceProviderParty></cac:Party></cac:ContractingParty><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification><cac:PartyName><cbc:Name languageID="ENG">Service Provider Ltd</cbc:Name></cac:PartyName></efac:Company></efac:Organization></efac:Organizations></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions>
     OCDS example: '{"parties":[{"id":"ORG-0001","name":"Service Provider Ltd"}]}'
