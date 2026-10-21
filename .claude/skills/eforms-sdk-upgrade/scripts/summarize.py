@@ -252,9 +252,15 @@ def echo_codes(head, old_path, new_path):
         for codelist, values in by_list.items():
             by_values[tuple(values)].append(codelist)
         for values, codelists in by_values.items():
-            # Match codes as quoted strings, XML text or CSV cells, not as words in prose.
+            # Match codes as quoted strings, XML text or CSV cells, not as words in prose. Skip codes that a tailored
+            # codelist removed, but that its parent (e.g. legal-basis for legal-basis_legal-basis-1) still has.
             used = (
-                [v for v in values if re.search(rf"""(^|['"`>,]){re.escape(v)}($|['"`<,])""", mapped, re.MULTILINE)]
+                [
+                    v
+                    for v in values
+                    if re.search(rf"""(^|['"`>,]){re.escape(v)}($|['"`<,])""", mapped, re.MULTILINE)
+                    and not all((f"{c.split('_')[0]}.gc", v) in new_codes for c in codelists)
+                ]
                 if label == "Removed"
                 else []
             )
