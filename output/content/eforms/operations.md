@@ -130,18 +130,19 @@ Get the `Organization` object in the `parties` array whose `.id` is equal to the
 
 ### Get the person for an ultimate beneficial owner
 
-Get the `Organization` object in the `parties` array whose `id` is equal to the value of `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`. If none exists yet:
+An organization references its ultimate beneficial owners in OPT-302-Organization (Beneficial Owner Reference). For each `ancestor::efac:Organizations/efac:Organization` whose `efac:UltimateBeneficialOwner/cbc:ID` is equal to the value of `ancestor::efac:UltimateBeneficialOwner/cbc:ID`:
 
-1. Add an `Organization` to `parties`
-1. Set its `.id` to the value of `ancestor::efac:Organization/efac:Company/cac:PartyIdentification/cbc:ID`.
-
-Get the `Person` object in the organization's `.beneficialOwners` array whose `id` is equal to the value of `ancestor::efac:UltimateBeneficialOwner/cbc:ID`. If none exists yet:
-
-1. Add a `Person` to `.beneficialOwners`
-1. Set its `.id` to the value of `ancestor::efac:UltimateBeneficialOwner/cbc:ID`.
+1. Get the `Organization` object in the `parties` array whose `id` is equal to the value of the organization's `efac:Company/cac:PartyIdentification/cbc:ID`. If none exists yet:
+   1. Add an `Organization` to `parties`
+   1. Set its `.id` to the value of the organization's `efac:Company/cac:PartyIdentification/cbc:ID`.
+1. Get the `Person` object in the organization's `.beneficialOwners` array whose `id` is equal to the value of `ancestor::efac:UltimateBeneficialOwner/cbc:ID`. If none exists yet:
+   1. Add a `Person` to `.beneficialOwners`
+   1. Set its `.id` to the value of `ancestor::efac:UltimateBeneficialOwner/cbc:ID`.
 
 ```{note}
-`ancestor::efac:UltimateBeneficialOwner/cbc:ID` is assumed to be a unique within the scope of the contracting process.
+`ancestor::efac:UltimateBeneficialOwner/cbc:ID` is assumed to be unique within the scope of the contracting process.
+
+If more than one organization references the ultimate beneficial owner, the person is repeated in each organization's `.beneficialOwners`. If no organization references it, the field is discarded.
 ```
 
 ### Get the organization for an organization technical identifier reference
