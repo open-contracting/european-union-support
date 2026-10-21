@@ -505,6 +505,33 @@ def update_with_annex(filename):
 
         df.at[label, "Business groups"] = dict(line[:-1]) if len(line) > 1 else None
 
+    # !!! The annex omits these business terms, so use the SDK documentation's Table 6 "Review components".
+    # https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#reviewSection
+    missing = pd.DataFrame(
+        [
+            (
+                "BT-804",
+                "Review Technical Identifier",
+                "No",
+                "A technical identifier linked to this review information.",
+            ),
+            # Table 6 repeats BT-799's description, so use the SDK's field description (translations/field_en.xml).
+            (
+                "BT-807",
+                "Review Body Identifier",
+                "No",
+                (
+                    "Identifier of review body points to an organisation (ORG-XXXX), or one of its alternate contact "
+                    "points (TPO-XXXX), dealing with reviews."
+                ),
+            ),
+            ("BT-808", "Review Applicant Identifier", "Yes", "The identifier of the applicant."),
+        ],
+        columns=["ID", "Name", "Repeatable", "Description"],
+    )
+    missing["Business groups"] = [{"BG-716": "Review"}] * len(missing)
+    df = pd.concat([df, missing], ignore_index=True)
+
     # We can now remove all rows for business groups.
     df = df[~df["ID"].str.startswith("BG-")]
 
