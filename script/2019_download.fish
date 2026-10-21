@@ -9,7 +9,7 @@ cd source
 
 # https://ec.europa.eu/growth/single-market/public-procurement/digital-procurement/eforms_en
 
-curl -sS -o CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx https://ec.europa.eu/docsroom/documents/52697/attachments/2/translations/en/renditions/native
+curl -sSL -o CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx https://ec.europa.eu/docsroom/documents/52697/attachments/2/translations/en/renditions/native
 
 # https://github.com/OP-TED/eForms-SDK/blob/main/fields/fields.json
 

@@ -134,7 +134,7 @@ def get_column_order(df, drop=()):
     for column in column_order:
         if column not in df.columns:
             column_order.remove(column)
-    for column in df.columns.format():
+    for column in df.columns:
         if column not in column_order:
             column_order.append(column)
     for column in drop:
@@ -313,13 +313,13 @@ def update_with_sdk(filename, verbose):
             labels_to_drop.add(label)
 
         # Remove a field's own attribute fields, as we documented these together.
-        if not np.isnan(row["attributeOf"]) and row["attributeOf"] in label:
+        if isinstance(row["attributeOf"], str) and row["attributeOf"] in label:
             labels_to_drop.add(label)
 
         # Remove fields that are forbidden on all supported notice types.
         forbidden = row["forbidden"]
         # Short-circuit the logic that follows.
-        if np.isnan(forbidden):
+        if not isinstance(forbidden, dict):
             continue
         # Abbreviate the constraints (there is sometimes a conditional constraint.).
         for constraint in forbidden["constraints"][1:]:
@@ -368,7 +368,7 @@ def update_with_sdk(filename, verbose):
                 df.at[label, "repeatable"] = True
 
         mandatory = row["mandatory"]
-        if not np.isnan(mandatory):
+        if isinstance(mandatory, dict):
             values = []
             for constraint in mandatory["constraints"]:
                 value = " ".join({subtypes.get(t, t): None for t in constraint.pop("noticeTypes")})
@@ -563,6 +563,17 @@ def update_with_annex(filename):
 
     # Make the repeatable properties comparable.
     df["Repeatable"] = df["Repeatable"].map({"Yes": True, "No": False})
+
+    # The SDK splits some BTs into BTs with suffixed IDs, like BT-67(a). Copy the annex row for each suffix.
+    with filename.open() as f:
+        bt_ids = {row["btId"] for row in yaml.safe_load(f) if "btId" in row}
+    split = set()
+    for bt_id in sorted(bt_ids - set(df["ID"])):
+        base = re.sub(r"\(\w+\)$", "", bt_id)
+        if base != bt_id and base in set(df["ID"]):
+            df = pd.concat([df, df[df["ID"] == base].assign(ID=bt_id)], ignore_index=True)
+            split.add(base)
+    df = df[~df["ID"].isin(split)]
 
     # The fields metadata covers "Name", "Data type", "Repeatable" and "Legal Status" ("forbidden" and "mandatory").
     # "Business groups" replaces "Level". "Fields not included in the legal text" isn't informative.
@@ -1117,12 +1128,16 @@ def business_groups():
 
 
 @cli.command()
-def codelists():
+@click.option("--ref", help="The eForms SDK tag (default: the default branch)")
+def codelists(ref):
     """Print information about eForms codelists."""
     writer = csv.writer(sys.stdout, lineterminator="\n")
     writer.writerow(["codelist", "code"])
 
-    for file in get("https://api.github.com/repos/OP-TED/eForms-SDK/contents/codelists").json():
+    url = "https://api.github.com/repos/OP-TED/eForms-SDK/contents/codelists"
+    if ref:
+        url += f"?ref={ref}"
+    for file in get(url).json():
         if not file["name"].endswith(".gc"):
             continue
 
