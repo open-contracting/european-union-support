@@ -504,7 +504,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:FrameworkAgreement/cbc:MaximumOperatorQuantity
     type: integer
     repeatable: false
-    mandatory: CN
+    pattern: ^(\d+)$
     Description: The maximum number of participants in the framework agreement.
     Business groups:
         BG-706: Techniques
@@ -582,7 +582,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efbc:OverallMaximumFrameworkContractsAmount
     type: amount
     repeatable: false
-    mandatory: CAN(VEAT) CAN
+    mandatory: CAN(VEAT) CAN CAN(MOD)
     Description: "The maximum value which can be spent within the framework agreement(s) announced in this notice over its/their whole duration, in all lots, including options and renewals, as calculated on the basis of the winner\u2019s tender or winners\u2019 tenders."
     Business groups:
         BG-7: Notice Result
@@ -904,6 +904,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:AdditionalInformationRequestPeriod/cbc:EndTime
     type: time
     repeatable: false
+    mandatory: PIN PIN(CN) CN CEI E3 T01
     pattern: ^(([01]\d|2[0-3])((:[0-5]\d){1,2}(\.\d+)?)?)(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
     Description: The time limit for requesting additional information about the procurement procedure.
     Business groups:
@@ -923,6 +924,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingProcess/cac:AdditionalInformationRequestPeriod/cbc:EndTime
     type: time
     repeatable: false
+    mandatory: PIN E2
     pattern: ^(([01]\d|2[0-3])((:[0-5]\d){1,2}(\.\d+)?)?)(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
     Description: The time limit for requesting additional information about the procurement procedure.
     Business groups:
@@ -1064,6 +1066,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:OpenTenderEvent/cbc:OccurrenceTime
     type: time
     repeatable: false
+    mandatory: CN
     pattern: ^(([01]\d|2[0-3])((:[0-5]\d){1,2}(\.\d+)?)?)(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
     Description: The date and time for the public opening of tenders.
     Business groups:
@@ -1624,7 +1627,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:DecisionReason/efbc:DecisionReasonCode
     type: code
     repeatable: false
-    mandatory: CAN T02
+    mandatory: CAN
     codeList: non-award-justification
     Description: The reason for not choosing a winner.
     Business groups:
@@ -1714,7 +1717,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:CallForTendersDocumentReference/cac:Attachment[../cbc:DocumentType/text()='non-restricted-document']/cac:ExternalReference/cbc:URI
     type: url
     repeatable: false
-    mandatory: PIN PIN(CN) CN CEI E1 E3
+    mandatory: PIN PIN(CN) CN CEI E1 E3 T01
     pattern: ((^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS|sftp|SFTP)://)|(^(w|W){3}(\d)?\.))[\w\?!\./:;,\-_=#+*%@"\(\)&]+
     Description: The internet address for accessing (the non-restricted part of) the procurement documents. For all notices except prior information notices, the address shall give access that is direct (i.e. the exact webpage with the documents, not a general website), unrestricted (e.g. no registration), full (i.e. the procurement documents are complete) and free of charge and the documents shall be available already at the time of the publication of the notice.
     Business groups:
@@ -2131,6 +2134,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/cbc:RankCode
     type: integer
     repeatable: false
+    pattern: ^(\d+)$
     Description: The position of the tender (i.e. whether the tender ended up first, second, third, etc.) in a design contest, a framework agreement with multiple winners (e.g. cascades), an innovation partnership, a competitive dialogue, or another procedure.
     Business groups:
         BG-7: Notice Result
@@ -7582,6 +7586,7 @@
     type: integer
     repeatable: false
     mandatory: CN (conditional)
+    pattern: ^(\d+)$
     Description: The maximum number of lots for which one tenderer can submit tenders.
     Business groups:
         BG-6: Procedure
@@ -7663,6 +7668,7 @@
     type: integer
     repeatable: false
     mandatory: CEI
+    pattern: ^(\d+)$
     Description: The maximum number of lots for which contract(s) can be awarded to one tenderer.
     Business groups:
         BG-6: Procedure
@@ -7709,6 +7715,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cac:PlannedPeriod/cbc:DurationMeasure
     type: measure
     repeatable: false
+    pattern: ^(\d+)$
     Description: The (estimated) period from the start to the end of the contract, framework agreement, dynamic purchasing system or qualification system. This shall include any options and renewals.
     Business groups:
         BG-36: Duration
@@ -7741,6 +7748,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cac:PlannedPeriod/cbc:DurationMeasure
     type: measure
     repeatable: false
+    pattern: ^(\d+)$
     Description: The (estimated) period from the start to the end of the contract, framework agreement, dynamic purchasing system or qualification system. This shall include any options and renewals.
     Business groups:
         BG-36: Duration
@@ -7825,6 +7833,8 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:Prize/cbc:RankCode
     type: integer
     repeatable: false
+    mandatory: PIN PIN(CN) CN E3
+    pattern: ^(\d+)$
     Description: The place (e.g. first place, second place) in a design contest, innovation partnership or competitive dialogue that receives the prize.
     Business groups:
         BG-704: Reward and Jury
@@ -7913,6 +7923,7 @@
     type: integer
     repeatable: false
     mandatory: CN
+    pattern: ^(\d+)$
     Description: The minimum number of candidates to be invited for the second stage of the procedure.
     Business groups:
         BG-6: Procedure
@@ -8475,7 +8486,7 @@
     type: email
     repeatable: false
     mandatory: PIN PIN(CN) CN CAN(VEAT) CAN CAN(MOD) CEI E6 T01 T02 (conditional)
-    pattern: ^[A-Za-z0-9!#$%&''*+/=?_-]+(\.[A-Za-z0-9!#$%&''*+/=?_-]+)*@([A-Za-z0-9]([A-Za-z0-9_-]*[A-Za-z0-9])?\.)+([A-Za-z]{2,})$
+    pattern: ^[\w!#$%&''*+/=?_-]+(\.[\w!#$%&''*+/=?_-]+)*@([\w]([\w_-]*[\w])?\.)+([\w]{2,})$
     Description: The email address for contacting the organisation. To avoid unnecessary processing of personal data, the email address shall allow the identification of a physical person only when necessary (in the sense of the Regulation (EU) 2016/679 and Regulation (EU) 2018/1725).
     Business groups:
         BG-703: Organisation
@@ -8566,7 +8577,7 @@
     type: email
     repeatable: false
     mandatory: E1 E2 E3 E4 E5 (conditional)
-    pattern: ^[A-Za-z0-9!#$%&''*+/=?_-]+(\.[A-Za-z0-9!#$%&''*+/=?_-]+)*@([A-Za-z0-9]([A-Za-z0-9_-]*[A-Za-z0-9])?\.)+([A-Za-z]{2,})$
+    pattern: ^[\w!#$%&''*+/=?_-]+(\.[\w!#$%&''*+/=?_-]+)*@([\w]([\w_-]*[\w])?\.)+([\w]{2,})$
     Description: The email address for contacting the organisation. To avoid unnecessary processing of personal data, the email address shall allow the identification of a physical person only when necessary (in the sense of the Regulation (EU) 2016/679 and Regulation (EU) 2018/1725).
     Business groups:
         BG-703: Organisation
@@ -8583,7 +8594,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:UltimateBeneficialOwner/cac:Contact/cbc:ElectronicMail
     type: email
     repeatable: false
-    pattern: ^[A-Za-z0-9!#$%&''*+/=?_-]+(\.[A-Za-z0-9!#$%&''*+/=?_-]+)*@([A-Za-z0-9]([A-Za-z0-9_-]*[A-Za-z0-9])?\.)+([A-Za-z]{2,})$
+    pattern: ^[\w!#$%&''*+/=?_-]+(\.[\w!#$%&''*+/=?_-]+)*@([\w]([\w_-]*[\w])?\.)+([\w]{2,})$
     Description: The email address for contacting the organisation. To avoid unnecessary processing of personal data, the email address shall allow the identification of a physical person only when necessary (in the sense of the Regulation (EU) 2016/679 and Regulation (EU) 2018/1725).
     Business groups:
         BG-703: Organisation
@@ -8836,6 +8847,7 @@
     type: integer
     repeatable: false
     mandatory: PIN PIN(CN) CN E3
+    pattern: ^(\d+)$
     Description: The maximum number of candidates to be invited for the second stage of the procedure.
     Business groups:
         BG-6: Procedure
@@ -10124,7 +10136,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/cbc:Description
     type: text-multilingual
     repeatable: false
-    mandatory: CN CAN(VEAT) CAN E3 E4 E5
+    mandatory: PIN PIN(CN) CN CAN(VEAT) CAN E3 E4 E5
     Description: The description of the award criterion.
     Business groups:
         BG-707: Award Criteria
@@ -10145,7 +10157,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cac:SubordinateAwardingCriterion/cbc:Description
     type: text-multilingual
     repeatable: false
-    mandatory: E3 E4 E5
+    mandatory: PIN PIN(CN) CN CAN(VEAT) CAN E3 E4 E5
     Description: The description of the award criterion.
     Business groups:
         BG-707: Award Criteria
@@ -10617,6 +10629,7 @@
     type: integer
     repeatable: false
     mandatory: CN
+    pattern: ^(\d+)$
     Description: The maximum number of times the contract can be renewed. By renewing, the buyer reserves the right (i.e. not an obligation) to renew the contract (i.e. extend its duration) without a new procurement procedure. For example, a contract may be valid for one year and the buyer may keep a possibility to renew it (e.g. once, twice) for another three months, if he is content with the services he received.
     Business groups:
         BG-36: Duration
@@ -10751,7 +10764,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:CallForTendersDocumentReference/cac:Attachment[../cbc:DocumentType/text()='restricted-document']/cac:ExternalReference/cbc:URI
     type: url
     repeatable: false
-    mandatory: PIN PIN(CN) CN CEI E1 E3
+    mandatory: PIN PIN(CN) CN CEI E1 E3 T01
     pattern: ((^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS|sftp|SFTP)://)|(^(w|W){3}(\d)?\.))[\w\?!\./:;,\-_=#+*%@"\(\)&]+
     Description: The internet address with information on accessing the restricted (part of the) procurement documents.
     Business groups:
@@ -10982,6 +10995,7 @@
     type: number
     repeatable: false
     mandatory: CAN E4 E5
+    pattern: ^(\d+)$
     Description: The number of requests the buyer received to review any of its decisions.
     Business groups:
         BG-612: Buyer Review Summary
@@ -11043,6 +11057,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:Prize/cbc:ValueAmount
     type: amount
     repeatable: false
+    mandatory: CN (conditional)
     Description: The value of the prize, if any, for the winner of a design contest, innovation partnership or competitive dialogue.
     Business groups:
         BG-704: Reward and Jury
@@ -11145,12 +11160,16 @@
 -   id: BT-67(a)-Procedure
     parentNodeId: ND-ExclusionGrounds
     name: Exclusion Ground
-    btId: BT-67
+    btId: BT-67(a)
     xpathAbsolute: /*/cac:TenderingTerms/cac:TendererQualificationRequest[cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode/@listName='exclusion-ground']/cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode
     type: code
     repeatable: false
     mandatory: PIN PIN(CN) CN CEI E3
     codeList: exclusion-ground
+    Description: The criteria (or criterion) of the given type are (is) used, unused, or (in case of prior information notice used as a call for competition or to reduce time limits) the use is not yet known.
+    Business groups:
+        BG-700: Exclusion Grounds and Selection Criteria
+        BG-701: Exclusion Grounds
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/F07_2014/LEFTI/QUALIFICATION/CONDITIONS
     TED guidance:
@@ -11162,10 +11181,14 @@
 -   id: BT-67(b)-Procedure
     parentNodeId: ND-ExclusionGrounds
     name: Exclusion Ground Description
-    btId: BT-67
+    btId: BT-67(b)
     xpathAbsolute: /*/cac:TenderingTerms/cac:TendererQualificationRequest[cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode/@listName='exclusion-ground']/cac:SpecificTendererRequirement/cbc:Description
     type: text-multilingual
     repeatable: false
+    Description: The brief description of the exclusion criteria (or criterion).
+    Business groups:
+        BG-700: Exclusion Grounds and Selection Criteria
+        BG-701: Exclusion Grounds
     eForms guidance: |-
         This field maps to the same `ExclusionCriteria` objects as created for [BT-67(a)-Procedure Exclusion Ground](<#BT-67(a)-Procedure>).
 
@@ -11253,6 +11276,7 @@
     type: integer
     repeatable: false
     mandatory: CAN
+    pattern: ^(\d+)$
     Description: Number of requests to participate and tenders to which this IPI Measure was applied, in the case of a public contract; number of requests to participate and projects, in the case of a design contest.
     Business groups:
         BG-7: Notice Result
@@ -11615,6 +11639,7 @@
     type: number
     repeatable: false
     mandatory: CAN E4 E5
+    pattern: ^(\d+)$
     Description: The number of organisations that requested the buyer to review any of its decisions (e.g. the technical specifications, award decision).
     Business groups:
         BG-612: Buyer Review Summary
@@ -12077,7 +12102,6 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cbc:Description
     type: text-multilingual
     repeatable: false
-    mandatory: E3 E4 E5
     Description: The justification for only indicating the award criteria's order of importance, not their weighing.
     Business groups:
         BG-707: Award Criteria
@@ -12094,7 +12118,6 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:TenderingTerms/cac:AwardingTerms/cac:AwardingCriterion/cbc:Description
     type: text-multilingual
     repeatable: false
-    mandatory: E3 E4 E5
     Description: The justification for only indicating the award criteria's order of importance, not their weighing.
     Business groups:
         BG-707: Award Criteria
@@ -12787,6 +12810,7 @@
     type: number
     repeatable: false
     mandatory: CAN E4 E5
+    pattern: ^(\d+)$
     Description: Number of tenders or requests to participate received. Tenders including variants or multiple tenders submitted (for one lot) by the same tenderer should be counted as one tender.
     Business groups:
         BG-7: Notice Result
@@ -12837,7 +12861,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:ReceivedSubmissionsStatistics/efbc:StatisticsCode
     type: code
     repeatable: false
-    mandatory: CAN
+    mandatory: CAN & CAN (conditional)
     codeList: received-submission-type
     Description: The type of tenders or requests to participate received. The total number of tenders received shall be given. When a notice does not fall under Directive 2009/81/EC and is not about social or other specific services, the number of tenders received from micro, small and medium enterprises; the number of tenders received from tenderers registered in other European Economic Area countries and the number of tenders received from tenderers registered in countries outside of the European Economic Area shall also be given. All tenders shall be counted, regardless of whether they are admissible or inadmissible. For tenders submitted by a group of tenderers (e.g. a consortium), the tender shall be counted in the relevant category (e.g. SME) if the majority of the work is expected to be done by tenderers which fall within this category (e.g. they are SMEs).
     Business groups:
@@ -13449,6 +13473,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cbc:RequiredCurriculaCode
     type: code
     repeatable: false
+    mandatory: CN (conditional)
     codeList: requirement-stage
     Description: Whether the names and professional qualifications of the staff assigned to perform the contract must be given.
     Business groups:
@@ -14121,6 +14146,7 @@
     type: measure
     repeatable: false
     mandatory: CN (conditional)
+    pattern: ^(\d+)$
     Description: The period, from the tender submission deadline, for which tenders must remain valid.
     Business groups:
         BG-102: Submission Terms
@@ -14238,6 +14264,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:SettledContract/efac:DurationJustification/efac:AssetsList/efac:Asset/efbc:AssetDescription
     type: text-multilingual
     repeatable: false
+    mandatory: T02
     eForms guidance: |-
         This field maps to the same `EssentialAssets` objects created for OPP-022-Contract and OPP-023-Contract.
 
@@ -14254,6 +14281,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:SettledContract/efac:DurationJustification/efac:AssetsList/efac:Asset/efbc:AssetSignificance
     type: text
     repeatable: false
+    mandatory: T02
     eForms guidance: |-
         This field maps to the same `EssentialAssets` objects created for OPP-021-Contract and OPP-023-Contract.
 
@@ -14270,6 +14298,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:SettledContract/efac:DurationJustification/efac:AssetsList/efac:Asset/efbc:AssetPredominance
     type: text
     repeatable: false
+    mandatory: T02
     eForms guidance: |-
         This field maps to the same `EssentialAssets` objects created for OPP-021-Contract and OPP-022-Contract.
 
@@ -14392,6 +14421,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Organizations/efac:Organization/efbc:GroupLeadIndicator
     type: indicator
     repeatable: false
+    mandatory: PIN PIN(CN) CN CAN(VEAT) CAN CAN(MOD) E1 E2 E3 E4 E5 E6
     codeList: indicator
     eForms guidance: |-
         If not "false":
@@ -14454,6 +14484,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotTender/efbc:PublicTransportationCumulatedDistance
     type: integer
     repeatable: false
+    pattern: ^(\d+)$
     eForms guidance: |-
         - Get the `ancestor::efac:NoticeResult/efac:SettledContract` whose `/efac:LotTender:cbc:ID` is equal to the value of `ancestor::efac:LotTender:cbc:ID`.
         - [Get the contract for the SettledContract](operations.md#get-the-contract-for-a-settledcontract).
@@ -14679,7 +14710,6 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:FiscalLegislationDocumentReference/cbc:ID
     type: id
     repeatable: false
-    mandatory: PIN
     eForms guidance: |-
         - [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
         - Set the document's `.documentType` to 'legislation'.
@@ -14694,7 +14724,6 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:FiscalLegislationDocumentReference/cbc:ID
     type: id
     repeatable: false
-    mandatory: PIN
     eForms guidance: |-
         [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
 
@@ -14709,7 +14738,6 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:EnvironmentalLegislationDocumentReference/cbc:ID
     type: id
     repeatable: false
-    mandatory: PIN
     eForms guidance: |-
         - [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
         - Set the document's `.documentType` to 'legislation'.
@@ -14724,7 +14752,6 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:EnvironmentalLegislationDocumentReference/cbc:ID
     type: id
     repeatable: false
-    mandatory: PIN
     eForms guidance: |-
         - [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
         - Set the document's `.documentType` to 'legislation'.
@@ -14738,7 +14765,6 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:EmploymentLegislationDocumentReference/cbc:ID
     type: id
     repeatable: false
-    mandatory: PIN
     eForms guidance: |-
         - [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
         - Set the document's `.documentType` to 'legislation'.
@@ -14753,7 +14779,6 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:TenderingTerms/cac:EmploymentLegislationDocumentReference/cbc:ID
     type: id
     repeatable: false
-    mandatory: PIN
     eForms guidance: |-
         - [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
         - Set the document's `.documentType` to 'legislation'.
@@ -14825,7 +14850,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:CallForTendersDocumentReference/cbc:ID
     type: id
     repeatable: false
-    mandatory: PIN PIN(CN) CN CEI E1 E3
+    mandatory: PIN PIN(CN) CN CEI E1 E3 T01
     eForms guidance: |-
         - [Get the document for the document reference](operations.md#get-the-document-for-a-document-reference).
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot), and add its `.id` to the document's `.relatedLots`.
