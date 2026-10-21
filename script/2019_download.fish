@@ -7,9 +7,9 @@ cd source
 # 2024-04-22 Link is broken.
 # curl -sS -o TED-XML-to-eForms-mapping-OP-public-20220404.xlsx https://simap.ted.europa.eu/documents/10184/320101/TED-XML-to-eForms-mapping-OP-public-20220404/a0fed751-76cb-491b-957d-96985fdc82a4
 
-# https://ec.europa.eu/growth/single-market/public-procurement/digital-procurement/eforms_en
+# https://single-market-economy.ec.europa.eu/single-market/public-procurement/digital-procurement/eforms_en ("annex")
 
-curl -sS -o CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx https://ec.europa.eu/docsroom/documents/52697/attachments/2/translations/en/renditions/native
+curl -sSL -o CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx https://ec.europa.eu/docsroom/documents/58074/attachments/1/translations/en/renditions/native
 
 # https://github.com/OP-TED/eForms-SDK/blob/main/fields/fields.json
 

@@ -14,6 +14,7 @@ from textwrap import dedent, indent
 from urllib.parse import urlsplit
 
 import click
+import elementpath
 import json_merge_patch
 import lxml.etree
 import lxml.html
@@ -22,6 +23,7 @@ import numpy as np
 import pandas as pd
 import requests
 import yaml
+from elementpath import XPath2Parser
 from jsonpointer import set_pointer
 from jsonschema import FormatChecker
 from jsonschema.validators import Draft4Validator
@@ -48,6 +50,23 @@ xmlhead = (
     'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">'
 )
 xmltail = "</ContractNotice>"
+
+
+def xpath_steps(xpath):
+    """Split an XPath into its steps, ignoring slashes in predicates."""
+    steps = []
+    depth = 0
+    start = 0
+    for i, char in enumerate(xpath):
+        if char == "[":
+            depth += 1
+        elif char == "]":
+            depth -= 1
+        elif char == "/" and not depth:
+            steps.append(xpath[start:i])
+            start = i + 1
+    steps.append(xpath[start:])
+    return [step for step in steps if step]
 
 
 class Dumper(yaml.SafeDumper):
@@ -134,7 +153,7 @@ def get_column_order(df, drop=()):
     for column in column_order:
         if column not in df.columns:
             column_order.remove(column)
-    for column in df.columns.format():
+    for column in df.columns:
         if column not in column_order:
             column_order.append(column)
     for column in drop:
@@ -313,13 +332,13 @@ def update_with_sdk(filename, verbose):
             labels_to_drop.add(label)
 
         # Remove a field's own attribute fields, as we documented these together.
-        if not np.isnan(row["attributeOf"]) and row["attributeOf"] in label:
+        if isinstance(row["attributeOf"], str) and row["attributeOf"] in label:
             labels_to_drop.add(label)
 
         # Remove fields that are forbidden on all supported notice types.
         forbidden = row["forbidden"]
         # Short-circuit the logic that follows.
-        if np.isnan(forbidden):
+        if not isinstance(forbidden, dict):
             continue
         # Abbreviate the constraints (there is sometimes a conditional constraint.).
         for constraint in forbidden["constraints"][1:]:
@@ -368,7 +387,7 @@ def update_with_sdk(filename, verbose):
                 df.at[label, "repeatable"] = True
 
         mandatory = row["mandatory"]
-        if not np.isnan(mandatory):
+        if isinstance(mandatory, dict):
             values = []
             for constraint in mandatory["constraints"]:
                 value = " ".join({subtypes.get(t, t): None for t in constraint.pop("noticeTypes")})
@@ -380,7 +399,8 @@ def update_with_sdk(filename, verbose):
                 raise AssertionError
             if mandatory != {"value": False, "severity": "ERROR"}:
                 raise AssertionError
-            df.at[label, "mandatory"] = " & ".join(values)
+            # Constraints differ in their conditions, which are omitted, so some values repeat.
+            df.at[label, "mandatory"] = " & ".join(dict.fromkeys(values))
 
     if verbose:
         click.echo(
@@ -412,6 +432,11 @@ def update_with_sdk(filename, verbose):
         # 1.12.0
         "businessEntityId",
         "referencedBusinessEntityIds",
+        # 1.14.0 https://docs.ted.europa.eu/eforms/latest/fields/index.html#_dynamic_properties
+        "numericRange",
+        # 1.15.0 Undocumented. Links a date field to its time field, and vice versa, like BT-13(d) and BT-13(t).
+        "dateFieldId",
+        "timeFieldId",
     ]
     # Simplify these columns if `severity` is the only other top-level key.
     for column in ("repeatable", "pattern"):
@@ -461,20 +486,17 @@ def update_with_annex(filename):
     # A warning is issued, because the Excel file has an unsupported extension.
     df = pd.read_excel(sourcedir / "CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx", "Annex")
 
-    # 0:Level, 1:ID, 2:Name, 3:Data type, 4:Repeatable, 5:Description, 6-50:Legal Status, 51:Fields not included in...
-    check(df.shape[1], 52, "columns")
+    # 0:Level, 1:ID, 2:Name, 3:Repeatable, 4:Data type, 5:Description, 6-51:Legal Status, 52:Fields not included in...
+    check(df.shape[1], 53, "columns")
 
     # Remove extra header rows.
     check(df["ID"].isna().sum(), 3, "extra header rows")
     df = df[df["ID"].notna()]
-    # !!! BG-714 now identifies "CVD Information" in addition to "Review".
-    if df.at[295, "ID"] == "BG-714":
-        df.at[295, "ID"] = "BG-7140"
-    else:
-        click.echo("BG-714 has moved, or isn't repeated?")
 
-    # Ensure there are no duplicates.
-    df.set_index("ID", verify_integrity=True)
+    # !!! Fix typo: BT-1251 is mislabeled as BT-1252 (Direct Award Justification Previous Procedure Identifier).
+    df.loc[(df["ID"] == "BT-1252") & (df["Name"].str.strip() == "Previous Planning Part Identifier"), "ID"] = "BT-1251"
+
+    check(df["ID"].duplicated().sum(), 0, "duplicate IDs")
 
     # Normalize whitespace (used in "Business groups").
     df["Name"] = df["Name"].str.strip()
@@ -485,52 +507,10 @@ def update_with_annex(filename):
     # Add "Business groups" column, to assist mapping by providing context.
     df["Business groups"] = pd.Series(dtype="object")
 
-    # !!! The 2024 Annex adds business terms.
-    annex_2024 = {
-        "BT-681": (  # Lot
-            "Foreign Subsidies Regulation",
-            (
-                "The Foreign Subsidies Regulation (FSR) (EU) 2022/2560, in line with Article 28 thereof, "
-                "is applicable to this procurement procedure."
-            ),
-            "No",
-            ("BG-705", "Other Requirements"),
-        ),
-        "BT-682": (  # Tender
-            "Foreign Subsidies Measures",
-            "Measures applied under the Foreign Subsidies Regulation (EU) 2022/2560.",
-            "No",
-            ("BG-7", "Notice Result"),
-            ("BG-320", "Tender"),
-        ),
-        "BT-806": (  # Procedure
-            "Exclusion Grounds Source",
-            "Where the exclusions grounds are defined, for example, the procurement documents or in ESPD.",
-            "Yes",
-            ("BG-700", "Exclusion Grounds and Selection Criteria"),
-        ),
-        "BT-809": (  # Lot
-            "Selection Criteria",
-            "The criteria (or criterion).",
-            "No",
-            ("BG-700", "Exclusion Grounds and Selection Criteria"),
-            ("BG-702", "Selection Criteria"),
-        ),
-        "BT-821": (  # Lot
-            "Selection Criteria Source",
-            "Where the selection criteria are defined, for example, the procurement documents or in ESPD.",
-            "Yes",
-            ("BG-700", "Exclusion Grounds and Selection Criteria"),
-        ),
-    }
-    for identifier, (name, description, repeatable, *business_groups) in annex_2024.items():
-        df.loc[-1] = ["", identifier, name, repeatable, None, description] + [None] * 46 + [dict(business_groups)]
-        df.index = df.index + 1
-
     line = []
     previous_level = 0
     for label, row in df.iterrows():
-        # !!! Fix typo, to not be at same level as immediately preceding BG-714 (deduplicated to BG-7140, above).
+        # !!! Fix typo, to not be at same level as immediately preceding BG-714 (CVD Information).
         if row["ID"] == "BT-735" and row["Level"] == "++":
             row["Level"] = "+++"
 
@@ -548,21 +528,53 @@ def update_with_annex(filename):
         if row["ID"] in nonrepeatable:
             df.at[label, "Repeatable"] = "No"
 
-        if row["ID"] not in annex_2024:
-            if len(line) > 1:
-                business_groups = dict(line[:-1])
-                # !!! The 2024 Annex adds a business group.
-                if line[0][0] in {"BG-701", "BG-702"}:
-                    business_groups = {"BG-700": "Exclusion Grounds and Selection Criteria", **business_groups}
-            else:
-                business_groups = None
-            df.at[label, "Business groups"] = business_groups
+        df.at[label, "Business groups"] = dict(line[:-1]) if len(line) > 1 else None
+
+    # !!! The annex omits these business terms, so use the SDK documentation's Table 6 "Review components".
+    # https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#reviewSection
+    missing = pd.DataFrame(
+        [
+            (
+                "BT-804",
+                "Review Technical Identifier",
+                "No",
+                "A technical identifier linked to this review information.",
+            ),
+            # Table 6 repeats BT-799's description, so use the SDK's field description (translations/field_en.xml).
+            (
+                "BT-807",
+                "Review Body Identifier",
+                "No",
+                (
+                    "Identifier of review body points to an organisation (ORG-XXXX), or one of its alternate contact "
+                    "points (TPO-XXXX), dealing with reviews."
+                ),
+            ),
+            ("BT-808", "Review Applicant Identifier", "Yes", "The identifier of the applicant."),
+        ],
+        columns=["ID", "Name", "Repeatable", "Description"],
+    )
+    missing["Business groups"] = [{"BG-716": "Review"}] * len(missing)
+    df = pd.concat([df, missing], ignore_index=True)
 
     # We can now remove all rows for business groups.
     df = df[~df["ID"].str.startswith("BG-")]
 
     # Make the repeatable properties comparable.
     df["Repeatable"] = df["Repeatable"].map({"Yes": True, "No": False})
+
+    # The SDK splits some BTs into BTs with suffixed IDs, like BT-67(a). Copy the annex row for each suffix.
+    with filename.open() as f:
+        # Fields removed from the SDK have no btId, until removed manually.
+        bt_ids = {row["btId"] for row in yaml.safe_load(f) if "btId" in row}
+    split = set()
+    for bt_id in sorted(bt_ids - set(df["ID"])):
+        base = re.sub(r"\(\w+\)$", "", bt_id)
+        if base != bt_id and base in set(df["ID"]):
+            df = pd.concat([df, df[df["ID"] == base].assign(ID=bt_id)], ignore_index=True)
+            split.add(base)
+    # Keep the unsuffixed row if any field still uses it.
+    df = df[~df["ID"].isin(split - bt_ids)]
 
     # The fields metadata covers "Name", "Data type", "Repeatable" and "Legal Status" ("forbidden" and "mandatory").
     # "Business groups" replaces "Level". "Fields not included in the legal text" isn't informative.
@@ -585,6 +597,11 @@ def update_with_annex(filename):
                 "BT-26(a)-Procedure": False,
                 "BT-702(a)-notice": True,
                 "BT-735-Lot": False,
+                # The (a) and (b) fields repeat together, as children of a repeatable node (ND-EEDProcurementDetails*).
+                "BT-811(a)-Lot": True,
+                "BT-811(a)-LotResult": True,
+                "BT-811(b)-Lot": True,
+                "BT-811(b)-LotResult": True,
             }
         },
         left_on="btId",
@@ -633,33 +650,11 @@ def update_with_annex(filename):
                 "BT-724",  # BT-124
                 "BT-778",  # BT-113
                 "BT-5561",  # BT-556
-                # "deletion of fields for BT-747, BT-748, BT-749"
-                # https://github.com/OP-TED/eForms-SDK/releases/tag/1.12.0
-                "BT-747",
-                "BT-748",
-                "BT-749",
                 # Forbidden on all supported types in update-with-sdk.
                 "BT-779",
                 "BT-780",
                 "BT-781",
                 "BT-782",
-                "BT-783",
-                "BT-784",
-                "BT-785",
-                "BT-786",
-                "BT-787",
-                "BT-788",
-                "BT-789",
-                "BT-790",
-                "BT-791",
-                "BT-792",
-                "BT-793",
-                "BT-794",
-                "BT-795",
-                "BT-796",
-                "BT-797",
-                "BT-798",
-                "BT-799",
                 "BT-800",
             }
         ),
@@ -808,12 +803,17 @@ def lint(filename, additional_properties):
     else:
         known_eforms_codes = set()
 
+    with (sourcedir / "fields.json").open() as f:
+        sdk_fields = {field["id"]: field for field in json.load(f)["fields"]}
+
     sdk_documents = {}
 
     unreviewed = 0
 
     http_errors = set()
     anchor_errors = set()
+    example_errors = set()
+    untested_predicates = set()
     single_quoted = defaultdict(list)
     double_quoted = defaultdict(list)
     additional_fields = defaultdict(list)
@@ -857,6 +857,7 @@ def lint(filename, additional_properties):
         # Format XML.
         eforms_example = field["eForms example"]
         if eforms_example and eforms_example != "N/A":
+            element = None
             try:
                 element = lxml.etree.fromstring(f"{xmlhead}{eforms_example}{xmltail}")  # our data
                 field["eForms example"] = lxml.etree.tostring(element).decode()[len(xmlhead) : -len(xmltail)]
@@ -864,6 +865,45 @@ def lint(filename, additional_properties):
                 # Note: The XML snippets are too short to validate against the eForms schema.
             except lxml.etree.XMLSyntaxError as e:
                 click.echo(f"{identifier}: XML is invalid: {e}: {eforms_example}")
+
+            if sdk_field := sdk_fields.get(identifier):
+                steps = xpath_steps(sdk_field["xpathAbsolute"])
+                # The last step of the XPath, without predicates, like "cbc:ID" or "@listName".
+                step = steps[-1].split("[", 1)[0]
+                if step.startswith("@"):
+                    if f"{step[1:]}=" not in eforms_example:
+                        example_errors.add(f"{identifier}: no {step} attribute")
+                elif f"<{step}" not in eforms_example:
+                    example_errors.add(f"{identifier}: no {step} element")
+                # The listName attribute is the codelist's parent's ID, if any, else the codelist's ID.
+                elif codelist := sdk_field.get("codeList", {}).get("value"):
+                    expected = codelist.get("parentId", codelist["id"])
+                    for actual in re.findall(rf'<{step}\b[^>]*\blistName="([^"]*)"', eforms_example):
+                        if actual != expected:
+                            example_errors.add(f'{identifier}: listName="{actual}", expected "{expected}"')
+
+                # Evaluate the XPath, predicates included, from the step that matches the example's top element.
+                if element is not None:
+                    names = [s.split("[", 1)[0] for s in steps]
+                    tops = {f"{child.prefix}:{lxml.etree.QName(child).localname}" for child in element}
+                    namespaces = {prefix: uri for prefix, uri in element.nsmap.items() if prefix}
+                    starts = [i for i, name in enumerate(names) if name in tops]
+
+                    def matches(path, element=element, namespaces=namespaces, starts=starts):
+                        # The SDK uses XPath 2.0, like `cbc:ID/text()=('CrossBorderLaw','LocalLegalBasis')`.
+                        return any(
+                            elementpath.select(element, "./" + "/".join(path[i:]), namespaces, parser=XPath2Parser)
+                            for i in starts
+                        )
+
+                    if not starts:
+                        example_errors.add(f"{identifier}: no top element on the XPath: {', '.join(sorted(tops))}")
+                    elif not matches(steps):
+                        # If the path matches without predicates, the example omits the elements they test.
+                        if matches(names):
+                            untested_predicates.add(identifier)
+                        else:
+                            example_errors.add(f"{identifier}: no match for {'/'.join(names[starts[0] :])}")
 
         # Format and validate JSON.
         ocds_example = field["OCDS example"]
@@ -917,12 +957,25 @@ def lint(filename, additional_properties):
         for code, occurrences in sorted(unknown_eforms_codes.items(), key=itemgetter(1)):
             click.echo(f"{code}{''.join(f',{identifier},{title}' for identifier, title in occurrences)}")
 
+    if known_eforms_codes:
+        # Broader concepts in the EU Vocabularies authority table, used to group codes (#218).
+        broader_codes = {"slc-abil", "slc-sche", "slc-sec", "slc-stand", "slc-suit"}
+        for path in sorted(Path("output/mapping/eforms/mapping-tables").glob("*.csv")):
+            with path.open() as f:
+                codes = [row[0] for row in csv.reader(f)][1:]
+            if unknown := [code for code in codes if code not in known_eforms_codes | broader_codes]:
+                click.echo(
+                    f"\n{path.name}: eForms codes that do not appear in any eForms codelist: {', '.join(unknown)}"
+                )
+
     if unreviewed:
         click.echo(f"\n{unreviewed} unreviewed eForms guidance")
 
     for title, errors in (
         ("HTTP errors", http_errors),
         ("Anchor errors", anchor_errors),
+        ("eForms example errors", example_errors),
+        ("eForms examples without the elements that XPath predicates test", untested_predicates),
     ):
         if errors:
             click.echo(f"\n{title} ({len(errors)}):")
@@ -1117,12 +1170,16 @@ def business_groups():
 
 
 @cli.command()
-def codelists():
+@click.option("--ref", help="The eForms SDK tag (default: the default branch)")
+def codelists(ref):
     """Print information about eForms codelists."""
     writer = csv.writer(sys.stdout, lineterminator="\n")
     writer.writerow(["codelist", "code"])
 
-    for file in get("https://api.github.com/repos/OP-TED/eForms-SDK/contents/codelists").json():
+    url = "https://api.github.com/repos/OP-TED/eForms-SDK/contents/codelists"
+    if ref:
+        url += f"?ref={ref}"
+    for file in get(url).json():
         if not file["name"].endswith(".gc"):
             continue
 

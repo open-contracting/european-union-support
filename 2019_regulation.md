@@ -166,7 +166,7 @@ These can be automated if persistent:
         ./manage.py update-with-annex output/mapping/eforms/guidance.yaml
 
         # This step is slow.
-        ./manage.py codelists > codes-eforms.csv
+        ./manage.py codelists --ref 1.9.0 > codes-eforms.csv
 
 1. Run and check the output of:
 
