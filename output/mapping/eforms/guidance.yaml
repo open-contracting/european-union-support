@@ -6729,7 +6729,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:ProcurementProject/cbc:ID
     type: id
     repeatable: false
-    Description: 'The internal identifier used for files regarding the procurement procedure or lot before a procedure identifier is given (e.g. coming from the buyer''s document management system or procurement planning system). '
+    Description: 'The identifier used by the buyer to identify the procedure or lot throughout the notices in procedure lifecycle (e.g. coming from the buyer''s document management system or procurement planning system). '
     Business groups:
         BG-2: Purpose
     TED Xpath:
@@ -6753,7 +6753,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='LotsGroup']/cac:ProcurementProject/cbc:ID
     type: id
     repeatable: false
-    Description: 'The internal identifier used for files regarding the procurement procedure or lot before a procedure identifier is given (e.g. coming from the buyer''s document management system or procurement planning system). '
+    Description: 'The identifier used by the buyer to identify the procedure or lot throughout the notices in procedure lifecycle (e.g. coming from the buyer''s document management system or procurement planning system). '
     Business groups:
         BG-2: Purpose
     eForms guidance: |-
@@ -6771,7 +6771,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Part']/cac:ProcurementProject/cbc:ID
     type: id
     repeatable: false
-    Description: 'The internal identifier used for files regarding the procurement procedure or lot before a procedure identifier is given (e.g. coming from the buyer''s document management system or procurement planning system). '
+    Description: 'The identifier used by the buyer to identify the procedure or lot throughout the notices in procedure lifecycle (e.g. coming from the buyer''s document management system or procurement planning system). '
     Business groups:
         BG-2: Purpose
     eForms guidance: |-
@@ -6788,7 +6788,7 @@
     xpathAbsolute: /*/cac:ProcurementProject/cbc:ID
     type: id
     repeatable: false
-    Description: 'The internal identifier used for files regarding the procurement procedure or lot before a procedure identifier is given (e.g. coming from the buyer''s document management system or procurement planning system). '
+    Description: 'The identifier used by the buyer to identify the procedure or lot throughout the notices in procedure lifecycle (e.g. coming from the buyer''s document management system or procurement planning system). '
     Business groups:
         BG-2: Purpose
     TED Xpath:
@@ -8124,7 +8124,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Funding/efbc:FinancingIdentifier
     type: id
     repeatable: false
-    Description: An identifier of the Union programme used to at least partially finance the contract. The most concrete information must be given (e.g. grant agreement number, national identifier, project acronym, contract number).
+    Description: An identifier of the Union programme used to at least partially finance the contract. The most concrete information must be given (e.g. the unique European identification number of the relevant programme when available, for example the CCI number for CPR funds, or grant agreement number, national identifier, project acronym, contract number).
     Business groups:
         BG-61: EU Funds
         BG-614: EU Funds Information
@@ -10802,7 +10802,7 @@
     type: code
     repeatable: false
     codeList: measurement-unit
-    Description: 'The unit which the good, service, or work comes in, for example hours or kilograms. Where the CPV code is a supply which does not need a further unit (e.g. cars), then no unit needs to be given and quantity is taken to be an amount, e.g. the "number of cars". '
+    Description: The unit which the good, service, or work comes in, for example hours or kilograms.
     Business groups:
         BG-2: Purpose
     eForms guidance: |-
@@ -11043,7 +11043,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingTerms/cac:AwardingTerms/cac:Prize/cbc:ValueAmount
     type: amount
     repeatable: false
-    Description: The value of the prize, if any, for the winner of a design contest, innovation partnership or competitive dialogue
+    Description: The value of the prize, if any, for the winner of a design contest, innovation partnership or competitive dialogue.
     Business groups:
         BG-704: Reward and Jury
         BG-44: Prize
@@ -11151,10 +11151,6 @@
     repeatable: false
     mandatory: PIN PIN(CN) CN CEI E3
     codeList: exclusion-ground
-    Description: 'The brief description of criteria regarding the personal situation of tenderers that may lead to their exclusion. This shall include a list of all such criteria and indicate required information (e.g. self-declaration, documentation). This may also include specific national exclusion grounds. '
-    Business groups:
-        BG-700: Exclusion Grounds and Selection Criteria
-        BG-701: Exclusion Grounds
     TED Xpath:
     - TED_EXPORT/FORM_SECTION/F07_2014/LEFTI/QUALIFICATION/CONDITIONS
     TED guidance:
@@ -11170,10 +11166,6 @@
     xpathAbsolute: /*/cac:TenderingTerms/cac:TendererQualificationRequest[cac:SpecificTendererRequirement/cbc:TendererRequirementTypeCode/@listName='exclusion-ground']/cac:SpecificTendererRequirement/cbc:Description
     type: text-multilingual
     repeatable: false
-    Description: 'The brief description of criteria regarding the personal situation of tenderers that may lead to their exclusion. This shall include a list of all such criteria and indicate required information (e.g. self-declaration, documentation). This may also include specific national exclusion grounds. '
-    Business groups:
-        BG-700: Exclusion Grounds and Selection Criteria
-        BG-701: Exclusion Grounds
     eForms guidance: |-
         This field maps to the same `ExclusionCriteria` objects as created for [BT-67(a)-Procedure Exclusion Ground](<#BT-67(a)-Procedure>).
 
@@ -11227,6 +11219,10 @@
     type: code
     repeatable: false
     codeList: ipi-scope
+    Description: The International Procurement Instrument (IPI) Regulation (EU) 2022/1031 is applicable to this procurement procedure.
+    Business groups:
+        BG-7: Notice Result
+        BG-320: Tender
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -11240,6 +11236,11 @@
     repeatable: false
     mandatory: CAN
     codeList: international-procurement-instrument-measure
+    Description: Information on the IPI Measure applicable to this tender.
+    Business groups:
+        BG-7: Notice Result
+        BG-320: Tender
+        BG-681: Information on IPI Measures
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -11252,6 +11253,11 @@
     type: integer
     repeatable: false
     mandatory: CAN
+    Description: Number of requests to participate and tenders to which this IPI Measure was applied, in the case of a public contract; number of requests to participate and projects, in the case of a design contest.
+    Business groups:
+        BG-7: Notice Result
+        BG-320: Tender
+        BG-681: Information on IPI Measures
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -11265,6 +11271,11 @@
     repeatable: false
     mandatory: CAN
     codeList: international-procurement-instrument-application
+    Description: Exception from the application of the IPI Measure.
+    Business groups:
+        BG-7: Notice Result
+        BG-320: Tender
+        BG-681: Information on IPI Measures
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -11277,6 +11288,11 @@
     type: text-multilingual
     repeatable: false
     mandatory: CAN
+    Description: A description and justification for the application of overriding reasons relating to the public interest.
+    Business groups:
+        BG-7: Notice Result
+        BG-320: Tender
+        BG-681: Information on IPI Measures
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -11795,7 +11811,7 @@
     Description: 'The category of vehicle falling within the scope of Directive 2009/33/EC, including: Light-duty vehicles (M1, M2, N1); Bus (M3); Truck (N2, N3); M1; M2; N1; N2; N3.'
     Business groups:
         BG-713: Strategic Procurement
-        BG-7140: CVD Information
+        BG-714: CVD Information
         BG-7141: CVD Vehicles
     eForms guidance: |-
         This field maps to the same `Item` objects as created for [OPT-155-LotResult Vehicle Type](#OPT-155-LotResult), [OPT-156-LotResult Vehicle Numeric](#OPT-156-LotResult) and [BT-735-LotResult CVD Contract Type](#BT-735-LotResult).
@@ -12141,7 +12157,7 @@
     Description: The CVD legal basis to establish which category of contract types (purchase, lease, rent, hired-purchase, public service contracts and service contracts according to table 1 CVD) applies.
     Business groups:
         BG-713: Strategic Procurement
-        BG-7140: CVD Information
+        BG-714: CVD Information
     eForms guidance: |-
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - Add a `Classification` object to the lot's `additionalClassifications` array:
@@ -12162,7 +12178,7 @@
     Description: The CVD legal basis to establish which category of contract types (purchase, lease, rent, hired-purchase, public service contracts and service contracts according to table 1 CVD) applies.
     Business groups:
         BG-713: Strategic Procurement
-        BG-7140: CVD Information
+        BG-714: CVD Information
     eForms guidance: |-
         This field maps to the same `Item` objects as created for [OPT-155-LotResult Vehicle Type](#OPT-155-LotResult), [OPT-156-LotResult Vehicle Numeric](#OPT-156-LotResult) and [BT-723-LotResult Vehicle Category](#BT-723-LotResult).
 
@@ -13249,7 +13265,7 @@
     type: code
     repeatable: true
     codeList: innovative-acquisition
-    Description: 'An indication that innovative works, supplies or services are being bought. '
+    Description: An indication that the object of the procurement is the R&D (i.e. research, development, testing) and / or the purchase of innovative solutions (i.e. innovative works, supplies or services).
     Business groups:
         BG-713: Strategic Procurement
     eForms guidance: |-
@@ -13320,7 +13336,7 @@
     codeList: review-information-type
     Description: Whether the information concerns a review request or a review decision.
     Business groups:
-        BG-714: Review
+        BG-716: Review
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13335,7 +13351,7 @@
     mandatory: CAN E4 E5
     Description: An identifier of a review request or a review decision. When appealed to a higher review body instance, a review requests must receive a new identifier.
     Business groups:
-        BG-714: Review
+        BG-716: Review
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13347,9 +13363,9 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:Appeals/efac:AppealInformation/efbc:PreviousAppealID
     type: id
     repeatable: false
-    Description: An identifier of the review request(s) that led to this decision or a review decision that is being appealed by this review request. Review decision which were initiated by the review body ("ex officio") are not preceeded by a review request.
+    Description: An identifier of the review request(s) that led to this decision or a review decision that is being appealed by this review request. Review decision which was initiated by the review body ("ex officio") are not preceded by a review request.
     Business groups:
-        BG-714: Review
+        BG-716: Review
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13375,7 +13391,7 @@
     pattern: ^(PROCEDURE|BUYER|RESULT|((PAR|LOT|GLO|RES|ORG|TPA|TPO|TEN|CON|UBO)-\d{4}))$
     Description: An identifier of one or more sections within this notice. The information in the review section refers to this section or these sections.
     Business groups:
-        BG-714: Review
+        BG-716: Review
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13391,7 +13407,7 @@
     pattern: ^((((1[6-9]|[2-9]\d)\d{2})-(((0[13578]|1[02]))-31|((0[13-9]|1[0-2])-(29|30))))|(((((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))-02-29))|(((1[6-9]|[2-9]\d)\d{2})-((0[1-9])|(1[0-2]))-(0[1-9]|1\d|2[0-8])))(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
     Description: The date and time when the review request was submitted or the review decision was taken.
     Business groups:
-        BG-714: Review
+        BG-716: Review
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13406,7 +13422,7 @@
     mandatory: CAN E4 E5
     Description: The name of the review request or review decision.
     Business groups:
-        BG-714: Review
+        BG-716: Review
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13421,7 +13437,7 @@
     mandatory: CAN E4 E5
     Description: The description of the review request or review decision or any other additional information.
     Business groups:
-        BG-714: Review
+        BG-716: Review
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13468,7 +13484,7 @@
     codeList: review-decision-type
     Description: The decision type (e.g. accepted, rejected because the complainant did not have legal standing).
     Business groups:
-        BG-714: Review
+        BG-716: Review
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13484,7 +13500,7 @@
     codeList: irregularity-type
     Description: The type of irregularity alleged in the review request or confirmed in the review decision.
     Business groups:
-        BG-714: Review
+        BG-716: Review
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13500,7 +13516,7 @@
     codeList: remedy-type
     Description: The remedy (e.g. interim measure, damages) requested in the review request or applied by the review decision.
     Business groups:
-        BG-714: Review
+        BG-716: Review
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13514,7 +13530,7 @@
     repeatable: false
     Description: The value of the remedy (e.g. damages, fines).
     Business groups:
-        BG-714: Review
+        BG-716: Review
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13529,7 +13545,7 @@
     pattern: ((^(http|HTTP|https|HTTPS|ftp|FTP|ftps|FTPS|sftp|SFTP)://)|(^(w|W){3}(\d)?\.))[\w\?!\./:;,\-_=#+*%@"\(\)&]+
     Description: The uniform resource locator (e.g. the web address) of the documents concerning the review request or a review decision.
     Business groups:
-        BG-714: Review
+        BG-716: Review
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13543,7 +13559,7 @@
     repeatable: false
     Description: The fee paid for lodging the review request.
     Business groups:
-        BG-714: Review
+        BG-716: Review
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13559,7 +13575,7 @@
     codeList: indicator
     Description: The review request was withdrawn.
     Business groups:
-        BG-714: Review
+        BG-716: Review
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13575,7 +13591,7 @@
     pattern: ^((((1[6-9]|[2-9]\d)\d{2})-(((0[13578]|1[02]))-31|((0[13-9]|1[0-2])-(29|30))))|(((((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00)))-02-29))|(((1[6-9]|[2-9]\d)\d{2})-((0[1-9])|(1[0-2]))-(0[1-9]|1\d|2[0-8])))(Z|[-+]((0[0-9]|1[0-3]):([03]0|45)|14:00))$
     Description: The date and time when the request for review was withdrawn.
     Business groups:
-        BG-714: Review
+        BG-716: Review
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13589,7 +13605,7 @@
     repeatable: false
     Description: The reasons for withdrawing the request for review.
     Business groups:
-        BG-714: Review
+        BG-716: Review
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13780,6 +13796,9 @@
     type: code
     repeatable: false
     codeList: eed-scope
+    Description: The Energy Efficiency Directive (EED) (EU) 2023/1791 is applicable for this procurement procedure.
+    Business groups:
+        BG-713: Strategic Procurement
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13792,6 +13811,9 @@
     type: code
     repeatable: false
     codeList: energy-efficiency-basis
+    Description: List of products covered by the Energy Labelling Directive, by the Ecodesign Directive, by Union green public procurement criteria, by Regulation 2020/740 and buildings, not being rented or purchased for the purposes listed in EED Annex IV point f) (i), (ii) and (iii).
+    Business groups:
+        BG-713: Strategic Procurement
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13805,6 +13827,9 @@
     repeatable: false
     mandatory: CAN CAN(MOD) E4 E5 E6
     codeList: energy-efficiency-basis
+    Description: List of products covered by the Energy Labelling Directive, by the Ecodesign Directive, by Union green public procurement criteria, by Regulation 2020/740 and buildings, not being rented or purchased for the purposes listed in EED Annex IV point f) (i), (ii) and (iii).
+    Business groups:
+        BG-713: Strategic Procurement
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13818,6 +13843,9 @@
     repeatable: false
     mandatory: PIN PIN(CN) CN CAN CAN(MOD) CEI E3 E4 E5 E6
     codeList: energy-efficiency-item
+    Description: List of products covered by the Energy Labelling Directive, by the Ecodesign Directive, by Union green public procurement criteria, by Regulation 2020/740 and buildings, not being rented or purchased for the purposes listed in EED Annex IV point f) (i), (ii) and (iii).
+    Business groups:
+        BG-713: Strategic Procurement
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13831,6 +13859,9 @@
     repeatable: false
     mandatory: CAN CAN(MOD) E4 E5 E6
     codeList: energy-efficiency-item
+    Description: List of products covered by the Energy Labelling Directive, by the Ecodesign Directive, by Union green public procurement criteria, by Regulation 2020/740 and buildings, not being rented or purchased for the purposes listed in EED Annex IV point f) (i), (ii) and (iii).
+    Business groups:
+        BG-713: Strategic Procurement
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13844,6 +13875,10 @@
     repeatable: false
     mandatory: CAN CAN(MOD) E4 E5 E6
     codeList: energy-efficiency-label
+    Description: Energy efficiency labels that are provided for the products (A+++, A++, A+, A, B, C, D).
+    Business groups:
+        BG-713: Strategic Procurement
+        BG-810: EED information
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13856,6 +13891,10 @@
     type: number
     repeatable: false
     mandatory: CAN CAN(MOD) E4 E5 E6
+    Description: Energy efficiency numeric values for products and services for which no label exist.
+    Business groups:
+        BG-713: Strategic Procurement
+        BG-810: EED information
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13868,6 +13907,10 @@
     type: number
     repeatable: false
     mandatory: CAN CAN(MOD) E4 E5 E6 (conditional)
+    Description: The unit of the energy efficiency number, for example, kWh/year.
+    Business groups:
+        BG-713: Strategic Procurement
+        BG-810: EED information
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13880,6 +13923,10 @@
     type: number
     repeatable: false
     mandatory: CAN CAN(MOD) E4 E5 E6
+    Description: The quantity provided or estimated for the product or service.
+    Business groups:
+        BG-713: Strategic Procurement
+        BG-810: EED information
     eForms guidance: ''
     eForms example: ''
     OCDS example: ''
@@ -13893,7 +13940,7 @@
     repeatable: true
     mandatory: PIN PIN(CN) CN CEI E3
     codeList: selection-criteria-source
-    Description: Where the selection criteria are defined, for example, the procurement documents or in ESPD.
+    Description: Where the selection criteria are defined, for example, the procurement documents or in ESPD
     Business groups:
         BG-700: Exclusion Grounds and Selection Criteria
     eForms guidance: |-

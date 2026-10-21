@@ -461,20 +461,17 @@ def update_with_annex(filename):
     # A warning is issued, because the Excel file has an unsupported extension.
     df = pd.read_excel(sourcedir / "CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx", "Annex")
 
-    # 0:Level, 1:ID, 2:Name, 3:Data type, 4:Repeatable, 5:Description, 6-50:Legal Status, 51:Fields not included in...
-    check(df.shape[1], 52, "columns")
+    # 0:Level, 1:ID, 2:Name, 3:Repeatable, 4:Data type, 5:Description, 6-51:Legal Status, 52:Fields not included in...
+    check(df.shape[1], 53, "columns")
 
     # Remove extra header rows.
     check(df["ID"].isna().sum(), 3, "extra header rows")
     df = df[df["ID"].notna()]
-    # !!! BG-714 now identifies "CVD Information" in addition to "Review".
-    if df.at[295, "ID"] == "BG-714":
-        df.at[295, "ID"] = "BG-7140"
-    else:
-        click.echo("BG-714 has moved, or isn't repeated?")
 
-    # Ensure there are no duplicates.
-    df.set_index("ID", verify_integrity=True)
+    # !!! Fix typo: BT-1251 is mislabeled as BT-1252 (Direct Award Justification Previous Procedure Identifier).
+    df.loc[(df["ID"] == "BT-1252") & (df["Name"].str.strip() == "Previous Planning Part Identifier"), "ID"] = "BT-1251"
+
+    check(df["ID"].duplicated().sum(), 0, "duplicate IDs")
 
     # Normalize whitespace (used in "Business groups").
     df["Name"] = df["Name"].str.strip()
@@ -485,52 +482,10 @@ def update_with_annex(filename):
     # Add "Business groups" column, to assist mapping by providing context.
     df["Business groups"] = pd.Series(dtype="object")
 
-    # !!! The 2024 Annex adds business terms.
-    annex_2024 = {
-        "BT-681": (  # Lot
-            "Foreign Subsidies Regulation",
-            (
-                "The Foreign Subsidies Regulation (FSR) (EU) 2022/2560, in line with Article 28 thereof, "
-                "is applicable to this procurement procedure."
-            ),
-            "No",
-            ("BG-705", "Other Requirements"),
-        ),
-        "BT-682": (  # Tender
-            "Foreign Subsidies Measures",
-            "Measures applied under the Foreign Subsidies Regulation (EU) 2022/2560.",
-            "No",
-            ("BG-7", "Notice Result"),
-            ("BG-320", "Tender"),
-        ),
-        "BT-806": (  # Procedure
-            "Exclusion Grounds Source",
-            "Where the exclusions grounds are defined, for example, the procurement documents or in ESPD.",
-            "Yes",
-            ("BG-700", "Exclusion Grounds and Selection Criteria"),
-        ),
-        "BT-809": (  # Lot
-            "Selection Criteria",
-            "The criteria (or criterion).",
-            "No",
-            ("BG-700", "Exclusion Grounds and Selection Criteria"),
-            ("BG-702", "Selection Criteria"),
-        ),
-        "BT-821": (  # Lot
-            "Selection Criteria Source",
-            "Where the selection criteria are defined, for example, the procurement documents or in ESPD.",
-            "Yes",
-            ("BG-700", "Exclusion Grounds and Selection Criteria"),
-        ),
-    }
-    for identifier, (name, description, repeatable, *business_groups) in annex_2024.items():
-        df.loc[-1] = ["", identifier, name, repeatable, None, description] + [None] * 46 + [dict(business_groups)]
-        df.index = df.index + 1
-
     line = []
     previous_level = 0
     for label, row in df.iterrows():
-        # !!! Fix typo, to not be at same level as immediately preceding BG-714 (deduplicated to BG-7140, above).
+        # !!! Fix typo, to not be at same level as immediately preceding BG-714 (CVD Information).
         if row["ID"] == "BT-735" and row["Level"] == "++":
             row["Level"] = "+++"
 
@@ -548,15 +503,7 @@ def update_with_annex(filename):
         if row["ID"] in nonrepeatable:
             df.at[label, "Repeatable"] = "No"
 
-        if row["ID"] not in annex_2024:
-            if len(line) > 1:
-                business_groups = dict(line[:-1])
-                # !!! The 2024 Annex adds a business group.
-                if line[0][0] in {"BG-701", "BG-702"}:
-                    business_groups = {"BG-700": "Exclusion Grounds and Selection Criteria", **business_groups}
-            else:
-                business_groups = None
-            df.at[label, "Business groups"] = business_groups
+        df.at[label, "Business groups"] = dict(line[:-1]) if len(line) > 1 else None
 
     # We can now remove all rows for business groups.
     df = df[~df["ID"].str.startswith("BG-")]
@@ -598,6 +545,11 @@ def update_with_annex(filename):
                 "BT-26(a)-Procedure": False,
                 "BT-702(a)-notice": True,
                 "BT-735-Lot": False,
+                # The (a) and (b) fields repeat together, as children of a repeatable node (ND-EEDProcurementDetails*).
+                "BT-811(a)-Lot": True,
+                "BT-811(a)-LotResult": True,
+                "BT-811(b)-Lot": True,
+                "BT-811(b)-LotResult": True,
             }
         },
         left_on="btId",
@@ -646,33 +598,11 @@ def update_with_annex(filename):
                 "BT-724",  # BT-124
                 "BT-778",  # BT-113
                 "BT-5561",  # BT-556
-                # "deletion of fields for BT-747, BT-748, BT-749"
-                # https://github.com/OP-TED/eForms-SDK/releases/tag/1.12.0
-                "BT-747",
-                "BT-748",
-                "BT-749",
                 # Forbidden on all supported types in update-with-sdk.
                 "BT-779",
                 "BT-780",
                 "BT-781",
                 "BT-782",
-                "BT-783",
-                "BT-784",
-                "BT-785",
-                "BT-786",
-                "BT-787",
-                "BT-788",
-                "BT-789",
-                "BT-790",
-                "BT-791",
-                "BT-792",
-                "BT-793",
-                "BT-794",
-                "BT-795",
-                "BT-796",
-                "BT-797",
-                "BT-798",
-                "BT-799",
                 "BT-800",
             }
         ),
