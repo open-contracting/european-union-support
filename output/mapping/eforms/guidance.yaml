@@ -1410,7 +1410,7 @@
     TED guidance:
     - If not set, let *Lot No* be '1'. Add to the award's `.relatedLots` (string).
     eForms guidance: |-
-        If no `Award` object in the `awards` array has an `.id` equal to `ancestor::efac:LotResult/cbcID`, add an `Award` object to the `awards` array, and set its `.id` to the value of `ancestor::efac:LotResult/cbc:ID`.
+        If no `Award` object in the `awards` array has an `.id` equal to `ancestor::efac:LotResult/cbc:ID`, add an `Award` object to the `awards` array, and set its `.id` to the value of `ancestor::efac:LotResult/cbc:ID`.
 
         Add this field to the award's `.relatedLots` array, if not already present.
     eForms example: <efac:LotResult><cbc:ID schemeName="result">RES-0002</cbc:ID><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotResult>
@@ -1433,7 +1433,7 @@
         BG-7: Notice Result
         BG-320: Tender
     eForms guidance: |-
-        If no `Bid` object in the `bids.details` array has an `.id` equal to the value of `ancestor::efac:LotTender/cbcID`, add a `Bid` object to the `bids.details` array, and set its `.id` to the value of `ancestor::efac:LotTender/cbc:ID`.
+        If no `Bid` object in the `bids.details` array has an `.id` equal to the value of `ancestor::efac:LotTender/cbc:ID`, add a `Bid` object to the `bids.details` array, and set its `.id` to the value of `ancestor::efac:LotTender/cbc:ID`.
 
         Add this field to the bid's `.relatedLots` array, if not already present.
     eForms example: <efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotTender>
@@ -14574,7 +14574,7 @@
     repeatable: false
     pattern: ^([0-9]+)$
     eForms guidance: |-
-        - Get the `ancestor::efac:NoticeResult/efac:SettledContract` whose `/efac:LotTender:cbc:ID` is equal to the value of `ancestor::efac:LotTender:cbc:ID`.
+        - Get the `ancestor::efac:NoticeResult/efac:SettledContract` whose `/efac:LotTender/cbc:ID` is equal to the value of `ancestor::efac:LotTender/cbc:ID`.
         - [Get the contract for the SettledContract](operations.md#get-the-contract-for-a-settledcontract).
         - Map to the contract's `.publicPassengerTransportServicesKilometers`.
     eForms example: <efac:NoticeResult><efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID><efbc:PublicTransportationCumulatedDistance unitCode="km">988754432110987</efbc:PublicTransportationCumulatedDistance></efac:LotTender><efac:SettledContract><cbc:ID schemeName="contract">CON-0001</cbc:ID><efac:LotTender><cbc:ID schemeName="tender">TEN-0001</cbc:ID></efac:LotTender></efac:SettledContract><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:SettledContract><cbc:ID schemeName="contract">CON-0001</cbc:ID></efac:SettledContract></efac:LotResult></efac:NoticeResult>
