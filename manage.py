@@ -414,6 +414,9 @@ def update_with_sdk(filename, verbose):
         "referencedBusinessEntityIds",
         # 1.14.0 https://docs.ted.europa.eu/eforms/latest/fields/index.html#_dynamic_properties
         "numericRange",
+        # 1.15.0 Undocumented. Links a date field to its time field, and vice versa, like BT-13(d) and BT-13(t).
+        "dateFieldId",
+        "timeFieldId",
     ]
     # Simplify these columns if `severity` is the only other top-level key.
     for column in ("repeatable", "pattern"):
