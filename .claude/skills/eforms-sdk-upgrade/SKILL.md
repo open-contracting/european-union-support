@@ -35,7 +35,8 @@ The pipeline must reproduce the committed `guidance.yaml` before you change the 
 
 ```bash
 fish script/2019_download.fish TAG
-./manage.py update-with-sdk --verbose output/mapping/eforms/guidance.yaml
+# Redirect to a file. Piping to `head` kills the command before it writes guidance.yaml.
+./manage.py update-with-sdk --verbose output/mapping/eforms/guidance.yaml > SCRATCH/sdk-verbose-TAG.txt
 ./manage.py update-with-annex output/mapping/eforms/guidance.yaml
 ./manage.py lint -a output/mapping/eforms/guidance.yaml
 # For step 6. Slow: one request per codelist. Write to the scratchpad; codes-eforms.csv is gitignored.
