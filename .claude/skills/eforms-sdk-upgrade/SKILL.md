@@ -49,7 +49,7 @@ Run `manage.py` with the project's virtual environment (`uv run ./manage.py`, or
 Checks:
 
 - `update-with-annex` should print only "N rows written". Anything else (e.g. "These rows were not included in the update: BT-67") means the SDK changed a `btId` or the annex changed. Find the cause. If a code fix is simple (like copying the annex row for suffixed `btId`s, as for BT-67(a) and BT-67(b)), propose it. Otherwise, the team's fallback is to fill in `Description` and `Business groups` manually; say so in the issue.
-- `update-with-sdk --verbose` lists dropped fields. Yellow ones are forbidden on every supported notice type (`supported_notice_types` excludes E1–E6). A field that moved from supported to E-only notices disappears from `guidance.yaml`, so it looks removed. Say so in the issue.
+- `update-with-sdk --verbose` lists dropped fields. Yellow ones are forbidden on every supported notice type (`supported_notice_types` excludes X01 and X02). A field that moved to X01- or X02-only notices disappears from `guidance.yaml`, so it looks removed. Say so in the issue.
 - If `source/CELEX_...xlsx` is 0 bytes, the annex URL in `script/2019_download.fish` is broken. Restore the file (`git checkout source/CELEX_32019R1780_EN_ANNEX_TABLE2_Extended.xlsx`) and tell the user.
 
 ## 4. Handle new properties
@@ -100,7 +100,7 @@ First, check that the step's commit is sound: the summarizer flags "annex data l
 
 The summarizer sees only `fields.json` (and codelists, with `--codes`). Business rules and view templates appear only in the release notes, so scan them for changes that make guidance moot or newly needed: fields **hidden** or filled by a **preset** value, and codes added to or removed from a codelist that has a mapping table or that the guidance names. The summarizer's "Codelists" section lists the exact codes (flag: "used in mapping"); without `--codes`, check them by hand.
 
-The release notes' "Addition of" items under notice types are usually existing fields allowed on more notice types, not new fields. The summarizer's "Notice types" section lists them, and the fields newly forbidden. They're relevant only if a field's guidance depends on the notice type, or if the notice type is unsupported (E1–E6, X01, X02). Otherwise, list them under "Not relevant", so readers of the release notes don't think we missed new fields. "Addition of" items under view templates only change how notices are displayed.
+The release notes' "Addition of" items under notice types are usually existing fields allowed on more notice types, not new fields. The summarizer's "Notice types" section lists them, and the fields newly forbidden. They're relevant only if a field's guidance depends on the notice type, or if the notice type is unsupported (X01, X02). Otherwise, list them under "Not relevant", so readers of the release notes don't think we missed new fields. "Addition of" items under view templates only change how notices are displayed.
 
 Past decisions (see #188, #196, #204 and #215 for the discussions):
 
