@@ -24,3 +24,6 @@ ignore-variadic-names = true
 
 [tool.uv.pip]
 exclude-newer = "1 week"
+
+[tool.ruff.lint.per-file-ignores]
+".claude/skills/*/scripts/*" = ["INP001"]
