@@ -382,7 +382,7 @@
     xpathAbsolute: /*/cac:TenderingProcess/cac:ProcessJustification[cbc:ProcessReasonCode/@listName='accelerated-procedure']/cbc:ProcessReasonCode
     type: code
     repeatable: false
-    mandatory: CN (conditional) & CN (conditional) & CN (conditional)
+    mandatory: CN (conditional)
     codeList: accelerated-procedure
     Description: The time limit for receipt of requests to participate or of tenders in this procedure can be reduced due to a state of urgency.
     Business groups:
@@ -408,7 +408,7 @@
     xpathAbsolute: /*/cac:ProcurementProjectLot[cbc:ID/@schemeName='Lot']/cac:TenderingProcess/cac:FrameworkAgreement/cbc:Justification
     type: text-multilingual
     repeatable: false
-    mandatory: PIN PIN(CN) CN (conditional) & PIN PIN(CN) CN (conditional) & PIN CN (conditional)
+    mandatory: PIN PIN(CN) CN (conditional) & PIN CN (conditional)
     Description: 'The justification for exceptional cases when the duration of framework agreements exceeds the legal limits. '
     Business groups:
         BG-706: Techniques
@@ -12862,7 +12862,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:ReceivedSubmissionsStatistics/efbc:StatisticsCode
     type: code
     repeatable: false
-    mandatory: CAN (conditional) & CAN (conditional)
+    mandatory: CAN (conditional)
     codeList: received-submission-type
     Description: The type of tenders or requests to participate received. The total number of tenders received shall be given. When a notice does not fall under Directive 2009/81/EC and is not about social or other specific services, the number of tenders received from micro, small and medium enterprises; the number of tenders received from tenderers registered in other European Economic Area countries and the number of tenders received from tenderers registered in countries outside of the European Economic Area shall also be given. All tenders shall be counted, regardless of whether they are admissible or inadmissible. For tenders submitted by a group of tenderers (e.g. a consortium), the tender shall be counted in the relevant category (e.g. SME) if the majority of the work is expected to be done by tenderers which fall within this category (e.g. they are SMEs).
     Business groups:

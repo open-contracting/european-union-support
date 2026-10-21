@@ -399,7 +399,8 @@ def update_with_sdk(filename, verbose):
                 raise AssertionError
             if mandatory != {"value": False, "severity": "ERROR"}:
                 raise AssertionError
-            df.at[label, "mandatory"] = " & ".join(values)
+            # Constraints differ in their conditions, which are omitted, so some values repeat.
+            df.at[label, "mandatory"] = " & ".join(dict.fromkeys(values))
 
     if verbose:
         click.echo(
