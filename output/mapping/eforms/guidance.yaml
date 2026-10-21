@@ -6416,7 +6416,7 @@
     eForms guidance: |-
         - Get the `withheldInformationItem` object created for [BT-195(BT-733)-LotsGroup Unpublished Identifier](<#BT-195(BT-733)-LotsGroup>) and for `ancestor::cac:ProcurementProjectLot[cbc:ID schemeName="LotsGroup"]`.
         - [Convert the date to ISO format](operations.md#convert-a-date-to-iso-format), and map to its `.availabilityDate`.
-    eForms example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
+    eForms example: <efac:FieldsPrivacy><efbc:PublicationDate>2025-03-31+01:00</efbc:PublicationDate></efac:FieldsPrivacy>
     OCDS example: '{"withheldInformation":[{"availabilityDate":"2025-03-31T00:00:00+01:00"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/withheld-publication.html#lotsGroupOfLotsLevelSection
 -   id: BT-198(BT-734)-Lot
@@ -8633,7 +8633,7 @@
     eForms guidance: |-
         - [Get the organization for the company](operations.md#get-the-organization-for-a-company).
         - Map to its `.address.region`.
-    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification><cac:PostalAddress><cbc:CountrySubentityCode listName="nuts-lvl3">XY374</cbc:CountrySubentityCode></cac:PostalAddress></efac:Company></efac:Organization></efac:Organizations>
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification><cac:PostalAddress><cbc:CountrySubentityCode listName="nuts">XY374</cbc:CountrySubentityCode></cac:PostalAddress></efac:Company></efac:Organization></efac:Organizations>
     OCDS example: '{"parties":[{"id":"ORG-0001","address":{"region":"XY374"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: BT-507-Organization-TouchPoint
@@ -8651,7 +8651,7 @@
     eForms guidance: |-
         - [Get the organization for the touchpoint](operations.md#get-the-organization-for-a-touchpoint).
         - Map to its `.address.region`.
-    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyLegalEntity><cbc:CompanyID>998298</cbc:CompanyID></cac:PartyLegalEntity></efac:Company><efac:TouchPoint><cac:PartyIdentification><cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID></cac:PartyIdentification><cac:PostalAddress><cbc:CountrySubentityCode listName="nuts-lvl3">XY374</cbc:CountrySubentityCode></cac:PostalAddress></efac:TouchPoint></efac:Organization></efac:Organizations>
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyLegalEntity><cbc:CompanyID>998298</cbc:CompanyID></cac:PartyLegalEntity></efac:Company><efac:TouchPoint><cac:PartyIdentification><cbc:ID schemeName="touchpoint">TPO-0001</cbc:ID></cac:PartyIdentification><cac:PostalAddress><cbc:CountrySubentityCode listName="nuts">XY374</cbc:CountrySubentityCode></cac:PostalAddress></efac:TouchPoint></efac:Organization></efac:Organizations>
     OCDS example: '{"parties":[{"id":"TPO-0001","address":{"region":"XY374"},"identifier":{"id":"998298","scheme":"internal"}}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#_general_structure_of_an_organization_related_information
 -   id: BT-507-UBO
@@ -8669,7 +8669,7 @@
     eForms guidance: |-
         - [Get the person for the ultimate beneficial owner](operations.md#get-the-person-for-an-ultimate-beneficial-owner)
         - Map to its `.address.region`.
-    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></efac:Company></efac:Organization><efac:UltimateBeneficialOwner><cbc:ID schemeName="ubo">UBO-0001</cbc:ID><cac:ResidenceAddress><cbc:CountrySubentityCode listName="nuts-lvl3">GBK62</cbc:CountrySubentityCode></cac:ResidenceAddress></efac:UltimateBeneficialOwner></efac:Organizations>
+    eForms example: <efac:Organizations><efac:Organization><efac:Company><cac:PartyIdentification><cbc:ID schemeName="organization">ORG-0001</cbc:ID></cac:PartyIdentification></efac:Company></efac:Organization><efac:UltimateBeneficialOwner><cbc:ID schemeName="ubo">UBO-0001</cbc:ID><cac:ResidenceAddress><cbc:CountrySubentityCode listName="nuts">GBK62</cbc:CountrySubentityCode></cac:ResidenceAddress></efac:UltimateBeneficialOwner></efac:Organizations>
     OCDS example: '{"parties":[{"id":"ORG-0001","beneficialOwners":[{"id":"UBO-0001","address":{"region":"GBK62"}}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/parties.html#ultimateBeneficialOwnerSection
 -   id: BT-5071-Lot
@@ -8706,7 +8706,7 @@
         - [Get the item for the ProcurementProjectLot](operations.md#get-the-item-for-a-procurementprojectlot).
         - For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the item's `.deliveryAddresses` array:
           - Map to its `.region`.
-    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="nuts=lvl3">UKG23</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation></cac:ProcurementProject></cac:ProcurementProjectLot>
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:ProcurementProject><cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="nuts">UKG23</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation></cac:ProcurementProject></cac:ProcurementProjectLot>
     OCDS example: '{"tender":{"items":[{"id":"1","deliveryAddresses":[{"region":"UKG23"}],"relatedLot":"LOT-0001"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#performancePlaceSection
 -   id: BT-5071-Part
@@ -8734,7 +8734,7 @@
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array:
 
         - Map to its `.region`.
-    eForms example: <cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="-lvl3">UKG23</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation>
+    eForms example: <cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="nuts">UKG23</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"deliveryAddresses":[{"region":"UKG23"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#performancePlaceSection
 -   id: BT-5071-Procedure
@@ -8755,7 +8755,7 @@
         For each `cac:RealizedLocation`, add or update the corresponding `Address` object in the `tender.deliveryAddresses` array:
 
         - Map to its `.region`.
-    eForms example: <cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="nuts-lvl3">UKG23</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation>
+    eForms example: <cac:RealizedLocation><cac:Address><cbc:CountrySubentityCode listName="nuts">UKG23</cbc:CountrySubentityCode></cac:Address></cac:RealizedLocation>
     OCDS example: '{"tender":{"deliveryAddresses":[{"region":"UKG23"}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#performancePlaceSection
 -   id: BT-508-Procedure-Buyer
@@ -10719,7 +10719,7 @@
         - [Get the contract for the SettledContract](operations.md#get-the-contract-for-a-settledcontract).
         - For each `efac:Funding`, add or update the corresponding `Finance` object in the contract's `.finance` array:
           - Map to its `.description`.
-    eForms example: <efac:NoticeResult><efac:SettledContract><cbc:ID schemeName="contract">CON-0001</cbc:ID><efac:Funding><cbc:FundingProgram>Program for the development ...</cbc:FundingProgram></efac:Funding></efac:SettledContract><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:SettledContract><cbc:ID schemeName="contract">CON-0001</cbc:ID></efac:SettledContract></efac:LotResult></efac:NoticeResult>
+    eForms example: <efac:NoticeResult><efac:SettledContract><cbc:ID schemeName="contract">CON-0001</cbc:ID><efac:Funding><cbc:Description languageID="ENG">Program for the development ...</cbc:Description></efac:Funding></efac:SettledContract><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:SettledContract><cbc:ID schemeName="contract">CON-0001</cbc:ID></efac:SettledContract></efac:LotResult></efac:NoticeResult>
     OCDS example: '{"contracts":[{"id":"CON-0001","finance":[{"description":"Program for the development ..."}],"awardID":"RES-0001"}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#settledContractSection
 -   id: BT-6140-Lot
@@ -11781,7 +11781,7 @@
         For each `ancestor::efac:Funding`, add or update the corresponding `Finance` object in the budget's `.finance` array:
 
         - Map to its `.title`.
-    eForms example: <efac:Funding><cbc:FundingProgramCode listName="eu-proramme">ERDF_2021</cbc:FundingProgramCode></efac:Funding>
+    eForms example: <efac:Funding><cbc:FundingProgramCode listName="eu-programme">ERDF_2021</cbc:FundingProgramCode></efac:Funding>
     OCDS example: '{"planning":{"budget":{"finance":[{"id":"1","title":"ERDF_2021"}]}}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#EUFundsSection
 -   id: BT-723-LotResult
@@ -12884,7 +12884,7 @@
     TED guidance:
     - Map to `tender.contractTerms.tendererLegalForm`
     eForms guidance: Discard. If the lot's `.contractTerms.tendererLegalForm` is not empty, tenderers must take a certain legal form.
-    eForms example: <cac:TendererQualificationRequest><cbc:CompanyLegalForm languageID="ENG">The tenderer ...</cbc:CompanyLegalForm></cac:TendererQualificationRequest>
+    eForms example: <cac:TendererQualificationRequest><cbc:CompanyLegalFormCode listName="required">true</cbc:CompanyLegalFormCode></cac:TendererQualificationRequest>
     OCDS example: ''
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#tendererReqsSection
 -   id: BT-762-notice
