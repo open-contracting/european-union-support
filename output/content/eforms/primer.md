@@ -26,7 +26,7 @@ In OCDS, planning information is modeled as a planning process, which is defined
 
 There are differences between a procedure in eForms and a contracting process in OCDS:
 
-* In OCDS, a contracting process includes an implementation stage, covering payments, progress updates and completion information. eForms does not currently cover the implementation stage; a Contract Completion form is [planned](https://docs.ted.europa.eu/eforms-common/FAQ/index.html#_forms_and_procedures).
+* In OCDS, a contracting process includes an implementation stage, covering payments, progress updates and completion information. eForms covers the implementation stage only in contract modification notices and in the voluntary contract completion notice (E5).
 * In multi-stage procedures (e.g. framework agreements with reopening of competition), OCDS treats each round of competition as a separate contracting process; for more information, see [Framework agreements](https://standard.open-contracting.org/latest/en/guidance/map/framework_agreements/). eForms treats each round of competition as  occurring within the same procedure.
 
 The following diagram illustrates the relationship between:
@@ -128,11 +128,6 @@ In OCDS, an UltimateBeneficialOwner is modeled as a `Person` object in the `bene
 * X01 - Notice containing information relevant to Formation or Completion of the liquidation of a [EEIG](https://en.wikipedia.org/wiki/European_economic_interest_grouping)
 * X02 - Notice containing information about Registration, Deletion, Transfer-registration or Transfer-deletion of a European Company or European Cooperative Society
 
-Furthermore, the following notice types are listed in the regulation's annex but are not described by the eForms SDK.
-
-- E1 - Prior market consultation notice
-- E5 - Contract completion notice type
-
 Therefore, fields that are only used in these notice types are omitted from the guidance.
 
 ```{dropdown} Omitted fields
@@ -165,39 +160,5 @@ For X01 and/or X02:
 - OPP-123-Business
 - OPP-130-Business
 - OPP-131-Business
-
-For E1:
-
-- BT-800(d)-Lot
-- BT-800(t)-Lot
-
-For E5:
-
-- BT-779-Tender
-- BT-780-Tender
-- BT-781-Lot
-- BT-782-Tender
-- BT-783-Review
-- BT-784-Review
-- BT-785-Review
-- BT-786-Review
-- BT-787-Review
-- BT-788-Review
-- BT-789-Review
-- BT-790-Review
-- BT-791-Review
-- BT-792-Review
-- BT-793-Review
-- BT-794-Review
-- BT-795-Review
-- BT-796-Review
-- BT-797-Review
-- BT-798-Review
-- BT-799-ReviewBody
-- OPT-091-ReviewReq
-- OPT-092-ReviewBody
-- OPT-092-ReviewReq
-- OPT-301-ReviewBody
-- OPT-301-ReviewReq
 
 ```

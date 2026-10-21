@@ -323,7 +323,8 @@ def update_with_sdk(filename, verbose):
 
     labels_to_drop = set()
     no_supported_types = {}
-    supported_notice_types = {str(i) for i in range(1, 41)} | {"CEI", "T01", "T02"}
+    # X01 and X02 relate to events outside the lifecycle of a contracting process.
+    supported_notice_types = {str(i) for i in range(1, 41)} | {f"E{i}" for i in range(1, 7)} | {"CEI", "T01", "T02"}
     expected = {"value": False, "severity": "ERROR", "constraints": [{"value": True, "severity": "ERROR"}]}
     for label, row in df.iterrows():
         # Remove OPA- fields. "Those fields can be ignored when generating the XML notice"
@@ -650,12 +651,6 @@ def update_with_annex(filename):
                 "BT-724",  # BT-124
                 "BT-778",  # BT-113
                 "BT-5561",  # BT-556
-                # Forbidden on all supported types in update-with-sdk.
-                "BT-779",
-                "BT-780",
-                "BT-781",
-                "BT-782",
-                "BT-800",
             }
         ),
         ["Repeatable"],
