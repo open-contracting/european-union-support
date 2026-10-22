@@ -13921,10 +13921,14 @@
     Description: The Energy Efficiency Directive (EED) (EU) 2023/1791 is applicable for this procurement procedure.
     Business groups:
         BG-713: Strategic Procurement
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        If "true":
+
+        - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
+        - Add 'EU-EED' to its `.coveredBy` array.
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:StrategicProcurement><efbc:ApplicableLegalBasis listName="eed-scope">true</efbc:ApplicableLegalBasis></efac:StrategicProcurement></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:TenderingTerms></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","coveredBy":["EU-EED"]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#EEDDirectiveLotSection
 -   id: BT-811(a)-Lot
     parentNodeId: ND-EEDProcurementDetailsLot
     name: EED List (Basis)
@@ -13936,10 +13940,19 @@
     Description: List of products covered by the Energy Labelling Directive, by the Ecodesign Directive, by Union green public procurement criteria, by Regulation 2020/740 and buildings, not being rented or purchased for the purposes listed in EED Annex IV point f) (i), (ii) and (iii).
     Business groups:
         BG-713: Strategic Procurement
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        This field maps to the same `Item` objects as created for [BT-811(b)-Lot EED List (Item)](<#BT-811(b)-Lot>).
+
+        If no `Item` object was created for `ancestor::efac:ProcurementDetails`, add an `Item` object to the `tender.items` array, set its `.id` incrementally, and set its `.relatedLot` to the value of `ancestor::cac:ProcurementProjectLot/cbc:ID`.
+
+        Add a `Classification` object to the item's `.additionalClassifications` array:
+
+        - Map this field to its `.id`.
+        - Set its `.scheme` to 'eu-energy-efficiency-basis'.
+        - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/energy-efficiency-basis), and map it to its `.description`.
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:StrategicProcurement><efbc:ApplicableLegalBasis listName="eed-scope">true</efbc:ApplicableLegalBasis><efac:StrategicProcurementInformation><efac:ProcurementDetails><efbc:AssetCategoryCode listName="energy-efficiency-item">dishwas</efbc:AssetCategoryCode><efbc:LegalFrameworkCode listName="energy-efficiency-basis">enrg-lab</efbc:LegalFrameworkCode></efac:ProcurementDetails></efac:StrategicProcurementInformation></efac:StrategicProcurement></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:TenderingTerms></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"items":[{"id":"1","relatedLot":"LOT-0001","additionalClassifications":[{"scheme":"eu-energy-efficiency-basis","id":"enrg-lab","description":"Energy Label"}]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#EEDDirectiveLotSection
 -   id: BT-811(a)-LotResult
     parentNodeId: ND-EEDProcurementDetailsLotResult
     name: EED List (Basis)
@@ -13952,10 +13965,19 @@
     Description: List of products covered by the Energy Labelling Directive, by the Ecodesign Directive, by Union green public procurement criteria, by Regulation 2020/740 and buildings, not being rented or purchased for the purposes listed in EED Annex IV point f) (i), (ii) and (iii).
     Business groups:
         BG-713: Strategic Procurement
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        This field maps to the same `Item` objects as created for [BT-811(b)-LotResult EED List (Item)](<#BT-811(b)-LotResult>), [BT-812-LotResult Energy Efficiency Label](#BT-812-LotResult), [BT-813-LotResult Energy Consumption in kWh/year](#BT-813-LotResult), [BT-814-LotResult Energy Savings in kWh/year](#BT-814-LotResult) and [BT-815-LotResult Energy Efficiency Quantity](#BT-815-LotResult).
+
+        If no `Item` object was created for `ancestor::efac:ProcurementDetails`, [get the award for the LotResult](operations.md#get-the-award-for-a-lotresult), add an `Item` object to the award's `.items` array, and set the item's `.id` incrementally.
+
+        Add a `Classification` object to the item's `.additionalClassifications` array:
+
+        - Map this field to its `.id`.
+        - Set its `.scheme` to 'eu-energy-efficiency-basis'.
+        - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/energy-efficiency-basis), and map it to its `.description`.
+    eForms example: <efac:NoticeResult><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:StrategicProcurement><efac:StrategicProcurementInformation><efac:ProcurementDetails><efbc:AssetCategoryCode listName="energy-efficiency-item">dishwas</efbc:AssetCategoryCode><efbc:LegalFrameworkCode listName="energy-efficiency-basis">enrg-lab</efbc:LegalFrameworkCode></efac:ProcurementDetails></efac:StrategicProcurementInformation></efac:StrategicProcurement><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotResult></efac:NoticeResult>
+    OCDS example: '{"awards":[{"id":"RES-0001","relatedLots":["LOT-0001"],"items":[{"id":"1","additionalClassifications":[{"scheme":"eu-energy-efficiency-basis","id":"enrg-lab","description":"Energy Label"}]}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
 -   id: BT-811(b)-Lot
     parentNodeId: ND-EEDProcurementDetailsLot
     name: EED List (Item)
@@ -13968,10 +13990,19 @@
     Description: List of products covered by the Energy Labelling Directive, by the Ecodesign Directive, by Union green public procurement criteria, by Regulation 2020/740 and buildings, not being rented or purchased for the purposes listed in EED Annex IV point f) (i), (ii) and (iii).
     Business groups:
         BG-713: Strategic Procurement
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        This field maps to the same `Item` objects as created for [BT-811(a)-Lot EED List (Basis)](<#BT-811(a)-Lot>).
+
+        If no `Item` object was created for `ancestor::efac:ProcurementDetails`, add an `Item` object to the `tender.items` array, set its `.id` incrementally, and set its `.relatedLot` to the value of `ancestor::cac:ProcurementProjectLot/cbc:ID`.
+
+        Add a `Classification` object to the item's `.additionalClassifications` array:
+
+        - Map this field to its `.id`.
+        - Set its `.scheme` to 'eu-energy-efficiency-item'.
+        - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/energy-efficiency-item), and map it to its `.description`.
+    eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><ext:UBLExtensions><ext:UBLExtension><ext:ExtensionContent><efext:EformsExtension><efac:StrategicProcurement><efbc:ApplicableLegalBasis listName="eed-scope">true</efbc:ApplicableLegalBasis><efac:StrategicProcurementInformation><efac:ProcurementDetails><efbc:AssetCategoryCode listName="energy-efficiency-item">dishwas</efbc:AssetCategoryCode></efac:ProcurementDetails></efac:StrategicProcurementInformation></efac:StrategicProcurement></efext:EformsExtension></ext:ExtensionContent></ext:UBLExtension></ext:UBLExtensions></cac:TenderingTerms></cac:ProcurementProjectLot>
+    OCDS example: '{"tender":{"items":[{"id":"1","relatedLot":"LOT-0001","additionalClassifications":[{"scheme":"eu-energy-efficiency-item","id":"dishwas","description":"Dishwashers"}]}]}}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#EEDDirectiveLotSection
 -   id: BT-811(b)-LotResult
     parentNodeId: ND-EEDProcurementDetailsLotResult
     name: EED List (Item)
@@ -13984,10 +14015,19 @@
     Description: List of products covered by the Energy Labelling Directive, by the Ecodesign Directive, by Union green public procurement criteria, by Regulation 2020/740 and buildings, not being rented or purchased for the purposes listed in EED Annex IV point f) (i), (ii) and (iii).
     Business groups:
         BG-713: Strategic Procurement
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        This field maps to the same `Item` objects as created for [BT-811(a)-LotResult EED List (Basis)](<#BT-811(a)-LotResult>), [BT-812-LotResult Energy Efficiency Label](#BT-812-LotResult), [BT-813-LotResult Energy Consumption in kWh/year](#BT-813-LotResult), [BT-814-LotResult Energy Savings in kWh/year](#BT-814-LotResult) and [BT-815-LotResult Energy Efficiency Quantity](#BT-815-LotResult).
+
+        If no `Item` object was created for `ancestor::efac:ProcurementDetails`, [get the award for the LotResult](operations.md#get-the-award-for-a-lotresult), add an `Item` object to the award's `.items` array, and set the item's `.id` incrementally.
+
+        Add a `Classification` object to the item's `.additionalClassifications` array:
+
+        - Map this field to its `.id`.
+        - Set its `.scheme` to 'eu-energy-efficiency-item'.
+        - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/energy-efficiency-item), and map it to its `.description`.
+    eForms example: <efac:NoticeResult><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:StrategicProcurement><efac:StrategicProcurementInformation><efac:ProcurementDetails><efbc:AssetCategoryCode listName="energy-efficiency-item">dishwas</efbc:AssetCategoryCode></efac:ProcurementDetails></efac:StrategicProcurementInformation></efac:StrategicProcurement><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotResult></efac:NoticeResult>
+    OCDS example: '{"awards":[{"id":"RES-0001","relatedLots":["LOT-0001"],"items":[{"id":"1","additionalClassifications":[{"scheme":"eu-energy-efficiency-item","id":"dishwas","description":"Dishwashers"}]}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
 -   id: BT-812-LotResult
     parentNodeId: ND-EEDAssetLabel
     name: Energy Efficiency Label
@@ -14001,10 +14041,19 @@
     Business groups:
         BG-713: Strategic Procurement
         BG-810: EED information
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        This field maps to the same `Item` objects as created for [BT-811(a)-LotResult EED List (Basis)](<#BT-811(a)-LotResult>), [BT-811(b)-LotResult EED List (Item)](<#BT-811(b)-LotResult>), [BT-813-LotResult Energy Consumption in kWh/year](#BT-813-LotResult), [BT-814-LotResult Energy Savings in kWh/year](#BT-814-LotResult) and [BT-815-LotResult Energy Efficiency Quantity](#BT-815-LotResult).
+
+        If no `Item` object was created for `ancestor::efac:ProcurementDetails`, [get the award for the LotResult](operations.md#get-the-award-for-a-lotresult), add an `Item` object to the award's `.items` array, and set the item's `.id` incrementally.
+
+        Add a `Classification` object to the item's `.additionalClassifications` array:
+
+        - Map this field to its `.id`.
+        - Set its `.scheme` to 'eu-energy-efficiency-label'.
+        - Look up the code's label in the [authority table](https://op.europa.eu/en/web/eu-vocabularies/concept-scheme/-/resource?uri=http://publications.europa.eu/resource/authority/energy-efficiency-label), and map it to its `.description`.
+    eForms example: <efac:NoticeResult><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:StrategicProcurement><efac:StrategicProcurementInformation><efac:ProcurementDetails><efbc:AssetCategoryCode listName="energy-efficiency-item">dishwas</efbc:AssetCategoryCode><efbc:LegalFrameworkCode listName="energy-efficiency-basis">enrg-lab</efbc:LegalFrameworkCode><efac:AssetLabel><efbc:LabelCode listName="energy-efficiency-label">ENERB</efbc:LabelCode></efac:AssetLabel></efac:ProcurementDetails></efac:StrategicProcurementInformation></efac:StrategicProcurement><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotResult></efac:NoticeResult>
+    OCDS example: '{"awards":[{"id":"RES-0001","relatedLots":["LOT-0001"],"items":[{"id":"1","additionalClassifications":[{"scheme":"eu-energy-efficiency-label","id":"ENERB","description":"B"}]}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
 -   id: BT-813-LotResult
     parentNodeId: ND-EEDConsumption
     name: Energy Consumption in kWh/year
@@ -14017,10 +14066,19 @@
     Business groups:
         BG-713: Strategic Procurement
         BG-810: EED information
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        This field maps to the same `Item` objects as created for [BT-811(a)-LotResult EED List (Basis)](<#BT-811(a)-LotResult>), [BT-811(b)-LotResult EED List (Item)](<#BT-811(b)-LotResult>), [BT-812-LotResult Energy Efficiency Label](#BT-812-LotResult), [BT-814-LotResult Energy Savings in kWh/year](#BT-814-LotResult) and [BT-815-LotResult Energy Efficiency Quantity](#BT-815-LotResult).
+
+        If no `Item` object was created for `ancestor::efac:ProcurementDetails`, [get the award for the LotResult](operations.md#get-the-award-for-a-lotresult), add an `Item` object to the award's `.items` array, and set the item's `.id` incrementally.
+
+        Add an `Attribute` object to the item's `.attributes` array:
+
+        - Map `ancestor::efac:AssetMetric/efbc:AssetMetricCode` to its `.id`.
+        - Set its `.name` to 'Energy consumption (kWh/year)'.
+        - If `ancestor::efac:ProcurementDetails/efbc:AssetCategoryCode` is "building", map this field to its `.value`. Otherwise, divide this field by the value of `ancestor::efac:ProcurementDetails/efac:StrategicProcurementStatistics/efbc:StatisticsNumeric` (the quantity), and map the result to its `.value`.
+    eForms example: <efac:NoticeResult><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:StrategicProcurement><efac:StrategicProcurementInformation><efac:ProcurementDetails><efbc:AssetCategoryCode listName="energy-efficiency-item">wa-pu</efbc:AssetCategoryCode><efbc:LegalFrameworkCode listName="energy-efficiency-basis">eco-des</efbc:LegalFrameworkCode><efac:AssetMetric><efbc:AssetMetricCode listName="metric-type">nrg-con-yr</efbc:AssetMetricCode><efbc:AssetMetricNumeric>140000</efbc:AssetMetricNumeric></efac:AssetMetric><efac:StrategicProcurementStatistics><efbc:StatisticsNumeric>100</efbc:StatisticsNumeric></efac:StrategicProcurementStatistics></efac:ProcurementDetails></efac:StrategicProcurementInformation></efac:StrategicProcurement><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotResult></efac:NoticeResult>
+    OCDS example: '{"awards":[{"id":"RES-0001","relatedLots":["LOT-0001"],"items":[{"id":"1","attributes":[{"id":"nrg-con-yr","name":"Energy consumption (kWh/year)","value":1400}]}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
 -   id: BT-814-LotResult
     parentNodeId: ND-EEDSavings
     name: Energy Savings in kWh/year
@@ -14033,10 +14091,19 @@
     Business groups:
         BG-713: Strategic Procurement
         BG-810: EED information
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: |-
+        This field maps to the same `Item` objects as created for [BT-811(a)-LotResult EED List (Basis)](<#BT-811(a)-LotResult>), [BT-811(b)-LotResult EED List (Item)](<#BT-811(b)-LotResult>), [BT-812-LotResult Energy Efficiency Label](#BT-812-LotResult), [BT-813-LotResult Energy Consumption in kWh/year](#BT-813-LotResult) and [BT-815-LotResult Energy Efficiency Quantity](#BT-815-LotResult).
+
+        If no `Item` object was created for `ancestor::efac:ProcurementDetails`, [get the award for the LotResult](operations.md#get-the-award-for-a-lotresult), add an `Item` object to the award's `.items` array, and set the item's `.id` incrementally.
+
+        Add an `Attribute` object to the item's `.attributes` array:
+
+        - Map `ancestor::efac:AssetMetric/efbc:AssetMetricCode` to its `.id`.
+        - Set its `.name` to 'Energy savings (kWh/year)'.
+        - If `ancestor::efac:ProcurementDetails/efbc:AssetCategoryCode` is "building", map this field to its `.value`. Otherwise, divide this field by the value of `ancestor::efac:ProcurementDetails/efac:StrategicProcurementStatistics/efbc:StatisticsNumeric` (the quantity), and map the result to its `.value`.
+    eForms example: <efac:NoticeResult><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:StrategicProcurement><efac:StrategicProcurementInformation><efac:ProcurementDetails><efbc:AssetCategoryCode listName="energy-efficiency-item">wa-pu</efbc:AssetCategoryCode><efbc:LegalFrameworkCode listName="energy-efficiency-basis">eco-des</efbc:LegalFrameworkCode><efac:AssetMetric><efbc:AssetMetricCode listName="metric-type">nrg-sav-yr</efbc:AssetMetricCode><efbc:AssetMetricNumeric>25000</efbc:AssetMetricNumeric></efac:AssetMetric><efac:StrategicProcurementStatistics><efbc:StatisticsNumeric>100</efbc:StatisticsNumeric></efac:StrategicProcurementStatistics></efac:ProcurementDetails></efac:StrategicProcurementInformation></efac:StrategicProcurement><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotResult></efac:NoticeResult>
+    OCDS example: '{"awards":[{"id":"RES-0001","relatedLots":["LOT-0001"],"items":[{"id":"1","attributes":[{"id":"nrg-sav-yr","name":"Energy savings (kWh/year)","value":250}]}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
 -   id: BT-815-LotResult
     parentNodeId: ND-EEDAssetQuantity
     name: Energy Efficiency Quantity
@@ -14049,10 +14116,10 @@
     Business groups:
         BG-713: Strategic Procurement
         BG-810: EED information
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: "This field maps to the same `Item` objects as created for [BT-811(a)-LotResult EED List (Basis)](<#BT-811(a)-LotResult>), [BT-811(b)-LotResult EED List (Item)](<#BT-811(b)-LotResult>), [BT-812-LotResult Energy Efficiency Label](#BT-812-LotResult), [BT-813-LotResult Energy Consumption in kWh/year](#BT-813-LotResult) and [BT-814-LotResult Energy Savings in kWh/year](#BT-814-LotResult).\n\nIf no `Item` object was created for `ancestor::efac:ProcurementDetails`, [get the award for the LotResult](operations.md#get-the-award-for-a-lotresult), add an `Item` object to the award's `.items` array, and set the item's `.id` incrementally.\n\nIf `ancestor::efac:ProcurementDetails/efbc:AssetCategoryCode` is \"building\", add an `Attribute` object to the item's `.attributes` array:\n\n- Set its `.id` to 'totalUsefulFloorArea'.\n- Set its `.name` to 'Total useful floor area (m\xB2)'.\n- Map this field to its `.value`.\n\nOtherwise, map this field to the item's `.quantity`."
+    eForms example: <efac:NoticeResult><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:StrategicProcurement><efac:StrategicProcurementInformation><efac:ProcurementDetails><efbc:AssetCategoryCode listName="energy-efficiency-item">wa-pu</efbc:AssetCategoryCode><efbc:LegalFrameworkCode listName="energy-efficiency-basis">eco-des</efbc:LegalFrameworkCode><efac:StrategicProcurementStatistics><efbc:StatisticsNumeric>100</efbc:StatisticsNumeric></efac:StrategicProcurementStatistics></efac:ProcurementDetails></efac:StrategicProcurementInformation></efac:StrategicProcurement><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotResult></efac:NoticeResult>
+    OCDS example: '{"awards":[{"id":"RES-0001","relatedLots":["LOT-0001"],"items":[{"id":"1","quantity":100}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
 -   id: BT-821-Lot
     parentNodeId: ND-SelectionCriteriaSource
     name: Selection Criteria Source
@@ -14710,10 +14777,10 @@
     repeatable: false
     mandatory: CAN CAN(MOD) E4 E5 E6 T02 (conditional)
     codeList: metric-type
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: This field is mapped to the `.id` of the `Attribute` object created for [BT-813-LotResult Energy Consumption in kWh/year](#BT-813-LotResult). The SDK presets it to "nrg-con-yr".
+    eForms example: <efac:NoticeResult><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:StrategicProcurement><efac:StrategicProcurementInformation><efac:ProcurementDetails><efbc:AssetCategoryCode listName="energy-efficiency-item">wa-pu</efbc:AssetCategoryCode><efbc:LegalFrameworkCode listName="energy-efficiency-basis">eco-des</efbc:LegalFrameworkCode><efac:AssetMetric><efbc:AssetMetricCode listName="metric-type">nrg-con-yr</efbc:AssetMetricCode><efbc:AssetMetricNumeric>140000</efbc:AssetMetricNumeric></efac:AssetMetric><efac:StrategicProcurementStatistics><efbc:StatisticsNumeric>100</efbc:StatisticsNumeric></efac:StrategicProcurementStatistics></efac:ProcurementDetails></efac:StrategicProcurementInformation></efac:StrategicProcurement><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotResult></efac:NoticeResult>
+    OCDS example: '{"awards":[{"id":"RES-0001","relatedLots":["LOT-0001"],"items":[{"id":"1","attributes":[{"id":"nrg-con-yr","name":"Energy consumption (kWh/year)","value":1400}]}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
 -   id: OPT-081-LotResult
     parentNodeId: ND-EEDSavings
     name: Savings Metric
@@ -14723,10 +14790,10 @@
     repeatable: false
     mandatory: CAN CAN(MOD) E4 E5 E6 T02 (conditional)
     codeList: metric-type
-    eForms guidance: ''
-    eForms example: ''
-    OCDS example: ''
-    sdk: ''
+    eForms guidance: This field is mapped to the `.id` of the `Attribute` object created for [BT-814-LotResult Energy Savings in kWh/year](#BT-814-LotResult). The SDK presets it to "nrg-sav-yr".
+    eForms example: <efac:NoticeResult><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:StrategicProcurement><efac:StrategicProcurementInformation><efac:ProcurementDetails><efbc:AssetCategoryCode listName="energy-efficiency-item">wa-pu</efbc:AssetCategoryCode><efbc:LegalFrameworkCode listName="energy-efficiency-basis">eco-des</efbc:LegalFrameworkCode><efac:AssetMetric><efbc:AssetMetricCode listName="metric-type">nrg-sav-yr</efbc:AssetMetricCode><efbc:AssetMetricNumeric>25000</efbc:AssetMetricNumeric></efac:AssetMetric><efac:StrategicProcurementStatistics><efbc:StatisticsNumeric>100</efbc:StatisticsNumeric></efac:StrategicProcurementStatistics></efac:ProcurementDetails></efac:StrategicProcurementInformation></efac:StrategicProcurement><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotResult></efac:NoticeResult>
+    OCDS example: '{"awards":[{"id":"RES-0001","relatedLots":["LOT-0001"],"items":[{"id":"1","attributes":[{"id":"nrg-sav-yr","name":"Energy savings (kWh/year)","value":250}]}]}]}'
+    sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
 -   id: OPT-090-Lot
     parentNodeId: ND-FABuyerCategories
     name: Buyer Categories
