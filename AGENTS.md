@@ -30,6 +30,14 @@ When writing guidance, follow "Fill in the mapping file" and "Manual checks" in 
 
 Then run `./manage.py lint output/mapping/eforms/guidance.yaml`, which validates the examples and normalizes formatting.
 
+## OCDS extensions
+
+When eForms data has no OCDS field or code, look for an existing extension before proposing a new field.
+
+- The profile's extensions are listed in the eForms extension's [extension_versions.json](https://raw.githubusercontent.com/open-contracting-extensions/eforms/latest/docs/extension_versions.json). Using an extension that isn't listed means adding it to the profile.
+- The Extension Explorer's [extensions.json](https://extensions.open-contracting.org/extensions.json) has every registered extension's metadata, schemas, codelists and readme, for every version. Search it, rather than guessing from extension names. Community extensions can be hosted outside GitHub, like itemAttributes on GitLab.
+- To add a code to an extension's codelist (like `largeBids` in open-contracting-extensions/ocds_bid_extension#58), edit `codelists/*.csv` and the "Unreleased" changelog entry in its `README.md`, and open a pull request in the extension's repository.
+
 ## Conventions
 
 - Mapping decisions are discussed in GitHub issues before guidance changes. Propose; don't decide alone. Draft issues and comments for the user to approve before posting.
