@@ -5,6 +5,7 @@ import json
 import re
 import shutil
 import sys
+import time
 from collections import defaultdict
 from copy import deepcopy
 from io import StringIO
@@ -165,7 +166,7 @@ def get_column_order(df, drop=()):
 def write_yaml_file(filename, data):
     with filename.open("w") as f:
         # Make it easier to see indentation. Avoid line wrapping. sort_keys is True by default.
-        yaml.dump(data, f, Dumper=Dumper, indent=4, width=1000, sort_keys=False)
+        yaml.dump(data, f, Dumper=Dumper, indent=4, width=1000, sort_keys=False, allow_unicode=True)
 
 
 def report_unmerged_rows(df, columns, series=None, unformatted=()):
@@ -776,7 +777,8 @@ def lint(filename, additional_properties):
     validator = Draft4Validator(schema, format_checker=FormatChecker())
 
     codes_txt = Path("codes.txt")
-    if codes_txt.is_file():
+    # Refresh the cache weekly, as the profile's codelists change when its extensions do.
+    if codes_txt.is_file() and time.time() - codes_txt.stat().st_mtime < 7 * 24 * 60 * 60:
         with codes_txt.open() as f:
             known_codes = set(f.read().splitlines())
     else:
@@ -932,7 +934,8 @@ def lint(filename, additional_properties):
         if ocds_example and ocds_example != "N/A":
             try:
                 data = json.loads(ocds_example)
-                field["OCDS example"] = json.dumps(data, separators=(",", ":")).replace("Infinity", "1e9999")
+                formatted = json.dumps(data, separators=(",", ":"), ensure_ascii=False)
+                field["OCDS example"] = formatted.replace("Infinity", "1e9999")
 
                 release = deepcopy(minimal_release)
                 json_merge_patch.merge(release, data)

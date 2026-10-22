@@ -490,7 +490,7 @@
     type: amount
     repeatable: false
     mandatory: CAN(VEAT) (conditional) & CAN (conditional) & CAN(MOD) E6 (conditional)
-    Description: "The approximate value to be spent within the framework agreement(s) announced in this notice over its/their whole duration, in all lots, including options and renewals, as calculated on the basis of the winner\u2019s tender or winners\u2019 tenders."
+    Description: The approximate value to be spent within the framework agreement(s) announced in this notice over its/their whole duration, in all lots, including options and renewals, as calculated on the basis of the winner’s tender or winners’ tenders.
     Business groups:
         BG-7: Notice Result
     eForms guidance: Discard. If a notice announces the results for multiple framework agreements, please express your interest in this field by commenting on [this issue](https://github.com/open-contracting/european-union-support/issues/198) or by contacting the [Data Support Team](mailto:data@open-contracting.org).
@@ -583,7 +583,7 @@
     type: amount
     repeatable: false
     mandatory: CAN(VEAT) (conditional) & CAN (conditional) & CAN(MOD) (conditional)
-    Description: "The maximum value which can be spent within the framework agreement(s) announced in this notice over its/their whole duration, in all lots, including options and renewals, as calculated on the basis of the winner\u2019s tender or winners\u2019 tenders."
+    Description: The maximum value which can be spent within the framework agreement(s) announced in this notice over its/their whole duration, in all lots, including options and renewals, as calculated on the basis of the winner’s tender or winners’ tenders.
     Business groups:
         BG-7: Notice Result
     eForms guidance: Discard.
@@ -1885,7 +1885,7 @@
     type: amount
     repeatable: false
     mandatory: CAN(VEAT) CAN CAN(MOD) E4 E5 E6 (conditional)
-    Description: "It is the re-calculated maximum value likely to be spent for a group of lots within the procedure. This information can be provided when the maximum value of a group of lots is lower than the sum of values of individual lots (e.g. when the same budget is shared for several lots). The value covers all contracts to be awarded within a framework agreement over its whole duration, including options and renewals. The value is re-calculated on the basis of the winner\u2019s tender or winners\u2019 tenders."
+    Description: It is the re-calculated maximum value likely to be spent for a group of lots within the procedure. This information can be provided when the maximum value of a group of lots is lower than the sum of values of individual lots (e.g. when the same budget is shared for several lots). The value covers all contracts to be awarded within a framework agreement over its whole duration, including options and renewals. The value is re-calculated on the basis of the winner’s tender or winners’ tenders.
     Business groups:
         BG-7: Notice Result
         BG-556: Group Framework Maximum Value
@@ -1901,7 +1901,7 @@
     type: amount
     repeatable: false
     mandatory: CAN(VEAT) CAN CAN(MOD) (conditional)
-    Description: "The value likely to be spent, within a framework agreement, for a group of lots. This information can be provided when the value likely to be spent for a group of lots is lower than the sum of values likely to be spent for individual lots (e.g. when the same budget is shared for several lots). The value covers all contracts to be awarded within a framework agreement over its whole duration, including options and renewals. The re-estimated value is the value likely to be spent, as re-estimated on the basis of the winner\u2019s tender or winners\u2019 tenders."
+    Description: The value likely to be spent, within a framework agreement, for a group of lots. This information can be provided when the value likely to be spent for a group of lots is lower than the sum of values likely to be spent for individual lots (e.g. when the same budget is shared for several lots). The value covers all contracts to be awarded within a framework agreement over its whole duration, including options and renewals. The re-estimated value is the value likely to be spent, as re-estimated on the basis of the winner’s tender or winners’ tenders.
     Business groups:
         BG-7: Notice Result
         BG-5561: Group Framework Re-estimated Value
@@ -10469,7 +10469,7 @@
         - [Get the lot for the ProcurementProjectLot](operations.md#get-the-lot-for-a-procurementprojectlot).
         - Map to its `.awardCriteria.weightingDescription`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cbc:CalculationExpression languageID="ENG">Price-quality score calculation is based on &#8230;</cbc:CalculationExpression></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
-    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","awardCriteria":{"weightingDescription":"Price-quality score calculation is based on \u2026"}}]}}'
+    OCDS example: '{"tender":{"lots":[{"id":"LOT-0001","awardCriteria":{"weightingDescription":"Price-quality score calculation is based on …"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
 -   id: BT-543-LotsGroup
     parentNodeId: ND-LotsGroupAwardCriteria
@@ -10485,7 +10485,7 @@
         - [Get the lot group for the ProcurementProjectLot](operations.md#get-the-lot-group-for-a-procurementprojectlot).
         - Map to its `.awardCriteria.weightingDescription`.
     eForms example: <cac:ProcurementProjectLot><cbc:ID schemeName="LotsGroup">GLO-0001</cbc:ID><cac:TenderingTerms><cac:AwardingTerms><cac:AwardingCriterion><cbc:CalculationExpression languageID="ENG">Price-quality score calculation is based on &#8230;</cbc:CalculationExpression></cac:AwardingCriterion></cac:AwardingTerms></cac:TenderingTerms></cac:ProcurementProjectLot>
-    OCDS example: '{"tender":{"lotGroups":[{"id":"GLO-0001","awardCriteria":{"weightingDescription":"Price-quality score calculation is based on \u2026"}}]}}'
+    OCDS example: '{"tender":{"lotGroups":[{"id":"GLO-0001","awardCriteria":{"weightingDescription":"Price-quality score calculation is based on …"}}]}}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/procedure-lot-part-information.html#awardCriteriaSection
 -   id: BT-553-Tender
     parentNodeId: ND-SubcontractedContract
@@ -10574,7 +10574,7 @@
     - GLO
     repeatable: false
     pattern: ^GLO-[0-9]{4}$
-    Description: "An identifier of a lot within the procedure that is part of a group of lots whose maximum value is lower than the sum of maximum values of individual lots (e.g. when the same budget is shared for several lots). These are maximum values as calculated on the basis of the winner\u2019s tender or winners\u2019 tenders."
+    Description: An identifier of a lot within the procedure that is part of a group of lots whose maximum value is lower than the sum of maximum values of individual lots (e.g. when the same budget is shared for several lots). These are maximum values as calculated on the basis of the winner’s tender or winners’ tenders.
     Business groups:
         BG-7: Notice Result
         BG-556: Group Framework Maximum Value
@@ -11130,7 +11130,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FrameworkAgreementValues/efbc:ReestimatedValueAmount
     type: amount
     repeatable: false
-    Description: "The value likely to be spent within a framework agreement over its whole duration, including options and renewals, as re-estimated on the basis of the winner\u2019s tender or winners\u2019 tenders."
+    Description: The value likely to be spent within a framework agreement over its whole duration, including options and renewals, as re-estimated on the basis of the winner’s tender or winners’ tenders.
     Business groups:
         BG-7: Notice Result
         BG-137: Procedure Lot Result
@@ -11497,7 +11497,7 @@
     xpathAbsolute: /*/ext:UBLExtensions/ext:UBLExtension/ext:ExtensionContent/efext:EformsExtension/efac:NoticeResult/efac:LotResult/efac:FrameworkAgreementValues/cbc:MaximumValueAmount
     type: amount
     repeatable: false
-    Description: "The maximum value which can be spent within a framework agreement over its whole duration, including options and renewals, as calculated on the basis of the winner\u2019s tender or winners\u2019 tenders."
+    Description: The maximum value which can be spent within a framework agreement over its whole duration, including options and renewals, as calculated on the basis of the winner’s tender or winners’ tenders.
     Business groups:
         BG-7: Notice Result
         BG-137: Procedure Lot Result
@@ -11661,7 +11661,7 @@
     type: code
     repeatable: false
     codeList: cvd-scope
-    Description: "The procurement falls within the scope of the European Parliament and Council 2009/33/EC (Clean Vehicles Directive \u2013 CVD)."
+    Description: The procurement falls within the scope of the European Parliament and Council 2009/33/EC (Clean Vehicles Directive – CVD).
     Business groups:
         BG-713: Strategic Procurement
     eForms guidance: |-
