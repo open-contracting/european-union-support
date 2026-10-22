@@ -102,6 +102,8 @@ The summarizer sees only `fields.json` (and codelists, with `--codes`). Business
 
 The release notes' "Addition of" items under notice types are usually existing fields allowed on more notice types, not new fields. The summarizer's "Notice types" section lists them, and the fields newly forbidden. They're relevant only if a field's guidance depends on the notice type, or if the notice type is unsupported (X01, X02). Otherwise, list them under "Not relevant", so readers of the release notes don't think we missed new fields. "Addition of" items under view templates only change how notices are displayed.
 
+Re-check the issues that wait on an SDK change: `gh issue list --label blocked --state open`. Read each one's comments to find its blocker, which is often an OP-TED/eForms-SDK issue. Skip issues blocked on something else, like OCDS 1.2. For the rest, check whether the step's `fields.json` or release notes make the change, even if the SDK issue is still open (e.g. #121 waits for BT-157-LotsGroup or BT-271-LotsGroup to be removed). If one is unblocked, say so in the write-up.
+
 Past decisions (see #188, #196, #204 and #215 for the discussions):
 
 **Relevant** (needs a change to guidance, examples, extensions or code):
