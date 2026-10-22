@@ -14116,7 +14116,18 @@
     Business groups:
         BG-713: Strategic Procurement
         BG-810: EED information
-    eForms guidance: "This field maps to the same `Item` objects as created for [BT-811(a)-LotResult EED List (Basis)](<#BT-811(a)-LotResult>), [BT-811(b)-LotResult EED List (Item)](<#BT-811(b)-LotResult>), [BT-812-LotResult Energy Efficiency Label](#BT-812-LotResult), [BT-813-LotResult Energy Consumption in kWh/year](#BT-813-LotResult) and [BT-814-LotResult Energy Savings in kWh/year](#BT-814-LotResult).\n\nIf no `Item` object was created for `ancestor::efac:ProcurementDetails`, [get the award for the LotResult](operations.md#get-the-award-for-a-lotresult), add an `Item` object to the award's `.items` array, and set the item's `.id` incrementally.\n\nIf `ancestor::efac:ProcurementDetails/efbc:AssetCategoryCode` is \"building\", add an `Attribute` object to the item's `.attributes` array:\n\n- Set its `.id` to 'totalUsefulFloorArea'.\n- Set its `.name` to 'Total useful floor area (m\xB2)'.\n- Map this field to its `.value`.\n\nOtherwise, map this field to the item's `.quantity`."
+    eForms guidance: |-
+        This field maps to the same `Item` objects as created for [BT-811(a)-LotResult EED List (Basis)](<#BT-811(a)-LotResult>), [BT-811(b)-LotResult EED List (Item)](<#BT-811(b)-LotResult>), [BT-812-LotResult Energy Efficiency Label](#BT-812-LotResult), [BT-813-LotResult Energy Consumption in kWh/year](#BT-813-LotResult) and [BT-814-LotResult Energy Savings in kWh/year](#BT-814-LotResult).
+
+        If no `Item` object was created for `ancestor::efac:ProcurementDetails`, [get the award for the LotResult](operations.md#get-the-award-for-a-lotresult), add an `Item` object to the award's `.items` array, and set the item's `.id` incrementally.
+
+        If `ancestor::efac:ProcurementDetails/efbc:AssetCategoryCode` is "building", add an `Attribute` object to the item's `.attributes` array:
+
+        - Set its `.id` to 'totalUsefulFloorArea'.
+        - Set its `.name` to 'Total useful floor area (square metres)'.
+        - Map this field to its `.value`.
+
+        Otherwise, map this field to the item's `.quantity`.
     eForms example: <efac:NoticeResult><efac:LotResult><cbc:ID schemeName="result">RES-0001</cbc:ID><efac:StrategicProcurement><efac:StrategicProcurementInformation><efac:ProcurementDetails><efbc:AssetCategoryCode listName="energy-efficiency-item">wa-pu</efbc:AssetCategoryCode><efbc:LegalFrameworkCode listName="energy-efficiency-basis">eco-des</efbc:LegalFrameworkCode><efac:StrategicProcurementStatistics><efbc:StatisticsNumeric>100</efbc:StatisticsNumeric></efac:StrategicProcurementStatistics></efac:ProcurementDetails></efac:StrategicProcurementInformation></efac:StrategicProcurement><efac:TenderLot><cbc:ID schemeName="Lot">LOT-0001</cbc:ID></efac:TenderLot></efac:LotResult></efac:NoticeResult>
     OCDS example: '{"awards":[{"id":"RES-0001","relatedLots":["LOT-0001"],"items":[{"id":"1","quantity":100}]}]}'
     sdk: https://docs.ted.europa.eu/eforms/latest/schema/competition-results.html#_lot_result
